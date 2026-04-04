@@ -1,6 +1,6 @@
 {
   "date": "2026-04-04",
-  "generated_at": "2026-04-04T10:51:18.879638",
+  "generated_at": "2026-04-04T11:03:03.715614",
   "games": [
     {
       "game_pk": 824295,
@@ -52516,6 +52516,96 @@
             }
           },
           "season_stats": {}
+        },
+        {
+          "name": "Luis Matos",
+          "batter_hand": "R",
+          "opp_pitcher": "Seth Lugo",
+          "pitcher_hand": "R",
+          "batter_side": "away",
+          "pitch_types": [
+            "CU",
+            "SL",
+            "FF",
+            "SI",
+            "FC"
+          ],
+          "pitch_detail": {
+            "CU": {
+              "usage_pct": 22.7,
+              "weight": 22.7,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "SL": {
+              "usage_pct": 22.7,
+              "weight": 22.7,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "FF": {
+              "usage_pct": 22.7,
+              "weight": 22.7,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "SI": {
+              "usage_pct": 18.2,
+              "weight": 18.2,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "FC": {
+              "usage_pct": 13.6,
+              "weight": 13.6,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            }
+          },
+          "pitcher_stats": {
+            "fb_rate": 30.0,
+            "hr_fb_rate": 0.0,
+            "hr_per_9": 0.0,
+            "ip": 2.7,
+            "total_hrs": 0
+          },
+          "scores": {
+            "L5": {
+              "composite": 0.1,
+              "batter_score": 0.165,
+              "pitcher_score": 0.083,
+              "env_score": 0.302,
+              "exit_velo": 82.3,
+              "barrel_pct": 2.0,
+              "fb_pct": 25.8,
+              "hard_hit_pct": 26.5,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": []
+            },
+            "L10": {
+              "composite": 0.1,
+              "batter_score": 0.165,
+              "pitcher_score": 0.083,
+              "env_score": 0.302,
+              "exit_velo": 82.3,
+              "barrel_pct": 2.0,
+              "fb_pct": 25.8,
+              "hard_hit_pct": 26.5,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": []
+            }
+          },
+          "season_stats": {}
         }
       ]
     },
@@ -55132,10 +55222,10 @@
           },
           "scores": {
             "L5": {
-              "composite": 0.298,
+              "composite": 0.299,
               "batter_score": 0.04,
               "pitcher_score": 0.612,
-              "env_score": 0.509,
+              "env_score": 0.515,
               "exit_velo": 70.3,
               "barrel_pct": 3.3,
               "fb_pct": 10.7,
@@ -55165,10 +55255,10 @@
               ]
             },
             "L10": {
-              "composite": 0.298,
+              "composite": 0.299,
               "batter_score": 0.04,
               "pitcher_score": 0.612,
-              "env_score": 0.509,
+              "env_score": 0.515,
               "exit_velo": 70.3,
               "barrel_pct": 3.3,
               "fb_pct": 10.7,
@@ -61384,6 +61474,78 @@
           "season_stats": {}
         },
         {
+          "name": "Dylan Carlson",
+          "batter_hand": "L",
+          "opp_pitcher": "Slade Cecconi",
+          "pitcher_hand": "R",
+          "batter_side": "away",
+          "pitch_types": [
+            "FF",
+            "CU",
+            "FC"
+          ],
+          "pitch_detail": {
+            "FF": {
+              "usage_pct": 42.9,
+              "weight": 44.8,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "CU": {
+              "usage_pct": 38.6,
+              "weight": 40.3,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "FC": {
+              "usage_pct": 18.6,
+              "weight": 14.9,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            }
+          },
+          "pitcher_stats": {
+            "fb_rate": 26.3,
+            "hr_fb_rate": 20.0,
+            "hr_per_9": 3.0,
+            "ip": 3.0,
+            "total_hrs": 1
+          },
+          "scores": {
+            "L5": {
+              "composite": 0.202,
+              "batter_score": 0.176,
+              "pitcher_score": 0.603,
+              "env_score": 0.72,
+              "exit_velo": 82.1,
+              "barrel_pct": 3.8,
+              "fb_pct": 28.2,
+              "hard_hit_pct": 16.8,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": []
+            },
+            "L10": {
+              "composite": 0.202,
+              "batter_score": 0.176,
+              "pitcher_score": 0.603,
+              "env_score": 0.72,
+              "exit_velo": 82.1,
+              "barrel_pct": 3.8,
+              "fb_pct": 28.2,
+              "hard_hit_pct": 16.8,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": []
+            }
+          },
+          "season_stats": {}
+        },
+        {
           "name": "David Fry",
           "batter_hand": "R",
           "opp_pitcher": "Shota Imanaga",
@@ -61440,6 +61602,78 @@
               "barrel_pct": 5.4,
               "fb_pct": 28.4,
               "hard_hit_pct": 25.0,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": []
+            }
+          },
+          "season_stats": {}
+        },
+        {
+          "name": "Scott Kingery",
+          "batter_hand": "R",
+          "opp_pitcher": "Slade Cecconi",
+          "pitcher_hand": "R",
+          "batter_side": "away",
+          "pitch_types": [
+            "FC",
+            "SI",
+            "FF"
+          ],
+          "pitch_detail": {
+            "FC": {
+              "usage_pct": 42.9,
+              "weight": 44.8,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "SI": {
+              "usage_pct": 38.1,
+              "weight": 39.8,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "FF": {
+              "usage_pct": 19.0,
+              "weight": 15.3,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            }
+          },
+          "pitcher_stats": {
+            "fb_rate": 42.9,
+            "hr_fb_rate": 0.0,
+            "hr_per_9": 0.0,
+            "ip": 1.3,
+            "total_hrs": 0
+          },
+          "scores": {
+            "L5": {
+              "composite": 0.196,
+              "batter_score": 0.311,
+              "pitcher_score": 0.19,
+              "env_score": 0.69,
+              "exit_velo": 83.8,
+              "barrel_pct": 5.3,
+              "fb_pct": 36.8,
+              "hard_hit_pct": 26.3,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": []
+            },
+            "L10": {
+              "composite": 0.196,
+              "batter_score": 0.311,
+              "pitcher_score": 0.19,
+              "env_score": 0.69,
+              "exit_velo": 83.8,
+              "barrel_pct": 5.3,
+              "fb_pct": 36.8,
+              "hard_hit_pct": 26.3,
               "data_quality": "LOW_PITCHER_IP",
               "recent_abs": []
             }
@@ -62821,6 +63055,181 @@
           "season_stats": {}
         },
         {
+          "name": "Mike Yastrzemski",
+          "batter_hand": "L",
+          "opp_pitcher": "Michael Soroka",
+          "pitcher_hand": "R",
+          "batter_side": "away",
+          "pitch_types": [
+            "FF",
+            "SV"
+          ],
+          "pitch_detail": {
+            "FF": {
+              "usage_pct": 51.2,
+              "weight": 51.2,
+              "barrel_rate": 20.0,
+              "fb_rate": 40.0,
+              "hard_hit_rate": 40.0,
+              "avg_exit_velo": 90.4
+            },
+            "SV": {
+              "usage_pct": 48.8,
+              "weight": 48.8,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            }
+          },
+          "pitcher_stats": {
+            "fb_rate": 33.3,
+            "hr_fb_rate": 0.0,
+            "hr_per_9": 0.0,
+            "ip": 2.3,
+            "total_hrs": 0
+          },
+          "scores": {
+            "L5": {
+              "composite": 0.368,
+              "batter_score": 0.47,
+              "pitcher_score": 0.111,
+              "env_score": 0.542,
+              "exit_velo": 88.2,
+              "barrel_pct": 13.5,
+              "fb_pct": 35.1,
+              "hard_hit_pct": 35.7,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": [
+                {
+                  "date": "2026-04-02",
+                  "pitcher_name": "Ginkel, Kevin",
+                  "pitch_arm": "R",
+                  "pitch_type": "4-Seam Fastball",
+                  "ev": 84.1,
+                  "angle": 70.0,
+                  "distance": 182.0,
+                  "result": "nan"
+                },
+                {
+                  "date": "2026-04-02",
+                  "pitcher_name": "Nelson, Ryne",
+                  "pitch_arm": "R",
+                  "pitch_type": "4-Seam Fastball",
+                  "ev": 102.2,
+                  "angle": -9.0,
+                  "distance": 18.0,
+                  "result": "field_out"
+                },
+                {
+                  "date": "2026-04-02",
+                  "pitcher_name": "Nelson, Ryne",
+                  "pitch_arm": "R",
+                  "pitch_type": "4-Seam Fastball",
+                  "ev": 81.8,
+                  "angle": 34.0,
+                  "distance": 268.0,
+                  "result": "nan"
+                },
+                {
+                  "date": "2026-03-30",
+                  "pitcher_name": "Kelly, Michael",
+                  "pitch_arm": "R",
+                  "pitch_type": "4-Seam Fastball",
+                  "ev": 104.5,
+                  "angle": 20.0,
+                  "distance": 356.0,
+                  "result": "triple"
+                },
+                {
+                  "date": "2026-03-30",
+                  "pitcher_name": "Kelly, Michael",
+                  "pitch_arm": "R",
+                  "pitch_type": "4-Seam Fastball",
+                  "ev": 79.2,
+                  "angle": 43.0,
+                  "distance": 239.0,
+                  "result": "nan"
+                }
+              ]
+            },
+            "L10": {
+              "composite": 0.358,
+              "batter_score": 0.447,
+              "pitcher_score": 0.111,
+              "env_score": 0.542,
+              "exit_velo": 89.4,
+              "barrel_pct": 11.6,
+              "fb_pct": 31.3,
+              "hard_hit_pct": 41.5,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": [
+                {
+                  "date": "2026-04-02",
+                  "pitcher_name": "Ginkel, Kevin",
+                  "pitch_arm": "R",
+                  "pitch_type": "4-Seam Fastball",
+                  "ev": 84.1,
+                  "angle": 70.0,
+                  "distance": 182.0,
+                  "result": "nan"
+                },
+                {
+                  "date": "2026-04-02",
+                  "pitcher_name": "Nelson, Ryne",
+                  "pitch_arm": "R",
+                  "pitch_type": "4-Seam Fastball",
+                  "ev": 102.2,
+                  "angle": -9.0,
+                  "distance": 18.0,
+                  "result": "field_out"
+                },
+                {
+                  "date": "2026-04-02",
+                  "pitcher_name": "Nelson, Ryne",
+                  "pitch_arm": "R",
+                  "pitch_type": "4-Seam Fastball",
+                  "ev": 81.8,
+                  "angle": 34.0,
+                  "distance": 268.0,
+                  "result": "nan"
+                },
+                {
+                  "date": "2026-03-30",
+                  "pitcher_name": "Kelly, Michael",
+                  "pitch_arm": "R",
+                  "pitch_type": "4-Seam Fastball",
+                  "ev": 104.5,
+                  "angle": 20.0,
+                  "distance": 356.0,
+                  "result": "triple"
+                },
+                {
+                  "date": "2026-03-30",
+                  "pitcher_name": "Kelly, Michael",
+                  "pitch_arm": "R",
+                  "pitch_type": "4-Seam Fastball",
+                  "ev": 79.2,
+                  "angle": 43.0,
+                  "distance": 239.0,
+                  "result": "nan"
+                },
+                {
+                  "date": "2026-03-28",
+                  "pitcher_name": "Wacha, Michael",
+                  "pitch_arm": "R",
+                  "pitch_type": "4-Seam Fastball",
+                  "ev": 102.5,
+                  "angle": 18.0,
+                  "distance": 348.0,
+                  "result": "field_out"
+                }
+              ]
+            }
+          },
+          "season_stats": {}
+        },
+        {
           "name": "Austin Riley",
           "batter_hand": "R",
           "opp_pitcher": "Michael Soroka",
@@ -63035,181 +63444,6 @@
           "season_stats": {}
         },
         {
-          "name": "Mike Yastrzemski",
-          "batter_hand": "L",
-          "opp_pitcher": "Michael Soroka",
-          "pitcher_hand": "R",
-          "batter_side": "away",
-          "pitch_types": [
-            "FF",
-            "SV"
-          ],
-          "pitch_detail": {
-            "FF": {
-              "usage_pct": 51.2,
-              "weight": 51.2,
-              "barrel_rate": 20.0,
-              "fb_rate": 40.0,
-              "hard_hit_rate": 40.0,
-              "avg_exit_velo": 90.4
-            },
-            "SV": {
-              "usage_pct": 48.8,
-              "weight": 48.8,
-              "barrel_rate": 0.0,
-              "fb_rate": 0.0,
-              "hard_hit_rate": 0.0,
-              "avg_exit_velo": 0.0
-            }
-          },
-          "pitcher_stats": {
-            "fb_rate": 33.3,
-            "hr_fb_rate": 0.0,
-            "hr_per_9": 0.0,
-            "ip": 2.3,
-            "total_hrs": 0
-          },
-          "scores": {
-            "L5": {
-              "composite": 0.35,
-              "batter_score": 0.47,
-              "pitcher_score": 0.111,
-              "env_score": 0.455,
-              "exit_velo": 88.2,
-              "barrel_pct": 13.5,
-              "fb_pct": 35.1,
-              "hard_hit_pct": 35.7,
-              "data_quality": "LOW_PITCHER_IP",
-              "recent_abs": [
-                {
-                  "date": "2026-04-02",
-                  "pitcher_name": "Ginkel, Kevin",
-                  "pitch_arm": "R",
-                  "pitch_type": "4-Seam Fastball",
-                  "ev": 84.1,
-                  "angle": 70.0,
-                  "distance": 182.0,
-                  "result": "nan"
-                },
-                {
-                  "date": "2026-04-02",
-                  "pitcher_name": "Nelson, Ryne",
-                  "pitch_arm": "R",
-                  "pitch_type": "4-Seam Fastball",
-                  "ev": 102.2,
-                  "angle": -9.0,
-                  "distance": 18.0,
-                  "result": "field_out"
-                },
-                {
-                  "date": "2026-04-02",
-                  "pitcher_name": "Nelson, Ryne",
-                  "pitch_arm": "R",
-                  "pitch_type": "4-Seam Fastball",
-                  "ev": 81.8,
-                  "angle": 34.0,
-                  "distance": 268.0,
-                  "result": "nan"
-                },
-                {
-                  "date": "2026-03-30",
-                  "pitcher_name": "Kelly, Michael",
-                  "pitch_arm": "R",
-                  "pitch_type": "4-Seam Fastball",
-                  "ev": 104.5,
-                  "angle": 20.0,
-                  "distance": 356.0,
-                  "result": "triple"
-                },
-                {
-                  "date": "2026-03-30",
-                  "pitcher_name": "Kelly, Michael",
-                  "pitch_arm": "R",
-                  "pitch_type": "4-Seam Fastball",
-                  "ev": 79.2,
-                  "angle": 43.0,
-                  "distance": 239.0,
-                  "result": "nan"
-                }
-              ]
-            },
-            "L10": {
-              "composite": 0.34,
-              "batter_score": 0.447,
-              "pitcher_score": 0.111,
-              "env_score": 0.455,
-              "exit_velo": 89.4,
-              "barrel_pct": 11.6,
-              "fb_pct": 31.3,
-              "hard_hit_pct": 41.5,
-              "data_quality": "LOW_PITCHER_IP",
-              "recent_abs": [
-                {
-                  "date": "2026-04-02",
-                  "pitcher_name": "Ginkel, Kevin",
-                  "pitch_arm": "R",
-                  "pitch_type": "4-Seam Fastball",
-                  "ev": 84.1,
-                  "angle": 70.0,
-                  "distance": 182.0,
-                  "result": "nan"
-                },
-                {
-                  "date": "2026-04-02",
-                  "pitcher_name": "Nelson, Ryne",
-                  "pitch_arm": "R",
-                  "pitch_type": "4-Seam Fastball",
-                  "ev": 102.2,
-                  "angle": -9.0,
-                  "distance": 18.0,
-                  "result": "field_out"
-                },
-                {
-                  "date": "2026-04-02",
-                  "pitcher_name": "Nelson, Ryne",
-                  "pitch_arm": "R",
-                  "pitch_type": "4-Seam Fastball",
-                  "ev": 81.8,
-                  "angle": 34.0,
-                  "distance": 268.0,
-                  "result": "nan"
-                },
-                {
-                  "date": "2026-03-30",
-                  "pitcher_name": "Kelly, Michael",
-                  "pitch_arm": "R",
-                  "pitch_type": "4-Seam Fastball",
-                  "ev": 104.5,
-                  "angle": 20.0,
-                  "distance": 356.0,
-                  "result": "triple"
-                },
-                {
-                  "date": "2026-03-30",
-                  "pitcher_name": "Kelly, Michael",
-                  "pitch_arm": "R",
-                  "pitch_type": "4-Seam Fastball",
-                  "ev": 79.2,
-                  "angle": 43.0,
-                  "distance": 239.0,
-                  "result": "nan"
-                },
-                {
-                  "date": "2026-03-28",
-                  "pitcher_name": "Wacha, Michael",
-                  "pitch_arm": "R",
-                  "pitch_type": "4-Seam Fastball",
-                  "ev": 102.5,
-                  "angle": 18.0,
-                  "distance": 348.0,
-                  "result": "field_out"
-                }
-              ]
-            }
-          },
-          "season_stats": {}
-        },
-        {
           "name": "Ozzie Albies",
           "batter_hand": "L",
           "opp_pitcher": "Michael Soroka",
@@ -63246,10 +63480,10 @@
           },
           "scores": {
             "L5": {
-              "composite": 0.322,
+              "composite": 0.34,
               "batter_score": 0.406,
               "pitcher_score": 0.111,
-              "env_score": 0.455,
+              "env_score": 0.542,
               "exit_velo": 85.5,
               "barrel_pct": 12.9,
               "fb_pct": 33.1,
@@ -63309,10 +63543,10 @@
               ]
             },
             "L10": {
-              "composite": 0.322,
+              "composite": 0.34,
               "batter_score": 0.406,
               "pitcher_score": 0.111,
-              "env_score": 0.455,
+              "env_score": 0.542,
               "exit_velo": 85.5,
               "barrel_pct": 12.9,
               "fb_pct": 33.1,
@@ -63420,10 +63654,10 @@
           },
           "scores": {
             "L5": {
-              "composite": 0.311,
+              "composite": 0.329,
               "batter_score": 0.377,
               "pitcher_score": 0.136,
-              "env_score": 0.425,
+              "env_score": 0.512,
               "exit_velo": 83.9,
               "barrel_pct": 15.0,
               "fb_pct": 29.5,
@@ -63533,10 +63767,10 @@
               ]
             },
             "L10": {
-              "composite": 0.34,
+              "composite": 0.357,
               "batter_score": 0.442,
               "pitcher_score": 0.136,
-              "env_score": 0.425,
+              "env_score": 0.512,
               "exit_velo": 83.9,
               "barrel_pct": 15.6,
               "fb_pct": 35.8,
@@ -66637,6 +66871,87 @@
               "barrel_pct": 3.9,
               "fb_pct": 24.6,
               "hard_hit_pct": 22.8,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": []
+            }
+          },
+          "season_stats": {}
+        },
+        {
+          "name": "Adrian Del Castillo",
+          "batter_hand": "L",
+          "opp_pitcher": "Bryce Elder",
+          "pitcher_hand": "R",
+          "batter_side": "home",
+          "pitch_types": [
+            "SL",
+            "CH",
+            "SI",
+            "FC"
+          ],
+          "pitch_detail": {
+            "SL": {
+              "usage_pct": 34.9,
+              "weight": 38.2,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "CH": {
+              "usage_pct": 27.9,
+              "weight": 30.5,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "SI": {
+              "usage_pct": 20.9,
+              "weight": 17.6,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "FC": {
+              "usage_pct": 16.3,
+              "weight": 13.7,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            }
+          },
+          "pitcher_stats": {
+            "fb_rate": 31.2,
+            "hr_fb_rate": 0.0,
+            "hr_per_9": 0.0,
+            "ip": 2.7,
+            "total_hrs": 0
+          },
+          "scores": {
+            "L5": {
+              "composite": 0.148,
+              "batter_score": 0.299,
+              "pitcher_score": 0.094,
+              "env_score": 0.542,
+              "exit_velo": 85.0,
+              "barrel_pct": 3.5,
+              "fb_pct": 33.6,
+              "hard_hit_pct": 32.9,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": []
+            },
+            "L10": {
+              "composite": 0.148,
+              "batter_score": 0.299,
+              "pitcher_score": 0.094,
+              "env_score": 0.542,
+              "exit_velo": 85.0,
+              "barrel_pct": 3.5,
+              "fb_pct": 33.6,
+              "hard_hit_pct": 32.9,
               "data_quality": "LOW_PITCHER_IP",
               "recent_abs": []
             }
@@ -72842,7 +73157,151 @@
           "season_stats": {}
         },
         {
+          "name": "Christian Koss",
+          "batter_hand": "R",
+          "opp_pitcher": "Clay Holmes",
+          "pitcher_hand": "R",
+          "batter_side": "home",
+          "pitch_types": [
+            "SI",
+            "FC",
+            "ST"
+          ],
+          "pitch_detail": {
+            "SI": {
+              "usage_pct": 51.4,
+              "weight": 64.4,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "FC": {
+              "usage_pct": 27.0,
+              "weight": 22.0,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "ST": {
+              "usage_pct": 21.6,
+              "weight": 13.6,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            }
+          },
+          "pitcher_stats": {
+            "fb_rate": 10.0,
+            "hr_fb_rate": 0.0,
+            "hr_per_9": 0.0,
+            "ip": 2.3,
+            "total_hrs": 0
+          },
+          "scores": {
+            "L5": {
+              "composite": 0.088,
+              "batter_score": 0.158,
+              "pitcher_score": 0.0,
+              "env_score": 0.376,
+              "exit_velo": 80.5,
+              "barrel_pct": 3.4,
+              "fb_pct": 26.3,
+              "hard_hit_pct": 23.5,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": []
+            },
+            "L10": {
+              "composite": 0.088,
+              "batter_score": 0.158,
+              "pitcher_score": 0.0,
+              "env_score": 0.376,
+              "exit_velo": 80.5,
+              "barrel_pct": 3.4,
+              "fb_pct": 26.3,
+              "hard_hit_pct": 23.5,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": []
+            }
+          },
+          "season_stats": {}
+        },
+        {
           "name": "Daniel Susac",
+          "batter_hand": "R",
+          "opp_pitcher": "Clay Holmes",
+          "pitcher_hand": "R",
+          "batter_side": "home",
+          "pitch_types": [
+            "SI",
+            "FC",
+            "ST"
+          ],
+          "pitch_detail": {
+            "SI": {
+              "usage_pct": 51.4,
+              "weight": 64.4,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "FC": {
+              "usage_pct": 27.0,
+              "weight": 22.0,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            },
+            "ST": {
+              "usage_pct": 21.6,
+              "weight": 13.6,
+              "barrel_rate": 0.0,
+              "fb_rate": 0.0,
+              "hard_hit_rate": 0.0,
+              "avg_exit_velo": 0.0
+            }
+          },
+          "pitcher_stats": {
+            "fb_rate": 10.0,
+            "hr_fb_rate": 0.0,
+            "hr_per_9": 0.0,
+            "ip": 2.3,
+            "total_hrs": 0
+          },
+          "scores": {
+            "L5": {
+              "composite": 0.06,
+              "batter_score": 0.0,
+              "pitcher_score": 0.0,
+              "env_score": 0.376,
+              "exit_velo": 0.0,
+              "barrel_pct": 0.0,
+              "fb_pct": 0.0,
+              "hard_hit_pct": 0.0,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": []
+            },
+            "L10": {
+              "composite": 0.06,
+              "batter_score": 0.0,
+              "pitcher_score": 0.0,
+              "env_score": 0.376,
+              "exit_velo": 0.0,
+              "barrel_pct": 0.0,
+              "fb_pct": 0.0,
+              "hard_hit_pct": 0.0,
+              "data_quality": "LOW_PITCHER_IP",
+              "recent_abs": []
+            }
+          },
+          "season_stats": {}
+        },
+        {
+          "name": "Jared Oliva",
           "batter_hand": "R",
           "opp_pitcher": "Clay Holmes",
           "pitcher_hand": "R",
