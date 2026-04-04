@@ -185,18 +185,23 @@ export function BatterCard({
                 </button>
                 {pitchTypes.map((pt) => {
                   const detail = pitchDetail[pt];
+                  const fullName = PITCH_NAMES[pt]?.[0] || pt;
+                  const tipText = detail
+                    ? `${fullName} — ${detail.usage_pct}% of pitches. Barrel: ${detail.barrel_rate}%, FB: ${detail.fb_rate}%, EV: ${detail.avg_exit_velo}`
+                    : fullName;
                   return (
-                    <button
-                      key={pt}
-                      onClick={() => setPitchFilter(pt === pitchFilter ? "all" : pt)}
-                      className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-colors ${
-                        pitchFilter === pt
-                          ? "bg-accent/15 text-accent border border-accent/30"
-                          : "bg-background/50 text-muted border border-card-border hover:text-foreground"
-                      }`}
-                    >
-                      {pt} {detail ? `${detail.usage_pct}%` : ""}
-                    </button>
+                    <Tooltip key={pt} text={tipText}>
+                      <button
+                        onClick={() => setPitchFilter(pt === pitchFilter ? "all" : pt)}
+                        className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-colors ${
+                          pitchFilter === pt
+                            ? "bg-accent/15 text-accent border border-accent/30"
+                            : "bg-background/50 text-muted border border-card-border hover:text-foreground"
+                        }`}
+                      >
+                        {pt} {detail ? `${detail.usage_pct}%` : ""}
+                      </button>
+                    </Tooltip>
                   );
                 })}
               </div>
