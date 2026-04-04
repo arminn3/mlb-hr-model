@@ -64,9 +64,21 @@ export function BatterCard({
     SV: ["Slurve"],
   };
 
-  // Filter recent ABs by selected pitch type
+  // Build set of pitch names that match the pitcher's arsenal
+  const arsenalPitchNames = new Set<string>();
+  for (const pt of pitchTypes) {
+    arsenalPitchNames.add(pt);
+    for (const name of (PITCH_NAMES[pt] || [])) {
+      arsenalPitchNames.add(name);
+    }
+  }
+
+  // Filter recent ABs — "All Pitches" only shows ABs against pitcher's pitch types
   const filteredABs = pitchFilter === "all"
-    ? scores.recent_abs
+    ? scores.recent_abs.filter((ab) =>
+        arsenalPitchNames.size === 0 || // show all if no arsenal data
+        Array.from(arsenalPitchNames).some((n) => ab.pitch_type === n || ab.pitch_type.includes(n))
+      )
     : scores.recent_abs.filter((ab) => {
         const names = PITCH_NAMES[pitchFilter] || [pitchFilter];
         return ab.pitch_type === pitchFilter || names.some((n) => ab.pitch_type.includes(n));
