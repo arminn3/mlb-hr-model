@@ -104,12 +104,12 @@ export function BatterCard({
               <span className="text-[10px] text-muted font-mono">{player.batter_hand}HB</span>
               <RatingBadge composite={scores.composite} />
               {scores.recent_abs.length <= 2 && (
-                <span className="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-accent/10 text-accent border border-accent/20" title="Limited MLB data — score may not reflect true ability. New to MLB or very few at-bats this season.">
+                <span className="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-accent/10 text-accent border border-accent/20">
                   NEW
                 </span>
               )}
               {scores.data_quality !== "OK" && scores.recent_abs.length > 2 && (
-                <span className="px-1.5 py-0.5 text-[9px] rounded bg-accent-yellow/10 text-accent-yellow" title={scores.data_quality === "LOW_SAMPLE" ? "Fewer than 5 balls in play — metrics are based on a small sample and may be unreliable." : scores.data_quality === "LOW_PITCHER_IP" ? "Opposing pitcher has fewer than 10 innings pitched — pitcher vulnerability metrics are less reliable." : "Limited data available for this matchup."}>
+                <span className="px-1.5 py-0.5 text-[9px] rounded bg-accent-yellow/10 text-accent-yellow">
                   {scores.data_quality.replace(/_/g, " ")}
                 </span>
               )}
