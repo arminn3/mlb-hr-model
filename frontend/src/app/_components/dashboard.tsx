@@ -108,24 +108,50 @@ export function Dashboard() {
     ...g.environment,
   }));
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handlePageChange = (page: Page) => {
+    setActivePage(page);
+    setSidebarOpen(false); // close on mobile after selecting
+  };
+
+  const pageTitle = activePage === "rankings" ? "HR Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "slips" ? "Slip Generator" : activePage === "bvp" ? "Batter vs Pitcher" : activePage === "environment" ? "Environment" : activePage === "gems" ? "Gem Finder" : activePage === "live" ? "Live Feed" : activePage === "results" ? "Results Log" : "How It Works";
+
   return (
-    <div className="flex min-h-screen -m-10">
-      {/* Sidebar */}
-      <Sidebar active={activePage} onChange={setActivePage} />
+    <div className="flex min-h-screen">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar — hidden on mobile, slide in when open */}
+      <div className={`fixed lg:static z-40 transition-transform duration-200 ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}>
+        <Sidebar active={activePage} onChange={handlePageChange} />
+      </div>
 
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top bar */}
-        <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b border-card-border px-8 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <h1 className="text-sm font-semibold text-foreground">
-              {activePage === "rankings" ? "HR Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "slips" ? "Slip Generator" : activePage === "bvp" ? "Batter vs Pitcher" : activePage === "environment" ? "Environment" : activePage === "results" ? "Results Log" : "How It Works"}
-            </h1>
-            <span className="text-xs text-muted">
+        <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b border-card-border px-4 md:px-8 py-3 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-3">
+            {/* Hamburger — mobile only */}
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="lg:hidden text-muted hover:text-foreground cursor-pointer"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <h1 className="text-sm font-semibold text-foreground">{pageTitle}</h1>
+            <span className="text-xs text-muted hidden sm:inline">
               {totalPlayers} players &middot; {data.games.length} games
             </span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             {(activePage === "rankings" || activePage === "slate" || activePage === "projections" || activePage === "slips" || activePage === "bvp" || activePage === "gems") && (
               <LookbackToggle value={lookback} onChange={setLookback} />
             )}
@@ -134,7 +160,7 @@ export function Dashboard() {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-4 md:p-8">
           {activePage === "rankings" && (
             <TopPicks games={data.games} lookback={lookback} />
           )}
