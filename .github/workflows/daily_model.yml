@@ -1,0 +1,61 @@
+name: Daily HR Prop Model
+
+on:
+  schedule:
+    # All times in UTC
+    - cron: '0 12 * * *'   # 8:00 AM ET — results tracker + ML trainer + first model run
+    - cron: '30 13 * * *'  # 9:30 AM ET — re-run with confirmed lineups
+    - cron: '0 16 * * *'   # 12:00 PM ET — midday refresh
+    - cron: '0 21 * * *'   # 5:00 PM ET — evening refresh
+  workflow_dispatch: # allow manual trigger
+
+jobs:
+  run-model:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt scikit-learn
+
+      - name: Restore Statcast cache
+        uses: actions/cache@v4
+        with:
+          path: statcast_cache/
+          key: statcast-cache-${{ github.run_id }}
+          restore-keys: statcast-cache-
+
+      - name: Run results tracker (yesterday)
+        run: python results_tracker.py || true
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+
+      - name: Run ML trainer
+        run: python ml_trainer.py || true
+
+      - name: Run HR prop model
+        run: python main.py --fast
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+
+      - name: Copy results to frontend
+        run: |
+          mkdir -p frontend/public/data/results
+          cp results/*.json frontend/public/data/results/ 2>/dev/null || true
+
+      - name: Commit and push results
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add frontend/public/data/ results/ statcast_cache/
+          git commit -m "chore: daily HR props $(date -u +%Y-%m-%d-%H%M)" || true
+          git push

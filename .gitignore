@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+.env
+odds_cache.json
+cron.log
+
+# Node
+frontend/node_modules/
+frontend/.next/
+
+# OS
+.DS_Store

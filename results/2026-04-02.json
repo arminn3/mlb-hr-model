@@ -1,0 +1,188 @@
+{
+  "date": "2026-04-02",
+  "total_players_ranked": 54,
+  "total_hrs_hit": 10,
+  "total_near_hrs": 3,
+  "model_hits": 9,
+  "model_near_hits": 3,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 3,
+      "rate": 30.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 6,
+      "rate": 30.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 8,
+      "rate": 26.7
+    },
+    "all": {
+      "total": 54,
+      "hits": 9,
+      "rate": 16.7
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 3,
+      "rate": 30.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 7,
+      "rate": 35.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 9,
+      "rate": 30.0
+    },
+    "all": {
+      "total": 54,
+      "hits": 12,
+      "rate": 22.2
+    }
+  },
+  "avg_composite_hr_hitters": 0.364,
+  "avg_composite_non_hitters": 0.272,
+  "composite_separation": 0.092,
+  "hr_hitters": [
+    {
+      "name": "Matt Olson",
+      "rank": 1,
+      "composite": 0.641,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "ATL@AZ"
+    },
+    {
+      "name": "Dominic Smith",
+      "rank": 4,
+      "composite": 0.519,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "ATL@AZ"
+    },
+    {
+      "name": "Matt Wallner",
+      "rank": 7,
+      "composite": 0.408,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "MIN@KC"
+    },
+    {
+      "name": "Jordan Lawlar",
+      "rank": 12,
+      "composite": 0.377,
+      "opp_pitcher": "Reynaldo L\u00f3pez",
+      "matchup": "ATL@AZ"
+    },
+    {
+      "name": "Mark Vientos",
+      "rank": 17,
+      "composite": 0.345,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "NYM@SF"
+    },
+    {
+      "name": "Kody Clemens",
+      "rank": 18,
+      "composite": 0.313,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "MIN@KC"
+    },
+    {
+      "name": "Mauricio Dub\u00f3n",
+      "rank": 24,
+      "composite": 0.282,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "ATL@AZ"
+    },
+    {
+      "name": "Josh Bell",
+      "rank": 29,
+      "composite": 0.258,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "MIN@KC"
+    },
+    {
+      "name": "Rafael Devers",
+      "rank": 52,
+      "composite": 0.136,
+      "opp_pitcher": "David Peterson",
+      "matchup": "NYM@SF"
+    }
+  ],
+  "near_hr_hitters": [
+    {
+      "name": "Bo Bichette",
+      "rank": 20,
+      "composite": 0.305,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "NYM@SF"
+    },
+    {
+      "name": "Jonathan India",
+      "rank": 31,
+      "composite": 0.246,
+      "opp_pitcher": "Taj Bradley",
+      "matchup": "MIN@KC"
+    },
+    {
+      "name": "Isaac Collins",
+      "rank": 38,
+      "composite": 0.213,
+      "opp_pitcher": "Taj Bradley",
+      "matchup": "MIN@KC"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Matt Olson",
+      "ev": 105.2,
+      "angle": 27.0,
+      "distance": 415.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "McCann, James"
+    },
+    {
+      "batter": "Isaac Collins",
+      "ev": 105.2,
+      "angle": 27.0,
+      "distance": 399.0,
+      "hr_in_parks": 6,
+      "result": "",
+      "pitcher": "Funderburk, Kody"
+    },
+    {
+      "batter": "Jonathan India",
+      "ev": 96.9,
+      "angle": 25.0,
+      "distance": 391.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Bradley, Taj"
+    },
+    {
+      "batter": "Bo Bichette",
+      "ev": 104.0,
+      "angle": 33.0,
+      "distance": 389.0,
+      "hr_in_parks": 5,
+      "result": "field_out",
+      "pitcher": "Ray, Robbie"
+    }
+  ],
+  "surprise_hrs": [
+    {
+      "name": "Jorge Mateo",
+      "pitcher": "James McCann",
+      "description": "Jorge Mateo homers (1) on a fly ball to left field. Michael Harris II scores."
+    }
+  ]
+}
