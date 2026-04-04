@@ -169,28 +169,35 @@ def run_model(game_date: date = None, fast: bool = False):
             away_tid = g.get("away_team_id")
             away_batters = get_team_roster(away_tid) if away_tid else []
 
+        # Deduplicate batters by ID within each side
+        seen_ids = set()
+
         # Home batters face away pitcher
         if away_p:
             for player in home_batters:
-                batters_to_score.append({
-                    "batter_id": player["id"],
-                    "batter_name": player["name"],
-                    "game_pk": gpk,
-                    "opp_pitcher": away_p,
-                    "batter_side": "home",
-                    "home_team": home,
-                })
+                if player["id"] not in seen_ids:
+                    seen_ids.add(player["id"])
+                    batters_to_score.append({
+                        "batter_id": player["id"],
+                        "batter_name": player["name"],
+                        "game_pk": gpk,
+                        "opp_pitcher": away_p,
+                        "batter_side": "home",
+                        "home_team": home,
+                    })
         # Away batters face home pitcher
         if home_p:
             for player in away_batters:
-                batters_to_score.append({
-                    "batter_id": player["id"],
-                    "batter_name": player["name"],
-                    "game_pk": gpk,
-                    "opp_pitcher": home_p,
-                    "batter_side": "away",
-                    "home_team": home,
-                })
+                if player["id"] not in seen_ids:
+                    seen_ids.add(player["id"])
+                    batters_to_score.append({
+                        "batter_id": player["id"],
+                        "batter_name": player["name"],
+                        "game_pk": gpk,
+                        "opp_pitcher": home_p,
+                        "batter_side": "away",
+                        "home_team": home,
+                    })
 
         src = "lineup" if home_lineup or away_lineup else "roster"
         print(f"  {away}@{home}: {len(home_batters)} home + {len(away_batters)} away batters ({src})")
