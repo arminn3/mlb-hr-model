@@ -1,85 +1,63 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 import type { GameData, LookbackKey } from "./types";
+
+interface ProjectionModel {
+  intercept: number;
+  coefficients: Record<string, number>;
+  scaler_mean: Record<string, number>;
+  scaler_scale: Record<string, number>;
+  training_games: number;
+  avg_hrs_per_game: number;
+  mae: number;
+}
 
 interface GameProjection {
   game: GameData;
   expectedHRs: number;
-  awayExpected: number;
-  homeExpected: number;
   topPlayer: string;
   topComposite: number;
-  playerCount: number;
   envScore: number;
 }
 
-function estimateGameHRs(game: GameData, lookback: LookbackKey): GameProjection {
+function predictHRs(game: GameData, lookback: LookbackKey, model: ProjectionModel): number {
   const env = game.environment;
-  const parkFactor = (env?.park_factor ?? 100) / 100;
+  const players = game.players;
+  const homePlayers = players.filter(p => p.batter_side === "home");
+  const awayPlayers = players.filter(p => p.batter_side === "away");
+  const awayP = homePlayers[0]?.pitcher_stats || {};
+  const homeP = awayPlayers[0]?.pitcher_stats || {};
 
-  const homePlayers = game.players.filter(p => p.batter_side === "home");
-  const awayPlayers = game.players.filter(p => p.batter_side === "away");
+  const composites = players.map(p => p.scores[lookback]?.composite ?? 0.3);
 
-  const awayPitcherStats = homePlayers[0]?.pitcher_stats;
-  const homePitcherStats = awayPlayers[0]?.pitcher_stats;
-
-  // League average: ~1.1 HR per team per game (2.2 total per game)
-  const baseHRPerTeam = 1.1;
-
-  // Pitcher adjustment: compare their HR/9 to league avg (1.25)
-  // Cap at 2.0 max, floor at 0.5 — early season rates are noisy
-  const leagueAvg = 1.25;
-  const clampHR9 = (hr9: number, ip: number): number => {
-    if (!hr9 || ip < 3) return leagueAvg;
-    const capped = Math.min(Math.max(hr9, 0.5), 2.0);
-    if (ip < 15) {
-      const trust = ip / 15;
-      return capped * trust + leagueAvg * (1 - trust);
-    }
-    return capped;
+  // Build feature vector matching training
+  const features: Record<string, number> = {
+    park_factor: (env?.park_factor ?? 100) / 100,
+    temperature: ((env?.temperature_f ?? 70) - 50) / 40,
+    wind: ((env?.wind_score ?? 0) + 15) / 30,
+    humidity: (env?.humidity ?? 50) / 100,
+    pressure: (1030 - (env?.pressure_hpa ?? 1013)) / 50,
+    pitcher_hr9: ((awayP.hr_per_9 ?? 1.25) + (homeP.hr_per_9 ?? 1.25)) / 2 / 2.0,
+    pitcher_fb_rate: ((awayP.fb_rate ?? 30) + (homeP.fb_rate ?? 30)) / 2 / 100,
+    pitcher_hr_fb: ((awayP.hr_fb_rate ?? 10) + (homeP.hr_fb_rate ?? 10)) / 2 / 100,
+    avg_batter_composite: composites.reduce((a, b) => a + b, 0) / (composites.length || 1),
+    max_batter_composite: Math.max(...composites, 0.3),
+    num_batters: players.length / 30,
   };
 
-  const awayPHR9 = clampHR9(awayPitcherStats?.hr_per_9 ?? 0, awayPitcherStats?.ip ?? 0);
-  const homePHR9 = clampHR9(homePitcherStats?.hr_per_9 ?? 0, homePitcherStats?.ip ?? 0);
-
-  // Scale base by pitcher HR tendency relative to league avg
-  let homeExpected = baseHRPerTeam * (awayPHR9 / leagueAvg);
-  let awayExpected = baseHRPerTeam * (homePHR9 / leagueAvg);
-
-  // Park factor adjustment
-  homeExpected *= parkFactor;
-  awayExpected *= parkFactor;
-
-  // Small env boost (wind, temp) — capped to prevent runaway
-  const windBoost = env?.wind_score ? Math.max(0, env.wind_score) * 0.005 : 0;
-  const tempBoost = env?.temperature_f && env.temperature_f > 75 ? (env.temperature_f - 75) * 0.002 : 0;
-  const envBoost = 1 + Math.min(windBoost + tempBoost, 0.15); // max 15% boost
-
-  homeExpected *= envBoost;
-  awayExpected *= envBoost;
-
-  // Find top player
-  let topPlayer = "";
-  let topComposite = 0;
-  for (const p of game.players) {
-    const c = p.scores[lookback]?.composite ?? 0;
-    if (c > topComposite) {
-      topComposite = c;
-      topPlayer = p.name;
-    }
+  // Apply scaler (standardize) then multiply by coefficients
+  let prediction = model.intercept;
+  for (const [feat, coef] of Object.entries(model.coefficients)) {
+    const raw = features[feat] ?? 0;
+    const mean = model.scaler_mean[feat] ?? 0;
+    const scale = model.scaler_scale[feat] ?? 1;
+    const scaled = (raw - mean) / scale;
+    prediction += scaled * coef;
   }
 
-  return {
-    game,
-    expectedHRs: homeExpected + awayExpected,
-    awayExpected,
-    homeExpected,
-    topPlayer,
-    topComposite,
-    playerCount: game.players.length,
-    envScore: env?.env_score ?? 0.5,
-  };
+  // Floor at 0.5, cap at 6
+  return Math.max(0.5, Math.min(6, prediction));
 }
 
 export function ProjectionsView({
@@ -89,13 +67,36 @@ export function ProjectionsView({
   games: GameData[];
   lookback: LookbackKey;
 }) {
+  const [model, setModel] = useState<ProjectionModel | null>(null);
+
+  useEffect(() => {
+    fetch("/data/results/projection_model.json")
+      .then(r => r.ok ? r.json() : null)
+      .then(setModel)
+      .catch(() => {});
+  }, []);
+
   const projections = useMemo(() => {
+    if (!model) return [];
     return games
-      .map((g) => estimateGameHRs(g, lookback))
+      .map((game): GameProjection => {
+        const expectedHRs = predictHRs(game, lookback, model);
+        let topPlayer = "";
+        let topComposite = 0;
+        for (const p of game.players) {
+          const c = p.scores[lookback]?.composite ?? 0;
+          if (c > topComposite) { topComposite = c; topPlayer = p.name; }
+        }
+        return { game, expectedHRs, topPlayer, topComposite, envScore: game.environment?.env_score ?? 0.5 };
+      })
       .sort((a, b) => b.expectedHRs - a.expectedHRs);
-  }, [games, lookback]);
+  }, [games, lookback, model]);
 
   const totalSlateHRs = projections.reduce((s, p) => s + p.expectedHRs, 0);
+
+  if (!model) {
+    return <p className="text-center text-muted py-12">Loading projection model...</p>;
+  }
 
   if (projections.length === 0) {
     return <p className="text-center text-muted py-12">No games to project.</p>;
@@ -110,7 +111,9 @@ export function ProjectionsView({
             <h2 className="text-sm uppercase tracking-wider text-accent font-bold mb-1">
               Projected Slate Total
             </h2>
-            <p className="text-xs text-muted">{projections.length} games</p>
+            <p className="text-xs text-muted">
+              {projections.length} games &middot; ML model trained on {model.training_games} games &middot; avg {model.avg_hrs_per_game} HR/game
+            </p>
           </div>
           <div className="text-right">
             <span className="text-4xl font-bold font-mono text-accent">
@@ -128,9 +131,7 @@ export function ProjectionsView({
             <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
               <th className="text-left py-3 pr-4">Game</th>
               <th className="text-center py-3 px-3">Env</th>
-              <th className="text-center py-3 px-3">Away HRs</th>
-              <th className="text-center py-3 px-3">Home HRs</th>
-              <th className="text-center py-3 px-3">Total HRs</th>
+              <th className="text-center py-3 px-3">Projected HRs</th>
               <th className="text-left py-3 px-3">Top Player</th>
               <th className="text-center py-3 px-3">Score</th>
             </tr>
@@ -155,8 +156,6 @@ export function ProjectionsView({
                     {Math.round(p.envScore * 100)}
                   </span>
                 </td>
-                <td className="text-center py-3 px-3 font-mono">{p.awayExpected.toFixed(1)}</td>
-                <td className="text-center py-3 px-3 font-mono">{p.homeExpected.toFixed(1)}</td>
                 <td className="text-center py-3 px-3">
                   <span className={`text-lg font-bold font-mono ${
                     p.expectedHRs >= 3.0 ? "text-accent-green" :
@@ -175,8 +174,8 @@ export function ProjectionsView({
       </div>
 
       <div className="mt-6 text-[10px] text-muted">
-        Based on pitcher HR/9 rates (blended with league avg for small samples), park factors, and weather.
-        League average: ~2.2 HRs per game.
+        ML projection model trained on {model.training_games} historical games.
+        Mean absolute error: {model.mae} HRs/game. Model retrains daily.
       </div>
     </div>
   );

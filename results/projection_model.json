@@ -1,0 +1,45 @@
+{
+  "intercept": 2.1429,
+  "coefficients": {
+    "park_factor": 0.1337,
+    "temperature": 0.1241,
+    "wind": 0.0643,
+    "humidity": 0.245,
+    "pressure": 0.0415,
+    "pitcher_hr9": 0.546,
+    "pitcher_fb_rate": -0.0242,
+    "pitcher_hr_fb": -0.2445,
+    "avg_batter_composite": 0.1603,
+    "max_batter_composite": 0.1749,
+    "num_batters": 0.0
+  },
+  "scaler_mean": {
+    "park_factor": 1.014095,
+    "temperature": 0.484357,
+    "wind": 0.516032,
+    "humidity": 0.514571,
+    "pressure": 0.397905,
+    "pitcher_hr9": 0.853905,
+    "pitcher_fb_rate": 0.288467,
+    "pitcher_hr_fb": 0.122414,
+    "avg_batter_composite": 0.301646,
+    "max_batter_composite": 0.475248,
+    "num_batters": 0.6
+  },
+  "scaler_scale": {
+    "park_factor": 0.145587,
+    "temperature": 0.125109,
+    "wind": 0.098838,
+    "humidity": 0.098725,
+    "pressure": 0.349105,
+    "pitcher_hr9": 0.646133,
+    "pitcher_fb_rate": 0.060026,
+    "pitcher_hr_fb": 0.097392,
+    "avg_batter_composite": 0.047078,
+    "max_batter_composite": 0.089419,
+    "num_batters": 1.0
+  },
+  "training_games": 105,
+  "avg_hrs_per_game": 2.14,
+  "mae": 1.2
+}
