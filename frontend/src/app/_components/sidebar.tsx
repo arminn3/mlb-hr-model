@@ -72,6 +72,26 @@ function Icon({ name }: { name: string }) {
   return null;
 }
 
+function NavButton({ item, active, onChange }: {
+  item: { key: Page; label: string; icon: string };
+  active: Page;
+  onChange: (page: Page) => void;
+}) {
+  return (
+    <button
+      onClick={() => onChange(item.key)}
+      className={`w-full flex items-center gap-3 px-3 py-2 text-sm rounded-lg cursor-pointer transition-colors ${
+        active === item.key
+          ? "bg-accent/10 text-accent font-medium border border-accent/20"
+          : "text-muted hover:text-foreground hover:bg-card/50"
+      }`}
+    >
+      <Icon name={item.icon} />
+      {item.label}
+    </button>
+  );
+}
+
 export function Sidebar({
   active,
   onChange,
@@ -89,31 +109,53 @@ export function Sidebar({
         <span className="text-xs text-muted block mt-0.5">MLB Prop Analysis</span>
       </div>
 
-      {/* Nav items */}
-      <div className="px-3 py-4 flex-1">
+      {/* Nav groups */}
+      <div className="px-3 py-4 flex-1 overflow-y-auto">
+        {/* Analysis */}
+        <span className="text-[10px] uppercase tracking-wider text-muted px-2 mb-2 block">
+          Analysis
+        </span>
+        <div className="space-y-1 mb-5">
+          {(["rankings", "slate", "gems"] as const).map((key) => {
+            const item = NAV_ITEMS.find(n => n.key === key)!;
+            return <NavButton key={key} item={item} active={active} onChange={onChange} />;
+          })}
+        </div>
+
+        {/* Research */}
+        <span className="text-[10px] uppercase tracking-wider text-muted px-2 mb-2 block">
+          Research
+        </span>
+        <div className="space-y-1 mb-5">
+          {(["bvp", "projections", "environment"] as const).map((key) => {
+            const item = NAV_ITEMS.find(n => n.key === key)!;
+            return <NavButton key={key} item={item} active={active} onChange={onChange} />;
+          })}
+        </div>
+
+        {/* Tools */}
         <span className="text-[10px] uppercase tracking-wider text-muted px-2 mb-2 block">
           Tools
         </span>
-        <div className="space-y-1">
-          {NAV_ITEMS.map((item) => (
-            <button
-              key={item.key}
-              onClick={() => onChange(item.key)}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm rounded-lg cursor-pointer transition-colors ${
-                active === item.key
-                  ? "bg-accent/10 text-accent font-medium border border-accent/20"
-                  : "text-muted hover:text-foreground hover:bg-card/50"
-              }`}
-            >
-              <Icon name={item.icon} />
-              {item.label}
-            </button>
-          ))}
+        <div className="space-y-1 mb-5">
+          {(["slips", "results"] as const).map((key) => {
+            const item = NAV_ITEMS.find(n => n.key === key)!;
+            return <NavButton key={key} item={item} active={active} onChange={onChange} />;
+          })}
         </div>
       </div>
 
+      {/* How It Works — pinned to bottom */}
+      <div className="px-3 pb-3">
+        <NavButton
+          item={NAV_ITEMS.find(n => n.key === "methodology")!}
+          active={active}
+          onChange={onChange}
+        />
+      </div>
+
       {/* Footer */}
-      <div className="px-5 py-4 border-t border-card-border text-[10px] text-muted">
+      <div className="px-5 py-3 border-t border-card-border text-[10px] text-muted">
         Data: Baseball Savant, Open-Meteo
       </div>
     </aside>
