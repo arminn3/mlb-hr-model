@@ -71,8 +71,8 @@ export function LiveFeed() {
             homeScore: linescore.teams?.home?.runs || 0,
           });
 
-          // Only fetch play-by-play for in-progress or final games
-          if (status !== "In Progress" && status !== "Final" && status !== "Game Over") continue;
+          // Fetch play-by-play for any game that has started
+          if (status === "Scheduled" || status === "Pre-Game" || status === "Warmup" || status === "Postponed") continue;
 
           try {
             const feedRes = await fetch(
