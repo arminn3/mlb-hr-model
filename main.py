@@ -232,9 +232,7 @@ def run_model(game_date: date = None, fast: bool = False):
             batter_h = "L" if pitcher_hand == "R" else "R"
 
         batter_df = get_batter_statcast(batter_id)
-        if batter_df.empty:
-            print("SKIP (no Statcast)")
-            continue
+        # Don't skip — score them even with empty data (they'll get low confidence)
 
         # Cache pitcher data
         pid = opp_pitcher["id"]

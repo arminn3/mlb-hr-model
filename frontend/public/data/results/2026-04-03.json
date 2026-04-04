@@ -2,7 +2,7 @@
   "date": "2026-04-03",
   "total_players_ranked": 250,
   "total_hrs_hit": 31,
-  "total_near_hrs": 0,
+  "total_near_hrs": 9,
   "model_hits": 30,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 9,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -82,23 +82,23 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 3,
-      "rate": 15.0
+      "hits": 4,
+      "rate": 20.0
     },
     "top_30": {
       "total": 30,
-      "hits": 8,
-      "rate": 26.7
+      "hits": 9,
+      "rate": 30.0
     },
     "all": {
       "total": 250,
-      "hits": 30,
-      "rate": 12.0
+      "hits": 39,
+      "rate": 15.6
     }
   },
   "avg_composite_hr_hitters": 0.319,
-  "avg_composite_non_hitters": 0.304,
-  "composite_separation": 0.015,
+  "avg_composite_non_hitters": 0.303,
+  "composite_separation": 0.016,
   "hr_hitters": [
     {
       "name": "Kyle Schwarber",
@@ -311,7 +311,171 @@
       "matchup": "NYM@SF"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Kevin McGonigle",
+      "rank": 20,
+      "composite": 0.446,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "STL@DET"
+    },
+    {
+      "name": "Will Smith",
+      "rank": 31,
+      "composite": 0.416,
+      "opp_pitcher": "Miles Mikolas",
+      "matchup": "LAD@WSH"
+    },
+    {
+      "name": "Riley Greene",
+      "rank": 46,
+      "composite": 0.39,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "STL@DET"
+    },
+    {
+      "name": "Cody Bellinger",
+      "rank": 78,
+      "composite": 0.346,
+      "opp_pitcher": "Eury P\u00e9rez",
+      "matchup": "MIA@NYY"
+    },
+    {
+      "name": "Matt Shaw",
+      "rank": 92,
+      "composite": 0.335,
+      "opp_pitcher": "Joey Cantillo",
+      "matchup": "CHC@CLE"
+    },
+    {
+      "name": "Luis Campusano",
+      "rank": 106,
+      "composite": 0.318,
+      "opp_pitcher": "Sonny Gray",
+      "matchup": "SD@BOS"
+    },
+    {
+      "name": "Alek Thomas",
+      "rank": 140,
+      "composite": 0.285,
+      "opp_pitcher": "Grant Holmes",
+      "matchup": "ATL@AZ"
+    },
+    {
+      "name": "Jake McCarthy",
+      "rank": 172,
+      "composite": 0.251,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "PHI@COL"
+    },
+    {
+      "name": "Pete Crow-Armstrong",
+      "rank": 246,
+      "composite": 0.144,
+      "opp_pitcher": "Joey Cantillo",
+      "matchup": "CHC@CLE"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Alek Thomas",
+      "ev": 102.8,
+      "angle": 29.0,
+      "distance": 395.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Holmes, Grant"
+    },
+    {
+      "batter": "Luis Campusano",
+      "ev": 101.7,
+      "angle": 24.0,
+      "distance": 387.0,
+      "hr_in_parks": 12,
+      "result": "double",
+      "pitcher": "Gray, Sonny"
+    },
+    {
+      "batter": "Pete Crow-Armstrong",
+      "ev": 107.7,
+      "angle": 37.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Brogdon, Connor"
+    },
+    {
+      "batter": "Matt Shaw",
+      "ev": 102.0,
+      "angle": 25.0,
+      "distance": 372.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Brogdon, Connor"
+    },
+    {
+      "batter": "Jake McCarthy",
+      "ev": 102.4,
+      "angle": 26.0,
+      "distance": 391.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Nola, Aaron"
+    },
+    {
+      "batter": "Riley Greene",
+      "ev": 108.9,
+      "angle": 23.0,
+      "distance": 407.0,
+      "hr_in_parks": 27,
+      "result": "field_out",
+      "pitcher": "Graceffo, Gordon"
+    },
+    {
+      "batter": "Dillon Dingler",
+      "ev": 105.1,
+      "angle": 20.0,
+      "distance": 388.0,
+      "hr_in_parks": 5,
+      "result": "field_out",
+      "pitcher": "Bruihl, Justin"
+    },
+    {
+      "batter": "Kevin McGonigle",
+      "ev": 102.5,
+      "angle": 28.0,
+      "distance": 400.0,
+      "hr_in_parks": 27,
+      "result": "field_out",
+      "pitcher": "McGreevy, Michael"
+    },
+    {
+      "batter": "Cody Bellinger",
+      "ev": 105.2,
+      "angle": 22.0,
+      "distance": 381.0,
+      "hr_in_parks": 7,
+      "result": "double",
+      "pitcher": "Phillips, Tyler"
+    },
+    {
+      "batter": "Max Muncy",
+      "ev": 106.5,
+      "angle": 26.0,
+      "distance": 372.0,
+      "hr_in_parks": 29,
+      "result": "single",
+      "pitcher": "Mikolas, Miles"
+    },
+    {
+      "batter": "Will Smith",
+      "ev": 100.3,
+      "angle": 28.0,
+      "distance": 353.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Mikolas, Miles"
+    }
+  ],
   "surprise_hrs": []
 }
