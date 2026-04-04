@@ -1,6 +1,6 @@
 "use client";
 
-export type Page = "rankings" | "slate" | "environment" | "projections" | "slips" | "bvp" | "results" | "methodology";
+export type Page = "rankings" | "slate" | "environment" | "projections" | "slips" | "bvp" | "gems" | "results" | "methodology";
 
 const NAV_ITEMS: { key: Page; label: string; icon: string }[] = [
   { key: "rankings", label: "HR Rankings", icon: "chart" },
@@ -9,6 +9,7 @@ const NAV_ITEMS: { key: Page; label: string; icon: string }[] = [
   { key: "environment", label: "Environment", icon: "cloud" },
   { key: "slips", label: "Slip Generator", icon: "slip" },
   { key: "bvp", label: "Batter vs Pitcher", icon: "bvp" },
+  { key: "gems", label: "Gem Finder", icon: "gem" },
   { key: "results", label: "Results Log", icon: "check" },
   { key: "methodology", label: "How It Works", icon: "info" },
 ];
@@ -30,6 +31,12 @@ function Icon({ name }: { name: string }) {
     return (
       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
+      </svg>
+    );
+  if (name === "gem")
+    return (
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 3l3.5 7L12 7l3.5 3L19 3M5 3l7 18 7-18" />
       </svg>
     );
   if (name === "bvp")

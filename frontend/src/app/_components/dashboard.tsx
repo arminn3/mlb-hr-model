@@ -13,6 +13,7 @@ import { ResultsView } from "./results-view";
 import { MethodologyPage } from "./methodology-page";
 import { SlipGenerator } from "./slip-generator";
 import { BvPPage } from "./bvp-page";
+import { GemFinder } from "./gem-finder";
 import { ProjectionsView } from "./projections-view";
 
 export function Dashboard() {
@@ -124,7 +125,7 @@ export function Dashboard() {
             </span>
           </div>
           <div className="flex items-center gap-4">
-            {(activePage === "rankings" || activePage === "slate" || activePage === "projections" || activePage === "slips" || activePage === "bvp") && (
+            {(activePage === "rankings" || activePage === "slate" || activePage === "projections" || activePage === "slips" || activePage === "bvp" || activePage === "gems") && (
               <LookbackToggle value={lookback} onChange={setLookback} />
             )}
             <DatePicker currentDate={selectedDate} onChange={loadDate} />
@@ -158,6 +159,10 @@ export function Dashboard() {
 
           {activePage === "bvp" && (
             <BvPPage games={data.games} lookback={lookback} />
+          )}
+
+          {activePage === "gems" && (
+            <GemFinder games={data.games} lookback={lookback} />
           )}
 
           {activePage === "slips" && (
