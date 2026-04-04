@@ -1,9 +1,9 @@
 {
   "date": "2026-04-03",
-  "total_players_ranked": 251,
+  "total_players_ranked": 250,
   "total_hrs_hit": 28,
   "total_near_hrs": 0,
-  "model_hits": 29,
+  "model_hits": 28,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
     "L5": {
@@ -23,9 +23,9 @@
         "rate": 23.3
       },
       "all": {
-        "total": 251,
-        "hits": 29,
-        "rate": 11.6
+        "total": 250,
+        "hits": 28,
+        "rate": 11.2
       }
     },
     "L10": {
@@ -45,9 +45,9 @@
         "rate": 23.3
       },
       "all": {
-        "total": 251,
-        "hits": 29,
-        "rate": 11.6
+        "total": 250,
+        "hits": 28,
+        "rate": 11.2
       }
     },
     "L15": {
@@ -67,9 +67,9 @@
         "rate": 20.0
       },
       "all": {
-        "total": 251,
-        "hits": 29,
-        "rate": 11.6
+        "total": 250,
+        "hits": 28,
+        "rate": 11.2
       }
     }
   },
@@ -91,9 +91,9 @@
       "rate": 23.3
     },
     "all": {
-      "total": 251,
-      "hits": 29,
-      "rate": 11.6
+      "total": 250,
+      "hits": 28,
+      "rate": 11.2
     }
   },
   "tier_accuracy_with_near": {
@@ -113,14 +113,14 @@
       "rate": 23.3
     },
     "all": {
-      "total": 251,
-      "hits": 29,
-      "rate": 11.6
+      "total": 250,
+      "hits": 28,
+      "rate": 11.2
     }
   },
-  "avg_composite_hr_hitters": 0.32,
+  "avg_composite_hr_hitters": 0.322,
   "avg_composite_non_hitters": 0.304,
-  "composite_separation": 0.016,
+  "composite_separation": 0.018,
   "hr_hitters": [
     {
       "name": "Kyle Schwarber",
@@ -131,7 +131,7 @@
     },
     {
       "name": "Max Muncy",
-      "rank": 15,
+      "rank": 14,
       "composite": 0.457,
       "opp_pitcher": "Cristian Javier",
       "matchup": "HOU@ATH"
@@ -235,92 +235,85 @@
       "matchup": "CIN@TEX"
     },
     {
-      "name": "Max Muncy",
-      "rank": 136,
-      "composite": 0.287,
-      "opp_pitcher": "Miles Mikolas",
-      "matchup": "LAD@WSH"
-    },
-    {
       "name": "CJ Abrams",
-      "rank": 147,
+      "rank": 146,
       "composite": 0.281,
       "opp_pitcher": "Emmet Sheehan",
       "matchup": "LAD@WSH"
     },
     {
       "name": "Tyler Stephenson",
-      "rank": 151,
+      "rank": 150,
       "composite": 0.278,
       "opp_pitcher": "MacKenzie Gore",
       "matchup": "CIN@TEX"
     },
     {
       "name": "Chase DeLauter",
-      "rank": 160,
+      "rank": 159,
       "composite": 0.268,
       "opp_pitcher": "Cade Horton",
       "matchup": "CHC@CLE"
     },
     {
       "name": "Owen Caissie",
-      "rank": 172,
+      "rank": 171,
       "composite": 0.251,
       "opp_pitcher": "Will Warren",
       "matchup": "MIA@NYY"
     },
     {
       "name": "Andr\u00e9s Gim\u00e9nez",
-      "rank": 177,
+      "rank": 176,
       "composite": 0.246,
       "opp_pitcher": "Grant Taylor",
       "matchup": "TOR@CWS"
     },
     {
       "name": "Ozzie Albies",
-      "rank": 199,
+      "rank": 198,
       "composite": 0.229,
       "opp_pitcher": "Eduardo Rodriguez",
       "matchup": "ATL@AZ"
     },
     {
       "name": "Lawrence Butler",
-      "rank": 206,
+      "rank": 205,
       "composite": 0.214,
       "opp_pitcher": "Cristian Javier",
       "matchup": "HOU@ATH"
     },
     {
       "name": "Xavier Edwards",
-      "rank": 215,
+      "rank": 214,
       "composite": 0.204,
       "opp_pitcher": "Will Warren",
       "matchup": "MIA@NYY"
     },
     {
       "name": "Elly De La Cruz",
-      "rank": 221,
+      "rank": 220,
       "composite": 0.198,
       "opp_pitcher": "MacKenzie Gore",
       "matchup": "CIN@TEX"
     },
     {
       "name": "Tristan Gray",
-      "rank": 223,
+      "rank": 222,
       "composite": 0.197,
       "opp_pitcher": "Joe Boyle",
       "matchup": "TB@MIN"
     },
     {
       "name": "Kyle Tucker",
-      "rank": 231,
+      "rank": 230,
       "composite": 0.185,
       "opp_pitcher": "Miles Mikolas",
       "matchup": "LAD@WSH"
     },
     {
       "name": "Gabriel Arias",
-      "rank": 248,
+      "rank": 247,
       "composite": 0.142,
       "opp_pitcher": "Cade Horton",
       "matchup": "CHC@CLE"

@@ -202,6 +202,12 @@ def compare_results(game_date: date) -> dict:
                     "opp_pitcher": player.get("opp_pitcher", ""),
                     "matchup": f"{game['away_team']}@{game['home_team']}",
                 })
+        # Deduplicate by player name — keep highest composite if duplicate
+        seen = {}
+        for p in players_lb:
+            if p["name"] not in seen or p["composite"] > seen[p["name"]]["composite"]:
+                seen[p["name"]] = p
+        players_lb = list(seen.values())
         players_lb.sort(key=lambda x: x["composite"], reverse=True)
         for i, p in enumerate(players_lb):
             p["rank"] = i + 1
