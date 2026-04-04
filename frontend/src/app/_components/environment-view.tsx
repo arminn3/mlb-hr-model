@@ -135,48 +135,84 @@ function CombinedView({ games }: { games: GameEnv[] }) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// Weather Boost View — only weather factors, no park
+// Weather Boost View — HomeRunPredict style categorized pills
 // ═══════════════════════════════════════════════════════════════════════════════
+
+function calcWeatherPct(g: GameEnv): number {
+  // Weather HR boost percentage
+  // Wind is the primary driver, temp and humidity secondary
+  let pct = 0;
+  // Wind: each mph of outward wind ≈ +1.2% HR boost
+  pct += g.wind_score * 1.2;
+  // Temperature: above 72F adds, below 55F subtracts
+  if (g.temperature_f) {
+    if (g.temperature_f > 72) pct += (g.temperature_f - 72) * 0.3;
+    if (g.temperature_f < 55) pct -= (55 - g.temperature_f) * 0.4;
+  }
+  // Humidity: slight positive effect
+  if (g.humidity && g.humidity > 60) pct += (g.humidity - 60) * 0.05;
+  // Dome = neutral
+  if (g.is_dome) pct = 0;
+  return Math.round(pct * 10) / 10;
+}
+
 function WeatherView({ games }: { games: GameEnv[] }) {
-  // Weather-only score: temp 30%, wind 40%, humidity 15%, pressure 15%
-  const withWeatherScore = games.map((g) => {
-    const ws = 0.30 * g.temp_norm + 0.40 * g.wind_norm + 0.15 * g.humid_norm + 0.15 * (g.pressure_norm ?? 0.5);
-    return { ...g, weather_score: ws };
-  });
-  const sorted = [...withWeatherScore].sort((a, b) => b.weather_score - a.weather_score);
+  const withPct = games.map((g) => ({ ...g, weatherPct: calcWeatherPct(g) }));
+
+  const favorable = withPct.filter(g => g.weatherPct > 5).sort((a, b) => b.weatherPct - a.weatherPct);
+  const unfavorable = withPct.filter(g => g.weatherPct < -5).sort((a, b) => a.weatherPct - b.weatherPct);
+  const neutral = withPct.filter(g => g.weatherPct >= -5 && g.weatherPct <= 5);
 
   return (
-    <div className="space-y-4">
-      <p className="text-xs text-muted">
-        Weather-only boost — park factors excluded. Shows which games have the best game-day conditions for HRs.
-      </p>
-      {sorted.map((g) => {
-        const score100 = Math.round(g.weather_score * 100);
-        const rating = ratingLabel(g.weather_score);
-        return (
-          <div key={g.game_pk} className="border border-card-border rounded-xl bg-card/50 p-5">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <span className="font-semibold text-foreground text-lg">{g.away_team} @ {g.home_team}</span>
-                <span className={`px-2 py-0.5 text-xs font-medium rounded ${rating.cls}`}>{rating.label}</span>
-                {g.is_dome && <span className="px-2 py-0.5 text-[10px] rounded bg-card-border text-muted">Dome</span>}
-              </div>
-              <ScoreCircle score={score100} env_score={g.weather_score} label="WX" />
-            </div>
+    <div>
+      <h3 className="text-lg font-bold text-foreground mb-4">Weather Impact on Home Runs</h3>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <WeatherCard label="Temperature" value={g.temperature_f !== null ? `${g.temperature_f}°F` : "?"} norm={g.temp_norm}
-                note={g.temperature_f && g.temperature_f >= 80 ? "Hot — ball carries well" : g.temperature_f && g.temperature_f >= 65 ? "Moderate" : "Cool — denser air"} weight="30%" />
-              <WeatherCard label="Wind" value={g.is_dome ? "Dome" : `${g.wind_speed_mph ?? "?"}mph`} norm={g.wind_norm}
-                note={windLabel(g.wind_score, g.is_dome)} weight="40%" />
-              <WeatherCard label="Humidity" value={g.humidity !== null ? `${g.humidity}%` : "?"} norm={g.humid_norm}
-                note={g.humidity && g.humidity >= 60 ? "Less air resistance" : "Drier air"} weight="15%" />
-              <WeatherCard label="Pressure" value={g.pressure_hpa !== null ? `${g.pressure_hpa} hPa` : "?"} norm={g.pressure_norm ?? 0.5}
-                note={g.pressure_hpa && g.pressure_hpa < 1000 ? "Low — thinner air" : "Standard"} weight="15%" />
-            </div>
-          </div>
-        );
-      })}
+      {/* Favorable */}
+      <div className="mb-6">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-accent-green" />
+          <span className="text-sm font-semibold text-foreground">HR Favorable Games</span>
+          <span className="text-xs text-muted">(Weather increases home run probability)</span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {favorable.length > 0 ? favorable.map(g => (
+            <WeatherPill key={g.game_pk} away={g.away_team} home={g.home_team} pct={g.weatherPct}
+              wind={g.wind_speed_mph} temp={g.temperature_f} type="favorable" />
+          )) : <span className="text-xs text-muted">No favorable weather games today</span>}
+        </div>
+      </div>
+
+      {/* Unfavorable */}
+      <div className="mb-6">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-accent-red" />
+          <span className="text-sm font-semibold text-foreground">HR Unfavorable Games</span>
+          <span className="text-xs text-muted">(Weather decreases home run probability)</span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {unfavorable.length > 0 ? unfavorable.map(g => (
+            <WeatherPill key={g.game_pk} away={g.away_team} home={g.home_team} pct={g.weatherPct}
+              wind={g.wind_speed_mph} temp={g.temperature_f} type="unfavorable" />
+          )) : <span className="text-xs text-muted">No unfavorable weather games today</span>}
+        </div>
+      </div>
+
+      {/* Neutral */}
+      <div className="mb-6">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-muted" />
+          <span className="text-sm font-semibold text-foreground">Neutral Impact Games</span>
+          <span className="text-xs text-muted">(Minimal weather effect)</span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {neutral.map(g => (
+            <WeatherPill key={g.game_pk} away={g.away_team} home={g.home_team} pct={g.weatherPct}
+              wind={g.wind_speed_mph} temp={g.temperature_f} type="neutral" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
     </div>
   );
 }
@@ -249,18 +285,27 @@ function FactorCard({ label, value, sub, norm }: { label: string; value: string;
   );
 }
 
-function WeatherCard({ label, value, norm, note, weight }: { label: string; value: string; norm: number; note: string; weight: string }) {
-  const color = norm >= 0.5 ? "bg-accent-green" : norm >= 0.3 ? "bg-accent-yellow" : "bg-accent-red";
+function WeatherPill({ away, home, pct, wind, temp, type }: {
+  away: string; home: string; pct: number;
+  wind: number | null; temp: number | null; type: "favorable" | "unfavorable" | "neutral";
+}) {
+  const borderColor = type === "favorable" ? "border-accent-green/30 bg-accent-green/5" :
+    type === "unfavorable" ? "border-accent-red/30 bg-accent-red/5" : "border-card-border bg-card/30";
+  const dotColor = type === "favorable" ? "bg-accent-green" : type === "unfavorable" ? "bg-accent-red" : "bg-muted";
+  const pctColor = type === "favorable" ? "text-accent-green" : type === "unfavorable" ? "text-accent-red" : "text-muted";
+
   return (
-    <div className="bg-background/30 rounded-lg p-4">
-      <div className="flex items-center justify-between mb-1">
-        <span className="text-[10px] uppercase tracking-wider text-muted">{label}</span>
-        <span className="text-[9px] text-accent font-mono">{weight}</span>
-      </div>
-      <div className="text-xl font-bold font-mono text-foreground mb-0.5">{value}</div>
-      <div className="text-[10px] text-muted mb-2">{note}</div>
-      <Bar pct={norm * 100} color={color} />
-      <div className="text-right text-[9px] text-muted mt-1">{Math.round(norm * 100)}%</div>
+    <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg border text-xs ${borderColor}`}>
+      <span className={`w-2 h-2 rounded-full ${dotColor}`} />
+      <span className="font-medium text-foreground">{away} @ {home}</span>
+      {type !== "neutral" ? (
+        <span className={`font-bold font-mono ${pctColor}`}>{pct > 0 ? "+" : ""}{pct}%</span>
+      ) : (
+        <span className="text-muted font-mono">neutral</span>
+      )}
+      {wind !== null && (
+        <span className="text-muted">{wind}mph wind{pct > 0 ? "+" : pct < 0 ? "-" : ""}</span>
+      )}
     </div>
   );
 }
