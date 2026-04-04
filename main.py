@@ -331,6 +331,7 @@ def run_model(game_date: date = None, fast: bool = False):
             "away_team": g.get("away_team", ""),
             "home_team": g.get("home_team", ""),
             "game_time": game_time_display,
+            "game_time_sort": local_hour * 60 + local_min,  # for sorting
             "away_pitcher": {
                 "name": g["away_pitcher"]["name"] if g.get("away_pitcher") else "TBD",
                 "hand": g["away_pitcher"]["hand"] if g.get("away_pitcher") else "?",
@@ -342,6 +343,9 @@ def run_model(game_date: date = None, fast: bool = False):
             "environment": env_by_game.get(gpk, {}),
             "players": players,
         })
+
+    # Sort games by start time (earliest first)
+    games_out.sort(key=lambda g: g.get("game_time_sort", 9999))
 
     return games_out, schedule
 
