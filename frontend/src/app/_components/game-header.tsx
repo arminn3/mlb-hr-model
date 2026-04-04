@@ -1,17 +1,33 @@
 import type { GameEnvironment } from "./types";
 
-// MLB team ID mapping for logo URLs
-const TEAM_IDS: Record<string, number> = {
-  ARI: 109, ATL: 144, BAL: 110, BOS: 111, CHC: 112, CIN: 113, CLE: 114,
-  COL: 115, CWS: 145, DET: 116, HOU: 117, KC: 118, LAA: 108, LAD: 119,
-  MIA: 146, MIL: 158, MIN: 142, NYM: 121, NYY: 147, OAK: 133, ATH: 133,
-  PHI: 143, PIT: 134, SD: 135, SDP: 135, SEA: 136, SF: 137, STL: 138,
-  TB: 139, TEX: 140, TOR: 141, WSH: 120, AZ: 109,
+// MLB team ID mapping for logo URLs + full names
+const TEAMS: Record<string, { id: number; name: string }> = {
+  ARI: { id: 109, name: "Diamondbacks" }, AZ: { id: 109, name: "Diamondbacks" },
+  ATL: { id: 144, name: "Braves" }, BAL: { id: 110, name: "Orioles" },
+  BOS: { id: 111, name: "Red Sox" }, CHC: { id: 112, name: "Cubs" },
+  CIN: { id: 113, name: "Reds" }, CLE: { id: 114, name: "Guardians" },
+  COL: { id: 115, name: "Rockies" }, CWS: { id: 145, name: "White Sox" },
+  DET: { id: 116, name: "Tigers" }, HOU: { id: 117, name: "Astros" },
+  KC: { id: 118, name: "Royals" }, LAA: { id: 108, name: "Angels" },
+  LAD: { id: 119, name: "Dodgers" }, MIA: { id: 146, name: "Marlins" },
+  MIL: { id: 158, name: "Brewers" }, MIN: { id: 142, name: "Twins" },
+  NYM: { id: 121, name: "Mets" }, NYY: { id: 147, name: "Yankees" },
+  OAK: { id: 133, name: "Athletics" }, ATH: { id: 133, name: "Athletics" },
+  PHI: { id: 143, name: "Phillies" }, PIT: { id: 134, name: "Pirates" },
+  SD: { id: 135, name: "Padres" }, SDP: { id: 135, name: "Padres" },
+  SEA: { id: 136, name: "Mariners" }, SF: { id: 137, name: "Giants" },
+  STL: { id: 138, name: "Cardinals" }, TB: { id: 139, name: "Rays" },
+  TEX: { id: 140, name: "Rangers" }, TOR: { id: 141, name: "Blue Jays" },
+  WSH: { id: 120, name: "Nationals" },
 };
 
 function teamLogoUrl(abbr: string): string {
-  const id = TEAM_IDS[abbr] || 0;
-  return `https://www.mlb.com/assets/images/team/svg/${id}.svg`;
+  const id = TEAMS[abbr]?.id || 0;
+  return `https://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/${abbr.toLowerCase()}.png&h=40&w=40`;
+}
+
+function teamName(abbr: string): string {
+  return TEAMS[abbr]?.name || abbr;
 }
 
 function envRating(score: number): { label: string; color: string; border: string } {
@@ -50,13 +66,13 @@ export function GameHeader({
         {/* Teams with logos and time */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <img src={teamLogoUrl(awayTeam)} alt={awayTeam} className="w-8 h-8" />
-            <span className="text-xl font-bold text-foreground">{awayTeam}</span>
+            <img src={teamLogoUrl(awayTeam)} alt={awayTeam} className="w-7 h-7 object-contain" />
+            <span className="text-lg font-bold text-foreground">{teamName(awayTeam)}</span>
           </div>
           <span className="text-muted text-sm">@</span>
           <div className="flex items-center gap-2">
-            <img src={teamLogoUrl(homeTeam)} alt={homeTeam} className="w-8 h-8" />
-            <span className="text-xl font-bold text-foreground">{homeTeam}</span>
+            <img src={teamLogoUrl(homeTeam)} alt={homeTeam} className="w-7 h-7 object-contain" />
+            <span className="text-lg font-bold text-foreground">{teamName(homeTeam)}</span>
           </div>
           {gameTime && (
             <span className="text-sm text-muted ml-2 font-mono">{gameTime}</span>
