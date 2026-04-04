@@ -98,38 +98,118 @@ export function EnvironmentView({ games }: { games: GameEnv[] }) {
 // ═══════════════════════════════════════════════════════════════════════════════
 // Combined View
 // ═══════════════════════════════════════════════════════════════════════════════
+function calcCombinedPct(g: GameEnv): { weatherPct: number; parkPct: number; combinedPct: number } {
+  const weatherPct = calcWeatherPct(g);
+  // Park: 100 = neutral. Every point above/below = ~1% HR boost/reduction
+  const parkPct = Math.round((g.park_factor - 100) * 1.0 * 10) / 10;
+  // Combined: additive
+  const combinedPct = Math.round((weatherPct + parkPct) * 10) / 10;
+  return { weatherPct, parkPct, combinedPct };
+}
+
 function CombinedView({ games }: { games: GameEnv[] }) {
-  const sorted = [...games].sort((a, b) => b.env_score - a.env_score);
+  const withPcts = games.map(g => ({ ...g, ...calcCombinedPct(g) }));
+  const sorted = [...withPcts].sort((a, b) => b.combinedPct - a.combinedPct);
+
+  const favorable = sorted.filter(g => g.combinedPct > 5);
+  const unfavorable = sorted.filter(g => g.combinedPct < -5);
+  const neutral = sorted.filter(g => g.combinedPct >= -5 && g.combinedPct <= 5);
 
   return (
-    <div className="space-y-4">
-      <p className="text-xs text-muted">
-        Combined weather + park factors ranked by HR-friendliness. Environment = 15% of composite score.
-      </p>
-      {sorted.map((g) => {
-        const score100 = Math.round(g.env_score * 100);
-        const rating = ratingLabel(g.env_score);
-        return (
-          <div key={g.game_pk} className="border border-card-border rounded-xl bg-card/50 p-5">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <span className="font-semibold text-foreground text-lg">{g.away_team} @ {g.home_team}</span>
-                <span className={`px-2 py-0.5 text-xs font-medium rounded ${rating.cls}`}>{rating.label}</span>
-                {g.is_dome && <span className="px-2 py-0.5 text-[10px] rounded bg-card-border text-muted">Dome</span>}
-              </div>
-              <ScoreCircle score={score100} env_score={g.env_score} label="ENV" />
-            </div>
+    <div>
+      <h3 className="text-lg font-bold text-foreground mb-2">Combined HR Impact (Weather + Park)</h3>
+      <p className="text-xs text-muted mb-6">Weather boost/reduction combined with park HR factor vs league average.</p>
 
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <FactorCard label="Park" value={`${g.park_factor}`} sub="HR factor" norm={g.park_norm} />
-              <FactorCard label="Temp" value={g.temperature_f !== null ? `${g.temperature_f}°F` : "?"} sub={g.temperature_f && g.temperature_f >= 75 ? "Warm — more carry" : "Cool"} norm={g.temp_norm} />
-              <FactorCard label="Wind" value={g.is_dome ? "Dome" : `${g.wind_speed_mph ?? "?"}mph`} sub={windLabel(g.wind_score, g.is_dome)} norm={g.wind_norm} />
-              <FactorCard label="Humidity" value={g.humidity !== null ? `${g.humidity}%` : "?"} sub={g.humidity && g.humidity >= 60 ? "Humid" : "Dry"} norm={g.humid_norm} />
-              <FactorCard label="Pressure" value={g.pressure_hpa !== null ? `${g.pressure_hpa}` : "?"} sub="hPa" norm={g.pressure_norm ?? 0.5} />
-            </div>
-          </div>
-        );
-      })}
+      {/* Favorable */}
+      <div className="mb-6">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-accent-green" />
+          <span className="text-sm font-semibold text-foreground">HR Favorable</span>
+          <span className="text-xs text-muted">(Combined conditions increase HR probability)</span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {favorable.length > 0 ? favorable.map(g => (
+            <CombinedPill key={g.game_pk} away={g.away_team} home={g.home_team}
+              weatherPct={g.weatherPct} parkPct={g.parkPct} combinedPct={g.combinedPct} type="favorable" />
+          )) : <span className="text-xs text-muted">None</span>}
+        </div>
+      </div>
+
+      {/* Unfavorable */}
+      <div className="mb-6">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-accent-red" />
+          <span className="text-sm font-semibold text-foreground">HR Unfavorable</span>
+          <span className="text-xs text-muted">(Combined conditions decrease HR probability)</span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {unfavorable.length > 0 ? unfavorable.map(g => (
+            <CombinedPill key={g.game_pk} away={g.away_team} home={g.home_team}
+              weatherPct={g.weatherPct} parkPct={g.parkPct} combinedPct={g.combinedPct} type="unfavorable" />
+          )) : <span className="text-xs text-muted">None</span>}
+        </div>
+      </div>
+
+      {/* Neutral */}
+      <div className="mb-6">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-muted" />
+          <span className="text-sm font-semibold text-foreground">Neutral</span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {neutral.map(g => (
+            <CombinedPill key={g.game_pk} away={g.away_team} home={g.home_team}
+              weatherPct={g.weatherPct} parkPct={g.parkPct} combinedPct={g.combinedPct} type="neutral" />
+          ))}
+        </div>
+      </div>
+
+      {/* Detailed table */}
+      <div className="mt-8">
+        <h4 className="text-sm font-semibold text-foreground mb-3">Detailed Breakdown</h4>
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
+                <th className="text-left py-2">Game</th>
+                <th className="text-center py-2">Weather %</th>
+                <th className="text-center py-2">Park %</th>
+                <th className="text-center py-2">Combined %</th>
+                <th className="text-center py-2">Temp</th>
+                <th className="text-center py-2">Wind</th>
+                <th className="text-center py-2">Park Factor</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sorted.map(g => (
+                <tr key={g.game_pk} className="border-b border-card-border/30">
+                  <td className="py-2 font-medium text-foreground">{g.away_team} @ {g.home_team}</td>
+                  <td className="text-center py-2">
+                    <span className={`font-mono ${g.weatherPct > 0 ? "text-accent-green" : g.weatherPct < 0 ? "text-accent-red" : "text-muted"}`}>
+                      {g.weatherPct > 0 ? "+" : ""}{g.weatherPct}%
+                    </span>
+                  </td>
+                  <td className="text-center py-2">
+                    <span className={`font-mono ${g.parkPct > 0 ? "text-accent-green" : g.parkPct < 0 ? "text-accent-red" : "text-muted"}`}>
+                      {g.parkPct > 0 ? "+" : ""}{g.parkPct}%
+                    </span>
+                  </td>
+                  <td className="text-center py-2">
+                    <span className={`font-mono font-bold ${g.combinedPct > 5 ? "text-accent-green" : g.combinedPct < -5 ? "text-accent-red" : "text-foreground"}`}>
+                      {g.combinedPct > 0 ? "+" : ""}{g.combinedPct}%
+                    </span>
+                  </td>
+                  <td className="text-center py-2 text-muted font-mono">{g.temperature_f ?? "?"}°F</td>
+                  <td className="text-center py-2 text-muted font-mono">{g.wind_speed_mph ?? "?"}mph</td>
+                  <td className="text-center py-2 text-muted font-mono">{g.park_factor}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
     </div>
   );
 }
@@ -279,6 +359,25 @@ function FactorCard({ label, value, sub, norm }: { label: string; value: string;
       <div className="text-lg font-bold font-mono text-foreground">{value}</div>
       <div className="text-[10px] text-muted mb-2">{sub}</div>
       <Bar pct={norm * 100} color={color} />
+    </div>
+  );
+}
+
+function CombinedPill({ away, home, weatherPct, parkPct, combinedPct, type }: {
+  away: string; home: string; weatherPct: number; parkPct: number; combinedPct: number;
+  type: "favorable" | "unfavorable" | "neutral";
+}) {
+  const borderColor = type === "favorable" ? "border-accent-green/30 bg-accent-green/5" :
+    type === "unfavorable" ? "border-accent-red/30 bg-accent-red/5" : "border-card-border bg-card/30";
+  const dotColor = type === "favorable" ? "bg-accent-green" : type === "unfavorable" ? "bg-accent-red" : "bg-muted";
+  const pctColor = type === "favorable" ? "text-accent-green" : type === "unfavorable" ? "text-accent-red" : "text-muted";
+
+  return (
+    <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg border text-xs ${borderColor}`}>
+      <span className={`w-2 h-2 rounded-full ${dotColor}`} />
+      <span className="font-medium text-foreground">{away} @ {home}</span>
+      <span className={`font-bold font-mono ${pctColor}`}>{combinedPct > 0 ? "+" : ""}{combinedPct}%</span>
+      <span className="text-muted text-[10px]">WX:{weatherPct > 0 ? "+" : ""}{weatherPct}% PK:{parkPct > 0 ? "+" : ""}{parkPct}%</span>
     </div>
   );
 }
