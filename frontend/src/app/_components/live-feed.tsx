@@ -79,18 +79,22 @@ export function LiveFeed() {
               const result = play.result || {};
               const about = play.about || {};
 
-              // Check each pitch/event in the play for batted ball data
-              for (const event of play.playEvents || []) {
-                const hitData = event.hitData;
-                if (!hitData || !hitData.launchSpeed) continue;
+              // Find the batted ball event (the one with hitData that was put in play)
+              const playEvents = play.playEvents || [];
+              const battedBall = playEvents.find(
+                (e: Record<string, unknown>) => e.hitData && (e.hitData as Record<string, unknown>).launchSpeed
+              );
+              if (!battedBall) continue;
 
-                const ev = hitData.launchSpeed || 0;
-                const angle = hitData.launchAngle || 0;
-                const dist = hitData.totalDistance || 0;
+              const hitData = battedBall.hitData as Record<string, number>;
+              const ev = hitData.launchSpeed || 0;
+              const angle = hitData.launchAngle || 0;
+              const dist = hitData.totalDistance || 0;
 
-                // Only show hard-hit air balls (90+ EV, 20+ degrees)
-                if (ev < 90 || angle < 20) continue;
+              // Only show hard-hit air balls (90+ EV, 20+ degrees)
+              if (ev < 90 || angle < 20) continue;
 
+              {
                 const isHR = result.event === "Home Run";
                 const isNearHR = !isHR && ev >= 95 && angle >= 25 && angle <= 35;
 
@@ -101,7 +105,7 @@ export function LiveFeed() {
                   ev,
                   angle,
                   distance: dist,
-                  result: result.event || event.details?.description || "",
+                  result: result.event || "",
                   description: result.description || "",
                   inning: about.inning || 0,
                   timestamp: about.startTime || "",
