@@ -15,9 +15,33 @@ import { ProjectionsView } from "./projections-view";
 export function Dashboard() {
   const [data, setData] = useState<ModelData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [activePage, setActivePage] = useState<Page>("rankings");
-  const [lookback, setLookback] = useState<LookbackKey>("L5");
-  const [selectedDate, setSelectedDate] = useState<string>("");
+
+  // Read initial state from URL hash: #page=rankings&date=2026-04-03&lookback=L5
+  function getHashParam(key: string, fallback: string): string {
+    if (typeof window === "undefined") return fallback;
+    const hash = window.location.hash.slice(1);
+    const params = new URLSearchParams(hash);
+    return params.get(key) || fallback;
+  }
+
+  const [activePage, setActivePageRaw] = useState<Page>(() => getHashParam("page", "rankings") as Page);
+  const [lookback, setLookbackRaw] = useState<LookbackKey>(() => getHashParam("lookback", "L5") as LookbackKey);
+  const [selectedDate, setSelectedDate] = useState<string>(() => getHashParam("date", ""));
+
+  // Update URL hash when state changes
+  function updateHash(page: string, date: string, lb: string) {
+    if (typeof window === "undefined") return;
+    window.location.hash = `page=${page}&date=${date}&lookback=${lb}`;
+  }
+
+  const setActivePage = (p: Page) => {
+    setActivePageRaw(p);
+    updateHash(p, selectedDate, lookback);
+  };
+  const setLookback = (lb: LookbackKey) => {
+    setLookbackRaw(lb);
+    updateHash(activePage, selectedDate, lb);
+  };
 
   const loadDate = (dateStr: string) => {
     const file = dateStr ? `/data/${dateStr}.json` : "/data/latest.json";
@@ -29,13 +53,15 @@ export function Dashboard() {
       .then((d) => {
         setData(d);
         setSelectedDate(d.date);
+        updateHash(activePage, d.date, lookback);
         setError(null);
       })
       .catch((err) => setError(err.message));
   };
 
   useEffect(() => {
-    loadDate("");
+    const initialDate = getHashParam("date", "");
+    loadDate(initialDate);
   }, []);
 
   if (error) {
