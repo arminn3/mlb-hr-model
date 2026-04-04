@@ -8,31 +8,60 @@ import numpy as np
 import config
 
 
-def get_pitch_mix(pitcher_df: pd.DataFrame, batter_hand: str) -> dict[str, float]:
+def get_pitch_mix(
+    pitcher_df: pd.DataFrame, batter_hand: str,
+    pitcher_season_df: pd.DataFrame = None,
+) -> dict[str, float]:
     """
     Calculate pitch type usage percentages for a pitcher vs a specific batter
-    handedness.  Filters out pitches below PITCH_MIN_USAGE_PCT and re-normalizes.
+    handedness. Blends recent data with 2025 season data early in the season.
+    Filters out pitches below PITCH_MIN_USAGE_PCT and re-normalizes.
 
     Returns dict: pitch_type code -> usage fraction (0.0-1.0), sums to 1.0.
     """
-    if pitcher_df.empty:
-        return {}
+    def _calc_mix(df: pd.DataFrame) -> tuple[dict[str, float], int]:
+        """Helper: compute raw mix from a DataFrame. Returns (mix_dict, total_pitches)."""
+        if df is None or df.empty:
+            return {}, 0
+        filtered = df[df["stand"] == batter_hand].copy() if "stand" in df.columns else df.copy()
+        if filtered.empty:
+            return {}, 0
+        filtered = filtered.dropna(subset=["pitch_type"])
+        if filtered.empty:
+            return {}, 0
+        counts = filtered["pitch_type"].value_counts()
+        total = counts.sum()
+        if total == 0:
+            return {}, 0
+        return (counts / total).to_dict(), int(total)
 
-    df = pitcher_df[pitcher_df["stand"] == batter_hand].copy()
-    if df.empty:
-        return {}
+    recent_mix, recent_total = _calc_mix(pitcher_df)
+    season_mix, season_total = _calc_mix(pitcher_season_df)
 
-    # Drop rows with missing pitch type
-    df = df.dropna(subset=["pitch_type"])
-    if df.empty:
-        return {}
+    # Blend recent + season based on how many recent pitches we have
+    # 200+ recent pitches (~3 starts) = trust recent fully
+    # 0 recent pitches = use season entirely
+    if recent_total >= 200:
+        mix = recent_mix
+    elif recent_total == 0:
+        mix = season_mix
+    elif season_total == 0:
+        mix = recent_mix
+    else:
+        # Blend: more recent pitches = more weight on recent
+        recent_weight = min(recent_total / 200, 1.0)
+        season_weight = 1.0 - recent_weight
 
-    counts = df["pitch_type"].value_counts()
-    total = counts.sum()
-    if total == 0:
-        return {}
+        # Combine all pitch types from both
+        all_types = set(recent_mix.keys()) | set(season_mix.keys())
+        mix = {}
+        for pt in all_types:
+            r_val = recent_mix.get(pt, 0) * recent_weight
+            s_val = season_mix.get(pt, 0) * season_weight
+            mix[pt] = r_val + s_val
 
-    mix = (counts / total).to_dict()
+    if not mix:
+        return {}
 
     # Filter out pitches below minimum usage threshold
     mix = {pt: pct for pt, pct in mix.items() if pct >= config.PITCH_MIN_USAGE_PCT}

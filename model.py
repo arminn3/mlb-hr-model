@@ -81,13 +81,14 @@ def score_batter_multi_lookback(
     batter_hand: str,
     env_data: dict = None,
     season_df: pd.DataFrame = None,
+    pitcher_season_df: pd.DataFrame = None,
 ) -> dict:
-    """Run scoring at each lookback window (L5, L10, L15). Returns dict keyed by 'L5', 'L10', 'L15'."""
+    """Run scoring at each lookback window. Returns dict keyed by 'L5', 'L10'."""
     results = {}
     for n_pa in config.LOOKBACK_WINDOWS:
         results[f"L{n_pa}"] = score_batter_vs_pitcher(
             batter_df, pitcher_df, pitcher_hand, batter_hand, env_data, n_pa=n_pa,
-            season_df=season_df,
+            season_df=season_df, pitcher_season_df=pitcher_season_df,
         )
     return results
 
@@ -100,6 +101,7 @@ def score_batter_vs_pitcher(
     env_data: dict = None,
     n_pa: int = None,
     season_df: pd.DataFrame = None,
+    pitcher_season_df: pd.DataFrame = None,
 ) -> dict:
     """
     Score a batter-pitcher matchup for HR potential.
@@ -134,7 +136,7 @@ def score_batter_vs_pitcher(
     }
 
     # ── Step 1-2: Pitch mix and weights ──────────────────────────────────────
-    pitch_mix = get_pitch_mix(pitcher_df, batter_hand)
+    pitch_mix = get_pitch_mix(pitcher_df, batter_hand, pitcher_season_df)
     if not pitch_mix:
         result["data_quality"] = "NO_PITCH_DATA"
         return result

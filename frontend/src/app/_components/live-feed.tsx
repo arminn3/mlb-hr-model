@@ -29,6 +29,7 @@ interface GameStatus {
 
 export function LiveFeed() {
   const [plays, setPlays] = useState<LivePlay[]>([]);
+  const [seenKeys, setSeenKeys] = useState<Set<string>>(new Set());
   const [games, setGames] = useState<GameStatus[]>([]);
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<string>("");
@@ -121,10 +122,23 @@ export function LiveFeed() {
       }
 
       // Sort by most recent first
-      allPlays.sort((a, b) => (b.timestamp > a.timestamp ? 1 : -1));
+      // Merge new plays with existing — never lose plays from finished games
+      setPlays((prev) => {
+        const newKeys = new Set(seenKeys);
+        const merged = [...prev];
+        for (const play of allPlays) {
+          const key = `${play.batter}-${play.game}-${play.inning}-${play.ev}-${play.angle}`;
+          if (!newKeys.has(key)) {
+            newKeys.add(key);
+            merged.push(play);
+          }
+        }
+        setSeenKeys(newKeys);
+        merged.sort((a, b) => (b.timestamp > a.timestamp ? 1 : -1));
+        return merged;
+      });
 
       setGames(activeGames);
-      setPlays(allPlays);
       setLastUpdate(new Date().toLocaleTimeString());
       setLoading(false);
     } catch {

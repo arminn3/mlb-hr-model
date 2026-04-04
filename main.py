@@ -317,10 +317,16 @@ def run_model(game_date: date = None, fast: bool = False):
             season_cache[batter_season_key] = get_season_statcast(batter_id, "batter", 2025)
         batter_2025 = season_cache[batter_season_key]
 
+        # Get pitcher 2025 season data for pitch mix blending
+        pitcher_season_key = (pid, 2025)
+        if pitcher_season_key not in season_cache:
+            season_cache[pitcher_season_key] = get_season_statcast(pid, "pitcher", 2025)
+        pitcher_2025 = season_cache[pitcher_season_key]
+
         try:
             multi_scores = score_batter_multi_lookback(
                 batter_df, pitcher_df, pitcher_hand, batter_h, env_data,
-                season_df=batter_2025,
+                season_df=batter_2025, pitcher_season_df=pitcher_2025,
             )
         except Exception as e:
             print(f"ERROR scoring: {e}")
