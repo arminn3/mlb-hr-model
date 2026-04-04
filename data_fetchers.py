@@ -187,6 +187,11 @@ def load_bulk_statcast(lookback_days: int = None) -> pd.DataFrame:
     try:
         df = statcast(start_dt=start_dt, end_dt=end_dt)
         if df is not None and not df.empty:
+            # Filter out spring training — only keep regular season games
+            if "game_type" in df.columns:
+                before = len(df)
+                df = df[df["game_type"] == "R"].copy()
+                print(f"Filtered spring training: {before} → {len(df)} rows (regular season only).")
             _bulk_statcast_cache = df
             _bulk_statcast_date = cache_key
             print(f"{len(df)} rows loaded.")
