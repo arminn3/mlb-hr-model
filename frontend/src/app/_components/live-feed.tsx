@@ -29,6 +29,7 @@ interface GameStatus {
 
 export function LiveFeed() {
   const [plays, setPlays] = useState<LivePlay[]>([]);
+  const [slateHRs, setSlateHRs] = useState(0);
   const [games, setGames] = useState<GameStatus[]>([]);
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<string>("");
@@ -38,13 +39,15 @@ export function LiveFeed() {
     try {
       // Get today's schedule
       const today = new Date().toISOString().split("T")[0];
+      // Fetch schedule with scoringplays for accurate HR count
       const schedRes = await fetch(
-        `https://statsapi.mlb.com/api/v1/schedule?date=${today}&sportId=1&hydrate=linescore`
+        `https://statsapi.mlb.com/api/v1/schedule?date=${today}&sportId=1&hydrate=linescore,scoringplays`
       );
       const schedData = await schedRes.json();
 
       const activeGames: GameStatus[] = [];
       const allPlays: LivePlay[] = [];
+      let totalHRsFromScoring = 0;
 
       for (const dateEntry of schedData.dates || []) {
         for (const game of dateEntry.games || []) {
@@ -52,6 +55,11 @@ export function LiveFeed() {
           const away = game.teams?.away?.team?.abbreviation || "";
           const home = game.teams?.home?.team?.abbreviation || "";
           const linescore = game.linescore || {};
+
+          // Count HRs from scoringplays (reliable, works for all game states)
+          for (const sp of game.scoringPlays || []) {
+            if (sp?.result?.event === "Home Run") totalHRsFromScoring++;
+          }
 
           activeGames.push({
             gamePk: game.gamePk,
@@ -140,6 +148,7 @@ export function LiveFeed() {
       merged.sort((a, b) => (b.timestamp > a.timestamp ? 1 : -1));
 
       setPlays(merged);
+      setSlateHRs(totalHRsFromScoring);
       setGames(activeGames);
       setLastUpdate(new Date().toLocaleTimeString());
       setLoading(false);
@@ -156,7 +165,7 @@ export function LiveFeed() {
   }, [fetchLiveData, autoRefresh]);
 
   const activeCount = games.filter(g => g.status === "In Progress").length;
-  const totalHRs = plays.filter(p => p.isHR).length;
+  const totalHRs = slateHRs;
   const hardHitCount = plays.filter(p => p.ev >= 95 && p.angle >= 25).length;
 
   return (
