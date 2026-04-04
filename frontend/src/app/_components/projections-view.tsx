@@ -16,61 +16,48 @@ interface GameProjection {
 
 function estimateGameHRs(game: GameData, lookback: LookbackKey): GameProjection {
   const env = game.environment;
-  const parkFactor = (env?.park_factor ?? 100) / 100; // normalize to multiplier
-  const weatherBoost = env?.wind_score ? Math.max(0, env.wind_score) * 0.01 : 0; // wind out adds %
-  const tempBoost = env?.temperature_f && env.temperature_f > 75 ? (env.temperature_f - 75) * 0.003 : 0;
+  const parkFactor = (env?.park_factor ?? 100) / 100;
 
-  // Get pitcher HR rates from player data
   const homePlayers = game.players.filter(p => p.batter_side === "home");
   const awayPlayers = game.players.filter(p => p.batter_side === "away");
 
-  // Away pitcher faces home batters, home pitcher faces away batters
   const awayPitcherStats = homePlayers[0]?.pitcher_stats;
   const homePitcherStats = awayPlayers[0]?.pitcher_stats;
 
-  // Base expected HRs per team from pitcher HR/9 rate
-  // Average starter goes ~5.5 innings, bullpen ~3.5 innings
-  // Use pitcher HR/9 for starter portion, league avg (1.3 HR/9) for bullpen
-  const leagueAvgHR9 = 1.3;
-  const starterInnings = 5.5;
-  const bullpenInnings = 3.5;
+  // League average: ~1.1 HR per team per game (2.2 total per game)
+  const baseHRPerTeam = 1.1;
 
-  // Cap HR/9 at 2.5 max — early season rates are inflated from tiny samples
-  // If pitcher has < 10 IP, blend with league average
-  const blendHR9 = (hr9: number, ip: number): number => {
-    const capped = Math.min(hr9 || leagueAvgHR9, 2.5);
-    if (ip < 10) {
-      const weight = ip / 10; // 0-1 scale of how much to trust pitcher's rate
-      return capped * weight + leagueAvgHR9 * (1 - weight);
+  // Pitcher adjustment: compare their HR/9 to league avg (1.25)
+  // Cap at 2.0 max, floor at 0.5 — early season rates are noisy
+  const leagueAvg = 1.25;
+  const clampHR9 = (hr9: number, ip: number): number => {
+    if (!hr9 || ip < 3) return leagueAvg;
+    const capped = Math.min(Math.max(hr9, 0.5), 2.0);
+    if (ip < 15) {
+      const trust = ip / 15;
+      return capped * trust + leagueAvg * (1 - trust);
     }
     return capped;
   };
-  const awayPitcherHR9 = blendHR9(awayPitcherStats?.hr_per_9 ?? 0, awayPitcherStats?.ip ?? 0);
-  const homePitcherHR9 = blendHR9(homePitcherStats?.hr_per_9 ?? 0, homePitcherStats?.ip ?? 0);
 
-  // Home team expected HRs (facing away pitcher)
-  let homeExpected = (awayPitcherHR9 * starterInnings / 9) + (leagueAvgHR9 * bullpenInnings / 9);
-  // Away team expected HRs (facing home pitcher)
-  let awayExpected = (homePitcherHR9 * starterInnings / 9) + (leagueAvgHR9 * bullpenInnings / 9);
+  const awayPHR9 = clampHR9(awayPitcherStats?.hr_per_9 ?? 0, awayPitcherStats?.ip ?? 0);
+  const homePHR9 = clampHR9(homePitcherStats?.hr_per_9 ?? 0, homePitcherStats?.ip ?? 0);
 
-  // Apply park and weather adjustments
-  const envMultiplier = parkFactor * (1 + weatherBoost + tempBoost);
-  homeExpected *= envMultiplier;
-  awayExpected *= envMultiplier;
+  // Scale base by pitcher HR tendency relative to league avg
+  let homeExpected = baseHRPerTeam * (awayPHR9 / leagueAvg);
+  let awayExpected = baseHRPerTeam * (homePHR9 / leagueAvg);
 
-  // Boost based on batter quality — if top batters have high composites, add to expected
-  const avgHomeComposite = homePlayers.length > 0
-    ? homePlayers.reduce((s, p) => s + (p.scores[lookback]?.composite ?? 0), 0) / homePlayers.length
-    : 0.3;
-  const avgAwayComposite = awayPlayers.length > 0
-    ? awayPlayers.reduce((s, p) => s + (p.scores[lookback]?.composite ?? 0), 0) / awayPlayers.length
-    : 0.3;
+  // Park factor adjustment
+  homeExpected *= parkFactor;
+  awayExpected *= parkFactor;
 
-  // Slight batter quality adjustment (keep it subtle — pitcher HR/9 already captures most of it)
-  homeExpected *= (0.85 + avgHomeComposite * 0.5);
-  awayExpected *= (0.85 + avgAwayComposite * 0.5);
+  // Small env boost (wind, temp) — capped to prevent runaway
+  const windBoost = env?.wind_score ? Math.max(0, env.wind_score) * 0.005 : 0;
+  const tempBoost = env?.temperature_f && env.temperature_f > 75 ? (env.temperature_f - 75) * 0.002 : 0;
+  const envBoost = 1 + Math.min(windBoost + tempBoost, 0.15); // max 15% boost
 
-  const totalExpected = homeExpected + awayExpected;
+  homeExpected *= envBoost;
+  awayExpected *= envBoost;
 
   // Find top player
   let topPlayer = "";
@@ -85,7 +72,7 @@ function estimateGameHRs(game: GameData, lookback: LookbackKey): GameProjection 
 
   return {
     game,
-    expectedHRs: totalExpected,
+    expectedHRs: homeExpected + awayExpected,
     awayExpected,
     homeExpected,
     topPlayer,
@@ -123,7 +110,7 @@ export function ProjectionsView({
             <h2 className="text-sm uppercase tracking-wider text-accent font-bold mb-1">
               Projected Slate Total
             </h2>
-            <p className="text-xs text-muted">{projections.length} games today</p>
+            <p className="text-xs text-muted">{projections.length} games</p>
           </div>
           <div className="text-right">
             <span className="text-4xl font-bold font-mono text-accent">
@@ -155,6 +142,9 @@ export function ProjectionsView({
                   <span className="font-semibold text-foreground">
                     {p.game.away_team} @ {p.game.home_team}
                   </span>
+                  {p.game.game_time && (
+                    <span className="text-xs text-muted ml-2">{p.game.game_time}</span>
+                  )}
                 </td>
                 <td className="text-center py-3 px-3">
                   <span className={`font-mono text-xs px-2 py-0.5 rounded ${
@@ -185,8 +175,8 @@ export function ProjectionsView({
       </div>
 
       <div className="mt-6 text-[10px] text-muted">
-        Based on pitcher HR/9 rates, park factors, weather conditions, and batter composite quality.
-        Starter ~5.5 IP, bullpen ~3.5 IP at league-average HR rate. Adjusted for environment.
+        Based on pitcher HR/9 rates (blended with league avg for small samples), park factors, and weather.
+        League average: ~2.2 HRs per game.
       </div>
     </div>
   );
