@@ -116,7 +116,7 @@ export function Sidebar({
           Analysis
         </span>
         <div className="space-y-1 mb-5">
-          {(["rankings", "slate", "gems"] as const).map((key) => {
+          {(["rankings", "slate", "gems", "projections", "environment"] as const).map((key) => {
             const item = NAV_ITEMS.find(n => n.key === key)!;
             return <NavButton key={key} item={item} active={active} onChange={onChange} />;
           })}
@@ -127,7 +127,7 @@ export function Sidebar({
           Research
         </span>
         <div className="space-y-1 mb-5">
-          {(["bvp", "projections", "environment"] as const).map((key) => {
+          {(["bvp"] as const).map((key) => {
             const item = NAV_ITEMS.find(n => n.key === key)!;
             return <NavButton key={key} item={item} active={active} onChange={onChange} />;
           })}
