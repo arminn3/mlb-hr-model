@@ -134,7 +134,9 @@ def _calc_bvp(batter_df, batter_2025, pitcher_id) -> dict:
     k_pct = round(n_ks / n_pa * 100, 1) if n_pa > 0 else 0
 
     # Recent BIP for the at-bat table
-    bip = combined.dropna(subset=["launch_speed"]).sort_values("game_date", ascending=False).head(10)
+    bip = combined.dropna(subset=["launch_speed"]).copy()
+    bip["game_date"] = bip["game_date"].astype(str)
+    bip = bip.sort_values("game_date", ascending=False).head(10)
     recent = []
     for _, row in bip.iterrows():
         recent.append({
