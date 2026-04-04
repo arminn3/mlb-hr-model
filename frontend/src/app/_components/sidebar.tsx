@@ -1,6 +1,6 @@
 "use client";
 
-export type Page = "rankings" | "slate" | "environment" | "projections" | "results";
+export type Page = "rankings" | "slate" | "environment" | "projections" | "results" | "methodology";
 
 const NAV_ITEMS: { key: Page; label: string; icon: string }[] = [
   { key: "rankings", label: "HR Rankings", icon: "chart" },
@@ -8,6 +8,7 @@ const NAV_ITEMS: { key: Page; label: string; icon: string }[] = [
   { key: "projections", label: "Projections", icon: "target" },
   { key: "environment", label: "Environment", icon: "cloud" },
   { key: "results", label: "Results Log", icon: "check" },
+  { key: "methodology", label: "How It Works", icon: "info" },
 ];
 
 function Icon({ name }: { name: string }) {
@@ -27,6 +28,12 @@ function Icon({ name }: { name: string }) {
     return (
       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
+      </svg>
+    );
+  if (name === "info")
+    return (
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     );
   if (name === "check")

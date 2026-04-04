@@ -10,6 +10,8 @@ interface DayReport {
   model_hits: number;
   model_near_hits?: number;
   tier_accuracy: Record<string, { total: number; hits: number; rate: number }>;
+  tier_accuracy_by_lookback?: Record<string, Record<string, { total: number; hits: number; rate: number }>>;
+  best_lookback?: string;
   tier_accuracy_with_near?: Record<string, { total: number; hits: number; rate: number }>;
   avg_composite_hr_hitters: number;
   avg_composite_non_hitters: number;
@@ -141,6 +143,48 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
               </div>
             ))}
           </div>
+
+          {/* Lookback comparison */}
+          {day.tier_accuracy_by_lookback && (
+            <div className="mb-4">
+              <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
+                Performance by Lookback Window
+                {day.best_lookback && (
+                  <span className="ml-2 text-accent font-semibold">Best: {day.best_lookback}</span>
+                )}
+              </h4>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs">
+                  <thead>
+                    <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
+                      <th className="text-left py-1.5">Window</th>
+                      <th className="text-center py-1.5">Top 10</th>
+                      <th className="text-center py-1.5">Top 20</th>
+                      <th className="text-center py-1.5">Top 30</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(day.tier_accuracy_by_lookback).map(([lb, acc]) => (
+                      <tr key={lb} className={`border-b border-card-border/30 ${lb === day.best_lookback ? "bg-accent/5" : ""}`}>
+                        <td className={`py-1.5 font-mono font-semibold ${lb === day.best_lookback ? "text-accent" : "text-foreground"}`}>
+                          {lb} {lb === day.best_lookback && "★"}
+                        </td>
+                        <td className="text-center py-1.5 font-mono">
+                          {(acc as Record<string, { rate: number; hits: number; total: number }>).top_10?.rate ?? 0}%
+                        </td>
+                        <td className="text-center py-1.5 font-mono">
+                          {(acc as Record<string, { rate: number; hits: number; total: number }>).top_20?.rate ?? 0}%
+                        </td>
+                        <td className="text-center py-1.5 font-mono">
+                          {(acc as Record<string, { rate: number; hits: number; total: number }>).top_30?.rate ?? 0}%
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
 
           {/* HR hitters */}
           {day.hr_hitters.length > 0 && (

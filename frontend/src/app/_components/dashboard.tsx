@@ -10,6 +10,7 @@ import { EnvironmentView } from "./environment-view";
 import { Methodology } from "./methodology";
 import { TopPicks } from "./top-picks";
 import { ResultsView } from "./results-view";
+import { MethodologyPage } from "./methodology-page";
 import { ProjectionsView } from "./projections-view";
 
 export function Dashboard() {
@@ -114,7 +115,7 @@ export function Dashboard() {
         <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b border-card-border px-8 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <h1 className="text-sm font-semibold text-foreground">
-              {activePage === "rankings" ? "HR Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "environment" ? "Environment" : "Results Log"}
+              {activePage === "rankings" ? "HR Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "environment" ? "Environment" : activePage === "results" ? "Results Log" : "How It Works"}
             </h1>
             <span className="text-xs text-muted">
               {totalPlayers} players &middot; {data.games.length} games
@@ -155,6 +156,10 @@ export function Dashboard() {
 
           {activePage === "results" && (
             <ResultsView selectedDate={selectedDate} />
+          )}
+
+          {activePage === "methodology" && (
+            <MethodologyPage />
           )}
         </main>
       </div>
