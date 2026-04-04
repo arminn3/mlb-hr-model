@@ -61,8 +61,8 @@ export function Dashboard() {
   };
 
   useEffect(() => {
-    const initialDate = getHashParam("date", "");
-    loadDate(initialDate);
+    // Always load latest data on first visit
+    loadDate("");
   }, []);
 
   if (error) {
