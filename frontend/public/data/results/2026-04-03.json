@@ -1,9 +1,9 @@
 {
   "date": "2026-04-03",
   "total_players_ranked": 250,
-  "total_hrs_hit": 28,
+  "total_hrs_hit": 31,
   "total_near_hrs": 0,
-  "model_hits": 28,
+  "model_hits": 30,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
     "L5": {
@@ -19,13 +19,13 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 8,
+        "rate": 26.7
       },
       "all": {
         "total": 250,
-        "hits": 28,
-        "rate": 11.2
+        "hits": 30,
+        "rate": 12.0
       }
     },
     "L10": {
@@ -46,30 +46,8 @@
       },
       "all": {
         "total": 250,
-        "hits": 28,
-        "rate": 11.2
-      }
-    },
-    "L15": {
-      "top_10": {
-        "total": 10,
-        "hits": 2,
-        "rate": 20.0
-      },
-      "top_20": {
-        "total": 20,
-        "hits": 4,
-        "rate": 20.0
-      },
-      "top_30": {
-        "total": 30,
-        "hits": 6,
-        "rate": 20.0
-      },
-      "all": {
-        "total": 250,
-        "hits": 28,
-        "rate": 11.2
+        "hits": 30,
+        "rate": 12.0
       }
     }
   },
@@ -87,13 +65,13 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 7,
-      "rate": 23.3
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 250,
-      "hits": 28,
-      "rate": 11.2
+      "hits": 30,
+      "rate": 12.0
     }
   },
   "tier_accuracy_with_near": {
@@ -109,18 +87,18 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 7,
-      "rate": 23.3
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 250,
-      "hits": 28,
-      "rate": 11.2
+      "hits": 30,
+      "rate": 12.0
     }
   },
-  "avg_composite_hr_hitters": 0.322,
+  "avg_composite_hr_hitters": 0.319,
   "avg_composite_non_hitters": 0.304,
-  "composite_separation": 0.018,
+  "composite_separation": 0.015,
   "hr_hitters": [
     {
       "name": "Kyle Schwarber",
@@ -163,6 +141,13 @@
       "composite": 0.443,
       "opp_pitcher": "Eury P\u00e9rez",
       "matchup": "MIA@NYY"
+    },
+    {
+      "name": "Francisco Alvarez",
+      "rank": 26,
+      "composite": 0.432,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "NYM@SF"
     },
     {
       "name": "Marcelo Mayer",
@@ -317,6 +302,13 @@
       "composite": 0.142,
       "opp_pitcher": "Cade Horton",
       "matchup": "CHC@CLE"
+    },
+    {
+      "name": "Marcus Semien",
+      "rank": 250,
+      "composite": 0.13,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "NYM@SF"
     }
   ],
   "near_hr_hitters": [],

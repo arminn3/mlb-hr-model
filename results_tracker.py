@@ -184,7 +184,7 @@ def compare_results(game_date: date) -> dict:
 
     # Build ranked lists for each lookback window
     lookback_results = {}
-    for lb in ["L5", "L10", "L15"]:
+    for lb in ["L5", "L10"]:
         players_lb = []
         for game in predictions["games"]:
             for player in game["players"]:
