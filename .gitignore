@@ -4,6 +4,9 @@ __pycache__/
 .env
 odds_cache.json
 cron.log
+statcast_cache/
+hr_props_*.json
+hr_props_*.csv
 
 # Node
 frontend/node_modules/
