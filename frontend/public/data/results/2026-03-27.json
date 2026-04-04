@@ -1,0 +1,231 @@
+{
+  "date": "2026-03-27",
+  "total_players_ranked": 144,
+  "total_hrs_hit": 17,
+  "total_near_hrs": 3,
+  "model_hits": 16,
+  "model_near_hits": 3,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 3,
+      "rate": 30.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 4,
+      "rate": 20.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 7,
+      "rate": 23.3
+    },
+    "all": {
+      "total": 144,
+      "hits": 16,
+      "rate": 11.1
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 5,
+      "rate": 50.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 6,
+      "rate": 30.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 9,
+      "rate": 30.0
+    },
+    "all": {
+      "total": 144,
+      "hits": 19,
+      "rate": 13.2
+    }
+  },
+  "avg_composite_hr_hitters": 0.359,
+  "avg_composite_non_hitters": 0.282,
+  "composite_separation": 0.077,
+  "hr_hitters": [
+    {
+      "name": "Yordan Alvarez",
+      "rank": 2,
+      "composite": 0.606,
+      "opp_pitcher": "Yusei Kikuchi",
+      "matchup": "LAA@HOU"
+    },
+    {
+      "name": "Ketel Marte",
+      "rank": 8,
+      "composite": 0.49,
+      "opp_pitcher": "Emmet Sheehan",
+      "matchup": "AZ@LAD"
+    },
+    {
+      "name": "Aaron Judge",
+      "rank": 9,
+      "composite": 0.482,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "NYY@SF"
+    },
+    {
+      "name": "Drake Baldwin",
+      "rank": 16,
+      "composite": 0.443,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "KC@ATL"
+    },
+    {
+      "name": "Michael Harris II",
+      "rank": 24,
+      "composite": 0.388,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "KC@ATL"
+    },
+    {
+      "name": "Giancarlo Stanton",
+      "rank": 26,
+      "composite": 0.38,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "NYY@SF"
+    },
+    {
+      "name": "Josh Lowe",
+      "rank": 27,
+      "composite": 0.374,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "LAA@HOU"
+    },
+    {
+      "name": "Alex Freeland",
+      "rank": 31,
+      "composite": 0.362,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "AZ@LAD"
+    },
+    {
+      "name": "Luke Raley",
+      "rank": 35,
+      "composite": 0.352,
+      "opp_pitcher": "Gavin Williams",
+      "matchup": "CLE@SEA"
+    },
+    {
+      "name": "Mookie Betts",
+      "rank": 38,
+      "composite": 0.339,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "AZ@LAD"
+    },
+    {
+      "name": "Mike Trout",
+      "rank": 49,
+      "composite": 0.311,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "LAA@HOU"
+    },
+    {
+      "name": "Ozzie Albies",
+      "rank": 59,
+      "composite": 0.292,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "KC@ATL"
+    },
+    {
+      "name": "Shea Langeliers",
+      "rank": 68,
+      "composite": 0.282,
+      "opp_pitcher": "Kevin Gausman",
+      "matchup": "ATH@TOR"
+    },
+    {
+      "name": "Zach Neto",
+      "rank": 78,
+      "composite": 0.27,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "LAA@HOU"
+    },
+    {
+      "name": "Chase DeLauter",
+      "rank": 123,
+      "composite": 0.196,
+      "opp_pitcher": "George Kirby",
+      "matchup": "CLE@SEA"
+    },
+    {
+      "name": "Cole Young",
+      "rank": 134,
+      "composite": 0.176,
+      "opp_pitcher": "Gavin Williams",
+      "matchup": "CLE@SEA"
+    }
+  ],
+  "near_hr_hitters": [
+    {
+      "name": "Kevin McGonigle",
+      "rank": 1,
+      "composite": 0.671,
+      "opp_pitcher": "Michael King",
+      "matchup": "DET@SD"
+    },
+    {
+      "name": "Freddie Freeman",
+      "rank": 4,
+      "composite": 0.531,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "AZ@LAD"
+    },
+    {
+      "name": "Maikel Garcia",
+      "rank": 55,
+      "composite": 0.3,
+      "opp_pitcher": "Chris Sale",
+      "matchup": "KC@ATL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Maikel Garcia",
+      "ev": 99.5,
+      "angle": 37.0,
+      "distance": 371.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Sale, Chris"
+    },
+    {
+      "batter": "Freddie Freeman",
+      "ev": 101.4,
+      "angle": 30.0,
+      "distance": 370.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Nelson, Ryne"
+    },
+    {
+      "batter": "Kevin McGonigle",
+      "ev": 104.2,
+      "angle": 32.0,
+      "distance": 401.0,
+      "hr_in_parks": 24,
+      "result": "field_out",
+      "pitcher": "King, Michael"
+    },
+    {
+      "batter": "Luke Raley",
+      "ev": 109.8,
+      "angle": 21.0,
+      "distance": 377.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Williams, Gavin"
+    }
+  ],
+  "surprise_hrs": []
+}

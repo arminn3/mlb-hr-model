@@ -1,0 +1,77 @@
+{
+  "date": "2026-03-25",
+  "total_players_ranked": 18,
+  "total_hrs_hit": 0,
+  "total_near_hrs": 1,
+  "model_hits": 0,
+  "model_near_hits": 1,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    },
+    "all": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    }
+  },
+  "avg_composite_hr_hitters": 0,
+  "avg_composite_non_hitters": 0.214,
+  "composite_separation": -0.214,
+  "hr_hitters": [],
+  "near_hr_hitters": [
+    {
+      "name": "Trent Grisham",
+      "rank": 7,
+      "composite": 0.254,
+      "opp_pitcher": "Logan Webb",
+      "matchup": "NYY@SF"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Trent Grisham",
+      "ev": 105.7,
+      "angle": 22.0,
+      "distance": 390.0,
+      "hr_in_parks": 24,
+      "result": "triple",
+      "pitcher": "Webb, Logan"
+    }
+  ],
+  "surprise_hrs": []
+}

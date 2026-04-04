@@ -1,0 +1,367 @@
+{
+  "date": "2026-04-01",
+  "total_players_ranked": 270,
+  "total_hrs_hit": 29,
+  "total_near_hrs": 6,
+  "model_hits": 27,
+  "model_near_hits": 6,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 4,
+      "rate": 40.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 5,
+      "rate": 25.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 7,
+      "rate": 23.3
+    },
+    "all": {
+      "total": 270,
+      "hits": 27,
+      "rate": 10.0
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 5,
+      "rate": 50.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 7,
+      "rate": 35.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 9,
+      "rate": 30.0
+    },
+    "all": {
+      "total": 270,
+      "hits": 33,
+      "rate": 12.2
+    }
+  },
+  "avg_composite_hr_hitters": 0.366,
+  "avg_composite_non_hitters": 0.284,
+  "composite_separation": 0.082,
+  "hr_hitters": [
+    {
+      "name": "Yandy D\u00edaz",
+      "rank": 1,
+      "composite": 0.698,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "TB@MIL"
+    },
+    {
+      "name": "Samuel Basallo",
+      "rank": 3,
+      "composite": 0.533,
+      "opp_pitcher": "Nathan Eovaldi",
+      "matchup": "TEX@BAL"
+    },
+    {
+      "name": "Brice Turang",
+      "rank": 4,
+      "composite": 0.479,
+      "opp_pitcher": "Drew Rasmussen",
+      "matchup": "TB@MIL"
+    },
+    {
+      "name": "Wilyer Abreu",
+      "rank": 7,
+      "composite": 0.463,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "BOS@HOU"
+    },
+    {
+      "name": "Juan Soto",
+      "rank": 16,
+      "composite": 0.442,
+      "opp_pitcher": "Matthew Liberatore",
+      "matchup": "NYM@STL"
+    },
+    {
+      "name": "Bryan Reynolds",
+      "rank": 23,
+      "composite": 0.424,
+      "opp_pitcher": "Andrew Abbott",
+      "matchup": "PIT@CIN"
+    },
+    {
+      "name": "Oneil Cruz",
+      "rank": 30,
+      "composite": 0.411,
+      "opp_pitcher": "Andrew Abbott",
+      "matchup": "PIT@CIN"
+    },
+    {
+      "name": "Gabriel Arias",
+      "rank": 33,
+      "composite": 0.407,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "CLE@LAD"
+    },
+    {
+      "name": "Ram\u00f3n Laureano",
+      "rank": 38,
+      "composite": 0.388,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "SF@SD"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 40,
+      "composite": 0.383,
+      "opp_pitcher": "George Kirby",
+      "matchup": "NYY@SEA"
+    },
+    {
+      "name": "Dylan Beavers",
+      "rank": 43,
+      "composite": 0.377,
+      "opp_pitcher": "Nathan Eovaldi",
+      "matchup": "TEX@BAL"
+    },
+    {
+      "name": "Corbin Carroll",
+      "rank": 46,
+      "composite": 0.371,
+      "opp_pitcher": "Tarik Skubal",
+      "matchup": "DET@AZ"
+    },
+    {
+      "name": "Carlos Correa",
+      "rank": 50,
+      "composite": 0.365,
+      "opp_pitcher": "Garrett Crochet",
+      "matchup": "BOS@HOU"
+    },
+    {
+      "name": "Freddie Freeman",
+      "rank": 53,
+      "composite": 0.364,
+      "opp_pitcher": "Gavin Williams",
+      "matchup": "CLE@LAD"
+    },
+    {
+      "name": "Jos\u00e9 Ram\u00edrez",
+      "rank": 55,
+      "composite": 0.362,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "CLE@LAD"
+    },
+    {
+      "name": "Paul Goldschmidt",
+      "rank": 68,
+      "composite": 0.35,
+      "opp_pitcher": "George Kirby",
+      "matchup": "NYY@SEA"
+    },
+    {
+      "name": "Shea Langeliers",
+      "rank": 83,
+      "composite": 0.333,
+      "opp_pitcher": "Chris Sale",
+      "matchup": "ATH@ATL"
+    },
+    {
+      "name": "Liam Hicks",
+      "rank": 85,
+      "composite": 0.332,
+      "opp_pitcher": "Shane Smith",
+      "matchup": "CWS@MIA"
+    },
+    {
+      "name": "Bryce Harper",
+      "rank": 89,
+      "composite": 0.33,
+      "opp_pitcher": "Cade Cavalli",
+      "matchup": "WSH@PHI"
+    },
+    {
+      "name": "Kyle Isbel",
+      "rank": 100,
+      "composite": 0.32,
+      "opp_pitcher": "Joe Ryan",
+      "matchup": "MIN@KC"
+    },
+    {
+      "name": "J.T. Realmuto",
+      "rank": 143,
+      "composite": 0.274,
+      "opp_pitcher": "Cade Cavalli",
+      "matchup": "WSH@PHI"
+    },
+    {
+      "name": "Christian V\u00e1zquez",
+      "rank": 146,
+      "composite": 0.271,
+      "opp_pitcher": "Garrett Crochet",
+      "matchup": "BOS@HOU"
+    },
+    {
+      "name": "Jonathan India",
+      "rank": 149,
+      "composite": 0.267,
+      "opp_pitcher": "Joe Ryan",
+      "matchup": "MIN@KC"
+    },
+    {
+      "name": "Otto Lopez",
+      "rank": 162,
+      "composite": 0.259,
+      "opp_pitcher": "Shane Smith",
+      "matchup": "CWS@MIA"
+    },
+    {
+      "name": "Josh Bell",
+      "rank": 163,
+      "composite": 0.259,
+      "opp_pitcher": "Noah Cameron",
+      "matchup": "MIN@KC"
+    },
+    {
+      "name": "Corey Seager",
+      "rank": 195,
+      "composite": 0.234,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "TEX@BAL"
+    },
+    {
+      "name": "CJ Abrams",
+      "rank": 243,
+      "composite": 0.19,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "WSH@PHI"
+    }
+  ],
+  "near_hr_hitters": [
+    {
+      "name": "Gunnar Henderson",
+      "rank": 8,
+      "composite": 0.462,
+      "opp_pitcher": "Nathan Eovaldi",
+      "matchup": "TEX@BAL"
+    },
+    {
+      "name": "Colt Keith",
+      "rank": 12,
+      "composite": 0.454,
+      "opp_pitcher": "Zac Gallen",
+      "matchup": "DET@AZ"
+    },
+    {
+      "name": "Will Smith",
+      "rank": 32,
+      "composite": 0.408,
+      "opp_pitcher": "Gavin Williams",
+      "matchup": "CLE@LAD"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 112,
+      "composite": 0.304,
+      "opp_pitcher": "Cade Cavalli",
+      "matchup": "WSH@PHI"
+    },
+    {
+      "name": "Graham Pauley",
+      "rank": 122,
+      "composite": 0.297,
+      "opp_pitcher": "Shane Smith",
+      "matchup": "CWS@MIA"
+    },
+    {
+      "name": "Drake Baldwin",
+      "rank": 167,
+      "composite": 0.256,
+      "opp_pitcher": "Luis Severino",
+      "matchup": "ATH@ATL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Colt Keith",
+      "ev": 101.5,
+      "angle": 26.0,
+      "distance": 372.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Gallen, Zac"
+    },
+    {
+      "batter": "Drake Baldwin",
+      "ev": 102.8,
+      "angle": 23.0,
+      "distance": 400.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Medina, Luis"
+    },
+    {
+      "batter": "Gunnar Henderson",
+      "ev": 98.6,
+      "angle": 28.0,
+      "distance": 391.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Eovaldi, Nathan"
+    },
+    {
+      "batter": "Will Smith",
+      "ev": 102.3,
+      "angle": 26.0,
+      "distance": 392.0,
+      "hr_in_parks": 8,
+      "result": "field_out",
+      "pitcher": "Smith, Cade"
+    },
+    {
+      "batter": "Liam Hicks",
+      "ev": 100.9,
+      "angle": 29.0,
+      "distance": 383.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Leasure, Jordan"
+    },
+    {
+      "batter": "Graham Pauley",
+      "ev": 105.1,
+      "angle": 22.0,
+      "distance": 384.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Sims, Lucas"
+    },
+    {
+      "batter": "Kyle Schwarber",
+      "ev": 103.9,
+      "angle": 30.0,
+      "distance": 403.0,
+      "hr_in_parks": 26,
+      "result": "field_out",
+      "pitcher": "P\u00e9rez, Cionel"
+    }
+  ],
+  "surprise_hrs": [
+    {
+      "name": "Eugenio Su\u00e1rez",
+      "pitcher": "Mason Montgomery",
+      "description": "Eugenio Su\u00e1rez homers (2) on a fly ball to left field. Sal Stewart scores."
+    },
+    {
+      "name": "Roman Anthony",
+      "pitcher": "Bryan Abreu",
+      "description": "${person|fullName|701350} homers ${total|homeRuns|701350} on a line drive to left center field.  "
+    }
+  ]
+}
