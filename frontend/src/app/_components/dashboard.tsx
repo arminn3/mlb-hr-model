@@ -14,6 +14,7 @@ import { MethodologyPage } from "./methodology-page";
 import { SlipGenerator } from "./slip-generator";
 import { BvPPage } from "./bvp-page";
 import { GemFinder } from "./gem-finder";
+import { LiveFeed } from "./live-feed";
 import { ProjectionsView } from "./projections-view";
 
 export function Dashboard() {
@@ -155,6 +156,10 @@ export function Dashboard() {
 
           {activePage === "environment" && (
             <EnvironmentView games={envGames} />
+          )}
+
+          {activePage === "live" && (
+            <LiveFeed />
           )}
 
           {activePage === "bvp" && (

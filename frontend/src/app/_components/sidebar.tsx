@@ -1,6 +1,6 @@
 "use client";
 
-export type Page = "rankings" | "slate" | "environment" | "projections" | "slips" | "bvp" | "gems" | "results" | "methodology";
+export type Page = "rankings" | "slate" | "environment" | "projections" | "slips" | "bvp" | "gems" | "live" | "results" | "methodology";
 
 const NAV_ITEMS: { key: Page; label: string; icon: string }[] = [
   { key: "rankings", label: "HR Rankings", icon: "chart" },
@@ -10,6 +10,7 @@ const NAV_ITEMS: { key: Page; label: string; icon: string }[] = [
   { key: "slips", label: "Slip Generator", icon: "slip" },
   { key: "bvp", label: "Batter vs Pitcher", icon: "bvp" },
   { key: "gems", label: "Gem Finder", icon: "gem" },
+  { key: "live", label: "Live Feed", icon: "live" },
   { key: "results", label: "Results Log", icon: "check" },
   { key: "methodology", label: "How It Works", icon: "info" },
 ];
@@ -31,6 +32,12 @@ function Icon({ name }: { name: string }) {
     return (
       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
+      </svg>
+    );
+  if (name === "live")
+    return (
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     );
   if (name === "gem")
@@ -116,7 +123,7 @@ export function Sidebar({
           Analysis
         </span>
         <div className="space-y-1 mb-5">
-          {(["rankings", "slate", "gems", "projections", "environment"] as const).map((key) => {
+          {(["rankings", "slate", "gems", "projections", "environment", "live"] as const).map((key) => {
             const item = NAV_ITEMS.find(n => n.key === key)!;
             return <NavButton key={key} item={item} active={active} onChange={onChange} />;
           })}
