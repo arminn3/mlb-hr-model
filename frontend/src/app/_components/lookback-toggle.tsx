@@ -2,7 +2,7 @@
 
 import type { LookbackKey } from "./types";
 
-const OPTIONS: LookbackKey[] = ["L5", "L10", "L15"];
+const OPTIONS: LookbackKey[] = ["L5", "L10"];
 
 export function LookbackToggle({
   value,

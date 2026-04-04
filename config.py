@@ -16,7 +16,7 @@ PITCH_ELEVATED_USAGE_PCT: float = 0.45  # pitches at 45%+ get elevated weight
 
 # ── Plate Appearance Sample Size ─────────────────────────────────────────────
 MIN_PA_PER_PITCH_TYPE: int = 5  # last N PAs per pitch type + handedness
-LOOKBACK_WINDOWS: list = [5, 10, 15]  # pre-compute scores at each lookback
+LOOKBACK_WINDOWS: list = [5, 10]  # pre-compute scores at each lookback
 
 # ── Pitch Usage Weight Tiers ─────────────────────────────────────────────────
 # Checked top-down: first matching threshold wins.
