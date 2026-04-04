@@ -142,18 +142,20 @@ def _find_closest_hour(
 # This is a simplification — each park has a different orientation.
 
 # Stadium outfield direction in degrees (approximate azimuth to center field)
+# Compass bearing (degrees from north) from home plate to center field
+# Researched from satellite imagery and Baseball Almanac orientation diagrams
 _OUTFIELD_AZIMUTH: dict[str, float] = {
-    "BAL": 45, "BOS": 70, "NYY": 50, "TB": 0,  # dome
-    "TOR": 0,  # dome
-    "CWS": 45, "CLE": 20, "DET": 35, "KC": 15, "MIN": 30,
-    "HOU": 0,  # retractable, often closed
-    "LAA": 45, "OAK": 50, "SEA": 0,  # retractable
-    "TEX": 0,  # retractable
-    "ATL": 30, "MIA": 0,  # dome
-    "NYM": 45, "PHI": 50, "WSH": 35,
-    "CHC": 25, "CIN": 55, "MIL": 0,  # retractable
-    "PIT": 30, "STL": 45, "ARI": 0,  # retractable
-    "COL": 50, "LAD": 40, "SDP": 55, "SF": 50,
+    "BAL": 52, "BOS": 65, "NYY": 57, "TB": 0,   # dome
+    "TOR": 0,   # dome
+    "CWS": 50, "CLE": 55, "DET": 125, "KC": 90, "MIN": 52,
+    "HOU": 0,   # retractable
+    "LAA": 68, "OAK": 55, "SEA": 0,   # retractable
+    "TEX": 0,   # retractable
+    "ATL": 45, "MIA": 0,   # dome
+    "NYM": 72, "PHI": 60, "WSH": 50,
+    "CHC": 22, "CIN": 60, "MIL": 0,   # retractable
+    "PIT": 48, "STL": 78, "ARI": 0,   # retractable
+    "COL": 70, "LAD": 55, "SDP": 68, "SF": 65,
 }
 
 # Fixed dome — weather never matters
