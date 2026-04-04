@@ -1,12 +1,13 @@
 "use client";
 
-export type Page = "rankings" | "slate" | "environment" | "projections" | "results" | "methodology";
+export type Page = "rankings" | "slate" | "environment" | "projections" | "slips" | "results" | "methodology";
 
 const NAV_ITEMS: { key: Page; label: string; icon: string }[] = [
   { key: "rankings", label: "HR Rankings", icon: "chart" },
   { key: "slate", label: "Game Slate", icon: "games" },
   { key: "projections", label: "Projections", icon: "target" },
   { key: "environment", label: "Environment", icon: "cloud" },
+  { key: "slips", label: "Slip Generator", icon: "slip" },
   { key: "results", label: "Results Log", icon: "check" },
   { key: "methodology", label: "How It Works", icon: "info" },
 ];
@@ -28,6 +29,12 @@ function Icon({ name }: { name: string }) {
     return (
       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
+      </svg>
+    );
+  if (name === "slip")
+    return (
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
       </svg>
     );
   if (name === "info")

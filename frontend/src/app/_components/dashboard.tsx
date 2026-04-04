@@ -11,6 +11,7 @@ import { Methodology } from "./methodology";
 import { TopPicks } from "./top-picks";
 import { ResultsView } from "./results-view";
 import { MethodologyPage } from "./methodology-page";
+import { SlipGenerator } from "./slip-generator";
 import { ProjectionsView } from "./projections-view";
 
 export function Dashboard() {
@@ -115,14 +116,14 @@ export function Dashboard() {
         <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b border-card-border px-8 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <h1 className="text-sm font-semibold text-foreground">
-              {activePage === "rankings" ? "HR Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "environment" ? "Environment" : activePage === "results" ? "Results Log" : "How It Works"}
+              {activePage === "rankings" ? "HR Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "slips" ? "Slip Generator" : activePage === "environment" ? "Environment" : activePage === "results" ? "Results Log" : "How It Works"}
             </h1>
             <span className="text-xs text-muted">
               {totalPlayers} players &middot; {data.games.length} games
             </span>
           </div>
           <div className="flex items-center gap-4">
-            {(activePage === "rankings" || activePage === "slate" || activePage === "projections") && (
+            {(activePage === "rankings" || activePage === "slate" || activePage === "projections" || activePage === "slips") && (
               <LookbackToggle value={lookback} onChange={setLookback} />
             )}
             <DatePicker currentDate={selectedDate} onChange={loadDate} />
@@ -152,6 +153,10 @@ export function Dashboard() {
 
           {activePage === "environment" && (
             <EnvironmentView games={envGames} />
+          )}
+
+          {activePage === "slips" && (
+            <SlipGenerator games={data.games} lookback={lookback} />
           )}
 
           {activePage === "results" && (
