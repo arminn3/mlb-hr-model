@@ -56,7 +56,25 @@ export interface PlayerData {
   pitch_detail: Record<string, PitchDetailEntry>;
   pitcher_stats: PitcherStats;
   scores: Record<LookbackKey, ScoreSet>;
-  season_stats?: Record<string, SeasonStats>;  // keyed by "2025", "2026"
+  season_stats?: Record<string, SeasonStats>;
+  bvp_stats?: {
+    career: {
+      abs: number;
+      hits: number;
+      hrs: number;
+      ba: number;
+      slg: number;
+      iso: number;
+      k_pct: number;
+    };
+    recent_abs: Array<{
+      date: string;
+      pitch_type: string;
+      ev: number;
+      angle: number;
+      result: string;
+    }>;
+  };
 }
 
 export interface PitchTypeSeason {

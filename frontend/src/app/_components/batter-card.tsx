@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { PlayerData, LookbackKey, PitchDetailEntry } from "./types";
 import { ScoreBar } from "./score-bar";
 import { PitchesTab } from "./pitches-tab";
+import { BvPTab } from "./bvp-tab";
 import { RatingBadge } from "./rating-badge";
 
 function evColor(ev: number): string {
@@ -41,7 +42,7 @@ export function BatterCard({
   rank: number;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const [detailTab, setDetailTab] = useState<"abs" | "statcast" | "pitches">("abs");
+  const [detailTab, setDetailTab] = useState<"abs" | "statcast" | "pitches" | "bvp">("abs");
   const [pitchFilter, setPitchFilter] = useState<string>("all");
 
   const scores = player.scores[lookback] || player.scores.L5;
@@ -130,7 +131,7 @@ export function BatterCard({
         <div className="px-4 pb-4 border-t border-card-border">
           {/* Sub-tabs */}
           <div className="flex items-center gap-1 mt-3 mb-3 bg-background/50 rounded-lg p-1 w-fit">
-            {(["abs", "statcast", "pitches"] as const).map((tab) => (
+            {(["abs", "statcast", "pitches", "bvp"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setDetailTab(tab)}
@@ -140,7 +141,7 @@ export function BatterCard({
                     : "text-muted hover:text-foreground"
                 }`}
               >
-                {tab === "abs" ? `Recent ABs (${lookback})` : tab === "statcast" ? "Pitch Breakdown" : "Pitches"}
+                {tab === "abs" ? `Recent ABs (${lookback})` : tab === "statcast" ? "Pitch Breakdown" : tab === "pitches" ? "Pitches" : "vs Pitcher"}
               </button>
             ))}
           </div>
@@ -262,6 +263,11 @@ export function BatterCard({
           {/* Season pitches tab */}
           {detailTab === "pitches" && (
             <PitchesTab player={player} />
+          )}
+
+          {/* BvP history tab */}
+          {detailTab === "bvp" && (
+            <BvPTab player={player} />
           )}
         </div>
       )}
