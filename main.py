@@ -253,10 +253,14 @@ def run_model(game_date: date = None, fast: bool = False):
             season_cache[batter_season_key] = get_season_statcast(batter_id, "batter", 2025)
         batter_2025 = season_cache[batter_season_key]
 
-        multi_scores = score_batter_multi_lookback(
-            batter_df, pitcher_df, pitcher_hand, batter_h, env_data,
-            season_df=batter_2025,
-        )
+        try:
+            multi_scores = score_batter_multi_lookback(
+                batter_df, pitcher_df, pitcher_hand, batter_h, env_data,
+                season_df=batter_2025,
+            )
+        except Exception as e:
+            print(f"ERROR scoring: {e}")
+            continue
 
         l5 = multi_scores.get("L5", {})
         composite_l5 = l5.get("composite_score", 0)
