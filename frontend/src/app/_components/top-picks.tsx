@@ -21,15 +21,18 @@ export function TopPicks({
 }) {
   const [filter, setFilter] = useState<number>(10);
 
-  // Memoize the full sorted list so it's stable across re-renders
+  // Memoize the full sorted list, deduplicated by player name
   const sorted = useMemo(() => {
+    const seen = new Set<string>();
     const all: { player: (typeof games)[0]["players"][0]; game: GameData }[] = [];
     for (const game of games) {
       for (const player of game.players) {
-        all.push({ player, game });
+        if (!seen.has(player.name)) {
+          seen.add(player.name);
+          all.push({ player, game });
+        }
       }
     }
-    // Sort by composite descending, tiebreak by name for stability
     return all.sort((a, b) => {
       const diff =
         (b.player.scores[lookback]?.composite ?? 0) -
