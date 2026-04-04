@@ -4,6 +4,75 @@
   "total_hrs_hit": 29,
   "total_near_hrs": 7,
   "model_hits": 28,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 4,
+        "rate": 40.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 8,
+        "rate": 40.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 9,
+        "rate": 30.0
+      },
+      "all": {
+        "total": 252,
+        "hits": 28,
+        "rate": 11.1
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 4,
+        "rate": 40.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 7,
+        "rate": 35.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 8,
+        "rate": 26.7
+      },
+      "all": {
+        "total": 252,
+        "hits": 28,
+        "rate": 11.1
+      }
+    },
+    "L15": {
+      "top_10": {
+        "total": 10,
+        "hits": 6,
+        "rate": 60.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 7,
+        "rate": 35.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 8,
+        "rate": 26.7
+      },
+      "all": {
+        "total": 252,
+        "hits": 28,
+        "rate": 11.1
+      }
+    }
+  },
   "model_near_hits": 7,
   "tier_accuracy": {
     "top_10": {

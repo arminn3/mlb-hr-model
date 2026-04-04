@@ -1,9 +1,78 @@
 {
   "date": "2026-04-03",
   "total_players_ranked": 251,
-  "total_hrs_hit": 24,
+  "total_hrs_hit": 26,
   "total_near_hrs": 0,
-  "model_hits": 24,
+  "model_hits": 26,
+  "best_lookback": "L10",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 6,
+        "rate": 20.0
+      },
+      "all": {
+        "total": 251,
+        "hits": 26,
+        "rate": 10.4
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 6,
+        "rate": 20.0
+      },
+      "all": {
+        "total": 251,
+        "hits": 26,
+        "rate": 10.4
+      }
+    },
+    "L15": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 251,
+        "hits": 26,
+        "rate": 10.4
+      }
+    }
+  },
   "model_near_hits": 0,
   "tier_accuracy": {
     "top_10": {
@@ -23,8 +92,8 @@
     },
     "all": {
       "total": 251,
-      "hits": 24,
-      "rate": 9.6
+      "hits": 26,
+      "rate": 10.4
     }
   },
   "tier_accuracy_with_near": {
@@ -45,13 +114,13 @@
     },
     "all": {
       "total": 251,
-      "hits": 24,
-      "rate": 9.6
+      "hits": 26,
+      "rate": 10.4
     }
   },
-  "avg_composite_hr_hitters": 0.323,
+  "avg_composite_hr_hitters": 0.321,
   "avg_composite_non_hitters": 0.304,
-  "composite_separation": 0.019,
+  "composite_separation": 0.017,
   "hr_hitters": [
     {
       "name": "Kyle Schwarber",
@@ -124,6 +193,13 @@
       "matchup": "BAL@PIT"
     },
     {
+      "name": "Matt Olson",
+      "rank": 80,
+      "composite": 0.345,
+      "opp_pitcher": "Eduardo Rodriguez",
+      "matchup": "ATL@AZ"
+    },
+    {
       "name": "Mookie Betts",
       "rank": 82,
       "composite": 0.342,
@@ -185,6 +261,13 @@
       "composite": 0.246,
       "opp_pitcher": "Grant Taylor",
       "matchup": "TOR@CWS"
+    },
+    {
+      "name": "Ozzie Albies",
+      "rank": 199,
+      "composite": 0.229,
+      "opp_pitcher": "Eduardo Rodriguez",
+      "matchup": "ATL@AZ"
     },
     {
       "name": "Xavier Edwards",

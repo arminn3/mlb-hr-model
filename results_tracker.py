@@ -182,30 +182,33 @@ def compare_results(game_date: date) -> dict:
     if not predictions or "games" not in predictions:
         return {"error": f"No model data for {game_date.isoformat()}"}
 
-    # Build ranked list from predictions (using L5 composite)
-    all_players = []
-    for game in predictions["games"]:
-        for player in game["players"]:
-            l5 = player.get("scores", {}).get("L5", {})
-            all_players.append({
-                "name": player["name"],
-                "composite": l5.get("composite", 0),
-                "batter_score": l5.get("batter_score", 0),
-                "pitcher_score": l5.get("pitcher_score", 0),
-                "env_score": l5.get("env_score", 0),
-                "barrel_pct": l5.get("barrel_pct", 0),
-                "fb_pct": l5.get("fb_pct", 0),
-                "hard_hit_pct": l5.get("hard_hit_pct", 0),
-                "exit_velo": l5.get("exit_velo", 0),
-                "opp_pitcher": player.get("opp_pitcher", ""),
-                "matchup": f"{game['away_team']}@{game['home_team']}",
-            })
+    # Build ranked lists for each lookback window
+    lookback_results = {}
+    for lb in ["L5", "L10", "L15"]:
+        players_lb = []
+        for game in predictions["games"]:
+            for player in game["players"]:
+                scores = player.get("scores", {}).get(lb, player.get("scores", {}).get("L5", {}))
+                players_lb.append({
+                    "name": player["name"],
+                    "composite": scores.get("composite", 0),
+                    "batter_score": scores.get("batter_score", 0),
+                    "pitcher_score": scores.get("pitcher_score", 0),
+                    "env_score": scores.get("env_score", 0),
+                    "barrel_pct": scores.get("barrel_pct", 0),
+                    "fb_pct": scores.get("fb_pct", 0),
+                    "hard_hit_pct": scores.get("hard_hit_pct", 0),
+                    "exit_velo": scores.get("exit_velo", 0),
+                    "opp_pitcher": player.get("opp_pitcher", ""),
+                    "matchup": f"{game['away_team']}@{game['home_team']}",
+                })
+        players_lb.sort(key=lambda x: x["composite"], reverse=True)
+        for i, p in enumerate(players_lb):
+            p["rank"] = i + 1
+        lookback_results[lb] = players_lb
 
-    all_players.sort(key=lambda x: x["composite"], reverse=True)
-
-    # Assign ranks
-    for i, p in enumerate(all_players):
-        p["rank"] = i + 1
+    # Use L5 as primary (for backward compat), but track all
+    all_players = lookback_results["L5"]
 
     # Get actual HRs
     actual_hrs = get_actual_hrs(game_date)
@@ -246,25 +249,39 @@ def compare_results(game_date: date) -> dict:
         if not matched:
             surprise_hrs.append(hr)
 
-    # Accuracy by tier
-    tiers = {
-        "top_10": all_players[:10],
-        "top_20": all_players[:20],
-        "top_30": all_players[:30],
-        "all": all_players,
-    }
-
+    # Accuracy by tier — for each lookback window
     tier_accuracy = {}
-    for tier_name, tier_players in tiers.items():
-        tier_names = {p["name"] for p in tier_players}
-        tier_hits = [p for p in tier_players if any(
-            p["name"] in hr or hr in p["name"] for hr in hr_names
-        )]
-        tier_accuracy[tier_name] = {
-            "total": len(tier_players),
-            "hits": len(tier_hits),
-            "rate": round(len(tier_hits) / len(tier_players) * 100, 1) if tier_players else 0,
+    tier_accuracy_by_lookback = {}
+    for lb, lb_players in lookback_results.items():
+        lb_tiers = {
+            "top_10": lb_players[:10],
+            "top_20": lb_players[:20],
+            "top_30": lb_players[:30],
+            "all": lb_players,
         }
+        lb_accuracy = {}
+        for tier_name, tier_players in lb_tiers.items():
+            tier_hits = [p for p in tier_players if any(
+                p["name"] in hr or hr in p["name"] for hr in hr_names
+            )]
+            lb_accuracy[tier_name] = {
+                "total": len(tier_players),
+                "hits": len(tier_hits),
+                "rate": round(len(tier_hits) / len(tier_players) * 100, 1) if tier_players else 0,
+            }
+        tier_accuracy_by_lookback[lb] = lb_accuracy
+
+    # Use L5 as the primary tier_accuracy (backward compat)
+    tier_accuracy = tier_accuracy_by_lookback.get("L5", {})
+
+    # Find which lookback performed best on this date
+    best_lookback = "L5"
+    best_top20 = 0
+    for lb, acc in tier_accuracy_by_lookback.items():
+        rate = acc.get("top_20", {}).get("rate", 0)
+        if rate > best_top20:
+            best_top20 = rate
+            best_lookback = lb
 
     # Average composite of HR hitters vs non-hitters
     hr_composites = [p["composite"] for p in hits]
@@ -272,9 +289,10 @@ def compare_results(game_date: date) -> dict:
     avg_hr_composite = round(sum(hr_composites) / len(hr_composites), 3) if hr_composites else 0
     avg_non_hr_composite = round(sum(non_hr_composites) / len(non_hr_composites), 3) if non_hr_composites else 0
 
-    # Near-HR tier accuracy (HR + near-HR combined)
+    # Near-HR tier accuracy (HR + near-HR combined) using L5
     tier_accuracy_with_near = {}
-    for tier_name, tier_players in tiers.items():
+    l5_tiers = {"top_10": all_players[:10], "top_20": all_players[:20], "top_30": all_players[:30], "all": all_players}
+    for tier_name, tier_players in l5_tiers.items():
         tier_hr_or_near = [p for p in tier_players if any(
             p["name"] in n or n in p["name"] for n in (hr_names | near_hr_names)
         )]
@@ -290,6 +308,8 @@ def compare_results(game_date: date) -> dict:
         "total_hrs_hit": len(actual_hrs),
         "total_near_hrs": len(near_hits),
         "model_hits": len(hits),
+        "best_lookback": best_lookback,
+        "tier_accuracy_by_lookback": tier_accuracy_by_lookback,
         "model_near_hits": len(near_hits),
         "tier_accuracy": tier_accuracy,
         "tier_accuracy_with_near": tier_accuracy_with_near,
