@@ -135,7 +135,7 @@ export function LiveFeed() {
   useEffect(() => {
     fetchLiveData();
     if (!autoRefresh) return;
-    const interval = setInterval(fetchLiveData, 30000); // 30 seconds
+    const interval = setInterval(fetchLiveData, 10000); // 10 seconds
     return () => clearInterval(interval);
   }, [fetchLiveData, autoRefresh]);
 
@@ -155,7 +155,7 @@ export function LiveFeed() {
             )}
           </h2>
           <p className="text-xs text-muted mt-0.5">
-            Hard-hit air balls across all active games. Updates every 30 seconds.
+            Hard-hit air balls across all active games. Updates every 10 seconds.
           </p>
         </div>
         <div className="flex items-center gap-3">
