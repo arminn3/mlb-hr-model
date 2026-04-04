@@ -20,6 +20,7 @@ import { ProjectionsView } from "./projections-view";
 export function Dashboard() {
   const [data, setData] = useState<ModelData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Read initial state from URL hash: #page=rankings&date=2026-04-03&lookback=L5
   function getHashParam(key: string, fallback: string): string {
@@ -107,8 +108,6 @@ export function Dashboard() {
     home_pitcher: g.home_pitcher.name,
     ...g.environment,
   }));
-
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handlePageChange = (page: Page) => {
     setActivePage(page);
