@@ -93,6 +93,11 @@ export function TopPicks({
                   <td className="text-center py-2 font-bold text-accent font-mono">{i + 1}</td>
                   <td className="py-2 pr-3">
                     <span className="font-semibold text-foreground">{player.name}</span>
+                    {s.recent_abs.length <= 2 && (
+                      <span className="ml-1.5 px-1.5 py-0.5 text-[9px] font-semibold rounded bg-accent/10 text-accent border border-accent/20">
+                        NEW
+                      </span>
+                    )}
                   </td>
                   <td className="py-2 pr-3 text-muted">
                     {game.away_team}@{game.home_team} vs {player.opp_pitcher}

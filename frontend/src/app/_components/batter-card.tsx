@@ -91,7 +91,12 @@ export function BatterCard({
               <span className="font-semibold text-foreground truncate">{player.name}</span>
               <span className="text-[10px] text-muted font-mono">{player.batter_hand}HB</span>
               <RatingBadge composite={scores.composite} />
-              {scores.data_quality !== "OK" && (
+              {scores.recent_abs.length <= 2 && (
+                <span className="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-accent/10 text-accent border border-accent/20">
+                  NEW
+                </span>
+              )}
+              {scores.data_quality !== "OK" && scores.recent_abs.length > 2 && (
                 <span className="px-1.5 py-0.5 text-[9px] rounded bg-accent-yellow/10 text-accent-yellow">
                   {scores.data_quality.replace(/_/g, " ")}
                 </span>
