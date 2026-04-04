@@ -117,6 +117,20 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
         />
       </div>
 
+      {/* Today's placeholder if no results yet */}
+      {selectedDate && filtered.length === 0 && (
+        <div className="border border-accent/20 rounded-xl bg-accent/5 p-8 mb-4 text-center">
+          <div className="text-3xl mb-3">&#9918;</div>
+          <h3 className="text-lg font-bold text-foreground mb-2">Games In Progress</h3>
+          <p className="text-sm text-muted">
+            Results for {selectedDate} will be available after today&apos;s games are complete.
+          </p>
+          <p className="text-xs text-muted mt-2">
+            The results tracker runs automatically overnight and logs HR outcomes, accuracy rates, and near-HR data.
+          </p>
+        </div>
+      )}
+
       {/* Daily reports */}
       {filtered.map((day) => (
         <div key={day.date} className="border border-card-border rounded-xl bg-card/50 p-5 mb-4">
