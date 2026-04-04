@@ -1,10 +1,10 @@
 {
   "date": "2026-03-27",
-  "total_players_ranked": 144,
+  "total_players_ranked": 143,
   "total_hrs_hit": 17,
   "total_near_hrs": 3,
   "model_hits": 16,
-  "best_lookback": "L10",
+  "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
       "top_10": {
@@ -14,62 +14,40 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 7,
+        "rate": 35.0
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 10,
+        "rate": 33.3
       },
       "all": {
-        "total": 144,
+        "total": 143,
         "hits": 16,
-        "rate": 11.1
+        "rate": 11.2
       }
     },
     "L10": {
       "top_10": {
         "total": 10,
-        "hits": 3,
+        "hits": 5,
+        "rate": 50.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 6,
         "rate": 30.0
       },
-      "top_20": {
-        "total": 20,
-        "hits": 5,
-        "rate": 25.0
-      },
       "top_30": {
         "total": 30,
-        "hits": 8,
-        "rate": 26.7
+        "hits": 10,
+        "rate": 33.3
       },
       "all": {
-        "total": 144,
+        "total": 143,
         "hits": 16,
-        "rate": 11.1
-      }
-    },
-    "L15": {
-      "top_10": {
-        "total": 10,
-        "hits": 2,
-        "rate": 20.0
-      },
-      "top_20": {
-        "total": 20,
-        "hits": 5,
-        "rate": 25.0
-      },
-      "top_30": {
-        "total": 30,
-        "hits": 7,
-        "rate": 23.3
-      },
-      "all": {
-        "total": 144,
-        "hits": 16,
-        "rate": 11.1
+        "rate": 11.2
       }
     }
   },
@@ -82,18 +60,18 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 7,
+      "rate": 35.0
     },
     "top_30": {
       "total": 30,
-      "hits": 7,
-      "rate": 23.3
+      "hits": 10,
+      "rate": 33.3
     },
     "all": {
-      "total": 144,
+      "total": 143,
       "hits": 16,
-      "rate": 11.1
+      "rate": 11.2
     }
   },
   "tier_accuracy_with_near": {
@@ -104,156 +82,156 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 6,
-      "rate": 30.0
+      "hits": 9,
+      "rate": 45.0
     },
     "top_30": {
       "total": 30,
-      "hits": 9,
-      "rate": 30.0
+      "hits": 12,
+      "rate": 40.0
     },
     "all": {
-      "total": 144,
+      "total": 143,
       "hits": 19,
-      "rate": 13.2
+      "rate": 13.3
     }
   },
-  "avg_composite_hr_hitters": 0.359,
-  "avg_composite_non_hitters": 0.282,
-  "composite_separation": 0.077,
+  "avg_composite_hr_hitters": 0.423,
+  "avg_composite_non_hitters": 0.286,
+  "composite_separation": 0.137,
   "hr_hitters": [
     {
       "name": "Yordan Alvarez",
-      "rank": 2,
-      "composite": 0.606,
+      "rank": 1,
+      "composite": 0.679,
       "opp_pitcher": "Yusei Kikuchi",
       "matchup": "LAA@HOU"
     },
     {
       "name": "Ketel Marte",
-      "rank": 8,
-      "composite": 0.49,
+      "rank": 9,
+      "composite": 0.527,
       "opp_pitcher": "Emmet Sheehan",
       "matchup": "AZ@LAD"
     },
     {
       "name": "Aaron Judge",
-      "rank": 9,
-      "composite": 0.482,
+      "rank": 10,
+      "composite": 0.525,
       "opp_pitcher": "Robbie Ray",
       "matchup": "NYY@SF"
     },
     {
       "name": "Drake Baldwin",
-      "rank": 16,
-      "composite": 0.443,
+      "rank": 11,
+      "composite": 0.515,
       "opp_pitcher": "Cole Ragans",
       "matchup": "KC@ATL"
-    },
-    {
-      "name": "Michael Harris II",
-      "rank": 24,
-      "composite": 0.388,
-      "opp_pitcher": "Cole Ragans",
-      "matchup": "KC@ATL"
-    },
-    {
-      "name": "Giancarlo Stanton",
-      "rank": 26,
-      "composite": 0.38,
-      "opp_pitcher": "Robbie Ray",
-      "matchup": "NYY@SF"
     },
     {
       "name": "Josh Lowe",
-      "rank": 27,
-      "composite": 0.374,
+      "rank": 12,
+      "composite": 0.482,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "LAA@HOU"
+    },
+    {
+      "name": "Mookie Betts",
+      "rank": 13,
+      "composite": 0.482,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "AZ@LAD"
+    },
+    {
+      "name": "Michael Harris",
+      "rank": 16,
+      "composite": 0.469,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "KC@ATL"
+    },
+    {
+      "name": "Chase DeLauter",
+      "rank": 21,
+      "composite": 0.43,
+      "opp_pitcher": "George Kirby",
+      "matchup": "CLE@SEA"
+    },
+    {
+      "name": "Mike Trout",
+      "rank": 26,
+      "composite": 0.404,
       "opp_pitcher": "Mike Burrows",
       "matchup": "LAA@HOU"
     },
     {
       "name": "Alex Freeland",
-      "rank": 31,
-      "composite": 0.362,
+      "rank": 28,
+      "composite": 0.404,
       "opp_pitcher": "Ryne Nelson",
       "matchup": "AZ@LAD"
     },
     {
+      "name": "Giancarlo Stanton",
+      "rank": 33,
+      "composite": 0.369,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "NYY@SF"
+    },
+    {
       "name": "Luke Raley",
-      "rank": 35,
-      "composite": 0.352,
+      "rank": 34,
+      "composite": 0.364,
       "opp_pitcher": "Gavin Williams",
       "matchup": "CLE@SEA"
     },
     {
-      "name": "Mookie Betts",
-      "rank": 38,
-      "composite": 0.339,
-      "opp_pitcher": "Ryne Nelson",
-      "matchup": "AZ@LAD"
-    },
-    {
-      "name": "Mike Trout",
-      "rank": 49,
-      "composite": 0.311,
-      "opp_pitcher": "Mike Burrows",
-      "matchup": "LAA@HOU"
-    },
-    {
-      "name": "Ozzie Albies",
-      "rank": 59,
-      "composite": 0.292,
-      "opp_pitcher": "Cole Ragans",
-      "matchup": "KC@ATL"
-    },
-    {
       "name": "Shea Langeliers",
-      "rank": 68,
-      "composite": 0.282,
+      "rank": 42,
+      "composite": 0.346,
       "opp_pitcher": "Kevin Gausman",
       "matchup": "ATH@TOR"
     },
     {
+      "name": "Ozzie Albies",
+      "rank": 70,
+      "composite": 0.282,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "KC@ATL"
+    },
+    {
       "name": "Zach Neto",
-      "rank": 78,
+      "rank": 80,
       "composite": 0.27,
       "opp_pitcher": "Mike Burrows",
       "matchup": "LAA@HOU"
     },
     {
-      "name": "Chase DeLauter",
-      "rank": 123,
-      "composite": 0.196,
-      "opp_pitcher": "George Kirby",
-      "matchup": "CLE@SEA"
-    },
-    {
       "name": "Cole Young",
-      "rank": 134,
-      "composite": 0.176,
+      "rank": 103,
+      "composite": 0.226,
       "opp_pitcher": "Gavin Williams",
       "matchup": "CLE@SEA"
     }
   ],
   "near_hr_hitters": [
     {
-      "name": "Kevin McGonigle",
-      "rank": 1,
-      "composite": 0.671,
-      "opp_pitcher": "Michael King",
-      "matchup": "DET@SD"
-    },
-    {
       "name": "Freddie Freeman",
-      "rank": 4,
-      "composite": 0.531,
+      "rank": 3,
+      "composite": 0.63,
       "opp_pitcher": "Ryne Nelson",
       "matchup": "AZ@LAD"
     },
     {
+      "name": "Kevin McGonigle",
+      "rank": 6,
+      "composite": 0.538,
+      "opp_pitcher": "Michael King",
+      "matchup": "DET@SD"
+    },
+    {
       "name": "Maikel Garcia",
-      "rank": 55,
-      "composite": 0.3,
+      "rank": 86,
+      "composite": 0.258,
       "opp_pitcher": "Chris Sale",
       "matchup": "KC@ATL"
     }

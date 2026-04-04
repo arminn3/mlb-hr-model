@@ -4,7 +4,7 @@
   "total_hrs_hit": 10,
   "total_near_hrs": 3,
   "model_hits": 9,
-  "best_lookback": "L10",
+  "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
       "top_10": {
@@ -14,8 +14,8 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 6,
-        "rate": 30.0
+        "hits": 7,
+        "rate": 35.0
       },
       "top_30": {
         "total": 30,
@@ -41,30 +41,8 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
-      },
-      "all": {
-        "total": 54,
-        "hits": 9,
-        "rate": 16.7
-      }
-    },
-    "L15": {
-      "top_10": {
-        "total": 10,
-        "hits": 3,
-        "rate": 30.0
-      },
-      "top_20": {
-        "total": 20,
-        "hits": 7,
-        "rate": 35.0
-      },
-      "top_30": {
-        "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 8,
+        "rate": 26.7
       },
       "all": {
         "total": 54,
@@ -82,8 +60,8 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 6,
-      "rate": 30.0
+      "hits": 7,
+      "rate": 35.0
     },
     "top_30": {
       "total": 30,
@@ -118,70 +96,70 @@
       "rate": 22.2
     }
   },
-  "avg_composite_hr_hitters": 0.364,
-  "avg_composite_non_hitters": 0.272,
-  "composite_separation": 0.092,
+  "avg_composite_hr_hitters": 0.401,
+  "avg_composite_non_hitters": 0.289,
+  "composite_separation": 0.112,
   "hr_hitters": [
     {
       "name": "Matt Olson",
       "rank": 1,
-      "composite": 0.641,
+      "composite": 0.653,
       "opp_pitcher": "Ryne Nelson",
       "matchup": "ATL@AZ"
     },
     {
       "name": "Dominic Smith",
       "rank": 4,
-      "composite": 0.519,
+      "composite": 0.495,
       "opp_pitcher": "Ryne Nelson",
       "matchup": "ATL@AZ"
     },
     {
       "name": "Matt Wallner",
       "rank": 7,
-      "composite": 0.408,
+      "composite": 0.459,
       "opp_pitcher": "Cole Ragans",
       "matchup": "MIN@KC"
     },
     {
       "name": "Jordan Lawlar",
-      "rank": 12,
-      "composite": 0.377,
+      "rank": 11,
+      "composite": 0.426,
       "opp_pitcher": "Reynaldo L\u00f3pez",
       "matchup": "ATL@AZ"
     },
     {
       "name": "Mark Vientos",
-      "rank": 17,
-      "composite": 0.345,
+      "rank": 14,
+      "composite": 0.406,
       "opp_pitcher": "Robbie Ray",
       "matchup": "NYM@SF"
     },
     {
-      "name": "Kody Clemens",
-      "rank": 18,
-      "composite": 0.313,
-      "opp_pitcher": "Cole Ragans",
-      "matchup": "MIN@KC"
-    },
-    {
       "name": "Mauricio Dub\u00f3n",
-      "rank": 24,
-      "composite": 0.282,
+      "rank": 16,
+      "composite": 0.38,
       "opp_pitcher": "Ryne Nelson",
       "matchup": "ATL@AZ"
     },
     {
+      "name": "Kody Clemens",
+      "rank": 19,
+      "composite": 0.348,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "MIN@KC"
+    },
+    {
       "name": "Josh Bell",
-      "rank": 29,
-      "composite": 0.258,
+      "rank": 27,
+      "composite": 0.298,
       "opp_pitcher": "Cole Ragans",
       "matchup": "MIN@KC"
     },
     {
       "name": "Rafael Devers",
       "rank": 52,
-      "composite": 0.136,
+      "composite": 0.143,
       "opp_pitcher": "David Peterson",
       "matchup": "NYM@SF"
     }
@@ -189,22 +167,22 @@
   "near_hr_hitters": [
     {
       "name": "Bo Bichette",
-      "rank": 20,
-      "composite": 0.305,
+      "rank": 21,
+      "composite": 0.334,
       "opp_pitcher": "Robbie Ray",
       "matchup": "NYM@SF"
     },
     {
       "name": "Jonathan India",
-      "rank": 31,
-      "composite": 0.246,
+      "rank": 32,
+      "composite": 0.239,
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@KC"
     },
     {
       "name": "Isaac Collins",
-      "rank": 38,
-      "composite": 0.213,
+      "rank": 48,
+      "composite": 0.168,
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@KC"
     }
