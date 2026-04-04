@@ -310,28 +310,29 @@ def run_model(game_date: date = None, fast: bool = False):
         # Sort players by L5 composite descending
         players.sort(key=lambda p: p["scores"].get("L5", {}).get("composite", 0), reverse=True)
 
-        # Format game time for display
+        # Format game time for display — always EST (UTC-4 during EDT)
         utc_time = g.get("game_datetime_utc", "")
-        local_hour = game_hours.get(gpk, 19)
-        local_min = 0
+        local_hour = game_hours.get(gpk, 19)  # local to stadium for weather
+        est_hour = 19
+        est_min = 0
         if utc_time and len(utc_time) > 14:
             try:
+                utc_hour = int(utc_time[11:13])
                 utc_min = int(utc_time[14:16])
-                local_min = utc_min
+                est_hour = (utc_hour - 4) % 24  # EDT = UTC-4
+                est_min = utc_min
             except (ValueError, IndexError):
                 pass
-        game_time_str = f"{local_hour}:{local_min:02d}"
-        # Convert to 12-hour format
-        ampm = "AM" if local_hour < 12 else "PM"
-        display_hour = local_hour % 12 or 12
-        game_time_display = f"{display_hour}:{local_min:02d} {ampm}"
+        ampm = "AM" if est_hour < 12 else "PM"
+        display_hour = est_hour % 12 or 12
+        game_time_display = f"{display_hour}:{est_min:02d} {ampm} ET"
 
         games_out.append({
             "game_pk": gpk,
             "away_team": g.get("away_team", ""),
             "home_team": g.get("home_team", ""),
             "game_time": game_time_display,
-            "game_time_sort": local_hour * 60 + local_min,  # for sorting
+            "game_time_sort": est_hour * 60 + est_min,  # for sorting by EST
             "away_pitcher": {
                 "name": g["away_pitcher"]["name"] if g.get("away_pitcher") else "TBD",
                 "hand": g["away_pitcher"]["hand"] if g.get("away_pitcher") else "?",
