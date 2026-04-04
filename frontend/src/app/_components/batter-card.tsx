@@ -6,6 +6,7 @@ import { ScoreBar } from "./score-bar";
 import { PitchesTab } from "./pitches-tab";
 import { BvPTab } from "./bvp-tab";
 import { RatingBadge } from "./rating-badge";
+import { Tooltip } from "./tooltip";
 
 function evColor(ev: number): string {
   if (ev >= 95) return "bg-accent-green/80 text-background";
@@ -104,14 +105,18 @@ export function BatterCard({
               <span className="text-[10px] text-muted font-mono">{player.batter_hand}HB</span>
               <RatingBadge composite={scores.composite} />
               {scores.recent_abs.length <= 2 && (
-                <span className="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-accent/10 text-accent border border-accent/20">
-                  NEW
-                </span>
+                <Tooltip text="Limited MLB data — score may not reflect true ability">
+                  <span className="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-accent/10 text-accent border border-accent/20">
+                    NEW
+                  </span>
+                </Tooltip>
               )}
               {scores.data_quality !== "OK" && scores.recent_abs.length > 2 && (
-                <span className="px-1.5 py-0.5 text-[9px] rounded bg-accent-yellow/10 text-accent-yellow">
-                  {scores.data_quality.replace(/_/g, " ")}
-                </span>
+                <Tooltip text={scores.data_quality === "LOW_SAMPLE" ? "Fewer than 5 balls in play — small sample size" : "Pitcher has less than 10 innings — pitcher metrics less reliable"}>
+                  <span className="px-1.5 py-0.5 text-[9px] rounded bg-accent-yellow/10 text-accent-yellow">
+                    {scores.data_quality.replace(/_/g, " ")}
+                  </span>
+                </Tooltip>
               )}
             </div>
 
