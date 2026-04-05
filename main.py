@@ -61,6 +61,7 @@ def _format_score(result: dict) -> dict:
         "hard_hit_pct": round(result["weighted_hard_hit_rate"] * 100, 1),
         "data_quality": result["data_quality"],
         "recent_abs": result.get("recent_abs", []),
+        "pitch_abs": result.get("pitch_abs", {}),
     }
 
 
@@ -211,6 +212,7 @@ def run_model(game_date: date = None, fast: bool = False):
     # Priority: lineups (if posted) > active roster > prop lines
     batters_to_score = []
     seen_player_ids = set()  # prevent duplicates across doubleheader games
+    matchup_game_count: dict[str, int] = {}  # track game number for doubleheaders
     print("\nBuilding batter lists...")
     for g in schedule:
         gpk = g["game_pk"]
@@ -220,8 +222,10 @@ def run_model(game_date: date = None, fast: bool = False):
         away_p = g.get("away_pitcher")
         home_p = g.get("home_pitcher")
 
-        # Note: don't skip finished games — we want all players ranked
-        # even after their game completes (scores are based on pre-game data)
+        # Track doubleheader game numbers
+        team_key = f"{away}@{home}"
+        matchup_game_count[team_key] = matchup_game_count.get(team_key, 0) + 1
+        game_num = matchup_game_count[team_key]
         home_lineup = g.get("home_lineup", [])
         away_lineup = g.get("away_lineup", [])
 
@@ -244,9 +248,8 @@ def run_model(game_date: date = None, fast: bool = False):
         # Home batters face away pitcher
         if away_p:
             for player in home_batters:
-                if player["id"] not in seen_ids and player["id"] not in seen_player_ids:
+                if player["id"] not in seen_ids:
                     seen_ids.add(player["id"])
-                    seen_player_ids.add(player["id"])
                     batters_to_score.append({
                         "batter_id": player["id"],
                         "batter_name": player["name"],
@@ -254,13 +257,13 @@ def run_model(game_date: date = None, fast: bool = False):
                         "opp_pitcher": away_p,
                         "batter_side": "home",
                         "home_team": home,
+                        "game_num": game_num,
                     })
         # Away batters face home pitcher
         if home_p:
             for player in away_batters:
-                if player["id"] not in seen_ids and player["id"] not in seen_player_ids:
+                if player["id"] not in seen_ids:
                     seen_ids.add(player["id"])
-                    seen_player_ids.add(player["id"])
                     batters_to_score.append({
                         "batter_id": player["id"],
                         "batter_name": player["name"],
@@ -268,6 +271,7 @@ def run_model(game_date: date = None, fast: bool = False):
                         "opp_pitcher": home_p,
                         "batter_side": "away",
                         "home_team": home,
+                        "game_num": game_num,
                     })
 
         src = "lineup" if home_lineup or away_lineup else "roster"
@@ -393,6 +397,7 @@ def run_model(game_date: date = None, fast: bool = False):
             "opp_pitcher": opp_pitcher["name"],
             "pitcher_hand": pitcher_hand,
             "platoon": platoon,
+            "game_num": entry.get("game_num", 1),
             "bvp_stats": bvp_stats,
             "batter_side": entry["batter_side"],
             "pitch_types": l5.get("pitch_types_used", []),
@@ -447,6 +452,7 @@ def run_model(game_date: date = None, fast: bool = False):
             "game_pk": gpk,
             "away_team": g.get("away_team", ""),
             "home_team": g.get("home_team", ""),
+            "game_num": matchup_game_count.get(f"{g.get('away_team','')}@{g.get('home_team','')}", 1),
             "game_time": game_time_display,
             "game_time_sort": est_hour * 60 + est_min,  # for sorting by EST
             "away_pitcher": {

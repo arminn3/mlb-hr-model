@@ -400,10 +400,42 @@ def score_batter_vs_pitcher(
     recent_abs.sort(key=lambda x: x["date"], reverse=True)
     result["recent_abs"] = recent_abs
 
+    # Per-pitch-type recent ABs — last 5 BIP on each pitch type (for filter view)
+    pitch_abs: dict[str, list] = {}
+    if not batter_df.empty and "p_throws" in batter_df.columns:
+        hand_bip = batter_df[
+            (batter_df["p_throws"] == pitcher_hand) &
+            (batter_df["launch_speed"].notna())
+        ].copy()
+        if not hand_bip.empty:
+            sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in hand_bip.columns else ["game_date"]
+            hand_bip = hand_bip.sort_values(sort_cols, ascending=False)
+            for pt in pitch_mix:
+                pt_bip = hand_bip[hand_bip["pitch_type"] == pt].head(5) if "pitch_type" in hand_bip.columns else pd.DataFrame()
+                if not pt_bip.empty:
+                    pt_list = []
+                    for _, row in pt_bip.iterrows():
+                        pt_list.append({
+                            "date": str(row.get("game_date", ""))[:10],
+                            "pitcher_name": str(row.get("player_name", "")),
+                            "pitch_arm": pitcher_hand,
+                            "pitch_type": str(row.get("pitch_name", pt)),
+                            "ev": round(float(row.get("launch_speed", 0)), 1),
+                            "angle": round(float(row.get("launch_angle", 0)), 1),
+                            "distance": round(float(row.get("hit_distance_sc", 0)), 0)
+                                if pd.notna(row.get("hit_distance_sc")) else None,
+                            "result": str(row.get("events", row.get("description", ""))),
+                        })
+                    pitch_abs[pt] = pt_list
+    result["pitch_abs"] = pitch_abs
+
     # Per-pitch aggregate stats (like PropFinder's Statcast tab)
     pitch_detail = {}
     for pt in pitch_mix:
         m = per_pitch_metrics.get(pt, {})
+        # Recalculate from the per-pitch-type ABs for accuracy
+        pt_bip_data = pitch_abs.get(pt, [])
+        n_pt = len(pt_bip_data)
         pitch_detail[pt] = {
             "usage_pct": round(pitch_mix[pt] * 100, 1),
             "weight": round(pitch_weights.get(pt, 0) * 100, 1),
@@ -411,6 +443,7 @@ def score_batter_vs_pitcher(
             "fb_rate": round(m.get("fly_ball_rate", 0) * 100, 1),
             "hard_hit_rate": round(m.get("hard_hit_rate", 0) * 100, 1),
             "avg_exit_velo": round(m.get("avg_exit_velo", 0), 1),
+            "count": n_pt,
         }
     result["pitch_detail"] = pitch_detail
 
