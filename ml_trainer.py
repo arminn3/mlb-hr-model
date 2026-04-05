@@ -83,13 +83,22 @@ def load_training_data() -> tuple[np.ndarray, np.ndarray, list[str]]:
                 p_hr_9 = p_stats.get("hr_per_9", 0)
                 p_fb_rate = p_stats.get("fb_rate", 0) / 100
 
-                # Normalize exit velo to 0-1 range
+                # Pitcher quality metrics
+                p_velo = p_stats.get("avg_velo", 0)
+                p_spin = p_stats.get("avg_spin", 0)
+                p_vert_break = p_stats.get("avg_vert_break", 0)
+                p_horiz_break = p_stats.get("avg_horiz_break", 0)
+
+                # Platoon
+                platoon = player.get("platoon", 0)
+
+                # Normalize
                 ev_norm = (exit_velo - 80) / 20 if exit_velo > 0 else 0
                 ev_norm = max(0, min(1, ev_norm))
-
-                # Park factor normalized
                 park_norm = (park_factor - 80) / 40
                 park_norm = max(0, min(1, park_norm))
+                velo_norm = (p_velo - 85) / 15 if p_velo > 0 else 0.5  # 85-100 range
+                spin_norm = (p_spin - 2000) / 500 if p_spin > 0 else 0.5  # 2000-2500 range
 
                 features = [
                     barrel_pct,
@@ -100,10 +109,15 @@ def load_training_data() -> tuple[np.ndarray, np.ndarray, list[str]]:
                     pitcher_score,
                     matchup_score,
                     p_hr_fb,
-                    p_hr_9 / 3.0,  # normalize to ~0-1
+                    p_hr_9 / 3.0,
                     p_fb_rate,
                     env_score,
                     park_norm,
+                    velo_norm,
+                    spin_norm,
+                    p_vert_break,
+                    p_horiz_break,
+                    platoon,
                 ]
 
                 # Label: did this player hit a HR?
@@ -117,6 +131,8 @@ def load_training_data() -> tuple[np.ndarray, np.ndarray, list[str]]:
         "batter_score", "pitcher_score", "matchup_score",
         "pitcher_hr_fb", "pitcher_hr_9", "pitcher_fb_rate",
         "env_score", "park_factor_norm",
+        "pitcher_velo", "pitcher_spin", "pitcher_vert_break", "pitcher_horiz_break",
+        "platoon",
     ]
 
     return np.array(X_rows), np.array(y_rows), feature_names
@@ -174,8 +190,9 @@ def train_model(X: np.ndarray, y: np.ndarray, feature_names: list[str]):
 
     # Group into composite categories
     batter_features = ["barrel_pct", "fb_pct", "hard_hit_pct", "exit_velo_norm", "batter_score"]
-    pitcher_features = ["pitcher_hr_fb", "pitcher_hr_9", "pitcher_fb_rate", "pitcher_score"]
-    matchup_features = ["matchup_score"]
+    pitcher_features = ["pitcher_hr_fb", "pitcher_hr_9", "pitcher_fb_rate", "pitcher_score",
+                        "pitcher_velo", "pitcher_spin", "pitcher_vert_break", "pitcher_horiz_break"]
+    matchup_features = ["matchup_score", "platoon"]
     env_features = ["env_score", "park_factor_norm"]
 
     batter_w = sum(weights[feature_names.index(f)] for f in batter_features if f in feature_names)

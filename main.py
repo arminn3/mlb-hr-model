@@ -356,11 +356,29 @@ def run_model(game_date: date = None, fast: bool = False):
         # BvP (Batter vs Pitcher) history
         bvp_stats = _calc_bvp(batter_df, batter_2025, pid)
 
+        # Pitcher pitch quality metrics
+        pitcher_quality = {"avg_velo": 0, "avg_spin": 0, "avg_vert_break": 0, "avg_horiz_break": 0}
+        if not pitcher_df.empty:
+            velo = pitcher_df["release_speed"].dropna()
+            spin = pitcher_df["release_spin_rate"].dropna()
+            vert = pitcher_df["pfx_z"].dropna()
+            horiz = pitcher_df["pfx_x"].dropna()
+            pitcher_quality = {
+                "avg_velo": round(float(velo.mean()), 1) if len(velo) > 0 else 0,
+                "avg_spin": round(float(spin.mean()), 0) if len(spin) > 0 else 0,
+                "avg_vert_break": round(float(vert.mean()), 2) if len(vert) > 0 else 0,
+                "avg_horiz_break": round(float(horiz.mean()), 2) if len(horiz) > 0 else 0,
+            }
+
+        # Platoon indicator: 1 = opposite hand (advantage), 0 = same hand
+        platoon = 1 if batter_h != pitcher_hand else 0
+
         player_obj = {
             "name": batter_name,
             "batter_hand": batter_h,
             "opp_pitcher": opp_pitcher["name"],
             "pitcher_hand": pitcher_hand,
+            "platoon": platoon,
             "bvp_stats": bvp_stats,
             "batter_side": entry["batter_side"],
             "pitch_types": l5.get("pitch_types_used", []),
@@ -371,6 +389,7 @@ def run_model(game_date: date = None, fast: bool = False):
                 "hr_per_9": round(l5.get("pitcher_hr_per_9", 0), 2),
                 "ip": round(l5.get("pitcher_ip", 0), 1),
                 "total_hrs": l5.get("pitcher_total_hrs", 0),
+                **pitcher_quality,
             },
             "scores": {
                 key: _format_score(result)
