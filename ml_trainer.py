@@ -189,7 +189,7 @@ def train_model(X: np.ndarray, y: np.ndarray, feature_names: list[str]):
     # Set minimum floors — matchup quality conceptually matters even if ML
     # hasn't found the signal yet (early season). As data grows the ML
     # will learn the real weight.
-    MIN_FLOORS = {"batter": 0.25, "matchup": 0.15, "pitcher": 0.15, "environment": 0.05}
+    MIN_FLOORS = {"batter": 0.30, "matchup": 0.10, "pitcher": 0.15, "environment": 0.05}
 
     raw = {
         "batter": batter_w / total_cat,
