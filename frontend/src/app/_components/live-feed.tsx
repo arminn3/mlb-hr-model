@@ -38,7 +38,9 @@ export function LiveFeed() {
   const fetchLiveData = useCallback(async () => {
     try {
       // Get today's schedule
-      const today = new Date().toISOString().split("T")[0];
+      // Use local date, not UTC — games are on the local calendar date
+      const now = new Date();
+      const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
       // Fetch schedule with scoringplays for accurate HR count
       const schedRes = await fetch(
         `https://statsapi.mlb.com/api/v1/schedule?date=${today}&sportId=1&hydrate=linescore,scoringplays`
