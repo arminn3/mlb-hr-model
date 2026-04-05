@@ -276,8 +276,10 @@ def score_batter_vs_pitcher(
         normed = normalize_metric(raw, metric_key)
         pitcher_score += normed * weight
 
-    # Floor pitcher score at 0.5 (league average) when still no data
-    if p_metrics["total_ip"] < 5 and (pitcher_season_df is None or pitcher_season_df.empty):
+    # Floor pitcher score at 0.5 (league average) when data is too thin
+    # to make a reliable assessment — prevents unknown pitchers from
+    # dragging hot batters to the bottom of the rankings
+    if p_metrics["total_ip"] < 10:
         pitcher_score = max(pitcher_score, 0.5)
 
     result["pitcher_score"] = pitcher_score

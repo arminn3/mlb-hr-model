@@ -239,8 +239,13 @@ def calc_pitcher_metrics(
     # Balls in play
     bip = df.dropna(subset=["launch_speed"])
 
-    # Fly balls
-    if not bip.empty and "launch_angle" in bip.columns:
+    # Fly balls — use Statcast bb_type classification (matches FanGraphs)
+    # Falls back to launch angle range if bb_type not available
+    if not bip.empty and "bb_type" in bip.columns:
+        fly_mask = bip["bb_type"] == "fly_ball"
+        n_fly = fly_mask.sum()
+        fb_rate = n_fly / len(bip) if len(bip) > 0 else 0.0
+    elif not bip.empty and "launch_angle" in bip.columns:
         fly_mask = (
             (bip["launch_angle"] >= config.FLY_BALL_LA_MIN)
             & (bip["launch_angle"] <= config.FLY_BALL_LA_MAX)
