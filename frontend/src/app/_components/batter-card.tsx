@@ -74,16 +74,15 @@ export function BatterCard({
     }
   }
 
-  // Filter recent ABs — "All Pitches" only shows ABs against pitcher's pitch types
+  // Filter recent ABs — use per-pitch-type last 5 BIP when a pitch filter is selected
+  const pitchAbsData = (scores as unknown as Record<string, unknown>).pitch_abs as Record<string, Array<Record<string, unknown>>> | undefined;
   const filteredABs = pitchFilter === "all"
-    ? scores.recent_abs.filter((ab) =>
-        arsenalPitchNames.size === 0 || // show all if no arsenal data
+    ? (scores.recent_abs || []).filter((ab) =>
+        arsenalPitchNames.size === 0 ||
         Array.from(arsenalPitchNames).some((n) => ab.pitch_type === n || ab.pitch_type.includes(n))
       )
-    : scores.recent_abs.filter((ab) => {
-        const names = PITCH_NAMES[pitchFilter] || [pitchFilter];
-        return ab.pitch_type === pitchFilter || names.some((n) => ab.pitch_type.includes(n));
-      });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    : ((pitchAbsData?.[pitchFilter] || []) as any[]);
 
   return (
     <div className="border border-card-border rounded-lg bg-card/40 hover:bg-card/60 transition-colors">
