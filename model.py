@@ -168,7 +168,15 @@ def score_batter_vs_pitcher(
         if len(recent_bip) < effective_n_bip:
             low_sample = True
 
-        # Compute metrics per pitch type FROM this pool only
+        # ── Step 4: Calculate metrics from the entire BIP pool ───────────
+        # Like PropFinder: barrel%, FB%, hard hit%, EV from all 5 BIP together
+        pool_metrics = calc_batter_metrics_for_pitch(recent_bip)
+        result["weighted_exit_velo"] = pool_metrics["avg_exit_velo"]
+        result["weighted_barrel_rate"] = pool_metrics["barrel_rate"]
+        result["weighted_fb_rate"] = pool_metrics["fly_ball_rate"]
+        result["weighted_hard_hit_rate"] = pool_metrics["hard_hit_rate"]
+
+        # Still compute per-pitch-type metrics for display/detail
         for pt in pitch_mix:
             pt_rows = recent_bip[recent_bip["pitch_type"] == pt] if "pitch_type" in recent_bip.columns else pd.DataFrame()
             if pt_rows.empty:
@@ -178,37 +186,6 @@ def score_batter_vs_pitcher(
                 }
             else:
                 per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pt_rows)
-
-        # ── Step 4: Weighted average across pitch types ──────────────────
-        active_pts = {
-            pt for pt, m in per_pitch_metrics.items()
-            if any(v > 0 for v in m.values())
-        }
-        if not active_pts:
-            # No BIP matched any pitch type — use overall pool metrics
-            overall = calc_batter_metrics_for_pitch(recent_bip)
-            result["weighted_exit_velo"] = overall["avg_exit_velo"]
-            result["weighted_barrel_rate"] = overall["barrel_rate"]
-            result["weighted_fb_rate"] = overall["fly_ball_rate"]
-            result["weighted_hard_hit_rate"] = overall["hard_hit_rate"]
-        else:
-            active_weights = {pt: pitch_weights.get(pt, 0) for pt in active_pts}
-            w_total = sum(active_weights.values())
-            if w_total > 0:
-                active_weights = {pt: w / w_total for pt, w in active_weights.items()}
-
-            calc_to_result = {
-                "avg_exit_velo": "weighted_exit_velo",
-                "barrel_rate": "weighted_barrel_rate",
-                "fly_ball_rate": "weighted_fb_rate",
-                "hard_hit_rate": "weighted_hard_hit_rate",
-            }
-            for calc_key, result_key in calc_to_result.items():
-                weighted_val = sum(
-                    per_pitch_metrics[pt][calc_key] * active_weights[pt]
-                    for pt in active_pts
-                )
-                result[result_key] = weighted_val
 
     # ── Step 4b: Blend recent metrics with 2025 season baseline ────────────
     # Early in the season, recent data is noisy. Use 2025 as a stabilizer.
