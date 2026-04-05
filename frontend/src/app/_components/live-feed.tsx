@@ -34,13 +34,22 @@ export function LiveFeed() {
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<string>("");
   const [autoRefresh, setAutoRefresh] = useState(true);
+  const [selectedDate, setSelectedDate] = useState<string>(() => {
+    const now = new Date();
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  });
+
+  // Check if viewing today
+  const isToday = (() => {
+    const now = new Date();
+    const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    return selectedDate === today;
+  })();
 
   const fetchLiveData = useCallback(async () => {
     try {
-      // Get today's schedule
-      // Use local date, not UTC — games are on the local calendar date
-      const now = new Date();
-      const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+      // Use selected date
+      const today = selectedDate;
       // Fetch schedule with scoringplays for accurate HR count
       const schedRes = await fetch(
         `https://statsapi.mlb.com/api/v1/schedule?date=${today}&sportId=1&hydrate=linescore,scoringplays`
@@ -157,14 +166,18 @@ export function LiveFeed() {
     } catch {
       setLoading(false);
     }
-  }, []);
+  }, [selectedDate]);
 
   useEffect(() => {
+    // Reset plays when date changes
+    setPlays([]);
+    setLoading(true);
     fetchLiveData();
-    if (!autoRefresh) return;
+    // Only auto-refresh for today's games
+    if (!autoRefresh || !isToday) return;
     const interval = setInterval(fetchLiveData, 10000); // 10 seconds
     return () => clearInterval(interval);
-  }, [fetchLiveData, autoRefresh]);
+  }, [fetchLiveData, autoRefresh, isToday]);
 
   const activeCount = games.filter(g => g.status === "In Progress").length;
   const totalHRs = slateHRs;
@@ -178,25 +191,62 @@ export function LiveFeed() {
         <div>
           <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
             Live Feed
-            {autoRefresh && (
+            {autoRefresh && isToday && (
               <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
             )}
           </h2>
-          <p className="text-xs text-muted mt-0.5">
-            Hard-hit air balls across all active games. Updates every 10 seconds.
-          </p>
+          <div className="flex items-center gap-2 mt-1">
+            <button
+              onClick={() => {
+                const d = new Date(selectedDate + "T12:00:00");
+                d.setDate(d.getDate() - 1);
+                setSelectedDate(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`);
+              }}
+              className="px-2 py-0.5 text-xs rounded cursor-pointer bg-card/50 text-muted border border-card-border hover:text-foreground"
+            >
+              &larr;
+            </button>
+            <span className="text-xs font-mono text-muted">
+              {isToday ? "Today" : selectedDate}
+            </span>
+            {!isToday && (
+              <button
+                onClick={() => {
+                  const d = new Date(selectedDate + "T12:00:00");
+                  d.setDate(d.getDate() + 1);
+                  setSelectedDate(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`);
+                }}
+                className="px-2 py-0.5 text-xs rounded cursor-pointer bg-card/50 text-muted border border-card-border hover:text-foreground"
+              >
+                &rarr;
+              </button>
+            )}
+            {!isToday && (
+              <button
+                onClick={() => {
+                  const now = new Date();
+                  setSelectedDate(`${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`);
+                }}
+                className="px-2 py-0.5 text-xs rounded cursor-pointer bg-accent-green/10 text-accent-green border border-accent-green/20 hover:bg-accent-green/20"
+              >
+                Today
+              </button>
+            )}
+          </div>
         </div>
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => setAutoRefresh(!autoRefresh)}
-            className={`px-3 py-1.5 text-xs rounded-lg cursor-pointer transition-colors ${
-              autoRefresh
-                ? "bg-accent-green/15 text-accent-green border border-accent-green/20"
-                : "bg-card/50 text-muted border border-card-border"
-            }`}
-          >
-            {autoRefresh ? "Live" : "Paused"}
-          </button>
+          {isToday && (
+            <button
+              onClick={() => setAutoRefresh(!autoRefresh)}
+              className={`px-3 py-1.5 text-xs rounded-lg cursor-pointer transition-colors ${
+                autoRefresh
+                  ? "bg-accent-green/15 text-accent-green border border-accent-green/20"
+                  : "bg-card/50 text-muted border border-card-border"
+              }`}
+            >
+              {autoRefresh ? "Live" : "Paused"}
+            </button>
+          )}
           <button
             onClick={fetchLiveData}
             className="px-3 py-1.5 text-xs rounded-lg cursor-pointer bg-card/50 text-muted border border-card-border hover:text-foreground"
@@ -263,10 +313,12 @@ export function LiveFeed() {
       </div>
 
       {loading ? (
-        <div className="text-center text-muted py-12 animate-pulse">Loading live data...</div>
+        <div className="text-center text-muted py-12 animate-pulse">Loading {isToday ? "live" : "historical"} data...</div>
       ) : plays.length === 0 ? (
         <div className="text-center text-muted py-12">
-          No hard-hit air balls yet. {activeCount === 0 ? "No games in progress." : "Waiting for batted balls..."}
+          {isToday
+            ? `No hard-hit air balls yet. ${activeCount === 0 ? "No games in progress." : "Waiting for batted balls..."}`
+            : "No hard-hit air ball data found for this date."}
         </div>
       ) : (
         <div className="overflow-x-auto">
