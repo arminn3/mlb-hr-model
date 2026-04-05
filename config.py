@@ -91,10 +91,13 @@ NORM_RANGES: dict = {
     "barrel_rate": (0.0, 0.25),
     "fly_ball_rate": (0.15, 0.55),
     "hard_hit_rate": (0.20, 0.65),
-    "fb_rate_allowed": (0.08, 0.25),     # bb_type fly ball rates are lower than LA-based
-    "hr_per_fb_rate": (0.03, 0.30),     # wider range to capture true vulnerability
-    "hr_per_ip": (0.3, 2.5),
-    "total_hrs_norm": (0.0, 1.0),
+    # Pitcher vulnerability ranges calibrated to MLB averages:
+    # League avg FB% (bb_type) ~12%, HR/FB ~12%, HR/9 ~1.2
+    # Ranges set so league avg = ~0.5, vulnerable (15%+ HR/FB) = 0.65+
+    "fb_rate_allowed": (0.04, 0.20),    # 12% avg -> 0.50, 16%+ -> 0.75
+    "hr_per_fb_rate": (0.0, 0.24),      # 12% avg -> 0.50, 18%+ -> 0.75
+    "hr_per_ip": (0.0, 2.4),            # 1.2 avg -> 0.50, 1.8+ -> 0.75
+    "total_hrs_norm": (0.0, 0.5),       # scaled tighter so HR count matters more
 }
 
 # ── Fuzzy Match Threshold ────────────────────────────────────────────────────
