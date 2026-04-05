@@ -184,7 +184,7 @@ export function Dashboard() {
           )}
 
           {activePage === "live" && (
-            <LiveFeed />
+            <LiveFeed selectedDate={selectedDate} />
           )}
 
           {activePage === "bvp" && (

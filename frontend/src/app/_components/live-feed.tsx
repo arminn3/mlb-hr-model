@@ -32,15 +32,18 @@ function getLocalDate(): string {
   return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
 }
 
-export function LiveFeed() {
+export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: string }) {
   const [plays, setPlays] = useState<LivePlay[]>([]);
   const [slateHRs, setSlateHRs] = useState(0);
   const [games, setGames] = useState<GameStatus[]>([]);
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<string>("");
   const [autoRefresh, setAutoRefresh] = useState(true);
-  const [selectedDate, setSelectedDate] = useState<string>(getLocalDate);
+  const [internalDate, setInternalDate] = useState<string>(getLocalDate);
 
+  // Use dashboard date if provided, otherwise internal state
+  const selectedDate = dashboardDate || internalDate;
+  const setSelectedDate = setInternalDate;
   const isToday = selectedDate === getLocalDate();
 
   // Load saved data for past dates from server JSON
