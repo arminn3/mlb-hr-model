@@ -32,10 +32,11 @@ PITCH_WEIGHT_TIERS: list = [
 # Fly ball rate and barrel rate weighted highest — HRs need the ball airborne
 # with power behind it.
 BATTER_WEIGHTS: dict = {
-    "avg_exit_velo": 0.15,
-    "barrel_rate": 0.30,
-    "fly_ball_rate": 0.35,
-    "hard_hit_rate": 0.20,
+    "avg_exit_velo": 0.20,
+    "barrel_rate": 0.40,
+    "fly_ball_rate": 0.40,
+    # hard_hit_rate removed from scoring — still displayed for research
+    # barrel already captures hard hit + lift, FB% captures lift tendency
 }
 
 # ── Pitcher Metric Weights (sum to 1.0) ─────────────────────────────────────

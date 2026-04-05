@@ -216,11 +216,12 @@ def score_batter_vs_pitcher(
             result[result_key] = recent_val * recent_weight + season_val * season_weight
 
     # ── Step 5: Normalize and weight batter metrics ──────────────────────────
+    # hard_hit_rate is calculated and displayed but NOT used in scoring
+    # barrel_rate already captures hard hit + lift, which is what matters for HRs
     batter_metric_map = {
         "weighted_exit_velo": "avg_exit_velo",
         "weighted_barrel_rate": "barrel_rate",
         "weighted_fb_rate": "fly_ball_rate",
-        "weighted_hard_hit_rate": "hard_hit_rate",
     }
     batter_score = 0.0
     for result_key, config_key in batter_metric_map.items():
