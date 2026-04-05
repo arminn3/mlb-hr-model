@@ -1,0 +1,195 @@
+{
+  "date": "2026-04-04",
+  "total_players_ranked": 332,
+  "total_hrs_hit": 13,
+  "total_near_hrs": 0,
+  "model_hits": 11,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
+      },
+      "all": {
+        "total": 332,
+        "hits": 11,
+        "rate": 3.3
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 2,
+        "rate": 6.7
+      },
+      "all": {
+        "total": 332,
+        "hits": 11,
+        "rate": 3.3
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 1,
+      "rate": 3.3
+    },
+    "all": {
+      "total": 332,
+      "hits": 11,
+      "rate": 3.3
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 1,
+      "rate": 3.3
+    },
+    "all": {
+      "total": 332,
+      "hits": 11,
+      "rate": 3.3
+    }
+  },
+  "avg_composite_hr_hitters": 0.284,
+  "avg_composite_non_hitters": 0.275,
+  "composite_separation": 0.009,
+  "hr_hitters": [
+    {
+      "name": "Christian Walker",
+      "rank": 10,
+      "composite": 0.538,
+      "opp_pitcher": "Luis Morales",
+      "matchup": "HOU@ATH"
+    },
+    {
+      "name": "Andy Pages",
+      "rank": 32,
+      "composite": 0.442,
+      "opp_pitcher": "Jake Irvin",
+      "matchup": "LAD@WSH"
+    },
+    {
+      "name": "CJ Abrams",
+      "rank": 92,
+      "composite": 0.335,
+      "opp_pitcher": "Tyler Glasnow",
+      "matchup": "LAD@WSH"
+    },
+    {
+      "name": "Kerry Carpenter",
+      "rank": 116,
+      "composite": 0.302,
+      "opp_pitcher": "Dustin May",
+      "matchup": "STL@DET"
+    },
+    {
+      "name": "Jordan Walker",
+      "rank": 151,
+      "composite": 0.263,
+      "opp_pitcher": "Jack Flaherty",
+      "matchup": "STL@DET"
+    },
+    {
+      "name": "Gleyber Torres",
+      "rank": 163,
+      "composite": 0.25,
+      "opp_pitcher": "Dustin May",
+      "matchup": "STL@DET"
+    },
+    {
+      "name": "Zach McKinstry",
+      "rank": 164,
+      "composite": 0.25,
+      "opp_pitcher": "Dustin May",
+      "matchup": "STL@DET"
+    },
+    {
+      "name": "Vladimir Guerrero Jr.",
+      "rank": 195,
+      "composite": 0.224,
+      "opp_pitcher": "Grant Taylor",
+      "matchup": "TOR@CWS"
+    },
+    {
+      "name": "Garrett Mitchell",
+      "rank": 237,
+      "composite": 0.199,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "MIL@KC"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 268,
+      "composite": 0.177,
+      "opp_pitcher": "Mason Fluharty",
+      "matchup": "TOR@CWS"
+    },
+    {
+      "name": "Munetaka Murakami",
+      "rank": 308,
+      "composite": 0.141,
+      "opp_pitcher": "Mason Fluharty",
+      "matchup": "TOR@CWS"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [
+    {
+      "name": "Matt Vierling",
+      "pitcher": "Chris Roycroft",
+      "description": "Matt Vierling homers (1) on a fly ball to right field. Spencer Torkelson scores."
+    },
+    {
+      "name": "Cam Smith",
+      "pitcher": "Luis Medina",
+      "description": "Cam Smith homers (2) on a fly ball to left center field."
+    }
+  ]
+}

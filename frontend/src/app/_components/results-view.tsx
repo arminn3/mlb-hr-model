@@ -88,6 +88,10 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
   const cumTop20Total = data.reduce((s, d) => s + (d.tier_accuracy.top_20?.total || 0), 0);
   const avgSeparation = data.reduce((s, d) => s + d.composite_separation, 0) / totalDays;
 
+  // Combined HR + near HR cumulative
+  const cumTop10WithNear = data.reduce((s, d) => s + (d.tier_accuracy_with_near?.top_10?.hits || d.tier_accuracy.top_10?.hits || 0), 0);
+  const cumTop20WithNear = data.reduce((s, d) => s + (d.tier_accuracy_with_near?.top_20?.hits || d.tier_accuracy.top_20?.hits || 0), 0);
+
   return (
     <div>
       {/* Cumulative summary */}
@@ -97,12 +101,12 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
         <StatBox
           label="Top 10 Hit Rate"
           value={cumTop10Total > 0 ? `${(cumTop10Hits / cumTop10Total * 100).toFixed(1)}%` : "-"}
-          sub={`${cumTop10Hits}/${cumTop10Total}`}
+          sub={`${cumTop10Hits}/${cumTop10Total} HRs${cumTop10WithNear > cumTop10Hits ? ` (${cumTop10WithNear} w/ near)` : ""}`}
         />
         <StatBox
           label="Top 20 Hit Rate"
           value={cumTop20Total > 0 ? `${(cumTop20Hits / cumTop20Total * 100).toFixed(1)}%` : "-"}
-          sub={`${cumTop20Hits}/${cumTop20Total}`}
+          sub={`${cumTop20Hits}/${cumTop20Total} HRs${cumTop20WithNear > cumTop20Hits ? ` (${cumTop20WithNear} w/ near)` : ""}`}
         />
         <StatBox
           label="Catch Rate"
@@ -143,8 +147,9 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
             </div>
           </div>
 
-          {/* Tier accuracy */}
-          <div className="grid grid-cols-4 gap-3 mb-4">
+          {/* Tier accuracy — HRs only */}
+          <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">HR Hit Rate</h4>
+          <div className="grid grid-cols-4 gap-3 mb-3">
             {Object.entries(day.tier_accuracy).map(([tier, acc]) => (
               <div key={tier} className="bg-background/30 rounded-lg p-3 text-center">
                 <div className="text-[10px] uppercase tracking-wider text-muted mb-1">
@@ -157,6 +162,28 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
               </div>
             ))}
           </div>
+
+          {/* Tier accuracy — HRs + Near HRs combined */}
+          {day.tier_accuracy_with_near && Object.values(day.tier_accuracy_with_near).some((a: { rate: number }) => a.rate > 0) && (
+            <>
+              <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
+                HR + Near HR Rate <span className="text-accent-yellow">(model confirmed)</span>
+              </h4>
+              <div className="grid grid-cols-4 gap-3 mb-4">
+                {Object.entries(day.tier_accuracy_with_near).map(([tier, acc]: [string, { total: number; hits: number; rate: number }]) => (
+                  <div key={tier} className="bg-accent-yellow/5 border border-accent-yellow/10 rounded-lg p-3 text-center">
+                    <div className="text-[10px] uppercase tracking-wider text-muted mb-1">
+                      {tier.replace("_", " ")}
+                    </div>
+                    <div className={`text-lg font-bold font-mono ${acc.rate >= 30 ? "text-accent-green" : acc.rate >= 20 ? "text-accent-yellow" : "text-foreground"}`}>
+                      {acc.rate}%
+                    </div>
+                    <div className="text-[10px] text-muted">{acc.hits}/{acc.total}</div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
 
           {/* Lookback comparison */}
           {day.tier_accuracy_by_lookback && (
