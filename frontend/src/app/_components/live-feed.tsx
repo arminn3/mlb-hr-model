@@ -10,7 +10,7 @@ interface LivePlay {
   angle: number;
   distance: number;
   result: string;
-  description: string;
+  description?: string;
   inning: number;
   timestamp: string;
   isHR: boolean;
@@ -27,6 +27,11 @@ interface GameStatus {
   homeScore: number;
 }
 
+function getLocalDate(): string {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+}
+
 export function LiveFeed() {
   const [plays, setPlays] = useState<LivePlay[]>([]);
   const [slateHRs, setSlateHRs] = useState(0);
@@ -34,33 +39,48 @@ export function LiveFeed() {
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<string>("");
   const [autoRefresh, setAutoRefresh] = useState(true);
-  const [selectedDate, setSelectedDate] = useState<string>(() => {
-    const now = new Date();
-    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-  });
+  const [selectedDate, setSelectedDate] = useState<string>(getLocalDate);
 
-  // Check if viewing today
-  const isToday = (() => {
-    const now = new Date();
-    const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-    return selectedDate === today;
-  })();
+  const isToday = selectedDate === getLocalDate();
 
-  const fetchLiveData = useCallback(async () => {
+  // Load saved data for past dates from server JSON
+  const loadSavedData = useCallback(async (dateStr: string) => {
+    setLoading(true);
+    setPlays([]);
+    setGames([]);
+    setSlateHRs(0);
     try {
-      // Use selected date
-      const today = selectedDate;
-      // Fetch schedule with scoringplays for accurate HR count
+      const res = await fetch(`/data/results/livefeed-${dateStr}.json`);
+      if (!res.ok) throw new Error("No saved data");
+      const data = await res.json();
+
+      setPlays(data.plays || []);
+      setSlateHRs(data.totalHRs || 0);
+      setGames(
+        (data.games || []).map((g: Record<string, unknown>) => ({
+          ...g,
+          inning: 0,
+        }))
+      );
+      setLastUpdate("Saved");
+    } catch {
+      // No saved file — try fetching live from MLB API as fallback
+      await fetchFromMLB(dateStr);
+    }
+    setLoading(false);
+  }, []);
+
+  // Fetch live from MLB API (for today, or fallback for past dates without saved files)
+  const fetchFromMLB = useCallback(async (dateStr: string) => {
+    try {
       const schedRes = await fetch(
-        `https://statsapi.mlb.com/api/v1/schedule?date=${today}&sportId=1&hydrate=team,linescore,scoringplays`
+        `https://statsapi.mlb.com/api/v1/schedule?date=${dateStr}&sportId=1&hydrate=team,linescore,scoringplays`
       );
       const schedData = await schedRes.json();
 
       const activeGames: GameStatus[] = [];
       const allPlays: LivePlay[] = [];
       let totalHRsFromScoring = 0;
-
-      // First pass: collect game info and identify which need play-by-play
       const gamesToFetch: Array<{ gamePk: number; away: string; home: string }> = [];
 
       for (const dateEntry of schedData.dates || []) {
@@ -141,42 +161,15 @@ export function LiveFeed() {
         }
       }
 
-      // Deduplicate plays
+      // Deduplicate
       const uniquePlays = new Map<string, LivePlay>();
       for (const p of allPlays) {
         const key = `${p.batter}-${p.game}-${p.inning}-${p.ev.toFixed(1)}-${p.angle.toFixed(0)}-${p.distance.toFixed(0)}`;
         uniquePlays.set(key, p);
       }
 
-      // Also restore any cached plays from localStorage
-      const cacheKey = `livefeed-${selectedDate}`;
-      try {
-        const cached = localStorage.getItem(cacheKey);
-        if (cached) {
-          const cachedPlays: LivePlay[] = JSON.parse(cached);
-          for (const p of cachedPlays) {
-            const key = `${p.batter}-${p.game}-${p.inning}-${p.ev.toFixed(1)}-${p.angle.toFixed(0)}-${p.distance.toFixed(0)}`;
-            if (!uniquePlays.has(key)) {
-              uniquePlays.set(key, p);
-            }
-          }
-        }
-      } catch { /* ignore parse errors */ }
-
       const merged = Array.from(uniquePlays.values());
       merged.sort((a, b) => (b.timestamp > a.timestamp ? 1 : -1));
-
-      // Persist to localStorage so data survives page refreshes / slate ending
-      try {
-        localStorage.setItem(cacheKey, JSON.stringify(merged));
-        // Clean up old dates (keep last 3 days)
-        for (let i = 4; i <= 10; i++) {
-          const d = new Date();
-          d.setDate(d.getDate() - i);
-          const old = `livefeed-${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-          localStorage.removeItem(old);
-        }
-      } catch { /* storage full, ignore */ }
 
       setPlays(merged);
       setSlateHRs(totalHRsFromScoring);
@@ -186,27 +179,22 @@ export function LiveFeed() {
     } catch {
       setLoading(false);
     }
-  }, [selectedDate]);
+  }, []);
 
+  // Main effect: load data based on selected date
   useEffect(() => {
-    // Load cached plays immediately so the page isn't blank
-    try {
-      const cacheKey = `livefeed-${selectedDate}`;
-      const cached = localStorage.getItem(cacheKey);
-      if (cached) {
-        const cachedPlays: LivePlay[] = JSON.parse(cached);
-        if (cachedPlays.length > 0) {
-          setPlays(cachedPlays);
-          setLoading(false);
-        }
-      }
-    } catch { /* ignore */ }
-    fetchLiveData();
-    // Only auto-refresh for today's games
-    if (!autoRefresh || !isToday) return;
-    const interval = setInterval(fetchLiveData, 10000); // 10 seconds
-    return () => clearInterval(interval);
-  }, [fetchLiveData, autoRefresh, isToday]);
+    if (isToday) {
+      // Today: fetch live from MLB API
+      setLoading(true);
+      fetchFromMLB(selectedDate);
+      if (!autoRefresh) return;
+      const interval = setInterval(() => fetchFromMLB(selectedDate), 10000);
+      return () => clearInterval(interval);
+    } else {
+      // Past date: load from saved JSON file
+      loadSavedData(selectedDate);
+    }
+  }, [selectedDate, isToday, autoRefresh, fetchFromMLB, loadSavedData]);
 
   const activeCount = games.filter(g => g.status === "In Progress").length;
   const totalHRs = slateHRs;
@@ -219,7 +207,7 @@ export function LiveFeed() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-            Live Feed
+            {isToday ? "Live Feed" : `Game Action — ${selectedDate}`}
             {autoRefresh && isToday && (
               <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
             )}
@@ -228,14 +216,11 @@ export function LiveFeed() {
             <button
               onClick={() => {
                 if (isToday) {
-                  // Go to yesterday
                   const d = new Date(selectedDate + "T12:00:00");
                   d.setDate(d.getDate() - 1);
                   setSelectedDate(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`);
                 } else {
-                  // Go back to today
-                  const now = new Date();
-                  setSelectedDate(`${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`);
+                  setSelectedDate(getLocalDate());
                 }
               }}
               className={`px-3 py-1 text-xs rounded-lg cursor-pointer transition-colors ${
@@ -244,11 +229,8 @@ export function LiveFeed() {
                   : "bg-accent-green/10 text-accent-green border border-accent-green/20 hover:bg-accent-green/20"
               }`}
             >
-              {isToday ? "Yesterday" : "Back to Today"}
+              {isToday ? "Yesterday" : "Back to Live"}
             </button>
-            {!isToday && (
-              <span className="text-xs font-mono text-muted">{selectedDate}</span>
-            )}
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -265,7 +247,7 @@ export function LiveFeed() {
             </button>
           )}
           <button
-            onClick={fetchLiveData}
+            onClick={() => isToday ? fetchFromMLB(selectedDate) : loadSavedData(selectedDate)}
             className="px-3 py-1.5 text-xs rounded-lg cursor-pointer bg-card/50 text-muted border border-card-border hover:text-foreground"
           >
             Refresh
@@ -279,8 +261,8 @@ export function LiveFeed() {
       {/* Stats bar */}
       <div className="grid grid-cols-5 gap-3 mb-6">
         <div className="bg-card/50 border border-card-border rounded-lg p-3 text-center">
-          <div className="text-lg font-bold font-mono text-foreground">{activeCount}</div>
-          <div className="text-[10px] text-muted uppercase">Games Live</div>
+          <div className="text-lg font-bold font-mono text-foreground">{isToday ? activeCount : games.length}</div>
+          <div className="text-[10px] text-muted uppercase">{isToday ? "Games Live" : "Games"}</div>
         </div>
         <div className="bg-card/50 border border-card-border rounded-lg p-3 text-center">
           <div className="text-lg font-bold font-mono text-accent-green">{totalHRs}</div>
@@ -308,7 +290,7 @@ export function LiveFeed() {
             className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs ${
               g.status === "In Progress"
                 ? "border-accent-green/30 bg-accent-green/5"
-                : g.status === "Final" || g.status === "Game Over"
+                : g.status === "Final" || g.status === "Game Over" || g.status === "Completed Early"
                   ? "border-card-border bg-card/30"
                   : "border-card-border bg-card/10"
             }`}
@@ -322,7 +304,7 @@ export function LiveFeed() {
             {g.status === "In Progress" && (
               <span className="text-muted font-mono">{g.inning}</span>
             )}
-            {(g.status === "Final" || g.status === "Game Over") && (
+            {(g.status === "Final" || g.status === "Game Over" || g.status === "Completed Early") && (
               <span className="text-muted">F</span>
             )}
           </div>
@@ -330,12 +312,12 @@ export function LiveFeed() {
       </div>
 
       {loading ? (
-        <div className="text-center text-muted py-12 animate-pulse">Loading {isToday ? "live" : "historical"} data...</div>
+        <div className="text-center text-muted py-12 animate-pulse">Loading {isToday ? "live" : "game action"} data...</div>
       ) : plays.length === 0 ? (
         <div className="text-center text-muted py-12">
           {isToday
             ? `No hard-hit air balls yet. ${activeCount === 0 ? "No games in progress." : "Waiting for batted balls..."}`
-            : "No hard-hit air ball data found for this date."}
+            : "No saved game action data for this date."}
         </div>
       ) : (
         <div className="overflow-x-auto">
@@ -377,17 +359,17 @@ export function LiveFeed() {
                   <td className="text-center py-2 font-mono text-muted">{p.inning}</td>
                   <td className="text-center py-2">
                     <span className={`font-mono ${p.ev >= 100 ? "text-accent-green font-bold" : p.ev >= 95 ? "text-accent-green" : "text-foreground"}`}>
-                      {p.ev.toFixed(1)}
+                      {typeof p.ev === 'number' ? p.ev.toFixed(1) : p.ev}
                     </span>
                   </td>
                   <td className="text-center py-2">
                     <span className={`font-mono ${p.angle >= 25 && p.angle <= 35 ? "text-accent-green" : "text-foreground"}`}>
-                      {p.angle.toFixed(0)}°
+                      {typeof p.angle === 'number' ? `${p.angle.toFixed(0)}°` : `${p.angle}°`}
                     </span>
                   </td>
                   <td className="text-center py-2">
                     <span className={`font-mono ${p.distance >= 380 ? "text-accent-green font-bold" : p.distance >= 350 ? "text-accent-green" : "text-foreground"}`}>
-                      {p.distance > 0 ? `${p.distance.toFixed(0)}ft` : "-"}
+                      {p.distance > 0 ? `${typeof p.distance === 'number' ? p.distance.toFixed(0) : p.distance}ft` : "-"}
                     </span>
                   </td>
                   <td className="py-2 text-muted capitalize">{p.result.replace(/_/g, " ")}</td>
