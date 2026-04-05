@@ -62,6 +62,31 @@
       "name": "park_factor_norm",
       "coefficient": 0.1513,
       "weight_pct": 6.5
+    },
+    {
+      "name": "pitcher_velo",
+      "coefficient": 0.0,
+      "weight_pct": 0.0
+    },
+    {
+      "name": "pitcher_spin",
+      "coefficient": 0.0,
+      "weight_pct": 0.0
+    },
+    {
+      "name": "pitcher_vert_break",
+      "coefficient": 0.0,
+      "weight_pct": 0.0
+    },
+    {
+      "name": "pitcher_horiz_break",
+      "coefficient": 0.0,
+      "weight_pct": 0.0
+    },
+    {
+      "name": "platoon",
+      "coefficient": 0.0,
+      "weight_pct": 0.0
     }
   ]
 }
