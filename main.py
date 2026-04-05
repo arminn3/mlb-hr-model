@@ -220,9 +220,8 @@ def run_model(game_date: date = None, fast: bool = False):
         away_p = g.get("away_pitcher")
         home_p = g.get("home_pitcher")
 
-        # Skip finished games (doubleheader game 1)
-        if status in ("Final", "Game Over", "Completed Early"):
-            continue
+        # Note: don't skip finished games — we want all players ranked
+        # even after their game completes (scores are based on pre-game data)
         home_lineup = g.get("home_lineup", [])
         away_lineup = g.get("away_lineup", [])
 
