@@ -198,8 +198,16 @@ def calc_batter_metrics_for_pitch(pa_pitches: pd.DataFrame) -> dict[str, float]:
         fly_balls = 0
     fly_ball_rate = fly_balls / n_bip
 
-    # Hard hit rate: exit velo >= 95 mph
-    hard_hits = (bip["launch_speed"] >= config.HARD_HIT_THRESHOLD).sum()
+    # Hard hit rate: exit velo >= 95 mph AND launch angle > 0° (exclude popups/grounders)
+    # A 96 EV popup at 66° or grounder at -10° has zero HR potential
+    if "launch_angle" in bip.columns:
+        hard_hits = (
+            (bip["launch_speed"] >= config.HARD_HIT_THRESHOLD)
+            & (bip["launch_angle"] > 0)
+            & (bip["launch_angle"] <= 50)
+        ).sum()
+    else:
+        hard_hits = (bip["launch_speed"] >= config.HARD_HIT_THRESHOLD).sum()
     hard_hit_rate = hard_hits / n_bip
 
     return {
