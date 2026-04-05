@@ -466,11 +466,34 @@ def print_results(games_out: list, game_date: date, schedule: list = None) -> No
     }
 
     # Save as latest + dated archive in frontend/public/data/
+    # NEVER overwrite a date's data once games have started — lock in morning predictions
     data_dir = Path("frontend/public/data")
     data_dir.mkdir(parents=True, exist_ok=True)
     dated_name = f"{game_date.isoformat()}.json"
+    dated_path = data_dir / dated_name
 
-    for path in [data_dir / "latest.json", data_dir / dated_name]:
+    if dated_path.exists():
+        # Check if any games have started for this date
+        try:
+            sched_check = requests.get(
+                f"https://statsapi.mlb.com/api/v1/schedule?date={game_date.isoformat()}&sportId=1",
+                timeout=10,
+            )
+            any_started = any(
+                g.get("status", {}).get("detailedState", "") not in ("Scheduled", "Pre-Game", "Warmup", "Postponed", "")
+                for d in sched_check.json().get("dates", [])
+                for g in d.get("games", [])
+            )
+            if any_started:
+                print(f"  Skipping {dated_name} — games already started. Morning predictions locked in.")
+                # Still update latest.json to point to this date's existing data
+                import shutil
+                shutil.copy(dated_path, data_dir / "latest.json")
+                return
+        except Exception:
+            pass
+
+    for path in [data_dir / "latest.json", dated_path]:
         with open(path, "w") as f:
             json.dump(frontend_data, f, indent=2, default=str)
 
