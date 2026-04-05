@@ -21,6 +21,10 @@ on:
     - cron: '0 1 * * *'    # 9:00 PM ET
   workflow_dispatch: # allow manual trigger
 
+concurrency:
+  group: hr-model-run
+  cancel-in-progress: true
+
 jobs:
   run-model:
     runs-on: ubuntu-latest
