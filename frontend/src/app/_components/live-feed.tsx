@@ -52,7 +52,7 @@ export function LiveFeed() {
       const today = selectedDate;
       // Fetch schedule with scoringplays for accurate HR count
       const schedRes = await fetch(
-        `https://statsapi.mlb.com/api/v1/schedule?date=${today}&sportId=1&hydrate=linescore,scoringplays`
+        `https://statsapi.mlb.com/api/v1/schedule?date=${today}&sportId=1&hydrate=team,linescore,scoringplays`
       );
       const schedData = await schedRes.json();
 
@@ -155,8 +155,35 @@ export function LiveFeed() {
         }
       }
 
+      // Also restore any cached plays from localStorage
+      const cacheKey = `livefeed-${selectedDate}`;
+      try {
+        const cached = localStorage.getItem(cacheKey);
+        if (cached) {
+          const cachedPlays: LivePlay[] = JSON.parse(cached);
+          for (const p of cachedPlays) {
+            const key = `${p.batter}-${p.game}-${p.inning}-${p.ev.toFixed(1)}-${p.angle.toFixed(0)}-${p.distance.toFixed(0)}`;
+            if (!uniquePlays.has(key)) {
+              uniquePlays.set(key, p);
+            }
+          }
+        }
+      } catch { /* ignore parse errors */ }
+
       const merged = Array.from(uniquePlays.values());
       merged.sort((a, b) => (b.timestamp > a.timestamp ? 1 : -1));
+
+      // Persist to localStorage so data survives page refreshes / slate ending
+      try {
+        localStorage.setItem(cacheKey, JSON.stringify(merged));
+        // Clean up old dates (keep last 3 days)
+        for (let i = 4; i <= 10; i++) {
+          const d = new Date();
+          d.setDate(d.getDate() - i);
+          const old = `livefeed-${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+          localStorage.removeItem(old);
+        }
+      } catch { /* storage full, ignore */ }
 
       setPlays(merged);
       setSlateHRs(totalHRsFromScoring);
@@ -169,9 +196,18 @@ export function LiveFeed() {
   }, [selectedDate]);
 
   useEffect(() => {
-    // Reset plays when date changes
-    setPlays([]);
-    setLoading(true);
+    // Load cached plays immediately so the page isn't blank
+    try {
+      const cacheKey = `livefeed-${selectedDate}`;
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        const cachedPlays: LivePlay[] = JSON.parse(cached);
+        if (cachedPlays.length > 0) {
+          setPlays(cachedPlays);
+          setLoading(false);
+        }
+      }
+    } catch { /* ignore */ }
     fetchLiveData();
     // Only auto-refresh for today's games
     if (!autoRefresh || !isToday) return;
