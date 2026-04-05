@@ -215,8 +215,9 @@ def score_batter_vs_pitcher(
             recent_bip = int((hand_mask & bip_mask).sum()) if not isinstance(hand_mask, bool) else int(bip_mask.sum())
 
         # More recent BIP = trust recent data more
-        # 0 BIP = 100% season, 30+ BIP = 30% season / 70% recent
-        season_weight = max(0.30, 1.0 - (recent_bip / 45))  # linear blend
+        # 0 BIP = 50% season, 20+ BIP = 20% season / 80% recent
+        # We want recent hot streaks to show — that's the whole point of L5
+        season_weight = max(0.20, 0.50 - (recent_bip / 40))  # linear blend
         recent_weight = 1.0 - season_weight
 
         blend_map = {
