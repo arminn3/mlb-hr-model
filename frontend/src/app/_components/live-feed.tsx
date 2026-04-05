@@ -168,6 +168,7 @@ export function LiveFeed() {
 
   const activeCount = games.filter(g => g.status === "In Progress").length;
   const totalHRs = slateHRs;
+  const nearHRCount = plays.filter(p => p.isNearHR).length;
   const hardHitCount = plays.filter(p => p.ev >= 95 && p.angle >= 25).length;
 
   return (
@@ -209,7 +210,7 @@ export function LiveFeed() {
       </div>
 
       {/* Stats bar */}
-      <div className="grid grid-cols-4 gap-3 mb-6">
+      <div className="grid grid-cols-5 gap-3 mb-6">
         <div className="bg-card/50 border border-card-border rounded-lg p-3 text-center">
           <div className="text-lg font-bold font-mono text-foreground">{activeCount}</div>
           <div className="text-[10px] text-muted uppercase">Games Live</div>
@@ -218,8 +219,12 @@ export function LiveFeed() {
           <div className="text-lg font-bold font-mono text-accent-green">{totalHRs}</div>
           <div className="text-[10px] text-muted uppercase">Home Runs</div>
         </div>
+        <div className="bg-card/50 border border-accent-yellow/30 rounded-lg p-3 text-center">
+          <div className="text-lg font-bold font-mono text-accent-yellow">{nearHRCount}</div>
+          <div className="text-[10px] text-muted uppercase">Near HRs</div>
+        </div>
         <div className="bg-card/50 border border-card-border rounded-lg p-3 text-center">
-          <div className="text-lg font-bold font-mono text-accent-yellow">{hardHitCount}</div>
+          <div className="text-lg font-bold font-mono text-foreground">{hardHitCount}</div>
           <div className="text-[10px] text-muted uppercase">Hard Hit Air</div>
         </div>
         <div className="bg-card/50 border border-card-border rounded-lg p-3 text-center">
