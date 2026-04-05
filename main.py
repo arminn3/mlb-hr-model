@@ -473,23 +473,48 @@ def print_results(games_out: list, game_date: date, schedule: list = None) -> No
     dated_path = data_dir / dated_name
 
     if dated_path.exists():
-        # Check if any games have started for this date
+        # Per-game locking: keep locked scores for started games, update only unstarted
         try:
             sched_check = requests.get(
                 f"https://statsapi.mlb.com/api/v1/schedule?date={game_date.isoformat()}&sportId=1",
                 timeout=10,
             )
-            any_started = any(
-                g.get("status", {}).get("detailedState", "") not in ("Scheduled", "Pre-Game", "Warmup", "Postponed", "")
-                for d in sched_check.json().get("dates", [])
-                for g in d.get("games", [])
-            )
-            if any_started:
-                print(f"  Skipping {dated_name} — games already started. Morning predictions locked in.")
-                # Still update latest.json to point to this date's existing data
-                import shutil
-                shutil.copy(dated_path, data_dir / "latest.json")
-                return
+            started_pks = set()
+            for d in sched_check.json().get("dates", []):
+                for g in d.get("games", []):
+                    status = g.get("status", {}).get("detailedState", "")
+                    if status not in ("Scheduled", "Pre-Game", "Warmup", "Postponed", ""):
+                        started_pks.add(g.get("gamePk", 0))
+
+            if started_pks:
+                # Load existing locked data
+                with open(dated_path) as f:
+                    existing = json.load(f)
+                existing_games = {g["game_pk"]: g for g in existing.get("games", [])}
+
+                # Merge: keep locked games from existing, use new data for unstarted
+                merged_games = []
+                new_game_pks = {g["game_pk"] for g in games_out}
+                for game in games_out:
+                    gpk = game["game_pk"]
+                    if gpk in started_pks and gpk in existing_games:
+                        # Game already started — keep the locked scores
+                        merged_games.append(existing_games[gpk])
+                    else:
+                        # Game hasn't started — use fresh scores
+                        merged_games.append(game)
+
+                # Also keep any locked games that aren't in the new run
+                for gpk, existing_game in existing_games.items():
+                    if gpk in started_pks and gpk not in new_game_pks:
+                        merged_games.append(existing_game)
+
+                games_out = merged_games
+                frontend_data["games"] = _clean_for_json(games_out)
+
+                started_count = len([g for g in games_out if g["game_pk"] in started_pks])
+                updated_count = len(games_out) - started_count
+                print(f"  Per-game lock: {started_count} games locked, {updated_count} games updated.")
         except Exception:
             pass
 

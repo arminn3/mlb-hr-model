@@ -2,11 +2,23 @@ name: Daily HR Prop Model
 
 on:
   schedule:
-    # All times in UTC
-    - cron: '0 12 * * *'   # 8:00 AM ET — results tracker + ML trainer + first model run
-    - cron: '30 13 * * *'  # 9:30 AM ET — re-run with confirmed lineups
-    - cron: '0 16 * * *'   # 12:00 PM ET — midday refresh
-    - cron: '0 21 * * *'   # 5:00 PM ET — evening refresh
+    # Run hourly from 7 AM to 9 PM ET (11:00 to 01:00+1 UTC)
+    # Results tracker + ML trainer only on first run (11:00 UTC / 7 AM ET)
+    - cron: '0 11 * * *'   # 7:00 AM ET
+    - cron: '0 12 * * *'   # 8:00 AM ET
+    - cron: '0 13 * * *'   # 9:00 AM ET
+    - cron: '0 14 * * *'   # 10:00 AM ET
+    - cron: '0 15 * * *'   # 11:00 AM ET
+    - cron: '0 16 * * *'   # 12:00 PM ET
+    - cron: '0 17 * * *'   # 1:00 PM ET
+    - cron: '0 18 * * *'   # 2:00 PM ET
+    - cron: '0 19 * * *'   # 3:00 PM ET
+    - cron: '0 20 * * *'   # 4:00 PM ET
+    - cron: '0 21 * * *'   # 5:00 PM ET
+    - cron: '0 22 * * *'   # 6:00 PM ET
+    - cron: '0 23 * * *'   # 7:00 PM ET
+    - cron: '0 0 * * *'    # 8:00 PM ET
+    - cron: '0 1 * * *'    # 9:00 PM ET
   workflow_dispatch: # allow manual trigger
 
 jobs:
@@ -34,13 +46,20 @@ jobs:
           key: statcast-cache-${{ github.run_id }}
           restore-keys: statcast-cache-
 
+      # Results tracker + ML trainer only on the 7 AM run
       - name: Run results tracker (yesterday)
+        if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
         run: python results_tracker.py || true
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
 
       - name: Run ML trainer
+        if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
         run: python ml_trainer.py || true
+
+      - name: Run projection trainer
+        if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
+        run: python projection_trainer.py || true
 
       - name: Run HR prop model
         run: python main.py --fast
@@ -56,6 +75,6 @@ jobs:
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git add frontend/public/data/ results/ statcast_cache/
-          git commit -m "chore: daily HR props $(date -u +%Y-%m-%d-%H%M)" || true
+          git add frontend/public/data/ results/
+          git commit -m "chore: HR props update $(date -u +%Y-%m-%d-%H%M)" || true
           git push
