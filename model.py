@@ -245,15 +245,25 @@ def score_batter_vs_pitcher(
     result["batter_score"] = batter_score
 
     # ── Step 6: Pitcher vulnerability metrics ────────────────────────────────
+    # Use 2026 data, but fall back to 2025 season data if pitcher has < 10 IP
     p_metrics = calc_pitcher_metrics(pitcher_df, batter_hand)
+
+    # If pitcher has thin 2026 data, blend with 2025 season stats
+    if p_metrics["total_ip"] < 10 and pitcher_season_df is not None and not pitcher_season_df.empty:
+        p_2025 = calc_pitcher_metrics(pitcher_season_df, batter_hand)
+        if p_2025["total_ip"] > 20:
+            # Blend: weight by IP ratio. More 2026 IP = more trust in 2026
+            w_2026 = p_metrics["total_ip"] / 10  # 0 to 1
+            w_2025 = 1 - w_2026
+            for key in ["fb_rate_allowed", "hr_per_fb_rate", "hr_per_ip", "total_hrs_norm"]:
+                p_metrics[key] = p_metrics[key] * w_2026 + p_2025[key] * w_2025
+
     result["pitcher_fb_rate"] = p_metrics["fb_rate_allowed"]
     result["pitcher_hr_fb_rate"] = p_metrics["hr_per_fb_rate"]
     result["pitcher_hr_per_9"] = p_metrics["hr_per_ip"]
     result["pitcher_total_hrs"] = p_metrics["total_hrs"]
     result["pitcher_ip"] = p_metrics["total_ip"]
 
-    # If pitcher has very limited data, use league average (0.5) instead of 0
-    # A pitcher with no data is an UNKNOWN, not a good pitcher
     pitcher_score = 0.0
     pitcher_metric_map = {
         "fb_rate_allowed": p_metrics["fb_rate_allowed"],
@@ -266,9 +276,8 @@ def score_batter_vs_pitcher(
         normed = normalize_metric(raw, metric_key)
         pitcher_score += normed * weight
 
-    # Floor pitcher score at 0.5 (league average) when data is too thin
-    # A pitcher with 0 IP shouldn't score 0 — they're unknown, not elite
-    if p_metrics["total_ip"] < 5:
+    # Floor pitcher score at 0.5 (league average) when still no data
+    if p_metrics["total_ip"] < 5 and (pitcher_season_df is None or pitcher_season_df.empty):
         pitcher_score = max(pitcher_score, 0.5)
 
     result["pitcher_score"] = pitcher_score
