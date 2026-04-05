@@ -91,9 +91,9 @@ NORM_RANGES: dict = {
     "barrel_rate": (0.0, 0.25),
     "fly_ball_rate": (0.15, 0.55),
     "hard_hit_rate": (0.20, 0.65),
-    "fb_rate_allowed": (0.20, 0.50),
-    "hr_per_fb_rate": (0.05, 0.25),
-    "hr_per_ip": (0.5, 2.5),
+    "fb_rate_allowed": (0.08, 0.25),     # bb_type fly ball rates are lower than LA-based
+    "hr_per_fb_rate": (0.03, 0.30),     # wider range to capture true vulnerability
+    "hr_per_ip": (0.3, 2.5),
     "total_hrs_norm": (0.0, 1.0),
 }
 
