@@ -271,9 +271,10 @@ def run_model(game_date: date = None, fast: bool = False):
         print("No batters found. Check schedule and roster data.")
         return [], schedule
 
-    # Load ALL statcast data in one bulk pull (~6 seconds vs 20+ minutes)
-    from data_fetchers import load_bulk_statcast
+    # Load ALL statcast data in bulk pulls (~30 seconds total vs 20+ minutes per-player)
+    from data_fetchers import load_bulk_statcast, load_bulk_2025
     load_bulk_statcast()
+    load_bulk_2025()
 
     print(f"\nScoring {total} batters...")
 

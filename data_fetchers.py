@@ -165,6 +165,9 @@ def _get_person_info(player_id: int) -> dict:
 _bulk_statcast_cache: Optional[pd.DataFrame] = None
 _bulk_statcast_date: Optional[str] = None
 
+# Bulk 2025 season cache — loaded once for all players
+_bulk_2025_cache: Optional[pd.DataFrame] = None
+
 
 def load_bulk_statcast(lookback_days: int = None) -> pd.DataFrame:
     """
@@ -239,19 +242,48 @@ def get_pitcher_statcast(player_id: int, lookback_days: int = None) -> pd.DataFr
         return pd.DataFrame()
 
 
+def load_bulk_2025() -> pd.DataFrame:
+    """Load ALL 2025 season Statcast data in one pull. Much faster than per-player."""
+    global _bulk_2025_cache
+    if _bulk_2025_cache is not None:
+        return _bulk_2025_cache
+
+    dates = config.SEASON_DATES.get(2025)
+    if not dates:
+        return pd.DataFrame()
+
+    from pybaseball import statcast
+    print(f"  Loading bulk 2025 season data...", end=" ")
+    try:
+        df = statcast(start_dt=dates[0], end_dt=dates[1])
+        if df is not None and not df.empty:
+            if "game_type" in df.columns:
+                df = df[df["game_type"] == "R"].copy()
+            _bulk_2025_cache = df
+            print(f"{len(df)} rows loaded.")
+            return df
+    except Exception as e:
+        print(f"FAILED ({e})")
+    return pd.DataFrame()
+
+
 def get_season_statcast(
     player_id: int, player_type: str, season: int
 ) -> pd.DataFrame:
     """
-    Pull full-season Statcast data with local CSV caching.
-    player_type: 'pitcher' or 'batter'
-    season: 2025 or 2026
+    Get full-season Statcast data for a player.
+    For 2025: uses bulk cache (fast). For other seasons: per-player CSV cache.
     """
+    # For 2025, use bulk cache — instant filter instead of slow CSV read
+    if season == 2025 and _bulk_2025_cache is not None and not _bulk_2025_cache.empty:
+        col = "batter" if player_type == "batter" else "pitcher"
+        return _bulk_2025_cache[_bulk_2025_cache[col] == player_id].copy()
+
+    # Fallback to per-player CSV cache for other seasons
     cache_dir = Path(config.STATCAST_CACHE_DIR)
     cache_dir.mkdir(exist_ok=True)
     cache_file = cache_dir / f"{player_type}_{player_id}_{season}.csv"
 
-    # Check cache freshness
     if cache_file.exists():
         age = time.time() - cache_file.stat().st_mtime
         if age < config.STATCAST_CACHE_TTL:
@@ -260,7 +292,6 @@ def get_season_statcast(
             except Exception:
                 pass
 
-    # Fetch from Statcast
     dates = config.SEASON_DATES.get(season)
     if not dates:
         return pd.DataFrame()
