@@ -1,37 +1,37 @@
 {
-  "trained_on": 1943,
-  "hr_count": 214,
-  "hr_rate": 11.01,
+  "trained_on": 2286,
+  "hr_count": 230,
+  "hr_rate": 10.06,
   "features": [
     {
       "name": "barrel_pct",
-      "coefficient": 0.4843,
-      "weight_pct": 17.4
+      "coefficient": 0.1347,
+      "weight_pct": 5.8
     },
     {
       "name": "fb_pct",
-      "coefficient": 0.2402,
-      "weight_pct": 8.6
+      "coefficient": -0.1785,
+      "weight_pct": 7.6
     },
     {
       "name": "hard_hit_pct",
-      "coefficient": 0.203,
-      "weight_pct": 7.3
+      "coefficient": -0.1103,
+      "weight_pct": 4.7
     },
     {
       "name": "exit_velo_norm",
-      "coefficient": 0.1637,
-      "weight_pct": 5.9
+      "coefficient": 0.0907,
+      "weight_pct": 3.9
     },
     {
       "name": "batter_score",
-      "coefficient": -0.2579,
-      "weight_pct": 9.3
+      "coefficient": 0.4777,
+      "weight_pct": 20.4
     },
     {
       "name": "pitcher_score",
-      "coefficient": 0.1525,
-      "weight_pct": 5.5
+      "coefficient": 0.6543,
+      "weight_pct": 27.9
     },
     {
       "name": "matchup_score",
@@ -40,28 +40,28 @@
     },
     {
       "name": "pitcher_hr_fb",
-      "coefficient": -0.0871,
-      "weight_pct": 3.1
+      "coefficient": -0.1605,
+      "weight_pct": 6.9
     },
     {
       "name": "pitcher_hr_9",
-      "coefficient": 0.5018,
-      "weight_pct": 18.0
+      "coefficient": 0.2662,
+      "weight_pct": 11.4
     },
     {
       "name": "pitcher_fb_rate",
-      "coefficient": -0.0804,
-      "weight_pct": 2.9
+      "coefficient": -0.1096,
+      "weight_pct": 4.7
     },
     {
       "name": "env_score",
-      "coefficient": 0.3838,
-      "weight_pct": 13.8
+      "coefficient": 0.0082,
+      "weight_pct": 0.3
     },
     {
       "name": "park_factor_norm",
-      "coefficient": -0.2296,
-      "weight_pct": 8.2
+      "coefficient": 0.1513,
+      "weight_pct": 6.5
     }
   ]
 }

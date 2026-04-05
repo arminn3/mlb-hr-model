@@ -3897,53 +3897,53 @@
   {
     "date": "2026-04-04",
     "total_players_ranked": 306,
-    "total_hrs_hit": 13,
+    "total_hrs_hit": 17,
     "total_near_hrs": 0,
-    "model_hits": 11,
+    "model_hits": 15,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 1,
-          "rate": 10.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 20,
-          "hits": 1,
-          "rate": 5.0
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
           "total": 30,
-          "hits": 2,
-          "rate": 6.7
+          "hits": 3,
+          "rate": 10.0
         },
         "all": {
           "total": 306,
-          "hits": 11,
-          "rate": 3.6
+          "hits": 15,
+          "rate": 4.9
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 1,
-          "rate": 10.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 20,
-          "hits": 1,
-          "rate": 5.0
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
           "total": 30,
-          "hits": 2,
-          "rate": 6.7
+          "hits": 3,
+          "rate": 10.0
         },
         "all": {
           "total": 306,
-          "hits": 11,
-          "rate": 3.6
+          "hits": 15,
+          "rate": 4.9
         }
       }
     },
@@ -3951,51 +3951,58 @@
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 1,
-        "rate": 5.0
+        "hits": 2,
+        "rate": 10.0
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
         "total": 306,
-        "hits": 11,
-        "rate": 3.6
+        "hits": 15,
+        "rate": 4.9
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 1,
-        "rate": 5.0
+        "hits": 2,
+        "rate": 10.0
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
         "total": 306,
-        "hits": 11,
-        "rate": 3.6
+        "hits": 15,
+        "rate": 4.9
       }
     },
     "avg_composite_hr_hitters": 0.284,
     "avg_composite_non_hitters": 0.271,
     "composite_separation": 0.013,
     "hr_hitters": [
+      {
+        "name": "Salvador Perez",
+        "rank": 5,
+        "composite": 0.562,
+        "opp_pitcher": "Brandon Sproat",
+        "matchup": "MIL@KC"
+      },
       {
         "name": "Christian Walker",
         "rank": 9,
@@ -4023,6 +4030,13 @@
         "composite": 0.302,
         "opp_pitcher": "Dustin May",
         "matchup": "STL@DET"
+      },
+      {
+        "name": "Zach Neto",
+        "rank": 123,
+        "composite": 0.277,
+        "opp_pitcher": "Emerson Hancock",
+        "matchup": "SEA@LAA"
       },
       {
         "name": "Jordan Walker",
@@ -4067,11 +4081,25 @@
         "matchup": "TOR@CWS"
       },
       {
+        "name": "Cody Bellinger",
+        "rank": 247,
+        "composite": 0.176,
+        "opp_pitcher": "Max Meyer",
+        "matchup": "MIA@NYY"
+      },
+      {
         "name": "Munetaka Murakami",
         "rank": 283,
         "composite": 0.141,
         "opp_pitcher": "Mason Fluharty",
         "matchup": "TOR@CWS"
+      },
+      {
+        "name": "Tyrone Taylor",
+        "rank": 289,
+        "composite": 0.13,
+        "opp_pitcher": "Landen Roupp",
+        "matchup": "NYM@SF"
       }
     ],
     "near_hr_hitters": [],
