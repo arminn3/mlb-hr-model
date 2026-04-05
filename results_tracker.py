@@ -182,11 +182,35 @@ def compare_results(game_date: date) -> dict:
     if not predictions or "games" not in predictions:
         return {"error": f"No model data for {game_date.isoformat()}"}
 
-    # Build ranked lists for each lookback window
+    # Get completed game statuses to filter out postponed/suspended
+    # Use game_pk to match since abbreviations aren't always available
+    completed_game_pks = set()
+    postponed_game_pks = set()
+    try:
+        sched_url = f"https://statsapi.mlb.com/api/v1/schedule?date={game_date.isoformat()}&sportId=1"
+        sched_resp = requests.get(sched_url, timeout=15)
+        sched_data = sched_resp.json()
+        for d in sched_data.get("dates", []):
+            for g in d.get("games", []):
+                status = g.get("status", {}).get("detailedState", "")
+                gpk = g.get("gamePk", 0)
+                if status in ("Final", "Game Over", "Completed Early"):
+                    completed_game_pks.add(gpk)
+                elif status in ("Postponed", "Cancelled", "Suspended"):
+                    postponed_game_pks.add(gpk)
+    except Exception:
+        pass
+
+    # Build ranked lists — exclude postponed/cancelled games only
     lookback_results = {}
     for lb in ["L5", "L10"]:
         players_lb = []
         for game in predictions["games"]:
+            gpk = game.get("game_pk", 0)
+            # Skip postponed/suspended/cancelled games
+            if gpk in postponed_game_pks:
+                continue
+            matchup = f"{game['away_team']}@{game['home_team']}"
             for player in game["players"]:
                 scores = player.get("scores", {}).get(lb, player.get("scores", {}).get("L5", {}))
                 players_lb.append({
@@ -200,7 +224,7 @@ def compare_results(game_date: date) -> dict:
                     "hard_hit_pct": scores.get("hard_hit_pct", 0),
                     "exit_velo": scores.get("exit_velo", 0),
                     "opp_pitcher": player.get("opp_pitcher", ""),
-                    "matchup": f"{game['away_team']}@{game['home_team']}",
+                    "matchup": matchup,
                 })
         # Deduplicate by player name — keep highest composite if duplicate
         seen = {}

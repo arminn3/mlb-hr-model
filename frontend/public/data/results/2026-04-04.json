@@ -1,6 +1,6 @@
 {
   "date": "2026-04-04",
-  "total_players_ranked": 332,
+  "total_players_ranked": 306,
   "total_hrs_hit": 13,
   "total_near_hrs": 0,
   "model_hits": 11,
@@ -19,13 +19,13 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 1,
-        "rate": 3.3
+        "hits": 2,
+        "rate": 6.7
       },
       "all": {
-        "total": 332,
+        "total": 306,
         "hits": 11,
-        "rate": 3.3
+        "rate": 3.6
       }
     },
     "L10": {
@@ -45,9 +45,9 @@
         "rate": 6.7
       },
       "all": {
-        "total": 332,
+        "total": 306,
         "hits": 11,
-        "rate": 3.3
+        "rate": 3.6
       }
     }
   },
@@ -65,13 +65,13 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 1,
-      "rate": 3.3
+      "hits": 2,
+      "rate": 6.7
     },
     "all": {
-      "total": 332,
+      "total": 306,
       "hits": 11,
-      "rate": 3.3
+      "rate": 3.6
     }
   },
   "tier_accuracy_with_near": {
@@ -87,92 +87,92 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 1,
-      "rate": 3.3
+      "hits": 2,
+      "rate": 6.7
     },
     "all": {
-      "total": 332,
+      "total": 306,
       "hits": 11,
-      "rate": 3.3
+      "rate": 3.6
     }
   },
   "avg_composite_hr_hitters": 0.284,
-  "avg_composite_non_hitters": 0.275,
-  "composite_separation": 0.009,
+  "avg_composite_non_hitters": 0.271,
+  "composite_separation": 0.013,
   "hr_hitters": [
     {
       "name": "Christian Walker",
-      "rank": 10,
+      "rank": 9,
       "composite": 0.538,
       "opp_pitcher": "Luis Morales",
       "matchup": "HOU@ATH"
     },
     {
       "name": "Andy Pages",
-      "rank": 32,
+      "rank": 27,
       "composite": 0.442,
       "opp_pitcher": "Jake Irvin",
       "matchup": "LAD@WSH"
     },
     {
       "name": "CJ Abrams",
-      "rank": 92,
+      "rank": 81,
       "composite": 0.335,
       "opp_pitcher": "Tyler Glasnow",
       "matchup": "LAD@WSH"
     },
     {
       "name": "Kerry Carpenter",
-      "rank": 116,
+      "rank": 101,
       "composite": 0.302,
       "opp_pitcher": "Dustin May",
       "matchup": "STL@DET"
     },
     {
       "name": "Jordan Walker",
-      "rank": 151,
+      "rank": 134,
       "composite": 0.263,
       "opp_pitcher": "Jack Flaherty",
       "matchup": "STL@DET"
     },
     {
       "name": "Gleyber Torres",
-      "rank": 163,
+      "rank": 145,
       "composite": 0.25,
       "opp_pitcher": "Dustin May",
       "matchup": "STL@DET"
     },
     {
       "name": "Zach McKinstry",
-      "rank": 164,
+      "rank": 146,
       "composite": 0.25,
       "opp_pitcher": "Dustin May",
       "matchup": "STL@DET"
     },
     {
       "name": "Vladimir Guerrero Jr.",
-      "rank": 195,
+      "rank": 176,
       "composite": 0.224,
       "opp_pitcher": "Grant Taylor",
       "matchup": "TOR@CWS"
     },
     {
       "name": "Garrett Mitchell",
-      "rank": 237,
+      "rank": 218,
       "composite": 0.199,
       "opp_pitcher": "Seth Lugo",
       "matchup": "MIL@KC"
     },
     {
       "name": "Colson Montgomery",
-      "rank": 268,
+      "rank": 246,
       "composite": 0.177,
       "opp_pitcher": "Mason Fluharty",
       "matchup": "TOR@CWS"
     },
     {
       "name": "Munetaka Murakami",
-      "rank": 308,
+      "rank": 283,
       "composite": 0.141,
       "opp_pitcher": "Mason Fluharty",
       "matchup": "TOR@CWS"
