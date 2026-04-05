@@ -304,9 +304,6 @@ def run_model(game_date: date = None, fast: bool = False):
         if pid not in pitcher_cache:
             pitcher_cache[pid] = get_pitcher_statcast(pid)
         pitcher_df = pitcher_cache[pid]
-        if pitcher_df.empty:
-            print("SKIP (no pitcher Statcast)")
-            continue
 
         env_data = calc_environment_score(
             home_team, game_date, batter_h, game_hours.get(gpk)
@@ -323,6 +320,15 @@ def run_model(game_date: date = None, fast: bool = False):
         if pitcher_season_key not in season_cache:
             season_cache[pitcher_season_key] = get_season_statcast(pid, "pitcher", 2025)
         pitcher_2025 = season_cache[pitcher_season_key]
+
+        # If pitcher has no 2026 data, use 2025 season data instead of skipping
+        if pitcher_df.empty:
+            if pitcher_2025 is not None and not pitcher_2025.empty:
+                pitcher_df = pitcher_2025
+                print("(using 2025 pitcher data)")
+            else:
+                print("SKIP (no pitcher Statcast)")
+                continue
 
         try:
             multi_scores = score_batter_multi_lookback(
