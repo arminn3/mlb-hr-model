@@ -60,6 +60,9 @@ export function LiveFeed() {
       const allPlays: LivePlay[] = [];
       let totalHRsFromScoring = 0;
 
+      // First pass: collect game info and identify which need play-by-play
+      const gamesToFetch: Array<{ gamePk: number; away: string; home: string }> = [];
+
       for (const dateEntry of schedData.dates || []) {
         for (const game of dateEntry.games || []) {
           const status = game.status?.detailedState || "";
@@ -67,7 +70,6 @@ export function LiveFeed() {
           const home = game.teams?.home?.team?.abbreviation || "";
           const linescore = game.linescore || {};
 
-          // Count HRs from scoringplays (reliable, works for all game states)
           for (const sp of game.scoringPlays || []) {
             if (sp?.result?.event === "Home Run") totalHRsFromScoring++;
           }
@@ -82,77 +84,68 @@ export function LiveFeed() {
             homeScore: linescore.teams?.home?.runs || 0,
           });
 
-          // Fetch play-by-play for any game that has started
-          if (status === "Scheduled" || status === "Pre-Game" || status === "Warmup" || status === "Postponed") continue;
-
-          try {
-            const feedRes = await fetch(
-              `https://statsapi.mlb.com/api/v1.1/game/${game.gamePk}/feed/live`
-            );
-            const feedData = await feedRes.json();
-
-            const allPlayData = feedData.liveData?.plays?.allPlays || [];
-
-            for (const play of allPlayData) {
-              const matchup = play.matchup || {};
-              const result = play.result || {};
-              const about = play.about || {};
-
-              // Find the batted ball event (the one with hitData that was put in play)
-              const playEvents = play.playEvents || [];
-              const battedBall = playEvents.find(
-                (e: Record<string, unknown>) => e.hitData && (e.hitData as Record<string, unknown>).launchSpeed
-              );
-              if (!battedBall) continue;
-
-              const hitData = battedBall.hitData as Record<string, number>;
-              const ev = hitData.launchSpeed || 0;
-              const angle = hitData.launchAngle || 0;
-              const dist = hitData.totalDistance || 0;
-
-              // Only show hard-hit air balls (90+ EV, 20+ degrees)
-              if (ev < 90 || angle < 20) continue;
-
-              {
-                const isHR = result.event === "Home Run";
-                const isNearHR = !isHR && ev >= 95 && angle >= 25 && angle <= 35;
-
-                allPlays.push({
-                  batter: matchup.batter?.fullName || "Unknown",
-                  pitcher: matchup.pitcher?.fullName || "Unknown",
-                  game: `${away}@${home}`,
-                  ev,
-                  angle,
-                  distance: dist,
-                  result: result.event || "",
-                  description: result.description || "",
-                  inning: about.inning || 0,
-                  timestamp: about.startTime || "",
-                  isHR,
-                  isNearHR,
-                });
-              }
-            }
-          } catch {
-            // Skip games with feed errors
+          if (status !== "Scheduled" && status !== "Pre-Game" && status !== "Warmup" && status !== "Postponed") {
+            gamesToFetch.push({ gamePk: game.gamePk, away, home });
           }
         }
       }
 
-      // Sort by most recent first
-      // Deduplicate plays — use a unique key per batted ball
-      const uniquePlays = new Map<string, LivePlay>();
-      // Add all previous plays first
-      for (const p of plays) {
-        const key = `${p.batter}-${p.game}-${p.inning}-${p.ev.toFixed(1)}-${p.angle.toFixed(0)}-${p.distance.toFixed(0)}`;
-        uniquePlays.set(key, p);
+      // Fetch all game feeds in parallel
+      const feedResults = await Promise.allSettled(
+        gamesToFetch.map(async (g) => {
+          const res = await fetch(`https://statsapi.mlb.com/api/v1.1/game/${g.gamePk}/feed/live`);
+          const data = await res.json();
+          return { ...g, plays: data.liveData?.plays?.allPlays || [] };
+        })
+      );
+
+      for (const result of feedResults) {
+        if (result.status !== "fulfilled") continue;
+        const { away, home, plays: gamePlays } = result.value;
+
+        for (const play of gamePlays) {
+          const matchup = play.matchup || {};
+          const resultData = play.result || {};
+          const about = play.about || {};
+
+          const playEvents = play.playEvents || [];
+          const battedBall = playEvents.find(
+            (e: Record<string, unknown>) => e.hitData && (e.hitData as Record<string, unknown>).launchSpeed
+          );
+          if (!battedBall) continue;
+
+          const hitData = battedBall.hitData as Record<string, number>;
+          const ev = hitData.launchSpeed || 0;
+          const angle = hitData.launchAngle || 0;
+          const dist = hitData.totalDistance || 0;
+
+          if (ev < 90 || angle < 20) continue;
+
+          const isHR = resultData.event === "Home Run";
+          const isNearHR = !isHR && ev >= 95 && angle >= 25 && angle <= 35;
+
+          allPlays.push({
+            batter: matchup.batter?.fullName || "Unknown",
+            pitcher: matchup.pitcher?.fullName || "Unknown",
+            game: `${away}@${home}`,
+            ev,
+            angle,
+            distance: dist,
+            result: resultData.event || "",
+            description: resultData.description || "",
+            inning: about.inning || 0,
+            timestamp: about.startTime || "",
+            isHR,
+            isNearHR,
+          });
+        }
       }
-      // Add new plays (won't overwrite existing)
+
+      // Deduplicate plays
+      const uniquePlays = new Map<string, LivePlay>();
       for (const p of allPlays) {
         const key = `${p.batter}-${p.game}-${p.inning}-${p.ev.toFixed(1)}-${p.angle.toFixed(0)}-${p.distance.toFixed(0)}`;
-        if (!uniquePlays.has(key)) {
-          uniquePlays.set(key, p);
-        }
+        uniquePlays.set(key, p);
       }
 
       // Also restore any cached plays from localStorage
