@@ -252,6 +252,8 @@ def score_batter_vs_pitcher(
     result["pitcher_total_hrs"] = p_metrics["total_hrs"]
     result["pitcher_ip"] = p_metrics["total_ip"]
 
+    # If pitcher has very limited data, use league average (0.5) instead of 0
+    # A pitcher with no data is an UNKNOWN, not a good pitcher
     pitcher_score = 0.0
     pitcher_metric_map = {
         "fb_rate_allowed": p_metrics["fb_rate_allowed"],
@@ -263,6 +265,12 @@ def score_batter_vs_pitcher(
         raw = pitcher_metric_map[metric_key]
         normed = normalize_metric(raw, metric_key)
         pitcher_score += normed * weight
+
+    # Floor pitcher score at 0.5 (league average) when data is too thin
+    # A pitcher with 0 IP shouldn't score 0 — they're unknown, not elite
+    if p_metrics["total_ip"] < 5:
+        pitcher_score = max(pitcher_score, 0.5)
+
     result["pitcher_score"] = pitcher_score
 
     # ── Step 7: Environment factor ──────────────────────────────────────────
