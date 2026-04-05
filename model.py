@@ -144,63 +144,71 @@ def score_batter_vs_pitcher(
     pitch_weights = get_pitch_weights(pitch_mix)
     result["pitch_types_used"] = list(pitch_mix.keys())
 
-    # ── Step 3: Per-pitch-type batter metrics ────────────────────────────────
-    per_pitch_metrics: dict[str, dict] = {}
+    # ── Step 3: Get batter's last N total BIP vs pitcher handedness ────────
+    # Like PropFinder: take the last 5 (or 10) balls in play total,
+    # then weight metrics by pitcher's pitch mix from within that pool.
+    effective_n_bip = n_pa or config.MIN_PA_PER_PITCH_TYPE
     low_sample = False
-    effective_n_pa = n_pa or config.MIN_PA_PER_PITCH_TYPE
+    per_pitch_metrics: dict[str, dict] = {}
 
-    for pt in pitch_mix:
-        pa_data = filter_pa_by_pitch_type_and_hand(
-            batter_df, pt, pitcher_hand, effective_n_pa
-        )
+    # Get all BIP vs this pitcher hand, sorted most recent first
+    recent_bip = pd.DataFrame()
+    if not batter_df.empty and "p_throws" in batter_df.columns:
+        hand_mask = batter_df["p_throws"] == pitcher_hand
+        bip_mask = batter_df["launch_speed"].notna()
+        recent_bip = batter_df[hand_mask & bip_mask].copy()
+        if not recent_bip.empty:
+            sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in recent_bip.columns else ["game_date"]
+            recent_bip = recent_bip.sort_values(sort_cols, ascending=False).head(effective_n_bip)
 
-        if pa_data.empty:
-            low_sample = True
-            per_pitch_metrics[pt] = {
-                "avg_exit_velo": 0.0,
-                "barrel_rate": 0.0,
-                "fly_ball_rate": 0.0,
-                "hard_hit_rate": 0.0,
-            }
-            continue
-
-        # Check if we got enough PAs
-        if "at_bat_number" in pa_data.columns and "game_pk" in pa_data.columns:
-            n_pa_actual = pa_data[["game_pk", "at_bat_number"]].drop_duplicates().shape[0]
-            if n_pa_actual < effective_n_pa:
-                low_sample = True
-
-        per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pa_data)
-
-    # ── Step 4: Weighted average across pitch types ──────────────────────────
-    # Exclude pitch types with zero data from the weighting, re-normalize
-    active_pts = {
-        pt for pt, m in per_pitch_metrics.items()
-        if any(v > 0 for v in m.values())
-    }
-    if not active_pts:
+    if recent_bip.empty:
         result["data_quality"] = "NO_BATTER_DATA"
-        # Still compute pitcher score below
+        low_sample = True
     else:
-        # Re-normalize weights to only include active pitch types
-        active_weights = {pt: pitch_weights.get(pt, 0) for pt in active_pts}
-        w_total = sum(active_weights.values())
-        if w_total > 0:
-            active_weights = {pt: w / w_total for pt, w in active_weights.items()}
+        if len(recent_bip) < effective_n_bip:
+            low_sample = True
 
-        # Map from calc names -> result dict names
-        calc_to_result = {
-            "avg_exit_velo": "weighted_exit_velo",
-            "barrel_rate": "weighted_barrel_rate",
-            "fly_ball_rate": "weighted_fb_rate",
-            "hard_hit_rate": "weighted_hard_hit_rate",
+        # Compute metrics per pitch type FROM this pool only
+        for pt in pitch_mix:
+            pt_rows = recent_bip[recent_bip["pitch_type"] == pt] if "pitch_type" in recent_bip.columns else pd.DataFrame()
+            if pt_rows.empty:
+                per_pitch_metrics[pt] = {
+                    "avg_exit_velo": 0.0, "barrel_rate": 0.0,
+                    "fly_ball_rate": 0.0, "hard_hit_rate": 0.0,
+                }
+            else:
+                per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pt_rows)
+
+        # ── Step 4: Weighted average across pitch types ──────────────────
+        active_pts = {
+            pt for pt, m in per_pitch_metrics.items()
+            if any(v > 0 for v in m.values())
         }
-        for calc_key, result_key in calc_to_result.items():
-            weighted_val = sum(
-                per_pitch_metrics[pt][calc_key] * active_weights[pt]
-                for pt in active_pts
-            )
-            result[result_key] = weighted_val
+        if not active_pts:
+            # No BIP matched any pitch type — use overall pool metrics
+            overall = calc_batter_metrics_for_pitch(recent_bip)
+            result["weighted_exit_velo"] = overall["avg_exit_velo"]
+            result["weighted_barrel_rate"] = overall["barrel_rate"]
+            result["weighted_fb_rate"] = overall["fly_ball_rate"]
+            result["weighted_hard_hit_rate"] = overall["hard_hit_rate"]
+        else:
+            active_weights = {pt: pitch_weights.get(pt, 0) for pt in active_pts}
+            w_total = sum(active_weights.values())
+            if w_total > 0:
+                active_weights = {pt: w / w_total for pt, w in active_weights.items()}
+
+            calc_to_result = {
+                "avg_exit_velo": "weighted_exit_velo",
+                "barrel_rate": "weighted_barrel_rate",
+                "fly_ball_rate": "weighted_fb_rate",
+                "hard_hit_rate": "weighted_hard_hit_rate",
+            }
+            for calc_key, result_key in calc_to_result.items():
+                weighted_val = sum(
+                    per_pitch_metrics[pt][calc_key] * active_weights[pt]
+                    for pt in active_pts
+                )
+                result[result_key] = weighted_val
 
     # ── Step 4b: Blend recent metrics with 2025 season baseline ────────────
     # Early in the season, recent data is noisy. Use 2025 as a stabilizer.
@@ -359,15 +367,20 @@ def score_batter_vs_pitcher(
         total_bip = int((hand_mask & bip_mask).sum())
     result["total_bip"] = total_bip
 
-    # Softer confidence penalty — season blend already handles noise
-    if total_bip >= 10:
+    # Confidence penalty — small samples produce unreliable metrics
+    # 15+ BIP = full confidence, scales down linearly
+    if total_bip >= 15:
         confidence = 1.0
-    elif total_bip >= 5:
-        confidence = 0.95
+    elif total_bip >= 10:
+        confidence = 0.90
+    elif total_bip >= 7:
+        confidence = 0.80
+    elif total_bip >= 4:
+        confidence = 0.65
     elif total_bip >= 1:
-        confidence = 0.85
-    else:
         confidence = 0.50
+    else:
+        confidence = 0.35
 
     result["confidence"] = confidence
     result["composite_score"] *= confidence
@@ -382,22 +395,24 @@ def score_batter_vs_pitcher(
     if p_metrics["total_ip"] < 10:
         result["data_quality"] = "LOW_PITCHER_IP"
 
-    # ── Step 8: Collect per-pitch-type recent AB detail ──────────────────────
-    # PropFinder-style: individual at-bat rows for each pitch type
+    # ── Step 8: Collect recent AB detail from the same BIP pool ─────────────
     recent_abs = []
-    for pt in pitch_mix:
-        pa_data = filter_pa_by_pitch_type_and_hand(
-            batter_df, pt, pitcher_hand, effective_n_pa
-        )
-        if pa_data.empty:
-            continue
-        bip = pa_data.dropna(subset=["launch_speed"])
-        for _, row in bip.iterrows():
+    # Re-fetch the same pool used for scoring
+    _recent_pool = pd.DataFrame()
+    if not batter_df.empty and "p_throws" in batter_df.columns:
+        _hand_mask = batter_df["p_throws"] == pitcher_hand
+        _bip_mask = batter_df["launch_speed"].notna()
+        _recent_pool = batter_df[_hand_mask & _bip_mask].copy()
+        if not _recent_pool.empty:
+            _sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in _recent_pool.columns else ["game_date"]
+            _recent_pool = _recent_pool.sort_values(_sort_cols, ascending=False).head(n_pa or config.MIN_PA_PER_PITCH_TYPE)
+    if not _recent_pool.empty:
+        for _, row in _recent_pool.iterrows():
             recent_abs.append({
                 "date": str(row.get("game_date", ""))[:10],
                 "pitcher_name": str(row.get("player_name", "")),
                 "pitch_arm": pitcher_hand,
-                "pitch_type": str(row.get("pitch_name", pt)),
+                "pitch_type": str(row.get("pitch_name", row.get("pitch_type", ""))),
                 "ev": round(float(row.get("launch_speed", 0)), 1),
                 "angle": round(float(row.get("launch_angle", 0)), 1),
                 "distance": round(float(row.get("hit_distance_sc", 0)), 0)

@@ -15,7 +15,7 @@ PITCH_MIN_USAGE_PCT: float = 0.12      # ignore pitches below 12% usage
 PITCH_ELEVATED_USAGE_PCT: float = 0.45  # pitches at 45%+ get elevated weight
 
 # ── Plate Appearance Sample Size ─────────────────────────────────────────────
-MIN_PA_PER_PITCH_TYPE: int = 5  # last N PAs per pitch type + handedness
+MIN_PA_PER_PITCH_TYPE: int = 5  # last N total BIP (balls in play) vs pitcher hand
 LOOKBACK_WINDOWS: list = [5, 10]  # pre-compute scores at each lookback
 
 # ── Pitch Usage Weight Tiers ─────────────────────────────────────────────────
