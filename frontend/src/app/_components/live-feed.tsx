@@ -198,39 +198,27 @@ export function LiveFeed() {
           <div className="flex items-center gap-2 mt-1">
             <button
               onClick={() => {
-                const d = new Date(selectedDate + "T12:00:00");
-                d.setDate(d.getDate() - 1);
-                setSelectedDate(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`);
-              }}
-              className="px-2 py-0.5 text-xs rounded cursor-pointer bg-card/50 text-muted border border-card-border hover:text-foreground"
-            >
-              &larr;
-            </button>
-            <span className="text-xs font-mono text-muted">
-              {isToday ? "Today" : selectedDate}
-            </span>
-            {!isToday && (
-              <button
-                onClick={() => {
+                if (isToday) {
+                  // Go to yesterday
                   const d = new Date(selectedDate + "T12:00:00");
-                  d.setDate(d.getDate() + 1);
+                  d.setDate(d.getDate() - 1);
                   setSelectedDate(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`);
-                }}
-                className="px-2 py-0.5 text-xs rounded cursor-pointer bg-card/50 text-muted border border-card-border hover:text-foreground"
-              >
-                &rarr;
-              </button>
-            )}
-            {!isToday && (
-              <button
-                onClick={() => {
+                } else {
+                  // Go back to today
                   const now = new Date();
                   setSelectedDate(`${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`);
-                }}
-                className="px-2 py-0.5 text-xs rounded cursor-pointer bg-accent-green/10 text-accent-green border border-accent-green/20 hover:bg-accent-green/20"
-              >
-                Today
-              </button>
+                }
+              }}
+              className={`px-3 py-1 text-xs rounded-lg cursor-pointer transition-colors ${
+                isToday
+                  ? "bg-card/50 text-muted border border-card-border hover:text-foreground"
+                  : "bg-accent-green/10 text-accent-green border border-accent-green/20 hover:bg-accent-green/20"
+              }`}
+            >
+              {isToday ? "Yesterday" : "Back to Today"}
+            </button>
+            {!isToday && (
+              <span className="text-xs font-mono text-muted">{selectedDate}</span>
             )}
           </div>
         </div>
