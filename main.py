@@ -210,13 +210,19 @@ def run_model(game_date: date = None, fast: bool = False):
 
     # Priority: lineups (if posted) > active roster > prop lines
     batters_to_score = []
+    seen_player_ids = set()  # prevent duplicates across doubleheader games
     print("\nBuilding batter lists...")
     for g in schedule:
         gpk = g["game_pk"]
+        status = g.get("game_status", "")
         home = g.get("home_team", "")
         away = g.get("away_team", "")
         away_p = g.get("away_pitcher")
         home_p = g.get("home_pitcher")
+
+        # Skip finished games (doubleheader game 1)
+        if status in ("Final", "Game Over", "Completed Early"):
+            continue
         home_lineup = g.get("home_lineup", [])
         away_lineup = g.get("away_lineup", [])
 
@@ -233,14 +239,15 @@ def run_model(game_date: date = None, fast: bool = False):
             away_tid = g.get("away_team_id")
             away_batters = get_team_roster(away_tid) if away_tid else []
 
-        # Deduplicate batters by ID within each side
+        # Deduplicate batters by ID within each game AND across games (doubleheaders)
         seen_ids = set()
 
         # Home batters face away pitcher
         if away_p:
             for player in home_batters:
-                if player["id"] not in seen_ids:
+                if player["id"] not in seen_ids and player["id"] not in seen_player_ids:
                     seen_ids.add(player["id"])
+                    seen_player_ids.add(player["id"])
                     batters_to_score.append({
                         "batter_id": player["id"],
                         "batter_name": player["name"],
@@ -252,8 +259,9 @@ def run_model(game_date: date = None, fast: bool = False):
         # Away batters face home pitcher
         if home_p:
             for player in away_batters:
-                if player["id"] not in seen_ids:
+                if player["id"] not in seen_ids and player["id"] not in seen_player_ids:
                     seen_ids.add(player["id"])
+                    seen_player_ids.add(player["id"])
                     batters_to_score.append({
                         "batter_id": player["id"],
                         "batter_name": player["name"],
