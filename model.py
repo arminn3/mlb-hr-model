@@ -396,9 +396,9 @@ def score_batter_vs_pitcher(
     if p_metrics["total_ip"] < 10:
         result["data_quality"] = "LOW_PITCHER_IP"
 
-    # ── Step 8: Collect recent AB detail from the same BIP pool ─────────────
+    # ── Step 8: Collect recent AB detail from the same BIP pool (with 2025 backfill) ──
     recent_abs = []
-    # Re-fetch the same pool used for scoring (filtered to pitcher's pitch types)
+    _n = n_pa or config.MIN_PA_PER_PITCH_TYPE
     _recent_pool = pd.DataFrame()
     if not batter_df.empty and "p_throws" in batter_df.columns:
         _hand_mask = batter_df["p_throws"] == pitcher_hand
@@ -408,7 +408,19 @@ def score_batter_vs_pitcher(
         _recent_pool = batter_df[_hand_mask & _bip_mask & _event_mask & _pitch_mask].copy()
         if not _recent_pool.empty:
             _sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in _recent_pool.columns else ["game_date"]
-            _recent_pool = _recent_pool.sort_values(_sort_cols, ascending=False).head(n_pa or config.MIN_PA_PER_PITCH_TYPE)
+            _recent_pool = _recent_pool.sort_values(_sort_cols, ascending=False).head(_n)
+    # Backfill from 2025 for display too
+    if len(_recent_pool) < _n and season_df is not None and not season_df.empty:
+        _needed = _n - len(_recent_pool)
+        _s_hand = season_df["p_throws"] == pitcher_hand if "p_throws" in season_df.columns else True
+        _s_bip = season_df["launch_speed"].notna()
+        _s_event = season_df["events"].notna() if "events" in season_df.columns else True
+        _s_pitch = season_df["pitch_type"].isin(pitcher_pitch_types) if "pitch_type" in season_df.columns else True
+        _s_pool = season_df[_s_hand & _s_bip & _s_event & _s_pitch].copy()
+        if not _s_pool.empty:
+            _s_sort = ["game_date", "at_bat_number"] if "at_bat_number" in _s_pool.columns else ["game_date"]
+            _s_pool = _s_pool.sort_values(_s_sort, ascending=False).head(_needed)
+            _recent_pool = pd.concat([_recent_pool, _s_pool], ignore_index=True)
     if not _recent_pool.empty:
         for _, row in _recent_pool.iterrows():
             recent_abs.append({
