@@ -155,82 +155,114 @@ function buildOptimalSlips(
 ): Slip[] {
   if (selected.length < legCount) return [];
 
-  // Sort players based on the sort mode before building slips
+  // Group players by game
+  const byGame: Record<number, SlipPlayer[]> = {};
+  for (const p of selected) {
+    if (!byGame[p.gamePk]) byGame[p.gamePk] = [];
+    byGame[p.gamePk].push(p);
+  }
+  for (const gk of Object.keys(byGame)) {
+    byGame[Number(gk)].sort((a, b) => b.composite - a.composite);
+  }
+  const gameKeys = Object.keys(byGame).map(Number);
+
+  // Sort players based on sort mode
   const sorted = [...selected];
   if (sortMode === "chalk") {
-    sorted.sort((a, b) => b.composite - a.composite); // highest first
+    sorted.sort((a, b) => b.composite - a.composite);
   } else if (sortMode === "longshot") {
-    sorted.sort((a, b) => a.composite - b.composite); // lowest first
-  } else if (sortMode === "diverse") {
-    // Interleave from different games
-    const byGame: Record<number, SlipPlayer[]> = {};
-    for (const p of selected) {
-      if (!byGame[p.gamePk]) byGame[p.gamePk] = [];
-      byGame[p.gamePk].push(p);
-    }
-    // Sort each game's players by composite desc
-    for (const gk of Object.keys(byGame)) {
-      byGame[Number(gk)].sort((a, b) => b.composite - a.composite);
-    }
-    // Round-robin from each game
-    sorted.length = 0;
-    const queues = Object.values(byGame);
-    let idx = 0;
-    while (sorted.length < selected.length) {
-      const q = queues[idx % queues.length];
-      if (q.length > 0) sorted.push(q.shift()!);
-      idx++;
-      // Safety: if all queues empty, break
-      if (queues.every((q) => q.length === 0)) break;
-    }
+    sorted.sort((a, b) => a.composite - b.composite);
   } else {
-    // "best" = highest composite first
     sorted.sort((a, b) => b.composite - a.composite);
   }
 
   // Greedy: assign players to slips, each player used exactly once
+  // ALWAYS prefer different games — only put same-game players together as last resort
   const slips: Slip[] = [];
   const used = new Set<string>();
 
-  for (let i = 0; i < sorted.length; i++) {
-    if (used.has(sorted[i].name)) continue;
+  // Pass 1: Build slips with players from DIFFERENT games
+  const diffGameSlips: Slip[] = [];
+  const pass1Used = new Set<string>();
 
-    const group: SlipPlayer[] = [sorted[i]];
-    used.add(sorted[i].name);
+  if (sortMode === "diverse") {
+    // Round-robin from each game to maximize spread
+    const queues = gameKeys.map((gk) => [...byGame[gk]]);
+    const interleaved: SlipPlayer[] = [];
+    let idx = 0;
+    while (interleaved.length < selected.length) {
+      const q = queues[idx % queues.length];
+      if (q.length > 0) interleaved.push(q.shift()!);
+      idx++;
+      if (queues.every((q) => q.length === 0)) break;
+    }
 
-    // Find remaining players for this slip
-    for (let j = i + 1; j < sorted.length && group.length < legCount; j++) {
-      if (used.has(sorted[j].name)) continue;
+    for (let i = 0; i < interleaved.length; i++) {
+      if (pass1Used.has(interleaved[i].name)) continue;
+      const group: SlipPlayer[] = [interleaved[i]];
+      pass1Used.add(interleaved[i].name);
+      const groupGames = new Set([interleaved[i].gamePk]);
 
-      // For diverse mode, prefer different games
-      if (sortMode === "diverse") {
-        const existingGames = new Set(group.map((p) => p.gamePk));
-        if (!existingGames.has(sorted[j].gamePk)) {
-          group.push(sorted[j]);
-          used.add(sorted[j].name);
+      for (let j = 0; j < interleaved.length && group.length < legCount; j++) {
+        if (pass1Used.has(interleaved[j].name)) continue;
+        if (!groupGames.has(interleaved[j].gamePk)) {
+          group.push(interleaved[j]);
+          pass1Used.add(interleaved[j].name);
+          groupGames.add(interleaved[j].gamePk);
         }
+      }
+      if (group.length === legCount) {
+        diffGameSlips.push({
+          players: group,
+          avgComposite: group.reduce((s, p) => s + p.composite, 0) / legCount,
+          gameCount: new Set(group.map((p) => p.gamePk)).size,
+        });
+      }
+    }
+  } else {
+    for (let i = 0; i < sorted.length; i++) {
+      if (pass1Used.has(sorted[i].name)) continue;
+      const group: SlipPlayer[] = [sorted[i]];
+      pass1Used.add(sorted[i].name);
+      const groupGames = new Set([sorted[i].gamePk]);
+
+      // First try: different games only
+      for (let j = i + 1; j < sorted.length && group.length < legCount; j++) {
+        if (pass1Used.has(sorted[j].name)) continue;
+        if (!groupGames.has(sorted[j].gamePk)) {
+          group.push(sorted[j]);
+          pass1Used.add(sorted[j].name);
+          groupGames.add(sorted[j].gamePk);
+        }
+      }
+      if (group.length === legCount) {
+        diffGameSlips.push({
+          players: group,
+          avgComposite: group.reduce((s, p) => s + p.composite, 0) / legCount,
+          gameCount: new Set(group.map((p) => p.gamePk)).size,
+        });
       } else {
-        group.push(sorted[j]);
-        used.add(sorted[j].name);
+        // Undo — these players go to pass 2
+        for (const p of group) pass1Used.delete(p.name);
       }
     }
+  }
 
-    // If diverse mode didn't fill the group, fill with any remaining
-    if (group.length < legCount) {
-      for (let j = 0; j < sorted.length && group.length < legCount; j++) {
-        if (!used.has(sorted[j].name)) {
-          group.push(sorted[j]);
-          used.add(sorted[j].name);
-        }
-      }
-    }
+  // Track who got used in diff-game slips
+  for (const slip of diffGameSlips) {
+    for (const p of slip.players) used.add(p.name);
+    slips.push(slip);
+  }
 
+  // Pass 2: Remaining players get grouped together (may be same game)
+  const remaining = sorted.filter((p) => !used.has(p.name));
+  for (let i = 0; i < remaining.length; i += legCount) {
+    const group = remaining.slice(i, i + legCount);
     if (group.length === legCount) {
-      const uniqueGames = new Set(group.map((p) => p.gamePk)).size;
       slips.push({
         players: group,
         avgComposite: group.reduce((s, p) => s + p.composite, 0) / legCount,
-        gameCount: uniqueGames,
+        gameCount: new Set(group.map((p) => p.gamePk)).size,
       });
     }
   }
@@ -515,20 +547,33 @@ export function SlipGenerator({
       {/* Slips */}
       {slips.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {slips.map((slip, i) => (
+          {slips.map((slip, i) => {
+            const isSameGame = slip.gameCount === 1;
+            return (
             <div
               key={i}
-              className="border border-card-border rounded-xl bg-card/40 p-4 hover:bg-card/60 transition-colors"
+              className={`rounded-xl p-4 transition-colors ${
+                isSameGame
+                  ? "border-2 border-accent-yellow/50 bg-accent-yellow/5 hover:bg-accent-yellow/10"
+                  : "border border-card-border bg-card/40 hover:bg-card/60"
+              }`}
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <span className="w-7 h-7 rounded-full bg-accent/10 flex items-center justify-center text-xs font-bold text-accent">
+                  <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
+                    isSameGame ? "bg-accent-yellow/20 text-accent-yellow" : "bg-accent/10 text-accent"
+                  }`}>
                     {i + 1}
                   </span>
-                  <span className="text-[10px] text-muted uppercase">
-                    {slip.gameCount} game{slip.gameCount > 1 ? "s" : ""}
-                    {slip.gameCount === 1 && " (SGP)"}
-                  </span>
+                  {isSameGame ? (
+                    <span className="text-[10px] font-semibold text-accent-yellow uppercase">
+                      Same Game Parlay
+                    </span>
+                  ) : (
+                    <span className="text-[10px] text-muted uppercase">
+                      {slip.gameCount} games
+                    </span>
+                  )}
                 </div>
                 <div className="text-right">
                   <span className="text-xs text-muted">Avg </span>
@@ -567,7 +612,8 @@ export function SlipGenerator({
                 ))}
               </div>
             </div>
-          ))}
+          );
+          })}
         </div>
       ) : (mode === "custom" || mode === "optimal") && selectedNames.size >= legCount ? (
         <p className="text-center text-muted py-8">
