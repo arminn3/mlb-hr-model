@@ -188,8 +188,10 @@ def calc_batter_metrics_for_pitch(pa_pitches: pd.DataFrame) -> dict[str, float]:
         barrels = bip.get("barrel", pd.Series(dtype=float)).fillna(0).astype(bool).sum()
     barrel_rate = barrels / n_bip
 
-    # Fly ball rate: launch angle between 25-50 degrees
-    if "launch_angle" in bip.columns:
+    # Fly ball rate: use bb_type classification, exclude popups
+    if "bb_type" in bip.columns:
+        fly_balls = (bip["bb_type"] == "fly_ball").sum()
+    elif "launch_angle" in bip.columns:
         fly_balls = (
             (bip["launch_angle"] >= config.FLY_BALL_LA_MIN)
             & (bip["launch_angle"] <= config.FLY_BALL_LA_MAX)
