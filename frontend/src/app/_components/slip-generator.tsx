@@ -204,7 +204,13 @@ export function SlipGenerator({
 }) {
   const [legCount, setLegCount] = useState<2 | 3>(2);
   const [mode, setMode] = useState<"auto" | "custom">("auto");
-  const [selectedNames, setSelectedNames] = useState<Set<string>>(new Set());
+  const [selectedNames, setSelectedNames] = useState<Set<string>>(() => {
+    if (typeof window === "undefined") return new Set();
+    try {
+      const saved = localStorage.getItem("slip-selected-players");
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch { return new Set(); }
+  });
   const [search, setSearch] = useState("");
 
   const allPlayers = useMemo(
@@ -232,6 +238,7 @@ export function SlipGenerator({
       const next = new Set(prev);
       if (next.has(name)) next.delete(name);
       else next.add(name);
+      try { localStorage.setItem("slip-selected-players", JSON.stringify([...next])); } catch {}
       return next;
     });
   };
@@ -324,7 +331,7 @@ export function SlipGenerator({
             />
             {selectedNames.size > 0 && (
               <button
-                onClick={() => setSelectedNames(new Set())}
+                onClick={() => { setSelectedNames(new Set()); try { localStorage.removeItem("slip-selected-players"); } catch {} }}
                 className="px-3 py-2 text-xs text-muted border border-card-border rounded-lg cursor-pointer hover:text-foreground"
               >
                 Clear ({selectedNames.size})
