@@ -33,8 +33,8 @@ PITCH_WEIGHT_TIERS: list = [
 # with power behind it.
 BATTER_WEIGHTS: dict = {
     "avg_exit_velo": 0.20,
-    "barrel_rate": 0.40,
-    "fly_ball_rate": 0.40,
+    "barrel_rate": 0.45,
+    "fly_ball_rate": 0.35,
     # hard_hit_rate removed from scoring — still displayed for research
     # barrel already captures hard hit + lift, FB% captures lift tendency
 }
@@ -50,10 +50,10 @@ PITCHER_WEIGHTS: dict = {
 # ── Composite Blend ──────────────────────────────────────────────────────────
 # Default weights — overridden by ML weights if available
 _DEFAULT_WEIGHTS = {
-    "batter": 0.45,
-    "matchup": 0.25,
-    "pitcher": 0.20,
-    "environment": 0.10,
+    "batter": 0.50,
+    "matchup": 0.10,
+    "pitcher": 0.35,
+    "environment": 0.05,
 }
 
 def _load_ml_weights() -> dict:
