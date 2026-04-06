@@ -549,19 +549,35 @@ export function SlipGenerator({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {slips.map((slip, i) => {
             const isSameGame = slip.gameCount === 1;
+            // Check for partial SGP — players sharing a game in a multi-game slip
+            const gameFreq: Record<number, string[]> = {};
+            for (const p of slip.players) {
+              if (!gameFreq[p.gamePk]) gameFreq[p.gamePk] = [];
+              gameFreq[p.gamePk].push(p.name);
+            }
+            const sharedGames = Object.entries(gameFreq).filter(([, names]) => names.length > 1);
+            const hasPartialSGP = !isSameGame && sharedGames.length > 0;
+            const sharedGameLabel = hasPartialSGP
+              ? sharedGames.map(([, names]) => names.join(" + ")).join(", ")
+              : "";
+
+            const cardWarning = isSameGame || hasPartialSGP;
+
             return (
             <div
               key={i}
               className={`rounded-xl p-4 transition-colors ${
                 isSameGame
                   ? "border-2 border-accent-yellow/50 bg-accent-yellow/5 hover:bg-accent-yellow/10"
+                  : hasPartialSGP
+                  ? "border-2 border-accent-yellow/30 bg-accent-yellow/[0.03] hover:bg-accent-yellow/[0.06]"
                   : "border border-card-border bg-card/40 hover:bg-card/60"
               }`}
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
                   <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
-                    isSameGame ? "bg-accent-yellow/20 text-accent-yellow" : "bg-accent/10 text-accent"
+                    cardWarning ? "bg-accent-yellow/20 text-accent-yellow" : "bg-accent/10 text-accent"
                   }`}>
                     {i + 1}
                   </span>
@@ -569,6 +585,15 @@ export function SlipGenerator({
                     <span className="text-[10px] font-semibold text-accent-yellow uppercase">
                       Same Game Parlay
                     </span>
+                  ) : hasPartialSGP ? (
+                    <div>
+                      <span className="text-[10px] text-muted uppercase">
+                        {slip.gameCount} games
+                      </span>
+                      <span className="text-[10px] text-accent-yellow ml-2">
+                        {sharedGames[0][1].length} legs same game
+                      </span>
+                    </div>
                   ) : (
                     <span className="text-[10px] text-muted uppercase">
                       {slip.gameCount} games
@@ -583,11 +608,21 @@ export function SlipGenerator({
                 </div>
               </div>
 
+              {hasPartialSGP && (
+                <div className="text-[10px] text-accent-yellow bg-accent-yellow/10 rounded px-2 py-1 mb-2">
+                  {sharedGameLabel} are in the same game
+                </div>
+              )}
+
               <div className="space-y-2">
-                {slip.players.map((p) => (
+                {slip.players.map((p) => {
+                  const isShared = hasPartialSGP && sharedGames.some(([, names]) => names.includes(p.name));
+                  return (
                   <div
                     key={p.name}
-                    className="flex items-center justify-between bg-background/30 rounded-lg px-3 py-2"
+                    className={`flex items-center justify-between rounded-lg px-3 py-2 ${
+                      isShared ? "bg-accent-yellow/[0.07]" : "bg-background/30"
+                    }`}
                   >
                     <div>
                       <div className="flex items-center gap-2">
@@ -609,7 +644,8 @@ export function SlipGenerator({
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           );
