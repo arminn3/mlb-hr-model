@@ -107,9 +107,49 @@ function calcCombinedPct(g: GameEnv): { weatherPct: number; parkPct: number; com
   return { weatherPct, parkPct, combinedPct };
 }
 
+type SortKey = "game" | "weatherPct" | "parkPct" | "combinedPct" | "temp" | "wind" | "parkFactor";
+type SortDir = "asc" | "desc" | "none";
+
+function useSortableTable<T>(data: T[], defaultSort: { key: SortKey; dir: SortDir } = { key: "combinedPct", dir: "desc" }) {
+  const [sortKey, setSortKey] = useState<SortKey>(defaultSort.key);
+  const [sortDir, setSortDir] = useState<SortDir>(defaultSort.dir);
+
+  const toggleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      // Cycle: desc → asc → none → desc
+      setSortDir(prev => prev === "desc" ? "asc" : prev === "asc" ? "none" : "desc");
+    } else {
+      setSortKey(key);
+      setSortDir("desc");
+    }
+  };
+
+  const arrow = (key: SortKey) => {
+    if (sortKey !== key || sortDir === "none") return "";
+    return sortDir === "desc" ? " ↓" : " ↑";
+  };
+
+  return { sortKey, sortDir, toggleSort, arrow };
+}
+
 function CombinedView({ games }: { games: GameEnv[] }) {
   const withPcts = games.map(g => ({ ...g, ...calcCombinedPct(g) }));
-  const sorted = [...withPcts].sort((a, b) => b.combinedPct - a.combinedPct);
+  const { sortKey, sortDir, toggleSort, arrow } = useSortableTable(withPcts);
+
+  const sorted = [...withPcts].sort((a, b) => {
+    if (sortDir === "none") return b.combinedPct - a.combinedPct; // default
+    const dir = sortDir === "desc" ? -1 : 1;
+    switch (sortKey) {
+      case "game": return dir * `${a.away_team}${a.home_team}`.localeCompare(`${b.away_team}${b.home_team}`);
+      case "weatherPct": return dir * (a.weatherPct - b.weatherPct);
+      case "parkPct": return dir * (a.parkPct - b.parkPct);
+      case "combinedPct": return dir * (a.combinedPct - b.combinedPct);
+      case "temp": return dir * ((a.temperature_f ?? 0) - (b.temperature_f ?? 0));
+      case "wind": return dir * ((a.wind_speed_mph ?? 0) - (b.wind_speed_mph ?? 0));
+      case "parkFactor": return dir * (a.park_factor - b.park_factor);
+      default: return 0;
+    }
+  });
 
   const favorable = sorted.filter(g => g.combinedPct > 5);
   const unfavorable = sorted.filter(g => g.combinedPct < -5);
@@ -171,13 +211,23 @@ function CombinedView({ games }: { games: GameEnv[] }) {
           <table className="w-full text-xs">
             <thead>
               <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
-                <th className="text-left py-2">Game</th>
-                <th className="text-center py-2">Weather %</th>
-                <th className="text-center py-2">Park %</th>
-                <th className="text-center py-2">Combined %</th>
-                <th className="text-center py-2">Temp</th>
-                <th className="text-center py-2">Wind</th>
-                <th className="text-center py-2">Park Factor</th>
+                {([
+                  { key: "game" as SortKey, label: "Game", align: "text-left" },
+                  { key: "weatherPct" as SortKey, label: "Weather %", align: "text-center" },
+                  { key: "parkPct" as SortKey, label: "Park %", align: "text-center" },
+                  { key: "combinedPct" as SortKey, label: "Combined %", align: "text-center" },
+                  { key: "temp" as SortKey, label: "Temp", align: "text-center" },
+                  { key: "wind" as SortKey, label: "Wind", align: "text-center" },
+                  { key: "parkFactor" as SortKey, label: "Park Factor", align: "text-center" },
+                ]).map(col => (
+                  <th
+                    key={col.key}
+                    onClick={() => toggleSort(col.key)}
+                    className={`${col.align} py-2 cursor-pointer hover:text-foreground transition-colors select-none`}
+                  >
+                    {col.label}{arrow(col.key)}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
