@@ -1,0 +1,316 @@
+{
+  "date": "2026-04-05",
+  "total_players_ranked": 267,
+  "total_hrs_hit": 32,
+  "total_near_hrs": 0,
+  "model_hits": 29,
+  "best_lookback": "L10",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 267,
+        "hits": 29,
+        "rate": 10.9
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 267,
+        "hits": 29,
+        "rate": 10.9
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 3,
+      "rate": 10.0
+    },
+    "all": {
+      "total": 267,
+      "hits": 29,
+      "rate": 10.9
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 3,
+      "rate": 10.0
+    },
+    "all": {
+      "total": 267,
+      "hits": 29,
+      "rate": 10.9
+    }
+  },
+  "avg_composite_hr_hitters": 0.422,
+  "avg_composite_non_hitters": 0.365,
+  "composite_separation": 0.057,
+  "hr_hitters": [
+    {
+      "name": "Yordan Alvarez",
+      "rank": 2,
+      "composite": 0.781,
+      "opp_pitcher": "Jacob Lopez",
+      "matchup": "HOU@ATH"
+    },
+    {
+      "name": "Christian Walker",
+      "rank": 22,
+      "composite": 0.654,
+      "opp_pitcher": "Jacob Lopez",
+      "matchup": "HOU@ATH"
+    },
+    {
+      "name": "Matt Shaw",
+      "rank": 25,
+      "composite": 0.641,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "CHC@CLE"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 35,
+      "composite": 0.596,
+      "opp_pitcher": "Pete Fairbanks",
+      "matchup": "MIA@NYY"
+    },
+    {
+      "name": "Ian Happ",
+      "rank": 42,
+      "composite": 0.56,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CHC@CLE"
+    },
+    {
+      "name": "Oneil Cruz",
+      "rank": 48,
+      "composite": 0.54,
+      "opp_pitcher": "Chris Bassitt",
+      "matchup": "BAL@PIT"
+    },
+    {
+      "name": "Adolis Garc\u00eda",
+      "rank": 51,
+      "composite": 0.538,
+      "opp_pitcher": "Tomoyuki Sugano",
+      "matchup": "PHI@COL"
+    },
+    {
+      "name": "Dansby Swanson",
+      "rank": 55,
+      "composite": 0.53,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CHC@CLE"
+    },
+    {
+      "name": "Brent Rooker",
+      "rank": 68,
+      "composite": 0.498,
+      "opp_pitcher": "Lance McCullers Jr.",
+      "matchup": "HOU@ATH"
+    },
+    {
+      "name": "James Wood",
+      "rank": 70,
+      "composite": 0.494,
+      "opp_pitcher": "Roki Sasaki",
+      "matchup": "LAD@WSH"
+    },
+    {
+      "name": "Kerry Carpenter",
+      "rank": 71,
+      "composite": 0.487,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@DET"
+    },
+    {
+      "name": "Matt Wallner",
+      "rank": 77,
+      "composite": 0.47,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "TB@MIN"
+    },
+    {
+      "name": "Joc Pederson",
+      "rank": 78,
+      "composite": 0.47,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "CIN@TEX"
+    },
+    {
+      "name": "Jake Meyers",
+      "rank": 89,
+      "composite": 0.442,
+      "opp_pitcher": "Jacob Lopez",
+      "matchup": "HOU@ATH"
+    },
+    {
+      "name": "Shohei Ohtani",
+      "rank": 96,
+      "composite": 0.421,
+      "opp_pitcher": "Foster Griffin",
+      "matchup": "LAD@WSH"
+    },
+    {
+      "name": "Richie Palacios",
+      "rank": 105,
+      "composite": 0.406,
+      "opp_pitcher": "Simeon Woods Richardson",
+      "matchup": "TB@MIN"
+    },
+    {
+      "name": "CJ Kayfus",
+      "rank": 114,
+      "composite": 0.375,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@CLE"
+    },
+    {
+      "name": "Manny Machado",
+      "rank": 132,
+      "composite": 0.34,
+      "opp_pitcher": "Ranger Suarez",
+      "matchup": "SD@BOS"
+    },
+    {
+      "name": "Gary S\u00e1nchez",
+      "rank": 138,
+      "composite": 0.331,
+      "opp_pitcher": "Kris Bubic",
+      "matchup": "MIL@KC"
+    },
+    {
+      "name": "Ryan O'Hearn",
+      "rank": 142,
+      "composite": 0.322,
+      "opp_pitcher": "Chris Bassitt",
+      "matchup": "BAL@PIT"
+    },
+    {
+      "name": "Teoscar Hern\u00e1ndez",
+      "rank": 144,
+      "composite": 0.309,
+      "opp_pitcher": "Foster Griffin",
+      "matchup": "LAD@WSH"
+    },
+    {
+      "name": "Junior Caminero",
+      "rank": 147,
+      "composite": 0.304,
+      "opp_pitcher": "Simeon Woods Richardson",
+      "matchup": "TB@MIN"
+    },
+    {
+      "name": "Jackson Merrill",
+      "rank": 162,
+      "composite": 0.292,
+      "opp_pitcher": "Ranger Suarez",
+      "matchup": "SD@BOS"
+    },
+    {
+      "name": "Maikel Garcia",
+      "rank": 166,
+      "composite": 0.285,
+      "opp_pitcher": "Kyle Harrison",
+      "matchup": "MIL@KC"
+    },
+    {
+      "name": "Luis Garc\u00eda Jr.",
+      "rank": 169,
+      "composite": 0.282,
+      "opp_pitcher": "Roki Sasaki",
+      "matchup": "LAD@WSH"
+    },
+    {
+      "name": "Drake Baldwin",
+      "rank": 175,
+      "composite": 0.278,
+      "opp_pitcher": "Brandon Pfaadt",
+      "matchup": "ATL@AZ"
+    },
+    {
+      "name": "TJ Rumfield",
+      "rank": 219,
+      "composite": 0.219,
+      "opp_pitcher": "Taijuan Walker",
+      "matchup": "PHI@COL"
+    },
+    {
+      "name": "Dalton Rushing",
+      "rank": 230,
+      "composite": 0.197,
+      "opp_pitcher": "Foster Griffin",
+      "matchup": "LAD@WSH"
+    },
+    {
+      "name": "Mickey Moniak",
+      "rank": 234,
+      "composite": 0.188,
+      "opp_pitcher": "Taijuan Walker",
+      "matchup": "PHI@COL"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [
+    {
+      "name": "Cole Young",
+      "pitcher": "Brent Suter",
+      "description": "Cole Young homers (2) on a fly ball to right field. Randy Arozarena scores. J.P. Crawford scores."
+    }
+  ]
+}

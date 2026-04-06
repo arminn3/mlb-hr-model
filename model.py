@@ -152,8 +152,13 @@ def score_batter_vs_pitcher(
     per_pitch_metrics: dict[str, dict] = {}
 
     # Get last N BIP vs this pitcher hand, filtered to pitcher's pitch types
-    # Only count BIP on pitches the opposing pitcher actually throws
+    # If pitcher has ST (sweeper) but no SL (slider), add SL to search —
+    # PropFinder shows both in arsenal and batters face both interchangeably
     pitcher_pitch_types = set(pitch_mix.keys())
+    if "ST" in pitcher_pitch_types and "SL" not in pitcher_pitch_types:
+        pitcher_pitch_types.add("SL")
+    if "SL" in pitcher_pitch_types and "ST" not in pitcher_pitch_types:
+        pitcher_pitch_types.add("ST")
     recent_bip = pd.DataFrame()
     if not batter_df.empty and "p_throws" in batter_df.columns:
         hand_mask = batter_df["p_throws"] == pitcher_hand
