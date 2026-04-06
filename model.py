@@ -163,8 +163,9 @@ def score_batter_vs_pitcher(
     if not batter_df.empty and "p_throws" in batter_df.columns:
         hand_mask = batter_df["p_throws"] == pitcher_hand
         bip_mask = batter_df["launch_speed"].notna()
+        event_mask = batter_df["events"].notna() if "events" in batter_df.columns else True
         pitch_mask = batter_df["pitch_type"].isin(pitcher_pitch_types) if "pitch_type" in batter_df.columns else True
-        recent_bip = batter_df[hand_mask & bip_mask & pitch_mask].copy()
+        recent_bip = batter_df[hand_mask & bip_mask & event_mask & pitch_mask].copy()
         if not recent_bip.empty:
             sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in recent_bip.columns else ["game_date"]
             recent_bip = recent_bip.sort_values(sort_cols, ascending=False).head(effective_n_bip)
@@ -388,8 +389,9 @@ def score_batter_vs_pitcher(
     if not batter_df.empty and "p_throws" in batter_df.columns:
         _hand_mask = batter_df["p_throws"] == pitcher_hand
         _bip_mask = batter_df["launch_speed"].notna()
+        _event_mask = batter_df["events"].notna() if "events" in batter_df.columns else True
         _pitch_mask = batter_df["pitch_type"].isin(pitcher_pitch_types) if "pitch_type" in batter_df.columns else True
-        _recent_pool = batter_df[_hand_mask & _bip_mask & _pitch_mask].copy()
+        _recent_pool = batter_df[_hand_mask & _bip_mask & _event_mask & _pitch_mask].copy()
         if not _recent_pool.empty:
             _sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in _recent_pool.columns else ["game_date"]
             _recent_pool = _recent_pool.sort_values(_sort_cols, ascending=False).head(n_pa or config.MIN_PA_PER_PITCH_TYPE)
@@ -415,7 +417,8 @@ def score_batter_vs_pitcher(
     if not batter_df.empty and "p_throws" in batter_df.columns:
         hand_bip = batter_df[
             (batter_df["p_throws"] == pitcher_hand) &
-            (batter_df["launch_speed"].notna())
+            (batter_df["launch_speed"].notna()) &
+            (batter_df["events"].notna() if "events" in batter_df.columns else True)
         ].copy()
         if not hand_bip.empty:
             sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in hand_bip.columns else ["game_date"]
