@@ -153,7 +153,15 @@ def score_batter_vs_pitcher(
 
     # Get last N BIP vs this pitcher hand, filtered to pitcher's pitch types
     # Like PropFinder: only count BIP on pitches the opposing pitcher throws
+    # Expand pitch families: if pitcher throws ST (sweeper), also match SL (slider)
+    # and vice versa — they're the same pitch family
+    PITCH_FAMILY = {
+        "ST": "SL", "SL": "ST",  # sweeper ↔ slider
+    }
     pitcher_pitch_types = set(pitch_mix.keys())
+    for pt in list(pitcher_pitch_types):
+        if pt in PITCH_FAMILY:
+            pitcher_pitch_types.add(PITCH_FAMILY[pt])
     recent_bip = pd.DataFrame()
     if not batter_df.empty and "p_throws" in batter_df.columns:
         hand_mask = batter_df["p_throws"] == pitcher_hand
