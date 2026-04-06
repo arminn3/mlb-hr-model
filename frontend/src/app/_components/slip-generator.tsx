@@ -146,6 +146,98 @@ function buildCustomSlips(
   return slips;
 }
 
+type SortMode = "best" | "chalk" | "longshot" | "diverse";
+
+function buildOptimalSlips(
+  selected: SlipPlayer[],
+  legCount: 2 | 3,
+  sortMode: SortMode
+): Slip[] {
+  if (selected.length < legCount) return [];
+
+  // Sort players based on the sort mode before building slips
+  const sorted = [...selected];
+  if (sortMode === "chalk") {
+    sorted.sort((a, b) => b.composite - a.composite); // highest first
+  } else if (sortMode === "longshot") {
+    sorted.sort((a, b) => a.composite - b.composite); // lowest first
+  } else if (sortMode === "diverse") {
+    // Interleave from different games
+    const byGame: Record<number, SlipPlayer[]> = {};
+    for (const p of selected) {
+      if (!byGame[p.gamePk]) byGame[p.gamePk] = [];
+      byGame[p.gamePk].push(p);
+    }
+    // Sort each game's players by composite desc
+    for (const gk of Object.keys(byGame)) {
+      byGame[Number(gk)].sort((a, b) => b.composite - a.composite);
+    }
+    // Round-robin from each game
+    sorted.length = 0;
+    const queues = Object.values(byGame);
+    let idx = 0;
+    while (sorted.length < selected.length) {
+      const q = queues[idx % queues.length];
+      if (q.length > 0) sorted.push(q.shift()!);
+      idx++;
+      // Safety: if all queues empty, break
+      if (queues.every((q) => q.length === 0)) break;
+    }
+  } else {
+    // "best" = highest composite first
+    sorted.sort((a, b) => b.composite - a.composite);
+  }
+
+  // Greedy: assign players to slips, each player used exactly once
+  const slips: Slip[] = [];
+  const used = new Set<string>();
+
+  for (let i = 0; i < sorted.length; i++) {
+    if (used.has(sorted[i].name)) continue;
+
+    const group: SlipPlayer[] = [sorted[i]];
+    used.add(sorted[i].name);
+
+    // Find remaining players for this slip
+    for (let j = i + 1; j < sorted.length && group.length < legCount; j++) {
+      if (used.has(sorted[j].name)) continue;
+
+      // For diverse mode, prefer different games
+      if (sortMode === "diverse") {
+        const existingGames = new Set(group.map((p) => p.gamePk));
+        if (!existingGames.has(sorted[j].gamePk)) {
+          group.push(sorted[j]);
+          used.add(sorted[j].name);
+        }
+      } else {
+        group.push(sorted[j]);
+        used.add(sorted[j].name);
+      }
+    }
+
+    // If diverse mode didn't fill the group, fill with any remaining
+    if (group.length < legCount) {
+      for (let j = 0; j < sorted.length && group.length < legCount; j++) {
+        if (!used.has(sorted[j].name)) {
+          group.push(sorted[j]);
+          used.add(sorted[j].name);
+        }
+      }
+    }
+
+    if (group.length === legCount) {
+      const uniqueGames = new Set(group.map((p) => p.gamePk)).size;
+      slips.push({
+        players: group,
+        avgComposite: group.reduce((s, p) => s + p.composite, 0) / legCount,
+        gameCount: uniqueGames,
+      });
+    }
+  }
+
+  return slips;
+}
+
 function PlayerPickRow({
   player,
   selected,
@@ -203,7 +295,8 @@ export function SlipGenerator({
   lookback: LookbackKey;
 }) {
   const [legCount, setLegCount] = useState<2 | 3>(2);
-  const [mode, setMode] = useState<"auto" | "custom">("auto");
+  const [mode, setMode] = useState<"auto" | "custom" | "optimal">("auto");
+  const [sortMode, setSortMode] = useState<SortMode>("best");
   const [selectedNames, setSelectedNames] = useState<Set<string>>(() => {
     if (typeof window === "undefined") return new Set();
     try {
@@ -233,6 +326,11 @@ export function SlipGenerator({
     [selectedPlayers, legCount]
   );
 
+  const optimalSlips = useMemo(
+    () => buildOptimalSlips(selectedPlayers, legCount, sortMode),
+    [selectedPlayers, legCount, sortMode]
+  );
+
   const togglePlayer = (name: string) => {
     setSelectedNames((prev) => {
       const next = new Set(prev);
@@ -254,7 +352,7 @@ export function SlipGenerator({
     return <p className="text-center text-muted py-12">No games available.</p>;
   }
 
-  const slips = mode === "auto" ? autoSlips : customSlips;
+  const slips = mode === "auto" ? autoSlips : mode === "optimal" ? optimalSlips : customSlips;
 
   return (
     <div>
@@ -265,7 +363,9 @@ export function SlipGenerator({
           <p className="text-xs text-muted mt-0.5">
             {mode === "auto"
               ? "Best HR parlay combinations based on model rankings."
-              : `Select players to build custom parlays. ${selectedNames.size} selected.`}
+              : mode === "optimal"
+              ? `Each player used once. ${selectedNames.size} selected = ${Math.floor(selectedNames.size / legCount)} ${legCount === 2 ? "duos" : "trios"}.`
+              : `All combos from your picks. ${selectedNames.size} selected.`}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -289,7 +389,17 @@ export function SlipGenerator({
                   : "text-muted hover:text-foreground"
               }`}
             >
-              Build
+              All Combos
+            </button>
+            <button
+              onClick={() => setMode("optimal")}
+              className={`px-3 py-1.5 text-xs rounded cursor-pointer transition-colors ${
+                mode === "optimal"
+                  ? "bg-accent/15 text-accent font-semibold"
+                  : "text-muted hover:text-foreground"
+              }`}
+            >
+              Optimal
             </button>
           </div>
           {/* Leg count toggle */}
@@ -318,8 +428,35 @@ export function SlipGenerator({
         </div>
       </div>
 
-      {/* Custom mode: player picker */}
-      {mode === "custom" && (
+      {/* Sort mode for optimal tab */}
+      {mode === "optimal" && selectedNames.size >= legCount && (
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-[10px] text-muted uppercase">Sort by:</span>
+          {(
+            [
+              { key: "best", label: "Best Overall" },
+              { key: "chalk", label: "Chalk" },
+              { key: "longshot", label: "Longshots" },
+              { key: "diverse", label: "Game Spread" },
+            ] as { key: SortMode; label: string }[]
+          ).map((s) => (
+            <button
+              key={s.key}
+              onClick={() => setSortMode(s.key)}
+              className={`px-3 py-1.5 text-xs rounded-lg cursor-pointer transition-colors ${
+                sortMode === s.key
+                  ? "bg-accent/15 text-accent border border-accent/30 font-semibold"
+                  : "bg-card/50 text-muted border border-card-border hover:text-foreground"
+              }`}
+            >
+              {s.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Player picker for custom and optimal modes */}
+      {(mode === "custom" || mode === "optimal") && (
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-3">
             <input
@@ -432,11 +569,11 @@ export function SlipGenerator({
             </div>
           ))}
         </div>
-      ) : mode === "custom" && selectedNames.size >= legCount ? (
+      ) : (mode === "custom" || mode === "optimal") && selectedNames.size >= legCount ? (
         <p className="text-center text-muted py-8">
           No valid combinations. Try selecting players from different games.
         </p>
-      ) : mode === "custom" ? (
+      ) : mode !== "auto" ? (
         <p className="text-center text-muted py-8">
           Select {legCount}+ players above to generate {legCount === 2 ? "duo" : "trio"} parlays.
         </p>
@@ -445,7 +582,9 @@ export function SlipGenerator({
       <div className="mt-6 text-[10px] text-muted">
         {mode === "auto"
           ? "Slips prioritize game diversity. Players rated 0.15+ composite are eligible. Top 20 shown."
-          : "Custom parlays built from your selections. SGP = Same Game Parlay (1 game). Multi-game parlays shown first."}
+          : mode === "optimal"
+          ? "Each player used exactly once. Sort by chalk (safest), longshots (highest payout), or game spread (most diverse)."
+          : "All possible combos from your selections. SGP = Same Game Parlay (1 game). Multi-game parlays shown first."}
       </div>
     </div>
   );
