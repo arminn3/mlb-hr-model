@@ -183,6 +183,8 @@ def score_batter_vs_pitcher(
             s_sort = ["game_date", "at_bat_number"] if "at_bat_number" in season_bip.columns else ["game_date"]
             season_bip = season_bip.sort_values(s_sort, ascending=False).head(needed)
             recent_bip = pd.concat([recent_bip, season_bip], ignore_index=True)
+            # Ensure exactly N BIP after backfill
+            recent_bip = recent_bip.head(effective_n_bip)
 
     if recent_bip.empty:
         result["data_quality"] = "NO_BATTER_DATA"
@@ -193,6 +195,8 @@ def score_batter_vs_pitcher(
 
         # ── Step 4: Calculate metrics from the entire BIP pool ───────────
         # Like PropFinder: barrel%, FB%, hard hit%, EV from all 5 BIP together
+        # Enforce exact pool size to ensure clean percentages (20%, 40%, etc.)
+        recent_bip = recent_bip.head(effective_n_bip)
         pool_metrics = calc_batter_metrics_for_pitch(recent_bip)
         result["weighted_exit_velo"] = pool_metrics["avg_exit_velo"]
         result["weighted_barrel_rate"] = pool_metrics["barrel_rate"]
