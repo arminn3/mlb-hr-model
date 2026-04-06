@@ -170,6 +170,20 @@ def score_batter_vs_pitcher(
             sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in recent_bip.columns else ["game_date"]
             recent_bip = recent_bip.sort_values(sort_cols, ascending=False).head(effective_n_bip)
 
+    # Backfill from 2025 season data if not enough BIP in 2026
+    # PropFinder does this — goes back to last season when recent data is thin
+    if len(recent_bip) < effective_n_bip and season_df is not None and not season_df.empty:
+        needed = effective_n_bip - len(recent_bip)
+        s_hand = season_df["p_throws"] == pitcher_hand if "p_throws" in season_df.columns else True
+        s_bip = season_df["launch_speed"].notna()
+        s_event = season_df["events"].notna() if "events" in season_df.columns else True
+        s_pitch = season_df["pitch_type"].isin(pitcher_pitch_types) if "pitch_type" in season_df.columns else True
+        season_bip = season_df[s_hand & s_bip & s_event & s_pitch].copy()
+        if not season_bip.empty:
+            s_sort = ["game_date", "at_bat_number"] if "at_bat_number" in season_bip.columns else ["game_date"]
+            season_bip = season_bip.sort_values(s_sort, ascending=False).head(needed)
+            recent_bip = pd.concat([recent_bip, season_bip], ignore_index=True)
+
     if recent_bip.empty:
         result["data_quality"] = "NO_BATTER_DATA"
         low_sample = True
