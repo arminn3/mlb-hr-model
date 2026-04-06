@@ -214,33 +214,8 @@ def score_batter_vs_pitcher(
             else:
                 per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pt_rows)
 
-    # ── Step 4b: Blend recent metrics with 2025 season baseline ────────────
-    # Early in the season, recent data is noisy. Use 2025 as a stabilizer.
-    # Weight shifts from 70% season / 30% recent (early) to 30% season / 70% recent (mid-season)
-    baseline = calc_season_baseline(season_df, pitcher_hand)
-    if baseline["has_data"]:
-        # Count total BIP in recent data to determine blend weight
-        recent_bip = 0
-        if not batter_df.empty:
-            hand_mask = batter_df["p_throws"] == pitcher_hand if "p_throws" in batter_df.columns else True
-            bip_mask = batter_df["launch_speed"].notna()
-            recent_bip = int((hand_mask & bip_mask).sum()) if not isinstance(hand_mask, bool) else int(bip_mask.sum())
-
-        # More recent BIP = trust recent data more
-        # 0 BIP = 50% season, 15+ BIP = 100% recent (no 2025)
-        season_weight = max(0.0, 0.50 - (recent_bip / 30))
-        recent_weight = 1.0 - season_weight
-
-        blend_map = {
-            "weighted_exit_velo": "avg_exit_velo",
-            "weighted_barrel_rate": "barrel_rate",
-            "weighted_fb_rate": "fly_ball_rate",
-            "weighted_hard_hit_rate": "hard_hit_rate",
-        }
-        for result_key, baseline_key in blend_map.items():
-            recent_val = result[result_key]
-            season_val = baseline[baseline_key]
-            result[result_key] = recent_val * recent_weight + season_val * season_weight
+    # 2025 season baseline removed — we backfill individual BIP from 2025
+    # in Step 3 instead of blending season averages which corrupts percentages
 
     # ── Step 5: Normalize and weight batter metrics ──────────────────────────
     # hard_hit_rate is calculated and displayed but NOT used in scoring
