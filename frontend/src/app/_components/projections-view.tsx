@@ -21,7 +21,7 @@ interface GameProjection {
   envScore: number;
 }
 
-function predictHRs(game: GameData, lookback: LookbackKey, model: ProjectionModel): number {
+function predictHRs(game: GameData, _lookback: LookbackKey, model: ProjectionModel): number {
   const env = game.environment;
   const players = game.players;
   const homePlayers = players.filter(p => p.batter_side === "home");
@@ -29,7 +29,12 @@ function predictHRs(game: GameData, lookback: LookbackKey, model: ProjectionMode
   const awayP = homePlayers[0]?.pitcher_stats || {};
   const homeP = awayPlayers[0]?.pitcher_stats || {};
 
-  const composites = players.map(p => p.scores[lookback]?.composite ?? 0.3);
+  // Use average of L5 and L10 composites so projection doesn't change with toggle
+  const composites = players.map(p => {
+    const l5 = p.scores.L5?.composite ?? 0.3;
+    const l10 = p.scores.L10?.composite ?? l5;
+    return (l5 + l10) / 2;
+  });
 
   // Build feature vector matching training
   const features: Record<string, number> = {
@@ -84,7 +89,9 @@ export function ProjectionsView({
         let topPlayer = "";
         let topComposite = 0;
         for (const p of game.players) {
-          const c = p.scores[lookback]?.composite ?? 0;
+          const l5 = p.scores.L5?.composite ?? 0;
+          const l10 = p.scores.L10?.composite ?? l5;
+          const c = (l5 + l10) / 2;
           if (c > topComposite) { topComposite = c; topPlayer = p.name; }
         }
         return { game, expectedHRs, topPlayer, topComposite, envScore: game.environment?.env_score ?? 0.5 };
