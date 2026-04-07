@@ -110,7 +110,33 @@ export function GemFinder({
         </p>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Mobile card view */}
+      <div className="md:hidden space-y-2">
+        {gems.map((g, i) => (
+          <div key={g.name} className="bg-card/40 border border-accent-yellow/20 rounded-lg px-3 py-2.5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-bold text-accent-yellow font-mono w-6">{i + 1}</span>
+                <div>
+                  <span className="text-sm font-semibold text-foreground">{g.name}</span>
+                  <div className="text-[10px] text-muted">{g.game} vs {g.opp_pitcher}</div>
+                </div>
+              </div>
+              <span className="font-mono text-sm font-bold text-foreground">{g.composite.toFixed(3)}</span>
+            </div>
+            <div className="flex flex-wrap gap-2 mt-1.5">
+              {g.barrel_pct >= 15 && <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-accent-green/15 text-accent-green">{g.barrel_pct}% bar</span>}
+              {g.exit_velo >= 90 && <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-accent-green/15 text-accent-green">{g.exit_velo} EV</span>}
+              {g.fb_pct >= 40 && <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-accent-green/15 text-accent-green">{g.fb_pct}% FB</span>}
+              {g.pitcher_hr9 >= 1.5 && <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-accent-yellow/15 text-accent-yellow">P {g.pitcher_hr9} HR/9</span>}
+              {g.env_score >= 0.5 && <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-accent-green/15 text-accent-green">env {Math.round(g.env_score * 100)}</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop table view */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-xs">
           <thead>
             <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
@@ -133,42 +159,14 @@ export function GemFinder({
               <tr key={g.name} className="border-b border-card-border/30 hover:bg-card/40">
                 <td className="text-center py-2 font-bold text-accent-yellow font-mono">{i + 1}</td>
                 <td className="py-2 font-medium text-foreground">{g.name}</td>
-                <td className="py-2 text-muted">
-                  {g.game} vs {g.opp_pitcher}
-                </td>
+                <td className="py-2 text-muted">{g.game} vs {g.opp_pitcher}</td>
                 <td className="text-center py-2 font-mono text-muted">{g.batter_hand}v{g.pitcher_hand}</td>
-                <td className="text-center py-2">
-                  <span className={`font-mono ${g.barrel_pct >= 15 ? "text-accent-green font-semibold" : ""}`}>
-                    {g.barrel_pct}%
-                  </span>
-                </td>
-                <td className="text-center py-2">
-                  <span className={`font-mono ${g.fb_pct >= 40 ? "text-accent-green font-semibold" : ""}`}>
-                    {g.fb_pct}%
-                  </span>
-                </td>
-                <td className="text-center py-2">
-                  <span className={`font-mono ${g.hard_hit_pct >= 45 ? "text-accent-green font-semibold" : ""}`}>
-                    {g.hard_hit_pct}%
-                  </span>
-                </td>
-                <td className="text-center py-2">
-                  <span className={`font-mono ${g.exit_velo >= 90 ? "text-accent-green font-semibold" : ""}`}>
-                    {g.exit_velo}
-                  </span>
-                </td>
-                <td className="text-center py-2">
-                  <span className={`font-mono ${g.pitcher_hr9 >= 1.5 ? "text-accent-green font-semibold" : ""}`}>
-                    {g.pitcher_hr9}
-                  </span>
-                </td>
-                <td className="text-center py-2">
-                  <span className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
-                    g.env_score >= 0.5 ? "bg-accent-green/15 text-accent-green" : "text-muted"
-                  }`}>
-                    {Math.round(g.env_score * 100)}
-                  </span>
-                </td>
+                <td className="text-center py-2"><span className={`font-mono ${g.barrel_pct >= 15 ? "text-accent-green font-semibold" : ""}`}>{g.barrel_pct}%</span></td>
+                <td className="text-center py-2"><span className={`font-mono ${g.fb_pct >= 40 ? "text-accent-green font-semibold" : ""}`}>{g.fb_pct}%</span></td>
+                <td className="text-center py-2"><span className={`font-mono ${g.hard_hit_pct >= 45 ? "text-accent-green font-semibold" : ""}`}>{g.hard_hit_pct}%</span></td>
+                <td className="text-center py-2"><span className={`font-mono ${g.exit_velo >= 90 ? "text-accent-green font-semibold" : ""}`}>{g.exit_velo}</span></td>
+                <td className="text-center py-2"><span className={`font-mono ${g.pitcher_hr9 >= 1.5 ? "text-accent-green font-semibold" : ""}`}>{g.pitcher_hr9}</span></td>
+                <td className="text-center py-2"><span className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${g.env_score >= 0.5 ? "bg-accent-green/15 text-accent-green" : "text-muted"}`}>{Math.round(g.env_score * 100)}</span></td>
                 <td className="text-center py-2 font-mono">{g.composite.toFixed(3)}</td>
                 <td className="py-2 text-[10px] text-muted max-w-xs">{g.reason}</td>
               </tr>
