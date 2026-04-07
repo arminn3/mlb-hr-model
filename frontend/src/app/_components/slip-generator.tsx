@@ -490,27 +490,28 @@ export function SlipGenerator({
       {/* Player picker for custom and optimal modes */}
       {(mode === "custom" || mode === "optimal") && (
         <div className="mb-6">
-          <div className="flex items-center gap-3 mb-3">
+          {/* Search bar with clear X */}
+          <div className="relative mb-3">
             <input
               type="text"
               placeholder="Search players..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="flex-1 px-3 py-2 text-sm bg-background/50 border border-card-border rounded-lg text-foreground placeholder-muted focus:outline-none focus:border-accent/50"
+              className="w-full px-3 py-2 pr-8 text-sm bg-background/50 border border-card-border rounded-lg text-foreground placeholder-muted focus:outline-none focus:border-accent/50"
             />
-            {selectedNames.size > 0 && (
+            {search && (
               <button
-                onClick={() => { setSelectedNames(new Set()); try { localStorage.removeItem("slip-selected-players"); } catch {} }}
-                className="px-3 py-2 text-xs text-muted border border-card-border rounded-lg cursor-pointer hover:text-foreground"
+                onClick={() => setSearch("")}
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center text-muted hover:text-foreground cursor-pointer text-sm"
               >
-                Clear ({selectedNames.size})
+                x
               </button>
             )}
           </div>
 
-          {/* Selected players chips */}
+          {/* Selected players chips + clear all */}
           {selectedNames.size > 0 && (
-            <div className="flex flex-wrap gap-1.5 mb-3">
+            <div className="flex flex-wrap items-center gap-1.5 mb-3">
               {selectedPlayers.map((p) => (
                 <button
                   key={p.name}
@@ -521,6 +522,12 @@ export function SlipGenerator({
                   <span className="text-accent/60">x</span>
                 </button>
               ))}
+              <button
+                onClick={() => { setSelectedNames(new Set()); try { localStorage.removeItem("slip-selected-players"); } catch {} }}
+                className="inline-flex items-center gap-1 px-2.5 py-1 text-xs text-accent-red border border-accent-red/30 rounded-full cursor-pointer hover:bg-accent-red/10"
+              >
+                Clear All Selections
+              </button>
             </div>
           )}
 
