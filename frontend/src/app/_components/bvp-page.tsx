@@ -125,6 +125,32 @@ export function BvPPage({
         />
       </div>
 
+      {/* Mobile sort chips */}
+      <div className="md:hidden flex flex-wrap gap-1.5 mb-3">
+        <span className="text-[10px] uppercase tracking-wider text-muted self-center mr-1">Sort:</span>
+        {([
+          { col: "hrs", label: "HR" },
+          { col: "abs", label: "AB" },
+          { col: "ba", label: "AVG" },
+          { col: "slg", label: "SLG" },
+          { col: "iso", label: "ISO" },
+          { col: "k_pct", label: "K%" },
+          { col: "composite", label: "Score" },
+        ]).map((s) => (
+          <button
+            key={s.col}
+            onClick={() => toggleSort(s.col)}
+            className={`px-2.5 py-1 text-[10px] rounded-full cursor-pointer transition-colors ${
+              sortCol === s.col
+                ? "bg-accent/15 text-accent border border-accent/30 font-semibold"
+                : "bg-card/50 text-muted border border-card-border"
+            }`}
+          >
+            {s.label}{sortCol === s.col ? (sortDir === "desc" ? " ↓" : " ↑") : ""}
+          </button>
+        ))}
+      </div>
+
       {/* Mobile card view */}
       <div className="md:hidden space-y-2">
         {sorted.map((m, i) => {
