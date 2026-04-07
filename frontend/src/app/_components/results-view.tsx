@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-interface DayReport {
+interface DayReportData {
   date: string;
   total_players_ranked: number;
   total_hrs_hit: number;
@@ -54,7 +54,7 @@ interface DayReport {
 }
 
 export function ResultsView({ selectedDate }: { selectedDate: string }) {
-  const [data, setData] = useState<DayReport[]>([]);
+  const [data, setData] = useState<DayReportData[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -144,20 +144,39 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
 
       {/* Daily reports */}
       {filtered.map((day) => (
-        <div key={day.date} className="border border-card-border rounded-xl bg-card/50 p-5 mb-4">
+        <DayReport key={day.date} day={day} />
+      ))}
+    </div>
+  );
+}
+
+function DayReport({ day }: { day: DayReportData }) {
+  const [lb, setLb] = useState<"L5" | "L10">("L5");
+  const tierAccuracy = lb === "L5"
+    ? day.tier_accuracy
+    : day.tier_accuracy_by_lookback?.[lb] || day.tier_accuracy;
+
+  return (
+        <div className="border border-card-border rounded-xl bg-card/50 p-5 mb-4">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-bold text-foreground">{day.date}</h3>
-            <div className="flex items-center gap-4 text-xs text-muted">
-              <span>{day.total_players_ranked} ranked</span>
-              <span>{day.total_hrs_hit} HRs hit</span>
-              <span className="text-accent-green">{day.model_hits} caught</span>
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-0.5">
+                <button onClick={() => setLb("L5")} className={`px-2.5 py-1 text-[10px] rounded cursor-pointer transition-colors ${lb === "L5" ? "bg-accent/15 text-accent font-semibold" : "text-muted hover:text-foreground"}`}>L5</button>
+                <button onClick={() => setLb("L10")} className={`px-2.5 py-1 text-[10px] rounded cursor-pointer transition-colors ${lb === "L10" ? "bg-accent/15 text-accent font-semibold" : "text-muted hover:text-foreground"}`}>L10</button>
+              </div>
+              <div className="flex items-center gap-4 text-xs text-muted">
+                <span>{day.total_players_ranked} ranked</span>
+                <span>{day.total_hrs_hit} HRs hit</span>
+                <span className="text-accent-green">{day.model_hits} caught</span>
+              </div>
             </div>
           </div>
 
           {/* Tier accuracy — HRs only */}
-          <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">HR Hit Rate</h4>
+          <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">HR Hit Rate ({lb})</h4>
           <div className="grid grid-cols-4 gap-3 mb-3">
-            {Object.entries(day.tier_accuracy).map(([tier, acc]) => (
+            {Object.entries(tierAccuracy).map(([tier, acc]) => (
               <div key={tier} className="bg-background/30 rounded-lg p-3 text-center">
                 <div className="text-[10px] uppercase tracking-wider text-muted mb-1">
                   {tier.replace("_", " ")}
@@ -170,26 +189,26 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
             ))}
           </div>
 
-          {/* Tier accuracy — HRs + Near HRs combined */}
+          {/* HR + Near HR — toned down, no border emphasis */}
           {day.tier_accuracy_with_near && Object.values(day.tier_accuracy_with_near).some((a: { rate: number }) => a.rate > 0) && (
-            <>
+            <div className="mb-4">
               <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
-                HR + Near HR Rate <span className="text-accent-yellow">(model confirmed)</span>
+                Including Near HRs
               </h4>
-              <div className="grid grid-cols-4 gap-3 mb-4">
+              <div className="grid grid-cols-4 gap-3">
                 {Object.entries(day.tier_accuracy_with_near).map(([tier, acc]: [string, { total: number; hits: number; rate: number }]) => (
-                  <div key={tier} className="bg-accent-yellow/5 border border-accent-yellow/10 rounded-lg p-3 text-center">
-                    <div className="text-[10px] uppercase tracking-wider text-muted mb-1">
+                  <div key={tier} className="bg-background/20 rounded-lg p-2 text-center">
+                    <div className="text-[10px] uppercase tracking-wider text-muted mb-0.5">
                       {tier.replace("_", " ")}
                     </div>
-                    <div className={`text-lg font-bold font-mono ${acc.rate >= 30 ? "text-accent-green" : acc.rate >= 20 ? "text-accent-yellow" : "text-foreground"}`}>
+                    <div className="text-sm font-mono text-muted">
                       {acc.rate}%
                     </div>
-                    <div className="text-[10px] text-muted">{acc.hits}/{acc.total}</div>
+                    <div className="text-[9px] text-muted">{acc.hits}/{acc.total}</div>
                   </div>
                 ))}
               </div>
-            </>
+            </div>
           )}
 
           {/* Lookback comparison */}
@@ -212,10 +231,10 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {Object.entries(day.tier_accuracy_by_lookback).map(([lb, acc]) => (
-                      <tr key={lb} className={`border-b border-card-border/30 ${lb === day.best_lookback ? "bg-accent/5" : ""}`}>
-                        <td className={`py-1.5 font-mono font-semibold ${lb === day.best_lookback ? "text-accent" : "text-foreground"}`}>
-                          {lb} {lb === day.best_lookback && "★"}
+                    {Object.entries(day.tier_accuracy_by_lookback).map(([lbKey, acc]) => (
+                      <tr key={lbKey} className={`border-b border-card-border/30 ${lbKey === day.best_lookback ? "bg-accent/5" : ""}`}>
+                        <td className={`py-1.5 font-mono font-semibold ${lbKey === day.best_lookback ? "text-accent" : "text-foreground"}`}>
+                          {lbKey} {lbKey === day.best_lookback && "★"}
                         </td>
                         <td className="text-center py-1.5 font-mono">
                           {(acc as Record<string, { rate: number; hits: number; total: number }>).top_10?.rate ?? 0}%
@@ -236,7 +255,7 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
 
           {/* HR hitters */}
           {day.hr_hitters.length > 0 && (
-            <HRHittersTable l5={day.hr_hitters} l10={day.hr_hitters_l10 || []} />
+            <HRHittersTable l5={day.hr_hitters} l10={day.hr_hitters_l10 || []} activeLb={lb} />
           )}
 
           {/* Near HRs — batted ball events */}
@@ -320,44 +339,19 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
             </span>
           </div>
         </div>
-      ))}
-    </div>
   );
 }
 
-function HRHittersTable({ l5, l10 }: {
+function HRHittersTable({ l5, l10, activeLb }: {
   l5: Array<{ name: string; rank: number; composite: number; opp_pitcher: string; matchup: string }>;
   l10: Array<{ name: string; rank: number; composite: number; opp_pitcher: string; matchup: string }>;
+  activeLb: "L5" | "L10";
 }) {
-  const [view, setView] = useState<"L5" | "L10">("L5");
-  const hitters = view === "L5" ? l5 : l10;
-  const hasL10 = l10.length > 0;
+  const hitters = activeLb === "L10" && l10.length > 0 ? l10 : l5;
 
   return (
     <div className="mb-3">
-      <div className="flex items-center justify-between mb-2">
-        <h4 className="text-[10px] uppercase tracking-wider text-muted">HR Hitters in Rankings</h4>
-        {hasL10 && (
-          <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-0.5">
-            <button
-              onClick={() => setView("L5")}
-              className={`px-2.5 py-1 text-[10px] rounded cursor-pointer transition-colors ${
-                view === "L5" ? "bg-accent/15 text-accent font-semibold" : "text-muted hover:text-foreground"
-              }`}
-            >
-              L5
-            </button>
-            <button
-              onClick={() => setView("L10")}
-              className={`px-2.5 py-1 text-[10px] rounded cursor-pointer transition-colors ${
-                view === "L10" ? "bg-accent/15 text-accent font-semibold" : "text-muted hover:text-foreground"
-              }`}
-            >
-              L10
-            </button>
-          </div>
-        )}
-      </div>
+      <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">HR Hitters in Rankings ({activeLb})</h4>
       <div className="overflow-x-auto">
         <table className="w-full text-xs">
           <thead>
