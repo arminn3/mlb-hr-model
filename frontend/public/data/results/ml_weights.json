@@ -1,6 +1,6 @@
 {
-  "batter": 0.385,
-  "matchup": 0.091,
-  "pitcher": 0.462,
-  "environment": 0.062
+  "batter": 0.50,
+  "matchup": 0.10,
+  "pitcher": 0.35,
+  "environment": 0.05
 }
