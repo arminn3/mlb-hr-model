@@ -152,7 +152,7 @@ _OUTFIELD_AZIMUTH: dict[str, float] = {
     "LAA": 68, "OAK": 55, "SEA": 0,   # retractable
     "TEX": 0,   # retractable
     "ATL": 45, "MIA": 0,   # dome
-    "NYM": 72, "PHI": 60, "WSH": 50,
+    "NYM": 27, "PHI": 60, "WSH": 50,
     "CHC": 22, "CIN": 60, "MIL": 0,   # retractable
     "PIT": 48, "STL": 78, "ARI": 0,   # retractable
     "COL": 70, "LAD": 55, "SDP": 68, "SF": 65,
