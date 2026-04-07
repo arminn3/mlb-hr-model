@@ -378,7 +378,7 @@ export function SlipGenerator({
         p.name.toLowerCase().includes(search.toLowerCase()) ||
         p.game.toLowerCase().includes(search.toLowerCase())
       )
-    : allPlayers.slice(0, 50);
+    : allPlayers.slice(0, 100);
 
   if (games.length === 0) {
     return <p className="text-center text-muted py-12">No games available.</p>;
