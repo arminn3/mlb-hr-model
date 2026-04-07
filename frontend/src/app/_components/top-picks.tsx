@@ -68,7 +68,38 @@ export function TopPicks({
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Mobile card view */}
+      <div className="md:hidden space-y-2">
+        {top.map(({ player, game }, i) => {
+          const s = player.scores[lookback];
+          if (!s) return null;
+          return (
+            <div key={player.name} className="flex items-center gap-3 bg-background/30 rounded-lg px-3 py-2.5">
+              <span className="text-sm font-bold text-accent font-mono w-7 text-center shrink-0">{i + 1}</span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold text-foreground truncate">{player.name}</span>
+                  <RatingBadge composite={s.composite} />
+                </div>
+                <div className="text-[10px] text-muted mt-0.5 truncate">
+                  {game.away_team}@{game.home_team} vs {player.opp_pitcher}
+                </div>
+                <div className="flex items-center gap-3 mt-1 text-[10px]">
+                  <span className="text-foreground font-mono">{s.exit_velo} EV</span>
+                  <span className={`font-mono ${s.barrel_pct > 0 ? "text-accent-green" : "text-muted"}`}>{s.barrel_pct}% bar</span>
+                  <span className={`font-mono ${s.fb_pct >= 40 ? "text-accent-green" : "text-muted"}`}>{s.fb_pct}% fb</span>
+                </div>
+              </div>
+              <div className="text-right shrink-0">
+                <span className="font-mono text-sm font-bold text-foreground">{s.composite.toFixed(3)}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Desktop table view */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-xs">
           <thead>
             <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">

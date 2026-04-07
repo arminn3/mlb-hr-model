@@ -107,7 +107,7 @@ export function Sidebar({
   onChange: (page: Page) => void;
 }) {
   return (
-    <aside className="w-56 flex-shrink-0 border-r border-card-border h-screen sticky top-0 flex flex-col bg-card/30">
+    <aside className="w-56 flex-shrink-0 border-r border-card-border h-screen sticky top-0 flex flex-col bg-background">
       {/* Logo */}
       <div className="px-5 py-5 border-b border-card-border">
         <span className="text-lg font-bold text-foreground tracking-tight">
