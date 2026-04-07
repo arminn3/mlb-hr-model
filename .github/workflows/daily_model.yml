@@ -83,8 +83,18 @@ jobs:
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
+          # Stash our generated data files
+          cp -r frontend/public/data /tmp/model-data
+          cp -r results /tmp/model-results
+          # Get latest remote
           git fetch origin main
-          git reset --soft origin/main
+          git checkout origin/main -- .
+          # Restore our generated files on top
+          cp -r /tmp/model-data frontend/public/
+          cp -r /tmp/model-results .
+          mkdir -p frontend/public/data/results
+          cp results/*.json frontend/public/data/results/ 2>/dev/null || true
+          # Commit and push
           git add frontend/public/data/ results/
           git diff --cached --quiet && echo "No changes to commit" || git commit -m "auto: HR props $(date -u +%Y-%m-%d-%H%M)"
           git push origin main
