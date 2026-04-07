@@ -143,19 +143,47 @@ def _find_closest_hour(
 
 # Stadium outfield direction in degrees (approximate azimuth to center field)
 # Compass bearing (degrees from north) from home plate to center field
-# Researched from satellite imagery and Baseball Almanac orientation diagrams
+# Researched from ballparks.com orientation diagrams, Baseball Almanac,
+# Wikipedia stadium articles, and satellite imagery cross-checks.
+# Verified April 2026 — accounts for new stadiums (Truist Park, Globe Life
+# Field, LoanDepot Park) that replaced older venues at different orientations.
 _OUTFIELD_AZIMUTH: dict[str, float] = {
-    "BAL": 52, "BOS": 65, "NYY": 57, "TB": 0,   # dome
-    "TOR": 0,   # dome
-    "CWS": 50, "CLE": 55, "DET": 125, "KC": 90, "MIN": 52,
-    "HOU": 0,   # retractable
-    "LAA": 68, "OAK": 55, "SEA": 0,   # retractable
-    "TEX": 0,   # retractable
-    "ATL": 45, "MIA": 0,   # dome
-    "NYM": 27, "PHI": 60, "WSH": 50,
-    "CHC": 22, "CIN": 60, "MIL": 0,   # retractable
-    "PIT": 48, "STL": 78, "ARI": 0,   # retractable
-    "COL": 70, "LAD": 55, "SDP": 68, "SF": 65,
+    # AL East
+    "BAL": 30,   # Oriole Park — NNE
+    "BOS": 45,   # Fenway Park — NE
+    "NYY": 75,   # Yankee Stadium — ENE
+    "TB":  45,   # Tropicana Field — NE (fixed dome, wind zeroed)
+    "TOR":  0,   # Rogers Centre — N (fixed dome, wind zeroed)
+    # AL Central
+    "CWS": 135,  # Rate Field — SE (home plate in NW corner)
+    "CLE":   0,  # Progressive Field — N
+    "DET": 150,  # Comerica Park — SSE (most south-oriented MLB park)
+    "KC":  45,   # Kauffman Stadium — NE
+    "MIN": 90,   # Target Field — E (confirmed "aligned east")
+    # AL West
+    "HOU": 345,  # Daikin Park / Minute Maid — NNW (retractable)
+    "LAA":  45,  # Angel Stadium — NE
+    "OAK":  60,  # Oakland Coliseum — ENE
+    "SEA":  45,  # T-Mobile Park — NE (retractable)
+    "TEX":  45,  # Globe Life Field — NE (retractable, new stadium 2020)
+    # NL East
+    "ATL": 135,  # Truist Park — SE (new stadium 2017, differs from Turner Field)
+    "MIA": 120,  # LoanDepot Park — ESE (retractable, new stadium 2012)
+    "NYM":  30,  # Citi Field — NNE
+    "PHI":  15,  # Citizens Bank Park — NNE
+    "WSH":  30,  # Nationals Park — NNE
+    # NL Central
+    "CHC":  30,  # Wrigley Field — NNE
+    "CIN": 120,  # Great American Ball Park — ESE (river beyond RF)
+    "MIL": 135,  # American Family Field — SE (retractable)
+    "PIT": 120,  # PNC Park — ESE
+    "STL":  60,  # Busch Stadium — ENE
+    # NL West
+    "ARI":   0,  # Chase Field — N (retractable)
+    "COL":   0,  # Coors Field — N (confirmed due north)
+    "LAD":  30,  # Dodger Stadium — NNE
+    "SDP":   0,  # Petco Park — N (confirmed due north)
+    "SF":   90,  # Oracle Park — E (confirmed "faces due east")
 }
 
 # Fixed dome — weather never matters
