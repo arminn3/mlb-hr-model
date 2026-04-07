@@ -57,9 +57,11 @@ jobs:
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
 
-      - name: Run ML trainer
-        if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
-        run: python ml_trainer.py || true
+      # ML trainer disabled — training data still contaminated from old model bugs
+      # Re-enable once we have 7+ days of clean data
+      # - name: Run ML trainer
+      #   if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
+      #   run: python ml_trainer.py || true
 
       - name: Run projection trainer
         if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
