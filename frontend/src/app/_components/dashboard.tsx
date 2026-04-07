@@ -151,7 +151,7 @@ export function Dashboard() {
             </span>
           </div>
           <div className="flex items-center gap-2 md:gap-4">
-            {(activePage === "rankings" || activePage === "slate" || activePage === "projections" || activePage === "slips" || activePage === "bvp" || activePage === "gems") && (
+            {(activePage === "rankings" || activePage === "slate" || activePage === "slips" || activePage === "bvp" || activePage === "gems") && (
               <LookbackToggle value={lookback} onChange={setLookback} />
             )}
             <DatePicker currentDate={selectedDate} onChange={loadDate} />
