@@ -23,6 +23,13 @@ interface DayReport {
     opp_pitcher: string;
     matchup: string;
   }>;
+  hr_hitters_l10?: Array<{
+    name: string;
+    rank: number;
+    composite: number;
+    opp_pitcher: string;
+    matchup: string;
+  }>;
   near_hr_hitters?: Array<{
     name: string;
     rank: number;
@@ -229,33 +236,7 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
 
           {/* HR hitters */}
           {day.hr_hitters.length > 0 && (
-            <div className="mb-3">
-              <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">HR Hitters in Rankings</h4>
-              <div className="overflow-x-auto">
-                <table className="w-full text-xs">
-                  <thead>
-                    <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
-                      <th className="text-center py-1.5 w-12">Rank</th>
-                      <th className="text-left py-1.5">Player</th>
-                      <th className="text-left py-1.5">vs Pitcher</th>
-                      <th className="text-left py-1.5">Game</th>
-                      <th className="text-center py-1.5">Score</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {day.hr_hitters.map((h) => (
-                      <tr key={h.name} className="border-b border-card-border/30">
-                        <td className="text-center py-1.5 font-mono font-bold text-accent">#{h.rank}</td>
-                        <td className="py-1.5 font-medium text-foreground">{h.name}</td>
-                        <td className="py-1.5 text-muted">{h.opp_pitcher}</td>
-                        <td className="py-1.5 text-muted">{h.matchup}</td>
-                        <td className="text-center py-1.5 font-mono">{h.composite.toFixed(3)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <HRHittersTable l5={day.hr_hitters} l10={day.hr_hitters_l10 || []} />
           )}
 
           {/* Near HRs — batted ball events */}
@@ -340,6 +321,67 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
           </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+function HRHittersTable({ l5, l10 }: {
+  l5: Array<{ name: string; rank: number; composite: number; opp_pitcher: string; matchup: string }>;
+  l10: Array<{ name: string; rank: number; composite: number; opp_pitcher: string; matchup: string }>;
+}) {
+  const [view, setView] = useState<"L5" | "L10">("L5");
+  const hitters = view === "L5" ? l5 : l10;
+  const hasL10 = l10.length > 0;
+
+  return (
+    <div className="mb-3">
+      <div className="flex items-center justify-between mb-2">
+        <h4 className="text-[10px] uppercase tracking-wider text-muted">HR Hitters in Rankings</h4>
+        {hasL10 && (
+          <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-0.5">
+            <button
+              onClick={() => setView("L5")}
+              className={`px-2.5 py-1 text-[10px] rounded cursor-pointer transition-colors ${
+                view === "L5" ? "bg-accent/15 text-accent font-semibold" : "text-muted hover:text-foreground"
+              }`}
+            >
+              L5
+            </button>
+            <button
+              onClick={() => setView("L10")}
+              className={`px-2.5 py-1 text-[10px] rounded cursor-pointer transition-colors ${
+                view === "L10" ? "bg-accent/15 text-accent font-semibold" : "text-muted hover:text-foreground"
+              }`}
+            >
+              L10
+            </button>
+          </div>
+        )}
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
+              <th className="text-center py-1.5 w-12">Rank</th>
+              <th className="text-left py-1.5">Player</th>
+              <th className="text-left py-1.5">vs Pitcher</th>
+              <th className="text-left py-1.5">Game</th>
+              <th className="text-center py-1.5">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {hitters.map((h) => (
+              <tr key={h.name} className="border-b border-card-border/30">
+                <td className="text-center py-1.5 font-mono font-bold text-accent">#{h.rank}</td>
+                <td className="py-1.5 font-medium text-foreground">{h.name}</td>
+                <td className="py-1.5 text-muted">{h.opp_pitcher}</td>
+                <td className="py-1.5 text-muted">{h.matchup}</td>
+                <td className="text-center py-1.5 font-mono">{h.composite.toFixed(3)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

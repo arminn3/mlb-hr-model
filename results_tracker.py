@@ -351,6 +351,12 @@ def compare_results(game_date: date) -> dict:
              "opp_pitcher": p["opp_pitcher"], "matchup": p["matchup"]}
             for p in hits
         ],
+        "hr_hitters_l10": [
+            {"name": p["name"], "rank": p["rank"], "composite": p["composite"],
+             "opp_pitcher": p["opp_pitcher"], "matchup": p["matchup"]}
+            for p in lookback_results.get("L10", [])
+            if p["name"] in hr_names
+        ],
         "near_hr_hitters": [
             {"name": p["name"], "rank": p["rank"], "composite": p["composite"],
              "opp_pitcher": p["opp_pitcher"], "matchup": p["matchup"]}

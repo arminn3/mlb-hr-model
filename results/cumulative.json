@@ -4732,6 +4732,204 @@
         "matchup": "KC@CLE"
       }
     ],
+    "hr_hitters_l10": [
+      {
+        "name": "Shohei Ohtani",
+        "rank": 1,
+        "composite": 0.783,
+        "opp_pitcher": "Max Scherzer",
+        "matchup": "LAD@TOR"
+      },
+      {
+        "name": "Carter Jensen",
+        "rank": 2,
+        "composite": 0.77,
+        "opp_pitcher": "Tanner Bibee",
+        "matchup": "KC@CLE"
+      },
+      {
+        "name": "Jordan Walker",
+        "rank": 13,
+        "composite": 0.687,
+        "opp_pitcher": "Zack Littell",
+        "matchup": "STL@WSH"
+      },
+      {
+        "name": "Freddie Freeman",
+        "rank": 14,
+        "composite": 0.681,
+        "opp_pitcher": "Max Scherzer",
+        "matchup": "LAD@TOR"
+      },
+      {
+        "name": "Cal Raleigh",
+        "rank": 15,
+        "composite": 0.673,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "SEA@TEX"
+      },
+      {
+        "name": "Tyler Stephenson",
+        "rank": 19,
+        "composite": 0.643,
+        "opp_pitcher": "Janson Junk",
+        "matchup": "CIN@MIA"
+      },
+      {
+        "name": "Jonathan Aranda",
+        "rank": 22,
+        "composite": 0.633,
+        "opp_pitcher": "Jameson Taillon",
+        "matchup": "CHC@TB"
+      },
+      {
+        "name": "Willson Contreras",
+        "rank": 35,
+        "composite": 0.597,
+        "opp_pitcher": "Brandon Woodruff",
+        "matchup": "MIL@BOS"
+      },
+      {
+        "name": "James Wood",
+        "rank": 36,
+        "composite": 0.585,
+        "opp_pitcher": "Andre Pallante",
+        "matchup": "STL@WSH"
+      },
+      {
+        "name": "Drake Baldwin",
+        "rank": 56,
+        "composite": 0.554,
+        "opp_pitcher": "Jos\u00e9 Soriano",
+        "matchup": "ATL@LAA"
+      },
+      {
+        "name": "Teoscar Hern\u00e1ndez",
+        "rank": 64,
+        "composite": 0.537,
+        "opp_pitcher": "Max Scherzer",
+        "matchup": "LAD@TOR"
+      },
+      {
+        "name": "Matt Shaw",
+        "rank": 68,
+        "composite": 0.532,
+        "opp_pitcher": "Shane McClanahan",
+        "matchup": "CHC@TB"
+      },
+      {
+        "name": "Brady House",
+        "rank": 70,
+        "composite": 0.531,
+        "opp_pitcher": "Andre Pallante",
+        "matchup": "STL@WSH"
+      },
+      {
+        "name": "Cam Smith",
+        "rank": 77,
+        "composite": 0.51,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "HOU@COL"
+      },
+      {
+        "name": "Junior Caminero",
+        "rank": 92,
+        "composite": 0.485,
+        "opp_pitcher": "Jameson Taillon",
+        "matchup": "CHC@TB"
+      },
+      {
+        "name": "Cedric Mullins",
+        "rank": 124,
+        "composite": 0.423,
+        "opp_pitcher": "Jameson Taillon",
+        "matchup": "CHC@TB"
+      },
+      {
+        "name": "Jonathan India",
+        "rank": 127,
+        "composite": 0.42,
+        "opp_pitcher": "Tanner Bibee",
+        "matchup": "KC@CLE"
+      },
+      {
+        "name": "Gunnar Henderson",
+        "rank": 130,
+        "composite": 0.416,
+        "opp_pitcher": "Grant Taylor",
+        "matchup": "BAL@CWS"
+      },
+      {
+        "name": "CJ Abrams",
+        "rank": 135,
+        "composite": 0.405,
+        "opp_pitcher": "Andre Pallante",
+        "matchup": "STL@WSH"
+      },
+      {
+        "name": "Troy Johnston",
+        "rank": 141,
+        "composite": 0.398,
+        "opp_pitcher": "Cody Bolton",
+        "matchup": "HOU@COL"
+      },
+      {
+        "name": "Zach Neto",
+        "rank": 152,
+        "composite": 0.384,
+        "opp_pitcher": "Chris Sale",
+        "matchup": "ATL@LAA"
+      },
+      {
+        "name": "Luke Keaschall",
+        "rank": 155,
+        "composite": 0.382,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "DET@MIN"
+      },
+      {
+        "name": "Jo Adell",
+        "rank": 162,
+        "composite": 0.376,
+        "opp_pitcher": "Chris Sale",
+        "matchup": "ATL@LAA"
+      },
+      {
+        "name": "Ram\u00f3n Ur\u00edas",
+        "rank": 196,
+        "composite": 0.329,
+        "opp_pitcher": "Zack Littell",
+        "matchup": "STL@WSH"
+      },
+      {
+        "name": "Steven Kwan",
+        "rank": 197,
+        "composite": 0.328,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "KC@CLE"
+      },
+      {
+        "name": "Mauricio Dub\u00f3n",
+        "rank": 247,
+        "composite": 0.233,
+        "opp_pitcher": "Jos\u00e9 Soriano",
+        "matchup": "ATL@LAA"
+      },
+      {
+        "name": "Dalton Rushing",
+        "rank": 257,
+        "composite": 0.191,
+        "opp_pitcher": "Max Scherzer",
+        "matchup": "LAD@TOR"
+      },
+      {
+        "name": "Brayan Rocchio",
+        "rank": 268,
+        "composite": 0.154,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "KC@CLE"
+      }
+    ],
     "near_hr_hitters": [
       {
         "name": "Andy Pages",
