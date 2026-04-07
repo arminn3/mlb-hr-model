@@ -93,68 +93,67 @@ def _estimate_local_game_hour(game_datetime_utc: str, home_team: str) -> int:
         return 19
 
 
-def _calc_bvp(batter_df, batter_2025, pitcher_id) -> dict:
-    """Calculate batter vs specific pitcher head-to-head stats."""
+def _calc_bvp(batter_df, batter_2025, pitcher_id, batter_id=None) -> dict:
+    """Calculate batter vs specific pitcher head-to-head stats.
+    Uses MLB Stats API for career stats + Statcast for recent BIP detail."""
     import pandas as pd
+    import requests
 
-    # Combine recent + 2025 data
+    empty = {"career": {"abs": 0, "hits": 0, "hrs": 0, "ba": 0, "slg": 0, "iso": 0, "k_pct": 0, "pa": 0, "ops": "0"}, "recent_abs": []}
+
+    # Career stats from MLB Stats API (all-time BvP)
+    career = empty["career"].copy()
+    if batter_id and pitcher_id:
+        try:
+            url = f"https://statsapi.mlb.com/api/v1/people/{batter_id}/stats?stats=vsPlayer&opposingPlayerId={pitcher_id}&group=hitting"
+            resp = requests.get(url, timeout=5)
+            if resp.ok:
+                data = resp.json()
+                for split_group in data.get("stats", []):
+                    for s in split_group.get("splits", []):
+                        stat = s.get("stat", {})
+                        n_ab = stat.get("atBats", 0)
+                        if n_ab > 0:
+                            career = {
+                                "abs": n_ab,
+                                "hits": stat.get("hits", 0),
+                                "hrs": stat.get("homeRuns", 0),
+                                "ba": float(stat.get("avg", "0") or "0"),
+                                "slg": float(stat.get("slg", "0") or "0"),
+                                "iso": round(float(stat.get("slg", "0") or "0") - float(stat.get("avg", "0") or "0"), 3),
+                                "k_pct": round(stat.get("strikeOuts", 0) / max(n_ab + stat.get("baseOnBalls", 0), 1) * 100, 1),
+                                "pa": n_ab + stat.get("baseOnBalls", 0) + stat.get("hitByPitch", 0),
+                                "ops": stat.get("ops", "0"),
+                            }
+        except Exception:
+            pass
+
+    # Recent BIP from Statcast (2025-2026)
     frames = []
     if batter_df is not None and not batter_df.empty and "pitcher" in batter_df.columns:
         frames.append(batter_df[batter_df["pitcher"] == pitcher_id])
     if batter_2025 is not None and not batter_2025.empty and "pitcher" in batter_2025.columns:
         frames.append(batter_2025[batter_2025["pitcher"] == pitcher_id])
 
-    if not frames:
-        return {"career": {"abs": 0, "hits": 0, "hrs": 0, "ba": 0, "slg": 0, "iso": 0, "k_pct": 0}, "recent_abs": []}
-
-    combined = pd.concat(frames).drop_duplicates(subset=["game_date", "at_bat_number", "pitch_number"] if "pitch_number" in frames[0].columns else ["game_date", "at_bat_number"])
-
-    if combined.empty:
-        return {"career": {"abs": 0, "hits": 0, "hrs": 0, "ba": 0, "slg": 0, "iso": 0, "k_pct": 0}, "recent_abs": []}
-
-    # PA-ending events
-    pa = combined[combined["events"].notna()]
-    if pa.empty:
-        return {"career": {"abs": 0, "hits": 0, "hrs": 0, "ba": 0, "slg": 0, "iso": 0, "k_pct": 0}, "recent_abs": []}
-
-    non_ab = {"walk", "hit_by_pitch", "intent_walk", "catcher_interf", "sac_fly", "sac_bunt"}
-    hits = {"single", "double", "triple", "home_run"}
-    bases = {"single": 1, "double": 2, "triple": 3, "home_run": 4}
-
-    ab_mask = ~pa["events"].isin(non_ab)
-    n_ab = int(ab_mask.sum())
-    n_hits = int(pa["events"].isin(hits).sum())
-    n_hrs = int((pa["events"] == "home_run").sum())
-    total_bases = sum(bases.get(e, 0) for e in pa["events"])
-    n_ks = int((pa["events"] == "strikeout").sum())
-    n_pa = len(pa)
-
-    ba = round(n_hits / n_ab, 3) if n_ab > 0 else 0
-    slg = round(total_bases / n_ab, 3) if n_ab > 0 else 0
-    iso = round(slg - ba, 3)
-    k_pct = round(n_ks / n_pa * 100, 1) if n_pa > 0 else 0
-
-    # Recent BIP for the at-bat table
-    bip = combined.dropna(subset=["launch_speed"]).copy()
-    bip["game_date"] = bip["game_date"].astype(str)
-    bip = bip.sort_values("game_date", ascending=False).head(10)
     recent = []
-    for _, row in bip.iterrows():
-        recent.append({
-            "date": str(row.get("game_date", ""))[:10],
-            "pitch_type": str(row.get("pitch_name", row.get("pitch_type", ""))),
-            "ev": round(float(row.get("launch_speed", 0)), 1),
-            "angle": round(float(row.get("launch_angle", 0)), 1),
-            "result": str(row.get("events", "")) if pd.notna(row.get("events")) else "",
-        })
+    if frames:
+        combined = pd.concat(frames).drop_duplicates(
+            subset=["game_date", "at_bat_number", "pitch_number"] if "pitch_number" in frames[0].columns else ["game_date", "at_bat_number"]
+        )
+        bip = combined.dropna(subset=["launch_speed"]).copy()
+        if not bip.empty:
+            bip["game_date"] = bip["game_date"].astype(str)
+            bip = bip.sort_values("game_date", ascending=False).head(10)
+            for _, row in bip.iterrows():
+                recent.append({
+                    "date": str(row.get("game_date", ""))[:10],
+                    "pitch_type": str(row.get("pitch_name", row.get("pitch_type", ""))),
+                    "ev": round(float(row.get("launch_speed", 0)), 1),
+                    "angle": round(float(row.get("launch_angle", 0)), 1),
+                    "result": str(row.get("events", "")) if pd.notna(row.get("events")) else "",
+                })
 
-    return {
-        "career": {
-            "abs": n_ab, "hits": n_hits, "hrs": n_hrs,
-            "ba": ba, "slg": slg, "iso": iso, "k_pct": k_pct,
-        },
-        "recent_abs": recent,
-    }
+    return {"career": career, "recent_abs": recent}
 
 
 def run_model(game_date: date = None, fast: bool = False):
@@ -372,7 +371,7 @@ def run_model(game_date: date = None, fast: bool = False):
                 season_stats[str(season)] = {"pitcher": p_stats, "batter": b_stats}
 
         # BvP (Batter vs Pitcher) history
-        bvp_stats = _calc_bvp(batter_df, batter_2025, pid)
+        bvp_stats = _calc_bvp(batter_df, batter_2025, pid, batter_id=batter_id)
 
         # Pitcher pitch quality metrics
         pitcher_quality = {"avg_velo": 0, "avg_spin": 0, "avg_vert_break": 0, "avg_horiz_break": 0}
