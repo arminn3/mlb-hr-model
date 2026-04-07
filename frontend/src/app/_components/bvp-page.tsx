@@ -101,7 +101,7 @@ export function BvPPage({
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
         <div>
           <h2 className="text-lg font-bold text-foreground">Batter vs Pitcher</h2>
           <p className="text-xs text-muted mt-0.5">
@@ -113,11 +113,37 @@ export function BvPPage({
           placeholder="Search player or pitcher..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="bg-card/50 border border-card-border rounded-lg px-3 py-1.5 text-xs text-foreground placeholder-muted w-64"
+          className="bg-card/50 border border-card-border rounded-lg px-3 py-1.5 text-xs text-foreground placeholder-muted w-full md:w-64"
         />
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Mobile card view */}
+      <div className="md:hidden space-y-2">
+        {sorted.map((m) => (
+          <div key={`${m.batter}-${m.pitcher}`} className="bg-background/30 rounded-lg px-3 py-2.5">
+            <div className="flex items-center justify-between">
+              <div className="min-w-0">
+                <span className="text-sm font-semibold text-foreground truncate block">{m.batter}</span>
+                <div className="text-[10px] text-muted mt-0.5">vs {m.pitcher} &middot; {m.game}</div>
+              </div>
+              <span className="font-mono text-sm font-bold text-foreground shrink-0 ml-2">{m.composite.toFixed(3)}</span>
+            </div>
+            <div className="flex items-center gap-3 mt-1.5 text-[10px]">
+              <span className="font-mono text-muted">{m.abs || 0} AB</span>
+              <span className={`font-mono ${m.hrs > 0 ? "text-accent-green font-bold" : "text-muted"}`}>{m.hrs} HR</span>
+              <span className={`font-mono ${m.ba >= 0.300 ? "text-accent-green" : "text-foreground"}`}>
+                {m.abs > 0 ? m.ba.toFixed(3) : "-"} AVG
+              </span>
+              <span className={`font-mono ${m.iso >= 0.200 ? "text-accent-green" : "text-foreground"}`}>
+                {m.abs > 0 ? m.iso.toFixed(3) : "-"} ISO
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop table view */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-xs">
           <thead>
             <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">

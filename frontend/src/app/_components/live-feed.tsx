@@ -207,7 +207,7 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
   return (
     <div>
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
         <div>
           <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
             {isToday ? "Live Feed" : `Game Action — ${selectedDate}`}
@@ -262,7 +262,7 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
       </div>
 
       {/* Stats bar */}
-      <div className="grid grid-cols-5 gap-3 mb-6">
+      <div className="grid grid-cols-3 md:grid-cols-5 gap-3 mb-6">
         <div className="bg-card/50 border border-card-border rounded-lg p-3 text-center">
           <div className="text-lg font-bold font-mono text-foreground">{isToday ? activeCount : games.length}</div>
           <div className="text-[10px] text-muted uppercase">{isToday ? "Games Live" : "Games"}</div>
@@ -323,7 +323,46 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
             : "No saved game action data for this date."}
         </div>
       ) : (
-        <div className="overflow-x-auto">
+        <>
+        {/* Mobile card view */}
+        <div className="md:hidden space-y-2">
+          {plays.map((p, i) => (
+            <div
+              key={i}
+              className={`rounded-lg px-3 py-2.5 ${
+                p.isHR ? "bg-accent-green/10 border border-accent-green/20" : p.isNearHR ? "bg-accent-yellow/5 border border-accent-yellow/20" : "bg-background/30"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 min-w-0">
+                  {p.isHR ? (
+                    <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-accent-green/20 text-accent-green shrink-0">HR</span>
+                  ) : p.isNearHR ? (
+                    <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-accent-yellow/20 text-accent-yellow shrink-0">NEAR</span>
+                  ) : (
+                    <span className="px-1.5 py-0.5 text-[10px] rounded bg-card-border text-muted shrink-0">AIR</span>
+                  )}
+                  <span className="text-sm font-medium text-foreground truncate">{p.batter}</span>
+                </div>
+                <span className={`font-mono text-sm font-bold shrink-0 ml-2 ${p.ev >= 100 ? "text-accent-green" : "text-foreground"}`}>
+                  {typeof p.ev === 'number' ? p.ev.toFixed(1) : p.ev}
+                </span>
+              </div>
+              <div className="flex items-center gap-3 mt-1 text-[10px] text-muted">
+                <span>{p.game} &middot; Inn {p.inning}</span>
+                <span className={`font-mono ${p.angle >= 25 && p.angle <= 35 ? "text-accent-green" : ""}`}>
+                  {typeof p.angle === 'number' ? `${p.angle.toFixed(0)}°` : `${p.angle}°`}
+                </span>
+                <span className={`font-mono ${p.distance >= 380 ? "text-accent-green" : ""}`}>
+                  {p.distance > 0 ? `${typeof p.distance === 'number' ? p.distance.toFixed(0) : p.distance}ft` : "-"}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop table view */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
               <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
@@ -381,6 +420,7 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
             </tbody>
           </table>
         </div>
+        </>
       )}
     </div>
   );

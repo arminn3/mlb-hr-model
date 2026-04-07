@@ -46,7 +46,28 @@ function StatsTable({
           {hand}
         </span>
       </div>
-      <div className="overflow-x-auto">
+      {/* Mobile card view */}
+      <div className="md:hidden space-y-1.5">
+        {entries.map(([code, s]) => (
+          <div key={code} className="bg-background/30 rounded-lg px-3 py-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-medium text-foreground">{s.type_name}</span>
+                <span className="text-[10px] text-muted font-mono">{s.usage_pct}%</span>
+              </div>
+              <span className="font-mono text-xs text-foreground">{s.hr} HR</span>
+            </div>
+            <div className="flex items-center gap-2 mt-1 text-[10px]">
+              <span className={`font-mono px-1 py-0.5 rounded ${statColor(s.ba, [0.230, 0.280])}`}>{s.ba.toFixed(3)} BA</span>
+              <span className={`font-mono px-1 py-0.5 rounded ${statColor(s.slg, [0.380, 0.480])}`}>{s.slg.toFixed(3)} SLG</span>
+              <span className={`font-mono px-1 py-0.5 rounded ${statColor(s.iso, [0.140, 0.200])}`}>{s.iso.toFixed(3)} ISO</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop table view */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-xs">
           <thead>
             <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">

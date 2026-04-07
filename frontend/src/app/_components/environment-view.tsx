@@ -207,7 +207,33 @@ function CombinedView({ games }: { games: GameEnv[] }) {
       {/* Detailed table */}
       <div className="mt-8">
         <h4 className="text-sm font-semibold text-foreground mb-3">Detailed Breakdown</h4>
-        <div className="overflow-x-auto">
+
+        {/* Mobile card view */}
+        <div className="md:hidden space-y-2">
+          {sorted.map(g => (
+            <div key={g.game_pk} className="bg-background/30 rounded-lg px-3 py-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-semibold text-foreground">{g.away_team} @ {g.home_team}</span>
+                <span className={`font-mono text-sm font-bold ${g.combinedPct > 5 ? "text-accent-green" : g.combinedPct < -5 ? "text-accent-red" : "text-foreground"}`}>
+                  {g.combinedPct > 0 ? "+" : ""}{g.combinedPct}%
+                </span>
+              </div>
+              <div className="flex items-center gap-3 mt-1.5 text-[10px]">
+                <span className={`font-mono ${g.weatherPct > 0 ? "text-accent-green" : g.weatherPct < 0 ? "text-accent-red" : "text-muted"}`}>
+                  WX {g.weatherPct > 0 ? "+" : ""}{g.weatherPct}%
+                </span>
+                <span className={`font-mono ${g.parkPct > 0 ? "text-accent-green" : g.parkPct < 0 ? "text-accent-red" : "text-muted"}`}>
+                  PK {g.parkPct > 0 ? "+" : ""}{g.parkPct}%
+                </span>
+                <span className="text-muted font-mono">{g.temperature_f ?? "?"}°F</span>
+                <span className="text-muted font-mono">{g.wind_speed_mph ?? "?"}mph</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop table view */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
               <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">

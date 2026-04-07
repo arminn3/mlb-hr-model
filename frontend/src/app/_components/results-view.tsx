@@ -158,9 +158,9 @@ function DayReport({ day }: { day: DayReportData }) {
 
   return (
         <div className="border border-card-border rounded-xl bg-card/50 p-5 mb-4">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
             <h3 className="text-lg font-bold text-foreground">{day.date}</h3>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-0.5">
                 <button onClick={() => setLb("L5")} className={`px-2.5 py-1 text-[10px] rounded cursor-pointer transition-colors ${lb === "L5" ? "bg-accent/15 text-accent font-semibold" : "text-muted hover:text-foreground"}`}>L5</button>
                 <button onClick={() => setLb("L10")} className={`px-2.5 py-1 text-[10px] rounded cursor-pointer transition-colors ${lb === "L10" ? "bg-accent/15 text-accent font-semibold" : "text-muted hover:text-foreground"}`}>L10</button>
@@ -175,7 +175,7 @@ function DayReport({ day }: { day: DayReportData }) {
 
           {/* Tier accuracy — HRs only */}
           <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">HR Hit Rate ({lb})</h4>
-          <div className="grid grid-cols-4 gap-3 mb-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
             {Object.entries(tierAccuracy).map(([tier, acc]) => (
               <div key={tier} className="bg-background/30 rounded-lg p-3 text-center">
                 <div className="text-[10px] uppercase tracking-wider text-muted mb-1">
@@ -195,7 +195,7 @@ function DayReport({ day }: { day: DayReportData }) {
               <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
                 Including Near HRs
               </h4>
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {Object.entries(day.tier_accuracy_with_near).map(([tier, acc]: [string, { total: number; hits: number; rate: number }]) => (
                   <div key={tier} className="bg-background/20 rounded-lg p-2 text-center">
                     <div className="text-[10px] uppercase tracking-wider text-muted mb-0.5">
@@ -220,7 +220,28 @@ function DayReport({ day }: { day: DayReportData }) {
                   <span className="ml-2 text-accent font-semibold">Best: {day.best_lookback}</span>
                 )}
               </h4>
-              <div className="overflow-x-auto">
+
+              {/* Mobile card view */}
+              <div className="md:hidden space-y-1.5">
+                {Object.entries(day.tier_accuracy_by_lookback).map(([lbKey, acc]) => {
+                  const a = acc as Record<string, { rate: number; hits: number; total: number }>;
+                  return (
+                    <div key={lbKey} className={`rounded-lg px-3 py-2 flex items-center justify-between ${lbKey === day.best_lookback ? "bg-accent/5" : "bg-background/30"}`}>
+                      <span className={`font-mono font-semibold text-sm ${lbKey === day.best_lookback ? "text-accent" : "text-foreground"}`}>
+                        {lbKey} {lbKey === day.best_lookback && "★"}
+                      </span>
+                      <div className="flex items-center gap-3 text-[10px] font-mono">
+                        <span>T10 {a.top_10?.rate ?? 0}%</span>
+                        <span>T20 {a.top_20?.rate ?? 0}%</span>
+                        <span>T30 {a.top_30?.rate ?? 0}%</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Desktop table view */}
+              <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-xs">
                   <thead>
                     <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
@@ -264,7 +285,27 @@ function DayReport({ day }: { day: DayReportData }) {
               <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
                 Near HRs — Warning Track ({day.near_hr_events.length} batted balls)
               </h4>
-              <div className="overflow-x-auto">
+
+              {/* Mobile card view */}
+              <div className="md:hidden space-y-1.5">
+                {day.near_hr_events.map((n: { batter: string; pitcher: string; ev: number; angle: number; distance: number | null; hr_in_parks?: number; result: string }, i: number) => (
+                  <div key={i} className="bg-background/30 rounded-lg px-3 py-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium text-foreground">{n.batter}</span>
+                      <span className={`font-mono text-sm font-bold ${n.ev >= 105 ? "text-accent-green" : "text-foreground"}`}>{n.ev} mph</span>
+                    </div>
+                    <div className="flex items-center gap-3 mt-1 text-[10px]">
+                      <span className="text-muted">vs {n.pitcher}</span>
+                      <span className={`font-mono ${n.angle >= 25 && n.angle <= 32 ? "text-accent-green" : ""}`}>{n.angle}°</span>
+                      <span className="font-mono">{n.distance ? `${n.distance}ft` : "-"}</span>
+                      <span className={`font-mono font-semibold ${(n.hr_in_parks ?? 0) >= 15 ? "text-accent-green" : "text-muted"}`}>{n.hr_in_parks ?? 0}/30 parks</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop table view */}
+              <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-xs">
                   <thead>
                     <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
@@ -329,7 +370,7 @@ function DayReport({ day }: { day: DayReportData }) {
           )}
 
           {/* Separation */}
-          <div className="mt-3 pt-3 border-t border-card-border flex items-center gap-4 text-xs">
+          <div className="mt-3 pt-3 border-t border-card-border flex flex-wrap items-center gap-2 md:gap-4 text-xs">
             <span className="text-muted">Composite separation:</span>
             <span className={`font-mono font-semibold ${day.composite_separation > 0 ? "text-accent-green" : "text-accent-red"}`}>
               {day.composite_separation > 0 ? "+" : ""}{day.composite_separation.toFixed(3)}
@@ -352,7 +393,23 @@ function HRHittersTable({ l5, l10, activeLb }: {
   return (
     <div className="mb-3">
       <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">HR Hitters in Rankings ({activeLb})</h4>
-      <div className="overflow-x-auto">
+
+      {/* Mobile card view */}
+      <div className="md:hidden space-y-1.5">
+        {hitters.map((h) => (
+          <div key={h.name} className="bg-background/30 rounded-lg px-3 py-2 flex items-center gap-3">
+            <span className="font-mono font-bold text-accent text-sm shrink-0">#{h.rank}</span>
+            <div className="flex-1 min-w-0">
+              <span className="text-sm font-semibold text-foreground truncate block">{h.name}</span>
+              <div className="text-[10px] text-muted mt-0.5">vs {h.opp_pitcher} &middot; {h.matchup}</div>
+            </div>
+            <span className="font-mono text-sm text-foreground shrink-0">{h.composite.toFixed(3)}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop table view */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-xs">
           <thead>
             <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">

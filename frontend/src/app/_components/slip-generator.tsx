@@ -288,9 +288,9 @@ function PlayerPickRow({
           : "bg-background/30 border border-transparent hover:bg-background/50"
       }`}
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 min-w-0">
         <span
-          className={`w-4 h-4 rounded border flex items-center justify-center text-[10px] ${
+          className={`w-4 h-4 rounded border flex items-center justify-center text-[10px] shrink-0 ${
             selected
               ? "bg-accent border-accent text-background font-bold"
               : "border-card-border"
@@ -298,16 +298,17 @@ function PlayerPickRow({
         >
           {selected ? "\u2713" : ""}
         </span>
-        <div>
-          <span className="text-sm font-medium text-foreground">{player.name}</span>
-          <span className="text-[10px] text-muted ml-2">{player.game}</span>
+        <div className="min-w-0">
+          <span className="text-sm font-medium text-foreground truncate block">{player.name}</span>
+          <span className="text-[10px] text-muted block md:hidden">{player.game}</span>
+          <span className="text-[10px] text-muted hidden md:inline ml-0">{player.game}</span>
         </div>
       </div>
-      <div className="flex items-center gap-3">
-        <span className="text-[10px] text-muted">
+      <div className="flex items-center gap-2 md:gap-3 shrink-0 ml-2">
+        <span className="text-[10px] text-muted hidden md:inline">
           {player.exit_velo.toFixed(0)} EV
         </span>
-        <span className="text-[10px] text-muted">
+        <span className="text-[10px] text-muted hidden md:inline">
           {player.barrel_pct.toFixed(0)}% bar
         </span>
         <RatingBadge composite={player.composite} />
@@ -389,7 +390,7 @@ export function SlipGenerator({
   return (
     <div>
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-6">
         <div>
           <h2 className="text-lg font-bold text-foreground">Slip Generator</h2>
           <p className="text-xs text-muted mt-0.5">
@@ -400,7 +401,7 @@ export function SlipGenerator({
               : `All combos from your picks. ${selectedNames.size} selected.`}
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           {/* Mode toggle */}
           <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-1">
             <button

@@ -124,8 +124,44 @@ export function ProjectionsView({
         </div>
       </div>
 
-      {/* Per-game projections */}
-      <div className="overflow-x-auto">
+      {/* Mobile card view */}
+      <div className="md:hidden space-y-2">
+        {projections.map((p) => (
+          <div key={p.game.game_pk} className="bg-background/30 rounded-lg px-3 py-2.5">
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-sm font-semibold text-foreground">
+                  {p.game.away_team} @ {p.game.home_team}
+                </span>
+                {p.game.game_time && (
+                  <span className="text-[10px] text-muted ml-2">{p.game.game_time}</span>
+                )}
+              </div>
+              <span className={`text-xl font-bold font-mono ${
+                p.expectedHRs >= 3.0 ? "text-accent-green" :
+                p.expectedHRs >= 2.0 ? "text-foreground" :
+                "text-muted"
+              }`}>
+                {p.expectedHRs.toFixed(1)}
+              </span>
+            </div>
+            <div className="flex items-center gap-3 mt-1.5 text-[10px]">
+              <span className={`font-mono px-1.5 py-0.5 rounded ${
+                p.envScore >= 0.5 ? "bg-accent-green/15 text-accent-green" :
+                p.envScore >= 0.35 ? "bg-accent-yellow/15 text-accent-yellow" :
+                "bg-accent-red/15 text-accent-red"
+              }`}>
+                Env {Math.round(p.envScore * 100)}
+              </span>
+              <span className="text-muted">Top: <span className="text-foreground">{p.topPlayer}</span></span>
+              <span className="font-mono text-muted">{p.topComposite.toFixed(3)}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop table view */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
