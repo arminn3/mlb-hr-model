@@ -273,11 +273,23 @@ def calc_environment_score(
         lo, hi = config.NORM_RANGES_ENV[key]
         return float(np.clip((value - lo) / (hi - lo), 0.0, 1.0))
 
+    is_dome = home_team in _FIXED_DOME_TEAMS
+    is_retractable = home_team in _RETRACTABLE_ROOF_TEAMS
+    roof_closed = _is_roof_likely_closed(home_team, weather.get("temperature_f"))
+
     park_norm = norm(park, "park_factor")
-    temp_norm = norm(weather["temperature_f"], "temperature")
-    wind_norm = norm(weather["wind_score"], "wind_score")
-    humid_norm = norm(weather["humidity"], "humidity")
-    pressure_norm = norm(weather["pressure_hpa"], "pressure")
+
+    # Dome/roof closed: only park factor matters — weather is irrelevant
+    if is_dome or roof_closed:
+        temp_norm = 0.5   # neutral
+        wind_norm = 0.5   # neutral
+        humid_norm = 0.5  # neutral
+        pressure_norm = 0.5
+    else:
+        temp_norm = norm(weather["temperature_f"], "temperature")
+        wind_norm = norm(weather["wind_score"], "wind_score")
+        humid_norm = norm(weather["humidity"], "humidity")
+        pressure_norm = norm(weather["pressure_hpa"], "pressure")
 
     # Weighted environment score
     env_score = (
@@ -287,10 +299,6 @@ def calc_environment_score(
         + config.ENVIRONMENT_WEIGHTS["humidity"] * humid_norm
         + config.ENVIRONMENT_WEIGHTS["pressure"] * pressure_norm
     )
-
-    is_dome = home_team in _FIXED_DOME_TEAMS
-    is_retractable = home_team in _RETRACTABLE_ROOF_TEAMS
-    roof_closed = _is_roof_likely_closed(home_team, weather.get("temperature_f"))
 
     return {
         "park_factor": park,
