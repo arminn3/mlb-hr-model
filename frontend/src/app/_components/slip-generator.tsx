@@ -401,61 +401,50 @@ export function SlipGenerator({
               : `All combos from your picks. ${selectedNames.size} selected.`}
           </p>
         </div>
-        <div className="flex items-center gap-2 flex-wrap">
-          {/* Mode toggle */}
-          <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-1">
-            <button
-              onClick={() => setMode("auto")}
-              className={`px-3 py-1.5 text-xs rounded cursor-pointer transition-colors ${
-                mode === "auto"
-                  ? "bg-accent/15 text-accent font-semibold"
-                  : "text-muted hover:text-foreground"
-              }`}
-            >
-              Auto
-            </button>
-            <button
-              onClick={() => setMode("custom")}
-              className={`px-3 py-1.5 text-xs rounded cursor-pointer transition-colors ${
-                mode === "custom"
-                  ? "bg-accent/15 text-accent font-semibold"
-                  : "text-muted hover:text-foreground"
-              }`}
-            >
-              All Combos
-            </button>
-            <button
-              onClick={() => setMode("optimal")}
-              className={`px-3 py-1.5 text-xs rounded cursor-pointer transition-colors ${
-                mode === "optimal"
-                  ? "bg-accent/15 text-accent font-semibold"
-                  : "text-muted hover:text-foreground"
-              }`}
-            >
-              Optimal
-            </button>
+        <div className="flex flex-col gap-3">
+          {/* Mode toggle — top row, larger tabs */}
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] uppercase tracking-wider text-muted">Mode:</span>
+            {([
+              { key: "auto" as const, label: "Auto", desc: "Model picks" },
+              { key: "custom" as const, label: "All Combos", desc: "Every combo" },
+              { key: "optimal" as const, label: "Optimal", desc: "No repeats" },
+            ]).map((m) => (
+              <button
+                key={m.key}
+                onClick={() => setMode(m.key)}
+                className={`px-4 py-2 text-xs rounded-lg cursor-pointer transition-colors ${
+                  mode === m.key
+                    ? "bg-accent text-background font-bold"
+                    : "bg-card/50 text-muted border border-card-border hover:text-foreground"
+                }`}
+              >
+                {m.label}
+              </button>
+            ))}
           </div>
-          {/* Leg count toggle */}
-          <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-1">
+          {/* Leg count — bottom row, pill style */}
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] uppercase tracking-wider text-muted">Legs:</span>
             <button
               onClick={() => setLegCount(2)}
-              className={`px-3 py-1.5 text-xs rounded cursor-pointer transition-colors ${
+              className={`px-4 py-1.5 text-xs rounded-full cursor-pointer transition-colors ${
                 legCount === 2
-                  ? "bg-accent/15 text-accent font-semibold"
-                  : "text-muted hover:text-foreground"
+                  ? "bg-accent-green/20 text-accent-green border border-accent-green/30 font-semibold"
+                  : "bg-card/50 text-muted border border-card-border hover:text-foreground"
               }`}
             >
-              Duos
+              2-Leg (Duos)
             </button>
             <button
               onClick={() => setLegCount(3)}
-              className={`px-3 py-1.5 text-xs rounded cursor-pointer transition-colors ${
+              className={`px-4 py-1.5 text-xs rounded-full cursor-pointer transition-colors ${
                 legCount === 3
-                  ? "bg-accent/15 text-accent font-semibold"
-                  : "text-muted hover:text-foreground"
+                  ? "bg-accent-green/20 text-accent-green border border-accent-green/30 font-semibold"
+                  : "bg-card/50 text-muted border border-card-border hover:text-foreground"
               }`}
             >
-              Trios
+              3-Leg (Trios)
             </button>
           </div>
         </div>
