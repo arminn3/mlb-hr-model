@@ -161,30 +161,50 @@ _OUTFIELD_AZIMUTH: dict[str, float] = {
 # Fixed dome — weather never matters
 _FIXED_DOME_TEAMS = {"TB", "TOR"}
 
-# Retractable roof — weather matters when roof is open
-# Roof is typically open when temp > 70°F and no rain
+# Retractable roof teams and their tendencies:
+# TEX (Globe Life) — almost always closed, default state is closed
+# MIA (LoanDepot) — closes frequently, especially when humid or <80°F
+# HOU (Minute Maid) — closes when hot (>90) or cold (<65) or rain
+# ARI/AZ (Chase Field) — closes when hot (>90) or cold
+# MIL (American Family) — closes when cold (<65) or rain
+# SEA (T-Mobile) — closes when cold (<60) or rain
 _RETRACTABLE_ROOF_TEAMS = {"HOU", "MIA", "ARI", "AZ", "MIL", "SEA", "TEX"}
 
-# Combined for backward compat
-_DOME_TEAMS = _FIXED_DOME_TEAMS  # only truly sealed domes
+# Teams that almost always play with roof closed
+_DEFAULT_CLOSED_TEAMS = {"TEX", "MIA"}
+
+_DOME_TEAMS = _FIXED_DOME_TEAMS
 
 
 def _is_roof_likely_closed(home_team: str, temperature_f: float = None) -> bool:
     """
     Estimate if a retractable roof is closed.
-    Open if: temp > 70°F (assumed no rain — we don't have precip data yet).
+    Each stadium has different tendencies.
     """
     if home_team in _FIXED_DOME_TEAMS:
         return True
     if home_team not in _RETRACTABLE_ROOF_TEAMS:
         return False
-    # AZ (Chase Field) almost always has roof closed in summer due to heat
-    if home_team in ("ARI", "AZ") and temperature_f and temperature_f > 90:
+    # TEX and MIA almost always play with roof closed
+    if home_team in _DEFAULT_CLOSED_TEAMS:
+        # Only open in rare perfect conditions: 75-82°F, dry
+        if temperature_f and 75 <= temperature_f <= 82:
+            return False  # might be open in perfect weather
+        return True  # closed by default
+    # AZ (Chase Field) — closed when hot or cold
+    if home_team in ("ARI", "AZ"):
+        if temperature_f and 65 <= temperature_f <= 85:
+            return False
         return True
-    # For others: open if warm enough
-    if temperature_f and temperature_f >= 70:
-        return False  # roof likely open — weather applies
-    return True  # cold = roof likely closed
+    # HOU — closed when hot or cold
+    if home_team == "HOU":
+        if temperature_f and 65 <= temperature_f <= 85:
+            return False
+        return True
+    # MIL, SEA — closed when cold
+    if temperature_f and temperature_f >= 65:
+        return False
+    return True
 
 
 def _calc_wind_score(
