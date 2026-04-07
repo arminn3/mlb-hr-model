@@ -72,13 +72,21 @@ export function BvPPage({
       )
     : matchups;
 
-  // Sort
+  // Split into has history vs no history, sort each group
   const sorted = useMemo(() => {
-    return [...filtered].sort((a, b) => {
+    const withHistory = filtered.filter(m => m.abs > 0);
+    const noHistory = filtered.filter(m => m.abs === 0);
+
+    const sortFn = (a: typeof filtered[0], b: typeof filtered[0]) => {
       const aVal = (a as Record<string, unknown>)[sortCol] as number;
       const bVal = (b as Record<string, unknown>)[sortCol] as number;
       return sortDir === "desc" ? bVal - aVal : aVal - bVal;
-    });
+    };
+
+    withHistory.sort(sortFn);
+    noHistory.sort((a, b) => b.composite - a.composite);
+
+    return [...withHistory, ...noHistory];
   }, [filtered, sortCol, sortDir]);
 
   const toggleSort = (col: string) => {
@@ -105,7 +113,7 @@ export function BvPPage({
         <div>
           <h2 className="text-lg font-bold text-foreground">Batter vs Pitcher</h2>
           <p className="text-xs text-muted mt-0.5">
-            {matchups.length} matchups across today&apos;s slate. Click column headers to sort.
+            {matchups.filter(m => m.abs > 0).length} matchups with history, {matchups.filter(m => m.abs === 0).length} with no history. Career head-to-head stats.
           </p>
         </div>
         <input
@@ -119,27 +127,36 @@ export function BvPPage({
 
       {/* Mobile card view */}
       <div className="md:hidden space-y-2">
-        {sorted.map((m) => (
-          <div key={`${m.batter}-${m.pitcher}`} className="bg-background/30 rounded-lg px-3 py-2.5">
-            <div className="flex items-center justify-between">
-              <div className="min-w-0">
-                <span className="text-sm font-semibold text-foreground truncate block">{m.batter}</span>
-                <div className="text-[10px] text-muted mt-0.5">vs {m.pitcher} &middot; {m.game}</div>
+        {sorted.map((m, i) => {
+          const isFirstNoHistory = m.abs === 0 && (i === 0 || sorted[i - 1].abs > 0);
+          return (
+            <div key={`${m.batter}-${m.pitcher}`}>
+              {isFirstNoHistory && (
+                <div className="text-[10px] uppercase tracking-wider text-muted mt-4 mb-2 px-1">No Head-to-Head History</div>
+              )}
+              <div className={`rounded-lg px-3 py-2.5 ${m.abs === 0 ? "bg-background/15 opacity-60" : "bg-background/30"}`}>
+                <div className="flex items-center justify-between">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-semibold text-foreground truncate">{m.batter}</span>
+                      {m.abs === 0 && <span className="text-[9px] px-1.5 py-0.5 rounded bg-card-border text-muted">No History</span>}
+                    </div>
+                    <div className="text-[10px] text-muted mt-0.5">vs {m.pitcher} &middot; {m.game}</div>
+                  </div>
+                  <span className="font-mono text-sm font-bold text-foreground shrink-0 ml-2">{m.composite.toFixed(3)}</span>
+                </div>
+                {m.abs > 0 && (
+                  <div className="flex items-center gap-3 mt-1.5 text-[10px]">
+                    <span className="font-mono text-muted">{m.abs} AB</span>
+                    <span className={`font-mono ${m.hrs > 0 ? "text-accent-green font-bold" : "text-muted"}`}>{m.hrs} HR</span>
+                    <span className={`font-mono ${m.ba >= 0.300 ? "text-accent-green" : "text-foreground"}`}>{m.ba.toFixed(3)} AVG</span>
+                    <span className={`font-mono ${m.iso >= 0.200 ? "text-accent-green" : "text-foreground"}`}>{m.iso.toFixed(3)} ISO</span>
+                  </div>
+                )}
               </div>
-              <span className="font-mono text-sm font-bold text-foreground shrink-0 ml-2">{m.composite.toFixed(3)}</span>
             </div>
-            <div className="flex items-center gap-3 mt-1.5 text-[10px]">
-              <span className="font-mono text-muted">{m.abs || 0} AB</span>
-              <span className={`font-mono ${m.hrs > 0 ? "text-accent-green font-bold" : "text-muted"}`}>{m.hrs} HR</span>
-              <span className={`font-mono ${m.ba >= 0.300 ? "text-accent-green" : "text-foreground"}`}>
-                {m.abs > 0 ? m.ba.toFixed(3) : "-"} AVG
-              </span>
-              <span className={`font-mono ${m.iso >= 0.200 ? "text-accent-green" : "text-foreground"}`}>
-                {m.abs > 0 ? m.iso.toFixed(3) : "-"} ISO
-              </span>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Desktop table view */}
@@ -162,9 +179,14 @@ export function BvPPage({
             </tr>
           </thead>
           <tbody>
-            {sorted.map((m) => (
-              <tr key={`${m.batter}-${m.pitcher}`} className="border-b border-card-border/30 hover:bg-card/40">
-                <td className="py-2 pr-3 font-medium text-foreground">{m.batter}</td>
+            {sorted.map((m, i) => {
+              const isFirstNoHistory = m.abs === 0 && (i === 0 || sorted[i - 1].abs > 0);
+              return (
+              <tr key={`${m.batter}-${m.pitcher}`} className={`border-b border-card-border/30 hover:bg-card/40 ${m.abs === 0 ? "opacity-50" : ""} ${isFirstNoHistory ? "border-t-2 border-t-card-border" : ""}`}>
+                <td className="py-2 pr-3 font-medium text-foreground">
+                  {m.batter}
+                  {m.abs === 0 && <span className="ml-2 text-[9px] px-1.5 py-0.5 rounded bg-card-border text-muted">No History</span>}
+                </td>
                 <td className="py-2 pr-3 text-muted">{m.pitcher}</td>
                 <td className="py-2 pr-3 text-muted">{m.game}</td>
                 <td className="text-center py-2 px-1 font-mono text-muted">{m.hand}</td>
@@ -195,7 +217,8 @@ export function BvPPage({
                 </td>
                 <td className="text-center py-2 font-mono">{m.composite.toFixed(3)}</td>
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
       </div>
