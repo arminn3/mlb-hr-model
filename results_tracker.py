@@ -13,7 +13,7 @@ Usage:
 import argparse
 import json
 from collections import defaultdict
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 import numpy as np
@@ -459,9 +459,11 @@ def main():
     parser.add_argument("--date", type=str, default=None)
     args = parser.parse_args()
 
-    game_date = date.today()
     if args.date:
         game_date = date.fromisoformat(args.date)
+    else:
+        # Default to yesterday — results are for completed games
+        game_date = date.today() - timedelta(days=1)
 
     print(f"Checking results for {game_date.isoformat()}...")
     report = compare_results(game_date)

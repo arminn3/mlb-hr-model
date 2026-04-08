@@ -19,6 +19,9 @@ on:
     - cron: '0 23 * * *'   # 7:00 PM ET
     - cron: '0 0 * * *'    # 8:00 PM ET
     - cron: '0 1 * * *'    # 9:00 PM ET
+    - cron: '0 2 * * *'    # 10:00 PM ET
+    - cron: '0 3 * * *'    # 11:00 PM ET
+    - cron: '0 4 * * *'    # 12:00 AM ET (midnight — results after last game)
   workflow_dispatch: # allow manual trigger
 
 concurrency:
@@ -53,9 +56,9 @@ jobs:
           key: statcast-cache-${{ github.run_id }}
           restore-keys: statcast-cache-
 
-      # Results tracker + ML trainer only on the 7 AM run
-      - name: Run results tracker (yesterday)
-        if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
+      # Results tracker: 7 AM (yesterday's results) + 10 PM/11 PM/midnight (today's results as games end)
+      - name: Run results tracker
+        if: github.event.schedule == '0 11 * * *' || github.event.schedule == '0 2 * * *' || github.event.schedule == '0 3 * * *' || github.event.schedule == '0 4 * * *' || github.event_name == 'workflow_dispatch'
         run: python results_tracker.py || true
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
@@ -70,8 +73,8 @@ jobs:
         if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
         run: python projection_trainer.py || true
 
-      - name: Save yesterday's batted balls
-        if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
+      - name: Save batted balls
+        if: github.event.schedule == '0 11 * * *' || github.event.schedule == '0 2 * * *' || github.event.schedule == '0 3 * * *' || github.event.schedule == '0 4 * * *' || github.event_name == 'workflow_dispatch'
         run: python save_batted_balls.py || true
 
       - name: Run HR prop model
