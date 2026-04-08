@@ -100,6 +100,40 @@ def load_training_data() -> tuple[np.ndarray, np.ndarray, list[str]]:
                 velo_norm = (p_velo - 85) / 15 if p_velo > 0 else 0.5  # 85-100 range
                 spin_norm = (p_spin - 2000) / 500 if p_spin > 0 else 0.5  # 2000-2500 range
 
+                # Per-pitch-type features: dominant pitch vs secondary pitches
+                pitch_detail = player.get("pitch_detail", {})
+                pitch_types_list = player.get("pitch_types", [])
+
+                # Find dominant pitch (highest usage)
+                dominant_pt = ""
+                dominant_usage = 0
+                for pt, detail in pitch_detail.items():
+                    usage = detail.get("usage_pct", 0)
+                    if usage > dominant_usage:
+                        dominant_usage = usage
+                        dominant_pt = pt
+
+                # Dominant pitch metrics
+                dom_detail = pitch_detail.get(dominant_pt, {})
+                dom_ev = dom_detail.get("avg_exit_velo", 0)
+                dom_barrel = dom_detail.get("barrel_rate", 0) / 100 if dom_detail.get("barrel_rate", 0) else 0
+                dom_fb = dom_detail.get("fb_rate", 0) / 100 if dom_detail.get("fb_rate", 0) else 0
+                dom_ev_norm = (dom_ev - 80) / 20 if dom_ev > 0 else 0
+                dom_usage_norm = dominant_usage / 100 if dominant_usage > 0 else 0
+
+                # Secondary pitches average
+                sec_ev_total = 0
+                sec_barrel_total = 0
+                sec_count = 0
+                for pt, detail in pitch_detail.items():
+                    if pt != dominant_pt and detail.get("avg_exit_velo", 0) > 0:
+                        sec_ev_total += detail.get("avg_exit_velo", 0)
+                        sec_barrel_total += detail.get("barrel_rate", 0) / 100
+                        sec_count += 1
+                sec_ev = sec_ev_total / sec_count if sec_count > 0 else 0
+                sec_barrel = sec_barrel_total / sec_count if sec_count > 0 else 0
+                sec_ev_norm = (sec_ev - 80) / 20 if sec_ev > 0 else 0
+
                 features = [
                     barrel_pct,
                     fb_pct,
@@ -118,6 +152,13 @@ def load_training_data() -> tuple[np.ndarray, np.ndarray, list[str]]:
                     p_vert_break,
                     p_horiz_break,
                     platoon,
+                    # New: per-pitch-type features
+                    dom_ev_norm,
+                    dom_barrel,
+                    dom_fb,
+                    dom_usage_norm,
+                    sec_ev_norm,
+                    sec_barrel,
                 ]
 
                 # Label: did this player hit a HR?
@@ -133,6 +174,9 @@ def load_training_data() -> tuple[np.ndarray, np.ndarray, list[str]]:
         "env_score", "park_factor_norm",
         "pitcher_velo", "pitcher_spin", "pitcher_vert_break", "pitcher_horiz_break",
         "platoon",
+        # Per-pitch-type features
+        "dom_pitch_ev", "dom_pitch_barrel", "dom_pitch_fb",
+        "dom_pitch_usage", "sec_pitch_ev", "sec_pitch_barrel",
     ]
 
     return np.array(X_rows), np.array(y_rows), feature_names
@@ -228,11 +272,8 @@ def train_model(X: np.ndarray, y: np.ndarray, feature_names: list[str]):
     print(f"  Pitcher vulnerability:  {cat_weights['pitcher']*100:.1f}%")
     print(f"  Environment:            {cat_weights['environment']*100:.1f}%")
 
-    # Save weights for the model to pick up automatically
-    Path("results").mkdir(exist_ok=True)
-    with open("results/ml_weights.json", "w") as f:
-        json.dump(cat_weights, f, indent=2)
-    print(f"\n  Saved to results/ml_weights.json — model will use these on next run.")
+    # DO NOT auto-save weights — user decides when to apply
+    print(f"\n  Weights NOT auto-applied. User must manually update results/ml_weights.json.")
 
     return model, scaler, coefs, weights
 
