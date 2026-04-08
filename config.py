@@ -92,7 +92,7 @@ HARD_HIT_THRESHOLD: float = 95.0  # mph exit velo for "hard hit"
 # ── Normalization Ranges (for 0-1 scaling) ───────────────────────────────────
 # Fixed empirical ranges so scores are comparable day-to-day.
 NORM_RANGES: dict = {
-    "avg_exit_velo": (80.0, 100.0),
+    "avg_exit_velo": (92.0, 102.0),
     "barrel_rate": (0.0, 0.25),
     "fly_ball_rate": (0.15, 0.55),
     "hard_hit_rate": (0.20, 0.65),

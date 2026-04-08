@@ -220,8 +220,19 @@ def score_batter_vs_pitcher(
                 per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pt_rows)
 
         # Build weighted scoring metrics (used for batter_score only, not display)
-        # pitch_weights applies tier multipliers (45%+ = 2x, 25-44% = 1.3x)
-        active_pts = {pt for pt, m in per_pitch_metrics.items() if any(v > 0 for v in m.values())}
+        # Require 2+ BIP per pitch type to get tier weight — prevents 1 lucky barrel from inflating
+        # Count BIP per pitch type in the pool
+        pt_bip_counts = {}
+        for pt in pitch_mix:
+            pt_codes = {pt}
+            if pt == "ST": pt_codes.add("SL")
+            if pt == "SL": pt_codes.add("ST")
+            pt_bip_counts[pt] = len(recent_bip[recent_bip["pitch_type"].isin(pt_codes)]) if "pitch_type" in recent_bip.columns else 0
+
+        active_pts = {
+            pt for pt, m in per_pitch_metrics.items()
+            if any(v > 0 for v in m.values()) and pt_bip_counts.get(pt, 0) >= 2
+        }
         if active_pts:
             active_wts = {pt: pitch_weights.get(pt, 0) for pt in active_pts}
             w_total = sum(active_wts.values())
@@ -351,12 +362,19 @@ def score_batter_vs_pitcher(
     result["matchup_score"] = matchup_score
 
     # ── Step 7c: Composite ───────────────────────────────────────────────────
-    result["composite_score"] = (
+    composite = (
         config.BATTER_COMPOSITE_WEIGHT * batter_score
         + config.MATCHUP_QUALITY_WEIGHT * matchup_score
         + config.PITCHER_COMPOSITE_WEIGHT * pitcher_score
         + config.ENVIRONMENT_COMPOSITE_WEIGHT * env_score
     )
+
+    # Batter score gatekeeper — weak bats can't ride a vulnerable pitcher into top rankings
+    # If batter_score < 0.30, cap composite at 0.40 regardless of pitcher/env
+    if batter_score < 0.30:
+        composite = min(composite, 0.40)
+
+    result["composite_score"] = composite
 
     # Count total balls in play for confidence
     total_bip = 0
