@@ -100,7 +100,7 @@ export function BatterCard({
           {/* Player info + metrics */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="font-semibold text-foreground truncate">{player.name}</span>
+              <span className="font-semibold text-foreground">{player.name}</span>
               <span className="text-[10px] text-muted font-mono">{player.batter_hand}HB</span>
               <RatingBadge composite={scores.composite} />
               {scores.recent_abs.length <= 2 && (

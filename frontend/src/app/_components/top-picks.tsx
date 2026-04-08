@@ -78,10 +78,10 @@ export function TopPicks({
               <span className="text-sm font-bold text-accent font-mono w-7 text-center shrink-0">{i + 1}</span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-foreground truncate">{player.name}</span>
+                  <span className="text-sm font-semibold text-foreground">{player.name}</span>
                   <RatingBadge composite={s.composite} />
                 </div>
-                <div className="text-[10px] text-muted mt-0.5 truncate">
+                <div className="text-[10px] text-muted mt-0.5">
                   {game.away_team}@{game.home_team} vs {player.opp_pitcher}
                 </div>
                 <div className="flex items-center gap-3 mt-1 text-[10px]">

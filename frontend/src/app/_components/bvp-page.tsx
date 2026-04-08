@@ -164,7 +164,7 @@ export function BvPPage({
                 <div className="flex items-center justify-between">
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-foreground truncate">{m.batter}</span>
+                      <span className="text-sm font-semibold text-foreground">{m.batter}</span>
                       {m.abs === 0 && <span className="text-[9px] px-1.5 py-0.5 rounded bg-card-border text-muted">No History</span>}
                     </div>
                     <div className="text-[10px] text-muted mt-0.5">vs {m.pitcher} &middot; {m.game}</div>

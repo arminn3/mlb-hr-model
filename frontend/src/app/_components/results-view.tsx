@@ -416,7 +416,7 @@ function HRHittersTable({ l5, l10, activeLb }: {
           <div key={h.name} className="bg-background/30 rounded-lg px-3 py-2 flex items-center gap-3">
             <span className="font-mono font-bold text-accent text-sm shrink-0">#{h.rank}</span>
             <div className="flex-1 min-w-0">
-              <span className="text-sm font-semibold text-foreground truncate block">{h.name}</span>
+              <span className="text-sm font-semibold text-foreground">{h.name}</span>
               <div className="text-[10px] text-muted mt-0.5">vs {h.opp_pitcher} &middot; {h.matchup}</div>
             </div>
             <span className="font-mono text-sm text-foreground shrink-0">{h.composite.toFixed(3)}</span>

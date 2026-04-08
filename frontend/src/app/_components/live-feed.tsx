@@ -342,7 +342,7 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
                   ) : (
                     <span className="px-1.5 py-0.5 text-[10px] rounded bg-card-border text-muted shrink-0">AIR</span>
                   )}
-                  <span className="text-sm font-medium text-foreground truncate">{p.batter}</span>
+                  <span className="text-sm font-medium text-foreground">{p.batter}</span>
                 </div>
                 <span className={`font-mono text-sm font-bold shrink-0 ml-2 ${p.ev >= 100 ? "text-accent-green" : "text-foreground"}`}>
                   {typeof p.ev === 'number' ? p.ev.toFixed(1) : p.ev}

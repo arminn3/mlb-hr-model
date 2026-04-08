@@ -131,7 +131,7 @@ export function PlayerRow({
           {/* Player info */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-foreground truncate">
+              <span className="font-semibold text-foreground">
                 {player.Player}
               </span>
               <span className="text-xs text-muted">

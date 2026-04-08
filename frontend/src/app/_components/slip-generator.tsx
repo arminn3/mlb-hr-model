@@ -299,7 +299,7 @@ function PlayerPickRow({
           {selected ? "\u2713" : ""}
         </span>
         <div className="min-w-0">
-          <span className="text-sm font-medium text-foreground truncate block">{player.name}</span>
+          <span className="text-sm font-medium text-foreground">{player.name}</span>
           <span className="text-[10px] text-muted block md:hidden">{player.game}</span>
           <span className="text-[10px] text-muted hidden md:inline ml-0">{player.game}</span>
         </div>
