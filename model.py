@@ -193,9 +193,8 @@ def score_batter_vs_pitcher(
         if len(recent_bip) < effective_n_bip:
             low_sample = True
 
-        # ── Step 4: Calculate metrics from the entire BIP pool ───────────
-        # Like PropFinder: barrel%, FB%, hard hit%, EV from all 5 BIP together
-        # Enforce exact pool size to ensure clean percentages (20%, 40%, etc.)
+        # ── Step 4: Calculate metrics — pool stats for display, weighted for scoring ──
+        # Display: barrel%, FB%, EV from all BIP together (what user sees)
         recent_bip = recent_bip.head(effective_n_bip)
         pool_metrics = calc_batter_metrics_for_pitch(recent_bip)
         result["weighted_exit_velo"] = pool_metrics["avg_exit_velo"]
@@ -203,7 +202,9 @@ def score_batter_vs_pitcher(
         result["weighted_fb_rate"] = pool_metrics["fly_ball_rate"]
         result["weighted_hard_hit_rate"] = pool_metrics["hard_hit_rate"]
 
-        # Still compute per-pitch-type metrics for display/detail
+        # Scoring: weight per-pitch-type metrics by pitch usage tiers
+        # A pitcher's dominant pitch (45%+ = 2x weight) matters more for HR prediction
+        # This makes a batter's fastball performance count more vs a fastball-heavy pitcher
         for pt in pitch_mix:
             pt_rows = recent_bip[recent_bip["pitch_type"] == pt] if "pitch_type" in recent_bip.columns else pd.DataFrame()
             if pt_rows.empty:
@@ -214,20 +215,34 @@ def score_batter_vs_pitcher(
             else:
                 per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pt_rows)
 
-    # 2025 season baseline removed — we backfill individual BIP from 2025
-    # in Step 3 instead of blending season averages which corrupts percentages
+        # Build weighted scoring metrics (used for batter_score only, not display)
+        # pitch_weights applies tier multipliers (45%+ = 2x, 25-44% = 1.3x)
+        active_pts = {pt for pt, m in per_pitch_metrics.items() if any(v > 0 for v in m.values())}
+        if active_pts:
+            active_wts = {pt: pitch_weights.get(pt, 0) for pt in active_pts}
+            w_total = sum(active_wts.values())
+            if w_total > 0:
+                active_wts = {pt: w / w_total for pt, w in active_wts.items()}
+                for metric in ["avg_exit_velo", "barrel_rate", "fly_ball_rate"]:
+                    scoring_key = f"_scoring_{metric}"
+                    result[scoring_key] = sum(
+                        per_pitch_metrics[pt][metric] * active_wts[pt]
+                        for pt in active_pts
+                    )
 
     # ── Step 5: Normalize and weight batter metrics ──────────────────────────
     # hard_hit_rate is calculated and displayed but NOT used in scoring
     # barrel_rate already captures hard hit + lift, which is what matters for HRs
-    batter_metric_map = {
-        "weighted_exit_velo": "avg_exit_velo",
-        "weighted_barrel_rate": "barrel_rate",
-        "weighted_fb_rate": "fly_ball_rate",
-    }
+    # Use pitch-weighted metrics for scoring (dominant pitch counts more)
+    # Display metrics (weighted_*) stay clean for the UI
+    scoring_map = [
+        ("_scoring_avg_exit_velo", "weighted_exit_velo", "avg_exit_velo"),
+        ("_scoring_barrel_rate", "weighted_barrel_rate", "barrel_rate"),
+        ("_scoring_fly_ball_rate", "weighted_fb_rate", "fly_ball_rate"),
+    ]
     batter_score = 0.0
-    for result_key, config_key in batter_metric_map.items():
-        raw = result[result_key]
+    for scoring_key, fallback_key, config_key in scoring_map:
+        raw = result.get(scoring_key, result.get(fallback_key, 0))
         normed = normalize_metric(raw, config_key)
         batter_score += normed * config.BATTER_WEIGHTS[config_key]
     result["batter_score"] = batter_score
