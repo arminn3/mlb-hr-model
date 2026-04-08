@@ -76,13 +76,20 @@ export function BatterCard({
 
   // Filter recent ABs — use per-pitch-type last 5 BIP when a pitch filter is selected
   const pitchAbsData = (scores as unknown as Record<string, unknown>).pitch_abs as Record<string, Array<Record<string, unknown>>> | undefined;
-  const filteredABs = pitchFilter === "all"
-    ? (scores.recent_abs || []).filter((ab) =>
-        arsenalPitchNames.size === 0 ||
-        Array.from(arsenalPitchNames).some((n) => ab.pitch_type === n || ab.pitch_type.includes(n))
-      )
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    : ((pitchAbsData?.[pitchFilter] || []) as any[]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let filteredABs: any[];
+  if (pitchFilter === "all") {
+    // Combine all per-pitch-type ABs and sort by date descending
+    if (pitchAbsData && Object.keys(pitchAbsData).length > 0) {
+      const allPitchAbs = Object.values(pitchAbsData).flat();
+      allPitchAbs.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+      filteredABs = allPitchAbs;
+    } else {
+      filteredABs = (scores.recent_abs || []);
+    }
+  } else {
+    filteredABs = (pitchAbsData?.[pitchFilter] || []);
+  }
 
   return (
     <div className="border border-card-border rounded-lg bg-card/40 hover:bg-card/60 transition-colors">
