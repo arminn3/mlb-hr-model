@@ -258,7 +258,8 @@ def load_bulk_2025() -> pd.DataFrame:
         df = statcast(start_dt=dates[0], end_dt=dates[1])
         if df is not None and not df.empty:
             if "game_type" in df.columns:
-                df = df[df["game_type"] == "R"].copy()
+                # Include regular season + postseason (exclude spring training)
+                df = df[df["game_type"].isin(["R", "F", "D", "L", "W"])].copy()
             _bulk_2025_cache = df
             print(f"{len(df)} rows loaded.")
             return df
