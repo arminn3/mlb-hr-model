@@ -156,18 +156,33 @@ function DayReport({ day }: { day: DayReportData }) {
 
   return (
         <div className="border border-card-border rounded-xl bg-card/50 p-5 mb-4">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
-            <h3 className="text-lg font-bold text-foreground">{day.date}</h3>
-            <div className="flex items-center gap-3 flex-wrap">
-              <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-0.5">
-                <button onClick={() => setLb("L5")} className={`px-2.5 py-1 text-[10px] rounded cursor-pointer transition-colors ${lb === "L5" ? "bg-accent/15 text-accent font-semibold" : "text-muted hover:text-foreground"}`}>L5</button>
-                <button onClick={() => setLb("L10")} className={`px-2.5 py-1 text-[10px] rounded cursor-pointer transition-colors ${lb === "L10" ? "bg-accent/15 text-accent font-semibold" : "text-muted hover:text-foreground"}`}>L10</button>
-              </div>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
+            <div className="flex items-center gap-4">
+              <h3 className="text-lg font-bold text-foreground">{day.date}</h3>
               <div className="flex items-center gap-4 text-xs text-muted">
                 <span>{day.total_players_ranked} ranked</span>
                 <span>{day.total_hrs_hit} HRs hit</span>
-                <span className="text-accent-green">{day.model_hits} caught</span>
+                <span className="text-accent-green font-semibold">{day.model_hits} caught</span>
               </div>
+            </div>
+            {/* L5/L10 toggle — prominent */}
+            <div className="flex items-center gap-1 bg-card border border-card-border rounded-xl p-1">
+              <button
+                onClick={() => setLb("L5")}
+                className={`px-5 py-2 text-sm font-bold rounded-lg cursor-pointer transition-colors ${
+                  lb === "L5" ? "bg-accent text-background" : "text-muted hover:text-foreground"
+                }`}
+              >
+                L5
+              </button>
+              <button
+                onClick={() => setLb("L10")}
+                className={`px-5 py-2 text-sm font-bold rounded-lg cursor-pointer transition-colors ${
+                  lb === "L10" ? "bg-accent text-background" : "text-muted hover:text-foreground"
+                }`}
+              >
+                L10
+              </button>
             </div>
           </div>
 
