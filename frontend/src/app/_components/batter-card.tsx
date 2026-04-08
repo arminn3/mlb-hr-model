@@ -96,7 +96,8 @@ export function BatterCard({
       filteredABs = (scores.recent_abs || []).slice(0, lookback === "L10" ? 10 : 5);
     }
   } else {
-    filteredABs = (pitchAbsData?.[pitchFilter] || []);
+    const limit = lookback === "L10" ? 10 : 5;
+    filteredABs = (pitchAbsData?.[pitchFilter] || []).slice(0, limit);
   }
 
   return (
