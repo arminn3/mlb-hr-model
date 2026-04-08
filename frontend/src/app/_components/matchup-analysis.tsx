@@ -649,10 +649,10 @@ function MatchupTableView({
                     {scores.pitcher_score.toFixed(2)}
                   </td>
                   <td className="py-2.5 px-2 text-center font-mono text-muted">
-                    {fmt(scores.exit_velo)}
+                    {fmt((player as unknown as Record<string, Record<string, number>>).season_profile?.ev ?? scores.exit_velo)}
                   </td>
                   <td className="py-2.5 px-2 text-center font-mono text-muted">
-                    {pct(scores.barrel_pct)}
+                    {pct((player as unknown as Record<string, Record<string, number>>).season_profile?.barrel ?? scores.barrel_pct)}
                   </td>
                   <td className="py-2.5 px-2 text-center font-mono font-bold text-foreground">
                     {(scores.composite * 100).toFixed(1)}
@@ -727,7 +727,7 @@ function MatchupTableView({
                 <div>
                   <span className="text-muted block uppercase">Barrel</span>
                   <span className="font-mono text-foreground block">
-                    {pct(scores.barrel_pct)}
+                    {pct((player as unknown as Record<string, Record<string, number>>).season_profile?.barrel ?? scores.barrel_pct)}
                   </span>
                 </div>
               </div>
