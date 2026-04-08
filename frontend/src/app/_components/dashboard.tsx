@@ -16,6 +16,7 @@ import { BvPPage } from "./bvp-page";
 import { GemFinder } from "./gem-finder";
 import { LiveFeed } from "./live-feed";
 import { ProjectionsView } from "./projections-view";
+import { MatchupAnalysis } from "./matchup-analysis";
 
 export function Dashboard() {
   const [data, setData] = useState<ModelData | null>(null);
@@ -115,7 +116,7 @@ export function Dashboard() {
     setSidebarOpen(false); // close on mobile after selecting
   };
 
-  const pageTitle = activePage === "rankings" ? "HR Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "slips" ? "Slip Generator" : activePage === "bvp" ? "Batter vs Pitcher" : activePage === "environment" ? "Environment" : activePage === "gems" ? "Gem Finder" : activePage === "live" ? "Live Feed" : activePage === "results" ? "Results Log" : "How It Works";
+  const pageTitle = activePage === "rankings" ? "HR Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "slips" ? "Slip Generator" : activePage === "bvp" ? "Batter vs Pitcher" : activePage === "environment" ? "Environment" : activePage === "gems" ? "Gem Finder" : activePage === "matchup" ? "Matchup Analysis" : activePage === "live" ? "Live Feed" : activePage === "results" ? "Results Log" : "How It Works";
 
   return (
     <div className="flex min-h-screen">
@@ -152,7 +153,7 @@ export function Dashboard() {
             </span>
           </div>
           <div className="flex items-center gap-2 md:gap-4">
-            {(activePage === "rankings" || activePage === "slate" || activePage === "slips" || activePage === "bvp" || activePage === "gems") && (
+            {(activePage === "rankings" || activePage === "slate" || activePage === "slips" || activePage === "bvp" || activePage === "gems" || activePage === "matchup") && (
               <LookbackToggle value={lookback} onChange={setLookback} />
             )}
             <DatePicker currentDate={selectedDate} onChange={loadDate} />
@@ -232,6 +233,10 @@ export function Dashboard() {
 
           {activePage === "gems" && (
             <GemFinder games={data.games} lookback={lookback} />
+          )}
+
+          {activePage === "matchup" && (
+            <MatchupAnalysis games={data.games} lookback={lookback} />
           )}
 
           {activePage === "slips" && (

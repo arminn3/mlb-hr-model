@@ -1,6 +1,6 @@
 "use client";
 
-export type Page = "rankings" | "slate" | "environment" | "projections" | "slips" | "bvp" | "gems" | "live" | "results" | "methodology";
+export type Page = "rankings" | "slate" | "environment" | "projections" | "slips" | "bvp" | "gems" | "live" | "results" | "methodology" | "matchup";
 
 const NAV_ITEMS: { key: Page; label: string; icon: string }[] = [
   { key: "rankings", label: "HR Rankings", icon: "chart" },
@@ -12,6 +12,7 @@ const NAV_ITEMS: { key: Page; label: string; icon: string }[] = [
   { key: "gems", label: "Gem Finder", icon: "gem" },
   { key: "live", label: "Live Feed", icon: "live" },
   { key: "results", label: "Results Log", icon: "check" },
+  { key: "matchup", label: "Matchup Analysis", icon: "matchup" },
   { key: "methodology", label: "How It Works", icon: "info" },
 ];
 
@@ -70,6 +71,12 @@ function Icon({ name }: { name: string }) {
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     );
+  if (name === "matchup")
+    return (
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M12 3v6m0 0l-3-3m3 3l3-3" />
+      </svg>
+    );
   if (name === "cloud")
     return (
       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -123,7 +130,7 @@ export function Sidebar({
           Analysis
         </span>
         <div className="space-y-1 mb-5">
-          {(["rankings", "slate", "gems", "projections", "environment", "live"] as const).map((key) => {
+          {(["rankings", "slate", "matchup", "gems", "projections", "environment", "live"] as const).map((key) => {
             const item = NAV_ITEMS.find(n => n.key === key)!;
             return <NavButton key={key} item={item} active={active} onChange={onChange} />;
           })}

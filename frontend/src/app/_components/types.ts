@@ -31,6 +31,7 @@ export interface PitchDetailEntry {
   fb_rate: number;
   hard_hit_rate: number;
   avg_exit_velo: number;
+  count?: number;
 }
 
 export interface PitcherInfo {
@@ -44,6 +45,10 @@ export interface PitcherStats {
   hr_per_9: number;
   ip: number;
   total_hrs: number;
+  avg_velo?: number;
+  avg_spin?: number;
+  avg_vert_break?: number;
+  avg_horiz_break?: number;
 }
 
 export interface PlayerData {
@@ -51,6 +56,8 @@ export interface PlayerData {
   batter_hand: string;
   opp_pitcher: string;
   pitcher_hand: string;
+  platoon?: number;
+  game_num?: number;
   batter_side: "home" | "away";
   pitch_types: string[];
   pitch_detail: Record<string, PitchDetailEntry>;
@@ -66,6 +73,8 @@ export interface PlayerData {
       slg: number;
       iso: number;
       k_pct: number;
+      pa?: number;
+      ops?: number | string;
     };
     recent_abs: Array<{
       date: string;
