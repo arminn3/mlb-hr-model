@@ -52,10 +52,51 @@ function pct(v: number | undefined | null, decimals = 1): string {
 
 /* ---------- sub-components ---------- */
 
-function StatRow({ label, value }: { label: string; value: string }) {
+function GradeBadge({ grade }: { grade: { label: string; color: string } }) {
+  const bgMap: Record<string, string> = {
+    ELITE: "bg-accent-green/20 text-accent-green border-accent-green/40",
+    A: "bg-accent-green/10 text-accent-green border-accent-green/30",
+    B: "bg-accent-yellow/10 text-accent-yellow border-accent-yellow/30",
+    C: "bg-accent-red/10 text-accent-red border-accent-red/30",
+    D: "bg-card text-muted border-card-border",
+  };
   return (
-    <div className="flex justify-between text-xs">
-      <span className="text-muted">{label}</span>
+    <span
+      className={`text-xs font-bold px-2.5 py-1 rounded border ${bgMap[grade.label] ?? bgMap.D}`}
+    >
+      {grade.label} GRADE
+    </span>
+  );
+}
+
+function SectionHeader({
+  emoji,
+  title,
+  subtitle,
+  borderColor,
+}: {
+  emoji: string;
+  title: string;
+  subtitle?: string;
+  borderColor: string;
+}) {
+  return (
+    <div className={`border-l-4 ${borderColor} pl-3 mb-3`}>
+      <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">
+        {emoji} {title}
+      </h4>
+      {subtitle && (
+        <p className="text-[10px] text-muted mt-0.5">{subtitle}</p>
+      )}
+    </div>
+  );
+}
+
+function BulletStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="text-xs py-0.5">
+      <span className="text-muted mr-1.5">&bull;</span>
+      <span className="text-muted">{label}:</span>{" "}
       <span className="font-mono text-foreground">{value}</span>
     </div>
   );
@@ -79,164 +120,214 @@ function MatchupCard({
   const grade = getGrade(scores.composite);
   const form = getForm(player);
   const env = game.environment;
+  const hrProb = (scores.composite * 100).toFixed(1);
 
   const pitchEntries = Object.entries(player.pitch_detail || {}).sort(
     (a, b) => b[1].usage_pct - a[1].usage_pct,
   );
 
+  const compositeColor =
+    scores.composite >= 0.55
+      ? "text-accent-green"
+      : scores.composite >= 0.4
+        ? "text-accent-yellow"
+        : scores.composite >= 0.25
+          ? "text-accent-red"
+          : "text-muted";
+
   return (
     <div className="bg-card/50 border border-card-border rounded-xl overflow-hidden">
-      {/* Header — always visible, clickable */}
+      {/* ===== Header — always visible, clickable ===== */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full text-left px-4 py-3 flex items-center justify-between gap-3 hover:bg-card/80 transition-colors cursor-pointer"
+        className="w-full text-left px-5 py-4 hover:bg-card/80 transition-colors cursor-pointer"
       >
-        <div className="flex items-center gap-3 min-w-0">
-          <span
-            className={`text-xs font-bold px-2 py-0.5 rounded ${grade.color} bg-card border border-card-border`}
-          >
-            {grade.label}
-          </span>
+        {/* Top row: matchup title + score/grade */}
+        <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <span className="text-sm font-semibold text-foreground truncate block">
-              {player.name}{" "}
-              <span className="text-muted font-normal text-xs">
-                ({player.batter_hand})
-              </span>{" "}
-              <span className="text-muted font-normal text-xs">vs</span>{" "}
-              {player.opp_pitcher}{" "}
-              <span className="text-muted font-normal text-xs">
-                ({player.pitcher_hand})
+            <span className="text-base font-bold text-foreground block truncate">
+              {"\u{1F525}"} {player.name} vs {player.opp_pitcher}
+            </span>
+            <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+              {player.platoon ? (
+                <span className="text-[10px] bg-accent-green/15 text-accent-green border border-accent-green/30 px-2 py-0.5 rounded-full font-medium">
+                  Platoon Advantage
+                </span>
+              ) : null}
+              <span className="text-[11px] text-muted">
+                {player.batter_hand} vs {player.pitcher_hand}
               </span>
+              {game.game_time && (
+                <span className="text-[11px] text-muted">
+                  {"\u00b7"} {game.game_time}
+                </span>
+              )}
+            </div>
+          </div>
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <span className={`font-mono text-xl font-bold ${compositeColor}`}>
+              {hrProb}%
             </span>
-            <span className="text-[11px] text-muted block mt-0.5">
-              {game.away_team} @ {game.home_team}
-              {game.game_time ? ` \u00b7 ${game.game_time}` : ""}
-              {player.platoon ? " \u00b7 Platoon \u2713" : ""}
-            </span>
+            <GradeBadge grade={grade} />
+            <svg
+              className={`w-4 h-4 text-muted transition-transform ${expanded ? "rotate-180" : ""}`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 flex-shrink-0">
-          <span className="font-mono text-xs text-foreground hidden sm:block">
-            {scores.composite.toFixed(3)}
+        {/* Team pills */}
+        <div className="flex items-center gap-2 mt-3">
+          <span className="bg-accent-red/20 text-foreground text-xs font-bold px-4 py-1.5 rounded-full border border-accent-red/30">
+            {game.away_team}
           </span>
-          <svg
-            className={`w-4 h-4 text-muted transition-transform ${expanded ? "rotate-180" : ""}`}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
+          <span className="text-muted text-xs font-medium">@</span>
+          <span className="bg-accent-yellow/20 text-foreground text-xs font-bold px-4 py-1.5 rounded-full border border-accent-yellow/30">
+            {game.home_team}
+          </span>
         </div>
       </button>
 
       {expanded && (
         <div className="border-t border-card-border">
-          {/* Score bar */}
-          <div className="grid grid-cols-3 divide-x divide-card-border text-center py-2.5 bg-background/40">
-            <div>
-              <span className="text-[10px] uppercase tracking-wider text-muted block">
-                Power
-              </span>
-              <span className="font-mono text-sm text-foreground font-semibold">
-                {scores.batter_score.toFixed(2)}
-              </span>
-            </div>
-            <div>
-              <span className="text-[10px] uppercase tracking-wider text-muted block">
-                Vulnerability
-              </span>
-              <span className="font-mono text-sm text-foreground font-semibold">
-                {scores.pitcher_score.toFixed(2)}
-              </span>
-            </div>
-            <div>
-              <span className="text-[10px] uppercase tracking-wider text-muted block">
-                Context
-              </span>
-              <span className="font-mono text-sm text-foreground font-semibold">
-                {scores.env_score.toFixed(2)}
-              </span>
-            </div>
+          {/* ===== Score boxes — 3 across ===== */}
+          <div className="grid grid-cols-3 gap-3 px-5 py-4">
+            {[
+              {
+                value: scores.batter_score.toFixed(2),
+                label: "POWER SCORE",
+                color: "text-accent-green",
+              },
+              {
+                value: scores.pitcher_score.toFixed(2),
+                label: "VULNERABILITY",
+                color: "text-accent-yellow",
+              },
+              {
+                value: scores.env_score.toFixed(2),
+                label: "CONTEXT",
+                color: "text-accent",
+              },
+            ].map((box) => (
+              <div
+                key={box.label}
+                className="border border-card-border rounded-lg bg-background/40 text-center py-3 px-2"
+              >
+                <span
+                  className={`font-mono text-lg font-bold block ${box.color}`}
+                >
+                  {box.value}
+                </span>
+                <span className="text-[10px] uppercase tracking-wider text-muted block mt-1">
+                  {box.label}
+                </span>
+              </div>
+            ))}
           </div>
 
-          {/* Batter / Pitcher split */}
-          <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-card-border">
+          {/* ===== Batter / Pitcher two-column ===== */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-0">
             {/* Batter metrics */}
-            <div className="p-4 space-y-1.5">
-              <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
-                Batter Metrics
-              </h4>
-              <StatRow label="Barrel %" value={pct(scores.barrel_pct)} />
-              <StatRow label="Exit Velo" value={fmt(scores.exit_velo) + " mph"} />
-              <StatRow label="FB %" value={pct(scores.fb_pct)} />
-              <StatRow label="Hard Hit %" value={pct(scores.hard_hit_pct)} />
-              <div className="flex justify-between text-xs pt-1">
-                <span className="text-muted">Form</span>
+            <div className="px-5 py-4 border-t border-card-border md:border-r">
+              <SectionHeader
+                emoji={"\u{1F3CF}"}
+                title="BATTER METRICS"
+                subtitle="Power & Contact Analysis"
+                borderColor="border-accent-green"
+              />
+              <div className="space-y-0.5">
+                <BulletStat label="Barrel" value={pct(scores.barrel_pct)} />
+                <BulletStat
+                  label="Exit Velo"
+                  value={fmt(scores.exit_velo) + " mph"}
+                />
+                <BulletStat label="FB%" value={pct(scores.fb_pct)} />
+                <BulletStat
+                  label="Hard Hit"
+                  value={pct(scores.hard_hit_pct)}
+                />
+              </div>
+              <div className="mt-2 pt-2 border-t border-card-border/50 text-xs">
+                <span className="text-muted">&bull; Form:</span>{" "}
                 <span className={`font-semibold ${form.color}`}>
-                  {form.label}
+                  {form.label === "Hot"
+                    ? "\u{1F525} Hot"
+                    : form.label === "Cold"
+                      ? "\u{1F9CA} Cold"
+                      : form.label === "Good"
+                        ? "\u{2705} Good"
+                        : "\u{2796} Average"}
                 </span>
               </div>
               {scores.data_quality && scores.data_quality !== "OK" && (
-                <div className="text-[10px] text-accent-yellow mt-1">
+                <div className="text-[10px] text-accent-yellow mt-2">
                   {scores.data_quality.replace(/_/g, " ")}
                 </div>
               )}
             </div>
 
             {/* Pitcher metrics */}
-            <div className="p-4 space-y-1.5">
-              <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
-                Pitcher Metrics
-              </h4>
-              <StatRow
-                label="HR/FB"
-                value={pct(player.pitcher_stats?.hr_fb_rate)}
+            <div className="px-5 py-4 border-t border-card-border">
+              <SectionHeader
+                emoji={"\u26BE"}
+                title="PITCHER METRICS"
+                subtitle="Vulnerability Assessment"
+                borderColor="border-accent-red"
               />
-              <StatRow
-                label="HR/9"
-                value={fmt(player.pitcher_stats?.hr_per_9, 2)}
-              />
-              <StatRow
-                label="FB Rate"
-                value={pct(player.pitcher_stats?.fb_rate)}
-              />
-              <StatRow
-                label="Avg Velo"
-                value={
-                  player.pitcher_stats?.avg_velo
-                    ? fmt(player.pitcher_stats.avg_velo) + " mph"
-                    : "-"
-                }
-              />
-              <StatRow
-                label="IP"
-                value={fmt(player.pitcher_stats?.ip, 1)}
-              />
-              <StatRow
-                label="Total HRs"
-                value={
-                  player.pitcher_stats?.total_hrs !== undefined
-                    ? String(player.pitcher_stats.total_hrs)
-                    : "-"
-                }
-              />
+              <div className="space-y-0.5">
+                <BulletStat
+                  label="HR/FB"
+                  value={pct(player.pitcher_stats?.hr_fb_rate)}
+                />
+                <BulletStat
+                  label="HR/9"
+                  value={fmt(player.pitcher_stats?.hr_per_9, 2)}
+                />
+                <BulletStat
+                  label="FB Rate"
+                  value={pct(player.pitcher_stats?.fb_rate)}
+                />
+                <BulletStat
+                  label="Avg Velo"
+                  value={
+                    player.pitcher_stats?.avg_velo
+                      ? fmt(player.pitcher_stats.avg_velo) + " mph"
+                      : "-"
+                  }
+                />
+                <BulletStat
+                  label="IP"
+                  value={fmt(player.pitcher_stats?.ip, 1)}
+                />
+                <BulletStat
+                  label="Total HRs"
+                  value={
+                    player.pitcher_stats?.total_hrs !== undefined
+                      ? String(player.pitcher_stats.total_hrs)
+                      : "-"
+                  }
+                />
+              </div>
             </div>
           </div>
 
-          {/* BvP career */}
+          {/* ===== BvP career ===== */}
           {player.bvp_stats?.career && player.bvp_stats.career.abs > 0 && (
-            <div className="border-t border-card-border p-4">
-              <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
-                Head-to-Head (Career)
-              </h4>
+            <div className="border-t border-card-border px-5 py-4">
+              <SectionHeader
+                emoji={"\u{1F4CA}"}
+                title="HEAD-TO-HEAD (CAREER)"
+                borderColor="border-accent"
+              />
               <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 text-center text-xs">
                 {[
                   { l: "AB", v: String(player.bvp_stats.career.abs) },
@@ -258,114 +349,154 @@ function MatchupCard({
                   },
                 ].map((s) => (
                   <div key={s.l}>
-                    <span className="text-muted block text-[10px]">{s.l}</span>
-                    <span className="font-mono text-foreground">{s.v}</span>
+                    <span className="text-muted block text-[10px] uppercase">
+                      {s.l}
+                    </span>
+                    <span className="font-mono text-foreground font-semibold">
+                      {s.v}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Game context */}
-          <div className="border-t border-card-border p-4">
-            <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
-              Game Context
-            </h4>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-              <div>
-                <span className="text-muted block">Ballpark</span>
-                <span className="font-mono text-foreground">
-                  {env.park_factor}{" "}
-                  <span className="text-muted text-[10px]">
+          {/* ===== Bottom two-column: Context + Pitch Analysis ===== */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            {/* Context & Conditions */}
+            <div className="px-5 py-4 border-t border-card-border md:border-r">
+              <SectionHeader
+                emoji={"\u{1F30D}"}
+                title="CONTEXT & CONDITIONS"
+                borderColor="border-accent"
+              />
+              <div className="space-y-2">
+                <div className="border border-card-border rounded-lg p-3 bg-background/30">
+                  <span className="text-[10px] uppercase tracking-wider text-muted block mb-1">
+                    Ballpark
+                  </span>
+                  <span className="font-mono text-sm text-foreground">
+                    PF {env.park_factor}
+                  </span>
+                  <span className="text-[10px] text-muted ml-1.5">
                     ({parkLabel(env.park_factor)})
                   </span>
-                </span>
-              </div>
-              <div>
-                <span className="text-muted block">Temperature</span>
-                <span className="font-mono text-foreground">
-                  {env.temperature_f !== null
-                    ? `${Math.round(env.temperature_f)}\u00b0F`
-                    : "-"}
-                </span>
-              </div>
-              <div>
-                <span className="text-muted block">Wind</span>
-                <span className="font-mono text-foreground">
-                  {env.wind_speed_mph !== null
-                    ? `${fmt(env.wind_speed_mph)} mph`
-                    : "-"}
-                  {env.wind_score !== undefined && (
-                    <span
-                      className={`ml-1 text-[10px] ${env.wind_score > 0 ? "text-accent-green" : env.wind_score < -3 ? "text-accent-red" : "text-muted"}`}
-                    >
-                      ({env.wind_score > 0 ? "+" : ""}
-                      {fmt(env.wind_score)})
+                </div>
+                <div className="border border-card-border rounded-lg p-3 bg-background/30">
+                  <span className="text-[10px] uppercase tracking-wider text-muted block mb-1">
+                    Weather
+                  </span>
+                  <span className="font-mono text-sm text-foreground">
+                    {env.temperature_f !== null
+                      ? `${Math.round(env.temperature_f)}\u00b0F`
+                      : "-"}
+                  </span>
+                  {env.wind_speed_mph !== null && (
+                    <span className="font-mono text-sm text-foreground ml-2">
+                      Wind {fmt(env.wind_speed_mph)} mph
+                      {env.wind_score !== undefined && (
+                        <span
+                          className={`ml-1 text-[10px] ${env.wind_score > 0 ? "text-accent-green" : env.wind_score < -3 ? "text-accent-red" : "text-muted"}`}
+                        >
+                          ({env.wind_score > 0 ? "+" : ""}
+                          {fmt(env.wind_score)})
+                        </span>
+                      )}
                     </span>
                   )}
-                </span>
+                </div>
+                <div className="border border-card-border rounded-lg p-3 bg-background/30">
+                  <span className="text-[10px] uppercase tracking-wider text-muted block mb-1">
+                    Handedness
+                  </span>
+                  <span className="font-mono text-sm text-foreground">
+                    {player.batter_hand} vs {player.pitcher_hand}
+                  </span>
+                  {player.platoon ? (
+                    <span className="text-[10px] text-accent-green ml-2">
+                      Platoon {"\u2713"}
+                    </span>
+                  ) : null}
+                </div>
+                <div className="border border-card-border rounded-lg p-3 bg-background/30">
+                  <span className="text-[10px] uppercase tracking-wider text-muted block mb-1">
+                    Venue
+                  </span>
+                  <span className="font-mono text-sm text-foreground">
+                    {env.is_dome
+                      ? "Dome"
+                      : env.is_retractable
+                        ? env.roof_closed
+                          ? "Roof Closed"
+                          : "Roof Open"
+                        : "Open Air"}
+                  </span>
+                </div>
               </div>
-              <div>
-                <span className="text-muted block">Dome / Roof</span>
-                <span className="font-mono text-foreground">
-                  {env.is_dome
-                    ? "Dome"
-                    : env.is_retractable
-                      ? env.roof_closed
-                        ? "Roof Closed"
-                        : "Roof Open"
-                      : "Open Air"}
-                </span>
-              </div>
+            </div>
+
+            {/* Pitch Analysis */}
+            <div className="px-5 py-4 border-t border-card-border">
+              <SectionHeader
+                emoji={"\u26BE"}
+                title="PITCH ANALYSIS & PERFORMANCE"
+                borderColor="border-accent-red"
+              />
+              {pitchEntries.length > 0 ? (
+                <div className="space-y-2">
+                  {pitchEntries.map(([code, detail]) => {
+                    const rating = getPitchRating(detail.barrel_rate);
+                    const borderClr =
+                      rating.label === "Strong"
+                        ? "border-accent-green"
+                        : rating.label === "Average"
+                          ? "border-accent-yellow"
+                          : "border-accent-red";
+                    const badgeBg =
+                      rating.label === "Strong"
+                        ? "bg-accent-green/15 text-accent-green"
+                        : rating.label === "Average"
+                          ? "bg-accent-yellow/15 text-accent-yellow"
+                          : "bg-accent-red/15 text-accent-red";
+                    return (
+                      <div
+                        key={code}
+                        className={`border-l-4 ${borderClr} border border-card-border rounded-lg p-3 bg-background/30`}
+                      >
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-xs font-semibold text-foreground">
+                            {code} ({pct(detail.usage_pct)})
+                          </span>
+                          <span
+                            className={`text-[10px] font-bold px-2 py-0.5 rounded ${badgeBg}`}
+                          >
+                            {rating.label}
+                          </span>
+                        </div>
+                        <div className="text-[11px] font-mono text-muted">
+                          Barrel: {pct(detail.barrel_rate)} | EV:{" "}
+                          {fmt(detail.avg_exit_velo)}mph | Hard:{" "}
+                          {pct(detail.hard_hit_rate)}
+                        </div>
+                        {detail.count !== undefined && (
+                          <div className="text-[10px] text-muted/60 mt-1">
+                            {detail.count >= 100
+                              ? "large"
+                              : detail.count >= 30
+                                ? "medium"
+                                : "small"}{" "}
+                            sample ({detail.count} BBE)
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <p className="text-xs text-muted">No pitch data available.</p>
+              )}
             </div>
           </div>
-
-          {/* Pitch analysis */}
-          {pitchEntries.length > 0 && (
-            <div className="border-t border-card-border p-4">
-              <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
-                Pitch-Type Analysis
-              </h4>
-              <div className="space-y-1.5">
-                {pitchEntries.map(([code, detail]) => {
-                  const rating = getPitchRating(detail.barrel_rate);
-                  return (
-                    <div
-                      key={code}
-                      className="flex items-center gap-2 text-xs"
-                    >
-                      <span className="font-mono text-foreground w-8 text-right flex-shrink-0">
-                        {code}
-                      </span>
-                      <span className="text-muted w-12 text-right flex-shrink-0">
-                        {pct(detail.usage_pct)}
-                      </span>
-                      {/* mini bar */}
-                      <div className="flex-1 h-1.5 bg-card rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-accent/40 rounded-full"
-                          style={{
-                            width: `${Math.min(detail.usage_pct, 100)}%`,
-                          }}
-                        />
-                      </div>
-                      <span className="text-muted w-20 text-right flex-shrink-0 hidden sm:block">
-                        Brl {pct(detail.barrel_rate)}
-                      </span>
-                      <span className="text-muted w-16 text-right flex-shrink-0 hidden sm:block">
-                        EV {fmt(detail.avg_exit_velo)}
-                      </span>
-                      <span
-                        className={`w-14 text-right font-semibold flex-shrink-0 ${rating.color}`}
-                      >
-                        {rating.label}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
         </div>
       )}
     </div>

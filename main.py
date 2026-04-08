@@ -390,6 +390,40 @@ def run_model(game_date: date = None, fast: bool = False):
         # Platoon indicator: 1 = opposite hand (advantage), 0 = same hand
         platoon = 1 if batter_h != pitcher_hand else 0
 
+        # Season-long batter profile (ALL BIP, not just L5)
+        # Used for the Matchup Analysis page (HRP-style)
+        season_profile = {"barrel": 0, "ev": 0, "fb": 0, "hard_hit": 0, "bip_count": 0, "hrs": 0, "iso": 0}
+        all_bip_frames = []
+        if not batter_df.empty:
+            hand_bip = batter_df[(batter_df["p_throws"] == pitcher_hand) & (batter_df["launch_speed"].notna()) & (batter_df["events"].notna())]
+            if not hand_bip.empty:
+                all_bip_frames.append(hand_bip)
+        if batter_2025 is not None and not batter_2025.empty:
+            hand_bip_25 = batter_2025[(batter_2025["p_throws"] == pitcher_hand) & (batter_2025["launch_speed"].notna()) & (batter_2025["events"].notna())]
+            if not hand_bip_25.empty:
+                all_bip_frames.append(hand_bip_25)
+        if all_bip_frames:
+            all_bip = pd.concat(all_bip_frames)
+            n = len(all_bip)
+            season_profile["bip_count"] = n
+            season_profile["ev"] = round(float(all_bip["launch_speed"].mean()), 1)
+            if "launch_speed_angle" in all_bip.columns:
+                season_profile["barrel"] = round(float((all_bip["launch_speed_angle"] == 6).sum() / n * 100), 1)
+            if "launch_angle" in all_bip.columns:
+                season_profile["fb"] = round(float(((all_bip["launch_angle"] >= 25) & (all_bip["launch_angle"] <= 50)).sum() / n * 100), 1)
+            season_profile["hard_hit"] = round(float((all_bip["launch_speed"] >= 95).sum() / n * 100), 1)
+            if "events" in all_bip.columns:
+                season_profile["hrs"] = int((all_bip["events"] == "home_run").sum())
+                hits_mask = all_bip["events"].isin({"single", "double", "triple", "home_run"})
+                non_ab = all_bip["events"].isin({"walk", "hit_by_pitch", "intent_walk", "sac_fly", "sac_bunt"})
+                ab = (~non_ab).sum()
+                if ab > 0:
+                    bases = {"single": 1, "double": 2, "triple": 3, "home_run": 4}
+                    total_bases = sum(bases.get(e, 0) for e in all_bip["events"])
+                    ba = hits_mask.sum() / ab
+                    slg = total_bases / ab
+                    season_profile["iso"] = round(float(slg - ba), 3)
+
         player_obj = {
             "name": batter_name,
             "batter_hand": batter_h,
@@ -414,6 +448,7 @@ def run_model(game_date: date = None, fast: bool = False):
                 for key, result in multi_scores.items()
             },
             "season_stats": season_stats,
+            "season_profile": season_profile,
         }
 
         players_by_game[gpk].append(player_obj)
