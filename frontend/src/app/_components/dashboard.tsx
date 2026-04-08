@@ -33,6 +33,7 @@ export function Dashboard() {
   const [activePage, setActivePageRaw] = useState<Page>(() => getHashParam("page", "rankings") as Page);
   const [lookback, setLookbackRaw] = useState<LookbackKey>(() => getHashParam("lookback", "L5") as LookbackKey);
   const [selectedDate, setSelectedDate] = useState<string>(() => getHashParam("date", ""));
+  const [selectedGames, setSelectedGames] = useState<Set<number>>(new Set()); // empty = all games
 
   // Update URL hash when state changes
   function updateHash(page: string, date: string, lb: string) {
@@ -166,7 +167,28 @@ export function Dashboard() {
 
           {activePage === "slate" && (
             <>
-              {data.games.map((game) => (
+              {/* Game filter dropdown */}
+              <div className="mb-4">
+                <select
+                  value={selectedGames.size === 0 ? "all" : [...selectedGames][0]?.toString() ?? "all"}
+                  onChange={(e) => {
+                    if (e.target.value === "all") {
+                      setSelectedGames(new Set());
+                    } else {
+                      setSelectedGames(new Set([parseInt(e.target.value)]));
+                    }
+                  }}
+                  className="bg-card/50 border border-card-border rounded-lg px-3 py-2 text-sm text-foreground cursor-pointer w-full md:w-auto"
+                >
+                  <option value="all">All Games ({data.games.length})</option>
+                  {data.games.map((game) => (
+                    <option key={game.game_pk} value={game.game_pk}>
+                      {game.away_team} @ {game.home_team} — {game.game_time || ""}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {(selectedGames.size === 0 ? data.games : data.games.filter((g) => selectedGames.has(g.game_pk))).map((game) => (
                 <GameSection key={game.game_pk} game={game} lookback={lookback} />
               ))}
               {data.games.length === 0 && (

@@ -22,7 +22,8 @@ LOOKBACK_WINDOWS: list = [5, 10]  # pre-compute scores at each lookback
 # Checked top-down: first matching threshold wins.
 # (min_usage, multiplier)
 PITCH_WEIGHT_TIERS: list = [
-    (0.45, 2.5),   # 45%+ → dominant pitch, 2.5x weight
+    (0.60, 2.5),   # 60%+ → ultra dominant, 2.5x weight
+    (0.45, 2.0),   # 45-59% → dominant pitch, 2.0x weight
     (0.35, 1.8),   # 35-44% → primary pitch, 1.8x weight
     (0.25, 1.3),   # 25-34% → significant pitch, 1.3x weight
     (0.12, 1.0),   # 12-24% → baseline
