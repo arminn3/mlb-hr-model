@@ -219,45 +219,18 @@ def score_batter_vs_pitcher(
             else:
                 per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pt_rows)
 
-        # Build weighted scoring metrics (used for batter_score only, not display)
-        # Require 2+ BIP per pitch type to get tier weight — prevents 1 lucky barrel from inflating
-        # Count BIP per pitch type in the pool
-        pt_bip_counts = {}
-        for pt in pitch_mix:
-            pt_codes = {pt}
-            if pt == "ST": pt_codes.add("SL")
-            if pt == "SL": pt_codes.add("ST")
-            pt_bip_counts[pt] = len(recent_bip[recent_bip["pitch_type"].isin(pt_codes)]) if "pitch_type" in recent_bip.columns else 0
-
-        active_pts = {
-            pt for pt, m in per_pitch_metrics.items()
-            if any(v > 0 for v in m.values()) and pt_bip_counts.get(pt, 0) >= 2
-        }
-        if active_pts:
-            active_wts = {pt: pitch_weights.get(pt, 0) for pt in active_pts}
-            w_total = sum(active_wts.values())
-            if w_total > 0:
-                active_wts = {pt: w / w_total for pt, w in active_wts.items()}
-                for metric in ["avg_exit_velo", "barrel_rate", "fly_ball_rate"]:
-                    scoring_key = f"_scoring_{metric}"
-                    result[scoring_key] = sum(
-                        per_pitch_metrics[pt][metric] * active_wts[pt]
-                        for pt in active_pts
-                    )
+        # Per-pitch metrics kept for display/detail only — not used in scoring
 
     # ── Step 5: Normalize and weight batter metrics ──────────────────────────
-    # hard_hit_rate is calculated and displayed but NOT used in scoring
-    # barrel_rate already captures hard hit + lift, which is what matters for HRs
-    # Use pitch-weighted metrics for scoring (dominant pitch counts more)
-    # Display metrics (weighted_*) stay clean for the UI
-    scoring_map = [
-        ("_scoring_avg_exit_velo", "weighted_exit_velo", "avg_exit_velo"),
-        ("_scoring_barrel_rate", "weighted_barrel_rate", "barrel_rate"),
-        ("_scoring_fly_ball_rate", "weighted_fb_rate", "fly_ball_rate"),
-    ]
+    # Score from the same metrics the user sees — no hidden numbers
+    batter_metric_map = {
+        "weighted_exit_velo": "avg_exit_velo",
+        "weighted_barrel_rate": "barrel_rate",
+        "weighted_fb_rate": "fly_ball_rate",
+    }
     batter_score = 0.0
-    for scoring_key, fallback_key, config_key in scoring_map:
-        raw = result.get(scoring_key, result.get(fallback_key, 0))
+    for result_key, config_key in batter_metric_map.items():
+        raw = result[result_key]
         normed = normalize_metric(raw, config_key)
         batter_score += normed * config.BATTER_WEIGHTS[config_key]
     result["batter_score"] = batter_score
