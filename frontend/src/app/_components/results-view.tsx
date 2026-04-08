@@ -367,7 +367,7 @@ function DayReport({ day }: { day: DayReportData }) {
                   </tbody>
                 </table>
               </div>
-              <div className="mt-2 px-2 py-1.5 rounded bg-accent-yellow/10 border border-accent-yellow/20 text-[10px] text-accent-yellow">
+              <div className="mt-3 px-3 py-2.5 rounded-lg bg-accent-yellow/10 border border-accent-yellow/20 text-sm text-accent-yellow">
                 This feature is a work in progress and may not be fully accurate. Some near-HR park calculations are still being refined.
               </div>
             </div>
