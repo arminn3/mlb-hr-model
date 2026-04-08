@@ -206,7 +206,11 @@ def score_batter_vs_pitcher(
         # A pitcher's dominant pitch (45%+ = 2x weight) matters more for HR prediction
         # This makes a batter's fastball performance count more vs a fastball-heavy pitcher
         for pt in pitch_mix:
-            pt_rows = recent_bip[recent_bip["pitch_type"] == pt] if "pitch_type" in recent_bip.columns else pd.DataFrame()
+            # Match ST↔SL for per-pitch metrics (same as BIP pool expansion)
+            pt_codes = {pt}
+            if pt == "ST": pt_codes.add("SL")
+            if pt == "SL": pt_codes.add("ST")
+            pt_rows = recent_bip[recent_bip["pitch_type"].isin(pt_codes)] if "pitch_type" in recent_bip.columns else pd.DataFrame()
             if pt_rows.empty:
                 per_pitch_metrics[pt] = {
                     "avg_exit_velo": 0.0, "barrel_rate": 0.0,

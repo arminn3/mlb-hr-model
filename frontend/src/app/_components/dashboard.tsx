@@ -167,26 +167,43 @@ export function Dashboard() {
 
           {activePage === "slate" && (
             <>
-              {/* Game filter dropdown */}
-              <div className="mb-4">
-                <select
-                  value={selectedGames.size === 0 ? "all" : [...selectedGames][0]?.toString() ?? "all"}
-                  onChange={(e) => {
-                    if (e.target.value === "all") {
-                      setSelectedGames(new Set());
-                    } else {
-                      setSelectedGames(new Set([parseInt(e.target.value)]));
-                    }
-                  }}
-                  className="bg-card/50 border border-card-border rounded-lg px-3 py-2 text-sm text-foreground cursor-pointer w-full md:w-auto"
+              {/* Game filter — multi-select chips */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                <button
+                  onClick={() => setSelectedGames(new Set())}
+                  className={`px-3 py-1.5 text-xs rounded-full cursor-pointer transition-colors ${
+                    selectedGames.size === 0
+                      ? "bg-accent text-background font-bold"
+                      : "bg-card/50 text-muted border border-card-border hover:text-foreground"
+                  }`}
                 >
-                  <option value="all">All Games ({data.games.length})</option>
-                  {data.games.map((game) => (
-                    <option key={game.game_pk} value={game.game_pk}>
-                      {game.away_team} @ {game.home_team} — {game.game_time || ""}
-                    </option>
-                  ))}
-                </select>
+                  All ({data.games.length})
+                </button>
+                {data.games.map((game) => {
+                  const sel = selectedGames.has(game.game_pk);
+                  return (
+                    <button
+                      key={game.game_pk}
+                      onClick={() => {
+                        setSelectedGames((prev) => {
+                          const next = new Set(prev);
+                          if (next.has(game.game_pk)) next.delete(game.game_pk);
+                          else next.add(game.game_pk);
+                          return next;
+                        });
+                      }}
+                      className={`px-2.5 py-1.5 text-[11px] rounded-full cursor-pointer transition-colors ${
+                        sel
+                          ? "bg-accent/15 text-accent border border-accent/30 font-semibold"
+                          : selectedGames.size === 0
+                          ? "bg-card/50 text-foreground border border-card-border"
+                          : "bg-card/50 text-muted border border-card-border hover:text-foreground"
+                      }`}
+                    >
+                      {game.away_team}@{game.home_team}
+                    </button>
+                  );
+                })}
               </div>
               {(selectedGames.size === 0 ? data.games : data.games.filter((g) => selectedGames.has(g.game_pk))).map((game) => (
                 <GameSection key={game.game_pk} game={game} lookback={lookback} />
