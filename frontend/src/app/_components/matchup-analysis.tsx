@@ -503,6 +503,242 @@ function MatchupCard({
   );
 }
 
+/* ---------- table helpers ---------- */
+
+type TableSortKey =
+  | "composite"
+  | "batter"
+  | "pitcher"
+  | "exit_velo"
+  | "barrel_pct";
+type PitcherVulnFilter = "all" | "high" | "medium" | "low";
+type BatterPowerFilter = "all" | "elite" | "strong" | "average" | "weak";
+
+function getFormDetailed(player: PlayerData): {
+  label: string;
+  dot: string;
+  color: string;
+} {
+  const l5 = player.scores.L5;
+  const l10 = player.scores.L10;
+  if (!l5 || !l10)
+    return { label: "N/A", dot: "\u26AA", color: "text-muted" };
+
+  const barrelDiff = l5.barrel_pct - l10.barrel_pct;
+  const evDiff = l5.exit_velo - l10.exit_velo;
+  const combined = barrelDiff + evDiff;
+
+  if (combined > 3)
+    return { label: "Hot", dot: "\uD83D\uDFE2", color: "text-accent-green" };
+  if (combined > 1)
+    return { label: "Good", dot: "\uD83D\uDD35", color: "text-blue-400" };
+  if (combined > -1)
+    return { label: "Average", dot: "\uD83D\uDFE1", color: "text-accent-yellow" };
+  if (combined > -3)
+    return { label: "Slump", dot: "\uD83D\uDFE0", color: "text-orange-400" };
+  return { label: "Cold", dot: "\uD83D\uDD34", color: "text-accent-red" };
+}
+
+function greenGradientBg(value: number): string {
+  const clamped = Math.max(0, Math.min(1, value));
+  const alpha = Math.round(clamped * 40);
+  return `rgba(34, 197, 94, ${alpha / 100})`;
+}
+
+/* ---------- table sub-components ---------- */
+
+function TableGradeBadge({ grade }: { grade: { label: string; color: string } }) {
+  const styles: Record<string, string> = {
+    ELITE: "bg-accent-green/25 text-accent-green border-accent-green/50",
+    A: "bg-accent-green/15 text-accent-green border-accent-green/40",
+    B: "bg-accent-yellow/15 text-accent-yellow border-accent-yellow/40",
+    C: "bg-accent-red/15 text-accent-red border-accent-red/40",
+    D: "bg-card text-muted border-card-border",
+  };
+  return (
+    <span
+      className={`text-[10px] font-bold px-2 py-0.5 rounded border ${styles[grade.label] ?? styles.D}`}
+    >
+      {grade.label}
+    </span>
+  );
+}
+
+function MatchupTableView({
+  players,
+  lookback,
+}: {
+  players: { player: PlayerData; game: GameData }[];
+  lookback: LookbackKey;
+}) {
+  return (
+    <>
+      {/* Desktop table */}
+      <div className="hidden md:block overflow-x-auto">
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="border-b border-card-border text-muted uppercase tracking-wider text-[10px]">
+              <th className="text-left py-2.5 px-3 font-semibold">Batter</th>
+              <th className="text-left py-2.5 px-2 font-semibold">Team</th>
+              <th className="text-center py-2.5 px-2 font-semibold">Grade</th>
+              <th className="text-center py-2.5 px-2 font-semibold">HR Prob</th>
+              <th className="text-center py-2.5 px-2 font-semibold">Form</th>
+              <th className="text-left py-2.5 px-3 font-semibold">Pitcher</th>
+              <th className="text-left py-2.5 px-2 font-semibold">P. Team</th>
+              <th className="text-center py-2.5 px-2 font-semibold">Batter Power</th>
+              <th className="text-center py-2.5 px-2 font-semibold">Pitcher Vuln</th>
+              <th className="text-center py-2.5 px-2 font-semibold">EV</th>
+              <th className="text-center py-2.5 px-2 font-semibold">Barrel%</th>
+              <th className="text-center py-2.5 px-2 font-semibold">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {players.map(({ player, game }) => {
+              const scores = player.scores[lookback];
+              if (!scores) return null;
+              const grade = getGrade(scores.composite);
+              const form = getFormDetailed(player);
+              const batterTeam =
+                player.batter_side === "home"
+                  ? game.home_team
+                  : game.away_team;
+              const pitcherTeam =
+                player.batter_side === "home"
+                  ? game.away_team
+                  : game.home_team;
+
+              return (
+                <tr
+                  key={`${game.game_pk}-${player.name}`}
+                  className="border-b border-card-border/50 hover:bg-card/40 transition-colors"
+                >
+                  <td className="py-2.5 px-3 font-medium text-foreground whitespace-nowrap">
+                    {player.name}
+                  </td>
+                  <td className="py-2.5 px-2 text-muted font-mono">
+                    {batterTeam}
+                  </td>
+                  <td className="py-2.5 px-2 text-center">
+                    <TableGradeBadge grade={grade} />
+                  </td>
+                  <td className="py-2.5 px-2 text-center">
+                    <span className={form.color} title={form.label}>
+                      {form.dot} <span className="text-[10px]">{form.label}</span>
+                    </span>
+                  </td>
+                  <td className="py-2.5 px-3 text-foreground whitespace-nowrap">
+                    {player.opp_pitcher}
+                  </td>
+                  <td className="py-2.5 px-2 text-muted font-mono">
+                    {pitcherTeam}
+                  </td>
+                  <td
+                    className="py-2.5 px-2 text-center font-mono font-semibold text-foreground"
+                    style={{
+                      backgroundColor: greenGradientBg(scores.batter_score),
+                    }}
+                  >
+                    {scores.batter_score.toFixed(2)}
+                  </td>
+                  <td
+                    className="py-2.5 px-2 text-center font-mono font-semibold text-foreground"
+                    style={{
+                      backgroundColor: greenGradientBg(scores.pitcher_score),
+                    }}
+                  >
+                    {scores.pitcher_score.toFixed(2)}
+                  </td>
+                  <td className="py-2.5 px-2 text-center font-mono text-muted">
+                    {fmt(scores.exit_velo)}
+                  </td>
+                  <td className="py-2.5 px-2 text-center font-mono text-muted">
+                    {pct(scores.barrel_pct)}
+                  </td>
+                  <td className="py-2.5 px-2 text-center font-mono font-bold text-foreground">
+                    {(scores.composite * 100).toFixed(1)}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Mobile cards fallback */}
+      <div className="md:hidden space-y-2">
+        {players.map(({ player, game }) => {
+          const scores = player.scores[lookback];
+          if (!scores) return null;
+          const grade = getGrade(scores.composite);
+          const form = getFormDetailed(player);
+          const batterTeam =
+            player.batter_side === "home" ? game.home_team : game.away_team;
+
+          return (
+            <div
+              key={`${game.game_pk}-${player.name}-mob`}
+              className="bg-card/50 border border-card-border rounded-lg p-3"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <div className="min-w-0">
+                  <span className="text-sm font-bold text-foreground block truncate">
+                    {player.name}
+                  </span>
+                  <span className="text-[11px] text-muted">
+                    {batterTeam} vs {player.opp_pitcher}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <span className="font-mono text-sm font-bold text-foreground">
+                    {(scores.composite * 100).toFixed(1)}
+                  </span>
+                  <TableGradeBadge grade={grade} />
+                </div>
+              </div>
+              <div className="grid grid-cols-4 gap-2 text-center text-[10px]">
+                <div>
+                  <span className="text-muted block uppercase">Power</span>
+                  <span
+                    className="font-mono font-semibold text-foreground block rounded px-1"
+                    style={{
+                      backgroundColor: greenGradientBg(scores.batter_score),
+                    }}
+                  >
+                    {scores.batter_score.toFixed(2)}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-muted block uppercase">Vuln</span>
+                  <span
+                    className="font-mono font-semibold text-foreground block rounded px-1"
+                    style={{
+                      backgroundColor: greenGradientBg(scores.pitcher_score),
+                    }}
+                  >
+                    {scores.pitcher_score.toFixed(2)}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-muted block uppercase">Form</span>
+                  <span className={`${form.color} block`}>
+                    {form.dot} {form.label}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-muted block uppercase">Barrel</span>
+                  <span className="font-mono text-foreground block">
+                    {pct(scores.barrel_pct)}
+                  </span>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+}
+
 /* ---------- main export ---------- */
 
 export function MatchupAnalysis({
@@ -512,10 +748,16 @@ export function MatchupAnalysis({
   games: GameData[];
   lookback: LookbackKey;
 }) {
+  const [viewMode, setViewMode] = useState<"table" | "cards">("table");
   const [selectedGamePk, setSelectedGamePk] = useState<number | null>(null);
   const [sortBy, setSortBy] = useState<"composite" | "batter" | "pitcher">(
     "composite",
   );
+  const [tableSortBy, setTableSortBy] = useState<TableSortKey>("composite");
+  const [pitcherVulnFilter, setPitcherVulnFilter] =
+    useState<PitcherVulnFilter>("all");
+  const [batterPowerFilter, setBatterPowerFilter] =
+    useState<BatterPowerFilter>("all");
   const [expandAll, setExpandAll] = useState(false);
 
   const filteredGames = useMemo(() => {
@@ -523,14 +765,65 @@ export function MatchupAnalysis({
     return games.filter((g) => g.game_pk === selectedGamePk);
   }, [games, selectedGamePk]);
 
-  const sortedPlayers = useMemo(() => {
+  const allPairs = useMemo(() => {
     const pairs: { player: PlayerData; game: GameData }[] = [];
     for (const game of filteredGames) {
       for (const player of game.players) {
         pairs.push({ player, game });
       }
     }
-    pairs.sort((a, b) => {
+    return pairs;
+  }, [filteredGames]);
+
+  const tableFilteredPairs = useMemo(() => {
+    let result = allPairs;
+
+    if (pitcherVulnFilter !== "all") {
+      result = result.filter(({ player }) => {
+        const s = player.scores[lookback];
+        if (!s) return false;
+        const v = s.pitcher_score;
+        if (pitcherVulnFilter === "high") return v > 0.6;
+        if (pitcherVulnFilter === "medium") return v >= 0.3 && v <= 0.6;
+        return v < 0.3;
+      });
+    }
+
+    if (batterPowerFilter !== "all") {
+      result = result.filter(({ player }) => {
+        const s = player.scores[lookback];
+        if (!s) return false;
+        const v = s.batter_score;
+        if (batterPowerFilter === "elite") return v > 0.8;
+        if (batterPowerFilter === "strong") return v > 0.5 && v <= 0.8;
+        if (batterPowerFilter === "average") return v > 0.3 && v <= 0.5;
+        return v <= 0.3;
+      });
+    }
+
+    return result;
+  }, [allPairs, lookback, pitcherVulnFilter, batterPowerFilter]);
+
+  const tableSortedPlayers = useMemo(() => {
+    const sorted = [...tableFilteredPairs];
+    sorted.sort((a, b) => {
+      const sa = a.player.scores[lookback];
+      const sb = b.player.scores[lookback];
+      if (!sa || !sb) return 0;
+      if (tableSortBy === "batter") return sb.batter_score - sa.batter_score;
+      if (tableSortBy === "pitcher")
+        return sb.pitcher_score - sa.pitcher_score;
+      if (tableSortBy === "exit_velo") return sb.exit_velo - sa.exit_velo;
+      if (tableSortBy === "barrel_pct")
+        return sb.barrel_pct - sa.barrel_pct;
+      return sb.composite - sa.composite;
+    });
+    return sorted;
+  }, [tableFilteredPairs, lookback, tableSortBy]);
+
+  const cardSortedPlayers = useMemo(() => {
+    const sorted = [...allPairs];
+    sorted.sort((a, b) => {
       const sa = a.player.scores[lookback];
       const sb = b.player.scores[lookback];
       if (!sa || !sb) return 0;
@@ -538,92 +831,204 @@ export function MatchupAnalysis({
       if (sortBy === "pitcher") return sb.pitcher_score - sa.pitcher_score;
       return sb.composite - sa.composite;
     });
-    return pairs;
-  }, [filteredGames, lookback, sortBy]);
+    return sorted;
+  }, [allPairs, lookback, sortBy]);
+
+  const selectClasses =
+    "bg-card/50 border border-card-border text-foreground text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-accent/40 cursor-pointer";
 
   return (
     <div className="space-y-4">
-      {/* Controls */}
-      <div className="flex flex-wrap items-center gap-2">
-        {/* Game selector */}
-        <select
-          value={selectedGamePk ?? ""}
-          onChange={(e) =>
-            setSelectedGamePk(e.target.value ? Number(e.target.value) : null)
-          }
-          className="bg-card/50 border border-card-border text-foreground text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-accent/40 cursor-pointer"
-        >
-          <option value="">All Games ({games.length})</option>
-          {games.map((g) => (
-            <option key={g.game_pk} value={g.game_pk}>
-              {g.away_team} @ {g.home_team}
-              {g.game_time ? ` \u2014 ${g.game_time}` : ""}
-            </option>
-          ))}
-        </select>
-
-        {/* Sort chips */}
-        {(
-          [
-            ["composite", "Score"],
-            ["batter", "Power"],
-            ["pitcher", "Vulnerability"],
-          ] as const
-        ).map(([key, label]) => (
+      {/* Tab toggle */}
+      <div className="flex items-center gap-1 bg-card/30 border border-card-border rounded-lg p-1 w-fit">
+        {(["table", "cards"] as const).map((mode) => (
           <button
-            key={key}
-            onClick={() => setSortBy(key)}
-            className={`px-3 py-1.5 text-xs rounded-full cursor-pointer transition-colors ${
-              sortBy === key
-                ? "bg-accent text-background font-bold"
-                : "bg-card/50 text-muted border border-card-border hover:text-foreground"
+            key={mode}
+            onClick={() => setViewMode(mode)}
+            className={`px-4 py-1.5 text-xs font-semibold rounded-md cursor-pointer transition-colors ${
+              viewMode === mode
+                ? "bg-accent text-background"
+                : "text-muted hover:text-foreground"
             }`}
           >
-            {label}
+            {mode === "table" ? "Table" : "Cards"}
           </button>
         ))}
-
-        {/* Expand / Collapse */}
-        <button
-          onClick={() => setExpandAll(!expandAll)}
-          className="ml-auto px-3 py-1.5 text-xs rounded-full bg-card/50 text-muted border border-card-border hover:text-foreground cursor-pointer transition-colors"
-        >
-          {expandAll ? "Collapse All" : "Expand All"}
-        </button>
       </div>
 
-      {/* Player count */}
-      <p className="text-xs text-muted">
-        {sortedPlayers.length} matchups
-        {selectedGamePk !== null && (
-          <>
-            {" "}
-            in{" "}
-            {(() => {
-              const g = games.find((g) => g.game_pk === selectedGamePk);
-              return g ? `${g.away_team} @ ${g.home_team}` : "";
-            })()}
-          </>
-        )}
-      </p>
+      {viewMode === "table" ? (
+        <>
+          {/* Table filters */}
+          <div className="flex flex-wrap items-center gap-2">
+            <select
+              value={selectedGamePk ?? ""}
+              onChange={(e) =>
+                setSelectedGamePk(
+                  e.target.value ? Number(e.target.value) : null,
+                )
+              }
+              className={selectClasses}
+            >
+              <option value="">All Games ({games.length})</option>
+              {games.map((g) => (
+                <option key={g.game_pk} value={g.game_pk}>
+                  {g.away_team} @ {g.home_team}
+                  {g.game_time ? ` \u2014 ${g.game_time}` : ""}
+                </option>
+              ))}
+            </select>
 
-      {/* Cards */}
-      <div className="space-y-2">
-        {sortedPlayers.map(({ player, game }, i) => (
-          <MatchupCard
-            key={`${game.game_pk}-${player.name}`}
-            player={player}
-            game={game}
+            <select
+              value={pitcherVulnFilter}
+              onChange={(e) =>
+                setPitcherVulnFilter(e.target.value as PitcherVulnFilter)
+              }
+              className={selectClasses}
+            >
+              <option value="all">Pitcher Vuln: All</option>
+              <option value="high">High (&gt;0.6)</option>
+              <option value="medium">Medium (0.3-0.6)</option>
+              <option value="low">Low (&lt;0.3)</option>
+            </select>
+
+            <select
+              value={batterPowerFilter}
+              onChange={(e) =>
+                setBatterPowerFilter(e.target.value as BatterPowerFilter)
+              }
+              className={selectClasses}
+            >
+              <option value="all">Batter Power: All</option>
+              <option value="elite">Elite (&gt;0.8)</option>
+              <option value="strong">Strong (&gt;0.5)</option>
+              <option value="average">Average</option>
+              <option value="weak">Weak</option>
+            </select>
+
+            <select
+              value={tableSortBy}
+              onChange={(e) =>
+                setTableSortBy(e.target.value as TableSortKey)
+              }
+              className={selectClasses}
+            >
+              <option value="composite">Sort: Score</option>
+              <option value="batter">Sort: Batter Power</option>
+              <option value="pitcher">Sort: Pitcher Vuln</option>
+              <option value="exit_velo">Sort: Exit Velo</option>
+              <option value="barrel_pct">Sort: Barrel%</option>
+            </select>
+          </div>
+
+          <p className="text-xs text-muted">
+            {tableSortedPlayers.length} matchups
+            {selectedGamePk !== null && (
+              <>
+                {" "}
+                in{" "}
+                {(() => {
+                  const g = games.find((gm) => gm.game_pk === selectedGamePk);
+                  return g ? `${g.away_team} @ ${g.home_team}` : "";
+                })()}
+              </>
+            )}
+          </p>
+
+          <MatchupTableView
+            players={tableSortedPlayers}
             lookback={lookback}
-            defaultExpanded={expandAll || (i < 5 && selectedGamePk !== null)}
           />
-        ))}
-      </div>
 
-      {sortedPlayers.length === 0 && (
-        <p className="text-center text-muted py-12">
-          No matchup data available.
-        </p>
+          {tableSortedPlayers.length === 0 && (
+            <p className="text-center text-muted py-12">
+              No matchup data available.
+            </p>
+          )}
+        </>
+      ) : (
+        <>
+          {/* Cards controls */}
+          <div className="flex flex-wrap items-center gap-2">
+            <select
+              value={selectedGamePk ?? ""}
+              onChange={(e) =>
+                setSelectedGamePk(
+                  e.target.value ? Number(e.target.value) : null,
+                )
+              }
+              className={selectClasses}
+            >
+              <option value="">All Games ({games.length})</option>
+              {games.map((g) => (
+                <option key={g.game_pk} value={g.game_pk}>
+                  {g.away_team} @ {g.home_team}
+                  {g.game_time ? ` \u2014 ${g.game_time}` : ""}
+                </option>
+              ))}
+            </select>
+
+            {(
+              [
+                ["composite", "Score"],
+                ["batter", "Power"],
+                ["pitcher", "Vulnerability"],
+              ] as const
+            ).map(([key, label]) => (
+              <button
+                key={key}
+                onClick={() => setSortBy(key)}
+                className={`px-3 py-1.5 text-xs rounded-full cursor-pointer transition-colors ${
+                  sortBy === key
+                    ? "bg-accent text-background font-bold"
+                    : "bg-card/50 text-muted border border-card-border hover:text-foreground"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+
+            <button
+              onClick={() => setExpandAll(!expandAll)}
+              className="ml-auto px-3 py-1.5 text-xs rounded-full bg-card/50 text-muted border border-card-border hover:text-foreground cursor-pointer transition-colors"
+            >
+              {expandAll ? "Collapse All" : "Expand All"}
+            </button>
+          </div>
+
+          <p className="text-xs text-muted">
+            {cardSortedPlayers.length} matchups
+            {selectedGamePk !== null && (
+              <>
+                {" "}
+                in{" "}
+                {(() => {
+                  const g = games.find((gm) => gm.game_pk === selectedGamePk);
+                  return g ? `${g.away_team} @ ${g.home_team}` : "";
+                })()}
+              </>
+            )}
+          </p>
+
+          <div className="space-y-2">
+            {cardSortedPlayers.slice(0, 25).map(({ player, game }, i) => (
+              <MatchupCard
+                key={`${game.game_pk}-${player.name}`}
+                player={player}
+                game={game}
+                lookback={lookback}
+                defaultExpanded={
+                  expandAll || (i < 5 && selectedGamePk !== null)
+                }
+              />
+            ))}
+          </div>
+
+          {cardSortedPlayers.length === 0 && (
+            <p className="text-center text-muted py-12">
+              No matchup data available.
+            </p>
+          )}
+        </>
       )}
     </div>
   );
