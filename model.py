@@ -432,34 +432,58 @@ def score_batter_vs_pitcher(
     recent_abs.sort(key=lambda x: x["date"], reverse=True)
     result["recent_abs"] = recent_abs
 
-    # Per-pitch-type recent ABs — last 5 BIP on each pitch type (for filter view)
+    # Per-pitch-type recent ABs — last 10 BIP per pitch type (supports L5 and L10 views)
+    # Backfills from 2025 if not enough 2026 data
     pitch_abs: dict[str, list] = {}
-    if not batter_df.empty and "p_throws" in batter_df.columns:
-        hand_bip = batter_df[
-            (batter_df["p_throws"] == pitcher_hand) &
-            (batter_df["launch_speed"].notna()) &
-            (batter_df["events"].notna() if "events" in batter_df.columns else True)
+
+    def _get_hand_bip(df):
+        if df is None or df.empty or "p_throws" not in df.columns:
+            return pd.DataFrame()
+        filtered = df[
+            (df["p_throws"] == pitcher_hand) &
+            (df["launch_speed"].notna()) &
+            (df["events"].notna() if "events" in df.columns else True)
         ].copy()
-        if not hand_bip.empty:
-            sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in hand_bip.columns else ["game_date"]
-            hand_bip = hand_bip.sort_values(sort_cols, ascending=False)
-            for pt in pitch_mix:
-                pt_bip = hand_bip[hand_bip["pitch_type"] == pt].head(5) if "pitch_type" in hand_bip.columns else pd.DataFrame()
-                if not pt_bip.empty:
-                    pt_list = []
-                    for _, row in pt_bip.iterrows():
-                        pt_list.append({
-                            "date": str(row.get("game_date", ""))[:10],
-                            "pitcher_name": str(row.get("player_name", "")),
-                            "pitch_arm": pitcher_hand,
-                            "pitch_type": str(row.get("pitch_name", pt)),
-                            "ev": round(float(row.get("launch_speed", 0)), 1),
-                            "angle": round(float(row.get("launch_angle", 0)), 1),
-                            "distance": round(float(row.get("hit_distance_sc", 0)), 0)
-                                if pd.notna(row.get("hit_distance_sc")) else None,
-                            "result": str(row.get("events", row.get("description", ""))),
-                        })
-                    pitch_abs[pt] = pt_list
+        if not filtered.empty:
+            s = ["game_date", "at_bat_number"] if "at_bat_number" in filtered.columns else ["game_date"]
+            filtered = filtered.sort_values(s, ascending=False)
+        return filtered
+
+    hand_bip_2026 = _get_hand_bip(batter_df)
+    hand_bip_2025 = _get_hand_bip(season_df)
+
+    if not hand_bip_2026.empty or not hand_bip_2025.empty:
+        for pt in pitch_mix:
+            # Match ST<->SL
+            pt_codes = {pt}
+            if pt == "ST": pt_codes.add("SL")
+            if pt == "SL": pt_codes.add("ST")
+
+            # Get from 2026 first
+            pt_rows_26 = hand_bip_2026[hand_bip_2026["pitch_type"].isin(pt_codes)].head(10) if not hand_bip_2026.empty and "pitch_type" in hand_bip_2026.columns else pd.DataFrame()
+
+            # Backfill from 2025 if needed
+            pt_rows_25 = pd.DataFrame()
+            if len(pt_rows_26) < 10 and not hand_bip_2025.empty and "pitch_type" in hand_bip_2025.columns:
+                needed = 10 - len(pt_rows_26)
+                pt_rows_25 = hand_bip_2025[hand_bip_2025["pitch_type"].isin(pt_codes)].head(needed)
+
+            all_pt = pd.concat([pt_rows_26, pt_rows_25]) if not pt_rows_25.empty else pt_rows_26
+            if not all_pt.empty:
+                pt_list = []
+                for _, row in all_pt.iterrows():
+                    pt_list.append({
+                        "date": str(row.get("game_date", ""))[:10],
+                        "pitcher_name": str(row.get("player_name", "")),
+                        "pitch_arm": pitcher_hand,
+                        "pitch_type": str(row.get("pitch_name", pt)),
+                        "ev": round(float(row.get("launch_speed", 0)), 1),
+                        "angle": round(float(row.get("launch_angle", 0)), 1),
+                        "distance": round(float(row.get("hit_distance_sc", 0)), 0)
+                            if pd.notna(row.get("hit_distance_sc")) else None,
+                        "result": str(row.get("events", row.get("description", ""))),
+                    })
+                pitch_abs[pt] = pt_list
     result["pitch_abs"] = pitch_abs
 
     # Per-pitch aggregate stats (like PropFinder's Statcast tab)

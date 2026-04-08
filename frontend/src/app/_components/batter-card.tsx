@@ -79,13 +79,21 @@ export function BatterCard({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let filteredABs: any[];
   if (pitchFilter === "all") {
-    // Combine all per-pitch-type ABs and sort by date descending
+    // Combine all per-pitch-type ABs, deduplicate, sort, cap at L5=5 / L10=10
     if (pitchAbsData && Object.keys(pitchAbsData).length > 0) {
       const allPitchAbs = Object.values(pitchAbsData).flat();
       allPitchAbs.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
-      filteredABs = allPitchAbs;
+      const seen = new Set<string>();
+      const deduped = allPitchAbs.filter((ab) => {
+        const key = `${ab.date}-${ab.ev}-${ab.angle}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+      const limit = lookback === "L10" ? 10 : 5;
+      filteredABs = deduped.slice(0, limit);
     } else {
-      filteredABs = (scores.recent_abs || []);
+      filteredABs = (scores.recent_abs || []).slice(0, lookback === "L10" ? 10 : 5);
     }
   } else {
     filteredABs = (pitchAbsData?.[pitchFilter] || []);
