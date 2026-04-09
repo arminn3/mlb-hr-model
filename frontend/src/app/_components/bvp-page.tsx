@@ -127,13 +127,28 @@ export function BvPPage({
             {matchups.filter(m => m.abs > 0).length} matchups with history, {matchups.filter(m => m.abs === 0).length} with no history. Career head-to-head stats.
           </p>
         </div>
-        <input
-          type="text"
-          placeholder="Search player or pitcher..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="bg-card/50 border border-card-border rounded-lg px-3 py-1.5 text-xs text-foreground placeholder-muted w-full md:w-64"
-        />
+        <div className="relative w-full md:w-64">
+          <svg
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted pointer-events-none"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"
+            />
+          </svg>
+          <input
+            type="text"
+            placeholder="Search player or pitcher..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full bg-card/50 border border-card-border rounded-lg pl-9 pr-3 py-1.5 text-xs text-foreground placeholder-muted"
+          />
+        </div>
       </div>
 
       {/* Mobile sort chips */}
