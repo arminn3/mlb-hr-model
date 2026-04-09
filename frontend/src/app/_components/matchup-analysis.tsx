@@ -776,7 +776,7 @@ function MatchupTableView({
                       backgroundColor: greenGradientBg(batterPower),
                     }}
                   >
-                    {Math.round(batterPower * 100)}
+                    {batterPower.toFixed(2)}
                   </td>
                   <td
                     className="p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] text-white whitespace-nowrap border-b border-r"
@@ -785,7 +785,7 @@ function MatchupTableView({
                       backgroundColor: greenGradientBg(scores.pitcher_score),
                     }}
                   >
-                    {Math.round(scores.pitcher_score * 100)}
+                    {scores.pitcher_score.toFixed(2)}
                   </td>
                   <td className={cellBase} style={{ borderColor }}>
                     {fmt(sp?.ev)}
