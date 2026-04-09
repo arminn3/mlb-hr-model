@@ -919,6 +919,7 @@ export function MatchupAnalysis({
     useState<PitcherVulnFilter>("all");
   const [batterPowerFilter, setBatterPowerFilter] =
     useState<BatterPowerFilter>("all");
+  const [tableSearch, setTableSearch] = useState("");
   const [expandAll, setExpandAll] = useState(false);
 
   const filteredGames = useMemo(() => {
@@ -960,8 +961,16 @@ export function MatchupAnalysis({
       });
     }
 
+    if (tableSearch.trim() !== "") {
+      const q = tableSearch.trim().toLowerCase();
+      result = result.filter(({ player }) =>
+        player.name.toLowerCase().includes(q) ||
+        (player.opp_pitcher ?? "").toLowerCase().includes(q),
+      );
+    }
+
     return result;
-  }, [allPairs, pitcherVulnFilter, batterPowerFilter]);
+  }, [allPairs, pitcherVulnFilter, batterPowerFilter, tableSearch]);
 
   const tableSortedPlayers = useMemo(() => {
     const teamOf = (pair: { player: PlayerData; game: GameData }) =>
@@ -1146,6 +1155,14 @@ export function MatchupAnalysis({
               <option value="weak">Weak</option>
             </select>
 
+            <input
+              type="text"
+              value={tableSearch}
+              onChange={(e) => setTableSearch(e.target.value)}
+              placeholder="Search batter or pitcher…"
+              className="bg-card/50 border border-card-border text-foreground placeholder:text-muted text-xs rounded-lg pl-3 pr-3 py-2 focus:outline-none focus:border-accent/40 w-56"
+            />
+
             <span className="text-xs text-muted ml-auto hidden md:inline">
               Click any column header to sort
             </span>
@@ -1230,6 +1247,7 @@ export function MatchupAnalysis({
           </div>
 
           <p className="text-xs text-muted">
+            Showing top {Math.min(30, cardSortedPlayers.length)} of{" "}
             {cardSortedPlayers.length} matchups
             {selectedGamePk !== null && (
               <>
@@ -1241,10 +1259,11 @@ export function MatchupAnalysis({
                 })()}
               </>
             )}
+            . Use the Table view to see every matchup.
           </p>
 
           <div className="space-y-2">
-            {cardSortedPlayers.slice(0, 25).map(({ player, game }, i) => (
+            {cardSortedPlayers.slice(0, 30).map(({ player, game }, i) => (
               <MatchupCard
                 key={`${game.game_pk}-${player.name}`}
                 player={player}
