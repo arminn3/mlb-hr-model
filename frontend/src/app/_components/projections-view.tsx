@@ -2,6 +2,16 @@
 
 import { useMemo, useEffect, useState } from "react";
 import type { GameData, LookbackKey } from "./types";
+import {
+  TABLE_BG,
+  cellClass,
+  cellStyle,
+  headerCellClass,
+  headerCellStyle,
+  tableClass,
+  tableWrapperClass,
+  tableWrapperStyle,
+} from "./table-styles";
 
 interface ProjectionModel {
   intercept: number;
@@ -168,48 +178,30 @@ export function ProjectionsView({
       </div>
 
       {/* Desktop table view */}
-      <div className="hidden md:block overflow-x-auto">
-        <table className="w-full text-sm">
+      <div className={`hidden md:block ${tableWrapperClass}`} style={tableWrapperStyle}>
+        <table className={tableClass}>
           <thead>
-            <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
-              <th className="text-left py-3 pr-4">Game</th>
-              <th className="text-center py-3 px-3">Env</th>
-              <th className="text-center py-3 px-3">Projected HRs</th>
-              <th className="text-left py-3 px-3">Top Player</th>
-              <th className="text-center py-3 px-3">Score</th>
+            <tr>
+              <th className={headerCellClass} style={headerCellStyle}>Game</th>
+              <th className={headerCellClass} style={headerCellStyle}>Env</th>
+              <th className={headerCellClass} style={headerCellStyle}>Projected HRs</th>
+              <th className={headerCellClass} style={headerCellStyle}>Top Player</th>
+              <th className={headerCellClass} style={headerCellStyle}>Score</th>
             </tr>
           </thead>
           <tbody>
             {projections.map((p) => (
-              <tr key={p.game.game_pk} className="border-b border-card-border/30 hover:bg-card/40">
-                <td className="py-3 pr-4">
-                  <span className="font-semibold text-foreground">
-                    {p.game.away_team} @ {p.game.home_team}
-                  </span>
+              <tr key={p.game.game_pk} style={{ backgroundColor: TABLE_BG }}>
+                <td className={cellClass} style={cellStyle}>
+                  {p.game.away_team} @ {p.game.home_team}
                   {p.game.game_time && (
-                    <span className="text-xs text-muted ml-2">{p.game.game_time}</span>
+                    <span className="text-[#a0a1a4] ml-2">{p.game.game_time}</span>
                   )}
                 </td>
-                <td className="text-center py-3 px-3">
-                  <span className={`font-mono text-xs px-2 py-0.5 rounded ${
-                    p.envScore >= 0.5 ? "bg-accent-green/15 text-accent-green" :
-                    p.envScore >= 0.35 ? "bg-accent-yellow/15 text-accent-yellow" :
-                    "bg-accent-red/15 text-accent-red"
-                  }`}>
-                    {Math.round(p.envScore * 100)}
-                  </span>
-                </td>
-                <td className="text-center py-3 px-3">
-                  <span className={`text-lg font-bold font-mono ${
-                    p.expectedHRs >= 3.0 ? "text-accent-green" :
-                    p.expectedHRs >= 2.0 ? "text-foreground" :
-                    "text-muted"
-                  }`}>
-                    {p.expectedHRs.toFixed(1)}
-                  </span>
-                </td>
-                <td className="py-3 px-3 text-foreground">{p.topPlayer}</td>
-                <td className="text-center py-3 px-3 font-mono text-xs">{p.topComposite.toFixed(3)}</td>
+                <td className={cellClass} style={cellStyle}>{Math.round(p.envScore * 100)}</td>
+                <td className={cellClass} style={cellStyle}>{p.expectedHRs.toFixed(1)}</td>
+                <td className={cellClass} style={cellStyle}>{p.topPlayer}</td>
+                <td className={cellClass} style={cellStyle}>{p.topComposite.toFixed(3)}</td>
               </tr>
             ))}
           </tbody>

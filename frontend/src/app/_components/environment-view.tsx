@@ -1,6 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import {
+  TABLE_BG,
+  cellClass,
+  cellStyle,
+  headerCellClass,
+  headerCellStyle,
+  tableClass,
+  tableWrapperClass,
+  tableWrapperStyle,
+} from "./table-styles";
 
 interface GameEnv {
   game_pk: number;
@@ -233,23 +243,24 @@ function CombinedView({ games }: { games: GameEnv[] }) {
         </div>
 
         {/* Desktop table view */}
-        <div className="hidden md:block overflow-x-auto">
-          <table className="w-full text-xs">
+        <div className={`hidden md:block ${tableWrapperClass}`} style={tableWrapperStyle}>
+          <table className={tableClass}>
             <thead>
-              <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
+              <tr>
                 {([
-                  { key: "game" as SortKey, label: "Game", align: "text-left" },
-                  { key: "weatherPct" as SortKey, label: "Weather %", align: "text-center" },
-                  { key: "parkPct" as SortKey, label: "Park %", align: "text-center" },
-                  { key: "combinedPct" as SortKey, label: "Combined %", align: "text-center" },
-                  { key: "temp" as SortKey, label: "Temp", align: "text-center" },
-                  { key: "wind" as SortKey, label: "Wind", align: "text-center" },
-                  { key: "parkFactor" as SortKey, label: "Park Factor", align: "text-center" },
+                  { key: "game" as SortKey, label: "Game" },
+                  { key: "weatherPct" as SortKey, label: "Weather %" },
+                  { key: "parkPct" as SortKey, label: "Park %" },
+                  { key: "combinedPct" as SortKey, label: "Combined %" },
+                  { key: "temp" as SortKey, label: "Temp" },
+                  { key: "wind" as SortKey, label: "Wind" },
+                  { key: "parkFactor" as SortKey, label: "Park Factor" },
                 ]).map(col => (
                   <th
                     key={col.key}
                     onClick={() => toggleSort(col.key)}
-                    className={`${col.align} py-2 cursor-pointer hover:text-foreground transition-colors select-none`}
+                    className={`${headerCellClass} cursor-pointer hover:text-white`}
+                    style={headerCellStyle}
                   >
                     {col.label}{arrow(col.key)}
                   </th>
@@ -258,26 +269,14 @@ function CombinedView({ games }: { games: GameEnv[] }) {
             </thead>
             <tbody>
               {sorted.map(g => (
-                <tr key={g.game_pk} className="border-b border-card-border/30">
-                  <td className="py-2 font-medium text-foreground">{g.away_team} @ {g.home_team}</td>
-                  <td className="text-center py-2">
-                    <span className={`font-mono ${g.weatherPct > 0 ? "text-accent-green" : g.weatherPct < 0 ? "text-accent-red" : "text-muted"}`}>
-                      {g.weatherPct > 0 ? "+" : ""}{g.weatherPct}%
-                    </span>
-                  </td>
-                  <td className="text-center py-2">
-                    <span className={`font-mono ${g.parkPct > 0 ? "text-accent-green" : g.parkPct < 0 ? "text-accent-red" : "text-muted"}`}>
-                      {g.parkPct > 0 ? "+" : ""}{g.parkPct}%
-                    </span>
-                  </td>
-                  <td className="text-center py-2">
-                    <span className={`font-mono font-bold ${g.combinedPct > 5 ? "text-accent-green" : g.combinedPct < -5 ? "text-accent-red" : "text-foreground"}`}>
-                      {g.combinedPct > 0 ? "+" : ""}{g.combinedPct}%
-                    </span>
-                  </td>
-                  <td className="text-center py-2 text-muted font-mono">{g.temperature_f ?? "?"}°F</td>
-                  <td className="text-center py-2 text-muted font-mono">{g.wind_speed_mph ?? "?"}mph</td>
-                  <td className="text-center py-2 text-muted font-mono">{g.park_factor}</td>
+                <tr key={g.game_pk} style={{ backgroundColor: TABLE_BG }}>
+                  <td className={cellClass} style={cellStyle}>{g.away_team} @ {g.home_team}</td>
+                  <td className={cellClass} style={cellStyle}>{g.weatherPct > 0 ? "+" : ""}{g.weatherPct}%</td>
+                  <td className={cellClass} style={cellStyle}>{g.parkPct > 0 ? "+" : ""}{g.parkPct}%</td>
+                  <td className={cellClass} style={cellStyle}>{g.combinedPct > 0 ? "+" : ""}{g.combinedPct}%</td>
+                  <td className={cellClass} style={cellStyle}>{g.temperature_f ?? "?"}°F</td>
+                  <td className={cellClass} style={cellStyle}>{g.wind_speed_mph ?? "?"}mph</td>
+                  <td className={cellClass} style={cellStyle}>{g.park_factor}</td>
                 </tr>
               ))}
             </tbody>

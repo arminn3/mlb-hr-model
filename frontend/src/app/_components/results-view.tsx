@@ -1,6 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {
+  TABLE_BG,
+  cellClass,
+  cellStyle,
+  headerCellClass,
+  headerCellStyle,
+  tableClass,
+  tableWrapperClass,
+  tableWrapperStyle,
+} from "./table-styles";
 
 interface DayReportData {
   date: string;
@@ -254,29 +264,27 @@ function DayReport({ day }: { day: DayReportData }) {
               </div>
 
               {/* Desktop table view */}
-              <div className="hidden md:block overflow-x-auto">
-                <table className="w-full text-xs">
+              <div className={`hidden md:block ${tableWrapperClass}`} style={tableWrapperStyle}>
+                <table className={tableClass}>
                   <thead>
-                    <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
-                      <th className="text-left py-1.5">Window</th>
-                      <th className="text-center py-1.5">Top 10</th>
-                      <th className="text-center py-1.5">Top 20</th>
-                      <th className="text-center py-1.5">Top 30</th>
+                    <tr>
+                      <th className={headerCellClass} style={headerCellStyle}>Window</th>
+                      <th className={headerCellClass} style={headerCellStyle}>Top 10</th>
+                      <th className={headerCellClass} style={headerCellStyle}>Top 20</th>
+                      <th className={headerCellClass} style={headerCellStyle}>Top 30</th>
                     </tr>
                   </thead>
                   <tbody>
                     {Object.entries(day.tier_accuracy_by_lookback).map(([lbKey, acc]) => (
-                      <tr key={lbKey} className={`border-b border-card-border/30 ${lbKey === day.best_lookback ? "bg-accent/5" : ""}`}>
-                        <td className={`py-1.5 font-mono font-semibold ${lbKey === day.best_lookback ? "text-accent" : "text-foreground"}`}>
-                          {lbKey} {lbKey === day.best_lookback && "★"}
-                        </td>
-                        <td className="text-center py-1.5 font-mono">
+                      <tr key={lbKey} style={{ backgroundColor: TABLE_BG }}>
+                        <td className={cellClass} style={cellStyle}>{lbKey} {lbKey === day.best_lookback && "★"}</td>
+                        <td className={cellClass} style={cellStyle}>
                           {(acc as Record<string, { rate: number; hits: number; total: number }>).top_10?.rate ?? 0}%
                         </td>
-                        <td className="text-center py-1.5 font-mono">
+                        <td className={cellClass} style={cellStyle}>
                           {(acc as Record<string, { rate: number; hits: number; total: number }>).top_20?.rate ?? 0}%
                         </td>
-                        <td className="text-center py-1.5 font-mono">
+                        <td className={cellClass} style={cellStyle}>
                           {(acc as Record<string, { rate: number; hits: number; total: number }>).top_30?.rate ?? 0}%
                         </td>
                       </tr>
@@ -318,50 +326,29 @@ function DayReport({ day }: { day: DayReportData }) {
               </div>
 
               {/* Desktop table view */}
-              <div className="hidden md:block overflow-x-auto">
-                <table className="w-full text-xs">
+              <div className={`hidden md:block ${tableWrapperClass}`} style={tableWrapperStyle}>
+                <table className={tableClass}>
                   <thead>
-                    <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
-                      <th className="text-left py-1.5">Batter</th>
-                      <th className="text-left py-1.5">vs Pitcher</th>
-                      <th className="text-center py-1.5">EV</th>
-                      <th className="text-center py-1.5">Angle</th>
-                      <th className="text-center py-1.5">Distance</th>
-                      <th className="text-center py-1.5">HR Parks</th>
-                      <th className="text-left py-1.5">Result</th>
+                    <tr>
+                      <th className={headerCellClass} style={headerCellStyle}>Batter</th>
+                      <th className={headerCellClass} style={headerCellStyle}>vs Pitcher</th>
+                      <th className={headerCellClass} style={headerCellStyle}>EV</th>
+                      <th className={headerCellClass} style={headerCellStyle}>Angle</th>
+                      <th className={headerCellClass} style={headerCellStyle}>Distance</th>
+                      <th className={headerCellClass} style={headerCellStyle}>HR Parks</th>
+                      <th className={headerCellClass} style={headerCellStyle}>Result</th>
                     </tr>
                   </thead>
                   <tbody>
                     {day.near_hr_events.map((n: { batter: string; pitcher: string; ev: number; angle: number; distance: number | null; hr_in_parks?: number; result: string }, i: number) => (
-                      <tr key={i} className="border-b border-card-border/30">
-                        <td className="py-1.5 font-medium text-foreground">{n.batter}</td>
-                        <td className="py-1.5 text-muted">{n.pitcher}</td>
-                        <td className="text-center py-1.5">
-                          <span className={`px-1.5 py-0.5 rounded font-mono ${n.ev >= 105 ? "bg-accent-green/70 text-background" : n.ev >= 100 ? "bg-accent-green/30 text-foreground" : "text-foreground"}`}>
-                            {n.ev}
-                          </span>
-                        </td>
-                        <td className="text-center py-1.5">
-                          <span className={`px-1.5 py-0.5 rounded font-mono ${n.angle >= 25 && n.angle <= 32 ? "bg-accent-green/70 text-background" : "text-foreground"}`}>
-                            {n.angle}°
-                          </span>
-                        </td>
-                        <td className="text-center py-1.5">
-                          <span className={`px-1.5 py-0.5 rounded font-mono ${n.distance && n.distance >= 390 ? "bg-accent-green/70 text-background" : n.distance && n.distance >= 370 ? "bg-accent-green/30 text-foreground" : "text-foreground"}`}>
-                            {n.distance ? `${n.distance} ft` : "-"}
-                          </span>
-                        </td>
-                        <td className="text-center py-1.5">
-                          <span className={`px-1.5 py-0.5 rounded font-mono font-semibold ${
-                            (n.hr_in_parks ?? 0) >= 25 ? "bg-accent-green/70 text-background" :
-                            (n.hr_in_parks ?? 0) >= 15 ? "bg-accent-green/30 text-foreground" :
-                            (n.hr_in_parks ?? 0) >= 1 ? "bg-accent-yellow/30 text-foreground" :
-                            "text-muted"
-                          }`}>
-                            {n.hr_in_parks ?? 0}/30
-                          </span>
-                        </td>
-                        <td className="py-1.5 text-muted capitalize">{(n.result || "").replace(/_/g, " ")}</td>
+                      <tr key={i} style={{ backgroundColor: TABLE_BG }}>
+                        <td className={cellClass} style={cellStyle}>{n.batter}</td>
+                        <td className={cellClass} style={cellStyle}>{n.pitcher}</td>
+                        <td className={cellClass} style={cellStyle}>{n.ev}</td>
+                        <td className={cellClass} style={cellStyle}>{n.angle}°</td>
+                        <td className={cellClass} style={cellStyle}>{n.distance ? `${n.distance} ft` : "-"}</td>
+                        <td className={cellClass} style={cellStyle}>{n.hr_in_parks ?? 0}/30</td>
+                        <td className={cellClass} style={cellStyle}>{(n.result || "").replace(/_/g, " ")}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -425,25 +412,25 @@ function HRHittersTable({ l5, l10, activeLb }: {
       </div>
 
       {/* Desktop table view */}
-      <div className="hidden md:block overflow-x-auto">
-        <table className="w-full text-xs">
+      <div className={`hidden md:block ${tableWrapperClass}`} style={tableWrapperStyle}>
+        <table className={tableClass}>
           <thead>
-            <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
-              <th className="text-center py-1.5 w-12">Rank</th>
-              <th className="text-left py-1.5">Player</th>
-              <th className="text-left py-1.5">vs Pitcher</th>
-              <th className="text-left py-1.5">Game</th>
-              <th className="text-center py-1.5">Score</th>
+            <tr>
+              <th className={headerCellClass} style={headerCellStyle}>Rank</th>
+              <th className={headerCellClass} style={headerCellStyle}>Player</th>
+              <th className={headerCellClass} style={headerCellStyle}>vs Pitcher</th>
+              <th className={headerCellClass} style={headerCellStyle}>Game</th>
+              <th className={headerCellClass} style={headerCellStyle}>Score</th>
             </tr>
           </thead>
           <tbody>
             {hitters.map((h) => (
-              <tr key={h.name} className="border-b border-card-border/30">
-                <td className="text-center py-1.5 font-mono font-bold text-accent">#{h.rank}</td>
-                <td className="py-1.5 font-medium text-foreground">{h.name}</td>
-                <td className="py-1.5 text-muted">{h.opp_pitcher}</td>
-                <td className="py-1.5 text-muted">{h.matchup}</td>
-                <td className="text-center py-1.5 font-mono">{h.composite.toFixed(3)}</td>
+              <tr key={h.name} style={{ backgroundColor: TABLE_BG }}>
+                <td className={cellClass} style={cellStyle}>#{h.rank}</td>
+                <td className={cellClass} style={cellStyle}>{h.name}</td>
+                <td className={cellClass} style={cellStyle}>{h.opp_pitcher}</td>
+                <td className={cellClass} style={cellStyle}>{h.matchup}</td>
+                <td className={cellClass} style={cellStyle}>{h.composite.toFixed(3)}</td>
               </tr>
             ))}
           </tbody>

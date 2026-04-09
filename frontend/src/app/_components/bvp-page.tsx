@@ -2,6 +2,16 @@
 
 import { useState, useMemo } from "react";
 import type { GameData, LookbackKey } from "./types";
+import {
+  TABLE_BG,
+  cellClass,
+  cellStyle,
+  headerCellClass,
+  headerCellStyle,
+  tableClass,
+  tableWrapperClass,
+  tableWrapperStyle,
+} from "./table-styles";
 
 export function BvPPage({
   games,
@@ -98,9 +108,10 @@ export function BvPPage({
     }
   };
 
-  const SortHeader = ({ col, label, className = "" }: { col: string; label: string; className?: string }) => (
+  const SortHeader = ({ col, label }: { col: string; label: string; className?: string }) => (
     <th
-      className={`py-2 px-2 cursor-pointer hover:text-foreground transition-colors ${className} ${sortCol === col ? "text-accent" : ""}`}
+      className={`${headerCellClass} cursor-pointer hover:text-white transition-colors ${sortCol === col ? "text-white" : ""}`}
+      style={headerCellStyle}
       onClick={() => toggleSort(col)}
     >
       {label} {sortCol === col ? (sortDir === "desc" ? "↓" : "↑") : ""}
@@ -186,65 +197,41 @@ export function BvPPage({
       </div>
 
       {/* Desktop table view */}
-      <div className="hidden md:block overflow-x-auto">
-        <table className="w-full text-xs">
+      <div className={`hidden md:block ${tableWrapperClass}`} style={tableWrapperStyle}>
+        <table className={tableClass}>
           <thead>
-            <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
-              <th className="text-left py-2 pr-3">Batter</th>
-              <th className="text-left py-2 pr-3">Pitcher</th>
-              <th className="text-left py-2 pr-3">Game</th>
-              <th className="text-center py-2 px-1">Hand</th>
-              <SortHeader col="abs" label="AB" className="text-center" />
-              <SortHeader col="hits" label="H" className="text-center" />
-              <SortHeader col="hrs" label="HR" className="text-center" />
-              <SortHeader col="ba" label="AVG" className="text-center" />
-              <SortHeader col="slg" label="SLG" className="text-center" />
-              <SortHeader col="iso" label="ISO" className="text-center" />
-              <SortHeader col="k_pct" label="K%" className="text-center" />
-              <SortHeader col="composite" label="Score" className="text-center" />
+            <tr>
+              <th className={headerCellClass} style={headerCellStyle}>Batter</th>
+              <th className={headerCellClass} style={headerCellStyle}>Pitcher</th>
+              <th className={headerCellClass} style={headerCellStyle}>Game</th>
+              <th className={headerCellClass} style={headerCellStyle}>Hand</th>
+              <SortHeader col="abs" label="AB" />
+              <SortHeader col="hits" label="H" />
+              <SortHeader col="hrs" label="HR" />
+              <SortHeader col="ba" label="AVG" />
+              <SortHeader col="slg" label="SLG" />
+              <SortHeader col="iso" label="ISO" />
+              <SortHeader col="k_pct" label="K%" />
+              <SortHeader col="composite" label="Score" />
             </tr>
           </thead>
           <tbody>
-            {sorted.map((m, i) => {
-              const isFirstNoHistory = m.abs === 0 && (i === 0 || sorted[i - 1].abs > 0);
-              return (
-              <tr key={`${m.batter}-${m.pitcher}`} className={`border-b border-card-border/30 hover:bg-card/40 ${m.abs === 0 ? "opacity-50" : ""} ${isFirstNoHistory ? "border-t-2 border-t-card-border" : ""}`}>
-                <td className="py-2 pr-3 font-medium text-foreground">
-                  {m.batter}
-                  {m.abs === 0 && <span className="ml-2 text-[9px] px-1.5 py-0.5 rounded bg-card-border text-muted">No History</span>}
-                </td>
-                <td className="py-2 pr-3 text-muted">{m.pitcher}</td>
-                <td className="py-2 pr-3 text-muted">{m.game}</td>
-                <td className="text-center py-2 px-1 font-mono text-muted">{m.hand}</td>
-                <td className="text-center py-2 font-mono">{m.abs || "-"}</td>
-                <td className="text-center py-2 font-mono">{m.hits || "-"}</td>
-                <td className="text-center py-2">
-                  <span className={`font-mono ${m.hrs > 0 ? "text-accent-green font-bold" : ""}`}>
-                    {m.hrs || "-"}
-                  </span>
-                </td>
-                <td className="text-center py-2">
-                  <span className={`font-mono ${m.ba >= 0.300 ? "text-accent-green" : m.ba > 0 ? "text-foreground" : "text-muted"}`}>
-                    {m.abs > 0 ? m.ba.toFixed(3) : "-"}
-                  </span>
-                </td>
-                <td className="text-center py-2">
-                  <span className={`font-mono ${m.slg >= 0.500 ? "text-accent-green" : m.slg > 0 ? "text-foreground" : "text-muted"}`}>
-                    {m.abs > 0 ? m.slg.toFixed(3) : "-"}
-                  </span>
-                </td>
-                <td className="text-center py-2">
-                  <span className={`font-mono ${m.iso >= 0.200 ? "text-accent-green" : m.iso > 0 ? "text-foreground" : "text-muted"}`}>
-                    {m.abs > 0 ? m.iso.toFixed(3) : "-"}
-                  </span>
-                </td>
-                <td className="text-center py-2 font-mono text-muted">
-                  {m.abs > 0 ? `${m.k_pct.toFixed(0)}%` : "-"}
-                </td>
-                <td className="text-center py-2 font-mono">{m.composite.toFixed(3)}</td>
+            {sorted.map((m) => (
+              <tr key={`${m.batter}-${m.pitcher}`} style={{ backgroundColor: TABLE_BG, opacity: m.abs === 0 ? 0.5 : 1 }}>
+                <td className={cellClass} style={cellStyle}>{m.batter}</td>
+                <td className={cellClass} style={cellStyle}>{m.pitcher}</td>
+                <td className={cellClass} style={cellStyle}>{m.game}</td>
+                <td className={cellClass} style={cellStyle}>{m.hand}</td>
+                <td className={cellClass} style={cellStyle}>{m.abs || "-"}</td>
+                <td className={cellClass} style={cellStyle}>{m.hits || "-"}</td>
+                <td className={cellClass} style={cellStyle}>{m.hrs || "-"}</td>
+                <td className={cellClass} style={cellStyle}>{m.abs > 0 ? m.ba.toFixed(3) : "-"}</td>
+                <td className={cellClass} style={cellStyle}>{m.abs > 0 ? m.slg.toFixed(3) : "-"}</td>
+                <td className={cellClass} style={cellStyle}>{m.abs > 0 ? m.iso.toFixed(3) : "-"}</td>
+                <td className={cellClass} style={cellStyle}>{m.abs > 0 ? `${m.k_pct.toFixed(0)}%` : "-"}</td>
+                <td className={cellClass} style={cellStyle}>{m.composite.toFixed(3)}</td>
               </tr>
-              );
-            })}
+            ))}
           </tbody>
         </table>
       </div>

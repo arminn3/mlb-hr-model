@@ -1,6 +1,16 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import {
+  TABLE_BG,
+  cellClass,
+  cellStyle,
+  headerCellClass,
+  headerCellStyle,
+  tableClass,
+  tableWrapperClass,
+  tableWrapperStyle,
+} from "./table-styles";
 
 interface LivePlay {
   batter: string;
@@ -362,59 +372,31 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
         </div>
 
         {/* Desktop table view */}
-        <div className="hidden md:block overflow-x-auto">
-          <table className="w-full text-xs">
+        <div className={`hidden md:block ${tableWrapperClass}`} style={tableWrapperStyle}>
+          <table className={tableClass}>
             <thead>
-              <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
-                <th className="text-left py-2">Type</th>
-                <th className="text-left py-2">Batter</th>
-                <th className="text-left py-2">Game</th>
-                <th className="text-center py-2">Inn</th>
-                <th className="text-center py-2">EV</th>
-                <th className="text-center py-2">Angle</th>
-                <th className="text-center py-2">Dist</th>
-                <th className="text-left py-2">Result</th>
+              <tr>
+                <th className={headerCellClass} style={headerCellStyle}>Type</th>
+                <th className={headerCellClass} style={headerCellStyle}>Batter</th>
+                <th className={headerCellClass} style={headerCellStyle}>Game</th>
+                <th className={headerCellClass} style={headerCellStyle}>Inn</th>
+                <th className={headerCellClass} style={headerCellStyle}>EV</th>
+                <th className={headerCellClass} style={headerCellStyle}>Angle</th>
+                <th className={headerCellClass} style={headerCellStyle}>Dist</th>
+                <th className={headerCellClass} style={headerCellStyle}>Result</th>
               </tr>
             </thead>
             <tbody>
               {plays.map((p, i) => (
-                <tr
-                  key={i}
-                  className={`border-b border-card-border/30 ${
-                    p.isHR ? "bg-accent-green/10" : p.isNearHR ? "bg-accent-yellow/5" : ""
-                  }`}
-                >
-                  <td className="py-2">
-                    {p.isHR ? (
-                      <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-accent-green/20 text-accent-green">HR</span>
-                    ) : p.isNearHR ? (
-                      <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-accent-yellow/20 text-accent-yellow">NEAR</span>
-                    ) : (
-                      <span className="px-1.5 py-0.5 text-[10px] rounded bg-card-border text-muted">AIR</span>
-                    )}
-                  </td>
-                  <td className="py-2">
-                    <span className="font-medium text-foreground">{p.batter}</span>
-                    <span className="text-muted text-[10px] ml-1">vs {p.pitcher}</span>
-                  </td>
-                  <td className="py-2 text-muted">{p.game}</td>
-                  <td className="text-center py-2 font-mono text-muted">{p.inning}</td>
-                  <td className="text-center py-2">
-                    <span className={`font-mono ${p.ev >= 100 ? "text-accent-green font-bold" : p.ev >= 95 ? "text-accent-green" : "text-foreground"}`}>
-                      {typeof p.ev === 'number' ? p.ev.toFixed(1) : p.ev}
-                    </span>
-                  </td>
-                  <td className="text-center py-2">
-                    <span className={`font-mono ${p.angle >= 25 && p.angle <= 35 ? "text-accent-green" : "text-foreground"}`}>
-                      {typeof p.angle === 'number' ? `${p.angle.toFixed(0)}°` : `${p.angle}°`}
-                    </span>
-                  </td>
-                  <td className="text-center py-2">
-                    <span className={`font-mono ${p.distance >= 380 ? "text-accent-green font-bold" : p.distance >= 350 ? "text-accent-green" : "text-foreground"}`}>
-                      {p.distance > 0 ? `${typeof p.distance === 'number' ? p.distance.toFixed(0) : p.distance}ft` : "-"}
-                    </span>
-                  </td>
-                  <td className="py-2 text-muted capitalize">{p.result.replace(/_/g, " ")}</td>
+                <tr key={i} style={{ backgroundColor: TABLE_BG }}>
+                  <td className={cellClass} style={cellStyle}>{p.isHR ? "HR" : p.isNearHR ? "NEAR" : "AIR"}</td>
+                  <td className={cellClass} style={cellStyle}>{p.batter} vs {p.pitcher}</td>
+                  <td className={cellClass} style={cellStyle}>{p.game}</td>
+                  <td className={cellClass} style={cellStyle}>{p.inning}</td>
+                  <td className={cellClass} style={cellStyle}>{typeof p.ev === 'number' ? p.ev.toFixed(1) : p.ev}</td>
+                  <td className={cellClass} style={cellStyle}>{typeof p.angle === 'number' ? `${p.angle.toFixed(0)}°` : `${p.angle}°`}</td>
+                  <td className={cellClass} style={cellStyle}>{p.distance > 0 ? `${typeof p.distance === 'number' ? p.distance.toFixed(0) : p.distance}ft` : "-"}</td>
+                  <td className={cellClass} style={cellStyle}>{p.result.replace(/_/g, " ")}</td>
                 </tr>
               ))}
             </tbody>

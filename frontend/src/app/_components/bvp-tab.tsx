@@ -1,6 +1,16 @@
 "use client";
 
 import type { PlayerData } from "./types";
+import {
+  TABLE_BG,
+  cellClass,
+  cellStyle,
+  headerCellClass,
+  headerCellStyle,
+  tableClass,
+  tableWrapperClass,
+  tableWrapperStyle,
+} from "./table-styles";
 
 export function BvPTab({ player }: { player: PlayerData }) {
   const bvp = player.bvp_stats;
@@ -64,33 +74,25 @@ export function BvPTab({ player }: { player: PlayerData }) {
           </div>
 
           {/* Desktop table view */}
-          <div className="hidden md:block overflow-x-auto">
-            <table className="w-full text-xs">
+          <div className={`hidden md:block ${tableWrapperClass}`} style={tableWrapperStyle}>
+            <table className={tableClass}>
               <thead>
-                <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
-                  <th className="text-left py-1.5">Date</th>
-                  <th className="text-left py-1.5">Pitch</th>
-                  <th className="text-center py-1.5">EV</th>
-                  <th className="text-center py-1.5">Angle</th>
-                  <th className="text-left py-1.5">Result</th>
+                <tr>
+                  <th className={headerCellClass} style={headerCellStyle}>Date</th>
+                  <th className={headerCellClass} style={headerCellStyle}>Pitch</th>
+                  <th className={headerCellClass} style={headerCellStyle}>EV</th>
+                  <th className={headerCellClass} style={headerCellStyle}>Angle</th>
+                  <th className={headerCellClass} style={headerCellStyle}>Result</th>
                 </tr>
               </thead>
               <tbody>
                 {bvp.recent_abs.map((ab, i) => (
-                  <tr key={i} className="border-b border-card-border/30">
-                    <td className="py-1.5 text-muted font-mono">{ab.date.slice(5)}</td>
-                    <td className="py-1.5 text-foreground">{ab.pitch_type}</td>
-                    <td className="text-center py-1.5">
-                      <span className={`font-mono ${ab.ev >= 95 ? "text-accent-green" : "text-foreground"}`}>
-                        {ab.ev > 0 ? ab.ev.toFixed(1) : "-"}
-                      </span>
-                    </td>
-                    <td className="text-center py-1.5">
-                      <span className={`font-mono ${ab.angle >= 25 && ab.angle <= 35 ? "text-accent-green" : "text-foreground"}`}>
-                        {ab.angle !== 0 ? `${ab.angle.toFixed(0)}°` : "-"}
-                      </span>
-                    </td>
-                    <td className="py-1.5 text-muted capitalize">{(ab.result || "").replace(/_/g, " ")}</td>
+                  <tr key={i} style={{ backgroundColor: TABLE_BG }}>
+                    <td className={cellClass} style={cellStyle}>{ab.date.slice(5)}</td>
+                    <td className={cellClass} style={cellStyle}>{ab.pitch_type}</td>
+                    <td className={cellClass} style={cellStyle}>{ab.ev > 0 ? ab.ev.toFixed(1) : "-"}</td>
+                    <td className={cellClass} style={cellStyle}>{ab.angle !== 0 ? `${ab.angle.toFixed(0)}°` : "-"}</td>
+                    <td className={cellClass} style={cellStyle}>{(ab.result || "").replace(/_/g, " ")}</td>
                   </tr>
                 ))}
               </tbody>

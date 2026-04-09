@@ -2,6 +2,16 @@
 
 import { useMemo } from "react";
 import type { GameData, LookbackKey } from "./types";
+import {
+  TABLE_BG,
+  cellClass,
+  cellStyle,
+  headerCellClass,
+  headerCellStyle,
+  tableClass,
+  tableWrapperClass,
+  tableWrapperStyle,
+} from "./table-styles";
 
 interface Gem {
   name: string;
@@ -136,39 +146,39 @@ export function GemFinder({
       </div>
 
       {/* Desktop table view */}
-      <div className="hidden md:block overflow-x-auto">
-        <table className="w-full text-xs">
+      <div className={`hidden md:block ${tableWrapperClass}`} style={tableWrapperStyle}>
+        <table className={tableClass}>
           <thead>
-            <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
-              <th className="text-center py-2 w-8">#</th>
-              <th className="text-left py-2">Player</th>
-              <th className="text-left py-2">Matchup</th>
-              <th className="text-center py-2">Hand</th>
-              <th className="text-center py-2">Barrel%</th>
-              <th className="text-center py-2">FB%</th>
-              <th className="text-center py-2">Hard Hit%</th>
-              <th className="text-center py-2">EV</th>
-              <th className="text-center py-2">P HR/9</th>
-              <th className="text-center py-2">Env</th>
-              <th className="text-center py-2">Score</th>
-              <th className="text-left py-2">Why</th>
+            <tr>
+              <th className={headerCellClass} style={headerCellStyle}>#</th>
+              <th className={headerCellClass} style={headerCellStyle}>Player</th>
+              <th className={headerCellClass} style={headerCellStyle}>Matchup</th>
+              <th className={headerCellClass} style={headerCellStyle}>Hand</th>
+              <th className={headerCellClass} style={headerCellStyle}>Barrel%</th>
+              <th className={headerCellClass} style={headerCellStyle}>FB%</th>
+              <th className={headerCellClass} style={headerCellStyle}>Hard Hit%</th>
+              <th className={headerCellClass} style={headerCellStyle}>EV</th>
+              <th className={headerCellClass} style={headerCellStyle}>P HR/9</th>
+              <th className={headerCellClass} style={headerCellStyle}>Env</th>
+              <th className={headerCellClass} style={headerCellStyle}>Score</th>
+              <th className={headerCellClass} style={headerCellStyle}>Why</th>
             </tr>
           </thead>
           <tbody>
             {gems.map((g, i) => (
-              <tr key={g.name} className="border-b border-card-border/30 hover:bg-card/40">
-                <td className="text-center py-2 font-bold text-accent-yellow font-mono">{i + 1}</td>
-                <td className="py-2 font-medium text-foreground">{g.name}</td>
-                <td className="py-2 text-muted">{g.game} vs {g.opp_pitcher}</td>
-                <td className="text-center py-2 font-mono text-muted">{g.batter_hand}v{g.pitcher_hand}</td>
-                <td className="text-center py-2"><span className={`font-mono ${g.barrel_pct >= 15 ? "text-accent-green font-semibold" : ""}`}>{g.barrel_pct}%</span></td>
-                <td className="text-center py-2"><span className={`font-mono ${g.fb_pct >= 40 ? "text-accent-green font-semibold" : ""}`}>{g.fb_pct}%</span></td>
-                <td className="text-center py-2"><span className={`font-mono ${g.hard_hit_pct >= 45 ? "text-accent-green font-semibold" : ""}`}>{g.hard_hit_pct}%</span></td>
-                <td className="text-center py-2"><span className={`font-mono ${g.exit_velo >= 90 ? "text-accent-green font-semibold" : ""}`}>{g.exit_velo}</span></td>
-                <td className="text-center py-2"><span className={`font-mono ${g.pitcher_hr9 >= 1.5 ? "text-accent-green font-semibold" : ""}`}>{g.pitcher_hr9}</span></td>
-                <td className="text-center py-2"><span className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${g.env_score >= 0.5 ? "bg-accent-green/15 text-accent-green" : "text-muted"}`}>{Math.round(g.env_score * 100)}</span></td>
-                <td className="text-center py-2 font-mono">{g.composite.toFixed(3)}</td>
-                <td className="py-2 text-[10px] text-muted max-w-xs">{g.reason}</td>
+              <tr key={g.name} style={{ backgroundColor: TABLE_BG }}>
+                <td className={cellClass} style={cellStyle}>{i + 1}</td>
+                <td className={cellClass} style={cellStyle}>{g.name}</td>
+                <td className={cellClass} style={cellStyle}>{g.game} vs {g.opp_pitcher}</td>
+                <td className={cellClass} style={cellStyle}>{g.batter_hand}v{g.pitcher_hand}</td>
+                <td className={cellClass} style={cellStyle}>{g.barrel_pct}%</td>
+                <td className={cellClass} style={cellStyle}>{g.fb_pct}%</td>
+                <td className={cellClass} style={cellStyle}>{g.hard_hit_pct}%</td>
+                <td className={cellClass} style={cellStyle}>{g.exit_velo}</td>
+                <td className={cellClass} style={cellStyle}>{g.pitcher_hr9}</td>
+                <td className={cellClass} style={cellStyle}>{Math.round(g.env_score * 100)}</td>
+                <td className={cellClass} style={cellStyle}>{g.composite.toFixed(3)}</td>
+                <td className={cellClass} style={cellStyle}>{g.reason}</td>
               </tr>
             ))}
           </tbody>

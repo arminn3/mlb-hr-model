@@ -617,10 +617,13 @@ function getFormDetailed(player: PlayerData): {
 }
 
 function greenGradientBg(value: number): string {
-  // Figma green #2a732e — alpha scales with value. 0 → transparent,
-  // 1 → solid dark green matching the Grade A/A+ cells.
-  const clamped = Math.max(0, Math.min(1, value));
-  return `rgba(42, 115, 46, ${clamped})`;
+  // Figma green #2a732e — only kicks in above 0.5 so weak/average
+  // values stay neutral. 0.5 → transparent, 1.0 → solid green.
+  // Below 0.5 = no tint at all (was lighting up 20%-power guys
+  // with faint green which looked wrong).
+  if (value < 0.5) return "transparent";
+  const alpha = (value - 0.5) / 0.5; // 0.5..1.0 → 0..1
+  return `rgba(42, 115, 46, ${alpha})`;
 }
 
 /* ---------- table sub-components ---------- */
@@ -1079,6 +1082,16 @@ export function MatchupAnalysis({
             {mode === "table" ? "Table" : "Cards"}
           </button>
         ))}
+      </div>
+
+      {/* Season-long disclosure */}
+      <div className="rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-xs text-foreground">
+        <span className="font-semibold text-accent">Season-long view.</span>{" "}
+        Grade, HR Probability, Batter Power, EV, and Barrel% all use full
+        2025+2026 season data — not L5 or L10. The{" "}
+        <span className="font-semibold">Recent Form</span> column is the only
+        place recent (L5 vs L10) performance shows up, and it has zero
+        influence on the grade or probability.
       </div>
 
       {viewMode === "table" ? (
