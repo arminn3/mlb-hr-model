@@ -110,6 +110,26 @@ function calcBatterPower(player: PlayerData): number {
   return Math.min(1, Math.max(0, raw));
 }
 
+// Season-long composite — uses season_profile for batter, season-based
+// pitcher_score and env_score (those are the same across L5/L10 in the
+// backend). Deliberately does NOT read batter_score or composite from
+// scores.L5 since those are L5-dependent.
+function calcSeasonComposite(player: PlayerData): number {
+  const batterPower = calcBatterPower(player);
+  const scores = player.scores.L5; // only for pitcher_score + env_score, both season-based
+  const pitcherVuln = scores?.pitcher_score ?? 0.5;
+  const envScore = scores?.env_score ?? 0.5;
+  // Weights: batter 60% (season_profile), pitcher 35% (season), env 5%
+  return 0.6 * batterPower + 0.35 * pitcherVuln + 0.05 * envScore;
+}
+
+// Rough HR probability display — composite * 25 lands elite guys
+// (~0.80 composite) at ~20%, matching the 16-22% range user referenced
+// for ideal/elite plays. Placeholder until a calibrated model is wired.
+function calcHrProb(seasonComposite: number): number {
+  return seasonComposite * 25;
+}
+
 function MatchupCard({
   player,
   game,
@@ -124,21 +144,22 @@ function MatchupCard({
   if (!scores) return null;
 
   const sp = player.season_profile;
-  const grade = getGrade(scores.composite);
+  const seasonComposite = calcSeasonComposite(player);
+  const grade = getGrade(seasonComposite);
   const form = getForm(player);
   const env = game.environment;
-  const hrProb = (scores.composite * 100).toFixed(1);
+  const hrProb = calcHrProb(seasonComposite).toFixed(1);
 
   const pitchEntries = Object.entries(player.pitch_detail || {}).sort(
     (a, b) => b[1].usage_pct - a[1].usage_pct,
   );
 
   const compositeColor =
-    scores.composite >= 0.55
+    seasonComposite >= 0.55
       ? "text-accent-green"
-      : scores.composite >= 0.4
+      : seasonComposite >= 0.4
         ? "text-accent-yellow"
-        : scores.composite >= 0.25
+        : seasonComposite >= 0.25
           ? "text-accent-red"
           : "text-muted";
 
@@ -605,7 +626,8 @@ function MatchupTableView({
               const scores = player.scores.L5;
               if (!scores) return null;
               const sp = player.season_profile;
-              const grade = getGrade(scores.composite);
+              const seasonComposite = calcSeasonComposite(player);
+              const grade = getGrade(seasonComposite);
               const form = getFormDetailed(player);
               const batterTeam =
                 player.batter_side === "home"
@@ -632,7 +654,7 @@ function MatchupTableView({
                     <TableGradeBadge grade={grade} />
                   </td>
                   <td className="py-2.5 px-2 text-center font-mono font-semibold text-foreground">
-                    {(scores.composite * 15).toFixed(1)}%
+                    {calcHrProb(seasonComposite).toFixed(1)}%
                   </td>
                   <td className="py-2.5 px-2 text-center">
                     <span className={form.color} title={form.label}>
@@ -668,7 +690,7 @@ function MatchupTableView({
                     {pct(sp?.barrel)}
                   </td>
                   <td className="py-2.5 px-2 text-center font-mono font-bold text-foreground">
-                    {(scores.composite * 100).toFixed(1)}
+                    {(seasonComposite * 100).toFixed(1)}
                   </td>
                 </tr>
               );
@@ -683,7 +705,8 @@ function MatchupTableView({
           const scores = player.scores.L5;
           if (!scores) return null;
           const sp = player.season_profile;
-          const grade = getGrade(scores.composite);
+          const seasonComposite = calcSeasonComposite(player);
+          const grade = getGrade(seasonComposite);
           const form = getFormDetailed(player);
           const batterTeam =
             player.batter_side === "home" ? game.home_team : game.away_team;
@@ -705,7 +728,7 @@ function MatchupTableView({
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <span className="font-mono text-sm font-bold text-foreground">
-                    {(scores.composite * 100).toFixed(1)}
+                    {calcHrProb(seasonComposite).toFixed(1)}%
                   </span>
                   <TableGradeBadge grade={grade} />
                 </div>
@@ -827,7 +850,7 @@ export function MatchupAnalysis({
       if (tableSortBy === "exit_velo") return (b.player.season_profile?.ev ?? 0) - (a.player.season_profile?.ev ?? 0);
       if (tableSortBy === "barrel_pct")
         return (b.player.season_profile?.barrel ?? 0) - (a.player.season_profile?.barrel ?? 0);
-      return sb.composite - sa.composite;
+      return calcSeasonComposite(b.player) - calcSeasonComposite(a.player);
     });
     return sorted;
   }, [tableFilteredPairs, tableSortBy]);
@@ -840,7 +863,7 @@ export function MatchupAnalysis({
       if (!sa || !sb) return 0;
       if (sortBy === "batter") return calcBatterPower(b.player) - calcBatterPower(a.player);
       if (sortBy === "pitcher") return sb.pitcher_score - sa.pitcher_score;
-      return sb.composite - sa.composite;
+      return calcSeasonComposite(b.player) - calcSeasonComposite(a.player);
     });
     return sorted;
   }, [allPairs, sortBy]);
