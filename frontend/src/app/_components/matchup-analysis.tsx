@@ -565,12 +565,15 @@ type TableSortKey =
   | "name"
   | "team"
   | "grade"
+  | "composite"
   | "hr_prob"
   | "form"
   | "pitcher_name"
   | "pitcher_team"
   | "batter_power"
-  | "pitcher_vuln";
+  | "pitcher_vuln"
+  | "exit_velo"
+  | "barrel_pct";
 type SortDir = "asc" | "desc";
 type PitcherVulnFilter = "all" | "high" | "medium" | "low";
 type BatterPowerFilter = "all" | "elite" | "strong" | "average" | "weak";
@@ -578,9 +581,12 @@ type BatterPowerFilter = "all" | "elite" | "strong" | "average" | "weak";
 // Columns that default to descending (numeric — highest first)
 const DESC_DEFAULT_KEYS = new Set<TableSortKey>([
   "grade",
+  "composite",
   "hr_prob",
   "batter_power",
   "pitcher_vuln",
+  "exit_velo",
+  "barrel_pct",
   "form",
 ]);
 
@@ -680,29 +686,33 @@ function MatchupTableView({
     "p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] text-white whitespace-nowrap border-b border-r";
   return (
     <>
-      {/* Desktop table — matches Figma node 1:88 */}
+      {/* Desktop table — Figma node 1:88 styling applied to full 12-column data set */}
       <div
         className="hidden md:block overflow-x-auto rounded-[12px] border"
         style={{ borderColor, backgroundColor: bgRow, fontFamily: "Inter, system-ui, sans-serif" }}
       >
-        <table className="w-full border-collapse">
+        <table className="border-collapse w-max min-w-full">
           <thead>
             <tr>
               <SortHeader label="Batter" sortKey="name" align="left" {...headerProps} />
               <SortHeader label="Team" sortKey="team" align="left" {...headerProps} />
-              <SortHeader label="Grade" sortKey="grade" align="center" {...headerProps} />
+              <SortHeader label="Grade" sortKey="grade" align="left" {...headerProps} />
               <SortHeader label="HR Probability" sortKey="hr_prob" align="left" {...headerProps} />
               <SortHeader label="Recent Form" sortKey="form" align="left" {...headerProps} />
               <SortHeader label="Pitcher" sortKey="pitcher_name" align="left" {...headerProps} />
               <SortHeader label="P. Team" sortKey="pitcher_team" align="left" {...headerProps} />
               <SortHeader label="Batter Power" sortKey="batter_power" align="left" {...headerProps} />
               <SortHeader label="Pitcher Vulnerability" sortKey="pitcher_vuln" align="left" {...headerProps} />
+              <SortHeader label="EV" sortKey="exit_velo" align="left" {...headerProps} />
+              <SortHeader label="Barrel%" sortKey="barrel_pct" align="left" {...headerProps} />
+              <SortHeader label="Score" sortKey="composite" align="left" {...headerProps} />
             </tr>
           </thead>
           <tbody>
             {players.map(({ player, game }) => {
               const scores = player.scores.L5;
               if (!scores) return null;
+              const sp = player.season_profile;
               const seasonComposite = calcSeasonComposite(player);
               const grade = getGrade(seasonComposite);
               const form = getFormDetailed(player);
@@ -730,7 +740,7 @@ function MatchupTableView({
                     {batterTeam}
                   </td>
                   <td
-                    className="p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] text-white text-center whitespace-nowrap border-b border-r"
+                    className="p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] text-white text-left whitespace-nowrap border-b border-r"
                     style={{
                       backgroundColor: GRADE_BG[grade.label],
                       borderColor: GRADE_BORDER[grade.label],
@@ -770,6 +780,15 @@ function MatchupTableView({
                     }}
                   >
                     {Math.round(scores.pitcher_score * 100)}
+                  </td>
+                  <td className={cellBase} style={{ borderColor }}>
+                    {fmt(sp?.ev)}
+                  </td>
+                  <td className={cellBase} style={{ borderColor }}>
+                    {pct(sp?.barrel)}
+                  </td>
+                  <td className={cellBase} style={{ borderColor }}>
+                    {(seasonComposite * 100).toFixed(1)}
                   </td>
                 </tr>
               );
@@ -959,15 +978,21 @@ export function MatchupAnalysis({
       key: TableSortKey,
     ): number => {
       const { player } = pair;
+      const sp = player.season_profile;
       const scores = player.scores.L5;
       switch (key) {
         case "grade":
+        case "composite":
         case "hr_prob":
           return calcSeasonComposite(player);
         case "batter_power":
           return calcBatterPower(player);
         case "pitcher_vuln":
           return scores?.pitcher_score ?? 0;
+        case "exit_velo":
+          return sp?.ev ?? 0;
+        case "barrel_pct":
+          return sp?.barrel ?? 0;
         case "form":
           return formScoreOf(player);
         default:
