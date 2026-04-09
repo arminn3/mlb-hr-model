@@ -700,7 +700,7 @@ function MatchupTableView({
               <SortHeader label="HR Probability" sortKey="hr_prob" align="left" {...headerProps} />
               <SortHeader label="Recent Form" sortKey="form" align="left" {...headerProps} />
               <SortHeader label="Pitcher" sortKey="pitcher_name" align="left" {...headerProps} />
-              <SortHeader label="P. Team" sortKey="pitcher_team" align="left" {...headerProps} />
+              <SortHeader label="Team" sortKey="pitcher_team" align="left" {...headerProps} />
               <SortHeader label="Batter Power" sortKey="batter_power" align="left" {...headerProps} />
               <SortHeader label="Pitcher Vulnerability" sortKey="pitcher_vuln" align="left" {...headerProps} />
               <SortHeader label="EV" sortKey="exit_velo" align="left" {...headerProps} />
