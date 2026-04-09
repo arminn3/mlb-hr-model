@@ -179,7 +179,16 @@ function calcBatterPower(player: PlayerData): number {
 function calcSeasonComposite(player: PlayerData): number {
   const batterPower = calcBatterPower(player);
   const scores = player.scores.L5; // only for pitcher_score + env_score, both season-based
-  const pitcherVuln = scores?.pitcher_score ?? 0.5;
+
+  // Pitcher data quality check: if the opposing pitcher has < 15 IP
+  // total, the stored pitcher_score is unreliable (e.g. Max Meyer at
+  // 8.3 IP, 0 HR allowed → backend rated him 0.294 "tough" which is
+  // just noise from a thin sample). Default to neutral 0.5 in those
+  // cases instead of trusting the phantom value.
+  const pitcherIp = player.pitcher_stats?.ip ?? 0;
+  const rawPitcherVuln = scores?.pitcher_score ?? 0.5;
+  const pitcherVuln = pitcherIp < 15 ? 0.5 : rawPitcherVuln;
+
   const envScore = scores?.env_score ?? 0.5;
   // Weights: batter 60% (season_profile), pitcher 35% (season), env 5%
   return 0.6 * batterPower + 0.35 * pitcherVuln + 0.05 * envScore;
