@@ -654,7 +654,7 @@ function SortHeader({
   return (
     <th
       onClick={() => onSort(sortKey)}
-      className={`cursor-pointer select-none p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] transition-colors whitespace-nowrap border-b border-[#32333b] ${
+      className={`cursor-pointer select-none p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] transition-colors whitespace-nowrap border-b border-r border-[#32333b] ${
         align === "left" ? "text-left" : "text-center"
       } ${active ? "text-white" : "text-[#a0a1a4] hover:text-white"}`}
       style={{ backgroundColor: "#1a1c24" }}
