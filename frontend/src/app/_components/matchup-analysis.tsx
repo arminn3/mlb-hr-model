@@ -137,27 +137,26 @@ function calcBatterPower(player: PlayerData): number {
   const hrs = sp.hrs ?? 0;
   const iso = sp.iso ?? 0;
 
-  // 1. HR rate per BIP — direct rate of "how often this guy turns
-  //    a ball in play into a HR". Rate, not volume — same approach
-  //    as HRP. Elite ~13%+. Below 13%, credit scales linearly.
+  // 1. HR rate per BIP — cap at 10% (good slugger = full credit).
+  //    Was 13% which only Judge-tier guys hit, leaving Carpenter
+  //    (8% rate) at 62% of max. League avg is ~5%.
   const hrRate = bip > 0 ? hrs / bip : 0;
-  const hrRateNorm = Math.min(1, hrRate / 0.13);
+  const hrRateNorm = Math.min(1, hrRate / 0.1);
 
-  // 2. ISO (slugging - batting avg) — pure power. Cap at 0.450 so
-  //    truly elite ISO (Judge 0.639, Suárez 0.431) separates from
-  //    "good" ISO (Carpenter 0.329).
-  const isoNorm = Math.max(0, Math.min(1, (iso - 0.1) / 0.35));
+  // 2. ISO — cap at 0.350 (good slugger = full credit). Was 0.450
+  //    which only Judge clears. Carpenter at 0.329 → 91% credit
+  //    instead of 65%.
+  const isoNorm = Math.max(0, Math.min(1, (iso - 0.1) / 0.25));
 
-  // 3. Barrel rate — best single HR predictor in baseball
-  //    (research r ≈ 0.73 with HR rate). Cap at 22% — only Judge
-  //    and Stanton clear that.
-  const barrelNorm = Math.max(0, Math.min(1, sp.barrel / 22));
+  // 3. Barrel rate — cap at 18% (good slugger = full credit).
+  //    Was 22% which is Stanton-tier. League avg is ~8%.
+  const barrelNorm = Math.max(0, Math.min(1, sp.barrel / 18));
 
-  // 4. Exit velo — raw power. Cap at 99 (elite tier).
-  const evNorm = Math.max(0, Math.min(1, (sp.ev - 86) / 13));
+  // 4. Exit velo — cap at 96 (good = full credit). Was 99.
+  const evNorm = Math.max(0, Math.min(1, (sp.ev - 86) / 10));
 
-  // 5. Fly-ball rate — needs to put it in the air.
-  const fbNorm = Math.max(0, Math.min(1, sp.fb / 40));
+  // 5. Fly-ball rate — cap at 38% (good = full credit). Was 40.
+  const fbNorm = Math.max(0, Math.min(1, sp.fb / 38));
 
   const raw =
     0.30 * hrRateNorm +
