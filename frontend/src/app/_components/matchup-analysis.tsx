@@ -122,45 +122,54 @@ function BulletStat({ label, value }: { label: string; value: string }) {
   );
 }
 
+// Hard sample-size floor for matchup analysis. Below this BIP count
+// we don't trust any rate stat (e.g. Luken Baker with 6 BIP and 1
+// lucky barrel). Players below this are filtered out of the page.
+const MIN_BIP_FOR_MATCHUP = 40;
+
 function calcBatterPower(player: PlayerData): number {
   const sp = player.season_profile;
   if (!sp) return 0;
 
   const bip = sp.bip_count ?? 0;
+  if (bip < MIN_BIP_FOR_MATCHUP) return 0;
+
   const hrs = sp.hrs ?? 0;
   const iso = sp.iso ?? 0;
 
-  // 1. HR COUNT (absolute volume) — direct measure of "this guy
-  //    actually hits HRs". Was using HR rate, but rate is unreliable
-  //    on small samples (Sal Stewart's 6 HRs in 62 BIP looked the
-  //    same as Suárez's 40 HRs in 336 BIP because both exceeded the
-  //    10% cap). Volume settles it. 25+ HRs = full credit.
-  const hrCountNorm = Math.min(1, hrs / 25);
+  // 1. HR rate per BIP — direct rate of "how often this guy turns
+  //    a ball in play into a HR". Rate, not volume — same approach
+  //    as HRP. Elite ~13%+. Below 13%, credit scales linearly.
+  const hrRate = bip > 0 ? hrs / bip : 0;
+  const hrRateNorm = Math.min(1, hrRate / 0.13);
 
-  // 2. ISO — pure power. Cap raised from 0.300 → 0.450 so elite
-  //    sluggers (Suárez 0.431, Judge 0.639) actually separate from
-  //    "good" sluggers (Carpenter 0.329).
+  // 2. ISO (slugging - batting avg) — pure power. Cap at 0.450 so
+  //    truly elite ISO (Judge 0.639, Suárez 0.431) separates from
+  //    "good" ISO (Carpenter 0.329).
   const isoNorm = Math.max(0, Math.min(1, (iso - 0.1) / 0.35));
 
-  // 3. Barrel rate — quality of contact. Elite 20%+
-  const barrelNorm = Math.max(0, Math.min(1, sp.barrel / 20));
+  // 3. Barrel rate — best single HR predictor in baseball
+  //    (research r ≈ 0.73 with HR rate). Cap at 22% — only Judge
+  //    and Stanton clear that.
+  const barrelNorm = Math.max(0, Math.min(1, sp.barrel / 22));
 
-  // 4. Exit velo — raw power. Elite 95+ mph
+  // 4. Exit velo — raw power. Cap at 99 (elite tier).
   const evNorm = Math.max(0, Math.min(1, (sp.ev - 86) / 13));
 
-  // 5. Fly-ball rate — needs to put it in the air. Ideal 40%+
+  // 5. Fly-ball rate — needs to put it in the air.
   const fbNorm = Math.max(0, Math.min(1, sp.fb / 40));
 
   const raw =
-    0.30 * hrCountNorm +
+    0.30 * hrRateNorm +
     0.25 * isoNorm +
     0.20 * barrelNorm +
     0.15 * evNorm +
     0.10 * fbNorm;
 
-  // Confidence scaling — small samples get discounted toward 0.
-  // 50 BIP = full credit, 25 BIP = half credit, 6 BIP = 12% credit.
-  const reliability = Math.min(1, bip / 50);
+  // Reliability ramp: 40 BIP → 0.6 credit, 80+ BIP → full credit.
+  // Soft, no cliff. Above the hard floor we still discount thin
+  // samples but don't kneecap them.
+  const reliability = Math.min(1, 0.6 + (bip - MIN_BIP_FOR_MATCHUP) / 100);
   return Math.min(1, Math.max(0, raw * reliability));
 }
 
@@ -960,6 +969,9 @@ export function MatchupAnalysis({
     const pairs: { player: PlayerData; game: GameData }[] = [];
     for (const game of filteredGames) {
       for (const player of game.players) {
+        // Hard floor: skip players with too few BIP to predict from
+        const bip = player.season_profile?.bip_count ?? 0;
+        if (bip < MIN_BIP_FOR_MATCHUP) continue;
         pairs.push({ player, game });
       }
     }
