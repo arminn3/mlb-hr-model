@@ -87,11 +87,7 @@ export function Dashboard() {
   }
 
   if (!data) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="animate-pulse text-muted text-sm">Loading model data...</div>
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
   const totalPlayers = data.games.reduce((sum, g) => sum + g.players.length, 0);
@@ -250,6 +246,75 @@ export function Dashboard() {
           {activePage === "methodology" && (
             <MethodologyPage />
           )}
+        </main>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Loading skeleton ---------- */
+
+function SkelBlock({ className = "" }: { className?: string }) {
+  return <div className={`bg-white/5 rounded animate-pulse ${className}`} />;
+}
+
+function DashboardSkeleton() {
+  return (
+    <div className="flex min-h-screen">
+      {/* Sidebar skeleton */}
+      <aside className="hidden lg:flex w-56 flex-col gap-2 border-r border-card-border bg-card/20 p-4">
+        <SkelBlock className="h-8 w-32 mb-4" />
+        {Array.from({ length: 8 }).map((_, i) => (
+          <SkelBlock key={i} className="h-8 w-full" />
+        ))}
+      </aside>
+
+      {/* Main */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Topbar skeleton */}
+        <header className="sticky top-0 bg-background/80 backdrop-blur-sm border-b border-card-border px-4 md:px-8 py-3 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-3">
+            <SkelBlock className="h-5 w-32" />
+            <SkelBlock className="h-3 w-40 hidden sm:block" />
+          </div>
+          <div className="flex items-center gap-2 md:gap-4">
+            <SkelBlock className="h-8 w-24 rounded-lg" />
+            <SkelBlock className="h-8 w-32 rounded-lg" />
+          </div>
+        </header>
+
+        {/* Content skeleton — 3 game-card-shaped blocks with table rows inside */}
+        <main className="flex-1 p-4 md:p-8 space-y-6">
+          {/* Filter chip row */}
+          <div className="flex flex-wrap gap-1.5">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <SkelBlock key={i} className="h-7 w-20 rounded-full" />
+            ))}
+          </div>
+
+          {/* Game card skeletons */}
+          {Array.from({ length: 3 }).map((_, gi) => (
+            <div
+              key={gi}
+              className="border border-card-border rounded-xl bg-card/20 p-4 md:p-6 space-y-3"
+            >
+              <div className="flex items-center justify-between gap-4">
+                <SkelBlock className="h-5 w-48" />
+                <SkelBlock className="h-4 w-24" />
+              </div>
+              <div className="space-y-2 pt-2">
+                {Array.from({ length: 6 }).map((__, ri) => (
+                  <div key={ri} className="flex items-center gap-3">
+                    <SkelBlock className="h-4 w-32" />
+                    <SkelBlock className="h-4 flex-1" />
+                    <SkelBlock className="h-4 w-12" />
+                    <SkelBlock className="h-4 w-12" />
+                    <SkelBlock className="h-4 w-12" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </main>
       </div>
     </div>
