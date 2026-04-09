@@ -153,7 +153,7 @@ export function Dashboard() {
             </span>
           </div>
           <div className="flex items-center gap-2 md:gap-4">
-            {(activePage === "rankings" || activePage === "slate" || activePage === "slips" || activePage === "bvp" || activePage === "gems" || activePage === "matchup") && (
+            {(activePage === "rankings" || activePage === "slate" || activePage === "slips" || activePage === "bvp" || activePage === "gems") && (
               <LookbackToggle value={lookback} onChange={setLookback} />
             )}
             <DatePicker currentDate={selectedDate} onChange={loadDate} />
@@ -236,7 +236,7 @@ export function Dashboard() {
           )}
 
           {activePage === "matchup" && (
-            <MatchupAnalysis games={data.games} lookback={lookback} />
+            <MatchupAnalysis games={data.games} />
           )}
 
           {activePage === "slips" && (

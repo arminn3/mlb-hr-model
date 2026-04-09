@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { GameData, LookbackKey, PlayerData } from "./types";
+import type { GameData, PlayerData } from "./types";
 
 /* ---------- helpers ---------- */
 
@@ -102,21 +102,28 @@ function BulletStat({ label, value }: { label: string; value: string }) {
   );
 }
 
+function calcBatterPower(player: PlayerData): number {
+  const sp = player.season_profile;
+  if (!sp) return 0;
+  const evNorm = Math.max(0, Math.min(1, (sp.ev - 85) / 15));
+  const raw = (sp.barrel / 25) * 0.5 + evNorm * 0.3 + (sp.fb / 50) * 0.2;
+  return Math.min(1, Math.max(0, raw));
+}
+
 function MatchupCard({
   player,
   game,
-  lookback,
   defaultExpanded,
 }: {
   player: PlayerData;
   game: GameData;
-  lookback: LookbackKey;
   defaultExpanded: boolean;
 }) {
   const [expanded, setExpanded] = useState(defaultExpanded);
-  const scores = player.scores[lookback];
+  const scores = player.scores.L5;
   if (!scores) return null;
 
+  const sp = player.season_profile;
   const grade = getGrade(scores.composite);
   const form = getForm(player);
   const env = game.environment;
@@ -203,7 +210,7 @@ function MatchupCard({
           <div className="grid grid-cols-3 gap-3 px-5 py-4">
             {[
               {
-                value: scores.batter_score.toFixed(2),
+                value: calcBatterPower(player).toFixed(2),
                 label: "POWER SCORE",
                 color: "text-accent-green",
               },
@@ -245,16 +252,19 @@ function MatchupCard({
                 borderColor="border-accent-green"
               />
               <div className="space-y-0.5">
-                <BulletStat label="Barrel" value={pct(scores.barrel_pct)} />
+                <BulletStat label="Barrel" value={pct(sp?.barrel)} />
                 <BulletStat
                   label="Exit Velo"
-                  value={fmt(scores.exit_velo) + " mph"}
+                  value={sp?.ev ? fmt(sp.ev) + " mph" : "-"}
                 />
-                <BulletStat label="FB%" value={pct(scores.fb_pct)} />
+                <BulletStat label="FB%" value={pct(sp?.fb)} />
                 <BulletStat
                   label="Hard Hit"
-                  value={pct(scores.hard_hit_pct)}
+                  value={pct(sp?.hard_hit)}
                 />
+                <BulletStat label="ISO" value={sp?.iso !== undefined ? sp.iso.toFixed(3) : "-"} />
+                <BulletStat label="HRs" value={sp?.hrs !== undefined ? String(sp.hrs) : "-"} />
+                <BulletStat label="BIP" value={sp?.bip_count !== undefined ? String(sp.bip_count) : "-"} />
               </div>
               <div className="mt-2 pt-2 border-t border-card-border/50 text-xs">
                 <span className="text-muted">&bull; Form:</span>{" "}
@@ -566,10 +576,8 @@ function TableGradeBadge({ grade }: { grade: { label: string; color: string } })
 
 function MatchupTableView({
   players,
-  lookback,
 }: {
   players: { player: PlayerData; game: GameData }[];
-  lookback: LookbackKey;
 }) {
   return (
     <>
@@ -594,8 +602,9 @@ function MatchupTableView({
           </thead>
           <tbody>
             {players.map(({ player, game }) => {
-              const scores = player.scores[lookback];
+              const scores = player.scores.L5;
               if (!scores) return null;
+              const sp = player.season_profile;
               const grade = getGrade(scores.composite);
               const form = getFormDetailed(player);
               const batterTeam =
@@ -606,6 +615,7 @@ function MatchupTableView({
                 player.batter_side === "home"
                   ? game.away_team
                   : game.home_team;
+              const batterPower = calcBatterPower(player);
 
               return (
                 <tr
@@ -635,10 +645,10 @@ function MatchupTableView({
                   <td
                     className="py-2.5 px-2 text-center font-mono font-semibold text-foreground"
                     style={{
-                      backgroundColor: greenGradientBg(scores.batter_score),
+                      backgroundColor: greenGradientBg(batterPower),
                     }}
                   >
-                    {scores.batter_score.toFixed(2)}
+                    {batterPower.toFixed(2)}
                   </td>
                   <td
                     className="py-2.5 px-2 text-center font-mono font-semibold text-foreground"
@@ -649,10 +659,10 @@ function MatchupTableView({
                     {scores.pitcher_score.toFixed(2)}
                   </td>
                   <td className="py-2.5 px-2 text-center font-mono text-muted">
-                    {fmt((player as unknown as Record<string, Record<string, number>>).season_profile?.ev ?? scores.exit_velo)}
+                    {fmt(sp?.ev)}
                   </td>
                   <td className="py-2.5 px-2 text-center font-mono text-muted">
-                    {pct((player as unknown as Record<string, Record<string, number>>).season_profile?.barrel ?? scores.barrel_pct)}
+                    {pct(sp?.barrel)}
                   </td>
                   <td className="py-2.5 px-2 text-center font-mono font-bold text-foreground">
                     {(scores.composite * 100).toFixed(1)}
@@ -667,12 +677,14 @@ function MatchupTableView({
       {/* Mobile cards fallback */}
       <div className="md:hidden space-y-2">
         {players.map(({ player, game }) => {
-          const scores = player.scores[lookback];
+          const scores = player.scores.L5;
           if (!scores) return null;
+          const sp = player.season_profile;
           const grade = getGrade(scores.composite);
           const form = getFormDetailed(player);
           const batterTeam =
             player.batter_side === "home" ? game.home_team : game.away_team;
+          const batterPower = calcBatterPower(player);
 
           return (
             <div
@@ -701,10 +713,10 @@ function MatchupTableView({
                   <span
                     className="font-mono font-semibold text-foreground block rounded px-1"
                     style={{
-                      backgroundColor: greenGradientBg(scores.batter_score),
+                      backgroundColor: greenGradientBg(batterPower),
                     }}
                   >
-                    {scores.batter_score.toFixed(2)}
+                    {batterPower.toFixed(2)}
                   </span>
                 </div>
                 <div>
@@ -727,7 +739,7 @@ function MatchupTableView({
                 <div>
                   <span className="text-muted block uppercase">Barrel</span>
                   <span className="font-mono text-foreground block">
-                    {pct((player as unknown as Record<string, Record<string, number>>).season_profile?.barrel ?? scores.barrel_pct)}
+                    {pct(sp?.barrel)}
                   </span>
                 </div>
               </div>
@@ -743,10 +755,8 @@ function MatchupTableView({
 
 export function MatchupAnalysis({
   games,
-  lookback,
 }: {
   games: GameData[];
-  lookback: LookbackKey;
 }) {
   const [viewMode, setViewMode] = useState<"table" | "cards">("table");
   const [selectedGamePk, setSelectedGamePk] = useState<number | null>(null);
@@ -780,7 +790,7 @@ export function MatchupAnalysis({
 
     if (pitcherVulnFilter !== "all") {
       result = result.filter(({ player }) => {
-        const s = player.scores[lookback];
+        const s = player.scores.L5;
         if (!s) return false;
         const v = s.pitcher_score;
         if (pitcherVulnFilter === "high") return v > 0.6;
@@ -791,9 +801,7 @@ export function MatchupAnalysis({
 
     if (batterPowerFilter !== "all") {
       result = result.filter(({ player }) => {
-        const s = player.scores[lookback];
-        if (!s) return false;
-        const v = s.batter_score;
+        const v = calcBatterPower(player);
         if (batterPowerFilter === "elite") return v > 0.8;
         if (batterPowerFilter === "strong") return v > 0.5 && v <= 0.8;
         if (batterPowerFilter === "average") return v > 0.3 && v <= 0.5;
@@ -802,37 +810,37 @@ export function MatchupAnalysis({
     }
 
     return result;
-  }, [allPairs, lookback, pitcherVulnFilter, batterPowerFilter]);
+  }, [allPairs, pitcherVulnFilter, batterPowerFilter]);
 
   const tableSortedPlayers = useMemo(() => {
     const sorted = [...tableFilteredPairs];
     sorted.sort((a, b) => {
-      const sa = a.player.scores[lookback];
-      const sb = b.player.scores[lookback];
+      const sa = a.player.scores.L5;
+      const sb = b.player.scores.L5;
       if (!sa || !sb) return 0;
-      if (tableSortBy === "batter") return sb.batter_score - sa.batter_score;
+      if (tableSortBy === "batter") return calcBatterPower(b.player) - calcBatterPower(a.player);
       if (tableSortBy === "pitcher")
         return sb.pitcher_score - sa.pitcher_score;
-      if (tableSortBy === "exit_velo") return sb.exit_velo - sa.exit_velo;
+      if (tableSortBy === "exit_velo") return (b.player.season_profile?.ev ?? 0) - (a.player.season_profile?.ev ?? 0);
       if (tableSortBy === "barrel_pct")
-        return sb.barrel_pct - sa.barrel_pct;
+        return (b.player.season_profile?.barrel ?? 0) - (a.player.season_profile?.barrel ?? 0);
       return sb.composite - sa.composite;
     });
     return sorted;
-  }, [tableFilteredPairs, lookback, tableSortBy]);
+  }, [tableFilteredPairs, tableSortBy]);
 
   const cardSortedPlayers = useMemo(() => {
     const sorted = [...allPairs];
     sorted.sort((a, b) => {
-      const sa = a.player.scores[lookback];
-      const sb = b.player.scores[lookback];
+      const sa = a.player.scores.L5;
+      const sb = b.player.scores.L5;
       if (!sa || !sb) return 0;
-      if (sortBy === "batter") return sb.batter_score - sa.batter_score;
+      if (sortBy === "batter") return calcBatterPower(b.player) - calcBatterPower(a.player);
       if (sortBy === "pitcher") return sb.pitcher_score - sa.pitcher_score;
       return sb.composite - sa.composite;
     });
     return sorted;
-  }, [allPairs, lookback, sortBy]);
+  }, [allPairs, sortBy]);
 
   const selectClasses =
     "bg-card/50 border border-card-border text-foreground text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-accent/40 cursor-pointer";
@@ -936,7 +944,6 @@ export function MatchupAnalysis({
 
           <MatchupTableView
             players={tableSortedPlayers}
-            lookback={lookback}
           />
 
           {tableSortedPlayers.length === 0 && (
@@ -1015,7 +1022,6 @@ export function MatchupAnalysis({
                 key={`${game.game_pk}-${player.name}`}
                 player={player}
                 game={game}
-                lookback={lookback}
                 defaultExpanded={
                   expandAll || (i < 5 && selectedGamePk !== null)
                 }

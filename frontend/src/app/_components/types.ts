@@ -64,6 +64,15 @@ export interface PlayerData {
   pitcher_stats: PitcherStats;
   scores: Record<LookbackKey, ScoreSet>;
   season_stats?: Record<string, SeasonStats>;
+  season_profile?: {
+    barrel: number;
+    ev: number;
+    fb: number;
+    hard_hit: number;
+    bip_count: number;
+    hrs: number;
+    iso: number;
+  };
   bvp_stats?: {
     career: {
       abs: number;
