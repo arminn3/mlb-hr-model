@@ -743,9 +743,9 @@ function MatchupTableView({
                     className="p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] text-white text-left whitespace-nowrap border-b border-r"
                     style={{
                       backgroundColor: GRADE_BG[grade.label],
-                      // bottom border matches bg → adjacent same-color
-                      // grade cells blend into one smooth strip
-                      borderBottomColor: GRADE_BG[grade.label],
+                      // subtle dark overlay line — visible but not harsh
+                      // (replaces the bright #428b47 that was too loud)
+                      borderBottomColor: "rgba(0, 0, 0, 0.25)",
                       borderRightColor: borderColor,
                     }}
                   >
