@@ -25,6 +25,7 @@ interface LivePlay {
   timestamp: string;
   isHR: boolean;
   isNearHR: boolean;
+  direction: "Left" | "Center" | "Right" | "—";
 }
 
 interface GameStatus {
@@ -147,12 +148,26 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
           );
           if (!battedBall) continue;
 
-          const hitData = battedBall.hitData as Record<string, number>;
-          const ev = hitData.launchSpeed || 0;
-          const angle = hitData.launchAngle || 0;
-          const dist = hitData.totalDistance || 0;
+          const hitData = battedBall.hitData as Record<string, unknown>;
+          const ev = (hitData.launchSpeed as number) || 0;
+          const angle = (hitData.launchAngle as number) || 0;
+          const dist = (hitData.totalDistance as number) || 0;
 
-          if (ev < 90 || angle < 20) continue;
+          // Hard hits only — 92+ EV
+          if (ev < 92 || angle < 20) continue;
+
+          // Direction from gameday hit coordinates. coordX runs ~0-250
+          // with home plate around 125. Low x = LF, high x = RF.
+          const coords = hitData.coordinates as
+            | { coordX?: number; coordY?: number }
+            | undefined;
+          const cx = coords?.coordX ?? 0;
+          let direction: "Left" | "Center" | "Right" | "—" = "—";
+          if (cx > 0) {
+            if (cx < 110) direction = "Left";
+            else if (cx > 145) direction = "Right";
+            else direction = "Center";
+          }
 
           const isHR = resultData.event === "Home Run";
           // NEAR HR if any of:
@@ -178,6 +193,7 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
             timestamp: about.startTime || "",
             isHR,
             isNearHR,
+            direction,
           });
         }
       }
@@ -391,6 +407,7 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
                 <th className={headerCellClass} style={headerCellStyle}>EV</th>
                 <th className={headerCellClass} style={headerCellStyle}>Angle</th>
                 <th className={headerCellClass} style={headerCellStyle}>Dist</th>
+                <th className={headerCellClass} style={headerCellStyle}>Direction</th>
                 <th className={headerCellClass} style={headerCellStyle}>Result</th>
               </tr>
             </thead>
@@ -459,6 +476,9 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
                       {p.distance > 0
                         ? `${typeof p.distance === "number" ? p.distance.toFixed(0) : p.distance}ft`
                         : "-"}
+                    </td>
+                    <td className={cellClass} style={{ ...cellStyle, color: "#a0a1a4" }}>
+                      {p.direction}
                     </td>
                     <td className={cellClass} style={{ ...cellStyle, color: "#a0a1a4" }}>
                       {p.result.replace(/_/g, " ")}
