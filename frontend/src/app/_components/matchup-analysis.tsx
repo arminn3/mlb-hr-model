@@ -7,11 +7,13 @@ import type { GameData, PlayerData } from "./types";
 /* ---------- helpers ---------- */
 
 function getGrade(composite: number): { label: string; color: string } {
-  if (composite >= 0.65) return { label: "A+", color: "text-white" };
-  if (composite >= 0.55) return { label: "A", color: "text-white" };
-  if (composite >= 0.45) return { label: "B", color: "text-white" };
-  if (composite >= 0.35) return { label: "C", color: "text-white" };
-  if (composite >= 0.25) return { label: "D", color: "text-white" };
+  // A+ is reserved for elite power × vulnerable pitcher × favorable
+  // env combos — maybe 1-3 per slate. HRP's CSV showed 1 A+ in top 50.
+  if (composite >= 0.82) return { label: "A+", color: "text-white" };
+  if (composite >= 0.7) return { label: "A", color: "text-white" };
+  if (composite >= 0.55) return { label: "B", color: "text-white" };
+  if (composite >= 0.4) return { label: "C", color: "text-white" };
+  if (composite >= 0.28) return { label: "D", color: "text-white" };
   return { label: "F", color: "text-white" };
 }
 
@@ -137,26 +139,24 @@ function calcBatterPower(player: PlayerData): number {
   const hrs = sp.hrs ?? 0;
   const iso = sp.iso ?? 0;
 
-  // 1. HR rate per BIP — cap at 10% (good slugger = full credit).
-  //    Was 13% which only Judge-tier guys hit, leaving Carpenter
-  //    (8% rate) at 62% of max. League avg is ~5%.
+  // 1. HR rate per BIP — cap at 10%. Solid slugger maxes out.
   const hrRate = bip > 0 ? hrs / bip : 0;
   const hrRateNorm = Math.min(1, hrRate / 0.1);
 
-  // 2. ISO — cap at 0.350 (good slugger = full credit). Was 0.450
-  //    which only Judge clears. Carpenter at 0.329 → 91% credit
-  //    instead of 65%.
-  const isoNorm = Math.max(0, Math.min(1, (iso - 0.1) / 0.25));
+  // 2. ISO — cap at 0.300. Real sluggers (Carpenter 0.329, Suárez
+  //    0.431) all max out. Was 0.350 which left Carpenter at 91%.
+  const isoNorm = Math.max(0, Math.min(1, (iso - 0.1) / 0.2));
 
-  // 3. Barrel rate — cap at 18% (good slugger = full credit).
-  //    Was 22% which is Stanton-tier. League avg is ~8%.
-  const barrelNorm = Math.max(0, Math.min(1, sp.barrel / 18));
+  // 3. Barrel rate — cap at 16% (was 18%). Most "good slugger"
+  //    barrel rates are 13-18%; this puts them all at ≥80% credit
+  //    instead of ≥72%.
+  const barrelNorm = Math.max(0, Math.min(1, sp.barrel / 16));
 
-  // 4. Exit velo — cap at 96 (good = full credit). Was 99.
-  const evNorm = Math.max(0, Math.min(1, (sp.ev - 86) / 10));
+  // 4. Exit velo — cap at 95 (was 96). Spread is 86 → 95 = 9 mph.
+  const evNorm = Math.max(0, Math.min(1, (sp.ev - 86) / 9));
 
-  // 5. Fly-ball rate — cap at 38% (good = full credit). Was 40.
-  const fbNorm = Math.max(0, Math.min(1, sp.fb / 38));
+  // 5. Fly-ball rate — cap at 35% (was 38). Real slugger threshold.
+  const fbNorm = Math.max(0, Math.min(1, sp.fb / 35));
 
   const raw =
     0.30 * hrRateNorm +
