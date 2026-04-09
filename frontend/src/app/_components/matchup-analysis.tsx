@@ -615,7 +615,7 @@ function TableGradeBadge({ grade }: { grade: { label: string; color: string } })
     D: "text-muted",
   };
   return (
-    <span className={`text-sm font-normal ${colorMap[grade.label] ?? colorMap.D}`}>
+    <span className={`text-[11px] font-bold ${colorMap[grade.label] ?? colorMap.D}`}>
       {grade.label}
     </span>
   );
@@ -650,13 +650,13 @@ function SortHeader({
   return (
     <th
       onClick={() => onSort(sortKey)}
-      className={`cursor-pointer select-none py-[6px] px-2 font-normal text-sm transition-colors whitespace-nowrap ${
+      className={`cursor-pointer select-none py-2 px-2 font-semibold text-[10px] uppercase tracking-wider transition-colors whitespace-nowrap ${
         align === "left" ? "text-left" : "text-center"
       } ${active ? "text-accent" : "text-muted hover:text-foreground"}`}
     >
       <span className="inline-flex items-center gap-1">
         {label}
-        {active && <span className="text-xs">{arrow}</span>}
+        {active && <span className="text-[9px]">{arrow}</span>}
       </span>
     </th>
   );
@@ -676,14 +676,10 @@ function MatchupTableView({
   const headerProps = { currentSort: sortKey, currentDir: sortDir, onSort };
   return (
     <>
-      {/* Desktop table — HRP/Glide Data Grid measurements:
-          - 3px cell vertical padding
-          - 8px cell horizontal padding
-          - 14px base font, 400 weight (no bold)
-          - subtle horizontal row dividers only, no vertical dividers */}
+      {/* Desktop table */}
       <div className="hidden md:block overflow-x-auto rounded-lg border border-card-border bg-card/20">
-        <table className="w-full text-sm">
-          <thead className="bg-card/40 border-b border-white/10 sticky top-0">
+        <table className="w-full text-xs">
+          <thead className="bg-card/40 border-b border-card-border sticky top-0">
             <tr>
               <SortHeader label="Batter" sortKey="name" align="left" {...headerProps} />
               <SortHeader label="Team" sortKey="team" align="left" {...headerProps} />
@@ -722,36 +718,39 @@ function MatchupTableView({
               return (
                 <tr
                   key={`${game.game_pk}-${player.name}`}
-                  className="border-b border-white/5 hover:bg-white/[0.03] transition-colors"
+                  className={`border-b border-card-border/20 hover:bg-card/40 transition-colors ${
+                    i % 2 === 0 ? "bg-transparent" : "bg-card/5"
+                  }`}
                 >
-                  <td className="py-[3px] px-2 font-normal text-foreground whitespace-nowrap">
+                  <td className="py-1 px-3 text-foreground whitespace-nowrap">
                     {player.name}
                   </td>
-                  <td className="py-[3px] px-2 text-muted">
+                  <td className="py-1 px-2 text-muted font-mono text-[11px]">
                     {batterTeam}
                   </td>
-                  <td className="py-[3px] px-2 text-center bg-accent-green/5">
+                  <td className="py-1 px-2 text-center bg-accent-green/5">
                     <TableGradeBadge grade={grade} />
                   </td>
-                  <td className="py-[3px] px-2 text-center text-foreground whitespace-nowrap">
+                  <td className="py-1 px-2 text-center font-mono text-foreground whitespace-nowrap">
                     {hrProbPct.toFixed(1)}%
                     {americanOdds && (
                       <span className="text-muted ml-1">({americanOdds})</span>
                     )}
                   </td>
-                  <td className="py-[3px] px-2 text-center whitespace-nowrap">
+                  <td className="py-1 px-2 text-center whitespace-nowrap">
                     <span className={form.color} title={form.label}>
-                      {form.dot} {form.label}
+                      {form.dot}{" "}
+                      <span className="text-[11px]">{form.label}</span>
                     </span>
                   </td>
-                  <td className="py-[3px] px-2 text-foreground whitespace-nowrap">
+                  <td className="py-1 px-3 text-foreground whitespace-nowrap">
                     {player.opp_pitcher}
                   </td>
-                  <td className="py-[3px] px-2 text-muted">
+                  <td className="py-1 px-2 text-muted font-mono text-[11px]">
                     {pitcherTeam}
                   </td>
                   <td
-                    className="py-[3px] px-2 text-center text-foreground"
+                    className="py-1 px-2 text-center font-mono text-foreground"
                     style={{
                       backgroundColor: greenGradientBg(batterPower),
                     }}
@@ -759,20 +758,20 @@ function MatchupTableView({
                     {batterPower.toFixed(2)}
                   </td>
                   <td
-                    className="py-[3px] px-2 text-center text-foreground"
+                    className="py-1 px-2 text-center font-mono text-foreground"
                     style={{
                       backgroundColor: greenGradientBg(scores.pitcher_score),
                     }}
                   >
                     {scores.pitcher_score.toFixed(2)}
                   </td>
-                  <td className="py-[3px] px-2 text-center text-foreground">
+                  <td className="py-1 px-2 text-center font-mono text-foreground">
                     {fmt(sp?.ev)}
                   </td>
-                  <td className="py-[3px] px-2 text-center text-foreground">
+                  <td className="py-1 px-2 text-center font-mono text-foreground">
                     {pct(sp?.barrel)}
                   </td>
-                  <td className="py-[3px] px-2 text-center text-foreground">
+                  <td className="py-1 px-2 text-center font-mono text-foreground">
                     {(seasonComposite * 100).toFixed(1)}
                   </td>
                 </tr>
