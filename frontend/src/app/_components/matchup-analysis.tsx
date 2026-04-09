@@ -611,7 +611,7 @@ function TableGradeBadge({ grade }: { grade: { label: string; color: string } })
   };
   return (
     <span
-      className={`text-xs font-bold px-2.5 py-1 rounded border inline-block min-w-[2.5rem] ${styles[grade.label] ?? styles.D}`}
+      className={`text-[11px] font-bold px-2 py-0.5 rounded border inline-block min-w-[2rem] ${styles[grade.label] ?? styles.D}`}
     >
       {grade.label}
     </span>
@@ -628,7 +628,7 @@ function SortHeader({
 }: {
   label: string;
   sortKey: TableSortKey;
-  currentSort: TableSortKey;
+  currentSort: TableSortKey | null;
   currentDir: SortDir;
   onSort: (key: TableSortKey) => void;
   align?: "left" | "center";
@@ -638,15 +638,13 @@ function SortHeader({
   return (
     <th
       onClick={() => onSort(sortKey)}
-      className={`cursor-pointer select-none py-3 px-2 font-semibold text-[11px] uppercase tracking-wider transition-colors whitespace-nowrap ${
+      className={`cursor-pointer select-none py-2 px-2 font-semibold text-[10px] uppercase tracking-wider transition-colors whitespace-nowrap ${
         align === "left" ? "text-left" : "text-center"
       } ${active ? "text-accent" : "text-muted hover:text-foreground"}`}
     >
       <span className="inline-flex items-center gap-1">
         {label}
-        <span className={`text-[10px] ${active ? "opacity-100" : "opacity-30"}`}>
-          {active ? arrow : "\u2195"}
-        </span>
+        {active && <span className="text-[9px]">{arrow}</span>}
       </span>
     </th>
   );
@@ -659,7 +657,7 @@ function MatchupTableView({
   onSort,
 }: {
   players: { player: PlayerData; game: GameData }[];
-  sortKey: TableSortKey;
+  sortKey: TableSortKey | null;
   sortDir: SortDir;
   onSort: (key: TableSortKey) => void;
 }) {
@@ -667,8 +665,8 @@ function MatchupTableView({
   return (
     <>
       {/* Desktop table */}
-      <div className="hidden md:block overflow-x-auto rounded-xl border border-card-border bg-card/20">
-        <table className="w-full text-sm">
+      <div className="hidden md:block overflow-x-auto rounded-lg border border-card-border bg-card/20">
+        <table className="w-full text-xs">
           <thead className="bg-card/40 border-b border-card-border sticky top-0">
             <tr>
               <SortHeader label="Batter" sortKey="name" align="left" {...headerProps} />
@@ -710,32 +708,32 @@ function MatchupTableView({
                     i % 2 === 0 ? "bg-transparent" : "bg-card/10"
                   }`}
                 >
-                  <td className="py-3 px-3 font-semibold text-foreground whitespace-nowrap">
+                  <td className="py-1.5 px-3 font-medium text-foreground whitespace-nowrap">
                     {player.name}
                   </td>
-                  <td className="py-3 px-2 text-muted font-mono text-xs">
+                  <td className="py-1.5 px-2 text-muted font-mono text-[11px]">
                     {batterTeam}
                   </td>
-                  <td className="py-3 px-2 text-center bg-accent/5">
+                  <td className="py-1.5 px-2 text-center bg-accent/5">
                     <TableGradeBadge grade={grade} />
                   </td>
-                  <td className="py-3 px-2 text-center font-mono font-bold text-accent">
+                  <td className="py-1.5 px-2 text-center font-mono font-semibold text-accent">
                     {calcHrProb(seasonComposite).toFixed(1)}%
                   </td>
-                  <td className="py-3 px-2 text-center whitespace-nowrap">
+                  <td className="py-1.5 px-2 text-center whitespace-nowrap">
                     <span className={form.color} title={form.label}>
                       {form.dot}{" "}
-                      <span className="text-xs font-medium">{form.label}</span>
+                      <span className="text-[11px] font-medium">{form.label}</span>
                     </span>
                   </td>
-                  <td className="py-3 px-3 text-foreground whitespace-nowrap">
+                  <td className="py-1.5 px-3 text-foreground whitespace-nowrap">
                     {player.opp_pitcher}
                   </td>
-                  <td className="py-3 px-2 text-muted font-mono text-xs">
+                  <td className="py-1.5 px-2 text-muted font-mono text-[11px]">
                     {pitcherTeam}
                   </td>
                   <td
-                    className="py-3 px-2 text-center font-mono font-bold text-foreground"
+                    className="py-1.5 px-2 text-center font-mono font-semibold text-foreground"
                     style={{
                       backgroundColor: greenGradientBg(batterPower),
                     }}
@@ -743,20 +741,20 @@ function MatchupTableView({
                     {batterPower.toFixed(2)}
                   </td>
                   <td
-                    className="py-3 px-2 text-center font-mono font-bold text-foreground"
+                    className="py-1.5 px-2 text-center font-mono font-semibold text-foreground"
                     style={{
                       backgroundColor: greenGradientBg(scores.pitcher_score),
                     }}
                   >
                     {scores.pitcher_score.toFixed(2)}
                   </td>
-                  <td className="py-3 px-2 text-center font-mono text-foreground">
+                  <td className="py-1.5 px-2 text-center font-mono text-foreground">
                     {fmt(sp?.ev)}
                   </td>
-                  <td className="py-3 px-2 text-center font-mono text-foreground">
+                  <td className="py-1.5 px-2 text-center font-mono text-foreground">
                     {pct(sp?.barrel)}
                   </td>
-                  <td className="py-3 px-2 text-center font-mono font-bold text-foreground">
+                  <td className="py-1.5 px-2 text-center font-mono font-semibold text-foreground">
                     {(seasonComposite * 100).toFixed(1)}
                   </td>
                 </tr>
@@ -856,7 +854,10 @@ export function MatchupAnalysis({
   const [sortBy, setSortBy] = useState<"composite" | "batter" | "pitcher">(
     "composite",
   );
-  const [tableSortBy, setTableSortBy] = useState<TableSortKey>("composite");
+  // null = default order (composite desc) with no active sort indicator.
+  // As soon as the user clicks a column, this becomes a real key and
+  // the arrow indicator appears.
+  const [tableSortBy, setTableSortBy] = useState<TableSortKey | null>(null);
   const [tableSortDir, setTableSortDir] = useState<SortDir>("desc");
 
   const handleTableSort = (key: TableSortKey) => {
@@ -975,19 +976,23 @@ export function MatchupAnalysis({
       }
     };
 
+    // null key → default order: grade (composite) descending
+    const effectiveKey: TableSortKey = tableSortBy ?? "composite";
+    const effectiveDir: SortDir = tableSortBy === null ? "desc" : tableSortDir;
+
     const isTextSort =
-      tableSortBy === "name" ||
-      tableSortBy === "team" ||
-      tableSortBy === "pitcher_name" ||
-      tableSortBy === "pitcher_team";
+      effectiveKey === "name" ||
+      effectiveKey === "team" ||
+      effectiveKey === "pitcher_name" ||
+      effectiveKey === "pitcher_team";
 
     const sorted = [...tableFilteredPairs];
     sorted.sort((a, b) => {
-      const dir = tableSortDir === "desc" ? -1 : 1;
+      const dir = effectiveDir === "desc" ? -1 : 1;
       if (isTextSort) {
-        return textValue(a, tableSortBy).localeCompare(textValue(b, tableSortBy)) * dir;
+        return textValue(a, effectiveKey).localeCompare(textValue(b, effectiveKey)) * dir;
       }
-      return (numericValue(a, tableSortBy) - numericValue(b, tableSortBy)) * dir;
+      return (numericValue(a, effectiveKey) - numericValue(b, effectiveKey)) * dir;
     });
     return sorted;
   }, [tableFilteredPairs, tableSortBy, tableSortDir]);
