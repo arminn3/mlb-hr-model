@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
 import type { GameData, PlayerData } from "./types";
 
@@ -544,6 +545,7 @@ function MatchupCard({
 type TableSortKey =
   | "name"
   | "team"
+  | "grade"
   | "composite"
   | "hr_prob"
   | "form"
@@ -559,6 +561,7 @@ type BatterPowerFilter = "all" | "elite" | "strong" | "average" | "weak";
 
 // Columns that default to descending (numeric — highest first)
 const DESC_DEFAULT_KEYS = new Set<TableSortKey>([
+  "grade",
   "composite",
   "hr_prob",
   "batter_power",
@@ -602,20 +605,29 @@ function greenGradientBg(value: number): string {
 /* ---------- table sub-components ---------- */
 
 function TableGradeBadge({ grade }: { grade: { label: string; color: string } }) {
-  const styles: Record<string, string> = {
-    ELITE: "bg-accent-green/25 text-accent-green border-accent-green/50",
-    A: "bg-accent-green/15 text-accent-green border-accent-green/40",
-    B: "bg-accent-yellow/15 text-accent-yellow border-accent-yellow/40",
-    C: "bg-accent-red/15 text-accent-red border-accent-red/40",
-    D: "bg-card text-muted border-card-border",
+  // HRP-style: no border, no background chip — just the colored letter,
+  // the cell itself carries the green tint.
+  const colorMap: Record<string, string> = {
+    ELITE: "text-accent-green",
+    A: "text-accent-green",
+    B: "text-accent-yellow",
+    C: "text-accent-red",
+    D: "text-muted",
   };
   return (
-    <span
-      className={`text-[11px] font-bold px-2 py-0.5 rounded border inline-block min-w-[2rem] ${styles[grade.label] ?? styles.D}`}
-    >
+    <span className={`text-[11px] font-bold ${colorMap[grade.label] ?? colorMap.D}`}>
       {grade.label}
     </span>
   );
+}
+
+function probToAmericanOdds(probPct: number): string {
+  // prob is expressed as a percentage (e.g. 17.5)
+  if (probPct <= 0 || probPct >= 100) return "";
+  const p = probPct / 100;
+  const american = p >= 0.5 ? -(p / (1 - p)) * 100 : ((1 - p) / p) * 100;
+  const rounded = Math.round(american);
+  return rounded >= 0 ? `+${rounded}` : `${rounded}`;
 }
 
 function SortHeader({
@@ -671,7 +683,7 @@ function MatchupTableView({
             <tr>
               <SortHeader label="Batter" sortKey="name" align="left" {...headerProps} />
               <SortHeader label="Team" sortKey="team" align="left" {...headerProps} />
-              <SortHeader label="Grade" sortKey="composite" {...headerProps} />
+              <SortHeader label="Grade" sortKey="grade" {...headerProps} />
               <SortHeader label="HR Prob" sortKey="hr_prob" {...headerProps} />
               <SortHeader label="Form" sortKey="form" {...headerProps} />
               <SortHeader label="Pitcher" sortKey="pitcher_name" align="left" {...headerProps} />
@@ -701,39 +713,44 @@ function MatchupTableView({
                   : game.home_team;
               const batterPower = calcBatterPower(player);
 
+              const hrProbPct = calcHrProb(seasonComposite);
+              const americanOdds = probToAmericanOdds(hrProbPct);
               return (
                 <tr
                   key={`${game.game_pk}-${player.name}`}
-                  className={`border-b border-card-border/30 hover:bg-card/50 transition-colors ${
-                    i % 2 === 0 ? "bg-transparent" : "bg-card/10"
+                  className={`border-b border-card-border/20 hover:bg-card/40 transition-colors ${
+                    i % 2 === 0 ? "bg-transparent" : "bg-card/5"
                   }`}
                 >
-                  <td className="py-1.5 px-3 font-medium text-foreground whitespace-nowrap">
+                  <td className="py-1 px-3 text-foreground whitespace-nowrap">
                     {player.name}
                   </td>
-                  <td className="py-1.5 px-2 text-muted font-mono text-[11px]">
+                  <td className="py-1 px-2 text-muted font-mono text-[11px]">
                     {batterTeam}
                   </td>
-                  <td className="py-1.5 px-2 text-center bg-accent/5">
+                  <td className="py-1 px-2 text-center bg-accent-green/5">
                     <TableGradeBadge grade={grade} />
                   </td>
-                  <td className="py-1.5 px-2 text-center font-mono font-semibold text-accent">
-                    {calcHrProb(seasonComposite).toFixed(1)}%
+                  <td className="py-1 px-2 text-center font-mono text-foreground whitespace-nowrap">
+                    {hrProbPct.toFixed(1)}%
+                    {americanOdds && (
+                      <span className="text-muted ml-1">({americanOdds})</span>
+                    )}
                   </td>
-                  <td className="py-1.5 px-2 text-center whitespace-nowrap">
+                  <td className="py-1 px-2 text-center whitespace-nowrap">
                     <span className={form.color} title={form.label}>
                       {form.dot}{" "}
-                      <span className="text-[11px] font-medium">{form.label}</span>
+                      <span className="text-[11px]">{form.label}</span>
                     </span>
                   </td>
-                  <td className="py-1.5 px-3 text-foreground whitespace-nowrap">
+                  <td className="py-1 px-3 text-foreground whitespace-nowrap">
                     {player.opp_pitcher}
                   </td>
-                  <td className="py-1.5 px-2 text-muted font-mono text-[11px]">
+                  <td className="py-1 px-2 text-muted font-mono text-[11px]">
                     {pitcherTeam}
                   </td>
                   <td
-                    className="py-1.5 px-2 text-center font-mono font-semibold text-foreground"
+                    className="py-1 px-2 text-center font-mono text-foreground"
                     style={{
                       backgroundColor: greenGradientBg(batterPower),
                     }}
@@ -741,20 +758,20 @@ function MatchupTableView({
                     {batterPower.toFixed(2)}
                   </td>
                   <td
-                    className="py-1.5 px-2 text-center font-mono font-semibold text-foreground"
+                    className="py-1 px-2 text-center font-mono text-foreground"
                     style={{
                       backgroundColor: greenGradientBg(scores.pitcher_score),
                     }}
                   >
                     {scores.pitcher_score.toFixed(2)}
                   </td>
-                  <td className="py-1.5 px-2 text-center font-mono text-foreground">
+                  <td className="py-1 px-2 text-center font-mono text-foreground">
                     {fmt(sp?.ev)}
                   </td>
-                  <td className="py-1.5 px-2 text-center font-mono text-foreground">
+                  <td className="py-1 px-2 text-center font-mono text-foreground">
                     {pct(sp?.barrel)}
                   </td>
-                  <td className="py-1.5 px-2 text-center font-mono font-semibold text-foreground">
+                  <td className="py-1 px-2 text-center font-mono text-foreground">
                     {(seasonComposite * 100).toFixed(1)}
                   </td>
                 </tr>
@@ -940,6 +957,7 @@ export function MatchupAnalysis({
       const sp = player.season_profile;
       const scores = player.scores.L5;
       switch (key) {
+        case "grade":
         case "composite":
         case "hr_prob":
           return calcSeasonComposite(player);
@@ -1011,7 +1029,11 @@ export function MatchupAnalysis({
   }, [allPairs, sortBy]);
 
   const selectClasses =
-    "bg-card/50 border border-card-border text-foreground text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-accent/40 cursor-pointer";
+    "bg-card/50 border border-card-border text-foreground text-xs rounded-lg pl-3 pr-8 py-2 focus:outline-none focus:border-accent/40 cursor-pointer appearance-none bg-no-repeat bg-[right_0.6rem_center] bg-[length:0.75em_0.75em]";
+  const selectBgStyle: CSSProperties = {
+    backgroundImage:
+      'url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 20 20\' fill=\'%239ca3af\'%3E%3Cpath fill-rule=\'evenodd\' d=\'M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z\' clip-rule=\'evenodd\'/%3E%3C/svg%3E")',
+  };
 
   return (
     <div className="space-y-4">
@@ -1044,6 +1066,7 @@ export function MatchupAnalysis({
                 )
               }
               className={selectClasses}
+              style={selectBgStyle}
             >
               <option value="">All Games ({games.length})</option>
               {games.map((g) => (
@@ -1060,6 +1083,7 @@ export function MatchupAnalysis({
                 setPitcherVulnFilter(e.target.value as PitcherVulnFilter)
               }
               className={selectClasses}
+              style={selectBgStyle}
             >
               <option value="all">Pitcher Vuln: All</option>
               <option value="high">High (&gt;0.6)</option>
@@ -1073,6 +1097,7 @@ export function MatchupAnalysis({
                 setBatterPowerFilter(e.target.value as BatterPowerFilter)
               }
               className={selectClasses}
+              style={selectBgStyle}
             >
               <option value="all">Batter Power: All</option>
               <option value="elite">Elite (&gt;0.8)</option>
@@ -1125,6 +1150,7 @@ export function MatchupAnalysis({
                 )
               }
               className={selectClasses}
+              style={selectBgStyle}
             >
               <option value="">All Games ({games.length})</option>
               {games.map((g) => (
