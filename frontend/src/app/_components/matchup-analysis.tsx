@@ -107,7 +107,12 @@ function calcBatterPower(player: PlayerData): number {
   if (!sp) return 0;
   const evNorm = Math.max(0, Math.min(1, (sp.ev - 85) / 15));
   const raw = (sp.barrel / 25) * 0.5 + evNorm * 0.3 + (sp.fb / 50) * 0.2;
-  return Math.min(1, Math.max(0, raw));
+  // Confidence scaling — small samples get discounted toward 0.
+  // 50 BIP = full credit, 25 BIP = half credit, 6 BIP = 12% credit.
+  // Prevents career-AAA guys with 1 lucky barrel from 6 BIP (~16% rate)
+  // from ranking next to Judge (300+ BIP, real 30% rate).
+  const reliability = Math.min(1, (sp.bip_count ?? 0) / 50);
+  return Math.min(1, Math.max(0, raw * reliability));
 }
 
 // Season-long composite — uses season_profile for batter, season-based
