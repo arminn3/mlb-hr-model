@@ -537,13 +537,31 @@ function MatchupCard({
 /* ---------- table helpers ---------- */
 
 type TableSortKey =
+  | "name"
+  | "team"
   | "composite"
-  | "batter"
-  | "pitcher"
+  | "hr_prob"
+  | "form"
+  | "pitcher_name"
+  | "pitcher_team"
+  | "batter_power"
+  | "pitcher_vuln"
   | "exit_velo"
   | "barrel_pct";
+type SortDir = "asc" | "desc";
 type PitcherVulnFilter = "all" | "high" | "medium" | "low";
 type BatterPowerFilter = "all" | "elite" | "strong" | "average" | "weak";
+
+// Columns that default to descending (numeric — highest first)
+const DESC_DEFAULT_KEYS = new Set<TableSortKey>([
+  "composite",
+  "hr_prob",
+  "batter_power",
+  "pitcher_vuln",
+  "exit_velo",
+  "barrel_pct",
+  "form",
+]);
 
 function getFormDetailed(player: PlayerData): {
   label: string;
@@ -588,41 +606,82 @@ function TableGradeBadge({ grade }: { grade: { label: string; color: string } })
   };
   return (
     <span
-      className={`text-[10px] font-bold px-2 py-0.5 rounded border ${styles[grade.label] ?? styles.D}`}
+      className={`text-xs font-bold px-2.5 py-1 rounded border inline-block min-w-[2.5rem] ${styles[grade.label] ?? styles.D}`}
     >
       {grade.label}
     </span>
   );
 }
 
+function SortHeader({
+  label,
+  sortKey,
+  currentSort,
+  currentDir,
+  onSort,
+  align = "center",
+}: {
+  label: string;
+  sortKey: TableSortKey;
+  currentSort: TableSortKey;
+  currentDir: SortDir;
+  onSort: (key: TableSortKey) => void;
+  align?: "left" | "center";
+}) {
+  const active = currentSort === sortKey;
+  const arrow = active ? (currentDir === "desc" ? "\u2193" : "\u2191") : "";
+  return (
+    <th
+      onClick={() => onSort(sortKey)}
+      className={`cursor-pointer select-none py-3 px-2 font-semibold text-[11px] uppercase tracking-wider transition-colors whitespace-nowrap ${
+        align === "left" ? "text-left" : "text-center"
+      } ${active ? "text-accent" : "text-muted hover:text-foreground"}`}
+    >
+      <span className="inline-flex items-center gap-1">
+        {label}
+        <span className={`text-[10px] ${active ? "opacity-100" : "opacity-30"}`}>
+          {active ? arrow : "\u2195"}
+        </span>
+      </span>
+    </th>
+  );
+}
+
 function MatchupTableView({
   players,
+  sortKey,
+  sortDir,
+  onSort,
 }: {
   players: { player: PlayerData; game: GameData }[];
+  sortKey: TableSortKey;
+  sortDir: SortDir;
+  onSort: (key: TableSortKey) => void;
 }) {
+  const headerProps = { currentSort: sortKey, currentDir: sortDir, onSort };
   return (
     <>
       {/* Desktop table */}
-      <div className="hidden md:block overflow-x-auto">
-        <table className="w-full text-xs">
-          <thead>
-            <tr className="border-b border-card-border text-muted uppercase tracking-wider text-[10px]">
-              <th className="text-left py-2.5 px-3 font-semibold">Batter</th>
-              <th className="text-left py-2.5 px-2 font-semibold">Team</th>
-              <th className="text-center py-2.5 px-2 font-semibold">Grade</th>
-              <th className="text-center py-2.5 px-2 font-semibold">HR Prob</th>
-              <th className="text-center py-2.5 px-2 font-semibold">Form</th>
-              <th className="text-left py-2.5 px-3 font-semibold">Pitcher</th>
-              <th className="text-left py-2.5 px-2 font-semibold">P. Team</th>
-              <th className="text-center py-2.5 px-2 font-semibold">Batter Power</th>
-              <th className="text-center py-2.5 px-2 font-semibold">Pitcher Vuln</th>
-              <th className="text-center py-2.5 px-2 font-semibold">EV</th>
-              <th className="text-center py-2.5 px-2 font-semibold">Barrel%</th>
-              <th className="text-center py-2.5 px-2 font-semibold">Score</th>
+      <div className="hidden md:block overflow-x-auto rounded-xl border border-card-border bg-card/20">
+        <table className="w-full text-sm">
+          <thead className="bg-card/40 border-b border-card-border sticky top-0">
+            <tr>
+              <SortHeader label="Batter" sortKey="name" align="left" {...headerProps} />
+              <SortHeader label="Team" sortKey="team" align="left" {...headerProps} />
+              <SortHeader label="Grade" sortKey="composite" {...headerProps} />
+              <SortHeader label="HR Prob" sortKey="hr_prob" {...headerProps} />
+              <SortHeader label="Form" sortKey="form" {...headerProps} />
+              <SortHeader label="Pitcher" sortKey="pitcher_name" align="left" {...headerProps} />
+              <SortHeader label="P. Team" sortKey="pitcher_team" align="left" {...headerProps} />
+              <SortHeader label="Batter Power" sortKey="batter_power" {...headerProps} />
+              <SortHeader label="Pitcher Vuln" sortKey="pitcher_vuln" {...headerProps} />
+              <SortHeader label="EV" sortKey="exit_velo" {...headerProps} />
+              <SortHeader label="Barrel%" sortKey="barrel_pct" {...headerProps} />
+              <SortHeader label="Score" sortKey="composite" {...headerProps} />
             </tr>
           </thead>
           <tbody>
-            {players.map(({ player, game }) => {
+            {players.map(({ player, game }, i) => {
               const scores = player.scores.L5;
               if (!scores) return null;
               const sp = player.season_profile;
@@ -642,33 +701,36 @@ function MatchupTableView({
               return (
                 <tr
                   key={`${game.game_pk}-${player.name}`}
-                  className="border-b border-card-border/50 hover:bg-card/40 transition-colors"
+                  className={`border-b border-card-border/30 hover:bg-card/50 transition-colors ${
+                    i % 2 === 0 ? "bg-transparent" : "bg-card/10"
+                  }`}
                 >
-                  <td className="py-2.5 px-3 font-medium text-foreground whitespace-nowrap">
+                  <td className="py-3 px-3 font-semibold text-foreground whitespace-nowrap">
                     {player.name}
                   </td>
-                  <td className="py-2.5 px-2 text-muted font-mono">
+                  <td className="py-3 px-2 text-muted font-mono text-xs">
                     {batterTeam}
                   </td>
-                  <td className="py-2.5 px-2 text-center">
+                  <td className="py-3 px-2 text-center bg-accent/5">
                     <TableGradeBadge grade={grade} />
                   </td>
-                  <td className="py-2.5 px-2 text-center font-mono font-semibold text-foreground">
+                  <td className="py-3 px-2 text-center font-mono font-bold text-accent">
                     {calcHrProb(seasonComposite).toFixed(1)}%
                   </td>
-                  <td className="py-2.5 px-2 text-center">
+                  <td className="py-3 px-2 text-center whitespace-nowrap">
                     <span className={form.color} title={form.label}>
-                      {form.dot} <span className="text-[10px]">{form.label}</span>
+                      {form.dot}{" "}
+                      <span className="text-xs font-medium">{form.label}</span>
                     </span>
                   </td>
-                  <td className="py-2.5 px-3 text-foreground whitespace-nowrap">
+                  <td className="py-3 px-3 text-foreground whitespace-nowrap">
                     {player.opp_pitcher}
                   </td>
-                  <td className="py-2.5 px-2 text-muted font-mono">
+                  <td className="py-3 px-2 text-muted font-mono text-xs">
                     {pitcherTeam}
                   </td>
                   <td
-                    className="py-2.5 px-2 text-center font-mono font-semibold text-foreground"
+                    className="py-3 px-2 text-center font-mono font-bold text-foreground"
                     style={{
                       backgroundColor: greenGradientBg(batterPower),
                     }}
@@ -676,20 +738,20 @@ function MatchupTableView({
                     {batterPower.toFixed(2)}
                   </td>
                   <td
-                    className="py-2.5 px-2 text-center font-mono font-semibold text-foreground"
+                    className="py-3 px-2 text-center font-mono font-bold text-foreground"
                     style={{
                       backgroundColor: greenGradientBg(scores.pitcher_score),
                     }}
                   >
                     {scores.pitcher_score.toFixed(2)}
                   </td>
-                  <td className="py-2.5 px-2 text-center font-mono text-muted">
+                  <td className="py-3 px-2 text-center font-mono text-foreground">
                     {fmt(sp?.ev)}
                   </td>
-                  <td className="py-2.5 px-2 text-center font-mono text-muted">
+                  <td className="py-3 px-2 text-center font-mono text-foreground">
                     {pct(sp?.barrel)}
                   </td>
-                  <td className="py-2.5 px-2 text-center font-mono font-bold text-foreground">
+                  <td className="py-3 px-2 text-center font-mono font-bold text-foreground">
                     {(seasonComposite * 100).toFixed(1)}
                   </td>
                 </tr>
@@ -790,6 +852,16 @@ export function MatchupAnalysis({
     "composite",
   );
   const [tableSortBy, setTableSortBy] = useState<TableSortKey>("composite");
+  const [tableSortDir, setTableSortDir] = useState<SortDir>("desc");
+
+  const handleTableSort = (key: TableSortKey) => {
+    if (tableSortBy === key) {
+      setTableSortDir((d) => (d === "desc" ? "asc" : "desc"));
+    } else {
+      setTableSortBy(key);
+      setTableSortDir(DESC_DEFAULT_KEYS.has(key) ? "desc" : "asc");
+    }
+  };
   const [pitcherVulnFilter, setPitcherVulnFilter] =
     useState<PitcherVulnFilter>("all");
   const [batterPowerFilter, setBatterPowerFilter] =
@@ -839,21 +911,81 @@ export function MatchupAnalysis({
   }, [allPairs, pitcherVulnFilter, batterPowerFilter]);
 
   const tableSortedPlayers = useMemo(() => {
+    const teamOf = (pair: { player: PlayerData; game: GameData }) =>
+      pair.player.batter_side === "home"
+        ? pair.game.home_team
+        : pair.game.away_team;
+    const pitcherTeamOf = (pair: { player: PlayerData; game: GameData }) =>
+      pair.player.batter_side === "home"
+        ? pair.game.away_team
+        : pair.game.home_team;
+    const formScoreOf = (player: PlayerData): number => {
+      const l5 = player.scores.L5;
+      const l10 = player.scores.L10;
+      if (!l5 || !l10) return -999;
+      return l5.barrel_pct - l10.barrel_pct + (l5.exit_velo - l10.exit_velo);
+    };
+
+    const numericValue = (
+      pair: { player: PlayerData; game: GameData },
+      key: TableSortKey,
+    ): number => {
+      const { player } = pair;
+      const sp = player.season_profile;
+      const scores = player.scores.L5;
+      switch (key) {
+        case "composite":
+        case "hr_prob":
+          return calcSeasonComposite(player);
+        case "batter_power":
+          return calcBatterPower(player);
+        case "pitcher_vuln":
+          return scores?.pitcher_score ?? 0;
+        case "exit_velo":
+          return sp?.ev ?? 0;
+        case "barrel_pct":
+          return sp?.barrel ?? 0;
+        case "form":
+          return formScoreOf(player);
+        default:
+          return 0;
+      }
+    };
+
+    const textValue = (
+      pair: { player: PlayerData; game: GameData },
+      key: TableSortKey,
+    ): string => {
+      switch (key) {
+        case "name":
+          return pair.player.name;
+        case "team":
+          return teamOf(pair);
+        case "pitcher_name":
+          return pair.player.opp_pitcher ?? "";
+        case "pitcher_team":
+          return pitcherTeamOf(pair);
+        default:
+          return "";
+      }
+    };
+
+    const isTextSort =
+      tableSortBy === "name" ||
+      tableSortBy === "team" ||
+      tableSortBy === "pitcher_name" ||
+      tableSortBy === "pitcher_team";
+
     const sorted = [...tableFilteredPairs];
     sorted.sort((a, b) => {
-      const sa = a.player.scores.L5;
-      const sb = b.player.scores.L5;
-      if (!sa || !sb) return 0;
-      if (tableSortBy === "batter") return calcBatterPower(b.player) - calcBatterPower(a.player);
-      if (tableSortBy === "pitcher")
-        return sb.pitcher_score - sa.pitcher_score;
-      if (tableSortBy === "exit_velo") return (b.player.season_profile?.ev ?? 0) - (a.player.season_profile?.ev ?? 0);
-      if (tableSortBy === "barrel_pct")
-        return (b.player.season_profile?.barrel ?? 0) - (a.player.season_profile?.barrel ?? 0);
-      return calcSeasonComposite(b.player) - calcSeasonComposite(a.player);
+      const dir = tableSortDir === "desc" ? -1 : 1;
+      if (isTextSort) {
+        return textValue(a, tableSortBy).localeCompare(textValue(b, tableSortBy)) * dir;
+      }
+      return (numericValue(a, tableSortBy) - numericValue(b, tableSortBy)) * dir;
     });
     return sorted;
-  }, [tableFilteredPairs, tableSortBy]);
+  }, [tableFilteredPairs, tableSortBy, tableSortDir]);
 
   const cardSortedPlayers = useMemo(() => {
     const sorted = [...allPairs];
@@ -939,19 +1071,9 @@ export function MatchupAnalysis({
               <option value="weak">Weak</option>
             </select>
 
-            <select
-              value={tableSortBy}
-              onChange={(e) =>
-                setTableSortBy(e.target.value as TableSortKey)
-              }
-              className={selectClasses}
-            >
-              <option value="composite">Sort: Score</option>
-              <option value="batter">Sort: Batter Power</option>
-              <option value="pitcher">Sort: Pitcher Vuln</option>
-              <option value="exit_velo">Sort: Exit Velo</option>
-              <option value="barrel_pct">Sort: Barrel%</option>
-            </select>
+            <span className="text-xs text-muted ml-auto hidden md:inline">
+              Click any column header to sort
+            </span>
           </div>
 
           <p className="text-xs text-muted">
@@ -970,6 +1092,9 @@ export function MatchupAnalysis({
 
           <MatchupTableView
             players={tableSortedPlayers}
+            sortKey={tableSortBy}
+            sortDir={tableSortDir}
+            onSort={handleTableSort}
           />
 
           {tableSortedPlayers.length === 0 && (
