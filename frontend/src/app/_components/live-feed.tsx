@@ -453,8 +453,7 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
                       </span>
                     </td>
                     <td className={cellClass} style={cellStyle}>
-                      {p.batter}{" "}
-                      <span style={{ color: "#a0a1a4" }}>vs {p.pitcher}</span>
+                      {p.batter}
                     </td>
                     <td className={cellClass} style={{ ...cellStyle, color: "#a0a1a4" }}>
                       {p.game}
