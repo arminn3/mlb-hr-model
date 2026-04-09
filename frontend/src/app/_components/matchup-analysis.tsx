@@ -722,35 +722,35 @@ function MatchupTableView({
                     i % 2 === 0 ? "bg-transparent" : "bg-card/5"
                   }`}
                 >
-                  <td className="py-1 px-3 text-foreground whitespace-nowrap">
+                  <td className="py-[3px] px-3 text-foreground whitespace-nowrap">
                     {player.name}
                   </td>
-                  <td className="py-1 px-2 text-muted font-mono text-[11px]">
+                  <td className="py-[3px] px-2 text-muted font-mono text-[11px]">
                     {batterTeam}
                   </td>
-                  <td className="py-1 px-2 text-center bg-accent-green/5">
+                  <td className="py-[3px] px-2 text-center bg-accent-green/5">
                     <TableGradeBadge grade={grade} />
                   </td>
-                  <td className="py-1 px-2 text-center font-mono text-foreground whitespace-nowrap">
+                  <td className="py-[3px] px-2 text-center font-mono text-foreground whitespace-nowrap">
                     {hrProbPct.toFixed(1)}%
                     {americanOdds && (
                       <span className="text-muted ml-1">({americanOdds})</span>
                     )}
                   </td>
-                  <td className="py-1 px-2 text-center whitespace-nowrap">
+                  <td className="py-[3px] px-2 text-center whitespace-nowrap">
                     <span className={form.color} title={form.label}>
                       {form.dot}{" "}
                       <span className="text-[11px]">{form.label}</span>
                     </span>
                   </td>
-                  <td className="py-1 px-3 text-foreground whitespace-nowrap">
+                  <td className="py-[3px] px-3 text-foreground whitespace-nowrap">
                     {player.opp_pitcher}
                   </td>
-                  <td className="py-1 px-2 text-muted font-mono text-[11px]">
+                  <td className="py-[3px] px-2 text-muted font-mono text-[11px]">
                     {pitcherTeam}
                   </td>
                   <td
-                    className="py-1 px-2 text-center font-mono text-foreground"
+                    className="py-[3px] px-2 text-center font-mono text-foreground"
                     style={{
                       backgroundColor: greenGradientBg(batterPower),
                     }}
@@ -758,20 +758,20 @@ function MatchupTableView({
                     {batterPower.toFixed(2)}
                   </td>
                   <td
-                    className="py-1 px-2 text-center font-mono text-foreground"
+                    className="py-[3px] px-2 text-center font-mono text-foreground"
                     style={{
                       backgroundColor: greenGradientBg(scores.pitcher_score),
                     }}
                   >
                     {scores.pitcher_score.toFixed(2)}
                   </td>
-                  <td className="py-1 px-2 text-center font-mono text-foreground">
+                  <td className="py-[3px] px-2 text-center font-mono text-foreground">
                     {fmt(sp?.ev)}
                   </td>
-                  <td className="py-1 px-2 text-center font-mono text-foreground">
+                  <td className="py-[3px] px-2 text-center font-mono text-foreground">
                     {pct(sp?.barrel)}
                   </td>
-                  <td className="py-1 px-2 text-center font-mono text-foreground">
+                  <td className="py-[3px] px-2 text-center font-mono text-foreground">
                     {(seasonComposite * 100).toFixed(1)}
                   </td>
                 </tr>
