@@ -130,12 +130,17 @@ function calcBatterPower(player: PlayerData): number {
   const hrs = sp.hrs ?? 0;
   const iso = sp.iso ?? 0;
 
-  // 1. HR rate per ball-in-play — direct HR production. Elite ~10%+
-  const hrRate = bip > 0 ? hrs / bip : 0;
-  const hrRateNorm = Math.min(1, hrRate / 0.1);
+  // 1. HR COUNT (absolute volume) — direct measure of "this guy
+  //    actually hits HRs". Was using HR rate, but rate is unreliable
+  //    on small samples (Sal Stewart's 6 HRs in 62 BIP looked the
+  //    same as Suárez's 40 HRs in 336 BIP because both exceeded the
+  //    10% cap). Volume settles it. 25+ HRs = full credit.
+  const hrCountNorm = Math.min(1, hrs / 25);
 
-  // 2. ISO (slugging - batting avg) — pure power. Elite 0.300+
-  const isoNorm = Math.max(0, Math.min(1, (iso - 0.1) / 0.2));
+  // 2. ISO — pure power. Cap raised from 0.300 → 0.450 so elite
+  //    sluggers (Suárez 0.431, Judge 0.639) actually separate from
+  //    "good" sluggers (Carpenter 0.329).
+  const isoNorm = Math.max(0, Math.min(1, (iso - 0.1) / 0.35));
 
   // 3. Barrel rate — quality of contact. Elite 20%+
   const barrelNorm = Math.max(0, Math.min(1, sp.barrel / 20));
@@ -147,7 +152,7 @@ function calcBatterPower(player: PlayerData): number {
   const fbNorm = Math.max(0, Math.min(1, sp.fb / 40));
 
   const raw =
-    0.30 * hrRateNorm +
+    0.30 * hrCountNorm +
     0.25 * isoNorm +
     0.20 * barrelNorm +
     0.15 * evNorm +
