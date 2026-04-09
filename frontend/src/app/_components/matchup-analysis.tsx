@@ -125,13 +125,37 @@ function BulletStat({ label, value }: { label: string; value: string }) {
 function calcBatterPower(player: PlayerData): number {
   const sp = player.season_profile;
   if (!sp) return 0;
-  const evNorm = Math.max(0, Math.min(1, (sp.ev - 85) / 15));
-  const raw = (sp.barrel / 25) * 0.5 + evNorm * 0.3 + (sp.fb / 50) * 0.2;
+
+  const bip = sp.bip_count ?? 0;
+  const hrs = sp.hrs ?? 0;
+  const iso = sp.iso ?? 0;
+
+  // 1. HR rate per ball-in-play — direct HR production. Elite ~10%+
+  const hrRate = bip > 0 ? hrs / bip : 0;
+  const hrRateNorm = Math.min(1, hrRate / 0.1);
+
+  // 2. ISO (slugging - batting avg) — pure power. Elite 0.300+
+  const isoNorm = Math.max(0, Math.min(1, (iso - 0.1) / 0.2));
+
+  // 3. Barrel rate — quality of contact. Elite 20%+
+  const barrelNorm = Math.max(0, Math.min(1, sp.barrel / 20));
+
+  // 4. Exit velo — raw power. Elite 95+ mph
+  const evNorm = Math.max(0, Math.min(1, (sp.ev - 86) / 13));
+
+  // 5. Fly-ball rate — needs to put it in the air. Ideal 40%+
+  const fbNorm = Math.max(0, Math.min(1, sp.fb / 40));
+
+  const raw =
+    0.30 * hrRateNorm +
+    0.25 * isoNorm +
+    0.20 * barrelNorm +
+    0.15 * evNorm +
+    0.10 * fbNorm;
+
   // Confidence scaling — small samples get discounted toward 0.
   // 50 BIP = full credit, 25 BIP = half credit, 6 BIP = 12% credit.
-  // Prevents career-AAA guys with 1 lucky barrel from 6 BIP (~16% rate)
-  // from ranking next to Judge (300+ BIP, real 30% rate).
-  const reliability = Math.min(1, (sp.bip_count ?? 0) / 50);
+  const reliability = Math.min(1, bip / 50);
   return Math.min(1, Math.max(0, raw * reliability));
 }
 
@@ -776,7 +800,7 @@ function MatchupTableView({
                       backgroundColor: greenGradientBg(batterPower),
                     }}
                   >
-                    {batterPower.toFixed(2)}
+                    {Math.round(batterPower * 100)}
                   </td>
                   <td
                     className="p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] text-white whitespace-nowrap border-b border-r"
@@ -785,7 +809,7 @@ function MatchupTableView({
                       backgroundColor: greenGradientBg(scores.pitcher_score),
                     }}
                   >
-                    {scores.pitcher_score.toFixed(2)}
+                    {Math.round(scores.pitcher_score * 100)}
                   </td>
                   <td className={cellBase} style={{ borderColor }}>
                     {fmt(sp?.ev)}
