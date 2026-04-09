@@ -145,7 +145,14 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
           if (ev < 90 || angle < 20) continue;
 
           const isHR = resultData.event === "Home Run";
-          const isNearHR = !isHR && ev >= 95 && angle >= 25 && angle <= 35;
+          // NEAR HR if any of:
+          //   1. Hard contact in HR launch window: 95+ EV, 25-35° angle
+          //   2. Deep flyout: 370+ ft regardless of angle (catches robberies
+          //      and wall-scrapers like Marsee's 400ft 22° flyout that got
+          //      caught at the wall)
+          const isNearHR =
+            !isHR &&
+            ((ev >= 95 && angle >= 25 && angle <= 35) || dist >= 370);
 
           allPlays.push({
             batter: matchup.batter?.fullName || "Unknown",
