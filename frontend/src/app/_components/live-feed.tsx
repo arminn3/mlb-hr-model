@@ -146,17 +146,14 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
 
           const isHR = resultData.event === "Home Run";
           // NEAR HR if any of:
-          //   1. Hard contact in HR launch window AND deep enough: 95+ EV,
-          //      25-35° angle, 380+ ft. The distance floor matters because
-          //      a 96 EV / 30° fly that only travels 360 is a routine F8
-          //      in most parks — not a near HR.
-          //   2. Pure distance override: 390+ ft regardless of angle.
-          //      Catches Marsee's 400ft 22° rope that got robbed at the
-          //      wall — angle was flat but the ball clearly threatened.
+          //   1. Hard contact in HR launch window: 95+ EV, 25-35° angle
+          //   2. Any 400+ ft non-grounder, regardless of angle (catches
+          //      Marsee's 400ft 22° robbery — if it traveled 400ft and
+          //      wasn't on the ground, it was either a HR or a near HR)
           const isNearHR =
             !isHR &&
-            ((ev >= 95 && angle >= 25 && angle <= 35 && dist >= 380) ||
-              dist >= 390);
+            ((ev >= 95 && angle >= 25 && angle <= 35) ||
+              (dist >= 400 && angle > 10));
 
           allPlays.push({
             batter: matchup.batter?.fullName || "Unknown",
