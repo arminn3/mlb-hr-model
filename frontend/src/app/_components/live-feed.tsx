@@ -153,8 +153,10 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
           const angle = (hitData.launchAngle as number) || 0;
           const dist = (hitData.totalDistance as number) || 0;
 
-          // Hard hits only — 92+ EV
-          if (ev < 92 || angle < 20) continue;
+          // Hard hits only — 92+ EV. No angle filter so we catch
+          // line drives at low angles (e.g. Conine 106 EV at 19°
+          // traveling 369ft was getting filtered out at 20° floor).
+          if (ev < 92) continue;
 
           // Direction from gameday hit coordinates. coordX runs ~0-250
           // with home plate around 125. Low x = LF, high x = RF.
