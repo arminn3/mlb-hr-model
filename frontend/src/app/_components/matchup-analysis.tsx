@@ -7,12 +7,31 @@ import type { GameData, PlayerData } from "./types";
 /* ---------- helpers ---------- */
 
 function getGrade(composite: number): { label: string; color: string } {
-  if (composite >= 0.7) return { label: "ELITE", color: "text-accent-green" };
-  if (composite >= 0.55) return { label: "A", color: "text-accent-green" };
-  if (composite >= 0.4) return { label: "B", color: "text-accent-yellow" };
-  if (composite >= 0.25) return { label: "C", color: "text-accent-red" };
-  return { label: "D", color: "text-muted" };
+  if (composite >= 0.65) return { label: "A+", color: "text-white" };
+  if (composite >= 0.55) return { label: "A", color: "text-white" };
+  if (composite >= 0.45) return { label: "B", color: "text-white" };
+  if (composite >= 0.35) return { label: "C", color: "text-white" };
+  if (composite >= 0.25) return { label: "D", color: "text-white" };
+  return { label: "F", color: "text-white" };
 }
+
+// Figma design tokens — grade cell backgrounds and borders.
+const GRADE_BG: Record<string, string> = {
+  "A+": "#2a732e",
+  A: "#2a732e",
+  B: "#037bc7",
+  C: "#6242b8",
+  D: "#cc581d",
+  F: "#931621",
+};
+const GRADE_BORDER: Record<string, string> = {
+  "A+": "#428b47",
+  A: "#428b47",
+  B: "#426f8b",
+  C: "#55428b",
+  D: "#8b6242",
+  F: "#8b4260",
+};
 
 function getForm(player: PlayerData): { label: string; color: string } {
   const l5 = player.scores.L5;
@@ -546,15 +565,12 @@ type TableSortKey =
   | "name"
   | "team"
   | "grade"
-  | "composite"
   | "hr_prob"
   | "form"
   | "pitcher_name"
   | "pitcher_team"
   | "batter_power"
-  | "pitcher_vuln"
-  | "exit_velo"
-  | "barrel_pct";
+  | "pitcher_vuln";
 type SortDir = "asc" | "desc";
 type PitcherVulnFilter = "all" | "high" | "medium" | "low";
 type BatterPowerFilter = "all" | "elite" | "strong" | "average" | "weak";
@@ -562,12 +578,9 @@ type BatterPowerFilter = "all" | "elite" | "strong" | "average" | "weak";
 // Columns that default to descending (numeric — highest first)
 const DESC_DEFAULT_KEYS = new Set<TableSortKey>([
   "grade",
-  "composite",
   "hr_prob",
   "batter_power",
   "pitcher_vuln",
-  "exit_velo",
-  "barrel_pct",
   "form",
 ]);
 
@@ -579,47 +592,32 @@ function getFormDetailed(player: PlayerData): {
   const l5 = player.scores.L5;
   const l10 = player.scores.L10;
   if (!l5 || !l10)
-    return { label: "N/A", dot: "\u26AA", color: "text-muted" };
+    return { label: "N/A", dot: "\u26AA", color: "text-white" };
 
   const barrelDiff = l5.barrel_pct - l10.barrel_pct;
   const evDiff = l5.exit_velo - l10.exit_velo;
   const combined = barrelDiff + evDiff;
 
-  if (combined > 3)
-    return { label: "Hot", dot: "\uD83D\uDFE2", color: "text-accent-green" };
-  if (combined > 1)
-    return { label: "Good", dot: "\uD83D\uDD35", color: "text-blue-400" };
-  if (combined > -1)
-    return { label: "Average", dot: "\uD83D\uDFE1", color: "text-accent-yellow" };
-  if (combined > -3)
-    return { label: "Slump", dot: "\uD83D\uDFE0", color: "text-orange-400" };
-  return { label: "Cold", dot: "\uD83D\uDD34", color: "text-accent-red" };
+  // Figma labels: Elite / Ideal / Good / Average / Cold
+  if (combined > 4)
+    return { label: "Elite", dot: "\uD83D\uDD25", color: "text-white" }; // 🔥
+  if (combined > 2)
+    return { label: "Ideal", dot: "\uD83D\uDD35", color: "text-white" }; // 🔵
+  if (combined > 0)
+    return { label: "Good", dot: "\uD83D\uDFE2", color: "text-white" }; // 🟢
+  if (combined > -2)
+    return { label: "Average", dot: "\uD83D\uDFE1", color: "text-white" }; // 🟡
+  return { label: "Cold", dot: "\uD83D\uDD34", color: "text-white" }; // 🔴
 }
 
 function greenGradientBg(value: number): string {
+  // Figma green #2a732e — alpha scales with value. 0 → transparent,
+  // 1 → solid dark green matching the Grade A/A+ cells.
   const clamped = Math.max(0, Math.min(1, value));
-  const alpha = Math.round(clamped * 40);
-  return `rgba(34, 197, 94, ${alpha / 100})`;
+  return `rgba(42, 115, 46, ${clamped})`;
 }
 
 /* ---------- table sub-components ---------- */
-
-function TableGradeBadge({ grade }: { grade: { label: string; color: string } }) {
-  // HRP-style: no border, no background chip — just the colored letter,
-  // the cell itself carries the green tint.
-  const colorMap: Record<string, string> = {
-    ELITE: "text-accent-green",
-    A: "text-accent-green",
-    B: "text-accent-yellow",
-    C: "text-accent-red",
-    D: "text-muted",
-  };
-  return (
-    <span className={`text-[11px] font-bold ${colorMap[grade.label] ?? colorMap.D}`}>
-      {grade.label}
-    </span>
-  );
-}
 
 function probToAmericanOdds(probPct: number): string {
   // prob is expressed as a percentage (e.g. 17.5)
@@ -636,7 +634,7 @@ function SortHeader({
   currentSort,
   currentDir,
   onSort,
-  align = "center",
+  align = "left",
 }: {
   label: string;
   sortKey: TableSortKey;
@@ -650,13 +648,14 @@ function SortHeader({
   return (
     <th
       onClick={() => onSort(sortKey)}
-      className={`cursor-pointer select-none py-2 px-2 font-semibold text-[10px] uppercase tracking-wider transition-colors whitespace-nowrap ${
+      className={`cursor-pointer select-none p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] transition-colors whitespace-nowrap border-b border-[#32333b] ${
         align === "left" ? "text-left" : "text-center"
-      } ${active ? "text-accent" : "text-muted hover:text-foreground"}`}
+      } ${active ? "text-white" : "text-[#a0a1a4] hover:text-white"}`}
+      style={{ backgroundColor: "#1a1c24" }}
     >
       <span className="inline-flex items-center gap-1">
         {label}
-        {active && <span className="text-[9px]">{arrow}</span>}
+        {active && <span className="text-xs">{arrow}</span>}
       </span>
     </th>
   );
@@ -674,32 +673,36 @@ function MatchupTableView({
   onSort: (key: TableSortKey) => void;
 }) {
   const headerProps = { currentSort: sortKey, currentDir: sortDir, onSort };
+  // Figma design tokens
+  const bgRow = "#0d1116";
+  const borderColor = "#32333b";
+  const cellBase =
+    "p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] text-white whitespace-nowrap border-b border-r";
   return (
     <>
-      {/* Desktop table */}
-      <div className="hidden md:block overflow-x-auto rounded-lg border border-card-border bg-card/20">
-        <table className="w-full text-xs">
-          <thead className="bg-card/40 border-b border-card-border sticky top-0">
+      {/* Desktop table — matches Figma node 1:88 */}
+      <div
+        className="hidden md:block overflow-x-auto rounded-[12px] border"
+        style={{ borderColor, backgroundColor: bgRow, fontFamily: "Inter, system-ui, sans-serif" }}
+      >
+        <table className="w-full border-collapse">
+          <thead>
             <tr>
               <SortHeader label="Batter" sortKey="name" align="left" {...headerProps} />
               <SortHeader label="Team" sortKey="team" align="left" {...headerProps} />
-              <SortHeader label="Grade" sortKey="grade" {...headerProps} />
-              <SortHeader label="HR Prob" sortKey="hr_prob" {...headerProps} />
-              <SortHeader label="Form" sortKey="form" {...headerProps} />
+              <SortHeader label="Grade" sortKey="grade" align="center" {...headerProps} />
+              <SortHeader label="HR Probability" sortKey="hr_prob" align="left" {...headerProps} />
+              <SortHeader label="Recent Form" sortKey="form" align="left" {...headerProps} />
               <SortHeader label="Pitcher" sortKey="pitcher_name" align="left" {...headerProps} />
               <SortHeader label="P. Team" sortKey="pitcher_team" align="left" {...headerProps} />
-              <SortHeader label="Batter Power" sortKey="batter_power" {...headerProps} />
-              <SortHeader label="Pitcher Vuln" sortKey="pitcher_vuln" {...headerProps} />
-              <SortHeader label="EV" sortKey="exit_velo" {...headerProps} />
-              <SortHeader label="Barrel%" sortKey="barrel_pct" {...headerProps} />
-              <SortHeader label="Score" sortKey="composite" {...headerProps} />
+              <SortHeader label="Batter Power" sortKey="batter_power" align="left" {...headerProps} />
+              <SortHeader label="Pitcher Vulnerability" sortKey="pitcher_vuln" align="left" {...headerProps} />
             </tr>
           </thead>
           <tbody>
-            {players.map(({ player, game }, i) => {
+            {players.map(({ player, game }) => {
               const scores = player.scores.L5;
               if (!scores) return null;
-              const sp = player.season_profile;
               const seasonComposite = calcSeasonComposite(player);
               const grade = getGrade(seasonComposite);
               const form = getFormDetailed(player);
@@ -712,67 +715,61 @@ function MatchupTableView({
                   ? game.away_team
                   : game.home_team;
               const batterPower = calcBatterPower(player);
-
               const hrProbPct = calcHrProb(seasonComposite);
               const americanOdds = probToAmericanOdds(hrProbPct);
+
               return (
                 <tr
                   key={`${game.game_pk}-${player.name}`}
-                  className={`border-b border-card-border/20 hover:bg-card/40 transition-colors ${
-                    i % 2 === 0 ? "bg-transparent" : "bg-card/5"
-                  }`}
+                  style={{ backgroundColor: bgRow }}
                 >
-                  <td className="py-[3px] px-3 text-foreground whitespace-nowrap">
+                  <td className={cellBase} style={{ borderColor }}>
                     {player.name}
                   </td>
-                  <td className="py-[3px] px-2 text-muted font-mono text-[11px]">
+                  <td className={cellBase} style={{ borderColor }}>
                     {batterTeam}
                   </td>
-                  <td className="py-[3px] px-2 text-center bg-accent-green/5">
-                    <TableGradeBadge grade={grade} />
+                  <td
+                    className="p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] text-white text-center whitespace-nowrap border-b border-r"
+                    style={{
+                      backgroundColor: GRADE_BG[grade.label],
+                      borderColor: GRADE_BORDER[grade.label],
+                    }}
+                  >
+                    {grade.label}
                   </td>
-                  <td className="py-[3px] px-2 text-center font-mono text-foreground whitespace-nowrap">
+                  <td className={cellBase} style={{ borderColor }}>
                     {hrProbPct.toFixed(1)}%
                     {americanOdds && (
-                      <span className="text-muted ml-1">({americanOdds})</span>
+                      <span className="text-[#a0a1a4] ml-1">({americanOdds})</span>
                     )}
                   </td>
-                  <td className="py-[3px] px-2 text-center whitespace-nowrap">
-                    <span className={form.color} title={form.label}>
-                      {form.dot}{" "}
-                      <span className="text-[11px]">{form.label}</span>
-                    </span>
+                  <td className={cellBase} style={{ borderColor }}>
+                    {form.dot} {form.label}
                   </td>
-                  <td className="py-[3px] px-3 text-foreground whitespace-nowrap">
+                  <td className={cellBase} style={{ borderColor }}>
                     {player.opp_pitcher}
                   </td>
-                  <td className="py-[3px] px-2 text-muted font-mono text-[11px]">
+                  <td className={cellBase} style={{ borderColor }}>
                     {pitcherTeam}
                   </td>
                   <td
-                    className="py-[3px] px-2 text-center font-mono text-foreground"
+                    className="p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] text-white whitespace-nowrap border-b border-r"
                     style={{
+                      borderColor,
                       backgroundColor: greenGradientBg(batterPower),
                     }}
                   >
-                    {batterPower.toFixed(2)}
+                    {Math.round(batterPower * 100)}
                   </td>
                   <td
-                    className="py-[3px] px-2 text-center font-mono text-foreground"
+                    className="p-3 font-medium text-sm tracking-[-0.28px] leading-[1.2] text-white whitespace-nowrap border-b border-r"
                     style={{
+                      borderColor,
                       backgroundColor: greenGradientBg(scores.pitcher_score),
                     }}
                   >
-                    {scores.pitcher_score.toFixed(2)}
-                  </td>
-                  <td className="py-[3px] px-2 text-center font-mono text-foreground">
-                    {fmt(sp?.ev)}
-                  </td>
-                  <td className="py-[3px] px-2 text-center font-mono text-foreground">
-                    {pct(sp?.barrel)}
-                  </td>
-                  <td className="py-[3px] px-2 text-center font-mono text-foreground">
-                    {(seasonComposite * 100).toFixed(1)}
+                    {Math.round(scores.pitcher_score * 100)}
                   </td>
                 </tr>
               );
@@ -812,7 +809,15 @@ function MatchupTableView({
                   <span className="font-mono text-sm font-bold text-foreground">
                     {calcHrProb(seasonComposite).toFixed(1)}%
                   </span>
-                  <TableGradeBadge grade={grade} />
+                  <span
+                    className="text-sm font-medium text-white px-2 py-0.5 rounded border"
+                    style={{
+                      backgroundColor: GRADE_BG[grade.label],
+                      borderColor: GRADE_BORDER[grade.label],
+                    }}
+                  >
+                    {grade.label}
+                  </span>
                 </div>
               </div>
               <div className="grid grid-cols-4 gap-2 text-center text-[10px]">
@@ -954,21 +959,15 @@ export function MatchupAnalysis({
       key: TableSortKey,
     ): number => {
       const { player } = pair;
-      const sp = player.season_profile;
       const scores = player.scores.L5;
       switch (key) {
         case "grade":
-        case "composite":
         case "hr_prob":
           return calcSeasonComposite(player);
         case "batter_power":
           return calcBatterPower(player);
         case "pitcher_vuln":
           return scores?.pitcher_score ?? 0;
-        case "exit_velo":
-          return sp?.ev ?? 0;
-        case "barrel_pct":
-          return sp?.barrel ?? 0;
         case "form":
           return formScoreOf(player);
         default:
@@ -995,7 +994,7 @@ export function MatchupAnalysis({
     };
 
     // null key → default order: grade (composite) descending
-    const effectiveKey: TableSortKey = tableSortBy ?? "composite";
+    const effectiveKey: TableSortKey = tableSortBy ?? "grade";
     const effectiveDir: SortDir = tableSortBy === null ? "desc" : tableSortDir;
 
     const isTextSort =
