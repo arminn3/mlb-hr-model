@@ -7,16 +7,6 @@ import { PitchesTab } from "./pitches-tab";
 import { BvPTab } from "./bvp-tab";
 import { RatingBadge } from "./rating-badge";
 import { Tooltip } from "./tooltip";
-import {
-  TABLE_BG,
-  cellClass,
-  cellStyle,
-  headerCellClass,
-  headerCellStyle,
-  tableClass,
-  tableWrapperClass,
-  tableWrapperStyle,
-} from "./table-styles";
 
 function evColor(ev: number): string {
   if (ev >= 95) return "bg-accent-green/80 text-background";
@@ -231,32 +221,40 @@ export function BatterCard({
                 })}
               </div>
 
-              <div className={tableWrapperClass} style={tableWrapperStyle}>
+              <div className="overflow-x-auto">
               {filteredABs.length > 0 ? (
-                <table className={tableClass}>
+                <table className="w-full text-xs">
                   <thead>
-                    <tr>
-                      <th className={headerCellClass} style={headerCellStyle}>Date</th>
-                      <th className={headerCellClass} style={headerCellStyle}>Pitcher</th>
-                      <th className={headerCellClass} style={headerCellStyle}>Arm</th>
-                      <th className={headerCellClass} style={headerCellStyle}>Pitch</th>
-                      <th className={headerCellClass} style={headerCellStyle}>EV</th>
-                      <th className={headerCellClass} style={headerCellStyle}>Angle</th>
-                      <th className={headerCellClass} style={headerCellStyle}>Dist</th>
-                      <th className={headerCellClass} style={headerCellStyle}>Result</th>
+                    <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
+                      <th className="text-left py-1.5 pr-3">Date</th>
+                      <th className="text-left py-1.5 pr-3">Pitcher</th>
+                      <th className="text-center py-1.5 px-2">Arm</th>
+                      <th className="text-left py-1.5 pr-3">Pitch</th>
+                      <th className="text-center py-1.5 px-2">EV</th>
+                      <th className="text-center py-1.5 px-2">Angle</th>
+                      <th className="text-center py-1.5 px-2">Dist</th>
+                      <th className="text-left py-1.5">Result</th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredABs.map((ab, i) => (
-                      <tr key={i} style={{ backgroundColor: TABLE_BG }}>
-                        <td className={cellClass} style={cellStyle}>{ab.date.slice(5)}</td>
-                        <td className={cellClass} style={cellStyle}>{ab.pitcher_name}</td>
-                        <td className={cellClass} style={cellStyle}>{ab.pitch_arm}</td>
-                        <td className={cellClass} style={cellStyle}>{ab.pitch_type}</td>
-                        <td className={cellClass} style={cellStyle}>{ab.ev}</td>
-                        <td className={cellClass} style={cellStyle}>{ab.angle}</td>
-                        <td className={cellClass} style={cellStyle}>{ab.distance ? ab.distance : "-"}</td>
-                        <td className={cellClass} style={cellStyle}>{(ab.result || "").replace(/_/g, " ")}</td>
+                      <tr key={i} className="border-b border-card-border/30 last:border-0">
+                        <td className="py-1.5 pr-3 text-muted font-mono">{ab.date.slice(5)}</td>
+                        <td className="py-1.5 pr-3 text-foreground">{ab.pitcher_name}</td>
+                        <td className="py-1.5 px-2 text-center text-muted">{ab.pitch_arm}</td>
+                        <td className="py-1.5 pr-3 text-foreground">{ab.pitch_type}</td>
+                        <td className="py-1.5 px-2 text-center">
+                          <span className={`px-1 py-0.5 rounded font-mono ${evColor(ab.ev)}`}>{ab.ev}</span>
+                        </td>
+                        <td className="py-1.5 px-2 text-center">
+                          <span className={`px-1 py-0.5 rounded font-mono ${angleColor(ab.angle)}`}>{ab.angle}</span>
+                        </td>
+                        <td className="py-1.5 px-2 text-center">
+                          <span className={`px-1 py-0.5 rounded font-mono ${distColor(ab.distance)}`}>
+                            {ab.distance ? ab.distance : "-"}
+                          </span>
+                        </td>
+                        <td className="py-1.5 text-muted capitalize">{(ab.result || "").replace(/_/g, " ")}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -270,30 +268,30 @@ export function BatterCard({
 
           {/* Statcast per-pitch breakdown */}
           {detailTab === "statcast" && (
-            <div className={tableWrapperClass} style={tableWrapperStyle}>
+            <div className="overflow-x-auto">
               {Object.keys(pitchDetail).length > 0 ? (
-                <table className={tableClass}>
+                <table className="w-full text-xs">
                   <thead>
-                    <tr>
-                      <th className={headerCellClass} style={headerCellStyle}>Pitch</th>
-                      <th className={headerCellClass} style={headerCellStyle}>Usage%</th>
-                      <th className={headerCellClass} style={headerCellStyle}>Weight%</th>
-                      <th className={headerCellClass} style={headerCellStyle}>Barrel%</th>
-                      <th className={headerCellClass} style={headerCellStyle}>FB%</th>
-                      <th className={headerCellClass} style={headerCellStyle}>Hard Hit%</th>
-                      <th className={headerCellClass} style={headerCellStyle}>Avg EV</th>
+                    <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
+                      <th className="text-left py-1.5 pr-3">Pitch</th>
+                      <th className="text-center py-1.5 px-2">Usage%</th>
+                      <th className="text-center py-1.5 px-2">Weight%</th>
+                      <th className="text-center py-1.5 px-2">Barrel%</th>
+                      <th className="text-center py-1.5 px-2">FB%</th>
+                      <th className="text-center py-1.5 px-2">Hard Hit%</th>
+                      <th className="text-center py-1.5 px-2">Avg EV</th>
                     </tr>
                   </thead>
                   <tbody>
                     {Object.entries(pitchDetail).map(([pt, d]: [string, PitchDetailEntry]) => (
-                      <tr key={pt} style={{ backgroundColor: TABLE_BG }}>
-                        <td className={cellClass} style={cellStyle}>{pt}</td>
-                        <td className={cellClass} style={cellStyle}>{d.usage_pct}%</td>
-                        <td className={cellClass} style={cellStyle}>{d.weight}%</td>
-                        <td className={cellClass} style={cellStyle}>{d.barrel_rate}%</td>
-                        <td className={cellClass} style={cellStyle}>{d.fb_rate}%</td>
-                        <td className={cellClass} style={cellStyle}>{d.hard_hit_rate}%</td>
-                        <td className={cellClass} style={cellStyle}>{d.avg_exit_velo}</td>
+                      <tr key={pt} className="border-b border-card-border/30 last:border-0">
+                        <td className="py-1.5 pr-3 font-medium text-foreground">{pt}</td>
+                        <td className="py-1.5 px-2 text-center font-mono text-muted">{d.usage_pct}%</td>
+                        <td className="py-1.5 px-2 text-center font-mono text-accent">{d.weight}%</td>
+                        <td className="py-1.5 px-2 text-center font-mono">{d.barrel_rate}%</td>
+                        <td className="py-1.5 px-2 text-center font-mono">{d.fb_rate}%</td>
+                        <td className="py-1.5 px-2 text-center font-mono">{d.hard_hit_rate}%</td>
+                        <td className="py-1.5 px-2 text-center font-mono">{d.avg_exit_velo}</td>
                       </tr>
                     ))}
                   </tbody>

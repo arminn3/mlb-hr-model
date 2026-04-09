@@ -2,16 +2,6 @@
 
 import { useState } from "react";
 import type { PlayerData, PitchTypeSeason } from "./types";
-import {
-  TABLE_BG,
-  cellClass,
-  cellStyle,
-  headerCellClass,
-  headerCellStyle,
-  tableClass,
-  tableWrapperClass,
-  tableWrapperStyle,
-} from "./table-styles";
 
 function statColor(val: number, thresholds: [number, number], invert = false): string {
   const good = invert ? val <= thresholds[0] : val >= thresholds[1];
@@ -77,35 +67,51 @@ function StatsTable({
       </div>
 
       {/* Desktop table view */}
-      <div className={`hidden md:block ${tableWrapperClass}`} style={tableWrapperStyle}>
-        <table className={tableClass}>
+      <div className="hidden md:block overflow-x-auto">
+        <table className="w-full text-xs">
           <thead>
-            <tr>
-              <th className={headerCellClass} style={headerCellStyle}>Type</th>
-              <th className={headerCellClass} style={headerCellStyle}>#</th>
-              <th className={headerCellClass} style={headerCellStyle}>%</th>
-              <th className={headerCellClass} style={headerCellStyle}>BA</th>
-              <th className={headerCellClass} style={headerCellStyle}>wOBA</th>
-              <th className={headerCellClass} style={headerCellStyle}>SLG</th>
-              <th className={headerCellClass} style={headerCellStyle}>ISO</th>
-              <th className={headerCellClass} style={headerCellStyle}>HR</th>
-              <th className={headerCellClass} style={headerCellStyle}>K%</th>
-              <th className={headerCellClass} style={headerCellStyle}>Whiff%</th>
+            <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
+              <th className="text-left py-1.5 pr-3">Type</th>
+              <th className="text-center py-1.5 px-1.5">#</th>
+              <th className="text-center py-1.5 px-1.5">%</th>
+              <th className="text-center py-1.5 px-1.5">BA</th>
+              <th className="text-center py-1.5 px-1.5">wOBA</th>
+              <th className="text-center py-1.5 px-1.5">SLG</th>
+              <th className="text-center py-1.5 px-1.5">ISO</th>
+              <th className="text-center py-1.5 px-1.5">HR</th>
+              <th className="text-center py-1.5 px-1.5">K%</th>
+              <th className="text-center py-1.5 px-1.5">Whiff%</th>
             </tr>
           </thead>
           <tbody>
             {entries.map(([code, s]) => (
-              <tr key={code} style={{ backgroundColor: TABLE_BG }}>
-                <td className={cellClass} style={cellStyle}>{s.type_name}</td>
-                <td className={cellClass} style={cellStyle}>{s.count}</td>
-                <td className={cellClass} style={cellStyle}>{s.usage_pct}%</td>
-                <td className={cellClass} style={cellStyle}>{s.ba.toFixed(3)}</td>
-                <td className={cellClass} style={cellStyle}>{s.woba.toFixed(3)}</td>
-                <td className={cellClass} style={cellStyle}>{s.slg.toFixed(3)}</td>
-                <td className={cellClass} style={cellStyle}>{s.iso.toFixed(3)}</td>
-                <td className={cellClass} style={cellStyle}>{s.hr}</td>
-                <td className={cellClass} style={cellStyle}>{s.k_pct}%</td>
-                <td className={cellClass} style={cellStyle}>{s.whiff_pct}%</td>
+              <tr key={code} className="border-b border-card-border/30 last:border-0">
+                <td className="py-1.5 pr-3 font-medium text-foreground">{s.type_name}</td>
+                <td className="text-center py-1.5 px-1.5 font-mono text-muted">{s.count}</td>
+                <td className="text-center py-1.5 px-1.5 font-mono text-muted">{s.usage_pct}%</td>
+                <td className="text-center py-1.5 px-1.5">
+                  <span className={`px-1.5 py-0.5 rounded font-mono ${statColor(s.ba, [0.230, 0.280])}`}>
+                    {s.ba.toFixed(3)}
+                  </span>
+                </td>
+                <td className="text-center py-1.5 px-1.5">
+                  <span className={`px-1.5 py-0.5 rounded font-mono ${statColor(s.woba, [0.310, 0.370])}`}>
+                    {s.woba.toFixed(3)}
+                  </span>
+                </td>
+                <td className="text-center py-1.5 px-1.5">
+                  <span className={`px-1.5 py-0.5 rounded font-mono ${statColor(s.slg, [0.380, 0.480])}`}>
+                    {s.slg.toFixed(3)}
+                  </span>
+                </td>
+                <td className="text-center py-1.5 px-1.5">
+                  <span className={`px-1.5 py-0.5 rounded font-mono ${statColor(s.iso, [0.140, 0.200])}`}>
+                    {s.iso.toFixed(3)}
+                  </span>
+                </td>
+                <td className="text-center py-1.5 px-1.5 font-mono text-foreground">{s.hr}</td>
+                <td className="text-center py-1.5 px-1.5 font-mono text-muted">{s.k_pct}%</td>
+                <td className="text-center py-1.5 px-1.5 font-mono text-muted">{s.whiff_pct}%</td>
               </tr>
             ))}
           </tbody>
