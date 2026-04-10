@@ -37,10 +37,13 @@ PITCH_WEIGHT_TIERS: list = [
 # with power behind it.
 BATTER_WEIGHTS: dict = {
     "avg_exit_velo": 0.20,
-    "barrel_rate": 0.45,
-    "fly_ball_rate": 0.35,
-    # hard_hit_rate removed from scoring — still displayed for research
-    # barrel already captures hard hit + lift, FB% captures lift tendency
+    "barrel_rate": 0.55,
+    "fly_ball_rate": 0.25,
+    # barrel rate gets more weight because Statcast's barrel definition
+    # already uses a sliding EV × angle window (98 mph = 26-30°, 106 mph
+    # = ~14-36°, 116 mph = 8-50°). It captures the same signal as FB%
+    # but more accurately. FB% still has value for air-ball tendency on
+    # non-barrel contact, just shouldn't be weighted nearly as high.
 }
 
 # ── Pitcher Metric Weights (sum to 1.0) ─────────────────────────────────────

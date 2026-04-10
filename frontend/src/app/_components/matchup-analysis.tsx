@@ -158,12 +158,17 @@ function calcBatterPower(player: PlayerData): number {
   // 5. Fly-ball rate — cap at 35% (was 38). Real slugger threshold.
   const fbNorm = Math.max(0, Math.min(1, sp.fb / 35));
 
+  // Barrel rate gets extra weight because it already captures the
+  // EV × angle interaction via Statcast's sliding window (a 106 EV
+  // ball at 24° IS a barrel). FB% at 10% was double-penalizing guys
+  // who barrel at slightly lower angles (like Stephenson's sinker
+  // contact). Reduced to 5%, +5 to barrel.
   const raw =
     0.30 * hrRateNorm +
     0.25 * isoNorm +
-    0.20 * barrelNorm +
+    0.25 * barrelNorm +
     0.15 * evNorm +
-    0.10 * fbNorm;
+    0.05 * fbNorm;
 
   // Reliability ramp: 40 BIP → 0.6 credit, 80+ BIP → full credit.
   // Soft, no cliff. Above the hard floor we still discount thin
@@ -180,14 +185,11 @@ function calcSeasonComposite(player: PlayerData): number {
   const batterPower = calcBatterPower(player);
   const scores = player.scores.L5; // only for pitcher_score + env_score, both season-based
 
-  // Pitcher data quality check: if the opposing pitcher has < 15 IP
-  // total, the stored pitcher_score is unreliable (e.g. Max Meyer at
-  // 8.3 IP, 0 HR allowed → backend rated him 0.294 "tough" which is
-  // just noise from a thin sample). Default to neutral 0.5 in those
-  // cases instead of trusting the phantom value.
-  const pitcherIp = player.pitcher_stats?.ip ?? 0;
-  const rawPitcherVuln = scores?.pitcher_score ?? 0.5;
-  const pitcherVuln = pitcherIp < 15 ? 0.5 : rawPitcherVuln;
+  // Use the real pitcher_score. Early in the season almost every
+  // pitcher has thin data — neutralizing them all to 0.5 wipes out
+  // the matchup signal entirely. If a pitcher looks hittable, the
+  // numbers should say that.
+  const pitcherVuln = scores?.pitcher_score ?? 0.5;
 
   const envScore = scores?.env_score ?? 0.5;
   // Weights: batter 60% (season_profile), pitcher 35% (season), env 5%
