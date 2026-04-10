@@ -6185,5 +6185,346 @@
       }
     ],
     "surprise_hrs": []
+  },
+  {
+    "date": "2026-04-09",
+    "total_players_ranked": 108,
+    "total_hrs_hit": 5,
+    "total_near_hrs": 10,
+    "model_hits": 5,
+    "best_lookback": "L10",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 108,
+          "hits": 5,
+          "rate": 4.6
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 2,
+          "rate": 6.7
+        },
+        "all": {
+          "total": 108,
+          "hits": 5,
+          "rate": 4.6
+        }
+      }
+    },
+    "model_near_hits": 10,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 108,
+        "hits": 5,
+        "rate": 4.6
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 108,
+        "hits": 15,
+        "rate": 13.9
+      }
+    },
+    "avg_composite_hr_hitters": 0.241,
+    "avg_composite_non_hitters": 0.332,
+    "composite_separation": -0.091,
+    "hr_hitters": [
+      {
+        "name": "Sal Stewart",
+        "rank": 32,
+        "composite": 0.4,
+        "opp_pitcher": "Max Meyer",
+        "matchup": "CIN@MIA"
+      },
+      {
+        "name": "Josh Bell",
+        "rank": 62,
+        "composite": 0.255,
+        "opp_pitcher": "Jack Flaherty",
+        "matchup": "DET@MIN"
+      },
+      {
+        "name": "Luis Robert Jr.",
+        "rank": 73,
+        "composite": 0.228,
+        "opp_pitcher": "Eduardo Rodriguez",
+        "matchup": "AZ@NYM"
+      },
+      {
+        "name": "Xander Bogaerts",
+        "rank": 96,
+        "composite": 0.166,
+        "opp_pitcher": "Jimmy Herget",
+        "matchup": "COL@SD"
+      },
+      {
+        "name": "Brenton Doyle",
+        "rank": 102,
+        "composite": 0.155,
+        "opp_pitcher": "Randy V\u00e1squez",
+        "matchup": "COL@SD"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Sal Stewart",
+        "rank": 18,
+        "composite": 0.482,
+        "opp_pitcher": "Max Meyer",
+        "matchup": "CIN@MIA"
+      },
+      {
+        "name": "Josh Bell",
+        "rank": 24,
+        "composite": 0.433,
+        "opp_pitcher": "Jack Flaherty",
+        "matchup": "DET@MIN"
+      },
+      {
+        "name": "Xander Bogaerts",
+        "rank": 94,
+        "composite": 0.166,
+        "opp_pitcher": "Jimmy Herget",
+        "matchup": "COL@SD"
+      },
+      {
+        "name": "Luis Robert Jr.",
+        "rank": 97,
+        "composite": 0.158,
+        "opp_pitcher": "Eduardo Rodriguez",
+        "matchup": "AZ@NYM"
+      },
+      {
+        "name": "Brenton Doyle",
+        "rank": 100,
+        "composite": 0.155,
+        "opp_pitcher": "Randy V\u00e1squez",
+        "matchup": "COL@SD"
+      }
+    ],
+    "near_hr_hitters": [
+      {
+        "name": "Riley Greene",
+        "rank": 3,
+        "composite": 0.753,
+        "opp_pitcher": "Mick Abel",
+        "matchup": "DET@MIN"
+      },
+      {
+        "name": "Kody Clemens",
+        "rank": 9,
+        "composite": 0.629,
+        "opp_pitcher": "Jack Flaherty",
+        "matchup": "DET@MIN"
+      },
+      {
+        "name": "Andrew Benintendi",
+        "rank": 18,
+        "composite": 0.523,
+        "opp_pitcher": "Seth Lugo",
+        "matchup": "CWS@KC"
+      },
+      {
+        "name": "Owen Caissie",
+        "rank": 23,
+        "composite": 0.483,
+        "opp_pitcher": "Rhett Lowder",
+        "matchup": "CIN@MIA"
+      },
+      {
+        "name": "Max Muncy",
+        "rank": 35,
+        "composite": 0.39,
+        "opp_pitcher": "Ryan Weathers",
+        "matchup": "ATH@NYY"
+      },
+      {
+        "name": "Spencer Torkelson",
+        "rank": 40,
+        "composite": 0.36,
+        "opp_pitcher": "Mick Abel",
+        "matchup": "DET@MIN"
+      },
+      {
+        "name": "Jakob Marsee",
+        "rank": 43,
+        "composite": 0.338,
+        "opp_pitcher": "Rhett Lowder",
+        "matchup": "CIN@MIA"
+      },
+      {
+        "name": "Austin Wynns",
+        "rank": 44,
+        "composite": 0.338,
+        "opp_pitcher": "Ryan Weathers",
+        "matchup": "ATH@NYY"
+      },
+      {
+        "name": "Vinnie Pasquantino",
+        "rank": 64,
+        "composite": 0.25,
+        "opp_pitcher": "Anthony Kay",
+        "matchup": "CWS@KC"
+      },
+      {
+        "name": "Javier B\u00e1ez",
+        "rank": 74,
+        "composite": 0.221,
+        "opp_pitcher": "Mick Abel",
+        "matchup": "DET@MIN"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Andrew Benintendi",
+        "ev": 98.1,
+        "angle": 33.0,
+        "distance": 389.0,
+        "hr_in_parks": 6,
+        "result": "field_out",
+        "pitcher": "Morgan, Eli"
+      },
+      {
+        "batter": "Vinnie Pasquantino",
+        "ev": 103.4,
+        "angle": 32.0,
+        "distance": 424.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "Kay, Anthony"
+      },
+      {
+        "batter": "Owen Caissie",
+        "ev": 102.6,
+        "angle": 32.0,
+        "distance": 373.0,
+        "hr_in_parks": 14,
+        "result": "double",
+        "pitcher": "Lowder, Rhett"
+      },
+      {
+        "batter": "Jakob Marsee",
+        "ev": 105.6,
+        "angle": 22.0,
+        "distance": 398.0,
+        "hr_in_parks": 7,
+        "result": "field_out",
+        "pitcher": "Lowder, Rhett"
+      },
+      {
+        "batter": "Kody Clemens",
+        "ev": 102.3,
+        "angle": 30.0,
+        "distance": 373.0,
+        "hr_in_parks": 6,
+        "result": "field_out",
+        "pitcher": "Holton, Tyler"
+      },
+      {
+        "batter": "Javier B\u00e1ez",
+        "ev": 102.3,
+        "angle": 24.0,
+        "distance": 381.0,
+        "hr_in_parks": 21,
+        "result": "double",
+        "pitcher": "Abel, Mick"
+      },
+      {
+        "batter": "Riley Greene",
+        "ev": 105.0,
+        "angle": 27.0,
+        "distance": 392.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Abel, Mick"
+      },
+      {
+        "batter": "Spencer Torkelson",
+        "ev": 103.3,
+        "angle": 28.0,
+        "distance": 374.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Abel, Mick"
+      },
+      {
+        "batter": "Max Muncy",
+        "ev": 107.8,
+        "angle": 26.0,
+        "distance": 388.0,
+        "hr_in_parks": 17,
+        "result": "triple",
+        "pitcher": "Weathers, Ryan"
+      },
+      {
+        "batter": "Austin Wynns",
+        "ev": 107.7,
+        "angle": 28.0,
+        "distance": 390.0,
+        "hr_in_parks": 27,
+        "result": "field_out",
+        "pitcher": "Weathers, Ryan"
+      }
+    ],
+    "surprise_hrs": []
   }
 ]
