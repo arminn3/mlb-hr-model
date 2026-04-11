@@ -92,9 +92,13 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git add frontend/public/data/ results/
-          git stash
-          git pull --rebase origin main || git rebase --abort
-          git stash pop || true
-          git add frontend/public/data/ results/
-          git diff --cached --quiet && echo "No changes to commit" || git commit -m "auto: HR props $(date -u +%Y-%m-%d-%H%M)"
-          git push origin main || true
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "auto: HR props $(date -u +%Y-%m-%d-%H%M)"
+          # Retry push up to 3 times with pull --no-rebase (merge, not rebase)
+          # to avoid conflict markers in large JSON files
+          for i in 1 2 3; do
+            git push origin main && break
+            echo "Push failed, pulling with merge strategy (attempt $i)..."
+            git pull origin main --no-rebase -X theirs || true
+            git push origin main && break
+          done
