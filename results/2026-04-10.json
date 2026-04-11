@@ -1,9 +1,15 @@
 {
   "date": "2026-04-10",
   "total_players_ranked": 269,
+<<<<<<< Updated upstream
   "total_hrs_hit": 25,
   "total_near_hrs": 0,
   "model_hits": 23,
+=======
+  "total_hrs_hit": 34,
+  "total_near_hrs": 0,
+  "model_hits": 30,
+>>>>>>> Stashed changes
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
@@ -24,8 +30,13 @@
       },
       "all": {
         "total": 269,
+<<<<<<< Updated upstream
         "hits": 23,
         "rate": 8.6
+=======
+        "hits": 30,
+        "rate": 11.2
+>>>>>>> Stashed changes
       }
     },
     "L10": {
@@ -41,6 +52,7 @@
       },
       "top_30": {
         "total": 30,
+<<<<<<< Updated upstream
         "hits": 4,
         "rate": 13.3
       },
@@ -48,6 +60,15 @@
         "total": 269,
         "hits": 23,
         "rate": 8.6
+=======
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 269,
+        "hits": 30,
+        "rate": 11.2
+>>>>>>> Stashed changes
       }
     }
   },
@@ -70,8 +91,13 @@
     },
     "all": {
       "total": 269,
+<<<<<<< Updated upstream
       "hits": 23,
       "rate": 8.6
+=======
+      "hits": 30,
+      "rate": 11.2
+>>>>>>> Stashed changes
     }
   },
   "tier_accuracy_with_near": {
@@ -92,6 +118,7 @@
     },
     "all": {
       "total": 269,
+<<<<<<< Updated upstream
       "hits": 23,
       "rate": 8.6
     }
@@ -99,6 +126,15 @@
   "avg_composite_hr_hitters": 0.438,
   "avg_composite_non_hitters": 0.37,
   "composite_separation": 0.068,
+=======
+      "hits": 30,
+      "rate": 11.2
+    }
+  },
+  "avg_composite_hr_hitters": 0.44,
+  "avg_composite_non_hitters": 0.368,
+  "composite_separation": 0.072,
+>>>>>>> Stashed changes
   "hr_hitters": [
     {
       "name": "Matt Olson",
@@ -136,6 +172,16 @@
       "matchup": "PIT@CHC"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "name": "Andy Pages",
+      "rank": 36,
+      "composite": 0.581,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "TEX@LAD"
+    },
+    {
+>>>>>>> Stashed changes
       "name": "Michael Harris II",
       "rank": 46,
       "composite": 0.551,
@@ -143,6 +189,16 @@
       "matchup": "CLE@ATL"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "name": "Yordan Alvarez",
+      "rank": 49,
+      "composite": 0.549,
+      "opp_pitcher": "Emerson Hancock",
+      "matchup": "HOU@SEA"
+    },
+    {
+>>>>>>> Stashed changes
       "name": "Willy Adames",
       "rank": 57,
       "composite": 0.53,
@@ -178,6 +234,30 @@
       "matchup": "COL@SD"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "name": "Randy Arozarena",
+      "rank": 74,
+      "composite": 0.486,
+      "opp_pitcher": "Tatsuya Imai",
+      "matchup": "HOU@SEA"
+    },
+    {
+      "name": "Max Muncy",
+      "rank": 81,
+      "composite": 0.468,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "TEX@LAD"
+    },
+    {
+      "name": "Corey Seager",
+      "rank": 82,
+      "composite": 0.461,
+      "opp_pitcher": "Tyler Glasnow",
+      "matchup": "TEX@LAD"
+    },
+    {
+>>>>>>> Stashed changes
       "name": "Jorge Soler",
       "rank": 89,
       "composite": 0.432,
@@ -220,6 +300,16 @@
       "matchup": "LAA@CIN"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "name": "Wyatt Langford",
+      "rank": 170,
+      "composite": 0.298,
+      "opp_pitcher": "Tyler Glasnow",
+      "matchup": "TEX@LAD"
+    },
+    {
+>>>>>>> Stashed changes
       "name": "Brooks Lee",
       "rank": 175,
       "composite": 0.291,
@@ -227,6 +317,16 @@
       "matchup": "MIN@TOR"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "name": "Evan Carter",
+      "rank": 185,
+      "composite": 0.272,
+      "opp_pitcher": "Tyler Glasnow",
+      "matchup": "TEX@LAD"
+    },
+    {
+>>>>>>> Stashed changes
       "name": "Brandon Valenzuela",
       "rank": 200,
       "composite": 0.25,
@@ -285,6 +385,16 @@
       "matchup": "CLE@ATL"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "name": "Andy Pages",
+      "rank": 21,
+      "composite": 0.586,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "TEX@LAD"
+    },
+    {
+>>>>>>> Stashed changes
       "name": "Jake Bauers",
       "rank": 26,
       "composite": 0.572,
@@ -306,6 +416,23 @@
       "matchup": "PIT@CHC"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "name": "Yordan Alvarez",
+      "rank": 56,
+      "composite": 0.487,
+      "opp_pitcher": "Emerson Hancock",
+      "matchup": "HOU@SEA"
+    },
+    {
+      "name": "Randy Arozarena",
+      "rank": 58,
+      "composite": 0.482,
+      "opp_pitcher": "Tatsuya Imai",
+      "matchup": "HOU@SEA"
+    },
+    {
+>>>>>>> Stashed changes
       "name": "Gavin Sheets",
       "rank": 59,
       "composite": 0.477,
@@ -327,6 +454,16 @@
       "matchup": "NYY@TB"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "name": "Corey Seager",
+      "rank": 67,
+      "composite": 0.461,
+      "opp_pitcher": "Tyler Glasnow",
+      "matchup": "TEX@LAD"
+    },
+    {
+>>>>>>> Stashed changes
       "name": "Willy Adames",
       "rank": 82,
       "composite": 0.433,
@@ -362,6 +499,16 @@
       "matchup": "MIN@TOR"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "name": "Max Muncy",
+      "rank": 106,
+      "composite": 0.4,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "TEX@LAD"
+    },
+    {
+>>>>>>> Stashed changes
       "name": "Michael Harris II",
       "rank": 108,
       "composite": 0.4,
@@ -369,6 +516,16 @@
       "matchup": "CLE@ATL"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "name": "Evan Carter",
+      "rank": 123,
+      "composite": 0.387,
+      "opp_pitcher": "Tyler Glasnow",
+      "matchup": "TEX@LAD"
+    },
+    {
+>>>>>>> Stashed changes
       "name": "Jorge Soler",
       "rank": 128,
       "composite": 0.377,
@@ -418,6 +575,16 @@
       "matchup": "MIN@TOR"
     },
     {
+<<<<<<< Updated upstream
+=======
+      "name": "Wyatt Langford",
+      "rank": 239,
+      "composite": 0.203,
+      "opp_pitcher": "Tyler Glasnow",
+      "matchup": "TEX@LAD"
+    },
+    {
+>>>>>>> Stashed changes
       "name": "Jung Hoo Lee",
       "rank": 240,
       "composite": 0.198,

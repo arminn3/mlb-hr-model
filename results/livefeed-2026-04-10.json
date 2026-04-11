@@ -101,7 +101,11 @@
       "gamePk": 823318,
       "away": "COL",
       "home": "SD",
+<<<<<<< Updated upstream
       "status": "Game Over",
+=======
+      "status": "Final",
+>>>>>>> Stashed changes
       "awayScore": 2,
       "homeScore": 5
     },
@@ -109,21 +113,139 @@
       "gamePk": 823156,
       "away": "HOU",
       "home": "SEA",
+<<<<<<< Updated upstream
       "status": "In Progress",
       "awayScore": 3,
+=======
+      "status": "Game Over",
+      "awayScore": 6,
+>>>>>>> Stashed changes
       "homeScore": 9
     },
     {
       "gamePk": 823968,
       "away": "TEX",
       "home": "LAD",
+<<<<<<< Updated upstream
       "status": "In Progress",
       "awayScore": 4,
       "homeScore": 5
+=======
+      "status": "Game Over",
+      "awayScore": 7,
+      "homeScore": 8
+>>>>>>> Stashed changes
     }
   ],
   "plays": [
     {
+<<<<<<< Updated upstream
+=======
+      "batter": "Max Muncy",
+      "pitcher": "Jacob Latz",
+      "game": "TEX@LAD",
+      "ev": 106.0,
+      "angle": 35.0,
+      "distance": 401.0,
+      "result": "Home Run",
+      "inning": 9,
+      "timestamp": "2026-04-11T04:55:54.890Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Cam Smith",
+      "pitcher": "Andr\u00e9s Mu\u00f1oz",
+      "game": "HOU@SEA",
+      "ev": 101.7,
+      "angle": 36.0,
+      "distance": 368.0,
+      "result": "Flyout",
+      "inning": 9,
+      "timestamp": "2026-04-11T04:46:28.266Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Dominic Canzone",
+      "pitcher": "Enyel De Los Santos",
+      "game": "HOU@SEA",
+      "ev": 92.9,
+      "angle": 48.0,
+      "distance": 285.0,
+      "result": "Flyout",
+      "inning": 8,
+      "timestamp": "2026-04-11T04:41:50.698Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Evan Carter",
+      "pitcher": "Edwin D\u00edaz",
+      "game": "TEX@LAD",
+      "ev": 98.9,
+      "angle": 26.0,
+      "distance": 373.0,
+      "result": "Home Run",
+      "inning": 9,
+      "timestamp": "2026-04-11T04:40:17.960Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Luke Raley",
+      "pitcher": "Enyel De Los Santos",
+      "game": "HOU@SEA",
+      "ev": 99.9,
+      "angle": 23.0,
+      "distance": 357.0,
+      "result": "Double",
+      "inning": 8,
+      "timestamp": "2026-04-11T04:39:42.348Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Andy Pages",
+      "pitcher": "Luis Curvelo",
+      "game": "TEX@LAD",
+      "ev": 103.5,
+      "angle": 23.0,
+      "distance": 396.0,
+      "result": "Home Run",
+      "inning": 8,
+      "timestamp": "2026-04-11T04:30:32.803Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Yordan Alvarez",
+      "pitcher": "Cole Wilcox",
+      "game": "HOU@SEA",
+      "ev": 104.5,
+      "angle": 31.0,
+      "distance": 389.0,
+      "result": "Home Run",
+      "inning": 8,
+      "timestamp": "2026-04-11T04:27:09.748Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jake Burger",
+      "pitcher": "Tanner Scott",
+      "game": "TEX@LAD",
+      "ev": 98.6,
+      "angle": 20.0,
+      "distance": 329.0,
+      "result": "Lineout",
+      "inning": 8,
+      "timestamp": "2026-04-11T04:22:39.183Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+>>>>>>> Stashed changes
       "batter": "Gavin Sheets",
       "pitcher": "Juan Mejia",
       "game": "COL@SD",
@@ -2100,8 +2222,15 @@
       "isNearHR": false
     }
   ],
+<<<<<<< Updated upstream
   "totalHRs": 30,
   "nearHRs": 30,
   "hardHitAir": 80,
   "totalAirBalls": 152
+=======
+  "totalHRs": 34,
+  "nearHRs": 30,
+  "hardHitAir": 84,
+  "totalAirBalls": 160
+>>>>>>> Stashed changes
 }
