@@ -1,0 +1,437 @@
+{
+  "date": "2026-04-10",
+  "total_players_ranked": 269,
+  "total_hrs_hit": 25,
+  "total_near_hrs": 0,
+  "model_hits": 23,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 269,
+        "hits": 23,
+        "rate": 8.6
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 269,
+        "hits": 23,
+        "rate": 8.6
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 5,
+      "rate": 16.7
+    },
+    "all": {
+      "total": 269,
+      "hits": 23,
+      "rate": 8.6
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 5,
+      "rate": 16.7
+    },
+    "all": {
+      "total": 269,
+      "hits": 23,
+      "rate": 8.6
+    }
+  },
+  "avg_composite_hr_hitters": 0.438,
+  "avg_composite_non_hitters": 0.37,
+  "composite_separation": 0.068,
+  "hr_hitters": [
+    {
+      "name": "Matt Olson",
+      "rank": 7,
+      "composite": 0.722,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "CLE@ATL"
+    },
+    {
+      "name": "Carter Jensen",
+      "rank": 10,
+      "composite": 0.715,
+      "opp_pitcher": "Davis Martin",
+      "matchup": "CWS@KC"
+    },
+    {
+      "name": "Josh Lowe",
+      "rank": 16,
+      "composite": 0.677,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "LAA@CIN"
+    },
+    {
+      "name": "Javier B\u00e1ez",
+      "rank": 22,
+      "composite": 0.633,
+      "opp_pitcher": "Chris Paddack",
+      "matchup": "MIA@DET"
+    },
+    {
+      "name": "Bryan Reynolds",
+      "rank": 25,
+      "composite": 0.612,
+      "opp_pitcher": "Shota Imanaga",
+      "matchup": "PIT@CHC"
+    },
+    {
+      "name": "Michael Harris II",
+      "rank": 46,
+      "composite": 0.551,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "CLE@ATL"
+    },
+    {
+      "name": "Willy Adames",
+      "rank": 57,
+      "composite": 0.53,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "SF@BAL"
+    },
+    {
+      "name": "Ronald Acu\u00f1a Jr.",
+      "rank": 58,
+      "composite": 0.529,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "CLE@ATL"
+    },
+    {
+      "name": "Ryan Jeffers",
+      "rank": 61,
+      "composite": 0.516,
+      "opp_pitcher": "Patrick Corbin",
+      "matchup": "MIN@TOR"
+    },
+    {
+      "name": "Gavin Sheets",
+      "rank": 65,
+      "composite": 0.508,
+      "opp_pitcher": "Tomoyuki Sugano",
+      "matchup": "COL@SD"
+    },
+    {
+      "name": "Luis Campusano",
+      "rank": 66,
+      "composite": 0.508,
+      "opp_pitcher": "Tomoyuki Sugano",
+      "matchup": "COL@SD"
+    },
+    {
+      "name": "Jorge Soler",
+      "rank": 89,
+      "composite": 0.432,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "LAA@CIN"
+    },
+    {
+      "name": "Daulton Varsho",
+      "rank": 97,
+      "composite": 0.4,
+      "opp_pitcher": "Simeon Woods Richardson",
+      "matchup": "MIN@TOR"
+    },
+    {
+      "name": "Yandy D\u00edaz",
+      "rank": 108,
+      "composite": 0.388,
+      "opp_pitcher": "Luis Gil",
+      "matchup": "NYY@TB"
+    },
+    {
+      "name": "Gunnar Henderson",
+      "rank": 126,
+      "composite": 0.358,
+      "opp_pitcher": "Landen Roupp",
+      "matchup": "SF@BAL"
+    },
+    {
+      "name": "Jake Bauers",
+      "rank": 132,
+      "composite": 0.352,
+      "opp_pitcher": "Jake Irvin",
+      "matchup": "WSH@MIL"
+    },
+    {
+      "name": "Elly De La Cruz",
+      "rank": 157,
+      "composite": 0.309,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "LAA@CIN"
+    },
+    {
+      "name": "Brooks Lee",
+      "rank": 175,
+      "composite": 0.291,
+      "opp_pitcher": "Patrick Corbin",
+      "matchup": "MIN@TOR"
+    },
+    {
+      "name": "Brandon Valenzuela",
+      "rank": 200,
+      "composite": 0.25,
+      "opp_pitcher": "Simeon Woods Richardson",
+      "matchup": "MIN@TOR"
+    },
+    {
+      "name": "Brandon Marsh",
+      "rank": 213,
+      "composite": 0.233,
+      "opp_pitcher": "Michael Soroka",
+      "matchup": "AZ@PHI"
+    },
+    {
+      "name": "Jung Hoo Lee",
+      "rank": 231,
+      "composite": 0.208,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "SF@BAL"
+    },
+    {
+      "name": "Kyle Manzardo",
+      "rank": 247,
+      "composite": 0.181,
+      "opp_pitcher": "Bryce Elder",
+      "matchup": "CLE@ATL"
+    },
+    {
+      "name": "Zach Neto",
+      "rank": 249,
+      "composite": 0.179,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "LAA@CIN"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Carter Jensen",
+      "rank": 5,
+      "composite": 0.731,
+      "opp_pitcher": "Davis Martin",
+      "matchup": "CWS@KC"
+    },
+    {
+      "name": "Josh Lowe",
+      "rank": 9,
+      "composite": 0.677,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "LAA@CIN"
+    },
+    {
+      "name": "Matt Olson",
+      "rank": 12,
+      "composite": 0.656,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "CLE@ATL"
+    },
+    {
+      "name": "Jake Bauers",
+      "rank": 26,
+      "composite": 0.572,
+      "opp_pitcher": "Jake Irvin",
+      "matchup": "WSH@MIL"
+    },
+    {
+      "name": "Ryan Jeffers",
+      "rank": 38,
+      "composite": 0.528,
+      "opp_pitcher": "Patrick Corbin",
+      "matchup": "MIN@TOR"
+    },
+    {
+      "name": "Bryan Reynolds",
+      "rank": 46,
+      "composite": 0.511,
+      "opp_pitcher": "Shota Imanaga",
+      "matchup": "PIT@CHC"
+    },
+    {
+      "name": "Gavin Sheets",
+      "rank": 59,
+      "composite": 0.477,
+      "opp_pitcher": "Tomoyuki Sugano",
+      "matchup": "COL@SD"
+    },
+    {
+      "name": "Luis Campusano",
+      "rank": 62,
+      "composite": 0.475,
+      "opp_pitcher": "Tomoyuki Sugano",
+      "matchup": "COL@SD"
+    },
+    {
+      "name": "Yandy D\u00edaz",
+      "rank": 64,
+      "composite": 0.467,
+      "opp_pitcher": "Luis Gil",
+      "matchup": "NYY@TB"
+    },
+    {
+      "name": "Willy Adames",
+      "rank": 82,
+      "composite": 0.433,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "SF@BAL"
+    },
+    {
+      "name": "Ronald Acu\u00f1a Jr.",
+      "rank": 90,
+      "composite": 0.408,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "CLE@ATL"
+    },
+    {
+      "name": "Brandon Marsh",
+      "rank": 93,
+      "composite": 0.405,
+      "opp_pitcher": "Michael Soroka",
+      "matchup": "AZ@PHI"
+    },
+    {
+      "name": "Javier B\u00e1ez",
+      "rank": 96,
+      "composite": 0.4,
+      "opp_pitcher": "Chris Paddack",
+      "matchup": "MIA@DET"
+    },
+    {
+      "name": "Daulton Varsho",
+      "rank": 101,
+      "composite": 0.4,
+      "opp_pitcher": "Simeon Woods Richardson",
+      "matchup": "MIN@TOR"
+    },
+    {
+      "name": "Michael Harris II",
+      "rank": 108,
+      "composite": 0.4,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "CLE@ATL"
+    },
+    {
+      "name": "Jorge Soler",
+      "rank": 128,
+      "composite": 0.377,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "LAA@CIN"
+    },
+    {
+      "name": "Zach Neto",
+      "rank": 167,
+      "composite": 0.32,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "LAA@CIN"
+    },
+    {
+      "name": "Elly De La Cruz",
+      "rank": 172,
+      "composite": 0.309,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "LAA@CIN"
+    },
+    {
+      "name": "Brooks Lee",
+      "rank": 185,
+      "composite": 0.291,
+      "opp_pitcher": "Patrick Corbin",
+      "matchup": "MIN@TOR"
+    },
+    {
+      "name": "Kyle Manzardo",
+      "rank": 186,
+      "composite": 0.291,
+      "opp_pitcher": "Bryce Elder",
+      "matchup": "CLE@ATL"
+    },
+    {
+      "name": "Gunnar Henderson",
+      "rank": 198,
+      "composite": 0.279,
+      "opp_pitcher": "Landen Roupp",
+      "matchup": "SF@BAL"
+    },
+    {
+      "name": "Brandon Valenzuela",
+      "rank": 215,
+      "composite": 0.25,
+      "opp_pitcher": "Simeon Woods Richardson",
+      "matchup": "MIN@TOR"
+    },
+    {
+      "name": "Jung Hoo Lee",
+      "rank": 240,
+      "composite": 0.198,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "SF@BAL"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [
+    {
+      "name": "Ben Rice",
+      "pitcher": "Hunter Bigge",
+      "description": "Ben Rice homers (4) on a fly ball to center field."
+    }
+  ]
+}
