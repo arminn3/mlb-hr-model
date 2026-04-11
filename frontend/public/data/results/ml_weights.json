@@ -1,12 +1,6 @@
 {
-<<<<<<< Updated upstream
-  "batter": 0.70,
-  "matchup": 0.10,
-  "pitcher": 0.15,
-=======
   "batter": 0.75,
   "matchup": 0.10,
   "pitcher": 0.10,
->>>>>>> Stashed changes
   "environment": 0.05
 }
