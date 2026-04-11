@@ -2,9 +2,15 @@
   "date": "2026-04-10",
   "total_players_ranked": 269,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   "total_hrs_hit": 25,
   "total_near_hrs": 0,
   "model_hits": 23,
+=======
+  "total_hrs_hit": 34,
+  "total_near_hrs": 0,
+  "model_hits": 30,
+>>>>>>> Stashed changes
 =======
   "total_hrs_hit": 34,
   "total_near_hrs": 0,
@@ -31,8 +37,13 @@
       "all": {
         "total": 269,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "hits": 23,
         "rate": 8.6
+=======
+        "hits": 30,
+        "rate": 11.2
+>>>>>>> Stashed changes
 =======
         "hits": 30,
         "rate": 11.2
@@ -53,6 +64,7 @@
       "top_30": {
         "total": 30,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "hits": 4,
         "rate": 13.3
       },
@@ -60,6 +72,15 @@
         "total": 269,
         "hits": 23,
         "rate": 8.6
+=======
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 269,
+        "hits": 30,
+        "rate": 11.2
+>>>>>>> Stashed changes
 =======
         "hits": 5,
         "rate": 16.7
@@ -92,8 +113,13 @@
     "all": {
       "total": 269,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "hits": 23,
       "rate": 8.6
+=======
+      "hits": 30,
+      "rate": 11.2
+>>>>>>> Stashed changes
 =======
       "hits": 30,
       "rate": 11.2
@@ -119,6 +145,7 @@
     "all": {
       "total": 269,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       "hits": 23,
       "rate": 8.6
     }
@@ -126,6 +153,15 @@
   "avg_composite_hr_hitters": 0.438,
   "avg_composite_non_hitters": 0.37,
   "composite_separation": 0.068,
+=======
+      "hits": 30,
+      "rate": 11.2
+    }
+  },
+  "avg_composite_hr_hitters": 0.44,
+  "avg_composite_non_hitters": 0.368,
+  "composite_separation": 0.072,
+>>>>>>> Stashed changes
 =======
       "hits": 30,
       "rate": 11.2
@@ -173,7 +209,10 @@
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
       "name": "Andy Pages",
       "rank": 36,
       "composite": 0.581,
@@ -181,6 +220,9 @@
       "matchup": "TEX@LAD"
     },
     {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "name": "Michael Harris II",
       "rank": 46,
@@ -190,7 +232,10 @@
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
       "name": "Yordan Alvarez",
       "rank": 49,
       "composite": 0.549,
@@ -198,6 +243,9 @@
       "matchup": "HOU@SEA"
     },
     {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "name": "Willy Adames",
       "rank": 57,
@@ -235,7 +283,10 @@
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
       "name": "Randy Arozarena",
       "rank": 74,
       "composite": 0.486,
@@ -257,6 +308,9 @@
       "matchup": "TEX@LAD"
     },
     {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "name": "Jorge Soler",
       "rank": 89,
@@ -301,7 +355,10 @@
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
       "name": "Wyatt Langford",
       "rank": 170,
       "composite": 0.298,
@@ -309,6 +366,9 @@
       "matchup": "TEX@LAD"
     },
     {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "name": "Brooks Lee",
       "rank": 175,
@@ -318,7 +378,10 @@
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
       "name": "Evan Carter",
       "rank": 185,
       "composite": 0.272,
@@ -326,6 +389,9 @@
       "matchup": "TEX@LAD"
     },
     {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "name": "Brandon Valenzuela",
       "rank": 200,
@@ -386,7 +452,10 @@
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
       "name": "Andy Pages",
       "rank": 21,
       "composite": 0.586,
@@ -394,6 +463,9 @@
       "matchup": "TEX@LAD"
     },
     {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "name": "Jake Bauers",
       "rank": 26,
@@ -417,7 +489,10 @@
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
       "name": "Yordan Alvarez",
       "rank": 56,
       "composite": 0.487,
@@ -432,6 +507,9 @@
       "matchup": "HOU@SEA"
     },
     {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "name": "Gavin Sheets",
       "rank": 59,
@@ -455,7 +533,10 @@
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
       "name": "Corey Seager",
       "rank": 67,
       "composite": 0.461,
@@ -463,6 +544,9 @@
       "matchup": "TEX@LAD"
     },
     {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "name": "Willy Adames",
       "rank": 82,
@@ -500,7 +584,10 @@
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
       "name": "Max Muncy",
       "rank": 106,
       "composite": 0.4,
@@ -508,6 +595,9 @@
       "matchup": "TEX@LAD"
     },
     {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "name": "Michael Harris II",
       "rank": 108,
@@ -517,7 +607,10 @@
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
       "name": "Evan Carter",
       "rank": 123,
       "composite": 0.387,
@@ -525,6 +618,9 @@
       "matchup": "TEX@LAD"
     },
     {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "name": "Jorge Soler",
       "rank": 128,
@@ -576,7 +672,10 @@
     },
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
       "name": "Wyatt Langford",
       "rank": 239,
       "composite": 0.203,
@@ -584,6 +683,9 @@
       "matchup": "TEX@LAD"
     },
     {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       "name": "Jung Hoo Lee",
       "rank": 240,
