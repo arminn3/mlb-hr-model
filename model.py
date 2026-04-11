@@ -239,13 +239,18 @@ def score_batter_vs_pitcher(
     # Use 2026 data, but fall back to 2025 season data if pitcher has < 10 IP
     p_metrics = calc_pitcher_metrics(pitcher_df, batter_hand)
 
-    # If pitcher has thin 2026 data, blend with 2025 season stats
+    # If pitcher has thin 2026 data, blend with 2025 season stats.
+    # Threshold raised to 50 IP — at 9 IP in April, we should trust
+    # 2025 heavily (Castillo: 23 HR in 180 IP in 2025 but 0 HR in 9 IP
+    # in 2026 → old code gave 92% weight to the 9 IP, rating him as
+    # HR-proof when he's actually very hittable).
     blended_with_2025 = False
-    if p_metrics["total_ip"] < 10 and pitcher_season_df is not None and not pitcher_season_df.empty:
+    if p_metrics["total_ip"] < 50 and pitcher_season_df is not None and not pitcher_season_df.empty:
         p_2025 = calc_pitcher_metrics(pitcher_season_df, batter_hand)
         if p_2025["total_ip"] > 20:
-            # Blend: weight by IP ratio. More 2026 IP = more trust in 2026
-            w_2026 = p_metrics["total_ip"] / 10  # 0 to 1
+            # Blend: linear ramp from 0-50 IP. At 9 IP → 82% trust in 2025.
+            # At 25 IP → 50/50. At 50 IP → full trust in 2026.
+            w_2026 = p_metrics["total_ip"] / 50  # 0 to 1
             w_2025 = 1 - w_2026
             for key in ["fb_rate_allowed", "hr_per_fb_rate", "hr_per_ip", "total_hrs_norm"]:
                 p_metrics[key] = p_metrics[key] * w_2026 + p_2025[key] * w_2025
