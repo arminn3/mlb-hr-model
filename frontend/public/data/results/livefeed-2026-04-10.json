@@ -101,15 +101,7 @@
       "gamePk": 823318,
       "away": "COL",
       "home": "SD",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      "status": "Game Over",
-=======
       "status": "Final",
->>>>>>> Stashed changes
-=======
-      "status": "Final",
->>>>>>> Stashed changes
       "awayScore": 2,
       "homeScore": 5
     },
@@ -117,48 +109,21 @@
       "gamePk": 823156,
       "away": "HOU",
       "home": "SEA",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      "status": "In Progress",
-      "awayScore": 3,
-=======
-      "status": "Game Over",
-      "awayScore": 6,
->>>>>>> Stashed changes
-=======
       "status": "Final",
       "awayScore": 6,
->>>>>>> Stashed changes
       "homeScore": 9
     },
     {
       "gamePk": 823968,
       "away": "TEX",
       "home": "LAD",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      "status": "In Progress",
-      "awayScore": 4,
-      "homeScore": 5
-=======
-      "status": "Game Over",
-      "awayScore": 7,
-      "homeScore": 8
->>>>>>> Stashed changes
-=======
       "status": "Final",
       "awayScore": 7,
       "homeScore": 8
->>>>>>> Stashed changes
     }
   ],
   "plays": [
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
       "batter": "Max Muncy",
       "pitcher": "Jacob Latz",
       "game": "TEX@LAD",
@@ -263,10 +228,6 @@
       "isNearHR": false
     },
     {
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
       "batter": "Gavin Sheets",
       "pitcher": "Juan Mejia",
       "game": "COL@SD",
@@ -2243,22 +2204,8 @@
       "isNearHR": false
     }
   ],
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  "totalHRs": 30,
-  "nearHRs": 30,
-  "hardHitAir": 80,
-  "totalAirBalls": 152
-=======
   "totalHRs": 34,
   "nearHRs": 30,
   "hardHitAir": 84,
   "totalAirBalls": 160
->>>>>>> Stashed changes
-=======
-  "totalHRs": 34,
-  "nearHRs": 30,
-  "hardHitAir": 84,
-  "totalAirBalls": 160
->>>>>>> Stashed changes
 }
