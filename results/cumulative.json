@@ -7263,9 +7263,9 @@
   {
     "date": "2026-04-11",
     "total_players_ranked": 269,
-    "total_hrs_hit": 31,
+    "total_hrs_hit": 34,
     "total_near_hrs": 0,
-    "model_hits": 28,
+    "model_hits": 31,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
@@ -7286,8 +7286,8 @@
         },
         "all": {
           "total": 269,
-          "hits": 28,
-          "rate": 10.4
+          "hits": 31,
+          "rate": 11.5
         }
       },
       "L10": {
@@ -7298,18 +7298,18 @@
         },
         "top_20": {
           "total": 20,
-          "hits": 5,
-          "rate": 25.0
+          "hits": 6,
+          "rate": 30.0
         },
         "top_30": {
           "total": 30,
-          "hits": 7,
-          "rate": 23.3
+          "hits": 8,
+          "rate": 26.7
         },
         "all": {
           "total": 269,
-          "hits": 28,
-          "rate": 10.4
+          "hits": 31,
+          "rate": 11.5
         }
       }
     },
@@ -7332,8 +7332,8 @@
       },
       "all": {
         "total": 269,
-        "hits": 28,
-        "rate": 10.4
+        "hits": 31,
+        "rate": 11.5
       }
     },
     "tier_accuracy_with_near": {
@@ -7354,13 +7354,13 @@
       },
       "all": {
         "total": 269,
-        "hits": 28,
-        "rate": 10.4
+        "hits": 31,
+        "rate": 11.5
       }
     },
-    "avg_composite_hr_hitters": 0.457,
+    "avg_composite_hr_hitters": 0.446,
     "avg_composite_non_hitters": 0.341,
-    "composite_separation": 0.116,
+    "composite_separation": 0.105,
     "hr_hitters": [
       {
         "name": "Jordan Walker",
@@ -7410,6 +7410,13 @@
         "composite": 0.686,
         "opp_pitcher": "Jacob Lopez",
         "matchup": "ATH@NYM"
+      },
+      {
+        "name": "Yordan Alvarez",
+        "rank": 42,
+        "composite": 0.631,
+        "opp_pitcher": "Luis Castillo",
+        "matchup": "HOU@SEA"
       },
       {
         "name": "Brooks Lee",
@@ -7517,6 +7524,13 @@
         "matchup": "AZ@PHI"
       },
       {
+        "name": "Cal Raleigh",
+        "rank": 147,
+        "composite": 0.239,
+        "opp_pitcher": "Lance McCullers Jr.",
+        "matchup": "HOU@SEA"
+      },
+      {
         "name": "Mickey Moniak",
         "rank": 167,
         "composite": 0.209,
@@ -7536,6 +7550,13 @@
         "composite": 0.171,
         "opp_pitcher": "Mart\u00edn P\u00e9rez",
         "matchup": "CLE@ATL"
+      },
+      {
+        "name": "Julio Rodr\u00edguez",
+        "rank": 195,
+        "composite": 0.163,
+        "opp_pitcher": "Lance McCullers Jr.",
+        "matchup": "HOU@SEA"
       },
       {
         "name": "Carlos Cortes",
@@ -7594,6 +7615,13 @@
         "composite": 0.733,
         "opp_pitcher": "Ranger Suarez",
         "matchup": "BOS@STL"
+      },
+      {
+        "name": "Yordan Alvarez",
+        "rank": 16,
+        "composite": 0.727,
+        "opp_pitcher": "Luis Castillo",
+        "matchup": "HOU@SEA"
       },
       {
         "name": "Teoscar Hern\u00e1ndez",
@@ -7720,6 +7748,20 @@
         "composite": 0.196,
         "opp_pitcher": "Kodai Senga",
         "matchup": "ATH@NYM"
+      },
+      {
+        "name": "Cal Raleigh",
+        "rank": 190,
+        "composite": 0.193,
+        "opp_pitcher": "Lance McCullers Jr.",
+        "matchup": "HOU@SEA"
+      },
+      {
+        "name": "Julio Rodr\u00edguez",
+        "rank": 211,
+        "composite": 0.163,
+        "opp_pitcher": "Lance McCullers Jr.",
+        "matchup": "HOU@SEA"
       },
       {
         "name": "Manny Machado",
