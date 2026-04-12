@@ -91,14 +91,34 @@ jobs:
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
+          # Check if there are changes worth committing. Stage only
+          # our generated data paths.
           git add frontend/public/data/ results/
           git diff --cached --quiet && echo "No changes to commit" && exit 0
-          git commit -m "auto: HR props $(date -u +%Y-%m-%d-%H%M)"
-          # Retry push up to 3 times with pull --no-rebase (merge, not rebase)
-          # to avoid conflict markers in large JSON files
+          # Stash our generated files temporarily, hard-reset to origin,
+          # then force-overwrite with our stashed versions. This avoids
+          # ANY merge attempt on the large JSON files (merges leave
+          # conflict markers in them even with -X theirs).
+          mkdir -p /tmp/hrprop-stash
+          cp -r frontend/public/data/ /tmp/hrprop-stash/frontend-data/ || true
+          cp -r results/ /tmp/hrprop-stash/results/ || true
+          git reset --hard HEAD
+          git fetch origin main
+          # Retry up to 3 times in case of race with another run
           for i in 1 2 3; do
-            git push origin main && break
-            echo "Push failed, pulling with merge strategy (attempt $i)..."
-            git pull origin main --no-rebase -X theirs || true
-            git push origin main && break
+            git reset --hard origin/main
+            # Restore our generated files, overwriting whatever is on origin
+            cp -r /tmp/hrprop-stash/frontend-data/* frontend/public/data/ 2>/dev/null || true
+            cp -r /tmp/hrprop-stash/results/* results/ 2>/dev/null || true
+            git add frontend/public/data/ results/
+            git diff --cached --quiet && echo "No changes after reset" && exit 0
+            git commit -m "auto: HR props $(date -u +%Y-%m-%d-%H%M)"
+            if git push origin main; then
+              echo "Pushed successfully on attempt $i"
+              exit 0
+            fi
+            echo "Push attempt $i failed, origin moved. Retrying..."
+            git fetch origin main
           done
+          echo "Push failed after 3 attempts"
+          exit 1

@@ -33,10 +33,23 @@ export function TopPicks({
         }
       }
     }
+    // Confidence-weighted ranking: ghost-sample players (Peters with
+    // 4 BIP and one lucky barrel) can't ride a tiny sample to top 5.
+    // A player's composite gets scaled by how much we trust the sample:
+    //   10+ recent BIP → full credit (100% of composite)
+    //   5 BIP  → 50% credit
+    //   0 BIP  → 0% credit
+    // This doesn't filter anyone out — they still show, just ranked
+    // fairly against their actual sample size.
+    const adjustedScore = (p: typeof all[number]) => {
+      const s = p.player.scores[lookback];
+      if (!s) return 0;
+      const abs = s.recent_abs?.length ?? 0;
+      const reliability = Math.min(1, abs / 10);
+      return s.composite * reliability;
+    };
     return all.sort((a, b) => {
-      const diff =
-        (b.player.scores[lookback]?.composite ?? 0) -
-        (a.player.scores[lookback]?.composite ?? 0);
+      const diff = adjustedScore(b) - adjustedScore(a);
       if (diff !== 0) return diff;
       return a.player.name.localeCompare(b.player.name);
     });

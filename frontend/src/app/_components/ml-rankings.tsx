@@ -88,10 +88,17 @@ export function MLRankings({
         }
       }
     }
+    // Same confidence-weighted ranking as HR Rankings so tiny-sample
+    // players can't fake their way to the top.
+    const adjustedScore = (pair: typeof all[number]) => {
+      const s = pair.player.scores[lookback];
+      if (!s) return 0;
+      const abs = s.recent_abs?.length ?? 0;
+      const reliability = Math.min(1, abs / 10);
+      return mlComposite(pair.player, lookback, mlWeights) * reliability;
+    };
     return all.sort((a, b) => {
-      const diff =
-        mlComposite(b.player, lookback, mlWeights) -
-        mlComposite(a.player, lookback, mlWeights);
+      const diff = adjustedScore(b) - adjustedScore(a);
       if (diff !== 0) return diff;
       return a.player.name.localeCompare(b.player.name);
     });
