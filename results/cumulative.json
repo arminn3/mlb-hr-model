@@ -7264,7 +7264,7 @@
     "date": "2026-04-11",
     "total_players_ranked": 269,
     "total_hrs_hit": 34,
-    "total_near_hrs": 0,
+    "total_near_hrs": 10,
     "model_hits": 31,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -7313,7 +7313,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 10,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -7349,18 +7349,18 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 8,
+        "rate": 26.7
       },
       "all": {
         "total": 269,
-        "hits": 31,
-        "rate": 11.5
+        "hits": 41,
+        "rate": 15.2
       }
     },
     "avg_composite_hr_hitters": 0.446,
-    "avg_composite_non_hitters": 0.341,
-    "composite_separation": 0.105,
+    "avg_composite_non_hitters": 0.338,
+    "composite_separation": 0.108,
     "hr_hitters": [
       {
         "name": "Jordan Walker",
@@ -7799,8 +7799,197 @@
         "matchup": "SF@BAL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Colson Montgomery",
+        "rank": 28,
+        "composite": 0.672,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "CWS@KC"
+      },
+      {
+        "name": "Byron Buxton",
+        "rank": 37,
+        "composite": 0.642,
+        "opp_pitcher": "Eric Lauer",
+        "matchup": "MIN@TOR"
+      },
+      {
+        "name": "Bryson Stott",
+        "rank": 53,
+        "composite": 0.595,
+        "opp_pitcher": "Brandon Pfaadt",
+        "matchup": "AZ@PHI"
+      },
+      {
+        "name": "Matt Olson",
+        "rank": 84,
+        "composite": 0.512,
+        "opp_pitcher": "Parker Messick",
+        "matchup": "CLE@ATL"
+      },
+      {
+        "name": "Taylor Trammell",
+        "rank": 98,
+        "composite": 0.469,
+        "opp_pitcher": "Luis Castillo",
+        "matchup": "HOU@SEA"
+      },
+      {
+        "name": "Otto Lopez",
+        "rank": 113,
+        "composite": 0.37,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "MIA@DET"
+      },
+      {
+        "name": "Cody Bellinger",
+        "rank": 137,
+        "composite": 0.251,
+        "opp_pitcher": "Nick Martinez",
+        "matchup": "NYY@TB"
+      },
+      {
+        "name": "Aaron Judge",
+        "rank": 171,
+        "composite": 0.2,
+        "opp_pitcher": "Nick Martinez",
+        "matchup": "NYY@TB"
+      },
+      {
+        "name": "Shea Langeliers",
+        "rank": 180,
+        "composite": 0.177,
+        "opp_pitcher": "Kodai Senga",
+        "matchup": "ATH@NYM"
+      },
+      {
+        "name": "Elly De La Cruz",
+        "rank": 182,
+        "composite": 0.175,
+        "opp_pitcher": "George Klassen",
+        "matchup": "LAA@CIN"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Matt Olson",
+        "ev": 101.7,
+        "angle": 26.0,
+        "distance": 388.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "Armstrong, Shawn"
+      },
+      {
+        "batter": "Jeremiah Jackson",
+        "ev": 103.3,
+        "angle": 27.0,
+        "distance": 366.0,
+        "hr_in_parks": 21,
+        "result": "double",
+        "pitcher": "Webb, Logan"
+      },
+      {
+        "batter": "Elly De La Cruz",
+        "ev": 102.5,
+        "angle": 26.0,
+        "distance": 331.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Zeferjahn, Ryan"
+      },
+      {
+        "batter": "Otto Lopez",
+        "ev": 106.3,
+        "angle": 21.0,
+        "distance": 384.0,
+        "hr_in_parks": 20,
+        "result": "double",
+        "pitcher": "Mize, Casey"
+      },
+      {
+        "batter": "Colson Montgomery",
+        "ev": 97.8,
+        "angle": 32.0,
+        "distance": 380.0,
+        "hr_in_parks": 8,
+        "result": "field_out",
+        "pitcher": "Wacha, Michael"
+      },
+      {
+        "batter": "Shohei Ohtani",
+        "ev": 117.8,
+        "angle": 27.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Leiter, Jack"
+      },
+      {
+        "batter": "Jake Bauers",
+        "ev": 98.9,
+        "angle": 36.0,
+        "distance": 376.0,
+        "hr_in_parks": 8,
+        "result": "field_out",
+        "pitcher": "Beeter, Clayton"
+      },
+      {
+        "batter": "Shea Langeliers",
+        "ev": 105.1,
+        "angle": 31.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Raley, Brooks"
+      },
+      {
+        "batter": "Bryson Stott",
+        "ev": 107.6,
+        "angle": 29.0,
+        "distance": 396.0,
+        "hr_in_parks": 4,
+        "result": "",
+        "pitcher": "Pfaadt, Brandon"
+      },
+      {
+        "batter": "Taylor Trammell",
+        "ev": 103.5,
+        "angle": 24.0,
+        "distance": 385.0,
+        "hr_in_parks": 21,
+        "result": "double",
+        "pitcher": "Castillo, Luis"
+      },
+      {
+        "batter": "Cody Bellinger",
+        "ev": 101.7,
+        "angle": 26.0,
+        "distance": 399.0,
+        "hr_in_parks": 23,
+        "result": "field_out",
+        "pitcher": "Bigge, Hunter"
+      },
+      {
+        "batter": "Aaron Judge",
+        "ev": 107.9,
+        "angle": 22.0,
+        "distance": 396.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Martinez, Nick"
+      },
+      {
+        "batter": "Byron Buxton",
+        "ev": 99.6,
+        "angle": 29.0,
+        "distance": 391.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Lauer, Eric"
+      }
+    ],
     "surprise_hrs": []
   }
 ]
