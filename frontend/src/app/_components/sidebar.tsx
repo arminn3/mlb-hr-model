@@ -1,9 +1,10 @@
 "use client";
 
-export type Page = "rankings" | "slate" | "environment" | "projections" | "slips" | "bvp" | "gems" | "live" | "results" | "methodology" | "matchup";
+export type Page = "rankings" | "ml" | "slate" | "environment" | "projections" | "slips" | "bvp" | "gems" | "live" | "results" | "methodology" | "matchup";
 
 const NAV_ITEMS: { key: Page; label: string; icon: string }[] = [
   { key: "rankings", label: "HR Rankings", icon: "chart" },
+  { key: "ml", label: "ML Rankings", icon: "brain" },
   { key: "slate", label: "Game Slate", icon: "games" },
   { key: "projections", label: "Projections", icon: "target" },
   { key: "environment", label: "Environment", icon: "cloud" },
@@ -83,6 +84,12 @@ function Icon({ name }: { name: string }) {
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
       </svg>
     );
+  if (name === "brain")
+    return (
+      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      </svg>
+    );
   return null;
 }
 
@@ -130,7 +137,7 @@ export function Sidebar({
           Analysis
         </span>
         <div className="space-y-1 mb-5">
-          {(["rankings", "slate", "matchup", "gems", "projections", "environment", "live"] as const).map((key) => {
+          {(["rankings", "ml", "slate", "matchup", "gems", "projections", "environment", "live"] as const).map((key) => {
             const item = NAV_ITEMS.find(n => n.key === key)!;
             return <NavButton key={key} item={item} active={active} onChange={onChange} />;
           })}
