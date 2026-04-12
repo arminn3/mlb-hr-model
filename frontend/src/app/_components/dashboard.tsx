@@ -9,6 +9,7 @@ import { GameSection } from "./game-section";
 import { EnvironmentView } from "./environment-view";
 import { Methodology } from "./methodology";
 import { TopPicks } from "./top-picks";
+import { MLRankings } from "./ml-rankings";
 import { ResultsView } from "./results-view";
 import { MethodologyPage } from "./methodology-page";
 import { SlipGenerator } from "./slip-generator";
@@ -112,7 +113,7 @@ export function Dashboard() {
     setSidebarOpen(false); // close on mobile after selecting
   };
 
-  const pageTitle = activePage === "rankings" ? "HR Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "slips" ? "Slip Generator" : activePage === "bvp" ? "Batter vs Pitcher" : activePage === "environment" ? "Environment" : activePage === "gems" ? "Gem Finder" : activePage === "matchup" ? "Matchup Analysis" : activePage === "live" ? "Live Feed" : activePage === "results" ? "Results Log" : "How It Works";
+  const pageTitle = activePage === "rankings" ? "HR Rankings" : activePage === "ml" ? "ML Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "slips" ? "Slip Generator" : activePage === "bvp" ? "Batter vs Pitcher" : activePage === "environment" ? "Environment" : activePage === "gems" ? "Gem Finder" : activePage === "matchup" ? "Matchup Analysis" : activePage === "live" ? "Live Feed" : activePage === "results" ? "Results Log" : "How It Works";
 
   return (
     <div className="flex min-h-screen">
@@ -149,7 +150,7 @@ export function Dashboard() {
             </span>
           </div>
           <div className="flex items-center gap-2 md:gap-4">
-            {(activePage === "rankings" || activePage === "slate" || activePage === "slips" || activePage === "bvp" || activePage === "gems") && (
+            {(activePage === "rankings" || activePage === "ml" || activePage === "slate" || activePage === "slips" || activePage === "bvp" || activePage === "gems") && (
               <LookbackToggle value={lookback} onChange={setLookback} />
             )}
             <DatePicker currentDate={selectedDate} onChange={loadDate} />
@@ -158,6 +159,10 @@ export function Dashboard() {
 
         {/* Page content */}
         <main className="flex-1 p-4 md:p-8">
+          {activePage === "ml" && (
+            <MLRankings games={data.games} lookback={lookback} />
+          )}
+
           {activePage === "rankings" && (
             <TopPicks games={data.games} lookback={lookback} />
           )}

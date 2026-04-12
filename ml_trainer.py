@@ -275,15 +275,16 @@ def train_model(X: np.ndarray, y: np.ndarray, feature_names: list[str]):
     # DO NOT auto-save weights — user decides when to apply
     print(f"\n  Weights NOT auto-applied. User must manually update results/ml_weights.json.")
 
-    return model, scaler, coefs, weights
+    return model, scaler, coefs, weights, cat_weights
 
 
-def save_ml_report(feature_names, coefs, weights, X, y):
+def save_ml_report(feature_names, coefs, weights, X, y, cat_weights=None):
     """Save the ML analysis to a JSON file for the frontend."""
     report = {
         "trained_on": len(X),
         "hr_count": int(y.sum()),
         "hr_rate": round(float(y.mean()) * 100, 2),
+        "category_weights": cat_weights or {},
         "features": [
             {"name": feature_names[i], "coefficient": round(float(coefs[i]), 4), "weight_pct": round(float(weights[i]) * 100, 1)}
             for i in range(len(feature_names))
@@ -316,8 +317,8 @@ def main():
         import subprocess
         subprocess.run(["pip3", "install", "--user", "scikit-learn"], check=True)
 
-    model, scaler, coefs, weights = train_model(X, y, feature_names)
-    save_ml_report(feature_names, coefs, weights, X, y)
+    model, scaler, coefs, weights, cat_weights = train_model(X, y, feature_names)
+    save_ml_report(feature_names, coefs, weights, X, y, cat_weights)
 
 
 if __name__ == "__main__":
