@@ -10,6 +10,7 @@ import { EnvironmentView } from "./environment-view";
 import { Methodology } from "./methodology";
 import { TopPicks } from "./top-picks";
 import { MLRankings } from "./ml-rankings";
+import { KRankings } from "./k-rankings";
 import { ResultsView } from "./results-view";
 import { MethodologyPage } from "./methodology-page";
 import { SlipGenerator } from "./slip-generator";
@@ -113,7 +114,7 @@ export function Dashboard() {
     setSidebarOpen(false); // close on mobile after selecting
   };
 
-  const pageTitle = activePage === "rankings" ? "HR Rankings" : activePage === "ml" ? "ML Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "slips" ? "Slip Generator" : activePage === "bvp" ? "Batter vs Pitcher" : activePage === "environment" ? "Environment" : activePage === "gems" ? "Gem Finder" : activePage === "matchup" ? "Matchup Analysis" : activePage === "live" ? "Live Feed" : activePage === "results" ? "Results Log" : "How It Works";
+  const pageTitle = activePage === "rankings" ? "HR Rankings" : activePage === "ml" ? "ML Rankings" : activePage === "kprops" ? "K Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "slips" ? "Slip Generator" : activePage === "bvp" ? "Batter vs Pitcher" : activePage === "environment" ? "Environment" : activePage === "gems" ? "Gem Finder" : activePage === "matchup" ? "Matchup Analysis" : activePage === "live" ? "Live Feed" : activePage === "results" ? "Results Log" : "How It Works";
 
   return (
     <div className="flex min-h-screen">
@@ -162,6 +163,8 @@ export function Dashboard() {
           {activePage === "ml" && (
             <MLRankings games={data.games} lookback={lookback} />
           )}
+
+          {activePage === "kprops" && <KRankings />}
 
           {activePage === "rankings" && (
             <TopPicks games={data.games} lookback={lookback} />
