@@ -1,11 +1,10 @@
 "use client";
 
-export type Page = "rankings" | "ml" | "kprops" | "slate" | "environment" | "projections" | "slips" | "bvp" | "gems" | "live" | "results" | "methodology" | "matchup";
+export type Page = "rankings" | "ml" | "slate" | "environment" | "projections" | "slips" | "bvp" | "gems" | "live" | "results" | "methodology" | "matchup";
 
 const NAV_ITEMS: { key: Page; label: string; icon: string }[] = [
   { key: "rankings", label: "HR Rankings", icon: "chart" },
   { key: "ml", label: "ML Rankings", icon: "brain" },
-  { key: "kprops", label: "K Rankings", icon: "k" },
   { key: "slate", label: "Game Slate", icon: "games" },
   { key: "projections", label: "Projections", icon: "target" },
   { key: "environment", label: "Environment", icon: "cloud" },
@@ -144,7 +143,7 @@ export function Sidebar({
           Analysis
         </span>
         <div className="space-y-1 mb-5">
-          {(["rankings", "ml", "kprops", "slate", "matchup", "gems", "projections", "environment", "live"] as const).map((key) => {
+          {(["rankings", "ml", "slate", "matchup", "gems", "projections", "environment", "live"] as const).map((key) => {
             const item = NAV_ITEMS.find(n => n.key === key)!;
             return <NavButton key={key} item={item} active={active} onChange={onChange} />;
           })}
