@@ -19,9 +19,15 @@ import { LiveFeed } from "./live-feed";
 import { ProjectionsView } from "./projections-view";
 import { MatchupAnalysis } from "./matchup-analysis";
 
-// Set to true to show a maintenance/error page to all visitors.
-// Flip to false to restore normal site.
-const MAINTENANCE_MODE = true;
+// When MAINTENANCE_MODE_PROD is true, show the error page ONLY on
+// the production Vercel deployment. Local dev (`npm run dev`) and
+// preview deploys are unaffected. Vercel auto-sets
+// NEXT_PUBLIC_VERCEL_ENV to "production" / "preview" / undefined.
+const MAINTENANCE_MODE_PROD = true;
+const IS_PROD =
+  typeof process !== "undefined" &&
+  process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
+const MAINTENANCE_MODE = MAINTENANCE_MODE_PROD && IS_PROD;
 
 function MaintenancePage() {
   return (
