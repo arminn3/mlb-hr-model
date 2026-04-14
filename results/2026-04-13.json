@@ -2,7 +2,7 @@
   "date": "2026-04-13",
   "total_players_ranked": 179,
   "total_hrs_hit": 37,
-  "total_near_hrs": 0,
+  "total_near_hrs": 16,
   "model_hits": 27,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 16,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -82,23 +82,23 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 5,
+      "rate": 25.0
     },
     "top_30": {
       "total": 30,
-      "hits": 4,
-      "rate": 13.3
+      "hits": 6,
+      "rate": 20.0
     },
     "all": {
       "total": 179,
-      "hits": 27,
-      "rate": 15.1
+      "hits": 43,
+      "rate": 24.0
     }
   },
   "avg_composite_hr_hitters": 0.363,
-  "avg_composite_non_hitters": 0.336,
-  "composite_separation": 0.027,
+  "avg_composite_non_hitters": 0.334,
+  "composite_separation": 0.029,
   "hr_hitters": [
     {
       "name": "Mike Trout",
@@ -481,8 +481,275 @@
       "matchup": "NYM@LAD"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Corey Seager",
+      "rank": 17,
+      "composite": 0.693,
+      "opp_pitcher": "Luis Severino",
+      "matchup": "TEX@ATH"
+    },
+    {
+      "name": "Randal Grichuk",
+      "rank": 26,
+      "composite": 0.65,
+      "opp_pitcher": "Yusei Kikuchi",
+      "matchup": "LAA@NYY"
+    },
+    {
+      "name": "Ryan O'Hearn",
+      "rank": 35,
+      "composite": 0.601,
+      "opp_pitcher": "Cade Cavalli",
+      "matchup": "WSH@PIT"
+    },
+    {
+      "name": "Alec Burleson",
+      "rank": 41,
+      "composite": 0.586,
+      "opp_pitcher": "Gavin Williams",
+      "matchup": "CLE@STL"
+    },
+    {
+      "name": "Jos\u00e9 Ram\u00edrez",
+      "rank": 56,
+      "composite": 0.499,
+      "opp_pitcher": "Matthew Liberatore",
+      "matchup": "CLE@STL"
+    },
+    {
+      "name": "Colton Cowser",
+      "rank": 59,
+      "composite": 0.488,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "AZ@BAL"
+    },
+    {
+      "name": "Ian Happ",
+      "rank": 69,
+      "composite": 0.459,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "CHC@PHI"
+    },
+    {
+      "name": "Roman Anthony",
+      "rank": 82,
+      "composite": 0.26,
+      "opp_pitcher": "Bailey Ober",
+      "matchup": "BOS@MIN"
+    },
+    {
+      "name": "Cam Smith",
+      "rank": 93,
+      "composite": 0.232,
+      "opp_pitcher": "George Kirby",
+      "matchup": "HOU@SEA"
+    },
+    {
+      "name": "Giancarlo Stanton",
+      "rank": 100,
+      "composite": 0.203,
+      "opp_pitcher": "Yusei Kikuchi",
+      "matchup": "LAA@NYY"
+    },
+    {
+      "name": "Cal Raleigh",
+      "rank": 106,
+      "composite": 0.178,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "HOU@SEA"
+    },
+    {
+      "name": "Trevor Story",
+      "rank": 109,
+      "composite": 0.169,
+      "opp_pitcher": "Bailey Ober",
+      "matchup": "BOS@MIN"
+    },
+    {
+      "name": "Brendan Donovan",
+      "rank": 111,
+      "composite": 0.16,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "HOU@SEA"
+    },
+    {
+      "name": "Amed Rosario",
+      "rank": 127,
+      "composite": 0.14,
+      "opp_pitcher": "Yusei Kikuchi",
+      "matchup": "LAA@NYY"
+    },
+    {
+      "name": "Alec Bohm",
+      "rank": 153,
+      "composite": 0.117,
+      "opp_pitcher": "Javier Assad",
+      "matchup": "CHC@PHI"
+    },
+    {
+      "name": "Josh Bell",
+      "rank": 167,
+      "composite": 0.107,
+      "opp_pitcher": "Garrett Crochet",
+      "matchup": "BOS@MIN"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Corey Seager",
+      "ev": 99.7,
+      "angle": 33.0,
+      "distance": 376.0,
+      "hr_in_parks": 22,
+      "result": "field_out",
+      "pitcher": "Severino, Luis"
+    },
+    {
+      "batter": "Colton Cowser",
+      "ev": 109.8,
+      "angle": 35.0,
+      "distance": 397.0,
+      "hr_in_parks": 4,
+      "result": "",
+      "pitcher": "Nelson, Ryne"
+    },
+    {
+      "batter": "Trevor Story",
+      "ev": 105.6,
+      "angle": 37.0,
+      "distance": 393.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Ober, Bailey"
+    },
+    {
+      "batter": "Josh Bell",
+      "ev": 102.8,
+      "angle": 23.0,
+      "distance": 394.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Crochet, Garrett"
+    },
+    {
+      "batter": "Roman Anthony",
+      "ev": 99.2,
+      "angle": 30.0,
+      "distance": 386.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Ober, Bailey"
+    },
+    {
+      "batter": "Giancarlo Stanton",
+      "ev": 110.5,
+      "angle": 20.0,
+      "distance": 411.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Anderson, Shaun"
+    },
+    {
+      "batter": "Mike Trout",
+      "ev": 106.8,
+      "angle": 38.0,
+      "distance": 391.0,
+      "hr_in_parks": 24,
+      "result": "field_out",
+      "pitcher": "Cruz, Fernando"
+    },
+    {
+      "batter": "Randal Grichuk",
+      "ev": 106.9,
+      "angle": 30.0,
+      "distance": 411.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Kikuchi, Yusei"
+    },
+    {
+      "batter": "Amed Rosario",
+      "ev": 104.8,
+      "angle": 21.0,
+      "distance": 389.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Kikuchi, Yusei"
+    },
+    {
+      "batter": "Ian Happ",
+      "ev": 100.5,
+      "angle": 31.0,
+      "distance": 393.0,
+      "hr_in_parks": 1,
+      "result": "double",
+      "pitcher": "Johnson, Seth"
+    },
+    {
+      "batter": "Alec Bohm",
+      "ev": 99.7,
+      "angle": 23.0,
+      "distance": 391.0,
+      "hr_in_parks": 1,
+      "result": "sac_fly",
+      "pitcher": "Assad, Javier"
+    },
+    {
+      "batter": "Ryan O'Hearn",
+      "ev": 101.7,
+      "angle": 28.0,
+      "distance": 401.0,
+      "hr_in_parks": 19,
+      "result": "double",
+      "pitcher": "Rutledge, Jackson"
+    },
+    {
+      "batter": "Cam Smith",
+      "ev": 103.0,
+      "angle": 29.0,
+      "distance": 369.0,
+      "hr_in_parks": 18,
+      "result": "field_out",
+      "pitcher": "Wilcox, Cole"
+    },
+    {
+      "batter": "Cal Raleigh",
+      "ev": 105.9,
+      "angle": 33.0,
+      "distance": 391.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "France, J.P."
+    },
+    {
+      "batter": "Brendan Donovan",
+      "ev": 97.0,
+      "angle": 30.0,
+      "distance": 381.0,
+      "hr_in_parks": 21,
+      "result": "field_out",
+      "pitcher": "Burrows, Mike"
+    },
+    {
+      "batter": "Jos\u00e9 Ram\u00edrez",
+      "ev": 97.3,
+      "angle": 25.0,
+      "distance": 381.0,
+      "hr_in_parks": 23,
+      "result": "double",
+      "pitcher": "Fernandez, Ryan"
+    },
+    {
+      "batter": "Alec Burleson",
+      "ev": 103.4,
+      "angle": 36.0,
+      "distance": 388.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Williams, Gavin"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Trent Grisham",
