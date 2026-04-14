@@ -63,11 +63,11 @@ jobs:
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
 
-      # ML trainer disabled — training data still contaminated from old model bugs
-      # Re-enable once we have 7+ days of clean data
-      # - name: Run ML trainer
-      #   if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
-      #   run: python ml_trainer.py || true
+      # ML trainer writes to results/ml_analysis.json only.
+      # HR Rankings still uses static config.py weights — not affected.
+      - name: Run ML trainer
+        if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
+        run: python ml_trainer.py || true
 
       - name: Run projection trainer
         if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
