@@ -8789,5 +8789,503 @@
         "description": "Gary S\u00e1nchez homers (4) on a fly ball to left center field. Brice Turang scores. William Contreras scores."
       }
     ]
+  },
+  {
+    "date": "2026-04-13",
+    "total_players_ranked": 179,
+    "total_hrs_hit": 37,
+    "total_near_hrs": 0,
+    "model_hits": 27,
+    "best_lookback": "L10",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 4,
+          "rate": 20.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 4,
+          "rate": 13.3
+        },
+        "all": {
+          "total": 179,
+          "hits": 27,
+          "rate": 15.1
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 5,
+          "rate": 25.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 9,
+          "rate": 30.0
+        },
+        "all": {
+          "total": 179,
+          "hits": 27,
+          "rate": 15.1
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 179,
+        "hits": 27,
+        "rate": 15.1
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 179,
+        "hits": 27,
+        "rate": 15.1
+      }
+    },
+    "avg_composite_hr_hitters": 0.363,
+    "avg_composite_non_hitters": 0.336,
+    "composite_separation": 0.027,
+    "hr_hitters": [
+      {
+        "name": "Mike Trout",
+        "rank": 6,
+        "composite": 0.763,
+        "opp_pitcher": "Will Warren",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Ryan Jeffers",
+        "rank": 11,
+        "composite": 0.713,
+        "opp_pitcher": "Garrett Crochet",
+        "matchup": "BOS@MIN"
+      },
+      {
+        "name": "Dansby Swanson",
+        "rank": 16,
+        "composite": 0.693,
+        "opp_pitcher": "Cristopher S\u00e1nchez",
+        "matchup": "CHC@PHI"
+      },
+      {
+        "name": "Connor Norby",
+        "rank": 20,
+        "composite": 0.672,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "MIA@ATL"
+      },
+      {
+        "name": "Pete Alonso",
+        "rank": 32,
+        "composite": 0.61,
+        "opp_pitcher": "Ryne Nelson",
+        "matchup": "AZ@BAL"
+      },
+      {
+        "name": "Aaron Judge",
+        "rank": 33,
+        "composite": 0.604,
+        "opp_pitcher": "Yusei Kikuchi",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Jarren Duran",
+        "rank": 36,
+        "composite": 0.599,
+        "opp_pitcher": "Bailey Ober",
+        "matchup": "BOS@MIN"
+      },
+      {
+        "name": "Kyle Schwarber",
+        "rank": 49,
+        "composite": 0.548,
+        "opp_pitcher": "Javier Assad",
+        "matchup": "CHC@PHI"
+      },
+      {
+        "name": "Byron Buxton",
+        "rank": 51,
+        "composite": 0.529,
+        "opp_pitcher": "Garrett Crochet",
+        "matchup": "BOS@MIN"
+      },
+      {
+        "name": "Brandon Lowe",
+        "rank": 53,
+        "composite": 0.509,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "WSH@PIT"
+      },
+      {
+        "name": "Jeremiah Jackson",
+        "rank": 57,
+        "composite": 0.494,
+        "opp_pitcher": "Ryne Nelson",
+        "matchup": "AZ@BAL"
+      },
+      {
+        "name": "Jordan Walker",
+        "rank": 58,
+        "composite": 0.492,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "CLE@STL"
+      },
+      {
+        "name": "Jacob Young",
+        "rank": 73,
+        "composite": 0.414,
+        "opp_pitcher": "Paul Skenes",
+        "matchup": "WSH@PIT"
+      },
+      {
+        "name": "Nolan Arenado",
+        "rank": 83,
+        "composite": 0.259,
+        "opp_pitcher": "Dean Kremer",
+        "matchup": "AZ@BAL"
+      },
+      {
+        "name": "Jos\u00e9 Caballero",
+        "rank": 86,
+        "composite": 0.249,
+        "opp_pitcher": "Yusei Kikuchi",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Lawrence Butler",
+        "rank": 97,
+        "composite": 0.218,
+        "opp_pitcher": "Nathan Eovaldi",
+        "matchup": "TEX@ATH"
+      },
+      {
+        "name": "Josh Naylor",
+        "rank": 104,
+        "composite": 0.183,
+        "opp_pitcher": "Mike Burrows",
+        "matchup": "HOU@SEA"
+      },
+      {
+        "name": "Ketel Marte",
+        "rank": 107,
+        "composite": 0.177,
+        "opp_pitcher": "Dean Kremer",
+        "matchup": "AZ@BAL"
+      },
+      {
+        "name": "Angel Mart\u00ednez",
+        "rank": 116,
+        "composite": 0.152,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "CLE@STL"
+      },
+      {
+        "name": "Spencer Horwitz",
+        "rank": 123,
+        "composite": 0.143,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "WSH@PIT"
+      },
+      {
+        "name": "Agust\u00edn Ram\u00edrez",
+        "rank": 129,
+        "composite": 0.138,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "MIA@ATL"
+      },
+      {
+        "name": "Victor Caratini",
+        "rank": 141,
+        "composite": 0.128,
+        "opp_pitcher": "Garrett Crochet",
+        "matchup": "BOS@MIN"
+      },
+      {
+        "name": "Brayan Rocchio",
+        "rank": 145,
+        "composite": 0.124,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "CLE@STL"
+      },
+      {
+        "name": "CJ Abrams",
+        "rank": 157,
+        "composite": 0.115,
+        "opp_pitcher": "Paul Skenes",
+        "matchup": "WSH@PIT"
+      },
+      {
+        "name": "Jake Burger",
+        "rank": 162,
+        "composite": 0.112,
+        "opp_pitcher": "Luis Severino",
+        "matchup": "TEX@ATH"
+      },
+      {
+        "name": "Andy Pages",
+        "rank": 175,
+        "composite": 0.086,
+        "opp_pitcher": "David Peterson",
+        "matchup": "NYM@LAD"
+      },
+      {
+        "name": "Ryan Kreidler",
+        "rank": 177,
+        "composite": 0.074,
+        "opp_pitcher": "Garrett Crochet",
+        "matchup": "BOS@MIN"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Aaron Judge",
+        "rank": 7,
+        "composite": 0.698,
+        "opp_pitcher": "Yusei Kikuchi",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Byron Buxton",
+        "rank": 12,
+        "composite": 0.651,
+        "opp_pitcher": "Garrett Crochet",
+        "matchup": "BOS@MIN"
+      },
+      {
+        "name": "Connor Norby",
+        "rank": 15,
+        "composite": 0.645,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "MIA@ATL"
+      },
+      {
+        "name": "Brandon Lowe",
+        "rank": 16,
+        "composite": 0.639,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "WSH@PIT"
+      },
+      {
+        "name": "Mike Trout",
+        "rank": 17,
+        "composite": 0.639,
+        "opp_pitcher": "Will Warren",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Pete Alonso",
+        "rank": 24,
+        "composite": 0.604,
+        "opp_pitcher": "Ryne Nelson",
+        "matchup": "AZ@BAL"
+      },
+      {
+        "name": "Kyle Schwarber",
+        "rank": 28,
+        "composite": 0.6,
+        "opp_pitcher": "Javier Assad",
+        "matchup": "CHC@PHI"
+      },
+      {
+        "name": "Ryan Jeffers",
+        "rank": 29,
+        "composite": 0.594,
+        "opp_pitcher": "Garrett Crochet",
+        "matchup": "BOS@MIN"
+      },
+      {
+        "name": "Jordan Walker",
+        "rank": 30,
+        "composite": 0.593,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "CLE@STL"
+      },
+      {
+        "name": "Dansby Swanson",
+        "rank": 35,
+        "composite": 0.563,
+        "opp_pitcher": "Cristopher S\u00e1nchez",
+        "matchup": "CHC@PHI"
+      },
+      {
+        "name": "Lawrence Butler",
+        "rank": 58,
+        "composite": 0.43,
+        "opp_pitcher": "Nathan Eovaldi",
+        "matchup": "TEX@ATH"
+      },
+      {
+        "name": "Jos\u00e9 Caballero",
+        "rank": 63,
+        "composite": 0.414,
+        "opp_pitcher": "Yusei Kikuchi",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Brayan Rocchio",
+        "rank": 69,
+        "composite": 0.382,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "CLE@STL"
+      },
+      {
+        "name": "Jeremiah Jackson",
+        "rank": 70,
+        "composite": 0.376,
+        "opp_pitcher": "Ryne Nelson",
+        "matchup": "AZ@BAL"
+      },
+      {
+        "name": "Jarren Duran",
+        "rank": 87,
+        "composite": 0.321,
+        "opp_pitcher": "Bailey Ober",
+        "matchup": "BOS@MIN"
+      },
+      {
+        "name": "CJ Abrams",
+        "rank": 106,
+        "composite": 0.28,
+        "opp_pitcher": "Paul Skenes",
+        "matchup": "WSH@PIT"
+      },
+      {
+        "name": "Ketel Marte",
+        "rank": 110,
+        "composite": 0.255,
+        "opp_pitcher": "Dean Kremer",
+        "matchup": "AZ@BAL"
+      },
+      {
+        "name": "Jacob Young",
+        "rank": 111,
+        "composite": 0.249,
+        "opp_pitcher": "Paul Skenes",
+        "matchup": "WSH@PIT"
+      },
+      {
+        "name": "Angel Mart\u00ednez",
+        "rank": 115,
+        "composite": 0.246,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "CLE@STL"
+      },
+      {
+        "name": "Nolan Arenado",
+        "rank": 118,
+        "composite": 0.212,
+        "opp_pitcher": "Dean Kremer",
+        "matchup": "AZ@BAL"
+      },
+      {
+        "name": "Victor Caratini",
+        "rank": 124,
+        "composite": 0.198,
+        "opp_pitcher": "Garrett Crochet",
+        "matchup": "BOS@MIN"
+      },
+      {
+        "name": "Spencer Horwitz",
+        "rank": 134,
+        "composite": 0.166,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "WSH@PIT"
+      },
+      {
+        "name": "Jake Burger",
+        "rank": 136,
+        "composite": 0.159,
+        "opp_pitcher": "Luis Severino",
+        "matchup": "TEX@ATH"
+      },
+      {
+        "name": "Josh Naylor",
+        "rank": 138,
+        "composite": 0.157,
+        "opp_pitcher": "Mike Burrows",
+        "matchup": "HOU@SEA"
+      },
+      {
+        "name": "Agust\u00edn Ram\u00edrez",
+        "rank": 150,
+        "composite": 0.138,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "MIA@ATL"
+      },
+      {
+        "name": "Ryan Kreidler",
+        "rank": 174,
+        "composite": 0.089,
+        "opp_pitcher": "Garrett Crochet",
+        "matchup": "BOS@MIN"
+      },
+      {
+        "name": "Andy Pages",
+        "rank": 176,
+        "composite": 0.086,
+        "opp_pitcher": "David Peterson",
+        "matchup": "NYM@LAD"
+      }
+    ],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [
+      {
+        "name": "Trent Grisham",
+        "pitcher": "Shaun Anderson",
+        "description": "Trent Grisham homers (1) on a fly ball to right center field. Giancarlo Stanton scores. Ben Rice scores."
+      },
+      {
+        "name": "Trent Grisham",
+        "pitcher": "Jordan Romano",
+        "description": "Trent Grisham homers (2) on a fly ball to right center field. Jazz Chisholm Jr. scores."
+      }
+    ]
   }
 ]
