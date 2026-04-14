@@ -152,8 +152,8 @@ function buildOptimalSlips(
   selected: SlipPlayer[],
   legCount: 2 | 3,
   sortMode: SortMode
-): Slip[] {
-  if (selected.length < legCount) return [];
+): { slips: Slip[]; leftovers: SlipPlayer[] } {
+  if (selected.length < legCount) return { slips: [], leftovers: [...selected] };
 
   // Group players by game
   const byGame: Record<number, SlipPlayer[]> = {};
@@ -256,6 +256,7 @@ function buildOptimalSlips(
 
   // Pass 2: Remaining players get grouped together (may be same game)
   const remaining = sorted.filter((p) => !used.has(p.name));
+  const leftovers: SlipPlayer[] = [];
   for (let i = 0; i < remaining.length; i += legCount) {
     const group = remaining.slice(i, i + legCount);
     if (group.length === legCount) {
@@ -264,10 +265,12 @@ function buildOptimalSlips(
         avgComposite: group.reduce((s, p) => s + p.composite, 0) / legCount,
         gameCount: new Set(group.map((p) => p.gamePk)).size,
       });
+    } else {
+      leftovers.push(...group);
     }
   }
 
-  return slips;
+  return { slips, leftovers };
 }
 
 function PlayerPickRow({
@@ -359,10 +362,12 @@ export function SlipGenerator({
     [selectedPlayers, legCount]
   );
 
-  const optimalSlips = useMemo(
+  const optimalResult = useMemo(
     () => buildOptimalSlips(selectedPlayers, legCount, sortMode),
     [selectedPlayers, legCount, sortMode]
   );
+  const optimalSlips = optimalResult.slips;
+  const optimalLeftovers = optimalResult.leftovers;
 
   const togglePlayer = (name: string) => {
     setSelectedNames((prev) => {
@@ -474,6 +479,24 @@ export function SlipGenerator({
               {s.label}
             </button>
           ))}
+        </div>
+      )}
+
+      {/* Leftover notice for optimal mode */}
+      {mode === "optimal" && optimalLeftovers.length > 0 && (
+        <div className="mb-4 rounded-lg border border-accent-yellow/30 bg-accent-yellow/5 px-3 py-2">
+          <div className="text-[11px] font-semibold text-accent-yellow uppercase tracking-wider mb-1">
+            {optimalLeftovers.length} player{optimalLeftovers.length === 1 ? "" : "s"} left out
+          </div>
+          <div className="text-xs text-foreground">
+            {selectedNames.size} selected doesn&apos;t divide evenly into {legCount === 2 ? "duos" : "trios"}. Not included:{" "}
+            <span className="font-medium">
+              {optimalLeftovers.map((p) => p.name).join(", ")}
+            </span>
+          </div>
+          <div className="text-[10px] text-muted mt-1">
+            Add {legCount - optimalLeftovers.length} more or remove {optimalLeftovers.length} to use everyone.
+          </div>
         </div>
       )}
 
