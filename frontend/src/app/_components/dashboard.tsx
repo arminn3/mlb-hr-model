@@ -19,10 +19,38 @@ import { LiveFeed } from "./live-feed";
 import { ProjectionsView } from "./projections-view";
 import { MatchupAnalysis } from "./matchup-analysis";
 
+// Set to true to show a maintenance/error page to all visitors.
+// Flip to false to restore normal site.
+const MAINTENANCE_MODE = true;
+
+function MaintenancePage() {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      <div className="bg-card/50 border border-card-border rounded-xl p-8 max-w-md text-center">
+        <div className="mb-4">
+          <svg className="w-12 h-12 mx-auto text-accent-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+          </svg>
+        </div>
+        <h2 className="text-lg font-semibold text-foreground mb-2">
+          Service Temporarily Unavailable
+        </h2>
+        <p className="text-sm text-muted">
+          We&apos;re experiencing technical difficulties. Please check back shortly.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export function Dashboard() {
   const [data, setData] = useState<ModelData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  if (MAINTENANCE_MODE) {
+    return <MaintenancePage />;
+  }
 
   // Read initial state from URL hash: #page=rankings&date=2026-04-03&lookback=L5
   function getHashParam(key: string, fallback: string): string {
