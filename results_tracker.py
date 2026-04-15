@@ -109,18 +109,19 @@ def get_near_hrs(game_date: date) -> list[dict]:
         if df is None or df.empty:
             return []
 
-        # Filter to near-HR batted balls — two criteria:
-        # 1. Hard hit fly balls: 95+ EV, 20-40 degree angle, not a HR
-        # 2. Deep fly balls: 350+ feet distance, not a HR
-        # Convert to numpy to avoid pandas NA ambiguity
+        # Filter to near-HR batted balls:
+        # 1. Hard contact in HR launch window: 95+ EV, 22-38° angle
+        # 2. Hard contact that went deep: 95+ EV, 360+ ft, angle > 10°.
+        #    Catches off-the-wall doubles (Happ 103/20°/368ft type) and
+        #    caught-at-the-track flyouts that were one gust from leaving.
         import numpy as np
         ev = pd.to_numeric(df["launch_speed"], errors="coerce").fillna(0).values
         la = pd.to_numeric(df["launch_angle"], errors="coerce").fillna(0).values
         dist = pd.to_numeric(df["hit_distance_sc"], errors="coerce").fillna(0).values
         is_hr = df["events"].astype(str).values == "home_run"
 
-        hard_fly = (ev >= 100) & (la >= 25) & (la <= 35) & ~is_hr
-        deep_fly = (dist >= 370) & ~is_hr
+        hard_fly = (ev >= 95) & (la >= 22) & (la <= 38) & ~is_hr
+        deep_fly = (ev >= 95) & (dist >= 360) & (la > 10) & ~is_hr
         mask = hard_fly | deep_fly
         near = df[mask].copy()
 

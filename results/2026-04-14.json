@@ -2,7 +2,7 @@
   "date": "2026-04-14",
   "total_players_ranked": 260,
   "total_hrs_hit": 34,
-  "total_near_hrs": 10,
+  "total_near_hrs": 17,
   "model_hits": 31,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 10,
+  "model_near_hits": 17,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -87,18 +87,18 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 4,
-      "rate": 13.3
+      "hits": 5,
+      "rate": 16.7
     },
     "all": {
       "total": 260,
-      "hits": 41,
-      "rate": 15.8
+      "hits": 48,
+      "rate": 18.5
     }
   },
   "avg_composite_hr_hitters": 0.329,
-  "avg_composite_non_hitters": 0.324,
-  "composite_separation": 0.005,
+  "avg_composite_non_hitters": 0.326,
+  "composite_separation": 0.003,
   "hr_hitters": [
     {
       "name": "Jos\u00e9 Ram\u00edrez",
@@ -553,6 +553,13 @@
       "matchup": "SF@CIN"
     },
     {
+      "name": "Ian Happ",
+      "rank": 28,
+      "composite": 0.672,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "CHC@PHI"
+    },
+    {
       "name": "Vladimir Guerrero Jr.",
       "rank": 52,
       "composite": 0.544,
@@ -565,6 +572,34 @@
       "composite": 0.511,
       "opp_pitcher": "Michael McGreevy",
       "matchup": "CLE@STL"
+    },
+    {
+      "name": "Marcus Semien",
+      "rank": 111,
+      "composite": 0.281,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "NYM@LAD"
+    },
+    {
+      "name": "Konnor Griffin",
+      "rank": 117,
+      "composite": 0.268,
+      "opp_pitcher": "PJ Poulin",
+      "matchup": "WSH@PIT"
+    },
+    {
+      "name": "Francisco Alvarez",
+      "rank": 126,
+      "composite": 0.251,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "NYM@LAD"
+    },
+    {
+      "name": "Ram\u00f3n Laureano",
+      "rank": 158,
+      "composite": 0.176,
+      "opp_pitcher": "Bryan Woo",
+      "matchup": "SEA@SD"
     },
     {
       "name": "Kyle Manzardo",
@@ -581,11 +616,25 @@
       "matchup": "TEX@ATH"
     },
     {
+      "name": "Luke Raley",
+      "rank": 219,
+      "composite": 0.12,
+      "opp_pitcher": "Michael King",
+      "matchup": "SEA@SD"
+    },
+    {
       "name": "Jose Fernandez",
       "rank": 229,
       "composite": 0.114,
       "opp_pitcher": "Trevor Rogers",
       "matchup": "AZ@BAL"
+    },
+    {
+      "name": "Vinnie Pasquantino",
+      "rank": 241,
+      "composite": 0.101,
+      "opp_pitcher": "Framber Valdez",
+      "matchup": "KC@DET"
     },
     {
       "name": "Luis Matos",
@@ -647,6 +696,15 @@
       "pitcher": "Rogers, Trevor"
     },
     {
+      "batter": "Munetaka Murakami",
+      "ev": 96.9,
+      "angle": 24.0,
+      "distance": 321.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "McClanahan, Shane"
+    },
+    {
       "batter": "Nick Fortes",
       "ev": 109.4,
       "angle": 29.0,
@@ -674,6 +732,15 @@
       "pitcher": "Ray, Robbie"
     },
     {
+      "batter": "Vinnie Pasquantino",
+      "ev": 99.4,
+      "angle": 31.0,
+      "distance": 360.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Valdez, Framber"
+    },
+    {
       "batter": "Jake McCarthy",
       "ev": 101.5,
       "angle": 27.0,
@@ -681,6 +748,24 @@
       "hr_in_parks": 30,
       "result": "triple",
       "pitcher": "Gordon, Colton"
+    },
+    {
+      "batter": "Marcus Semien",
+      "ev": 101.9,
+      "angle": 36.0,
+      "distance": 361.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Yamamoto, Yoshinobu"
+    },
+    {
+      "batter": "Francisco Alvarez",
+      "ev": 96.0,
+      "angle": 29.0,
+      "distance": 337.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Yamamoto, Yoshinobu"
     },
     {
       "batter": "Vladimir Guerrero Jr.",
@@ -708,6 +793,51 @@
       "hr_in_parks": 14,
       "result": "single",
       "pitcher": "Gausman, Kevin"
+    },
+    {
+      "batter": "Ian Happ",
+      "ev": 103.2,
+      "angle": 20.0,
+      "distance": 368.0,
+      "hr_in_parks": 16,
+      "result": "double",
+      "pitcher": "Nola, Aaron"
+    },
+    {
+      "batter": "Konnor Griffin",
+      "ev": 105.3,
+      "angle": 22.0,
+      "distance": 361.0,
+      "hr_in_parks": 18,
+      "result": "double",
+      "pitcher": "Varland, Gus"
+    },
+    {
+      "batter": "Luke Raley",
+      "ev": 107.2,
+      "angle": 19.0,
+      "distance": 361.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "King, Michael"
+    },
+    {
+      "batter": "Ram\u00f3n Laureano",
+      "ev": 105.0,
+      "angle": 23.0,
+      "distance": 360.0,
+      "hr_in_parks": 27,
+      "result": "triple",
+      "pitcher": "Woo, Bryan"
+    },
+    {
+      "batter": "Daniel Schneemann",
+      "ev": 99.9,
+      "angle": 23.0,
+      "distance": 348.0,
+      "hr_in_parks": 11,
+      "result": "field_out",
+      "pitcher": "Stanek, Ryne"
     },
     {
       "batter": "Bo Naylor",
