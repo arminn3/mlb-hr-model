@@ -11,6 +11,7 @@ interface YesterdayPick {
   oppPitcher: string;
   mlScore: number;
   hitHR: boolean;
+  nearHR: boolean;
 }
 
 const FILTER_OPTIONS = [
@@ -82,12 +83,16 @@ export function MLRankings({
       fetch(`/data/${prevStr}.json`).then((r) => (r.ok ? r.json() : null)),
       fetch("/data/results/cumulative.json").then((r) => (r.ok ? r.json() : [])),
     ])
-      .then(([slate, cum]: [ModelData | null, Array<{ date: string; hr_hitters: Array<{ name: string }> }>]) => {
+      .then(([slate, cum]: [ModelData | null, Array<{ date: string; hr_hitters: Array<{ name: string }>; near_hr_hitters?: Array<{ name: string }>; near_hr_events?: Array<{ batter: string }> }>]) => {
         if (!slate) return;
         const dayReport = cum.find((x) => x.date === prevStr);
         const hrNames = new Set<string>(
           (dayReport?.hr_hitters ?? []).map((h) => h.name)
         );
+        const nearNames = new Set<string>([
+          ...(dayReport?.near_hr_hitters ?? []).map((h) => h.name),
+          ...(dayReport?.near_hr_events ?? []).map((h) => h.batter),
+        ]);
         const seen = new Set<string>();
         const allPicks: YesterdayPick[] = [];
         for (const game of slate.games ?? []) {
@@ -103,6 +108,7 @@ export function MLRankings({
               oppPitcher: player.opp_pitcher,
               mlScore: score * reliability,
               hitHR: hrNames.has(player.name),
+              nearHR: !hrNames.has(player.name) && nearNames.has(player.name),
             });
           }
         }
@@ -172,6 +178,9 @@ export function MLRankings({
   const yesterdayHits = yesterday
     ? yesterday.picks.filter((p) => p.hitHR).length
     : 0;
+  const yesterdayNears = yesterday
+    ? yesterday.picks.filter((p) => p.nearHR).length
+    : 0;
   const yesterdayTop10Hits = yesterday
     ? yesterday.picks.slice(0, 10).filter((p) => p.hitHR).length
     : 0;
@@ -201,6 +210,12 @@ export function MLRankings({
                   {yesterdayHits}/20
                 </div>
               </div>
+              <div className="text-right">
+                <div className="text-[10px] text-muted uppercase">Near HR</div>
+                <div className="font-mono font-bold text-accent-yellow">
+                  {yesterdayNears}
+                </div>
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5">
@@ -210,6 +225,8 @@ export function MLRankings({
                 className={`flex items-center gap-2 px-2.5 py-1.5 rounded text-xs ${
                   p.hitHR
                     ? "bg-accent-green/10 border border-accent-green/30"
+                    : p.nearHR
+                    ? "bg-accent-yellow/10 border border-accent-yellow/30"
                     : "bg-background/30 border border-transparent"
                 }`}
               >
@@ -218,10 +235,15 @@ export function MLRankings({
                 </span>
                 <span
                   className={`w-4 text-center shrink-0 ${
-                    p.hitHR ? "text-accent-green" : "text-muted/30"
+                    p.hitHR
+                      ? "text-accent-green"
+                      : p.nearHR
+                      ? "text-accent-yellow"
+                      : "text-muted/30"
                   }`}
+                  title={p.nearHR ? "Near HR" : p.hitHR ? "HR" : ""}
                 >
-                  {p.hitHR ? "\u2713" : "\u00b7"}
+                  {p.hitHR ? "\u2713" : p.nearHR ? "\u25d0" : "\u00b7"}
                 </span>
                 <span className="flex-1 min-w-0 truncate text-foreground font-medium">
                   {p.name}
