@@ -1,9 +1,17 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { GameData, LookbackKey, PlayerData } from "./types";
+import type { GameData, LookbackKey, PlayerData, ModelData } from "./types";
 import { RatingBadge } from "./rating-badge";
 import { ScoreBar } from "./score-bar";
+
+interface YesterdayPick {
+  name: string;
+  matchup: string;
+  oppPitcher: string;
+  mlScore: number;
+  hitHR: boolean;
+}
 
 const FILTER_OPTIONS = [
   { label: "Top 10", value: 10 },
@@ -48,13 +56,65 @@ function mlComposite(player: PlayerData, lb: LookbackKey, w: MlWeights): number 
 export function MLRankings({
   games,
   lookback,
+  currentDate,
 }: {
   games: GameData[];
   lookback: LookbackKey;
+  currentDate: string;
 }) {
   const [filter, setFilter] = useState<number>(10);
   const [mlWeights, setMlWeights] = useState<MlWeights>(FALLBACK_WEIGHTS);
   const [weightSource, setWeightSource] = useState<string>("fallback");
+  const [yesterday, setYesterday] = useState<{
+    date: string;
+    picks: YesterdayPick[];
+    totalHRs: number;
+  } | null>(null);
+
+  // Load yesterday's slate + HR hitters, score with current ML weights.
+  useEffect(() => {
+    if (!currentDate) return;
+    const [y, m, d] = currentDate.split("-").map(Number);
+    const prev = new Date(Date.UTC(y, m - 1, d - 1));
+    const prevStr = prev.toISOString().slice(0, 10);
+
+    Promise.all([
+      fetch(`/data/${prevStr}.json`).then((r) => (r.ok ? r.json() : null)),
+      fetch("/data/results/cumulative.json").then((r) => (r.ok ? r.json() : [])),
+    ])
+      .then(([slate, cum]: [ModelData | null, Array<{ date: string; hr_hitters: Array<{ name: string }> }>]) => {
+        if (!slate) return;
+        const dayReport = cum.find((x) => x.date === prevStr);
+        const hrNames = new Set<string>(
+          (dayReport?.hr_hitters ?? []).map((h) => h.name)
+        );
+        const seen = new Set<string>();
+        const allPicks: YesterdayPick[] = [];
+        for (const game of slate.games ?? []) {
+          for (const player of game.players ?? []) {
+            if (seen.has(player.name)) continue;
+            seen.add(player.name);
+            const score = mlComposite(player, lookback, mlWeights);
+            const abs = player.scores[lookback]?.recent_abs?.length ?? 0;
+            const reliability = Math.min(1, abs / 10);
+            allPicks.push({
+              name: player.name,
+              matchup: `${game.away_team}@${game.home_team}`,
+              oppPitcher: player.opp_pitcher,
+              mlScore: score * reliability,
+              hitHR: hrNames.has(player.name),
+            });
+          }
+        }
+        allPicks.sort((a, b) => b.mlScore - a.mlScore);
+        setYesterday({
+          date: prevStr,
+          picks: allPicks.slice(0, 20),
+          totalHRs: hrNames.size,
+        });
+      })
+      .catch(() => setYesterday(null));
+  }, [currentDate, lookback, mlWeights]);
 
   // Try to load ML-learned weights from the published analysis file.
   useEffect(() => {
@@ -109,7 +169,77 @@ export function MLRankings({
 
   const wPct = (n: number) => `${Math.round(n * 100)}%`;
 
+  const yesterdayHits = yesterday
+    ? yesterday.picks.filter((p) => p.hitHR).length
+    : 0;
+  const yesterdayTop10Hits = yesterday
+    ? yesterday.picks.slice(0, 10).filter((p) => p.hitHR).length
+    : 0;
+
   return (
+    <>
+      {yesterday && yesterday.picks.length > 0 && (
+        <div className="border border-card-border rounded-xl bg-card/30 p-5 mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
+                Yesterday&apos;s ML Picks — {yesterday.date}
+              </h3>
+              <p className="text-[11px] text-muted mt-0.5">
+                How these same ML weights would have ranked yesterday&apos;s slate.
+                {" "}Leaguewide: {yesterday.totalHRs} HRs hit.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 text-xs">
+              <div className="text-right">
+                <div className="text-[10px] text-muted uppercase">Top 10</div>
+                <div className="font-mono font-bold text-accent-green">
+                  {yesterdayTop10Hits}/10
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-[10px] text-muted uppercase">Top 20</div>
+                <div className="font-mono font-bold text-accent-green">
+                  {yesterdayHits}/20
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5">
+            {yesterday.picks.map((p, i) => (
+              <div
+                key={p.name}
+                className={`flex items-center gap-2 px-2.5 py-1.5 rounded text-xs ${
+                  p.hitHR
+                    ? "bg-accent-green/10 border border-accent-green/30"
+                    : "bg-background/30 border border-transparent"
+                }`}
+              >
+                <span className="font-mono font-bold text-muted w-5 text-center shrink-0">
+                  {i + 1}
+                </span>
+                <span
+                  className={`w-4 text-center shrink-0 ${
+                    p.hitHR ? "text-accent-green" : "text-muted/30"
+                  }`}
+                >
+                  {p.hitHR ? "\u2713" : "\u00b7"}
+                </span>
+                <span className="flex-1 min-w-0 truncate text-foreground font-medium">
+                  {p.name}
+                </span>
+                <span className="text-[10px] text-muted shrink-0">
+                  {p.matchup}
+                </span>
+                <span className="font-mono text-foreground shrink-0 w-12 text-right">
+                  {p.mlScore.toFixed(3)}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
     <div className="border border-accent/20 rounded-xl bg-accent/5 p-5 mb-6">
       <div className="flex items-center justify-between mb-2">
         <h2 className="text-sm font-bold text-accent uppercase tracking-wider">
@@ -251,5 +381,6 @@ export function MLRankings({
         </table>
       </div>
     </div>
+    </>
   );
 }

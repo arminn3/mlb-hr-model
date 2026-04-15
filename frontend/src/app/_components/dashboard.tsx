@@ -211,7 +211,7 @@ export function Dashboard() {
         {/* Page content */}
         <main className="flex-1 p-4 md:p-8">
           {activePage === "ml" && (
-            <MLRankings games={data.games} lookback={lookback} />
+            <MLRankings games={data.games} lookback={lookback} currentDate={data.date} />
           )}
 
           {activePage === "rankings" && (
