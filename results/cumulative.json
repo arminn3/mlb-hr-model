@@ -9559,7 +9559,7 @@
     "date": "2026-04-14",
     "total_players_ranked": 260,
     "total_hrs_hit": 34,
-    "total_near_hrs": 0,
+    "total_near_hrs": 10,
     "model_hits": 31,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -9608,7 +9608,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 10,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -9634,28 +9634,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 4,
+        "rate": 13.3
       },
       "all": {
         "total": 260,
-        "hits": 31,
-        "rate": 11.9
+        "hits": 41,
+        "rate": 15.8
       }
     },
     "avg_composite_hr_hitters": 0.329,
-    "avg_composite_non_hitters": 0.323,
-    "composite_separation": 0.006,
+    "avg_composite_non_hitters": 0.324,
+    "composite_separation": 0.005,
     "hr_hitters": [
       {
         "name": "Jos\u00e9 Ram\u00edrez",
@@ -10094,8 +10094,197 @@
         "matchup": "LAA@NYY"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Matt Olson",
+        "rank": 10,
+        "composite": 0.75,
+        "opp_pitcher": "Max Meyer",
+        "matchup": "MIA@ATL"
+      },
+      {
+        "name": "Elly De La Cruz",
+        "rank": 12,
+        "composite": 0.74,
+        "opp_pitcher": "Robbie Ray",
+        "matchup": "SF@CIN"
+      },
+      {
+        "name": "Vladimir Guerrero Jr.",
+        "rank": 52,
+        "composite": 0.544,
+        "opp_pitcher": "Jacob Misiorowski",
+        "matchup": "TOR@MIL"
+      },
+      {
+        "name": "Bo Naylor",
+        "rank": 63,
+        "composite": 0.511,
+        "opp_pitcher": "Michael McGreevy",
+        "matchup": "CLE@STL"
+      },
+      {
+        "name": "Kyle Manzardo",
+        "rank": 180,
+        "composite": 0.154,
+        "opp_pitcher": "Michael McGreevy",
+        "matchup": "CLE@STL"
+      },
+      {
+        "name": "Andrew McCutchen",
+        "rank": 217,
+        "composite": 0.123,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "TEX@ATH"
+      },
+      {
+        "name": "Jose Fernandez",
+        "rank": 229,
+        "composite": 0.114,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "AZ@BAL"
+      },
+      {
+        "name": "Luis Matos",
+        "rank": 253,
+        "composite": 0.075,
+        "opp_pitcher": "Kevin Gausman",
+        "matchup": "TOR@MIL"
+      },
+      {
+        "name": "Jorge Barrosa",
+        "rank": 255,
+        "composite": 0.07,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "AZ@BAL"
+      },
+      {
+        "name": "Jake McCarthy",
+        "rank": 259,
+        "composite": 0.037,
+        "opp_pitcher": "Colton Gordon",
+        "matchup": "COL@HOU"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Andrew McCutchen",
+        "ev": 100.9,
+        "angle": 29.0,
+        "distance": 407.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Springs, Jeffrey"
+      },
+      {
+        "batter": "Matt Olson",
+        "ev": 107.8,
+        "angle": 40.0,
+        "distance": 416.0,
+        "hr_in_parks": 29,
+        "result": "",
+        "pitcher": "Fairbanks, Pete"
+      },
+      {
+        "batter": "Jose Fernandez",
+        "ev": 102.8,
+        "angle": 26.0,
+        "distance": 398.0,
+        "hr_in_parks": 14,
+        "result": "double",
+        "pitcher": "Rogers, Trevor"
+      },
+      {
+        "batter": "Jorge Barrosa",
+        "ev": 97.0,
+        "angle": 14.0,
+        "distance": 426.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "Rogers, Trevor"
+      },
+      {
+        "batter": "Nick Fortes",
+        "ev": 109.4,
+        "angle": 29.0,
+        "distance": 410.0,
+        "hr_in_parks": 28,
+        "result": "",
+        "pitcher": "Schultz, Noah"
+      },
+      {
+        "batter": "Daniel Susac",
+        "ev": 101.4,
+        "angle": 29.0,
+        "distance": 377.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Pag\u00e1n, Emilio"
+      },
+      {
+        "batter": "Elly De La Cruz",
+        "ev": 103.4,
+        "angle": 33.0,
+        "distance": 391.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Ray, Robbie"
+      },
+      {
+        "batter": "Jake McCarthy",
+        "ev": 101.5,
+        "angle": 27.0,
+        "distance": 398.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Gordon, Colton"
+      },
+      {
+        "batter": "Vladimir Guerrero Jr.",
+        "ev": 111.3,
+        "angle": 16.0,
+        "distance": 377.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Anderson, Grant"
+      },
+      {
+        "batter": "Davis Schneider",
+        "ev": 111.1,
+        "angle": 21.0,
+        "distance": 393.0,
+        "hr_in_parks": 21,
+        "result": "double",
+        "pitcher": "Megill, Trevor"
+      },
+      {
+        "batter": "Luis Matos",
+        "ev": 100.1,
+        "angle": 22.0,
+        "distance": 379.0,
+        "hr_in_parks": 14,
+        "result": "single",
+        "pitcher": "Gausman, Kevin"
+      },
+      {
+        "batter": "Bo Naylor",
+        "ev": 103.4,
+        "angle": 23.0,
+        "distance": 389.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "McGreevy, Michael"
+      },
+      {
+        "batter": "Kyle Manzardo",
+        "ev": 104.7,
+        "angle": 38.0,
+        "distance": 392.0,
+        "hr_in_parks": 27,
+        "result": "double",
+        "pitcher": "McGreevy, Michael"
+      }
+    ],
     "surprise_hrs": []
   }
 ]
