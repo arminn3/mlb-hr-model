@@ -33,6 +33,9 @@ const MAINTENANCE_MODE = MAINTENANCE_MODE_PROD && IS_PROD;
 // Add YYYY-MM-DD strings here to fall back to the prior day on prod.
 const PROD_BLOCKED_DATES: Set<string> = new Set(IS_PROD ? ["2026-04-15"] : []);
 
+// Players globally hidden from every ranking/tab.
+const HIDDEN_PLAYERS: Set<string> = new Set(["Marcelo Mayer"]);
+
 function MaintenancePage() {
   return (
     <div className="flex items-center justify-center h-screen">
@@ -111,6 +114,16 @@ export function Dashboard() {
         return d;
       })
       .then((d: ModelData) => {
+        // Strip globally hidden players from every game.
+        if (HIDDEN_PLAYERS.size > 0) {
+          d = {
+            ...d,
+            games: d.games.map((g) => ({
+              ...g,
+              players: g.players.filter((p) => !HIDDEN_PLAYERS.has(p.name)),
+            })),
+          };
+        }
         setData(d);
         setSelectedDate(d.date);
         updateHash(activePage, d.date, lookback);
