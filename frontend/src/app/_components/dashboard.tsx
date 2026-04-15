@@ -23,11 +23,15 @@ import { MatchupAnalysis } from "./matchup-analysis";
 // the production Vercel deployment. Local dev (`npm run dev`) and
 // preview deploys are unaffected. Vercel auto-sets
 // NEXT_PUBLIC_VERCEL_ENV to "production" / "preview" / undefined.
-const MAINTENANCE_MODE_PROD = true;
+const MAINTENANCE_MODE_PROD = false;
 const IS_PROD =
   typeof process !== "undefined" &&
   process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
 const MAINTENANCE_MODE = MAINTENANCE_MODE_PROD && IS_PROD;
+
+// Dates hidden from prod only (dev sees them normally).
+// Add YYYY-MM-DD strings here to fall back to the prior day on prod.
+const PROD_BLOCKED_DATES: Set<string> = new Set(IS_PROD ? ["2026-04-15"] : []);
 
 function MaintenancePage() {
   return (
@@ -90,8 +94,32 @@ export function Dashboard() {
   };
 
   const loadDate = (dateStr: string) => {
-    const file = dateStr ? `/data/${dateStr}.json` : "/data/latest.json";
-    fetch(file)
+    // If no date requested, resolve "latest" first so we can check the block list.
+    const resolvePath = dateStr
+      ? Promise.resolve(`/data/${dateStr}.json`)
+      : fetch("/data/latest.json")
+          .then((r) => r.ok ? r.json() : Promise.reject(new Error("No data yet.")))
+          .then((d: { date: string }) => {
+            if (PROD_BLOCKED_DATES.has(d.date)) {
+              // Latest is blocked on prod — step back one day.
+              const parts = d.date.split("-").map(Number);
+              const prev = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] - 1));
+              const prevStr = prev.toISOString().slice(0, 10);
+              return `/data/${prevStr}.json`;
+            }
+            return `/data/${d.date}.json`;
+          });
+
+    Promise.resolve(
+      dateStr && PROD_BLOCKED_DATES.has(dateStr)
+        ? (() => {
+            const parts = dateStr.split("-").map(Number);
+            const prev = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] - 1));
+            return `/data/${prev.toISOString().slice(0, 10)}.json`;
+          })()
+        : resolvePath
+    )
+      .then((file) => fetch(file as string))
       .then((res) => {
         if (!res.ok) throw new Error("No data for this date.");
         return res.json();
