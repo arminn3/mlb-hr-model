@@ -94,37 +94,23 @@ export function Dashboard() {
   };
 
   const loadDate = (dateStr: string) => {
-    // If no date requested, resolve "latest" first so we can check the block list.
-    const resolvePath = dateStr
-      ? Promise.resolve(`/data/${dateStr}.json`)
-      : fetch("/data/latest.json")
-          .then((r) => r.ok ? r.json() : Promise.reject(new Error("No data yet.")))
-          .then((d: { date: string }) => {
-            if (PROD_BLOCKED_DATES.has(d.date)) {
-              // Latest is blocked on prod — step back one day.
-              const parts = d.date.split("-").map(Number);
-              const prev = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] - 1));
-              const prevStr = prev.toISOString().slice(0, 10);
-              return `/data/${prevStr}.json`;
-            }
-            return `/data/${d.date}.json`;
-          });
-
-    Promise.resolve(
-      dateStr && PROD_BLOCKED_DATES.has(dateStr)
-        ? (() => {
-            const parts = dateStr.split("-").map(Number);
-            const prev = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2] - 1));
-            return `/data/${prev.toISOString().slice(0, 10)}.json`;
-          })()
-        : resolvePath
-    )
-      .then((file) => fetch(file as string))
+    const url = dateStr ? `/data/${dateStr}.json` : "/data/latest.json";
+    fetch(url)
       .then((res) => {
         if (!res.ok) throw new Error("No data for this date.");
         return res.json();
       })
-      .then((d) => {
+      .then((d: ModelData) => {
+        // If the fetched date is blocked on prod, swap in the prior day.
+        if (PROD_BLOCKED_DATES.has(d.date)) {
+          const [y, m, day] = d.date.split("-").map(Number);
+          const prev = new Date(Date.UTC(y, m - 1, day - 1));
+          const prevStr = prev.toISOString().slice(0, 10);
+          return fetch(`/data/${prevStr}.json`).then((r) => r.json());
+        }
+        return d;
+      })
+      .then((d: ModelData) => {
         setData(d);
         setSelectedDate(d.date);
         updateHash(activePage, d.date, lookback);
