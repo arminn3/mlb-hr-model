@@ -176,9 +176,7 @@ export function MLRankings({
     ? yesterday.picks.slice(0, 10).filter((p) => p.hitHR).length
     : 0;
 
-  return (
-    <>
-      {yesterday && yesterday.picks.length > 0 && (
+  const yesterdayPanel = yesterday && yesterday.picks.length > 0 ? (
         <div className="border border-card-border rounded-xl bg-card/30 p-5 mb-6">
           <div className="flex items-center justify-between mb-3">
             <div>
@@ -238,8 +236,10 @@ export function MLRankings({
             ))}
           </div>
         </div>
-      )}
+      ) : null;
 
+  return (
+    <>
     <div className="border border-accent/20 rounded-xl bg-accent/5 p-5 mb-6">
       <div className="flex items-center justify-between mb-2">
         <h2 className="text-sm font-bold text-accent uppercase tracking-wider">
@@ -381,6 +381,7 @@ export function MLRankings({
         </table>
       </div>
     </div>
+    {yesterdayPanel}
     </>
   );
 }
