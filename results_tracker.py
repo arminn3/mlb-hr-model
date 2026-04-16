@@ -109,20 +109,20 @@ def get_near_hrs(game_date: date) -> list[dict]:
         if df is None or df.empty:
             return []
 
-        # Filter to near-HR batted balls:
-        # 1. Hard contact in HR launch window: 95+ EV, 22-38° angle
-        # 2. Hard contact that went deep: 95+ EV, 360+ ft, angle > 10°.
-        #    Catches off-the-wall doubles (Happ 103/20°/368ft type) and
-        #    caught-at-the-track flyouts that were one gust from leaving.
+        # Near-HR rule (matches frontend Live Feed):
+        # Would this ball have been a HR in at least 10 of 30 MLB parks?
+        # Uses each park's weighted fence distance from PARK_FENCE_DIST.
+        # Requires angle > 10° to exclude grounders that travel on
+        # bounces. Single clean rule — retired the EV/angle gymnastics.
         import numpy as np
         ev = pd.to_numeric(df["launch_speed"], errors="coerce").fillna(0).values
         la = pd.to_numeric(df["launch_angle"], errors="coerce").fillna(0).values
         dist = pd.to_numeric(df["hit_distance_sc"], errors="coerce").fillna(0).values
         is_hr = df["events"].astype(str).values == "home_run"
 
-        hard_fly = (ev >= 95) & (la >= 22) & (la <= 38) & ~is_hr
-        deep_fly = (ev >= 95) & (dist >= 360) & (la > 10) & ~is_hr
-        mask = hard_fly | deep_fly
+        parks_count = np.array([sum(1 for pd_ in _UNIQUE_PARK_DISTS.values() if d >= pd_)
+                                 for d in dist])
+        mask = (parks_count >= 10) & (la > 10) & ~is_hr
         near = df[mask].copy()
 
         # Reverse lookup batter names from MLB API

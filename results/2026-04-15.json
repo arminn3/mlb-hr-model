@@ -2,7 +2,7 @@
   "date": "2026-04-15",
   "total_players_ranked": 269,
   "total_hrs_hit": 36,
-  "total_near_hrs": 22,
+  "total_near_hrs": 15,
   "model_hits": 32,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 22,
+  "model_near_hits": 15,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -92,13 +92,13 @@
     },
     "all": {
       "total": 269,
-      "hits": 54,
-      "rate": 20.1
+      "hits": 47,
+      "rate": 17.5
     }
   },
   "avg_composite_hr_hitters": 0.284,
-  "avg_composite_non_hitters": 0.302,
-  "composite_separation": -0.018,
+  "avg_composite_non_hitters": 0.304,
+  "composite_separation": -0.02,
   "hr_hitters": [
     {
       "name": "Aaron Judge",
@@ -581,32 +581,11 @@
       "matchup": "LAA@NYY"
     },
     {
-      "name": "Andrew Benintendi",
-      "rank": 45,
-      "composite": 0.578,
-      "opp_pitcher": "Jesse Scholtens",
-      "matchup": "TB@CWS"
-    },
-    {
-      "name": "James Wood",
-      "rank": 49,
-      "composite": 0.56,
-      "opp_pitcher": "Mason Montgomery",
-      "matchup": "WSH@PIT"
-    },
-    {
       "name": "Adolis Garc\u00eda",
       "rank": 58,
       "composite": 0.524,
       "opp_pitcher": "Shota Imanaga",
       "matchup": "CHC@PHI"
-    },
-    {
-      "name": "Tyler Soderstrom",
-      "rank": 61,
-      "composite": 0.513,
-      "opp_pitcher": "Kumar Rocker",
-      "matchup": "TEX@ATH"
     },
     {
       "name": "Ram\u00f3n Laureano",
@@ -628,27 +607,6 @@
       "composite": 0.399,
       "opp_pitcher": "Eduardo Rodriguez",
       "matchup": "AZ@BAL"
-    },
-    {
-      "name": "Kerry Carpenter",
-      "rank": 94,
-      "composite": 0.311,
-      "opp_pitcher": "Seth Lugo",
-      "matchup": "KC@DET"
-    },
-    {
-      "name": "Carson Benge",
-      "rank": 105,
-      "composite": 0.283,
-      "opp_pitcher": "Shohei Ohtani",
-      "matchup": "NYM@LAD"
-    },
-    {
-      "name": "Lenyn Sosa",
-      "rank": 111,
-      "composite": 0.265,
-      "opp_pitcher": "Chad Patrick",
-      "matchup": "TOR@MIL"
     },
     {
       "name": "Vinnie Pasquantino",
@@ -698,25 +656,9 @@
       "composite": 0.12,
       "opp_pitcher": "Sean Burke",
       "matchup": "TB@CWS"
-    },
-    {
-      "name": "MJ Melendez",
-      "rank": 259,
-      "composite": 0.084,
-      "opp_pitcher": "Shohei Ohtani",
-      "matchup": "NYM@LAD"
     }
   ],
   "near_hr_events": [
-    {
-      "batter": "Tyler Soderstrom",
-      "ev": 99.6,
-      "angle": 30.0,
-      "distance": 356.0,
-      "hr_in_parks": 4,
-      "result": "double",
-      "pitcher": "Rocker, Kumar"
-    },
     {
       "batter": "Austin Riley",
       "ev": 105.7,
@@ -745,15 +687,6 @@
       "pitcher": "Paddack, Chris"
     },
     {
-      "batter": "Matt Olson",
-      "ev": 95.1,
-      "angle": 35.0,
-      "distance": 361.0,
-      "hr_in_parks": 21,
-      "result": "field_out",
-      "pitcher": "Paddack, Chris"
-    },
-    {
       "batter": "Corbin Carroll",
       "ev": 96.8,
       "angle": 29.0,
@@ -761,24 +694,6 @@
       "hr_in_parks": 7,
       "result": "double",
       "pitcher": "Wolfram, Grant"
-    },
-    {
-      "batter": "Adrian Del Castillo",
-      "ev": 96.9,
-      "angle": 30.0,
-      "distance": 363.0,
-      "hr_in_parks": 7,
-      "result": "triple",
-      "pitcher": "Bradish, Kyle"
-    },
-    {
-      "batter": "Jeremiah Jackson",
-      "ev": 97.3,
-      "angle": 28.0,
-      "distance": 348.0,
-      "hr_in_parks": 1,
-      "result": "field_out",
-      "pitcher": "Rodriguez, Eduardo"
     },
     {
       "batter": "Johnathan Rodr\u00edguez",
@@ -808,15 +723,6 @@
       "pitcher": "Gilbert, Tyler"
     },
     {
-      "batter": "Andrew Benintendi",
-      "ev": 103.3,
-      "angle": 25.0,
-      "distance": 340.0,
-      "hr_in_parks": 13,
-      "result": "triple",
-      "pitcher": "Scholtens, Jesse"
-    },
-    {
       "batter": "Hunter Feduccia",
       "ev": 107.7,
       "angle": 30.0,
@@ -844,15 +750,6 @@
       "pitcher": "Finnegan, Kyle"
     },
     {
-      "batter": "Kerry Carpenter",
-      "ev": 95.8,
-      "angle": 37.0,
-      "distance": 350.0,
-      "hr_in_parks": 6,
-      "result": "field_out",
-      "pitcher": "Lugo, Seth"
-    },
-    {
       "batter": "Yordan Alvarez",
       "ev": 103.7,
       "angle": 27.0,
@@ -869,33 +766,6 @@
       "hr_in_parks": 30,
       "result": "double",
       "pitcher": "Arrighetti, Spencer"
-    },
-    {
-      "batter": "Carson Benge",
-      "ev": 102.8,
-      "angle": 23.0,
-      "distance": 366.0,
-      "hr_in_parks": 3,
-      "result": "double",
-      "pitcher": "Treinen, Blake"
-    },
-    {
-      "batter": "MJ Melendez",
-      "ev": 99.3,
-      "angle": 23.0,
-      "distance": 333.0,
-      "hr_in_parks": 14,
-      "result": "double",
-      "pitcher": "Ohtani, Shohei"
-    },
-    {
-      "batter": "Lenyn Sosa",
-      "ev": 99.9,
-      "angle": 39.0,
-      "distance": 363.0,
-      "hr_in_parks": 17,
-      "result": "field_out",
-      "pitcher": "Hall, DL"
     },
     {
       "batter": "Giancarlo Stanton",
@@ -916,24 +786,6 @@
       "pitcher": "Imanaga, Shota"
     },
     {
-      "batter": "Drew Millas",
-      "ev": 95.9,
-      "angle": 24.0,
-      "distance": 343.0,
-      "hr_in_parks": 1,
-      "result": "field_out",
-      "pitcher": "Santana, Dennis"
-    },
-    {
-      "batter": "James Wood",
-      "ev": 101.8,
-      "angle": 39.0,
-      "distance": 364.0,
-      "hr_in_parks": 8,
-      "result": "field_out",
-      "pitcher": "Mlodzinski, Carmen"
-    },
-    {
       "batter": "Luke Raley",
       "ev": 102.0,
       "angle": 31.0,
@@ -950,15 +802,6 @@
       "hr_in_parks": 1,
       "result": "double",
       "pitcher": "Speier, Gabe"
-    },
-    {
-      "batter": "Ram\u00f3n Laureano",
-      "ev": 103.3,
-      "angle": 36.0,
-      "distance": 352.0,
-      "hr_in_parks": 22,
-      "result": "field_out",
-      "pitcher": "Hancock, Emerson"
     },
     {
       "batter": "Julio Rodr\u00edguez",
