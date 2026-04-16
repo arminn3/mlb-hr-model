@@ -283,7 +283,9 @@ export function Dashboard() {
           )}
 
           {activePage === "live" && (
-            <LiveFeed selectedDate={selectedDate} />
+            // Don't pass the (possibly blocked/fallback) selectedDate here —
+            // let LiveFeed use its own getLocalDate() so prod still polls today.
+            <LiveFeed />
           )}
 
           {activePage === "bvp" && (
