@@ -12,6 +12,22 @@ import {
   tableWrapperStyle,
 } from "./table-styles";
 
+// Weighted-average outfield fence distance per park: (LF + 2*CF + RF) / 4.
+// Mirrors results_tracker.py so Live Feed near-HR flagging matches the
+// historical results tracker exactly. 30 unique parks.
+const PARK_FENCE_DISTS: number[] = [
+  376, 360, 356, 375, 371, 369, 378, 410, 373, 371,
+  380, 373, 368, 375, 369, 369, 376, 374, 369, 367,
+  366, 368, 375, 364, 367, 370, 380, 363, 361, 364,
+];
+
+function hrInParks(distance: number): number {
+  if (!distance || distance <= 0) return 0;
+  let n = 0;
+  for (const d of PARK_FENCE_DISTS) if (distance >= d) n++;
+  return n;
+}
+
 interface LivePlay {
   batter: string;
   pitcher: string;
@@ -173,15 +189,10 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
           }
 
           const isHR = resultData.event === "Home Run";
-          // NEAR HR if any of (matches results_tracker backend logic):
-          //   1. Hard contact in HR launch window: 95+ EV, 22-38° angle
-          //   2. Hard contact that went deep: 95+ EV, 360+ ft, angle > 10°
-          //      — catches Wood-style 104/37°/375ft wall-balls that
-          //      would've been HRs in many parks.
-          const isNearHR =
-            !isHR &&
-            ((ev >= 95 && angle >= 22 && angle <= 38) ||
-              (ev >= 95 && dist >= 360 && angle > 10));
+          // NEAR HR = would've been a HR in 10+ of 30 MLB parks.
+          // Uses each park's weighted fence distance (LF+2*CF+RF)/4.
+          // Clean single rule — EV/angle gymnastics retired.
+          const isNearHR = !isHR && hrInParks(dist) >= 10;
 
           allPlays.push({
             batter: matchup.batter?.fullName || "Unknown",
