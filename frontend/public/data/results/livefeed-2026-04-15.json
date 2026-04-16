@@ -101,7 +101,7 @@
       "gamePk": 823314,
       "away": "SEA",
       "home": "SD",
-      "status": "Game Over",
+      "status": "Final",
       "awayScore": 6,
       "homeScore": 7
     },
@@ -117,7 +117,7 @@
       "gamePk": 823963,
       "away": "NYM",
       "home": "LAD",
-      "status": "Game Over",
+      "status": "Final",
       "awayScore": 2,
       "homeScore": 8
     }
