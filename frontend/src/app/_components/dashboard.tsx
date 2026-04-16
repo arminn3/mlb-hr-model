@@ -31,7 +31,9 @@ const MAINTENANCE_MODE = MAINTENANCE_MODE_PROD && IS_PROD;
 
 // Dates hidden from prod only (dev sees them normally).
 // Add YYYY-MM-DD strings here to fall back to the prior day on prod.
-const PROD_BLOCKED_DATES: Set<string> = new Set<string>();
+const PROD_BLOCKED_DATES: Set<string> = new Set(
+  IS_PROD ? ["2026-04-15", "2026-04-16"] : []
+);
 
 function MaintenancePage() {
   return (
@@ -100,15 +102,20 @@ export function Dashboard() {
         if (!res.ok) throw new Error("No data for this date.");
         return res.json();
       })
-      .then((d: ModelData) => {
-        // If the fetched date is blocked on prod, swap in the prior day.
-        if (PROD_BLOCKED_DATES.has(d.date)) {
-          const [y, m, day] = d.date.split("-").map(Number);
+      .then(async (d: ModelData) => {
+        // If the fetched date is blocked on prod, walk back day by day
+        // until we land on an unblocked date.
+        let cur = d;
+        let safety = 14;
+        while (PROD_BLOCKED_DATES.has(cur.date) && safety-- > 0) {
+          const [y, m, day] = cur.date.split("-").map(Number);
           const prev = new Date(Date.UTC(y, m - 1, day - 1));
           const prevStr = prev.toISOString().slice(0, 10);
-          return fetch(`/data/${prevStr}.json`).then((r) => r.json());
+          const resp = await fetch(`/data/${prevStr}.json`);
+          if (!resp.ok) break;
+          cur = await resp.json();
         }
-        return d;
+        return cur;
       })
       .then((d: ModelData) => {
         setData(d);
