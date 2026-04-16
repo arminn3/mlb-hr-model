@@ -231,22 +231,51 @@ export function BvPPage({
             </tr>
           </thead>
           <tbody>
-            {sorted.map((m) => (
-              <tr key={`${m.batter}-${m.pitcher}`} style={{ backgroundColor: TABLE_BG, opacity: m.abs === 0 ? 0.5 : 1 }}>
-                <td className={cellClass} style={cellStyle}>{m.batter}</td>
-                <td className={cellClass} style={cellStyle}>{m.pitcher}</td>
-                <td className={cellClass} style={cellStyle}>{m.game}</td>
-                <td className={cellClass} style={cellStyle}>{m.hand}</td>
-                <td className={cellClass} style={cellStyle}>{m.abs || "-"}</td>
-                <td className={cellClass} style={cellStyle}>{m.hits || "-"}</td>
-                <td className={cellClass} style={cellStyle}>{m.hrs || "-"}</td>
-                <td className={cellClass} style={cellStyle}>{m.abs > 0 ? m.ba.toFixed(3) : "-"}</td>
-                <td className={cellClass} style={cellStyle}>{m.abs > 0 ? m.slg.toFixed(3) : "-"}</td>
-                <td className={cellClass} style={cellStyle}>{m.abs > 0 ? m.iso.toFixed(3) : "-"}</td>
-                <td className={cellClass} style={cellStyle}>{m.abs > 0 ? `${m.k_pct.toFixed(0)}%` : "-"}</td>
-                <td className={cellClass} style={cellStyle}>{m.composite.toFixed(3)}</td>
-              </tr>
-            ))}
+            {sorted.map((m) => {
+              // Cell color helpers — green/red/neutral on notable stats only.
+              const hrStyle = m.hrs > 0
+                ? { ...cellStyle, color: "#22c55e", fontWeight: 700 }
+                : cellStyle;
+              const baStyle = m.abs > 0 && m.ba >= 0.300
+                ? { ...cellStyle, color: "#22c55e", fontWeight: 600 }
+                : m.abs > 0 && m.ba < 0.200
+                ? { ...cellStyle, color: "#ef4444" }
+                : cellStyle;
+              const slgStyle = m.abs > 0 && m.slg >= 0.500
+                ? { ...cellStyle, color: "#22c55e", fontWeight: 600 }
+                : cellStyle;
+              const isoStyle = m.abs > 0 && m.iso >= 0.200
+                ? { ...cellStyle, color: "#22c55e", fontWeight: 600 }
+                : cellStyle;
+              const kStyle = m.abs > 0 && m.k_pct >= 30
+                ? { ...cellStyle, color: "#ef4444", fontWeight: 600 }
+                : m.abs > 0 && m.k_pct <= 15
+                ? { ...cellStyle, color: "#22c55e", fontWeight: 600 }
+                : cellStyle;
+              const scoreStyle = m.composite >= 0.6
+                ? { ...cellStyle, color: "#22c55e", fontWeight: 700 }
+                : m.composite >= 0.4
+                ? { ...cellStyle, color: "#eab308", fontWeight: 600 }
+                : m.composite < 0.2
+                ? { ...cellStyle, color: "#ef4444" }
+                : cellStyle;
+              return (
+                <tr key={`${m.batter}-${m.pitcher}`} style={{ backgroundColor: TABLE_BG, opacity: m.abs === 0 ? 0.5 : 1 }}>
+                  <td className={cellClass} style={cellStyle}>{m.batter}</td>
+                  <td className={cellClass} style={cellStyle}>{m.pitcher}</td>
+                  <td className={cellClass} style={cellStyle}>{m.game}</td>
+                  <td className={cellClass} style={cellStyle}>{m.hand}</td>
+                  <td className={cellClass} style={cellStyle}>{m.abs || "-"}</td>
+                  <td className={cellClass} style={cellStyle}>{m.hits || "-"}</td>
+                  <td className={cellClass} style={hrStyle}>{m.hrs || "-"}</td>
+                  <td className={cellClass} style={baStyle}>{m.abs > 0 ? m.ba.toFixed(3) : "-"}</td>
+                  <td className={cellClass} style={slgStyle}>{m.abs > 0 ? m.slg.toFixed(3) : "-"}</td>
+                  <td className={cellClass} style={isoStyle}>{m.abs > 0 ? m.iso.toFixed(3) : "-"}</td>
+                  <td className={cellClass} style={kStyle}>{m.abs > 0 ? `${m.k_pct.toFixed(0)}%` : "-"}</td>
+                  <td className={cellClass} style={scoreStyle}>{m.composite.toFixed(3)}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
