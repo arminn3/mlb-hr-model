@@ -34,14 +34,27 @@ export function DatePicker({
   const canPrev = idx < dates.length - 1;
   const canNext = idx > 0;
 
+  const arrowClass =
+    "w-8 h-8 flex items-center justify-center text-foreground " +
+    "bg-card/60 border border-card-border rounded-lg " +
+    "hover:bg-accent/10 hover:border-accent/40 hover:text-accent " +
+    "active:scale-95 " +
+    "disabled:opacity-30 disabled:bg-card/30 disabled:border-card-border " +
+    "disabled:hover:text-foreground disabled:hover:bg-card/30 disabled:hover:border-card-border " +
+    "disabled:active:scale-100 " +
+    "cursor-pointer disabled:cursor-default transition-all duration-150";
+
   return (
-    <div className="flex items-center gap-0.5">
+    <div className="flex items-center gap-1.5">
       <button
         onClick={() => { if (canPrev) onChange(dates[idx + 1]); }}
         disabled={!canPrev}
-        className="w-8 h-8 flex items-center justify-center text-muted hover:text-foreground disabled:opacity-30 cursor-pointer disabled:cursor-default rounded-lg hover:bg-card/50"
+        aria-label="Previous date"
+        className={arrowClass}
       >
-        &larr;
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
       </button>
 
       {/* Full date on desktop, short on mobile */}
@@ -69,9 +82,12 @@ export function DatePicker({
       <button
         onClick={() => { if (canNext) onChange(dates[idx - 1]); }}
         disabled={!canNext}
-        className="w-8 h-8 flex items-center justify-center text-muted hover:text-foreground disabled:opacity-30 cursor-pointer disabled:cursor-default rounded-lg hover:bg-card/50"
+        aria-label="Next date"
+        className={arrowClass}
       >
-        &rarr;
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
       </button>
     </div>
   );
