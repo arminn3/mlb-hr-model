@@ -47,6 +47,15 @@ print("Loading statcast...")
 load_bulk_statcast()
 batter_df = get_batter_statcast(LOWE_ID)
 pitcher_df = get_pitcher_statcast(MIKOLAS_ID)
+
+# CRITICAL: filter to PRE-4/14 only — we want Lowe's L5 as it was on 4/14,
+# not including games he played after.
+import pandas as pd
+if batter_df is not None and not batter_df.empty and "game_date" in batter_df.columns:
+    batter_df = batter_df[pd.to_datetime(batter_df["game_date"]) < pd.Timestamp("2026-04-14")].copy()
+    print(f"  Filtered batter_df to pre-4/14: {len(batter_df)} rows")
+if pitcher_df is not None and not pitcher_df.empty and "game_date" in pitcher_df.columns:
+    pitcher_df = pitcher_df[pd.to_datetime(pitcher_df["game_date"]) < pd.Timestamp("2026-04-14")].copy()
 batter_season = get_season_statcast(LOWE_ID, "batter", 2025)
 pitcher_season = get_season_statcast(MIKOLAS_ID, "pitcher", 2025)
 batter_hand = get_batter_hand(LOWE_ID)

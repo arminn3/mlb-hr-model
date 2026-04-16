@@ -91,25 +91,35 @@ jobs:
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          # Check if there are changes worth committing. Stage only
-          # our generated data paths.
-          git add frontend/public/data/ results/
-          git diff --cached --quiet && echo "No changes to commit" && exit 0
-          # Stash our generated files temporarily, hard-reset to origin,
-          # then force-overwrite with our stashed versions. This avoids
-          # ANY merge attempt on the large JSON files (merges leave
-          # conflict markers in them even with -X theirs).
-          mkdir -p /tmp/hrprop-stash
-          cp -r frontend/public/data/ /tmp/hrprop-stash/frontend-data/ || true
-          cp -r results/ /tmp/hrprop-stash/results/ || true
+          # Only stash the files this run actually regenerates. Historical
+          # dated JSONs (2026-04-14.json, etc.) are NEVER touched by this
+          # cron run, so we must NOT overwrite them — manual patches made
+          # between checkout and push (like Lowe 4/14 Mikolas) would be
+          # lost otherwise.
+          TODAY=$(date -u +%Y-%m-%d)
+          mkdir -p /tmp/hrprop-stash/frontend-data
+          mkdir -p /tmp/hrprop-stash/results
+          [ -f "frontend/public/data/latest.json" ] && cp "frontend/public/data/latest.json" /tmp/hrprop-stash/frontend-data/ || true
+          [ -f "frontend/public/data/${TODAY}.json" ] && cp "frontend/public/data/${TODAY}.json" /tmp/hrprop-stash/frontend-data/ || true
+          [ -f "frontend/public/data/index.json" ] && cp "frontend/public/data/index.json" /tmp/hrprop-stash/frontend-data/ || true
+          # results/ files — copy everything generated this run (small dir)
+          cp -r results/. /tmp/hrprop-stash/results/ 2>/dev/null || true
+          # Also stash the results subfolder that gets synced
+          mkdir -p /tmp/hrprop-stash/frontend-data/results
+          cp -r frontend/public/data/results/. /tmp/hrprop-stash/frontend-data/results/ 2>/dev/null || true
+
           git reset --hard HEAD
           git fetch origin main
           # Retry up to 3 times in case of race with another run
           for i in 1 2 3; do
             git reset --hard origin/main
-            # Restore our generated files, overwriting whatever is on origin
-            cp -r /tmp/hrprop-stash/frontend-data/* frontend/public/data/ 2>/dev/null || true
-            cp -r /tmp/hrprop-stash/results/* results/ 2>/dev/null || true
+            # Restore ONLY the files this run regenerated — never touch
+            # historical dated JSONs from origin.
+            [ -f "/tmp/hrprop-stash/frontend-data/latest.json" ] && cp "/tmp/hrprop-stash/frontend-data/latest.json" frontend/public/data/ || true
+            [ -f "/tmp/hrprop-stash/frontend-data/${TODAY}.json" ] && cp "/tmp/hrprop-stash/frontend-data/${TODAY}.json" frontend/public/data/ || true
+            [ -f "/tmp/hrprop-stash/frontend-data/index.json" ] && cp "/tmp/hrprop-stash/frontend-data/index.json" frontend/public/data/ || true
+            cp -r /tmp/hrprop-stash/frontend-data/results/. frontend/public/data/results/ 2>/dev/null || true
+            cp -r /tmp/hrprop-stash/results/. results/ 2>/dev/null || true
             git add frontend/public/data/ results/
             git diff --cached --quiet && echo "No changes after reset" && exit 0
             git commit -m "auto: HR props $(date -u +%Y-%m-%d-%H%M)"
