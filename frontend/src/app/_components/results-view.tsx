@@ -340,17 +340,46 @@ function DayReport({ day }: { day: DayReportData }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {day.near_hr_events.map((n: { batter: string; pitcher: string; ev: number; angle: number; distance: number | null; hr_in_parks?: number; result: string }, i: number) => (
-                      <tr key={i} style={{ backgroundColor: TABLE_BG }}>
-                        <td className={cellClass} style={cellStyle}>{n.batter}</td>
-                        <td className={cellClass} style={cellStyle}>{n.pitcher}</td>
-                        <td className={cellClass} style={cellStyle}>{n.ev}</td>
-                        <td className={cellClass} style={cellStyle}>{n.angle}°</td>
-                        <td className={cellClass} style={cellStyle}>{n.distance ? `${n.distance} ft` : "-"}</td>
-                        <td className={cellClass} style={cellStyle}>{n.hr_in_parks ?? 0}/30</td>
-                        <td className={cellClass} style={cellStyle}>{(n.result || "").replace(/_/g, " ")}</td>
-                      </tr>
-                    ))}
+                    {day.near_hr_events.map((n: { batter: string; pitcher: string; ev: number; angle: number; distance: number | null; hr_in_parks?: number; result: string }, i: number) => {
+                      const parks = n.hr_in_parks ?? 0;
+                      const evStyle = n.ev >= 105
+                        ? { ...cellStyle, color: "#22c55e", fontWeight: 700 }
+                        : n.ev >= 100
+                        ? { ...cellStyle, color: "#22c55e", fontWeight: 600 }
+                        : cellStyle;
+                      const angleStyle = n.angle >= 25 && n.angle <= 35
+                        ? { ...cellStyle, color: "#22c55e", fontWeight: 600 }
+                        : cellStyle;
+                      const distStyle = (n.distance ?? 0) >= 400
+                        ? { ...cellStyle, color: "#22c55e", fontWeight: 700 }
+                        : (n.distance ?? 0) >= 380
+                        ? { ...cellStyle, color: "#22c55e", fontWeight: 600 }
+                        : cellStyle;
+                      const parksStyle = parks >= 20
+                        ? { ...cellStyle, color: "#22c55e", fontWeight: 700 }
+                        : parks >= 15
+                        ? { ...cellStyle, color: "#22c55e", fontWeight: 600 }
+                        : parks >= 10
+                        ? { ...cellStyle, color: "#eab308", fontWeight: 600 }
+                        : cellStyle;
+                      const result = (n.result || "").replace(/_/g, " ");
+                      const resultStyle = /double|triple/i.test(result)
+                        ? { ...cellStyle, color: "#eab308", fontWeight: 600 }
+                        : /field out|flyout|groundout|lineout/i.test(result)
+                        ? { ...cellStyle, color: "#ef4444" }
+                        : cellStyle;
+                      return (
+                        <tr key={i} style={{ backgroundColor: TABLE_BG }}>
+                          <td className={cellClass} style={cellStyle}>{n.batter}</td>
+                          <td className={cellClass} style={cellStyle}>{n.pitcher}</td>
+                          <td className={cellClass} style={evStyle}>{n.ev}</td>
+                          <td className={cellClass} style={angleStyle}>{n.angle}°</td>
+                          <td className={cellClass} style={distStyle}>{n.distance ? `${n.distance} ft` : "-"}</td>
+                          <td className={cellClass} style={parksStyle}>{parks}/30</td>
+                          <td className={cellClass} style={resultStyle}>{result}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
