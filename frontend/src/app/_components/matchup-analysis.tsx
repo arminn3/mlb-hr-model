@@ -105,9 +105,15 @@ function calcLearnedComposite(
     const z = (feats[name] - mean) / (scale || 1);
     score += coef * z;
   }
-  const range = weights.score_max - weights.score_min;
-  const norm = range > 0 ? (score - weights.score_min) / range : 0.5;
-  return Math.max(0, Math.min(1, norm));
+  // Map raw logit score to [0,1] via a sigmoid-like curve instead of
+  // hard-clipping at the 2025 training range. The training score_min/
+  // score_max were derived from all 2025 rows (early-season with tiny
+  // samples INCLUDED), so 2026 players with stable full-season profiles
+  // produce raw scores outside that range and all clip to 1.0. Using
+  // logistic converts arbitrary raw scores to [0,1] smoothly so elite
+  // players stay differentiated.
+  const prob = 1 / (1 + Math.exp(-score));
+  return Math.max(0, Math.min(1, prob));
 }
 
 /* ---------- helpers ---------- */
@@ -299,11 +305,12 @@ function calcSeasonComposite(
   return 0.6 * batterPower + 0.35 * pitcherVuln + 0.05 * envScore;
 }
 
-// Rough HR probability display — composite * 25 lands elite guys
-// (~0.80 composite) at ~20%, matching the 16-22% range user referenced
-// for ideal/elite plays. Placeholder until a calibrated model is wired.
+// Composite (sigmoid of learned logit) has min ~0.30, max ~0.98. Linear
+// map that range onto realistic HR probability 3-22% so elite plays
+// show ~20% and bottom of slate shows ~3-5%. Kept simple until a
+// properly calibrated Platt/isotonic layer replaces it.
 function calcHrProb(seasonComposite: number): number {
-  return seasonComposite * 25;
+  return Math.max(0, (seasonComposite - 0.30) * (19 / 0.68) + 3);
 }
 
 function MatchupCard({
