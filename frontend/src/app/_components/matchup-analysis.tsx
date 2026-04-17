@@ -1,20 +1,122 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { GameData, PlayerData } from "./types";
+
+/* ---------- learned weights (trained on 2023-2025 Statcast, 125k samples) ---------- */
+
+// Structure matches results/matchup_v2_weights.json exactly.
+interface LearnedWeights {
+  n_samples: number;
+  n_hrs: number;
+  auc: number;
+  intercept: number;
+  coefficients: Record<string, number>;
+  feature_means: Record<string, number>;
+  feature_scales: Record<string, number>;
+  score_min: number;
+  score_max: number;
+  grade_cutoffs_norm: { "A+": number; A: number; B: number; C: number; D: number };
+}
+
+type GradeCutoffs = { "A+": number; A: number; B: number; C: number; D: number };
+
+// Fallback grade bands (used when learned weights haven't loaded yet).
+const FALLBACK_CUTOFFS: GradeCutoffs = { "A+": 0.82, A: 0.7, B: 0.55, C: 0.4, D: 0.28 };
+
+// Slate-relative grading. Given every eligible player's composite for
+// the day, pick cutoffs at percentiles matching HRP-style distribution
+// (~3% A+, 15% A, 30% B, 30% C, 15% D, 7% F). This keeps grades
+// meaningful even when absolute model calibration drifts.
+function deriveSlateCutoffs(composites: number[]): GradeCutoffs {
+  if (composites.length < 10) return FALLBACK_CUTOFFS;
+  const sorted = [...composites].sort((a, b) => b - a);
+  const at = (pct: number) => sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * pct))] ?? 0;
+  return {
+    "A+": at(0.03),
+    A: at(0.18),
+    B: at(0.48),
+    C: at(0.78),
+    D: at(0.93),
+  };
+}
+
+function getGradeFromCutoffs(
+  composite: number,
+  cutoffs: { "A+": number; A: number; B: number; C: number; D: number },
+): { label: string; color: string } {
+  if (composite >= cutoffs["A+"]) return { label: "A+", color: "text-white" };
+  if (composite >= cutoffs.A) return { label: "A", color: "text-white" };
+  if (composite >= cutoffs.B) return { label: "B", color: "text-white" };
+  if (composite >= cutoffs.C) return { label: "C", color: "text-white" };
+  if (composite >= cutoffs.D) return { label: "D", color: "text-white" };
+  return { label: "F", color: "text-white" };
+}
+
+// Extract features from player + game in the exact shape the training
+// script used. Returns null if essential season_profile data is missing.
+function extractLearnedFeatures(
+  player: PlayerData,
+  game: GameData,
+): Record<string, number> | null {
+  const sp = player.season_profile;
+  if (!sp || !sp.bip_count) return null;
+  const p = player.pitcher_stats;
+  const env = game.environment;
+
+  const barrel_pct = sp.barrel / 100;                      // % → 0..1
+  const iso = sp.iso ?? 0;                                  // already 0..1
+  const hr_per_bip = sp.bip_count > 0 ? (sp.hrs ?? 0) / sp.bip_count : 0;
+  const avg_ev = sp.ev ?? 0;                                // mph
+  const fb_pct = (sp.fb ?? 0) / 100;
+  const hard_pct = (sp.hard_hit ?? 0) / 100;
+
+  // pitcher_stats.hr_per_9 is HRs allowed per 9 IP. A typical 9 IP has
+  // ~23 BIPs (subtract walks/Ks/HBP). So HR/BIP ≈ HR/9 / 23. This maps
+  // cleanly onto the training p_hr_rate mean of ~0.021 for league-avg
+  // ~1.0 HR/9 pitchers.
+  const p_hr_rate = (p?.hr_per_9 ?? 0) / 23;
+  const p_fb_rate = (p?.fb_rate ?? 0) / 100;
+  const p_hr_fb_rate = (p?.hr_fb_rate ?? 0) / 100;
+  const park_hr_factor = env?.park_factor ?? 100;
+  const platoon = player.batter_hand !== player.pitcher_hand ? 1 : 0;
+
+  return {
+    barrel_pct, iso, hr_per_bip, avg_ev, fb_pct, hard_pct,
+    p_hr_rate, p_fb_rate, p_hr_fb_rate, park_hr_factor, platoon,
+  };
+}
+
+// Apply the learned logistic model. Z-scores each feature with the
+// training mean/scale, dot-products with coefficients, then normalizes
+// to the [0,1] range seen in 2025 (for grade mapping).
+function calcLearnedComposite(
+  player: PlayerData,
+  game: GameData,
+  weights: LearnedWeights,
+): number {
+  const feats = extractLearnedFeatures(player, game);
+  if (!feats) return 0;
+  let score = weights.intercept;
+  for (const [name, coef] of Object.entries(weights.coefficients)) {
+    const mean = weights.feature_means[name] ?? 0;
+    const scale = weights.feature_scales[name] ?? 1;
+    const z = (feats[name] - mean) / (scale || 1);
+    score += coef * z;
+  }
+  const range = weights.score_max - weights.score_min;
+  const norm = range > 0 ? (score - weights.score_min) / range : 0.5;
+  return Math.max(0, Math.min(1, norm));
+}
 
 /* ---------- helpers ---------- */
 
-function getGrade(composite: number): { label: string; color: string } {
-  // A+ is reserved for elite power × vulnerable pitcher × favorable
-  // env combos — maybe 1-3 per slate. HRP's CSV showed 1 A+ in top 50.
-  if (composite >= 0.82) return { label: "A+", color: "text-white" };
-  if (composite >= 0.7) return { label: "A", color: "text-white" };
-  if (composite >= 0.55) return { label: "B", color: "text-white" };
-  if (composite >= 0.4) return { label: "C", color: "text-white" };
-  if (composite >= 0.28) return { label: "D", color: "text-white" };
-  return { label: "F", color: "text-white" };
+function getGrade(
+  composite: number,
+  cutoffs?: GradeCutoffs | null,
+): { label: string; color: string } {
+  return getGradeFromCutoffs(composite, cutoffs ?? FALLBACK_CUTOFFS);
 }
 
 // Figma design tokens — grade cell backgrounds and borders.
@@ -177,22 +279,23 @@ function calcBatterPower(player: PlayerData): number {
   return Math.min(1, Math.max(0, raw * reliability));
 }
 
-// Season-long composite — uses season_profile for batter, season-based
-// pitcher_score and env_score (those are the same across L5/L10 in the
-// backend). Deliberately does NOT read batter_score or composite from
-// scores.L5 since those are L5-dependent.
-function calcSeasonComposite(player: PlayerData): number {
+// Season-long composite. When learned weights are provided, uses the
+// 3-year trained logistic model. Otherwise falls back to the original
+// hand-tuned 60/35/5 blend.
+function calcSeasonComposite(
+  player: PlayerData,
+  game?: GameData,
+  weights?: LearnedWeights | null,
+): number {
+  if (game && weights) {
+    return calcLearnedComposite(player, game, weights);
+  }
+  // Fallback — hand-tuned formula (kept so the page still works
+  // gracefully before the weights JSON has loaded).
   const batterPower = calcBatterPower(player);
-  const scores = player.scores.L5; // only for pitcher_score + env_score, both season-based
-
-  // Use the real pitcher_score. Early in the season almost every
-  // pitcher has thin data — neutralizing them all to 0.5 wipes out
-  // the matchup signal entirely. If a pitcher looks hittable, the
-  // numbers should say that.
+  const scores = player.scores.L5;
   const pitcherVuln = scores?.pitcher_score ?? 0.5;
-
   const envScore = scores?.env_score ?? 0.5;
-  // Weights: batter 60% (season_profile), pitcher 35% (season), env 5%
   return 0.6 * batterPower + 0.35 * pitcherVuln + 0.05 * envScore;
 }
 
@@ -207,18 +310,22 @@ function MatchupCard({
   player,
   game,
   defaultExpanded,
+  weights,
+  cutoffs,
 }: {
   player: PlayerData;
   game: GameData;
   defaultExpanded: boolean;
+  weights: LearnedWeights | null;
+  cutoffs: GradeCutoffs;
 }) {
   const [expanded, setExpanded] = useState(defaultExpanded);
   const scores = player.scores.L5;
   if (!scores) return null;
 
   const sp = player.season_profile;
-  const seasonComposite = calcSeasonComposite(player);
-  const grade = getGrade(seasonComposite);
+  const seasonComposite = calcSeasonComposite(player, game, weights);
+  const grade = getGrade(seasonComposite, cutoffs);
   const form = getForm(player);
   const env = game.environment;
   const hrProb = calcHrProb(seasonComposite).toFixed(1);
@@ -723,11 +830,15 @@ function MatchupTableView({
   sortKey,
   sortDir,
   onSort,
+  weights,
+  cutoffs,
 }: {
   players: { player: PlayerData; game: GameData }[];
   sortKey: TableSortKey | null;
   sortDir: SortDir;
   onSort: (key: TableSortKey) => void;
+  weights: LearnedWeights | null;
+  cutoffs: GradeCutoffs;
 }) {
   const headerProps = { currentSort: sortKey, currentDir: sortDir, onSort };
   // Figma design tokens
@@ -764,8 +875,8 @@ function MatchupTableView({
               const scores = player.scores.L5;
               if (!scores) return null;
               const sp = player.season_profile;
-              const seasonComposite = calcSeasonComposite(player);
-              const grade = getGrade(seasonComposite);
+              const seasonComposite = calcSeasonComposite(player, game, weights);
+              const grade = getGrade(seasonComposite, cutoffs);
               const form = getFormDetailed(player);
               const batterTeam =
                 player.batter_side === "home"
@@ -857,8 +968,8 @@ function MatchupTableView({
           const scores = player.scores.L5;
           if (!scores) return null;
           const sp = player.season_profile;
-          const seasonComposite = calcSeasonComposite(player);
-          const grade = getGrade(seasonComposite);
+          const seasonComposite = calcSeasonComposite(player, game, weights);
+          const grade = getGrade(seasonComposite, cutoffs);
           const form = getFormDetailed(player);
           const batterTeam =
             player.batter_side === "home" ? game.home_team : game.away_team;
@@ -946,6 +1057,18 @@ export function MatchupAnalysis({
 }) {
   const [viewMode, setViewMode] = useState<"table" | "cards">("table");
   const [selectedGamePk, setSelectedGamePk] = useState<number | null>(null);
+  const [learnedWeights, setLearnedWeights] = useState<LearnedWeights | null>(null);
+
+  // Load 3-year trained weights. Page falls back to hand-tuned formula
+  // while this is loading or if the fetch fails.
+  useEffect(() => {
+    fetch("/data/results/matchup_v2_weights.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: LearnedWeights | null) => {
+        if (d?.coefficients) setLearnedWeights(d);
+      })
+      .catch(() => {});
+  }, []);
   const [sortBy, setSortBy] = useState<"composite" | "batter" | "pitcher">(
     "composite",
   );
@@ -987,6 +1110,16 @@ export function MatchupAnalysis({
     }
     return pairs;
   }, [filteredGames]);
+
+  // Slate-relative grade cutoffs. Compute from every eligible player's
+  // composite today. NOTE: uses the full unfiltered slate (allPairs)
+  // so cutoffs don't shift when the user applies filters mid-view.
+  const slateCutoffs = useMemo<GradeCutoffs>(() => {
+    const composites = allPairs.map(({ player, game }) =>
+      calcSeasonComposite(player, game, learnedWeights),
+    );
+    return deriveSlateCutoffs(composites);
+  }, [allPairs, learnedWeights]);
 
   const tableFilteredPairs = useMemo(() => {
     let result = allPairs;
@@ -1050,7 +1183,7 @@ export function MatchupAnalysis({
         case "grade":
         case "composite":
         case "hr_prob":
-          return calcSeasonComposite(player);
+          return calcSeasonComposite(player, pair.game, learnedWeights);
         case "batter_power":
           return calcBatterPower(player);
         case "pitcher_vuln":
@@ -1103,7 +1236,7 @@ export function MatchupAnalysis({
       return (numericValue(a, effectiveKey) - numericValue(b, effectiveKey)) * dir;
     });
     return sorted;
-  }, [tableFilteredPairs, tableSortBy, tableSortDir]);
+  }, [tableFilteredPairs, tableSortBy, tableSortDir, learnedWeights]);
 
   const cardSortedPlayers = useMemo(() => {
     const sorted = [...allPairs];
@@ -1113,10 +1246,13 @@ export function MatchupAnalysis({
       if (!sa || !sb) return 0;
       if (sortBy === "batter") return calcBatterPower(b.player) - calcBatterPower(a.player);
       if (sortBy === "pitcher") return sb.pitcher_score - sa.pitcher_score;
-      return calcSeasonComposite(b.player) - calcSeasonComposite(a.player);
+      return (
+        calcSeasonComposite(b.player, b.game, learnedWeights) -
+        calcSeasonComposite(a.player, a.game, learnedWeights)
+      );
     });
     return sorted;
-  }, [allPairs, sortBy]);
+  }, [allPairs, sortBy, learnedWeights]);
 
   const selectClasses =
     "bg-card/50 border border-card-border text-foreground text-xs rounded-lg pl-3 pr-8 py-2 focus:outline-none focus:border-accent/40 cursor-pointer appearance-none bg-no-repeat bg-[right_0.6rem_center] bg-[length:0.75em_0.75em]";
@@ -1144,14 +1280,30 @@ export function MatchupAnalysis({
         ))}
       </div>
 
-      {/* Season-long disclosure */}
+      {/* Season-long disclosure + model source */}
       <div className="rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-xs text-foreground">
-        <span className="font-semibold text-accent">Season-long view.</span>{" "}
-        Grade, HR Probability, Batter Power, EV, and Barrel% all use full
-        2025+2026 season data — not L5 or L10. The{" "}
-        <span className="font-semibold">Recent Form</span> column is the only
-        place recent (L5 vs L10) performance shows up, and it has zero
-        influence on the grade or probability.
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <span className="font-semibold text-accent">Season-long view.</span>{" "}
+            Grade, HR Probability, Batter Power, EV, and Barrel% all use full
+            2025+2026 season data — not L5 or L10. The{" "}
+            <span className="font-semibold">Recent Form</span> column is the only
+            place recent (L5 vs L10) performance shows up, and it has zero
+            influence on the grade or probability.
+          </div>
+          {learnedWeights ? (
+            <span
+              className="hidden md:inline-flex shrink-0 items-center gap-1.5 rounded-md border border-accent-green/30 bg-accent-green/10 px-2.5 py-1 text-[10px] font-mono font-semibold text-accent-green uppercase tracking-wider"
+              title={`Trained on ${learnedWeights.n_samples.toLocaleString()} player-days, ${learnedWeights.n_hrs.toLocaleString()} HRs (2023-2025). AUC ${learnedWeights.auc.toFixed(3)}.`}
+            >
+              ML v2 · {Math.round(learnedWeights.n_samples / 1000)}k samples
+            </span>
+          ) : (
+            <span className="hidden md:inline-flex shrink-0 items-center rounded-md border border-card-border bg-card px-2.5 py-1 text-[10px] font-mono text-muted uppercase">
+              Loading model…
+            </span>
+          )}
+        </div>
       </div>
 
       {viewMode === "table" ? (
@@ -1253,6 +1405,8 @@ export function MatchupAnalysis({
             sortKey={tableSortBy}
             sortDir={tableSortDir}
             onSort={handleTableSort}
+            weights={learnedWeights}
+            cutoffs={slateCutoffs}
           />
 
           {tableSortedPlayers.length === 0 && (
@@ -1337,6 +1491,8 @@ export function MatchupAnalysis({
                 defaultExpanded={
                   expandAll || (i < 5 && selectedGamePk !== null)
                 }
+                weights={learnedWeights}
+                cutoffs={slateCutoffs}
               />
             ))}
           </div>
