@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  /* ---- Colors (existing, kept) ---- */
   --background: #141414;
   --foreground: #e4e4e7;
   --card: #1c1c1e;
@@ -10,9 +11,34 @@
   --accent-yellow: #fbbf24;
   --accent-red: #f87171;
   --muted: #71717a;
+
+  /* ---- Surface elevation (replaces bg-card/30, /40, /50, /60 scatter) ---- */
+  --surface-1: #1c1c1e;        /* base card (== --card) */
+  --surface-2: #232326;        /* raised / hover */
+  --surface-3: #2a2a2e;        /* popover / dropdown */
+  --surface-sunken: #161618;   /* filter bar trough */
+  --border-subtle: #2c2c2e;    /* == --card-border */
+  --border-strong: #3a3a3e;
+
+  /* ---- Radii ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* ---- Shadows (dark-mode tuned) ---- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
 }
 
 @theme inline {
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -22,8 +48,61 @@
   --color-accent-yellow: var(--accent-yellow);
   --color-accent-red: var(--accent-red);
   --color-muted: var(--muted);
+
+  /* Surfaces */
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Typography scale (locked 6 steps)
+     - Replaces 17 arbitrary font sizes.
+     - text-[9px]/[10px]/[11px] stays banned outside table-styles.ts. */
+  --text-display: 24px;
+  --text-display--line-height: 32px;
+  --text-display--font-weight: 600;
+  --text-display--letter-spacing: -0.01em;
+
+  --text-title: 18px;
+  --text-title--line-height: 24px;
+  --text-title--font-weight: 600;
+  --text-title--letter-spacing: -0.005em;
+
+  --text-body: 14px;
+  --text-body--line-height: 20px;
+  --text-body--font-weight: 400;
+
+  --text-label: 12px;
+  --text-label--line-height: 16px;
+  --text-label--font-weight: 500;
+  --text-label--letter-spacing: 0.01em;
+
+  --text-caption: 11px;
+  --text-caption--line-height: 14px;
+  --text-caption--font-weight: 500;
+  --text-caption--letter-spacing: 0.02em;
+
+  --text-micro: 10px;
+  --text-micro--line-height: 12px;
+  --text-micro--font-weight: 600;
+  --text-micro--letter-spacing: 0.04em;
+
+  /* Radii */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  /* Shadows */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
 }
 
 body {
