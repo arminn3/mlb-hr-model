@@ -11158,7 +11158,7 @@
     "date": "2026-04-16",
     "total_players_ranked": 180,
     "total_hrs_hit": 16,
-    "total_near_hrs": 0,
+    "total_near_hrs": 6,
     "model_hits": 16,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -11207,7 +11207,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 6,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -11238,23 +11238,23 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 5,
-        "rate": 16.7
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 180,
-        "hits": 16,
-        "rate": 8.9
+        "hits": 22,
+        "rate": 12.2
       }
     },
     "avg_composite_hr_hitters": 0.423,
-    "avg_composite_non_hitters": 0.268,
-    "composite_separation": 0.155,
+    "avg_composite_non_hitters": 0.267,
+    "composite_separation": 0.156,
     "hr_hitters": [
       {
         "name": "Jos\u00e9 Ram\u00edrez",
@@ -11483,8 +11483,133 @@
         "matchup": "TB@CWS"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "James Wood",
+        "rank": 12,
+        "composite": 0.671,
+        "opp_pitcher": "Braxton Ashcraft",
+        "matchup": "WSH@PIT"
+      },
+      {
+        "name": "Gleyber Torres",
+        "rank": 52,
+        "composite": 0.378,
+        "opp_pitcher": "Kris Bubic",
+        "matchup": "KC@DET"
+      },
+      {
+        "name": "Konnor Griffin",
+        "rank": 61,
+        "composite": 0.274,
+        "opp_pitcher": "Foster Griffin",
+        "matchup": "WSH@PIT"
+      },
+      {
+        "name": "Taylor Ward",
+        "rank": 75,
+        "composite": 0.234,
+        "opp_pitcher": "Parker Messick",
+        "matchup": "BAL@CLE"
+      },
+      {
+        "name": "Kazuma Okamoto",
+        "rank": 107,
+        "composite": 0.161,
+        "opp_pitcher": "Brandon Sproat",
+        "matchup": "TOR@MIL"
+      },
+      {
+        "name": "Kevin McGonigle",
+        "rank": 150,
+        "composite": 0.111,
+        "opp_pitcher": "Kris Bubic",
+        "matchup": "KC@DET"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Taylor Ward",
+        "ev": 102.8,
+        "angle": 27.0,
+        "distance": 393.0,
+        "hr_in_parks": 14,
+        "result": "field_out",
+        "pitcher": "Messick, Parker"
+      },
+      {
+        "batter": "Dillon Dingler",
+        "ev": 101.6,
+        "angle": 31.0,
+        "distance": 380.0,
+        "hr_in_parks": 23,
+        "result": "field_out",
+        "pitcher": "Mears, Nick"
+      },
+      {
+        "batter": "Kevin McGonigle",
+        "ev": 99.0,
+        "angle": 25.0,
+        "distance": 388.0,
+        "hr_in_parks": 1,
+        "result": "triple",
+        "pitcher": "Mears, Nick"
+      },
+      {
+        "batter": "Gleyber Torres",
+        "ev": 101.4,
+        "angle": 24.0,
+        "distance": 369.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Bubic, Kris"
+      },
+      {
+        "batter": "Dillon Dingler",
+        "ev": 103.5,
+        "angle": 23.0,
+        "distance": 368.0,
+        "hr_in_parks": 16,
+        "result": "double",
+        "pitcher": "Bubic, Kris"
+      },
+      {
+        "batter": "Vinnie Pasquantino",
+        "ev": 98.7,
+        "angle": 29.0,
+        "distance": 387.0,
+        "hr_in_parks": 26,
+        "result": "field_out",
+        "pitcher": "Montero, Keider"
+      },
+      {
+        "batter": "Kazuma Okamoto",
+        "ev": 96.9,
+        "angle": 30.0,
+        "distance": 379.0,
+        "hr_in_parks": 27,
+        "result": "field_out",
+        "pitcher": "Sproat, Brandon"
+      },
+      {
+        "batter": "James Wood",
+        "ev": 104.4,
+        "angle": 37.0,
+        "distance": 374.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "Mattson, Isaac"
+      },
+      {
+        "batter": "Konnor Griffin",
+        "ev": 108.7,
+        "angle": 23.0,
+        "distance": 401.0,
+        "hr_in_parks": 23,
+        "result": "triple",
+        "pitcher": "Schultz, Paxton"
+      }
+    ],
     "surprise_hrs": []
   }
 ]
