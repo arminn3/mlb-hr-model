@@ -4,6 +4,9 @@ import { useState, useMemo } from "react";
 import type { GameData, LookbackKey } from "./types";
 import { RatingBadge } from "./rating-badge";
 import { ScoreBar } from "./score-bar";
+import { Badge } from "./ui/badge";
+import { Card } from "./ui/card";
+import { Chip } from "./ui/chip";
 
 const FILTER_OPTIONS = [
   { label: "Top 10", value: 10 },
@@ -59,24 +62,25 @@ export function TopPicks({
   if (top.length === 0) return null;
 
   return (
-    <div className="border border-accent/20 rounded-xl bg-accent/5 p-5 mb-6">
-      <div className="flex items-center justify-between mb-3">
-        <h2 className="text-sm font-bold text-accent uppercase tracking-wider">
+    <Card
+      variant="outline"
+      padding="md"
+      className="border-accent/25 bg-accent/[0.04] mb-6"
+    >
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+        <h2 className="text-[10px] leading-[12px] font-semibold uppercase tracking-[0.08em] text-accent">
           HR Rankings
         </h2>
-        <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-1">
+        <div className="flex items-center gap-1.5">
           {FILTER_OPTIONS.map((opt) => (
-            <button
+            <Chip
               key={opt.value}
+              size="sm"
+              selected={filter === opt.value}
               onClick={() => setFilter(opt.value)}
-              className={`px-3 py-1 text-[11px] rounded cursor-pointer transition-colors ${
-                filter === opt.value
-                  ? "bg-accent/15 text-accent font-medium"
-                  : "text-muted hover:text-foreground"
-              }`}
             >
               {opt.label}
-            </button>
+            </Chip>
           ))}
         </div>
       </div>
@@ -87,24 +91,28 @@ export function TopPicks({
           const s = player.scores[lookback];
           if (!s) return null;
           return (
-            <div key={player.name} className="flex items-center gap-3 bg-background/30 rounded-lg px-3 py-2.5">
-              <span className="text-sm font-bold text-accent font-mono w-7 text-center shrink-0">{i + 1}</span>
+            <div
+              key={player.name}
+              className="flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2.5"
+              style={{ background: "var(--surface-sunken)" }}
+            >
+              <span className="text-[13px] font-bold text-accent font-mono w-7 text-center shrink-0">{i + 1}</span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-foreground">{player.name}</span>
+                  <span className="text-[13px] font-semibold text-foreground">{player.name}</span>
                   <RatingBadge composite={s.composite} />
                 </div>
-                <div className="text-[10px] text-muted mt-0.5">
+                <div className="text-[11px] leading-[14px] font-medium tracking-[0.02em] text-muted mt-0.5">
                   {game.away_team}@{game.home_team} vs {player.opp_pitcher}
                 </div>
-                <div className="flex items-center gap-3 mt-1 text-[10px]">
+                <div className="flex items-center gap-3 mt-1 text-[11px]">
                   <span className="text-foreground font-mono">{s.exit_velo} EV</span>
                   <span className={`font-mono ${s.barrel_pct > 0 ? "text-accent-green" : "text-muted"}`}>{s.barrel_pct}% bar</span>
                   <span className={`font-mono ${s.fb_pct >= 40 ? "text-accent-green" : "text-muted"}`}>{s.fb_pct}% fb</span>
                 </div>
               </div>
               <div className="text-right shrink-0">
-                <span className="font-mono text-sm font-bold text-foreground">{s.composite.toFixed(3)}</span>
+                <span className="font-mono text-[14px] font-bold text-foreground">{s.composite.toFixed(3)}</span>
               </div>
             </div>
           );
@@ -138,8 +146,8 @@ export function TopPicks({
                   <td className="py-2 pr-3">
                     <span className="font-semibold text-foreground">{player.name}</span>
                     {s.recent_abs.length <= 2 && (
-                      <span className="ml-1.5 px-1.5 py-0.5 text-[9px] font-semibold rounded bg-accent/10 text-accent border border-accent/20">
-                        NEW
+                      <span className="ml-1.5 inline-block align-middle">
+                        <Badge variant="accent" size="sm">NEW</Badge>
                       </span>
                     )}
                   </td>
@@ -161,6 +169,6 @@ export function TopPicks({
           </tbody>
         </table>
       </div>
-    </div>
+    </Card>
   );
 }

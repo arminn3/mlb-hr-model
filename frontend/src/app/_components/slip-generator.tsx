@@ -1,8 +1,43 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { GameData, LookbackKey } from "./types";
 import { RatingBadge } from "./rating-badge";
+
+/** Slip Generator session state — survives tab switches via sessionStorage.
+ *  Bumped to v2 because keys changed from the old single-key persistence. */
+const SLIP_STATE_KEY = "beeb:slip-gen:v2";
+
+interface PersistedState {
+  selectedNames: string[];
+  legCount: 2 | 3;
+  mode: "auto" | "custom" | "optimal";
+  sortMode: SortMode;
+  search: string;
+}
+
+function loadPersistedState(): Partial<PersistedState> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = sessionStorage.getItem(SLIP_STATE_KEY);
+    if (!raw) {
+      // Migrate from v1 (selectedNames only) if present so users don't lose picks
+      const legacy = localStorage.getItem("slip-selected-players");
+      if (legacy) return { selectedNames: JSON.parse(legacy) };
+      return {};
+    }
+    return JSON.parse(raw);
+  } catch {
+    return {};
+  }
+}
+
+function persistState(state: PersistedState) {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.setItem(SLIP_STATE_KEY, JSON.stringify(state));
+  } catch {}
+}
 
 interface SlipPlayer {
   name: string;
@@ -330,17 +365,36 @@ export function SlipGenerator({
   games: GameData[];
   lookback: LookbackKey;
 }) {
-  const [legCount, setLegCount] = useState<2 | 3>(2);
-  const [mode, setMode] = useState<"auto" | "custom" | "optimal">("auto");
-  const [sortMode, setSortMode] = useState<SortMode>("best");
-  const [selectedNames, setSelectedNames] = useState<Set<string>>(() => {
-    if (typeof window === "undefined") return new Set();
-    try {
-      const saved = localStorage.getItem("slip-selected-players");
-      return saved ? new Set(JSON.parse(saved)) : new Set();
-    } catch { return new Set(); }
-  });
-  const [search, setSearch] = useState("");
+  // Hydrate from sessionStorage once on mount. Keeping the full parlay-
+  // building state across tab switches (not just selectedNames).
+  const initial = useRef<Partial<PersistedState>>(loadPersistedState()).current;
+
+  const [legCount, setLegCount] = useState<2 | 3>(
+    (initial.legCount === 2 || initial.legCount === 3) ? initial.legCount : 2
+  );
+  const [mode, setMode] = useState<"auto" | "custom" | "optimal">(
+    initial.mode ?? "auto"
+  );
+  const [sortMode, setSortMode] = useState<SortMode>(initial.sortMode ?? "best");
+  const [selectedNames, setSelectedNames] = useState<Set<string>>(
+    () => new Set(initial.selectedNames ?? [])
+  );
+  const [search, setSearch] = useState(initial.search ?? "");
+
+  // Debounced persist (150ms) so rapid typing in the search box doesn't
+  // hammer sessionStorage.
+  useEffect(() => {
+    const t = setTimeout(() => {
+      persistState({
+        selectedNames: [...selectedNames],
+        legCount,
+        mode,
+        sortMode,
+        search,
+      });
+    }, 150);
+    return () => clearTimeout(t);
+  }, [selectedNames, legCount, mode, sortMode, search]);
 
   const allPlayers = useMemo(
     () => getAllPlayers(games, lookback),
@@ -374,8 +428,7 @@ export function SlipGenerator({
       const next = new Set(prev);
       if (next.has(name)) next.delete(name);
       else next.add(name);
-      try { localStorage.setItem("slip-selected-players", JSON.stringify([...next])); } catch {}
-      return next;
+      return next; // persistence handled by the useEffect above
     });
   };
 
@@ -549,7 +602,7 @@ export function SlipGenerator({
                 </button>
               ))}
               <button
-                onClick={() => { setSelectedNames(new Set()); try { localStorage.removeItem("slip-selected-players"); } catch {} }}
+                onClick={() => { setSelectedNames(new Set()); try { localStorage.removeItem("slip-selected-players"); } catch {} /* clear v1 legacy */ }}
                 className="inline-flex items-center gap-1 px-2.5 py-1 text-xs text-accent-red border border-accent-red/30 rounded-full cursor-pointer hover:bg-accent-red/10"
               >
                 Clear All Selections
