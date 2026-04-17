@@ -215,7 +215,7 @@ export function Dashboard() {
         {/* Top bar — 3 slots: left (title/meta), center (date), right (lookback)
             Mobile: stacks — title row above, controls row below. */}
         <header
-          className="sticky top-0 z-10 bg-background/85 backdrop-blur-md border-b border-[var(--border-subtle)] px-4 md:px-8 py-3"
+          className="sticky top-0 z-10 bg-background/85 backdrop-blur-md border-b border-(color:var(--border-subtle)) px-4 md:px-8 py-3"
         >
           <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
             {/* LEFT slot */}

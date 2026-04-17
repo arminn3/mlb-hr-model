@@ -35,7 +35,7 @@ export function Chip({
 
   const state = selected
     ? "bg-accent/15 text-accent border border-accent/30 font-semibold"
-    : "bg-[var(--surface-2)] text-muted border border-[var(--border-subtle)] hover:text-foreground hover:border-[var(--border-strong)]";
+    : "bg-[var(--surface-2)] text-muted border border-(color:var(--border-subtle)) hover:text-foreground hover:border-(color:var(--border-strong))";
 
   return (
     <button

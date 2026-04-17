@@ -88,7 +88,7 @@ export function Sidebar({
   onChange: (page: Page) => void;
 }) {
   return (
-    <aside className="w-56 flex-shrink-0 border-r border-[var(--border-subtle)] h-screen sticky top-0 flex flex-col bg-background">
+    <aside className="w-56 flex-shrink-0 border-r border-(color:var(--border-subtle)) h-screen sticky top-0 flex flex-col bg-background">
       {/* Logo */}
       <div className="px-5 py-5">
         <span className="text-[17px] font-semibold tracking-[-0.01em] text-foreground block">
@@ -100,7 +100,7 @@ export function Sidebar({
       </div>
 
       {/* Thin divider under logo */}
-      <div className="mx-5 border-b border-[var(--border-subtle)]" />
+      <div className="mx-5 border-b border-(color:var(--border-subtle))" />
 
       {/* Nav groups */}
       <div className="px-3 py-4 flex-1 overflow-y-auto">
@@ -150,7 +150,7 @@ export function Sidebar({
       </div>
 
       {/* Footer */}
-      <div className="px-5 py-3 border-t border-[var(--border-subtle)] text-[10px] font-medium tracking-[0.02em] text-muted/80">
+      <div className="px-5 py-3 border-t border-(color:var(--border-subtle)) text-[10px] font-medium tracking-[0.02em] text-muted/80">
         Data: Baseball Savant, Open-Meteo
       </div>
     </aside>

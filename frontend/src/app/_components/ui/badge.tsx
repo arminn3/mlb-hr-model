@@ -10,7 +10,7 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 
 const VARIANT: Record<Variant, string> = {
   neutral:
-    "bg-[var(--surface-2)] text-muted border border-[var(--border-subtle)]",
+    "bg-[var(--surface-2)] text-muted border border-(color:var(--border-subtle))",
   accent:
     "bg-accent/15 text-accent border border-accent/30",
   success:

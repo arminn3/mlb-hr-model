@@ -42,7 +42,7 @@ export function GameSection({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Side 1: Home batters vs Away pitcher */}
         <div>
-          <h3 className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted/80 mb-3 pb-2 border-b border-[var(--border-subtle)]">
+          <h3 className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted/80 mb-3 pb-2 border-b border-(color:var(--border-subtle))">
             {game.home_team} Batters vs {game.away_pitcher.name} ({game.away_pitcher.hand}HP)
           </h3>
           <PitcherCard
@@ -62,7 +62,7 @@ export function GameSection({
 
         {/* Side 2: Away batters vs Home pitcher */}
         <div>
-          <h3 className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted/80 mb-3 pb-2 border-b border-[var(--border-subtle)]">
+          <h3 className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted/80 mb-3 pb-2 border-b border-(color:var(--border-subtle))">
             {game.away_team} Batters vs {game.home_pitcher.name} ({game.home_pitcher.hand}HP)
           </h3>
           <PitcherCard
