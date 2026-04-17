@@ -122,21 +122,46 @@ export function MLRankings({
       .catch(() => setYesterday(null));
   }, [currentDate, lookback, mlWeights]);
 
-  // Try to load ML-learned weights from the published analysis file.
+  // Prefer the 3-year Matchup v2 weights (125k samples, stable) over the
+  // 2026-only ml_analysis.json (~5k samples, noisy). Fall back to the
+  // smaller file if v2 isn't deployed yet. When 2026 accumulates enough
+  // samples (~20k+), we'll blend them in via a future training pipeline.
   useEffect(() => {
-    fetch("/data/results/ml_analysis.json")
+    fetch("/data/results/matchup_v2_weights.json")
       .then((res) => (res.ok ? res.json() : null))
       .then((d) => {
         if (d?.category_weights) {
           setMlWeights({
             batter: d.category_weights.batter ?? FALLBACK_WEIGHTS.batter,
-            matchup: d.category_weights.matchup ?? FALLBACK_WEIGHTS.matchup,
+            // matchup_v2 has no "matchup" key — default to 0, lets
+            // batter/pitcher/env split the full 100%.
+            matchup: d.category_weights.matchup ?? 0,
             pitcher: d.category_weights.pitcher ?? FALLBACK_WEIGHTS.pitcher,
             environment:
               d.category_weights.environment ?? FALLBACK_WEIGHTS.environment,
           });
-          setWeightSource("live");
+          setWeightSource(`3yr (${d.n_samples?.toLocaleString?.() ?? "125k"} samples)`);
+          return true;
         }
+        return false;
+      })
+      .then((ok) => {
+        if (ok) return;
+        // Fallback: 2026-only trained weights.
+        return fetch("/data/results/ml_analysis.json")
+          .then((res) => (res.ok ? res.json() : null))
+          .then((d) => {
+            if (d?.category_weights) {
+              setMlWeights({
+                batter: d.category_weights.batter ?? FALLBACK_WEIGHTS.batter,
+                matchup: d.category_weights.matchup ?? FALLBACK_WEIGHTS.matchup,
+                pitcher: d.category_weights.pitcher ?? FALLBACK_WEIGHTS.pitcher,
+                environment:
+                  d.category_weights.environment ?? FALLBACK_WEIGHTS.environment,
+              });
+              setWeightSource(`2026 only (${d.trained_on?.toLocaleString?.() ?? "?"} samples)`);
+            }
+          });
       })
       .catch(() => {
         // keep fallback
