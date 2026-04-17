@@ -10,7 +10,10 @@ export function PitcherCard({
   pitchTypes?: string[];
 }) {
   return (
-    <div className="bg-card/60 border border-card-border rounded-lg p-4 mb-3">
+    <div
+      className="rounded-[var(--radius-md)] p-4 mb-3"
+      style={{ background: "var(--surface-1)" }}
+    >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <span className="font-semibold text-foreground">{pitcher.name}</span>

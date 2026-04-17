@@ -101,7 +101,10 @@ export function BatterCard({
   }
 
   return (
-    <div className="border border-card-border rounded-lg bg-card/40 hover:bg-card/60 transition-colors">
+    <div
+      className="rounded-[var(--radius-md)] hover:bg-[var(--surface-2)] transition-colors"
+      style={{ background: "var(--surface-1)" }}
+    >
       {/* Card face */}
       <button
         onClick={() => setExpanded(!expanded)}
