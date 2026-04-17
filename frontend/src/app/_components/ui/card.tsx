@@ -13,13 +13,13 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
 
 const VARIANT: Record<Variant, string> = {
   default:
-    "bg-[var(--surface-1)] border border-(color:var(--border-subtle))",
+    "bg-[var(--surface-1)] border border-[#2c2c2e]",
   raised:
-    "bg-[var(--surface-2)] border border-(color:var(--border-strong)) shadow-[var(--shadow-md)]",
+    "bg-[var(--surface-2)] border border-[#3a3a3e] shadow-[var(--shadow-md)]",
   sunken:
-    "bg-[var(--surface-sunken)] border border-(color:var(--border-subtle))",
+    "bg-[var(--surface-sunken)] border border-[#2c2c2e]",
   outline:
-    "bg-transparent border border-(color:var(--border-subtle))",
+    "bg-transparent border border-[#2c2c2e]",
 };
 
 const PADDING: Record<Padding, string> = {
@@ -130,7 +130,7 @@ export function CardFooter({
     <div
       {...rest}
       className={
-        "flex items-center justify-end gap-2 mt-4 pt-3 border-t border-(color:var(--border-subtle))" +
+        "flex items-center justify-end gap-2 mt-4 pt-3 border-t border-[#2c2c2e]" +
         (className ? " " + className : "")
       }
     >

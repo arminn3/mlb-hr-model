@@ -21,8 +21,8 @@ const VARIANT: Record<Variant, string> = {
     "hover:bg-accent/90 active:bg-accent/85 " +
     "disabled:bg-accent/40 disabled:text-background/60",
   secondary:
-    "bg-[var(--surface-2)] text-foreground border border-(color:var(--border-strong)) " +
-    "hover:bg-[var(--surface-3)] hover:border-(color:var(--border-strong)) " +
+    "bg-[var(--surface-2)] text-foreground border border-[#3a3a3e] " +
+    "hover:bg-[var(--surface-3)] hover:border-[#3a3a3e] " +
     "active:bg-[var(--surface-2)] " +
     "disabled:opacity-40",
   ghost:

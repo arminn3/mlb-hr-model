@@ -21,7 +21,7 @@ const VARIANT: Record<Variant, string> = {
     "active:bg-[var(--surface-sunken)] " +
     "disabled:opacity-30",
   solid:
-    "bg-[var(--surface-2)] text-foreground border border-(color:var(--border-strong)) " +
+    "bg-[var(--surface-2)] text-foreground border border-[#3a3a3e] " +
     "hover:bg-[var(--surface-3)] " +
     "active:bg-[var(--surface-2)] " +
     "disabled:opacity-30",
