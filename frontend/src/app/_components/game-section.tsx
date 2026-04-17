@@ -30,7 +30,7 @@ export function GameSection({
   return (
     <div
       className="rounded-[var(--radius-lg)] p-5 mb-6"
-      style={{ background: "var(--surface-sunken)" }}
+      style={{ background: "#161618", border: "1px solid #242428" }}
     >
       <GameHeader
         awayTeam={game.away_team}

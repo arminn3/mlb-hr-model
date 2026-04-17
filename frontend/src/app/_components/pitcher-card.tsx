@@ -12,7 +12,7 @@ export function PitcherCard({
   return (
     <div
       className="rounded-[var(--radius-md)] p-4 mb-3"
-      style={{ background: "var(--surface-1)" }}
+      style={{ background: "#232326", border: "1px solid #2c2c2e" }}
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">

@@ -102,8 +102,8 @@ export function BatterCard({
 
   return (
     <div
-      className="rounded-[var(--radius-md)] hover:bg-[var(--surface-2)] transition-colors"
-      style={{ background: "var(--surface-1)" }}
+      className="rounded-[var(--radius-md)] transition-colors"
+      style={{ background: "#232326", border: "1px solid #2c2c2e" }}
     >
       {/* Card face */}
       <button
