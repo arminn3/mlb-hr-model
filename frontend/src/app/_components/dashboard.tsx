@@ -1,5 +1,6 @@
 "use client";
 
+import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { ModelData, LookbackKey, GameEnvironment } from "./types";
 import { Sidebar, type Page } from "./sidebar";
@@ -18,6 +19,29 @@ import { GemFinder } from "./gem-finder";
 import { LiveFeed } from "./live-feed";
 import { ProjectionsView } from "./projections-view";
 import { MatchupAnalysis } from "./matchup-analysis";
+import { IconButton } from "./ui/icon-button";
+
+/** Central per-tab config. Replaces the hardcoded conditional at the
+ *  old dashboard header line 209. Easier to audit which tabs show what. */
+const TAB_CONFIG: Record<Page, {
+  title: string;
+  subtitle?: string;
+  showLookback: boolean;
+  showDatePicker: boolean;
+}> = {
+  rankings:    { title: "HR Rankings",       subtitle: "Top HR plays by composite score",      showLookback: true,  showDatePicker: true },
+  ml:          { title: "ML Rankings",       subtitle: "Data-driven — learned from 125k slate samples", showLookback: true,  showDatePicker: true },
+  slate:       { title: "Game Slate",        subtitle: "Every game on today's card",           showLookback: true,  showDatePicker: true },
+  projections: { title: "Projections",       subtitle: "Future at-bat modeling",               showLookback: false, showDatePicker: true },
+  environment: { title: "Environment",       subtitle: "Park, weather, and wind conditions",   showLookback: false, showDatePicker: true },
+  slips:       { title: "Slip Generator",    subtitle: "Build multi-leg parlays",              showLookback: true,  showDatePicker: true },
+  bvp:         { title: "Batter vs Pitcher", subtitle: "Head-to-head history",                 showLookback: true,  showDatePicker: true },
+  gems:        { title: "Gem Finder",        subtitle: "Under-the-radar picks",                showLookback: true,  showDatePicker: true },
+  live:        { title: "Live Feed",         subtitle: "Real-time game action",                showLookback: false, showDatePicker: false },
+  results:     { title: "Results Log",       subtitle: "How the model performed",              showLookback: false, showDatePicker: true },
+  methodology: { title: "How It Works",      showLookback: false, showDatePicker: false },
+  matchup:     { title: "Matchup Analysis",  subtitle: "Season-long hitter vs pitcher",        showLookback: false, showDatePicker: true },
+};
 
 // When MAINTENANCE_MODE_PROD is true, show the error page ONLY on
 // the production Vercel deployment. Local dev (`npm run dev`) and
@@ -169,47 +193,60 @@ export function Dashboard() {
     setSidebarOpen(false); // close on mobile after selecting
   };
 
-  const pageTitle = activePage === "rankings" ? "HR Rankings" : activePage === "ml" ? "ML Rankings" : activePage === "slate" ? "Game Slate" : activePage === "projections" ? "Projections" : activePage === "slips" ? "Slip Generator" : activePage === "bvp" ? "Batter vs Pitcher" : activePage === "environment" ? "Environment" : activePage === "gems" ? "Gem Finder" : activePage === "matchup" ? "Matchup Analysis" : activePage === "live" ? "Live Feed" : activePage === "results" ? "Results Log" : "How It Works";
+  const tabConfig = TAB_CONFIG[activePage];
 
   return (
     <div className="flex min-h-screen">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          className="fixed inset-0 bg-black/60 z-30 lg:hidden backdrop-blur-sm"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar — hidden on mobile, slide in when open */}
-      <div className={`fixed lg:static z-40 transition-transform duration-200 ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}>
+      <div className={`fixed lg:static z-40 transition-transform duration-[var(--duration-base)] ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}>
         <Sidebar active={activePage} onChange={handlePageChange} />
       </div>
 
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Top bar */}
-        <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b border-card-border px-4 md:px-8 py-3 flex items-center justify-between gap-2">
-          <div className="flex items-center gap-3">
-            {/* Hamburger — mobile only */}
-            <button
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="lg:hidden text-muted hover:text-foreground cursor-pointer"
-            >
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-            <h1 className="text-sm font-semibold text-foreground">{pageTitle}</h1>
-            <span className="text-xs text-muted hidden sm:inline">
-              {totalPlayers} players &middot; {data.games.length} games
-            </span>
-          </div>
-          <div className="flex items-center gap-2 md:gap-4">
-            {(activePage === "rankings" || activePage === "ml" || activePage === "slate" || activePage === "slips" || activePage === "bvp" || activePage === "gems") && (
-              <LookbackToggle value={lookback} onChange={setLookback} />
-            )}
-            <DatePicker currentDate={selectedDate} onChange={loadDate} />
+        {/* Top bar — 3 slots: left (title/meta), center (date), right (lookback)
+            Mobile: stacks — title row above, controls row below. */}
+        <header
+          className="sticky top-0 z-10 bg-background/85 backdrop-blur-md border-b border-[var(--border-subtle)] px-4 md:px-8 py-3"
+        >
+          <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
+            {/* LEFT slot */}
+            <div className="flex items-center gap-3 min-w-0">
+              <IconButton
+                icon={Menu}
+                aria-label="Open navigation"
+                variant="ghost"
+                size="md"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                className="lg:hidden"
+              />
+              <div className="min-w-0">
+                <h1 className="text-[14px] leading-[20px] font-semibold tracking-[-0.005em] text-foreground truncate">
+                  {tabConfig.title}
+                </h1>
+                <p className="text-[11px] leading-[14px] font-medium tracking-[0.02em] text-muted truncate">
+                  {tabConfig.subtitle ?? `${totalPlayers} players \u00b7 ${data.games.length} games`}
+                </p>
+              </div>
+            </div>
+
+            {/* RIGHT slot (date + lookback) */}
+            <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
+              {tabConfig.showLookback && (
+                <LookbackToggle value={lookback} onChange={setLookback} />
+              )}
+              {tabConfig.showDatePicker && (
+                <DatePicker currentDate={selectedDate} onChange={loadDate} />
+              )}
+            </div>
           </div>
         </header>
 
