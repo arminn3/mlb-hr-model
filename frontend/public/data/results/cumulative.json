@@ -11156,54 +11156,54 @@
   },
   {
     "date": "2026-04-16",
-    "total_players_ranked": 201,
-    "total_hrs_hit": 0,
+    "total_players_ranked": 180,
+    "total_hrs_hit": 16,
     "total_near_hrs": 0,
-    "model_hits": 0,
-    "best_lookback": "L5",
+    "model_hits": 16,
+    "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 30.0
         },
         "top_20": {
           "total": 20,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 15.0
         },
         "top_30": {
           "total": 30,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 5,
+          "rate": 16.7
         },
         "all": {
-          "total": 201,
-          "hits": 0,
-          "rate": 0.0
+          "total": 180,
+          "hits": 16,
+          "rate": 8.9
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 20,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 4,
+          "rate": 20.0
         },
         "top_30": {
           "total": 30,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 5,
+          "rate": 16.7
         },
         "all": {
-          "total": 201,
-          "hits": 0,
-          "rate": 0.0
+          "total": 180,
+          "hits": 16,
+          "rate": 8.9
         }
       }
     },
@@ -11211,52 +11211,278 @@
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 30.0
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
         "total": 30,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
-        "total": 201,
-        "hits": 0,
-        "rate": 0.0
+        "total": 180,
+        "hits": 16,
+        "rate": 8.9
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 30.0
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
         "total": 30,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
-        "total": 201,
-        "hits": 0,
-        "rate": 0.0
+        "total": 180,
+        "hits": 16,
+        "rate": 8.9
       }
     },
-    "avg_composite_hr_hitters": 0,
-    "avg_composite_non_hitters": 0.271,
-    "composite_separation": -0.271,
-    "hr_hitters": [],
-    "hr_hitters_l10": [],
+    "avg_composite_hr_hitters": 0.423,
+    "avg_composite_non_hitters": 0.268,
+    "composite_separation": 0.155,
+    "hr_hitters": [
+      {
+        "name": "Jos\u00e9 Ram\u00edrez",
+        "rank": 2,
+        "composite": 0.811,
+        "opp_pitcher": "Shane Baz",
+        "matchup": "BAL@CLE"
+      },
+      {
+        "name": "Mike Trout",
+        "rank": 8,
+        "composite": 0.693,
+        "opp_pitcher": "Max Fried",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Vinnie Pasquantino",
+        "rank": 10,
+        "composite": 0.68,
+        "opp_pitcher": "Keider Montero",
+        "matchup": "KC@DET"
+      },
+      {
+        "name": "Marcell Ozuna",
+        "rank": 25,
+        "composite": 0.582,
+        "opp_pitcher": "Foster Griffin",
+        "matchup": "WSH@PIT"
+      },
+      {
+        "name": "Oswald Peraza",
+        "rank": 27,
+        "composite": 0.579,
+        "opp_pitcher": "Max Fried",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Aaron Judge",
+        "rank": 32,
+        "composite": 0.528,
+        "opp_pitcher": "Brent Suter",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Jo Adell",
+        "rank": 42,
+        "composite": 0.473,
+        "opp_pitcher": "Max Fried",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Dillon Dingler",
+        "rank": 49,
+        "composite": 0.412,
+        "opp_pitcher": "Kris Bubic",
+        "matchup": "KC@DET"
+      },
+      {
+        "name": "Hunter Goodman",
+        "rank": 50,
+        "composite": 0.406,
+        "opp_pitcher": "Ryan Weiss",
+        "matchup": "COL@HOU"
+      },
+      {
+        "name": "Everson Pereira",
+        "rank": 54,
+        "composite": 0.376,
+        "opp_pitcher": "Steven Matz",
+        "matchup": "TB@CWS"
+      },
+      {
+        "name": "Salvador Perez",
+        "rank": 57,
+        "composite": 0.344,
+        "opp_pitcher": "Keider Montero",
+        "matchup": "KC@DET"
+      },
+      {
+        "name": "Junior Caminero",
+        "rank": 77,
+        "composite": 0.233,
+        "opp_pitcher": "Jordan Leasure",
+        "matchup": "TB@CWS"
+      },
+      {
+        "name": "Ben Rice",
+        "rank": 88,
+        "composite": 0.19,
+        "opp_pitcher": "Brent Suter",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Josh Jung",
+        "rank": 98,
+        "composite": 0.172,
+        "opp_pitcher": "Jacob Lopez",
+        "matchup": "TEX@ATH"
+      },
+      {
+        "name": "Giancarlo Stanton",
+        "rank": 108,
+        "composite": 0.16,
+        "opp_pitcher": "Brent Suter",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Miguel Vargas",
+        "rank": 137,
+        "composite": 0.124,
+        "opp_pitcher": "Steven Matz",
+        "matchup": "TB@CWS"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Mike Trout",
+        "rank": 4,
+        "composite": 0.692,
+        "opp_pitcher": "Max Fried",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Jos\u00e9 Ram\u00edrez",
+        "rank": 6,
+        "composite": 0.643,
+        "opp_pitcher": "Shane Baz",
+        "matchup": "BAL@CLE"
+      },
+      {
+        "name": "Aaron Judge",
+        "rank": 13,
+        "composite": 0.567,
+        "opp_pitcher": "Brent Suter",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Dillon Dingler",
+        "rank": 18,
+        "composite": 0.528,
+        "opp_pitcher": "Kris Bubic",
+        "matchup": "KC@DET"
+      },
+      {
+        "name": "Salvador Perez",
+        "rank": 27,
+        "composite": 0.486,
+        "opp_pitcher": "Keider Montero",
+        "matchup": "KC@DET"
+      },
+      {
+        "name": "Ben Rice",
+        "rank": 32,
+        "composite": 0.449,
+        "opp_pitcher": "Brent Suter",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Junior Caminero",
+        "rank": 37,
+        "composite": 0.422,
+        "opp_pitcher": "Jordan Leasure",
+        "matchup": "TB@CWS"
+      },
+      {
+        "name": "Marcell Ozuna",
+        "rank": 40,
+        "composite": 0.417,
+        "opp_pitcher": "Foster Griffin",
+        "matchup": "WSH@PIT"
+      },
+      {
+        "name": "Vinnie Pasquantino",
+        "rank": 43,
+        "composite": 0.401,
+        "opp_pitcher": "Keider Montero",
+        "matchup": "KC@DET"
+      },
+      {
+        "name": "Hunter Goodman",
+        "rank": 47,
+        "composite": 0.365,
+        "opp_pitcher": "Ryan Weiss",
+        "matchup": "COL@HOU"
+      },
+      {
+        "name": "Oswald Peraza",
+        "rank": 51,
+        "composite": 0.349,
+        "opp_pitcher": "Max Fried",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Jo Adell",
+        "rank": 53,
+        "composite": 0.343,
+        "opp_pitcher": "Max Fried",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Giancarlo Stanton",
+        "rank": 71,
+        "composite": 0.309,
+        "opp_pitcher": "Brent Suter",
+        "matchup": "LAA@NYY"
+      },
+      {
+        "name": "Josh Jung",
+        "rank": 75,
+        "composite": 0.298,
+        "opp_pitcher": "Jacob Lopez",
+        "matchup": "TEX@ATH"
+      },
+      {
+        "name": "Miguel Vargas",
+        "rank": 81,
+        "composite": 0.289,
+        "opp_pitcher": "Steven Matz",
+        "matchup": "TB@CWS"
+      },
+      {
+        "name": "Everson Pereira",
+        "rank": 113,
+        "composite": 0.203,
+        "opp_pitcher": "Steven Matz",
+        "matchup": "TB@CWS"
+      }
+    ],
     "near_hr_hitters": [],
     "near_hr_events": [],
     "surprise_hrs": []
