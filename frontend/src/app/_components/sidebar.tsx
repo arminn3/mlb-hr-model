@@ -131,9 +131,9 @@ export function Sidebar({
       {/* Logo */}
       <div className="px-5 py-5 border-b border-card-border">
         <span className="text-lg font-bold text-foreground tracking-tight">
-          HR Model
+          Beeb Sheets
         </span>
-        <span className="text-xs text-muted block mt-0.5">MLB Prop Analysis</span>
+        <span className="text-xs text-muted block mt-0.5">MLB HR Prop Analysis</span>
       </div>
 
       {/* Nav groups */}

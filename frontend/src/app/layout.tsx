@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MLB HR Prop Model",
-  description: "Daily MLB home run prop scoring model — pitch-type matchup analysis powered by Statcast data.",
+  title: "Beeb Sheets",
+  description: "Daily MLB home run prop scoring — pitch-type matchup analysis powered by Statcast data.",
 };
 
 export default function RootLayout({
