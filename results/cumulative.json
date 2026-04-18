@@ -11616,7 +11616,7 @@
     "date": "2026-04-17",
     "total_players_ranked": 251,
     "total_hrs_hit": 32,
-    "total_near_hrs": 0,
+    "total_near_hrs": 17,
     "model_hits": 25,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -11665,7 +11665,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 17,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -11696,18 +11696,18 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
-        "hits": 5,
-        "rate": 16.7
+        "hits": 7,
+        "rate": 23.3
       },
       "all": {
         "total": 251,
-        "hits": 25,
-        "rate": 10.0
+        "hits": 42,
+        "rate": 16.7
       }
     },
     "avg_composite_hr_hitters": 0.444,
@@ -12067,8 +12067,354 @@
         "matchup": "STL@HOU"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Mickey Moniak",
+        "rank": 20,
+        "composite": 0.677,
+        "opp_pitcher": "Tyler Glasnow",
+        "matchup": "LAD@COL"
+      },
+      {
+        "name": "Ezequiel Tovar",
+        "rank": 29,
+        "composite": 0.644,
+        "opp_pitcher": "Tyler Glasnow",
+        "matchup": "LAD@COL"
+      },
+      {
+        "name": "Brandon Lowe",
+        "rank": 32,
+        "composite": 0.631,
+        "opp_pitcher": "Nick Martinez",
+        "matchup": "TB@PIT"
+      },
+      {
+        "name": "Kyle Tucker",
+        "rank": 37,
+        "composite": 0.608,
+        "opp_pitcher": "Tomoyuki Sugano",
+        "matchup": "LAD@COL"
+      },
+      {
+        "name": "Shea Langeliers",
+        "rank": 59,
+        "composite": 0.536,
+        "opp_pitcher": "Davis Martin",
+        "matchup": "CWS@ATH"
+      },
+      {
+        "name": "Freddie Freeman",
+        "rank": 84,
+        "composite": 0.46,
+        "opp_pitcher": "Tomoyuki Sugano",
+        "matchup": "LAD@COL"
+      },
+      {
+        "name": "Luisangel Acu\u00f1a",
+        "rank": 103,
+        "composite": 0.28,
+        "opp_pitcher": "Aaron Civale",
+        "matchup": "CWS@ATH"
+      },
+      {
+        "name": "Will Smith",
+        "rank": 110,
+        "composite": 0.262,
+        "opp_pitcher": "Tomoyuki Sugano",
+        "matchup": "LAD@COL"
+      },
+      {
+        "name": "Bobby Witt Jr.",
+        "rank": 147,
+        "composite": 0.191,
+        "opp_pitcher": "Cam Schlittler",
+        "matchup": "KC@NYY"
+      },
+      {
+        "name": "Tyrone Taylor",
+        "rank": 156,
+        "composite": 0.181,
+        "opp_pitcher": "Edward Cabrera",
+        "matchup": "NYM@CHC"
+      },
+      {
+        "name": "Alex Freeland",
+        "rank": 159,
+        "composite": 0.181,
+        "opp_pitcher": "Tomoyuki Sugano",
+        "matchup": "LAD@COL"
+      },
+      {
+        "name": "Brice Turang",
+        "rank": 180,
+        "composite": 0.154,
+        "opp_pitcher": "Janson Junk",
+        "matchup": "MIL@MIA"
+      },
+      {
+        "name": "Connor Wong",
+        "rank": 204,
+        "composite": 0.128,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "DET@BOS"
+      },
+      {
+        "name": "Nathaniel Lowe",
+        "rank": 206,
+        "composite": 0.126,
+        "opp_pitcher": "Joe Ryan",
+        "matchup": "CIN@MIN"
+      },
+      {
+        "name": "Danny Jansen",
+        "rank": 213,
+        "composite": 0.12,
+        "opp_pitcher": "Logan Gilbert",
+        "matchup": "TEX@SEA"
+      },
+      {
+        "name": "Carlos Correa",
+        "rank": 231,
+        "composite": 0.107,
+        "opp_pitcher": "Kyle Leahy",
+        "matchup": "STL@HOU"
+      },
+      {
+        "name": "Hao-Yu  Lee",
+        "rank": 250,
+        "composite": 0.042,
+        "opp_pitcher": "Ranger Suarez",
+        "matchup": "DET@BOS"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Luisangel Acu\u00f1a",
+        "ev": 101.3,
+        "angle": 25.0,
+        "distance": 377.0,
+        "hr_in_parks": 2,
+        "result": "double",
+        "pitcher": "Civale, Aaron"
+      },
+      {
+        "batter": "Shea Langeliers",
+        "ev": 104.1,
+        "angle": 33.0,
+        "distance": 388.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Martin, Davis"
+      },
+      {
+        "batter": "Hao-Yu  Lee",
+        "ev": 101.0,
+        "angle": 27.0,
+        "distance": 375.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Suarez, Ranger"
+      },
+      {
+        "batter": "Connor Wong",
+        "ev": 105.8,
+        "angle": 21.0,
+        "distance": 385.0,
+        "hr_in_parks": 13,
+        "result": "double",
+        "pitcher": "Mize, Casey"
+      },
+      {
+        "batter": "Matt Shaw",
+        "ev": 103.1,
+        "angle": 26.0,
+        "distance": 370.0,
+        "hr_in_parks": 2,
+        "result": "double",
+        "pitcher": "Manaea, Sean"
+      },
+      {
+        "batter": "Tyrone Taylor",
+        "ev": 107.6,
+        "angle": 16.0,
+        "distance": 378.0,
+        "hr_in_parks": 2,
+        "result": "single",
+        "pitcher": "Cabrera, Edward"
+      },
+      {
+        "batter": "Ezequiel Tovar",
+        "ev": 100.4,
+        "angle": 27.0,
+        "distance": 378.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Glasnow, Tyler"
+      },
+      {
+        "batter": "Mickey Moniak",
+        "ev": 100.6,
+        "angle": 23.0,
+        "distance": 384.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "Glasnow, Tyler"
+      },
+      {
+        "batter": "Kyle Tucker",
+        "ev": 103.8,
+        "angle": 25.0,
+        "distance": 408.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Sugano, Tomoyuki"
+      },
+      {
+        "batter": "Alex Freeland",
+        "ev": 102.8,
+        "angle": 23.0,
+        "distance": 409.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Sugano, Tomoyuki"
+      },
+      {
+        "batter": "Mickey Moniak",
+        "ev": 107.4,
+        "angle": 25.0,
+        "distance": 393.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Glasnow, Tyler"
+      },
+      {
+        "batter": "Freddie Freeman",
+        "ev": 103.9,
+        "angle": 22.0,
+        "distance": 384.0,
+        "hr_in_parks": 7,
+        "result": "double",
+        "pitcher": "Sugano, Tomoyuki"
+      },
+      {
+        "batter": "Will Smith",
+        "ev": 100.3,
+        "angle": 29.0,
+        "distance": 378.0,
+        "hr_in_parks": 1,
+        "result": "sac_fly",
+        "pitcher": "Sugano, Tomoyuki"
+      },
+      {
+        "batter": "Carlos Correa",
+        "ev": 112.8,
+        "angle": 16.0,
+        "distance": 380.0,
+        "hr_in_parks": 14,
+        "result": "double",
+        "pitcher": "Stanek, Ryne"
+      },
+      {
+        "batter": "Alec Burleson",
+        "ev": 103.9,
+        "angle": 24.0,
+        "distance": 384.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Abreu, Bryan"
+      },
+      {
+        "batter": "Xavier Edwards",
+        "ev": 99.3,
+        "angle": 28.0,
+        "distance": 394.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Crow, Coleman"
+      },
+      {
+        "batter": "Otto Lopez",
+        "ev": 101.8,
+        "angle": 24.0,
+        "distance": 389.0,
+        "hr_in_parks": 17,
+        "result": "triple",
+        "pitcher": "Crow, Coleman"
+      },
+      {
+        "batter": "Brice Turang",
+        "ev": 71.9,
+        "angle": 12.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Junk, Janson"
+      },
+      {
+        "batter": "Nathaniel Lowe",
+        "ev": 105.4,
+        "angle": 24.0,
+        "distance": 400.0,
+        "hr_in_parks": 17,
+        "result": "field_out",
+        "pitcher": "Topa, Justin"
+      },
+      {
+        "batter": "Bobby Witt Jr.",
+        "ev": 108.3,
+        "angle": 26.0,
+        "distance": 396.0,
+        "hr_in_parks": 20,
+        "result": "field_error",
+        "pitcher": "Schlittler, Cam"
+      },
+      {
+        "batter": "Austin Riley",
+        "ev": 111.6,
+        "angle": 29.0,
+        "distance": 396.0,
+        "hr_in_parks": 4,
+        "result": "",
+        "pitcher": "Banks, Tanner"
+      },
+      {
+        "batter": "Brandon Lowe",
+        "ev": 101.3,
+        "angle": 26.0,
+        "distance": 395.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "G\u00f3mez, Yoendrys"
+      },
+      {
+        "batter": "Brandon Lowe",
+        "ev": 105.7,
+        "angle": 25.0,
+        "distance": 382.0,
+        "hr_in_parks": 21,
+        "result": "double",
+        "pitcher": "Martinez, Nick"
+      },
+      {
+        "batter": "Danny Jansen",
+        "ev": 103.0,
+        "angle": 24.0,
+        "distance": 376.0,
+        "hr_in_parks": 7,
+        "result": "double",
+        "pitcher": "Legumina, Casey"
+      },
+      {
+        "batter": "Casey Schmitt",
+        "ev": 101.7,
+        "angle": 31.0,
+        "distance": 378.0,
+        "hr_in_parks": 13,
+        "result": "field_out",
+        "pitcher": "Littell, Zack"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Ryan McMahon",
