@@ -39,6 +39,58 @@ function persistState(state: PersistedState) {
   } catch {}
 }
 
+// Team abbr → searchable synonyms (city + nickname + common variants).
+// Lets users type "dodgers" or "los angeles" and match LAD games.
+const TEAM_SYNONYMS: Record<string, string> = {
+  LAD: "los angeles dodgers la",
+  LAA: "los angeles angels la anaheim",
+  NYY: "new york yankees ny",
+  NYM: "new york mets ny",
+  BOS: "boston red sox",
+  TB:  "tampa bay rays",
+  TBR: "tampa bay rays",
+  TOR: "toronto blue jays",
+  BAL: "baltimore orioles o's",
+  CLE: "cleveland guardians indians",
+  CWS: "chicago white sox",
+  CHW: "chicago white sox",
+  DET: "detroit tigers",
+  KC:  "kansas city royals",
+  MIN: "minnesota twins",
+  HOU: "houston astros",
+  OAK: "oakland athletics a's as",
+  ATH: "oakland athletics a's as",
+  SEA: "seattle mariners",
+  TEX: "texas rangers",
+  ATL: "atlanta braves",
+  MIA: "miami marlins florida",
+  PHI: "philadelphia phillies philly",
+  WSH: "washington nationals nats",
+  CHC: "chicago cubs",
+  CIN: "cincinnati reds",
+  MIL: "milwaukee brewers brew crew",
+  PIT: "pittsburgh pirates",
+  STL: "st louis cardinals saint cards",
+  ARI: "arizona diamondbacks dbacks d-backs",
+  AZ:  "arizona diamondbacks dbacks d-backs",
+  COL: "colorado rockies",
+  LAC: "",  // placeholder keeps parser aligned if something odd shows up
+  SD:  "san diego padres friars",
+  SDP: "san diego padres friars",
+  SF:  "san francisco giants",
+};
+
+function gameMatchesQuery(game: string, q: string): boolean {
+  // game is formatted "AWAY@HOME" (e.g. "LAD@COL").
+  if (game.toLowerCase().includes(q)) return true;
+  const [away, home] = game.split("@");
+  for (const abbr of [away, home]) {
+    const syn = TEAM_SYNONYMS[abbr];
+    if (syn && syn.toLowerCase().includes(q)) return true;
+  }
+  return false;
+}
+
 interface SlipPlayer {
   name: string;
   composite: number;
@@ -433,10 +485,12 @@ export function SlipGenerator({
   };
 
   const filteredPlayers = search
-    ? allPlayers.filter((p) =>
-        p.name.toLowerCase().includes(search.toLowerCase()) ||
-        p.game.toLowerCase().includes(search.toLowerCase())
-      )
+    ? allPlayers.filter((p) => {
+        const q = search.toLowerCase();
+        if (p.name.toLowerCase().includes(q)) return true;
+        if (gameMatchesQuery(p.game, q)) return true;
+        return false;
+      })
     : allPlayers;
 
   if (games.length === 0) {
