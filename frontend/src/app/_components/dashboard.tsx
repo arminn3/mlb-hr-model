@@ -47,7 +47,7 @@ const TAB_CONFIG: Record<Page, {
 // the production Vercel deployment. Local dev (`npm run dev`) and
 // preview deploys are unaffected. Vercel auto-sets
 // NEXT_PUBLIC_VERCEL_ENV to "production" / "preview" / undefined.
-const MAINTENANCE_MODE_PROD = true;
+const MAINTENANCE_MODE_PROD = false;
 const IS_PROD =
   typeof process !== "undefined" &&
   process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
@@ -55,7 +55,9 @@ const MAINTENANCE_MODE = MAINTENANCE_MODE_PROD && IS_PROD;
 
 // Dates hidden from prod only (dev sees them normally).
 // Add YYYY-MM-DD strings here to fall back to the prior day on prod.
-const PROD_BLOCKED_DATES: Set<string> = new Set<string>();
+const PROD_BLOCKED_DATES: Set<string> = new Set(
+  IS_PROD ? ["2026-04-18"] : []
+);
 
 function MaintenancePage({ onLive }: { onLive: () => void }) {
   return (
