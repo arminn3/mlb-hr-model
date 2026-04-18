@@ -287,19 +287,30 @@ export function MLRankings({
 
   return (
     <>
-    <div className="border border-accent/20 rounded-xl bg-accent/5 p-5 mb-6">
-      <div className="flex items-center justify-between mb-2">
-        <h2 className="text-sm font-bold text-accent uppercase tracking-wider">
-          ML Rankings
-        </h2>
-        <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-1">
+    <div
+      className="rounded-[12px] p-6 mb-6"
+      style={{ background: "#1c1c1e", border: "1px solid #2c2c2e" }}
+    >
+      <div className="flex items-start justify-between gap-3 mb-5 flex-wrap">
+        <div>
+          <h2 className="text-[15px] leading-[20px] font-semibold tracking-[-0.005em] text-foreground">
+            ML Rankings
+          </h2>
+          <p className="text-[11px] leading-[14px] font-medium tracking-[0.02em] text-muted mt-0.5">
+            Data-driven — reweighted using what the ML learned from past HR outcomes
+          </p>
+        </div>
+        <div
+          className="inline-flex items-center rounded-full p-0.5"
+          style={{ background: "#141416", border: "1px solid #2c2c2e" }}
+        >
           {FILTER_OPTIONS.map((opt) => (
             <button
               key={opt.value}
               onClick={() => setFilter(opt.value)}
-              className={`px-3 py-1 text-[11px] rounded cursor-pointer transition-colors ${
+              className={`px-3 py-1 text-[11px] font-medium rounded-full cursor-pointer transition-colors ${
                 filter === opt.value
-                  ? "bg-accent/15 text-accent font-medium"
+                  ? "bg-accent text-background font-semibold"
                   : "text-muted hover:text-foreground"
               }`}
             >
@@ -309,15 +320,13 @@ export function MLRankings({
         </div>
       </div>
 
-      <p className="text-xs text-muted mb-4">
-        Data-driven rankings — same per-player scores as HR Rankings, but reweighted using
-        what the ML learned from past HR outcomes. Current ML weights:{" "}
+      <p className="text-[11px] leading-[16px] text-muted mb-4">
+        Current ML weights:{" "}
         <span className="text-foreground font-mono">
           Batter {wPct(mlWeights.batter)} · Pitcher {wPct(mlWeights.pitcher)}
-          · Matchup {wPct(mlWeights.matchup)} · Env{" "}
-          {wPct(mlWeights.environment)}
+          · Matchup {wPct(mlWeights.matchup)} · Env {wPct(mlWeights.environment)}
         </span>{" "}
-        <span className="text-[10px]">({weightSource})</span>
+        <span className="text-[10px] text-muted/80">({weightSource})</span>
       </p>
 
       {/* Mobile card view */}

@@ -47,7 +47,7 @@ const TAB_CONFIG: Record<Page, {
 // the production Vercel deployment. Local dev (`npm run dev`) and
 // preview deploys are unaffected. Vercel auto-sets
 // NEXT_PUBLIC_VERCEL_ENV to "production" / "preview" / undefined.
-const MAINTENANCE_MODE_PROD = false;
+const MAINTENANCE_MODE_PROD = true;
 const IS_PROD =
   typeof process !== "undefined" &&
   process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
@@ -57,7 +57,7 @@ const MAINTENANCE_MODE = MAINTENANCE_MODE_PROD && IS_PROD;
 // Add YYYY-MM-DD strings here to fall back to the prior day on prod.
 const PROD_BLOCKED_DATES: Set<string> = new Set<string>();
 
-function MaintenancePage() {
+function MaintenancePage({ onLive }: { onLive: () => void }) {
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="bg-card/50 border border-card-border rounded-xl p-8 max-w-md text-center">
@@ -72,9 +72,15 @@ function MaintenancePage() {
         <h2 className="text-lg font-semibold text-foreground mb-2">
           Service Temporarily Unavailable
         </h2>
-        <p className="text-sm text-muted">
+        <p className="text-sm text-muted mb-5">
           We&apos;re experiencing technical difficulties. Please check back shortly.
         </p>
+        <button
+          onClick={onLive}
+          className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-accent text-background hover:bg-accent/90 cursor-pointer transition-colors"
+        >
+          View Live Game Feed
+        </button>
       </div>
     </div>
   );
@@ -84,10 +90,6 @@ export function Dashboard() {
   const [data, setData] = useState<ModelData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  if (MAINTENANCE_MODE) {
-    return <MaintenancePage />;
-  }
 
   // Read initial state from URL hash: #page=rankings&date=2026-04-03&lookback=L5
   function getHashParam(key: string, fallback: string): string {
@@ -152,6 +154,12 @@ export function Dashboard() {
     // Always load latest data on first visit
     loadDate("");
   }, []);
+
+  // Maintenance gate — runs after all hooks are declared so hook order
+  // stays stable across re-renders. Live Feed stays reachable on prod.
+  if (MAINTENANCE_MODE && activePage !== "live") {
+    return <MaintenancePage onLive={() => setActivePage("live")} />;
+  }
 
   if (error) {
     return (
