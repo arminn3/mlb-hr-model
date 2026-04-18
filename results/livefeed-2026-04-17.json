@@ -93,7 +93,7 @@
       "gamePk": 824048,
       "away": "SD",
       "home": "LAA",
-      "status": "In Progress",
+      "status": "Final",
       "awayScore": 0,
       "homeScore": 8
     },
@@ -101,8 +101,8 @@
       "gamePk": 823152,
       "away": "TEX",
       "home": "SEA",
-      "status": "In Progress",
-      "awayScore": 3,
+      "status": "Final",
+      "awayScore": 5,
       "homeScore": 0
     },
     {
@@ -117,12 +117,51 @@
       "gamePk": 825019,
       "away": "CWS",
       "home": "ATH",
-      "status": "In Progress",
+      "status": "Final",
       "awayScore": 9,
       "homeScore": 2
     }
   ],
   "plays": [
+    {
+      "batter": "Cole Young",
+      "pitcher": "Jacob Latz",
+      "game": "TEX@SEA",
+      "ev": 96.5,
+      "angle": 37.0,
+      "distance": 333.0,
+      "result": "Flyout",
+      "inning": 9,
+      "timestamp": "2026-04-18T04:46:49.636Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Mitch Garver",
+      "pitcher": "Jacob Latz",
+      "game": "TEX@SEA",
+      "ev": 90.7,
+      "angle": 35.0,
+      "distance": 320.0,
+      "result": "Flyout",
+      "inning": 9,
+      "timestamp": "2026-04-18T04:45:05.125Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Gavin Sheets",
+      "pitcher": "Jordan Romano",
+      "game": "SD@LAA",
+      "ev": 96.7,
+      "angle": 20.0,
+      "distance": 335.0,
+      "result": "Double",
+      "inning": 9,
+      "timestamp": "2026-04-18T04:33:33.463Z",
+      "isHR": false,
+      "isNearHR": false
+    },
     {
       "batter": "Danny Jansen",
       "pitcher": "Casey Legumina",
@@ -2440,6 +2479,6 @@
   ],
   "totalHRs": 32,
   "nearHRs": 34,
-  "hardHitAir": 95,
-  "totalAirBalls": 178
+  "hardHitAir": 96,
+  "totalAirBalls": 181
 }
