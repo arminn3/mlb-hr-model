@@ -1,0 +1,429 @@
+{
+  "date": "2026-04-17",
+  "total_players_ranked": 251,
+  "total_hrs_hit": 28,
+  "total_near_hrs": 0,
+  "model_hits": 21,
+  "best_lookback": "L10",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 3,
+        "rate": 30.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 251,
+        "hits": 21,
+        "rate": 8.4
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 251,
+        "hits": 21,
+        "rate": 8.4
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 3,
+      "rate": 30.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 4,
+      "rate": 13.3
+    },
+    "all": {
+      "total": 251,
+      "hits": 21,
+      "rate": 8.4
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 3,
+      "rate": 30.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 4,
+      "rate": 13.3
+    },
+    "all": {
+      "total": 251,
+      "hits": 21,
+      "rate": 8.4
+    }
+  },
+  "avg_composite_hr_hitters": 0.423,
+  "avg_composite_non_hitters": 0.318,
+  "composite_separation": 0.105,
+  "hr_hitters": [
+    {
+      "name": "Max Muncy",
+      "rank": 4,
+      "composite": 0.81,
+      "opp_pitcher": "Tomoyuki Sugano",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Vinnie Pasquantino",
+      "rank": 5,
+      "composite": 0.795,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "KC@NYY"
+    },
+    {
+      "name": "Dominic Smith",
+      "rank": 8,
+      "composite": 0.758,
+      "opp_pitcher": "Taijuan Walker",
+      "matchup": "ATL@PHI"
+    },
+    {
+      "name": "Yordan Alvarez",
+      "rank": 21,
+      "composite": 0.672,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@HOU"
+    },
+    {
+      "name": "Ian Happ",
+      "rank": 39,
+      "composite": 0.605,
+      "opp_pitcher": "Kodai Senga",
+      "matchup": "NYM@CHC"
+    },
+    {
+      "name": "Michael Harris II",
+      "rank": 43,
+      "composite": 0.588,
+      "opp_pitcher": "Taijuan Walker",
+      "matchup": "ATL@PHI"
+    },
+    {
+      "name": "Mois\u00e9s Ballesteros",
+      "rank": 44,
+      "composite": 0.58,
+      "opp_pitcher": "Kodai Senga",
+      "matchup": "NYM@CHC"
+    },
+    {
+      "name": "Jeremiah Jackson",
+      "rank": 45,
+      "composite": 0.579,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "BAL@CLE"
+    },
+    {
+      "name": "James Wood",
+      "rank": 47,
+      "composite": 0.574,
+      "opp_pitcher": "Logan Webb",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Daylen Lile",
+      "rank": 64,
+      "composite": 0.523,
+      "opp_pitcher": "Logan Webb",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 65,
+      "composite": 0.521,
+      "opp_pitcher": "Michael Wacha",
+      "matchup": "KC@NYY"
+    },
+    {
+      "name": "Daniel Schneemann",
+      "rank": 75,
+      "composite": 0.486,
+      "opp_pitcher": "Chris Bassitt",
+      "matchup": "BAL@CLE"
+    },
+    {
+      "name": "Oneil Cruz",
+      "rank": 109,
+      "composite": 0.262,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "TB@PIT"
+    },
+    {
+      "name": "Nico Hoerner",
+      "rank": 137,
+      "composite": 0.206,
+      "opp_pitcher": "Kodai Senga",
+      "matchup": "NYM@CHC"
+    },
+    {
+      "name": "Austin Riley",
+      "rank": 141,
+      "composite": 0.199,
+      "opp_pitcher": "Taijuan Walker",
+      "matchup": "ATL@PHI"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 168,
+      "composite": 0.167,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Heliot Ramos",
+      "rank": 193,
+      "composite": 0.14,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Nolan Arenado",
+      "rank": 210,
+      "composite": 0.123,
+      "opp_pitcher": "Braydon Fisher",
+      "matchup": "TOR@AZ"
+    },
+    {
+      "name": "Drew Gilbert",
+      "rank": 214,
+      "composite": 0.119,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Jose Altuve",
+      "rank": 239,
+      "composite": 0.1,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@HOU"
+    },
+    {
+      "name": "Christian V\u00e1zquez",
+      "rank": 247,
+      "composite": 0.074,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@HOU"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Ian Happ",
+      "rank": 11,
+      "composite": 0.695,
+      "opp_pitcher": "Kodai Senga",
+      "matchup": "NYM@CHC"
+    },
+    {
+      "name": "Max Muncy",
+      "rank": 12,
+      "composite": 0.69,
+      "opp_pitcher": "Tomoyuki Sugano",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Yordan Alvarez",
+      "rank": 16,
+      "composite": 0.667,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@HOU"
+    },
+    {
+      "name": "Mois\u00e9s Ballesteros",
+      "rank": 19,
+      "composite": 0.648,
+      "opp_pitcher": "Kodai Senga",
+      "matchup": "NYM@CHC"
+    },
+    {
+      "name": "Oneil Cruz",
+      "rank": 27,
+      "composite": 0.616,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "TB@PIT"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 31,
+      "composite": 0.61,
+      "opp_pitcher": "Michael Wacha",
+      "matchup": "KC@NYY"
+    },
+    {
+      "name": "Daniel Schneemann",
+      "rank": 32,
+      "composite": 0.604,
+      "opp_pitcher": "Chris Bassitt",
+      "matchup": "BAL@CLE"
+    },
+    {
+      "name": "Vinnie Pasquantino",
+      "rank": 40,
+      "composite": 0.581,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "KC@NYY"
+    },
+    {
+      "name": "Jeremiah Jackson",
+      "rank": 41,
+      "composite": 0.579,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "BAL@CLE"
+    },
+    {
+      "name": "James Wood",
+      "rank": 72,
+      "composite": 0.473,
+      "opp_pitcher": "Logan Webb",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Dominic Smith",
+      "rank": 73,
+      "composite": 0.471,
+      "opp_pitcher": "Taijuan Walker",
+      "matchup": "ATL@PHI"
+    },
+    {
+      "name": "Daylen Lile",
+      "rank": 98,
+      "composite": 0.411,
+      "opp_pitcher": "Logan Webb",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Michael Harris II",
+      "rank": 111,
+      "composite": 0.376,
+      "opp_pitcher": "Taijuan Walker",
+      "matchup": "ATL@PHI"
+    },
+    {
+      "name": "Austin Riley",
+      "rank": 115,
+      "composite": 0.364,
+      "opp_pitcher": "Taijuan Walker",
+      "matchup": "ATL@PHI"
+    },
+    {
+      "name": "Nolan Arenado",
+      "rank": 125,
+      "composite": 0.335,
+      "opp_pitcher": "Braydon Fisher",
+      "matchup": "TOR@AZ"
+    },
+    {
+      "name": "Jose Altuve",
+      "rank": 145,
+      "composite": 0.288,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@HOU"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 202,
+      "composite": 0.143,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Heliot Ramos",
+      "rank": 207,
+      "composite": 0.14,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Drew Gilbert",
+      "rank": 223,
+      "composite": 0.119,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Nico Hoerner",
+      "rank": 229,
+      "composite": 0.112,
+      "opp_pitcher": "Kodai Senga",
+      "matchup": "NYM@CHC"
+    },
+    {
+      "name": "Christian V\u00e1zquez",
+      "rank": 239,
+      "composite": 0.098,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@HOU"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [
+    {
+      "name": "Ryan McMahon",
+      "pitcher": "Alex Lange",
+      "description": "Ryan McMahon homers (1) on a fly ball to left field. Ben Rice scores."
+    },
+    {
+      "name": "Otto Lopez",
+      "pitcher": "DL Hall",
+      "description": "Otto Lopez homers (3) on a fly ball to center field. Xavier Edwards scores."
+    },
+    {
+      "name": "Nolan Gorman",
+      "pitcher": "Bryan Abreu",
+      "description": "Nolan Gorman homers (3) on a fly ball to right field. Alec Burleson scores. Jordan Walker scores."
+    },
+    {
+      "name": "Iv\u00e1n Herrera",
+      "pitcher": "J.P. France",
+      "description": "Iv\u00e1n Herrera homers (2) on a fly ball to left field. JJ Wetherholt scores."
+    },
+    {
+      "name": "Myles Straw",
+      "pitcher": "Michael Soroka",
+      "description": "Myles Straw homers (1) on a fly ball to left field."
+    }
+  ]
+}
