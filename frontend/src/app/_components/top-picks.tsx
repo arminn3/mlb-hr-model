@@ -5,8 +5,6 @@ import type { GameData, LookbackKey } from "./types";
 import { RatingBadge } from "./rating-badge";
 import { ScoreBar } from "./score-bar";
 import { Badge } from "./ui/badge";
-import { Card } from "./ui/card";
-import { Chip } from "./ui/chip";
 
 const FILTER_OPTIONS = [
   { label: "Top 10", value: 10 },
@@ -62,25 +60,24 @@ export function TopPicks({
   if (top.length === 0) return null;
 
   return (
-    <Card
-      variant="outline"
-      padding="md"
-      className="border-accent/25 bg-accent/[0.04] mb-6"
-    >
-      <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-        <h2 className="text-[10px] leading-[12px] font-semibold uppercase tracking-[0.08em] text-accent">
+    <div className="border border-accent/20 rounded-xl bg-accent/5 p-5 mb-6">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-sm font-bold text-accent uppercase tracking-wider">
           HR Rankings
         </h2>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-1">
           {FILTER_OPTIONS.map((opt) => (
-            <Chip
+            <button
               key={opt.value}
-              size="sm"
-              selected={filter === opt.value}
               onClick={() => setFilter(opt.value)}
+              className={`px-3 py-1 text-[11px] rounded cursor-pointer transition-colors ${
+                filter === opt.value
+                  ? "bg-accent/15 text-accent font-medium"
+                  : "text-muted hover:text-foreground"
+              }`}
             >
               {opt.label}
-            </Chip>
+            </button>
           ))}
         </div>
       </div>
@@ -169,6 +166,6 @@ export function TopPicks({
           </tbody>
         </table>
       </div>
-    </Card>
+    </div>
   );
 }
