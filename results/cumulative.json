@@ -12447,7 +12447,7 @@
     "date": "2026-04-18",
     "total_players_ranked": 268,
     "total_hrs_hit": 35,
-    "total_near_hrs": 0,
+    "total_near_hrs": 12,
     "model_hits": 32,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -12496,7 +12496,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 12,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -12522,28 +12522,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 3,
-        "rate": 30.0
+        "hits": 4,
+        "rate": 40.0
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
-        "hits": 5,
-        "rate": 16.7
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 268,
-        "hits": 32,
-        "rate": 11.9
+        "hits": 44,
+        "rate": 16.4
       }
     },
     "avg_composite_hr_hitters": 0.421,
-    "avg_composite_non_hitters": 0.33,
-    "composite_separation": 0.091,
+    "avg_composite_non_hitters": 0.324,
+    "composite_separation": 0.097,
     "hr_hitters": [
       {
         "name": "James Wood",
@@ -12996,8 +12996,238 @@
         "matchup": "ATL@PHI"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Dominic Canzone",
+        "rank": 10,
+        "composite": 0.791,
+        "opp_pitcher": "Nathan Eovaldi",
+        "matchup": "TEX@SEA"
+      },
+      {
+        "name": "Yo\u00e1n Moncada",
+        "rank": 36,
+        "composite": 0.659,
+        "opp_pitcher": "Germ\u00e1n M\u00e1rquez",
+        "matchup": "SD@LAA"
+      },
+      {
+        "name": "Ronald Acu\u00f1a Jr.",
+        "rank": 40,
+        "composite": 0.645,
+        "opp_pitcher": "Cristopher S\u00e1nchez",
+        "matchup": "ATL@PHI"
+      },
+      {
+        "name": "Nico Hoerner",
+        "rank": 46,
+        "composite": 0.626,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "NYM@CHC"
+      },
+      {
+        "name": "Max Muncy",
+        "rank": 72,
+        "composite": 0.516,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "LAD@COL"
+      },
+      {
+        "name": "Logan O'Hoppe",
+        "rank": 76,
+        "composite": 0.509,
+        "opp_pitcher": "Germ\u00e1n M\u00e1rquez",
+        "matchup": "SD@LAA"
+      },
+      {
+        "name": "Freddie Freeman",
+        "rank": 103,
+        "composite": 0.371,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "LAD@COL"
+      },
+      {
+        "name": "Miguel Andujar",
+        "rank": 119,
+        "composite": 0.287,
+        "opp_pitcher": "Yusei Kikuchi",
+        "matchup": "SD@LAA"
+      },
+      {
+        "name": "Eloy Jim\u00e9nez",
+        "rank": 120,
+        "composite": 0.282,
+        "opp_pitcher": "Zac Gallen",
+        "matchup": "TOR@AZ"
+      },
+      {
+        "name": "Zach Neto",
+        "rank": 179,
+        "composite": 0.168,
+        "opp_pitcher": "Germ\u00e1n M\u00e1rquez",
+        "matchup": "SD@LAA"
+      },
+      {
+        "name": "Giancarlo Stanton",
+        "rank": 181,
+        "composite": 0.163,
+        "opp_pitcher": "Noah Cameron",
+        "matchup": "KC@NYY"
+      },
+      {
+        "name": "CJ Abrams",
+        "rank": 203,
+        "composite": 0.146,
+        "opp_pitcher": "Adrian Houser",
+        "matchup": "SF@WSH"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Eloy Jim\u00e9nez",
+        "ev": 98.0,
+        "angle": 28.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Gallen, Zac"
+      },
+      {
+        "batter": "Jacob Wilson",
+        "ev": 100.4,
+        "angle": 24.0,
+        "distance": 386.0,
+        "hr_in_parks": 25,
+        "result": "field_out",
+        "pitcher": "Leasure, Jordan"
+      },
+      {
+        "batter": "Max Muncy",
+        "ev": 102.7,
+        "angle": 21.0,
+        "distance": 371.0,
+        "hr_in_parks": 16,
+        "result": "triple",
+        "pitcher": "Newcomb, Sean"
+      },
+      {
+        "batter": "Nico Hoerner",
+        "ev": 98.3,
+        "angle": 26.0,
+        "distance": 391.0,
+        "hr_in_parks": 17,
+        "result": "field_out",
+        "pitcher": "Peralta, Freddy"
+      },
+      {
+        "batter": "Freddie Freeman",
+        "ev": 101.2,
+        "angle": 30.0,
+        "distance": 395.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Hill, Jaden"
+      },
+      {
+        "batter": "Freddie Freeman",
+        "ev": 102.5,
+        "angle": 27.0,
+        "distance": 395.0,
+        "hr_in_parks": 28,
+        "result": "triple",
+        "pitcher": "Feltner, Ryan"
+      },
+      {
+        "batter": "Miguel Andujar",
+        "ev": 98.6,
+        "angle": 23.0,
+        "distance": 370.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Kikuchi, Yusei"
+      },
+      {
+        "batter": "Zach Neto",
+        "ev": 104.1,
+        "angle": 28.0,
+        "distance": 382.0,
+        "hr_in_parks": 7,
+        "result": "double",
+        "pitcher": "M\u00e1rquez, Germ\u00e1n"
+      },
+      {
+        "batter": "Logan O'Hoppe",
+        "ev": 100.3,
+        "angle": 27.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "M\u00e1rquez, Germ\u00e1n"
+      },
+      {
+        "batter": "Yo\u00e1n Moncada",
+        "ev": 100.2,
+        "angle": 38.0,
+        "distance": 376.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "M\u00e1rquez, Germ\u00e1n"
+      },
+      {
+        "batter": "Giancarlo Stanton",
+        "ev": 110.9,
+        "angle": 36.0,
+        "distance": 398.0,
+        "hr_in_parks": 4,
+        "result": "",
+        "pitcher": "Spence, Mitch"
+      },
+      {
+        "batter": "Ronald Acu\u00f1a Jr.",
+        "ev": 107.6,
+        "angle": 33.0,
+        "distance": 402.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "S\u00e1nchez, Cristopher"
+      },
+      {
+        "batter": "Jonny DeLuca",
+        "ev": 100.3,
+        "angle": 23.0,
+        "distance": 378.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Sisk, Evan"
+      },
+      {
+        "batter": "Dominic Canzone",
+        "ev": 104.7,
+        "angle": 21.0,
+        "distance": 377.0,
+        "hr_in_parks": 7,
+        "result": "double",
+        "pitcher": "Quantrill, Cal"
+      },
+      {
+        "batter": "CJ Abrams",
+        "ev": 101.3,
+        "angle": 30.0,
+        "distance": 402.0,
+        "hr_in_parks": 16,
+        "result": "field_out",
+        "pitcher": "Houser, Adrian"
+      },
+      {
+        "batter": "Heliot Ramos",
+        "ev": 111.5,
+        "angle": 15.0,
+        "distance": 373.0,
+        "hr_in_parks": 19,
+        "result": "double",
+        "pitcher": "Cavalli, Cade"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Carson Kelly",
