@@ -1,0 +1,484 @@
+{
+  "date": "2026-04-19",
+  "total_players_ranked": 269,
+  "total_hrs_hit": 29,
+  "total_near_hrs": 0,
+  "model_hits": 26,
+  "best_lookback": "L10",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 8,
+        "rate": 26.7
+      },
+      "all": {
+        "total": 269,
+        "hits": 26,
+        "rate": 9.7
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 5,
+        "rate": 25.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 6,
+        "rate": 20.0
+      },
+      "all": {
+        "total": 269,
+        "hits": 26,
+        "rate": 9.7
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 8,
+      "rate": 26.7
+    },
+    "all": {
+      "total": 269,
+      "hits": 26,
+      "rate": 9.7
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 8,
+      "rate": 26.7
+    },
+    "all": {
+      "total": 269,
+      "hits": 26,
+      "rate": 9.7
+    }
+  },
+  "avg_composite_hr_hitters": 0.486,
+  "avg_composite_non_hitters": 0.329,
+  "composite_separation": 0.157,
+  "hr_hitters": [
+    {
+      "name": "Ben Rice",
+      "rank": 6,
+      "composite": 0.765,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "KC@NYY"
+    },
+    {
+      "name": "Michael Harris II",
+      "rank": 12,
+      "composite": 0.737,
+      "opp_pitcher": "Andrew Painter",
+      "matchup": "ATL@PHI"
+    },
+    {
+      "name": "Yordan Alvarez",
+      "rank": 17,
+      "composite": 0.699,
+      "opp_pitcher": "Matthew Liberatore",
+      "matchup": "STL@HOU"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 23,
+      "composite": 0.656,
+      "opp_pitcher": "Grant Holmes",
+      "matchup": "ATL@PHI"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 24,
+      "composite": 0.647,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "CWS@ATH"
+    },
+    {
+      "name": "MJ Melendez",
+      "rank": 26,
+      "composite": 0.642,
+      "opp_pitcher": "Javier Assad",
+      "matchup": "NYM@CHC"
+    },
+    {
+      "name": "Junior Caminero",
+      "rank": 28,
+      "composite": 0.63,
+      "opp_pitcher": "Mitch Keller",
+      "matchup": "TB@PIT"
+    },
+    {
+      "name": "Jahmai Jones",
+      "rank": 29,
+      "composite": 0.628,
+      "opp_pitcher": "Garrett Crochet",
+      "matchup": "DET@BOS"
+    },
+    {
+      "name": "Willson Contreras",
+      "rank": 33,
+      "composite": 0.623,
+      "opp_pitcher": "Framber Valdez",
+      "matchup": "DET@BOS"
+    },
+    {
+      "name": "Trent Grisham",
+      "rank": 34,
+      "composite": 0.621,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "KC@NYY"
+    },
+    {
+      "name": "Aaron Judge",
+      "rank": 38,
+      "composite": 0.614,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "KC@NYY"
+    },
+    {
+      "name": "Taylor Ward",
+      "rank": 39,
+      "composite": 0.609,
+      "opp_pitcher": "Joey Cantillo",
+      "matchup": "BAL@CLE"
+    },
+    {
+      "name": "Munetaka Murakami",
+      "rank": 60,
+      "composite": 0.57,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "CWS@ATH"
+    },
+    {
+      "name": "J.P. Crawford",
+      "rank": 63,
+      "composite": 0.567,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "TEX@SEA"
+    },
+    {
+      "name": "Dillon Dingler",
+      "rank": 68,
+      "composite": 0.552,
+      "opp_pitcher": "Garrett Crochet",
+      "matchup": "DET@BOS"
+    },
+    {
+      "name": "Mickey Moniak",
+      "rank": 79,
+      "composite": 0.508,
+      "opp_pitcher": "Roki Sasaki",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Jos\u00e9 Ram\u00edrez",
+      "rank": 93,
+      "composite": 0.482,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "BAL@CLE"
+    },
+    {
+      "name": "Miguel Vargas",
+      "rank": 103,
+      "composite": 0.45,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "CWS@ATH"
+    },
+    {
+      "name": "Nick Yorke",
+      "rank": 122,
+      "composite": 0.308,
+      "opp_pitcher": "Shane McClanahan",
+      "matchup": "TB@PIT"
+    },
+    {
+      "name": "Darell Hernaiz",
+      "rank": 136,
+      "composite": 0.27,
+      "opp_pitcher": "Noah Schultz",
+      "matchup": "CWS@ATH"
+    },
+    {
+      "name": "Kyle Karros",
+      "rank": 142,
+      "composite": 0.257,
+      "opp_pitcher": "Roki Sasaki",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Derek Hill",
+      "rank": 163,
+      "composite": 0.202,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "CWS@ATH"
+    },
+    {
+      "name": "Kazuma Okamoto",
+      "rank": 166,
+      "composite": 0.193,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "TOR@AZ"
+    },
+    {
+      "name": "Randy Arozarena",
+      "rank": 188,
+      "composite": 0.158,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "TEX@SEA"
+    },
+    {
+      "name": "Rob Refsnyder",
+      "rank": 211,
+      "composite": 0.141,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "TEX@SEA"
+    },
+    {
+      "name": "Curtis Mead",
+      "rank": 232,
+      "composite": 0.118,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "SF@WSH"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Kyle Schwarber",
+      "rank": 2,
+      "composite": 0.778,
+      "opp_pitcher": "Grant Holmes",
+      "matchup": "ATL@PHI"
+    },
+    {
+      "name": "Yordan Alvarez",
+      "rank": 5,
+      "composite": 0.758,
+      "opp_pitcher": "Matthew Liberatore",
+      "matchup": "STL@HOU"
+    },
+    {
+      "name": "Aaron Judge",
+      "rank": 11,
+      "composite": 0.69,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "KC@NYY"
+    },
+    {
+      "name": "Michael Harris II",
+      "rank": 14,
+      "composite": 0.682,
+      "opp_pitcher": "Andrew Painter",
+      "matchup": "ATL@PHI"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 20,
+      "composite": 0.653,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "KC@NYY"
+    },
+    {
+      "name": "Mickey Moniak",
+      "rank": 28,
+      "composite": 0.591,
+      "opp_pitcher": "Roki Sasaki",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Munetaka Murakami",
+      "rank": 34,
+      "composite": 0.57,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "CWS@ATH"
+    },
+    {
+      "name": "MJ Melendez",
+      "rank": 39,
+      "composite": 0.563,
+      "opp_pitcher": "Javier Assad",
+      "matchup": "NYM@CHC"
+    },
+    {
+      "name": "Taylor Ward",
+      "rank": 40,
+      "composite": 0.557,
+      "opp_pitcher": "Joey Cantillo",
+      "matchup": "BAL@CLE"
+    },
+    {
+      "name": "Dillon Dingler",
+      "rank": 55,
+      "composite": 0.505,
+      "opp_pitcher": "Garrett Crochet",
+      "matchup": "DET@BOS"
+    },
+    {
+      "name": "Jahmai Jones",
+      "rank": 74,
+      "composite": 0.44,
+      "opp_pitcher": "Garrett Crochet",
+      "matchup": "DET@BOS"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 78,
+      "composite": 0.428,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "CWS@ATH"
+    },
+    {
+      "name": "J.P. Crawford",
+      "rank": 83,
+      "composite": 0.408,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "TEX@SEA"
+    },
+    {
+      "name": "Curtis Mead",
+      "rank": 90,
+      "composite": 0.393,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Junior Caminero",
+      "rank": 93,
+      "composite": 0.387,
+      "opp_pitcher": "Mitch Keller",
+      "matchup": "TB@PIT"
+    },
+    {
+      "name": "Trent Grisham",
+      "rank": 98,
+      "composite": 0.382,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "KC@NYY"
+    },
+    {
+      "name": "Jos\u00e9 Ram\u00edrez",
+      "rank": 110,
+      "composite": 0.356,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "BAL@CLE"
+    },
+    {
+      "name": "Willson Contreras",
+      "rank": 115,
+      "composite": 0.34,
+      "opp_pitcher": "Framber Valdez",
+      "matchup": "DET@BOS"
+    },
+    {
+      "name": "Miguel Vargas",
+      "rank": 151,
+      "composite": 0.285,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "CWS@ATH"
+    },
+    {
+      "name": "Nick Yorke",
+      "rank": 168,
+      "composite": 0.258,
+      "opp_pitcher": "Shane McClanahan",
+      "matchup": "TB@PIT"
+    },
+    {
+      "name": "Darell Hernaiz",
+      "rank": 177,
+      "composite": 0.223,
+      "opp_pitcher": "Noah Schultz",
+      "matchup": "CWS@ATH"
+    },
+    {
+      "name": "Rob Refsnyder",
+      "rank": 184,
+      "composite": 0.212,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "TEX@SEA"
+    },
+    {
+      "name": "Randy Arozarena",
+      "rank": 222,
+      "composite": 0.158,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "TEX@SEA"
+    },
+    {
+      "name": "Kazuma Okamoto",
+      "rank": 232,
+      "composite": 0.13,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "TOR@AZ"
+    },
+    {
+      "name": "Derek Hill",
+      "rank": 247,
+      "composite": 0.108,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "CWS@ATH"
+    },
+    {
+      "name": "Kyle Karros",
+      "rank": 249,
+      "composite": 0.107,
+      "opp_pitcher": "Roki Sasaki",
+      "matchup": "LAD@COL"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [
+    {
+      "name": "Spencer Horwitz",
+      "pitcher": "Mason Englert",
+      "description": "Spencer Horwitz homers (2) on a fly ball to right field."
+    },
+    {
+      "name": "Jorge Barrosa",
+      "pitcher": "Mason Fluharty",
+      "description": "Jorge Barrosa homers (1) on a fly ball to left field. Ketel Marte scores."
+    }
+  ]
+}
