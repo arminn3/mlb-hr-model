@@ -2,7 +2,7 @@
   "date": "2026-04-19",
   "total_players_ranked": 269,
   "total_hrs_hit": 29,
-  "total_near_hrs": 0,
+  "total_near_hrs": 13,
   "model_hits": 26,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 13,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -77,23 +77,23 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 1,
-      "rate": 10.0
+      "hits": 2,
+      "rate": 20.0
     },
     "top_20": {
       "total": 20,
-      "hits": 3,
-      "rate": 15.0
+      "hits": 4,
+      "rate": 20.0
     },
     "top_30": {
       "total": 30,
-      "hits": 8,
-      "rate": 26.7
+      "hits": 9,
+      "rate": 30.0
     },
     "all": {
       "total": 269,
-      "hits": 26,
-      "rate": 9.7
+      "hits": 39,
+      "rate": 14.5
     }
   },
   "avg_composite_hr_hitters": 0.486,
@@ -467,8 +467,245 @@
       "matchup": "LAD@COL"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Heliot Ramos",
+      "rank": 2,
+      "composite": 0.82,
+      "opp_pitcher": "PJ Poulin",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Hunter Goodman",
+      "rank": 31,
+      "composite": 0.626,
+      "opp_pitcher": "Roki Sasaki",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Adrian Del Castillo",
+      "rank": 77,
+      "composite": 0.524,
+      "opp_pitcher": "Kevin Gausman",
+      "matchup": "TOR@AZ"
+    },
+    {
+      "name": "Jordan Walker",
+      "rank": 85,
+      "composite": 0.491,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "STL@HOU"
+    },
+    {
+      "name": "Joey Bart",
+      "rank": 109,
+      "composite": 0.419,
+      "opp_pitcher": "Shane McClanahan",
+      "matchup": "TB@PIT"
+    },
+    {
+      "name": "Brady House",
+      "rank": 131,
+      "composite": 0.278,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "SF@WSH"
+    },
+    {
+      "name": "Juan Brito",
+      "rank": 155,
+      "composite": 0.221,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "BAL@CLE"
+    },
+    {
+      "name": "Shohei Ohtani",
+      "rank": 157,
+      "composite": 0.216,
+      "opp_pitcher": "Michael Lorenzen",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Cal Raleigh",
+      "rank": 170,
+      "composite": 0.188,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "TEX@SEA"
+    },
+    {
+      "name": "Alex Freeland",
+      "rank": 176,
+      "composite": 0.181,
+      "opp_pitcher": "Michael Lorenzen",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Paul Goldschmidt",
+      "rank": 178,
+      "composite": 0.178,
+      "opp_pitcher": "Cole Ragans",
+      "matchup": "KC@NYY"
+    },
+    {
+      "name": "Edouard Julien",
+      "rank": 185,
+      "composite": 0.163,
+      "opp_pitcher": "Roki Sasaki",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Chase Meidroth",
+      "rank": 200,
+      "composite": 0.148,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "CWS@ATH"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Adrian Del Castillo",
+      "ev": 106.0,
+      "angle": 24.0,
+      "distance": 392.0,
+      "hr_in_parks": 17,
+      "result": "double",
+      "pitcher": "Gausman, Kevin"
+    },
+    {
+      "batter": "Chase Meidroth",
+      "ev": 98.4,
+      "angle": 26.0,
+      "distance": 387.0,
+      "hr_in_parks": 23,
+      "result": "double",
+      "pitcher": "Springs, Jeffrey"
+    },
+    {
+      "batter": "Miguel Vargas",
+      "ev": 109.3,
+      "angle": 27.0,
+      "distance": 426.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Springs, Jeffrey"
+    },
+    {
+      "batter": "Juan Brito",
+      "ev": 102.6,
+      "angle": 26.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "double",
+      "pitcher": "Rogers, Trevor"
+    },
+    {
+      "batter": "Shohei Ohtani",
+      "ev": 105.8,
+      "angle": 23.0,
+      "distance": 401.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Vodnik, Victor"
+    },
+    {
+      "batter": "Alex Freeland",
+      "ev": 100.1,
+      "angle": 32.0,
+      "distance": 409.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Herget, Jimmy"
+    },
+    {
+      "batter": "Edouard Julien",
+      "ev": 103.6,
+      "angle": 23.0,
+      "distance": 391.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Treinen, Blake"
+    },
+    {
+      "batter": "Hunter Goodman",
+      "ev": 101.3,
+      "angle": 31.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Sasaki, Roki"
+    },
+    {
+      "batter": "Jos\u00e9 Ferm\u00edn",
+      "ev": 99.3,
+      "angle": 23.0,
+      "distance": 379.0,
+      "hr_in_parks": 1,
+      "result": "double",
+      "pitcher": "King, Bryan"
+    },
+    {
+      "batter": "Jordan Walker",
+      "ev": 98.0,
+      "angle": 30.0,
+      "distance": 370.0,
+      "hr_in_parks": 3,
+      "result": "double",
+      "pitcher": "De Los Santos, Enyel"
+    },
+    {
+      "batter": "Oswald Peraza",
+      "ev": 109.1,
+      "angle": 19.0,
+      "distance": 372.0,
+      "hr_in_parks": 24,
+      "result": "double",
+      "pitcher": "Hart, Kyle"
+    },
+    {
+      "batter": "Paul Goldschmidt",
+      "ev": 107.4,
+      "angle": 24.0,
+      "distance": 395.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Ragans, Cole"
+    },
+    {
+      "batter": "Joey Bart",
+      "ev": 106.9,
+      "angle": 23.0,
+      "distance": 403.0,
+      "hr_in_parks": 18,
+      "result": "double",
+      "pitcher": "McClanahan, Shane"
+    },
+    {
+      "batter": "Cal Raleigh",
+      "ev": 108.6,
+      "angle": 29.0,
+      "distance": 398.0,
+      "hr_in_parks": 4,
+      "result": "",
+      "pitcher": "Gore, MacKenzie"
+    },
+    {
+      "batter": "Heliot Ramos",
+      "ev": 108.2,
+      "angle": 19.0,
+      "distance": 375.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Alvarez, Andrew"
+    },
+    {
+      "batter": "Brady House",
+      "ev": 108.3,
+      "angle": 30.0,
+      "distance": 388.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Ray, Robbie"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Spencer Horwitz",
