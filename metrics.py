@@ -462,9 +462,18 @@ def build_batter_pa_history(
     if ev_rows.empty:
         return []
 
-    # Sort newest first so the frontend can slice top-N for L{N} filters
+    # Sort newest first. Tiebreak by at_bat_number (descending) so same-day
+    # PAs are in true reverse-chronological order — critical for L{N} PA
+    # filters to return the actual most-recent N PAs rather than a random
+    # subset of the most-recent day's PAs.
+    sort_keys = []
+    ascending = []
     if "game_date" in ev_rows.columns:
-        ev_rows = ev_rows.sort_values("game_date", ascending=False)
+        sort_keys.append("game_date"); ascending.append(False)
+    if "at_bat_number" in ev_rows.columns:
+        sort_keys.append("at_bat_number"); ascending.append(False)
+    if sort_keys:
+        ev_rows = ev_rows.sort_values(by=sort_keys, ascending=ascending)
 
     # Cap to most recent N PAs to keep slate JSON size bounded
     if len(ev_rows) > max_rows:

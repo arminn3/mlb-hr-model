@@ -103,6 +103,9 @@ function applyRangeType(
 }
 
 function aggregate(history: PAHistoryEntry[], filter: Filter): RowStats {
+  // Backend delivers rows already sorted newest-first by (game_date,
+  // at_bat_number). Preserve that order — re-sorting by date alone loses
+  // within-day chronology and can produce non-deterministic L{N} PA subsets.
   const filtered = history
     .filter((r) => r.season === filter.season)
     .filter(
@@ -115,8 +118,7 @@ function aggregate(history: PAHistoryEntry[], filter: Filter): RowStats {
         filter.selectedPitchTypes.size === 0 ||
         (r.pitch_type !== null && filter.selectedPitchTypes.has(r.pitch_type)),
     );
-  const sorted = [...filtered].sort((a, b) => b.date.localeCompare(a.date));
-  const limited = applyRangeType(sorted, filter.range, filter.type);
+  const limited = applyRangeType(filtered, filter.range, filter.type);
 
   const PA = limited.length;
   const H = limited.filter((r) => HIT_RESULTS.has(r.result)).length;

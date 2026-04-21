@@ -582,14 +582,29 @@ def _build_team_pitch_mix_block(g: dict) -> dict:
                 "batters": [],
             }
 
-        # Pitcher's pitch mix (context for today's matchup), split by batter hand
+        # Pitcher's pitch mix (context for today's matchup), split by batter
+        # hand. Use raw mix (no ≥12% threshold) so rare pitches still appear
+        # as pills — they start unselected on the frontend, but the user can
+        # click to include them in stats.
+        def _raw_mix(pdf, hand):
+            if pdf is None or pdf.empty or "stand" not in pdf.columns:
+                return {}
+            f = pdf[pdf["stand"] == hand].dropna(subset=["pitch_type"])
+            if f.empty:
+                return {}
+            counts = f["pitch_type"].value_counts()
+            total = counts.sum()
+            if total == 0:
+                return {}
+            return {str(k): round(float(v) / float(total), 4) for k, v in counts.items()}
+
         mix_r: dict = {}
         mix_l: dict = {}
         if pitcher_id:
             pdf = _pitcher_career(pitcher_id)
             if not pdf.empty:
-                mix_r = {k: round(v, 4) for k, v in (get_pitch_mix(pdf, "R") or {}).items()}
-                mix_l = {k: round(v, 4) for k, v in (get_pitch_mix(pdf, "L") or {}).items()}
+                mix_r = _raw_mix(pdf, "R")
+                mix_l = _raw_mix(pdf, "L")
 
         # Include every active-roster batter so key hitters aren't silently
         # dropped. For projected lineups (no posted batting order yet), rank
