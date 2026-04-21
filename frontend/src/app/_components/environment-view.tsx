@@ -81,16 +81,24 @@ function impactTier(pct: number): { label: string; color: string; bg: string } {
 }
 
 // ── Wind direction → compass + flow ──────────────────────────────────────
+const COMPASS_8 = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"] as const;
+
 function windInfo(deg: number | null, score: number, isDome: boolean) {
   if (isDome) return { compass: "—", flow: "Dome", color: "#a1a1aa" };
   if (deg === null || deg === undefined) return { compass: "?", flow: "?", color: "#a1a1aa" };
-  const dirs = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-  const compass = dirs[Math.round(deg / 45) % 8];
+  const compass = COMPASS_8[Math.round(deg / 45) % 8];
   if (score > 5)  return { compass, flow: "Out",   color: "#22c55e" };
   if (score > 2)  return { compass, flow: "Out",   color: "#4ade80" };
   if (score < -5) return { compass, flow: "In",    color: "#ef4444" };
   if (score < -2) return { compass, flow: "In",    color: "#f87171" };
   return { compass, flow: "Cross", color: "#a1a1aa" };
+}
+
+// Meteorological convention: wind "from" X blows "to" X+180.
+function blowingToward(fromDeg: number | null): string {
+  if (fromDeg === null || fromDeg === undefined) return "?";
+  const to = (fromDeg + 180) % 360;
+  return COMPASS_8[Math.round(to / 45) % 8];
 }
 
 // ── Compact wind arrow SVG (24px, direction only) ────────────────────────
@@ -147,7 +155,15 @@ function ExpandedDetail({ g }: { g: GameEnv }) {
           <Stat label="RHB" value={`${splitPct("R") > 0 ? "+" : ""}${splitPct("R")}%`} color={splitPct("R") > 0 ? "#22c55e" : splitPct("R") < 0 ? "#ef4444" : undefined} />
         </>
       )}
-      <Stat label="Wind" value={g.is_dome ? "—" : `${g.wind_speed_mph ?? "?"} mph ${wd.compass} (${wd.flow})`} color={wd.color} />
+      <Stat
+        label="Wind"
+        value={
+          g.is_dome
+            ? "—"
+            : `${g.wind_speed_mph ?? "?"} mph — from ${wd.compass}${g.wind_direction !== null ? ` (${Math.round(g.wind_direction)}°)` : ""} → ${blowingToward(g.wind_direction)} — ${wd.flow} to CF`
+        }
+        color={wd.color}
+      />
       <Stat label="Temp" value={g.temperature_f !== null ? `${Math.round(g.temperature_f)}°F` : "—"} />
       <Stat label="Humidity" value={g.humidity !== null ? `${Math.round(g.humidity)}%` : "—"} />
       <Stat label="Pressure" value={g.pressure_hpa !== null ? `${Math.round(g.pressure_hpa)} hPa` : "—"} />
@@ -178,7 +194,7 @@ function EnvRow({
         className="w-full grid items-center gap-2 px-4 py-2.5 text-left hover:bg-[var(--surface-2,#232326)] cursor-pointer transition-colors"
         style={{
           gridTemplateColumns:
-            "minmax(150px,1.2fr) 90px 70px 60px minmax(110px,1fr) 60px 60px 80px",
+            "minmax(150px,1.2fr) 90px 70px 60px minmax(150px,1.1fr) 60px 60px 80px",
         }}
       >
         {/* Matchup */}
@@ -215,14 +231,18 @@ function EnvRow({
           {g.park_factor}
         </div>
 
-        {/* Wind */}
+        {/* Wind — arrow + compass + mph + flow */}
         <div className="flex items-center justify-end gap-1.5 font-mono text-[12px]">
           {g.is_dome ? (
             <span className="text-muted">—</span>
           ) : (
             <>
               <MiniCompass deg={g.wind_direction} color={wd.color} />
-              <span className="text-foreground">{g.wind_speed_mph !== null ? Math.round(g.wind_speed_mph) : "?"}</span>
+              <span className="text-foreground w-6 text-right">
+                {g.wind_speed_mph !== null ? Math.round(g.wind_speed_mph) : "?"}
+              </span>
+              <span className="text-muted text-[10px]">mph</span>
+              <span className="text-foreground text-[10px] w-5">{wd.compass}</span>
               <span className="text-[10px] w-10 text-left" style={{ color: wd.color }}>
                 {wd.flow}
               </span>
@@ -309,7 +329,7 @@ export function EnvironmentView({ games }: { games: GameEnv[] }) {
           className="grid items-center gap-2 px-4 py-2 border-b"
           style={{
             gridTemplateColumns:
-              "minmax(150px,1.2fr) 90px 70px 60px minmax(110px,1fr) 60px 60px 80px",
+              "minmax(150px,1.2fr) 90px 70px 60px minmax(150px,1.1fr) 60px 60px 80px",
             borderColor: "#2c2c2e",
             background: "#161618",
           }}
