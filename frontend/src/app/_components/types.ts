@@ -155,6 +155,7 @@ export interface PAHistoryEntry {
   is_bbe: boolean;
   ev: number | null;
   la: number | null;
+  bat_speed: number | null;
   is_barrel: boolean;
   is_hard_hit: boolean;
   result: PAResult;

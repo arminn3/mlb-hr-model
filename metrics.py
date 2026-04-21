@@ -529,6 +529,12 @@ def build_batter_pa_history(
         bases = _BASES.get(result, 0)
         woba_value = _WOBA_WEIGHTS.get(result, 0.0)
 
+        bat_speed = getattr(row, "bat_speed", None)
+        bat_speed_val = (
+            round(float(bat_speed), 1)
+            if bat_speed is not None and not pd.isna(bat_speed) else None
+        )
+
         out.append({
             "date": date_str,
             "season": season,
@@ -538,6 +544,7 @@ def build_batter_pa_history(
             "is_bbe": is_bbe,
             "ev": round(ls_val, 1) if ls_val is not None else None,
             "la": round(la_val, 1) if la_val is not None else None,
+            "bat_speed": bat_speed_val,
             "is_barrel": bool(is_barrel),
             "is_hard_hit": is_hard_hit,
             "result": result,

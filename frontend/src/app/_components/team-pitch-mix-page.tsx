@@ -61,6 +61,10 @@ interface RowStats {
   bb_pct: number | null;
   avg_ev: number | null;
   barrel_pct: number | null;
+  hh_pct: number | null;   // hard-hit % of BBE
+  la_ss_pct: number | null; // sweet-spot LA% of BBE (8°-32°)
+  bat_spd: number | null;   // avg bat speed (mph) across rows where measured
+  fb_pct: number | null;    // fly-ball % of BBE (LA 25°-50°)
 }
 
 // ── Aggregation ─────────────────────────────────────────────────────────
@@ -125,8 +129,14 @@ function aggregate(history: PAHistoryEntry[], filter: Filter): RowStats {
   const TB = limited.reduce((s, r) => s + r.bases, 0);
   const bbe = limited.filter((r) => r.is_bbe);
   const BARRELS = bbe.filter((r) => r.is_barrel).length;
+  const HARD_HITS = bbe.filter((r) => r.is_hard_hit).length;
+  const SS_HITS = bbe.filter((r) => r.la !== null && r.la >= 8 && r.la <= 32).length;
+  const FB_HITS = bbe.filter((r) => r.la !== null && r.la >= 25 && r.la <= 50).length;
   const wobaSum = limited.reduce((s, r) => s + (r.woba_value ?? 0), 0);
   const wobaDenom = AB + BB + HBP + SF;
+  // Bat speed: use swings where measured (2023+ Statcast). Approximate by
+  // taking bbe rows with bat_speed populated.
+  const bs = limited.filter((r) => r.bat_speed !== null && r.bat_speed > 0);
 
   return {
     PA, AB, H, HR, BB, K, TB, HBP, SF,
@@ -140,6 +150,10 @@ function aggregate(history: PAHistoryEntry[], filter: Filter): RowStats {
     bb_pct: PA >= 3 ? BB / PA : null,
     avg_ev: bbe.length >= 2 ? bbe.reduce((s, r) => s + (r.ev ?? 0), 0) / bbe.length : null,
     barrel_pct: bbe.length >= 2 ? BARRELS / bbe.length : null,
+    hh_pct: bbe.length >= 2 ? HARD_HITS / bbe.length : null,
+    la_ss_pct: bbe.length >= 2 ? SS_HITS / bbe.length : null,
+    bat_spd: bs.length >= 2 ? bs.reduce((s, r) => s + (r.bat_speed ?? 0), 0) / bs.length : null,
+    fb_pct: bbe.length >= 2 ? FB_HITS / bbe.length : null,
   };
 }
 
@@ -204,65 +218,109 @@ function PitchMixPills({
 }
 
 // ── Table ───────────────────────────────────────────────────────────────
-const COLS = [
-  { key: "order", label: "#", align: "text-center", w: "w-10" },
-  { key: "name", label: "PLAYER", align: "text-left", w: "min-w-[160px]" },
-  { key: "PA", label: "PA", align: "text-right", w: "w-14" },
-  { key: "hab", label: "H-AB", align: "text-right", w: "w-20" },
-  { key: "avg", label: "AVG", align: "text-right", w: "w-16" },
-  { key: "obp", label: "OBP", align: "text-right", w: "w-16" },
-  { key: "slg", label: "SLG", align: "text-right", w: "w-16" },
-  { key: "iso", label: "ISO", align: "text-right", w: "w-16" },
-  { key: "woba", label: "wOBA", align: "text-right", w: "w-16" },
-  { key: "k_pct", label: "K%", align: "text-right", w: "w-16" },
-  { key: "bb_pct", label: "BB%", align: "text-right", w: "w-16" },
-  { key: "HR", label: "HR", align: "text-right", w: "w-12" },
-  { key: "avg_ev", label: "AVG EV", align: "text-right", w: "w-20" },
-  { key: "barrel_pct", label: "BARREL%", align: "text-right", w: "w-20" },
-] as const;
+// Compact density overrides — tighter than the default table-styles.ts so
+// more fits on screen without horizontal scroll.
+const compactCell = "py-1.5 px-2 text-[12px] font-medium whitespace-nowrap border-b border-r";
+const compactHeader = "py-1.5 px-2 text-[11px] font-medium whitespace-nowrap border-b border-r select-none";
+
+type SortKey =
+  | "name" | "PA" | "avg" | "obp" | "slg" | "iso" | "woba"
+  | "k_pct" | "bb_pct" | "HR" | "avg_ev" | "barrel_pct"
+  | "hh_pct" | "la_ss_pct" | "bat_spd" | "fb_pct";
+
+const COLS: ReadonlyArray<{
+  key: SortKey | "hab";
+  label: string;
+  align: string;
+  w: string;
+  sortable: boolean;
+}> = [
+  { key: "name", label: "Player", align: "text-left", w: "min-w-[160px]", sortable: true },
+  { key: "PA", label: "PA", align: "text-right", w: "w-10", sortable: true },
+  { key: "hab", label: "H-AB", align: "text-right", w: "w-14", sortable: false },
+  { key: "avg", label: "Avg", align: "text-right", w: "w-12", sortable: true },
+  { key: "obp", label: "OBP", align: "text-right", w: "w-12", sortable: true },
+  { key: "slg", label: "Slg", align: "text-right", w: "w-12", sortable: true },
+  { key: "iso", label: "Iso", align: "text-right", w: "w-12", sortable: true },
+  { key: "woba", label: "wOBA", align: "text-right", w: "w-14", sortable: true },
+  { key: "k_pct", label: "K%", align: "text-right", w: "w-12", sortable: true },
+  { key: "bb_pct", label: "BB%", align: "text-right", w: "w-12", sortable: true },
+  { key: "HR", label: "HR", align: "text-right", w: "w-10", sortable: true },
+  { key: "avg_ev", label: "Avg EV", align: "text-right", w: "w-14", sortable: true },
+  { key: "barrel_pct", label: "Barrel%", align: "text-right", w: "w-16", sortable: true },
+  { key: "hh_pct", label: "HH%", align: "text-right", w: "w-14", sortable: true },
+  { key: "la_ss_pct", label: "LA SS%", align: "text-right", w: "w-14", sortable: true },
+  { key: "bat_spd", label: "Bat Spd", align: "text-right", w: "w-14", sortable: true },
+  { key: "fb_pct", label: "FB%", align: "text-right", w: "w-12", sortable: true },
+];
+
+// MLB headshot CDN. Falls back to a generic silhouette if the ID is unknown.
+function headshotUrl(id: number): string {
+  return `https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_120,q_auto:best/v1/people/${id}/headshot/67/current`;
+}
 
 function PlayerRow({
-  batter, stats, idx,
+  batter, stats,
 }: {
   batter: TeamPitchMixBatter;
   stats: RowStats;
-  idx: number;
 }) {
   const hab = stats.AB > 0 ? `${stats.H}-${stats.AB}` : "—";
 
   return (
     <tr>
-      <td className={cellClass + " text-center text-muted"} style={cellStyle}>{idx + 1}</td>
-      <td className={cellClass} style={cellStyle}>
-        <div className="flex flex-col leading-tight">
-          <span className="font-semibold">{batter.name}</span>
-          <span className="text-[10px] text-muted">{batter.pos || "—"} | {batter.batter_hand}HB</span>
+      <td className={compactCell} style={cellStyle}>
+        <div className="flex items-center gap-2 min-w-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={headshotUrl(batter.id)}
+            alt=""
+            width={28}
+            height={28}
+            loading="lazy"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).style.visibility = "hidden";
+            }}
+            className="w-7 h-7 rounded-full shrink-0 bg-[var(--surface-2)] object-cover"
+          />
+          <div className="flex flex-col leading-tight min-w-0">
+            <span className="font-semibold text-white truncate">{batter.name}</span>
+            <span className="text-[10px] text-muted">{batter.pos || "—"} | {batter.batter_hand}HB</span>
+          </div>
         </div>
       </td>
-      <td className={cellClass + " text-right font-mono"} style={cellStyle}>{stats.PA}</td>
-      <td className={cellClass + " text-right font-mono text-muted"} style={cellStyle}>{hab}</td>
-      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.avg, 0.220, 0.290)) }}>{fmt3(stats.avg)}</td>
-      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.obp, 0.290, 0.350)) }}>{fmt3(stats.obp)}</td>
-      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.slg, 0.360, 0.460)) }}>{fmt3(stats.slg)}</td>
-      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.iso, 0.130, 0.200)) }}>{fmt3(stats.iso)}</td>
-      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.woba, 0.300, 0.360)) }}>{fmt3(stats.woba)}</td>
-      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.k_pct, 0.20, 0.28, true)) }}>{fmtPct(stats.k_pct)}</td>
-      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.bb_pct, 0.06, 0.12)) }}>{fmtPct(stats.bb_pct)}</td>
-      <td className={cellClass + " text-right font-mono"} style={cellStyle}>{stats.HR > 0 ? stats.HR : "—"}</td>
-      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.avg_ev, 88, 93)) }}>{fmtNum(stats.avg_ev, 1)}</td>
-      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.barrel_pct, 0.06, 0.12)) }}>{fmtPct(stats.barrel_pct)}</td>
+      <td className={compactCell + " text-right font-mono text-white"} style={cellStyle}>{stats.PA}</td>
+      <td className={compactCell + " text-right font-mono text-muted"} style={cellStyle}>{hab}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.avg, 0.220, 0.290)) }}>{fmt3(stats.avg)}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.obp, 0.290, 0.350)) }}>{fmt3(stats.obp)}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.slg, 0.360, 0.460)) }}>{fmt3(stats.slg)}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.iso, 0.130, 0.200)) }}>{fmt3(stats.iso)}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.woba, 0.300, 0.360)) }}>{fmt3(stats.woba)}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.k_pct, 0.20, 0.28, true)) }}>{fmtPct(stats.k_pct)}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.bb_pct, 0.06, 0.12)) }}>{fmtPct(stats.bb_pct)}</td>
+      <td className={compactCell + " text-right font-mono text-white"} style={cellStyle}>{stats.HR > 0 ? stats.HR : "—"}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.avg_ev, 88, 93)) }}>{fmtNum(stats.avg_ev, 1)}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.barrel_pct, 0.06, 0.12)) }}>{fmtPct(stats.barrel_pct)}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.hh_pct, 0.30, 0.45)) }}>{fmtPct(stats.hh_pct)}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.la_ss_pct, 0.28, 0.38)) }}>{fmtPct(stats.la_ss_pct)}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.bat_spd, 68, 73)) }}>{fmtNum(stats.bat_spd, 1)}</td>
+      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(stats.fb_pct, 0.25, 0.40)) }}>{fmtPct(stats.fb_pct)}</td>
     </tr>
   );
 }
 
 function SideTable({
   title, pitchMix, batters, filter, onTogglePitchType,
+  sortKey, sortDir, onSort,
 }: {
   title: string;
   pitchMix: Record<string, number>;
   batters: Array<{ batter: TeamPitchMixBatter; stats: RowStats }>;
   filter: Filter;
   onTogglePitchType: (pt: string) => void;
+  sortKey: SortKey;
+  sortDir: "asc" | "desc";
+  onSort: (key: SortKey) => void;
 }) {
   const topPitches = Object.entries(pitchMix)
     .sort((a, b) => b[1] - a[1])
@@ -270,7 +328,7 @@ function SideTable({
     .map(([pt]) => PITCH_NAMES[pt] || pt)
     .join(", ");
 
-  // Team totals row (weighted by PA across displayed batters)
+  // Team totals row (weighted by PA/BBE across displayed batters)
   const totals = batters.reduce(
     (acc, { stats }) => {
       acc.PA += stats.PA; acc.AB += stats.AB; acc.H += stats.H;
@@ -278,22 +336,35 @@ function SideTable({
       acc.TB += stats.TB; acc.HBP += stats.HBP; acc.SF += stats.SF;
       acc.BBE += stats.BBE; acc.BARRELS += stats.BARRELS;
       acc.evSum += (stats.avg_ev ?? 0) * stats.BBE;
+      acc.hhSum += (stats.hh_pct ?? 0) * stats.BBE;
+      acc.ssSum += (stats.la_ss_pct ?? 0) * stats.BBE;
+      acc.fbSum += (stats.fb_pct ?? 0) * stats.BBE;
+      if (stats.bat_spd !== null) {
+        acc.spdSum += stats.bat_spd * stats.BBE;
+        acc.spdBBE += stats.BBE;
+      }
       return acc;
     },
-    { PA: 0, AB: 0, H: 0, HR: 0, BB: 0, K: 0, TB: 0, HBP: 0, SF: 0, BBE: 0, BARRELS: 0, evSum: 0 },
+    { PA: 0, AB: 0, H: 0, HR: 0, BB: 0, K: 0, TB: 0, HBP: 0, SF: 0, BBE: 0,
+      BARRELS: 0, evSum: 0, hhSum: 0, ssSum: 0, fbSum: 0, spdSum: 0, spdBBE: 0 },
   );
   const tDenom = totals.AB + totals.BB + totals.HBP + totals.SF;
   const totalStats: RowStats = {
-    ...totals,
+    PA: totals.PA, AB: totals.AB, H: totals.H, HR: totals.HR, BB: totals.BB, K: totals.K,
+    TB: totals.TB, HBP: totals.HBP, SF: totals.SF, BBE: totals.BBE, BARRELS: totals.BARRELS,
     avg: totals.AB >= 3 ? totals.H / totals.AB : null,
     obp: tDenom >= 3 ? (totals.H + totals.BB + totals.HBP) / tDenom : null,
     slg: totals.AB >= 3 ? totals.TB / totals.AB : null,
     iso: totals.AB >= 3 ? (totals.TB - totals.H) / totals.AB : null,
-    woba: null, // skip — sum of woba_values isn't tracked at this level
+    woba: null,
     k_pct: totals.PA >= 3 ? totals.K / totals.PA : null,
     bb_pct: totals.PA >= 3 ? totals.BB / totals.PA : null,
     avg_ev: totals.BBE >= 2 ? totals.evSum / totals.BBE : null,
     barrel_pct: totals.BBE >= 2 ? totals.BARRELS / totals.BBE : null,
+    hh_pct: totals.BBE >= 2 ? totals.hhSum / totals.BBE : null,
+    la_ss_pct: totals.BBE >= 2 ? totals.ssSum / totals.BBE : null,
+    bat_spd: totals.spdBBE >= 2 ? totals.spdSum / totals.spdBBE : null,
+    fb_pct: totals.BBE >= 2 ? totals.fbSum / totals.BBE : null,
   };
 
   return (
@@ -307,48 +378,60 @@ function SideTable({
         <table className={tableClass}>
           <thead>
             <tr>
-              {COLS.map((c) => (
-                <th
-                  key={c.key}
-                  className={headerCellClass + " " + c.align + " " + c.w}
-                  style={headerCellStyle}
-                >
-                  {c.label}
-                </th>
-              ))}
+              {COLS.map((c) => {
+                const isSorted = c.sortable && c.key === sortKey;
+                const indicator = isSorted ? (sortDir === "desc" ? " ↓" : " ↑") : "";
+                return (
+                  <th
+                    key={c.key}
+                    className={
+                      compactHeader + " " + c.align + " " + c.w +
+                      " " + (c.sortable ? "cursor-pointer" : "") +
+                      " " + (isSorted ? "text-accent" : "text-muted")
+                    }
+                    style={headerCellStyle}
+                    onClick={() => c.sortable && onSort(c.key as SortKey)}
+                  >
+                    {c.label}{indicator}
+                  </th>
+                );
+              })}
             </tr>
           </thead>
           <tbody>
             {batters.length === 0 && (
               <tr>
-                <td className={cellClass + " text-center text-muted"} colSpan={COLS.length} style={cellStyle}>
-                  No career PAs against this pitcher for any batter in the {title.toLowerCase()}.
+                <td className={compactCell + " text-center text-muted"} colSpan={COLS.length} style={cellStyle}>
+                  No PA history on file for any batter in the {title.toLowerCase()} under current filters.
                 </td>
               </tr>
             )}
-            {batters.map(({ batter, stats }, i) => (
-              <PlayerRow key={batter.id} batter={batter} stats={stats} idx={i} />
+            {batters.map(({ batter, stats }) => (
+              <PlayerRow key={batter.id} batter={batter} stats={stats} />
             ))}
             {batters.length > 0 && (
               <tr className="border-t-2" style={{ borderColor: "#3a3a3e" }}>
-                <td className={cellClass + " text-center text-muted"} style={cellStyle}>—</td>
-                <td className={cellClass} style={cellStyle}>
+                <td className={compactCell} style={cellStyle}>
                   <span className="font-semibold text-muted">
                     {title.toLowerCase().startsWith("vs rhb") ? "RHB Avg" : "LHB Avg"}
                   </span>
                 </td>
-                <td className={cellClass + " text-right font-mono text-muted"} style={cellStyle}>{totalStats.PA}</td>
-                <td className={cellClass + " text-right font-mono text-muted"} style={cellStyle}>{totalStats.H}-{totalStats.AB}</td>
-                <td className={cellClass + " text-right font-mono"} style={cellStyle}>{fmt3(totalStats.avg)}</td>
-                <td className={cellClass + " text-right font-mono"} style={cellStyle}>{fmt3(totalStats.obp)}</td>
-                <td className={cellClass + " text-right font-mono"} style={cellStyle}>{fmt3(totalStats.slg)}</td>
-                <td className={cellClass + " text-right font-mono"} style={cellStyle}>{fmt3(totalStats.iso)}</td>
-                <td className={cellClass + " text-right font-mono text-muted"} style={cellStyle}>—</td>
-                <td className={cellClass + " text-right font-mono"} style={cellStyle}>{fmtPct(totalStats.k_pct)}</td>
-                <td className={cellClass + " text-right font-mono"} style={cellStyle}>{fmtPct(totalStats.bb_pct)}</td>
-                <td className={cellClass + " text-right font-mono"} style={cellStyle}>{totalStats.HR > 0 ? totalStats.HR : "—"}</td>
-                <td className={cellClass + " text-right font-mono"} style={cellStyle}>{fmtNum(totalStats.avg_ev, 1)}</td>
-                <td className={cellClass + " text-right font-mono"} style={cellStyle}>{fmtPct(totalStats.barrel_pct)}</td>
+                <td className={compactCell + " text-right font-mono text-muted"} style={cellStyle}>{totalStats.PA}</td>
+                <td className={compactCell + " text-right font-mono text-muted"} style={cellStyle}>{totalStats.H}-{totalStats.AB}</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{fmt3(totalStats.avg)}</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{fmt3(totalStats.obp)}</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{fmt3(totalStats.slg)}</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{fmt3(totalStats.iso)}</td>
+                <td className={compactCell + " text-right font-mono text-muted"} style={cellStyle}>—</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{fmtPct(totalStats.k_pct)}</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{fmtPct(totalStats.bb_pct)}</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{totalStats.HR > 0 ? totalStats.HR : "—"}</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{fmtNum(totalStats.avg_ev, 1)}</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{fmtPct(totalStats.barrel_pct)}</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{fmtPct(totalStats.hh_pct)}</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{fmtPct(totalStats.la_ss_pct)}</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{fmtNum(totalStats.bat_spd, 1)}</td>
+                <td className={compactCell + " text-right font-mono"} style={cellStyle}>{fmtPct(totalStats.fb_pct)}</td>
               </tr>
             )}
           </tbody>
@@ -398,6 +481,17 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
   const [pitcherHand, setPitcherHand] = useState<HandFilter>("all");
   const [startersOnly, setStartersOnly] = useState(true);
   const [selectedPitchTypes, setSelectedPitchTypes] = useState<Set<string>>(new Set());
+  const [sortKey, setSortKey] = useState<SortKey>("fb_pct");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
+
+  const onSort = (k: SortKey) => {
+    if (k === sortKey) {
+      setSortDir((d) => (d === "desc" ? "asc" : "desc"));
+    } else {
+      setSortKey(k);
+      setSortDir("desc");
+    }
+  };
 
   // Reset game index if it overflows
   useEffect(() => {
@@ -437,17 +531,24 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
       const eff = effectiveHand(b, pitcher.hand);
       (eff === "R" ? rhb : lhb).push({ batter: b, stats });
     }
-    // Sort by order within lineup, then by name
-    const byOrder = (a: { batter: TeamPitchMixBatter }, b: { batter: TeamPitchMixBatter }) => {
-      const ao = a.batter.order ?? 99;
-      const bo = b.batter.order ?? 99;
-      if (ao !== bo) return ao - bo;
-      return a.batter.name.localeCompare(b.batter.name);
+    const dirMul = sortDir === "desc" ? -1 : 1;
+    const cmp = (a: { batter: TeamPitchMixBatter; stats: RowStats },
+                 b: { batter: TeamPitchMixBatter; stats: RowStats }) => {
+      if (sortKey === "name") {
+        return a.batter.name.localeCompare(b.batter.name) * dirMul;
+      }
+      const av = a.stats[sortKey] as number | null;
+      const bv = b.stats[sortKey] as number | null;
+      // Nulls sink to the bottom regardless of sortDir
+      if (av === null && bv === null) return 0;
+      if (av === null) return 1;
+      if (bv === null) return -1;
+      return (av - bv) * dirMul;
     };
-    rhb.sort(byOrder);
-    lhb.sort(byOrder);
+    rhb.sort(cmp);
+    lhb.sort(cmp);
     return { rhbRows: rhb, lhbRows: lhb };
-  }, [currentSide, filter, pitcher.hand, startersOnly]);
+  }, [currentSide, filter, pitcher.hand, startersOnly, sortKey, sortDir]);
 
   const togglePitch = (pt: string) => {
     setSelectedPitchTypes((prev) => {
@@ -562,6 +663,9 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
         batters={rhbRows}
         filter={filter}
         onTogglePitchType={togglePitch}
+        sortKey={sortKey}
+        sortDir={sortDir}
+        onSort={onSort}
       />
       <SideTable
         title="vs LHB"
@@ -569,6 +673,9 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
         batters={lhbRows}
         filter={filter}
         onTogglePitchType={togglePitch}
+        sortKey={sortKey}
+        sortDir={sortDir}
+        onSort={onSort}
       />
     </div>
   );
