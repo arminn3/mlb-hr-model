@@ -1,16 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import {
-  TABLE_BG,
-  cellClass,
-  cellStyle,
-  headerCellClass,
-  headerCellStyle,
-  tableClass,
-  tableWrapperClass,
-  tableWrapperStyle,
-} from "./table-styles";
+import { useMemo, useState } from "react";
 
 interface GameEnv {
   game_pk: number;
@@ -30,452 +20,375 @@ interface GameEnv {
   humid_norm: number;
   pressure_norm?: number;
   env_score: number;
+  weather_density_pct?: number;
+  weather_wind_pct?: number;
+  weather_hr_pct?: number;
+  park_hr_pct?: number;
+  combined_hr_pct?: number;
 }
 
-type EnvTab = "combined" | "weather" | "parks";
+type SortKey = "impact" | "wind" | "temp" | "park" | "game";
 
-function ratingLabel(score: number): { label: string; cls: string } {
-  if (score >= 0.65) return { label: "Excellent", cls: "bg-accent-green/15 text-accent-green" };
-  if (score >= 0.50) return { label: "Good", cls: "bg-accent-green/15 text-accent-green" };
-  if (score >= 0.35) return { label: "Average", cls: "bg-accent-yellow/15 text-accent-yellow" };
-  return { label: "Poor", cls: "bg-accent-red/15 text-accent-red" };
+// ── Park L/R splits (for expanded detail) ────────────────────────────────
+const PARK_SPLITS: Record<string, { L: number; R: number }> = {
+  LAD: { L: 140, R: 134 }, CIN: { L: 120, R: 112 }, NYY: { L: 130, R: 105 },
+  BAL: { L: 115, R: 106 }, PHI: { L: 118, R: 112 }, HOU: { L: 110, R: 114 },
+  LAA: { L: 108, R: 114 }, TOR: { L: 112, R: 106 }, SDP: { L: 106, R: 112 },
+  COL: { L: 118, R: 112 }, NYM: { L: 103, R: 107 }, MIL: { L: 108, R: 100 },
+  DET: { L: 100, R: 104 }, MIN: { L: 98, R: 102 },  CWS: { L: 94, R: 98 },
+  CLE: { L: 98, R: 94 },   ATL: { L: 93, R: 97 },   CHC: { L: 100, R: 90 },
+  SEA: { L: 90, R: 98 },   ARI: { L: 94, R: 90 },   AZ: { L: 94, R: 90 },
+  MIA: { L: 88, R: 94 },   WSH: { L: 93, R: 89 },   TEX: { L: 89, R: 93 },
+  BOS: { L: 80, R: 95 },   STL: { L: 76, R: 80 },   KC:  { L: 92, R: 88 },
+  PIT: { L: 62, R: 70 },   SF:  { L: 70, R: 80 },   TB:  { L: 93, R: 97 },
+  OAK: { L: 110, R: 106 }, ATH: { L: 110, R: 106 },
+};
+
+// ── Impact calcs ─────────────────────────────────────────────────────────
+function weatherPct(g: GameEnv): number {
+  if (g.weather_hr_pct !== undefined && g.weather_hr_pct !== null) {
+    return Math.round(g.weather_hr_pct * 10) / 10;
+  }
+  if (g.is_dome) return 0;
+  let pct = (g.wind_score ?? 0) * 1.2;
+  if (g.temperature_f) {
+    if (g.temperature_f > 72) pct += (g.temperature_f - 72) * 0.3;
+    if (g.temperature_f < 55) pct -= (55 - g.temperature_f) * 0.4;
+  }
+  if (g.humidity && g.humidity > 60) pct += (g.humidity - 60) * 0.05;
+  return Math.round(pct * 10) / 10;
+}
+function parkPct(g: GameEnv): number {
+  if (g.park_hr_pct !== undefined && g.park_hr_pct !== null) {
+    return Math.round(g.park_hr_pct * 10) / 10;
+  }
+  return Math.round((g.park_factor - 100) * 10) / 10;
+}
+function combinedPct(g: GameEnv): number {
+  if (g.combined_hr_pct !== undefined && g.combined_hr_pct !== null) {
+    return Math.round(g.combined_hr_pct * 10) / 10;
+  }
+  return Math.round((weatherPct(g) + parkPct(g)) * 10) / 10;
 }
 
-function ratingColor(score: number): string {
-  if (score >= 0.5) return "text-accent-green";
-  if (score >= 0.35) return "text-accent-yellow";
-  return "text-accent-red";
+// ── Tiers ────────────────────────────────────────────────────────────────
+function impactTier(pct: number): { label: string; color: string; bg: string } {
+  if (pct >= 10) return { label: "Elite", color: "#22c55e", bg: "rgba(34,197,94,0.12)" };
+  if (pct >= 5)  return { label: "Boost", color: "#4ade80", bg: "rgba(74,222,128,0.08)" };
+  if (pct >= -5) return { label: "Neutral", color: "#a1a1aa", bg: "rgba(161,161,170,0.04)" };
+  if (pct >= -10) return { label: "Drag", color: "#fbbf24", bg: "rgba(251,191,36,0.08)" };
+  return { label: "Suppress", color: "#ef4444", bg: "rgba(239,68,68,0.10)" };
 }
 
-function borderColor(score: number): string {
-  if (score >= 0.5) return "border-accent-green";
-  if (score >= 0.35) return "border-accent-yellow";
-  return "border-accent-red";
+// ── Wind direction → compass + flow ──────────────────────────────────────
+function windInfo(deg: number | null, score: number, isDome: boolean) {
+  if (isDome) return { compass: "—", flow: "Dome", color: "#a1a1aa" };
+  if (deg === null || deg === undefined) return { compass: "?", flow: "?", color: "#a1a1aa" };
+  const dirs = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+  const compass = dirs[Math.round(deg / 45) % 8];
+  if (score > 5)  return { compass, flow: "Out",   color: "#22c55e" };
+  if (score > 2)  return { compass, flow: "Out",   color: "#4ade80" };
+  if (score < -5) return { compass, flow: "In",    color: "#ef4444" };
+  if (score < -2) return { compass, flow: "In",    color: "#f87171" };
+  return { compass, flow: "Cross", color: "#a1a1aa" };
 }
 
-function windLabel(score: number, isDome: boolean): string {
-  if (isDome) return "Dome";
-  if (score > 5) return "OUT (strong)";
-  if (score > 2) return "OUT (mild)";
-  if (score < -5) return "IN (strong)";
-  if (score < -2) return "IN (mild)";
-  return "Neutral";
-}
-
-function Bar({ pct, color }: { pct: number; color: string }) {
+// ── Compact wind arrow SVG (24px, direction only) ────────────────────────
+function MiniCompass({ deg, color }: { deg: number | null; color: string }) {
+  if (deg === null) {
+    return <span className="inline-block w-4 text-center text-muted">—</span>;
+  }
   return (
-    <div className="w-full h-2 bg-card-border rounded-full overflow-hidden">
-      <div className={`h-full rounded-full ${color}`} style={{ width: `${Math.min(pct, 100)}%` }} />
+    <svg
+      viewBox="0 0 24 24"
+      className="inline-block w-4 h-4 align-middle"
+      style={{ transform: `rotate(${deg}deg)`, color }}
+      aria-hidden
+    >
+      <path d="M12 3 L16 13 L12 11 L8 13 Z" fill="currentColor" />
+    </svg>
+  );
+}
+
+// ── Summary chip strip ───────────────────────────────────────────────────
+function SummaryRow({ games }: { games: GameEnv[] }) {
+  const sorted = [...games].sort((a, b) => combinedPct(b) - combinedPct(a));
+  const best = sorted[0];
+  const worst = sorted[sorted.length - 1];
+  const domes = games.filter((g) => g.is_dome).length;
+  const windyOut = games.filter((g) => (g.wind_score ?? 0) > 2 && !g.is_dome).length;
+  const windyIn = games.filter((g) => (g.wind_score ?? 0) < -2 && !g.is_dome).length;
+
+  if (!best) return null;
+  const bestPct = combinedPct(best);
+  const worstPct = combinedPct(worst);
+
+  return (
+    <div
+      className="flex flex-wrap items-center gap-x-5 gap-y-2 px-4 py-2.5 rounded-[var(--radius-md)] border mb-4 text-[12px]"
+      style={{ background: "var(--surface-1, #1c1c1e)", borderColor: "#2c2c2e" }}
+    >
+      <div>
+        <span className="text-muted">Best </span>
+        <span className="font-semibold text-foreground">{best.away_team} @ {best.home_team}</span>
+        <span className="font-mono ml-1.5" style={{ color: impactTier(bestPct).color }}>
+          {bestPct > 0 ? "+" : ""}{bestPct}%
+        </span>
+      </div>
+      <div className="w-px h-4 bg-[#2c2c2e]" />
+      <div>
+        <span className="text-muted">Worst </span>
+        <span className="font-semibold text-foreground">{worst.away_team} @ {worst.home_team}</span>
+        <span className="font-mono ml-1.5" style={{ color: impactTier(worstPct).color }}>
+          {worstPct > 0 ? "+" : ""}{worstPct}%
+        </span>
+      </div>
+      <div className="w-px h-4 bg-[#2c2c2e]" />
+      <div className="font-mono">
+        <span className="text-accent-green">{windyOut}</span>
+        <span className="text-muted ml-1">out</span>
+      </div>
+      <div className="font-mono">
+        <span className="text-accent-red">{windyIn}</span>
+        <span className="text-muted ml-1">in</span>
+      </div>
+      <div className="font-mono">
+        <span className="text-muted">{domes} domes</span>
+      </div>
     </div>
   );
 }
 
+// ── Inline expandable detail (replaces the old modal/diamond) ───────────
+function ExpandedDetail({ g }: { g: GameEnv }) {
+  const wx = weatherPct(g);
+  const park = parkPct(g);
+  const combined = combinedPct(g);
+  const tier = impactTier(combined);
+  const splits = PARK_SPLITS[g.home_team];
+  const splitPct = (side: "L" | "R") => {
+    if (!splits) return combined;
+    const sp = Math.round((splits[side] - 100) * 10) / 10;
+    return Math.round((wx + sp) * 10) / 10;
+  };
+  const wd = windInfo(g.wind_direction, g.wind_score ?? 0, g.is_dome);
+
+  const Stat = ({ label, value, mono = true, color }: { label: string; value: string; mono?: boolean; color?: string }) => (
+    <div>
+      <div className="text-[10px] uppercase tracking-[0.06em] text-muted mb-0.5">{label}</div>
+      <div className={`text-[13px] ${mono ? "font-mono" : "font-semibold"} text-foreground`} style={color ? { color } : undefined}>
+        {value}
+      </div>
+    </div>
+  );
+
+  return (
+    <div
+      className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-4 px-4 py-4 border-t"
+      style={{ borderColor: "#2c2c2e", background: "rgba(0,0,0,0.18)" }}
+    >
+      <Stat label="Combined" value={`${combined > 0 ? "+" : ""}${combined}%`} color={tier.color} />
+      <Stat label="Weather" value={`${wx > 0 ? "+" : ""}${wx}%`} color={wx > 0 ? "#22c55e" : wx < 0 ? "#ef4444" : undefined} />
+      <Stat label="Park" value={`${park > 0 ? "+" : ""}${park}%`} color={park > 0 ? "#22c55e" : park < 0 ? "#ef4444" : undefined} />
+      {splits && (
+        <>
+          <Stat label="LHB" value={`${splitPct("L") > 0 ? "+" : ""}${splitPct("L")}%`} color={splitPct("L") > 0 ? "#22c55e" : splitPct("L") < 0 ? "#ef4444" : undefined} />
+          <Stat label="RHB" value={`${splitPct("R") > 0 ? "+" : ""}${splitPct("R")}%`} color={splitPct("R") > 0 ? "#22c55e" : splitPct("R") < 0 ? "#ef4444" : undefined} />
+        </>
+      )}
+      <Stat label="Wind" value={g.is_dome ? "—" : `${g.wind_speed_mph ?? "?"} mph ${wd.compass} (${wd.flow})`} color={wd.color} />
+      <Stat label="Temp" value={g.temperature_f !== null ? `${Math.round(g.temperature_f)}°F` : "—"} />
+      <Stat label="Humidity" value={g.humidity !== null ? `${Math.round(g.humidity)}%` : "—"} />
+      <Stat label="Pressure" value={g.pressure_hpa !== null ? `${Math.round(g.pressure_hpa)} hPa` : "—"} />
+      <Stat label="Venue" value={g.is_dome ? "Dome / Roof" : "Open air"} />
+    </div>
+  );
+}
+
+// ── Row ─────────────────────────────────────────────────────────────────
+function EnvRow({
+  g, expanded, onToggle,
+}: {
+  g: GameEnv;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
+  const combined = combinedPct(g);
+  const wx = weatherPct(g);
+  const park = parkPct(g);
+  const tier = impactTier(combined);
+  const wd = windInfo(g.wind_direction, g.wind_score ?? 0, g.is_dome);
+
+  return (
+    <div className="border-b" style={{ borderColor: "#2c2c2e" }}>
+      <button
+        type="button"
+        onClick={onToggle}
+        className="w-full grid items-center gap-2 px-4 py-2.5 text-left hover:bg-[var(--surface-2,#232326)] cursor-pointer transition-colors"
+        style={{
+          gridTemplateColumns:
+            "minmax(150px,1.2fr) 90px 70px 60px minmax(110px,1fr) 60px 60px 80px",
+        }}
+      >
+        {/* Matchup */}
+        <div className="flex items-center gap-2 min-w-0">
+          <span
+            className="w-1 h-7 rounded-full shrink-0"
+            style={{ background: tier.color }}
+          />
+          <span className="font-semibold text-foreground truncate">
+            {g.away_team} <span className="text-muted font-normal">@</span> {g.home_team}
+          </span>
+          {g.is_dome && (
+            <span className="text-[9px] text-muted uppercase tracking-wider border border-[#3a3a3e] rounded px-1 py-0.5">
+              Dome
+            </span>
+          )}
+        </div>
+
+        {/* Impact (big colored) */}
+        <div
+          className="text-right font-mono font-bold text-[14px] px-2 py-0.5 rounded"
+          style={{ color: tier.color, background: tier.bg }}
+        >
+          {combined > 0 ? "+" : ""}{combined}%
+        </div>
+
+        {/* Weather % */}
+        <div className="text-right font-mono text-[12px]" style={{ color: wx > 0 ? "#22c55e" : wx < 0 ? "#ef4444" : "#a1a1aa" }}>
+          {wx > 0 ? "+" : ""}{wx}
+        </div>
+
+        {/* Park */}
+        <div className="text-right font-mono text-[12px] text-foreground">
+          {g.park_factor}
+        </div>
+
+        {/* Wind */}
+        <div className="flex items-center justify-end gap-1.5 font-mono text-[12px]">
+          {g.is_dome ? (
+            <span className="text-muted">—</span>
+          ) : (
+            <>
+              <MiniCompass deg={g.wind_direction} color={wd.color} />
+              <span className="text-foreground">{g.wind_speed_mph !== null ? Math.round(g.wind_speed_mph) : "?"}</span>
+              <span className="text-[10px] w-10 text-left" style={{ color: wd.color }}>
+                {wd.flow}
+              </span>
+            </>
+          )}
+        </div>
+
+        {/* Temp */}
+        <div className="text-right font-mono text-[12px] text-foreground">
+          {g.is_dome ? "—" : g.temperature_f !== null ? `${Math.round(g.temperature_f)}°` : "?"}
+        </div>
+
+        {/* Humidity */}
+        <div className="text-right font-mono text-[12px] text-muted">
+          {g.is_dome ? "—" : g.humidity !== null ? `${Math.round(g.humidity)}%` : "?"}
+        </div>
+
+        {/* Tier label + caret */}
+        <div className="flex items-center justify-end gap-1.5">
+          <span className="text-[10px] uppercase tracking-wider" style={{ color: tier.color }}>
+            {tier.label}
+          </span>
+          <svg
+            viewBox="0 0 20 20"
+            className="w-3.5 h-3.5 text-muted transition-transform"
+            style={{ transform: expanded ? "rotate(180deg)" : "none" }}
+          >
+            <path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+      </button>
+      {expanded && <ExpandedDetail g={g} />}
+    </div>
+  );
+}
+
+// ── Main ────────────────────────────────────────────────────────────────
 export function EnvironmentView({ games }: { games: GameEnv[] }) {
-  const [tab, setTab] = useState<EnvTab>("combined");
+  const [sortBy, setSortBy] = useState<SortKey>("impact");
+  const [expandedPk, setExpandedPk] = useState<number | null>(null);
+
+  const sorted = useMemo(() => {
+    const arr = [...games];
+    switch (sortBy) {
+      case "impact": arr.sort((a, b) => combinedPct(b) - combinedPct(a)); break;
+      case "wind":   arr.sort((a, b) => (b.wind_score ?? 0) - (a.wind_score ?? 0)); break;
+      case "temp":   arr.sort((a, b) => (b.temperature_f ?? 0) - (a.temperature_f ?? 0)); break;
+      case "park":   arr.sort((a, b) => b.park_factor - a.park_factor); break;
+      case "game":   arr.sort((a, b) => `${a.away_team}${a.home_team}`.localeCompare(`${b.away_team}${b.home_team}`)); break;
+    }
+    return arr;
+  }, [games, sortBy]);
 
   if (!games || games.length === 0) {
     return <div className="text-center text-muted text-sm py-12">No environment data available.</div>;
   }
 
+  const HeaderCell = ({
+    label, k, align = "right",
+  }: {
+    label: string;
+    k?: SortKey;
+    align?: "left" | "right";
+  }) => {
+    const active = k && sortBy === k;
+    return (
+      <div
+        className={`text-[10px] uppercase tracking-[0.06em] select-none ${k ? "cursor-pointer" : ""} ${align === "right" ? "text-right" : "text-left"} ${active ? "text-accent" : "text-muted"}`}
+        onClick={k ? () => setSortBy(k) : undefined}
+      >
+        {label}{active ? " ↓" : ""}
+      </div>
+    );
+  };
+
   return (
     <div>
-      {/* Sub-tabs */}
-      <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-1 w-fit mb-6">
-        {([
-          { key: "combined" as const, label: "Combined" },
-          { key: "weather" as const, label: "Weather Boost" },
-          { key: "parks" as const, label: "Park Factors" },
-        ]).map((t) => (
-          <button
-            key={t.key}
-            onClick={() => setTab(t.key)}
-            className={`px-4 py-1.5 text-xs rounded cursor-pointer transition-colors ${
-              tab === t.key ? "bg-accent/15 text-accent font-medium" : "text-muted hover:text-foreground"
-            }`}
-          >
-            {t.label}
-          </button>
+      <SummaryRow games={sorted} />
+
+      <div
+        className="rounded-[var(--radius-md)] border overflow-hidden"
+        style={{ background: "var(--surface-1,#1c1c1e)", borderColor: "#2c2c2e" }}
+      >
+        {/* Column headers */}
+        <div
+          className="grid items-center gap-2 px-4 py-2 border-b"
+          style={{
+            gridTemplateColumns:
+              "minmax(150px,1.2fr) 90px 70px 60px minmax(110px,1fr) 60px 60px 80px",
+            borderColor: "#2c2c2e",
+            background: "#161618",
+          }}
+        >
+          <HeaderCell label="Matchup" k="game" align="left" />
+          <HeaderCell label="Impact" k="impact" />
+          <HeaderCell label="Wx%" />
+          <HeaderCell label="Park" k="park" />
+          <HeaderCell label="Wind" k="wind" />
+          <HeaderCell label="Temp" k="temp" />
+          <HeaderCell label="Hum" />
+          <HeaderCell label="Tier" />
+        </div>
+        {sorted.map((g) => (
+          <EnvRow
+            key={g.game_pk}
+            g={g}
+            expanded={expandedPk === g.game_pk}
+            onToggle={() =>
+              setExpandedPk((prev) => (prev === g.game_pk ? null : g.game_pk))
+            }
+          />
         ))}
       </div>
 
-      {tab === "combined" && <CombinedView games={games} />}
-      {tab === "weather" && <WeatherView games={games} />}
-      {tab === "parks" && <ParksView games={games} />}
-    </div>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// Combined View
-// ═══════════════════════════════════════════════════════════════════════════════
-function calcCombinedPct(g: GameEnv): { weatherPct: number; parkPct: number; combinedPct: number } {
-  const weatherPct = calcWeatherPct(g);
-  // Park: 100 = neutral. Every point above/below = ~1% HR boost/reduction
-  const parkPct = Math.round((g.park_factor - 100) * 1.0 * 10) / 10;
-  // Combined: additive
-  const combinedPct = Math.round((weatherPct + parkPct) * 10) / 10;
-  return { weatherPct, parkPct, combinedPct };
-}
-
-type SortKey = "game" | "weatherPct" | "parkPct" | "combinedPct" | "temp" | "wind" | "parkFactor";
-type SortDir = "asc" | "desc" | "none";
-
-function useSortableTable<T>(data: T[], defaultSort: { key: SortKey; dir: SortDir } = { key: "combinedPct", dir: "desc" }) {
-  const [sortKey, setSortKey] = useState<SortKey>(defaultSort.key);
-  const [sortDir, setSortDir] = useState<SortDir>(defaultSort.dir);
-
-  const toggleSort = (key: SortKey) => {
-    if (sortKey === key) {
-      // Cycle: desc → asc → none → desc
-      setSortDir(prev => prev === "desc" ? "asc" : prev === "asc" ? "none" : "desc");
-    } else {
-      setSortKey(key);
-      setSortDir("desc");
-    }
-  };
-
-  const arrow = (key: SortKey) => {
-    if (sortKey !== key || sortDir === "none") return "";
-    return sortDir === "desc" ? " ↓" : " ↑";
-  };
-
-  return { sortKey, sortDir, toggleSort, arrow };
-}
-
-function CombinedView({ games }: { games: GameEnv[] }) {
-  const withPcts = games.map(g => ({ ...g, ...calcCombinedPct(g) }));
-  const { sortKey, sortDir, toggleSort, arrow } = useSortableTable(withPcts);
-
-  const sorted = [...withPcts].sort((a, b) => {
-    if (sortDir === "none") return b.combinedPct - a.combinedPct; // default
-    const dir = sortDir === "desc" ? -1 : 1;
-    switch (sortKey) {
-      case "game": return dir * `${a.away_team}${a.home_team}`.localeCompare(`${b.away_team}${b.home_team}`);
-      case "weatherPct": return dir * (a.weatherPct - b.weatherPct);
-      case "parkPct": return dir * (a.parkPct - b.parkPct);
-      case "combinedPct": return dir * (a.combinedPct - b.combinedPct);
-      case "temp": return dir * ((a.temperature_f ?? 0) - (b.temperature_f ?? 0));
-      case "wind": return dir * ((a.wind_speed_mph ?? 0) - (b.wind_speed_mph ?? 0));
-      case "parkFactor": return dir * (a.park_factor - b.park_factor);
-      default: return 0;
-    }
-  });
-
-  const favorable = sorted.filter(g => g.combinedPct > 5);
-  const unfavorable = sorted.filter(g => g.combinedPct < -5);
-  const neutral = sorted.filter(g => g.combinedPct >= -5 && g.combinedPct <= 5);
-
-  return (
-    <div>
-      <h3 className="text-lg font-bold text-foreground mb-2">Combined HR Impact (Weather + Park)</h3>
-      <p className="text-xs text-muted mb-6">Weather boost/reduction combined with park HR factor vs league average.</p>
-
-      {/* Favorable */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-accent-green" />
-          <span className="text-sm font-semibold text-foreground">HR Favorable</span>
-          <span className="text-xs text-muted">(Combined conditions increase HR probability)</span>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {favorable.length > 0 ? favorable.map(g => (
-            <CombinedPill key={g.game_pk} away={g.away_team} home={g.home_team}
-              weatherPct={g.weatherPct} parkPct={g.parkPct} combinedPct={g.combinedPct} type="favorable" />
-          )) : <span className="text-xs text-muted">None</span>}
-        </div>
+      <div className="mt-4 text-[11px] text-muted">
+        Weather: Open-Meteo · Park factors: 3-yr HR rates · Combined = weather% + park%.
       </div>
-
-      {/* Unfavorable */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-accent-red" />
-          <span className="text-sm font-semibold text-foreground">HR Unfavorable</span>
-          <span className="text-xs text-muted">(Combined conditions decrease HR probability)</span>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {unfavorable.length > 0 ? unfavorable.map(g => (
-            <CombinedPill key={g.game_pk} away={g.away_team} home={g.home_team}
-              weatherPct={g.weatherPct} parkPct={g.parkPct} combinedPct={g.combinedPct} type="unfavorable" />
-          )) : <span className="text-xs text-muted">None</span>}
-        </div>
-      </div>
-
-      {/* Neutral */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-muted" />
-          <span className="text-sm font-semibold text-foreground">Neutral</span>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {neutral.map(g => (
-            <CombinedPill key={g.game_pk} away={g.away_team} home={g.home_team}
-              weatherPct={g.weatherPct} parkPct={g.parkPct} combinedPct={g.combinedPct} type="neutral" />
-          ))}
-        </div>
-      </div>
-
-      {/* Detailed table */}
-      <div className="mt-8">
-        <h4 className="text-sm font-semibold text-foreground mb-3">Detailed Breakdown</h4>
-
-        {/* Mobile card view */}
-        <div className="md:hidden space-y-2">
-          {sorted.map(g => (
-            <div key={g.game_pk} className="bg-background/30 rounded-lg px-3 py-2.5">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-foreground">{g.away_team} @ {g.home_team}</span>
-                <span className={`font-mono text-sm font-bold ${g.combinedPct > 5 ? "text-accent-green" : g.combinedPct < -5 ? "text-accent-red" : "text-foreground"}`}>
-                  {g.combinedPct > 0 ? "+" : ""}{g.combinedPct}%
-                </span>
-              </div>
-              <div className="flex items-center gap-3 mt-1.5 text-[10px]">
-                <span className={`font-mono ${g.weatherPct > 0 ? "text-accent-green" : g.weatherPct < 0 ? "text-accent-red" : "text-muted"}`}>
-                  WX {g.weatherPct > 0 ? "+" : ""}{g.weatherPct}%
-                </span>
-                <span className={`font-mono ${g.parkPct > 0 ? "text-accent-green" : g.parkPct < 0 ? "text-accent-red" : "text-muted"}`}>
-                  PK {g.parkPct > 0 ? "+" : ""}{g.parkPct}%
-                </span>
-                <span className="text-muted font-mono">{g.temperature_f ?? "?"}°F</span>
-                <span className="text-muted font-mono">{g.wind_speed_mph ?? "?"}mph</span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Desktop table view */}
-        <div className={`hidden md:block ${tableWrapperClass}`} style={tableWrapperStyle}>
-          <table className={tableClass}>
-            <thead>
-              <tr>
-                {([
-                  { key: "game" as SortKey, label: "Game" },
-                  { key: "weatherPct" as SortKey, label: "Weather %" },
-                  { key: "parkPct" as SortKey, label: "Park %" },
-                  { key: "combinedPct" as SortKey, label: "Combined %" },
-                  { key: "temp" as SortKey, label: "Temp" },
-                  { key: "wind" as SortKey, label: "Wind" },
-                  { key: "parkFactor" as SortKey, label: "Park Factor" },
-                ]).map(col => (
-                  <th
-                    key={col.key}
-                    onClick={() => toggleSort(col.key)}
-                    className={`${headerCellClass} cursor-pointer hover:text-white`}
-                    style={headerCellStyle}
-                  >
-                    {col.label}{arrow(col.key)}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {sorted.map(g => (
-                <tr key={g.game_pk} style={{ backgroundColor: TABLE_BG }}>
-                  <td className={cellClass} style={cellStyle}>{g.away_team} @ {g.home_team}</td>
-                  <td className={cellClass} style={cellStyle}>{g.weatherPct > 0 ? "+" : ""}{g.weatherPct}%</td>
-                  <td className={cellClass} style={cellStyle}>{g.parkPct > 0 ? "+" : ""}{g.parkPct}%</td>
-                  <td className={cellClass} style={cellStyle}>{g.combinedPct > 0 ? "+" : ""}{g.combinedPct}%</td>
-                  <td className={cellClass} style={cellStyle}>{g.temperature_f ?? "?"}°F</td>
-                  <td className={cellClass} style={cellStyle}>{g.wind_speed_mph ?? "?"}mph</td>
-                  <td className={cellClass} style={cellStyle}>{g.park_factor}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// Weather Boost View — HomeRunPredict style categorized pills
-// ═══════════════════════════════════════════════════════════════════════════════
-
-function calcWeatherPct(g: GameEnv): number {
-  // Weather HR boost percentage
-  // Wind is the primary driver, temp and humidity secondary
-  let pct = 0;
-  // Wind: each mph of outward wind ≈ +1.2% HR boost
-  pct += g.wind_score * 1.2;
-  // Temperature: above 72F adds, below 55F subtracts
-  if (g.temperature_f) {
-    if (g.temperature_f > 72) pct += (g.temperature_f - 72) * 0.3;
-    if (g.temperature_f < 55) pct -= (55 - g.temperature_f) * 0.4;
-  }
-  // Humidity: slight positive effect
-  if (g.humidity && g.humidity > 60) pct += (g.humidity - 60) * 0.05;
-  // Dome = neutral
-  if (g.is_dome) pct = 0;
-  return Math.round(pct * 10) / 10;
-}
-
-function WeatherView({ games }: { games: GameEnv[] }) {
-  const withPct = games.map((g) => ({ ...g, weatherPct: calcWeatherPct(g) }));
-
-  const favorable = withPct.filter(g => g.weatherPct > 5).sort((a, b) => b.weatherPct - a.weatherPct);
-  const unfavorable = withPct.filter(g => g.weatherPct < -5).sort((a, b) => a.weatherPct - b.weatherPct);
-  const neutral = withPct.filter(g => g.weatherPct >= -5 && g.weatherPct <= 5);
-
-  return (
-    <div>
-      <h3 className="text-lg font-bold text-foreground mb-4">Weather Impact on Home Runs</h3>
-
-      {/* Favorable */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-accent-green" />
-          <span className="text-sm font-semibold text-foreground">HR Favorable Games</span>
-          <span className="text-xs text-muted">(Weather increases home run probability)</span>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {favorable.length > 0 ? favorable.map(g => (
-            <WeatherPill key={g.game_pk} away={g.away_team} home={g.home_team} pct={g.weatherPct}
-              wind={g.wind_speed_mph} temp={g.temperature_f} type="favorable" />
-          )) : <span className="text-xs text-muted">No favorable weather games today</span>}
-        </div>
-      </div>
-
-      {/* Unfavorable */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-accent-red" />
-          <span className="text-sm font-semibold text-foreground">HR Unfavorable Games</span>
-          <span className="text-xs text-muted">(Weather decreases home run probability)</span>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {unfavorable.length > 0 ? unfavorable.map(g => (
-            <WeatherPill key={g.game_pk} away={g.away_team} home={g.home_team} pct={g.weatherPct}
-              wind={g.wind_speed_mph} temp={g.temperature_f} type="unfavorable" />
-          )) : <span className="text-xs text-muted">No unfavorable weather games today</span>}
-        </div>
-      </div>
-
-      {/* Neutral */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-muted" />
-          <span className="text-sm font-semibold text-foreground">Neutral Impact Games</span>
-          <span className="text-xs text-muted">(Minimal weather effect)</span>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {neutral.map(g => (
-            <WeatherPill key={g.game_pk} away={g.away_team} home={g.home_team} pct={g.weatherPct}
-              wind={g.wind_speed_mph} temp={g.temperature_f} type="neutral" />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// Park Factors View — just parks, ranked by HR factor
-// ═══════════════════════════════════════════════════════════════════════════════
-function ParksView({ games }: { games: GameEnv[] }) {
-  const sorted = [...games].sort((a, b) => b.park_factor - a.park_factor);
-
-  return (
-    <div className="space-y-4">
-      <p className="text-xs text-muted">
-        Static HR park factors — how much each stadium boosts or suppresses home runs regardless of weather.
-        100 = neutral. Split by batter handedness where available.
-      </p>
-      {sorted.map((g) => {
-        const pf = g.park_factor;
-        const pct = Math.min(((pf - 60) / (140 - 60)) * 100, 100);
-        const color = pf >= 110 ? "text-accent-green" : pf >= 95 ? "text-foreground" : pf >= 85 ? "text-accent-yellow" : "text-accent-red";
-        const barColor = pf >= 110 ? "bg-accent-green" : pf >= 95 ? "bg-accent-yellow" : "bg-accent-red";
-        const tag = pf >= 110 ? "HR Friendly" : pf >= 95 ? "Neutral" : pf >= 85 ? "Slight Suppressor" : "Pitcher Park";
-        const tagCls = pf >= 110 ? "bg-accent-green/15 text-accent-green" : pf >= 95 ? "bg-accent-yellow/15 text-accent-yellow" : "bg-accent-red/15 text-accent-red";
-
-        return (
-          <div key={g.game_pk} className="border border-card-border rounded-xl bg-card/50 p-5">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-3">
-                <span className="font-semibold text-foreground text-lg">{g.away_team} @ {g.home_team}</span>
-                <span className={`px-2 py-0.5 text-xs font-medium rounded ${tagCls}`}>{tag}</span>
-              </div>
-              <span className={`text-3xl font-bold font-mono ${color}`}>{pf}</span>
-            </div>
-            <div className="mb-2">
-              <Bar pct={pct} color={barColor} />
-            </div>
-            <div className="flex justify-between text-[9px] text-muted">
-              <span>60 (worst)</span>
-              <span>100 (neutral)</span>
-              <span>140 (best)</span>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// Shared sub-components
-// ═══════════════════════════════════════════════════════════════════════════════
-function ScoreCircle({ score, env_score, label }: { score: number; env_score: number; label: string }) {
-  return (
-    <div className={`w-14 h-14 rounded-full border-2 flex flex-col items-center justify-center flex-shrink-0 ${borderColor(env_score)}`}>
-      <span className={`text-lg font-bold font-mono ${ratingColor(env_score)}`}>{score}</span>
-      <span className="text-[7px] text-muted -mt-0.5">{label}</span>
-    </div>
-  );
-}
-
-function FactorCard({ label, value, sub, norm }: { label: string; value: string; sub: string; norm: number }) {
-  const color = norm >= 0.5 ? "bg-accent-green" : norm >= 0.3 ? "bg-accent-yellow" : "bg-accent-red";
-  return (
-    <div className="bg-background/30 rounded-lg p-3">
-      <div className="text-[10px] uppercase tracking-wider text-muted mb-1">{label}</div>
-      <div className="text-lg font-bold font-mono text-foreground">{value}</div>
-      <div className="text-[10px] text-muted mb-2">{sub}</div>
-      <Bar pct={norm * 100} color={color} />
-    </div>
-  );
-}
-
-function CombinedPill({ away, home, weatherPct, parkPct, combinedPct, type }: {
-  away: string; home: string; weatherPct: number; parkPct: number; combinedPct: number;
-  type: "favorable" | "unfavorable" | "neutral";
-}) {
-  const borderColor = type === "favorable" ? "border-accent-green/30 bg-accent-green/5" :
-    type === "unfavorable" ? "border-accent-red/30 bg-accent-red/5" : "border-card-border bg-card/30";
-  const dotColor = type === "favorable" ? "bg-accent-green" : type === "unfavorable" ? "bg-accent-red" : "bg-muted";
-  const pctColor = type === "favorable" ? "text-accent-green" : type === "unfavorable" ? "text-accent-red" : "text-muted";
-
-  return (
-    <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg border text-xs ${borderColor}`}>
-      <span className={`w-2 h-2 rounded-full ${dotColor}`} />
-      <span className="font-medium text-foreground">{away} @ {home}</span>
-      <span className={`font-bold font-mono ${pctColor}`}>{combinedPct > 0 ? "+" : ""}{combinedPct}%</span>
-      <span className="text-muted text-[10px]">WX:{weatherPct > 0 ? "+" : ""}{weatherPct}% PK:{parkPct > 0 ? "+" : ""}{parkPct}%</span>
-    </div>
-  );
-}
-
-function WeatherPill({ away, home, pct, wind, temp, type }: {
-  away: string; home: string; pct: number;
-  wind: number | null; temp: number | null; type: "favorable" | "unfavorable" | "neutral";
-}) {
-  const borderColor = type === "favorable" ? "border-accent-green/30 bg-accent-green/5" :
-    type === "unfavorable" ? "border-accent-red/30 bg-accent-red/5" : "border-card-border bg-card/30";
-  const dotColor = type === "favorable" ? "bg-accent-green" : type === "unfavorable" ? "bg-accent-red" : "bg-muted";
-  const pctColor = type === "favorable" ? "text-accent-green" : type === "unfavorable" ? "text-accent-red" : "text-muted";
-
-  return (
-    <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg border text-xs ${borderColor}`}>
-      <span className={`w-2 h-2 rounded-full ${dotColor}`} />
-      <span className="font-medium text-foreground">{away} @ {home}</span>
-      {type !== "neutral" ? (
-        <span className={`font-bold font-mono ${pctColor}`}>{pct > 0 ? "+" : ""}{pct}%</span>
-      ) : (
-        <span className="text-muted font-mono">neutral</span>
-      )}
-      {wind !== null && (
-        <span className="text-muted">{wind}mph wind{pct > 0 ? "+" : pct < 0 ? "-" : ""}</span>
-      )}
     </div>
   );
 }
