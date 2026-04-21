@@ -1,0 +1,367 @@
+{
+  "date": "2026-04-20",
+  "total_players_ranked": 179,
+  "total_hrs_hit": 22,
+  "total_near_hrs": 0,
+  "model_hits": 18,
+  "best_lookback": "L10",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 3,
+        "rate": 30.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 179,
+        "hits": 18,
+        "rate": 10.1
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 4,
+        "rate": 40.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 7,
+        "rate": 35.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 8,
+        "rate": 26.7
+      },
+      "all": {
+        "total": 179,
+        "hits": 18,
+        "rate": 10.1
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 3,
+      "rate": 30.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 4,
+      "rate": 20.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 5,
+      "rate": 16.7
+    },
+    "all": {
+      "total": 179,
+      "hits": 18,
+      "rate": 10.1
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 3,
+      "rate": 30.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 4,
+      "rate": 20.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 5,
+      "rate": 16.7
+    },
+    "all": {
+      "total": 179,
+      "hits": 18,
+      "rate": 10.1
+    }
+  },
+  "avg_composite_hr_hitters": 0.465,
+  "avg_composite_non_hitters": 0.328,
+  "composite_separation": 0.137,
+  "hr_hitters": [
+    {
+      "name": "Vladimir Guerrero Jr.",
+      "rank": 2,
+      "composite": 0.813,
+      "opp_pitcher": "Reid Detmers",
+      "matchup": "TOR@LAA"
+    },
+    {
+      "name": "Nick Kurtz",
+      "rank": 5,
+      "composite": 0.752,
+      "opp_pitcher": "Emerson Hancock",
+      "matchup": "ATH@SEA"
+    },
+    {
+      "name": "Max Muncy",
+      "rank": 10,
+      "composite": 0.696,
+      "opp_pitcher": "Jose Quintana",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Leody Taveras",
+      "rank": 14,
+      "composite": 0.677,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "BAL@KC"
+    },
+    {
+      "name": "Shea Langeliers",
+      "rank": 23,
+      "composite": 0.632,
+      "opp_pitcher": "Emerson Hancock",
+      "matchup": "ATH@SEA"
+    },
+    {
+      "name": "Jac Caglianone",
+      "rank": 32,
+      "composite": 0.605,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "BAL@KC"
+    },
+    {
+      "name": "Cal Raleigh",
+      "rank": 37,
+      "composite": 0.588,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "ATH@SEA"
+    },
+    {
+      "name": "Miguel Rojas",
+      "rank": 39,
+      "composite": 0.579,
+      "opp_pitcher": "Jose Quintana",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Carlos Cortes",
+      "rank": 41,
+      "composite": 0.578,
+      "opp_pitcher": "Emerson Hancock",
+      "matchup": "ATH@SEA"
+    },
+    {
+      "name": "Matt Olson",
+      "rank": 57,
+      "composite": 0.497,
+      "opp_pitcher": "Jake Irvin",
+      "matchup": "ATL@WSH"
+    },
+    {
+      "name": "Sal Stewart",
+      "rank": 62,
+      "composite": 0.474,
+      "opp_pitcher": "Jesse Scholtens",
+      "matchup": "CIN@TB"
+    },
+    {
+      "name": "Daylen Lile",
+      "rank": 71,
+      "composite": 0.313,
+      "opp_pitcher": "Bryce Elder",
+      "matchup": "ATL@WSH"
+    },
+    {
+      "name": "Dansby Swanson",
+      "rank": 79,
+      "composite": 0.278,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "PHI@CHC"
+    },
+    {
+      "name": "Christian Walker",
+      "rank": 115,
+      "composite": 0.197,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "HOU@CLE"
+    },
+    {
+      "name": "Dominic Canzone",
+      "rank": 123,
+      "composite": 0.184,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "ATH@SEA"
+    },
+    {
+      "name": "Dalton Rushing",
+      "rank": 124,
+      "composite": 0.183,
+      "opp_pitcher": "Jose Quintana",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Isaac Paredes",
+      "rank": 135,
+      "composite": 0.161,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "HOU@CLE"
+    },
+    {
+      "name": "Agust\u00edn Ram\u00edrez",
+      "rank": 137,
+      "composite": 0.156,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "STL@MIA"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Carlos Cortes",
+      "rank": 1,
+      "composite": 0.784,
+      "opp_pitcher": "Emerson Hancock",
+      "matchup": "ATH@SEA"
+    },
+    {
+      "name": "Max Muncy",
+      "rank": 5,
+      "composite": 0.713,
+      "opp_pitcher": "Jose Quintana",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Cal Raleigh",
+      "rank": 6,
+      "composite": 0.713,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "ATH@SEA"
+    },
+    {
+      "name": "Vladimir Guerrero Jr.",
+      "rank": 10,
+      "composite": 0.687,
+      "opp_pitcher": "Reid Detmers",
+      "matchup": "TOR@LAA"
+    },
+    {
+      "name": "Nick Kurtz",
+      "rank": 11,
+      "composite": 0.681,
+      "opp_pitcher": "Emerson Hancock",
+      "matchup": "ATH@SEA"
+    },
+    {
+      "name": "Shea Langeliers",
+      "rank": 19,
+      "composite": 0.631,
+      "opp_pitcher": "Emerson Hancock",
+      "matchup": "ATH@SEA"
+    },
+    {
+      "name": "Jac Caglianone",
+      "rank": 20,
+      "composite": 0.628,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "BAL@KC"
+    },
+    {
+      "name": "Matt Olson",
+      "rank": 23,
+      "composite": 0.617,
+      "opp_pitcher": "Jake Irvin",
+      "matchup": "ATL@WSH"
+    },
+    {
+      "name": "Leody Taveras",
+      "rank": 31,
+      "composite": 0.592,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "BAL@KC"
+    },
+    {
+      "name": "Sal Stewart",
+      "rank": 34,
+      "composite": 0.556,
+      "opp_pitcher": "Jesse Scholtens",
+      "matchup": "CIN@TB"
+    },
+    {
+      "name": "Dansby Swanson",
+      "rank": 56,
+      "composite": 0.443,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "PHI@CHC"
+    },
+    {
+      "name": "Dalton Rushing",
+      "rank": 87,
+      "composite": 0.338,
+      "opp_pitcher": "Jose Quintana",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Miguel Rojas",
+      "rank": 94,
+      "composite": 0.321,
+      "opp_pitcher": "Jose Quintana",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Daylen Lile",
+      "rank": 111,
+      "composite": 0.242,
+      "opp_pitcher": "Bryce Elder",
+      "matchup": "ATL@WSH"
+    },
+    {
+      "name": "Dominic Canzone",
+      "rank": 114,
+      "composite": 0.23,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "ATH@SEA"
+    },
+    {
+      "name": "Agust\u00edn Ram\u00edrez",
+      "rank": 118,
+      "composite": 0.203,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "STL@MIA"
+    },
+    {
+      "name": "Isaac Paredes",
+      "rank": 135,
+      "composite": 0.162,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "HOU@CLE"
+    },
+    {
+      "name": "Christian Walker",
+      "rank": 145,
+      "composite": 0.14,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "HOU@CLE"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [
+    {
+      "name": "TJ Rumfield",
+      "pitcher": "Edgardo Henriquez",
+      "description": "TJ Rumfield homers (3) on a fly ball to right field."
+    }
+  ]
+}
