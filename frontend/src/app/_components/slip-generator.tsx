@@ -372,37 +372,49 @@ function PlayerPickRow({
   return (
     <button
       onClick={onToggle}
-      className={`w-full flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer transition-colors text-left ${
+      className={`w-full flex items-center justify-between px-4 py-3 rounded-lg cursor-pointer transition-colors text-left ${
         selected
           ? "bg-accent/15 border border-accent/30"
           : "bg-background/30 border border-transparent hover:bg-background/50"
       }`}
     >
-      <div className="flex items-center gap-2 min-w-0">
+      <div className="flex items-center gap-3 min-w-0">
         <span
-          className={`w-4 h-4 rounded border flex items-center justify-center text-[10px] shrink-0 ${
+          className={`w-5 h-5 rounded border flex items-center justify-center shrink-0 ${
             selected
-              ? "bg-accent border-accent text-background font-bold"
+              ? "bg-accent border-accent text-background"
               : "border-card-border"
           }`}
         >
-          {selected ? "\u2713" : ""}
+          {selected && (
+            <svg
+              className="w-3 h-3"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={3}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              <path d="M5 13l4 4L19 7" />
+            </svg>
+          )}
         </span>
-        <div className="min-w-0">
-          <span className="text-sm font-medium text-foreground">{player.name}</span>
-          <span className="text-[10px] text-muted block md:hidden">{player.game}</span>
-          <span className="text-[10px] text-muted hidden md:inline ml-0">{player.game}</span>
+        <div className="min-w-0 flex items-baseline gap-2">
+          <span className="text-[15px] font-semibold text-foreground">{player.name}</span>
+          <span className="text-[11px] text-muted">{player.game}</span>
         </div>
       </div>
-      <div className="flex items-center gap-2 md:gap-3 shrink-0 ml-2">
-        <span className="text-[10px] text-muted hidden md:inline">
+      <div className="flex items-center gap-3 md:gap-4 shrink-0 ml-2">
+        <span className="text-[11px] text-muted hidden md:inline font-mono">
           {player.exit_velo.toFixed(0)} EV
         </span>
-        <span className="text-[10px] text-muted hidden md:inline">
+        <span className="text-[11px] text-muted hidden md:inline font-mono">
           {player.barrel_pct.toFixed(0)}% bar
         </span>
         <RatingBadge composite={player.composite} />
-        <span className="font-mono text-xs text-foreground w-12 text-right">
+        <span className="font-mono text-sm font-semibold text-foreground w-14 text-right">
           {player.composite.toFixed(3)}
         </span>
       </div>
@@ -432,6 +444,24 @@ export function SlipGenerator({
     () => new Set(initial.selectedNames ?? [])
   );
   const [search, setSearch] = useState(initial.search ?? "");
+
+  // Search-focus state — the player dropdown only appears when the user
+  // is actively focused in the search area. Click outside collapses it.
+  const [searchFocused, setSearchFocused] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function onDocMouseDown(e: MouseEvent) {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(e.target as Node)
+      ) {
+        setSearchFocused(false);
+      }
+    }
+    document.addEventListener("mousedown", onDocMouseDown);
+    return () => document.removeEventListener("mousedown", onDocMouseDown);
+  }, []);
 
   // Debounced persist (150ms) so rapid typing in the search box doesn't
   // hammer sessionStorage.
@@ -562,54 +592,12 @@ export function SlipGenerator({
         </div>
       </div>
 
-      {/* Sort mode for optimal tab */}
-      {mode === "optimal" && selectedNames.size >= legCount && (
-        <div className="flex items-center gap-2 mb-4">
-          <span className="text-[10px] text-muted uppercase">Sort by:</span>
-          {(
-            [
-              { key: "best", label: "Best Overall" },
-              { key: "chalk", label: "Chalk" },
-              { key: "longshot", label: "Longshots" },
-              { key: "diverse", label: "Game Spread" },
-            ] as { key: SortMode; label: string }[]
-          ).map((s) => (
-            <button
-              key={s.key}
-              onClick={() => setSortMode(s.key)}
-              className={`px-3 py-1.5 text-xs rounded-lg cursor-pointer transition-colors ${
-                sortMode === s.key
-                  ? "bg-accent/15 text-accent border border-accent/30 font-semibold"
-                  : "bg-card/50 text-muted border border-card-border hover:text-foreground"
-              }`}
-            >
-              {s.label}
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* Leftover notice for optimal mode */}
-      {mode === "optimal" && optimalLeftovers.length > 0 && (
-        <div className="mb-4 rounded-lg border border-accent-yellow/30 bg-accent-yellow/5 px-3 py-2">
-          <div className="text-[11px] font-semibold text-accent-yellow uppercase tracking-wider mb-1">
-            {optimalLeftovers.length} player{optimalLeftovers.length === 1 ? "" : "s"} left out
-          </div>
-          <div className="text-xs text-foreground">
-            {selectedNames.size} selected doesn&apos;t divide evenly into {legCount === 2 ? "duos" : "trios"}. Not included:{" "}
-            <span className="font-medium">
-              {optimalLeftovers.map((p) => p.name).join(", ")}
-            </span>
-          </div>
-          <div className="text-[10px] text-muted mt-1">
-            Add {legCount - optimalLeftovers.length} more or remove {optimalLeftovers.length} to use everyone.
-          </div>
-        </div>
-      )}
+      {/* Sort-by filter stashed for future — chalk/longshot/diverse modes
+          aren't wired up yet. Optimal slips are sorted by best score. */}
 
       {/* Player picker for custom and optimal modes */}
       {(mode === "custom" || mode === "optimal") && (
-        <div className="mb-6">
+        <div className="mb-6" ref={searchContainerRef}>
           {/* Search bar with clear X */}
           <div className="relative mb-3">
             <svg
@@ -630,6 +618,7 @@ export function SlipGenerator({
               placeholder="Search players..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              onFocus={() => setSearchFocused(true)}
               className="w-full pl-9 pr-8 py-2 text-sm bg-background/50 border border-card-border rounded-lg text-foreground placeholder-muted focus:outline-none focus:border-accent/50"
             />
             {search && (
@@ -642,45 +631,82 @@ export function SlipGenerator({
             )}
           </div>
 
-          {/* Selected players chips + clear all */}
-          {selectedNames.size > 0 && (
-            <div className="flex flex-wrap items-center gap-1.5 mb-3">
-              {selectedPlayers.map((p) => (
+          {/* Selected players chips — wrap naturally across rows (per Figma).
+              Reserve minimum height when empty so layout doesn't shift when
+              the first chip is added. */}
+          <div
+            className="flex flex-wrap items-center gap-2 mb-4"
+            style={{ minHeight: 36 }}
+          >
+            {selectedPlayers.length === 0 ? (
+              <span className="text-[11px] text-muted">No players selected yet.</span>
+            ) : (
+              <>
+                {selectedPlayers.map((p) => (
+                  <button
+                    key={p.name}
+                    onClick={() => togglePlayer(p.name)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs bg-accent/15 text-accent border border-accent/30 rounded-full cursor-pointer hover:bg-accent/25"
+                  >
+                    {p.name}
+                    <span className="text-accent/60">x</span>
+                  </button>
+                ))}
                 <button
-                  key={p.name}
-                  onClick={() => togglePlayer(p.name)}
-                  className="inline-flex items-center gap-1 px-2.5 py-1 text-xs bg-accent/15 text-accent border border-accent/30 rounded-full cursor-pointer hover:bg-accent/25"
+                  onClick={() => { setSelectedNames(new Set()); try { localStorage.removeItem("slip-selected-players"); } catch {} /* clear v1 legacy */ }}
+                  className="inline-flex items-center gap-1 px-3 py-1.5 text-xs text-accent-red border border-accent-red/30 rounded-full cursor-pointer hover:bg-accent-red/10"
                 >
-                  {p.name}
-                  <span className="text-accent/60">x</span>
+                  Clear All Selections
                 </button>
+              </>
+            )}
+          </div>
+
+          {/* Player list — only visible when user is focused in the search
+              area. Click outside collapses it. */}
+          {searchFocused && (
+            <div className="max-h-[400px] overflow-y-auto space-y-2 border border-card-border rounded-lg p-3 bg-card/20">
+              {filteredPlayers.map((p) => (
+                <PlayerPickRow
+                  key={p.name}
+                  player={p}
+                  selected={selectedNames.has(p.name)}
+                  onToggle={() => togglePlayer(p.name)}
+                />
               ))}
-              <button
-                onClick={() => { setSelectedNames(new Set()); try { localStorage.removeItem("slip-selected-players"); } catch {} /* clear v1 legacy */ }}
-                className="inline-flex items-center gap-1 px-2.5 py-1 text-xs text-accent-red border border-accent-red/30 rounded-full cursor-pointer hover:bg-accent-red/10"
-              >
-                Clear All Selections
-              </button>
             </div>
           )}
 
-          {/* Player list */}
-          <div className="max-h-64 overflow-y-auto space-y-1 border border-card-border rounded-lg p-2 bg-card/20">
-            {filteredPlayers.map((p) => (
-              <PlayerPickRow
-                key={p.name}
-                player={p}
-                selected={selectedNames.has(p.name)}
-                onToggle={() => togglePlayer(p.name)}
-              />
-            ))}
+          {/* Notice slot between the player list and the parlay ticket.
+              Reserved height stays constant so the ticket below doesn't
+              shift when the notice content changes. Shows one of:
+                - "N PLAYERS LEFT OUT" (optimal mode, selections don't divide evenly)
+                - "Select at least N players..." (fewer picks than legCount)
+                - (empty placeholder) */}
+          <div className="mt-6 mb-6" style={{ minHeight: 96 }}>
+            {mode === "optimal" && optimalLeftovers.length > 0 ? (
+              <div className="rounded-lg border border-accent-yellow/30 bg-accent-yellow/5 px-4 py-3">
+                <div className="text-[11px] font-semibold text-accent-yellow uppercase tracking-wider mb-1.5">
+                  {optimalLeftovers.length} player{optimalLeftovers.length === 1 ? "" : "s"} left out
+                </div>
+                <div className="text-[13px] text-foreground">
+                  {selectedNames.size} selected doesn&apos;t divide evenly into {legCount === 2 ? "duos" : "trios"}. Not included:{" "}
+                  <span className="font-semibold">
+                    {optimalLeftovers.map((p) => p.name).join(", ")}
+                  </span>
+                </div>
+                <div className="text-[11px] text-muted mt-1.5">
+                  Add {legCount - optimalLeftovers.length} more or remove {optimalLeftovers.length} to use everyone.
+                </div>
+              </div>
+            ) : selectedNames.size > 0 && selectedNames.size < legCount ? (
+              <div className="rounded-lg border border-accent-yellow/30 bg-accent-yellow/5 px-4 py-3">
+                <div className="text-[13px] text-accent-yellow">
+                  Select at least {legCount} players to generate {legCount === 2 ? "duos" : "trios"}.
+                </div>
+              </div>
+            ) : null}
           </div>
-
-          {selectedNames.size > 0 && selectedNames.size < legCount && (
-            <p className="text-xs text-accent-yellow mt-2">
-              Select at least {legCount} players to generate {legCount === 2 ? "duos" : "trios"}.
-            </p>
-          )}
         </div>
       )}
 
@@ -805,7 +831,7 @@ export function SlipGenerator({
         {mode === "auto"
           ? "Slips prioritize game diversity. Players rated 0.15+ composite are eligible. Top 20 shown."
           : mode === "optimal"
-          ? "Each player used exactly once. Sort by chalk (safest), longshots (highest payout), or game spread (most diverse)."
+          ? "Each player used exactly once. Slips sorted by best composite score."
           : "All possible combos from your selections. SGP = Same Game Parlay (1 game). Multi-game parlays shown first."}
       </div>
     </div>
