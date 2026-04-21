@@ -19,6 +19,7 @@ import { GemFinder } from "./gem-finder";
 import { LiveFeed } from "./live-feed";
 import { ProjectionsView } from "./projections-view";
 import { MatchupAnalysis } from "./matchup-analysis";
+import { TeamPitchMixPage } from "./team-pitch-mix-page";
 import { IconButton } from "./ui/icon-button";
 
 /** Central per-tab config. Replaces the hardcoded conditional at the
@@ -36,6 +37,7 @@ const TAB_CONFIG: Record<Page, {
   environment: { title: "Environment",       subtitle: "Park, weather, and wind conditions",   showLookback: false, showDatePicker: true },
   slips:       { title: "Slip Generator",    subtitle: "Build multi-leg parlays",              showLookback: true,  showDatePicker: true },
   bvp:         { title: "Batter vs Pitcher", subtitle: "Head-to-head history",                 showLookback: true,  showDatePicker: true },
+  team_pitch_mix: { title: "Team vs Pitch Mix", subtitle: "Lineup stats vs opposing pitcher's arsenal", showLookback: false, showDatePicker: true },
   gems:        { title: "Gem Finder",        subtitle: "Under-the-radar picks",                showLookback: true,  showDatePicker: true },
   live:        { title: "Live Feed",         subtitle: "Real-time game action",                showLookback: false, showDatePicker: false },
   results:     { title: "Results Log",       subtitle: "How the model performed",              showLookback: false, showDatePicker: true },
@@ -92,6 +94,15 @@ export function Dashboard() {
   const [data, setData] = useState<ModelData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return window.localStorage.getItem("beeb:sidebar-collapsed") === "1";
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem("beeb:sidebar-collapsed", sidebarCollapsed ? "1" : "0");
+  }, [sidebarCollapsed]);
 
   // Read initial state from URL hash: #page=rankings&date=2026-04-03&lookback=L5
   function getHashParam(key: string, fallback: string): string {
@@ -215,9 +226,20 @@ export function Dashboard() {
         />
       )}
 
-      {/* Sidebar — hidden on mobile, slide in when open */}
-      <div className={`fixed lg:static z-40 transition-transform duration-[var(--duration-base)] ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}>
-        <Sidebar active={activePage} onChange={handlePageChange} />
+      {/* Sidebar — slide-in drawer on mobile, icon-strip collapse on desktop */}
+      <div
+        className={
+          "fixed lg:static z-40 " +
+          "transition-transform duration-[var(--duration-base)] " +
+          (sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0")
+        }
+      >
+        <Sidebar
+          active={activePage}
+          collapsed={sidebarCollapsed}
+          onChange={handlePageChange}
+          onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+        />
       </div>
 
       {/* Main content */}
@@ -225,10 +247,10 @@ export function Dashboard() {
         {/* Top bar — 3 slots: left (title/meta), center (date), right (lookback)
             Mobile: stacks — title row above, controls row below. */}
         <header
-          className="sticky top-0 z-10 bg-background/85 backdrop-blur-md px-4 md:px-8 py-3"
-          style={{ borderBottom: "1px solid #2c2c2e" }}
+          className="sticky top-0 z-10 backdrop-blur-md px-4 md:px-8 flex items-center"
+          style={{ height: 60, background: "#1c1c1e", borderBottom: "1px solid #2c2c2e" }}
         >
-          <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="w-full flex items-center justify-between gap-3">
             {/* LEFT slot */}
             <div className="flex items-center gap-3 min-w-0">
               <IconButton
@@ -336,6 +358,10 @@ export function Dashboard() {
 
           {activePage === "bvp" && (
             <BvPPage games={data.games} lookback={lookback} />
+          )}
+
+          {activePage === "team_pitch_mix" && (
+            <TeamPitchMixPage games={data.games} />
           )}
 
           {activePage === "gems" && (

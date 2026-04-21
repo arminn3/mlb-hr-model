@@ -132,6 +132,62 @@ export interface GameEnvironment {
   env_score: number;
 }
 
+// ── Team vs Pitch Mix ───────────────────────────────────────────────────
+// Raw per-PA history for a batter-pitcher career head-to-head. The
+// frontend aggregates any (Season × Range × Type × selectedPitchTypes)
+// slice dynamically via a pure function. See team-pitch-mix-page.tsx.
+
+export type PAResult =
+  | "single" | "double" | "triple" | "home_run"
+  | "walk" | "hit_by_pitch"
+  | "strikeout" | "strikeout_double_play"
+  | "sac_fly" | "sac_bunt" | "intent_walk" | "catcher_interf"
+  | "field_out" | "force_out" | "grounded_into_double_play"
+  | "fielders_choice" | "fielders_choice_out" | "double_play"
+  | "field_error" | "sac_fly_double_play" | string;
+
+export interface PAHistoryEntry {
+  date: string;           // "2025-06-14"
+  season: number;         // 2025
+  pitch_type: string | null; // "SL" — terminating pitch type
+  pitches_seen: number;
+  is_bbe: boolean;
+  ev: number | null;
+  la: number | null;
+  is_barrel: boolean;
+  is_hard_hit: boolean;
+  result: PAResult;
+  bases: 0 | 1 | 2 | 3 | 4;
+  woba_value: number;
+}
+
+export interface TeamPitchMixPitcher {
+  name: string;
+  hand: string;
+  pitch_mix_vs_rhb: Record<string, number>; // usage fraction 0-1
+  pitch_mix_vs_lhb: Record<string, number>;
+}
+
+export interface TeamPitchMixBatter {
+  id: number;
+  name: string;
+  batter_hand: string;    // "R" | "L" | "S"
+  order: number | null;   // null = bench/projected, number = lineup slot
+  pos: string;
+  pa_history: PAHistoryEntry[];
+}
+
+export interface TeamPitchMixSide {
+  pitcher: TeamPitchMixPitcher;
+  lineup_status: "posted" | "projected" | "tbd";
+  batters: TeamPitchMixBatter[];
+}
+
+export interface TeamPitchMix {
+  away: TeamPitchMixSide; // away batters vs home pitcher
+  home: TeamPitchMixSide; // home batters vs away pitcher
+}
+
 export interface GameData {
   game_pk: number;
   away_team: string;
@@ -141,6 +197,7 @@ export interface GameData {
   home_pitcher: PitcherInfo;
   environment: GameEnvironment;
   players: PlayerData[];
+  team_pitch_mix?: TeamPitchMix;
 }
 
 export interface ModelData {

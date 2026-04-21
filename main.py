@@ -32,7 +32,7 @@ from data_fetchers import (
     get_batter_hand,
 )
 from model import score_batter_multi_lookback
-from metrics import calc_pitch_type_stats
+from metrics import calc_pitch_type_stats, build_bvp_pa_history, get_pitch_mix
 from environment import calc_environment_score
 import config
 
@@ -482,6 +482,8 @@ def run_model(game_date: date = None, fast: bool = False):
         display_hour = est_hour % 12 or 12
         game_time_display = f"{display_hour}:{est_min:02d} {ampm} ET"
 
+        team_pitch_mix = _build_team_pitch_mix_block(g)
+
         games_out.append({
             "game_pk": gpk,
             "away_team": g.get("away_team", ""),
@@ -498,6 +500,7 @@ def run_model(game_date: date = None, fast: bool = False):
                 "hand": g["home_pitcher"]["hand"] if g.get("home_pitcher") else "?",
             },
             "environment": env_by_game.get(gpk, {}),
+            "team_pitch_mix": team_pitch_mix,
             "players": players,
         })
 
@@ -505,6 +508,124 @@ def run_model(game_date: date = None, fast: bool = False):
     games_out.sort(key=lambda g: g.get("game_time_sort", 9999))
 
     return games_out, schedule
+
+
+def _build_team_pitch_mix_block(g: dict) -> dict:
+    """For a schedule game row, build the team_pitch_mix block consumed by
+       the 'Team vs Pitch Mix' tab. Returns {away: {...}, home: {...}} where
+       each side has pitcher info + pitch-mix percentages + per-batter
+       pa_history vs that pitcher.
+
+       Data source: career = bulk 2026 + 2025 season cache concatenated.
+       This is what's already loaded in memory from load_bulk_statcast()
+       + load_bulk_2025() earlier in the pipeline, so no extra fetches.
+    """
+    away_p = g.get("away_pitcher") or {}
+    home_p = g.get("home_pitcher") or {}
+    away_p_id = away_p.get("id")
+    home_p_id = home_p.get("id")
+
+    def _career_for(pitcher_id):
+        if not pitcher_id:
+            return pd.DataFrame()
+        parts = []
+        df_26 = get_pitcher_statcast(pitcher_id)
+        if df_26 is not None and not df_26.empty:
+            parts.append(df_26)
+        df_25 = get_season_statcast(pitcher_id, "pitcher", 2025)
+        if df_25 is not None and not df_25.empty:
+            parts.append(df_25)
+        if not parts:
+            return pd.DataFrame()
+        return pd.concat(parts, ignore_index=True)
+
+    def _side(pitcher: dict, pitcher_id, lineup: list,
+              lineup_posted: bool) -> dict:
+        if not pitcher_id or not lineup:
+            return {
+                "pitcher": {
+                    "name": pitcher.get("name", "TBD"),
+                    "hand": pitcher.get("hand", "?"),
+                    "pitch_mix_vs_rhb": {},
+                    "pitch_mix_vs_lhb": {},
+                },
+                "lineup_status": "tbd",
+                "batters": [],
+            }
+        career = _career_for(pitcher_id)
+        if career.empty:
+            return {
+                "pitcher": {
+                    "name": pitcher.get("name", "TBD"),
+                    "hand": pitcher.get("hand", "?"),
+                    "pitch_mix_vs_rhb": {},
+                    "pitch_mix_vs_lhb": {},
+                },
+                "lineup_status": "posted" if lineup_posted else "projected",
+                "batters": [],
+            }
+
+        # Pitcher's pitch mix, split by batter hand
+        mix_r = get_pitch_mix(career, "R") or {}
+        mix_l = get_pitch_mix(career, "L") or {}
+        # Round to 4 decimals for compact JSON
+        mix_r = {k: round(v, 4) for k, v in mix_r.items()}
+        mix_l = {k: round(v, 4) for k, v in mix_l.items()}
+
+        batters_out = []
+        for idx, bp in enumerate(lineup):
+            bid = bp.get("id")
+            if bid is None:
+                continue
+            bname = bp.get("name", "?")
+            bhand = get_batter_hand(bid) or bp.get("hand", "?")
+            pa_history = build_bvp_pa_history(career, bid)
+            # Order: posted lineups → actual slot (1-9). Projected rosters →
+            # assign 1-9 to the first 9 (treated as likely starters for the
+            # "Starters Only" filter), None for bench/reserves.
+            if lineup_posted:
+                order = idx + 1
+            else:
+                order = idx + 1 if idx < 9 else None
+            batters_out.append({
+                "id": bid,
+                "name": bname,
+                "batter_hand": bhand,
+                "order": order,
+                "pos": bp.get("pos") or bp.get("position") or "",
+                "pa_history": pa_history,
+            })
+
+        return {
+            "pitcher": {
+                "name": pitcher.get("name", "TBD"),
+                "hand": pitcher.get("hand", "?"),
+                "pitch_mix_vs_rhb": mix_r,
+                "pitch_mix_vs_lhb": mix_l,
+            },
+            "lineup_status": "posted" if lineup_posted else "projected",
+            "batters": batters_out,
+        }
+
+    home_lineup = g.get("home_lineup") or []
+    away_lineup = g.get("away_lineup") or []
+    home_posted = bool(home_lineup)
+    away_posted = bool(away_lineup)
+
+    # Fall back to active roster if lineup not yet posted
+    if not home_lineup:
+        tid = g.get("home_team_id")
+        home_lineup = get_team_roster(tid) if tid else []
+    if not away_lineup:
+        tid = g.get("away_team_id")
+        away_lineup = get_team_roster(tid) if tid else []
+
+    return {
+        # Away side: away batters facing HOME pitcher
+        "away": _side(home_p, home_p_id, away_lineup, away_posted),
+        # Home side: home batters facing AWAY pitcher
+        "home": _side(away_p, away_p_id, home_lineup, home_posted),
+    }
 
 
 def print_results(games_out: list, game_date: date, schedule: list = None) -> None:

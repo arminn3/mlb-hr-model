@@ -404,3 +404,132 @@ def calc_pitch_type_stats(
         }
 
     return result
+
+
+# ── Head-to-head BvP raw PA history ─────────────────────────────────────
+# Used by the "Team vs Pitch Mix" tab: emit raw per-PA rows so the frontend
+# can aggregate any (Season × Range × Type × PitchType) slice dynamically.
+
+# FanGraphs 2024 wOBA linear weights. Hard-coded constant.
+_WOBA_WEIGHTS = {
+    "walk": 0.69,
+    "hit_by_pitch": 0.72,
+    "single": 0.88,
+    "double": 1.25,
+    "triple": 1.58,
+    "home_run": 2.03,
+}
+_BASES = {"single": 1, "double": 2, "triple": 3, "home_run": 4}
+_HIT_EVENTS = {"single", "double", "triple", "home_run"}
+_NON_AB_EVENTS = {"walk", "hit_by_pitch", "sac_fly", "sac_bunt", "intent_walk",
+                  "catcher_interf", "sac_fly_double_play"}
+_K_EVENTS = {"strikeout", "strikeout_double_play"}
+
+
+def build_bvp_pa_history(
+    pitcher_df: pd.DataFrame,
+    batter_id: int,
+) -> list[dict]:
+    """Emit per-PA head-to-head history for (batter_id vs pitcher_df's pitcher).
+
+    One dict per completed plate appearance. Frontend aggregates.
+
+    Fields:
+        date (str YYYY-MM-DD), season (int), pitch_type (str | None),
+        pitches_seen (int), is_bbe (bool), ev (float | None),
+        la (float | None), is_barrel (bool), is_hard_hit (bool),
+        result (str), bases (int 0-4), woba_value (float).
+    """
+    if pitcher_df is None or pitcher_df.empty:
+        return []
+    if "batter" not in pitcher_df.columns:
+        return []
+
+    # Filter to this batter's PAs against this pitcher
+    df = pitcher_df[pitcher_df["batter"] == batter_id].copy()
+    if df.empty:
+        return []
+
+    # Count pitches-seen per PA (game_pk + at_bat_number uniquely identifies a PA)
+    if "at_bat_number" in df.columns and "game_pk" in df.columns:
+        pitches_per_pa = (
+            df.groupby(["game_pk", "at_bat_number"]).size().to_dict()
+        )
+    else:
+        pitches_per_pa = {}
+
+    # Keep only terminating pitches of each PA (events non-null)
+    ev_rows = df[df["events"].notna()].copy()
+    if ev_rows.empty:
+        return []
+
+    # Sort newest first so the frontend can slice top-N for L{N} filters
+    if "game_date" in ev_rows.columns:
+        ev_rows = ev_rows.sort_values("game_date", ascending=False)
+
+    out: list[dict] = []
+    for row in ev_rows.itertuples(index=False):
+        result = getattr(row, "events", None)
+        if result is None:
+            continue
+        result = str(result)
+
+        date_val = getattr(row, "game_date", None)
+        if isinstance(date_val, pd.Timestamp):
+            date_str = date_val.strftime("%Y-%m-%d")
+        elif date_val is None:
+            continue
+        else:
+            date_str = str(date_val)[:10]
+        try:
+            season = int(date_str[:4])
+        except (ValueError, TypeError):
+            continue
+
+        ls = getattr(row, "launch_speed", None)
+        la = getattr(row, "launch_angle", None)
+        ls_val = float(ls) if ls is not None and not pd.isna(ls) else None
+        la_val = float(la) if la is not None and not pd.isna(la) else None
+        is_bbe = ls_val is not None
+
+        # Barrel: launch_speed_angle == 6 (Statcast definition)
+        lsa = getattr(row, "launch_speed_angle", None)
+        is_barrel = False
+        if lsa is not None and not pd.isna(lsa):
+            try:
+                is_barrel = int(lsa) == int(getattr(config, "BARREL_VALUE", 6))
+            except (ValueError, TypeError):
+                is_barrel = False
+
+        is_hard_hit = bool(ls_val is not None and ls_val >= config.HARD_HIT_THRESHOLD)
+
+        # PA-level counts
+        pk = getattr(row, "game_pk", None)
+        abn = getattr(row, "at_bat_number", None)
+        pitches_seen = int(pitches_per_pa.get((pk, abn), 1)) if pk is not None and abn is not None else 1
+
+        pitch_type = getattr(row, "pitch_type", None)
+        if pitch_type is None or pd.isna(pitch_type):
+            pitch_type_str = None
+        else:
+            pitch_type_str = str(pitch_type)
+
+        bases = _BASES.get(result, 0)
+        woba_value = _WOBA_WEIGHTS.get(result, 0.0)
+
+        out.append({
+            "date": date_str,
+            "season": season,
+            "pitch_type": pitch_type_str,
+            "pitches_seen": pitches_seen,
+            "is_bbe": is_bbe,
+            "ev": round(ls_val, 1) if ls_val is not None else None,
+            "la": round(la_val, 1) if la_val is not None else None,
+            "is_barrel": bool(is_barrel),
+            "is_hard_hit": is_hard_hit,
+            "result": result,
+            "bases": bases,
+            "woba_value": round(float(woba_value), 2),
+        })
+
+    return out

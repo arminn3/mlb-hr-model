@@ -115,7 +115,7 @@ export function MLRankings({
         allPicks.sort((a, b) => b.mlScore - a.mlScore);
         setYesterday({
           date: prevStr,
-          picks: allPicks.slice(0, 20),
+          picks: allPicks.slice(0, 30),
           totalHRs: hrNames.size,
         });
       })
@@ -206,6 +206,9 @@ export function MLRankings({
   const yesterdayNears = yesterday
     ? yesterday.picks.filter((p) => p.nearHR).length
     : 0;
+  const yesterdayTop20Hits = yesterday
+    ? yesterday.picks.slice(0, 20).filter((p) => p.hitHR).length
+    : 0;
   const yesterdayTop10Hits = yesterday
     ? yesterday.picks.slice(0, 10).filter((p) => p.hitHR).length
     : 0;
@@ -232,7 +235,13 @@ export function MLRankings({
               <div className="text-right">
                 <div className="text-[10px] text-muted uppercase">Top 20</div>
                 <div className="font-mono font-bold text-accent-green">
-                  {yesterdayHits}/20
+                  {yesterdayTop20Hits}/20
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-[10px] text-muted uppercase">Top 30</div>
+                <div className="font-mono font-bold text-accent-green">
+                  {yesterdayHits}/30
                 </div>
               </div>
               <div className="text-right">
@@ -243,11 +252,11 @@ export function MLRankings({
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-1.5">
+          <div className="space-y-1.5 md:columns-2 md:gap-x-1.5">
             {yesterday.picks.map((p, i) => (
               <div
                 key={p.name}
-                className={`flex items-center gap-2 px-2.5 py-1.5 rounded text-xs ${
+                className={`flex items-center gap-2 px-2.5 py-1.5 rounded text-xs break-inside-avoid ${
                   p.hitHR
                     ? "bg-accent-green/10 border border-accent-green/30"
                     : p.nearHR
