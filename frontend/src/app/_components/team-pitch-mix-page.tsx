@@ -472,7 +472,10 @@ function Select<T extends string | number>({
 
 // ── Main page ──────────────────────────────────────────────────────────
 export function TeamPitchMixPage({ games }: { games: GameData[] }) {
-  const gamesWithData = games.filter((g) => g.team_pitch_mix);
+  // Memoize so the array reference is stable across renders — otherwise
+  // the auto-select useEffect below fires after every click and resets
+  // the user's manual pitch-pill toggles.
+  const gamesWithData = useMemo(() => games.filter((g) => g.team_pitch_mix), [games]);
 
   // Initial selection: first game, away team
   const [gameIdx, setGameIdx] = useState(0);
