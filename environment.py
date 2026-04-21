@@ -339,6 +339,37 @@ def _park_wind_sensitivity(home_team: str) -> float:
     return _PARK_WIND_SENSITIVITY.get(home_team, 1.0)
 
 
+def _load_calibration() -> None:
+    """If `environment_calibration.json` exists (written by
+       `historical_backtest.py`), override the hardcoded `_K_RHO`,
+       `_K_WIND`, and `_PARK_WIND_SENSITIVITY` with data-calibrated
+       values. Hardcoded values remain as a compile-time fallback so
+       the module still works if the JSON is deleted."""
+    import json
+    from pathlib import Path
+    global _K_RHO, _K_WIND
+    path = Path(__file__).resolve().parent / "environment_calibration.json"
+    if not path.exists():
+        return
+    try:
+        with path.open() as f:
+            calib = json.load(f)
+    except (OSError, ValueError):
+        return
+    meta = calib.get("meta", {})
+    if isinstance(meta.get("K_RHO"), (int, float)):
+        _K_RHO = float(meta["K_RHO"])
+    if isinstance(meta.get("K_WIND"), (int, float)):
+        _K_WIND = float(meta["K_WIND"])
+    sens = calib.get("PARK_WIND_SENSITIVITY_SHRUNK", {})
+    for park, mult in sens.items():
+        if isinstance(mult, (int, float)):
+            _PARK_WIND_SENSITIVITY[park] = float(mult)
+
+
+_load_calibration()
+
+
 def _saturation_vapor_pressure_hpa(t_c: float) -> float:
     """Arden Buck (1981). More accurate than Tetens at extremes."""
     return 6.1121 * math.exp((18.678 - t_c / 234.5) * (t_c / (257.14 + t_c)))
