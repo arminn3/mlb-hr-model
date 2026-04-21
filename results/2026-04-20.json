@@ -2,7 +2,7 @@
   "date": "2026-04-20",
   "total_players_ranked": 179,
   "total_hrs_hit": 22,
-  "total_near_hrs": 0,
+  "total_near_hrs": 11,
   "model_hits": 18,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 11,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -77,28 +77,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 3,
-      "rate": 30.0
+      "hits": 5,
+      "rate": 50.0
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 7,
+      "rate": 35.0
     },
     "top_30": {
       "total": 30,
-      "hits": 5,
-      "rate": 16.7
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 179,
-      "hits": 18,
-      "rate": 10.1
+      "hits": 29,
+      "rate": 16.2
     }
   },
   "avg_composite_hr_hitters": 0.465,
-  "avg_composite_non_hitters": 0.328,
-  "composite_separation": 0.137,
+  "avg_composite_non_hitters": 0.32,
+  "composite_separation": 0.145,
   "hr_hitters": [
     {
       "name": "Vladimir Guerrero Jr.",
@@ -355,8 +355,195 @@
       "matchup": "HOU@CLE"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "James Wood",
+      "rank": 3,
+      "composite": 0.81,
+      "opp_pitcher": "Bryce Elder",
+      "matchup": "ATL@WSH"
+    },
+    {
+      "name": "Yordan Alvarez",
+      "rank": 9,
+      "composite": 0.704,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "HOU@CLE"
+    },
+    {
+      "name": "Kevin McGonigle",
+      "rank": 16,
+      "composite": 0.672,
+      "opp_pitcher": "Sonny Gray",
+      "matchup": "DET@BOS"
+    },
+    {
+      "name": "Spencer Steer",
+      "rank": 40,
+      "composite": 0.578,
+      "opp_pitcher": "Jesse Scholtens",
+      "matchup": "CIN@TB"
+    },
+    {
+      "name": "Taylor Ward",
+      "rank": 45,
+      "composite": 0.563,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "BAL@KC"
+    },
+    {
+      "name": "Jake Fraley",
+      "rank": 66,
+      "composite": 0.455,
+      "opp_pitcher": "Rhett Lowder",
+      "matchup": "CIN@TB"
+    },
+    {
+      "name": "Samuel Basallo",
+      "rank": 69,
+      "composite": 0.333,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "BAL@KC"
+    },
+    {
+      "name": "Brenton Doyle",
+      "rank": 116,
+      "composite": 0.197,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Salvador Perez",
+      "rank": 121,
+      "composite": 0.19,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "BAL@KC"
+    },
+    {
+      "name": "Andy Pages",
+      "rank": 122,
+      "composite": 0.186,
+      "opp_pitcher": "Jose Quintana",
+      "matchup": "LAD@COL"
+    },
+    {
+      "name": "Nolan Gorman",
+      "rank": 148,
+      "composite": 0.14,
+      "opp_pitcher": "Max Meyer",
+      "matchup": "STL@MIA"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Kevin McGonigle",
+      "ev": 107.0,
+      "angle": 25.0,
+      "distance": 372.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Watson, Ryan"
+    },
+    {
+      "batter": "Kevin McGonigle",
+      "ev": 100.5,
+      "angle": 31.0,
+      "distance": 383.0,
+      "hr_in_parks": 11,
+      "result": "field_out",
+      "pitcher": "Whitlock, Garrett"
+    },
+    {
+      "batter": "Yordan Alvarez",
+      "ev": 102.2,
+      "angle": 29.0,
+      "distance": 375.0,
+      "hr_in_parks": 16,
+      "result": "field_out",
+      "pitcher": "Cecconi, Slade"
+    },
+    {
+      "batter": "Andy Pages",
+      "ev": 88.4,
+      "angle": 14.0,
+      "distance": 438.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Gordon, Tanner"
+    },
+    {
+      "batter": "Brenton Doyle",
+      "ev": 109.4,
+      "angle": 18.0,
+      "distance": 403.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Wrobleski, Justin"
+    },
+    {
+      "batter": "Salvador Perez",
+      "ev": 103.4,
+      "angle": 33.0,
+      "distance": 391.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Bradish, Kyle"
+    },
+    {
+      "batter": "Samuel Basallo",
+      "ev": 102.8,
+      "angle": 30.0,
+      "distance": 398.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Lugo, Seth"
+    },
+    {
+      "batter": "Taylor Ward",
+      "ev": 105.6,
+      "angle": 22.0,
+      "distance": 404.0,
+      "hr_in_parks": 19,
+      "result": "double",
+      "pitcher": "Lugo, Seth"
+    },
+    {
+      "batter": "Nolan Gorman",
+      "ev": 108.1,
+      "angle": 28.0,
+      "distance": 398.0,
+      "hr_in_parks": 4,
+      "result": "",
+      "pitcher": "Meyer, Max"
+    },
+    {
+      "batter": "Jake Fraley",
+      "ev": 101.4,
+      "angle": 26.0,
+      "distance": 376.0,
+      "hr_in_parks": 10,
+      "result": "double",
+      "pitcher": "Lowder, Rhett"
+    },
+    {
+      "batter": "Spencer Steer",
+      "ev": 95.2,
+      "angle": 26.0,
+      "distance": 373.0,
+      "hr_in_parks": 9,
+      "result": "double",
+      "pitcher": "Scholtens, Jesse"
+    },
+    {
+      "batter": "James Wood",
+      "ev": 104.6,
+      "angle": 27.0,
+      "distance": 384.0,
+      "hr_in_parks": 5,
+      "result": "field_out",
+      "pitcher": "Elder, Bryce"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "TJ Rumfield",
