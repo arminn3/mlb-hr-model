@@ -143,19 +143,36 @@ function fieldWindLabel(
   return "Out to LF"; // -67.5 ≤ a < -22.5
 }
 
-// ── Compact wind arrow SVG (24px, direction only) ────────────────────────
+// Compute the arrow's rotation in field-relative space, so "Out to CF"
+// always points up, "Left to Right" points right, etc. — regardless of
+// the park's absolute compass orientation.
+function fieldFrameRotation(windFromDeg: number | null, homeTeam: string): number | null {
+  if (windFromDeg === null || windFromDeg === undefined) return null;
+  const cf = PARK_CF_BEARING[homeTeam];
+  const toDeg = (windFromDeg + 180) % 360;
+  if (cf === undefined) return toDeg;
+  return ((toDeg - cf) + 360) % 360;
+}
+
+// ── Wind direction arrow — proper shaft + head, points where wind is
+//     BLOWING (destination), rotated into field-relative frame so the
+//     arrow's direction always matches the label.
 function MiniCompass({ deg, color }: { deg: number | null; color: string }) {
   if (deg === null) {
-    return <span className="inline-block w-4 text-center text-muted">—</span>;
+    return <span className="inline-block w-5 text-center text-muted">—</span>;
   }
   return (
     <svg
       viewBox="0 0 24 24"
-      className="inline-block w-4 h-4 align-middle"
-      style={{ transform: `rotate(${deg}deg)`, color }}
+      className="inline-block w-5 h-5 align-middle shrink-0"
+      style={{ transform: `rotate(${deg}deg)`, color, transition: "transform 200ms" }}
       aria-hidden
     >
-      <path d="M12 3 L16 13 L12 11 L8 13 Z" fill="currentColor" />
+      {/* Arrow with shaft + head, pointing up at 0°. Caller rotates. */}
+      <path
+        d="M12 2 L19 11 L14.5 11 L14.5 22 L9.5 22 L9.5 11 L5 11 Z"
+        fill="currentColor"
+      />
     </svg>
   );
 }
@@ -204,7 +221,7 @@ function ExpandedDetail({ g }: { g: GameEnv }) {
           <div className="text-[13px] font-semibold text-muted">—</div>
         ) : (
           <div className="flex items-center gap-1.5 text-[13px]" style={{ color: wd.color }}>
-            <MiniCompass deg={g.wind_direction} color={wd.color} />
+            <MiniCompass deg={fieldFrameRotation(g.wind_direction, g.home_team)} color={wd.color} />
             <span className="font-mono">
               {g.wind_speed_mph !== null ? g.wind_speed_mph : "?"} mph
             </span>
@@ -281,21 +298,26 @@ function EnvRow({
           {g.park_factor}
         </div>
 
-        {/* Wind — arrow + mph + field-relative label */}
+        {/* Wind — arrow + mph + field-relative label. Dome or missing
+            data collapses to a single em-dash. */}
         <div className="flex items-center justify-end gap-1.5 text-[12px]">
-          {g.is_dome ? (
-            <span className="text-muted">—</span>
-          ) : (
-            <>
-              <MiniCompass deg={g.wind_direction} color={wd.color} />
-              <span className="font-mono text-foreground">
-                {g.wind_speed_mph !== null ? Math.round(g.wind_speed_mph) : "?"} mph
-              </span>
-              <span className="text-[11px]" style={{ color: wd.color }}>
-                {fieldWindLabel(g.wind_direction, g.home_team, g.is_dome)}
-              </span>
-            </>
-          )}
+          {(() => {
+            if (g.is_dome) return <span className="text-muted">— Dome</span>;
+            if (g.wind_speed_mph === null || g.wind_direction === null) {
+              return <span className="text-muted">—</span>;
+            }
+            return (
+              <>
+                <MiniCompass deg={fieldFrameRotation(g.wind_direction, g.home_team)} color={wd.color} />
+                <span className="font-mono text-foreground">
+                  {Math.round(g.wind_speed_mph)} mph
+                </span>
+                <span className="text-[11px]" style={{ color: wd.color }}>
+                  {fieldWindLabel(g.wind_direction, g.home_team, g.is_dome)}
+                </span>
+              </>
+            );
+          })()}
         </div>
 
         {/* Temp */}
