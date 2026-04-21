@@ -557,6 +557,17 @@ def _build_team_pitch_mix_block(g: dict) -> dict:
             return pd.DataFrame()
         return pd.concat(parts, ignore_index=True)
 
+    def _batter_recent_pa_count(batter_id) -> int:
+        """Count batter's 2026 PAs — used to rank projected-lineup batters
+           so the most-used hitters float to the top (top-9 = likely
+           starters, rest = bench)."""
+        if not batter_id:
+            return 0
+        df = get_batter_statcast(batter_id)
+        if df is None or df.empty or "events" not in df.columns:
+            return 0
+        return int(df["events"].notna().sum())
+
     def _side(pitcher: dict, pitcher_id, lineup: list,
               lineup_posted: bool) -> dict:
         if not lineup:
@@ -580,22 +591,33 @@ def _build_team_pitch_mix_block(g: dict) -> dict:
                 mix_r = {k: round(v, 4) for k, v in (get_pitch_mix(pdf, "R") or {}).items()}
                 mix_l = {k: round(v, 4) for k, v in (get_pitch_mix(pdf, "L") or {}).items()}
 
-        # Include everyone on the active roster so key hitters (Yordan on
-        # IL, pinch-hitters, platoon starters) aren't silently dropped.
-        # Total size stays manageable — per-batter cap handles it.
+        # Include every active-roster batter so key hitters aren't silently
+        # dropped. For projected lineups (no posted batting order yet), rank
+        # by 2026 PA count — most-used hitters float up as "likely starters"
+        # (order 1-9) so the Starters Only filter surfaces Yordan-type names
+        # instead of alphabetical luck of the draw.
+        if not lineup_posted:
+            ranked = sorted(
+                [bp for bp in lineup if bp.get("id") is not None],
+                key=lambda bp: _batter_recent_pa_count(bp["id"]),
+                reverse=True,
+            )
+        else:
+            ranked = [bp for bp in lineup if bp.get("id") is not None]
+
         batters_out = []
-        for idx, bp in enumerate(lineup):
-            bid = bp.get("id")
-            if bid is None:
-                continue
+        for idx, bp in enumerate(ranked):
+            bid = bp["id"]
             bname = bp.get("name", "?")
             bhand = get_batter_hand(bid) or bp.get("hand", "?")
             bdf = _batter_career(bid)
             pa_history = build_batter_pa_history(bdf, max_rows=120) if not bdf.empty else []
-            if lineup_posted:
-                order = idx + 1
-            else:
-                order = idx + 1 if idx < 9 else None
+            # Posted lineup → actual batting order 1-9 (bench = None).
+            # Projected lineup → every roster batter gets a rank slot so
+            # platoon starters (Goldschmidt vs LHP, etc.) aren't dropped.
+            # They're sorted by 2026 PA count already, so likely starters
+            # appear first; Starters Only keeps them all since none are null.
+            order = idx + 1
             batters_out.append({
                 "id": bid,
                 "name": bname,
