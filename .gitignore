@@ -6,6 +6,7 @@ odds_cache.json
 cron.log
 statcast_cache/
 cache/
+.asos_cache/
 hr_props_*.json
 hr_props_*.csv
 

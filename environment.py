@@ -278,6 +278,153 @@ def _calc_wind_score(
     return float(wind_mph * alignment)
 
 
+import math
+
+# ── Physics-based weather HR boost ───────────────────────────────────────
+# Based on WEATHER_MODEL_RESEARCH.md — humid-air density via Arden Buck,
+# vector wind projection onto HP→CF, calibrated coefficients from
+# weather_backtest.py grid search (2026 season, 329 games). See the
+# research brief for the full derivation.
+_RHO_REFERENCE = 1.225          # kg/m³, ICAO sea-level dry air standard
+_K_RHO = 1.5                    # density exponent; empirically calibrated
+_K_WIND = 0.5                   # HR % per mph of out-projected tailwind
+_WIND_HEIGHT_CORRECTION = 1.19  # 10m → 30m log profile
+_EV_REF = 100.0                 # mph
+
+# Park factor contains BOTH structural effects (dimensions, wall heights,
+# humidor) and typical-weather effects (Coors altitude, LA warmth, SF
+# marine layer). Since our physics weather model re-applies today's
+# density on top, using the raw park delta double-counts the weather
+# component. This share isolates the structural portion so the two stack
+# additively instead of overlapping. Tune via backtest.
+_PARK_STRUCTURAL_SHARE = 0.55
+
+# ── Per-park wind sensitivity ────────────────────────────────────────────
+# How much ambient 10m wind actually translates to carry at each park.
+# 1.0 = league-average. Higher = wind matters more than the linear model
+# assumes (open stadium, prevailing fetch over water, elevated bleachers).
+# Lower = wind is dampened by geometry, enclosure, altitude, or swirling
+# patterns that decorrelate from the nearest airport's reading. Values
+# informed by Nathan's physics articles, Weather Applied Metrics per-park
+# wind correlations, and Wrigley's historical wind/HR logs.
+_PARK_WIND_SENSITIVITY: dict[str, float] = {
+    # High sensitivity — wind is a bigger lever than average
+    "CHC": 1.7,   # Wrigley — lake gusts, open bleachers, the canonical wind park
+    "KC":  1.2,   # Kauffman — open, flat, prairie winds carry
+    "BOS": 1.15,  # Fenway — Monster bounces but mostly additive
+    "CIN": 1.1,   # Great American — short RF porch, river fetch
+    "MIN": 1.1,   # Target — open, cold dense-air amplifier
+    "CWS": 1.1,   # Rate Field — exposed corners
+    "DET": 1.1,   # Comerica — vast open OF
+    "CLE": 1.1,   # Progressive — lake proximity
+    # Baseline
+    "STL": 1.0, "NYM": 1.0, "PHI": 1.0, "WSH": 1.0,
+    "BAL": 1.0, "PIT": 1.0, "ATL": 1.0, "LAA": 1.0,
+    # Dampened — wind matters less than linear model assumes
+    "NYY": 0.9,   # Yankee — geometry (short RF) dominates, not wind
+    "LAD": 0.9,   # Dodger — mild climate, light typical wind
+    "SDP": 0.85,  # Petco — marine layer dampens carry
+    "OAK": 0.9,   # Coliseum — mild bay wind (Sutter 2026 TBD)
+    "COL": 0.75,  # Coors — altitude effect dominates, wind is smaller lever
+    "SF":  0.55,  # Oracle — notorious swirling coastal, low wind↔HR correlation
+    # Retractable roofs — sensitivity only applies when roof is open
+    "SEA": 0.7, "ARI": 0.7, "AZ": 0.7,
+    "TEX": 0.7, "MIA": 0.7, "HOU": 0.7, "MIL": 0.7,
+    # Fixed domes — zeroed upstream, included for completeness
+    "TB": 0.0, "TOR": 0.0,
+}
+
+
+def _park_wind_sensitivity(home_team: str) -> float:
+    return _PARK_WIND_SENSITIVITY.get(home_team, 1.0)
+
+
+def _saturation_vapor_pressure_hpa(t_c: float) -> float:
+    """Arden Buck (1981). More accurate than Tetens at extremes."""
+    return 6.1121 * math.exp((18.678 - t_c / 234.5) * (t_c / (257.14 + t_c)))
+
+
+def _humid_air_density_kg_m3(
+    temp_f: Optional[float],
+    pressure_hpa: Optional[float],
+    rh_pct: Optional[float],
+) -> Optional[float]:
+    """Humid-air density at station level. None if inputs missing."""
+    if temp_f is None or pressure_hpa is None:
+        return None
+    t_c = (temp_f - 32) * 5 / 9
+    t_k = t_c + 273.15
+    p_pa = pressure_hpa * 100.0
+    rh = rh_pct if rh_pct is not None else 50.0
+    p_sat = _saturation_vapor_pressure_hpa(t_c) * 100
+    p_v = (rh / 100.0) * p_sat
+    p_d = p_pa - p_v
+    M_d = 0.028965  # kg/mol dry air
+    M_v = 0.018016  # kg/mol water vapor
+    R = 8.31446
+    return (p_d * M_d + p_v * M_v) / (R * t_k)
+
+
+def _wind_out_component(
+    wind_mph: Optional[float],
+    wind_dir_from_deg: Optional[float],
+    home_team: str,
+) -> float:
+    """Project wind onto HP→CF axis. +tailwind, -headwind, 0 crosswind."""
+    if wind_mph is None or wind_dir_from_deg is None:
+        return 0.0
+    beta = _OUTFIELD_AZIMUTH.get(home_team)
+    if beta is None:
+        return 0.0
+    # Met convention: wind comes FROM that direction. The velocity vector
+    # blows TO (dir + 180) mod 360.
+    to_rad = math.radians((wind_dir_from_deg + 180.0) % 360.0)
+    w_x = wind_mph * math.sin(to_rad)
+    w_y = wind_mph * math.cos(to_rad)
+    cf_rad = math.radians(beta)
+    cf_x = math.sin(cf_rad)
+    cf_y = math.cos(cf_rad)
+    return w_x * cf_x + w_y * cf_y
+
+
+def calc_weather_hr_pct(
+    temp_f: Optional[float],
+    wind_mph: Optional[float],
+    wind_dir_deg: Optional[float],
+    humidity: Optional[float],
+    pressure_hpa: Optional[float],
+    home_team: str,
+    is_dome_or_roofed: bool = False,
+) -> dict:
+    """
+    Physics-based weather HR boost vs league-average environment.
+    Returns dict with components so the UI/backtest can audit the math.
+
+      density_pct: % boost from humid-air density vs sea-level reference
+      wind_pct:    % boost from projected tailwind component
+      total_pct:   combined (density + wind)
+    """
+    if is_dome_or_roofed:
+        return {"density_pct": 0.0, "wind_pct": 0.0, "total_pct": 0.0}
+
+    rho = _humid_air_density_kg_m3(temp_f, pressure_hpa, humidity)
+    if rho and rho > 0:
+        density_pct = ((_RHO_REFERENCE / rho) ** _K_RHO - 1.0) * 100.0
+    else:
+        density_pct = 0.0
+
+    w_out = _wind_out_component(wind_mph, wind_dir_deg, home_team) * _WIND_HEIGHT_CORRECTION
+    w_out *= _park_wind_sensitivity(home_team)
+    wind_pct = _K_WIND * w_out  # already %/mph HR-rate units
+
+    total = density_pct + wind_pct
+    return {
+        "density_pct": round(density_pct, 2),
+        "wind_pct": round(wind_pct, 2),
+        "total_pct": round(total, 2),
+    }
+
+
 def calc_environment_score(
     home_team: str, game_date: date = None, batter_hand: str = None,
     game_hour_local: int = None,
@@ -328,6 +475,23 @@ def calc_environment_score(
         + config.ENVIRONMENT_WEIGHTS["pressure"] * pressure_norm
     )
 
+    # Physics-based weather HR boost (independent of the heuristic env_score
+    # above — this is the authoritative weather signal for the UI and for
+    # any downstream HR probability adjustment).
+    weather_boost = calc_weather_hr_pct(
+        temp_f=weather.get("temperature_f"),
+        wind_mph=weather.get("wind_speed_mph"),
+        wind_dir_deg=weather.get("wind_direction"),
+        humidity=weather.get("humidity"),
+        pressure_hpa=weather.get("pressure_hpa"),
+        home_team=home_team,
+        is_dome_or_roofed=(is_dome or roof_closed),
+    )
+    # Park contribution — only the structural share to avoid double-counting
+    # typical weather that the park factor already embeds.
+    park_hr_pct = round((park - 100.0) * _PARK_STRUCTURAL_SHARE, 2)
+    combined_hr_pct = round(weather_boost["total_pct"] + park_hr_pct, 2)
+
     return {
         "park_factor": park,
         "temperature_f": weather["temperature_f"],
@@ -345,4 +509,10 @@ def calc_environment_score(
         "humid_norm": round(humid_norm, 3),
         "pressure_norm": round(pressure_norm, 3),
         "env_score": round(env_score, 3),
+        # Physics weather model (WEATHER_MODEL_RESEARCH.md)
+        "weather_density_pct": weather_boost["density_pct"],
+        "weather_wind_pct": weather_boost["wind_pct"],
+        "weather_hr_pct": weather_boost["total_pct"],
+        "park_hr_pct": park_hr_pct,
+        "combined_hr_pct": combined_hr_pct,
     }
