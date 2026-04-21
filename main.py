@@ -580,10 +580,11 @@ def _build_team_pitch_mix_block(g: dict) -> dict:
                 mix_r = {k: round(v, 4) for k, v in (get_pitch_mix(pdf, "R") or {}).items()}
                 mix_l = {k: round(v, 4) for k, v in (get_pitch_mix(pdf, "L") or {}).items()}
 
-        # Cap to first 13 batters (9 starters + 4 bench) to bound JSON size
-        capped = lineup[:13]
+        # Include everyone on the active roster so key hitters (Yordan on
+        # IL, pinch-hitters, platoon starters) aren't silently dropped.
+        # Total size stays manageable — per-batter cap handles it.
         batters_out = []
-        for idx, bp in enumerate(capped):
+        for idx, bp in enumerate(lineup):
             bid = bp.get("id")
             if bid is None:
                 continue

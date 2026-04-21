@@ -498,6 +498,24 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
     if (gameIdx >= gamesWithData.length) setGameIdx(0);
   }, [gamesWithData.length, gameIdx]);
 
+  // Auto-select pitch-type pills ≥12% usage whenever the game or side
+  // changes. Pills below the threshold still appear but start unselected
+  // (user can click to include them). Match PropFinder's behavior.
+  const PITCH_AUTOSELECT_THRESHOLD = 0.12;
+  useEffect(() => {
+    const g = gamesWithData[gameIdx];
+    if (!g || !g.team_pitch_mix) return;
+    const p = g.team_pitch_mix[side].pitcher;
+    const union = new Set<string>();
+    for (const [pt, u] of Object.entries(p.pitch_mix_vs_rhb || {})) {
+      if (u >= PITCH_AUTOSELECT_THRESHOLD) union.add(pt);
+    }
+    for (const [pt, u] of Object.entries(p.pitch_mix_vs_lhb || {})) {
+      if (u >= PITCH_AUTOSELECT_THRESHOLD) union.add(pt);
+    }
+    setSelectedPitchTypes(union);
+  }, [gameIdx, side, gamesWithData]);
+
   if (gamesWithData.length === 0) {
     return (
       <div className="text-center text-muted py-12">
@@ -520,14 +538,15 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
 
   const filter: Filter = { season, range, type, pitcherHand, selectedPitchTypes, startersOnly };
 
-  // Split batters into RHB and LHB tables
+  // Split batters into RHB and LHB tables. Keep PA=0 batters visible —
+  // displaying them with "—" is more honest than silently dropping them
+  // (so injured/rarely-played names still appear in the table).
   const { rhbRows, lhbRows } = useMemo(() => {
     const rhb: Array<{ batter: TeamPitchMixBatter; stats: RowStats }> = [];
     const lhb: Array<{ batter: TeamPitchMixBatter; stats: RowStats }> = [];
     for (const b of currentSide.batters) {
       if (startersOnly && b.order === null) continue;
       const stats = aggregate(b.pa_history, filter);
-      if (stats.PA === 0) continue;
       const eff = effectiveHand(b, pitcher.hand);
       (eff === "R" ? rhb : lhb).push({ batter: b, stats });
     }
