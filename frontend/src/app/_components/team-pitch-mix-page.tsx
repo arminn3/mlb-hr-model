@@ -29,11 +29,13 @@ const PITCH_NAMES: Record<string, string> = {
 
 type RangeChoice = "Season" | "L5" | "L10" | "L15" | "L20" | "L25";
 type TypeChoice = "Games" | "Plate Appearances" | "Batted Ball Events";
+type HandFilter = "all" | "R" | "L";
 
 interface Filter {
   season: number;
   range: RangeChoice;
   type: TypeChoice;
+  pitcherHand: HandFilter;
   selectedPitchTypes: Set<string>;
   startersOnly: boolean;
 }
@@ -99,6 +101,11 @@ function applyRangeType(
 function aggregate(history: PAHistoryEntry[], filter: Filter): RowStats {
   const filtered = history
     .filter((r) => r.season === filter.season)
+    .filter(
+      (r) =>
+        filter.pitcherHand === "all" ||
+        r.pitcher_hand === filter.pitcherHand,
+    )
     .filter(
       (r) =>
         filter.selectedPitchTypes.size === 0 ||
@@ -388,6 +395,7 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
   const [season, setSeason] = useState<number>(2026);
   const [range, setRange] = useState<RangeChoice>("Season");
   const [type, setType] = useState<TypeChoice>("Plate Appearances");
+  const [pitcherHand, setPitcherHand] = useState<HandFilter>("all");
   const [startersOnly, setStartersOnly] = useState(true);
   const [selectedPitchTypes, setSelectedPitchTypes] = useState<Set<string>>(new Set());
 
@@ -416,7 +424,7 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
   const viewingTeam = side === "away" ? game.away_team : game.home_team;
   const opposingTeam = side === "away" ? game.home_team : game.away_team;
 
-  const filter: Filter = { season, range, type, selectedPitchTypes, startersOnly };
+  const filter: Filter = { season, range, type, pitcherHand, selectedPitchTypes, startersOnly };
 
   // Split batters into RHB and LHB tables
   const { rhbRows, lhbRows } = useMemo(() => {
@@ -496,6 +504,21 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
           options={["Games", "Plate Appearances", "Batted Ball Events"] as const}
           onChange={(v) => setType(v as TypeChoice)}
         />
+        <div className="flex flex-col gap-1">
+          <span className="text-[11px] uppercase text-muted tracking-[0.06em]">Pitcher</span>
+          <div className="flex gap-1 h-8">
+            {(["all", "R", "L"] as const).map((h) => (
+              <Chip
+                key={h}
+                size="sm"
+                selected={pitcherHand === h}
+                onClick={() => setPitcherHand(h)}
+              >
+                {h === "all" ? "vs All" : h === "R" ? "vs RHP" : "vs LHP"}
+              </Chip>
+            ))}
+          </div>
+        </div>
         <label className="flex items-center gap-2 h-8 cursor-pointer select-none">
           <input
             type="checkbox"

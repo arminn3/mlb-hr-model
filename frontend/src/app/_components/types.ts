@@ -149,7 +149,8 @@ export type PAResult =
 export interface PAHistoryEntry {
   date: string;           // "2025-06-14"
   season: number;         // 2025
-  pitch_type: string | null; // "SL" — terminating pitch type
+  pitcher_hand: "R" | "L" | null; // hand of the pitcher faced
+  pitch_type: string | null;      // terminating pitch type
   pitches_seen: number;
   is_bbe: boolean;
   ev: number | null;

@@ -426,29 +426,28 @@ _NON_AB_EVENTS = {"walk", "hit_by_pitch", "sac_fly", "sac_bunt", "intent_walk",
 _K_EVENTS = {"strikeout", "strikeout_double_play"}
 
 
-def build_bvp_pa_history(
-    pitcher_df: pd.DataFrame,
-    batter_id: int,
+def build_batter_pa_history(
+    batter_df: pd.DataFrame,
+    max_rows: int = 300,
 ) -> list[dict]:
-    """Emit per-PA head-to-head history for (batter_id vs pitcher_df's pitcher).
+    """Emit per-PA history for a batter across ALL pitchers faced.
 
-    One dict per completed plate appearance. Frontend aggregates.
+    Each row tags the pitcher's hand (p_throws) so the frontend can
+    filter to vs All / vs RHP / vs LHP. Powers the "Team vs Pitch Mix"
+    tab's Season/Range/Type/PitcherHand/SelectedPitchTypes filter matrix.
+
+    Rows are sorted newest first and capped at `max_rows` (default 300)
+    per call — enough to satisfy L25 Games × ~4 PAs/game with headroom
+    while keeping slate JSON size bounded.
 
     Fields:
-        date (str YYYY-MM-DD), season (int), pitch_type (str | None),
-        pitches_seen (int), is_bbe (bool), ev (float | None),
-        la (float | None), is_barrel (bool), is_hard_hit (bool),
-        result (str), bases (int 0-4), woba_value (float).
+        date, season, pitcher_hand ("R"|"L"), pitch_type (str | None),
+        pitches_seen, is_bbe, ev, la, is_barrel, is_hard_hit,
+        result, bases, woba_value.
     """
-    if pitcher_df is None or pitcher_df.empty:
+    if batter_df is None or batter_df.empty:
         return []
-    if "batter" not in pitcher_df.columns:
-        return []
-
-    # Filter to this batter's PAs against this pitcher
-    df = pitcher_df[pitcher_df["batter"] == batter_id].copy()
-    if df.empty:
-        return []
+    df = batter_df.copy()
 
     # Count pitches-seen per PA (game_pk + at_bat_number uniquely identifies a PA)
     if "at_bat_number" in df.columns and "game_pk" in df.columns:
@@ -466,6 +465,10 @@ def build_bvp_pa_history(
     # Sort newest first so the frontend can slice top-N for L{N} filters
     if "game_date" in ev_rows.columns:
         ev_rows = ev_rows.sort_values("game_date", ascending=False)
+
+    # Cap to most recent N PAs to keep slate JSON size bounded
+    if len(ev_rows) > max_rows:
+        ev_rows = ev_rows.head(max_rows)
 
     out: list[dict] = []
     for row in ev_rows.itertuples(index=False):
@@ -514,12 +517,22 @@ def build_bvp_pa_history(
         else:
             pitch_type_str = str(pitch_type)
 
+        # Pitcher hand (for vs All/RHP/LHP filter)
+        p_throws = getattr(row, "p_throws", None)
+        if p_throws is None or pd.isna(p_throws):
+            pitcher_hand = None
+        else:
+            pitcher_hand = str(p_throws).upper()[:1]
+            if pitcher_hand not in ("R", "L"):
+                pitcher_hand = None
+
         bases = _BASES.get(result, 0)
         woba_value = _WOBA_WEIGHTS.get(result, 0.0)
 
         out.append({
             "date": date_str,
             "season": season,
+            "pitcher_hand": pitcher_hand,
             "pitch_type": pitch_type_str,
             "pitches_seen": pitches_seen,
             "is_bbe": is_bbe,
