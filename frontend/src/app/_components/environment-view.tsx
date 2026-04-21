@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { WeatherResearch } from "./weather-research";
 
 interface GameEnv {
   game_pk: number;
@@ -328,6 +329,7 @@ function EnvRow({
 
 // ── Main ────────────────────────────────────────────────────────────────
 export function EnvironmentView({ games }: { games: GameEnv[] }) {
+  const [tab, setTab] = useState<"today" | "research">("today");
   const [sortBy, setSortBy] = useState<SortKey>("impact");
   const [expandedPk, setExpandedPk] = useState<number | null>(null);
 
@@ -367,6 +369,28 @@ export function EnvironmentView({ games }: { games: GameEnv[] }) {
 
   return (
     <div>
+      {/* Tab toggle — Today's slate vs 10-season research findings */}
+      <div className="flex items-center gap-1 mb-4">
+        {(["today", "research"] as const).map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={
+              "px-3 py-1.5 text-[12px] font-semibold rounded-[var(--radius-md)] cursor-pointer transition-colors " +
+              (tab === t
+                ? "bg-accent/15 text-accent border border-accent/40"
+                : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
+            }
+          >
+            {t === "today" ? "Today's Slate" : "Model & Research"}
+          </button>
+        ))}
+      </div>
+
+      {tab === "research" ? (
+        <WeatherResearch />
+      ) : (
+      <>
       <div
         className="rounded-[var(--radius-md)] border overflow-hidden"
         style={{ background: "var(--surface-1,#1c1c1e)", borderColor: "#2c2c2e" }}
@@ -405,6 +429,8 @@ export function EnvironmentView({ games }: { games: GameEnv[] }) {
       <div className="mt-4 text-[11px] text-muted">
         Weather: Open-Meteo · Park factors: 3-yr HR rates · Combined = weather% + park%.
       </div>
+      </>
+      )}
     </div>
   );
 }

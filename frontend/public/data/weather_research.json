@@ -1,0 +1,590 @@
+{
+  "dataset": {
+    "n_games": 22763,
+    "total_hrs": 53769,
+    "total_pas": 1724691,
+    "seasons": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "baseline_hr_rate": 0.0308
+  },
+  "global_coefficients": {
+    "K_RHO": 2.680528216762689,
+    "K_WIND": 0.3313367367516612
+  },
+  "hr_rate_by_temperature": [
+    {
+      "label": "Cold (<55\u00b0F)",
+      "n": 1281,
+      "hr_rate": 0.026329059934125352,
+      "vs_league_pct": -14.5
+    },
+    {
+      "label": "Cool (55-70\u00b0F)",
+      "n": 5554,
+      "hr_rate": 0.028452446673124628,
+      "vs_league_pct": -7.6
+    },
+    {
+      "label": "Mild (70-80\u00b0F)",
+      "n": 7035,
+      "hr_rate": 0.03104805842380883,
+      "vs_league_pct": 0.8
+    },
+    {
+      "label": "Warm (80-90\u00b0F)",
+      "n": 6737,
+      "hr_rate": 0.0326277665285148,
+      "vs_league_pct": 5.9
+    },
+    {
+      "label": "Hot (>90\u00b0F)",
+      "n": 2151,
+      "hr_rate": 0.033017835064727614,
+      "vs_league_pct": 7.2
+    }
+  ],
+  "hr_rate_by_wind": [
+    {
+      "label": "Strong In (wind \u2264 -10)",
+      "n": 2286,
+      "hr_rate": 0.02863353858337873,
+      "vs_league_pct": -7.0
+    },
+    {
+      "label": "Mild In (-10 to -3)",
+      "n": 4243,
+      "hr_rate": 0.029136300611430105,
+      "vs_league_pct": -5.4
+    },
+    {
+      "label": "Neutral (-3 to +3)",
+      "n": 5258,
+      "hr_rate": 0.030376554880894933,
+      "vs_league_pct": -1.4
+    },
+    {
+      "label": "Mild Out (+3 to +10)",
+      "n": 6142,
+      "hr_rate": 0.032030008436870344,
+      "vs_league_pct": 4.0
+    },
+    {
+      "label": "Strong Out (wind \u2265 +10)",
+      "n": 4834,
+      "hr_rate": 0.03220398396152534,
+      "vs_league_pct": 4.5
+    }
+  ],
+  "park_hr_rate_ranking": [
+    {
+      "park": "NYY",
+      "n": 759,
+      "hr_rate": 0.03786236636762768,
+      "vs_league_pct": 22.9
+    },
+    {
+      "park": "CIN",
+      "n": 759,
+      "hr_rate": 0.03654148304294144,
+      "vs_league_pct": 18.6
+    },
+    {
+      "park": "BAL",
+      "n": 759,
+      "hr_rate": 0.03586713480929092,
+      "vs_league_pct": 16.4
+    },
+    {
+      "park": "LAD",
+      "n": 760,
+      "hr_rate": 0.03482937833735564,
+      "vs_league_pct": 13.1
+    },
+    {
+      "park": "TOR",
+      "n": 759,
+      "hr_rate": 0.03413687331063791,
+      "vs_league_pct": 10.8
+    },
+    {
+      "park": "TEX",
+      "n": 759,
+      "hr_rate": 0.033926773824528134,
+      "vs_league_pct": 10.1
+    },
+    {
+      "park": "LAA",
+      "n": 759,
+      "hr_rate": 0.03366136814477709,
+      "vs_league_pct": 9.3
+    },
+    {
+      "park": "COL",
+      "n": 759,
+      "hr_rate": 0.03344860268999932,
+      "vs_league_pct": 8.6
+    },
+    {
+      "park": "PHI",
+      "n": 759,
+      "hr_rate": 0.033339369577092735,
+      "vs_league_pct": 8.2
+    },
+    {
+      "park": "MIL",
+      "n": 759,
+      "hr_rate": 0.033064425318544505,
+      "vs_league_pct": 7.3
+    },
+    {
+      "park": "HOU",
+      "n": 759,
+      "hr_rate": 0.03300946569504124,
+      "vs_league_pct": 7.2
+    },
+    {
+      "park": "MIN",
+      "n": 759,
+      "hr_rate": 0.03236620283557915,
+      "vs_league_pct": 5.1
+    },
+    {
+      "park": "SEA",
+      "n": 759,
+      "hr_rate": 0.03231852384593891,
+      "vs_league_pct": 4.9
+    },
+    {
+      "park": "CWS",
+      "n": 758,
+      "hr_rate": 0.03159582425174502,
+      "vs_league_pct": 2.6
+    },
+    {
+      "park": "WSH",
+      "n": 759,
+      "hr_rate": 0.0315759311760095,
+      "vs_league_pct": 2.5
+    },
+    {
+      "park": "NYM",
+      "n": 759,
+      "hr_rate": 0.03059802865384426,
+      "vs_league_pct": -0.7
+    },
+    {
+      "park": "SDP",
+      "n": 759,
+      "hr_rate": 0.030098073803639453,
+      "vs_league_pct": -2.3
+    },
+    {
+      "park": "CHC",
+      "n": 760,
+      "hr_rate": 0.02988422236796006,
+      "vs_league_pct": -3.0
+    },
+    {
+      "park": "CLE",
+      "n": 757,
+      "hr_rate": 0.029694823540362913,
+      "vs_league_pct": -3.6
+    },
+    {
+      "park": "BOS",
+      "n": 759,
+      "hr_rate": 0.02962965551048322,
+      "vs_league_pct": -3.8
+    },
+    {
+      "park": "TB",
+      "n": 759,
+      "hr_rate": 0.029337315528956263,
+      "vs_league_pct": -4.8
+    },
+    {
+      "park": "ATL",
+      "n": 758,
+      "hr_rate": 0.029029192646499755,
+      "vs_league_pct": -5.8
+    },
+    {
+      "park": "ARI",
+      "n": 759,
+      "hr_rate": 0.028724006227885845,
+      "vs_league_pct": -6.8
+    },
+    {
+      "park": "DET",
+      "n": 756,
+      "hr_rate": 0.027869798093018837,
+      "vs_league_pct": -9.5
+    },
+    {
+      "park": "OAK",
+      "n": 759,
+      "hr_rate": 0.02773229012124741,
+      "vs_league_pct": -10.0
+    },
+    {
+      "park": "STL",
+      "n": 759,
+      "hr_rate": 0.026713235424711733,
+      "vs_league_pct": -13.3
+    },
+    {
+      "park": "KC",
+      "n": 759,
+      "hr_rate": 0.025520593164466934,
+      "vs_league_pct": -17.2
+    },
+    {
+      "park": "PIT",
+      "n": 758,
+      "hr_rate": 0.024643715593357086,
+      "vs_league_pct": -20.0
+    },
+    {
+      "park": "MIA",
+      "n": 758,
+      "hr_rate": 0.024539049105204477,
+      "vs_league_pct": -20.3
+    },
+    {
+      "park": "SF",
+      "n": 759,
+      "hr_rate": 0.022542384726653954,
+      "vs_league_pct": -26.8
+    }
+  ],
+  "park_wind_sensitivity": [
+    {
+      "park": "CHC",
+      "n": 760,
+      "sens_raw": 6.94,
+      "sens_ship": 5.877,
+      "p_val": 1,
+      "significant": true
+    },
+    {
+      "park": "BAL",
+      "n": 759,
+      "sens_raw": 4.816,
+      "sens_ship": 3.084,
+      "p_val": 0.0005,
+      "significant": true
+    },
+    {
+      "park": "PHI",
+      "n": 759,
+      "sens_raw": 3.166,
+      "sens_ship": 2.559,
+      "p_val": 0.0008,
+      "significant": true
+    },
+    {
+      "park": "STL",
+      "n": 759,
+      "sens_raw": 2.683,
+      "sens_ship": 2.292,
+      "p_val": 0.0012,
+      "significant": true
+    },
+    {
+      "park": "BOS",
+      "n": 759,
+      "sens_raw": 2.534,
+      "sens_ship": 2.229,
+      "p_val": 0.0008,
+      "significant": true
+    },
+    {
+      "park": "KC",
+      "n": 759,
+      "sens_raw": 2.465,
+      "sens_ship": 2.17,
+      "p_val": 0.0011,
+      "significant": true
+    },
+    {
+      "park": "WSH",
+      "n": 759,
+      "sens_raw": 2.548,
+      "sens_ship": 2.169,
+      "p_val": 0.003,
+      "significant": true
+    },
+    {
+      "park": "CLE",
+      "n": 757,
+      "sens_raw": 2.451,
+      "sens_ship": 2.14,
+      "p_val": 0.0019,
+      "significant": true
+    },
+    {
+      "park": "NYY",
+      "n": 759,
+      "sens_raw": 1.996,
+      "sens_ship": 1.741,
+      "p_val": 0.024,
+      "significant": true
+    },
+    {
+      "park": "MIL",
+      "n": 759,
+      "sens_raw": 1.568,
+      "sens_ship": 1.451,
+      "p_val": 0.0416,
+      "significant": true
+    },
+    {
+      "park": "PIT",
+      "n": 758,
+      "sens_raw": 1.583,
+      "sens_ship": 1.451,
+      "p_val": 0.0521,
+      "significant": true
+    },
+    {
+      "park": "HOU",
+      "n": 759,
+      "sens_raw": 1.513,
+      "sens_ship": 1.393,
+      "p_val": 0.0692,
+      "significant": true
+    },
+    {
+      "park": "ARI",
+      "n": 759,
+      "sens_raw": -0.403,
+      "sens_ship": 1.0,
+      "p_val": 0.6881,
+      "significant": false
+    },
+    {
+      "park": "ATL",
+      "n": 758,
+      "sens_raw": -1.348,
+      "sens_ship": 1.0,
+      "p_val": 0.1897,
+      "significant": false
+    },
+    {
+      "park": "CIN",
+      "n": 759,
+      "sens_raw": -1.579,
+      "sens_ship": 1.0,
+      "p_val": 0.1079,
+      "significant": false
+    },
+    {
+      "park": "COL",
+      "n": 759,
+      "sens_raw": 0.404,
+      "sens_ship": 1.0,
+      "p_val": 0.5522,
+      "significant": false
+    },
+    {
+      "park": "CWS",
+      "n": 758,
+      "sens_raw": 0.69,
+      "sens_ship": 1.0,
+      "p_val": 0.3439,
+      "significant": false
+    },
+    {
+      "park": "DET",
+      "n": 756,
+      "sens_raw": 1.223,
+      "sens_ship": 1.0,
+      "p_val": 0.1344,
+      "significant": false
+    },
+    {
+      "park": "LAA",
+      "n": 759,
+      "sens_raw": 1.982,
+      "sens_ship": 1.0,
+      "p_val": 0.3791,
+      "significant": false
+    },
+    {
+      "park": "LAD",
+      "n": 760,
+      "sens_raw": 2.779,
+      "sens_ship": 1.0,
+      "p_val": 0.1136,
+      "significant": false
+    },
+    {
+      "park": "MIA",
+      "n": 758,
+      "sens_raw": -1.3,
+      "sens_ship": 1.0,
+      "p_val": 0.189,
+      "significant": false
+    },
+    {
+      "park": "MIN",
+      "n": 759,
+      "sens_raw": 0.677,
+      "sens_ship": 1.0,
+      "p_val": 0.3838,
+      "significant": false
+    },
+    {
+      "park": "NYM",
+      "n": 759,
+      "sens_raw": -0.408,
+      "sens_ship": 1.0,
+      "p_val": 0.5848,
+      "significant": false
+    },
+    {
+      "park": "OAK",
+      "n": 759,
+      "sens_raw": 2.11,
+      "sens_ship": 1.0,
+      "p_val": 0.1198,
+      "significant": false
+    },
+    {
+      "park": "SDP",
+      "n": 759,
+      "sens_raw": 1.037,
+      "sens_ship": 1.0,
+      "p_val": 0.3837,
+      "significant": false
+    },
+    {
+      "park": "SEA",
+      "n": 759,
+      "sens_raw": 2.62,
+      "sens_ship": 1.0,
+      "p_val": 0.1751,
+      "significant": false
+    },
+    {
+      "park": "SF",
+      "n": 759,
+      "sens_raw": -0.201,
+      "sens_ship": 1.0,
+      "p_val": 0.775,
+      "significant": false
+    },
+    {
+      "park": "TEX",
+      "n": 759,
+      "sens_raw": 0.287,
+      "sens_ship": 1.0,
+      "p_val": 0.6728,
+      "significant": false
+    }
+  ],
+  "extreme_conditions": {
+    "hot_wind_out": {
+      "n": 4000,
+      "hr_rate": 0.03437072579782285,
+      "vs_league_pct": 11.6
+    },
+    "cold_wind_in": {
+      "n": 606,
+      "hr_rate": 0.02569986424496441,
+      "vs_league_pct": -16.6
+    }
+  },
+  "cross_validation": [
+    {
+      "season": 2015,
+      "n_test": 2267,
+      "pearson_r": 0.13275987768296849,
+      "rmse": 0.0192436734996747,
+      "beta_density": 0.08336385331820174,
+      "beta_wind": 9.47423117103883e-05
+    },
+    {
+      "season": 2016,
+      "n_test": 2266,
+      "pearson_r": 0.09188647205642407,
+      "rmse": 0.020459867246437353,
+      "beta_density": 0.0841921717007396,
+      "beta_wind": 0.00010651407167047898
+    },
+    {
+      "season": 2017,
+      "n_test": 2268,
+      "pearson_r": 0.11639397544796878,
+      "rmse": 0.02071085396825864,
+      "beta_density": 0.08114141825059897,
+      "beta_wind": 0.0001078079268757463
+    },
+    {
+      "season": 2018,
+      "n_test": 2269,
+      "pearson_r": 0.1133826497734337,
+      "rmse": 0.020422928312368777,
+      "beta_density": 0.08400575170165137,
+      "beta_wind": 0.00010522739552396444
+    },
+    {
+      "season": 2019,
+      "n_test": 2267,
+      "pearson_r": 0.09673843578292857,
+      "rmse": 0.022309711465750913,
+      "beta_density": 0.08369472879282432,
+      "beta_wind": 0.00010597336418369219
+    },
+    {
+      "season": 2020,
+      "n_test": 838,
+      "pearson_r": 0.08494563772541908,
+      "rmse": 0.02265762004627996,
+      "beta_density": 0.08340607894405919,
+      "beta_wind": 0.00010181519331686374
+    },
+    {
+      "season": 2021,
+      "n_test": 2267,
+      "pearson_r": 0.12673536107674385,
+      "rmse": 0.021361507697686737,
+      "beta_density": 0.08304521792703082,
+      "beta_wind": 9.364322947997564e-05
+    },
+    {
+      "season": 2022,
+      "n_test": 2268,
+      "pearson_r": 0.1403193769931093,
+      "rmse": 0.020624738429733492,
+      "beta_density": 0.08055119950371008,
+      "beta_wind": 0.00010360205620760064
+    },
+    {
+      "season": 2023,
+      "n_test": 2268,
+      "pearson_r": 0.1299386068185418,
+      "rmse": 0.020871122870762142,
+      "beta_density": 0.08298432673346742,
+      "beta_wind": 9.637635605183019e-05
+    },
+    {
+      "season": 2024,
+      "n_test": 2267,
+      "pearson_r": 0.15135549189201383,
+      "rmse": 0.019825272472950784,
+      "beta_density": 0.07929968673877115,
+      "beta_wind": 0.00010517558447545474
+    }
+  ]
+}
