@@ -110,55 +110,6 @@ function MiniCompass({ deg, color }: { deg: number | null; color: string }) {
   );
 }
 
-// ── Summary chip strip ───────────────────────────────────────────────────
-function SummaryRow({ games }: { games: GameEnv[] }) {
-  const sorted = [...games].sort((a, b) => combinedPct(b) - combinedPct(a));
-  const best = sorted[0];
-  const worst = sorted[sorted.length - 1];
-  const domes = games.filter((g) => g.is_dome).length;
-  const windyOut = games.filter((g) => (g.wind_score ?? 0) > 2 && !g.is_dome).length;
-  const windyIn = games.filter((g) => (g.wind_score ?? 0) < -2 && !g.is_dome).length;
-
-  if (!best) return null;
-  const bestPct = combinedPct(best);
-  const worstPct = combinedPct(worst);
-
-  return (
-    <div
-      className="flex flex-wrap items-center gap-x-5 gap-y-2 px-4 py-2.5 rounded-[var(--radius-md)] border mb-4 text-[12px]"
-      style={{ background: "var(--surface-1, #1c1c1e)", borderColor: "#2c2c2e" }}
-    >
-      <div>
-        <span className="text-muted">Best </span>
-        <span className="font-semibold text-foreground">{best.away_team} @ {best.home_team}</span>
-        <span className="font-mono ml-1.5" style={{ color: impactTier(bestPct).color }}>
-          {bestPct > 0 ? "+" : ""}{bestPct}%
-        </span>
-      </div>
-      <div className="w-px h-4 bg-[#2c2c2e]" />
-      <div>
-        <span className="text-muted">Worst </span>
-        <span className="font-semibold text-foreground">{worst.away_team} @ {worst.home_team}</span>
-        <span className="font-mono ml-1.5" style={{ color: impactTier(worstPct).color }}>
-          {worstPct > 0 ? "+" : ""}{worstPct}%
-        </span>
-      </div>
-      <div className="w-px h-4 bg-[#2c2c2e]" />
-      <div className="font-mono">
-        <span className="text-accent-green">{windyOut}</span>
-        <span className="text-muted ml-1">out</span>
-      </div>
-      <div className="font-mono">
-        <span className="text-accent-red">{windyIn}</span>
-        <span className="text-muted ml-1">in</span>
-      </div>
-      <div className="font-mono">
-        <span className="text-muted">{domes} domes</span>
-      </div>
-    </div>
-  );
-}
-
 // ── Inline expandable detail (replaces the old modal/diamond) ───────────
 function ExpandedDetail({ g }: { g: GameEnv }) {
   const wx = weatherPct(g);
@@ -349,8 +300,6 @@ export function EnvironmentView({ games }: { games: GameEnv[] }) {
 
   return (
     <div>
-      <SummaryRow games={sorted} />
-
       <div
         className="rounded-[var(--radius-md)] border overflow-hidden"
         style={{ background: "var(--surface-1,#1c1c1e)", borderColor: "#2c2c2e" }}
