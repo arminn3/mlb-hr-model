@@ -101,6 +101,47 @@ function blowingToward(fromDeg: number | null): string {
   return COMPASS_8[Math.round(to / 45) % 8];
 }
 
+// ── Stadium orientation: HP→CF compass bearings (mirror of backend) ──────
+// Used to describe wind relative to the field: Out to CF / In from RF /
+// Left to Right / etc. If a park is missing, we fall back to raw compass.
+const PARK_CF_BEARING: Record<string, number> = {
+  ARI: 23, AZ: 23, ATL: 25, BAL: 32, BOS: 45, CHC: 30,
+  CIN: 10, CLE: 0,  COL: 0,  CWS: 35, DET: 150,
+  HOU: 345, KC: 45, LAA: 60, LAD: 20, MIA: 40, MIL: 45,
+  MIN: 90, NYM: 25, NYY: 75, OAK: 60, ATH: 60,
+  PHI: 0, PIT: 115, SDP: 0, SD: 0, SF: 90, SEA: 60,
+  STL: 55, TB: 45, TEX: 20, TOR: 0, WSH: 25,
+};
+
+// Describe wind relative to the field using the batter's left/right frame.
+// Returns strings like "Out to CF", "In from RF", "Left to Right".
+function fieldWindLabel(
+  fromDeg: number | null,
+  homeTeam: string,
+  isDome: boolean,
+): string {
+  if (isDome) return "Dome";
+  if (fromDeg === null || fromDeg === undefined) return "?";
+  const cfBearing = PARK_CF_BEARING[homeTeam];
+  if (cfBearing === undefined) return COMPASS_8[Math.round((((fromDeg + 180) % 360) / 45)) % 8];
+
+  // α = signed angle from CF bearing to wind-TO direction, in [-180, 180]
+  const toDeg = (fromDeg + 180) % 360;
+  let alpha = toDeg - cfBearing;
+  while (alpha > 180) alpha -= 360;
+  while (alpha < -180) alpha += 360;
+  const a = alpha;
+  // Bucket into 8 sectors of 45° each (edges at ±22.5, ±67.5, ±112.5, ±157.5).
+  if (a >= -22.5 && a < 22.5)   return "Out to CF";
+  if (a >= 22.5 && a < 67.5)    return "Out to RF";
+  if (a >= 67.5 && a < 112.5)   return "Left to Right";
+  if (a >= 112.5 && a < 157.5)  return "In from RF";
+  if (a >= 157.5 || a < -157.5) return "In from CF";
+  if (a >= -157.5 && a < -112.5) return "In from LF";
+  if (a >= -112.5 && a < -67.5) return "Right to Left";
+  return "Out to LF"; // -67.5 ≤ a < -22.5
+}
+
 // ── Compact wind arrow SVG (24px, direction only) ────────────────────────
 function MiniCompass({ deg, color }: { deg: number | null; color: string }) {
   if (deg === null) {
@@ -155,15 +196,23 @@ function ExpandedDetail({ g }: { g: GameEnv }) {
           <Stat label="RHB" value={`${splitPct("R") > 0 ? "+" : ""}${splitPct("R")}%`} color={splitPct("R") > 0 ? "#22c55e" : splitPct("R") < 0 ? "#ef4444" : undefined} />
         </>
       )}
-      <Stat
-        label="Wind"
-        value={
-          g.is_dome
-            ? "—"
-            : `${g.wind_speed_mph ?? "?"} mph — from ${wd.compass}${g.wind_direction !== null ? ` (${Math.round(g.wind_direction)}°)` : ""} → ${blowingToward(g.wind_direction)} — ${wd.flow} to CF`
-        }
-        color={wd.color}
-      />
+      {/* Wind: arrow + mph + simple field-relative label */}
+      <div>
+        <div className="text-[10px] uppercase tracking-[0.06em] text-muted mb-0.5">Wind</div>
+        {g.is_dome ? (
+          <div className="text-[13px] font-semibold text-muted">—</div>
+        ) : (
+          <div className="flex items-center gap-1.5 text-[13px]" style={{ color: wd.color }}>
+            <MiniCompass deg={g.wind_direction} color={wd.color} />
+            <span className="font-mono">
+              {g.wind_speed_mph !== null ? g.wind_speed_mph : "?"} mph
+            </span>
+            <span className="font-semibold">
+              {fieldWindLabel(g.wind_direction, g.home_team, g.is_dome)}
+            </span>
+          </div>
+        )}
+      </div>
       <Stat label="Temp" value={g.temperature_f !== null ? `${Math.round(g.temperature_f)}°F` : "—"} />
       <Stat label="Humidity" value={g.humidity !== null ? `${Math.round(g.humidity)}%` : "—"} />
       <Stat label="Pressure" value={g.pressure_hpa !== null ? `${Math.round(g.pressure_hpa)} hPa` : "—"} />
@@ -231,20 +280,18 @@ function EnvRow({
           {g.park_factor}
         </div>
 
-        {/* Wind — arrow + compass + mph + flow */}
-        <div className="flex items-center justify-end gap-1.5 font-mono text-[12px]">
+        {/* Wind — arrow + mph + field-relative label */}
+        <div className="flex items-center justify-end gap-1.5 text-[12px]">
           {g.is_dome ? (
             <span className="text-muted">—</span>
           ) : (
             <>
               <MiniCompass deg={g.wind_direction} color={wd.color} />
-              <span className="text-foreground w-6 text-right">
-                {g.wind_speed_mph !== null ? Math.round(g.wind_speed_mph) : "?"}
+              <span className="font-mono text-foreground">
+                {g.wind_speed_mph !== null ? Math.round(g.wind_speed_mph) : "?"} mph
               </span>
-              <span className="text-muted text-[10px]">mph</span>
-              <span className="text-foreground text-[10px] w-5">{wd.compass}</span>
-              <span className="text-[10px] w-10 text-left" style={{ color: wd.color }}>
-                {wd.flow}
+              <span className="text-[11px]" style={{ color: wd.color }}>
+                {fieldWindLabel(g.wind_direction, g.home_team, g.is_dome)}
               </span>
             </>
           )}
