@@ -70,20 +70,31 @@ const fmt3 = (v: number | null) => (v === null ? "—" : v.toFixed(3).replace(/^
 const fmtPct = (v: number | null) => (v === null ? "—" : `${(v * 100).toFixed(1)}%`);
 const fmtNum = (v: number | null, d = 1) => (v === null ? "—" : v.toFixed(d));
 
-const COLS = [
-  { key: "rank", label: "#", align: "text-center", w: "w-8" },
-  { key: "name", label: "Player", align: "text-left", w: "min-w-[180px]" },
-  { key: "pa", label: "PA", align: "text-right", w: "w-10" },
-  { key: "hr", label: "HR", align: "text-right", w: "w-10" },
-  { key: "xhr", label: "xHR", align: "text-right", w: "w-12" },
-  { key: "luck", label: "Luck", align: "text-right", w: "w-14" },
-  { key: "barrel", label: "Barrel%", align: "text-right", w: "w-16" },
-  { key: "ev", label: "EV", align: "text-right", w: "w-14" },
-  { key: "hh", label: "HH%", align: "text-right", w: "w-14" },
-  { key: "fb", label: "FB%", align: "text-right", w: "w-14" },
-  { key: "bs", label: "Bat Spd", align: "text-right", w: "w-16" },
-  { key: "fs", label: "Fast Sw%", align: "text-right", w: "w-16" },
-  { key: "pfb", label: "Pull+FB%", align: "text-right", w: "w-16" },
+type SortKey =
+  | "name" | "pa" | "hr" | "xhr_count" | "luck_residual"
+  | "barrel_pct" | "exit_velo" | "hard_hit_pct" | "fb_pct"
+  | "bat_speed" | "fast_swing_pct" | "pull_fb_pct";
+
+const COLS: ReadonlyArray<{
+  key: SortKey | "rank";
+  label: string;
+  align: string;
+  w: string;
+  sortable: boolean;
+}> = [
+  { key: "rank", label: "#", align: "text-center", w: "w-8", sortable: false },
+  { key: "name", label: "Player", align: "text-left", w: "min-w-[180px]", sortable: true },
+  { key: "pa", label: "PA", align: "text-right", w: "w-10", sortable: true },
+  { key: "hr", label: "HR", align: "text-right", w: "w-10", sortable: true },
+  { key: "xhr_count", label: "xHR", align: "text-right", w: "w-12", sortable: true },
+  { key: "luck_residual", label: "Luck", align: "text-right", w: "w-14", sortable: true },
+  { key: "barrel_pct", label: "Barrel%", align: "text-right", w: "w-16", sortable: true },
+  { key: "exit_velo", label: "EV", align: "text-right", w: "w-14", sortable: true },
+  { key: "hard_hit_pct", label: "HH%", align: "text-right", w: "w-14", sortable: true },
+  { key: "fb_pct", label: "FB%", align: "text-right", w: "w-14", sortable: true },
+  { key: "bat_speed", label: "Bat Spd", align: "text-right", w: "w-16", sortable: true },
+  { key: "fast_swing_pct", label: "Fast Sw%", align: "text-right", w: "w-16", sortable: true },
+  { key: "pull_fb_pct", label: "Pull+FB%", align: "text-right", w: "w-16", sortable: true },
 ];
 
 function PlayerRow({ row, idx, mode }: { row: BatterRow; idx: number; mode: TabKey }) {
@@ -144,6 +155,10 @@ export function Breakouts() {
   const [report, setReport] = useState<ResearchReport | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const [tab, setTab] = useState<TabKey>("unlucky");
+  // Default sort depends on the tab: unlucky = ascending luck (most-negative
+  // first); lucky = descending luck (most-positive first).
+  const [sortKey, setSortKey] = useState<SortKey>("luck_residual");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("asc");
 
   useEffect(() => {
     fetch("/data/bat_tracking_research.json")
@@ -155,12 +170,41 @@ export function Breakouts() {
       .catch((e) => setErr(e.message));
   }, []);
 
+  // When tab flips, reset to the sensible default sort for that mode.
+  useEffect(() => {
+    setSortKey("luck_residual");
+    setSortDir(tab === "lucky" ? "desc" : "asc");
+  }, [tab]);
+
+  const onSort = (k: SortKey) => {
+    if (k === sortKey) {
+      setSortDir((d) => (d === "desc" ? "asc" : "desc"));
+    } else {
+      setSortKey(k);
+      // For "lower is worse" metrics (K%, luck on unlucky), start desc;
+      // for most metrics desc = highest-first feels natural.
+      setSortDir("desc");
+    }
+  };
+
   const rows: BatterRow[] = useMemo(() => {
     if (!report) return [];
-    return tab === "lucky"
-      ? report.lucky_unlucky_2026.lucky_top_20
-      : report.lucky_unlucky_2026.unlucky_top_20;
-  }, [report, tab]);
+    const base =
+      tab === "lucky"
+        ? report.lucky_unlucky_2026.lucky_top_20
+        : report.lucky_unlucky_2026.unlucky_top_20;
+    const dirMul = sortDir === "desc" ? -1 : 1;
+    const cmp = (a: BatterRow, b: BatterRow) => {
+      if (sortKey === "name") return a.name.localeCompare(b.name) * dirMul;
+      const av = a[sortKey] as number | null;
+      const bv = b[sortKey] as number | null;
+      if (av === null && bv === null) return 0;
+      if (av === null) return 1;
+      if (bv === null) return -1;
+      return (av - bv) * dirMul;
+    };
+    return [...base].sort(cmp);
+  }, [report, tab, sortKey, sortDir]);
 
   if (err) {
     return (
@@ -219,15 +263,24 @@ export function Breakouts() {
         <table className={tableClass}>
           <thead>
             <tr>
-              {COLS.map((c) => (
-                <th
-                  key={c.key}
-                  className={compactHeader + " " + c.align + " " + c.w + " text-muted"}
-                  style={headerCellStyle}
-                >
-                  {c.label}
-                </th>
-              ))}
+              {COLS.map((c) => {
+                const isSorted = c.sortable && c.key === sortKey;
+                const indicator = isSorted ? (sortDir === "desc" ? " ↓" : " ↑") : "";
+                return (
+                  <th
+                    key={c.key}
+                    className={
+                      compactHeader + " " + c.align + " " + c.w +
+                      " " + (c.sortable ? "cursor-pointer" : "") +
+                      " " + (isSorted ? "text-accent" : "text-muted")
+                    }
+                    style={headerCellStyle}
+                    onClick={() => c.sortable && onSort(c.key as SortKey)}
+                  >
+                    {c.label}{indicator}
+                  </th>
+                );
+              })}
             </tr>
           </thead>
           <tbody>
