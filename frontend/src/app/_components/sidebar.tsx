@@ -3,7 +3,6 @@
 import { useRef, useState } from "react";
 import { PanelLeft } from "lucide-react";
 import { Icon, type IconName } from "./icon";
-import { IconButton } from "./ui/icon-button";
 
 export type Page =
   | "rankings"
@@ -172,14 +171,24 @@ export function Sidebar({
           </div>
         )}
         {onToggleCollapse && (
-          <IconButton
-            icon={PanelLeft}
+          <button
+            type="button"
             aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-            variant="ghost"
-            size="sm"
             onClick={onToggleCollapse}
-            className="flex-shrink-0"
-          />
+            className={
+              "flex-shrink-0 inline-flex items-center justify-center cursor-pointer " +
+              "w-7 h-7 rounded-[var(--radius-md)] " +
+              "bg-white/[0.04] text-muted backdrop-blur-md " +
+              "border border-white/10 " +
+              "shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_1px_2px_0_rgba(0,0,0,0.25)] " +
+              "transition-[background-color,border-color,color,box-shadow] duration-[var(--duration-fast)] " +
+              "hover:bg-white/[0.09] hover:border-white/20 hover:text-foreground " +
+              "active:bg-white/[0.06] " +
+              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            }
+          >
+            <PanelLeft size={14} />
+          </button>
         )}
       </div>
 

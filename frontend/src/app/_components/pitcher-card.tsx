@@ -11,8 +11,12 @@ export function PitcherCard({
 }) {
   return (
     <div
-      className="rounded-[var(--radius-md)] p-4 mb-3"
-      style={{ background: "#232326", border: "1px solid #2c2c2e" }}
+      className="rounded-[var(--radius-md)] p-4 mb-3 backdrop-blur-sm"
+      style={{
+        background: "linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.01) 100%)",
+        border: "1px solid rgba(255,255,255,0.06)",
+        boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.03)",
+      }}
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">

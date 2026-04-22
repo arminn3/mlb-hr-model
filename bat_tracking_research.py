@@ -37,6 +37,9 @@ FLY_BALL_LA_MIN = 25             # degrees
 FLY_BALL_LA_MAX = 50
 FAST_SWING_MPH = 75.0             # Statcast "fast swing" threshold
 PULL_HC_X_THRESHOLD = 50.0        # feet off center; sign determined by batter stance
+IDEAL_AA_MIN = 5.0                # Statcast "ideal attack angle" range: 5-25°
+IDEAL_AA_MAX = 25.0
+BARREL_HR_CONVERSION = 0.60       # league: barrels become HRs at ~60% rate (HRp calibration)
 
 MIN_PA = 100                      # batter-season min-PA filter
 MIN_PA_LEADERBOARD = 50           # early-season: filter at 50 PAs so leaderboard isn't empty
@@ -103,7 +106,44 @@ def aggregate_batter_season(df: pd.DataFrame, season: int) -> pd.DataFrame:
     hard_hit_pct = grp["_hard_hit"].mean().rename("hard_hit_pct")
     fb_pct = grp["_fb"].mean().rename("fb_pct")
     exit_velo = grp["launch_speed"].mean().rename("exit_velo")
+    avg_launch_angle = grp["launch_angle"].mean().rename("avg_launch_angle")
     n_bbe = grp.size().rename("n_bbe")
+
+    # HRp-parity metrics
+    if "hit_distance_sc" in bbe.columns:
+        avg_distance = grp["hit_distance_sc"].mean().rename("avg_distance")
+    else:
+        avg_distance = pd.Series(dtype=float, name="avg_distance")
+    if "estimated_slg_using_speedangle" in bbe.columns:
+        xslg = grp["estimated_slg_using_speedangle"].mean().rename("xslg")
+    else:
+        xslg = pd.Series(dtype=float, name="xslg")
+    if "estimated_woba_using_speedangle" in bbe.columns:
+        xwoba = grp["estimated_woba_using_speedangle"].mean().rename("xwoba")
+    else:
+        xwoba = pd.Series(dtype=float, name="xwoba")
+
+    # FB Exit Velo — EV on fly balls only
+    fb_only = bbe[bbe["_fb"] == 1]
+    fb_ev = fb_only.groupby("batter")["launch_speed"].mean().rename("fb_ev") if not fb_only.empty else pd.Series(dtype=float, name="fb_ev")
+
+    # HR/FB — HR count per FB count
+    hr_fb = bbe[(bbe["events"] == "home_run") & (bbe["_fb"] == 1)].groupby("batter").size().rename("n_hr_fb")
+
+    # Barrels count (for Bar xHR)
+    barrels_count = grp["_barrel"].sum().rename("n_barrels")
+
+    # Pure Pull % — % of BBE pulled (any LA)
+    if "hc_x" in bbe.columns:
+        pulled_any = _is_pulled(bbe["hc_x"], bbe["stand"]).fillna(False)
+        bbe["_pull"] = pulled_any.astype(int)
+        pull_bbe_full = bbe[bbe["_has_hc"]]
+        if not pull_bbe_full.empty:
+            pull_pct = pull_bbe_full.groupby("batter")["_pull"].mean().rename("pull_pct")
+        else:
+            pull_pct = pd.Series(dtype=float, name="pull_pct")
+    else:
+        pull_pct = pd.Series(dtype=float, name="pull_pct")
 
     # Pull+FB: among BBE with hc_x available only
     pull_bbe = bbe[bbe["_has_hc"]]
@@ -124,29 +164,55 @@ def aggregate_batter_season(df: pd.DataFrame, season: int) -> pd.DataFrame:
         fast_swing_pct = sgrp["_fast"].mean().rename("fast_swing_pct")
         swing_length = sgrp["swing_length"].mean().rename("swing_length") if "swing_length" in swings.columns else None
         n_swings_with_bs = sgrp.size().rename("n_swings_with_bat_speed")
+        # Attack angle + Ideal AA %
+        if "attack_angle" in swings.columns:
+            attack_angle = sgrp["attack_angle"].mean().rename("attack_angle")
+            swings["_ideal_aa"] = (
+                (swings["attack_angle"] >= IDEAL_AA_MIN)
+                & (swings["attack_angle"] <= IDEAL_AA_MAX)
+            ).fillna(False).astype(int)
+            ideal_aa_pct = sgrp["_ideal_aa"].mean().rename("ideal_aa_pct")
+        else:
+            attack_angle = pd.Series(dtype=float, name="attack_angle")
+            ideal_aa_pct = pd.Series(dtype=float, name="ideal_aa_pct")
     else:
         bat_speed = pd.Series(dtype=float, name="bat_speed")
         fast_swing_pct = pd.Series(dtype=float, name="fast_swing_pct")
         swing_length = None
         n_swings_with_bs = pd.Series(dtype=int, name="n_swings_with_bat_speed")
+        attack_angle = pd.Series(dtype=float, name="attack_angle")
+        ideal_aa_pct = pd.Series(dtype=float, name="ideal_aa_pct")
 
     # Name lookup: Statcast's player_name column is the PITCHER; we need
     # the batter's name, which we'll resolve later via MLB Stats API. For
     # now carry batter_id only.
 
     # Assemble
-    parts = [pa_counts, hr_counts, n_bbe, barrel_pct, exit_velo, fb_pct, hard_hit_pct,
-             bat_speed, fast_swing_pct, pull_fb_pct, n_bbe_with_hc, n_swings_with_bs]
+    parts = [pa_counts, hr_counts, n_bbe, barrel_pct, exit_velo, avg_launch_angle,
+             fb_pct, hard_hit_pct,
+             bat_speed, fast_swing_pct, pull_fb_pct, pull_pct,
+             avg_distance, xslg, xwoba, fb_ev, hr_fb, barrels_count,
+             attack_angle, ideal_aa_pct,
+             n_bbe_with_hc, n_swings_with_bs]
     if swing_length is not None:
         parts.append(swing_length)
     result = pd.concat(parts, axis=1)
     result["hr_rate"] = result["hr"] / result["pa"]
+    # Bar xHR — barrels × league-average barrel→HR conversion (~60%)
+    result["bar_xhr"] = result["n_barrels"].fillna(0) * BARREL_HR_CONVERSION
+    result["bar_diff"] = result["hr"] - result["bar_xhr"]
+    # HR/FB rate
+    result["hr_per_fb"] = result["n_hr_fb"].fillna(0) / (result["fb_pct"] * result["n_bbe"]).replace(0, pd.NA)
     result["season"] = season
     result = result.reset_index().rename(columns={"batter": "batter_id"})
     # Force numeric dtypes — defends against mixed-type quirks from Statcast Int64
-    num_cols = ["pa", "hr", "n_bbe", "barrel_pct", "exit_velo", "fb_pct", "hard_hit_pct",
-                "bat_speed", "fast_swing_pct", "pull_fb_pct", "n_bbe_with_hc",
-                "n_swings_with_bat_speed", "hr_rate"]
+    num_cols = ["pa", "hr", "n_bbe", "barrel_pct", "exit_velo", "avg_launch_angle",
+                "fb_pct", "hard_hit_pct",
+                "bat_speed", "fast_swing_pct", "pull_fb_pct", "pull_pct",
+                "avg_distance", "xslg", "xwoba", "fb_ev", "n_hr_fb", "n_barrels",
+                "attack_angle", "ideal_aa_pct",
+                "n_bbe_with_hc", "n_swings_with_bat_speed", "hr_rate",
+                "bar_xhr", "bar_diff", "hr_per_fb"]
     for c in num_cols:
         if c in result.columns:
             result[c] = pd.to_numeric(result[c], errors="coerce")
@@ -259,7 +325,10 @@ def fisher_ci(r: float, n: int, z: float = 1.96) -> tuple[float, float]:
 
 METRICS = [
     "barrel_pct", "exit_velo", "hard_hit_pct", "fb_pct",
-    "bat_speed", "fast_swing_pct", "pull_fb_pct",
+    "avg_launch_angle", "avg_distance",
+    "xslg", "xwoba",
+    "bat_speed", "fast_swing_pct", "attack_angle", "ideal_aa_pct",
+    "pull_fb_pct",
 ]
 
 
@@ -436,8 +505,16 @@ def lucky_unlucky(model: dict, seasons_df: pd.DataFrame, year_2026_df: pd.DataFr
     df["luck_residual"] = df["hr"] - df["xhr_count"]
     df["name"] = df["batter_id"].map(name_lookup).fillna("?")
 
-    display_cols = ["name", "batter_id", "pa", "hr",
-                    "xhr_count", "luck_residual", "hr_rate", "predicted_hr_rate"] + cols
+    display_cols = (
+        ["name", "batter_id", "pa", "hr", "xhr_count", "luck_residual",
+         "hr_rate", "predicted_hr_rate", "bar_xhr", "bar_diff",
+         "n_barrels", "avg_distance", "avg_launch_angle", "xslg", "xwoba", "fb_ev",
+         "pull_pct", "attack_angle", "ideal_aa_pct", "hr_per_fb"]
+        + cols
+    )
+    # dedup while preserving order (many cols appear in both hand-picked list and `cols`)
+    seen: set[str] = set()
+    display_cols = [c for c in display_cols if c in df.columns and not (c in seen or seen.add(c))]
 
     lucky = df.sort_values("luck_residual", ascending=False).head(20)[display_cols]
     unlucky = df.sort_values("luck_residual", ascending=True).head(20)[display_cols]

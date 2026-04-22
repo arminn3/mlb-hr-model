@@ -102,8 +102,16 @@ export function BatterCard({
 
   return (
     <div
-      className="rounded-[var(--radius-md)] transition-colors"
-      style={{ background: "#232326", border: "1px solid #2c2c2e" }}
+      className="rounded-[var(--radius-md)] transition-all duration-[var(--duration-fast)] hover:border-white/10"
+      style={{
+        background: expanded
+          ? "linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.015) 100%)"
+          : "linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.008) 100%)",
+        border: `1px solid ${expanded ? "rgba(255,255,255,0.10)" : "rgba(255,255,255,0.05)"}`,
+        boxShadow: expanded
+          ? "inset 0 1px 0 0 rgba(255,255,255,0.04), 0 4px 16px -4px rgba(0,0,0,0.35)"
+          : "inset 0 1px 0 0 rgba(255,255,255,0.025)",
+      }}
     >
       {/* Card face */}
       <button
@@ -118,20 +126,24 @@ export function BatterCard({
 
           {/* Player info + metrics */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="font-semibold text-foreground">{player.name}</span>
+            {/* Row 1: name (on its own line so it never wraps mid-word) */}
+            <div className="font-semibold text-foreground whitespace-nowrap mb-1">
+              {player.name}
+            </div>
+            {/* Row 2: tags — can wrap to a second line if there are many */}
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1.5">
               <span className="text-[10px] text-muted font-mono">{player.batter_hand}HB</span>
               <RatingBadge composite={scores.composite} />
               {scores.recent_abs.length <= 2 && (
                 <Tooltip text="Limited MLB data — score may not reflect true ability">
-                  <span className="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-accent/10 text-accent border border-accent/20">
+                  <span className="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-accent/10 text-accent border border-accent/20 whitespace-nowrap">
                     NEW
                   </span>
                 </Tooltip>
               )}
               {scores.data_quality !== "OK" && scores.recent_abs.length > 2 && (
                 <Tooltip text={scores.data_quality === "LOW_SAMPLE" ? "Fewer than 5 balls in play — small sample size" : "Pitcher has less than 10 innings — pitcher metrics less reliable"}>
-                  <span className="px-1.5 py-0.5 text-[9px] rounded bg-accent-yellow/10 text-accent-yellow">
+                  <span className="px-1.5 py-0.5 text-[9px] rounded bg-accent-yellow/10 text-accent-yellow whitespace-nowrap">
                     {scores.data_quality.replace(/_/g, " ")}
                   </span>
                 </Tooltip>
@@ -168,20 +180,29 @@ export function BatterCard({
 
       {/* Expanded detail */}
       {expanded && (
-        <div className="px-4 pb-4 border-t border-card-border">
-          {/* Sub-tabs */}
-          <div className="flex items-center gap-1 mt-3 mb-3 bg-background/50 rounded-lg p-1 w-fit">
+        <div
+          className="px-4 pb-4"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+        >
+          {/* Sub-tabs — segmented control */}
+          <div
+            className="inline-flex items-center p-[3px] rounded-full mt-3 mb-4 backdrop-blur-md"
+            style={{
+              background: "rgba(255,255,255,0.035)",
+              border: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
             {(["abs", "statcast", "pitches", "bvp"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setDetailTab(tab)}
-                className={`px-3 py-1 text-xs rounded cursor-pointer transition-colors ${
+                className={`px-3 py-1 text-[11px] font-semibold rounded-full cursor-pointer transition-all duration-[var(--duration-fast)] ${
                   detailTab === tab
-                    ? "bg-accent/15 text-accent font-medium"
+                    ? "bg-accent text-black shadow-[0_1px_3px_0_rgba(0,0,0,0.35)]"
                     : "text-muted hover:text-foreground"
                 }`}
               >
-                {tab === "abs" ? `Recent ABs (${lookback})` : tab === "statcast" ? "Pitch Breakdown" : tab === "pitches" ? "Pitches" : "vs Pitcher"}
+                {tab === "abs" ? `Recent ABs · ${lookback}` : tab === "statcast" ? "Pitch Breakdown" : tab === "pitches" ? "Pitches" : "vs Pitcher"}
               </button>
             ))}
           </div>
@@ -193,10 +214,10 @@ export function BatterCard({
               <div className="flex flex-wrap items-center gap-1.5 mb-3">
                 <button
                   onClick={() => setPitchFilter("all")}
-                  className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-colors ${
+                  className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all duration-[var(--duration-fast)] ${
                     pitchFilter === "all"
-                      ? "bg-accent/15 text-accent border border-accent/30"
-                      : "bg-background/50 text-muted border border-card-border hover:text-foreground"
+                      ? "bg-accent/20 text-accent border border-accent/40"
+                      : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"
                   }`}
                 >
                   All Pitches
@@ -211,10 +232,10 @@ export function BatterCard({
                     <Tooltip key={pt} text={tipText}>
                       <button
                         onClick={() => setPitchFilter(pt === pitchFilter ? "all" : pt)}
-                        className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-colors ${
+                        className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all duration-[var(--duration-fast)] ${
                           pitchFilter === pt
-                            ? "bg-accent/15 text-accent border border-accent/30"
-                            : "bg-background/50 text-muted border border-card-border hover:text-foreground"
+                            ? "bg-accent/20 text-accent border border-accent/40"
+                            : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"
                         }`}
                       >
                         {pt} {detail ? `${detail.usage_pct}%` : ""}

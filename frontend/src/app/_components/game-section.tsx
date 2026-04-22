@@ -29,8 +29,13 @@ export function GameSection({
 
   return (
     <div
-      className="rounded-[var(--radius-lg)] p-5 mb-6"
-      style={{ background: "#161618", border: "1px solid #242428" }}
+      className="rounded-[var(--radius-lg)] p-5 mb-6 backdrop-blur-sm"
+      style={{
+        background:
+          "linear-gradient(180deg, rgba(255,255,255,0.015) 0%, rgba(255,255,255,0.005) 60%, rgba(0,0,0,0.10) 100%)",
+        border: "1px solid rgba(255,255,255,0.06)",
+        boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.03), 0 8px 24px -12px rgba(0,0,0,0.4)",
+      }}
     >
       <GameHeader
         awayTeam={game.away_team}
@@ -44,7 +49,7 @@ export function GameSection({
         <div>
           <h3
             className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted/80 mb-3 pb-2"
-            style={{ borderBottom: "1px solid #2c2c2e" }}
+            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
           >
             {game.home_team} Batters vs {game.away_pitcher.name} ({game.away_pitcher.hand}HP)
           </h3>
@@ -67,7 +72,7 @@ export function GameSection({
         <div>
           <h3
             className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted/80 mb-3 pb-2"
-            style={{ borderBottom: "1px solid #2c2c2e" }}
+            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
           >
             {game.away_team} Batters vs {game.home_pitcher.name} ({game.home_pitcher.hand}HP)
           </h3>

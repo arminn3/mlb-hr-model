@@ -2,12 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
-  TABLE_BG,
   tableWrapperClass,
   tableWrapperStyle,
   tableClass,
-  headerCellStyle,
+  cellClass,
   cellStyle,
+  headerCellClass,
+  headerCellStyle,
 } from "./table-styles";
 
 interface BatterRow {
@@ -47,12 +48,6 @@ interface ResearchReport {
 
 type TabKey = "unlucky" | "lucky";
 
-const compactCell = "py-1.5 px-2 text-[12px] font-medium whitespace-nowrap border-b border-r";
-const compactHeader = "py-1.5 px-2 text-[11px] font-medium whitespace-nowrap border-b border-r select-none";
-
-function headshotUrl(id: number): string {
-  return `https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_120,q_auto:best/v1/people/${id}/headshot/67/current`;
-}
 
 // Heat-map coloring (green above threshold, red below, muted neutral)
 function heat(value: number | null, lo: number, hi: number): string | null {
@@ -79,72 +74,59 @@ const COLS: ReadonlyArray<{
   key: SortKey | "rank";
   label: string;
   align: string;
-  w: string;
   sortable: boolean;
 }> = [
-  { key: "rank", label: "#", align: "text-center", w: "w-8", sortable: false },
-  { key: "name", label: "Player", align: "text-left", w: "min-w-[180px]", sortable: true },
-  { key: "pa", label: "PA", align: "text-right", w: "w-10", sortable: true },
-  { key: "hr", label: "HR", align: "text-right", w: "w-10", sortable: true },
-  { key: "xhr_count", label: "xHR", align: "text-right", w: "w-12", sortable: true },
-  { key: "luck_residual", label: "Luck", align: "text-right", w: "w-14", sortable: true },
-  { key: "barrel_pct", label: "Barrel%", align: "text-right", w: "w-16", sortable: true },
-  { key: "exit_velo", label: "EV", align: "text-right", w: "w-14", sortable: true },
-  { key: "hard_hit_pct", label: "HH%", align: "text-right", w: "w-14", sortable: true },
-  { key: "fb_pct", label: "FB%", align: "text-right", w: "w-14", sortable: true },
-  { key: "bat_speed", label: "Bat Spd", align: "text-right", w: "w-16", sortable: true },
-  { key: "fast_swing_pct", label: "Fast Sw%", align: "text-right", w: "w-16", sortable: true },
-  { key: "pull_fb_pct", label: "Pull+FB%", align: "text-right", w: "w-16", sortable: true },
+  { key: "rank", label: "#", align: "text-center", sortable: false },
+  { key: "name", label: "Player", align: "text-left", sortable: true },
+  { key: "pa", label: "PA", align: "text-right", sortable: true },
+  { key: "hr", label: "HR", align: "text-right", sortable: true },
+  { key: "xhr_count", label: "xHR", align: "text-right", sortable: true },
+  { key: "luck_residual", label: "Luck", align: "text-right", sortable: true },
+  { key: "barrel_pct", label: "Barrel%", align: "text-right", sortable: true },
+  { key: "exit_velo", label: "EV", align: "text-right", sortable: true },
+  { key: "hard_hit_pct", label: "HH%", align: "text-right", sortable: true },
+  { key: "fb_pct", label: "FB%", align: "text-right", sortable: true },
+  { key: "bat_speed", label: "Bat Spd", align: "text-right", sortable: true },
+  { key: "fast_swing_pct", label: "Fast Sw%", align: "text-right", sortable: true },
+  { key: "pull_fb_pct", label: "Pull+FB%", align: "text-right", sortable: true },
 ];
 
 function PlayerRow({ row, idx, mode }: { row: BatterRow; idx: number; mode: TabKey }) {
   const luckColor = mode === "lucky" ? "#22c55e" : "#ef4444";
   return (
     <tr>
-      <td className={compactCell + " text-center text-muted"} style={cellStyle}>{idx + 1}</td>
-      <td className={compactCell} style={cellStyle}>
-        <div className="flex items-center gap-2 min-w-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={headshotUrl(row.batter_id)}
-            alt=""
-            width={28}
-            height={28}
-            loading="lazy"
-            onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }}
-            className="w-7 h-7 rounded-full shrink-0 bg-[var(--surface-2)] object-cover"
-          />
-          <span className="font-semibold text-white truncate">{row.name}</span>
-        </div>
+      <td className={cellClass + " text-center"} style={{ ...cellStyle, color: "#a0a1a4" }}>{idx + 1}</td>
+      <td className={cellClass} style={cellStyle}>
+        <span className="font-semibold text-white">{row.name}</span>
       </td>
-      <td className={compactCell + " text-right font-mono text-white"} style={cellStyle}>{row.pa}</td>
-      <td className={compactCell + " text-right font-mono text-white"} style={cellStyle}>{row.hr}</td>
-      <td className={compactCell + " text-right font-mono text-muted"} style={cellStyle}>{fmtNum(row.xhr_count, 1)}</td>
+      <td className={cellClass + " text-right font-mono"} style={cellStyle}>{row.pa}</td>
+      <td className={cellClass + " text-right font-mono"} style={cellStyle}>{row.hr}</td>
+      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, color: "#a0a1a4" }}>{fmtNum(row.xhr_count, 1)}</td>
       <td
-        className={compactCell + " text-right font-mono"}
+        className={cellClass + " text-right font-mono"}
         style={{ ...cellStyle, color: luckColor, backgroundColor: luckColor + "22", fontWeight: 700 }}
       >
         {row.luck_residual > 0 ? "+" : ""}{fmtNum(row.luck_residual, 1)}
       </td>
-      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.barrel_pct, 0.06, 0.12)) }}>
+      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.barrel_pct, 0.06, 0.12)) }}>
         {fmtPct(row.barrel_pct)}
       </td>
-      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.exit_velo, 87, 92)) }}>
+      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.exit_velo, 87, 92)) }}>
         {fmtNum(row.exit_velo, 1)}
       </td>
-      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.hard_hit_pct, 0.30, 0.45)) }}>
+      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.hard_hit_pct, 0.30, 0.45)) }}>
         {fmtPct(row.hard_hit_pct)}
       </td>
-      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.fb_pct, 0.25, 0.38)) }}>
+      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.fb_pct, 0.25, 0.38)) }}>
         {fmtPct(row.fb_pct)}
       </td>
-      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.bat_speed, 68, 73)) }}>
+      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.bat_speed, 68, 73)) }}>
         {fmtNum(row.bat_speed, 1)}
       </td>
-      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.fast_swing_pct, 0.30, 0.50)) }}>
+      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.fast_swing_pct, 0.30, 0.50)) }}>
         {fmtPct(row.fast_swing_pct)}
       </td>
-      <td className={compactCell + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.pull_fb_pct, 0.10, 0.25)) }}>
+      <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, ...heatStyle(heat(row.pull_fb_pct, 0.10, 0.25)) }}>
         {fmtPct(row.pull_fb_pct)}
       </td>
     </tr>
@@ -235,7 +217,7 @@ export function Breakouts() {
                   : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
               }
             >
-              {t === "unlucky" ? "Breakout Candidates (Under-performers)" : "Regression Candidates (Over-performers)"}
+              {t === "unlucky" ? "Breakout Candidates" : "Regression Candidates"}
             </button>
           ))}
         </div>
@@ -251,7 +233,7 @@ export function Breakouts() {
       {/* Meta bar */}
       <div
         className="flex flex-wrap items-baseline gap-x-5 gap-y-1 px-3 py-2 rounded-[var(--radius-md)] border mb-3 text-[11px]"
-        style={{ background: TABLE_BG, borderColor: "#32333b" }}
+        style={{ background: "#0d1116", borderColor: "#32333b" }}
       >
         <span><span className="text-muted">Evaluated </span><span className="font-mono font-semibold text-foreground">{lu.n_batters_evaluated}</span><span className="text-muted"> batters @ ≥{lu.min_pa} PA</span></span>
         <span><span className="text-muted">2026 league HR/PA </span><span className="font-mono font-semibold text-foreground">{(lu.league_hr_rate_2026 * 100).toFixed(2)}%</span></span>
@@ -270,9 +252,9 @@ export function Breakouts() {
                   <th
                     key={c.key}
                     className={
-                      compactHeader + " " + c.align + " " + c.w +
+                      headerCellClass + " " + c.align +
                       " " + (c.sortable ? "cursor-pointer" : "") +
-                      " " + (isSorted ? "text-accent" : "text-muted")
+                      " " + (isSorted ? "text-accent" : "")
                     }
                     style={headerCellStyle}
                     onClick={() => c.sortable && onSort(c.key as SortKey)}

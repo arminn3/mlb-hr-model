@@ -21,9 +21,18 @@ const TEAMS: Record<string, { id: number; name: string }> = {
   WSH: { id: 120, name: "Nationals" },
 };
 
+// ESPN uses "ari" for Diamondbacks (not "az"), "oak" for Athletics (not "ath"),
+// "sd" for Padres (not "sdp"). Our data feed sometimes uses the non-ESPN
+// alias — normalize before building the logo URL.
+const ESPN_ABBR: Record<string, string> = {
+  AZ: "ari",
+  ATH: "oak",
+  SDP: "sd",
+};
+
 function teamLogoUrl(abbr: string): string {
-  const id = TEAMS[abbr]?.id || 0;
-  return `https://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/${abbr.toLowerCase()}.png&h=40&w=40`;
+  const code = ESPN_ABBR[abbr] ?? abbr.toLowerCase();
+  return `https://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/${code}.png&h=40&w=40`;
 }
 
 function teamName(abbr: string): string {
