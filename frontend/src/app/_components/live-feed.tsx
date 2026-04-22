@@ -67,7 +67,6 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
   const [lastUpdate, setLastUpdate] = useState<string>("");
   const [autoRefresh, setAutoRefresh] = useState(true);
   const [internalDate, setInternalDate] = useState<string>(getLocalDate);
-  const [playFilter, setPlayFilter] = useState<"highlights" | "near" | "hr" | "all">("highlights");
 
   // Use dashboard date if provided, otherwise internal state
   const selectedDate = dashboardDate || internalDate;
@@ -253,25 +252,6 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
   const nearHRCount = plays.filter(p => p.isNearHR).length;
   const hardHitCount = plays.filter(p => p.ev >= 95 && p.angle >= 25).length;
 
-  // Filter + prioritize. Default view surfaces HRs + Near-HRs at the top
-  // so robbed-HR moments (Cruz 110.6/34°/397ft yesterday) aren't buried
-  // in a 150-play firehose.
-  const filteredPlays = (() => {
-    let list = plays;
-    if (playFilter === "hr") list = plays.filter(p => p.isHR);
-    else if (playFilter === "near") list = plays.filter(p => p.isNearHR);
-    else if (playFilter === "highlights") list = plays.filter(p => p.isHR || p.isNearHR);
-    // "all" → no filter
-    // Within each group: HRs first, then near-HRs, then air balls; within
-    // group keep the original timestamp-desc order.
-    return [...list].sort((a, b) => {
-      const pri = (p: LivePlay) => (p.isHR ? 2 : p.isNearHR ? 1 : 0);
-      const d = pri(b) - pri(a);
-      if (d !== 0) return d;
-      return b.timestamp > a.timestamp ? 1 : -1;
-    });
-  })();
-
   return (
     <div>
       {/* Header */}
@@ -382,40 +362,8 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
         ))}
       </div>
 
-      {/* Filter chips — surface HRs + Near-HRs by default so robbed-HR
-          moments aren't buried in the full play feed. */}
-      {plays.length > 0 && (
-        <div className="flex flex-wrap items-center gap-1.5 mb-4">
-          {(
-            [
-              { key: "highlights", label: `Highlights (${totalHRs} HR + ${nearHRCount} near)` },
-              { key: "hr", label: `HRs only (${totalHRs})` },
-              { key: "near", label: `Near HRs (${nearHRCount})` },
-              { key: "all", label: `All plays (${plays.length})` },
-            ] as const
-          ).map((opt) => (
-            <button
-              key={opt.key}
-              onClick={() => setPlayFilter(opt.key)}
-              className={
-                "px-3 py-1 text-[12px] font-semibold rounded-[var(--radius-md)] cursor-pointer transition-colors " +
-                (playFilter === opt.key
-                  ? "bg-accent/15 text-accent border border-accent/40"
-                  : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
-              }
-            >
-              {opt.label}
-            </button>
-          ))}
-        </div>
-      )}
-
       {loading ? (
         <div className="text-center text-muted py-12 animate-pulse">Loading {isToday ? "live" : "game action"} data...</div>
-      ) : filteredPlays.length === 0 && plays.length > 0 ? (
-        <div className="text-center text-muted py-8 text-sm">
-          No plays match this filter. Try {playFilter === "highlights" ? "\"All plays\"" : "\"Highlights\""} or switch to a different date.
-        </div>
       ) : plays.length === 0 ? (
         <div className="text-center text-muted py-12">
           {isToday
@@ -426,7 +374,7 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
         <>
         {/* Mobile card view */}
         <div className="md:hidden space-y-2">
-          {filteredPlays.map((p, i) => (
+          {plays.map((p, i) => (
             <div
               key={i}
               className={`rounded-lg px-3 py-2.5 ${
@@ -478,7 +426,7 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
               </tr>
             </thead>
             <tbody>
-              {filteredPlays.map((p, i) => {
+              {plays.map((p, i) => {
                 // Row tint: green for HR, yellow for NEAR, default for AIR
                 const rowBg = p.isHR
                   ? "rgba(34, 197, 94, 0.10)"
