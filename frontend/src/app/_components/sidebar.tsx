@@ -54,24 +54,38 @@ function NavButton({
 }) {
   const isActive = active === item.key;
   return (
-    <button
-      onClick={() => onChange(item.key)}
-      title={collapsed ? item.label : undefined}
-      aria-label={item.label}
-      className={
-        (collapsed
-          ? "w-full flex items-center justify-center h-9 "
-          : "w-full flex items-center gap-3 px-3 py-2 ") +
-        "text-[13px] font-medium rounded-[var(--radius-md)] border " +
-        "transition-colors duration-[var(--duration-fast)] cursor-pointer " +
-        (isActive
-          ? "bg-accent/10 border-accent/30 text-accent"
-          : "bg-transparent border-transparent text-muted hover:text-foreground hover:bg-[var(--surface-2)]")
-      }
-    >
-      <Icon name={item.icon} size={16} />
-      {!collapsed && <span className="truncate">{item.label}</span>}
-    </button>
+    <div className="relative group">
+      <button
+        onClick={() => onChange(item.key)}
+        aria-label={item.label}
+        className={
+          (collapsed
+            ? "w-full flex items-center justify-center h-9 "
+            : "w-full flex items-center gap-3 px-3 py-2 ") +
+          "text-[13px] font-medium rounded-[var(--radius-md)] border " +
+          "transition-colors duration-[var(--duration-fast)] cursor-pointer " +
+          (isActive
+            ? "bg-accent/10 border-accent/30 text-accent"
+            : "bg-transparent border-transparent text-muted hover:text-foreground hover:bg-[var(--surface-2)]")
+        }
+      >
+        <Icon name={item.icon} size={16} />
+        {!collapsed && <span className="truncate">{item.label}</span>}
+      </button>
+      {collapsed && (
+        // Custom tooltip — shows instantly on hover (no native title delay).
+        // Absolute positioned to the right of the collapsed icon.
+        <span
+          className="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-75
+            absolute left-full top-1/2 -translate-y-1/2 ml-2 z-50 whitespace-nowrap
+            px-2 py-1 rounded-[var(--radius-sm)] text-[12px] font-medium
+            bg-[var(--surface-3,#2a2a2e)] text-foreground border border-[#3a3a3e] shadow-md"
+          role="tooltip"
+        >
+          {item.label}
+        </span>
+      )}
+    </div>
   );
 }
 
@@ -149,7 +163,7 @@ export function Sidebar({
       </div>
 
       {/* Nav groups */}
-      <div className={(collapsed ? "px-2" : "px-3") + " py-4 flex-1 overflow-y-auto overflow-x-hidden"}>
+      <div className={(collapsed ? "px-2" : "px-3") + " py-4 flex-1 overflow-y-auto overflow-x-visible"}>
         <SectionLabel collapsed={collapsed}>Analysis</SectionLabel>
         <div className="space-y-1 mb-5">
           {(
