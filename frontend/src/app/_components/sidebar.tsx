@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { PanelLeft } from "lucide-react";
 import { Icon, type IconName } from "./icon";
 import { IconButton } from "./ui/icon-button";
@@ -53,10 +54,25 @@ function NavButton({
   onChange: (page: Page) => void;
 }) {
   const isActive = active === item.key;
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const [tipPos, setTipPos] = useState<{ top: number; left: number } | null>(null);
+
+  const showTip = () => {
+    if (!collapsed || !btnRef.current) return;
+    const r = btnRef.current.getBoundingClientRect();
+    setTipPos({ top: r.top + r.height / 2, left: r.right + 8 });
+  };
+  const hideTip = () => setTipPos(null);
+
   return (
-    <div className="relative group">
+    <>
       <button
+        ref={btnRef}
         onClick={() => onChange(item.key)}
+        onMouseEnter={showTip}
+        onMouseLeave={hideTip}
+        onFocus={showTip}
+        onBlur={hideTip}
         aria-label={item.label}
         className={
           (collapsed
@@ -72,20 +88,25 @@ function NavButton({
         <Icon name={item.icon} size={16} />
         {!collapsed && <span className="truncate">{item.label}</span>}
       </button>
-      {collapsed && (
-        // Custom tooltip — shows instantly on hover (no native title delay).
-        // Absolute positioned to the right of the collapsed icon.
+      {collapsed && tipPos && (
+        // Fixed-position tooltip so it escapes the sidebar's overflow-auto
+        // scroll container. Rendered instantly on hover — no browser delay.
         <span
-          className="pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-75
-            absolute left-full top-1/2 -translate-y-1/2 ml-2 z-50 whitespace-nowrap
-            px-2 py-1 rounded-[var(--radius-sm)] text-[12px] font-medium
-            bg-[var(--surface-3,#2a2a2e)] text-foreground border border-[#3a3a3e] shadow-md"
           role="tooltip"
+          className="pointer-events-none fixed whitespace-nowrap px-2 py-1
+            rounded-[var(--radius-sm)] text-[12px] font-medium
+            bg-[var(--surface-3,#2a2a2e)] text-foreground border border-[#3a3a3e] shadow-md"
+          style={{
+            top: tipPos.top,
+            left: tipPos.left,
+            transform: "translateY(-50%)",
+            zIndex: 100,
+          }}
         >
           {item.label}
         </span>
       )}
-    </div>
+    </>
   );
 }
 
