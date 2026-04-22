@@ -15,7 +15,7 @@ import { ResultsView } from "./results-view";
 import { MethodologyPage } from "./methodology-page";
 import { SlipGenerator } from "./slip-generator";
 import { BvPPage } from "./bvp-page";
-import { GemFinder } from "./gem-finder";
+import { Breakouts } from "./breakouts";
 import { LiveFeed } from "./live-feed";
 import { ProjectionsView } from "./projections-view";
 import { MatchupAnalysis } from "./matchup-analysis";
@@ -38,7 +38,7 @@ const TAB_CONFIG: Record<Page, {
   slips:       { title: "Slip Generator",    subtitle: "Build multi-leg parlays",              showLookback: true,  showDatePicker: true },
   bvp:         { title: "Batter vs Pitcher", subtitle: "Head-to-head history",                 showLookback: true,  showDatePicker: true },
   team_pitch_mix: { title: "Team vs Pitch Mix", subtitle: "Lineup stats vs opposing pitcher's arsenal", showLookback: false, showDatePicker: true },
-  gems:        { title: "Gem Finder",        subtitle: "Under-the-radar picks",                showLookback: true,  showDatePicker: true },
+  breakouts:   { title: "Breakouts & Regression", subtitle: "Over- and under-performers vs xHR from bat-tracking stats", showLookback: false, showDatePicker: false },
   live:        { title: "Live Feed",         subtitle: "Real-time + historical game action",   showLookback: false, showDatePicker: true },
   results:     { title: "Results Log",       subtitle: "How the model performed",              showLookback: false, showDatePicker: true },
   methodology: { title: "How It Works",      showLookback: false, showDatePicker: false },
@@ -366,8 +366,8 @@ export function Dashboard() {
             <TeamPitchMixPage games={data.games} />
           )}
 
-          {activePage === "gems" && (
-            <GemFinder games={data.games} lookback={lookback} />
+          {activePage === "breakouts" && (
+            <Breakouts />
           )}
 
           {activePage === "matchup" && (

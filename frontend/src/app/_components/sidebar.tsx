@@ -13,7 +13,7 @@ export type Page =
   | "slips"
   | "bvp"
   | "team_pitch_mix"
-  | "gems"
+  | "breakouts"
   | "live"
   | "results"
   | "methodology"
@@ -34,7 +34,7 @@ const NAV_ITEMS: NavItem[] = [
   { key: "slips", label: "Slip Generator", icon: "slip" },
   { key: "bvp", label: "Batter vs Pitcher", icon: "bvp" },
   { key: "team_pitch_mix", label: "Team vs Pitch Mix", icon: "matchup" },
-  { key: "gems", label: "Gem Finder", icon: "gem" },
+  { key: "breakouts", label: "Breakouts & Regression", icon: "gem" },
   { key: "live", label: "Live Feed", icon: "live" },
   { key: "results", label: "Results Log", icon: "check" },
   { key: "matchup", label: "Matchup Analysis", icon: "matchup" },
@@ -158,7 +158,7 @@ export function Sidebar({
               "ml",
               "slate",
               "matchup",
-              "gems",
+              "breakouts",
               "projections",
               "environment",
               "live",
