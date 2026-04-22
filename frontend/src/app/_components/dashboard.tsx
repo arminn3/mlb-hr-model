@@ -39,7 +39,7 @@ const TAB_CONFIG: Record<Page, {
   bvp:         { title: "Batter vs Pitcher", subtitle: "Head-to-head history",                 showLookback: true,  showDatePicker: true },
   team_pitch_mix: { title: "Team vs Pitch Mix", subtitle: "Lineup stats vs opposing pitcher's arsenal", showLookback: false, showDatePicker: true },
   gems:        { title: "Gem Finder",        subtitle: "Under-the-radar picks",                showLookback: true,  showDatePicker: true },
-  live:        { title: "Live Feed",         subtitle: "Real-time game action",                showLookback: false, showDatePicker: false },
+  live:        { title: "Live Feed",         subtitle: "Real-time + historical game action",   showLookback: false, showDatePicker: true },
   results:     { title: "Results Log",       subtitle: "How the model performed",              showLookback: false, showDatePicker: true },
   methodology: { title: "How It Works",      showLookback: false, showDatePicker: false },
   matchup:     { title: "Matchup Analysis",  subtitle: "Season-long hitter vs pitcher",        showLookback: false, showDatePicker: true },
@@ -351,9 +351,11 @@ export function Dashboard() {
           )}
 
           {activePage === "live" && (
-            // Don't pass the (possibly blocked/fallback) selectedDate here —
-            // let LiveFeed use its own getLocalDate() so prod still polls today.
-            <LiveFeed />
+            // Pass dashboard's date so the date picker controls Live Feed.
+            // LiveFeed uses isToday=getLocalDate() to decide live polling
+            // vs saved-JSON load. Empty string → undefined → LiveFeed
+            // defaults to today.
+            <LiveFeed selectedDate={selectedDate || undefined} />
           )}
 
           {activePage === "bvp" && (
