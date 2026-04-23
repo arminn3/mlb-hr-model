@@ -1,28 +1,31 @@
 name: Daily HR Prop Model
 
 on:
-  schedule:
-    # Run hourly from 7 AM to 9 PM ET (11:00 to 01:00+1 UTC)
-    # Results tracker + ML trainer only on first run (11:00 UTC / 7 AM ET)
-    - cron: '0 11 * * *'   # 7:00 AM ET
-    - cron: '0 12 * * *'   # 8:00 AM ET
-    - cron: '0 13 * * *'   # 9:00 AM ET
-    - cron: '0 14 * * *'   # 10:00 AM ET
-    - cron: '0 15 * * *'   # 11:00 AM ET
-    - cron: '0 16 * * *'   # 12:00 PM ET
-    - cron: '0 17 * * *'   # 1:00 PM ET
-    - cron: '0 18 * * *'   # 2:00 PM ET
-    - cron: '0 19 * * *'   # 3:00 PM ET
-    - cron: '0 20 * * *'   # 4:00 PM ET
-    - cron: '0 21 * * *'   # 5:00 PM ET
-    - cron: '0 22 * * *'   # 6:00 PM ET
-    - cron: '0 23 * * *'   # 7:00 PM ET
-    - cron: '0 0 * * *'    # 8:00 PM ET
-    - cron: '0 1 * * *'    # 9:00 PM ET
-    - cron: '0 2 * * *'    # 10:00 PM ET
-    - cron: '0 3 * * *'    # 11:00 PM ET
-    - cron: '0 4 * * *'    # 12:00 AM ET (midnight — results after last game)
-  workflow_dispatch: # allow manual trigger
+  # Hourly schedule is DISABLED — user asked to stop auto-updating the slate
+  # on prod (2026-04-23). Manual runs still work via workflow_dispatch.
+  # To re-enable: un-comment the `schedule:` block below. Do NOT re-enable
+  # without explicit user approval.
+  #
+  # schedule:
+  #   - cron: '0 11 * * *'   # 7:00 AM ET
+  #   - cron: '0 12 * * *'   # 8:00 AM ET
+  #   - cron: '0 13 * * *'   # 9:00 AM ET
+  #   - cron: '0 14 * * *'   # 10:00 AM ET
+  #   - cron: '0 15 * * *'   # 11:00 AM ET
+  #   - cron: '0 16 * * *'   # 12:00 PM ET
+  #   - cron: '0 17 * * *'   # 1:00 PM ET
+  #   - cron: '0 18 * * *'   # 2:00 PM ET
+  #   - cron: '0 19 * * *'   # 3:00 PM ET
+  #   - cron: '0 20 * * *'   # 4:00 PM ET
+  #   - cron: '0 21 * * *'   # 5:00 PM ET
+  #   - cron: '0 22 * * *'   # 6:00 PM ET
+  #   - cron: '0 23 * * *'   # 7:00 PM ET
+  #   - cron: '0 0 * * *'    # 8:00 PM ET
+  #   - cron: '0 1 * * *'    # 9:00 PM ET
+  #   - cron: '0 2 * * *'    # 10:00 PM ET
+  #   - cron: '0 3 * * *'    # 11:00 PM ET
+  #   - cron: '0 4 * * *'    # 12:00 AM ET
+  workflow_dispatch: # manual trigger only
 
 concurrency:
   group: hr-model-run
