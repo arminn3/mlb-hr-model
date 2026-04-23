@@ -2,7 +2,7 @@
   "date": "2026-04-22",
   "total_players_ranked": 260,
   "total_hrs_hit": 36,
-  "total_near_hrs": 0,
+  "total_near_hrs": 12,
   "model_hits": 33,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 12,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -92,13 +92,13 @@
     },
     "all": {
       "total": 260,
-      "hits": 33,
-      "rate": 12.7
+      "hits": 45,
+      "rate": 17.3
     }
   },
   "avg_composite_hr_hitters": 0.441,
-  "avg_composite_non_hitters": 0.299,
-  "composite_separation": 0.142,
+  "avg_composite_non_hitters": 0.296,
+  "composite_separation": 0.145,
   "hr_hitters": [
     {
       "name": "Yordan Alvarez",
@@ -565,8 +565,229 @@
       "matchup": "BAL@KC"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Taylor Ward",
+      "rank": 39,
+      "composite": 0.58,
+      "opp_pitcher": "Michael Wacha",
+      "matchup": "BAL@KC"
+    },
+    {
+      "name": "Jorge Soler",
+      "rank": 58,
+      "composite": 0.531,
+      "opp_pitcher": "Eric Lauer",
+      "matchup": "TOR@LAA"
+    },
+    {
+      "name": "Alex Bregman",
+      "rank": 72,
+      "composite": 0.491,
+      "opp_pitcher": "Kyle Backhus",
+      "matchup": "PHI@CHC"
+    },
+    {
+      "name": "Teoscar Hern\u00e1ndez",
+      "rank": 74,
+      "composite": 0.486,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "LAD@SF"
+    },
+    {
+      "name": "Pete Crow-Armstrong",
+      "rank": 86,
+      "composite": 0.454,
+      "opp_pitcher": "Kyle Backhus",
+      "matchup": "PHI@CHC"
+    },
+    {
+      "name": "Wenceel P\u00e9rez",
+      "rank": 87,
+      "composite": 0.451,
+      "opp_pitcher": "DL Hall",
+      "matchup": "MIL@DET"
+    },
+    {
+      "name": "Gavin Sheets",
+      "rank": 102,
+      "composite": 0.313,
+      "opp_pitcher": "Tomoyuki Sugano",
+      "matchup": "SD@COL"
+    },
+    {
+      "name": "TJ Rumfield",
+      "rank": 123,
+      "composite": 0.243,
+      "opp_pitcher": "Walker Buehler",
+      "matchup": "SD@COL"
+    },
+    {
+      "name": "Corbin Carroll",
+      "rank": 133,
+      "composite": 0.225,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "CWS@AZ"
+    },
+    {
+      "name": "TJ Friedl",
+      "rank": 146,
+      "composite": 0.209,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "CIN@TB"
+    },
+    {
+      "name": "Ketel Marte",
+      "rank": 163,
+      "composite": 0.172,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "CWS@AZ"
+    },
+    {
+      "name": "Dylan Beavers",
+      "rank": 190,
+      "composite": 0.143,
+      "opp_pitcher": "Michael Wacha",
+      "matchup": "BAL@KC"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Corbin Carroll",
+      "ev": 107.0,
+      "angle": 33.0,
+      "distance": 422.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Newcomb, Sean"
+    },
+    {
+      "batter": "Munetaka Murakami",
+      "ev": 97.2,
+      "angle": 35.0,
+      "distance": 368.0,
+      "hr_in_parks": 7,
+      "result": "field_out",
+      "pitcher": "Rodriguez, Eduardo"
+    },
+    {
+      "batter": "Ketel Marte",
+      "ev": 109.9,
+      "angle": 16.0,
+      "distance": 388.0,
+      "hr_in_parks": 5,
+      "result": "double",
+      "pitcher": "Kay, Anthony"
+    },
+    {
+      "batter": "Alex Bregman",
+      "ev": 101.5,
+      "angle": 29.0,
+      "distance": 389.0,
+      "hr_in_parks": 2,
+      "result": "triple",
+      "pitcher": "Walker, Taijuan"
+    },
+    {
+      "batter": "Pete Crow-Armstrong",
+      "ev": 108.8,
+      "angle": 20.0,
+      "distance": 395.0,
+      "hr_in_parks": 24,
+      "result": "double",
+      "pitcher": "Walker, Taijuan"
+    },
+    {
+      "batter": "Gavin Sheets",
+      "ev": 100.8,
+      "angle": 13.0,
+      "distance": 418.0,
+      "hr_in_parks": 29,
+      "result": "",
+      "pitcher": "Senzatela, Antonio"
+    },
+    {
+      "batter": "TJ Rumfield",
+      "ev": 98.4,
+      "angle": 26.0,
+      "distance": 388.0,
+      "hr_in_parks": 27,
+      "result": "double",
+      "pitcher": "Morgan, David"
+    },
+    {
+      "batter": "Hunter Goodman",
+      "ev": 101.9,
+      "angle": 28.0,
+      "distance": 419.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Buehler, Walker"
+    },
+    {
+      "batter": "Wenceel P\u00e9rez",
+      "ev": 99.0,
+      "angle": 27.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Hall, DL"
+    },
+    {
+      "batter": "Dylan Beavers",
+      "ev": 103.1,
+      "angle": 26.0,
+      "distance": 404.0,
+      "hr_in_parks": 25,
+      "result": "field_out",
+      "pitcher": "Wacha, Michael"
+    },
+    {
+      "batter": "Taylor Ward",
+      "ev": 101.9,
+      "angle": 21.0,
+      "distance": 392.0,
+      "hr_in_parks": 27,
+      "result": "double",
+      "pitcher": "Wacha, Michael"
+    },
+    {
+      "batter": "Jorge Soler",
+      "ev": 111.5,
+      "angle": 27.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Fisher, Braydon"
+    },
+    {
+      "batter": "Iv\u00e1n Herrera",
+      "ev": 102.2,
+      "angle": 31.0,
+      "distance": 384.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Junk, Janson"
+    },
+    {
+      "batter": "Teoscar Hern\u00e1ndez",
+      "ev": 100.8,
+      "angle": 29.0,
+      "distance": 390.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Walker, Ryan"
+    },
+    {
+      "batter": "TJ Friedl",
+      "ev": 101.4,
+      "angle": 33.0,
+      "distance": 397.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Martinez, Nick"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Joey Wiemer",
