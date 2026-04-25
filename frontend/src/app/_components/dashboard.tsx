@@ -367,7 +367,7 @@ export function Dashboard() {
           )}
 
           {activePage === "breakouts" && (
-            <Breakouts games={data.games} />
+            <Breakouts />
           )}
 
           {activePage === "matchup" && (
