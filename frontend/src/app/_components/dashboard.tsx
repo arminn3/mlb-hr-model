@@ -351,11 +351,11 @@ export function Dashboard() {
           )}
 
           {activePage === "live" && (
-            // Pass dashboard's date so the date picker controls Live Feed.
-            // LiveFeed uses isToday=getLocalDate() to decide live polling
-            // vs saved-JSON load. Empty string → undefined → LiveFeed
-            // defaults to today.
-            <LiveFeed selectedDate={selectedDate || undefined} />
+            // Don't pass the dashboard's selectedDate — on prod it gets
+            // walked back to the prior unblocked slate, which would force
+            // LiveFeed into past-date mode and break today's live polling.
+            // LiveFeed has its own internal date state + Yesterday button.
+            <LiveFeed />
           )}
 
           {activePage === "bvp" && (
