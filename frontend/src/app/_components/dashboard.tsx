@@ -18,6 +18,7 @@ import { BvPPage } from "./bvp-page";
 import { Breakouts } from "./breakouts";
 import { LiveFeed } from "./live-feed";
 import { ProjectionsView } from "./projections-view";
+import { UserMenu } from "./user-menu";
 import { MatchupAnalysis } from "./matchup-analysis";
 import { TeamPitchMixPage } from "./team-pitch-mix-page";
 import { IconButton } from "./ui/icon-button";
@@ -415,7 +416,7 @@ export function Dashboard() {
               </div>
             </div>
 
-            {/* RIGHT slot (date + lookback) */}
+            {/* RIGHT slot (date + lookback + user menu) */}
             <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
               {tabConfig.showLookback && (
                 <LookbackToggle value={lookback} onChange={setLookback} />
@@ -423,6 +424,7 @@ export function Dashboard() {
               {tabConfig.showDatePicker && (
                 <DatePicker currentDate={selectedDate} onChange={loadDate} />
               )}
+              <UserMenu />
             </div>
           </div>
         </header>
