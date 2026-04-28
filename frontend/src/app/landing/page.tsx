@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button } from "../_components/ui/button";
 
 type TopPick = {
   name: string;
@@ -69,13 +70,7 @@ function Nav() {
           <a href="#features" className="hidden sm:block text-sm text-muted hover:text-foreground transition-colors">Features</a>
           <a href="#how" className="hidden sm:block text-sm text-muted hover:text-foreground transition-colors">How it works</a>
           <a href="#faq" className="hidden sm:block text-sm text-muted hover:text-foreground transition-colors">FAQ</a>
-          <a
-            href="/dashboard"
-            className="px-4 py-1.5 text-xs font-semibold rounded-lg text-background transition-all hover:opacity-90"
-            style={{ background: "linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)" }}
-          >
-            Launch App
-          </a>
+          <Button href="/dashboard" variant="primary" size="sm">Launch App</Button>
         </div>
       </div>
     </nav>
@@ -98,20 +93,8 @@ function Hero() {
         {BRAND} turns every Statcast metric — barrel rate, exit velocity, bat speed, and opposing pitcher arsenal — into a ranked HR-probability board. Every day, every game.
       </p>
       <div className="flex items-center justify-center gap-3">
-        <a
-          href="/dashboard"
-          className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-lg text-background transition-all hover:opacity-90 shadow-lg"
-          style={{ background: "linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)" }}
-        >
-          Launch App →
-        </a>
-        <a
-          href="#features"
-          className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-lg text-foreground border transition-colors hover:bg-white/5"
-          style={{ borderColor: "rgba(255,255,255,0.12)" }}
-        >
-          See features
-        </a>
+        <Button href="/dashboard" variant="primary" size="lg">Launch App →</Button>
+        <Button href="#features" variant="secondary" size="lg">See features</Button>
       </div>
     </section>
   );
@@ -301,13 +284,7 @@ function CTA() {
           Ready to find an edge?
         </h2>
         <p className="text-muted mb-6">Today&apos;s slate is already scored. Walk in at first pitch.</p>
-        <a
-          href="/dashboard"
-          className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-lg text-background transition-all hover:opacity-90 shadow-lg"
-          style={{ background: "linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)" }}
-        >
-          Launch App →
-        </a>
+        <Button href="/dashboard" variant="primary" size="lg">Launch App →</Button>
       </GlassBox>
     </section>
   );
