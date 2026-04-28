@@ -128,11 +128,6 @@ function LivePreview() {
 
   return (
     <section className="max-w-4xl mx-auto px-6 pb-20">
-      <div className="text-center mb-6">
-        <div className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-muted">
-          Sample picks — what tonight&apos;s top of the slate looks like
-        </div>
-      </div>
       <GlassBox className="p-6">
         <div className="space-y-2">
           {picks.map((p, i) => (
