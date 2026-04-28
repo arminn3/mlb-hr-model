@@ -17,7 +17,7 @@ interface VariantTokens {
 // (#4476f5 → #3461d1, ring rgba(55,93,187,0.65)). Other variants follow the
 // same lighter-top → darker-bottom gradient pattern with a tinted outer ring.
 const VARIANT_TOKENS: Record<Exclude<Variant, "ghost">, VariantTokens> = {
-  primary:   { from: "#4476f5", to: "#3461d1", ring: "rgba(55,93,187,0.65)",   text: "#ffffff" },
+  primary:   { from: "#60a5fa", to: "#3b82f6", ring: "rgba(29,78,216,0.65)",   text: "#ffffff" },
   success:   { from: "#22c55e", to: "#16a34a", ring: "rgba(21,128,61,0.65)",   text: "#ffffff" },
   danger:    { from: "#ef4444", to: "#dc2626", ring: "rgba(185,28,28,0.65)",   text: "#ffffff" },
   secondary: { from: "#3f3f46", to: "#27272a", ring: "rgba(63,63,70,0.65)",    text: "#ffffff" },
