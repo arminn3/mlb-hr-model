@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type TopPick = {
   name: string;
@@ -117,78 +117,25 @@ function Hero() {
   );
 }
 
-function LivePreview() {
-  const [picks, setPicks] = useState<TopPick[] | null>(null);
-  const [err, setErr] = useState(false);
+const SAMPLE_PICKS: TopPick[] = [
+  { name: "Aaron Judge", team: "NYY", opp: "Tarik Skubal", composite: 0.91, barrel_pct: 21.4, fb_pct: 44.2, exit_velo: 95.1 },
+  { name: "Shohei Ohtani", team: "LAD", opp: "Logan Webb", composite: 0.87, barrel_pct: 18.6, fb_pct: 41.0, exit_velo: 93.7 },
+  { name: "Kyle Schwarber", team: "PHI", opp: "Sonny Gray", composite: 0.84, barrel_pct: 17.3, fb_pct: 49.5, exit_velo: 92.4 },
+];
 
-  useEffect(() => {
-    let cancelled = false;
-    fetch("/data/latest.json")
-      .then((r) => (r.ok ? r.json() : Promise.reject()))
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .then((data: any) => {
-        if (cancelled) return;
-        const rows: TopPick[] = [];
-        const orderByName = new Map<string, number>();
-        for (const g of data.games ?? []) {
-          for (const side of ["away", "home"] as const) {
-            for (const b of g.team_pitch_mix?.[side]?.batters ?? []) {
-              orderByName.set(b.name, b.order ?? 99);
-            }
-          }
-        }
-        const seen = new Set<string>();
-        for (const g of data.games ?? []) {
-          for (const p of g.players ?? []) {
-            if (seen.has(p.name)) continue;
-            seen.add(p.name);
-            const ord = orderByName.get(p.name) ?? 99;
-            if (ord > 9) continue; // likely starters only
-            const l5 = p.scores?.L5;
-            if (!l5) continue;
-            rows.push({
-              name: p.name,
-              team: p.batter_side === "away" ? g.away_team : g.home_team,
-              opp: p.opp_pitcher,
-              composite: l5.composite ?? 0,
-              barrel_pct: l5.barrel_pct ?? null,
-              fb_pct: l5.fb_pct ?? null,
-              exit_velo: l5.exit_velo ?? null,
-            });
-          }
-        }
-        rows.sort((a, b) => b.composite - a.composite);
-        setPicks(rows.slice(0, 3));
-      })
-      .catch(() => !cancelled && setErr(true));
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+function LivePreview() {
+  const picks = SAMPLE_PICKS;
 
   return (
     <section className="max-w-4xl mx-auto px-6 pb-20">
       <div className="text-center mb-6">
         <div className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-wider text-muted">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent-green animate-pulse" />
-          Live — today&apos;s top HR picks
+          Sample picks — what tonight&apos;s top of the slate looks like
         </div>
       </div>
       <GlassBox className="p-6">
-        {err && (
-          <div className="text-center text-muted text-sm py-8">
-            Today&apos;s slate isn&apos;t loaded yet. Check back at game time.
-          </div>
-        )}
-        {!err && !picks && (
-          <div className="text-center text-muted text-sm py-8 animate-pulse">Loading…</div>
-        )}
-        {picks && picks.length === 0 && (
-          <div className="text-center text-muted text-sm py-8">No games on today&apos;s slate.</div>
-        )}
-        {picks && picks.length > 0 && (
-          <div className="space-y-2">
-            {picks.map((p, i) => (
+        <div className="space-y-2">
+          {picks.map((p, i) => (
               <div
                 key={p.name}
                 className="flex items-center gap-4 p-3 rounded-[var(--radius-md)]"
@@ -216,8 +163,7 @@ function LivePreview() {
                 </div>
               </div>
             ))}
-          </div>
-        )}
+        </div>
         <div className="mt-5 text-center">
           <a
             href="/dashboard"
