@@ -13,8 +13,11 @@ Usage:
 import argparse
 import json
 import math
+import shutil
+import subprocess
+import sys
 from collections import defaultdict
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 import numpy as np
@@ -820,6 +823,39 @@ def print_results(games_out: list, game_date: date, schedule: list = None) -> No
     print(f"Total players scored: {total_players}")
 
 
+def _refresh_results_and_ml(game_date: date) -> None:
+    """Reconcile yesterday's predictions vs actual HRs and refresh ML analysis,
+    then sync the result files into the frontend public dir.
+
+    Failures here are non-fatal — slate gen still proceeds. The user wanted
+    these to auto-update on every slate gen so we don't keep accumulating
+    backfill debt the way we did 4/23-4/26."""
+    yesterday = game_date - timedelta(days=1)
+    repo = Path(__file__).resolve().parent
+    py = sys.executable
+
+    print(f"[auto-refresh] reconciling results for {yesterday.isoformat()}...")
+    rc = subprocess.run(
+        [py, "results_tracker.py", "--date", yesterday.isoformat()],
+        cwd=repo, check=False,
+    ).returncode
+    if rc != 0:
+        print(f"[auto-refresh] results_tracker exited {rc} — continuing")
+
+    print("[auto-refresh] retraining ML analysis...")
+    rc = subprocess.run([py, "ml_trainer.py"], cwd=repo, check=False).returncode
+    if rc != 0:
+        print(f"[auto-refresh] ml_trainer exited {rc} — continuing")
+
+    # Sync results/ → frontend/public/data/results/ so the dashboard sees them
+    src = repo / "results"
+    dst = repo / "frontend" / "public" / "data" / "results"
+    if src.exists() and dst.exists():
+        for f in src.glob("*.json"):
+            shutil.copy2(f, dst / f.name)
+        print(f"[auto-refresh] synced {src} → {dst}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Daily MLB HR Prop Model")
     parser.add_argument(
@@ -830,11 +866,18 @@ def main():
         "--fast", action="store_true",
         help="Skip season stats for faster runtime",
     )
+    parser.add_argument(
+        "--skip-auto-results", action="store_true",
+        help="Skip auto-running results_tracker and ml_trainer before slate gen",
+    )
     args = parser.parse_args()
 
     game_date = date.today()
     if args.date:
         game_date = date.fromisoformat(args.date)
+
+    if not args.skip_auto_results:
+        _refresh_results_and_ml(game_date)
 
     games_out, schedule = run_model(game_date, fast=args.fast)
     print_results(games_out, game_date, schedule)
