@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 import { AgentationAutoClear } from "./_components/agentation-auto-clear";
 import "./globals.css";
 
@@ -42,7 +43,40 @@ export default function RootLayout({
   );
 
   if (HAS_CLERK) {
-    return <ClerkProvider>{tree}</ClerkProvider>;
+    return (
+      <ClerkProvider
+        appearance={{
+          baseTheme: dark,
+          variables: {
+            colorPrimary: "#3b82f6",
+            colorBackground: "#1c1c1e",
+            colorText: "#f5f5f7",
+            colorTextSecondary: "#a0a1a4",
+            colorInputBackground: "#141416",
+            colorInputText: "#f5f5f7",
+            borderRadius: "8px",
+            fontFamily: "var(--font-inter)",
+            spacingUnit: "0.85rem",
+          },
+          elements: {
+            // UserButton dropdown — tighter, more modern.
+            userButtonPopoverCard: "w-64 shadow-xl border border-white/8 rounded-lg",
+            userButtonPopoverMain: "py-1",
+            userButtonPopoverActionButton: "py-2 px-3 text-[13px] font-medium hover:bg-white/5",
+            userButtonPopoverActionButtonText: "text-[13px]",
+            userButtonPopoverActionButtonIcon: "w-4 h-4",
+            userButtonPopoverFooter: "hidden",
+            userButtonPopoverUserPreview: "py-2 px-3",
+            userButtonPopoverUserPreviewMainIdentifier: "text-[13px] font-semibold",
+            userButtonPopoverUserPreviewSecondaryIdentifier: "text-[11px] text-muted",
+            // Sign-in / sign-up pages — also no Clerk footer chrome.
+            footer: "hidden",
+          },
+        }}
+      >
+        {tree}
+      </ClerkProvider>
+    );
   }
   return tree;
 }

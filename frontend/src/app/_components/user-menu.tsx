@@ -13,10 +13,7 @@ export function UserMenu() {
       <Show when="signed-in">
         <UserButton
           appearance={{
-            variables: { colorPrimary: "#3b82f6" },
-            elements: {
-              avatarBox: "w-8 h-8",
-            },
+            elements: { avatarBox: "w-8 h-8" },
           }}
           userProfileMode="modal"
         />
