@@ -78,6 +78,7 @@ def get_todays_schedule(game_date: date = None) -> list[dict]:
                 for p in lineups.get("homePlayers", [])
             ]
 
+            venue = game.get("venue", {})
             games.append({
                 "game_pk": game["gamePk"],
                 "away_team": away.get("team", {}).get("abbreviation", ""),
@@ -86,6 +87,8 @@ def get_todays_schedule(game_date: date = None) -> list[dict]:
                 "home_team_id": home.get("team", {}).get("id"),
                 "game_status": status,
                 "game_datetime_utc": game.get("gameDate", ""),  # ISO UTC
+                "venue_id": venue.get("id"),
+                "venue_name": venue.get("name", ""),
                 "away_pitcher": _parse_pitcher(away.get("probablePitcher")),
                 "home_pitcher": _parse_pitcher(home.get("probablePitcher")),
                 "away_lineup": away_lineup,

@@ -1,0 +1,473 @@
+{
+  "date": "2026-04-27",
+  "total_players_ranked": 209,
+  "total_hrs_hit": 19,
+  "total_near_hrs": 6,
+  "model_hits": 19,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 3,
+        "rate": 30.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 7,
+        "rate": 35.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 8,
+        "rate": 26.7
+      },
+      "all": {
+        "total": 209,
+        "hits": 19,
+        "rate": 9.1
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 5,
+        "rate": 50.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 6,
+        "rate": 30.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 8,
+        "rate": 26.7
+      },
+      "all": {
+        "total": 209,
+        "hits": 19,
+        "rate": 9.1
+      }
+    }
+  },
+  "model_near_hits": 6,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 3,
+      "rate": 30.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 7,
+      "rate": 35.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 8,
+      "rate": 26.7
+    },
+    "all": {
+      "total": 209,
+      "hits": 19,
+      "rate": 9.1
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 3,
+      "rate": 30.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 7,
+      "rate": 35.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 9,
+      "rate": 30.0
+    },
+    "all": {
+      "total": 209,
+      "hits": 25,
+      "rate": 12.0
+    }
+  },
+  "avg_composite_hr_hitters": 0.447,
+  "avg_composite_non_hitters": 0.259,
+  "composite_separation": 0.188,
+  "hr_hitters": [
+    {
+      "name": "Seiya Suzuki",
+      "rank": 3,
+      "composite": 0.778,
+      "opp_pitcher": "Randy V\u00e1squez",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 6,
+      "composite": 0.73,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Jazz Chisholm Jr.",
+      "rank": 10,
+      "composite": 0.686,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Aaron Judge",
+      "rank": 11,
+      "composite": 0.678,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Munetaka Murakami",
+      "rank": 13,
+      "composite": 0.669,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "LAA@CWS"
+    },
+    {
+      "name": "Byron Buxton",
+      "rank": 16,
+      "composite": 0.662,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "SEA@MIN"
+    },
+    {
+      "name": "Miguel Vargas",
+      "rank": 20,
+      "composite": 0.647,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "LAA@CWS"
+    },
+    {
+      "name": "Carlos Narv\u00e1ez",
+      "rank": 25,
+      "composite": 0.633,
+      "opp_pitcher": "Dylan Cease",
+      "matchup": "BOS@TOR"
+    },
+    {
+      "name": "JJ Wetherholt",
+      "rank": 38,
+      "composite": 0.559,
+      "opp_pitcher": "Mason Montgomery",
+      "matchup": "STL@PIT"
+    },
+    {
+      "name": "Cal Raleigh",
+      "rank": 42,
+      "composite": 0.525,
+      "opp_pitcher": "Connor Prielipp",
+      "matchup": "SEA@MIN"
+    },
+    {
+      "name": "Mois\u00e9s Ballesteros",
+      "rank": 51,
+      "composite": 0.475,
+      "opp_pitcher": "Randy V\u00e1squez",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Jorge Soler",
+      "rank": 59,
+      "composite": 0.384,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "LAA@CWS"
+    },
+    {
+      "name": "Daniel Schneemann",
+      "rank": 102,
+      "composite": 0.176,
+      "opp_pitcher": "Steven Matz",
+      "matchup": "TB@CLE"
+    },
+    {
+      "name": "Kody Clemens",
+      "rank": 106,
+      "composite": 0.172,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "SEA@MIN"
+    },
+    {
+      "name": "Joc Pederson",
+      "rank": 110,
+      "composite": 0.166,
+      "opp_pitcher": "Max Fried",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Pedro Pag\u00e9s",
+      "rank": 111,
+      "composite": 0.163,
+      "opp_pitcher": "Mason Montgomery",
+      "matchup": "STL@PIT"
+    },
+    {
+      "name": "Gavin Sheets",
+      "rank": 114,
+      "composite": 0.162,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Jonathan Aranda",
+      "rank": 136,
+      "composite": 0.137,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "TB@CLE"
+    },
+    {
+      "name": "Liam Hicks",
+      "rank": 179,
+      "composite": 0.095,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "MIA@LAD"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Munetaka Murakami",
+      "rank": 1,
+      "composite": 0.869,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "LAA@CWS"
+    },
+    {
+      "name": "JJ Wetherholt",
+      "rank": 2,
+      "composite": 0.688,
+      "opp_pitcher": "Mason Montgomery",
+      "matchup": "STL@PIT"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 5,
+      "composite": 0.671,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Carlos Narv\u00e1ez",
+      "rank": 7,
+      "composite": 0.666,
+      "opp_pitcher": "Dylan Cease",
+      "matchup": "BOS@TOR"
+    },
+    {
+      "name": "Byron Buxton",
+      "rank": 10,
+      "composite": 0.662,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "SEA@MIN"
+    },
+    {
+      "name": "Seiya Suzuki",
+      "rank": 17,
+      "composite": 0.628,
+      "opp_pitcher": "Randy V\u00e1squez",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Miguel Vargas",
+      "rank": 23,
+      "composite": 0.574,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "LAA@CWS"
+    },
+    {
+      "name": "Kody Clemens",
+      "rank": 24,
+      "composite": 0.564,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "SEA@MIN"
+    },
+    {
+      "name": "Jorge Soler",
+      "rank": 31,
+      "composite": 0.508,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "LAA@CWS"
+    },
+    {
+      "name": "Aaron Judge",
+      "rank": 38,
+      "composite": 0.445,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Cal Raleigh",
+      "rank": 49,
+      "composite": 0.395,
+      "opp_pitcher": "Connor Prielipp",
+      "matchup": "SEA@MIN"
+    },
+    {
+      "name": "Mois\u00e9s Ballesteros",
+      "rank": 50,
+      "composite": 0.373,
+      "opp_pitcher": "Randy V\u00e1squez",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Jazz Chisholm Jr.",
+      "rank": 53,
+      "composite": 0.363,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Gavin Sheets",
+      "rank": 135,
+      "composite": 0.15,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Joc Pederson",
+      "rank": 141,
+      "composite": 0.141,
+      "opp_pitcher": "Max Fried",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Jonathan Aranda",
+      "rank": 145,
+      "composite": 0.137,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "TB@CLE"
+    },
+    {
+      "name": "Pedro Pag\u00e9s",
+      "rank": 161,
+      "composite": 0.122,
+      "opp_pitcher": "Mason Montgomery",
+      "matchup": "STL@PIT"
+    },
+    {
+      "name": "Liam Hicks",
+      "rank": 181,
+      "composite": 0.095,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "MIA@LAD"
+    },
+    {
+      "name": "Daniel Schneemann",
+      "rank": 195,
+      "composite": 0.079,
+      "opp_pitcher": "Steven Matz",
+      "matchup": "TB@CLE"
+    }
+  ],
+  "near_hr_hitters": [
+    {
+      "name": "Trent Grisham",
+      "rank": 29,
+      "composite": 0.609,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Bryce Teodosio",
+      "rank": 49,
+      "composite": 0.475,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "LAA@CWS"
+    },
+    {
+      "name": "Mike Trout",
+      "rank": 50,
+      "composite": 0.475,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "LAA@CWS"
+    },
+    {
+      "name": "Alex Bregman",
+      "rank": 70,
+      "composite": 0.274,
+      "opp_pitcher": "Randy V\u00e1squez",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Junior Caminero",
+      "rank": 137,
+      "composite": 0.137,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "TB@CLE"
+    },
+    {
+      "name": "Trevor Larnach",
+      "rank": 143,
+      "composite": 0.132,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "SEA@MIN"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Mike Trout",
+      "ev": 108.4,
+      "angle": 20.0,
+      "distance": 400.0,
+      "hr_in_parks": 16,
+      "result": "field_out",
+      "pitcher": "Bido, Osvaldo"
+    },
+    {
+      "batter": "Bryce Teodosio",
+      "ev": 107.2,
+      "angle": 21.0,
+      "distance": 387.0,
+      "hr_in_parks": 21,
+      "result": "double",
+      "pitcher": "Kay, Anthony"
+    },
+    {
+      "batter": "Junior Caminero",
+      "ev": 109.3,
+      "angle": 30.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Messick, Parker"
+    },
+    {
+      "batter": "Trevor Larnach",
+      "ev": 101.4,
+      "angle": 31.0,
+      "distance": 402.0,
+      "hr_in_parks": 16,
+      "result": "triple",
+      "pitcher": "Castillo, Luis"
+    },
+    {
+      "batter": "Alex Bregman",
+      "ev": 104.0,
+      "angle": 25.0,
+      "distance": 372.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "V\u00e1squez, Randy"
+    },
+    {
+      "batter": "Trent Grisham",
+      "ev": 104.7,
+      "angle": 23.0,
+      "distance": 405.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Gray, Peyton"
+    }
+  ],
+  "surprise_hrs": []
+}

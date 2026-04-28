@@ -20,6 +20,16 @@ export function PitcherCard({
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
+          {pitcher.id ? (
+            <img
+              src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_80,q_auto:best/v1/people/${pitcher.id}/headshot/67/current`}
+              alt={pitcher.name}
+              className="w-9 h-9 rounded-full object-cover bg-card-border/40"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-9 h-9 rounded-full bg-card-border/40" />
+          )}
           <span className="font-semibold text-foreground">{pitcher.name}</span>
           <span className="px-1.5 py-0.5 text-[10px] font-mono font-semibold rounded bg-card-border text-muted">
             {pitcher.hand}HP

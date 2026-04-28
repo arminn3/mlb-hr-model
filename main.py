@@ -17,6 +17,7 @@ from collections import defaultdict
 from datetime import date
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 from tabulate import tabulate
 
@@ -32,7 +33,7 @@ from data_fetchers import (
     get_batter_hand,
 )
 from model import score_batter_multi_lookback
-from metrics import calc_pitch_type_stats, build_batter_pa_history, get_pitch_mix
+from metrics import calc_pitch_type_stats, build_batter_pa_history, get_pitch_mix, build_pitcher_profile
 from environment import calc_environment_score
 import config
 
@@ -331,14 +332,16 @@ def run_model(game_date: date = None, fast: bool = False):
             season_cache[pitcher_season_key] = get_season_statcast(pid, "pitcher", 2025)
         pitcher_2025 = season_cache[pitcher_season_key]
 
-        # If pitcher has no 2026 data, use 2025 season data instead of skipping
+        # If pitcher has no 2026 data, use 2025 season data. If 2025 is also
+        # empty (MLB debut / rookie), still score the batter on their own
+        # profile — model.py will flag data_quality=NO_PITCH_DATA and default
+        # matchup/pitcher components to neutral 0.5 instead of dropping them.
         if pitcher_df.empty:
             if pitcher_2025 is not None and not pitcher_2025.empty:
                 pitcher_df = pitcher_2025
                 print("(using 2025 pitcher data)")
             else:
-                print("SKIP (no pitcher Statcast)")
-                continue
+                print("(no pitcher Statcast — scoring batter-only)")
 
         try:
             multi_scores = score_batter_multi_lookback(
@@ -392,7 +395,7 @@ def run_model(game_date: date = None, fast: bool = False):
 
         # Season-long batter profile (ALL BIP, not just L5)
         # Used for the Matchup Analysis page (HRP-style)
-        season_profile = {"barrel": 0, "ev": 0, "fb": 0, "hard_hit": 0, "bip_count": 0, "hrs": 0, "iso": 0}
+        season_profile = {"barrel": 0, "ev": 0, "fb": 0, "hard_hit": 0, "bip_count": 0, "hrs": 0, "iso": 0, "pull_barrel": 0, "pull_air": 0}
         all_bip_frames = []
         if not batter_df.empty:
             hand_bip = batter_df[(batter_df["p_throws"] == pitcher_hand) & (batter_df["launch_speed"].notna()) & (batter_df["events"].notna())]
@@ -412,6 +415,15 @@ def run_model(game_date: date = None, fast: bool = False):
             if "launch_angle" in all_bip.columns:
                 season_profile["fb"] = round(float(((all_bip["launch_angle"] >= 25) & (all_bip["launch_angle"] <= 50)).sum() / n * 100), 1)
             season_profile["hard_hit"] = round(float((all_bip["launch_speed"] >= 95).sum() / n * 100), 1)
+            if {"hc_x", "hc_y", "stand", "launch_speed_angle", "launch_angle"}.issubset(all_bip.columns):
+                sub = all_bip.dropna(subset=["hc_x", "hc_y"])
+                if len(sub) > 0:
+                    spray = np.degrees(np.arctan2(sub["hc_x"].astype(float) - 125.42, 198.27 - sub["hc_y"].astype(float)))
+                    pulled = ((sub["stand"] == "R") & (spray < -15)) | ((sub["stand"] == "L") & (spray > 15))
+                    barrel_mask = sub["launch_speed_angle"] == 6
+                    air_mask = sub["launch_angle"] >= 10
+                    season_profile["pull_barrel"] = round(float((pulled & barrel_mask).sum() / n * 100), 1)
+                    season_profile["pull_air"] = round(float((pulled & air_mask).sum() / n * 100), 1)
             if "events" in all_bip.columns:
                 season_profile["hrs"] = int((all_bip["events"] == "home_run").sum())
                 hits_mask = all_bip["events"].isin({"single", "double", "triple", "home_run"})
@@ -454,6 +466,24 @@ def run_model(game_date: date = None, fast: bool = False):
         players_by_game[gpk].append(player_obj)
         print(f"OK (L5={composite_l5:.3f})")
 
+    # ── Phase 2.5: Build full pitcher profiles (one per pitcher) ─────────────
+    print("Building pitcher profiles...")
+    pitcher_profiles: dict[int, dict] = {}
+    season_year = game_date.year
+    seen_pids: set[int] = set()
+    for g in schedule:
+        for side in ("away_pitcher", "home_pitcher"):
+            p = g.get(side) or {}
+            pid = p.get("id")
+            if not pid or pid in seen_pids:
+                continue
+            seen_pids.add(pid)
+            df = pitcher_cache.get(pid)
+            if df is None:
+                df = get_pitcher_statcast(pid)
+                pitcher_cache[pid] = df
+            pitcher_profiles[pid] = build_pitcher_profile(df, pitcher_id=pid, season=season_year)
+
     # ── Phase 3: Build game-grouped output ───────────────────────────────────
     games_out = []
     for g in schedule:
@@ -494,10 +524,18 @@ def run_model(game_date: date = None, fast: bool = False):
             "away_pitcher": {
                 "name": g["away_pitcher"]["name"] if g.get("away_pitcher") else "TBD",
                 "hand": g["away_pitcher"]["hand"] if g.get("away_pitcher") else "?",
+                "id": g["away_pitcher"].get("id") if g.get("away_pitcher") else None,
+                "profile": pitcher_profiles.get(
+                    g["away_pitcher"].get("id") if g.get("away_pitcher") else None
+                ),
             },
             "home_pitcher": {
                 "name": g["home_pitcher"]["name"] if g.get("home_pitcher") else "TBD",
                 "hand": g["home_pitcher"]["hand"] if g.get("home_pitcher") else "?",
+                "id": g["home_pitcher"].get("id") if g.get("home_pitcher") else None,
+                "profile": pitcher_profiles.get(
+                    g["home_pitcher"].get("id") if g.get("home_pitcher") else None
+                ),
             },
             "environment": env_by_game.get(gpk, {}),
             "team_pitch_mix": team_pitch_mix,

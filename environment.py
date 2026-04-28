@@ -27,7 +27,8 @@ def get_park_factor(home_team: str, batter_hand: str = None) -> float:
 
 
 def get_game_weather(
-    home_team: str, game_date: date = None, game_hour_local: int = None
+    home_team: str, game_date: date = None, game_hour_local: int = None,
+    coords_override: tuple = None,
 ) -> dict[str, Optional[float]]:
     """
     Fetch weather conditions at game time from Open-Meteo.

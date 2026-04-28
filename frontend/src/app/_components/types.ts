@@ -37,6 +37,47 @@ export interface PitchDetailEntry {
 export interface PitcherInfo {
   name: string;
   hand: string;
+  id?: number | null;
+  profile?: PitcherProfile | null;
+}
+
+export interface PitcherStatRow {
+  ip: number | null;
+  bf: number;
+  baa: number | null;
+  woba: number | null;
+  slg: number | null;
+  iso: number | null;
+  whip: number | null;
+  hr: number;
+  hr_per_9: number | null;
+  bb_pct: number | null;
+  whiff_pct: number | null;
+  k_pct: number | null;
+  meatball_pct: number | null;
+  barrel_pct: number | null;
+  hard_hit_pct: number | null;
+  fb_pct: number | null;
+  hr_fb_pct: number | null;
+  pullair_pct: number | null;
+}
+
+export interface PitcherArsenalEntry {
+  type: string;
+  name: string;
+  usage_pct: number;
+  avg_velo?: number | null;
+  avg_spin?: number | null;
+  whiff_pct: number;
+  count: number;
+}
+
+export interface PitcherProfile {
+  rows: { season: PitcherStatRow; vs_L: PitcherStatRow; vs_R: PitcherStatRow };
+  arsenal: PitcherArsenalEntry[];
+  wins: number;
+  losses: number;
+  games_started: number;
 }
 
 export interface PitcherStats {
@@ -72,6 +113,8 @@ export interface PlayerData {
     bip_count: number;
     hrs: number;
     iso: number;
+    pull_barrel?: number;
+    pull_air?: number;
   };
   bvp_stats?: {
     career: {

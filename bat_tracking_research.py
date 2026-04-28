@@ -518,6 +518,9 @@ def lucky_unlucky(model: dict, seasons_df: pd.DataFrame, year_2026_df: pd.DataFr
 
     lucky = df.sort_values("luck_residual", ascending=False).head(20)[display_cols]
     unlucky = df.sort_values("luck_residual", ascending=True).head(20)[display_cols]
+    # Full list so the frontend can filter to today's slate (Breakouts /
+    # Regression tables are slate-scoped, not a global leaderboard).
+    all_sorted = df.sort_values("luck_residual", ascending=True)[display_cols]
 
     def _rowdict(row) -> dict:
         d = {}
@@ -540,6 +543,7 @@ def lucky_unlucky(model: dict, seasons_df: pd.DataFrame, year_2026_df: pd.DataFr
         "n_batters_evaluated": int(len(df)),
         "lucky_top_20": [_rowdict(r) for _, r in lucky.iterrows()],
         "unlucky_top_20": [_rowdict(r) for _, r in unlucky.iterrows()],
+        "all_batters_sorted": [_rowdict(r) for _, r in all_sorted.iterrows()],
     }
 
 

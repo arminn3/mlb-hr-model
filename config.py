@@ -196,6 +196,26 @@ STADIUM_COORDS: dict = {
     "SDP": (32.7075, -117.1575),"SF":  (37.7786, -122.3897),
 }
 
+# ── Alternate Venues (Mexico City Series, London Series, Field of Dreams) ────
+# Keyed by MLB Stats API venue.id. When a game's venue.id matches, the model
+# uses these coords/park factor instead of the home team's default ballpark.
+ALT_VENUES: dict = {
+    # Estadio Alfredo Harp Helú — Mexico City. 7,200 ft elevation, open-air.
+    # Park factor 130 reflects ~22% HR boost from air-density alone (drag drops
+    # ~10%/1000m of elevation) plus dimensions slightly friendlier than league
+    # average. The 2023 Padres-Giants series there ran an even higher empirical
+    # rate; tune up if more samples land. outfield_azimuth=None so wind
+    # orientation has neutral effect (we don't have stadium-specific data).
+    5340: {
+        "name": "Estadio Alfredo Harp Helú",
+        "city": "Mexico City",
+        "coords": (19.4045, -99.1175),
+        "park_factor": 130.0,
+        "elevation_ft": 7200,
+        "is_dome": False,
+    },
+}
+
 # ── Environment Normalization ────────────────────────────────────────────────
 NORM_RANGES_ENV: dict = {
     "park_factor": (80.0, 120.0),     # narrower range — less extreme scaling

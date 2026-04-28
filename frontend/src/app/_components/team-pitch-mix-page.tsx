@@ -485,7 +485,12 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
   const [type, setType] = useState<TypeChoice>("Plate Appearances");
   const [pitcherHand, setPitcherHand] = useState<HandFilter>("all");
   const [startersOnly, setStartersOnly] = useState(true);
-  const [selectedPitchTypes, setSelectedPitchTypes] = useState<Set<string>>(new Set());
+  // Pitch-type chips are independent per hand: RHB section's selection
+  // does NOT affect LHB stats, and vice versa. Same pitcher usually throws
+  // a different mix to each hand, so a "FF" pick vs RHBs shouldn't fold
+  // LHBs' FF performance into the table either.
+  const [selectedPitchTypesRhb, setSelectedPitchTypesRhb] = useState<Set<string>>(new Set());
+  const [selectedPitchTypesLhb, setSelectedPitchTypesLhb] = useState<Set<string>>(new Set());
   const [sortKey, setSortKey] = useState<SortKey>("fb_pct");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
 
@@ -504,21 +509,29 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
   }, [gamesWithData.length, gameIdx]);
 
   // Auto-select pitch-type pills ≥12% usage whenever the game or side
-  // changes. Pills below the threshold still appear but start unselected
-  // (user can click to include them). Match PropFinder's behavior.
+  // changes. Pills below the threshold still appear but start unselected.
+  // Each hand's pills are seeded from its OWN pitch mix so the two
+  // sections start in sync with the pitcher's actual usage against that hand.
   const PITCH_AUTOSELECT_THRESHOLD = 0.12;
   useEffect(() => {
     const g = gamesWithData[gameIdx];
     if (!g || !g.team_pitch_mix) return;
     const p = g.team_pitch_mix[side].pitcher;
-    const union = new Set<string>();
+    const pickRhb = new Set<string>();
     for (const [pt, u] of Object.entries(p.pitch_mix_vs_rhb || {})) {
-      if (u >= PITCH_AUTOSELECT_THRESHOLD) union.add(pt);
+      if (u >= PITCH_AUTOSELECT_THRESHOLD) pickRhb.add(pt);
     }
+    const pickLhb = new Set<string>();
     for (const [pt, u] of Object.entries(p.pitch_mix_vs_lhb || {})) {
-      if (u >= PITCH_AUTOSELECT_THRESHOLD) union.add(pt);
+      if (u >= PITCH_AUTOSELECT_THRESHOLD) pickLhb.add(pt);
     }
-    setSelectedPitchTypes(union);
+    setSelectedPitchTypesRhb(pickRhb);
+    setSelectedPitchTypesLhb(pickLhb);
+    // Default the pitcher-hand filter to match today's starter. "vs All"
+    // would fold the opposite-platoon history into the table and dilute
+    // the matchup signal — not what anyone actually wants by default.
+    const h = (p.hand || "").toUpperCase();
+    setPitcherHand(h === "R" ? "R" : h === "L" ? "L" : "all");
   }, [gameIdx, side, gamesWithData]);
 
   if (gamesWithData.length === 0) {
@@ -541,19 +554,23 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
   const viewingTeam = side === "away" ? game.away_team : game.home_team;
   const opposingTeam = side === "away" ? game.home_team : game.away_team;
 
-  const filter: Filter = { season, range, type, pitcherHand, selectedPitchTypes, startersOnly };
+  const rhbFilter: Filter = { season, range, type, pitcherHand, selectedPitchTypes: selectedPitchTypesRhb, startersOnly };
+  const lhbFilter: Filter = { season, range, type, pitcherHand, selectedPitchTypes: selectedPitchTypesLhb, startersOnly };
 
-  // Split batters into RHB and LHB tables. Keep PA=0 batters visible —
-  // displaying them with "—" is more honest than silently dropping them
-  // (so injured/rarely-played names still appear in the table).
+  // Split batters into RHB and LHB tables. Each side aggregates with its
+  // own pitch-type selection. Keep PA=0 batters visible — displaying them
+  // with "—" is more honest than silently dropping them.
   const { rhbRows, lhbRows } = useMemo(() => {
     const rhb: Array<{ batter: TeamPitchMixBatter; stats: RowStats }> = [];
     const lhb: Array<{ batter: TeamPitchMixBatter; stats: RowStats }> = [];
     for (const b of currentSide.batters) {
       if (startersOnly && b.order === null) continue;
-      const stats = aggregate(b.pa_history, filter);
       const eff = effectiveHand(b, pitcher.hand);
-      (eff === "R" ? rhb : lhb).push({ batter: b, stats });
+      if (eff === "R") {
+        rhb.push({ batter: b, stats: aggregate(b.pa_history, rhbFilter) });
+      } else {
+        lhb.push({ batter: b, stats: aggregate(b.pa_history, lhbFilter) });
+      }
     }
     const dirMul = sortDir === "desc" ? -1 : 1;
     const cmp = (a: { batter: TeamPitchMixBatter; stats: RowStats },
@@ -572,10 +589,17 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
     rhb.sort(cmp);
     lhb.sort(cmp);
     return { rhbRows: rhb, lhbRows: lhb };
-  }, [currentSide, filter, pitcher.hand, startersOnly, sortKey, sortDir]);
+  }, [currentSide, rhbFilter, lhbFilter, pitcher.hand, startersOnly, sortKey, sortDir]);
 
-  const togglePitch = (pt: string) => {
-    setSelectedPitchTypes((prev) => {
+  const toggleRhbPitch = (pt: string) => {
+    setSelectedPitchTypesRhb((prev) => {
+      const next = new Set(prev);
+      if (next.has(pt)) next.delete(pt); else next.add(pt);
+      return next;
+    });
+  };
+  const toggleLhbPitch = (pt: string) => {
+    setSelectedPitchTypesLhb((prev) => {
       const next = new Set(prev);
       if (next.has(pt)) next.delete(pt); else next.add(pt);
       return next;
@@ -600,7 +624,8 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
             const [gi, s] = v.split(":");
             setGameIdx(parseInt(gi, 10));
             setSide(s as "away" | "home");
-            setSelectedPitchTypes(new Set());
+            setSelectedPitchTypesRhb(new Set());
+            setSelectedPitchTypesLhb(new Set());
           }}
           format={(v) => {
             const [gi, s] = (v as string).split(":");
@@ -685,8 +710,8 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
         title="vs RHB"
         pitchMix={pitcher.pitch_mix_vs_rhb}
         batters={rhbRows}
-        filter={filter}
-        onTogglePitchType={togglePitch}
+        filter={rhbFilter}
+        onTogglePitchType={toggleRhbPitch}
         sortKey={sortKey}
         sortDir={sortDir}
         onSort={onSort}
@@ -695,8 +720,8 @@ export function TeamPitchMixPage({ games }: { games: GameData[] }) {
         title="vs LHB"
         pitchMix={pitcher.pitch_mix_vs_lhb}
         batters={lhbRows}
-        filter={filter}
-        onTogglePitchType={togglePitch}
+        filter={lhbFilter}
+        onTogglePitchType={toggleLhbPitch}
         sortKey={sortKey}
         sortDir={sortDir}
         onSort={onSort}

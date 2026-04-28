@@ -30,7 +30,7 @@ const ESPN_ABBR: Record<string, string> = {
   SDP: "sd",
 };
 
-function teamLogoUrl(abbr: string): string {
+export function teamLogoUrl(abbr: string): string {
   const code = ESPN_ABBR[abbr] ?? abbr.toLowerCase();
   return `https://a.espncdn.com/combiner/i?img=/i/teamlogos/mlb/500/${code}.png&h=40&w=40`;
 }

@@ -4,8 +4,286 @@ Raw metric calculations from Statcast pitch-level DataFrames.
 
 import pandas as pd
 import numpy as np
+import requests
 
 import config
+
+# Statcast event sets used by build_pitcher_profile
+_OUT_EVENTS = {
+    "strikeout", "field_out", "force_out", "grounded_into_double_play",
+    "double_play", "triple_play", "fielders_choice", "fielders_choice_out",
+    "sac_fly", "sac_bunt", "sac_fly_double_play",
+}
+_HIT_EVENTS = {"single", "double", "triple", "home_run"}
+_BB_EVENTS = {"walk", "intent_walk"}
+_SWING_DESCRIPTIONS = {
+    "swinging_strike", "swinging_strike_blocked", "foul", "foul_tip",
+    "hit_into_play", "missed_bunt", "foul_bunt",
+}
+_WHIFF_DESCRIPTIONS = {"swinging_strike", "swinging_strike_blocked", "foul_tip"}
+
+# Friendly pitch-type names for the UI
+_PITCH_NAMES = {
+    "FF": "Four-Seam", "FT": "Two-Seam", "FC": "Cutter", "SI": "Sinker",
+    "SL": "Slider", "ST": "Sweeper", "SV": "Slurve", "CU": "Curveball",
+    "KC": "Knuckle-Curve", "CH": "Changeup", "FS": "Splitter", "FO": "Forkball",
+    "EP": "Eephus", "KN": "Knuckleball", "SC": "Screwball",
+}
+
+
+# wOBA weights (FanGraphs 2024 — close enough for current-season directional comparison)
+_WOBA_WEIGHTS = {
+    "walk": 0.696, "intent_walk": 0.696, "hit_by_pitch": 0.728,
+    "single": 0.882, "double": 1.244, "triple": 1.569, "home_run": 2.005,
+}
+
+
+def build_pitcher_profile(pitcher_df: pd.DataFrame, pitcher_id: int = None,
+                           season: int = 2026) -> dict:
+    """Compute pitcher's full 2026 stat table — Season / vsLHB / vsRHB rows
+    with all the columns the UI table needs (IP, BF, BAA, wOBA, SLG, ISO,
+    WHIP, HR, HR/9, BB%, Whiff%, K%, Meatball%, Barrel%, HH%, FB%, HR/FB%,
+    PullAir%). Plus the pitcher's arsenal.
+
+    Returns:
+        {
+          "rows": {"season": {...}, "vs_L": {...}, "vs_R": {...}},
+          "arsenal": [{type, name, usage_pct, avg_velo, avg_spin, whiff_pct, count}, ...],
+          "wins": int, "losses": int, "games_started": int,
+        }
+
+    Each row has the same shape; missing fields → None and the UI renders "—".
+    """
+    out: dict = {
+        "rows": {
+            "season": _empty_row(),
+            "vs_L": _empty_row(),
+            "vs_R": _empty_row(),
+        },
+        "arsenal": [],
+        "wins": 0,
+        "losses": 0,
+        "games_started": 0,
+    }
+
+    # Pull season W/L from MLB Stats API (Statcast doesn't have these)
+    if pitcher_id is not None:
+        try:
+            url = (f"https://statsapi.mlb.com/api/v1/people/{pitcher_id}/stats"
+                   f"?stats=season&group=pitching&season={season}")
+            resp = requests.get(url, timeout=8)
+            if resp.ok:
+                splits = resp.json().get("stats", [{}])[0].get("splits", [])
+                if splits:
+                    s = splits[0].get("stat", {})
+                    out["wins"] = int(s.get("wins", 0) or 0)
+                    out["losses"] = int(s.get("losses", 0) or 0)
+                    out["games_started"] = int(s.get("gamesStarted", 0) or 0)
+        except Exception:
+            pass
+
+    if pitcher_df is None or len(pitcher_df) == 0:
+        return out
+
+    df = pitcher_df
+
+    # Compute season + per-hand splits from the same df
+    out["rows"]["season"] = _compute_row(df)
+    if "stand" in df.columns:
+        out["rows"]["vs_L"] = _compute_row(df[df["stand"] == "L"])
+        out["rows"]["vs_R"] = _compute_row(df[df["stand"] == "R"])
+
+    # Arsenal
+    if "pitch_type" in df.columns and len(df) > 0:
+        total = len(df)
+        arsenal = []
+        for pt, group in df.groupby("pitch_type"):
+            if pd.isna(pt) or pt == "":
+                continue
+            n = len(group)
+            velo = group["release_speed"].dropna() if "release_speed" in group.columns else pd.Series(dtype=float)
+            spin = group["release_spin_rate"].dropna() if "release_spin_rate" in group.columns else pd.Series(dtype=float)
+            desc = group["description"] if "description" in group.columns else pd.Series(dtype=object)
+            n_swings = int(desc.isin(_SWING_DESCRIPTIONS).sum())
+            n_whiffs = int(desc.isin(_WHIFF_DESCRIPTIONS).sum())
+            arsenal.append({
+                "type": pt,
+                "name": _PITCH_NAMES.get(pt, pt),
+                "usage_pct": round(n / total * 100, 1),
+                "avg_velo": round(float(velo.mean()), 1) if len(velo) > 0 else None,
+                "avg_spin": int(round(float(spin.mean()))) if len(spin) > 0 else None,
+                "whiff_pct": round(n_whiffs / n_swings * 100, 1) if n_swings > 0 else 0.0,
+                "count": n,
+            })
+        arsenal.sort(key=lambda a: a["usage_pct"], reverse=True)
+        out["arsenal"] = arsenal
+
+    return out
+
+
+def _empty_row() -> dict:
+    return {
+        "ip": None, "bf": 0, "baa": None, "woba": None, "slg": None, "iso": None,
+        "whip": None, "hr": 0, "hr_per_9": None,
+        "bb_pct": None, "whiff_pct": None, "k_pct": None, "meatball_pct": None,
+        "barrel_pct": None, "hard_hit_pct": None, "fb_pct": None,
+        "hr_fb_pct": None, "pullair_pct": None,
+    }
+
+
+def _compute_row(df: pd.DataFrame) -> dict:
+    """Compute one row of the pitcher stat table from a Statcast pitch-level df.
+    df may be the full season or a hand-filtered subset.
+    """
+    row = _empty_row()
+    if df is None or len(df) == 0:
+        return row
+
+    has_events = "events" in df.columns
+    evt = df["events"].dropna() if has_events else pd.Series(dtype=object)
+    n_pa = len(evt)
+    if n_pa == 0:
+        return row
+
+    # Outs → IP
+    n_outs = int(evt.isin(_OUT_EVENTS).sum())
+    # strikeout shows up in _OUT_EVENTS too — count once
+    ip = n_outs / 3.0
+
+    # PA / BF (excluding catcher's interference, ignored for our purposes)
+    bf = int(n_pa)
+
+    # Counts
+    n_k = int((evt == "strikeout").sum())
+    n_bb = int(evt.isin(_BB_EVENTS).sum())
+    n_hbp = int((evt == "hit_by_pitch").sum())
+    n_sf = int((evt == "sac_fly").sum())
+    n_singles = int((evt == "single").sum())
+    n_doubles = int((evt == "double").sum())
+    n_triples = int((evt == "triple").sum())
+    n_hr = int((evt == "home_run").sum())
+    n_hits = n_singles + n_doubles + n_triples + n_hr
+    n_ab = max(n_pa - n_bb - n_hbp - n_sf, 0)
+
+    # BAA / SLG / ISO
+    baa = round(n_hits / n_ab, 3) if n_ab > 0 else None
+    total_bases = n_singles + 2 * n_doubles + 3 * n_triples + 4 * n_hr
+    slg = round(total_bases / n_ab, 3) if n_ab > 0 else None
+    iso = round(slg - baa, 3) if (slg is not None and baa is not None) else None
+
+    # wOBA against
+    woba_num = (
+        _WOBA_WEIGHTS["walk"] * n_bb
+        + _WOBA_WEIGHTS["hit_by_pitch"] * n_hbp
+        + _WOBA_WEIGHTS["single"] * n_singles
+        + _WOBA_WEIGHTS["double"] * n_doubles
+        + _WOBA_WEIGHTS["triple"] * n_triples
+        + _WOBA_WEIGHTS["home_run"] * n_hr
+    )
+    woba_denom = n_ab + n_bb + n_hbp + n_sf
+    woba = round(woba_num / woba_denom, 3) if woba_denom > 0 else None
+
+    # WHIP — (BB + H) / IP
+    whip = round((n_bb + n_hits) / ip, 2) if ip > 0 else None
+
+    # HR/9
+    hr_per_9 = round(n_hr * 9 / ip, 2) if ip > 0 else None
+
+    # BB% / K% — % of plate appearances
+    bb_pct = round(n_bb / n_pa * 100, 1)
+    k_pct = round(n_k / n_pa * 100, 1)
+
+    # Strike-zone metrics — over all pitches in df, not just PAs
+    desc = df["description"] if "description" in df.columns else pd.Series(dtype=object)
+    n_swings = int(desc.isin(_SWING_DESCRIPTIONS).sum())
+    n_whiffs = int(desc.isin(_WHIFF_DESCRIPTIONS).sum())
+    whiff_pct = round(n_whiffs / n_swings * 100, 1) if n_swings > 0 else None
+
+    # Meatball% — pitches in Heart of zone (or zone 5 fallback)
+    if "attack_zone" in df.columns:
+        n_heart = int((df["attack_zone"] == "Heart").sum())
+        meatball_pct = round(n_heart / len(df) * 100, 1)
+    elif "zone" in df.columns:
+        n_mid = int((df["zone"] == 5).sum())
+        meatball_pct = round(n_mid / len(df) * 100, 1)
+    else:
+        meatball_pct = None
+
+    # Statcast contact-quality metrics (over BIP)
+    bip = df[df["bb_type"].notna()] if "bb_type" in df.columns else df.iloc[0:0]
+    n_bip = len(bip)
+    if n_bip > 0:
+        n_fb_bip = int((bip["bb_type"] == "fly_ball").sum())
+        ev = bip["launch_speed"].dropna() if "launch_speed" in bip.columns else pd.Series(dtype=float)
+        n_hard = int((ev >= 95).sum()) if len(ev) > 0 else 0
+        if "launch_speed_angle" in bip.columns:
+            n_barrels = int((bip["launch_speed_angle"] == 6).sum())
+        else:
+            la = bip["launch_angle"] if "launch_angle" in bip.columns else None
+            if la is not None and len(ev) > 0:
+                barrel_mask = (bip["launch_speed"] >= 98) & (la.between(26, 30))
+                n_barrels = int(barrel_mask.sum())
+            else:
+                n_barrels = 0
+        barrel_pct = round(n_barrels / n_bip * 100, 1)
+        hard_hit_pct = round(n_hard / n_bip * 100, 1)
+        fb_pct = round(n_fb_bip / n_bip * 100, 1)
+        hr_fb_pct = round(n_hr / n_fb_bip * 100, 1) if n_fb_bip > 0 else 0.0
+        # PullAir%: pulled fly balls + line drives (LA >= 10) over BIP.
+        # Statcast spray-angle proxy via hc_x/hc_y. Use the standard formula:
+        #   spray_angle_deg = atan2((hc_x - 125.42), (198.27 - hc_y)) * 180/pi
+        # Pulled = abs(spray) > 15 AND sign matches batter handedness:
+        #   RHB pulled → spray < -15 (LF side); LHB pulled → spray > 15 (RF side).
+        if {"hc_x", "hc_y", "stand", "launch_angle"}.issubset(bip.columns):
+            try:
+                hc_x = bip["hc_x"].astype(float)
+                hc_y = bip["hc_y"].astype(float)
+                spray = np.degrees(np.arctan2(hc_x - 125.42, 198.27 - hc_y))
+                stand = bip["stand"]
+                la = bip["launch_angle"].astype(float)
+                pulled_mask = (
+                    ((stand == "R") & (spray < -15)) | ((stand == "L") & (spray > 15))
+                )
+                air_mask = la >= 10
+                n_pullair = int((pulled_mask & air_mask).sum())
+                pullair_pct = round(n_pullair / n_bip * 100, 1)
+            except Exception:
+                pullair_pct = None
+        else:
+            pullair_pct = None
+    else:
+        barrel_pct = hard_hit_pct = fb_pct = hr_fb_pct = pullair_pct = None
+
+    row.update({
+        "ip": round(ip, 1),
+        "bf": bf,
+        "baa": baa,
+        "woba": woba,
+        "slg": slg,
+        "iso": iso,
+        "whip": whip,
+        "hr": n_hr,
+        "hr_per_9": hr_per_9,
+        "bb_pct": bb_pct,
+        "whiff_pct": whiff_pct,
+        "k_pct": k_pct,
+        "meatball_pct": meatball_pct,
+        "barrel_pct": barrel_pct,
+        "hard_hit_pct": hard_hit_pct,
+        "fb_pct": fb_pct,
+        "hr_fb_pct": hr_fb_pct,
+        "pullair_pct": pullair_pct,
+    })
+    return row
+
+
+def _to_float(value, default=None):
+    if value is None or value == "" or value == "-.--":
+        return default
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
 
 
 def get_pitch_mix(

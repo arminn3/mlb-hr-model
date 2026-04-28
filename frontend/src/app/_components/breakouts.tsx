@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import type { GameData } from "./types";
 import {
   tableWrapperClass,
   tableWrapperStyle,
@@ -43,6 +44,9 @@ interface ResearchReport {
     n_batters_evaluated: number;
     lucky_top_20: BatterRow[];
     unlucky_top_20: BatterRow[];
+    // Full sorted list so we can slice to today's slate. Older research
+    // dumps only ship the top-20 lists, so this field is optional.
+    all_batters_sorted?: BatterRow[];
   };
 }
 
@@ -71,13 +75,14 @@ type SortKey =
   | "bat_speed" | "fast_swing_pct" | "pull_fb_pct";
 
 const COLS: ReadonlyArray<{
-  key: SortKey | "rank";
+  key: SortKey | "rank" | "team";
   label: string;
   align: string;
   sortable: boolean;
 }> = [
   { key: "rank", label: "#", align: "text-center", sortable: false },
   { key: "name", label: "Player", align: "text-left", sortable: true },
+  { key: "team", label: "Team", align: "text-left", sortable: false },
   { key: "pa", label: "PA", align: "text-right", sortable: true },
   { key: "hr", label: "HR", align: "text-right", sortable: true },
   { key: "xhr_count", label: "xHR", align: "text-right", sortable: true },
@@ -91,7 +96,7 @@ const COLS: ReadonlyArray<{
   { key: "pull_fb_pct", label: "Pull+FB%", align: "text-right", sortable: true },
 ];
 
-function PlayerRow({ row, idx, mode }: { row: BatterRow; idx: number; mode: TabKey }) {
+function PlayerRow({ row, idx, mode, team }: { row: BatterRow; idx: number; mode: TabKey; team?: string }) {
   const luckColor = mode === "lucky" ? "#22c55e" : "#ef4444";
   return (
     <tr>
@@ -99,6 +104,7 @@ function PlayerRow({ row, idx, mode }: { row: BatterRow; idx: number; mode: TabK
       <td className={cellClass} style={cellStyle}>
         <span className="font-semibold text-white">{row.name}</span>
       </td>
+      <td className={cellClass + " font-mono"} style={{ ...cellStyle, color: "#a0a1a4" }}>{team ?? "—"}</td>
       <td className={cellClass + " text-right font-mono"} style={cellStyle}>{row.pa}</td>
       <td className={cellClass + " text-right font-mono"} style={cellStyle}>{row.hr}</td>
       <td className={cellClass + " text-right font-mono"} style={{ ...cellStyle, color: "#a0a1a4" }}>{fmtNum(row.xhr_count, 1)}</td>
@@ -133,7 +139,7 @@ function PlayerRow({ row, idx, mode }: { row: BatterRow; idx: number; mode: TabK
   );
 }
 
-export function Breakouts() {
+export function Breakouts({ games }: { games: GameData[] }) {
   const [report, setReport] = useState<ResearchReport | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const [tab, setTab] = useState<TabKey>("unlucky");
@@ -169,12 +175,41 @@ export function Breakouts() {
     }
   };
 
+  // Map batter_id → team abbreviation from today's slate. Filtering by
+  // batter_id (not name) fixes the "two Max Muncys" problem — same name,
+  // different players, both landing on opposite tabs.
+  const teamById = useMemo(() => {
+    const m = new Map<number, string>();
+    for (const g of games) {
+      const tpm = g.team_pitch_mix;
+      if (!tpm) continue;
+      for (const b of tpm.away.batters) m.set(b.id, g.away_team);
+      for (const b of tpm.home.batters) m.set(b.id, g.home_team);
+    }
+    return m;
+  }, [games]);
+
   const rows: BatterRow[] = useMemo(() => {
     if (!report) return [];
-    const base =
-      tab === "lucky"
-        ? report.lucky_unlucky_2026.lucky_top_20
-        : report.lucky_unlucky_2026.unlucky_top_20;
+    const lu = report.lucky_unlucky_2026;
+    // Prefer the full sorted list so slate filtering still yields 20+ names;
+    // fall back to the static top_20 for older research dumps.
+    const full = lu.all_batters_sorted;
+    let base: BatterRow[];
+    if (full && full.length > 0) {
+      const filtered = teamById.size > 0
+        ? full.filter((r) => teamById.has(r.batter_id))
+        : full;
+      base = tab === "lucky"
+        ? [...filtered].sort((a, b) => b.luck_residual - a.luck_residual).slice(0, 20)
+        : [...filtered].sort((a, b) => a.luck_residual - b.luck_residual).slice(0, 20);
+    } else {
+      // Legacy research dump — fall back to name matching (only option).
+      const top = tab === "lucky" ? lu.lucky_top_20 : lu.unlucky_top_20;
+      const slateNames = new Set<string>();
+      for (const g of games) for (const p of g.players) slateNames.add(p.name);
+      base = slateNames.size > 0 ? top.filter((r) => slateNames.has(r.name)) : top;
+    }
     const dirMul = sortDir === "desc" ? -1 : 1;
     const cmp = (a: BatterRow, b: BatterRow) => {
       if (sortKey === "name") return a.name.localeCompare(b.name) * dirMul;
@@ -186,7 +221,7 @@ export function Breakouts() {
       return (av - bv) * dirMul;
     };
     return [...base].sort(cmp);
-  }, [report, tab, sortKey, sortDir]);
+  }, [report, tab, sortKey, sortDir, teamById, games]);
 
   if (err) {
     return (
@@ -267,7 +302,7 @@ export function Breakouts() {
           </thead>
           <tbody>
             {rows.map((row, i) => (
-              <PlayerRow key={row.batter_id} row={row} idx={i} mode={tab} />
+              <PlayerRow key={row.batter_id} row={row} idx={i} mode={tab} team={teamById.get(row.batter_id)} />
             ))}
           </tbody>
         </table>

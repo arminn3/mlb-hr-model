@@ -136,13 +136,20 @@ def score_batter_vs_pitcher(
     }
 
     # ── Step 1-2: Pitch mix and weights ──────────────────────────────────────
+    # When the pitcher has no Statcast history (rookie debut, etc.), pitch_mix
+    # is empty — but we still score the batter off their own profile instead
+    # of returning zeros. matchup_score stays at its neutral 0.5 default;
+    # pitcher_score floors at 0.5 (Step 6); batter_score + env_score do all
+    # the work. data_quality flag tells the UI to warn the user.
     pitch_mix = get_pitch_mix(pitcher_df, batter_hand, pitcher_season_df)
-    if not pitch_mix:
+    arsenal_unknown = not pitch_mix
+    if arsenal_unknown:
         result["data_quality"] = "NO_PITCH_DATA"
-        return result
-
-    pitch_weights = get_pitch_weights(pitch_mix)
-    result["pitch_types_used"] = list(pitch_mix.keys())
+        pitch_weights: dict[str, float] = {}
+        result["pitch_types_used"] = []
+    else:
+        pitch_weights = get_pitch_weights(pitch_mix)
+        result["pitch_types_used"] = list(pitch_mix.keys())
 
     # ── Step 3: Get batter's last N total BIP vs pitcher handedness ────────
     # Like PropFinder: take the last 5 (or 10) balls in play total,
@@ -164,7 +171,13 @@ def score_batter_vs_pitcher(
         hand_mask = batter_df["p_throws"] == pitcher_hand
         bip_mask = batter_df["launch_speed"].notna()
         event_mask = batter_df["events"].notna() if "events" in batter_df.columns else True
-        pitch_mask = batter_df["pitch_type"].isin(pitcher_pitch_types) if "pitch_type" in batter_df.columns else True
+        # If the pitcher arsenal is unknown, don't filter by pitch type — fall
+        # back to all BIP vs same-hand pitchers so batter_score still reflects
+        # real recent production.
+        if pitcher_pitch_types and "pitch_type" in batter_df.columns:
+            pitch_mask = batter_df["pitch_type"].isin(pitcher_pitch_types)
+        else:
+            pitch_mask = True
         recent_bip = batter_df[hand_mask & bip_mask & event_mask & pitch_mask].copy()
         if not recent_bip.empty:
             sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in recent_bip.columns else ["game_date"]
@@ -177,7 +190,10 @@ def score_batter_vs_pitcher(
         s_hand = season_df["p_throws"] == pitcher_hand if "p_throws" in season_df.columns else True
         s_bip = season_df["launch_speed"].notna()
         s_event = season_df["events"].notna() if "events" in season_df.columns else True
-        s_pitch = season_df["pitch_type"].isin(pitcher_pitch_types) if "pitch_type" in season_df.columns else True
+        if pitcher_pitch_types and "pitch_type" in season_df.columns:
+            s_pitch = season_df["pitch_type"].isin(pitcher_pitch_types)
+        else:
+            s_pitch = True
         season_bip = season_df[s_hand & s_bip & s_event & s_pitch].copy()
         if not season_bip.empty:
             s_sort = ["game_date", "at_bat_number"] if "at_bat_number" in season_bip.columns else ["game_date"]
@@ -398,7 +414,13 @@ def score_batter_vs_pitcher(
         _hand_mask = batter_df["p_throws"] == pitcher_hand
         _bip_mask = batter_df["launch_speed"].notna()
         _event_mask = batter_df["events"].notna() if "events" in batter_df.columns else True
-        _pitch_mask = batter_df["pitch_type"].isin(pitcher_pitch_types) if "pitch_type" in batter_df.columns else True
+        # If pitcher arsenal is unknown, fall back to all BIP vs same-hand so
+        # recent_abs still populates (ML Rankings' reliability multiplier
+        # otherwise zeros the batter out).
+        if pitcher_pitch_types and "pitch_type" in batter_df.columns:
+            _pitch_mask = batter_df["pitch_type"].isin(pitcher_pitch_types)
+        else:
+            _pitch_mask = True
         _recent_pool = batter_df[_hand_mask & _bip_mask & _event_mask & _pitch_mask].copy()
         if not _recent_pool.empty:
             _sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in _recent_pool.columns else ["game_date"]
@@ -409,7 +431,10 @@ def score_batter_vs_pitcher(
         _s_hand = season_df["p_throws"] == pitcher_hand if "p_throws" in season_df.columns else True
         _s_bip = season_df["launch_speed"].notna()
         _s_event = season_df["events"].notna() if "events" in season_df.columns else True
-        _s_pitch = season_df["pitch_type"].isin(pitcher_pitch_types) if "pitch_type" in season_df.columns else True
+        if pitcher_pitch_types and "pitch_type" in season_df.columns:
+            _s_pitch = season_df["pitch_type"].isin(pitcher_pitch_types)
+        else:
+            _s_pitch = True
         _s_pool = season_df[_s_hand & _s_bip & _s_event & _s_pitch].copy()
         if not _s_pool.empty:
             _s_sort = ["game_date", "at_bat_number"] if "at_bat_number" in _s_pool.columns else ["game_date"]

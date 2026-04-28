@@ -1,9 +1,37 @@
 "use client";
 
-import type { GameData, LookbackKey, PlayerData, PitcherStats } from "./types";
+import type { GameData, LookbackKey, PlayerData, TeamPitchMixSide } from "./types";
 import { GameHeader } from "./game-header";
-import { PitcherCard } from "./pitcher-card";
+import { PitcherProfileCard } from "./pitcher-profile-card";
 import { BatterCard } from "./batter-card";
+
+type LineupInfo = { order: number | null; id: number };
+
+function buildLineupLookup(side?: TeamPitchMixSide): Map<string, LineupInfo> {
+  const m = new Map<string, LineupInfo>();
+  if (!side) return m;
+  for (const b of side.batters) m.set(b.name, { order: b.order, id: b.id });
+  return m;
+}
+
+function sortBatters(
+  players: PlayerData[],
+  lookup: Map<string, LineupInfo>,
+  posted: boolean,
+  lookback: LookbackKey,
+): { p: PlayerData; info?: LineupInfo }[] {
+  const rows = players.map((p) => ({ p, info: lookup.get(p.name) }));
+  if (posted) {
+    // Confirmed lineup — show only starters (order 1-9), sort by batting slot
+    return rows
+      .filter(({ info }) => info?.order != null && info.order >= 1 && info.order <= 9)
+      .sort((a, b) => (a.info!.order! - b.info!.order!));
+  }
+  // Projected / tbd — fall back to composite-score sort
+  return rows.sort(
+    (a, b) => (b.p.scores[lookback]?.composite ?? 0) - (a.p.scores[lookback]?.composite ?? 0),
+  );
+}
 
 export function GameSection({
   game,
@@ -12,20 +40,25 @@ export function GameSection({
   game: GameData;
   lookback: LookbackKey;
 }) {
-  // Split players into home batters (facing away pitcher) and away batters (facing home pitcher)
-  const homeBatters = game.players
-    .filter((p) => p.batter_side === "home")
-    .sort((a, b) => (b.scores[lookback]?.composite ?? 0) - (a.scores[lookback]?.composite ?? 0));
+  const homeSide = game.team_pitch_mix?.home;
+  const awaySide = game.team_pitch_mix?.away;
+  const homeLookup = buildLineupLookup(homeSide);
+  const awayLookup = buildLineupLookup(awaySide);
+  const homePosted = homeSide?.lineup_status === "posted";
+  const awayPosted = awaySide?.lineup_status === "posted";
 
-  const awayBatters = game.players
-    .filter((p) => p.batter_side === "away")
-    .sort((a, b) => (b.scores[lookback]?.composite ?? 0) - (a.scores[lookback]?.composite ?? 0));
-
-  // Extract pitcher stats from first player on each side
-  const awayPitcherStats = homeBatters[0]?.pitcher_stats ?? defaultPitcherStats;
-  const homePitcherStats = awayBatters[0]?.pitcher_stats ?? defaultPitcherStats;
-  const awayPitcherTypes = homeBatters[0]?.pitch_types ?? [];
-  const homePitcherTypes = awayBatters[0]?.pitch_types ?? [];
+  const homeBatters = sortBatters(
+    game.players.filter((p) => p.batter_side === "home"),
+    homeLookup,
+    homePosted,
+    lookback,
+  );
+  const awayBatters = sortBatters(
+    game.players.filter((p) => p.batter_side === "away"),
+    awayLookup,
+    awayPosted,
+    lookback,
+  );
 
   return (
     <div
@@ -44,61 +77,65 @@ export function GameSection({
         env={game.environment}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Side 1: Home batters vs Away pitcher */}
-        <div>
-          <h3
-            className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted/80 mb-3 pb-2"
-            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
-          >
-            {game.home_team} Batters vs {game.away_pitcher.name} ({game.away_pitcher.hand}HP)
-          </h3>
-          <PitcherCard
-            pitcher={game.away_pitcher}
-            stats={awayPitcherStats}
-            pitchTypes={awayPitcherTypes}
-          />
-          <div className="space-y-2">
-            {homeBatters.map((p, i) => (
-              <BatterCard key={p.name} player={p} lookback={lookback} rank={i + 1} />
-            ))}
-            {homeBatters.length === 0 && (
-              <p className="text-xs text-muted py-4 text-center">No batters with HR props</p>
-            )}
-          </div>
-        </div>
+      {/* Stacked layout — pitcher then the batters facing them, twice */}
+      <PitcherBlock
+        title={`${game.home_team} Batters vs ${game.away_pitcher.name}`}
+        pitcher={game.away_pitcher}
+        batters={homeBatters}
+        posted={homePosted}
+        lookback={lookback}
+      />
+      <PitcherBlock
+        title={`${game.away_team} Batters vs ${game.home_pitcher.name}`}
+        pitcher={game.home_pitcher}
+        batters={awayBatters}
+        posted={awayPosted}
+        lookback={lookback}
+        className="mt-8"
+      />
+    </div>
+  );
+}
 
-        {/* Side 2: Away batters vs Home pitcher */}
-        <div>
-          <h3
-            className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted/80 mb-3 pb-2"
-            style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
-          >
-            {game.away_team} Batters vs {game.home_pitcher.name} ({game.home_pitcher.hand}HP)
-          </h3>
-          <PitcherCard
-            pitcher={game.home_pitcher}
-            stats={homePitcherStats}
-            pitchTypes={homePitcherTypes}
+function PitcherBlock({
+  title,
+  pitcher,
+  batters,
+  posted,
+  lookback,
+  className = "",
+}: {
+  title: string;
+  pitcher: GameData["away_pitcher"];
+  batters: { p: PlayerData; info?: LineupInfo }[];
+  posted: boolean;
+  lookback: LookbackKey;
+  className?: string;
+}) {
+  return (
+    <div className={className}>
+      <h3
+        className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted/80 mb-3 pb-2"
+        style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+      >
+        {title} ({pitcher.hand}HP)
+      </h3>
+      <PitcherProfileCard pitcher={pitcher} />
+      <div className="space-y-3">
+        {batters.map(({ p, info }) => (
+          <BatterCard
+            key={p.name}
+            player={p}
+            lookback={lookback}
+            battingOrder={posted ? (info?.order ?? null) : null}
+            mlbId={info?.id}
           />
-          <div className="space-y-2">
-            {awayBatters.map((p, i) => (
-              <BatterCard key={p.name} player={p} lookback={lookback} rank={i + 1} />
-            ))}
-            {awayBatters.length === 0 && (
-              <p className="text-xs text-muted py-4 text-center">No batters with HR props</p>
-            )}
-          </div>
-        </div>
+        ))}
+        {batters.length === 0 && (
+          <p className="text-xs text-muted py-4 text-center">No batters with HR props</p>
+        )}
       </div>
     </div>
   );
 }
 
-const defaultPitcherStats: PitcherStats = {
-  fb_rate: 0,
-  hr_fb_rate: 0,
-  hr_per_9: 0,
-  ip: 0,
-  total_hrs: 0,
-};

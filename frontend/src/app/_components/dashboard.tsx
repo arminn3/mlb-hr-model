@@ -1,7 +1,7 @@
 "use client";
 
-import { Menu } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight, Menu } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import type { ModelData, LookbackKey, GameEnvironment } from "./types";
 import { Sidebar, type Page } from "./sidebar";
 import { LookbackToggle } from "./lookback-toggle";
@@ -21,6 +21,15 @@ import { ProjectionsView } from "./projections-view";
 import { MatchupAnalysis } from "./matchup-analysis";
 import { TeamPitchMixPage } from "./team-pitch-mix-page";
 import { IconButton } from "./ui/icon-button";
+import { teamLogoUrl } from "./game-header";
+
+function formatLongDate(dateStr: string): string {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  if (!y || !m || !d) return dateStr;
+  const month = new Date(Date.UTC(y, m - 1, d)).toLocaleString("en-US", { month: "long", timeZone: "UTC" });
+  const ord = d % 100 >= 11 && d % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][d % 10] ?? "th";
+  return `${month} ${d}${ord}`;
+}
 
 /** Central per-tab config. Replaces the hardcoded conditional at the
  *  old dashboard header line 209. Easier to audit which tabs show what. */
@@ -58,7 +67,7 @@ const MAINTENANCE_MODE = MAINTENANCE_MODE_PROD && IS_PROD;
 // Dates hidden from prod only (dev sees them normally).
 // Add YYYY-MM-DD strings here to fall back to the prior day on prod.
 const PROD_BLOCKED_DATES: Set<string> = new Set(
-  IS_PROD ? ["2026-04-22", "2026-04-23", "2026-04-24", "2026-04-25"] : []
+  IS_PROD ? ["2026-04-22", "2026-04-23", "2026-04-24", "2026-04-25", "2026-04-26", "2026-04-27", "2026-04-28"] : []
 );
 
 function MaintenancePage({ onLive }: { onLive: () => void }) {
@@ -86,6 +95,135 @@ function MaintenancePage({ onLive }: { onLive: () => void }) {
           View Live Game Feed
         </button>
       </div>
+    </div>
+  );
+}
+
+type SlateGame = { game_pk: number; away_team: string; home_team: string; game_time?: string };
+
+function SlateGameFilter({
+  games,
+  date,
+  selected,
+  onSelect,
+}: {
+  games: SlateGame[];
+  date: string;
+  selected: Set<number>;
+  onSelect: (gamePk: number) => void;
+}) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const longDate = formatLongDate(date);
+
+  const updateScrollState = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+  };
+
+  useEffect(() => {
+    updateScrollState();
+    const ro = new ResizeObserver(updateScrollState);
+    if (scrollRef.current) ro.observe(scrollRef.current);
+    return () => ro.disconnect();
+  }, [games.length]);
+
+  const page = (dir: 1 | -1) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+  };
+
+  return (
+    <div className="relative mb-6">
+      <div
+        ref={scrollRef}
+        onScroll={updateScrollState}
+        className="flex gap-3 overflow-x-auto pb-1 px-1 scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {games.map((game) => {
+          const sel = selected.has(game.game_pk);
+          const time = (game.game_time ?? "").replace(/\s*ET\s*$/i, "").trim();
+          return (
+            <button
+              key={game.game_pk}
+              type="button"
+              onClick={() => onSelect(game.game_pk)}
+              className={`shrink-0 w-[160px] rounded-2xl px-4 py-3 cursor-pointer transition-all flex flex-col gap-3 items-stretch ${
+                sel
+                  ? "bg-accent/10 border border-accent shadow-[0_0_0_1px_var(--accent)]"
+                  : "bg-card/50 border border-card-border hover:border-foreground/40"
+              }`}
+            >
+              <div className="grid grid-cols-[1fr_auto_1fr] gap-1.5 items-center w-full">
+                <div className="flex gap-1 items-center justify-self-end">
+                  <img
+                    src={teamLogoUrl(game.away_team)}
+                    alt={game.away_team}
+                    className="w-4 h-4 object-contain"
+                    loading="lazy"
+                  />
+                  <span className="text-sm font-medium text-foreground">{game.away_team}</span>
+                </div>
+                <span className="text-xs text-muted">@</span>
+                <div className="flex gap-1 items-center justify-self-start">
+                  <img
+                    src={teamLogoUrl(game.home_team)}
+                    alt={game.home_team}
+                    className="w-4 h-4 object-contain"
+                    loading="lazy"
+                  />
+                  <span className="text-sm font-medium text-foreground">{game.home_team}</span>
+                </div>
+              </div>
+              <div className="text-center text-xs text-muted whitespace-nowrap">
+                {longDate}
+                {time && <span className="text-[9px] mx-1 align-middle">•</span>}
+                {time && time}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Left edge: fade + chevron, only when scrollable left */}
+      <div
+        aria-hidden
+        className={`pointer-events-none absolute left-0 top-0 bottom-2 w-16 bg-gradient-to-r from-background to-transparent transition-opacity duration-200 ${
+          canScrollLeft ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      <button
+        type="button"
+        aria-label="Scroll games left"
+        onClick={() => page(-1)}
+        className={`absolute left-0 top-1/2 -translate-y-1/2 size-9 flex items-center justify-center rounded-lg bg-card border border-card-border text-muted hover:text-foreground hover:border-foreground/40 cursor-pointer shadow-sm transition-opacity duration-200 ${
+          canScrollLeft ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <ChevronLeft className="size-4" />
+      </button>
+
+      {/* Right edge: fade + chevron, only when scrollable right */}
+      <div
+        aria-hidden
+        className={`pointer-events-none absolute right-0 top-0 bottom-2 w-16 bg-gradient-to-l from-background to-transparent transition-opacity duration-200 ${
+          canScrollRight ? "opacity-100" : "opacity-0"
+        }`}
+      />
+      <button
+        type="button"
+        aria-label="Scroll games right"
+        onClick={() => page(1)}
+        className={`absolute right-0 top-1/2 -translate-y-1/2 size-9 flex items-center justify-center rounded-lg bg-card border border-card-border text-muted hover:text-foreground hover:border-foreground/40 cursor-pointer shadow-sm transition-opacity duration-200 ${
+          canScrollRight ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <ChevronRight className="size-4" />
+      </button>
     </div>
   );
 }
@@ -167,6 +305,12 @@ export function Dashboard() {
     // Always load latest data on first visit
     loadDate("");
   }, []);
+
+  // Default the slate filter to the first game whenever the date changes.
+  useEffect(() => {
+    if (!data?.games || data.games.length === 0) return;
+    setSelectedGames(new Set([data.games[0].game_pk]));
+  }, [data?.date]);
 
   // Maintenance gate — runs after all hooks are declared so hook order
   // stays stable across re-renders. Live Feed stays reachable on prod.
@@ -295,45 +439,13 @@ export function Dashboard() {
 
           {activePage === "slate" && (
             <>
-              {/* Game filter — multi-select chips */}
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                <button
-                  onClick={() => setSelectedGames(new Set())}
-                  className={`px-3 py-1.5 text-xs rounded-full cursor-pointer transition-colors ${
-                    selectedGames.size === 0
-                      ? "bg-accent text-background font-bold"
-                      : "bg-card/50 text-muted border border-card-border hover:text-foreground"
-                  }`}
-                >
-                  All ({data.games.length})
-                </button>
-                {data.games.map((game) => {
-                  const sel = selectedGames.has(game.game_pk);
-                  return (
-                    <button
-                      key={game.game_pk}
-                      onClick={() => {
-                        setSelectedGames((prev) => {
-                          const next = new Set(prev);
-                          if (next.has(game.game_pk)) next.delete(game.game_pk);
-                          else next.add(game.game_pk);
-                          return next;
-                        });
-                      }}
-                      className={`px-2.5 py-1.5 text-[11px] rounded-full cursor-pointer transition-colors ${
-                        sel
-                          ? "bg-accent/15 text-accent border border-accent/30 font-semibold"
-                          : selectedGames.size === 0
-                          ? "bg-card/50 text-foreground border border-card-border"
-                          : "bg-card/50 text-muted border border-card-border hover:text-foreground"
-                      }`}
-                    >
-                      {game.away_team}@{game.home_team}
-                    </button>
-                  );
-                })}
-              </div>
-              {(selectedGames.size === 0 ? data.games : data.games.filter((g) => selectedGames.has(g.game_pk))).map((game) => (
+              <SlateGameFilter
+                games={data.games}
+                date={data.date}
+                selected={selectedGames}
+                onSelect={(pk) => setSelectedGames(new Set([pk]))}
+              />
+              {data.games.filter((g) => selectedGames.has(g.game_pk)).map((game) => (
                 <GameSection key={game.game_pk} game={game} lookback={lookback} />
               ))}
               {data.games.length === 0 && (
@@ -367,7 +479,7 @@ export function Dashboard() {
           )}
 
           {activePage === "breakouts" && (
-            <Breakouts />
+            <Breakouts games={data.games} />
           )}
 
           {activePage === "matchup" && (
