@@ -58,18 +58,23 @@ export default function RootLayout({
             fontFamily: "var(--font-inter)",
             spacingUnit: "0.85rem",
           },
+          layout: {
+            // Kill the orange "Development mode" banner on test instances.
+            unsafe_disableDevelopmentModeWarnings: true,
+          },
           elements: {
             // UserButton dropdown — tighter, more modern.
-            userButtonPopoverCard: "w-64 shadow-xl border border-white/8 rounded-lg",
+            userButtonPopoverCard: "w-64 shadow-2xl border border-white/10 rounded-lg",
             userButtonPopoverMain: "py-1",
-            userButtonPopoverActionButton: "py-2 px-3 text-[13px] font-medium hover:bg-white/5",
-            userButtonPopoverActionButtonText: "text-[13px]",
-            userButtonPopoverActionButtonIcon: "w-4 h-4",
+            userButtonPopoverActionButton: "py-2 px-3 text-[13px] font-medium text-white hover:bg-white/5",
+            userButtonPopoverActionButtonText: "text-[13px] text-white",
+            userButtonPopoverActionButtonIcon: "w-4 h-4 text-white/70",
             userButtonPopoverFooter: "hidden",
-            userButtonPopoverUserPreview: "py-2 px-3",
-            userButtonPopoverUserPreviewMainIdentifier: "text-[13px] font-semibold",
-            userButtonPopoverUserPreviewSecondaryIdentifier: "text-[11px] text-muted",
-            // Sign-in / sign-up pages — also no Clerk footer chrome.
+            // User preview block (avatar + name + email at top of dropdown).
+            userPreview: "py-2 px-3",
+            userPreviewMainIdentifier: "text-[13px] font-semibold text-white",
+            userPreviewSecondaryIdentifier: "text-[11px] text-white/60",
+            // Sign-in / sign-up page footer chrome.
             footer: "hidden",
           },
         }}
