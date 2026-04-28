@@ -70,7 +70,7 @@ function Nav() {
           <a href="#how" className="hidden sm:block text-sm text-muted hover:text-foreground transition-colors">How it works</a>
           <a href="#faq" className="hidden sm:block text-sm text-muted hover:text-foreground transition-colors">FAQ</a>
           <a
-            href="/"
+            href="/dashboard"
             className="px-4 py-1.5 text-xs font-semibold rounded-lg text-background transition-all hover:opacity-90"
             style={{ background: "linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)" }}
           >
@@ -99,7 +99,7 @@ function Hero() {
       </p>
       <div className="flex items-center justify-center gap-3">
         <a
-          href="/"
+          href="/dashboard"
           className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-lg text-background transition-all hover:opacity-90 shadow-lg"
           style={{ background: "linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)" }}
         >
@@ -220,7 +220,7 @@ function LivePreview() {
         )}
         <div className="mt-5 text-center">
           <a
-            href="/"
+            href="/dashboard"
             className="inline-flex items-center gap-2 text-sm font-semibold transition-colors"
             style={{ color: "#60a5fa" }}
           >
@@ -361,7 +361,7 @@ function CTA() {
         </h2>
         <p className="text-muted mb-6">Today&apos;s slate is already scored. Walk in at first pitch.</p>
         <a
-          href="/"
+          href="/dashboard"
           className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-lg text-background transition-all hover:opacity-90 shadow-lg"
           style={{ background: "linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)" }}
         >

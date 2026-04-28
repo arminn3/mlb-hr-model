@@ -155,7 +155,7 @@ export function Sidebar({
         style={{ height: 60 }}
       >
         {!collapsed && (
-          <div className="min-w-0">
+          <a href="/" className="min-w-0 cursor-pointer hover:opacity-80 transition-opacity">
             <div
               className="font-semibold text-foreground truncate"
               style={{ fontSize: 14, lineHeight: "20px", letterSpacing: "-0.005em" }}
@@ -168,7 +168,7 @@ export function Sidebar({
             >
               MLB HR Prop Analysis
             </div>
-          </div>
+          </a>
         )}
         {onToggleCollapse && (
           <button
