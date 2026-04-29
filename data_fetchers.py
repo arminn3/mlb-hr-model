@@ -24,6 +24,143 @@ MLB_API_BASE = "https://statsapi.mlb.com/api/v1"
 ODDS_API_BASE = "https://api.the-odds-api.com/v4"
 ODDS_CACHE_FILE = Path("odds_cache.json")
 
+ROTOWIRE_LINEUPS_URL = "https://www.rotowire.com/baseball/daily-lineups.php"
+_rotowire_cache: Optional[dict] = None  # team-pair → pitcher dicts, fetched once per process
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Rotowire fallback (for pitchers MLB API hasn't published yet)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# MLB API uses "AZ"; Rotowire uses "ARI". Normalize both to "AZ".
+_ROTOWIRE_TEAM_FIXUPS = {"ARI": "AZ"}
+
+
+def _slug_to_name(slug: str) -> str:
+    """Convert Rotowire URL slug ('cristopher-sanchez-16500') to display name."""
+    parts = slug.split("-")
+    # Strip trailing numeric Rotowire id
+    while parts and parts[-1].isdigit():
+        parts.pop()
+    return " ".join(p.capitalize() for p in parts)
+
+
+def _normalize_abbr(abbr: str) -> str:
+    return _ROTOWIRE_TEAM_FIXUPS.get(abbr, abbr)
+
+
+def _fetch_rotowire_pitchers() -> dict:
+    """Scrape Rotowire's daily lineups page. Returns dict keyed by
+    (away_abbr, home_abbr) → {away_pitcher: {name, hand}, home_pitcher: ...}.
+
+    Names are expanded from URL slugs so abbreviated displays like 'C. Sanchez'
+    become 'Cristopher Sanchez' — important for downstream MLB ID lookup.
+    """
+    global _rotowire_cache
+    if _rotowire_cache is not None:
+        return _rotowire_cache
+    import re
+    try:
+        r = requests.get(
+            ROTOWIRE_LINEUPS_URL,
+            headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"},
+            timeout=15,
+        )
+        r.raise_for_status()
+    except Exception as e:
+        print(f"  Rotowire fetch failed: {e}")
+        _rotowire_cache = {}
+        return _rotowire_cache
+
+    html = r.text
+    chunks = re.split(r'<div class="lineup is-mlb', html)[1:]
+    pitcher_block_re = re.compile(
+        r'lineup__player-highlight[^"]*">\s*<div class="lineup__player-highlight-name">\s*'
+        r'<a href="/baseball/player/([a-z0-9\-]+)"[^>]*>([^<]+)</a>\s*'
+        r'<span class="lineup__throws">([LRS])</span>'
+    )
+    out: dict = {}
+    for chunk in chunks:
+        # Truncate at next game container to avoid bleed-over
+        end = chunk.find('<div class="lineup is-')
+        if end != -1:
+            chunk = chunk[:end]
+        abbrs = re.findall(r'class="lineup__abbr">([A-Z]{2,4})<', chunk)
+        pitchers = pitcher_block_re.findall(chunk)
+        if len(abbrs) < 2 or len(pitchers) < 2:
+            continue
+        away_abbr = _normalize_abbr(abbrs[0])
+        home_abbr = _normalize_abbr(abbrs[1])
+        out[(away_abbr, home_abbr)] = {
+            "away_pitcher": {
+                "name": _slug_to_name(pitchers[0][0]),
+                "hand": pitchers[0][2],
+            },
+            "home_pitcher": {
+                "name": _slug_to_name(pitchers[1][0]),
+                "hand": pitchers[1][2],
+            },
+        }
+    _rotowire_cache = out
+    return out
+
+
+def _lookup_pitcher_mlb_id(name: str) -> Optional[int]:
+    """Look up an active pitcher's MLB ID by name. Returns None if not found."""
+    try:
+        url = f"{MLB_API_BASE}/people/search?names={requests.utils.quote(name)}&sportIds=1"
+        resp = requests.get(url, timeout=10)
+        resp.raise_for_status()
+        people = resp.json().get("people", [])
+        # Prefer pitcher with matching last name + active status
+        for p in people:
+            pos = (p.get("primaryPosition") or {}).get("abbreviation", "")
+            if pos == "P":
+                return p.get("id")
+        # Fallback: first active person
+        for p in people:
+            if p.get("active"):
+                return p.get("id")
+        return people[0].get("id") if people else None
+    except Exception:
+        return None
+
+
+def _augment_with_rotowire(games: list[dict]) -> int:
+    """Fill in missing probable pitchers from Rotowire. Returns count filled."""
+    needs_lookup = any(
+        g.get("away_pitcher") is None or g.get("home_pitcher") is None
+        for g in games
+    )
+    if not needs_lookup:
+        return 0
+
+    print("  MLB API has gaps; checking Rotowire for projected starters...")
+    rw = _fetch_rotowire_pitchers()
+    if not rw:
+        return 0
+
+    filled = 0
+    for g in games:
+        key = (g["away_team"], g["home_team"])
+        rw_game = rw.get(key)
+        if not rw_game:
+            continue
+        for slot in ("away_pitcher", "home_pitcher"):
+            if g.get(slot) is not None:
+                continue  # MLB already had it; trust them
+            rw_p = rw_game.get(slot)
+            if not rw_p:
+                continue
+            pid = _lookup_pitcher_mlb_id(rw_p["name"])
+            if pid is None:
+                print(f"    {key[0]}@{key[1]} {slot}: '{rw_p['name']}' (Rotowire) — MLB ID lookup failed, skipping")
+                continue
+            g[slot] = {"id": pid, "name": rw_p["name"], "hand": rw_p["hand"], "source": "rotowire"}
+            print(f"    {key[0]}@{key[1]} {slot}: {rw_p['name']} (Rotowire projected)")
+            filled += 1
+    return filled
+
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # MLB Stats API
@@ -94,6 +231,8 @@ def get_todays_schedule(game_date: date = None) -> list[dict]:
                 "away_lineup": away_lineup,
                 "home_lineup": home_lineup,
             })
+
+    _augment_with_rotowire(games)
     return games
 
 

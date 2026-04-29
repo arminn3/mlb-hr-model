@@ -1,0 +1,625 @@
+{
+  "date": "2026-04-28",
+  "total_players_ranked": 338,
+  "total_hrs_hit": 27,
+  "total_near_hrs": 11,
+  "model_hits": 19,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 338,
+        "hits": 19,
+        "rate": 5.6
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
+      },
+      "all": {
+        "total": 338,
+        "hits": 19,
+        "rate": 5.6
+      }
+    }
+  },
+  "model_near_hits": 11,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 3,
+      "rate": 10.0
+    },
+    "all": {
+      "total": 338,
+      "hits": 19,
+      "rate": 5.6
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 4,
+      "rate": 20.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 4,
+      "rate": 13.3
+    },
+    "all": {
+      "total": 338,
+      "hits": 30,
+      "rate": 8.9
+    }
+  },
+  "avg_composite_hr_hitters": 0.322,
+  "avg_composite_non_hitters": 0.299,
+  "composite_separation": 0.023,
+  "hr_hitters": [
+    {
+      "name": "Aaron Judge",
+      "rank": 13,
+      "composite": 0.704,
+      "opp_pitcher": "Jacob deGrom",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Byron Buxton",
+      "rank": 15,
+      "composite": 0.684,
+      "opp_pitcher": "Logan Gilbert",
+      "matchup": "SEA@MIN"
+    },
+    {
+      "name": "Juan Soto",
+      "rank": 19,
+      "composite": 0.665,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "WSH@NYM"
+    },
+    {
+      "name": "Wenceel P\u00e9rez",
+      "rank": 49,
+      "composite": 0.586,
+      "opp_pitcher": "Mart\u00edn P\u00e9rez",
+      "matchup": "DET@ATL"
+    },
+    {
+      "name": "Brice Matthews",
+      "rank": 81,
+      "composite": 0.513,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "HOU@BAL"
+    },
+    {
+      "name": "Josh Naylor",
+      "rank": 87,
+      "composite": 0.504,
+      "opp_pitcher": "Joe Ryan",
+      "matchup": "SEA@MIN"
+    },
+    {
+      "name": "Oneil Cruz",
+      "rank": 103,
+      "composite": 0.454,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@PIT"
+    },
+    {
+      "name": "Xander Bogaerts",
+      "rank": 121,
+      "composite": 0.302,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Josh Lowe",
+      "rank": 156,
+      "composite": 0.235,
+      "opp_pitcher": "Davis Martin",
+      "matchup": "LAA@CWS"
+    },
+    {
+      "name": "Bo Bichette",
+      "rank": 173,
+      "composite": 0.213,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "WSH@NYM"
+    },
+    {
+      "name": "Ryan O'Hearn",
+      "rank": 187,
+      "composite": 0.196,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@PIT"
+    },
+    {
+      "name": "Austin Wells",
+      "rank": 209,
+      "composite": 0.17,
+      "opp_pitcher": "Jacob deGrom",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Edouard Julien",
+      "rank": 215,
+      "composite": 0.163,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "COL@CIN"
+    },
+    {
+      "name": "Pete Crow-Armstrong",
+      "rank": 232,
+      "composite": 0.15,
+      "opp_pitcher": "Walker Buehler",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Pete Alonso",
+      "rank": 235,
+      "composite": 0.147,
+      "opp_pitcher": "Kai-Wei Teng",
+      "matchup": "HOU@BAL"
+    },
+    {
+      "name": "Ozzie Albies",
+      "rank": 255,
+      "composite": 0.135,
+      "opp_pitcher": "Casey Mize",
+      "matchup": "DET@ATL"
+    },
+    {
+      "name": "Konnor Griffin",
+      "rank": 256,
+      "composite": 0.134,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@PIT"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 278,
+      "composite": 0.122,
+      "opp_pitcher": "Jos\u00e9 Soriano",
+      "matchup": "LAA@CWS"
+    },
+    {
+      "name": "Drew Romo",
+      "rank": 337,
+      "composite": 0.036,
+      "opp_pitcher": "Jos\u00e9 Soriano",
+      "matchup": "LAA@CWS"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Byron Buxton",
+      "rank": 3,
+      "composite": 0.767,
+      "opp_pitcher": "Logan Gilbert",
+      "matchup": "SEA@MIN"
+    },
+    {
+      "name": "Juan Soto",
+      "rank": 31,
+      "composite": 0.606,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "WSH@NYM"
+    },
+    {
+      "name": "Brice Matthews",
+      "rank": 49,
+      "composite": 0.536,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "HOU@BAL"
+    },
+    {
+      "name": "Aaron Judge",
+      "rank": 76,
+      "composite": 0.465,
+      "opp_pitcher": "Jacob deGrom",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Josh Lowe",
+      "rank": 90,
+      "composite": 0.428,
+      "opp_pitcher": "Davis Martin",
+      "matchup": "LAA@CWS"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 100,
+      "composite": 0.404,
+      "opp_pitcher": "Jos\u00e9 Soriano",
+      "matchup": "LAA@CWS"
+    },
+    {
+      "name": "Pete Alonso",
+      "rank": 102,
+      "composite": 0.4,
+      "opp_pitcher": "Kai-Wei Teng",
+      "matchup": "HOU@BAL"
+    },
+    {
+      "name": "Wenceel P\u00e9rez",
+      "rank": 109,
+      "composite": 0.374,
+      "opp_pitcher": "Mart\u00edn P\u00e9rez",
+      "matchup": "DET@ATL"
+    },
+    {
+      "name": "Ozzie Albies",
+      "rank": 111,
+      "composite": 0.373,
+      "opp_pitcher": "Casey Mize",
+      "matchup": "DET@ATL"
+    },
+    {
+      "name": "Josh Naylor",
+      "rank": 140,
+      "composite": 0.312,
+      "opp_pitcher": "Joe Ryan",
+      "matchup": "SEA@MIN"
+    },
+    {
+      "name": "Oneil Cruz",
+      "rank": 146,
+      "composite": 0.309,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@PIT"
+    },
+    {
+      "name": "Edouard Julien",
+      "rank": 151,
+      "composite": 0.305,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "COL@CIN"
+    },
+    {
+      "name": "Konnor Griffin",
+      "rank": 157,
+      "composite": 0.299,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@PIT"
+    },
+    {
+      "name": "Xander Bogaerts",
+      "rank": 194,
+      "composite": 0.233,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Bo Bichette",
+      "rank": 211,
+      "composite": 0.211,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "WSH@NYM"
+    },
+    {
+      "name": "Pete Crow-Armstrong",
+      "rank": 231,
+      "composite": 0.173,
+      "opp_pitcher": "Walker Buehler",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Austin Wells",
+      "rank": 248,
+      "composite": 0.146,
+      "opp_pitcher": "Jacob deGrom",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Ryan O'Hearn",
+      "rank": 275,
+      "composite": 0.126,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@PIT"
+    },
+    {
+      "name": "Drew Romo",
+      "rank": 338,
+      "composite": 0.036,
+      "opp_pitcher": "Jos\u00e9 Soriano",
+      "matchup": "LAA@CWS"
+    }
+  ],
+  "near_hr_hitters": [
+    {
+      "name": "Angel Mart\u00ednez",
+      "rank": 12,
+      "composite": 0.719,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "TB@CLE"
+    },
+    {
+      "name": "Dylan Beavers",
+      "rank": 34,
+      "composite": 0.627,
+      "opp_pitcher": "Kai-Wei Teng",
+      "matchup": "HOU@BAL"
+    },
+    {
+      "name": "Royce Lewis",
+      "rank": 55,
+      "composite": 0.578,
+      "opp_pitcher": "Logan Gilbert",
+      "matchup": "SEA@MIN"
+    },
+    {
+      "name": "Connor Norby",
+      "rank": 76,
+      "composite": 0.524,
+      "opp_pitcher": "Shohei Ohtani",
+      "matchup": "MIA@LAD"
+    },
+    {
+      "name": "Jazz Chisholm Jr.",
+      "rank": 95,
+      "composite": 0.488,
+      "opp_pitcher": "Jacob deGrom",
+      "matchup": "NYY@TEX"
+    },
+    {
+      "name": "Trevor Larnach",
+      "rank": 97,
+      "composite": 0.479,
+      "opp_pitcher": "Logan Gilbert",
+      "matchup": "SEA@MIN"
+    },
+    {
+      "name": "Jackson Merrill",
+      "rank": 124,
+      "composite": 0.299,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Matt Shaw",
+      "rank": 146,
+      "composite": 0.253,
+      "opp_pitcher": "Walker Buehler",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Brent Rooker",
+      "rank": 195,
+      "composite": 0.184,
+      "opp_pitcher": "Kris Bubic",
+      "matchup": "KC@ATH"
+    },
+    {
+      "name": "Adolis Garc\u00eda",
+      "rank": 220,
+      "composite": 0.16,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "SF@PHI"
+    },
+    {
+      "name": "Cody Bellinger",
+      "rank": 243,
+      "composite": 0.143,
+      "opp_pitcher": "Jacob deGrom",
+      "matchup": "NYY@TEX"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Brent Rooker",
+      "ev": 109.8,
+      "angle": 38.0,
+      "distance": 405.0,
+      "hr_in_parks": 19,
+      "result": "",
+      "pitcher": "Strahm, Matt"
+    },
+    {
+      "batter": "Salvador Perez",
+      "ev": 106.0,
+      "angle": 22.0,
+      "distance": 377.0,
+      "hr_in_parks": 26,
+      "result": "single",
+      "pitcher": "Civale, Aaron"
+    },
+    {
+      "batter": "Dylan Beavers",
+      "ev": 100.3,
+      "angle": 32.0,
+      "distance": 380.0,
+      "hr_in_parks": 12,
+      "result": "field_out",
+      "pitcher": "Teng, Kai-Wei"
+    },
+    {
+      "batter": "Angel Mart\u00ednez",
+      "ev": 104.2,
+      "angle": 22.0,
+      "distance": 385.0,
+      "hr_in_parks": 5,
+      "result": "double",
+      "pitcher": "Sulser, Cole"
+    },
+    {
+      "batter": "Connor Norby",
+      "ev": 101.0,
+      "angle": 37.0,
+      "distance": 374.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Ohtani, Shohei"
+    },
+    {
+      "batter": "Garrett Mitchell",
+      "ev": 106.8,
+      "angle": 38.0,
+      "distance": 385.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Kelly, Merrill"
+    },
+    {
+      "batter": "Royce Lewis",
+      "ev": 97.8,
+      "angle": 29.0,
+      "distance": 381.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Bazardo, Eduard"
+    },
+    {
+      "batter": "Trevor Larnach",
+      "ev": 105.8,
+      "angle": 20.0,
+      "distance": 389.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Gilbert, Logan"
+    },
+    {
+      "batter": "Adolis Garc\u00eda",
+      "ev": 102.3,
+      "angle": 25.0,
+      "distance": 382.0,
+      "hr_in_parks": 21,
+      "result": "double",
+      "pitcher": "Mahle, Tyler"
+    },
+    {
+      "batter": "Alec Burleson",
+      "ev": 109.6,
+      "angle": 21.0,
+      "distance": 376.0,
+      "hr_in_parks": 13,
+      "result": "double",
+      "pitcher": "Barco, Hunter"
+    },
+    {
+      "batter": "Alec Burleson",
+      "ev": 101.9,
+      "angle": 29.0,
+      "distance": 385.0,
+      "hr_in_parks": 24,
+      "result": "double",
+      "pitcher": "Ashcraft, Braxton"
+    },
+    {
+      "batter": "Jackson Merrill",
+      "ev": 98.5,
+      "angle": 33.0,
+      "distance": 371.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Cabrera, Edward"
+    },
+    {
+      "batter": "Matt Shaw",
+      "ev": 99.5,
+      "angle": 22.0,
+      "distance": 382.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Buehler, Walker"
+    },
+    {
+      "batter": "Jazz Chisholm Jr.",
+      "ev": 106.5,
+      "angle": 23.0,
+      "distance": 399.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "deGrom, Jacob"
+    },
+    {
+      "batter": "Cody Bellinger",
+      "ev": 97.5,
+      "angle": 25.0,
+      "distance": 382.0,
+      "hr_in_parks": 21,
+      "result": "double",
+      "pitcher": "deGrom, Jacob"
+    }
+  ],
+  "surprise_hrs": [
+    {
+      "name": "Spencer Steer",
+      "pitcher": "Kyle Freeland",
+      "description": "Spencer Steer homers (5) on a fly ball to left center field. Elly De La Cruz scores."
+    },
+    {
+      "name": "Elly De La Cruz",
+      "pitcher": "Tanner Gordon",
+      "description": "Elly De La Cruz homers (10) on a fly ball to left center field. Dane Myers scores."
+    },
+    {
+      "name": "Nolan Gorman",
+      "pitcher": "Braxton Ashcraft",
+      "description": "Nolan Gorman homers (4) on a fly ball to right field."
+    },
+    {
+      "name": "Victor Scott II",
+      "pitcher": "Braxton Ashcraft",
+      "description": "Victor Scott II homers (1) on a fly ball to right field."
+    },
+    {
+      "name": "Sal Frelick",
+      "pitcher": "Merrill Kelly",
+      "description": "Sal Frelick homers (2) on a fly ball to right center field."
+    },
+    {
+      "name": "Salvador Perez",
+      "pitcher": "Hogan Harris",
+      "description": "Salvador Perez homers (5) on a fly ball to center field."
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "pitcher": "Justin Sterner",
+      "description": "Bobby Witt Jr. homers (2) on a fly ball to right center field. Nick Loftin scores. Kyle Isbel scores."
+    }
+  ]
+}

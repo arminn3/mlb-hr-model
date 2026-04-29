@@ -163,7 +163,7 @@ def _calc_bvp(batter_df, batter_2025, pitcher_id, batter_id=None) -> dict:
 def run_model(game_date: date = None, fast: bool = False):
     """
     Full pipeline: fetch data, score every batter with an HR prop at
-    L5/L10/L15 lookbacks, return game-grouped results.
+    L5/L10 lookbacks, return game-grouped results.
     """
     if game_date is None:
         game_date = date.today()

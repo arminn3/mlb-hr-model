@@ -1,4 +1,4 @@
-export type LookbackKey = "L5" | "L10" | "L15";
+export type LookbackKey = "L5" | "L10";
 
 export interface RecentAB {
   date: string;
