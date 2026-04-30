@@ -326,8 +326,8 @@ def score_batter_vs_pitcher(
                     s = season_stats[pt]
                     weighted_iso += s["iso"] * wt
                     weighted_slg += s["slg"] * wt
-                    # HR rate: HRs per at-bat for this pitch type
-                    hr_rate = s["hr"] / max(s["count"], 1) * 100
+                    # HR rate: HRs per plate appearance for this pitch type
+                    hr_rate = s["hr"] / max(s.get("n_pa", s["count"]), 1) * 100
                     weighted_hr_rate += hr_rate * wt
                     weighted_whiff += s["whiff_pct"] * wt
                     total_weight += wt
@@ -341,7 +341,7 @@ def score_batter_vs_pitcher(
                 # Normalize each to 0-1
                 iso_norm = float(np.clip((weighted_iso - 0.05) / (0.30 - 0.05), 0, 1))
                 slg_norm = float(np.clip((weighted_slg - 0.25) / (0.60 - 0.25), 0, 1))
-                hr_norm = float(np.clip(weighted_hr_rate / 3.0, 0, 1))  # 3% HR rate = elite
+                hr_norm = float(np.clip(weighted_hr_rate / 8.0, 0, 1))  # 8% HR/PA = elite
                 # Whiff is inverted — lower whiff = better matchup
                 whiff_norm = float(np.clip(1.0 - (weighted_whiff / 40.0), 0, 1))
 
@@ -477,6 +477,10 @@ def score_batter_vs_pitcher(
     hand_bip_2026 = _get_hand_bip(batter_df)
     hand_bip_2025 = _get_hand_bip(season_df)
 
+    # pitch_detail_metrics[pt] = calc_batter_metrics_for_pitch(all_pt) computed
+    # inside the loop below while the DataFrame is still available.
+    pitch_detail_metrics: dict[str, dict] = {}
+
     if not hand_bip_2026.empty or not hand_bip_2025.empty:
         for pt in pitch_mix:
             # Match ST<->SL
@@ -495,6 +499,12 @@ def score_batter_vs_pitcher(
 
             all_pt = pd.concat([pt_rows_26, pt_rows_25]) if not pt_rows_25.empty else pt_rows_26
             if not all_pt.empty:
+                # Compute display stats from the same rows shown in pitch_abs.
+                # This avoids the mismatch where per_pitch_metrics used recent_bip
+                # (last-N total BIP) and could return all zeros for a pitch type
+                # that wasn't in the last N total BIP.
+                pitch_detail_metrics[pt] = calc_batter_metrics_for_pitch(all_pt)
+
                 pt_list = []
                 for _, row in all_pt.iterrows():
                     pt_list.append({
@@ -511,13 +521,13 @@ def score_batter_vs_pitcher(
                 pitch_abs[pt] = pt_list
     result["pitch_abs"] = pitch_abs
 
-    # Per-pitch aggregate stats (like PropFinder's Statcast tab)
+    # Per-pitch aggregate stats — sourced from pitch_detail_metrics which is
+    # computed from the same per-type DataFrames used for pitch_abs (not from
+    # the last-N total BIP pool, which could miss pitch types entirely).
     pitch_detail = {}
     for pt in pitch_mix:
-        m = per_pitch_metrics.get(pt, {})
-        # Recalculate from the per-pitch-type ABs for accuracy
-        pt_bip_data = pitch_abs.get(pt, [])
-        n_pt = len(pt_bip_data)
+        m = pitch_detail_metrics.get(pt, {})
+        n_pt = len(pitch_abs.get(pt, []))
         pitch_detail[pt] = {
             "usage_pct": round(pitch_mix[pt] * 100, 1),
             "weight": round(pitch_weights.get(pt, 0) * 100, 1),

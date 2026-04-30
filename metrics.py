@@ -671,6 +671,7 @@ def calc_pitch_type_stats(
         result[str(pt)] = {
             "type_name": str(type_name),
             "count": int(count),
+            "n_pa": int(n_pa),
             "usage_pct": round(float(usage_pct), 1),
             "ba": round(float(ba), 3),
             "slg": round(float(slg), 3),

@@ -105,7 +105,7 @@ NORM_RANGES: dict = {
     "fb_rate_allowed": (0.04, 0.20),    # 12% avg -> 0.50, 16%+ -> 0.75
     "hr_per_fb_rate": (0.0, 0.24),      # 12% avg -> 0.50, 18%+ -> 0.75
     "hr_per_ip": (0.0, 2.4),            # 1.2 avg -> 0.50, 1.8+ -> 0.75
-    "total_hrs_norm": (0.0, 0.5),       # scaled tighter so HR count matters more
+    "total_hrs_norm": (0.0, 1.0),       # full range of HR/IP metric (capped at 1.0 upstream)
 }
 
 # ── Fuzzy Match Threshold ────────────────────────────────────────────────────
