@@ -10,6 +10,7 @@ interface GameEnv {
   park_factor: number;
   temperature_f: number | null;
   wind_speed_mph: number | null;
+  wind_gust_mph?: number | null;
   wind_direction: number | null;
   wind_score: number;
   humidity: number | null;
@@ -214,7 +215,7 @@ function ExpandedDetail({ g }: { g: GameEnv }) {
           <Stat label="RHB" value={`${splitPct("R") > 0 ? "+" : ""}${splitPct("R")}%`} color={splitPct("R") > 0 ? "#22c55e" : splitPct("R") < 0 ? "#ef4444" : undefined} />
         </>
       )}
-      {/* Wind: arrow + mph + simple field-relative label */}
+      {/* Wind: arrow + mph + gust + simple field-relative label */}
       <div>
         <div className="text-[10px] uppercase tracking-[0.06em] text-muted mb-0.5">Wind</div>
         {g.is_dome ? (
@@ -224,6 +225,9 @@ function ExpandedDetail({ g }: { g: GameEnv }) {
             <MiniCompass deg={fieldFrameRotation(g.wind_direction, g.home_team)} color={wd.color} />
             <span className="font-mono">
               {g.wind_speed_mph !== null ? g.wind_speed_mph : "?"} mph
+              {g.wind_gust_mph != null && g.wind_gust_mph > (g.wind_speed_mph ?? 0) + 1 && (
+                <span className="text-muted"> / G {g.wind_gust_mph}</span>
+              )}
             </span>
             <span className="font-semibold">
               {fieldWindLabel(g.wind_direction, g.home_team, g.is_dome)}
@@ -298,19 +302,21 @@ function EnvRow({
           {g.park_factor}
         </div>
 
-        {/* Wind — arrow + mph + field-relative label. Dome or missing
-            data collapses to a single em-dash. */}
+        {/* Wind — arrow + mph (+ gust) + field-relative label */}
         <div className="flex items-center justify-end gap-1.5 text-[12px]">
           {(() => {
             if (g.is_dome) return <span className="text-muted">— Dome</span>;
             if (g.wind_speed_mph === null || g.wind_direction === null) {
               return <span className="text-muted">—</span>;
             }
+            const gustStr = g.wind_gust_mph != null && g.wind_gust_mph > (g.wind_speed_mph ?? 0) + 1
+              ? ` G${Math.round(g.wind_gust_mph)}`
+              : "";
             return (
               <>
                 <MiniCompass deg={fieldFrameRotation(g.wind_direction, g.home_team)} color={wd.color} />
                 <span className="font-mono text-foreground">
-                  {Math.round(g.wind_speed_mph)} mph
+                  {Math.round(g.wind_speed_mph)}{gustStr} mph
                 </span>
                 <span className="text-[11px]" style={{ color: wd.color }}>
                   {fieldWindLabel(g.wind_direction, g.home_team, g.is_dome)}

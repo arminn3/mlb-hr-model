@@ -68,7 +68,7 @@ const MAINTENANCE_MODE = MAINTENANCE_MODE_PROD && IS_PROD;
 // Dates hidden from prod only (dev sees them normally).
 // Add YYYY-MM-DD strings here to fall back to the prior day on prod.
 const PROD_BLOCKED_DATES: Set<string> = new Set(
-  IS_PROD ? ["2026-04-29"] : []
+  IS_PROD ? ["2026-04-30"] : []
 );
 
 function MaintenancePage({ onLive }: { onLive: () => void }) {
@@ -100,7 +100,17 @@ function MaintenancePage({ onLive }: { onLive: () => void }) {
   );
 }
 
-type SlateGame = { game_pk: number; away_team: string; home_team: string; game_time?: string };
+type SlateGame = { game_pk: number; away_team: string; home_team: string; game_time?: string; game_status?: string; game_status_reason?: string };
+
+function gameStatusBadge(status?: string, reason?: string): { label: string; color: string } | null {
+  if (!status || status === "Scheduled" || status === "Pre-Game") return null;
+  if (/postponed/i.test(status)) return { label: "PPD" + (reason ? ` · ${reason}` : ""), color: "#ef4444" };
+  if (/delayed/i.test(status)) return { label: "DELAYED" + (reason ? ` · ${reason}` : ""), color: "#fbbf24" };
+  if (/suspended/i.test(status)) return { label: "SUSP", color: "#f97316" };
+  if (/in progress/i.test(status)) return { label: "LIVE", color: "#22c55e" };
+  if (/final/i.test(status)) return { label: "FINAL", color: "#71717a" };
+  return null;
+}
 
 function SlateGameFilter({
   games,
@@ -148,6 +158,7 @@ function SlateGameFilter({
         {games.map((game) => {
           const sel = selected.has(game.game_pk);
           const time = (game.game_time ?? "").replace(/\s*ET\s*$/i, "").trim();
+          const badge = gameStatusBadge(game.game_status, game.game_status_reason);
           return (
             <button
               key={game.game_pk}
@@ -159,8 +170,8 @@ function SlateGameFilter({
                   : "bg-card/50 border border-card-border hover:border-foreground/40"
               }`}
             >
-              <div className="grid grid-cols-[1fr_auto_1fr] gap-1.5 items-center w-full">
-                <div className="flex gap-1 items-center justify-self-end">
+              <div className="flex items-center justify-center gap-1.5 w-full">
+                <div className="flex gap-1 items-center">
                   <img
                     src={teamLogoUrl(game.away_team)}
                     alt={game.away_team}
@@ -170,21 +181,30 @@ function SlateGameFilter({
                   <span className="text-sm font-medium text-foreground">{game.away_team}</span>
                 </div>
                 <span className="text-xs text-muted">@</span>
-                <div className="flex gap-1 items-center justify-self-start">
+                <div className="flex gap-1 items-center">
+                  <span className="text-sm font-medium text-foreground">{game.home_team}</span>
                   <img
                     src={teamLogoUrl(game.home_team)}
                     alt={game.home_team}
                     className="w-4 h-4 object-contain"
                     loading="lazy"
                   />
-                  <span className="text-sm font-medium text-foreground">{game.home_team}</span>
                 </div>
               </div>
-              <div className="text-center text-xs text-muted whitespace-nowrap">
-                {longDate}
-                {time && <span className="text-[9px] mx-1 align-middle">•</span>}
-                {time && time}
-              </div>
+              {badge ? (
+                <div
+                  className="text-center text-[10px] font-semibold tracking-wide truncate px-1 py-0.5 rounded"
+                  style={{ color: badge.color, background: `${badge.color}18` }}
+                >
+                  {badge.label}
+                </div>
+              ) : (
+                <div className="text-center text-xs text-muted whitespace-nowrap">
+                  {longDate}
+                  {time && <span className="text-[9px] mx-1 align-middle">•</span>}
+                  {time && time}
+                </div>
+              )}
             </button>
           );
         })}

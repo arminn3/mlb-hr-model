@@ -160,6 +160,7 @@ export interface GameEnvironment {
   park_factor: number;
   temperature_f: number | null;
   wind_speed_mph: number | null;
+  wind_gust_mph?: number | null;
   wind_direction: number | null;
   wind_score: number;
   humidity: number | null;
@@ -238,6 +239,8 @@ export interface GameData {
   away_team: string;
   home_team: string;
   game_time?: string;
+  game_status?: string;
+  game_status_reason?: string;
   away_pitcher: PitcherInfo;
   home_pitcher: PitcherInfo;
   environment: GameEnvironment;

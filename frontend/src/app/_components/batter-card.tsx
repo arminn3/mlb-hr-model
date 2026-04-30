@@ -46,7 +46,7 @@ export function BatterCard({
   mlbId?: number;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const [detailTab, setDetailTab] = useState<"profile" | "abs" | "statcast" | "pitches" | "bvp">("profile");
+  const [detailTab, setDetailTab] = useState<"profile" | "abs" | "statcast" | "pitches" | "bvp">("abs");
   // Multi-select set of pitch codes — empty Set = "all pitches"
   const [pitchFilter, setPitchFilter] = useState<Set<string>>(new Set());
 
@@ -129,6 +129,53 @@ export function BatterCard({
   // League avg ~3-4%; >8% green, >4% foreground, <4% muted.
   const pullBrl = player.season_profile?.pull_barrel ?? null;
 
+  // Stat cards reflect the pitch filter when active. With no filter, use the
+  // all-pitches numbers from `scores` (which drive the composite). With one or
+  // more pitches selected, weighted-average the matching pitch_detail entries
+  // by their BIP `count` so the user sees the same stats restricted to the
+  // pitches they chose.
+  let displayBarrel = scores.barrel_pct;
+  let displayFb = scores.fb_pct;
+  let displayHardHit = scores.hard_hit_pct;
+  let displayEv = scores.exit_velo;
+  let displayHrFb: number | null = hrFbPct;
+  if (pitchFilter.size > 0) {
+    let totalCount = 0;
+    let wBarrel = 0, wFb = 0, wHard = 0, wEv = 0;
+    for (const pt of pitchFilter) {
+      const d = pitchDetail[pt];
+      if (!d) continue;
+      const c = d.count ?? 0;
+      totalCount += c;
+      wBarrel += (d.barrel_rate ?? 0) * c;
+      wFb += (d.fb_rate ?? 0) * c;
+      wHard += (d.hard_hit_rate ?? 0) * c;
+      wEv += (d.avg_exit_velo ?? 0) * c;
+    }
+    if (totalCount > 0) {
+      displayBarrel = Math.round((wBarrel / totalCount) * 10) / 10;
+      displayFb = Math.round((wFb / totalCount) * 10) / 10;
+      displayHardHit = Math.round((wHard / totalCount) * 10) / 10;
+      displayEv = Math.round((wEv / totalCount) * 10) / 10;
+    } else {
+      displayBarrel = 0;
+      displayFb = 0;
+      displayHardHit = 0;
+      displayEv = 0;
+    }
+    const filterAbs = recentAbsArr.filter((ab) => {
+      const pt = ab.pitch_type ?? "";
+      if (pitchFilter.has(pt)) return true;
+      for (const code of pitchFilter) {
+        if ((PITCH_NAMES[code] || []).includes(pt)) return true;
+      }
+      return false;
+    });
+    const fFb = filterAbs.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
+    const fHr = filterAbs.filter((ab) => ab.result === "home_run").length;
+    displayHrFb = fFb.length > 0 ? (fHr / fFb.length) * 100 : null;
+  }
+
   return (
     <div
       className="rounded-[var(--radius-md)] transition-all duration-[var(--duration-fast)] hover:border-white/15"
@@ -207,24 +254,24 @@ export function BatterCard({
 
         {/* Stat mini-cards — own row, evenly spaced, full width */}
         <div className="grid grid-cols-6 gap-2 mt-3">
-          <StatMiniCard label="Barrel%" value={`${scores.barrel_pct}%`}
-            cls={statHighlight(scores.barrel_pct, [8, 15])} />
+          <StatMiniCard label="Barrel%" value={`${displayBarrel}%`}
+            cls={statHighlight(displayBarrel, [8, 15])} />
           <StatMiniCard
             label="Pull Brl%"
             value={pullBrl == null ? "—" : `${pullBrl.toFixed(1)}%`}
             cls={pullBrl == null ? "text-muted" : statHighlight(pullBrl, [4, 8])}
           />
-          <StatMiniCard label="FB%" value={`${scores.fb_pct}%`}
-            cls={statHighlight(scores.fb_pct, [25, 40])} />
+          <StatMiniCard label="FB%" value={`${displayFb}%`}
+            cls={statHighlight(displayFb, [25, 40])} />
           <StatMiniCard
             label="HR/FB%"
-            value={hrFbPct == null ? "—" : `${hrFbPct.toFixed(1)}%`}
-            cls={hrFbPct == null ? "text-muted" : statHighlight(hrFbPct, [10, 18])}
+            value={displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`}
+            cls={displayHrFb == null ? "text-muted" : statHighlight(displayHrFb, [10, 18])}
           />
-          <StatMiniCard label="Hard Hit%" value={`${scores.hard_hit_pct}%`}
-            cls={statHighlight(scores.hard_hit_pct, [35, 50])} />
-          <StatMiniCard label="Exit Velo" value={`${scores.exit_velo}`}
-            cls={statHighlight(scores.exit_velo, [88, 93])} />
+          <StatMiniCard label="Hard Hit%" value={`${displayHardHit}%`}
+            cls={statHighlight(displayHardHit, [35, 50])} />
+          <StatMiniCard label="Exit Velo" value={`${displayEv}`}
+            cls={statHighlight(displayEv, [88, 93])} />
         </div>
       </button>
 
@@ -234,9 +281,56 @@ export function BatterCard({
           className="px-4 pb-4"
           style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
         >
+          {/* Pitch filter — drives the stat mini-cards above AND filters
+              the Recent ABs table below. Always visible when expanded so the
+              user can toggle without bouncing between tabs. */}
+          {pitchTypes.length > 0 && (
+            <div className="flex flex-wrap items-center gap-1.5 mt-3 mb-3">
+              <button
+                onClick={() => setPitchFilter(new Set())}
+                className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all duration-[var(--duration-fast)] ${
+                  pitchFilter.size === 0
+                    ? "bg-accent/20 text-accent border border-accent/40"
+                    : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"
+                }`}
+              >
+                All Pitches
+              </button>
+              {pitchTypes.map((pt) => {
+                const detail = pitchDetail[pt];
+                const fullName = PITCH_NAMES[pt]?.[0] || pt;
+                const tipText = detail
+                  ? `${fullName} — ${detail.usage_pct}% of pitches. Barrel: ${detail.barrel_rate}%, FB: ${detail.fb_rate}%, EV: ${detail.avg_exit_velo}`
+                  : fullName;
+                const sel = pitchFilter.has(pt);
+                return (
+                  <Tooltip key={pt} text={tipText}>
+                    <button
+                      onClick={() =>
+                        setPitchFilter((prev) => {
+                          const next = new Set(prev);
+                          if (next.has(pt)) next.delete(pt);
+                          else next.add(pt);
+                          return next;
+                        })
+                      }
+                      className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all duration-[var(--duration-fast)] ${
+                        sel
+                          ? "bg-accent/20 text-accent border border-accent/40"
+                          : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"
+                      }`}
+                    >
+                      {pt} {detail ? `${detail.usage_pct}%` : ""}
+                    </button>
+                  </Tooltip>
+                );
+              })}
+            </div>
+          )}
+
           {/* Sub-tabs — segmented control */}
           <div
-            className="inline-flex items-center p-[3px] rounded-full mt-3 mb-4 backdrop-blur-md"
+            className="inline-flex items-center p-[3px] rounded-full mb-4 backdrop-blur-md"
             style={{
               background: "rgba(255,255,255,0.035)",
               border: "1px solid rgba(255,255,255,0.08)",
@@ -272,49 +366,6 @@ export function BatterCard({
           {/* Recent ABs */}
           {detailTab === "abs" && (
             <div>
-              {/* Pitch type filter — multi-select. Empty Set = "all". */}
-              <div className="flex flex-wrap items-center gap-1.5 mb-3">
-                <button
-                  onClick={() => setPitchFilter(new Set())}
-                  className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all duration-[var(--duration-fast)] ${
-                    pitchFilter.size === 0
-                      ? "bg-accent/20 text-accent border border-accent/40"
-                      : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"
-                  }`}
-                >
-                  All Pitches
-                </button>
-                {pitchTypes.map((pt) => {
-                  const detail = pitchDetail[pt];
-                  const fullName = PITCH_NAMES[pt]?.[0] || pt;
-                  const tipText = detail
-                    ? `${fullName} — ${detail.usage_pct}% of pitches. Barrel: ${detail.barrel_rate}%, FB: ${detail.fb_rate}%, EV: ${detail.avg_exit_velo}`
-                    : fullName;
-                  const sel = pitchFilter.has(pt);
-                  return (
-                    <Tooltip key={pt} text={tipText}>
-                      <button
-                        onClick={() =>
-                          setPitchFilter((prev) => {
-                            const next = new Set(prev);
-                            if (next.has(pt)) next.delete(pt);
-                            else next.add(pt);
-                            return next;
-                          })
-                        }
-                        className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all duration-[var(--duration-fast)] ${
-                          sel
-                            ? "bg-accent/20 text-accent border border-accent/40"
-                            : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"
-                        }`}
-                      >
-                        {pt} {detail ? `${detail.usage_pct}%` : ""}
-                      </button>
-                    </Tooltip>
-                  );
-                })}
-              </div>
-
               <div className="overflow-x-auto">
               {filteredABs.length > 0 ? (
                 <table className="w-full text-xs">

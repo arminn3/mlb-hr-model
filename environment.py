@@ -63,7 +63,7 @@ def get_game_weather(
         url = (
             f"https://api.open-meteo.com/v1/forecast"
             f"?latitude={lat}&longitude={lon}"
-            f"&hourly=temperature_2m,wind_speed_10m,wind_direction_10m,"
+            f"&hourly=temperature_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m,"
             f"relative_humidity_2m,surface_pressure"
             f"&temperature_unit=fahrenheit"
             f"&wind_speed_unit=mph"
@@ -78,6 +78,7 @@ def get_game_weather(
         temps = hourly.get("temperature_2m", [])
         winds = hourly.get("wind_speed_10m", [])
         wind_dirs = hourly.get("wind_direction_10m", [])
+        wind_gusts = hourly.get("wind_gusts_10m", [])
         humidities = hourly.get("relative_humidity_2m", [])
         pressures = hourly.get("surface_pressure", [])
 
@@ -91,15 +92,20 @@ def get_game_weather(
         temp_f = temps[best_idx] if best_idx < len(temps) else None
         wind_mph = winds[best_idx] if best_idx < len(winds) else None
         wind_dir = wind_dirs[best_idx] if best_idx < len(wind_dirs) else None
+        wind_gust = wind_gusts[best_idx] if best_idx < len(wind_gusts) else None
         humid = humidities[best_idx] if best_idx < len(humidities) else None
         pressure = pressures[best_idx] if best_idx < len(pressures) else None
 
-        # Calculate wind HR score: positive = helps HRs, negative = hurts
+        # Calculate wind HR score: positive = helps HRs, negative = hurts.
+        # Score still uses sustained wind to keep the model unchanged; gust is
+        # a display-only field for now (user must explicitly opt into using
+        # gusts for scoring per the no-auto-changes rule).
         wind_score = _calc_wind_score(wind_mph, wind_dir, home_team, temp_f)
 
         return {
             "temperature_f": round(temp_f, 1) if temp_f is not None else None,
             "wind_speed_mph": round(wind_mph, 1) if wind_mph is not None else None,
+            "wind_gust_mph": round(wind_gust, 1) if wind_gust is not None else None,
             "wind_direction": round(wind_dir, 0) if wind_dir is not None else None,
             "humidity": round(humid, 0) if humid is not None else None,
             "pressure_hpa": round(pressure, 1) if pressure is not None else None,
@@ -528,6 +534,7 @@ def calc_environment_score(
         "park_factor": park,
         "temperature_f": weather["temperature_f"],
         "wind_speed_mph": weather["wind_speed_mph"],
+        "wind_gust_mph": weather.get("wind_gust_mph"),
         "wind_direction": weather["wind_direction"],
         "wind_score": weather["wind_score"],
         "humidity": weather["humidity"],
