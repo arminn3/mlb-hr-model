@@ -249,7 +249,75 @@ function SlateGameFilter({
   );
 }
 
+function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
+  const [input, setInput] = useState("");
+  const [shake, setShake] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const attempt = async () => {
+    if (!input || loading) return;
+    setLoading(true);
+    try {
+      const res = await fetch("/api/unlock", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: input }),
+      });
+      if (res.ok) {
+        onUnlock();
+      } else {
+        setShake(true);
+        setInput("");
+        setTimeout(() => setShake(false), 600);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex items-center justify-center min-h-screen" style={{ background: "var(--background)" }}>
+      <div
+        className="w-full max-w-sm mx-4 rounded-2xl p-8 flex flex-col gap-5"
+        style={{
+          background: "linear-gradient(180deg,rgba(255,255,255,0.05) 0%,rgba(255,255,255,0.02) 100%)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          boxShadow: "0 24px 64px -16px rgba(0,0,0,0.6)",
+        }}
+      >
+        <div className="text-center">
+          <div className="text-lg font-bold text-foreground mb-1">Beeb Sheets</div>
+          <div className="text-sm text-muted">Enter password to continue</div>
+        </div>
+        <input
+          type="password"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && attempt()}
+          placeholder="Password"
+          autoFocus
+          className={`w-full px-4 py-3 rounded-xl text-sm text-foreground placeholder:text-muted/50 outline-none transition-all ${shake ? "animate-[shake_0.4s_ease]" : ""}`}
+          style={{
+            background: "rgba(255,255,255,0.06)",
+            border: `1px solid ${shake ? "rgba(239,68,68,0.6)" : "rgba(255,255,255,0.12)"}`,
+          }}
+        />
+        <button
+          onClick={attempt}
+          disabled={loading}
+          className="w-full py-3 rounded-xl text-sm font-semibold text-background cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{ background: "var(--accent)" }}
+        >
+          {loading ? "Checking…" : "Unlock"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function Dashboard() {
+  // null = still checking, false = locked, true = unlocked
+  const [unlocked, setUnlocked] = useState<boolean | null>(IS_PROD ? null : true);
   const [data, setData] = useState<ModelData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -262,6 +330,15 @@ export function Dashboard() {
     if (typeof window === "undefined") return;
     window.localStorage.setItem("beeb:sidebar-collapsed", sidebarCollapsed ? "1" : "0");
   }, [sidebarCollapsed]);
+
+  // Check server-side whether the unlock cookie is already set (prod only).
+  useEffect(() => {
+    if (!IS_PROD) return;
+    fetch("/api/unlock")
+      .then((r) => r.json())
+      .then((d) => setUnlocked(d.unlocked === true))
+      .catch(() => setUnlocked(false));
+  }, []);
 
   // Read initial state from URL hash: #page=rankings&date=2026-04-03&lookback=L5
   function getHashParam(key: string, fallback: string): string {
@@ -332,6 +409,12 @@ export function Dashboard() {
     if (!data?.games || data.games.length === 0) return;
     setSelectedGames(new Set([data.games[0].game_pk]));
   }, [data?.date]);
+
+  // Password gate — prod only. null = still checking cookie via API.
+  if (unlocked === null) return null;
+  if (unlocked === false) {
+    return <PasswordGate onUnlock={() => setUnlocked(true)} />;
+  }
 
   // Maintenance gate — runs after all hooks are declared so hook order
   // stays stable across re-renders. Live Feed stays reachable on prod.
