@@ -24,7 +24,7 @@ const FILTER_OPTIONS = [
 // ML category weights loaded from results/ml_analysis.json.
 // These represent what the ML learned from past HR outcomes —
 // separate from the manual composite weights used by HR Rankings.
-interface MlWeights {
+export interface MlWeights {
   batter: number;
   matchup: number;
   pitcher: number;
@@ -33,14 +33,14 @@ interface MlWeights {
 
 // Fallback if ml_analysis.json isn't available yet (matches the
 // 18-day cumulative analysis as of 2026-04-11).
-const FALLBACK_WEIGHTS: MlWeights = {
+export const FALLBACK_WEIGHTS: MlWeights = {
   batter: 0.391,
   matchup: 0.092,
   pitcher: 0.435,
   environment: 0.082,
 };
 
-function mlComposite(player: PlayerData, lb: LookbackKey, w: MlWeights): number {
+export function mlComposite(player: PlayerData, lb: LookbackKey, w: MlWeights): number {
   const s = player.scores[lb];
   if (!s) return 0;
   // Use backend's batter/pitcher/env scores but reweight them with

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { GameData, LookbackKey } from "./types";
 import { RatingBadge } from "./rating-badge";
+import { mlComposite, FALLBACK_WEIGHTS, type MlWeights } from "./ml-rankings";
 
 /** Slip Generator session state — survives tab switches via sessionStorage.
  *  Bumped to v2 because keys changed from the old single-key persistence. */
@@ -110,7 +111,7 @@ interface Slip {
   gameCount: number;
 }
 
-function getAllPlayers(games: GameData[], lookback: LookbackKey): SlipPlayer[] {
+function getAllPlayers(games: GameData[], lookback: LookbackKey, weights: MlWeights): SlipPlayer[] {
   const allPlayers: SlipPlayer[] = [];
   const seen = new Set<string>();
   for (const game of games) {
@@ -118,7 +119,7 @@ function getAllPlayers(games: GameData[], lookback: LookbackKey): SlipPlayer[] {
       if (seen.has(player.name)) continue;
       seen.add(player.name);
       const scores = player.scores[lookback];
-      const composite = scores?.composite ?? 0;
+      const composite = mlComposite(player, lookback, weights);
       if (composite < 0.15) continue;
       allPlayers.push({
         name: player.name,
@@ -444,6 +445,23 @@ export function SlipGenerator({
     () => new Set(initial.selectedNames ?? [])
   );
   const [search, setSearch] = useState(initial.search ?? "");
+  const [mlWeights, setMlWeights] = useState<MlWeights>(FALLBACK_WEIGHTS);
+
+  useEffect(() => {
+    fetch("/data/results/ml_analysis.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d?.category_weights) {
+          setMlWeights({
+            batter: d.category_weights.batter ?? FALLBACK_WEIGHTS.batter,
+            matchup: d.category_weights.matchup ?? FALLBACK_WEIGHTS.matchup,
+            pitcher: d.category_weights.pitcher ?? FALLBACK_WEIGHTS.pitcher,
+            environment: d.category_weights.environment ?? FALLBACK_WEIGHTS.environment,
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Search-focus state — the player dropdown only appears when the user
   // is actively focused in the search area. Click outside collapses it.
@@ -479,8 +497,8 @@ export function SlipGenerator({
   }, [selectedNames, legCount, mode, sortMode, search]);
 
   const allPlayers = useMemo(
-    () => getAllPlayers(games, lookback),
-    [games, lookback]
+    () => getAllPlayers(games, lookback, mlWeights),
+    [games, lookback, mlWeights]
   );
 
   const autoSlips = useMemo(
