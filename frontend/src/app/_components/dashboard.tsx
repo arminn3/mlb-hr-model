@@ -68,7 +68,7 @@ const MAINTENANCE_MODE = MAINTENANCE_MODE_PROD && IS_PROD;
 // Dates hidden from prod only (dev sees them normally).
 // Add YYYY-MM-DD strings here to fall back to the prior day on prod.
 const PROD_BLOCKED_DATES: Set<string> = new Set(
-  IS_PROD ? ["2026-05-01"] : []
+  IS_PROD ? ["2026-05-02"] : []
 );
 
 function MaintenancePage({ onLive }: { onLive: () => void }) {
