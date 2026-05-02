@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Menu } from "lucide-react";
+import { ChevronLeft, ChevronRight, Menu, Eye, EyeOff } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { ModelData, LookbackKey, GameEnvironment } from "./types";
 import { Sidebar, type Page } from "./sidebar";
@@ -253,6 +253,7 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
   const [input, setInput] = useState("");
   const [shake, setShake] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const attempt = async () => {
     if (!input || loading) return;
@@ -289,19 +290,29 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
           <div className="text-lg font-bold text-foreground mb-1">Beeb Sheets</div>
           <div className="text-sm text-muted">Enter password to continue</div>
         </div>
-        <input
-          type="password"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && attempt()}
-          placeholder="Password"
-          autoFocus
-          className={`w-full px-4 py-3 rounded-xl text-sm text-foreground placeholder:text-muted/50 outline-none transition-all ${shake ? "animate-[shake_0.4s_ease]" : ""}`}
-          style={{
-            background: "rgba(255,255,255,0.06)",
-            border: `1px solid ${shake ? "rgba(239,68,68,0.6)" : "rgba(255,255,255,0.12)"}`,
-          }}
-        />
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && attempt()}
+            placeholder="Password"
+            autoFocus
+            className={`w-full px-4 py-3 pr-11 rounded-xl text-sm text-foreground placeholder:text-muted/50 outline-none transition-all ${shake ? "animate-[shake_0.4s_ease]" : ""}`}
+            style={{
+              background: "rgba(255,255,255,0.06)",
+              border: `1px solid ${shake ? "rgba(239,68,68,0.6)" : "rgba(255,255,255,0.12)"}`,
+            }}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted/50 hover:text-muted transition-colors"
+            tabIndex={-1}
+          >
+            {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+          </button>
+        </div>
         <button
           onClick={attempt}
           disabled={loading}
