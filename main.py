@@ -469,15 +469,26 @@ def run_model(game_date: date = None, fast: bool = False):
         _bz_df = pd.concat(_bz_frames, ignore_index=True) if _bz_frames else pd.DataFrame()
         batter_zones = _compute_zone_stats(_bz_df)
 
-        _pz_frames = []
-        for _d in [pitcher_df, pitcher_2025]:
-            if _d is not None and not _d.empty and "zone" in _d.columns and "launch_speed" in _d.columns:
-                _f = _d[_d["launch_speed"].notna()].copy()
-                if "stand" in _f.columns:
-                    _f = _f[_f["stand"] == batter_h]
-                if not _f.empty:
-                    _pz_frames.append(_f)
-        _pz_df = pd.concat(_pz_frames, ignore_index=True) if _pz_frames else pd.DataFrame()
+        # Pitcher zones — use 2026 only when it has enough BIP; backfill 2025 for thin pitchers
+        _MIN_PITCHER_ZONE_BIP = 20
+        _pz_26 = pd.DataFrame()
+        if not pitcher_df.empty and "zone" in pitcher_df.columns and "launch_speed" in pitcher_df.columns:
+            _pz_26 = pitcher_df[pitcher_df["launch_speed"].notna()].copy()
+            if "stand" in _pz_26.columns:
+                _pz_26 = _pz_26[_pz_26["stand"] == batter_h]
+        _pz_26_bip = int(_pz_26["zone"].between(1, 9).sum()) if not _pz_26.empty and "zone" in _pz_26.columns else 0
+
+        if _pz_26_bip >= _MIN_PITCHER_ZONE_BIP:
+            _pz_df = _pz_26
+        else:
+            _pz_frames = [_pz_26] if not _pz_26.empty else []
+            if pitcher_2025 is not None and not pitcher_2025.empty and "zone" in pitcher_2025.columns and "launch_speed" in pitcher_2025.columns:
+                _pz_25 = pitcher_2025[pitcher_2025["launch_speed"].notna()].copy()
+                if "stand" in _pz_25.columns:
+                    _pz_25 = _pz_25[_pz_25["stand"] == batter_h]
+                if not _pz_25.empty:
+                    _pz_frames.append(_pz_25)
+            _pz_df = pd.concat(_pz_frames, ignore_index=True) if _pz_frames else pd.DataFrame()
         pitcher_zones = _compute_zone_stats(_pz_df)
 
         player_obj = {
