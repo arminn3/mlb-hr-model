@@ -11,7 +11,7 @@ const SLIP_STATE_KEY = "beeb:slip-gen:v2";
 
 interface PersistedState {
   selectedNames: string[];
-  legCount: 2 | 3;
+  legCount: number;
   mode: "auto" | "custom" | "optimal";
   sortMode: SortMode;
   search: string;
@@ -141,44 +141,31 @@ function getAllPlayers(games: GameData[], lookback: LookbackKey, weights: MlWeig
 
 function buildSlips(
   players: SlipPlayer[],
-  legCount: 2 | 3
+  legCount: number
 ): Slip[] {
-  const candidates = players.slice(0, 30);
+  const cap = legCount <= 3 ? 30 : 20;
+  const candidates = players.slice(0, cap);
   const slips: Slip[] = [];
 
-  if (legCount === 2) {
-    for (let i = 0; i < candidates.length; i++) {
-      for (let j = i + 1; j < candidates.length; j++) {
-        const p1 = candidates[i];
-        const p2 = candidates[j];
-        const diffGames = p1.gamePk !== p2.gamePk;
-        const avg = (p1.composite + p2.composite) / 2;
-        slips.push({
-          players: [p1, p2],
-          avgComposite: avg,
-          gameCount: diffGames ? 2 : 1,
-        });
-      }
+  function combine(start: number, combo: SlipPlayer[]) {
+    if (combo.length === legCount) {
+      const uniqueGames = new Set(combo.map((p) => p.gamePk)).size;
+      if (uniqueGames < 2) return;
+      slips.push({
+        players: [...combo],
+        avgComposite: combo.reduce((s, p) => s + p.composite, 0) / legCount,
+        gameCount: uniqueGames,
+      });
+      return;
     }
-  } else {
-    for (let i = 0; i < Math.min(candidates.length, 20); i++) {
-      for (let j = i + 1; j < Math.min(candidates.length, 25); j++) {
-        for (let k = j + 1; k < Math.min(candidates.length, 30); k++) {
-          const p1 = candidates[i];
-          const p2 = candidates[j];
-          const p3 = candidates[k];
-          const uniqueGames = new Set([p1.gamePk, p2.gamePk, p3.gamePk]).size;
-          if (uniqueGames < 2) continue;
-          const avg = (p1.composite + p2.composite + p3.composite) / 3;
-          slips.push({
-            players: [p1, p2, p3],
-            avgComposite: avg,
-            gameCount: uniqueGames,
-          });
-        }
-      }
+    const remaining = legCount - combo.length;
+    for (let i = start; i <= candidates.length - remaining; i++) {
+      combine(i + 1, [...combo, candidates[i]]);
+      if (slips.length >= 2000) return;
     }
   }
+
+  combine(0, []);
 
   slips.sort((a, b) => {
     if (b.gameCount !== a.gameCount) return b.gameCount - a.gameCount;
@@ -190,7 +177,7 @@ function buildSlips(
 
 function buildCustomSlips(
   selected: SlipPlayer[],
-  legCount: 2 | 3
+  legCount: number
 ): Slip[] {
   if (selected.length < legCount) return [];
   const slips: Slip[] = [];
@@ -238,7 +225,7 @@ type SortMode = "best" | "chalk" | "longshot" | "diverse";
 
 function buildOptimalSlips(
   selected: SlipPlayer[],
-  legCount: 2 | 3,
+  legCount: number,
   sortMode: SortMode
 ): { slips: Slip[]; leftovers: SlipPlayer[] } {
   if (selected.length < legCount) return { slips: [], leftovers: [...selected] };
@@ -434,8 +421,8 @@ export function SlipGenerator({
   // building state across tab switches (not just selectedNames).
   const initial = useRef<Partial<PersistedState>>(loadPersistedState()).current;
 
-  const [legCount, setLegCount] = useState<2 | 3>(
-    (initial.legCount === 2 || initial.legCount === 3) ? initial.legCount : 2
+  const [legCount, setLegCount] = useState<number>(
+    (typeof initial.legCount === "number" && initial.legCount >= 2) ? initial.legCount : 2
   );
   const [mode, setMode] = useState<"auto" | "custom" | "optimal">(
     initial.mode ?? "auto"
@@ -583,29 +570,26 @@ export function SlipGenerator({
               </button>
             ))}
           </div>
-          {/* Leg count — bottom row, pill style */}
+          {/* Leg count — stepper */}
           <div className="flex items-center gap-2">
             <span className="text-[10px] uppercase tracking-wider text-muted">Legs:</span>
-            <button
-              onClick={() => setLegCount(2)}
-              className={`px-4 py-1.5 text-xs rounded-full cursor-pointer transition-colors ${
-                legCount === 2
-                  ? "bg-accent-green/20 text-accent-green border border-accent-green/30 font-semibold"
-                  : "bg-card/50 text-muted border border-card-border hover:text-foreground"
-              }`}
-            >
-              2-Leg (Duos)
-            </button>
-            <button
-              onClick={() => setLegCount(3)}
-              className={`px-4 py-1.5 text-xs rounded-full cursor-pointer transition-colors ${
-                legCount === 3
-                  ? "bg-accent-green/20 text-accent-green border border-accent-green/30 font-semibold"
-                  : "bg-card/50 text-muted border border-card-border hover:text-foreground"
-              }`}
-            >
-              3-Leg (Trios)
-            </button>
+            <div className="flex items-center rounded-full border border-card-border bg-card/50 overflow-hidden">
+              <button
+                onClick={() => setLegCount((n) => Math.max(2, n - 1))}
+                className="px-3 py-1.5 text-sm text-muted hover:text-foreground cursor-pointer transition-colors select-none"
+              >
+                −
+              </button>
+              <span className="px-2 text-xs font-semibold text-accent-green font-mono min-w-[1.5rem] text-center">
+                {legCount}
+              </span>
+              <button
+                onClick={() => setLegCount((n) => Math.min(8, n + 1))}
+                className="px-3 py-1.5 text-sm text-muted hover:text-foreground cursor-pointer transition-colors select-none"
+              >
+                +
+              </button>
+            </div>
           </div>
         </div>
       </div>
