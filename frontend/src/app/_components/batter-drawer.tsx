@@ -448,11 +448,6 @@ export function BatterDrawer({
             </div>
           )}
 
-          {/* Zone Overlap */}
-          {player.batter_zones && player.pitcher_zones && (
-            <ZoneGrid batter_zones={player.batter_zones} pitcher_zones={player.pitcher_zones} />
-          )}
-
           {/* Pitch filter chips */}
           {pitchTypes.length > 0 && (
             <div className="flex flex-wrap items-center gap-1.5">
@@ -611,6 +606,11 @@ export function BatterDrawer({
             {detailTab === "pitches" && <PitchesTab player={player} />}
             {detailTab === "bvp" && <BvPTab player={player} />}
           </div>
+
+          {/* Zone Overlap — below the table so it doesn't crowd primary info */}
+          {player.batter_zones && player.pitcher_zones && (
+            <ZoneGrid batter_zones={player.batter_zones} pitcher_zones={player.pitcher_zones} />
+          )}
         </div>
       </div>
     </>

@@ -469,11 +469,15 @@ def run_model(game_date: date = None, fast: bool = False):
         _bz_df = pd.concat(_bz_frames, ignore_index=True) if _bz_frames else pd.DataFrame()
         batter_zones = _compute_zone_stats(_bz_df)
 
-        _pz_df = pd.DataFrame()
-        if not pitcher_df.empty and "zone" in pitcher_df.columns and "launch_speed" in pitcher_df.columns:
-            _pz_df = pitcher_df[pitcher_df["launch_speed"].notna()].copy()
-            if "stand" in _pz_df.columns:
-                _pz_df = _pz_df[_pz_df["stand"] == batter_h]
+        _pz_frames = []
+        for _d in [pitcher_df, pitcher_2025]:
+            if _d is not None and not _d.empty and "zone" in _d.columns and "launch_speed" in _d.columns:
+                _f = _d[_d["launch_speed"].notna()].copy()
+                if "stand" in _f.columns:
+                    _f = _f[_f["stand"] == batter_h]
+                if not _f.empty:
+                    _pz_frames.append(_f)
+        _pz_df = pd.concat(_pz_frames, ignore_index=True) if _pz_frames else pd.DataFrame()
         pitcher_zones = _compute_zone_stats(_pz_df)
 
         player_obj = {
