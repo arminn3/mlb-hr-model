@@ -216,7 +216,7 @@ export function BatterDrawer({
       <div
         className="fixed right-0 top-0 bottom-0 z-50 flex flex-col"
         style={{
-          width: "min(520px, 100vw)",
+          width: "min(680px, 100vw)",
           background: "linear-gradient(180deg, rgba(16,16,20,0.99) 0%, rgba(10,10,14,1) 100%)",
           borderLeft: "1px solid rgba(255,255,255,0.09)",
           boxShadow: "-32px 0 80px -12px rgba(0,0,0,0.75)",
