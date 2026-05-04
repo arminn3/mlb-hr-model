@@ -1,0 +1,711 @@
+{
+  "date": "2026-05-03",
+  "total_players_ranked": 270,
+  "total_hrs_hit": 26,
+  "total_near_hrs": 17,
+  "model_hits": 22,
+  "best_lookback": "L10",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 2,
+        "rate": 6.7
+      },
+      "all": {
+        "total": 270,
+        "hits": 22,
+        "rate": 8.1
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 270,
+        "hits": 22,
+        "rate": 8.1
+      }
+    }
+  },
+  "model_near_hits": 17,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 270,
+      "hits": 22,
+      "rate": 8.1
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 5,
+      "rate": 16.7
+    },
+    "all": {
+      "total": 270,
+      "hits": 39,
+      "rate": 14.4
+    }
+  },
+  "avg_composite_hr_hitters": 0.389,
+  "avg_composite_non_hitters": 0.402,
+  "composite_separation": -0.013,
+  "hr_hitters": [
+    {
+      "name": "Kazuma Okamoto",
+      "rank": 9,
+      "composite": 0.652,
+      "opp_pitcher": "Joe Ryan",
+      "matchup": "TOR@MIN"
+    },
+    {
+      "name": "Manny Machado",
+      "rank": 29,
+      "composite": 0.587,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "CWS@SD"
+    },
+    {
+      "name": "Aaron Judge",
+      "rank": 49,
+      "composite": 0.54,
+      "opp_pitcher": "Trey Gibson",
+      "matchup": "BAL@NYY"
+    },
+    {
+      "name": "Spencer Torkelson",
+      "rank": 52,
+      "composite": 0.53,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "TEX@DET"
+    },
+    {
+      "name": "Jarren Duran",
+      "rank": 55,
+      "composite": 0.521,
+      "opp_pitcher": "Cody Bolton",
+      "matchup": "HOU@BOS"
+    },
+    {
+      "name": "Tyler Soderstrom",
+      "rank": 87,
+      "composite": 0.401,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CLE@ATH"
+    },
+    {
+      "name": "Bryson Stott",
+      "rank": 104,
+      "composite": 0.4,
+      "opp_pitcher": "Chris Paddack",
+      "matchup": "PHI@MIA"
+    },
+    {
+      "name": "Mois\u00e9s Ballesteros",
+      "rank": 109,
+      "composite": 0.4,
+      "opp_pitcher": "Merrill Kelly",
+      "matchup": "AZ@CHC"
+    },
+    {
+      "name": "Mickey Moniak",
+      "rank": 111,
+      "composite": 0.4,
+      "opp_pitcher": "Spencer Strider",
+      "matchup": "ATL@COL"
+    },
+    {
+      "name": "Miguel Andujar",
+      "rank": 118,
+      "composite": 0.4,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "CWS@SD"
+    },
+    {
+      "name": "TJ Rumfield",
+      "rank": 129,
+      "composite": 0.394,
+      "opp_pitcher": "Spencer Strider",
+      "matchup": "ATL@COL"
+    },
+    {
+      "name": "Jorge Mateo",
+      "rank": 144,
+      "composite": 0.378,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "ATL@COL"
+    },
+    {
+      "name": "Gabriel Moreno",
+      "rank": 171,
+      "composite": 0.352,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "AZ@CHC"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 172,
+      "composite": 0.351,
+      "opp_pitcher": "Trey Gibson",
+      "matchup": "BAL@NYY"
+    },
+    {
+      "name": "Jonah Heim",
+      "rank": 175,
+      "composite": 0.349,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "ATL@COL"
+    },
+    {
+      "name": "Chase DeLauter",
+      "rank": 186,
+      "composite": 0.336,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "CLE@ATH"
+    },
+    {
+      "name": "Jasson Dom\u00ednguez",
+      "rank": 203,
+      "composite": 0.314,
+      "opp_pitcher": "Trey Gibson",
+      "matchup": "BAL@NYY"
+    },
+    {
+      "name": "Mark Vientos",
+      "rank": 221,
+      "composite": 0.292,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "NYM@LAA"
+    },
+    {
+      "name": "Colby Thomas",
+      "rank": 239,
+      "composite": 0.275,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CLE@ATH"
+    },
+    {
+      "name": "Drew Romo",
+      "rank": 244,
+      "composite": 0.264,
+      "opp_pitcher": "Griffin Canning",
+      "matchup": "CWS@SD"
+    },
+    {
+      "name": "Zack Gelof",
+      "rank": 257,
+      "composite": 0.24,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CLE@ATH"
+    },
+    {
+      "name": "Esteury Ruiz",
+      "rank": 265,
+      "composite": 0.174,
+      "opp_pitcher": "Jes\u00fas Luzardo",
+      "matchup": "PHI@MIA"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Mois\u00e9s Ballesteros",
+      "rank": 15,
+      "composite": 0.589,
+      "opp_pitcher": "Merrill Kelly",
+      "matchup": "AZ@CHC"
+    },
+    {
+      "name": "Aaron Judge",
+      "rank": 17,
+      "composite": 0.588,
+      "opp_pitcher": "Trey Gibson",
+      "matchup": "BAL@NYY"
+    },
+    {
+      "name": "Spencer Torkelson",
+      "rank": 21,
+      "composite": 0.577,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "TEX@DET"
+    },
+    {
+      "name": "TJ Rumfield",
+      "rank": 24,
+      "composite": 0.57,
+      "opp_pitcher": "Spencer Strider",
+      "matchup": "ATL@COL"
+    },
+    {
+      "name": "Kazuma Okamoto",
+      "rank": 40,
+      "composite": 0.532,
+      "opp_pitcher": "Joe Ryan",
+      "matchup": "TOR@MIN"
+    },
+    {
+      "name": "Jonah Heim",
+      "rank": 81,
+      "composite": 0.445,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "ATL@COL"
+    },
+    {
+      "name": "Jarren Duran",
+      "rank": 87,
+      "composite": 0.421,
+      "opp_pitcher": "Cody Bolton",
+      "matchup": "HOU@BOS"
+    },
+    {
+      "name": "Bryson Stott",
+      "rank": 115,
+      "composite": 0.4,
+      "opp_pitcher": "Chris Paddack",
+      "matchup": "PHI@MIA"
+    },
+    {
+      "name": "Mickey Moniak",
+      "rank": 121,
+      "composite": 0.4,
+      "opp_pitcher": "Spencer Strider",
+      "matchup": "ATL@COL"
+    },
+    {
+      "name": "Manny Machado",
+      "rank": 127,
+      "composite": 0.4,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "CWS@SD"
+    },
+    {
+      "name": "Miguel Andujar",
+      "rank": 128,
+      "composite": 0.4,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "CWS@SD"
+    },
+    {
+      "name": "Tyler Soderstrom",
+      "rank": 158,
+      "composite": 0.368,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CLE@ATH"
+    },
+    {
+      "name": "Jasson Dom\u00ednguez",
+      "rank": 165,
+      "composite": 0.36,
+      "opp_pitcher": "Trey Gibson",
+      "matchup": "BAL@NYY"
+    },
+    {
+      "name": "Jorge Mateo",
+      "rank": 175,
+      "composite": 0.356,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "ATL@COL"
+    },
+    {
+      "name": "Gabriel Moreno",
+      "rank": 180,
+      "composite": 0.352,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "AZ@CHC"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 182,
+      "composite": 0.349,
+      "opp_pitcher": "Trey Gibson",
+      "matchup": "BAL@NYY"
+    },
+    {
+      "name": "Colby Thomas",
+      "rank": 184,
+      "composite": 0.345,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CLE@ATH"
+    },
+    {
+      "name": "Chase DeLauter",
+      "rank": 214,
+      "composite": 0.312,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "CLE@ATH"
+    },
+    {
+      "name": "Mark Vientos",
+      "rank": 222,
+      "composite": 0.303,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "NYM@LAA"
+    },
+    {
+      "name": "Drew Romo",
+      "rank": 247,
+      "composite": 0.264,
+      "opp_pitcher": "Griffin Canning",
+      "matchup": "CWS@SD"
+    },
+    {
+      "name": "Zack Gelof",
+      "rank": 260,
+      "composite": 0.229,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CLE@ATH"
+    },
+    {
+      "name": "Esteury Ruiz",
+      "rank": 266,
+      "composite": 0.167,
+      "opp_pitcher": "Jes\u00fas Luzardo",
+      "matchup": "PHI@MIA"
+    }
+  ],
+  "near_hr_hitters": [
+    {
+      "name": "Daulton Varsho",
+      "rank": 12,
+      "composite": 0.645,
+      "opp_pitcher": "Joe Ryan",
+      "matchup": "TOR@MIN"
+    },
+    {
+      "name": "Carlos Narv\u00e1ez",
+      "rank": 22,
+      "composite": 0.611,
+      "opp_pitcher": "Cody Bolton",
+      "matchup": "HOU@BOS"
+    },
+    {
+      "name": "Andrew Benintendi",
+      "rank": 28,
+      "composite": 0.591,
+      "opp_pitcher": "Griffin Canning",
+      "matchup": "CWS@SD"
+    },
+    {
+      "name": "Vinnie Pasquantino",
+      "rank": 31,
+      "composite": 0.581,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "KC@SEA"
+    },
+    {
+      "name": "Josh Lowe",
+      "rank": 42,
+      "composite": 0.557,
+      "opp_pitcher": "Clay Holmes",
+      "matchup": "NYM@LAA"
+    },
+    {
+      "name": "Sam Antonacci",
+      "rank": 62,
+      "composite": 0.499,
+      "opp_pitcher": "Griffin Canning",
+      "matchup": "CWS@SD"
+    },
+    {
+      "name": "Jordan Walker",
+      "rank": 66,
+      "composite": 0.488,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@STL"
+    },
+    {
+      "name": "Brent Rooker",
+      "rank": 84,
+      "composite": 0.437,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CLE@ATH"
+    },
+    {
+      "name": "Bryce Harper",
+      "rank": 101,
+      "composite": 0.4,
+      "opp_pitcher": "Chris Paddack",
+      "matchup": "PHI@MIA"
+    },
+    {
+      "name": "Yordan Alvarez",
+      "rank": 166,
+      "composite": 0.356,
+      "opp_pitcher": "Ranger Suarez",
+      "matchup": "HOU@BOS"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 168,
+      "composite": 0.353,
+      "opp_pitcher": "Steven Matz",
+      "matchup": "SF@TB"
+    },
+    {
+      "name": "Mauricio Dub\u00f3n",
+      "rank": 169,
+      "composite": 0.353,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "ATL@COL"
+    },
+    {
+      "name": "Isaac Collins",
+      "rank": 181,
+      "composite": 0.343,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "KC@SEA"
+    },
+    {
+      "name": "Matt Wallner",
+      "rank": 188,
+      "composite": 0.335,
+      "opp_pitcher": "Trey Yesavage",
+      "matchup": "TOR@MIN"
+    },
+    {
+      "name": "Roman Anthony",
+      "rank": 196,
+      "composite": 0.323,
+      "opp_pitcher": "Cody Bolton",
+      "matchup": "HOU@BOS"
+    },
+    {
+      "name": "Sal Stewart",
+      "rank": 222,
+      "composite": 0.291,
+      "opp_pitcher": "Braxton Ashcraft",
+      "matchup": "CIN@PIT"
+    },
+    {
+      "name": "Konnor Griffin",
+      "rank": 241,
+      "composite": 0.268,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "CIN@PIT"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Brent Rooker",
+      "ev": 100.2,
+      "angle": 38.0,
+      "distance": 391.0,
+      "hr_in_parks": 17,
+      "result": "field_out",
+      "pitcher": "Holderman, Colin"
+    },
+    {
+      "batter": "Yordan Alvarez",
+      "ev": 107.1,
+      "angle": 25.0,
+      "distance": 396.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Mor\u00e1n, Jovani"
+    },
+    {
+      "batter": "Roman Anthony",
+      "ev": 110.5,
+      "angle": 26.0,
+      "distance": 389.0,
+      "hr_in_parks": 2,
+      "result": "double",
+      "pitcher": "Bolton, Cody"
+    },
+    {
+      "batter": "Carlos Narv\u00e1ez",
+      "ev": 106.4,
+      "angle": 23.0,
+      "distance": 396.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Bolton, Cody"
+    },
+    {
+      "batter": "Jonah Heim",
+      "ev": 95.3,
+      "angle": 25.0,
+      "distance": 391.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Herget, Jimmy"
+    },
+    {
+      "batter": "Mauricio Dub\u00f3n",
+      "ev": 103.7,
+      "angle": 32.0,
+      "distance": 397.0,
+      "hr_in_parks": 4,
+      "result": "",
+      "pitcher": "Freeland, Kyle"
+    },
+    {
+      "batter": "Josh Lowe",
+      "ev": 99.9,
+      "angle": 39.0,
+      "distance": 369.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Holmes, Clay"
+    },
+    {
+      "batter": "Bryce Harper",
+      "ev": 103.2,
+      "angle": 25.0,
+      "distance": 381.0,
+      "hr_in_parks": 21,
+      "result": "double",
+      "pitcher": "Paddack, Chris"
+    },
+    {
+      "batter": "Daulton Varsho",
+      "ev": 105.6,
+      "angle": 20.0,
+      "distance": 378.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Orze, Eric"
+    },
+    {
+      "batter": "Matt Wallner",
+      "ev": 109.3,
+      "angle": 21.0,
+      "distance": 385.0,
+      "hr_in_parks": 24,
+      "result": "double",
+      "pitcher": "Mantiply, Joe"
+    },
+    {
+      "batter": "Sal Stewart",
+      "ev": 100.1,
+      "angle": 34.0,
+      "distance": 371.0,
+      "hr_in_parks": 26,
+      "result": "field_out",
+      "pitcher": "Soto, Gregory"
+    },
+    {
+      "batter": "Konnor Griffin",
+      "ev": 108.2,
+      "angle": 22.0,
+      "distance": 404.0,
+      "hr_in_parks": 23,
+      "result": "double",
+      "pitcher": "Santillan, Tony"
+    },
+    {
+      "batter": "Sam Antonacci",
+      "ev": 102.2,
+      "angle": 34.0,
+      "distance": 388.0,
+      "hr_in_parks": 17,
+      "result": "field_out",
+      "pitcher": "Adam, Jason"
+    },
+    {
+      "batter": "Andrew Benintendi",
+      "ev": 100.6,
+      "angle": 26.0,
+      "distance": 378.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Canning, Griffin"
+    },
+    {
+      "batter": "Vinnie Pasquantino",
+      "ev": 100.6,
+      "angle": 23.0,
+      "distance": 393.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Hoppe, Alex"
+    },
+    {
+      "batter": "Isaac Collins",
+      "ev": 107.8,
+      "angle": 17.0,
+      "distance": 391.0,
+      "hr_in_parks": 6,
+      "result": "double",
+      "pitcher": "Castillo, Luis"
+    },
+    {
+      "batter": "Jordan Walker",
+      "ev": 105.6,
+      "angle": 26.0,
+      "distance": 389.0,
+      "hr_in_parks": 25,
+      "result": "field_out",
+      "pitcher": "Wrobleski, Justin"
+    },
+    {
+      "batter": "Casey Schmitt",
+      "ev": 105.3,
+      "angle": 34.0,
+      "distance": 400.0,
+      "hr_in_parks": 13,
+      "result": "",
+      "pitcher": "Bigge, Hunter"
+    }
+  ],
+  "surprise_hrs": [
+    {
+      "name": "Adrian Del Castillo",
+      "pitcher": "Corbin Martin",
+      "description": "Adrian Del Castillo homers (3) on a fly ball to center field. Lourdes Gurriel Jr. scores."
+    },
+    {
+      "name": "Derek Hill",
+      "pitcher": "Adrian Morejon",
+      "description": "Derek Hill homers (2) on a fly ball to center field. Chase Meidroth scores."
+    }
+  ]
+}
