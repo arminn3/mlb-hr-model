@@ -101,8 +101,9 @@ export function BatterDrawer({
 }) {
   const [detailTab, setDetailTab] = useState<"abs" | "statcast" | "pitches" | "bvp" | "profile">("abs");
   const [pitchFilter, setPitchFilter] = useState<Set<string>>(new Set());
+  const [activeLookback, setActiveLookback] = useState<LookbackKey>(lookback);
 
-  const scores = player.scores[lookback] || player.scores.L5;
+  const scores = player.scores[activeLookback] || player.scores.L5;
   const pitchDetail = player.pitch_detail || {};
   const pitchTypes = player.pitch_types || [];
 
@@ -267,12 +268,29 @@ export function BatterDrawer({
             </div>
           </div>
 
-          <button
-            onClick={onClose}
-            className="flex-shrink-0 p-2 rounded-lg text-muted hover:text-foreground hover:bg-white/[0.06] transition-colors cursor-pointer"
-          >
-            <X size={18} />
-          </button>
+          <div className="flex flex-col items-end gap-2 flex-shrink-0">
+            <button
+              onClick={onClose}
+              className="p-2 rounded-lg text-muted hover:text-foreground hover:bg-white/[0.06] transition-colors cursor-pointer"
+            >
+              <X size={18} />
+            </button>
+            <div className="flex items-center p-[3px] rounded-full" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)" }}>
+              {(["L5", "L10"] as LookbackKey[]).map((lb) => (
+                <button
+                  key={lb}
+                  onClick={() => setActiveLookback(lb)}
+                  className={`px-3 py-1 text-[11px] font-bold rounded-full cursor-pointer transition-all ${
+                    activeLookback === lb
+                      ? "bg-accent text-black shadow-[0_1px_3px_0_rgba(0,0,0,0.35)]"
+                      : "text-muted hover:text-foreground"
+                  }`}
+                >
+                  {lb}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Scrollable body */}
