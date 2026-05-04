@@ -24,6 +24,16 @@ export interface ScoreSet {
   recent_abs: RecentAB[];
 }
 
+export interface ZoneEntry {
+  zone: number;
+  bip: number;
+  hrs: number;
+  barrels: number;
+  barrel_rate: number;
+  hr_rate: number;
+  hard_hits: number;
+}
+
 export interface PitchDetailEntry {
   usage_pct: number;
   weight: number;
@@ -104,6 +114,8 @@ export interface PlayerData {
   pitch_detail: Record<string, PitchDetailEntry>;
   pitcher_stats: PitcherStats;
   scores: Record<LookbackKey, ScoreSet>;
+  batter_zones?: ZoneEntry[];
+  pitcher_zones?: ZoneEntry[];
   season_stats?: Record<string, SeasonStats>;
   season_profile?: {
     barrel: number;

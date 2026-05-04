@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import type { PlayerData, LookbackKey, PitchDetailEntry } from "./types";
+import type { PlayerData, LookbackKey, PitchDetailEntry, ZoneEntry } from "./types";
 import { ScoreBar } from "./score-bar";
 import { PitchesTab } from "./pitches-tab";
 import { BvPTab } from "./bvp-tab";
@@ -84,6 +84,106 @@ function matchupLabel(pitchDetail: Record<string, PitchDetailEntry>): {
   if (score >= 0.45) return { label: "GREAT MATCHUP", color: "text-accent-green" };
   if (score >= 0.25) return { label: "DECENT", color: "text-accent-yellow" };
   return { label: "TOUGH", color: "text-muted" };
+}
+
+const ZONE_ORDER = [7, 8, 9, 4, 5, 6, 1, 2, 3]; // top-to-bottom, left-to-right
+
+function isHotBatter(z: ZoneEntry): boolean {
+  return z.bip >= 2 && (z.barrel_rate >= 12 || z.hrs >= 1);
+}
+function isVulnPitcher(z: ZoneEntry): boolean {
+  return z.bip >= 3 && (z.hr_rate >= 6 || (z.bip > 0 && (z.hard_hits / z.bip) * 100 >= 40));
+}
+
+function ZoneGrid({ batter_zones, pitcher_zones }: { batter_zones: ZoneEntry[]; pitcher_zones: ZoneEntry[] }) {
+  const bzMap = Object.fromEntries(batter_zones.map((z) => [z.zone, z]));
+  const pzMap = Object.fromEntries(pitcher_zones.map((z) => [z.zone, z]));
+
+  const overlapCount = ZONE_ORDER.filter((zn) => {
+    const bz = bzMap[zn];
+    const pz = pzMap[zn];
+    return bz && pz && isHotBatter(bz) && isVulnPitcher(pz);
+  }).length;
+
+  const overallLabel = overlapCount >= 3
+    ? { text: "GREAT", color: "text-accent-green" }
+    : overlapCount >= 1
+    ? { text: "DECENT", color: "text-accent-yellow" }
+    : { text: "POOR OVERLAP", color: "text-muted" };
+
+  return (
+    <div className="rounded-xl p-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted">Zone Overlap</span>
+        <span className={`text-xs font-bold ${overallLabel.color}`}>
+          {overlapCount} zone{overlapCount !== 1 ? "s" : ""} overlap · {overallLabel.text}
+        </span>
+      </div>
+      <div className="flex items-start gap-6 justify-center">
+        {/* Batter hot zones */}
+        <div className="flex flex-col items-center gap-1.5">
+          <span className="text-[9px] uppercase tracking-[0.06em] text-muted/60">Batter Hot</span>
+          <div className="grid grid-cols-3 gap-1">
+            {ZONE_ORDER.map((zn) => {
+              const z = bzMap[zn];
+              const hot = z ? isHotBatter(z) : false;
+              const overlap = hot && pzMap[zn] ? isVulnPitcher(pzMap[zn]) : false;
+              return (
+                <div
+                  key={zn}
+                  title={z ? `Zone ${zn}: ${z.bip} BIP, ${z.barrel_rate}% brl, ${z.hrs} HR` : `Zone ${zn}`}
+                  className="w-11 h-11 rounded flex flex-col items-center justify-center gap-0.5"
+                  style={{
+                    background: overlap ? "rgba(250,204,21,0.25)" : hot ? "rgba(74,222,128,0.22)" : "rgba(255,255,255,0.04)",
+                    border: overlap ? "1.5px solid rgba(250,204,21,0.55)" : hot ? "1px solid rgba(74,222,128,0.35)" : "1px solid rgba(255,255,255,0.08)",
+                  }}
+                >
+                  <span className="text-[9px] text-muted/40 leading-none">{zn}</span>
+                  {hot && z && (
+                    <span className={`text-[9px] font-mono font-semibold leading-none ${overlap ? "text-yellow-300" : "text-accent-green"}`}>
+                      {z.barrel_rate > 0 ? `${z.barrel_rate}%` : `${z.hrs}HR`}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="self-center text-muted/25 text-sm font-light">vs</div>
+
+        {/* Pitcher vulnerable zones */}
+        <div className="flex flex-col items-center gap-1.5">
+          <span className="text-[9px] uppercase tracking-[0.06em] text-muted/60">Pitcher Vuln.</span>
+          <div className="grid grid-cols-3 gap-1">
+            {ZONE_ORDER.map((zn) => {
+              const z = pzMap[zn];
+              const vuln = z ? isVulnPitcher(z) : false;
+              const overlap = vuln && bzMap[zn] ? isHotBatter(bzMap[zn]) : false;
+              return (
+                <div
+                  key={zn}
+                  title={z ? `Zone ${zn}: ${z.bip} BIP, ${z.hr_rate}% HR/BIP, ${z.hrs} HR` : `Zone ${zn}`}
+                  className="w-11 h-11 rounded flex flex-col items-center justify-center gap-0.5"
+                  style={{
+                    background: overlap ? "rgba(250,204,21,0.25)" : vuln ? "rgba(239,68,68,0.18)" : "rgba(255,255,255,0.04)",
+                    border: overlap ? "1.5px solid rgba(250,204,21,0.55)" : vuln ? "1px solid rgba(239,68,68,0.30)" : "1px solid rgba(255,255,255,0.08)",
+                  }}
+                >
+                  <span className="text-[9px] text-muted/40 leading-none">{zn}</span>
+                  {vuln && z && (
+                    <span className={`text-[9px] font-mono font-semibold leading-none ${overlap ? "text-yellow-300" : "text-red-400"}`}>
+                      {z.hr_rate > 0 ? `${z.hr_rate}%` : `${z.hrs}HR`}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function BatterDrawer({
@@ -346,6 +446,11 @@ export function BatterDrawer({
                 })}
               </div>
             </div>
+          )}
+
+          {/* Zone Overlap */}
+          {player.batter_zones && player.pitcher_zones && (
+            <ZoneGrid batter_zones={player.batter_zones} pitcher_zones={player.pitcher_zones} />
           )}
 
           {/* Pitch filter chips */}

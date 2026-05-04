@@ -52,6 +52,26 @@ def _clean_for_json(obj):
     return obj
 
 
+def _compute_zone_stats(df: pd.DataFrame) -> list:
+    """Per-zone (1-9) BIP stats from a pre-filtered DataFrame."""
+    zones = []
+    for z in range(1, 10):
+        if df is None or df.empty:
+            zones.append({"zone": z, "bip": 0, "hrs": 0, "barrels": 0, "barrel_rate": 0.0, "hr_rate": 0.0, "hard_hits": 0})
+            continue
+        z_rows = df[df["zone"] == z]
+        bip = len(z_rows)
+        hrs = int((z_rows["events"] == "home_run").sum()) if "events" in z_rows.columns and bip > 0 else 0
+        barrels = int((z_rows["launch_speed_angle"] == 6).sum()) if "launch_speed_angle" in z_rows.columns and bip > 0 else 0
+        hard_hits = int((z_rows["launch_speed"] >= 95).sum()) if bip > 0 else 0
+        zones.append({
+            "zone": z, "bip": bip, "hrs": hrs, "barrels": barrels, "hard_hits": hard_hits,
+            "barrel_rate": round(barrels / bip * 100, 1) if bip > 0 else 0.0,
+            "hr_rate": round(hrs / bip * 100, 1) if bip > 0 else 0.0,
+        })
+    return zones
+
+
 def _format_score(result: dict) -> dict:
     """Format a single lookback's score result for JSON output."""
     return {
@@ -439,6 +459,23 @@ def run_model(game_date: date = None, fast: bool = False):
                     slg = total_bases / ab
                     season_profile["iso"] = round(float(slg - ba), 3)
 
+        # Zone grids — batter hot zones and pitcher vulnerable zones (pitch location 1-9)
+        _bz_frames = []
+        for _d in [batter_df, batter_2025]:
+            if _d is not None and not _d.empty and "zone" in _d.columns and "launch_speed" in _d.columns and "p_throws" in _d.columns:
+                _f = _d[(_d["p_throws"] == pitcher_hand) & _d["launch_speed"].notna()]
+                if not _f.empty:
+                    _bz_frames.append(_f)
+        _bz_df = pd.concat(_bz_frames, ignore_index=True) if _bz_frames else pd.DataFrame()
+        batter_zones = _compute_zone_stats(_bz_df)
+
+        _pz_df = pd.DataFrame()
+        if not pitcher_df.empty and "zone" in pitcher_df.columns and "launch_speed" in pitcher_df.columns:
+            _pz_df = pitcher_df[pitcher_df["launch_speed"].notna()].copy()
+            if "stand" in _pz_df.columns:
+                _pz_df = _pz_df[_pz_df["stand"] == batter_h]
+        pitcher_zones = _compute_zone_stats(_pz_df)
+
         player_obj = {
             "name": batter_name,
             "batter_hand": batter_h,
@@ -464,6 +501,8 @@ def run_model(game_date: date = None, fast: bool = False):
             },
             "season_stats": season_stats,
             "season_profile": season_profile,
+            "batter_zones": batter_zones,
+            "pitcher_zones": pitcher_zones,
         }
 
         players_by_game[gpk].append(player_obj)
