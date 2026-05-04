@@ -6,7 +6,8 @@ import type { ModelData, LookbackKey, GameEnvironment } from "./types";
 import { Sidebar, type Page } from "./sidebar";
 import { LookbackToggle } from "./lookback-toggle";
 import { DatePicker } from "./date-picker";
-import { GameSection } from "./game-section";
+import { GameSection, type SelectedBatter } from "./game-section";
+import { BatterDetailPage } from "./batter-detail-page";
 import { EnvironmentView } from "./environment-view";
 import { Methodology } from "./methodology";
 import { TopPicks } from "./top-picks";
@@ -363,6 +364,7 @@ export function Dashboard() {
   const [lookback, setLookbackRaw] = useState<LookbackKey>(() => getHashParam("lookback", "L5") as LookbackKey);
   const [selectedDate, setSelectedDate] = useState<string>(() => getHashParam("date", ""));
   const [selectedGames, setSelectedGames] = useState<Set<number>>(new Set()); // empty = all games
+  const [selectedBatter, setSelectedBatter] = useState<SelectedBatter | null>(null);
 
   // Update URL hash when state changes
   function updateHash(page: string, date: string, lb: string) {
@@ -553,7 +555,16 @@ export function Dashboard() {
             <TopPicks games={data.games} lookback={lookback} />
           )}
 
-          {activePage === "slate" && (
+          {activePage === "slate" && selectedBatter ? (
+            <BatterDetailPage
+              player={selectedBatter.player}
+              lookback={lookback}
+              mlbId={selectedBatter.mlbId}
+              battingOrder={selectedBatter.battingOrder}
+              teamAbbr={selectedBatter.teamAbbr}
+              onBack={() => setSelectedBatter(null)}
+            />
+          ) : activePage === "slate" && (
             <>
               <SlateGameFilter
                 games={data.games}
@@ -562,7 +573,12 @@ export function Dashboard() {
                 onSelect={(pk) => setSelectedGames(new Set([pk]))}
               />
               {data.games.filter((g) => selectedGames.has(g.game_pk)).map((game) => (
-                <GameSection key={game.game_pk} game={game} lookback={lookback} />
+                <GameSection
+                  key={game.game_pk}
+                  game={game}
+                  lookback={lookback}
+                  onSelectBatter={setSelectedBatter}
+                />
               ))}
               {data.games.length === 0 && (
                 <p className="text-center text-muted py-12">No games with scored players today.</p>

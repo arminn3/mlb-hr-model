@@ -246,6 +246,16 @@ export interface TeamPitchMix {
   home: TeamPitchMixSide; // home batters vs away pitcher
 }
 
+export interface BullpenEntry {
+  id: number;
+  name: string;
+  last_date: string;
+  days_rest: number;
+  pitches: number;
+  ip: string;
+  status: "fresh" | "available" | "questionable" | "tired";
+}
+
 export interface GameData {
   game_pk: number;
   away_team: string;
@@ -258,6 +268,7 @@ export interface GameData {
   environment: GameEnvironment;
   players: PlayerData[];
   team_pitch_mix?: TeamPitchMix;
+  bullpen?: { away: BullpenEntry[]; home: BullpenEntry[] };
 }
 
 export interface ModelData {

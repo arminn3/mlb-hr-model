@@ -104,7 +104,7 @@ const GROUP_LABELS: Record<ColumnDef["group"], string> = {
   statcast: "Statcast",
 };
 
-export function PitcherProfileCard({ pitcher }: { pitcher: PitcherInfo }) {
+export function PitcherProfileCard({ pitcher, side }: { pitcher: PitcherInfo; side?: "away" | "home" }) {
   const profile = pitcher.profile ?? null;
   const rows = profile?.rows ?? null;
   const wins = profile?.wins ?? 0;
@@ -129,42 +129,39 @@ export function PitcherProfileCard({ pitcher }: { pitcher: PitcherInfo }) {
         boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.04)",
       }}
     >
-      {/* Header — headshot + name + hand */}
-      <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
-        <div className="flex items-center gap-3">
-          {pitcher.id ? (
-            <img
-              src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_120,q_auto:best/v1/people/${pitcher.id}/headshot/67/current`}
-              alt={pitcher.name}
-              className="w-12 h-12 rounded-full object-cover bg-card-border/40"
-              loading="lazy"
-            />
-          ) : (
-            <div className="w-12 h-12 rounded-full bg-card-border/40" />
-          )}
-          <div className="flex flex-col">
-            <span className="text-lg font-semibold text-foreground">{pitcher.name}</span>
-            <div className="flex items-center gap-1.5 mt-0.5">
-              <span className="px-1.5 py-0.5 text-[10px] font-mono font-semibold rounded bg-card-border/60 text-muted">
-                {pitcher.hand}HP
-              </span>
-              {(wins > 0 || losses > 0) && (
-                <span className="text-[11px] text-muted font-mono">{wins}-{losses}</span>
-              )}
-              {games_started > 0 && (
-                <span className="text-[11px] text-muted">{games_started} GS</span>
-              )}
-            </div>
-          </div>
+      {/* Side label */}
+      {side && (
+        <div className="mb-3">
+          <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-muted/50">
+            {side === "away" ? "Away Starter" : "Home Starter"}
+          </span>
         </div>
-        <div className="flex items-center gap-3 text-[10px] text-muted">
-          <div className="flex items-center gap-1.5">
-            <span className="inline-block w-2 h-2 rounded-sm bg-accent-green/70" />
-            Favors batter
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="inline-block w-2 h-2 rounded-sm bg-accent-red/70" />
-            Favors pitcher
+      )}
+
+      {/* Header — headshot + name + hand */}
+      <div className="flex items-center gap-3 mb-4">
+        {pitcher.id ? (
+          <img
+            src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_120,q_auto:best/v1/people/${pitcher.id}/headshot/67/current`}
+            alt={pitcher.name}
+            className="w-12 h-12 rounded-full object-cover bg-card-border/40 flex-shrink-0"
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-12 h-12 rounded-full bg-card-border/40 flex-shrink-0" />
+        )}
+        <div className="flex flex-col min-w-0">
+          <span className="text-base font-semibold text-foreground leading-tight">{pitcher.name}</span>
+          <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
+            <span className="px-1.5 py-0.5 text-[10px] font-mono font-semibold rounded bg-card-border/60 text-muted">
+              {pitcher.hand}HP
+            </span>
+            {(wins > 0 || losses > 0) && (
+              <span className="text-[11px] text-muted font-mono">{wins}-{losses}</span>
+            )}
+            {games_started > 0 && (
+              <span className="text-[11px] text-muted">{games_started} GS</span>
+            )}
           </div>
         </div>
       </div>

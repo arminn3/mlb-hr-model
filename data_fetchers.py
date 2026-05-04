@@ -749,3 +749,138 @@ def find_batter_game(
                     "batter_side": "away",
                 }
     return None
+
+
+def get_bullpen_freshness_bulk(
+    team_ids: list,
+    game_date: date,
+    starter_ids: Optional[set] = None,
+    lookback_days: int = 5,
+) -> dict:
+    """
+    For each team_id, return a list of relief pitcher appearances from the last
+    `lookback_days` days (excluding today). Each entry has:
+        name, days_rest, pitches, ip, status ("fresh"/"available"/"questionable"/"tired")
+
+    starter_ids: pitcher IDs for today's starters — excluded from results.
+    """
+    from collections import defaultdict
+
+    if starter_ids is None:
+        starter_ids = set()
+
+    start = (game_date - timedelta(days=lookback_days)).isoformat()
+    end   = (game_date - timedelta(days=1)).isoformat()
+
+    # ── Step 1: fetch recent schedule for the full date range ────────────────
+    sched_url = (
+        f"{MLB_API_BASE}/schedule"
+        f"?sportId=1&startDate={start}&endDate={end}"
+        f"&hydrate=team"
+    )
+    try:
+        r = requests.get(sched_url, timeout=15)
+        r.raise_for_status()
+        sched_data = r.json()
+    except Exception:
+        return {tid: [] for tid in team_ids}
+
+    # Map game_pk -> (date_str, {team_id, ...}) for completed games only
+    pk_meta: dict = {}
+    for d_entry in sched_data.get("dates", []):
+        game_date_str = d_entry.get("date", "")
+        for g in d_entry.get("games", []):
+            status = g.get("status", {}).get("detailedState", "")
+            if status not in ("Final", "Game Over", "Completed Early"):
+                continue
+            away_id = g.get("teams", {}).get("away", {}).get("team", {}).get("id")
+            home_id = g.get("teams", {}).get("home", {}).get("team", {}).get("id")
+            relevant_teams = {t for t in (away_id, home_id) if t in team_ids}
+            if relevant_teams:
+                pk_meta[g["gamePk"]] = {
+                    "date": game_date_str,
+                    "away_id": away_id,
+                    "home_id": home_id,
+                }
+
+    # ── Step 2: fetch boxscores for relevant games ───────────────────────────
+    # pitcher_id -> most recent appearance per team
+    team_pitcher_map: dict = defaultdict(dict)
+
+    for pk, meta in pk_meta.items():
+        try:
+            bs_r = requests.get(f"{MLB_API_BASE}/game/{pk}/boxscore", timeout=10)
+            bs_r.raise_for_status()
+            bs = bs_r.json()
+        except Exception:
+            continue
+
+        gd = date.fromisoformat(meta["date"])
+        days_rest = (game_date - gd).days - 1  # days since that outing
+
+        for side, team_id_key in (("away", "away_id"), ("home", "home_id")):
+            tid = meta.get(team_id_key)
+            if tid not in team_ids:
+                continue
+            team_bs = bs.get("teams", {}).get(side, {})
+            pitcher_ids = team_bs.get("pitchers", [])
+            players = team_bs.get("players", {})
+
+            for i, pid in enumerate(pitcher_ids):
+                if pid in starter_ids:
+                    continue
+                key = f"ID{pid}"
+                p_data = players.get(key, {})
+                p_stats = p_data.get("stats", {}).get("pitching", {})
+                name = p_data.get("person", {}).get("fullName", "")
+                if not name:
+                    continue
+                pitches = p_stats.get("numberOfPitches") or 0
+                ip = p_stats.get("inningsPitched") or "0.0"
+                # Only track most-recent appearance per pitcher
+                if pid not in team_pitcher_map[tid]:
+                    team_pitcher_map[tid][pid] = {
+                        "id": pid,
+                        "name": name,
+                        "last_date": meta["date"],
+                        "days_rest": days_rest,
+                        "pitches": pitches,
+                        "ip": ip,
+                        "is_first": i == 0,  # first pitcher listed = likely starter
+                    }
+
+    # ── Step 3: build output per team ────────────────────────────────────────
+    result: dict = {}
+
+    for tid in team_ids:
+        entries = list(team_pitcher_map.get(tid, {}).values())
+        # Exclude first-listed pitchers (starters) with 5+ IP
+        entries = [
+            e for e in entries
+            if not (e["is_first"] and _ip_to_float(e["ip"]) >= 5.0)
+        ]
+        # Classify status
+        for e in entries:
+            dr = e["days_rest"]
+            p  = e["pitches"]
+            if dr <= 0:
+                e["status"] = "tired"
+            elif dr == 1:
+                e["status"] = "questionable" if p >= 20 else "available"
+            else:
+                e["status"] = "fresh"
+            del e["is_first"]  # internal only
+
+        entries.sort(key=lambda x: (x["days_rest"], -x["pitches"]))
+        result[tid] = entries
+
+    return result
+
+
+def _ip_to_float(ip: str) -> float:
+    """Convert '6.2' innings pitched notation to a float."""
+    try:
+        parts = str(ip).split(".")
+        return int(parts[0]) + (int(parts[1]) / 3 if len(parts) > 1 else 0)
+    except Exception:
+        return 0.0

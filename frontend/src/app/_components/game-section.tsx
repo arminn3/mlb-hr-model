@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import type { GameData, LookbackKey, PlayerData, TeamPitchMixSide } from "./types";
 import { GameHeader } from "./game-header";
 import { PitcherProfileCard } from "./pitcher-profile-card";
-import { BatterCard } from "./batter-card";
-import { BatterDrawer } from "./batter-drawer";
+import { BatterTable, type BatterRowInfo } from "./batter-table";
+import { BullpenSection } from "./bullpen-section";
 
 type LineupInfo = { order: number | null; id: number };
 
@@ -21,29 +20,37 @@ function sortBatters(
   lookup: Map<string, LineupInfo>,
   posted: boolean,
   lookback: LookbackKey,
-): { p: PlayerData; info?: LineupInfo }[] {
-  const rows = players.map((p) => ({ p, info: lookup.get(p.name) }));
+): BatterRowInfo[] {
+  const rows: BatterRowInfo[] = players.map((p) => {
+    const info = lookup.get(p.name);
+    return { p, order: posted ? (info?.order ?? null) : null, mlbId: info?.id };
+  });
   if (posted) {
     return rows
-      .filter(({ info }) => info?.order != null && info.order >= 1 && info.order <= 9)
-      .sort((a, b) => (a.info!.order! - b.info!.order!));
+      .filter(({ order }) => order != null && order >= 1 && order <= 9)
+      .sort((a, b) => a.order! - b.order!);
   }
   return rows.sort(
     (a, b) => (b.p.scores[lookback]?.composite ?? 0) - (a.p.scores[lookback]?.composite ?? 0),
   );
 }
 
-type Selected = { player: PlayerData; mlbId?: number; battingOrder: number | null };
+export type SelectedBatter = {
+  player: PlayerData;
+  mlbId?: number;
+  battingOrder: number | null;
+  teamAbbr: string;
+};
 
 export function GameSection({
   game,
   lookback,
+  onSelectBatter,
 }: {
   game: GameData;
   lookback: LookbackKey;
+  onSelectBatter: (s: SelectedBatter) => void;
 }) {
-  const [selected, setSelected] = useState<Selected | null>(null);
-
   const homeSide = game.team_pitch_mix?.home;
   const awaySide = game.team_pitch_mix?.away;
   const homeLookup = buildLineupLookup(homeSide);
@@ -65,99 +72,61 @@ export function GameSection({
   );
 
   return (
-    <>
-      <div
-        className="rounded-[var(--radius-lg)] p-5 mb-6 backdrop-blur-sm"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(255,255,255,0.015) 0%, rgba(255,255,255,0.005) 60%, rgba(0,0,0,0.10) 100%)",
-          border: "1px solid rgba(255,255,255,0.06)",
-          boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.03), 0 8px 24px -12px rgba(0,0,0,0.4)",
-        }}
-      >
-        <GameHeader
+    <div className="mb-10">
+      {/* Matchup hero */}
+      <GameHeader
+        awayTeam={game.away_team}
+        homeTeam={game.home_team}
+        gameTime={game.game_time}
+        env={game.environment}
+      />
+
+      {/* Pitcher cards — 2-col side by side */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+        <PitcherProfileCard pitcher={game.away_pitcher} side="away" />
+        <PitcherProfileCard pitcher={game.home_pitcher} side="home" />
+      </div>
+
+      {/* Batter tables */}
+      <div className="mt-8 space-y-4">
+        <BatterTable
+          teamAbbr={game.away_team}
+          batters={awayBatters}
+          lookback={lookback}
+          posted={awayPosted}
+          onSelect={(row) =>
+            onSelectBatter({
+              player: row.p,
+              mlbId: row.mlbId,
+              battingOrder: row.order,
+              teamAbbr: game.away_team,
+            })
+          }
+        />
+        <BatterTable
+          teamAbbr={game.home_team}
+          batters={homeBatters}
+          lookback={lookback}
+          posted={homePosted}
+          onSelect={(row) =>
+            onSelectBatter({
+              player: row.p,
+              mlbId: row.mlbId,
+              battingOrder: row.order,
+              teamAbbr: game.home_team,
+            })
+          }
+        />
+      </div>
+
+      {/* Bullpen freshness */}
+      {game.bullpen && (
+        <BullpenSection
           awayTeam={game.away_team}
           homeTeam={game.home_team}
-          gameTime={game.game_time}
-          env={game.environment}
-        />
-
-        <PitcherBlock
-          title={`${game.home_team} Batters vs ${game.away_pitcher.name}`}
-          pitcher={game.away_pitcher}
-          batters={homeBatters}
-          posted={homePosted}
-          lookback={lookback}
-          onSelect={setSelected}
-        />
-        <PitcherBlock
-          title={`${game.away_team} Batters vs ${game.home_pitcher.name}`}
-          pitcher={game.home_pitcher}
-          batters={awayBatters}
-          posted={awayPosted}
-          lookback={lookback}
-          onSelect={setSelected}
-          className="mt-8"
-        />
-      </div>
-
-      {selected && (
-        <BatterDrawer
-          player={selected.player}
-          lookback={lookback}
-          mlbId={selected.mlbId}
-          battingOrder={selected.battingOrder}
-          onClose={() => setSelected(null)}
+          bullpen={game.bullpen}
         />
       )}
-    </>
-  );
-}
-
-function PitcherBlock({
-  title,
-  pitcher,
-  batters,
-  posted,
-  lookback,
-  onSelect,
-  className = "",
-}: {
-  title: string;
-  pitcher: GameData["away_pitcher"];
-  batters: { p: PlayerData; info?: LineupInfo }[];
-  posted: boolean;
-  lookback: LookbackKey;
-  onSelect: (s: Selected) => void;
-  className?: string;
-}) {
-  return (
-    <div className={className}>
-      <h3
-        className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted/80 mb-3 pb-2"
-        style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
-      >
-        {title} ({pitcher.hand}HP)
-      </h3>
-      <PitcherProfileCard pitcher={pitcher} />
-      <div className="space-y-3">
-        {batters.map(({ p, info }) => {
-          const battingOrder = posted ? (info?.order ?? null) : null;
-          return (
-            <BatterCard
-              key={p.name}
-              player={p}
-              lookback={lookback}
-              battingOrder={battingOrder}
-              mlbId={info?.id}
-              onSelect={() => onSelect({ player: p, mlbId: info?.id, battingOrder })}
-            />
-          );
-        })}
-        {batters.length === 0 && (
-          <p className="text-xs text-muted py-4 text-center">No batters with HR props</p>
-        )}
-      </div>
     </div>
   );
 }

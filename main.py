@@ -34,6 +34,7 @@ from data_fetchers import (
     resolve_player_id,
     find_batter_game,
     get_batter_hand,
+    get_bullpen_freshness_bulk,
 )
 from model import score_batter_multi_lookback
 from metrics import calc_pitch_type_stats, build_batter_pa_history, get_pitch_mix, build_pitcher_profile
@@ -50,6 +51,16 @@ def _clean_for_json(obj):
     if isinstance(obj, list):
         return [_clean_for_json(v) for v in obj]
     return obj
+
+
+# Pitcher overrides — set manually when the probable pitcher changes after the
+# schedule is fetched. Key: team abbreviation (home or away). Value: dict with
+# "name", "hand" ("R"/"L"), and optionally "id" (MLB player ID).
+# Clear this dict after regen; it only applies to the current run.
+PITCHER_OVERRIDES: dict[str, dict] = {
+    "NYM": {"name": "Huascar Brazobán", "hand": "R", "id": 623211},
+    "DET": {"name": "Tyler Holton", "hand": "L", "id": 663947},
+}
 
 
 def _compute_zone_stats(df: pd.DataFrame) -> list:
@@ -198,6 +209,17 @@ def run_model(game_date: date = None, fast: bool = False):
         return [], []
 
     print(f"  {len(schedule)} games found.")
+
+    # Apply manual pitcher overrides (e.g. opener, bullpen game, late swap)
+    if PITCHER_OVERRIDES:
+        for g in schedule:
+            for side in ("away_team", "home_team"):
+                team = g.get(side, "")
+                if team in PITCHER_OVERRIDES:
+                    pitcher_side = "away_pitcher" if side == "away_team" else "home_pitcher"
+                    ov = PITCHER_OVERRIDES[team]
+                    g[pitcher_side] = {"name": ov["name"], "hand": ov["hand"], "id": ov.get("id")}
+                    print(f"  [OVERRIDE] {team} pitcher → {ov['name']} ({ov['hand']}HP)")
 
     pitchers_available = sum(
         1 for g in schedule for side in ("away_pitcher", "home_pitcher") if g.get(side)
@@ -601,6 +623,36 @@ def run_model(game_date: date = None, fast: bool = False):
 
     # Sort games by start time (earliest first)
     games_out.sort(key=lambda g: g.get("game_time_sort", 9999))
+
+    # ── Bullpen freshness ────────────────────────────────────────────────────
+    print("Fetching bullpen freshness...")
+    all_team_ids = []
+    team_abbr_to_id: dict[str, int] = {}
+    starter_ids: set[int] = set()
+    for g in schedule:
+        for side in ("away", "home"):
+            tid = g.get(f"{side}_team_id")
+            abbr = g.get(f"{side}_team", "")
+            if tid:
+                all_team_ids.append(tid)
+                team_abbr_to_id[abbr] = tid
+            pitcher = g.get(f"{side}_pitcher")
+            if pitcher and pitcher.get("id"):
+                starter_ids.add(pitcher["id"])
+
+    bullpen_data = get_bullpen_freshness_bulk(
+        list(set(all_team_ids)), game_date, starter_ids=starter_ids
+    )
+
+    # Attach to each game by team_id lookup
+    for game in games_out:
+        away_id = team_abbr_to_id.get(game["away_team"])
+        home_id = team_abbr_to_id.get(game["home_team"])
+        game["bullpen"] = {
+            "away": bullpen_data.get(away_id, []) if away_id else [],
+            "home": bullpen_data.get(home_id, []) if home_id else [],
+        }
+    print(f"  Bullpen data attached for {len(bullpen_data)} teams.")
 
     return games_out, schedule
 
