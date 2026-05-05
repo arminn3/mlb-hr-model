@@ -87,8 +87,8 @@ export function GameSection({
         <PitcherProfileCard pitcher={game.home_pitcher} side="home" />
       </div>
 
-      {/* Batter tables */}
-      <div className="mt-8 space-y-4">
+      {/* Away: batter table + bullpen */}
+      <div className="mt-8 space-y-3">
         <BatterTable
           teamAbbr={game.away_team}
           batters={awayBatters}
@@ -103,6 +103,13 @@ export function GameSection({
             })
           }
         />
+        {game.bullpen?.away?.length ? (
+          <BullpenSection teamAbbr={game.away_team} entries={game.bullpen.away} />
+        ) : null}
+      </div>
+
+      {/* Home: batter table + bullpen */}
+      <div className="mt-4 space-y-3">
         <BatterTable
           teamAbbr={game.home_team}
           batters={homeBatters}
@@ -117,16 +124,10 @@ export function GameSection({
             })
           }
         />
+        {game.bullpen?.home?.length ? (
+          <BullpenSection teamAbbr={game.home_team} entries={game.bullpen.home} />
+        ) : null}
       </div>
-
-      {/* Bullpen freshness */}
-      {game.bullpen && (
-        <BullpenSection
-          awayTeam={game.away_team}
-          homeTeam={game.home_team}
-          bullpen={game.bullpen}
-        />
-      )}
     </div>
   );
 }

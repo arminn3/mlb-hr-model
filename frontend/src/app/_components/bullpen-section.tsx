@@ -67,25 +67,12 @@ function TeamBullpen({ teamAbbr, entries }: { teamAbbr: string; entries: Bullpen
 }
 
 export function BullpenSection({
-  awayTeam,
-  homeTeam,
-  bullpen,
+  teamAbbr,
+  entries,
 }: {
-  awayTeam: string;
-  homeTeam: string;
-  bullpen: { away: BullpenEntry[]; home: BullpenEntry[] };
+  teamAbbr: string;
+  entries: BullpenEntry[];
 }) {
-  if (!bullpen.away.length && !bullpen.home.length) return null;
-
-  return (
-    <div className="mt-4 space-y-3">
-      <div className="px-1">
-        <span className="text-[10px] font-bold uppercase tracking-[0.1em] text-muted/50">Bullpen Freshness</span>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <TeamBullpen teamAbbr={awayTeam} entries={bullpen.away} />
-        <TeamBullpen teamAbbr={homeTeam} entries={bullpen.home} />
-      </div>
-    </div>
-  );
+  if (!entries.length) return null;
+  return <TeamBullpen teamAbbr={teamAbbr} entries={entries} />;
 }
