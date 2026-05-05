@@ -254,6 +254,11 @@ export interface BullpenEntry {
   pitches: number;
   ip: string;
   status: "fresh" | "available" | "questionable" | "tired";
+  era: number | null;
+  hr9: number | null;
+  k_pct: number | null;
+  whip: number | null;
+  g: number | null;
 }
 
 export interface GameData {

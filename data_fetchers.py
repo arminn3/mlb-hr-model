@@ -852,14 +852,22 @@ def get_bullpen_freshness_bulk(
     # ── Step 3: build output per team ────────────────────────────────────────
     result: dict = {}
 
+    # Collect all pitcher IDs across all teams for batch stats fetch
+    all_pitcher_ids = set()
+    for pmap in team_pitcher_map.values():
+        for pid in pmap:
+            all_pitcher_ids.add(pid)
+
+    pitcher_stats = _fetch_pitcher_season_stats(list(all_pitcher_ids))
+
     for tid in team_ids:
         entries = list(team_pitcher_map.get(tid, {}).values())
-        # Exclude first-listed pitchers (starters) with 5+ IP
+        # Exclude starters (first in boxscore with 5+ IP)
         entries = [
             e for e in entries
             if not (e["is_first"] and _ip_to_float(e["ip"]) >= 5.0)
         ]
-        # Classify status
+        # Classify freshness + attach season stats
         for e in entries:
             dr = e["days_rest"]
             p  = e["pitches"]
@@ -869,12 +877,60 @@ def get_bullpen_freshness_bulk(
                 e["status"] = "questionable" if p >= 20 else "available"
             else:
                 e["status"] = "fresh"
-            del e["is_first"]  # internal only
+            del e["is_first"]
+            # Attach season stats (era, hr9, k_pct, whip, g, ip_total)
+            s = pitcher_stats.get(e["id"], {})
+            e["era"]   = s.get("era")
+            e["hr9"]   = s.get("hr9")
+            e["k_pct"] = s.get("k_pct")
+            e["whip"]  = s.get("whip")
+            e["g"]     = s.get("g")
 
         entries.sort(key=lambda x: (x["days_rest"], -x["pitches"]))
         result[tid] = entries
 
     return result
+
+
+def _fetch_pitcher_season_stats(pitcher_ids: list) -> dict:
+    """
+    Batch-fetch 2026 season pitching stats for a list of pitcher IDs.
+    Returns dict: pitcher_id -> { era, hr9, k_pct, whip, g }
+    """
+    if not pitcher_ids:
+        return {}
+    # MLB API supports comma-separated playerIds
+    chunk_size = 50
+    stats: dict = {}
+    for i in range(0, len(pitcher_ids), chunk_size):
+        chunk = pitcher_ids[i:i + chunk_size]
+        ids_str = ",".join(str(p) for p in chunk)
+        url = (
+            f"{MLB_API_BASE}/stats"
+            f"?stats=season&group=pitching&season=2026&gameType=R"
+            f"&playerIds={ids_str}"
+        )
+        try:
+            r = requests.get(url, timeout=10)
+            r.raise_for_status()
+            for split in r.json().get("stats", []):
+                for row in split.get("splits", []):
+                    pid = row.get("player", {}).get("id")
+                    s   = row.get("stat", {})
+                    if not pid:
+                        continue
+                    bf = s.get("battersFaced") or 0
+                    k  = s.get("strikeOuts") or 0
+                    stats[pid] = {
+                        "era":   round(float(s["era"]), 2) if s.get("era") not in (None, "-.--", "--") else None,
+                        "whip":  round(float(s["whip"]), 2) if s.get("whip") not in (None, "-.--", "--") else None,
+                        "hr9":   round(float(s["homeRunsPer9"]), 2) if s.get("homeRunsPer9") not in (None, "-.--", "--") else None,
+                        "k_pct": round(k / bf * 100, 1) if bf > 0 else None,
+                        "g":     s.get("gamesPlayed") or 0,
+                    }
+        except Exception:
+            pass
+    return stats
 
 
 def _ip_to_float(ip: str) -> float:
