@@ -642,12 +642,13 @@ def run_model(game_date: date = None, fast: bool = False):
     )
 
     # Attach to each game by team_id lookup
+    empty = {"arms": [], "quality": {"tier": 2, "label": "Average", "avg_era": None, "avg_hr9": None, "avg_k_pct": None, "tired_count": 0}}
     for game in games_out:
         away_id = team_abbr_to_id.get(game["away_team"])
         home_id = team_abbr_to_id.get(game["home_team"])
         game["bullpen"] = {
-            "away": bullpen_data.get(away_id, []) if away_id else [],
-            "home": bullpen_data.get(home_id, []) if home_id else [],
+            "away": bullpen_data.get(away_id, empty) if away_id else empty,
+            "home": bullpen_data.get(home_id, empty) if home_id else empty,
         }
     print(f"  Bullpen data attached for {len(bullpen_data)} teams.")
 

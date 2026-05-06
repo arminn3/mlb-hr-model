@@ -887,7 +887,44 @@ def get_bullpen_freshness_bulk(
             e["g"]     = s.get("g")
 
         entries.sort(key=lambda x: (x["days_rest"], -x["pitches"]))
-        result[tid] = entries
+
+        # ── Team aggregate quality ────────────────────────────────────────────
+        arms_with_stats = [e for e in entries if e.get("era") is not None]
+        tired_count = sum(1 for e in entries if e["status"] in ("tired", "questionable"))
+        if arms_with_stats:
+            avg_era = round(sum(e["era"] for e in arms_with_stats) / len(arms_with_stats), 2)
+            hr9_arms = [e for e in arms_with_stats if e.get("hr9") is not None]
+            avg_hr9  = round(sum(e["hr9"] for e in hr9_arms) / len(hr9_arms), 2) if hr9_arms else None
+            k_arms   = [e for e in arms_with_stats if e.get("k_pct") is not None]
+            avg_k    = round(sum(e["k_pct"] for e in k_arms) / len(k_arms), 1) if k_arms else None
+
+            # Tier: 1=Elite, 2=Average, 3=Vulnerable
+            hr9_bad = avg_hr9 is not None and avg_hr9 > 1.5
+            era_bad = avg_era > 4.25
+            era_good = avg_era < 3.50
+            hr9_good = avg_hr9 is not None and avg_hr9 < 1.0
+
+            if (era_bad or hr9_bad) or tired_count >= 2:
+                tier, label = 3, "Vulnerable"
+            elif era_good and hr9_good:
+                tier, label = 1, "Elite"
+            else:
+                tier, label = 2, "Average"
+        else:
+            avg_era = avg_hr9 = avg_k = None
+            tier, label = 2, "Average"
+
+        result[tid] = {
+            "arms": entries,
+            "quality": {
+                "tier": tier,
+                "label": label,
+                "avg_era": avg_era,
+                "avg_hr9": avg_hr9,
+                "avg_k_pct": avg_k,
+                "tired_count": tired_count,
+            },
+        }
 
     return result
 

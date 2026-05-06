@@ -261,6 +261,20 @@ export interface BullpenEntry {
   g: number | null;
 }
 
+export interface BullpenQuality {
+  tier: 1 | 2 | 3;
+  label: "Elite" | "Average" | "Vulnerable";
+  avg_era: number | null;
+  avg_hr9: number | null;
+  avg_k_pct: number | null;
+  tired_count: number;
+}
+
+export interface TeamBullpen {
+  arms: BullpenEntry[];
+  quality: BullpenQuality;
+}
+
 export interface GameData {
   game_pk: number;
   away_team: string;
@@ -273,7 +287,7 @@ export interface GameData {
   environment: GameEnvironment;
   players: PlayerData[];
   team_pitch_mix?: TeamPitchMix;
-  bullpen?: { away: BullpenEntry[]; home: BullpenEntry[] };
+  bullpen?: { away: TeamBullpen; home: TeamBullpen };
 }
 
 export interface ModelData {
