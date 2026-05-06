@@ -24247,5 +24247,849 @@
         "description": "Michael Conforto homers (1) on a fly ball to center field."
       }
     ]
+  },
+  {
+    "date": "2026-05-05",
+    "total_players_ranked": 234,
+    "total_hrs_hit": 31,
+    "total_near_hrs": 19,
+    "model_hits": 30,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 4,
+          "rate": 20.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 8,
+          "rate": 26.7
+        },
+        "all": {
+          "total": 234,
+          "hits": 30,
+          "rate": 12.8
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 4,
+          "rate": 20.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 6,
+          "rate": 20.0
+        },
+        "all": {
+          "total": 234,
+          "hits": 30,
+          "rate": 12.8
+        }
+      }
+    },
+    "model_near_hits": 19,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 8,
+        "rate": 26.7
+      },
+      "all": {
+        "total": 234,
+        "hits": 30,
+        "rate": 12.8
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 5,
+        "rate": 25.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 10,
+        "rate": 33.3
+      },
+      "all": {
+        "total": 234,
+        "hits": 49,
+        "rate": 20.9
+      }
+    },
+    "avg_composite_hr_hitters": 0.463,
+    "avg_composite_non_hitters": 0.416,
+    "composite_separation": 0.047,
+    "hr_hitters": [
+      {
+        "name": "Ryan McMahon",
+        "rank": 8,
+        "composite": 0.69,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@NYY"
+      },
+      {
+        "name": "Casey Schmitt",
+        "rank": 13,
+        "composite": 0.666,
+        "opp_pitcher": "Walker Buehler",
+        "matchup": "SD@SF"
+      },
+      {
+        "name": "Matt Olson",
+        "rank": 14,
+        "composite": 0.662,
+        "opp_pitcher": "George Kirby",
+        "matchup": "ATL@SEA"
+      },
+      {
+        "name": "Bryce Harper",
+        "rank": 19,
+        "composite": 0.625,
+        "opp_pitcher": "Luis Severino",
+        "matchup": "ATH@PHI"
+      },
+      {
+        "name": "JJ Bleday",
+        "rank": 21,
+        "composite": 0.624,
+        "opp_pitcher": "Jameson Taillon",
+        "matchup": "CIN@CHC"
+      },
+      {
+        "name": "Jazz Chisholm Jr.",
+        "rank": 26,
+        "composite": 0.61,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@NYY"
+      },
+      {
+        "name": "Nathaniel Lowe",
+        "rank": 27,
+        "composite": 0.609,
+        "opp_pitcher": "Jameson Taillon",
+        "matchup": "CIN@CHC"
+      },
+      {
+        "name": "Kazuma Okamoto",
+        "rank": 29,
+        "composite": 0.605,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "TOR@TB"
+      },
+      {
+        "name": "Paul Goldschmidt",
+        "rank": 34,
+        "composite": 0.596,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@NYY"
+      },
+      {
+        "name": "Bryson Stott",
+        "rank": 41,
+        "composite": 0.579,
+        "opp_pitcher": "Luis Severino",
+        "matchup": "ATH@PHI"
+      },
+      {
+        "name": "Michael Busch",
+        "rank": 45,
+        "composite": 0.563,
+        "opp_pitcher": "Andrew Abbott",
+        "matchup": "CIN@CHC"
+      },
+      {
+        "name": "Christian Walker",
+        "rank": 51,
+        "composite": 0.555,
+        "opp_pitcher": "Shohei Ohtani",
+        "matchup": "LAD@HOU"
+      },
+      {
+        "name": "Mike Trout",
+        "rank": 60,
+        "composite": 0.545,
+        "opp_pitcher": "Erick Fedde",
+        "matchup": "CWS@LAA"
+      },
+      {
+        "name": "Isaac Collins",
+        "rank": 66,
+        "composite": 0.512,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "CLE@KC"
+      },
+      {
+        "name": "Willson Contreras",
+        "rank": 77,
+        "composite": 0.481,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "BOS@DET"
+      },
+      {
+        "name": "Otto Lopez",
+        "rank": 85,
+        "composite": 0.433,
+        "opp_pitcher": "Chris Bassitt",
+        "matchup": "BAL@MIA"
+      },
+      {
+        "name": "Rhys Hoskins",
+        "rank": 89,
+        "composite": 0.402,
+        "opp_pitcher": "Stephen Kolek",
+        "matchup": "CLE@KC"
+      },
+      {
+        "name": "Wilyer Abreu",
+        "rank": 124,
+        "composite": 0.386,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "BOS@DET"
+      },
+      {
+        "name": "Byron Buxton",
+        "rank": 132,
+        "composite": 0.378,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "MIN@WSH"
+      },
+      {
+        "name": "Matt Vierling",
+        "rank": 135,
+        "composite": 0.372,
+        "opp_pitcher": "Jovani Mor\u00e1n",
+        "matchup": "BOS@DET"
+      },
+      {
+        "name": "Zach Neto",
+        "rank": 144,
+        "composite": 0.366,
+        "opp_pitcher": "Erick Fedde",
+        "matchup": "CWS@LAA"
+      },
+      {
+        "name": "Michael Massey",
+        "rank": 146,
+        "composite": 0.362,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "CLE@KC"
+      },
+      {
+        "name": "Jorge Soler",
+        "rank": 159,
+        "composite": 0.347,
+        "opp_pitcher": "Erick Fedde",
+        "matchup": "CWS@LAA"
+      },
+      {
+        "name": "J.P. Crawford",
+        "rank": 163,
+        "composite": 0.345,
+        "opp_pitcher": "Bryce Elder",
+        "matchup": "ATL@SEA"
+      },
+      {
+        "name": "Chase Meidroth",
+        "rank": 167,
+        "composite": 0.34,
+        "opp_pitcher": "Sam Aldegheri",
+        "matchup": "CWS@LAA"
+      },
+      {
+        "name": "Liam Hicks",
+        "rank": 173,
+        "composite": 0.332,
+        "opp_pitcher": "Chris Bassitt",
+        "matchup": "BAL@MIA"
+      },
+      {
+        "name": "Ceddanne Rafaela",
+        "rank": 193,
+        "composite": 0.306,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "BOS@DET"
+      },
+      {
+        "name": "Braden Shewmake",
+        "rank": 218,
+        "composite": 0.227,
+        "opp_pitcher": "Shohei Ohtani",
+        "matchup": "LAD@HOU"
+      },
+      {
+        "name": "Jesus Rodriguez",
+        "rank": 227,
+        "composite": 0.2,
+        "opp_pitcher": "Walker Buehler",
+        "matchup": "SD@SF"
+      },
+      {
+        "name": "Xander Bogaerts",
+        "rank": 231,
+        "composite": 0.177,
+        "opp_pitcher": "Logan Webb",
+        "matchup": "SD@SF"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Nathaniel Lowe",
+        "rank": 6,
+        "composite": 0.673,
+        "opp_pitcher": "Jameson Taillon",
+        "matchup": "CIN@CHC"
+      },
+      {
+        "name": "Casey Schmitt",
+        "rank": 9,
+        "composite": 0.669,
+        "opp_pitcher": "Walker Buehler",
+        "matchup": "SD@SF"
+      },
+      {
+        "name": "Matt Olson",
+        "rank": 18,
+        "composite": 0.615,
+        "opp_pitcher": "George Kirby",
+        "matchup": "ATL@SEA"
+      },
+      {
+        "name": "Ryan McMahon",
+        "rank": 20,
+        "composite": 0.609,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@NYY"
+      },
+      {
+        "name": "Paul Goldschmidt",
+        "rank": 21,
+        "composite": 0.609,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@NYY"
+      },
+      {
+        "name": "Mike Trout",
+        "rank": 22,
+        "composite": 0.609,
+        "opp_pitcher": "Erick Fedde",
+        "matchup": "CWS@LAA"
+      },
+      {
+        "name": "JJ Bleday",
+        "rank": 32,
+        "composite": 0.594,
+        "opp_pitcher": "Jameson Taillon",
+        "matchup": "CIN@CHC"
+      },
+      {
+        "name": "Jazz Chisholm Jr.",
+        "rank": 33,
+        "composite": 0.588,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@NYY"
+      },
+      {
+        "name": "Willson Contreras",
+        "rank": 48,
+        "composite": 0.541,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "BOS@DET"
+      },
+      {
+        "name": "Kazuma Okamoto",
+        "rank": 49,
+        "composite": 0.536,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "TOR@TB"
+      },
+      {
+        "name": "Michael Busch",
+        "rank": 72,
+        "composite": 0.474,
+        "opp_pitcher": "Andrew Abbott",
+        "matchup": "CIN@CHC"
+      },
+      {
+        "name": "Bryson Stott",
+        "rank": 75,
+        "composite": 0.468,
+        "opp_pitcher": "Luis Severino",
+        "matchup": "ATH@PHI"
+      },
+      {
+        "name": "Christian Walker",
+        "rank": 77,
+        "composite": 0.461,
+        "opp_pitcher": "Shohei Ohtani",
+        "matchup": "LAD@HOU"
+      },
+      {
+        "name": "Liam Hicks",
+        "rank": 83,
+        "composite": 0.433,
+        "opp_pitcher": "Chris Bassitt",
+        "matchup": "BAL@MIA"
+      },
+      {
+        "name": "Byron Buxton",
+        "rank": 85,
+        "composite": 0.423,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "MIN@WSH"
+      },
+      {
+        "name": "Bryce Harper",
+        "rank": 93,
+        "composite": 0.4,
+        "opp_pitcher": "Luis Severino",
+        "matchup": "ATH@PHI"
+      },
+      {
+        "name": "Isaac Collins",
+        "rank": 109,
+        "composite": 0.4,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "CLE@KC"
+      },
+      {
+        "name": "Jorge Soler",
+        "rank": 117,
+        "composite": 0.4,
+        "opp_pitcher": "Erick Fedde",
+        "matchup": "CWS@LAA"
+      },
+      {
+        "name": "Wilyer Abreu",
+        "rank": 130,
+        "composite": 0.386,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "BOS@DET"
+      },
+      {
+        "name": "Ceddanne Rafaela",
+        "rank": 132,
+        "composite": 0.384,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "BOS@DET"
+      },
+      {
+        "name": "Matt Vierling",
+        "rank": 146,
+        "composite": 0.372,
+        "opp_pitcher": "Jovani Mor\u00e1n",
+        "matchup": "BOS@DET"
+      },
+      {
+        "name": "Zach Neto",
+        "rank": 153,
+        "composite": 0.366,
+        "opp_pitcher": "Erick Fedde",
+        "matchup": "CWS@LAA"
+      },
+      {
+        "name": "Michael Massey",
+        "rank": 157,
+        "composite": 0.362,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "CLE@KC"
+      },
+      {
+        "name": "Chase Meidroth",
+        "rank": 158,
+        "composite": 0.362,
+        "opp_pitcher": "Sam Aldegheri",
+        "matchup": "CWS@LAA"
+      },
+      {
+        "name": "Braden Shewmake",
+        "rank": 183,
+        "composite": 0.333,
+        "opp_pitcher": "Shohei Ohtani",
+        "matchup": "LAD@HOU"
+      },
+      {
+        "name": "J.P. Crawford",
+        "rank": 185,
+        "composite": 0.332,
+        "opp_pitcher": "Bryce Elder",
+        "matchup": "ATL@SEA"
+      },
+      {
+        "name": "Otto Lopez",
+        "rank": 187,
+        "composite": 0.329,
+        "opp_pitcher": "Chris Bassitt",
+        "matchup": "BAL@MIA"
+      },
+      {
+        "name": "Rhys Hoskins",
+        "rank": 190,
+        "composite": 0.324,
+        "opp_pitcher": "Stephen Kolek",
+        "matchup": "CLE@KC"
+      },
+      {
+        "name": "Xander Bogaerts",
+        "rank": 226,
+        "composite": 0.211,
+        "opp_pitcher": "Logan Webb",
+        "matchup": "SD@SF"
+      },
+      {
+        "name": "Jesus Rodriguez",
+        "rank": 227,
+        "composite": 0.2,
+        "opp_pitcher": "Walker Buehler",
+        "matchup": "SD@SF"
+      }
+    ],
+    "near_hr_hitters": [
+      {
+        "name": "Daylen Lile",
+        "rank": 10,
+        "composite": 0.672,
+        "opp_pitcher": "Taj Bradley",
+        "matchup": "MIN@WSH"
+      },
+      {
+        "name": "Cody Bellinger",
+        "rank": 25,
+        "composite": 0.613,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@NYY"
+      },
+      {
+        "name": "Oneil Cruz",
+        "rank": 32,
+        "composite": 0.597,
+        "opp_pitcher": "Eduardo Rodriguez",
+        "matchup": "PIT@AZ"
+      },
+      {
+        "name": "Ryan Jeffers",
+        "rank": 68,
+        "composite": 0.509,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "MIN@WSH"
+      },
+      {
+        "name": "James Wood",
+        "rank": 94,
+        "composite": 0.4,
+        "opp_pitcher": "Taj Bradley",
+        "matchup": "MIN@WSH"
+      },
+      {
+        "name": "Bobby Witt Jr.",
+        "rank": 106,
+        "composite": 0.4,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "CLE@KC"
+      },
+      {
+        "name": "Ketel Marte",
+        "rank": 110,
+        "composite": 0.4,
+        "opp_pitcher": "Bubba Chandler",
+        "matchup": "PIT@AZ"
+      },
+      {
+        "name": "Konnor Griffin",
+        "rank": 112,
+        "composite": 0.4,
+        "opp_pitcher": "Eduardo Rodriguez",
+        "matchup": "PIT@AZ"
+      },
+      {
+        "name": "Matt Chapman",
+        "rank": 113,
+        "composite": 0.4,
+        "opp_pitcher": "Walker Buehler",
+        "matchup": "SD@SF"
+      },
+      {
+        "name": "Lenyn Sosa",
+        "rank": 115,
+        "composite": 0.398,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "TOR@TB"
+      },
+      {
+        "name": "Vaughn Grissom",
+        "rank": 117,
+        "composite": 0.397,
+        "opp_pitcher": "Erick Fedde",
+        "matchup": "CWS@LAA"
+      },
+      {
+        "name": "George Springer",
+        "rank": 142,
+        "composite": 0.368,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "TOR@TB"
+      },
+      {
+        "name": "Leody Taveras",
+        "rank": 152,
+        "composite": 0.354,
+        "opp_pitcher": "Sandy Alcantara",
+        "matchup": "BAL@MIA"
+      },
+      {
+        "name": "Samuel Basallo",
+        "rank": 177,
+        "composite": 0.329,
+        "opp_pitcher": "Sandy Alcantara",
+        "matchup": "BAL@MIA"
+      },
+      {
+        "name": "Royce Lewis",
+        "rank": 178,
+        "composite": 0.327,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "MIN@WSH"
+      },
+      {
+        "name": "Ezequiel Duran",
+        "rank": 194,
+        "composite": 0.306,
+        "opp_pitcher": "Elmer Rodr\u00edguez",
+        "matchup": "TEX@NYY"
+      },
+      {
+        "name": "Ernie Clement",
+        "rank": 197,
+        "composite": 0.303,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "TOR@TB"
+      },
+      {
+        "name": "Freddie Freeman",
+        "rank": 224,
+        "composite": 0.209,
+        "opp_pitcher": "Peter Lambert",
+        "matchup": "LAD@HOU"
+      },
+      {
+        "name": "Sung-Mun Song",
+        "rank": 233,
+        "composite": 0.111,
+        "opp_pitcher": "Logan Webb",
+        "matchup": "SD@SF"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Oneil Cruz",
+        "ev": 108.4,
+        "angle": 23.0,
+        "distance": 400.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Lo\u00e1isiga, Jonathan"
+      },
+      {
+        "batter": "Konnor Griffin",
+        "ev": 110.1,
+        "angle": 33.0,
+        "distance": 414.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Rodriguez, Eduardo"
+      },
+      {
+        "batter": "Ketel Marte",
+        "ev": 103.2,
+        "angle": 23.0,
+        "distance": 395.0,
+        "hr_in_parks": 29,
+        "result": "triple",
+        "pitcher": "Chandler, Bubba"
+      },
+      {
+        "batter": "Freddie Freeman",
+        "ev": 103.8,
+        "angle": 29.0,
+        "distance": 391.0,
+        "hr_in_parks": 17,
+        "result": "field_out",
+        "pitcher": "Lambert, Peter"
+      },
+      {
+        "batter": "Bobby Witt Jr.",
+        "ev": 103.9,
+        "angle": 32.0,
+        "distance": 388.0,
+        "hr_in_parks": 8,
+        "result": "field_out",
+        "pitcher": "Williams, Gavin"
+      },
+      {
+        "batter": "Vaughn Grissom",
+        "ev": 101.1,
+        "angle": 35.0,
+        "distance": 380.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Fedde, Erick"
+      },
+      {
+        "batter": "Leody Taveras",
+        "ev": 102.7,
+        "angle": 22.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Ekness, Josh"
+      },
+      {
+        "batter": "Samuel Basallo",
+        "ev": 111.3,
+        "angle": 16.0,
+        "distance": 381.0,
+        "hr_in_parks": 7,
+        "result": "double",
+        "pitcher": "Alcantara, Sandy"
+      },
+      {
+        "batter": "Ezequiel Duran",
+        "ev": 105.2,
+        "angle": 22.0,
+        "distance": 399.0,
+        "hr_in_parks": 25,
+        "result": "triple",
+        "pitcher": "Bednar, David"
+      },
+      {
+        "batter": "Cody Bellinger",
+        "ev": 107.6,
+        "angle": 20.0,
+        "distance": 368.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "deGrom, Jacob"
+      },
+      {
+        "batter": "Bryson Stott",
+        "ev": 103.7,
+        "angle": 21.0,
+        "distance": 399.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Severino, Luis"
+      },
+      {
+        "batter": "Matt Chapman",
+        "ev": 102.0,
+        "angle": 28.0,
+        "distance": 371.0,
+        "hr_in_parks": 20,
+        "result": "field_out",
+        "pitcher": "Buehler, Walker"
+      },
+      {
+        "batter": "Sung-Mun Song",
+        "ev": 100.8,
+        "angle": 23.0,
+        "distance": 373.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Webb, Logan"
+      },
+      {
+        "batter": "George Springer",
+        "ev": 101.4,
+        "angle": 28.0,
+        "distance": 390.0,
+        "hr_in_parks": 19,
+        "result": "double_play",
+        "pitcher": "Rasmussen, Drew"
+      },
+      {
+        "batter": "Ernie Clement",
+        "ev": 99.6,
+        "angle": 25.0,
+        "distance": 380.0,
+        "hr_in_parks": 10,
+        "result": "field_out",
+        "pitcher": "Rasmussen, Drew"
+      },
+      {
+        "batter": "Lenyn Sosa",
+        "ev": 101.0,
+        "angle": 29.0,
+        "distance": 388.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Rasmussen, Drew"
+      },
+      {
+        "batter": "Ryan Jeffers",
+        "ev": 101.0,
+        "angle": 23.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Granillo, Andre"
+      },
+      {
+        "batter": "James Wood",
+        "ev": 111.9,
+        "angle": 20.0,
+        "distance": 379.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Orze, Eric"
+      },
+      {
+        "batter": "Daylen Lile",
+        "ev": 103.4,
+        "angle": 23.0,
+        "distance": 383.0,
+        "hr_in_parks": 15,
+        "result": "double",
+        "pitcher": "Bradley, Taj"
+      },
+      {
+        "batter": "Royce Lewis",
+        "ev": 98.7,
+        "angle": 29.0,
+        "distance": 369.0,
+        "hr_in_parks": 11,
+        "result": "sac_fly",
+        "pitcher": "Cavalli, Cade"
+      }
+    ],
+    "surprise_hrs": []
   }
 ]
