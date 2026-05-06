@@ -57,10 +57,7 @@ def _clean_for_json(obj):
 # schedule is fetched. Key: team abbreviation (home or away). Value: dict with
 # "name", "hand" ("R"/"L"), and optionally "id" (MLB player ID).
 # Clear this dict after regen; it only applies to the current run.
-PITCHER_OVERRIDES: dict[str, dict] = {
-    "NYM": {"name": "Huascar Brazobán", "hand": "R", "id": 623211},
-    "DET": {"name": "Tyler Holton", "hand": "L", "id": 663947},
-}
+PITCHER_OVERRIDES: dict[str, dict] = {}
 
 
 def _compute_zone_stats(df: pd.DataFrame) -> list:
