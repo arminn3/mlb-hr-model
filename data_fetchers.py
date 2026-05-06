@@ -933,38 +933,41 @@ def _fetch_pitcher_season_stats(pitcher_ids: list) -> dict:
     """
     Batch-fetch 2026 season pitching stats for a list of pitcher IDs.
     Returns dict: pitcher_id -> { era, hr9, k_pct, whip, g }
+    Uses /v1/people?personIds=...&hydrate=stats(...) which correctly filters by ID.
     """
     if not pitcher_ids:
         return {}
-    # MLB API supports comma-separated playerIds
     chunk_size = 50
     stats: dict = {}
+    hydrate = "stats(group=[pitching],type=[season],season=2026,gameType=R)"
     for i in range(0, len(pitcher_ids), chunk_size):
         chunk = pitcher_ids[i:i + chunk_size]
         ids_str = ",".join(str(p) for p in chunk)
-        url = (
-            f"{MLB_API_BASE}/stats"
-            f"?stats=season&group=pitching&season=2026&gameType=R"
-            f"&playerIds={ids_str}"
-        )
+        url = f"{MLB_API_BASE}/people?personIds={ids_str}&hydrate={hydrate}"
         try:
-            r = requests.get(url, timeout=10)
+            r = requests.get(url, timeout=15)
             r.raise_for_status()
-            for split in r.json().get("stats", []):
-                for row in split.get("splits", []):
-                    pid = row.get("player", {}).get("id")
-                    s   = row.get("stat", {})
-                    if not pid:
-                        continue
-                    bf = s.get("battersFaced") or 0
-                    k  = s.get("strikeOuts") or 0
-                    stats[pid] = {
-                        "era":   round(float(s["era"]), 2) if s.get("era") not in (None, "-.--", "--") else None,
-                        "whip":  round(float(s["whip"]), 2) if s.get("whip") not in (None, "-.--", "--") else None,
-                        "hr9":   round(float(s["homeRunsPer9"]), 2) if s.get("homeRunsPer9") not in (None, "-.--", "--") else None,
-                        "k_pct": round(k / bf * 100, 1) if bf > 0 else None,
-                        "g":     s.get("gamesPlayed") or 0,
-                    }
+            for person in r.json().get("people", []):
+                pid = person.get("id")
+                if not pid:
+                    continue
+                for sg in person.get("stats", []):
+                    for split in sg.get("splits", []):
+                        s = split.get("stat", {})
+                        bf = s.get("battersFaced") or 0
+                        k  = s.get("strikeOuts") or 0
+                        def _safe(v, digits=2):
+                            try:
+                                return round(float(v), digits) if v not in (None, "-.--", "--", "") else None
+                            except (TypeError, ValueError):
+                                return None
+                        stats[pid] = {
+                            "era":   _safe(s.get("era")),
+                            "whip":  _safe(s.get("whip")),
+                            "hr9":   _safe(s.get("homeRunsPer9")),
+                            "k_pct": round(k / bf * 100, 1) if bf > 0 else None,
+                            "g":     s.get("gamesPlayed") or 0,
+                        }
         except Exception:
             pass
     return stats
