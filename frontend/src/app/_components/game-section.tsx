@@ -120,7 +120,7 @@ export function GameSection({
       </div>
 
       {/* Bullpen freshness — both teams side by side, after both batter tables */}
-      {game.bullpen && (
+      {game.bullpen?.away?.arms && game.bullpen?.home?.arms && (
         <BullpenSection
           awayTeam={game.away_team}
           homeTeam={game.home_team}
