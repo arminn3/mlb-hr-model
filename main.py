@@ -90,6 +90,8 @@ def _format_score(result: dict) -> dict:
         "exit_velo": round(result["weighted_exit_velo"], 1),
         "barrel_pct": round(result["weighted_barrel_rate"] * 100, 1),
         "fb_pct": round(result["weighted_fb_rate"] * 100, 1),
+        "ld_pct": round(result["weighted_ld_rate"] * 100, 1),
+        "gb_pct": round(result["weighted_gb_rate"] * 100, 1),
         "hard_hit_pct": round(result["weighted_hard_hit_rate"] * 100, 1),
         "data_quality": result["data_quality"],
         "recent_abs": result.get("recent_abs", []),

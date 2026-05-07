@@ -209,23 +209,27 @@ export function BatterDetailPage({
   const pullBrl = player.season_profile?.pull_barrel ?? null;
 
   let displayBarrel = scores.barrel_pct, displayFb = scores.fb_pct;
+  let displayLd = scores.ld_pct ?? 0, displayGb = scores.gb_pct ?? 0;
   let displayHardHit = scores.hard_hit_pct, displayEv = scores.exit_velo;
   let displayHrFb: number | null = hrFbPct;
 
   if (pitchFilter.size > 0) {
-    let totalCount = 0, wBarrel = 0, wFb = 0, wHard = 0, wEv = 0;
+    let totalCount = 0, wBarrel = 0, wFb = 0, wLd = 0, wGb = 0, wHard = 0, wEv = 0;
     for (const pt of pitchFilter) {
       const d = pitchDetail[pt]; if (!d) continue;
       const c = d.count ?? 0; totalCount += c;
       wBarrel += (d.barrel_rate ?? 0) * c; wFb += (d.fb_rate ?? 0) * c;
+      wLd += (d.ld_rate ?? 0) * c; wGb += (d.gb_rate ?? 0) * c;
       wHard += (d.hard_hit_rate ?? 0) * c; wEv += (d.avg_exit_velo ?? 0) * c;
     }
     if (totalCount > 0) {
       displayBarrel = Math.round((wBarrel / totalCount) * 10) / 10;
       displayFb = Math.round((wFb / totalCount) * 10) / 10;
+      displayLd = Math.round((wLd / totalCount) * 10) / 10;
+      displayGb = Math.round((wGb / totalCount) * 10) / 10;
       displayHardHit = Math.round((wHard / totalCount) * 10) / 10;
       displayEv = Math.round((wEv / totalCount) * 10) / 10;
-    } else { displayBarrel = 0; displayFb = 0; displayHardHit = 0; displayEv = 0; }
+    } else { displayBarrel = 0; displayFb = 0; displayLd = 0; displayGb = 0; displayHardHit = 0; displayEv = 0; }
     const filterAbs = recentAbsArr.filter((ab) => {
       const pt = ab.pitch_type ?? "";
       if (pitchFilter.has(pt)) return true;
@@ -245,8 +249,11 @@ export function BatterDetailPage({
     { label: "Barrel%",    value: `${displayBarrel}%`,                                       cls: statHighlight(displayBarrel, [8, 15]) },
     { label: "Hard Hit%",  value: `${displayHardHit}%`,                                      cls: statHighlight(displayHardHit, [35, 50]) },
     { label: "HR/FB%",     value: displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`, cls: displayHrFb == null ? "text-muted" : statHighlight(displayHrFb, [10, 18]) },
+    { label: "GB%",        value: `${displayGb}%`,                                           cls: "text-muted" },
+    { label: "LD%",        value: `${displayLd}%`,                                           cls: "text-muted" },
     { label: "FB%",        value: `${displayFb}%`,                                           cls: statHighlight(displayFb, [25, 40]) },
     { label: "Pull Brl%",  value: pullBrl == null ? "—" : `${pullBrl.toFixed(1)}%`,          cls: pullBrl == null ? "text-muted" : statHighlight(pullBrl, [4, 8]) },
+    { label: "Season FB%", value: player.season_profile?.fb != null ? `${player.season_profile.fb}%` : "—", cls: player.season_profile?.fb != null ? statHighlight(player.season_profile.fb, [25, 40]) : "text-muted" },
   ];
 
   return (
@@ -356,6 +363,85 @@ export function BatterDetailPage({
                   </div>
                 );
               })}
+            </div>
+          </div>
+        )}
+
+        {/* Per-pitch EV / LA breakdown */}
+        {pitchDetailEntries.length > 0 && pitchAbsData && (
+          <div className="rounded-xl overflow-hidden" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <div className="px-4 py-2.5" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.025)" }}>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted">EV &amp; LA vs Arsenal</span>
+              <span className="text-[9px] text-muted/40 ml-2 font-mono">recent · 2026</span>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+                    <th className="px-4 py-1.5 text-[9px] uppercase tracking-wider text-muted/50 font-semibold text-left w-24">Pitch</th>
+                    <th className="px-3 py-1.5 text-[9px] uppercase tracking-wider text-muted/50 font-semibold text-center">Avg EV</th>
+                    <th className="px-3 py-1.5 text-[9px] uppercase tracking-wider text-muted/50 font-semibold text-center">Avg LA</th>
+                    <th className="px-3 py-1.5 text-[9px] uppercase tracking-wider text-muted/40 font-semibold text-center">EV '26</th>
+                    <th className="px-3 py-1.5 text-[9px] uppercase tracking-wider text-muted/40 font-semibold text-center">LA '26</th>
+                    <th className="px-3 py-1.5 text-[9px] uppercase tracking-wider text-muted/40 font-semibold text-center">n</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {pitchDetailEntries.map(([pt, d]) => {
+                    const abs = pitchAbsData[pt] ?? [];
+                    const season26 = abs.filter((ab) => String(ab.date ?? "").startsWith("2026"));
+                    const s26Ev = season26.length > 0
+                      ? season26.reduce((s, ab) => s + (Number(ab.ev) || 0), 0) / season26.length
+                      : null;
+                    const s26La = season26.length > 0
+                      ? season26.reduce((s, ab) => s + (Number(ab.angle) || 0), 0) / season26.length
+                      : null;
+                    const evColor = (ev: number | null | undefined) => {
+                      if (ev == null) return "text-muted/40";
+                      if (ev >= 95) return "text-accent-green font-semibold";
+                      if (ev >= 90) return "text-foreground";
+                      return "text-muted";
+                    };
+                    const laColor = (la: number | null | undefined) => {
+                      if (la == null) return "text-muted/40";
+                      if (la >= 20 && la <= 35) return "text-accent-green font-semibold";
+                      if (la >= 10 && la <= 45) return "text-foreground";
+                      return "text-muted";
+                    };
+                    return (
+                      <tr key={pt} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                        <td className="px-4 py-2">
+                          <span className="text-xs font-mono font-semibold text-foreground">{pt}</span>
+                          <span className="text-[10px] text-muted/50 ml-1.5">{PITCH_NAMES[pt]?.[0] || ""}</span>
+                        </td>
+                        <td className="px-3 py-2 text-center">
+                          <span className={`text-xs font-mono ${evColor(d.avg_exit_velo)}`}>
+                            {d.avg_exit_velo > 0 ? d.avg_exit_velo : "—"}
+                          </span>
+                        </td>
+                        <td className="px-3 py-2 text-center">
+                          <span className={`text-xs font-mono ${laColor(d.avg_launch_angle)}`}>
+                            {d.avg_launch_angle != null ? `${d.avg_launch_angle}°` : "—"}
+                          </span>
+                        </td>
+                        <td className="px-3 py-2 text-center">
+                          <span className={`text-xs font-mono ${evColor(s26Ev)}`}>
+                            {s26Ev != null ? s26Ev.toFixed(1) : "—"}
+                          </span>
+                        </td>
+                        <td className="px-3 py-2 text-center">
+                          <span className={`text-xs font-mono ${laColor(s26La)}`}>
+                            {s26La != null ? `${s26La.toFixed(1)}°` : "—"}
+                          </span>
+                        </td>
+                        <td className="px-3 py-2 text-center">
+                          <span className="text-[10px] font-mono text-muted/50">{abs.length}</span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
             </div>
           </div>
         )}

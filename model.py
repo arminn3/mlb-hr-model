@@ -125,6 +125,8 @@ def score_batter_vs_pitcher(
         "weighted_exit_velo": 0.0,
         "weighted_barrel_rate": 0.0,
         "weighted_fb_rate": 0.0,
+        "weighted_ld_rate": 0.0,
+        "weighted_gb_rate": 0.0,
         "weighted_hard_hit_rate": 0.0,
         "pitcher_fb_rate": 0.0,
         "pitcher_hr_fb_rate": 0.0,
@@ -216,6 +218,8 @@ def score_batter_vs_pitcher(
         result["weighted_exit_velo"] = pool_metrics["avg_exit_velo"]
         result["weighted_barrel_rate"] = pool_metrics["barrel_rate"]
         result["weighted_fb_rate"] = pool_metrics["fly_ball_rate"]
+        result["weighted_ld_rate"] = pool_metrics["line_drive_rate"]
+        result["weighted_gb_rate"] = pool_metrics["ground_ball_rate"]
         result["weighted_hard_hit_rate"] = pool_metrics["hard_hit_rate"]
 
         # Scoring: weight per-pitch-type metrics by pitch usage tiers
@@ -533,8 +537,11 @@ def score_batter_vs_pitcher(
             "weight": round(pitch_weights.get(pt, 0) * 100, 1),
             "barrel_rate": round(m.get("barrel_rate", 0) * 100, 1),
             "fb_rate": round(m.get("fly_ball_rate", 0) * 100, 1),
+            "ld_rate": round(m.get("line_drive_rate", 0) * 100, 1),
+            "gb_rate": round(m.get("ground_ball_rate", 0) * 100, 1),
             "hard_hit_rate": round(m.get("hard_hit_rate", 0) * 100, 1),
             "avg_exit_velo": round(m.get("avg_exit_velo", 0), 1),
+            "avg_launch_angle": round(m.get("avg_launch_angle", 0), 1),
             "count": n_pt,
         }
     result["pitch_detail"] = pitch_detail

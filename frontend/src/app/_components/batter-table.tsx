@@ -161,6 +161,13 @@ export function BatterRow({
       <td className="py-2.5 pr-3 w-14 text-center">
         <span className={`text-xs font-mono ${statColor(scores.hard_hit_pct, 35, 50)}`}>{scores.hard_hit_pct}%</span>
       </td>
+      {/* Contact breakdown: GB / LD / FB */}
+      <td className="py-2.5 pr-3 w-14 text-center">
+        <span className="text-xs font-mono text-muted">{scores.gb_pct ?? "—"}%</span>
+      </td>
+      <td className="py-2.5 pr-3 w-14 text-center">
+        <span className="text-xs font-mono text-muted">{scores.ld_pct ?? "—"}%</span>
+      </td>
       <td className="py-2.5 pr-3 w-14 text-center">
         <span className={`text-xs font-mono ${statColor(scores.fb_pct, 25, 40)}`}>{scores.fb_pct}%</span>
       </td>
@@ -230,6 +237,8 @@ export function BatterTable({
               <th className="py-2 pr-3 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-14">EV</th>
               <th className="py-2 pr-3 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-14">Brl%</th>
               <th className="py-2 pr-3 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-14">HH%</th>
+              <th className="py-2 pr-3 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-14">GB%</th>
+              <th className="py-2 pr-3 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-14">LD%</th>
               <th className="py-2 pr-3 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-14">FB%</th>
               <th className="py-2 pr-4 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-16">HR/FB</th>
               <th className="w-6" />

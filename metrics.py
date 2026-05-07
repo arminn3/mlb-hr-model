@@ -466,15 +466,19 @@ def calc_batter_metrics_for_pitch(pa_pitches: pd.DataFrame) -> dict[str, float]:
         barrels = bip.get("barrel", pd.Series(dtype=float)).fillna(0).astype(bool).sum()
     barrel_rate = barrels / n_bip
 
-    # Fly ball rate: launch angle 25-50° (excludes popups which are 50°+)
+    # Contact type rates from launch angle
     if "launch_angle" in bip.columns:
-        fly_balls = (
-            (bip["launch_angle"] >= config.FLY_BALL_LA_MIN)
-            & (bip["launch_angle"] <= config.FLY_BALL_LA_MAX)
-        ).sum()
+        la = bip["launch_angle"]
+        fly_balls   = ((la >= config.FLY_BALL_LA_MIN) & (la <= config.FLY_BALL_LA_MAX)).sum()
+        line_drives = ((la >= 10) & (la < config.FLY_BALL_LA_MIN)).sum()
+        ground_balls = (la < 10).sum()
+        avg_la = float(la.dropna().mean()) if la.notna().any() else 0.0
     else:
-        fly_balls = 0
-    fly_ball_rate = fly_balls / n_bip
+        fly_balls = line_drives = ground_balls = 0
+        avg_la = 0.0
+    fly_ball_rate    = fly_balls / n_bip
+    line_drive_rate  = line_drives / n_bip
+    ground_ball_rate = ground_balls / n_bip
 
     # Hard hit rate: exit velo >= 95 mph AND launch angle > 0° (exclude popups/grounders)
     # A 96 EV popup at 66° or grounder at -10° has zero HR potential
@@ -490,8 +494,11 @@ def calc_batter_metrics_for_pitch(pa_pitches: pd.DataFrame) -> dict[str, float]:
 
     return {
         "avg_exit_velo": float(avg_ev),
+        "avg_launch_angle": avg_la,
         "barrel_rate": float(barrel_rate),
         "fly_ball_rate": float(fly_ball_rate),
+        "line_drive_rate": float(line_drive_rate),
+        "ground_ball_rate": float(ground_ball_rate),
         "hard_hit_rate": float(hard_hit_rate),
     }
 

@@ -19,6 +19,8 @@ export interface ScoreSet {
   exit_velo: number;
   barrel_pct: number;
   fb_pct: number;
+  ld_pct: number;
+  gb_pct: number;
   hard_hit_pct: number;
   data_quality: string;
   recent_abs: RecentAB[];
@@ -39,8 +41,11 @@ export interface PitchDetailEntry {
   weight: number;
   barrel_rate: number;
   fb_rate: number;
+  ld_rate?: number;
+  gb_rate?: number;
   hard_hit_rate: number;
   avg_exit_velo: number;
+  avg_launch_angle?: number | null;
   count?: number;
 }
 
