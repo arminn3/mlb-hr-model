@@ -1,7 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import type { PlayerData, LookbackKey, PitchDetailEntry } from "./types";
 import { teamLogoUrl, teamName } from "./game-header";
+
+type SortCol = "score" | "ev" | "barrel" | "hh" | "gb" | "ld" | "fb" | "hrfb";
+type SortDir = "desc" | "asc";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -189,6 +193,32 @@ export function BatterRow({
 
 // ── BatterTable ──────────────────────────────────────────────────────────────
 
+function SortTh({
+  label, col, active, dir, onClick, className,
+}: {
+  label: string; col: SortCol; active: SortCol; dir: SortDir;
+  onClick: (c: SortCol) => void; className?: string;
+}) {
+  const isActive = active === col;
+  return (
+    <th
+      onClick={() => onClick(col)}
+      className={`py-2 text-[9px] uppercase tracking-widest font-semibold cursor-pointer select-none transition-colors ${isActive ? "text-accent" : "text-muted/50 hover:text-muted"} ${className ?? ""}`}
+    >
+      <span className="inline-flex items-center gap-0.5">
+        {label}
+        {isActive && (
+          <svg className="w-2.5 h-2.5 flex-shrink-0" fill="currentColor" viewBox="0 0 10 10">
+            {dir === "desc"
+              ? <path d="M5 7L1 3h8z" />
+              : <path d="M5 3l4 4H1z" />}
+          </svg>
+        )}
+      </span>
+    </th>
+  );
+}
+
 export function BatterTable({
   teamAbbr,
   batters,
@@ -202,7 +232,45 @@ export function BatterTable({
   posted: boolean;
   onSelect: (row: BatterRowInfo) => void;
 }) {
+  const [sortCol, setSortCol] = useState<SortCol>("score");
+  const [sortDir, setSortDir] = useState<SortDir>("desc");
+
   if (batters.length === 0) return null;
+
+  function handleSort(col: SortCol) {
+    if (col === sortCol) {
+      setSortDir((d) => (d === "desc" ? "asc" : "desc"));
+    } else {
+      setSortCol(col);
+      setSortDir("desc");
+    }
+  }
+
+  function getVal(row: BatterRowInfo): number {
+    const sc = row.p.scores[lookback] || row.p.scores.L5;
+    const recentAbs = sc.recent_abs ?? [];
+    const fbs = recentAbs.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
+    const hrs = recentAbs.filter((ab) => ab.result === "home_run").length;
+    switch (sortCol) {
+      case "score":  return sc.composite ?? 0;
+      case "ev":     return sc.exit_velo ?? 0;
+      case "barrel": return sc.barrel_pct ?? 0;
+      case "hh":     return sc.hard_hit_pct ?? 0;
+      case "gb":     return sc.gb_pct ?? 0;
+      case "ld":     return sc.ld_pct ?? 0;
+      case "fb":     return sc.fb_pct ?? 0;
+      case "hrfb":   return fbs.length > 0 ? (hrs / fbs.length) * 100 : -1;
+      default:       return 0;
+    }
+  }
+
+  const sorted = [...batters].sort((a, b) => {
+    const diff = getVal(a) - getVal(b);
+    return sortDir === "desc" ? -diff : diff;
+  });
+
+  const thCls = (col: SortCol, extra: string) =>
+    `pr-3 w-14 text-center ${extra}`;
 
   return (
     <div
@@ -232,20 +300,20 @@ export function BatterTable({
             <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
               <th className="py-2 pl-4 pr-2 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-8">#</th>
               <th className="py-2 pr-4 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-left">Player</th>
-              <th className="py-2 pr-4 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-left w-24">Score</th>
+              <SortTh label="Score"  col="score"  active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-24 text-left" />
               <th className="py-2 pr-4 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-left w-20">Pitch</th>
-              <th className="py-2 pr-3 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-14">EV</th>
-              <th className="py-2 pr-3 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-14">Brl%</th>
-              <th className="py-2 pr-3 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-14">HH%</th>
-              <th className="py-2 pr-3 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-14">GB%</th>
-              <th className="py-2 pr-3 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-14">LD%</th>
-              <th className="py-2 pr-3 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-14">FB%</th>
-              <th className="py-2 pr-4 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-16">HR/FB</th>
+              <SortTh label="EV"     col="ev"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("ev", "")} />
+              <SortTh label="Brl%"   col="barrel" active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("barrel", "")} />
+              <SortTh label="HH%"    col="hh"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("hh", "")} />
+              <SortTh label="GB%"    col="gb"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("gb", "")} />
+              <SortTh label="LD%"    col="ld"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("ld", "")} />
+              <SortTh label="FB%"    col="fb"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("fb", "")} />
+              <SortTh label="HR/FB"  col="hrfb"   active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-16 text-center" />
               <th className="w-6" />
             </tr>
           </thead>
           <tbody>
-            {batters.map((row) => (
+            {sorted.map((row) => (
               <BatterRow
                 key={row.p.name}
                 row={row}
