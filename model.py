@@ -211,35 +211,47 @@ def score_batter_vs_pitcher(
         if len(recent_bip) < effective_n_bip:
             low_sample = True
 
-        # ── Step 4: Calculate metrics — pool stats for display, weighted for scoring ──
-        # Display: barrel%, FB%, EV from all BIP together (what user sees)
+        # ── Step 4: Pitch-usage-weighted batter metrics ──────────────────────
+        # EV/barrel/FB/HH are weighted by how often the pitcher throws each pitch.
+        # Painter's FF at 47% vs LHBs means Soderstrom's FF stats get 47% weight,
+        # not an equal share. Pool metrics serve as fallback for pitches with no BIP.
         recent_bip = recent_bip.head(effective_n_bip)
         pool_metrics = calc_batter_metrics_for_pitch(recent_bip)
-        result["weighted_exit_velo"] = pool_metrics["avg_exit_velo"]
-        result["weighted_barrel_rate"] = pool_metrics["barrel_rate"]
-        result["weighted_fb_rate"] = pool_metrics["fly_ball_rate"]
-        result["weighted_ld_rate"] = pool_metrics["line_drive_rate"]
-        result["weighted_gb_rate"] = pool_metrics["ground_ball_rate"]
-        result["weighted_hard_hit_rate"] = pool_metrics["hard_hit_rate"]
 
-        # Scoring: weight per-pitch-type metrics by pitch usage tiers
-        # A pitcher's dominant pitch (45%+ = 2x weight) matters more for HR prediction
-        # This makes a batter's fastball performance count more vs a fastball-heavy pitcher
+        # Per-pitch metrics — fall back to pool avg (not zero) for pitches with no BIP
         for pt in pitch_mix:
-            # Match ST↔SL for per-pitch metrics (same as BIP pool expansion)
             pt_codes = {pt}
             if pt == "ST": pt_codes.add("SL")
             if pt == "SL": pt_codes.add("ST")
             pt_rows = recent_bip[recent_bip["pitch_type"].isin(pt_codes)] if "pitch_type" in recent_bip.columns else pd.DataFrame()
-            if pt_rows.empty:
-                per_pitch_metrics[pt] = {
-                    "avg_exit_velo": 0.0, "barrel_rate": 0.0,
-                    "fly_ball_rate": 0.0, "hard_hit_rate": 0.0,
-                }
-            else:
-                per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pt_rows)
+            per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pt_rows) if not pt_rows.empty else pool_metrics
 
-        # Per-pitch metrics kept for display/detail only — not used in scoring
+        # Default to pool; override with pitch-weighted blend when weights exist
+        result["weighted_exit_velo"]     = pool_metrics["avg_exit_velo"]
+        result["weighted_barrel_rate"]   = pool_metrics["barrel_rate"]
+        result["weighted_fb_rate"]       = pool_metrics["fly_ball_rate"]
+        result["weighted_ld_rate"]       = pool_metrics["line_drive_rate"]
+        result["weighted_gb_rate"]       = pool_metrics["ground_ball_rate"]
+        result["weighted_hard_hit_rate"] = pool_metrics["hard_hit_rate"]
+
+        if pitch_weights:
+            w_ev = w_brl = w_fb = w_hh = w_ld = w_gb = total_w = 0.0
+            for pt, wt in pitch_weights.items():
+                m = per_pitch_metrics.get(pt, pool_metrics)
+                w_ev  += wt * m["avg_exit_velo"]
+                w_brl += wt * m["barrel_rate"]
+                w_fb  += wt * m["fly_ball_rate"]
+                w_hh  += wt * m["hard_hit_rate"]
+                w_ld  += wt * m.get("line_drive_rate", pool_metrics["line_drive_rate"])
+                w_gb  += wt * m.get("ground_ball_rate", pool_metrics["ground_ball_rate"])
+                total_w += wt
+            if total_w > 0:
+                result["weighted_exit_velo"]     = w_ev  / total_w
+                result["weighted_barrel_rate"]   = w_brl / total_w
+                result["weighted_fb_rate"]       = w_fb  / total_w
+                result["weighted_hard_hit_rate"] = w_hh  / total_w
+                result["weighted_ld_rate"]       = w_ld  / total_w
+                result["weighted_gb_rate"]       = w_gb  / total_w
 
     # ── Step 5: Normalize and weight batter metrics ──────────────────────────
     # Score from the same metrics the user sees — no hidden numbers

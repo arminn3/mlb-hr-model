@@ -2,7 +2,7 @@
   "date": "2026-05-06",
   "total_players_ranked": 274,
   "total_hrs_hit": 30,
-  "total_near_hrs": 0,
+  "total_near_hrs": 11,
   "model_hits": 27,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 11,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -92,13 +92,13 @@
     },
     "all": {
       "total": 274,
-      "hits": 27,
-      "rate": 9.9
+      "hits": 38,
+      "rate": 13.9
     }
   },
   "avg_composite_hr_hitters": 0.465,
-  "avg_composite_non_hitters": 0.431,
-  "composite_separation": 0.034,
+  "avg_composite_non_hitters": 0.432,
+  "composite_separation": 0.033,
   "hr_hitters": [
     {
       "name": "Juan Soto",
@@ -481,8 +481,213 @@
       "matchup": "MIL@STL"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Cam Smith",
+      "rank": 81,
+      "composite": 0.518,
+      "opp_pitcher": "Tyler Glasnow",
+      "matchup": "LAD@HOU"
+    },
+    {
+      "name": "Myles Straw",
+      "rank": 99,
+      "composite": 0.447,
+      "opp_pitcher": "Shane McClanahan",
+      "matchup": "TOR@TB"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 116,
+      "composite": 0.4,
+      "opp_pitcher": "Walbert Ure\u00f1a",
+      "matchup": "CWS@LAA"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 124,
+      "composite": 0.4,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "ATH@PHI"
+    },
+    {
+      "name": "MJ Melendez",
+      "rank": 160,
+      "composite": 0.4,
+      "opp_pitcher": "Michael Lorenzen",
+      "matchup": "NYM@COL"
+    },
+    {
+      "name": "Riley Greene",
+      "rank": 176,
+      "composite": 0.386,
+      "opp_pitcher": "Sonny Gray",
+      "matchup": "BOS@DET"
+    },
+    {
+      "name": "Jackson Chourio",
+      "rank": 178,
+      "composite": 0.384,
+      "opp_pitcher": "Andre Pallante",
+      "matchup": "MIL@STL"
+    },
+    {
+      "name": "Troy Johnston",
+      "rank": 180,
+      "composite": 0.377,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "NYM@COL"
+    },
+    {
+      "name": "Spencer Horwitz",
+      "rank": 181,
+      "composite": 0.377,
+      "opp_pitcher": "Michael Soroka",
+      "matchup": "PIT@AZ"
+    },
+    {
+      "name": "Edouard Julien",
+      "rank": 188,
+      "composite": 0.37,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "NYM@COL"
+    },
+    {
+      "name": "Brandon Marsh",
+      "rank": 213,
+      "composite": 0.336,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "ATH@PHI"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Spencer Horwitz",
+      "ev": 100.9,
+      "angle": 24.0,
+      "distance": 377.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Soroka, Michael"
+    },
+    {
+      "batter": "Spencer Horwitz",
+      "ev": 103.4,
+      "angle": 29.0,
+      "distance": 409.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Soroka, Michael"
+    },
+    {
+      "batter": "Ian Happ",
+      "ev": 105.0,
+      "angle": 30.0,
+      "distance": 401.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Antone, Tejay"
+    },
+    {
+      "batter": "Troy Johnston",
+      "ev": 96.9,
+      "angle": 27.0,
+      "distance": 376.0,
+      "hr_in_parks": 27,
+      "result": "double",
+      "pitcher": "Myers, Tobias"
+    },
+    {
+      "batter": "Edouard Julien",
+      "ev": 99.9,
+      "angle": 39.0,
+      "distance": 386.0,
+      "hr_in_parks": 12,
+      "result": "field_out",
+      "pitcher": "Peralta, Freddy"
+    },
+    {
+      "batter": "MJ Melendez",
+      "ev": 98.9,
+      "angle": 22.0,
+      "distance": 377.0,
+      "hr_in_parks": 4,
+      "result": "triple",
+      "pitcher": "Lorenzen, Michael"
+    },
+    {
+      "batter": "Riley Greene",
+      "ev": 109.3,
+      "angle": 19.0,
+      "distance": 381.0,
+      "hr_in_parks": 19,
+      "result": "double",
+      "pitcher": "Gray, Sonny"
+    },
+    {
+      "batter": "Cam Smith",
+      "ev": 107.9,
+      "angle": 22.0,
+      "distance": 397.0,
+      "hr_in_parks": 22,
+      "result": "field_out",
+      "pitcher": "Treinen, Blake"
+    },
+    {
+      "batter": "Colson Montgomery",
+      "ev": 99.7,
+      "angle": 26.0,
+      "distance": 378.0,
+      "hr_in_parks": 11,
+      "result": "double",
+      "pitcher": "Ure\u00f1a, Walbert"
+    },
+    {
+      "batter": "Brandon Marsh",
+      "ev": 100.3,
+      "angle": 25.0,
+      "distance": 385.0,
+      "hr_in_parks": 1,
+      "result": "triple",
+      "pitcher": "Springs, Jeffrey"
+    },
+    {
+      "batter": "Kyle Schwarber",
+      "ev": 101.7,
+      "angle": 37.0,
+      "distance": 381.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Springs, Jeffrey"
+    },
+    {
+      "batter": "Jackson Chourio",
+      "ev": 108.7,
+      "angle": 22.0,
+      "distance": 386.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Svanson, Matt"
+    },
+    {
+      "batter": "Jackson Chourio",
+      "ev": 102.1,
+      "angle": 31.0,
+      "distance": 368.0,
+      "hr_in_parks": 22,
+      "result": "field_out",
+      "pitcher": "Pallante, Andre"
+    },
+    {
+      "batter": "Myles Straw",
+      "ev": 102.4,
+      "angle": 25.0,
+      "distance": 401.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "McClanahan, Shane"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Xander Bogaerts",
