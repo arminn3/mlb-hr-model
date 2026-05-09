@@ -218,13 +218,14 @@ def score_batter_vs_pitcher(
         recent_bip = recent_bip.head(effective_n_bip)
         pool_metrics = calc_batter_metrics_for_pitch(recent_bip)
 
-        # Per-pitch metrics — fall back to pool avg (not zero) for pitches with no BIP
+        # Per-pitch metrics — need ≥3 BIP to trust; otherwise fall back to pool avg.
+        # 1-2 BIP per pitch type is pure noise (2 GBs on FF ≠ "can't hit fastballs").
         for pt in pitch_mix:
             pt_codes = {pt}
             if pt == "ST": pt_codes.add("SL")
             if pt == "SL": pt_codes.add("ST")
             pt_rows = recent_bip[recent_bip["pitch_type"].isin(pt_codes)] if "pitch_type" in recent_bip.columns else pd.DataFrame()
-            per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pt_rows) if not pt_rows.empty else pool_metrics
+            per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pt_rows) if len(pt_rows) >= 3 else pool_metrics
 
         # Default to pool; override with pitch-weighted blend when weights exist
         result["weighted_exit_velo"]     = pool_metrics["avg_exit_velo"]
