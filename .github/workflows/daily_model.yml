@@ -1,31 +1,9 @@
 name: Daily HR Prop Model
 
 on:
-  # Hourly schedule is DISABLED — user asked to stop auto-updating the slate
-  # on prod (2026-04-23). Manual runs still work via workflow_dispatch.
-  # To re-enable: un-comment the `schedule:` block below. Do NOT re-enable
-  # without explicit user approval.
-  #
-  # schedule:
-  #   - cron: '0 11 * * *'   # 7:00 AM ET
-  #   - cron: '0 12 * * *'   # 8:00 AM ET
-  #   - cron: '0 13 * * *'   # 9:00 AM ET
-  #   - cron: '0 14 * * *'   # 10:00 AM ET
-  #   - cron: '0 15 * * *'   # 11:00 AM ET
-  #   - cron: '0 16 * * *'   # 12:00 PM ET
-  #   - cron: '0 17 * * *'   # 1:00 PM ET
-  #   - cron: '0 18 * * *'   # 2:00 PM ET
-  #   - cron: '0 19 * * *'   # 3:00 PM ET
-  #   - cron: '0 20 * * *'   # 4:00 PM ET
-  #   - cron: '0 21 * * *'   # 5:00 PM ET
-  #   - cron: '0 22 * * *'   # 6:00 PM ET
-  #   - cron: '0 23 * * *'   # 7:00 PM ET
-  #   - cron: '0 0 * * *'    # 8:00 PM ET
-  #   - cron: '0 1 * * *'    # 9:00 PM ET
-  #   - cron: '0 2 * * *'    # 10:00 PM ET
-  #   - cron: '0 3 * * *'    # 11:00 PM ET
-  #   - cron: '0 4 * * *'    # 12:00 AM ET
-  workflow_dispatch: # manual trigger only
+  schedule:
+    - cron: '0 13 * * *'   # 9:00 AM ET — generate today's slate (prod stays blocked)
+  workflow_dispatch:
 
 concurrency:
   group: hr-model-run
@@ -90,47 +68,44 @@ jobs:
           mkdir -p frontend/public/data/results
           cp results/*.json frontend/public/data/results/ 2>/dev/null || true
 
+      - name: Block today on prod
+        run: |
+          TODAY=$(date -u +%Y-%m-%d)
+          sed -i "s/IS_PROD ? \[\"[0-9-]*\"\] : \[\]/IS_PROD ? [\"${TODAY}\"] : []/" frontend/src/app/_components/dashboard.tsx
+
       - name: Commit and push results
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          # Only stash the files this run actually regenerates. Historical
-          # dated JSONs (2026-04-14.json, etc.) are NEVER touched by this
-          # cron run, so we must NOT overwrite them — manual patches made
-          # between checkout and push (like Lowe 4/14 Mikolas) would be
-          # lost otherwise.
           TODAY=$(date -u +%Y-%m-%d)
           mkdir -p /tmp/hrprop-stash/frontend-data
           mkdir -p /tmp/hrprop-stash/results
           [ -f "frontend/public/data/latest.json" ] && cp "frontend/public/data/latest.json" /tmp/hrprop-stash/frontend-data/ || true
           [ -f "frontend/public/data/${TODAY}.json" ] && cp "frontend/public/data/${TODAY}.json" /tmp/hrprop-stash/frontend-data/ || true
           [ -f "frontend/public/data/index.json" ] && cp "frontend/public/data/index.json" /tmp/hrprop-stash/frontend-data/ || true
-          # results/ files — copy everything generated this run (small dir)
           cp -r results/. /tmp/hrprop-stash/results/ 2>/dev/null || true
-          # Also stash the results subfolder that gets synced
           mkdir -p /tmp/hrprop-stash/frontend-data/results
           cp -r frontend/public/data/results/. /tmp/hrprop-stash/frontend-data/results/ 2>/dev/null || true
+          cp frontend/src/app/_components/dashboard.tsx /tmp/hrprop-stash/dashboard.tsx || true
 
           git reset --hard HEAD
           git fetch origin main
-          # Retry up to 3 times in case of race with another run
           for i in 1 2 3; do
             git reset --hard origin/main
-            # Restore ONLY the files this run regenerated — never touch
-            # historical dated JSONs from origin.
             [ -f "/tmp/hrprop-stash/frontend-data/latest.json" ] && cp "/tmp/hrprop-stash/frontend-data/latest.json" frontend/public/data/ || true
             [ -f "/tmp/hrprop-stash/frontend-data/${TODAY}.json" ] && cp "/tmp/hrprop-stash/frontend-data/${TODAY}.json" frontend/public/data/ || true
             [ -f "/tmp/hrprop-stash/frontend-data/index.json" ] && cp "/tmp/hrprop-stash/frontend-data/index.json" frontend/public/data/ || true
             cp -r /tmp/hrprop-stash/frontend-data/results/. frontend/public/data/results/ 2>/dev/null || true
             cp -r /tmp/hrprop-stash/results/. results/ 2>/dev/null || true
-            git add frontend/public/data/ results/
+            [ -f "/tmp/hrprop-stash/dashboard.tsx" ] && cp "/tmp/hrprop-stash/dashboard.tsx" frontend/src/app/_components/dashboard.tsx || true
+            git add frontend/public/data/ results/ frontend/src/app/_components/dashboard.tsx
             git diff --cached --quiet && echo "No changes after reset" && exit 0
-            git commit -m "auto: HR props $(date -u +%Y-%m-%d-%H%M)"
+            git commit -m "auto: HR props ${TODAY} (prod blocked)"
             if git push origin main; then
               echo "Pushed successfully on attempt $i"
               exit 0
             fi
-            echo "Push attempt $i failed, origin moved. Retrying..."
+            echo "Push attempt $i failed, retrying..."
             git fetch origin main
           done
           echo "Push failed after 3 attempts"
