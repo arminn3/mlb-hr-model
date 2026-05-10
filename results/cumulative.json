@@ -27003,9 +27003,9 @@
   {
     "date": "2026-05-09",
     "total_players_ranked": 335,
-    "total_hrs_hit": 25,
-    "total_near_hrs": 0,
-    "model_hits": 23,
+    "total_hrs_hit": 27,
+    "total_near_hrs": 15,
+    "model_hits": 25,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
@@ -27026,8 +27026,8 @@
         },
         "all": {
           "total": 335,
-          "hits": 23,
-          "rate": 6.9
+          "hits": 25,
+          "rate": 7.5
         }
       },
       "L10": {
@@ -27038,22 +27038,22 @@
         },
         "top_20": {
           "total": 20,
-          "hits": 2,
-          "rate": 10.0
+          "hits": 3,
+          "rate": 15.0
         },
         "top_30": {
           "total": 30,
-          "hits": 3,
-          "rate": 10.0
+          "hits": 4,
+          "rate": 13.3
         },
         "all": {
           "total": 335,
-          "hits": 23,
-          "rate": 6.9
+          "hits": 25,
+          "rate": 7.5
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 15,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -27072,8 +27072,8 @@
       },
       "all": {
         "total": 335,
-        "hits": 23,
-        "rate": 6.9
+        "hits": 25,
+        "rate": 7.5
       }
     },
     "tier_accuracy_with_near": {
@@ -27084,23 +27084,23 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 4,
-        "rate": 13.3
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
         "total": 335,
-        "hits": 23,
-        "rate": 6.9
+        "hits": 40,
+        "rate": 11.9
       }
     },
-    "avg_composite_hr_hitters": 0.469,
-    "avg_composite_non_hitters": 0.401,
-    "composite_separation": 0.068,
+    "avg_composite_hr_hitters": 0.465,
+    "avg_composite_non_hitters": 0.4,
+    "composite_separation": 0.065,
     "hr_hitters": [
       {
         "name": "Brent Rooker",
@@ -27150,6 +27150,13 @@
         "composite": 0.56,
         "opp_pitcher": "Kyle Harrison",
         "matchup": "NYY@MIL"
+      },
+      {
+        "name": "Andy Pages",
+        "rank": 61,
+        "composite": 0.537,
+        "opp_pitcher": "Spencer Strider",
+        "matchup": "ATL@LAD"
       },
       {
         "name": "Kyle Schwarber",
@@ -27250,6 +27257,13 @@
         "matchup": "CHC@TEX"
       },
       {
+        "name": "Bryce Eldridge",
+        "rank": 268,
+        "composite": 0.305,
+        "opp_pitcher": "Braxton Ashcraft",
+        "matchup": "PIT@SF"
+      },
+      {
         "name": "Ty France",
         "rank": 313,
         "composite": 0.235,
@@ -27278,6 +27292,13 @@
         "composite": 0.682,
         "opp_pitcher": "Luis Castillo",
         "matchup": "SEA@CWS"
+      },
+      {
+        "name": "Andy Pages",
+        "rank": 20,
+        "composite": 0.62,
+        "opp_pitcher": "Spencer Strider",
+        "matchup": "ATL@LAD"
       },
       {
         "name": "Bobby Witt Jr.",
@@ -27392,6 +27413,13 @@
         "matchup": "WSH@MIA"
       },
       {
+        "name": "Bryce Eldridge",
+        "rank": 216,
+        "composite": 0.371,
+        "opp_pitcher": "Braxton Ashcraft",
+        "matchup": "PIT@SF"
+      },
+      {
         "name": "Jes\u00fas S\u00e1nchez",
         "rank": 223,
         "composite": 0.364,
@@ -27427,8 +27455,259 @@
         "matchup": "CHC@TEX"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "MJ Melendez",
+        "rank": 13,
+        "composite": 0.666,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "NYM@AZ"
+      },
+      {
+        "name": "Kazuma Okamoto",
+        "rank": 45,
+        "composite": 0.584,
+        "opp_pitcher": "Jack Kochanowicz",
+        "matchup": "LAA@TOR"
+      },
+      {
+        "name": "Bo Bichette",
+        "rank": 52,
+        "composite": 0.553,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "NYM@AZ"
+      },
+      {
+        "name": "Mark Vientos",
+        "rank": 74,
+        "composite": 0.512,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "NYM@AZ"
+      },
+      {
+        "name": "Gabriel Moreno",
+        "rank": 88,
+        "composite": 0.487,
+        "opp_pitcher": "Clay Holmes",
+        "matchup": "NYM@AZ"
+      },
+      {
+        "name": "Adrian Del Castillo",
+        "rank": 107,
+        "composite": 0.432,
+        "opp_pitcher": "Clay Holmes",
+        "matchup": "NYM@AZ"
+      },
+      {
+        "name": "Tyrone Taylor",
+        "rank": 111,
+        "composite": 0.412,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "NYM@AZ"
+      },
+      {
+        "name": "Nick Kurtz",
+        "rank": 204,
+        "composite": 0.364,
+        "opp_pitcher": "Shane Baz",
+        "matchup": "ATH@BAL"
+      },
+      {
+        "name": "Jorge Soler",
+        "rank": 212,
+        "composite": 0.357,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "LAA@TOR"
+      },
+      {
+        "name": "Lane Thomas",
+        "rank": 216,
+        "composite": 0.354,
+        "opp_pitcher": "Burch Smith",
+        "matchup": "DET@KC"
+      },
+      {
+        "name": "George Springer",
+        "rank": 226,
+        "composite": 0.345,
+        "opp_pitcher": "Jack Kochanowicz",
+        "matchup": "LAA@TOR"
+      },
+      {
+        "name": "CJ Abrams",
+        "rank": 249,
+        "composite": 0.323,
+        "opp_pitcher": "Janson Junk",
+        "matchup": "WSH@MIA"
+      },
+      {
+        "name": "Leo Jim\u00e9nez",
+        "rank": 269,
+        "composite": 0.304,
+        "opp_pitcher": "Zack Littell",
+        "matchup": "WSH@MIA"
+      },
+      {
+        "name": "Jose Altuve",
+        "rank": 293,
+        "composite": 0.273,
+        "opp_pitcher": "Chase Burns",
+        "matchup": "HOU@CIN"
+      },
+      {
+        "name": "Luis Arraez",
+        "rank": 305,
+        "composite": 0.255,
+        "opp_pitcher": "Braxton Ashcraft",
+        "matchup": "PIT@SF"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Mark Vientos",
+        "ev": 101.2,
+        "angle": 31.0,
+        "distance": 398.0,
+        "hr_in_parks": 20,
+        "result": "field_out",
+        "pitcher": "Sewald, Paul"
+      },
+      {
+        "batter": "Bo Bichette",
+        "ev": 100.1,
+        "angle": 32.0,
+        "distance": 385.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Clarke, Taylor"
+      },
+      {
+        "batter": "Tyrone Taylor",
+        "ev": 97.4,
+        "angle": 28.0,
+        "distance": 389.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Clarke, Taylor"
+      },
+      {
+        "batter": "MJ Melendez",
+        "ev": 106.1,
+        "angle": 21.0,
+        "distance": 388.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Kelly, Merrill"
+      },
+      {
+        "batter": "Gabriel Moreno",
+        "ev": 99.0,
+        "angle": 25.0,
+        "distance": 368.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Holmes, Clay"
+      },
+      {
+        "batter": "Adrian Del Castillo",
+        "ev": 99.8,
+        "angle": 27.0,
+        "distance": 389.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Holmes, Clay"
+      },
+      {
+        "batter": "Nick Kurtz",
+        "ev": 108.4,
+        "angle": 20.0,
+        "distance": 388.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "Baz, Shane"
+      },
+      {
+        "batter": "Jose Altuve",
+        "ev": 105.4,
+        "angle": 36.0,
+        "distance": 382.0,
+        "hr_in_parks": 9,
+        "result": "field_out",
+        "pitcher": "Ashcraft, Graham"
+      },
+      {
+        "batter": "Byron Buxton",
+        "ev": 107.1,
+        "angle": 39.0,
+        "distance": 377.0,
+        "hr_in_parks": 4,
+        "result": "double",
+        "pitcher": "Pallette, Peyton"
+      },
+      {
+        "batter": "Lane Thomas",
+        "ev": 98.8,
+        "angle": 25.0,
+        "distance": 372.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Madden, Ty"
+      },
+      {
+        "batter": "Leo Jim\u00e9nez",
+        "ev": 99.7,
+        "angle": 27.0,
+        "distance": 375.0,
+        "hr_in_parks": 22,
+        "result": "sac_fly",
+        "pitcher": "Kent, Zak"
+      },
+      {
+        "batter": "CJ Abrams",
+        "ev": 101.0,
+        "angle": 31.0,
+        "distance": 389.0,
+        "hr_in_parks": 25,
+        "result": "triple",
+        "pitcher": "Junk, Janson"
+      },
+      {
+        "batter": "Luis Arraez",
+        "ev": 95.8,
+        "angle": 25.0,
+        "distance": 369.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "Ashcraft, Braxton"
+      },
+      {
+        "batter": "George Springer",
+        "ev": 101.3,
+        "angle": 33.0,
+        "distance": 399.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Farris, Mitch"
+      },
+      {
+        "batter": "Kazuma Okamoto",
+        "ev": 108.7,
+        "angle": 40.0,
+        "distance": 379.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Kochanowicz, Jack"
+      },
+      {
+        "batter": "Jorge Soler",
+        "ev": 106.9,
+        "angle": 20.0,
+        "distance": 402.0,
+        "hr_in_parks": 19,
+        "result": "double",
+        "pitcher": "Yesavage, Trey"
+      }
+    ],
     "surprise_hrs": []
   }
 ]
