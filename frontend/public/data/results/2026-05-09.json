@@ -1,0 +1,431 @@
+{
+  "date": "2026-05-09",
+  "total_players_ranked": 335,
+  "total_hrs_hit": 25,
+  "total_near_hrs": 0,
+  "model_hits": 23,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 335,
+        "hits": 23,
+        "rate": 6.9
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 335,
+        "hits": 23,
+        "rate": 6.9
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 4,
+      "rate": 13.3
+    },
+    "all": {
+      "total": 335,
+      "hits": 23,
+      "rate": 6.9
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 4,
+      "rate": 13.3
+    },
+    "all": {
+      "total": 335,
+      "hits": 23,
+      "rate": 6.9
+    }
+  },
+  "avg_composite_hr_hitters": 0.469,
+  "avg_composite_non_hitters": 0.401,
+  "composite_separation": 0.068,
+  "hr_hitters": [
+    {
+      "name": "Brent Rooker",
+      "rank": 3,
+      "composite": 0.74,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "ATH@BAL"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 10,
+      "composite": 0.682,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "SEA@CWS"
+    },
+    {
+      "name": "Xavier Edwards",
+      "rank": 12,
+      "composite": 0.668,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "WSH@MIA"
+    },
+    {
+      "name": "Michael Massey",
+      "rank": 29,
+      "composite": 0.607,
+      "opp_pitcher": "Burch Smith",
+      "matchup": "DET@KC"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 32,
+      "composite": 0.603,
+      "opp_pitcher": "Burch Smith",
+      "matchup": "DET@KC"
+    },
+    {
+      "name": "Byron Buxton",
+      "rank": 38,
+      "composite": 0.592,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "MIN@CLE"
+    },
+    {
+      "name": "Paul Goldschmidt",
+      "rank": 48,
+      "composite": 0.56,
+      "opp_pitcher": "Kyle Harrison",
+      "matchup": "NYY@MIL"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 66,
+      "composite": 0.529,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "COL@PHI"
+    },
+    {
+      "name": "Miguel Vargas",
+      "rank": 73,
+      "composite": 0.513,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "SEA@CWS"
+    },
+    {
+      "name": "Jake Bauers",
+      "rank": 77,
+      "composite": 0.51,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "NYY@MIL"
+    },
+    {
+      "name": "Brandon Valenzuela",
+      "rank": 81,
+      "composite": 0.502,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "LAA@TOR"
+    },
+    {
+      "name": "Ernie Clement",
+      "rank": 110,
+      "composite": 0.425,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "LAA@TOR"
+    },
+    {
+      "name": "Braden Shewmake",
+      "rank": 120,
+      "composite": 0.4,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "HOU@CIN"
+    },
+    {
+      "name": "Kyle Stowers",
+      "rank": 121,
+      "composite": 0.4,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "WSH@MIA"
+    },
+    {
+      "name": "Jakob Marsee",
+      "rank": 122,
+      "composite": 0.4,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "WSH@MIA"
+    },
+    {
+      "name": "Alec Bohm",
+      "rank": 126,
+      "composite": 0.4,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "COL@PHI"
+    },
+    {
+      "name": "Willi Castro",
+      "rank": 136,
+      "composite": 0.4,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "COL@PHI"
+    },
+    {
+      "name": "Jes\u00fas S\u00e1nchez",
+      "rank": 187,
+      "composite": 0.378,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "LAA@TOR"
+    },
+    {
+      "name": "James Wood",
+      "rank": 211,
+      "composite": 0.358,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "WSH@MIA"
+    },
+    {
+      "name": "Manny Machado",
+      "rank": 229,
+      "composite": 0.344,
+      "opp_pitcher": "Dustin May",
+      "matchup": "STL@SD"
+    },
+    {
+      "name": "Josh Jung",
+      "rank": 253,
+      "composite": 0.321,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@TEX"
+    },
+    {
+      "name": "Ty France",
+      "rank": 313,
+      "composite": 0.235,
+      "opp_pitcher": "Dustin May",
+      "matchup": "STL@SD"
+    },
+    {
+      "name": "Justin Foscue",
+      "rank": 316,
+      "composite": 0.223,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@TEX"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Brent Rooker",
+      "rank": 3,
+      "composite": 0.778,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "ATH@BAL"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 9,
+      "composite": 0.682,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "SEA@CWS"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 23,
+      "composite": 0.611,
+      "opp_pitcher": "Burch Smith",
+      "matchup": "DET@KC"
+    },
+    {
+      "name": "Michael Massey",
+      "rank": 36,
+      "composite": 0.582,
+      "opp_pitcher": "Burch Smith",
+      "matchup": "DET@KC"
+    },
+    {
+      "name": "Paul Goldschmidt",
+      "rank": 61,
+      "composite": 0.532,
+      "opp_pitcher": "Kyle Harrison",
+      "matchup": "NYY@MIL"
+    },
+    {
+      "name": "Xavier Edwards",
+      "rank": 63,
+      "composite": 0.527,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "WSH@MIA"
+    },
+    {
+      "name": "Jake Bauers",
+      "rank": 70,
+      "composite": 0.505,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "NYY@MIL"
+    },
+    {
+      "name": "Miguel Vargas",
+      "rank": 74,
+      "composite": 0.496,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "SEA@CWS"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 105,
+      "composite": 0.438,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "COL@PHI"
+    },
+    {
+      "name": "Brandon Valenzuela",
+      "rank": 118,
+      "composite": 0.4,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "LAA@TOR"
+    },
+    {
+      "name": "Ernie Clement",
+      "rank": 119,
+      "composite": 0.4,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "LAA@TOR"
+    },
+    {
+      "name": "Braden Shewmake",
+      "rank": 130,
+      "composite": 0.4,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "HOU@CIN"
+    },
+    {
+      "name": "Kyle Stowers",
+      "rank": 132,
+      "composite": 0.4,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "WSH@MIA"
+    },
+    {
+      "name": "Jakob Marsee",
+      "rank": 133,
+      "composite": 0.4,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "WSH@MIA"
+    },
+    {
+      "name": "Alec Bohm",
+      "rank": 135,
+      "composite": 0.4,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "COL@PHI"
+    },
+    {
+      "name": "Willi Castro",
+      "rank": 144,
+      "composite": 0.4,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "COL@PHI"
+    },
+    {
+      "name": "Byron Buxton",
+      "rank": 145,
+      "composite": 0.4,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "MIN@CLE"
+    },
+    {
+      "name": "James Wood",
+      "rank": 213,
+      "composite": 0.373,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "WSH@MIA"
+    },
+    {
+      "name": "Jes\u00fas S\u00e1nchez",
+      "rank": 223,
+      "composite": 0.364,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "LAA@TOR"
+    },
+    {
+      "name": "Josh Jung",
+      "rank": 265,
+      "composite": 0.321,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@TEX"
+    },
+    {
+      "name": "Manny Machado",
+      "rank": 276,
+      "composite": 0.315,
+      "opp_pitcher": "Dustin May",
+      "matchup": "STL@SD"
+    },
+    {
+      "name": "Ty France",
+      "rank": 277,
+      "composite": 0.315,
+      "opp_pitcher": "Dustin May",
+      "matchup": "STL@SD"
+    },
+    {
+      "name": "Justin Foscue",
+      "rank": 316,
+      "composite": 0.223,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@TEX"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": []
+}
