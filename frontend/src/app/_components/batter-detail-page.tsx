@@ -80,74 +80,115 @@ function matchupLabel(pitchDetail: Record<string, PitchDetailEntry>): { label: s
   return { label: "TOUGH", color: "text-muted" };
 }
 
-const ZONE_ORDER = [7, 8, 9, 4, 5, 6, 1, 2, 3];
+const ZONE_ROWS = [
+  { label: "Upper", zones: [1, 2, 3] },
+  { label: "Middle", zones: [4, 5, 6] },
+  { label: "Lower", zones: [7, 8, 9] },
+];
+const ZONE_COL_LABELS = ["Outside", "Mid", "Inside"];
 
-function isHotBatter(z: ZoneEntry): boolean {
-  return z.bip >= 2 && (z.barrel_rate >= 12 || z.hrs >= 1);
-}
-function isVulnPitcher(z: ZoneEntry): boolean {
-  return z.bip >= 3 && (z.hr_rate >= 6 || (z.bip > 0 && (z.hard_hits / z.bip) * 100 >= 40));
+function zoneBackground(rate: number, bip: number, r: number, g: number, b: number): React.CSSProperties {
+  if (bip < 2) return { background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" };
+  const t = Math.min(rate / 12, 1);
+  const alpha = 0.07 + t * 0.73;
+  return {
+    background: `rgba(${r},${g},${b},${alpha})`,
+    border: `1px solid rgba(${r},${g},${b},${Math.min(alpha + 0.2, 0.95)})`,
+  };
 }
 
 function ZoneGrid({ batter_zones, pitcher_zones }: { batter_zones: ZoneEntry[]; pitcher_zones: ZoneEntry[] }) {
   const bzMap = Object.fromEntries(batter_zones.map((z) => [z.zone, z]));
   const pzMap = Object.fromEntries(pitcher_zones.map((z) => [z.zone, z]));
-  const overlapCount = ZONE_ORDER.filter((zn) => {
-    const bz = bzMap[zn]; const pz = pzMap[zn];
-    return bz && pz && isHotBatter(bz) && isVulnPitcher(pz);
-  }).length;
+
+  const isHot = (zn: number) => { const z = bzMap[zn]; return !!(z && z.bip >= 2 && z.hr_rate >= 4); };
+  const isVuln = (zn: number) => { const z = pzMap[zn]; return !!(z && z.bip >= 2 && z.hr_rate >= 5); };
+  const overlapZones = new Set(ZONE_ROWS.flatMap((r) => r.zones).filter((zn) => isHot(zn) && isVuln(zn)));
+  const overlapCount = overlapZones.size;
   const overallLabel = overlapCount >= 3
     ? { text: "GREAT", color: "text-accent-green" }
     : overlapCount >= 1
     ? { text: "DECENT", color: "text-accent-yellow" }
     : { text: "POOR OVERLAP", color: "text-muted" };
 
+  function HeatGrid({ type }: { type: "batter" | "pitcher" }) {
+    return (
+      <div className="flex flex-col gap-1">
+        <div className="flex gap-1" style={{ paddingLeft: 44 }}>
+          {ZONE_COL_LABELS.map((l) => (
+            <div key={l} className="text-center text-[8px] text-muted/40 uppercase tracking-wider" style={{ width: 52 }}>{l}</div>
+          ))}
+        </div>
+        {ZONE_ROWS.map(({ label, zones }) => (
+          <div key={label} className="flex items-center gap-1">
+            <div className="text-right pr-1.5 text-[8px] text-muted/40 uppercase tracking-wider flex-shrink-0" style={{ width: 40 }}>{label}</div>
+            {zones.map((zn) => {
+              const bz = bzMap[zn];
+              const pz = pzMap[zn];
+              const isOverlap = overlapZones.has(zn);
+              const z = type === "batter" ? bz : pz;
+              const rate = z?.hr_rate ?? 0;
+              const bip = z?.bip ?? 0;
+              const hasData = bip >= 2;
+
+              let cellStyle: React.CSSProperties;
+              if (isOverlap) {
+                cellStyle = { background: "rgba(250,204,21,0.22)", border: "1.5px solid rgba(250,204,21,0.65)" };
+              } else if (type === "batter") {
+                cellStyle = zoneBackground(rate, bip, 239, 68, 68);
+              } else {
+                cellStyle = zoneBackground(rate, bip, 59, 130, 246);
+              }
+
+              const textBright = isOverlap ? "text-yellow-300" : rate >= 7 ? "text-white" : "text-foreground/80";
+
+              return (
+                <div
+                  key={zn}
+                  title={z ? `${z.bip} BIP · ${z.hrs} HR · ${z.hr_rate.toFixed(1)}% HR rate` : `No data`}
+                  className="rounded flex flex-col items-center justify-center gap-0.5"
+                  style={{ width: 52, height: 40, ...cellStyle }}
+                >
+                  {hasData ? (
+                    <>
+                      <span className={`text-[11px] font-mono font-bold leading-none ${textBright}`}>
+                        {(rate / 100).toFixed(2)}
+                      </span>
+                      <span className="text-[8px] text-muted/35 leading-none">{bip}bip</span>
+                    </>
+                  ) : (
+                    <span className="text-[10px] text-muted/20">—</span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="rounded-xl p-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex items-center justify-between mb-4">
         <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted">Zone Overlap</span>
         <span className={`text-xs font-bold ${overallLabel.color}`}>
           {overlapCount} zone{overlapCount !== 1 ? "s" : ""} overlap · {overallLabel.text}
         </span>
       </div>
-      <div className="flex items-start gap-6 justify-center">
+      <div className="flex flex-wrap items-start gap-6 justify-center overflow-x-auto">
         <div className="flex flex-col items-center gap-1.5">
-          <span className="text-[9px] uppercase tracking-[0.06em] text-muted/60">Batter Hot</span>
-          <div className="grid grid-cols-3 gap-1">
-            {ZONE_ORDER.map((zn) => {
-              const z = bzMap[zn];
-              const hot = z ? isHotBatter(z) : false;
-              const overlap = hot && pzMap[zn] ? isVulnPitcher(pzMap[zn]) : false;
-              return (
-                <div key={zn} title={z ? `Zone ${zn}: ${z.bip} BIP, ${z.barrel_rate}% brl, ${z.hrs} HR` : `Zone ${zn}`}
-                  className="w-11 h-11 rounded flex flex-col items-center justify-center gap-0.5"
-                  style={{ background: overlap ? "rgba(250,204,21,0.25)" : hot ? "rgba(74,222,128,0.22)" : "rgba(255,255,255,0.04)", border: overlap ? "1.5px solid rgba(250,204,21,0.55)" : hot ? "1px solid rgba(74,222,128,0.35)" : "1px solid rgba(255,255,255,0.08)" }}>
-                  <span className="text-[9px] text-muted/40 leading-none">{zn}</span>
-                  {hot && z && <span className={`text-[9px] font-mono font-semibold leading-none ${overlap ? "text-yellow-300" : "text-accent-green"}`}>{z.barrel_rate > 0 ? `${z.barrel_rate}%` : `${z.hrs}HR`}</span>}
-                </div>
-              );
-            })}
-          </div>
+          <span className="text-[9px] uppercase tracking-[0.06em] font-semibold" style={{ color: "rgba(239,68,68,0.7)" }}>Batter HR Rate</span>
+          <HeatGrid type="batter" />
         </div>
-        <div className="self-center text-muted/25 text-sm font-light">vs</div>
+        <div className="self-center text-muted/20 text-sm font-light">vs</div>
         <div className="flex flex-col items-center gap-1.5">
-          <span className="text-[9px] uppercase tracking-[0.06em] text-muted/60">Pitcher Vuln.</span>
-          <div className="grid grid-cols-3 gap-1">
-            {ZONE_ORDER.map((zn) => {
-              const z = pzMap[zn];
-              const vuln = z ? isVulnPitcher(z) : false;
-              const overlap = vuln && bzMap[zn] ? isHotBatter(bzMap[zn]) : false;
-              return (
-                <div key={zn} title={z ? `Zone ${zn}: ${z.bip} BIP, ${z.hr_rate}% HR/BIP, ${z.hrs} HR` : `Zone ${zn}`}
-                  className="w-11 h-11 rounded flex flex-col items-center justify-center gap-0.5"
-                  style={{ background: overlap ? "rgba(250,204,21,0.25)" : vuln ? "rgba(239,68,68,0.18)" : "rgba(255,255,255,0.04)", border: overlap ? "1.5px solid rgba(250,204,21,0.55)" : vuln ? "1px solid rgba(239,68,68,0.30)" : "1px solid rgba(255,255,255,0.08)" }}>
-                  <span className="text-[9px] text-muted/40 leading-none">{zn}</span>
-                  {vuln && z && <span className={`text-[9px] font-mono font-semibold leading-none ${overlap ? "text-yellow-300" : "text-red-400"}`}>{z.hr_rate > 0 ? `${z.hr_rate}%` : `${z.hrs}HR`}</span>}
-                </div>
-              );
-            })}
-          </div>
+          <span className="text-[9px] uppercase tracking-[0.06em] font-semibold" style={{ color: "rgba(96,165,250,0.7)" }}>Pitcher HR Rate Allowed</span>
+          <HeatGrid type="pitcher" />
         </div>
+      </div>
+      <div className="mt-3 flex items-center gap-3 justify-center">
+        <span className="text-[8px] text-muted/30 uppercase tracking-wider">Gold = both hot · Red intensity = batter HR rate · Blue intensity = pitcher vulnerability</span>
       </div>
     </div>
   );
