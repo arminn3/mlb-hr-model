@@ -1,0 +1,778 @@
+{
+  "date": "2026-05-12",
+  "total_players_ranked": 390,
+  "total_hrs_hit": 35,
+  "total_near_hrs": 12,
+  "model_hits": 32,
+  "best_lookback": "L10",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 390,
+        "hits": 32,
+        "rate": 8.2
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 390,
+        "hits": 32,
+        "rate": 8.2
+      }
+    }
+  },
+  "model_near_hits": 12,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 3,
+      "rate": 10.0
+    },
+    "all": {
+      "total": 390,
+      "hits": 32,
+      "rate": 8.2
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 4,
+      "rate": 20.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 5,
+      "rate": 16.7
+    },
+    "all": {
+      "total": 390,
+      "hits": 44,
+      "rate": 11.3
+    }
+  },
+  "avg_composite_hr_hitters": 0.418,
+  "avg_composite_non_hitters": 0.402,
+  "composite_separation": 0.016,
+  "hr_hitters": [
+    {
+      "name": "James Wood",
+      "rank": 1,
+      "composite": 0.769,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "WSH@CIN"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 16,
+      "composite": 0.655,
+      "opp_pitcher": "Brayan Bello",
+      "matchup": "PHI@BOS"
+    },
+    {
+      "name": "Ezequiel Duran",
+      "rank": 29,
+      "composite": 0.619,
+      "opp_pitcher": "Zac Gallen",
+      "matchup": "AZ@TEX"
+    },
+    {
+      "name": "Shea Langeliers",
+      "rank": 49,
+      "composite": 0.587,
+      "opp_pitcher": "Andre Pallante",
+      "matchup": "STL@ATH"
+    },
+    {
+      "name": "Paul Goldschmidt",
+      "rank": 66,
+      "composite": 0.561,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Mike Yastrzemski",
+      "rank": 68,
+      "composite": 0.551,
+      "opp_pitcher": "Colin Rea",
+      "matchup": "CHC@ATL"
+    },
+    {
+      "name": "Joey Ortiz",
+      "rank": 78,
+      "composite": 0.523,
+      "opp_pitcher": "Matt Waldron",
+      "matchup": "SD@MIL"
+    },
+    {
+      "name": "Dillon Dingler",
+      "rank": 80,
+      "composite": 0.521,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "DET@NYM"
+    },
+    {
+      "name": "Austin Riley",
+      "rank": 99,
+      "composite": 0.464,
+      "opp_pitcher": "Colin Rea",
+      "matchup": "CHC@ATL"
+    },
+    {
+      "name": "Drew Romo",
+      "rank": 107,
+      "composite": 0.43,
+      "opp_pitcher": "Stephen Kolek",
+      "matchup": "KC@CWS"
+    },
+    {
+      "name": "Joc Pederson",
+      "rank": 111,
+      "composite": 0.414,
+      "opp_pitcher": "Zac Gallen",
+      "matchup": "AZ@TEX"
+    },
+    {
+      "name": "Vaughn Grissom",
+      "rank": 116,
+      "composite": 0.4,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "LAA@CLE"
+    },
+    {
+      "name": "Daylen Lile",
+      "rank": 133,
+      "composite": 0.4,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "WSH@CIN"
+    },
+    {
+      "name": "Luis Garc\u00eda Jr.",
+      "rank": 137,
+      "composite": 0.4,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "WSH@CIN"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 159,
+      "composite": 0.4,
+      "opp_pitcher": "Erick Fedde",
+      "matchup": "KC@CWS"
+    },
+    {
+      "name": "Salvador Perez",
+      "rank": 161,
+      "composite": 0.4,
+      "opp_pitcher": "Erick Fedde",
+      "matchup": "KC@CWS"
+    },
+    {
+      "name": "Ryan Jeffers",
+      "rank": 164,
+      "composite": 0.4,
+      "opp_pitcher": "Eury P\u00e9rez",
+      "matchup": "MIA@MIN"
+    },
+    {
+      "name": "Miguel Andujar",
+      "rank": 181,
+      "composite": 0.4,
+      "opp_pitcher": "Brandon Sproat",
+      "matchup": "SD@MIL"
+    },
+    {
+      "name": "Shohei Ohtani",
+      "rank": 201,
+      "composite": 0.4,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "SF@LAD"
+    },
+    {
+      "name": "Dominic Canzone",
+      "rank": 222,
+      "composite": 0.385,
+      "opp_pitcher": "Tatsuya Imai",
+      "matchup": "SEA@HOU"
+    },
+    {
+      "name": "Alex Bregman",
+      "rank": 227,
+      "composite": 0.378,
+      "opp_pitcher": "Grant Holmes",
+      "matchup": "CHC@ATL"
+    },
+    {
+      "name": "Harrison Bader",
+      "rank": 240,
+      "composite": 0.37,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "SF@LAD"
+    },
+    {
+      "name": "JJ Wetherholt",
+      "rank": 245,
+      "composite": 0.366,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "STL@ATH"
+    },
+    {
+      "name": "Ildemaro Vargas",
+      "rank": 262,
+      "composite": 0.351,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "AZ@TEX"
+    },
+    {
+      "name": "Ryan Vilade",
+      "rank": 265,
+      "composite": 0.349,
+      "opp_pitcher": "Patrick Corbin",
+      "matchup": "TB@TOR"
+    },
+    {
+      "name": "Randy Arozarena",
+      "rank": 266,
+      "composite": 0.349,
+      "opp_pitcher": "Tatsuya Imai",
+      "matchup": "SEA@HOU"
+    },
+    {
+      "name": "Brady House",
+      "rank": 283,
+      "composite": 0.334,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "WSH@CIN"
+    },
+    {
+      "name": "Eric Haase",
+      "rank": 292,
+      "composite": 0.327,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "SF@LAD"
+    },
+    {
+      "name": "Chase Meidroth",
+      "rank": 344,
+      "composite": 0.264,
+      "opp_pitcher": "Stephen Kolek",
+      "matchup": "KC@CWS"
+    },
+    {
+      "name": "Derek Hill",
+      "rank": 352,
+      "composite": 0.248,
+      "opp_pitcher": "Stephen Kolek",
+      "matchup": "KC@CWS"
+    },
+    {
+      "name": "Trent Grisham",
+      "rank": 381,
+      "composite": 0.177,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Angel Mart\u00ednez",
+      "rank": 382,
+      "composite": 0.175,
+      "opp_pitcher": "Walbert Ure\u00f1a",
+      "matchup": "LAA@CLE"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "James Wood",
+      "rank": 5,
+      "composite": 0.731,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "WSH@CIN"
+    },
+    {
+      "name": "Ryan Jeffers",
+      "rank": 12,
+      "composite": 0.656,
+      "opp_pitcher": "Eury P\u00e9rez",
+      "matchup": "MIA@MIN"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 19,
+      "composite": 0.645,
+      "opp_pitcher": "Brayan Bello",
+      "matchup": "PHI@BOS"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 21,
+      "composite": 0.64,
+      "opp_pitcher": "Erick Fedde",
+      "matchup": "KC@CWS"
+    },
+    {
+      "name": "Shea Langeliers",
+      "rank": 53,
+      "composite": 0.565,
+      "opp_pitcher": "Andre Pallante",
+      "matchup": "STL@ATH"
+    },
+    {
+      "name": "Paul Goldschmidt",
+      "rank": 61,
+      "composite": 0.553,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Joc Pederson",
+      "rank": 78,
+      "composite": 0.524,
+      "opp_pitcher": "Zac Gallen",
+      "matchup": "AZ@TEX"
+    },
+    {
+      "name": "Austin Riley",
+      "rank": 83,
+      "composite": 0.502,
+      "opp_pitcher": "Colin Rea",
+      "matchup": "CHC@ATL"
+    },
+    {
+      "name": "Ezequiel Duran",
+      "rank": 84,
+      "composite": 0.5,
+      "opp_pitcher": "Zac Gallen",
+      "matchup": "AZ@TEX"
+    },
+    {
+      "name": "Drew Romo",
+      "rank": 101,
+      "composite": 0.485,
+      "opp_pitcher": "Stephen Kolek",
+      "matchup": "KC@CWS"
+    },
+    {
+      "name": "Mike Yastrzemski",
+      "rank": 106,
+      "composite": 0.482,
+      "opp_pitcher": "Colin Rea",
+      "matchup": "CHC@ATL"
+    },
+    {
+      "name": "Joey Ortiz",
+      "rank": 125,
+      "composite": 0.441,
+      "opp_pitcher": "Matt Waldron",
+      "matchup": "SD@MIL"
+    },
+    {
+      "name": "Eric Haase",
+      "rank": 136,
+      "composite": 0.41,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "SF@LAD"
+    },
+    {
+      "name": "Vaughn Grissom",
+      "rank": 142,
+      "composite": 0.4,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "LAA@CLE"
+    },
+    {
+      "name": "Daylen Lile",
+      "rank": 152,
+      "composite": 0.4,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "WSH@CIN"
+    },
+    {
+      "name": "Luis Garc\u00eda Jr.",
+      "rank": 155,
+      "composite": 0.4,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "WSH@CIN"
+    },
+    {
+      "name": "Alex Bregman",
+      "rank": 174,
+      "composite": 0.4,
+      "opp_pitcher": "Grant Holmes",
+      "matchup": "CHC@ATL"
+    },
+    {
+      "name": "Salvador Perez",
+      "rank": 177,
+      "composite": 0.4,
+      "opp_pitcher": "Erick Fedde",
+      "matchup": "KC@CWS"
+    },
+    {
+      "name": "Miguel Andujar",
+      "rank": 193,
+      "composite": 0.4,
+      "opp_pitcher": "Brandon Sproat",
+      "matchup": "SD@MIL"
+    },
+    {
+      "name": "Shohei Ohtani",
+      "rank": 212,
+      "composite": 0.4,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "SF@LAD"
+    },
+    {
+      "name": "Brady House",
+      "rank": 215,
+      "composite": 0.396,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "WSH@CIN"
+    },
+    {
+      "name": "Dominic Canzone",
+      "rank": 229,
+      "composite": 0.386,
+      "opp_pitcher": "Tatsuya Imai",
+      "matchup": "SEA@HOU"
+    },
+    {
+      "name": "Dillon Dingler",
+      "rank": 234,
+      "composite": 0.383,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "DET@NYM"
+    },
+    {
+      "name": "JJ Wetherholt",
+      "rank": 247,
+      "composite": 0.375,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "STL@ATH"
+    },
+    {
+      "name": "Randy Arozarena",
+      "rank": 283,
+      "composite": 0.34,
+      "opp_pitcher": "Tatsuya Imai",
+      "matchup": "SEA@HOU"
+    },
+    {
+      "name": "Harrison Bader",
+      "rank": 285,
+      "composite": 0.336,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "SF@LAD"
+    },
+    {
+      "name": "Ryan Vilade",
+      "rank": 295,
+      "composite": 0.326,
+      "opp_pitcher": "Patrick Corbin",
+      "matchup": "TB@TOR"
+    },
+    {
+      "name": "Ildemaro Vargas",
+      "rank": 302,
+      "composite": 0.32,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "AZ@TEX"
+    },
+    {
+      "name": "Chase Meidroth",
+      "rank": 355,
+      "composite": 0.241,
+      "opp_pitcher": "Stephen Kolek",
+      "matchup": "KC@CWS"
+    },
+    {
+      "name": "Derek Hill",
+      "rank": 357,
+      "composite": 0.237,
+      "opp_pitcher": "Stephen Kolek",
+      "matchup": "KC@CWS"
+    },
+    {
+      "name": "Trent Grisham",
+      "rank": 359,
+      "composite": 0.231,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Angel Mart\u00ednez",
+      "rank": 365,
+      "composite": 0.217,
+      "opp_pitcher": "Walbert Ure\u00f1a",
+      "matchup": "LAA@CLE"
+    }
+  ],
+  "near_hr_hitters": [
+    {
+      "name": "Oneil Cruz",
+      "rank": 18,
+      "composite": 0.653,
+      "opp_pitcher": "Michael Lorenzen",
+      "matchup": "COL@PIT"
+    },
+    {
+      "name": "Mike Trout",
+      "rank": 19,
+      "composite": 0.649,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "LAA@CLE"
+    },
+    {
+      "name": "Gabriel Moreno",
+      "rank": 48,
+      "composite": 0.589,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "AZ@TEX"
+    },
+    {
+      "name": "Josh Jung",
+      "rank": 73,
+      "composite": 0.526,
+      "opp_pitcher": "Zac Gallen",
+      "matchup": "AZ@TEX"
+    },
+    {
+      "name": "Wilyer Abreu",
+      "rank": 142,
+      "composite": 0.4,
+      "opp_pitcher": "Zack Wheeler",
+      "matchup": "PHI@BOS"
+    },
+    {
+      "name": "Jakob Marsee",
+      "rank": 165,
+      "composite": 0.4,
+      "opp_pitcher": "Bailey Ober",
+      "matchup": "MIA@MIN"
+    },
+    {
+      "name": "Cal Raleigh",
+      "rank": 189,
+      "composite": 0.4,
+      "opp_pitcher": "Tatsuya Imai",
+      "matchup": "SEA@HOU"
+    },
+    {
+      "name": "Tyler Soderstrom",
+      "rank": 194,
+      "composite": 0.4,
+      "opp_pitcher": "Andre Pallante",
+      "matchup": "STL@ATH"
+    },
+    {
+      "name": "Cole Young",
+      "rank": 270,
+      "composite": 0.346,
+      "opp_pitcher": "Tatsuya Imai",
+      "matchup": "SEA@HOU"
+    },
+    {
+      "name": "Jonathan Aranda",
+      "rank": 289,
+      "composite": 0.328,
+      "opp_pitcher": "Patrick Corbin",
+      "matchup": "TB@TOR"
+    },
+    {
+      "name": "Brandon Nimmo",
+      "rank": 313,
+      "composite": 0.304,
+      "opp_pitcher": "Zac Gallen",
+      "matchup": "AZ@TEX"
+    },
+    {
+      "name": "Ryan Waldschmidt",
+      "rank": 348,
+      "composite": 0.26,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "AZ@TEX"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Tyler Soderstrom",
+      "ev": 100.6,
+      "angle": 30.0,
+      "distance": 394.0,
+      "hr_in_parks": 26,
+      "result": "field_out",
+      "pitcher": "Soriano, George"
+    },
+    {
+      "batter": "Austin Riley",
+      "ev": 102.9,
+      "angle": 27.0,
+      "distance": 385.0,
+      "hr_in_parks": 22,
+      "result": "field_out",
+      "pitcher": "Rea, Colin"
+    },
+    {
+      "batter": "Wilyer Abreu",
+      "ev": 105.6,
+      "angle": 32.0,
+      "distance": 372.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Wheeler, Zack"
+    },
+    {
+      "batter": "Mike Trout",
+      "ev": 105.9,
+      "angle": 23.0,
+      "distance": 386.0,
+      "hr_in_parks": 20,
+      "result": "double",
+      "pitcher": "Gaddis, Hunter"
+    },
+    {
+      "batter": "Cal Raleigh",
+      "ev": 100.5,
+      "angle": 33.0,
+      "distance": 387.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Murray, Jayden"
+    },
+    {
+      "batter": "Cole Young",
+      "ev": 104.4,
+      "angle": 27.0,
+      "distance": 411.0,
+      "hr_in_parks": 29,
+      "result": "field_out",
+      "pitcher": "Imai, Tatsuya"
+    },
+    {
+      "batter": "Eric Haase",
+      "ev": 103.6,
+      "angle": 29.0,
+      "distance": 397.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Treinen, Blake"
+    },
+    {
+      "batter": "Jakob Marsee",
+      "ev": 101.6,
+      "angle": 32.0,
+      "distance": 389.0,
+      "hr_in_parks": 7,
+      "result": "field_out",
+      "pitcher": "Ober, Bailey"
+    },
+    {
+      "batter": "Oneil Cruz",
+      "ev": 111.1,
+      "angle": 21.0,
+      "distance": 384.0,
+      "hr_in_parks": 23,
+      "result": "double",
+      "pitcher": "Lorenzen, Michael"
+    },
+    {
+      "batter": "Oneil Cruz",
+      "ev": 112.5,
+      "angle": 17.0,
+      "distance": 391.0,
+      "hr_in_parks": 1,
+      "result": "double",
+      "pitcher": "Lorenzen, Michael"
+    },
+    {
+      "batter": "Gabriel Moreno",
+      "ev": 103.5,
+      "angle": 35.0,
+      "distance": 387.0,
+      "hr_in_parks": 8,
+      "result": "sac_fly",
+      "pitcher": "Latz, Jacob"
+    },
+    {
+      "batter": "Ryan Waldschmidt",
+      "ev": 100.5,
+      "angle": 22.0,
+      "distance": 374.0,
+      "hr_in_parks": 2,
+      "result": "double",
+      "pitcher": "Gore, MacKenzie"
+    },
+    {
+      "batter": "Josh Jung",
+      "ev": 106.0,
+      "angle": 22.0,
+      "distance": 403.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Pfaadt, Brandon"
+    },
+    {
+      "batter": "Brandon Nimmo",
+      "ev": 108.3,
+      "angle": 18.0,
+      "distance": 391.0,
+      "hr_in_parks": 6,
+      "result": "triple",
+      "pitcher": "Gallen, Zac"
+    },
+    {
+      "batter": "Jonathan Aranda",
+      "ev": 102.4,
+      "angle": 28.0,
+      "distance": 398.0,
+      "hr_in_parks": 19,
+      "result": "sac_fly",
+      "pitcher": "Fisher, Braydon"
+    }
+  ],
+  "surprise_hrs": []
+}
