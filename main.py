@@ -80,6 +80,21 @@ def _compute_zone_stats(df: pd.DataFrame) -> list:
     return zones
 
 
+def _compute_pitcher_zone_freq(df: pd.DataFrame, batter_hand: str) -> list:
+    """Per-zone (1-9) pitch frequency from ALL pitches (not just BIP), filtered by batter hand."""
+    if df is None or df.empty or "zone" not in df.columns:
+        return [{"zone": z, "count": 0, "pct": 0.0} for z in range(1, 10)]
+    filtered = df[df["stand"] == batter_hand].copy() if "stand" in df.columns else df.copy()
+    # Only zones 1-9 (in-zone) for the grid; exclude 11-14 (out-of-zone) from total
+    # so pct is relative to all pitches thrown (in and out of zone)
+    total = len(filtered)
+    result = []
+    for z in range(1, 10):
+        count = int((filtered["zone"] == z).sum())
+        result.append({"zone": z, "count": count, "pct": round(count / total * 100, 1) if total > 0 else 0.0})
+    return result
+
+
 def _format_score(result: dict) -> dict:
     """Format a single lookback's score result for JSON output."""
     return {
@@ -512,6 +527,12 @@ def run_model(game_date: date = None, fast: bool = False):
             _pz_df = pd.concat(_pz_frames, ignore_index=True) if _pz_frames else pd.DataFrame()
         pitcher_zones = _compute_zone_stats(_pz_df)
 
+        # Pitcher pitch frequency by zone — all pitches vs this batter hand
+        _pfreq_df = pitcher_df if not pitcher_df.empty else pd.DataFrame()
+        if _pfreq_df.empty and pitcher_2025 is not None and not pitcher_2025.empty:
+            _pfreq_df = pitcher_2025
+        pitcher_zone_freq = _compute_pitcher_zone_freq(_pfreq_df, batter_h)
+
         player_obj = {
             "name": batter_name,
             "batter_hand": batter_h,
@@ -539,6 +560,7 @@ def run_model(game_date: date = None, fast: bool = False):
             "season_profile": season_profile,
             "batter_zones": batter_zones,
             "pitcher_zones": pitcher_zones,
+            "pitcher_zone_freq": pitcher_zone_freq,
         }
 
         players_by_game[gpk].append(player_obj)

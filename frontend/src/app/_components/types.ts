@@ -121,6 +121,7 @@ export interface PlayerData {
   scores: Record<LookbackKey, ScoreSet>;
   batter_zones?: ZoneEntry[];
   pitcher_zones?: ZoneEntry[];
+  pitcher_zone_freq?: { zone: number; count: number; pct: number }[];
   season_stats?: Record<string, SeasonStats>;
   season_profile?: {
     barrel: number;
