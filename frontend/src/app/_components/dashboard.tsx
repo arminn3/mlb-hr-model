@@ -67,11 +67,6 @@ const IS_PROD =
   process.env.NEXT_PUBLIC_VERCEL_ENV === "production";
 const MAINTENANCE_MODE = MAINTENANCE_MODE_PROD && IS_PROD;
 
-// Dates hidden from prod only (dev sees them normally).
-// Add YYYY-MM-DD strings here to fall back to the prior day on prod.
-const PROD_BLOCKED_DATES: Set<string> = new Set(
-  IS_PROD ? ["2026-05-15"] : []
-);
 
 function MaintenancePage({ onLive }: { onLive: () => void }) {
   return (
@@ -390,18 +385,7 @@ export function Dashboard() {
         return res.json();
       })
       .then(async (d: ModelData) => {
-        // If the fetched date is blocked on prod, walk back day by day
-        // until we land on an unblocked date.
         let cur = d;
-        let safety = 14;
-        while (PROD_BLOCKED_DATES.has(cur.date) && safety-- > 0) {
-          const [y, m, day] = cur.date.split("-").map(Number);
-          const prev = new Date(Date.UTC(y, m - 1, day - 1));
-          const prevStr = prev.toISOString().slice(0, 10);
-          const resp = await fetch(`/data/${prevStr}.json`);
-          if (!resp.ok) break;
-          cur = await resp.json();
-        }
         return cur;
       })
       .then((d: ModelData) => {

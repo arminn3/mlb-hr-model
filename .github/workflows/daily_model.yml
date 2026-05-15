@@ -2,7 +2,8 @@ name: Daily HR Prop Model
 
 on:
   schedule:
-    - cron: '0 3 * * *'   # 11:00 PM ET — generate next day's slate (prod stays blocked)
+    - cron: '0 3 * * *'    # 11:00 PM ET — next day's slate
+    - cron: '0 14 * * *'   # 9:00 AM ET  — same day update (lineups, weather)
   workflow_dispatch:
 
 concurrency:
@@ -37,15 +38,12 @@ jobs:
           key: statcast-cache-${{ github.run_id }}
           restore-keys: statcast-cache-
 
-      # Results tracker: 7 AM (yesterday's results) + 10 PM/11 PM/midnight (today's results as games end)
       - name: Run results tracker
         if: github.event.schedule == '0 11 * * *' || github.event.schedule == '0 2 * * *' || github.event.schedule == '0 3 * * *' || github.event.schedule == '0 4 * * *' || github.event_name == 'workflow_dispatch'
         run: python results_tracker.py || true
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
 
-      # ML trainer writes to results/ml_analysis.json only.
-      # HR Rankings still uses static config.py weights — not affected.
       - name: Run ML trainer
         if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
         run: python ml_trainer.py || true
@@ -58,7 +56,16 @@ jobs:
         if: github.event.schedule == '0 11 * * *' || github.event.schedule == '0 2 * * *' || github.event.schedule == '0 3 * * *' || github.event.schedule == '0 4 * * *' || github.event_name == 'workflow_dispatch'
         run: python save_batted_balls.py || true
 
-      - name: Run HR prop model
+      - name: Run HR prop model (11 PM — next day)
+        if: github.event.schedule == '0 3 * * *' || github.event_name == 'workflow_dispatch'
+        run: |
+          TOMORROW=$(date -u -d '+1 day' +%Y-%m-%d 2>/dev/null || date -u -v+1d +%Y-%m-%d)
+          python main.py --date "$TOMORROW" --fast
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+
+      - name: Run HR prop model (9 AM — today update)
+        if: github.event.schedule == '0 14 * * *'
         run: python main.py --fast
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
@@ -67,11 +74,6 @@ jobs:
         run: |
           mkdir -p frontend/public/data/results
           cp results/*.json frontend/public/data/results/ 2>/dev/null || true
-
-      - name: Block today on prod
-        run: |
-          TODAY=$(date -u +%Y-%m-%d)
-          sed -i "s/IS_PROD ? \[\"[0-9-]*\"\] : \[\]/IS_PROD ? [\"${TODAY}\"] : []/" frontend/src/app/_components/dashboard.tsx
 
       - name: Commit and push results
         run: |
@@ -86,7 +88,6 @@ jobs:
           cp -r results/. /tmp/hrprop-stash/results/ 2>/dev/null || true
           mkdir -p /tmp/hrprop-stash/frontend-data/results
           cp -r frontend/public/data/results/. /tmp/hrprop-stash/frontend-data/results/ 2>/dev/null || true
-          cp frontend/src/app/_components/dashboard.tsx /tmp/hrprop-stash/dashboard.tsx || true
 
           git reset --hard HEAD
           git fetch origin main
@@ -97,10 +98,9 @@ jobs:
             [ -f "/tmp/hrprop-stash/frontend-data/index.json" ] && cp "/tmp/hrprop-stash/frontend-data/index.json" frontend/public/data/ || true
             cp -r /tmp/hrprop-stash/frontend-data/results/. frontend/public/data/results/ 2>/dev/null || true
             cp -r /tmp/hrprop-stash/results/. results/ 2>/dev/null || true
-            [ -f "/tmp/hrprop-stash/dashboard.tsx" ] && cp "/tmp/hrprop-stash/dashboard.tsx" frontend/src/app/_components/dashboard.tsx || true
-            git add frontend/public/data/ results/ frontend/src/app/_components/dashboard.tsx
+            git add frontend/public/data/ results/
             git diff --cached --quiet && echo "No changes after reset" && exit 0
-            git commit -m "auto: HR props ${TODAY} (prod blocked)"
+            git commit -m "auto: HR props ${TODAY}"
             if git push origin main; then
               echo "Pushed successfully on attempt $i"
               exit 0
