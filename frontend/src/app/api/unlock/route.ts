@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     httpOnly: true,
     sameSite: "lax",
     path: "/",
-    maxAge: 60 * 60 * 24 * 30, // 30 days
+    // no maxAge = session cookie, clears when browser closes
   });
   return res;
 }
