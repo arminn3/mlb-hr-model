@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { GameData, LookbackKey, PlayerData, ModelData } from "./types";
+import type { GameData, PlayerData, ModelData } from "./types";
+import { scoreFor, type UILookback } from "./score-utils";
 import { RatingBadge } from "./rating-badge";
 import { ScoreBar } from "./score-bar";
 
@@ -40,8 +41,8 @@ export const FALLBACK_WEIGHTS: MlWeights = {
   environment: 0.082,
 };
 
-export function mlComposite(player: PlayerData, lb: LookbackKey, w: MlWeights): number {
-  const s = player.scores[lb];
+export function mlComposite(player: PlayerData, lb: UILookback, w: MlWeights): number {
+  const s = scoreFor(player, lb);
   if (!s) return 0;
   // Use backend's batter/pitcher/env scores but reweight them with
   // ML-learned category weights. matchup_score isn't stored
@@ -60,7 +61,7 @@ export function MLRankings({
   currentDate,
 }: {
   games: GameData[];
-  lookback: LookbackKey;
+  lookback: UILookback;
   currentDate: string;
 }) {
   const [filter, setFilter] = useState<number>(10);
@@ -100,7 +101,7 @@ export function MLRankings({
             if (seen.has(player.name)) continue;
             seen.add(player.name);
             const score = mlComposite(player, lookback, mlWeights);
-            const abs = player.scores[lookback]?.recent_abs?.length ?? 0;
+            const abs = scoreFor(player, lookback)?.recent_abs?.length ?? 0;
             const reliability = Math.min(1, abs / 10);
             allPicks.push({
               name: player.name,
@@ -182,7 +183,7 @@ export function MLRankings({
     // Same confidence-weighted ranking as HR Rankings so tiny-sample
     // players can't fake their way to the top.
     const adjustedScore = (pair: typeof all[number]) => {
-      const s = pair.player.scores[lookback];
+      const s = scoreFor(pair.player, lookback);
       if (!s) return 0;
       const abs = s.recent_abs?.length ?? 0;
       const reliability = Math.min(1, abs / 10);
@@ -341,7 +342,7 @@ export function MLRankings({
       {/* Mobile card view */}
       <div className="md:hidden space-y-2">
         {top.map(({ player, game }, i) => {
-          const s = player.scores[lookback];
+          const s = scoreFor(player, lookback);
           if (!s) return null;
           const mlScore = mlComposite(player, lookback, mlWeights);
           return (
@@ -402,7 +403,7 @@ export function MLRankings({
           </thead>
           <tbody>
             {top.map(({ player, game }, i) => {
-              const s = player.scores[lookback];
+              const s = scoreFor(player, lookback);
               if (!s) return null;
               const mlScore = mlComposite(player, lookback, mlWeights);
               return (

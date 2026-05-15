@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import type { GameData, LookbackKey } from "./types";
+import type { GameData } from "./types";
+import { scoreFor, type UILookback } from "./score-utils";
 import { RatingBadge } from "./rating-badge";
 import { ScoreBar } from "./score-bar";
 import { Badge } from "./ui/badge";
@@ -18,7 +19,7 @@ export function TopPicks({
   lookback,
 }: {
   games: GameData[];
-  lookback: LookbackKey;
+  lookback: UILookback;
 }) {
   const [filter, setFilter] = useState<number>(10);
 
@@ -43,7 +44,7 @@ export function TopPicks({
     // This doesn't filter anyone out — they still show, just ranked
     // fairly against their actual sample size.
     const adjustedScore = (p: typeof all[number]) => {
-      const s = p.player.scores[lookback];
+      const s = scoreFor(p.player, lookback);
       if (!s) return 0;
       const abs = s.recent_abs?.length ?? 0;
       const reliability = Math.min(1, abs / 10);
@@ -96,7 +97,7 @@ export function TopPicks({
       {/* Mobile card view */}
       <div className="md:hidden space-y-2">
         {top.map(({ player, game }, i) => {
-          const s = player.scores[lookback];
+          const s = scoreFor(player, lookback);
           if (!s) return null;
           return (
             <div
@@ -146,7 +147,7 @@ export function TopPicks({
           </thead>
           <tbody>
             {top.map(({ player, game }, i) => {
-              const s = player.scores[lookback];
+              const s = scoreFor(player, lookback);
               if (!s) return null;
               return (
                 <tr key={player.name} className="border-b border-card-border/30 last:border-0 hover:bg-card/40">

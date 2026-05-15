@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import type { PlayerData, LookbackKey, PitchDetailEntry, ZoneEntry } from "./types";
+import type { PlayerData, PitchDetailEntry, ZoneEntry } from "./types";
+import { scoreFor, type UILookback } from "./score-utils";
 import { ScoreBar } from "./score-bar";
 import { PitchesTab } from "./pitches-tab";
 import { BvPTab } from "./bvp-tab";
@@ -194,16 +195,16 @@ export function BatterDrawer({
   onClose,
 }: {
   player: PlayerData;
-  lookback: LookbackKey;
+  lookback: UILookback;
   mlbId?: number;
   battingOrder: number | null;
   onClose: () => void;
 }) {
   const [detailTab, setDetailTab] = useState<"abs" | "statcast" | "pitches" | "bvp" | "profile">("abs");
   const [pitchFilter, setPitchFilter] = useState<Set<string>>(new Set());
-  const [activeLookback, setActiveLookback] = useState<LookbackKey>(lookback);
+  const [activeLookback, setActiveLookback] = useState<UILookback>(lookback);
 
-  const scores = player.scores[activeLookback] || player.scores.L5;
+  const scores = scoreFor(player, activeLookback) ?? scoreFor(player, "L5")!;
   const pitchDetail = player.pitch_detail || {};
   const pitchTypes = player.pitch_types || [];
 
@@ -376,7 +377,7 @@ export function BatterDrawer({
               <X size={18} />
             </button>
             <div className="flex items-center p-[3px] rounded-full" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)" }}>
-              {(["L5", "L10"] as LookbackKey[]).map((lb) => (
+              {(["L5", "L10", "Season"] as UILookback[]).map((lb) => (
                 <button
                   key={lb}
                   onClick={() => setActiveLookback(lb)}

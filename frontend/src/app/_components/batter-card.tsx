@@ -1,6 +1,7 @@
 "use client";
 
-import type { PlayerData, LookbackKey } from "./types";
+import type { PlayerData } from "./types";
+import { scoreFor, type UILookback } from "./score-utils";
 import { ScoreBar } from "./score-bar";
 import { RatingBadge } from "./rating-badge";
 import { Tooltip } from "./tooltip";
@@ -19,12 +20,12 @@ export function BatterCard({
   onSelect,
 }: {
   player: PlayerData;
-  lookback: LookbackKey;
+  lookback: UILookback;
   battingOrder: number | null;
   mlbId?: number;
   onSelect: () => void;
 }) {
-  const scores = player.scores[lookback] || player.scores.L5;
+  const scores = scoreFor(player, lookback) ?? scoreFor(player, "L5")!;
   const pullBrl = player.season_profile?.pull_barrel ?? null;
 
   const recentAbsArr = scores.recent_abs ?? [];

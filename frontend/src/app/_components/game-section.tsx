@@ -1,6 +1,7 @@
 "use client";
 
-import type { GameData, LookbackKey, PlayerData, TeamPitchMixSide } from "./types";
+import type { GameData, PlayerData, TeamPitchMixSide } from "./types";
+import { scoreFor, type UILookback } from "./score-utils";
 import { GameHeader } from "./game-header";
 import { PitcherProfileCard } from "./pitcher-profile-card";
 import { BatterTable, type BatterRowInfo } from "./batter-table";
@@ -19,7 +20,7 @@ function sortBatters(
   players: PlayerData[],
   lookup: Map<string, LineupInfo>,
   posted: boolean,
-  lookback: LookbackKey,
+  lookback: UILookback,
 ): BatterRowInfo[] {
   const rows: BatterRowInfo[] = players.map((p) => {
     const info = lookup.get(p.name);
@@ -31,7 +32,7 @@ function sortBatters(
       .sort((a, b) => a.order! - b.order!);
   }
   return rows.sort(
-    (a, b) => (b.p.scores[lookback]?.composite ?? 0) - (a.p.scores[lookback]?.composite ?? 0),
+    (a, b) => (scoreFor(b.p, lookback)?.composite ?? 0) - (scoreFor(a.p, lookback)?.composite ?? 0),
   );
 }
 
@@ -48,7 +49,7 @@ export function GameSection({
   onSelectBatter,
 }: {
   game: GameData;
-  lookback: LookbackKey;
+  lookback: UILookback;
   onSelectBatter: (s: SelectedBatter) => void;
 }) {
   const homeSide = game.team_pitch_mix?.home;

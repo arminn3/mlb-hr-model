@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { PlayerData, LookbackKey, PitchDetailEntry } from "./types";
+import type { PlayerData, PitchDetailEntry } from "./types";
+import { scoreFor, type UILookback } from "./score-utils";
 import { teamLogoUrl, teamName } from "./game-header";
 
 type SortCol = "score" | "ev" | "barrel" | "hh" | "gb" | "ld" | "fb" | "hrfb";
@@ -58,12 +59,12 @@ export function BatterRow({
   onSelect,
 }: {
   row: BatterRowInfo;
-  lookback: LookbackKey;
+  lookback: UILookback;
   posted: boolean;
   onSelect: () => void;
 }) {
   const { p, order, mlbId } = row;
-  const scores = p.scores[lookback] || p.scores.L5;
+  const scores = scoreFor(p, lookback) ?? scoreFor(p, "L5")!;
 
   const recentAbs = scores.recent_abs ?? [];
   const flyBalls  = recentAbs.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
@@ -228,7 +229,7 @@ export function BatterTable({
 }: {
   teamAbbr: string;
   batters: BatterRowInfo[];
-  lookback: LookbackKey;
+  lookback: UILookback;
   posted: boolean;
   onSelect: (row: BatterRowInfo) => void;
 }) {
@@ -247,7 +248,7 @@ export function BatterTable({
   }
 
   function getVal(row: BatterRowInfo): number {
-    const sc = row.p.scores[lookback] || row.p.scores.L5;
+    const sc = scoreFor(row.p, lookback) ?? scoreFor(row.p, "L5")!;
     const recentAbs = sc.recent_abs ?? [];
     const fbs = recentAbs.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
     const hrs = recentAbs.filter((ab) => ab.result === "home_run").length;

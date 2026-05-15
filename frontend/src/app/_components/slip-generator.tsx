@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { GameData, LookbackKey } from "./types";
+import type { GameData } from "./types";
+import { scoreFor, type UILookback } from "./score-utils";
 import { RatingBadge } from "./rating-badge";
 import { mlComposite, FALLBACK_WEIGHTS, type MlWeights } from "./ml-rankings";
 
@@ -111,14 +112,14 @@ interface Slip {
   gameCount: number;
 }
 
-function getAllPlayers(games: GameData[], lookback: LookbackKey, weights: MlWeights): SlipPlayer[] {
+function getAllPlayers(games: GameData[], lookback: UILookback, weights: MlWeights): SlipPlayer[] {
   const allPlayers: SlipPlayer[] = [];
   const seen = new Set<string>();
   for (const game of games) {
     for (const player of game.players) {
       if (seen.has(player.name)) continue;
       seen.add(player.name);
-      const scores = player.scores[lookback];
+      const scores = scoreFor(player, lookback);
       const composite = mlComposite(player, lookback, weights);
       if (composite < 0.15) continue;
       allPlayers.push({
@@ -415,7 +416,7 @@ export function SlipGenerator({
   lookback,
 }: {
   games: GameData[];
-  lookback: LookbackKey;
+  lookback: UILookback;
 }) {
   // Hydrate from sessionStorage once on mount. Keeping the full parlay-
   // building state across tab switches (not just selectedNames).

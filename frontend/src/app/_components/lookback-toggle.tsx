@@ -1,15 +1,15 @@
 "use client";
 
-import type { LookbackKey } from "./types";
+import type { UILookback } from "./score-utils";
 
-const OPTIONS: LookbackKey[] = ["L5", "L10"];
+const OPTIONS: UILookback[] = ["L5", "L10", "Season"];
 
 export function LookbackToggle({
   value,
   onChange,
 }: {
-  value: LookbackKey;
-  onChange: (v: LookbackKey) => void;
+  value: UILookback;
+  onChange: (v: UILookback) => void;
 }) {
   return (
     <div className="flex items-center gap-1 bg-card/50 border border-card-border rounded-lg p-1">

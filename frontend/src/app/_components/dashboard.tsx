@@ -2,7 +2,8 @@
 
 import { ChevronLeft, ChevronRight, Menu, Eye, EyeOff } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import type { ModelData, LookbackKey, GameEnvironment } from "./types";
+import type { ModelData, GameEnvironment } from "./types";
+import type { UILookback } from "./score-utils";
 import { Sidebar, type Page } from "./sidebar";
 import { LookbackToggle } from "./lookback-toggle";
 import { DatePicker } from "./date-picker";
@@ -361,7 +362,7 @@ export function Dashboard() {
   }
 
   const [activePage, setActivePageRaw] = useState<Page>(() => getHashParam("page", "rankings") as Page);
-  const [lookback, setLookbackRaw] = useState<LookbackKey>(() => getHashParam("lookback", "L5") as LookbackKey);
+  const [lookback, setLookbackRaw] = useState<UILookback>(() => getHashParam("lookback", "L5") as UILookback);
   const [selectedDate, setSelectedDate] = useState<string>(() => getHashParam("date", ""));
   const [selectedGames, setSelectedGames] = useState<Set<number>>(new Set()); // empty = all games
   const [selectedBatter, setSelectedBatter] = useState<SelectedBatter | null>(null);
@@ -376,7 +377,7 @@ export function Dashboard() {
     setActivePageRaw(p);
     updateHash(p, selectedDate, lookback);
   };
-  const setLookback = (lb: LookbackKey) => {
+  const setLookback = (lb: UILookback) => {
     setLookbackRaw(lb);
     updateHash(activePage, selectedDate, lb);
   };

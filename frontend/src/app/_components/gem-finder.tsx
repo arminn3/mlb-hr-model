@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
-import type { GameData, LookbackKey } from "./types";
+import type { GameData } from "./types";
+import { scoreFor, type UILookback } from "./score-utils";
 import {
   TABLE_BG,
   cellClass,
@@ -36,7 +37,7 @@ export function GemFinder({
   lookback,
 }: {
   games: GameData[];
-  lookback: LookbackKey;
+  lookback: UILookback;
 }) {
   const gems = useMemo(() => {
     const candidates: Gem[] = [];
@@ -49,7 +50,7 @@ export function GemFinder({
         if (seen.has(player.name)) continue;
         seen.add(player.name);
 
-        const scores = player.scores[lookback];
+        const scores = scoreFor(player, lookback);
         if (!scores) continue;
 
         const pitcherStats = player.pitcher_stats;

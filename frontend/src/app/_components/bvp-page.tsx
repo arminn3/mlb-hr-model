@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import type { GameData, LookbackKey } from "./types";
+import type { GameData } from "./types";
+import { scoreFor, type UILookback } from "./score-utils";
 import {
   TABLE_BG,
   cellClass,
@@ -18,7 +19,7 @@ export function BvPPage({
   lookback,
 }: {
   games: GameData[];
-  lookback: LookbackKey;
+  lookback: UILookback;
 }) {
   const [search, setSearch] = useState("");
   const [sortCol, setSortCol] = useState<string>("hrs");
@@ -50,7 +51,7 @@ export function BvPPage({
         seen.add(key);
 
         const bvp = player.bvp_stats?.career;
-        const score = player.scores[lookback]?.composite ?? 0;
+        const score = scoreFor(player, lookback)?.composite ?? 0;
 
         rows.push({
           batter: player.name,

@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useEffect, useState } from "react";
-import type { GameData, LookbackKey } from "./types";
+import type { GameData } from "./types";
+import type { UILookback } from "./score-utils";
 import {
   TABLE_BG,
   cellClass,
@@ -31,7 +32,7 @@ interface GameProjection {
   envScore: number;
 }
 
-function predictHRs(game: GameData, _lookback: LookbackKey, model: ProjectionModel): number {
+function predictHRs(game: GameData, _lookback: UILookback, model: ProjectionModel): number {
   const env = game.environment;
   const players = game.players;
   const homePlayers = players.filter(p => p.batter_side === "home");
@@ -80,7 +81,7 @@ export function ProjectionsView({
   lookback,
 }: {
   games: GameData[];
-  lookback: LookbackKey;
+  lookback: UILookback;
 }) {
   const [model, setModel] = useState<ProjectionModel | null>(null);
 
