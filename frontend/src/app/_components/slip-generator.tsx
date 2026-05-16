@@ -13,7 +13,7 @@ const SLIP_STATE_KEY = "beeb:slip-gen:v2";
 interface PersistedState {
   selectedNames: string[];
   legCount: number;
-  mode: "auto" | "custom" | "optimal" | "timeslate";
+  mode: "auto" | "custom" | "optimal";
   sortMode: SortMode;
   search: string;
 }
@@ -91,12 +91,6 @@ function gameMatchesQuery(game: string, q: string): boolean {
     if (syn && syn.toLowerCase().includes(q)) return true;
   }
   return false;
-}
-
-const EARLY_CUTOFF = 1020; // 5 PM ET in minutes past midnight
-
-function timeSlot(sort: number): "Early" | "Late" {
-  return sort < EARLY_CUTOFF ? "Early" : "Late";
 }
 
 interface SlipPlayer {
@@ -234,76 +228,20 @@ function buildCustomSlips(
 
 type SortMode = "best" | "chalk" | "longshot" | "diverse";
 
-function buildTimeSlateAutoSlips(players: SlipPlayer[], legCount: number): Slip[] {
-  const early = players.filter((p) => timeSlot(p.gameTimeSort) === "Early");
-  const late  = players.filter((p) => timeSlot(p.gameTimeSort) === "Late");
-  if (early.length === 0 || late.length === 0) return [];
-
-  const slips: Slip[] = [];
-  const cap = 12;
-
-  if (legCount === 2) {
-    for (const e of early.slice(0, cap)) {
-      for (const l of late.slice(0, cap)) {
-        slips.push({ players: [e, l], avgComposite: (e.composite + l.composite) / 2, gameCount: 2 });
-        if (slips.length >= 2000) break;
-      }
-      if (slips.length >= 2000) break;
-    }
-  } else {
-    // Build a blended pool, alternating early/late, then combo
-    const pool: SlipPlayer[] = [];
-    let ei = 0, li = 0;
-    while (pool.length < cap * 2) {
-      if (ei < early.length) pool.push(early[ei++]);
-      if (li < late.length)  pool.push(late[li++]);
-      if (ei >= early.length && li >= late.length) break;
-    }
-    function combine(start: number, combo: SlipPlayer[]) {
-      if (combo.length === legCount) {
-        const ec = combo.filter((p) => timeSlot(p.gameTimeSort) === "Early").length;
-        if (ec === 0 || ec === legCount) return;
-        const uniqueGames = new Set(combo.map((p) => p.gamePk)).size;
-        slips.push({ players: [...combo], avgComposite: combo.reduce((s, p) => s + p.composite, 0) / legCount, gameCount: uniqueGames });
-        return;
-      }
-      const remaining = legCount - combo.length;
-      for (let i = start; i <= pool.length - remaining; i++) {
-        combine(i + 1, [...combo, pool[i]]);
-        if (slips.length >= 2000) return;
-      }
-    }
-    combine(0, []);
-  }
-
-  slips.sort((a, b) => b.avgComposite - a.avgComposite);
-  return slips.slice(0, 20);
+const EARLY_CUTOFF = 1020; // 5 PM ET in minutes past midnight
+function timeSlot(sort: number): "Early" | "Late" {
+  return sort < EARLY_CUTOFF ? "Early" : "Late";
 }
 
-function buildTimeSlateCustomSlips(selected: SlipPlayer[], legCount: number): Slip[] {
-  if (selected.length < legCount) return [];
-  const early = selected.filter((p) => timeSlot(p.gameTimeSort) === "Early");
-  const late  = selected.filter((p) => timeSlot(p.gameTimeSort) === "Late");
-  if (early.length === 0 || late.length === 0) return [];
-
-  const slips: Slip[] = [];
-  function combine(start: number, combo: SlipPlayer[]) {
-    if (combo.length === legCount) {
-      const ec = combo.filter((p) => timeSlot(p.gameTimeSort) === "Early").length;
-      if (ec === 0 || ec === legCount) return;
-      const uniqueGames = new Set(combo.map((p) => p.gamePk)).size;
-      slips.push({ players: [...combo], avgComposite: combo.reduce((s, p) => s + p.composite, 0) / legCount, gameCount: uniqueGames });
-      return;
-    }
-    const remaining = legCount - combo.length;
-    for (let i = start; i <= selected.length - remaining; i++) {
-      combine(i + 1, [...combo, selected[i]]);
-      if (slips.length >= 2000) return;
-    }
-  }
-  combine(0, []);
-  slips.sort((a, b) => b.avgComposite - a.avgComposite);
-  return slips;
+function TimeSlotPill({ sort }: { sort: number }) {
+  const slot = timeSlot(sort);
+  return (
+    <span className={`text-[8px] font-bold uppercase px-1.5 py-0.5 rounded shrink-0 ${
+      slot === "Early"
+        ? "bg-accent-yellow/15 text-accent-yellow border border-accent-yellow/20"
+        : "bg-accent/15 text-accent border border-accent/20"
+    }`}>{slot}</span>
+  );
 }
 
 function buildOptimalSlips(
@@ -472,8 +410,9 @@ function PlayerPickRow({
             </svg>
           )}
         </span>
-        <div className="min-w-0 flex items-baseline gap-2">
+        <div className="min-w-0 flex items-center gap-2">
           <span className="text-[15px] font-semibold text-foreground">{player.name}</span>
+          <TimeSlotPill sort={player.gameTimeSort} />
           <span className="text-[11px] text-muted">{player.game}</span>
         </div>
       </div>
@@ -511,7 +450,7 @@ export function SlipGenerator({
   const [legCount, setLegCount] = useState<number>(
     (typeof initial.legCount === "number" && initial.legCount >= 2) ? initial.legCount : 2
   );
-  const [mode, setMode] = useState<"auto" | "custom" | "optimal" | "timeslate">(
+  const [mode, setMode] = useState<"auto" | "custom" | "optimal">(
     initial.mode ?? "auto"
   );
   const [sortMode, setSortMode] = useState<SortMode>(initial.sortMode ?? "best");
@@ -619,26 +558,7 @@ export function SlipGenerator({
     return <p className="text-center text-muted py-12">No games available.</p>;
   }
 
-  const tsAutoSlips = useMemo(
-    () => buildTimeSlateAutoSlips(allPlayers, legCount),
-    [allPlayers, legCount]
-  );
-  const tsCustomSlips = useMemo(
-    () => buildTimeSlateCustomSlips(selectedPlayers, legCount),
-    [selectedPlayers, legCount]
-  );
-
-  const earlyPlayers = useMemo(() => allPlayers.filter((p) => timeSlot(p.gameTimeSort) === "Early"), [allPlayers]);
-  const latePlayers  = useMemo(() => allPlayers.filter((p) => timeSlot(p.gameTimeSort) === "Late"),  [allPlayers]);
-
-  const tsHasEarlySelected = selectedPlayers.some((p) => timeSlot(p.gameTimeSort) === "Early");
-  const tsHasLateSelected  = selectedPlayers.some((p) => timeSlot(p.gameTimeSort) === "Late");
-
-  const slips =
-    mode === "auto"      ? autoSlips :
-    mode === "optimal"   ? optimalSlips :
-    mode === "timeslate" ? (selectedPlayers.length >= legCount ? tsCustomSlips : tsAutoSlips) :
-    customSlips;
+  const slips = mode === "auto" ? autoSlips : mode === "optimal" ? optimalSlips : customSlips;
 
   const favoritedPlayers = useMemo(() => {
     if (!favorites || favorites.size === 0) return [];
@@ -706,10 +626,6 @@ export function SlipGenerator({
               ? "Best HR parlay combinations based on model rankings."
               : mode === "optimal"
               ? `Each player used once. ${selectedNames.size} selected = ${Math.floor(selectedNames.size / legCount)} ${legCount === 2 ? "duos" : "trios"}.`
-              : mode === "timeslate"
-              ? selectedPlayers.length >= legCount
-                ? `Custom time-slate parlays. ${selectedPlayers.length} selected — must span Early + Late.`
-                : `Auto: best cross-slate parlays. Early (before 5 PM ET) + Late (5 PM+).`
               : `All combos from your picks. ${selectedNames.size} selected.`}
           </p>
         </div>
@@ -718,10 +634,9 @@ export function SlipGenerator({
           <div className="flex items-center gap-2">
             <span className="text-[10px] uppercase tracking-wider text-muted">Mode:</span>
             {([
-              { key: "auto"      as const, label: "Auto",       desc: "Model picks" },
-              { key: "custom"    as const, label: "All Combos", desc: "Every combo" },
-              { key: "optimal"   as const, label: "Optimal",    desc: "No repeats" },
-              { key: "timeslate" as const, label: "Time Slate", desc: "Early + Late" },
+              { key: "auto"    as const, label: "Auto",       desc: "Model picks" },
+              { key: "custom"  as const, label: "All Combos", desc: "Every combo" },
+              { key: "optimal" as const, label: "Optimal",    desc: "No repeats" },
             ]).map((m) => (
               <button
                 key={m.key}
@@ -878,94 +793,6 @@ export function SlipGenerator({
         </div>
       )}
 
-      {/* Time Slate player picker */}
-      {mode === "timeslate" && (
-        <div className="mb-6">
-          {/* Early / Late columns */}
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            {(["Early", "Late"] as const).map((slot) => {
-              const group = slot === "Early" ? earlyPlayers : latePlayers;
-              const cutoffLabel = slot === "Early" ? "before 5 PM ET" : "5 PM ET+";
-              return (
-                <div key={slot}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded ${
-                      slot === "Early"
-                        ? "bg-accent-yellow/15 text-accent-yellow border border-accent-yellow/25"
-                        : "bg-accent/15 text-accent border border-accent/25"
-                    }`}>{slot}</span>
-                    <span className="text-[10px] text-muted">{cutoffLabel} · {group.length} players</span>
-                  </div>
-                  <div className="max-h-64 overflow-y-auto space-y-1.5 border border-card-border rounded-lg p-2 bg-card/20">
-                    {group.length === 0 ? (
-                      <p className="text-[11px] text-muted text-center py-4">No {slot.toLowerCase()} games today.</p>
-                    ) : group.map((p) => (
-                      <button
-                        key={p.name}
-                        onClick={() => togglePlayer(p.name)}
-                        className={`w-full flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer transition-colors text-left ${
-                          selectedNames.has(p.name)
-                            ? slot === "Early"
-                              ? "bg-accent-yellow/15 border border-accent-yellow/30"
-                              : "bg-accent/15 border border-accent/30"
-                            : "bg-background/30 border border-transparent hover:bg-background/50"
-                        }`}
-                      >
-                        <div className="min-w-0">
-                          <div className="text-[13px] font-semibold text-foreground truncate">{p.name}</div>
-                          <div className="text-[10px] text-muted">{p.game} · {p.gameTime}</div>
-                        </div>
-                        <span className={`font-mono text-xs font-bold ml-2 shrink-0 ${
-                          p.composite >= 0.70 ? "text-accent-green" : p.composite >= 0.50 ? "text-accent-yellow" : "text-muted"
-                        }`}>{p.composite.toFixed(3)}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Selected chips + warning */}
-          {selectedPlayers.length > 0 && (
-            <div className="mb-3 flex flex-wrap items-center gap-2">
-              {selectedPlayers.map((p) => {
-                const slot = timeSlot(p.gameTimeSort);
-                return (
-                  <button
-                    key={p.name}
-                    onClick={() => togglePlayer(p.name)}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-full cursor-pointer ${
-                      slot === "Early"
-                        ? "bg-accent-yellow/15 text-accent-yellow border border-accent-yellow/30 hover:bg-accent-yellow/25"
-                        : "bg-accent/15 text-accent border border-accent/30 hover:bg-accent/25"
-                    }`}
-                  >
-                    <span className={`text-[9px] font-bold uppercase ${slot === "Early" ? "text-accent-yellow/60" : "text-accent/60"}`}>{slot[0]}</span>
-                    {p.name}
-                    <span className="opacity-50">x</span>
-                  </button>
-                );
-              })}
-              <button
-                onClick={() => setSelectedNames(new Set())}
-                className="inline-flex items-center gap-1 px-3 py-1.5 text-xs text-accent-red border border-accent-red/30 rounded-full cursor-pointer hover:bg-accent-red/10"
-              >
-                Clear
-              </button>
-            </div>
-          )}
-
-          {selectedPlayers.length >= legCount && (!tsHasEarlySelected || !tsHasLateSelected) && (
-            <div className="rounded-lg border border-accent-yellow/30 bg-accent-yellow/5 px-4 py-3 mb-4">
-              <div className="text-[13px] text-accent-yellow">
-                All picks are from {tsHasEarlySelected ? "Early" : "Late"} games — add at least one {tsHasEarlySelected ? "Late" : "Early"} game player to generate time-slate parlays.
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
       {/* Slips */}
       {slips.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1054,13 +881,7 @@ export function SlipGenerator({
                         <RatingBadge composite={p.composite} />
                       </div>
                       <div className="text-[10px] text-muted mt-0.5 flex items-center gap-1.5">
-                        {mode === "timeslate" && (
-                          <span className={`text-[8px] font-bold uppercase px-1 py-0.5 rounded ${
-                            timeSlot(p.gameTimeSort) === "Early"
-                              ? "bg-accent-yellow/15 text-accent-yellow"
-                              : "bg-accent/15 text-accent"
-                          }`}>{timeSlot(p.gameTimeSort)}</span>
-                        )}
+                        <TimeSlotPill sort={p.gameTimeSort} />
                         {p.game} vs {p.opp_pitcher} ({p.pitcher_hand}HP)
                       </div>
                     </div>
@@ -1095,8 +916,6 @@ export function SlipGenerator({
           ? "Slips prioritize game diversity. Players rated 0.15+ composite are eligible. Top 20 shown."
           : mode === "optimal"
           ? "Each player used exactly once. Slips sorted by best composite score."
-          : mode === "timeslate"
-          ? "Every slip must have at least one Early game (before 5 PM ET) and one Late game (5 PM ET+) leg. No custom picks = auto best."
           : "All possible combos from your selections. SGP = Same Game Parlay (1 game). Multi-game parlays shown first."}
       </div>
     </div>
