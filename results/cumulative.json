@@ -30617,9 +30617,9 @@
   {
     "date": "2026-05-15",
     "total_players_ranked": 289,
-    "total_hrs_hit": 22,
+    "total_hrs_hit": 30,
     "total_near_hrs": 0,
-    "model_hits": 20,
+    "model_hits": 28,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
@@ -30640,8 +30640,8 @@
         },
         "all": {
           "total": 289,
-          "hits": 20,
-          "rate": 6.9
+          "hits": 28,
+          "rate": 9.7
         }
       },
       "L10": {
@@ -30657,13 +30657,13 @@
         },
         "top_30": {
           "total": 30,
-          "hits": 4,
-          "rate": 13.3
+          "hits": 5,
+          "rate": 16.7
         },
         "all": {
           "total": 289,
-          "hits": 20,
-          "rate": 6.9
+          "hits": 28,
+          "rate": 9.7
         }
       }
     },
@@ -30686,8 +30686,8 @@
       },
       "all": {
         "total": 289,
-        "hits": 20,
-        "rate": 6.9
+        "hits": 28,
+        "rate": 9.7
       }
     },
     "tier_accuracy_with_near": {
@@ -30708,13 +30708,13 @@
       },
       "all": {
         "total": 289,
-        "hits": 20,
-        "rate": 6.9
+        "hits": 28,
+        "rate": 9.7
       }
     },
-    "avg_composite_hr_hitters": 0.453,
-    "avg_composite_non_hitters": 0.411,
-    "composite_separation": 0.042,
+    "avg_composite_hr_hitters": 0.447,
+    "avg_composite_non_hitters": 0.41,
+    "composite_separation": 0.037,
     "hr_hitters": [
       {
         "name": "Drake Baldwin",
@@ -30745,11 +30745,32 @@
         "matchup": "CHC@CWS"
       },
       {
+        "name": "Teoscar Hern\u00e1ndez",
+        "rank": 31,
+        "composite": 0.605,
+        "opp_pitcher": "Jack Kochanowicz",
+        "matchup": "LAD@LAA"
+      },
+      {
+        "name": "Max Muncy",
+        "rank": 35,
+        "composite": 0.585,
+        "opp_pitcher": "Jack Kochanowicz",
+        "matchup": "LAD@LAA"
+      },
+      {
         "name": "Ben Rice",
         "rank": 41,
         "composite": 0.575,
         "opp_pitcher": "Clay Holmes",
         "matchup": "NYY@NYM"
+      },
+      {
+        "name": "Nick Kurtz",
+        "rank": 68,
+        "composite": 0.506,
+        "opp_pitcher": "Tyler Mahle",
+        "matchup": "SF@ATH"
       },
       {
         "name": "Yandy D\u00edaz",
@@ -30808,6 +30829,13 @@
         "matchup": "MIA@TB"
       },
       {
+        "name": "Andy Pages",
+        "rank": 154,
+        "composite": 0.389,
+        "opp_pitcher": "Jack Kochanowicz",
+        "matchup": "LAD@LAA"
+      },
+      {
         "name": "Isaac Paredes",
         "rank": 163,
         "composite": 0.379,
@@ -30829,11 +30857,39 @@
         "matchup": "BOS@ATL"
       },
       {
+        "name": "Pedro Pag\u00e9s",
+        "rank": 182,
+        "composite": 0.366,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "KC@STL"
+      },
+      {
         "name": "Juan Soto",
         "rank": 183,
         "composite": 0.365,
         "opp_pitcher": "Cam Schlittler",
         "matchup": "NYY@NYM"
+      },
+      {
+        "name": "Jordan Walker",
+        "rank": 203,
+        "composite": 0.346,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "KC@STL"
+      },
+      {
+        "name": "Harrison Bader",
+        "rank": 213,
+        "composite": 0.336,
+        "opp_pitcher": "Aaron Civale",
+        "matchup": "SF@ATH"
+      },
+      {
+        "name": "Luis Arraez",
+        "rank": 215,
+        "composite": 0.332,
+        "opp_pitcher": "Aaron Civale",
+        "matchup": "SF@ATH"
       },
       {
         "name": "Rhys Hoskins",
@@ -30887,6 +30943,13 @@
         "matchup": "CHC@CWS"
       },
       {
+        "name": "Max Muncy",
+        "rank": 25,
+        "composite": 0.605,
+        "opp_pitcher": "Jack Kochanowicz",
+        "matchup": "LAD@LAA"
+      },
+      {
         "name": "Brandon Lowe",
         "rank": 38,
         "composite": 0.575,
@@ -30922,6 +30985,13 @@
         "matchup": "NYY@NYM"
       },
       {
+        "name": "Teoscar Hern\u00e1ndez",
+        "rank": 81,
+        "composite": 0.45,
+        "opp_pitcher": "Jack Kochanowicz",
+        "matchup": "LAD@LAA"
+      },
+      {
         "name": "Daylen Lile",
         "rank": 99,
         "composite": 0.411,
@@ -30941,6 +31011,13 @@
         "composite": 0.4,
         "opp_pitcher": "Spencer Strider",
         "matchup": "BOS@ATL"
+      },
+      {
+        "name": "Nick Kurtz",
+        "rank": 159,
+        "composite": 0.4,
+        "opp_pitcher": "Tyler Mahle",
+        "matchup": "SF@ATH"
       },
       {
         "name": "Jakob Marsee",
@@ -30969,6 +31046,41 @@
         "composite": 0.373,
         "opp_pitcher": "Connelly Early",
         "matchup": "BOS@ATL"
+      },
+      {
+        "name": "Jordan Walker",
+        "rank": 193,
+        "composite": 0.359,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "KC@STL"
+      },
+      {
+        "name": "Luis Arraez",
+        "rank": 205,
+        "composite": 0.345,
+        "opp_pitcher": "Aaron Civale",
+        "matchup": "SF@ATH"
+      },
+      {
+        "name": "Pedro Pag\u00e9s",
+        "rank": 206,
+        "composite": 0.344,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "KC@STL"
+      },
+      {
+        "name": "Andy Pages",
+        "rank": 217,
+        "composite": 0.339,
+        "opp_pitcher": "Jack Kochanowicz",
+        "matchup": "LAD@LAA"
+      },
+      {
+        "name": "Harrison Bader",
+        "rank": 218,
+        "composite": 0.336,
+        "opp_pitcher": "Aaron Civale",
+        "matchup": "SF@ATH"
       },
       {
         "name": "Rhys Hoskins",

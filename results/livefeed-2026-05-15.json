@@ -85,15 +85,15 @@
       "gamePk": 823061,
       "away": "KC",
       "home": "STL",
-      "status": "In Progress",
+      "status": "Final",
       "awayScore": 4,
-      "homeScore": 4
+      "homeScore": 5
     },
     {
       "gamePk": 824360,
       "away": "AZ",
       "home": "COL",
-      "status": "Game Over",
+      "status": "Final",
       "awayScore": 9,
       "homeScore": 1
     },
@@ -101,7 +101,7 @@
       "gamePk": 824037,
       "away": "LAD",
       "home": "LAA",
-      "status": "In Progress",
+      "status": "Final",
       "awayScore": 6,
       "homeScore": 0
     },
@@ -109,7 +109,7 @@
       "gamePk": 823140,
       "away": "SD",
       "home": "SEA",
-      "status": "In Progress",
+      "status": "Final",
       "awayScore": 2,
       "homeScore": 0
     },
@@ -117,12 +117,129 @@
       "gamePk": 825009,
       "away": "SF",
       "home": "ATH",
-      "status": "In Progress",
+      "status": "Final",
       "awayScore": 2,
       "homeScore": 5
     }
   ],
   "plays": [
+    {
+      "batter": "Bryce Teodosio",
+      "pitcher": "Charlie Barnes",
+      "game": "LAD@LAA",
+      "ev": 94.8,
+      "angle": 34.0,
+      "distance": 327.0,
+      "result": "Flyout",
+      "inning": 9,
+      "timestamp": "2026-05-16T04:11:55.865Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Mookie Betts",
+      "pitcher": "Brent Suter",
+      "game": "LAD@LAA",
+      "ev": 97.1,
+      "angle": 22.0,
+      "distance": 358.0,
+      "result": "Lineout",
+      "inning": 9,
+      "timestamp": "2026-05-16T04:04:47.082Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Zack Gelof",
+      "pitcher": "Tristan Beck",
+      "game": "SF@ATH",
+      "ev": 95.5,
+      "angle": 52.0,
+      "distance": 276.0,
+      "result": "Flyout",
+      "inning": 8,
+      "timestamp": "2026-05-16T04:00:50.814Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Sung-Mun Song",
+      "pitcher": "Alex Hoppe",
+      "game": "SD@SEA",
+      "ev": 97.0,
+      "angle": 27.0,
+      "distance": 373.0,
+      "result": "Flyout",
+      "inning": 9,
+      "timestamp": "2026-05-16T03:57:27.156Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Oswald Peraza",
+      "pitcher": "Jack Dreyer",
+      "game": "LAD@LAA",
+      "ev": 93.9,
+      "angle": 47.0,
+      "distance": 295.0,
+      "result": "Flyout",
+      "inning": 8,
+      "timestamp": "2026-05-16T03:53:42.204Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Josh Naylor",
+      "pitcher": "Jason Adam",
+      "game": "SD@SEA",
+      "ev": 98.9,
+      "angle": 27.0,
+      "distance": 381.0,
+      "result": "Flyout",
+      "inning": 8,
+      "timestamp": "2026-05-16T03:41:10.260Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Fernando Tatis Jr.",
+      "pitcher": "Jos\u00e9 A. Ferrer",
+      "game": "SD@SEA",
+      "ev": 97.8,
+      "angle": 27.0,
+      "distance": 368.0,
+      "result": "Flyout",
+      "inning": 8,
+      "timestamp": "2026-05-16T03:29:13.875Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Darell Hernaiz",
+      "pitcher": "Sam Hentges",
+      "game": "SF@ATH",
+      "ev": 90.1,
+      "angle": 28.0,
+      "distance": 303.0,
+      "result": "Lineout",
+      "inning": 6,
+      "timestamp": "2026-05-16T03:25:39.668Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Michael Massey",
+      "pitcher": "Gordon Graceffo",
+      "game": "KC@STL",
+      "ev": 91.6,
+      "angle": 36.0,
+      "distance": 327.0,
+      "result": "Flyout",
+      "inning": 11,
+      "timestamp": "2026-05-16T03:16:39.964Z",
+      "isHR": false,
+      "isNearHR": false
+    },
     {
       "batter": "Hyeseong Kim",
       "pitcher": "Jack Kochanowicz",
@@ -2335,7 +2452,7 @@
     }
   ],
   "totalHRs": 30,
-  "nearHRs": 38,
-  "hardHitAir": 93,
-  "totalAirBalls": 170
+  "nearHRs": 41,
+  "hardHitAir": 97,
+  "totalAirBalls": 179
 }
