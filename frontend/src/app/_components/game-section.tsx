@@ -47,10 +47,14 @@ export function GameSection({
   game,
   lookback,
   onSelectBatter,
+  favorites,
+  onToggleFavorite,
 }: {
   game: GameData;
   lookback: UILookback;
   onSelectBatter: (s: SelectedBatter) => void;
+  favorites?: Set<string>;
+  onToggleFavorite?: (name: string) => void;
 }) {
   const homeSide = game.team_pitch_mix?.home;
   const awaySide = game.team_pitch_mix?.away;
@@ -95,6 +99,8 @@ export function GameSection({
           batters={awayBatters}
           lookback={lookback}
           posted={awayPosted}
+          favorites={favorites}
+          onToggleFavorite={onToggleFavorite}
           onSelect={(row) =>
             onSelectBatter({
               player: row.p,
@@ -109,6 +115,8 @@ export function GameSection({
           batters={homeBatters}
           lookback={lookback}
           posted={homePosted}
+          favorites={favorites}
+          onToggleFavorite={onToggleFavorite}
           onSelect={(row) =>
             onSelectBatter({
               player: row.p,

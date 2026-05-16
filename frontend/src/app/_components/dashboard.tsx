@@ -361,6 +361,7 @@ export function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<string>(() => getHashParam("date", ""));
   const [selectedGames, setSelectedGames] = useState<Set<number>>(new Set()); // empty = all games
   const [selectedBatter, setSelectedBatter] = useState<SelectedBatter | null>(null);
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
   // Update URL hash when state changes
   function updateHash(page: string, date: string, lb: string) {
@@ -375,6 +376,19 @@ export function Dashboard() {
   const setLookback = (lb: UILookback) => {
     setLookbackRaw(lb);
     updateHash(activePage, selectedDate, lb);
+  };
+
+  const onToggleFavorite = (name: string) => {
+    setFavorites((prev) => {
+      const next = new Set(prev);
+      if (next.has(name)) {
+        next.delete(name);
+      } else {
+        next.add(name);
+        setActivePage("slips");
+      }
+      return next;
+    });
   };
 
   const loadDate = (dateStr: string) => {
@@ -563,6 +577,8 @@ export function Dashboard() {
                   game={game}
                   lookback={lookback}
                   onSelectBatter={setSelectedBatter}
+                  favorites={favorites}
+                  onToggleFavorite={onToggleFavorite}
                 />
               ))}
               {data.games.length === 0 && (
@@ -604,7 +620,7 @@ export function Dashboard() {
           )}
 
           {activePage === "slips" && (
-            <SlipGenerator games={data.games} lookback={lookback} />
+            <SlipGenerator games={data.games} lookback={lookback} favorites={favorites} onUnfavorite={(name) => setFavorites((prev) => { const n = new Set(prev); n.delete(name); return n; })} />
           )}
 
           {activePage === "results" && (
