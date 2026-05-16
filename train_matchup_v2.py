@@ -64,17 +64,31 @@ PARK_HR_FACTOR: dict[int, float] = {
 
 
 # ── Config ────────────────────────────────────────────────────────────────────
-YEAR_WEIGHTS = {2023: 0.5, 2024: 1.0, 2025: 1.5}
+YEAR_WEIGHTS = {2023: 0.5, 2024: 1.0, 2025: 1.5, 2026: 2.0}
 MIN_BATTER_BIP = 40
 MIN_PITCHER_BIP = 20
+MIN_BATTER_BIP_CURRENT = 15  # lower threshold for partial current season
 
 
 def load_year(year: int) -> pd.DataFrame:
     path = Path(f"cache/statcast_{year}.parquet")
-    if not path.exists():
-        raise SystemExit(f"Missing cache: {path}. Run backtest_hr_weights.py first.")
-    print(f"  [{year}] loading {path}")
-    return pd.read_parquet(path)
+    if path.exists():
+        print(f"  [{year}] loading {path}")
+        return pd.read_parquet(path)
+    if year == date.today().year:
+        # Download current-season data and cache it
+        from pybaseball import statcast
+        import pybaseball
+        pybaseball.cache.enable()
+        start = f"{year}-03-15"
+        end = date.today().isoformat()
+        print(f"  [{year}] fetching statcast {start} to {end}...")
+        df = statcast(start_dt=start, end_dt=end)
+        path.parent.mkdir(exist_ok=True)
+        df.to_parquet(path)
+        print(f"  [{year}] cached to {path}")
+        return df
+    raise SystemExit(f"Missing cache: {path}. Run backtest_hr_weights.py first.")
 
 
 def build_features(df: pd.DataFrame, year: int) -> pd.DataFrame:
@@ -123,7 +137,8 @@ def build_features(df: pd.DataFrame, year: int) -> pd.DataFrame:
         batter_side=("stand", "first"),   # L/R
         pitcher_side=("p_throws", "first"),
     ).reset_index()
-    per_game = per_game[per_game["cum_bip"] >= MIN_BATTER_BIP].copy()
+    bip_threshold = MIN_BATTER_BIP_CURRENT if year == date.today().year else MIN_BATTER_BIP
+    per_game = per_game[per_game["cum_bip"] >= bip_threshold].copy()
 
     # Batter features
     per_game["barrel_pct"] = per_game["cum_barrel"] / per_game["cum_bip"]
@@ -243,8 +258,10 @@ def train(all_data: pd.DataFrame) -> dict:
     for f, c in coefs.items():
         subweights[CATEGORY[f]][f] = abs(c) / cat_totals[CATEGORY[f]]
 
-    # Calibrate grade bands from 2025-only composite distribution
-    cal = all_data[all_data["year"] == 2025].copy()
+    # Calibrate grade bands from most recent year with enough data
+    cal_year = max(y for y in YEAR_WEIGHTS if len(all_data[all_data["year"] == y]) > 100)
+    cal = all_data[all_data["year"] == cal_year].copy()
+    print(f"  Calibrating grade bands from {cal_year} ({len(cal):,} rows)")
     Xcal = scaler.transform(cal[FEATURES].values)
     cal_scores = clf.decision_function(Xcal)
     # Normalize to [0, 1] using empirical min/max
@@ -294,7 +311,7 @@ def train(all_data: pd.DataFrame) -> dict:
 
 def main():
     frames = []
-    for year in (2023, 2024, 2025):
+    for year in sorted(YEAR_WEIGHTS.keys()):
         print(f"\n=== {year} ===")
         df = load_year(year)
         per_game = build_features(df, year)
