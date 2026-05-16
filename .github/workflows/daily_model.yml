@@ -57,15 +57,15 @@ jobs:
         run: python save_batted_balls.py || true
 
       - name: Run HR prop model (11 PM — next day)
-        if: github.event.schedule == '0 3 * * *' || github.event_name == 'workflow_dispatch'
+        if: github.event.schedule == '0 3 * * *'
         run: |
           TOMORROW=$(date -u -d '+1 day' +%Y-%m-%d 2>/dev/null || date -u -v+1d +%Y-%m-%d)
           python main.py --date "$TOMORROW" --fast
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
 
-      - name: Run HR prop model (9 AM — today update)
-        if: github.event.schedule == '0 14 * * *'
+      - name: Run HR prop model (manual or 8 AM — today)
+        if: github.event.schedule == '0 12 * * *' || github.event_name == 'workflow_dispatch'
         run: python main.py --fast
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
