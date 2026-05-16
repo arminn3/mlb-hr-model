@@ -562,6 +562,8 @@ export function Dashboard() {
               battingOrder={selectedBatter.battingOrder}
               teamAbbr={selectedBatter.teamAbbr}
               onBack={() => setSelectedBatter(null)}
+              isFavorited={favorites.has(selectedBatter.player.name)}
+              onToggleFavorite={onToggleFavorite}
             />
           ) : activePage === "slate" && (
             <>
