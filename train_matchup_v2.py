@@ -67,7 +67,6 @@ PARK_HR_FACTOR: dict[int, float] = {
 YEAR_WEIGHTS = {2023: 0.5, 2024: 1.0, 2025: 1.5, 2026: 2.0}
 MIN_BATTER_BIP = 40
 MIN_PITCHER_BIP = 20
-MIN_BATTER_BIP_CURRENT = 15  # lower threshold for partial current season
 
 
 def load_year(year: int) -> pd.DataFrame:
@@ -137,8 +136,7 @@ def build_features(df: pd.DataFrame, year: int) -> pd.DataFrame:
         batter_side=("stand", "first"),   # L/R
         pitcher_side=("p_throws", "first"),
     ).reset_index()
-    bip_threshold = MIN_BATTER_BIP_CURRENT if year == date.today().year else MIN_BATTER_BIP
-    per_game = per_game[per_game["cum_bip"] >= bip_threshold].copy()
+    per_game = per_game[per_game["cum_bip"] >= MIN_BATTER_BIP].copy()
 
     # Batter features
     per_game["barrel_pct"] = per_game["cum_barrel"] / per_game["cum_bip"]
