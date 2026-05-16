@@ -454,7 +454,7 @@ def run_model(game_date: date = None, fast: bool = False):
 
         # Season-long batter profile (ALL BIP, not just L5)
         # Used for the Matchup Analysis page (HRP-style)
-        season_profile = {"barrel": 0, "ev": 0, "fb": 0, "hard_hit": 0, "bip_count": 0, "hrs": 0, "iso": 0, "pull_barrel": 0, "pull_air": 0}
+        season_profile = {"barrel": 0, "ev": 0, "fb": 0, "hard_hit": 0, "bip_count": 0, "hrs": 0, "iso": 0, "pull_barrel": 0, "pull_air": 0, "xwoba": 0.0, "sweet_spot": 0.0}
         all_bip_frames = []
         if not batter_df.empty:
             hand_bip = batter_df[(batter_df["p_throws"] == pitcher_hand) & (batter_df["launch_speed"].notna()) & (batter_df["events"].notna())]
@@ -474,6 +474,13 @@ def run_model(game_date: date = None, fast: bool = False):
             if "launch_angle" in all_bip.columns:
                 season_profile["fb"] = round(float(((all_bip["launch_angle"] >= 25) & (all_bip["launch_angle"] <= 50)).sum() / n * 100), 1)
             season_profile["hard_hit"] = round(float((all_bip["launch_speed"] >= 95).sum() / n * 100), 1)
+            if "launch_angle" in all_bip.columns:
+                sweet_mask = (all_bip["launch_angle"] >= 8) & (all_bip["launch_angle"] <= 32)
+                season_profile["sweet_spot"] = round(float(sweet_mask.sum() / n * 100), 1)
+            if "estimated_woba_using_speedangle" in all_bip.columns:
+                xw_vals = all_bip["estimated_woba_using_speedangle"].dropna()
+                if len(xw_vals) > 0:
+                    season_profile["xwoba"] = round(float(xw_vals.mean()), 3)
             if {"hc_x", "hc_y", "stand", "launch_speed_angle", "launch_angle"}.issubset(all_bip.columns):
                 sub = all_bip.dropna(subset=["hc_x", "hc_y"])
                 if len(sub) > 0:
@@ -544,6 +551,7 @@ def run_model(game_date: date = None, fast: bool = False):
             "batter_side": entry["batter_side"],
             "pitch_types": l5.get("pitch_types_used", []),
             "pitch_detail": l5.get("pitch_detail", {}),
+            "matchup_swstr": round(l5.get("matchup_swstr", 0.0), 1),
             "pitcher_stats": {
                 "fb_rate": round(l5.get("pitcher_fb_rate", 0) * 100, 1),
                 "hr_fb_rate": round(l5.get("pitcher_hr_fb_rate", 0) * 100, 1),

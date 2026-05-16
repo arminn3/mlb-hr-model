@@ -47,6 +47,7 @@ export interface PitchDetailEntry {
   avg_exit_velo: number;
   avg_launch_angle?: number | null;
   count?: number;
+  whiff_pct?: number;
 }
 
 export interface PitcherInfo {
@@ -133,7 +134,10 @@ export interface PlayerData {
     iso: number;
     pull_barrel?: number;
     pull_air?: number;
+    xwoba?: number;
+    sweet_spot?: number;
   };
+  matchup_swstr?: number;
   bvp_stats?: {
     career: {
       abs: number;

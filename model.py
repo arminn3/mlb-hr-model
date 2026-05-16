@@ -325,6 +325,7 @@ def score_batter_vs_pitcher(
     # How does this batter's ISO/SLG/HR look against the specific pitch types
     # this pitcher throws? Weighted by pitch mix.
     matchup_score = 0.5  # neutral default
+    matchup_swstr = 0.0  # weighted batter whiff% vs pitcher's mix (display only)
     if season_df is not None and not season_df.empty and pitch_mix:
         from metrics import calc_pitch_type_stats
         season_vs_hand = season_df[season_df["p_throws"] == pitcher_hand] if "p_throws" in season_df.columns else season_df
@@ -354,6 +355,7 @@ def score_batter_vs_pitcher(
                 weighted_slg /= total_weight
                 weighted_hr_rate /= total_weight
                 weighted_whiff /= total_weight
+                matchup_swstr = round(float(weighted_whiff), 1)
 
                 # Normalize each to 0-1
                 iso_norm = float(np.clip((weighted_iso - 0.05) / (0.30 - 0.05), 0, 1))
@@ -371,6 +373,7 @@ def score_batter_vs_pitcher(
                 )
 
     result["matchup_score"] = matchup_score
+    result["matchup_swstr"] = matchup_swstr
 
     # ── Step 7c: Composite ───────────────────────────────────────────────────
     composite = (
@@ -538,6 +541,27 @@ def score_batter_vs_pitcher(
                 pitch_abs[pt] = pt_list
     result["pitch_abs"] = pitch_abs
 
+    # Per-pitch whiff% from all pitches (not just BIP): use batter_df then season_df as fallback
+    _whiff_by_type: dict[str, float] = {}
+    _swing_descs = {"swinging_strike", "swinging_strike_blocked", "foul", "foul_tip",
+                    "hit_into_play", "hit_into_play_score", "hit_into_play_no_out"}
+    _whiff_descs = {"swinging_strike", "swinging_strike_blocked"}
+    for _src_df in [batter_df, season_df]:
+        if _src_df is None or _src_df.empty: continue
+        if not {"p_throws", "pitch_type", "description"}.issubset(_src_df.columns): continue
+        _hdf = _src_df[_src_df["p_throws"] == pitcher_hand]
+        if _hdf.empty: continue
+        for _pt in pitch_mix:
+            if _pt in _whiff_by_type: continue
+            _pt_codes = {_pt}
+            if _pt == "ST": _pt_codes.add("SL")
+            if _pt == "SL": _pt_codes.add("ST")
+            _pt_rows = _hdf[_hdf["pitch_type"].isin(_pt_codes)]
+            _n_swings = int(_pt_rows["description"].isin(_swing_descs).sum())
+            _n_whiffs = int(_pt_rows["description"].isin(_whiff_descs).sum())
+            if _n_swings > 0:
+                _whiff_by_type[_pt] = round(float(_n_whiffs / _n_swings * 100), 1)
+
     # Per-pitch aggregate stats — sourced from pitch_detail_metrics which is
     # computed from the same per-type DataFrames used for pitch_abs (not from
     # the last-N total BIP pool, which could miss pitch types entirely).
@@ -556,6 +580,7 @@ def score_batter_vs_pitcher(
             "avg_exit_velo": round(m.get("avg_exit_velo", 0), 1),
             "avg_launch_angle": round(m.get("avg_launch_angle", 0), 1),
             "count": n_pt,
+            "whiff_pct": _whiff_by_type.get(pt, 0.0),
         }
     result["pitch_detail"] = pitch_detail
 

@@ -5,7 +5,7 @@ import type { PlayerData, PitchDetailEntry } from "./types";
 import { scoreFor, type UILookback } from "./score-utils";
 import { teamLogoUrl, teamName } from "./game-header";
 
-type SortCol = "score" | "ev" | "barrel" | "hh" | "gb" | "ld" | "fb" | "hrfb";
+type SortCol = "score" | "pitch" | "ev" | "barrel" | "hh" | "fb" | "hrfb" | "xwoba" | "sweet" | "swstr" | "pullbrl" | "bip" | "gb" | "ld";
 type SortDir = "desc" | "asc";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -22,9 +22,9 @@ function statColor(value: number, lo: number, hi: number): string {
   return "text-muted";
 }
 
-function matchupPill(pitchDetail: Record<string, PitchDetailEntry>): { label: string; style: React.CSSProperties } {
+function matchupScore(pitchDetail: Record<string, PitchDetailEntry>): number {
   const entries = Object.entries(pitchDetail).filter(([, d]) => (d.usage_pct ?? 0) >= 12);
-  if (!entries.length) return { label: "—", style: {} };
+  if (!entries.length) return 0.5;
   let totalUsage = 0, weighted = 0;
   for (const [, d] of entries) {
     const u = (d.usage_pct ?? 0) / 100;
@@ -33,7 +33,10 @@ function matchupPill(pitchDetail: Record<string, PitchDetailEntry>): { label: st
     weighted += u * (0.65 * Math.min(b / 25, 1) + 0.35 * Math.max(0, Math.min((e - 85) / 20, 1)));
     totalUsage += u;
   }
-  const score = totalUsage > 0 ? weighted / totalUsage : 0.5;
+  return totalUsage > 0 ? weighted / totalUsage : 0.5;
+}
+
+function matchupPill(score: number): { label: string; style: React.CSSProperties } {
   if (score >= 0.45) return {
     label: "GREAT",
     style: { background: "rgba(74,222,128,0.12)", border: "1px solid rgba(74,222,128,0.3)", color: "var(--accent-green)" },
@@ -71,9 +74,15 @@ export function BatterRow({
   const hrCount   = recentAbs.filter((ab) => ab.result === "home_run").length;
   const hrFbPct   = flyBalls.length > 0 ? (hrCount / flyBalls.length) * 100 : null;
 
-  const pill = matchupPill(p.pitch_detail || {});
+  const mScore = matchupScore(p.pitch_detail || {});
+  const pill = matchupPill(mScore);
   const isLowData = scores.recent_abs.length <= 2;
   const hasQualityWarn = !isLowData && scores.data_quality !== "OK";
+
+  const xwoba = p.season_profile?.xwoba ?? null;
+  const sweet = p.season_profile?.sweet_spot ?? null;
+  const swstr = p.matchup_swstr ?? null;
+  const pullBrl = p.season_profile?.pull_barrel ?? null;
 
   return (
     <tr
@@ -156,7 +165,7 @@ export function BatterRow({
         </span>
       </td>
 
-      {/* Stats */}
+      {/* Core stats */}
       <td className="py-2.5 pr-3 w-14 text-center">
         <span className={`text-xs font-mono ${statColor(scores.exit_velo, 88, 93)}`}>{scores.exit_velo}</span>
       </td>
@@ -166,13 +175,6 @@ export function BatterRow({
       <td className="py-2.5 pr-3 w-14 text-center">
         <span className={`text-xs font-mono ${statColor(scores.hard_hit_pct, 35, 50)}`}>{scores.hard_hit_pct}%</span>
       </td>
-      {/* Contact breakdown: GB / LD / FB */}
-      <td className="py-2.5 pr-3 w-14 text-center">
-        <span className="text-xs font-mono text-muted">{scores.gb_pct ?? "—"}%</span>
-      </td>
-      <td className="py-2.5 pr-3 w-14 text-center">
-        <span className="text-xs font-mono text-muted">{scores.ld_pct ?? "—"}%</span>
-      </td>
       <td className="py-2.5 pr-3 w-14 text-center">
         <span className={`text-xs font-mono ${statColor(scores.fb_pct, 25, 40)}`}>{scores.fb_pct}%</span>
       </td>
@@ -180,6 +182,46 @@ export function BatterRow({
         <span className={`text-xs font-mono ${hrFbPct == null ? "text-muted" : statColor(hrFbPct, 10, 18)}`}>
           {hrFbPct == null ? "—" : `${hrFbPct.toFixed(0)}%`}
         </span>
+      </td>
+
+      {/* Advanced / display-only columns */}
+      <td className="py-2.5 pr-3 w-16 text-center">
+        <span className={`text-xs font-mono ${xwoba == null ? "text-muted" : statColor(xwoba, 0.32, 0.40)}`}>
+          {xwoba == null || xwoba === 0 ? "—" : xwoba.toFixed(3)}
+        </span>
+      </td>
+      <td className="py-2.5 pr-3 w-16 text-center">
+        <span className={`text-xs font-mono ${sweet == null ? "text-muted" : statColor(sweet, 35, 50)}`}>
+          {sweet == null || sweet === 0 ? "—" : `${sweet.toFixed(1)}%`}
+        </span>
+      </td>
+      <td className="py-2.5 pr-3 w-16 text-center">
+        <span className={`text-xs font-mono ${swstr == null || swstr === 0 ? "text-muted" : statColor(100 - swstr, 60, 75)}`}>
+          {swstr == null || swstr === 0 ? "—" : `${swstr.toFixed(1)}%`}
+        </span>
+      </td>
+      <td className="py-2.5 pr-3 w-16 text-center">
+        <span className={`text-xs font-mono ${pullBrl == null ? "text-muted" : statColor(pullBrl, 4, 8)}`}>
+          {pullBrl == null || pullBrl === 0 ? "—" : `${pullBrl.toFixed(1)}%`}
+        </span>
+      </td>
+      <td className="py-2.5 pr-3 w-14 text-center">
+        {(() => {
+          const bip = p.season_profile?.bip_count ?? 0;
+          return (
+            <span className={`text-xs font-mono ${bip >= 50 ? "text-foreground" : bip >= 20 ? "text-accent-yellow" : "text-muted"}`}>
+              {bip > 0 ? bip : "—"}
+            </span>
+          );
+        })()}
+      </td>
+
+      {/* Contact shape (less important — at the end) */}
+      <td className="py-2.5 pr-3 w-14 text-center">
+        <span className="text-xs font-mono text-muted">{scores.gb_pct ?? "—"}%</span>
+      </td>
+      <td className="py-2.5 pr-3 w-14 text-center">
+        <span className="text-xs font-mono text-muted">{scores.ld_pct ?? "—"}%</span>
       </td>
 
       {/* Chevron */}
@@ -253,15 +295,21 @@ export function BatterTable({
     const fbs = recentAbs.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
     const hrs = recentAbs.filter((ab) => ab.result === "home_run").length;
     switch (sortCol) {
-      case "score":  return sc.composite ?? 0;
-      case "ev":     return sc.exit_velo ?? 0;
-      case "barrel": return sc.barrel_pct ?? 0;
-      case "hh":     return sc.hard_hit_pct ?? 0;
-      case "gb":     return sc.gb_pct ?? 0;
-      case "ld":     return sc.ld_pct ?? 0;
-      case "fb":     return sc.fb_pct ?? 0;
-      case "hrfb":   return fbs.length > 0 ? (hrs / fbs.length) * 100 : -1;
-      default:       return 0;
+      case "score":   return sc.composite ?? 0;
+      case "pitch":   return matchupScore(row.p.pitch_detail || {});
+      case "ev":      return sc.exit_velo ?? 0;
+      case "barrel":  return sc.barrel_pct ?? 0;
+      case "hh":      return sc.hard_hit_pct ?? 0;
+      case "fb":      return sc.fb_pct ?? 0;
+      case "hrfb":    return fbs.length > 0 ? (hrs / fbs.length) * 100 : -1;
+      case "xwoba":   return row.p.season_profile?.xwoba ?? -1;
+      case "sweet":   return row.p.season_profile?.sweet_spot ?? -1;
+      case "swstr":   return row.p.matchup_swstr != null ? -(row.p.matchup_swstr) : 1;
+      case "pullbrl": return row.p.season_profile?.pull_barrel ?? -1;
+      case "bip":     return row.p.season_profile?.bip_count ?? -1;
+      case "gb":      return sc.gb_pct ?? 0;
+      case "ld":      return sc.ld_pct ?? 0;
+      default:        return 0;
     }
   }
 
@@ -270,8 +318,8 @@ export function BatterTable({
     return sortDir === "desc" ? -diff : diff;
   });
 
-  const thCls = (col: SortCol, extra: string) =>
-    `pr-3 w-14 text-center ${extra}`;
+  const thCls = (col: SortCol) => `pr-3 w-14 text-center`;
+  const thWide = (col: SortCol) => `pr-3 w-16 text-center`;
 
   return (
     <div
@@ -301,15 +349,20 @@ export function BatterTable({
             <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
               <th className="py-2 pl-4 pr-2 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-center w-8">#</th>
               <th className="py-2 pr-4 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-left">Player</th>
-              <SortTh label="Score"  col="score"  active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-24 text-left" />
-              <th className="py-2 pr-4 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-left w-20">Pitch</th>
-              <SortTh label="EV"     col="ev"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("ev", "")} />
-              <SortTh label="Brl%"   col="barrel" active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("barrel", "")} />
-              <SortTh label="HH%"    col="hh"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("hh", "")} />
-              <SortTh label="GB%"    col="gb"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("gb", "")} />
-              <SortTh label="LD%"    col="ld"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("ld", "")} />
-              <SortTh label="FB%"    col="fb"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("fb", "")} />
-              <SortTh label="HR/FB"  col="hrfb"   active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-16 text-center" />
+              <SortTh label="Score"    col="score"   active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-24 text-left" />
+              <SortTh label="Pitch"    col="pitch"   active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-20 text-left" />
+              <SortTh label="EV"       col="ev"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("ev")} />
+              <SortTh label="Brl%"     col="barrel"  active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("barrel")} />
+              <SortTh label="HH%"      col="hh"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("hh")} />
+              <SortTh label="FB%"      col="fb"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("fb")} />
+              <SortTh label="HR/FB"    col="hrfb"    active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-16 text-center" />
+              <SortTh label="xwOBA"    col="xwoba"   active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("xwoba")} />
+              <SortTh label="Sweet%"   col="sweet"   active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("sweet")} />
+              <SortTh label="SwStr%"   col="swstr"   active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("swstr")} />
+              <SortTh label="PullBrl%" col="pullbrl" active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("pullbrl")} />
+              <SortTh label="BIP"      col="bip"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("bip")} />
+              <SortTh label="GB%"      col="gb"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("gb")} />
+              <SortTh label="LD%"      col="ld"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("ld")} />
               <th className="w-6" />
             </tr>
           </thead>

@@ -609,8 +609,8 @@ export function BatterDrawer({
           </div>
 
           {/* Zone Overlap — below the table so it doesn't crowd primary info */}
-          {player.batter_zones && player.pitcher_zone_freq && (
-            <ZoneGrid batter_zones={player.batter_zones} pitcher_zone_freq={player.pitcher_zone_freq} />
+          {player.batter_zones && (
+            <ZoneGrid batter_zones={player.batter_zones} pitcher_zone_freq={player.pitcher_zone_freq ?? []} />
           )}
         </div>
       </div>
