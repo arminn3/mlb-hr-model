@@ -295,6 +295,7 @@ export interface GameData {
   away_team: string;
   home_team: string;
   game_time?: string;
+  game_time_sort?: number;
   game_status?: string;
   game_status_reason?: string;
   away_pitcher: PitcherInfo;
