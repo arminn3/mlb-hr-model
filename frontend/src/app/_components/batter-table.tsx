@@ -199,32 +199,10 @@ export function BatterRow({
           {sweet == null || sweet === 0 ? "—" : `${sweet.toFixed(1)}%`}
         </span>
       </td>
-      <td className="py-2.5 pr-3 w-20 text-center">
-        {(() => {
-          const pitches = Object.entries(p.pitch_detail || {})
-            .filter(([, d]) => (d.usage_pct ?? 0) >= 10)
-            .sort(([, a], [, b]) => (b.usage_pct ?? 0) - (a.usage_pct ?? 0))
-            .slice(0, 3);
-          if (pitches.length === 0) {
-            return <span className="text-xs font-mono text-muted">—</span>;
-          }
-          return (
-            <div className="flex flex-col gap-0.5 items-center">
-              {pitches.map(([pt, d]) => {
-                const w = d.whiff_pct ?? null;
-                const color = w == null ? "text-muted" : w >= 35 ? "text-accent-red/80" : w >= 22 ? "text-foreground" : "text-accent-green";
-                return (
-                  <div key={pt} className="flex items-center gap-1">
-                    <span className="text-[9px] font-bold text-muted/60 w-5 text-right">{pt}</span>
-                    <span className={`text-[10px] font-mono ${color}`}>
-                      {w != null ? `${w.toFixed(0)}%` : "—"}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })()}
+      <td className="py-2.5 pr-3 w-16 text-center">
+        <span className={`text-xs font-mono ${swstr == null || swstr === 0 ? "text-muted" : statColor(100 - swstr, 60, 75)}`}>
+          {swstr == null || swstr === 0 ? "—" : `${swstr.toFixed(1)}%`}
+        </span>
       </td>
       <td className="py-2.5 pr-3 w-16 text-center">
         <span className={`text-xs font-mono ${pullBrl == null ? "text-muted" : statColor(pullBrl, 4, 8)}`}>
@@ -405,7 +383,7 @@ export function BatterTable({
               <SortTh label="HR/FB"    col="hrfb"    active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-16 text-center" />
               <SortTh label="xwOBA"    col="xwoba"   active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("xwoba")} />
               <SortTh label="Sweet%"   col="sweet"   active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("sweet")} />
-              <SortTh label="SwStr% / Pitch" col="swstr" active={sortCol} dir={sortDir} onClick={handleSort} className="pr-3 w-20 text-center" />
+              <SortTh label="SwStr%"   col="swstr"   active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("swstr")} />
               <SortTh label="PullBrl%" col="pullbrl" active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("pullbrl")} />
               <SortTh label="BIP"      col="bip"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("bip")} />
               <SortTh label="GB%"      col="gb"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("gb")} />
