@@ -64,7 +64,7 @@ jobs:
       - name: Run HR prop model (11 PM — next day)
         if: github.event.schedule == '0 3 * * *'
         run: |
-          TOMORROW=$(date -u -d '+1 day' +%Y-%m-%d 2>/dev/null || date -u -v+1d +%Y-%m-%d)
+          TOMORROW=$(TZ='America/New_York' date -d '+1 day' +%Y-%m-%d)
           python main.py --date "$TOMORROW" --fast
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
