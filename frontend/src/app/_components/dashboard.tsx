@@ -381,12 +381,8 @@ export function Dashboard() {
   const onToggleFavorite = (name: string) => {
     setFavorites((prev) => {
       const next = new Set(prev);
-      if (next.has(name)) {
-        next.delete(name);
-      } else {
-        next.add(name);
-        setActivePage("slips");
-      }
+      if (next.has(name)) next.delete(name);
+      else next.add(name);
       return next;
     });
   };
