@@ -251,121 +251,69 @@ function buildOptimalSlips(
 ): { slips: Slip[]; leftovers: SlipPlayer[] } {
   if (selected.length < legCount) return { slips: [], leftovers: [...selected] };
 
-  // Group players by game
-  const byGame: Record<number, SlipPlayer[]> = {};
-  for (const p of selected) {
-    if (!byGame[p.gamePk]) byGame[p.gamePk] = [];
-    byGame[p.gamePk].push(p);
-  }
-  for (const gk of Object.keys(byGame)) {
-    byGame[Number(gk)].sort((a, b) => b.composite - a.composite);
-  }
-  const gameKeys = Object.keys(byGame).map(Number);
-
-  // Sort players based on sort mode
-  const sorted = [...selected];
-  if (sortMode === "chalk") {
-    sorted.sort((a, b) => b.composite - a.composite);
-  } else if (sortMode === "longshot") {
-    sorted.sort((a, b) => a.composite - b.composite);
-  } else {
-    sorted.sort((a, b) => b.composite - a.composite);
-  }
-
-  // Greedy: assign players to slips, each player used exactly once
-  // ALWAYS prefer different games — only put same-game players together as last resort
-  const slips: Slip[] = [];
-  const used = new Set<string>();
-
-  // Pass 1: Build slips with players from DIFFERENT games
-  const diffGameSlips: Slip[] = [];
-  const pass1Used = new Set<string>();
-
+  // Build the ordering: diverse = round-robin by game, others = by composite
+  let ordered: SlipPlayer[];
   if (sortMode === "diverse") {
-    // Round-robin from each game to maximize spread
-    const queues = gameKeys.map((gk) => [...byGame[gk]]);
-    const interleaved: SlipPlayer[] = [];
-    let idx = 0;
-    while (interleaved.length < selected.length) {
-      const q = queues[idx % queues.length];
-      if (q.length > 0) interleaved.push(q.shift()!);
-      idx++;
+    const byGame: Record<number, SlipPlayer[]> = {};
+    for (const p of selected) {
+      if (!byGame[p.gamePk]) byGame[p.gamePk] = [];
+      byGame[p.gamePk].push(p);
+    }
+    for (const gk of Object.keys(byGame)) byGame[Number(gk)].sort((a, b) => b.composite - a.composite);
+    const queues = Object.values(byGame);
+    ordered = [];
+    let qi = 0;
+    while (ordered.length < selected.length) {
+      const q = queues[qi % queues.length];
+      if (q.length > 0) ordered.push(q.shift()!);
+      qi++;
       if (queues.every((q) => q.length === 0)) break;
     }
-
-    for (let i = 0; i < interleaved.length; i++) {
-      if (pass1Used.has(interleaved[i].name)) continue;
-      const group: SlipPlayer[] = [interleaved[i]];
-      pass1Used.add(interleaved[i].name);
-      const groupGames = new Set([interleaved[i].gamePk]);
-
-      for (let j = 0; j < interleaved.length && group.length < legCount; j++) {
-        if (pass1Used.has(interleaved[j].name)) continue;
-        if (!groupGames.has(interleaved[j].gamePk)) {
-          group.push(interleaved[j]);
-          pass1Used.add(interleaved[j].name);
-          groupGames.add(interleaved[j].gamePk);
-        }
-      }
-      if (group.length === legCount) {
-        diffGameSlips.push({
-          players: group,
-          avgComposite: group.reduce((s, p) => s + p.composite, 0) / legCount,
-          gameCount: new Set(group.map((p) => p.gamePk)).size,
-        });
-      }
-    }
   } else {
-    for (let i = 0; i < sorted.length; i++) {
-      if (pass1Used.has(sorted[i].name)) continue;
-      const group: SlipPlayer[] = [sorted[i]];
-      pass1Used.add(sorted[i].name);
-      const groupGames = new Set([sorted[i].gamePk]);
+    ordered = [...selected].sort((a, b) =>
+      sortMode === "longshot" ? a.composite - b.composite : b.composite - a.composite
+    );
+  }
 
-      // First try: different games only
-      for (let j = i + 1; j < sorted.length && group.length < legCount; j++) {
-        if (pass1Used.has(sorted[j].name)) continue;
-        if (!groupGames.has(sorted[j].gamePk)) {
-          group.push(sorted[j]);
-          pass1Used.add(sorted[j].name);
-          groupGames.add(sorted[j].gamePk);
-        }
-      }
-      if (group.length === legCount) {
-        diffGameSlips.push({
-          players: group,
-          avgComposite: group.reduce((s, p) => s + p.composite, 0) / legCount,
-          gameCount: new Set(group.map((p) => p.gamePk)).size,
-        });
-      } else {
-        // Undo — these players go to pass 2
-        for (const p of group) pass1Used.delete(p.name);
+  // Single greedy pass — prefer diff-game partners, fall back to same-game if needed.
+  // This guarantees 0 leftovers whenever selected.length is divisible by legCount.
+  const available = new Set(ordered.map((p) => p.name));
+  const slips: Slip[] = [];
+
+  for (const starter of ordered) {
+    if (!available.has(starter.name)) continue;
+    const group: SlipPlayer[] = [starter];
+    available.delete(starter.name);
+    const groupGames = new Set([starter.gamePk]);
+
+    // First pass: fill with diff-game players
+    for (const p of ordered) {
+      if (group.length === legCount) break;
+      if (!available.has(p.name)) continue;
+      if (!groupGames.has(p.gamePk)) {
+        group.push(p);
+        available.delete(p.name);
+        groupGames.add(p.gamePk);
       }
     }
-  }
+    // Fallback: fill remaining slots with any available player (same game ok)
+    for (const p of ordered) {
+      if (group.length === legCount) break;
+      if (!available.has(p.name)) continue;
+      group.push(p);
+      available.delete(p.name);
+    }
 
-  // Track who got used in diff-game slips
-  for (const slip of diffGameSlips) {
-    for (const p of slip.players) used.add(p.name);
-    slips.push(slip);
-  }
-
-  // Pass 2: Remaining players get grouped together (may be same game)
-  const remaining = sorted.filter((p) => !used.has(p.name));
-  const leftovers: SlipPlayer[] = [];
-  for (let i = 0; i < remaining.length; i += legCount) {
-    const group = remaining.slice(i, i + legCount);
     if (group.length === legCount) {
       slips.push({
         players: group,
         avgComposite: group.reduce((s, p) => s + p.composite, 0) / legCount,
         gameCount: new Set(group.map((p) => p.gamePk)).size,
       });
-    } else {
-      leftovers.push(...group);
     }
   }
 
+  const leftovers = ordered.filter((p) => available.has(p.name));
   return { slips, leftovers };
 }
 
@@ -773,13 +721,15 @@ export function SlipGenerator({
                   {optimalLeftovers.length} player{optimalLeftovers.length === 1 ? "" : "s"} left out
                 </div>
                 <div className="text-[13px] text-foreground">
-                  {selectedNames.size} selected doesn&apos;t divide evenly into {legCount === 2 ? "duos" : "trios"}. Not included:{" "}
+                  {selectedNames.size} selected — couldn&apos;t place everyone into a full {legCount === 2 ? "duo" : "trio"}. Not included:{" "}
                   <span className="font-semibold">
                     {optimalLeftovers.map((p) => p.name).join(", ")}
                   </span>
                 </div>
                 <div className="text-[11px] text-muted mt-1.5">
-                  Add {legCount - optimalLeftovers.length} more or remove {optimalLeftovers.length} to use everyone.
+                  {selectedNames.size % legCount === 0
+                    ? `Remove ${optimalLeftovers.length} to reassign, or add ${legCount - optimalLeftovers.length} more.`
+                    : `Add ${legCount - (optimalLeftovers.length % legCount)} more or remove ${optimalLeftovers.length % legCount} to use everyone.`}
                 </div>
               </div>
             ) : selectedNames.size > 0 && selectedNames.size < legCount ? (
