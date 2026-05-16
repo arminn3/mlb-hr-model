@@ -50,12 +50,16 @@ jobs:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
 
       - name: Run ML trainer
-        if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
+        if: github.event.schedule == '0 3 * * *' || github.event_name == 'workflow_dispatch'
         run: python ml_trainer.py || true
 
       - name: Run projection trainer
-        if: github.event.schedule == '0 11 * * *' || github.event_name == 'workflow_dispatch'
+        if: github.event.schedule == '0 3 * * *' || github.event_name == 'workflow_dispatch'
         run: python projection_trainer.py || true
+
+      - name: Run breakout/regression research
+        if: github.event.schedule == '0 3 * * *' || github.event_name == 'workflow_dispatch'
+        run: python bat_tracking_research.py || true
 
       - name: Save batted balls
         if: github.event.schedule == '0 11 * * *' || github.event.schedule == '0 2 * * *' || github.event.schedule == '0 3 * * *' || github.event.schedule == '0 4 * * *' || github.event_name == 'workflow_dispatch'
@@ -84,6 +88,7 @@ jobs:
         run: |
           mkdir -p frontend/public/data/results
           cp results/*.json frontend/public/data/results/ 2>/dev/null || true
+          [ -f "bat_tracking_research.json" ] && cp bat_tracking_research.json frontend/public/data/ || true
 
       - name: Commit and push results
         run: |
@@ -95,6 +100,7 @@ jobs:
           [ -f "frontend/public/data/latest.json" ] && cp "frontend/public/data/latest.json" /tmp/hrprop-stash/frontend-data/ || true
           [ -f "frontend/public/data/${TODAY}.json" ] && cp "frontend/public/data/${TODAY}.json" /tmp/hrprop-stash/frontend-data/ || true
           [ -f "frontend/public/data/index.json" ] && cp "frontend/public/data/index.json" /tmp/hrprop-stash/frontend-data/ || true
+          [ -f "frontend/public/data/bat_tracking_research.json" ] && cp "frontend/public/data/bat_tracking_research.json" /tmp/hrprop-stash/frontend-data/ || true
           cp -r results/. /tmp/hrprop-stash/results/ 2>/dev/null || true
           mkdir -p /tmp/hrprop-stash/frontend-data/results
           cp -r frontend/public/data/results/. /tmp/hrprop-stash/frontend-data/results/ 2>/dev/null || true
@@ -106,6 +112,7 @@ jobs:
             [ -f "/tmp/hrprop-stash/frontend-data/latest.json" ] && cp "/tmp/hrprop-stash/frontend-data/latest.json" frontend/public/data/ || true
             [ -f "/tmp/hrprop-stash/frontend-data/${TODAY}.json" ] && cp "/tmp/hrprop-stash/frontend-data/${TODAY}.json" frontend/public/data/ || true
             [ -f "/tmp/hrprop-stash/frontend-data/index.json" ] && cp "/tmp/hrprop-stash/frontend-data/index.json" frontend/public/data/ || true
+            [ -f "/tmp/hrprop-stash/frontend-data/bat_tracking_research.json" ] && cp "/tmp/hrprop-stash/frontend-data/bat_tracking_research.json" frontend/public/data/ || true
             cp -r /tmp/hrprop-stash/frontend-data/results/. frontend/public/data/results/ 2>/dev/null || true
             cp -r /tmp/hrprop-stash/results/. results/ 2>/dev/null || true
             git add frontend/public/data/ results/
