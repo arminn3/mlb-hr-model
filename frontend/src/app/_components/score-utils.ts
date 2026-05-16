@@ -42,6 +42,11 @@ function computeSeasonScoreSet(p: PlayerData): ScoreSet | null {
     hard_hit_pct:  sp.hard_hit,
     data_quality:  "SEASON",
     recent_abs:    l10?.recent_abs ?? [],
+    xwoba:         sp.xwoba,
+    sweet_spot:    sp.sweet_spot,
+    pull_brl:      sp.pull_barrel,
+    swstr:         undefined,
+    bip:           sp.bip_count,
   };
 }
 

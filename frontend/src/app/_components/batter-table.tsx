@@ -83,10 +83,10 @@ export function BatterRow({
   const isLowData = scores.recent_abs.length <= 2;
   const hasQualityWarn = !isLowData && scores.data_quality !== "OK";
 
-  const xwoba = p.season_profile?.xwoba ?? null;
-  const sweet = p.season_profile?.sweet_spot ?? null;
-  const swstr = p.matchup_swstr ?? null;
-  const pullBrl = p.season_profile?.pull_barrel ?? null;
+  const xwoba = scores.xwoba ?? null;
+  const sweet = scores.sweet_spot ?? null;
+  const swstr = scores.swstr ?? p.matchup_swstr ?? null;
+  const pullBrl = scores.pull_brl ?? null;
 
   return (
     <tr
@@ -211,7 +211,7 @@ export function BatterRow({
       </td>
       <td className="py-2.5 pr-3 w-14 text-center">
         {(() => {
-          const bip = p.season_profile?.bip_count ?? 0;
+          const bip = scores.bip ?? p.season_profile?.bip_count ?? 0;
           return (
             <span className={`text-xs font-mono ${bip >= 50 ? "text-foreground" : bip >= 20 ? "text-accent-yellow" : "text-muted"}`}>
               {bip > 0 ? bip : "—"}
@@ -325,11 +325,11 @@ export function BatterTable({
       case "hh":      return sc.hard_hit_pct ?? 0;
       case "fb":      return sc.fb_pct ?? 0;
       case "hrfb":    return fbs.length > 0 ? (hrs / fbs.length) * 100 : -1;
-      case "xwoba":   return row.p.season_profile?.xwoba ?? -1;
-      case "sweet":   return row.p.season_profile?.sweet_spot ?? -1;
-      case "swstr":   return row.p.matchup_swstr != null ? -(row.p.matchup_swstr) : 1;
-      case "pullbrl": return row.p.season_profile?.pull_barrel ?? -1;
-      case "bip":     return row.p.season_profile?.bip_count ?? -1;
+      case "xwoba":   return sc.xwoba ?? -1;
+      case "sweet":   return sc.sweet_spot ?? -1;
+      case "swstr":   return sc.swstr != null ? -(sc.swstr) : (row.p.matchup_swstr != null ? -(row.p.matchup_swstr) : 1);
+      case "pullbrl": return sc.pull_brl ?? -1;
+      case "bip":     return sc.bip ?? -1;
       case "gb":      return sc.gb_pct ?? 0;
       case "ld":      return sc.ld_pct ?? 0;
       default:        return 0;

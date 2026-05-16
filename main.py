@@ -111,6 +111,11 @@ def _format_score(result: dict) -> dict:
         "data_quality": result["data_quality"],
         "recent_abs": result.get("recent_abs", []),
         "pitch_abs": result.get("pitch_abs", {}),
+        "xwoba": result.get("xwoba", 0.0),
+        "sweet_spot": result.get("sweet_spot", 0.0),
+        "pull_brl": result.get("pull_brl", 0.0),
+        "swstr": round(result.get("matchup_swstr", 0.0), 1),
+        "bip": result.get("bip_count", 0),
     }
 
 

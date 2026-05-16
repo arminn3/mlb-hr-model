@@ -24,6 +24,11 @@ export interface ScoreSet {
   hard_hit_pct: number;
   data_quality: string;
   recent_abs: RecentAB[];
+  xwoba?: number;
+  sweet_spot?: number;
+  pull_brl?: number;
+  swstr?: number;
+  bip?: number;
 }
 
 export interface ZoneEntry {

@@ -218,6 +218,36 @@ def score_batter_vs_pitcher(
         recent_bip = recent_bip.head(effective_n_bip)
         pool_metrics = calc_batter_metrics_for_pitch(recent_bip)
 
+        # Extra display stats from this lookback's BIP pool
+        _n_bip = len(recent_bip)
+        result["bip_count"] = _n_bip
+        if _n_bip > 0:
+            if "estimated_woba_using_speedangle" in recent_bip.columns:
+                _xw = recent_bip["estimated_woba_using_speedangle"].dropna()
+                result["xwoba"] = round(float(_xw.mean()), 3) if len(_xw) > 0 else 0.0
+            else:
+                result["xwoba"] = 0.0
+            if "launch_angle" in recent_bip.columns:
+                _sweet = (recent_bip["launch_angle"] >= 8) & (recent_bip["launch_angle"] <= 32)
+                result["sweet_spot"] = round(float(_sweet.sum() / _n_bip * 100), 1)
+            else:
+                result["sweet_spot"] = 0.0
+            if {"hc_x", "hc_y", "stand", "launch_speed_angle"}.issubset(recent_bip.columns):
+                _sub = recent_bip.dropna(subset=["hc_x", "hc_y"])
+                if len(_sub) > 0:
+                    _spray = np.degrees(np.arctan2(_sub["hc_x"].astype(float) - 125.42, 198.27 - _sub["hc_y"].astype(float)))
+                    _pulled = ((_sub["stand"] == "R") & (_spray < -15)) | ((_sub["stand"] == "L") & (_spray > 15))
+                    _barrel = _sub["launch_speed_angle"] == 6
+                    result["pull_brl"] = round(float((_pulled & _barrel).sum() / _n_bip * 100), 1)
+                else:
+                    result["pull_brl"] = 0.0
+            else:
+                result["pull_brl"] = 0.0
+        else:
+            result["xwoba"] = 0.0
+            result["sweet_spot"] = 0.0
+            result["pull_brl"] = 0.0
+
         # Per-pitch metrics — need ≥3 BIP to trust; otherwise fall back to pool avg.
         # 1-2 BIP per pitch type is pure noise (2 GBs on FF ≠ "can't hit fastballs").
         for pt in pitch_mix:
