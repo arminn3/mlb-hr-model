@@ -3,7 +3,7 @@ name: Daily HR Prop Model
 on:
   schedule:
     - cron: '0 3 * * *'    # 11:00 PM ET — next day's slate
-    - cron: '0 14 * * *'   # 9:00 AM ET  — same day update (lineups, weather)
+    - cron: '0 12 * * *'   # 8:00 AM ET  — same day update (lineups, weather)
   workflow_dispatch:
 
 concurrency:
