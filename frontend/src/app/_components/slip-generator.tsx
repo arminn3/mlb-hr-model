@@ -276,22 +276,26 @@ function buildOptimalSlips(
   }
 
   // Single greedy pass — prefer diff-game partners, fall back to same-game if needed.
-  // This guarantees 0 leftovers whenever selected.length is divisible by legCount.
+  // If a group can't reach legCount (not enough players left), put them back so they
+  // appear in leftovers correctly.
   const available = new Set(ordered.map((p) => p.name));
   const slips: Slip[] = [];
 
   for (const starter of ordered) {
     if (!available.has(starter.name)) continue;
+
     const group: SlipPlayer[] = [starter];
+    const taken: string[] = [starter.name];
     available.delete(starter.name);
     const groupGames = new Set([starter.gamePk]);
 
-    // First pass: fill with diff-game players
+    // First: fill with diff-game players
     for (const p of ordered) {
       if (group.length === legCount) break;
       if (!available.has(p.name)) continue;
       if (!groupGames.has(p.gamePk)) {
         group.push(p);
+        taken.push(p.name);
         available.delete(p.name);
         groupGames.add(p.gamePk);
       }
@@ -301,6 +305,7 @@ function buildOptimalSlips(
       if (group.length === legCount) break;
       if (!available.has(p.name)) continue;
       group.push(p);
+      taken.push(p.name);
       available.delete(p.name);
     }
 
@@ -310,6 +315,9 @@ function buildOptimalSlips(
         avgComposite: group.reduce((s, p) => s + p.composite, 0) / legCount,
         gameCount: new Set(group.map((p) => p.gamePk)).size,
       });
+    } else {
+      // Not enough players to complete the group — put them back as leftovers
+      for (const name of taken) available.add(name);
     }
   }
 
