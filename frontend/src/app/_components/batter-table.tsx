@@ -5,7 +5,7 @@ import type { PlayerData, PitchDetailEntry } from "./types";
 import { scoreFor, type UILookback } from "./score-utils";
 import { teamLogoUrl, teamName } from "./game-header";
 
-type SortCol = "score" | "pitch" | "ev" | "barrel" | "hh" | "fb" | "hrfb" | "xwoba" | "sweet" | "swstr" | "pullbrl" | "bip" | "gb" | "ld";
+type SortCol = "score" | "pitch" | "ev" | "barrel" | "hh" | "fb" | "hrfb" | "xwoba" | "sweet" | "swstr" | "pullbrl" | "bip" | "gb" | "ld" | null;
 type SortDir = "desc" | "asc";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -258,8 +258,8 @@ export function BatterRow({
 function SortTh({
   label, col, active, dir, onClick, className,
 }: {
-  label: string; col: SortCol; active: SortCol; dir: SortDir;
-  onClick: (c: SortCol) => void; className?: string;
+  label: string; col: Exclude<SortCol, null>; active: SortCol; dir: SortDir;
+  onClick: (c: Exclude<SortCol, null>) => void; className?: string;
 }) {
   const isActive = active === col;
   return (
@@ -298,12 +298,12 @@ export function BatterTable({
   favorites?: Set<string>;
   onToggleFavorite?: (name: string) => void;
 }) {
-  const [sortCol, setSortCol] = useState<SortCol>("score");
+  const [sortCol, setSortCol] = useState<SortCol>(null);
   const [sortDir, setSortDir] = useState<SortDir>("desc");
 
   if (batters.length === 0) return null;
 
-  function handleSort(col: SortCol) {
+  function handleSort(col: Exclude<SortCol, null>) {
     if (col === sortCol) {
       setSortDir((d) => (d === "desc" ? "asc" : "desc"));
     } else {
@@ -336,10 +336,12 @@ export function BatterTable({
     }
   }
 
-  const sorted = [...batters].sort((a, b) => {
-    const diff = getVal(a) - getVal(b);
-    return sortDir === "desc" ? -diff : diff;
-  });
+  const sorted = sortCol === null
+    ? [...batters]
+    : [...batters].sort((a, b) => {
+        const diff = getVal(a) - getVal(b);
+        return sortDir === "desc" ? -diff : diff;
+      });
 
   const thCls = (col: SortCol) => `pr-3 w-14 text-center`;
   const thWide = (col: SortCol) => `pr-3 w-16 text-center`;
