@@ -5,6 +5,11 @@ on:
     - cron: '0 3 * * *'    # 11:00 PM ET — next day's slate
     - cron: '0 12 * * *'   # 8:00 AM ET  — same day update (lineups, weather)
   workflow_dispatch:
+    inputs:
+      date:
+        description: 'Game date (YYYY-MM-DD). Leave blank for today.'
+        required: false
+        default: ''
 
 concurrency:
   group: hr-model-run
@@ -66,7 +71,12 @@ jobs:
 
       - name: Run HR prop model (manual or 8 AM — today)
         if: github.event.schedule == '0 12 * * *' || github.event_name == 'workflow_dispatch'
-        run: python main.py --fast
+        run: |
+          if [ -n "${{ github.event.inputs.date }}" ]; then
+            python main.py --date "${{ github.event.inputs.date }}" --fast
+          else
+            python main.py --fast
+          fi
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
 
