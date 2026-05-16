@@ -589,8 +589,19 @@ def score_batter_vs_pitcher(
             _pt_rows = _hdf[_hdf["pitch_type"].isin(_pt_codes)]
             _n_swings = int(_pt_rows["description"].isin(_swing_descs).sum())
             _n_whiffs = int(_pt_rows["description"].isin(_whiff_descs).sum())
-            if _n_swings > 0:
+            if _n_swings >= 5:  # require min 5 swings — 1-2 whiffs = 100% is noise
                 _whiff_by_type[_pt] = round(float(_n_whiffs / _n_swings * 100), 1)
+
+    # Recompute matchup_swstr from _whiff_by_type (reliable: min 5 swings, uses 2026+2025 data)
+    # Overrides the season-stats value computed in step 7b which can hit 100% on tiny samples
+    if pitch_weights:
+        _ww = _wtotal = 0.0
+        for _pt, _wt in pitch_weights.items():
+            if _pt in _whiff_by_type:
+                _ww += _whiff_by_type[_pt] * _wt
+                _wtotal += _wt
+        if _wtotal > 0:
+            result["matchup_swstr"] = round(_ww / _wtotal, 1)
 
     # Per-pitch aggregate stats — sourced from pitch_detail_metrics which is
     # computed from the same per-type DataFrames used for pitch_abs (not from
