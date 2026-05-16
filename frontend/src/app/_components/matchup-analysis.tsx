@@ -12,6 +12,7 @@ interface LearnedWeights {
   n_hrs: number;
   auc: number;
   intercept: number;
+  training_years?: number[];
   coefficients: Record<string, number>;
   feature_means: Record<string, number>;
   feature_scales: Record<string, number>;
@@ -1301,7 +1302,7 @@ export function MatchupAnalysis({
           {learnedWeights ? (
             <span
               className="hidden md:inline-flex shrink-0 items-center gap-1.5 rounded-md border border-accent-green/30 bg-accent-green/10 px-2.5 py-1 text-[10px] font-mono font-semibold text-accent-green uppercase tracking-wider"
-              title={`Trained on ${learnedWeights.n_samples.toLocaleString()} player-days, ${learnedWeights.n_hrs.toLocaleString()} HRs (2023-2025). AUC ${learnedWeights.auc.toFixed(3)}.`}
+              title={`Trained on ${learnedWeights.n_samples.toLocaleString()} player-days, ${learnedWeights.n_hrs.toLocaleString()} HRs (${(learnedWeights.training_years ?? [2023,2024,2025,2026]).at(0)}–${(learnedWeights.training_years ?? [2023,2024,2025,2026]).at(-1)}). AUC ${learnedWeights.auc.toFixed(3)}.`}
             >
               ML v2 · {Math.round(learnedWeights.n_samples / 1000)}k samples
             </span>
