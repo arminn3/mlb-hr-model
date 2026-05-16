@@ -1,0 +1,389 @@
+{
+  "date": "2026-05-15",
+  "total_players_ranked": 289,
+  "total_hrs_hit": 22,
+  "total_near_hrs": 0,
+  "model_hits": 20,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 289,
+        "hits": 20,
+        "rate": 6.9
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 289,
+        "hits": 20,
+        "rate": 6.9
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 4,
+      "rate": 13.3
+    },
+    "all": {
+      "total": 289,
+      "hits": 20,
+      "rate": 6.9
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 4,
+      "rate": 13.3
+    },
+    "all": {
+      "total": 289,
+      "hits": 20,
+      "rate": 6.9
+    }
+  },
+  "avg_composite_hr_hitters": 0.453,
+  "avg_composite_non_hitters": 0.411,
+  "composite_separation": 0.042,
+  "hr_hitters": [
+    {
+      "name": "Drake Baldwin",
+      "rank": 6,
+      "composite": 0.712,
+      "opp_pitcher": "Connelly Early",
+      "matchup": "BOS@ATL"
+    },
+    {
+      "name": "Jarred Kelenic",
+      "rank": 12,
+      "composite": 0.674,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@CWS"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 18,
+      "composite": 0.647,
+      "opp_pitcher": "Braxton Ashcraft",
+      "matchup": "PHI@PIT"
+    },
+    {
+      "name": "Miguel Vargas",
+      "rank": 25,
+      "composite": 0.628,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@CWS"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 41,
+      "composite": 0.575,
+      "opp_pitcher": "Clay Holmes",
+      "matchup": "NYY@NYM"
+    },
+    {
+      "name": "Yandy D\u00edaz",
+      "rank": 75,
+      "composite": 0.489,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "MIA@TB"
+    },
+    {
+      "name": "Jakob Marsee",
+      "rank": 79,
+      "composite": 0.473,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "MIA@TB"
+    },
+    {
+      "name": "Brandon Lowe",
+      "rank": 97,
+      "composite": 0.4,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "PHI@PIT"
+    },
+    {
+      "name": "Matt McLain",
+      "rank": 113,
+      "composite": 0.4,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "CIN@CLE"
+    },
+    {
+      "name": "Marcelo Mayer",
+      "rank": 118,
+      "composite": 0.4,
+      "opp_pitcher": "Spencer Strider",
+      "matchup": "BOS@ATL"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 121,
+      "composite": 0.4,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@CWS"
+    },
+    {
+      "name": "Marcell Ozuna",
+      "rank": 148,
+      "composite": 0.394,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "PHI@PIT"
+    },
+    {
+      "name": "Cedric Mullins",
+      "rank": 150,
+      "composite": 0.394,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "MIA@TB"
+    },
+    {
+      "name": "Isaac Paredes",
+      "rank": 163,
+      "composite": 0.379,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "TEX@HOU"
+    },
+    {
+      "name": "Connor Norby",
+      "rank": 167,
+      "composite": 0.375,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "MIA@TB"
+    },
+    {
+      "name": "Michael Harris II",
+      "rank": 169,
+      "composite": 0.373,
+      "opp_pitcher": "Connelly Early",
+      "matchup": "BOS@ATL"
+    },
+    {
+      "name": "Juan Soto",
+      "rank": 183,
+      "composite": 0.365,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "NYY@NYM"
+    },
+    {
+      "name": "Rhys Hoskins",
+      "rank": 216,
+      "composite": 0.331,
+      "opp_pitcher": "Andrew Abbott",
+      "matchup": "CIN@CLE"
+    },
+    {
+      "name": "Daylen Lile",
+      "rank": 221,
+      "composite": 0.327,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "BAL@WSH"
+    },
+    {
+      "name": "Hunter Goodman",
+      "rank": 230,
+      "composite": 0.315,
+      "opp_pitcher": "Merrill Kelly",
+      "matchup": "AZ@COL"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Jarred Kelenic",
+      "rank": 9,
+      "composite": 0.647,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@CWS"
+    },
+    {
+      "name": "Drake Baldwin",
+      "rank": 15,
+      "composite": 0.627,
+      "opp_pitcher": "Connelly Early",
+      "matchup": "BOS@ATL"
+    },
+    {
+      "name": "Miguel Vargas",
+      "rank": 20,
+      "composite": 0.612,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@CWS"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 23,
+      "composite": 0.607,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "CHC@CWS"
+    },
+    {
+      "name": "Brandon Lowe",
+      "rank": 38,
+      "composite": 0.575,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "PHI@PIT"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 48,
+      "composite": 0.547,
+      "opp_pitcher": "Braxton Ashcraft",
+      "matchup": "PHI@PIT"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 71,
+      "composite": 0.477,
+      "opp_pitcher": "Clay Holmes",
+      "matchup": "NYY@NYM"
+    },
+    {
+      "name": "Matt McLain",
+      "rank": 72,
+      "composite": 0.475,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "CIN@CLE"
+    },
+    {
+      "name": "Juan Soto",
+      "rank": 74,
+      "composite": 0.47,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "NYY@NYM"
+    },
+    {
+      "name": "Daylen Lile",
+      "rank": 99,
+      "composite": 0.411,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "BAL@WSH"
+    },
+    {
+      "name": "Marcell Ozuna",
+      "rank": 106,
+      "composite": 0.4,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "PHI@PIT"
+    },
+    {
+      "name": "Marcelo Mayer",
+      "rank": 125,
+      "composite": 0.4,
+      "opp_pitcher": "Spencer Strider",
+      "matchup": "BOS@ATL"
+    },
+    {
+      "name": "Jakob Marsee",
+      "rank": 172,
+      "composite": 0.382,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "MIA@TB"
+    },
+    {
+      "name": "Isaac Paredes",
+      "rank": 177,
+      "composite": 0.379,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "TEX@HOU"
+    },
+    {
+      "name": "Cedric Mullins",
+      "rank": 182,
+      "composite": 0.375,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "MIA@TB"
+    },
+    {
+      "name": "Michael Harris II",
+      "rank": 183,
+      "composite": 0.373,
+      "opp_pitcher": "Connelly Early",
+      "matchup": "BOS@ATL"
+    },
+    {
+      "name": "Rhys Hoskins",
+      "rank": 226,
+      "composite": 0.331,
+      "opp_pitcher": "Andrew Abbott",
+      "matchup": "CIN@CLE"
+    },
+    {
+      "name": "Yandy D\u00edaz",
+      "rank": 227,
+      "composite": 0.331,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "MIA@TB"
+    },
+    {
+      "name": "Hunter Goodman",
+      "rank": 247,
+      "composite": 0.304,
+      "opp_pitcher": "Merrill Kelly",
+      "matchup": "AZ@COL"
+    },
+    {
+      "name": "Connor Norby",
+      "rank": 265,
+      "composite": 0.275,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "MIA@TB"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": []
+}
