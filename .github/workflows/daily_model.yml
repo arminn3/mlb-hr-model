@@ -111,7 +111,7 @@ jobs:
 
           git reset --hard HEAD
           git fetch origin main
-          for i in 1 2 3; do
+          for i in 1 2 3 4 5; do
             git reset --hard origin/main
             [ -f "/tmp/hrprop-stash/frontend-data/latest.json" ] && cp "/tmp/hrprop-stash/frontend-data/latest.json" frontend/public/data/ || true
             [ -f "/tmp/hrprop-stash/frontend-data/${TODAY}.json" ] && cp "/tmp/hrprop-stash/frontend-data/${TODAY}.json" frontend/public/data/ || true
@@ -126,8 +126,9 @@ jobs:
               echo "Pushed successfully on attempt $i"
               exit 0
             fi
-            echo "Push attempt $i failed, retrying..."
+            echo "Push attempt $i failed, retrying in $((i * 10))s..."
+            sleep $((i * 10))
             git fetch origin main
           done
-          echo "Push failed after 3 attempts"
+          echo "Push failed after 5 attempts"
           exit 1
