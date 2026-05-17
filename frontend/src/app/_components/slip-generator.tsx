@@ -236,8 +236,8 @@ function timeSlot(sort: number): "Early" | "Late" {
 function TimeSlotPill({ sort }: { sort: number }) {
   const slot = timeSlot(sort);
   return (
-    <span className="text-[10px] px-1 shrink-0 select-none" title={slot}>
-      {slot === "Early" ? "🌅" : "🌙"}
+    <span className="text-[10px] px-1 shrink-0 select-none text-muted">
+      {slot === "Early" ? "🌅 Early" : "🌙 Late"}
     </span>
   );
 }

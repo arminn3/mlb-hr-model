@@ -1,9 +1,9 @@
 {
   "date": "2026-05-16",
   "total_players_ranked": 366,
-  "total_hrs_hit": 35,
-  "total_near_hrs": 23,
-  "model_hits": 33,
+  "total_hrs_hit": 31,
+  "total_near_hrs": 0,
+  "model_hits": 30,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
@@ -24,8 +24,8 @@
       },
       "all": {
         "total": 366,
-        "hits": 33,
-        "rate": 9.0
+        "hits": 30,
+        "rate": 8.2
       }
     },
     "L10": {
@@ -46,12 +46,12 @@
       },
       "all": {
         "total": 366,
-        "hits": 33,
-        "rate": 9.0
+        "hits": 30,
+        "rate": 8.2
       }
     }
   },
-  "model_near_hits": 23,
+  "model_near_hits": 0,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -70,8 +70,8 @@
     },
     "all": {
       "total": 366,
-      "hits": 33,
-      "rate": 9.0
+      "hits": 30,
+      "rate": 8.2
     }
   },
   "tier_accuracy_with_near": {
@@ -82,23 +82,23 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 8,
-      "rate": 40.0
+      "hits": 6,
+      "rate": 30.0
     },
     "top_30": {
       "total": 30,
-      "hits": 9,
-      "rate": 30.0
+      "hits": 7,
+      "rate": 23.3
     },
     "all": {
       "total": 366,
-      "hits": 56,
-      "rate": 15.3
+      "hits": 30,
+      "rate": 8.2
     }
   },
-  "avg_composite_hr_hitters": 0.456,
+  "avg_composite_hr_hitters": 0.46,
   "avg_composite_non_hitters": 0.383,
-  "composite_separation": 0.073,
+  "composite_separation": 0.077,
   "hr_hitters": [
     {
       "name": "Drake Baldwin",
@@ -155,13 +155,6 @@
       "composite": 0.586,
       "opp_pitcher": "Joey Cantillo",
       "matchup": "CIN@CLE"
-    },
-    {
-      "name": "Brent Rooker",
-      "rank": 44,
-      "composite": 0.577,
-      "opp_pitcher": "Trevor McDonald",
-      "matchup": "SF@ATH"
     },
     {
       "name": "Miguel Amaya",
@@ -269,25 +262,11 @@
       "matchup": "KC@STL"
     },
     {
-      "name": "Casey Schmitt",
-      "rank": 213,
-      "composite": 0.361,
-      "opp_pitcher": "Luis Severino",
-      "matchup": "SF@ATH"
-    },
-    {
       "name": "Pete Crow-Armstrong",
       "rank": 236,
       "composite": 0.342,
       "opp_pitcher": "Davis Martin",
       "matchup": "CHC@CWS"
-    },
-    {
-      "name": "Mookie Betts",
-      "rank": 246,
-      "composite": 0.337,
-      "opp_pitcher": "Jos\u00e9 Soriano",
-      "matchup": "LAD@LAA"
     },
     {
       "name": "Heriberto Hern\u00e1ndez",
@@ -397,13 +376,6 @@
       "matchup": "CHC@CWS"
     },
     {
-      "name": "Brent Rooker",
-      "rank": 51,
-      "composite": 0.547,
-      "opp_pitcher": "Trevor McDonald",
-      "matchup": "SF@ATH"
-    },
-    {
       "name": "Miguel Amaya",
       "rank": 81,
       "composite": 0.49,
@@ -437,13 +409,6 @@
       "composite": 0.425,
       "opp_pitcher": "Cade Cavalli",
       "matchup": "BAL@WSH"
-    },
-    {
-      "name": "Mookie Betts",
-      "rank": 104,
-      "composite": 0.421,
-      "opp_pitcher": "Jos\u00e9 Soriano",
-      "matchup": "LAD@LAA"
     },
     {
       "name": "Rodolfo Dur\u00e1n",
@@ -523,13 +488,6 @@
       "matchup": "SD@SEA"
     },
     {
-      "name": "Casey Schmitt",
-      "rank": 244,
-      "composite": 0.348,
-      "opp_pitcher": "Luis Severino",
-      "matchup": "SF@ATH"
-    },
-    {
       "name": "Heriberto Hern\u00e1ndez",
       "rank": 259,
       "composite": 0.331,
@@ -565,395 +523,7 @@
       "matchup": "MIL@MIN"
     }
   ],
-  "near_hr_hitters": [
-    {
-      "name": "Corbin Carroll",
-      "rank": 11,
-      "composite": 0.705,
-      "opp_pitcher": "Tomoyuki Sugano",
-      "matchup": "AZ@COL"
-    },
-    {
-      "name": "Spencer Steer",
-      "rank": 15,
-      "composite": 0.654,
-      "opp_pitcher": "Joey Cantillo",
-      "matchup": "CIN@CLE"
-    },
-    {
-      "name": "James Wood",
-      "rank": 36,
-      "composite": 0.59,
-      "opp_pitcher": "Chris Bassitt",
-      "matchup": "BAL@WSH"
-    },
-    {
-      "name": "Jonathan Aranda",
-      "rank": 45,
-      "composite": 0.575,
-      "opp_pitcher": "Sandy Alcantara",
-      "matchup": "MIA@TB"
-    },
-    {
-      "name": "Will Smith",
-      "rank": 49,
-      "composite": 0.564,
-      "opp_pitcher": "Jos\u00e9 Soriano",
-      "matchup": "LAD@LAA"
-    },
-    {
-      "name": "Harrison Bader",
-      "rank": 63,
-      "composite": 0.521,
-      "opp_pitcher": "Luis Severino",
-      "matchup": "SF@ATH"
-    },
-    {
-      "name": "Ketel Marte",
-      "rank": 108,
-      "composite": 0.4,
-      "opp_pitcher": "Tomoyuki Sugano",
-      "matchup": "AZ@COL"
-    },
-    {
-      "name": "Brandon Nimmo",
-      "rank": 132,
-      "composite": 0.4,
-      "opp_pitcher": "Kai-Wei Teng",
-      "matchup": "TEX@HOU"
-    },
-    {
-      "name": "Ram\u00f3n Laureano",
-      "rank": 149,
-      "composite": 0.4,
-      "opp_pitcher": "Logan Gilbert",
-      "matchup": "SD@SEA"
-    },
-    {
-      "name": "Junior Caminero",
-      "rank": 222,
-      "composite": 0.358,
-      "opp_pitcher": "Sandy Alcantara",
-      "matchup": "MIA@TB"
-    },
-    {
-      "name": "Kyle Stowers",
-      "rank": 252,
-      "composite": 0.333,
-      "opp_pitcher": "Nick Martinez",
-      "matchup": "MIA@TB"
-    },
-    {
-      "name": "Cedric Mullins",
-      "rank": 257,
-      "composite": 0.321,
-      "opp_pitcher": "Sandy Alcantara",
-      "matchup": "MIA@TB"
-    },
-    {
-      "name": "Darell Hernaiz",
-      "rank": 265,
-      "composite": 0.317,
-      "opp_pitcher": "Trevor McDonald",
-      "matchup": "SF@ATH"
-    },
-    {
-      "name": "Javier Sanoja",
-      "rank": 289,
-      "composite": 0.289,
-      "opp_pitcher": "Nick Martinez",
-      "matchup": "MIA@TB"
-    },
-    {
-      "name": "Ozzie Albies",
-      "rank": 294,
-      "composite": 0.285,
-      "opp_pitcher": "Payton Tolle",
-      "matchup": "BOS@ATL"
-    },
-    {
-      "name": "Drew Gilbert",
-      "rank": 295,
-      "composite": 0.285,
-      "opp_pitcher": "Luis Severino",
-      "matchup": "SF@ATH"
-    },
-    {
-      "name": "Owen Caissie",
-      "rank": 311,
-      "composite": 0.262,
-      "opp_pitcher": "Nick Martinez",
-      "matchup": "MIA@TB"
-    },
-    {
-      "name": "Maikel Garcia",
-      "rank": 312,
-      "composite": 0.26,
-      "opp_pitcher": "Kyle Leahy",
-      "matchup": "KC@STL"
-    },
-    {
-      "name": "Jeremiah Jackson",
-      "rank": 316,
-      "composite": 0.255,
-      "opp_pitcher": "Cade Cavalli",
-      "matchup": "BAL@WSH"
-    },
-    {
-      "name": "Bryan Reynolds",
-      "rank": 325,
-      "composite": 0.241,
-      "opp_pitcher": "Cristopher S\u00e1nchez",
-      "matchup": "PHI@PIT"
-    },
-    {
-      "name": "Henry Davis",
-      "rank": 335,
-      "composite": 0.229,
-      "opp_pitcher": "Cristopher S\u00e1nchez",
-      "matchup": "PHI@PIT"
-    },
-    {
-      "name": "Oswald Peraza",
-      "rank": 347,
-      "composite": 0.213,
-      "opp_pitcher": "Justin Wrobleski",
-      "matchup": "LAD@LAA"
-    },
-    {
-      "name": "Coby Mayo",
-      "rank": 359,
-      "composite": 0.172,
-      "opp_pitcher": "Cade Cavalli",
-      "matchup": "BAL@WSH"
-    }
-  ],
-  "near_hr_events": [
-    {
-      "batter": "Darell Hernaiz",
-      "ev": 98.9,
-      "angle": 28.0,
-      "distance": 369.0,
-      "hr_in_parks": 2,
-      "result": "double",
-      "pitcher": "McDonald, Trevor"
-    },
-    {
-      "batter": "Harrison Bader",
-      "ev": 99.1,
-      "angle": 33.0,
-      "distance": 380.0,
-      "hr_in_parks": 19,
-      "result": "field_out",
-      "pitcher": "Severino, Luis"
-    },
-    {
-      "batter": "Drew Gilbert",
-      "ev": 100.3,
-      "angle": 23.0,
-      "distance": 392.0,
-      "hr_in_parks": 25,
-      "result": "triple",
-      "pitcher": "Severino, Luis"
-    },
-    {
-      "batter": "Ozzie Albies",
-      "ev": 98.9,
-      "angle": 26.0,
-      "distance": 373.0,
-      "hr_in_parks": 25,
-      "result": "field_out",
-      "pitcher": "Tolle, Payton"
-    },
-    {
-      "batter": "Spencer Steer",
-      "ev": 101.3,
-      "angle": 24.0,
-      "distance": 381.0,
-      "hr_in_parks": 5,
-      "result": "double",
-      "pitcher": "Cantillo, Joey"
-    },
-    {
-      "batter": "Corbin Carroll",
-      "ev": 107.2,
-      "angle": 21.0,
-      "distance": 390.0,
-      "hr_in_parks": 29,
-      "result": "double",
-      "pitcher": "Sugano, Tomoyuki"
-    },
-    {
-      "batter": "Ketel Marte",
-      "ev": 105.3,
-      "angle": 20.0,
-      "distance": 404.0,
-      "hr_in_parks": 19,
-      "result": "double",
-      "pitcher": "Sugano, Tomoyuki"
-    },
-    {
-      "batter": "Brandon Nimmo",
-      "ev": 102.8,
-      "angle": 30.0,
-      "distance": 396.0,
-      "hr_in_parks": 8,
-      "result": "field_out",
-      "pitcher": "Teng, Kai-Wei"
-    },
-    {
-      "batter": "Will Smith",
-      "ev": 108.0,
-      "angle": 44.0,
-      "distance": 391.0,
-      "hr_in_parks": 1,
-      "result": "",
-      "pitcher": "Manoah, Alek"
-    },
-    {
-      "batter": "Oswald Peraza",
-      "ev": 98.6,
-      "angle": 26.0,
-      "distance": 376.0,
-      "hr_in_parks": 27,
-      "result": "force_out",
-      "pitcher": "Wrobleski, Justin"
-    },
-    {
-      "batter": "Bryan Reynolds",
-      "ev": 106.6,
-      "angle": 24.0,
-      "distance": 387.0,
-      "hr_in_parks": 25,
-      "result": "double",
-      "pitcher": "S\u00e1nchez, Cristopher"
-    },
-    {
-      "batter": "Henry Davis",
-      "ev": 102.7,
-      "angle": 32.0,
-      "distance": 388.0,
-      "hr_in_parks": 1,
-      "result": "field_out",
-      "pitcher": "S\u00e1nchez, Cristopher"
-    },
-    {
-      "batter": "Rodolfo Dur\u00e1n",
-      "ev": 102.2,
-      "angle": 30.0,
-      "distance": 387.0,
-      "hr_in_parks": 23,
-      "result": "field_out",
-      "pitcher": "Gonzalez, Domingo"
-    },
-    {
-      "batter": "Ram\u00f3n Laureano",
-      "ev": 97.8,
-      "angle": 26.0,
-      "distance": 377.0,
-      "hr_in_parks": 2,
-      "result": "double",
-      "pitcher": "Gilbert, Logan"
-    },
-    {
-      "batter": "Maikel Garcia",
-      "ev": 81.1,
-      "angle": 19.0,
-      "distance": 426.0,
-      "hr_in_parks": 30,
-      "result": "",
-      "pitcher": "Leahy, Kyle"
-    },
-    {
-      "batter": "Jonathan Aranda",
-      "ev": 104.2,
-      "angle": 27.0,
-      "distance": 406.0,
-      "hr_in_parks": 29,
-      "result": "double",
-      "pitcher": "Bachar, Lake"
-    },
-    {
-      "batter": "Junior Caminero",
-      "ev": 99.9,
-      "angle": 28.0,
-      "distance": 378.0,
-      "hr_in_parks": 4,
-      "result": "double",
-      "pitcher": "Bachar, Lake"
-    },
-    {
-      "batter": "Javier Sanoja",
-      "ev": 98.4,
-      "angle": 23.0,
-      "distance": 378.0,
-      "hr_in_parks": 8,
-      "result": "double",
-      "pitcher": "Baker, Bryan"
-    },
-    {
-      "batter": "Kyle Stowers",
-      "ev": 99.7,
-      "angle": 29.0,
-      "distance": 395.0,
-      "hr_in_parks": 28,
-      "result": "field_out",
-      "pitcher": "Martinez, Nick"
-    },
-    {
-      "batter": "Owen Caissie",
-      "ev": 107.3,
-      "angle": 20.0,
-      "distance": 391.0,
-      "hr_in_parks": 1,
-      "result": "field_out",
-      "pitcher": "Martinez, Nick"
-    },
-    {
-      "batter": "Cedric Mullins",
-      "ev": 107.8,
-      "angle": 26.0,
-      "distance": 402.0,
-      "hr_in_parks": 16,
-      "result": "",
-      "pitcher": "Alcantara, Sandy"
-    },
-    {
-      "batter": "Kyle Stowers",
-      "ev": 109.9,
-      "angle": 28.0,
-      "distance": 396.0,
-      "hr_in_parks": 4,
-      "result": "",
-      "pitcher": "Martinez, Nick"
-    },
-    {
-      "batter": "Jeremiah Jackson",
-      "ev": 100.2,
-      "angle": 30.0,
-      "distance": 396.0,
-      "hr_in_parks": 22,
-      "result": "field_out",
-      "pitcher": "Poulin, PJ"
-    },
-    {
-      "batter": "Coby Mayo",
-      "ev": 111.0,
-      "angle": 36.0,
-      "distance": 405.0,
-      "hr_in_parks": 19,
-      "result": "",
-      "pitcher": "Cavalli, Cade"
-    },
-    {
-      "batter": "James Wood",
-      "ev": 104.7,
-      "angle": 22.0,
-      "distance": 389.0,
-      "hr_in_parks": 26,
-      "result": "double",
-      "pitcher": "Bassitt, Chris"
-    }
-  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
   "surprise_hrs": []
 }
