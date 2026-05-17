@@ -236,8 +236,12 @@ function timeSlot(sort: number): "Early" | "Late" {
 function TimeSlotPill({ sort }: { sort: number }) {
   const slot = timeSlot(sort);
   return (
-    <span className="text-[10px] px-1 shrink-0 select-none text-muted">
-      {slot === "Early" ? "🌅 Early" : "🌙 Late"}
+    <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full shrink-0 ${
+      slot === "Early"
+        ? "bg-orange-500/15 text-orange-400 border border-orange-500/25"
+        : "bg-indigo-500/15 text-indigo-400 border border-indigo-500/25"
+    }`}>
+      {slot === "Early" ? "☀️ Early" : "🌙 Late"}
     </span>
   );
 }
