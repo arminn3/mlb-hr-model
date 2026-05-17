@@ -66,11 +66,9 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
   const [loading, setLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState<string>("");
   const [autoRefresh, setAutoRefresh] = useState(true);
-  const [internalDate, setInternalDate] = useState<string>(getLocalDate);
 
-  // Use dashboard date if provided, otherwise internal state
-  const selectedDate = dashboardDate || internalDate;
-  const setSelectedDate = setInternalDate;
+  // Always follow the dashboard date picker; fall back to today if not provided
+  const selectedDate = dashboardDate || getLocalDate();
   const isToday = selectedDate === getLocalDate();
 
   // Load saved data for past dates from server JSON
@@ -263,26 +261,9 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
               <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
             )}
           </h2>
-          <div className="flex items-center gap-2 mt-1">
-            <button
-              onClick={() => {
-                if (isToday) {
-                  const d = new Date(selectedDate + "T12:00:00");
-                  d.setDate(d.getDate() - 1);
-                  setSelectedDate(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`);
-                } else {
-                  setSelectedDate(getLocalDate());
-                }
-              }}
-              className={`px-3 py-1 text-xs rounded-lg cursor-pointer transition-colors ${
-                isToday
-                  ? "bg-card/50 text-muted border border-card-border hover:text-foreground"
-                  : "bg-accent-green/10 text-accent-green border border-accent-green/20 hover:bg-accent-green/20"
-              }`}
-            >
-              {isToday ? "Yesterday" : "Back to Live"}
-            </button>
-          </div>
+          {!isToday && (
+            <p className="text-[11px] text-muted mt-1">Use the date picker above to switch dates.</p>
+          )}
         </div>
         <div className="flex items-center gap-3">
           {isToday && (

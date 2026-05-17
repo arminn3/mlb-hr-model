@@ -594,11 +594,7 @@ export function Dashboard() {
           )}
 
           {activePage === "live" && (
-            // Don't pass the dashboard's selectedDate — on prod it gets
-            // walked back to the prior unblocked slate, which would force
-            // LiveFeed into past-date mode and break today's live polling.
-            // LiveFeed has its own internal date state + Yesterday button.
-            <LiveFeed />
+            <LiveFeed selectedDate={selectedDate} />
           )}
 
           {activePage === "bvp" && (
