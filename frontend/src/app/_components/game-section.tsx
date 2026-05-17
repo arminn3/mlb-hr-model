@@ -31,9 +31,8 @@ function sortBatters(
       .filter(({ order }) => order != null && order >= 1 && order <= 9)
       .sort((a, b) => a.order! - b.order!);
   }
-  return rows.sort(
-    (a, b) => (scoreFor(b.p, lookback)?.composite ?? 0) - (scoreFor(a.p, lookback)?.composite ?? 0),
-  );
+  // Lineup not posted — preserve original API order (roster order from MLB)
+  return rows;
 }
 
 export type SelectedBatter = {
