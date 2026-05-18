@@ -1,10 +1,10 @@
 {
   "date": "2026-05-17",
   "total_players_ranked": 302,
-  "total_hrs_hit": 32,
+  "total_hrs_hit": 37,
   "total_near_hrs": 0,
-  "model_hits": 30,
-  "best_lookback": "L5",
+  "model_hits": 33,
+  "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
     "L5": {
       "top_10": {
@@ -24,8 +24,8 @@
       },
       "all": {
         "total": 302,
-        "hits": 30,
-        "rate": 9.9
+        "hits": 33,
+        "rate": 10.9
       }
     },
     "L10": {
@@ -36,18 +36,18 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 5,
-        "rate": 16.7
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 302,
-        "hits": 30,
-        "rate": 9.9
+        "hits": 33,
+        "rate": 10.9
       }
     }
   },
@@ -70,8 +70,8 @@
     },
     "all": {
       "total": 302,
-      "hits": 30,
-      "rate": 9.9
+      "hits": 33,
+      "rate": 10.9
     }
   },
   "tier_accuracy_with_near": {
@@ -92,13 +92,13 @@
     },
     "all": {
       "total": 302,
-      "hits": 30,
-      "rate": 9.9
+      "hits": 33,
+      "rate": 10.9
     }
   },
-  "avg_composite_hr_hitters": 0.46,
+  "avg_composite_hr_hitters": 0.456,
   "avg_composite_non_hitters": 0.42,
-  "composite_separation": 0.04,
+  "composite_separation": 0.036,
   "hr_hitters": [
     {
       "name": "Kyle Manzardo",
@@ -155,6 +155,13 @@
       "composite": 0.593,
       "opp_pitcher": "Richard Lovelady",
       "matchup": "BAL@WSH"
+    },
+    {
+      "name": "Corbin Carroll",
+      "rank": 47,
+      "composite": 0.581,
+      "opp_pitcher": "Michael Lorenzen",
+      "matchup": "AZ@COL"
     },
     {
       "name": "Michael Busch",
@@ -276,11 +283,25 @@
       "matchup": "MIL@MIN"
     },
     {
+      "name": "Lourdes Gurriel Jr.",
+      "rank": 230,
+      "composite": 0.341,
+      "opp_pitcher": "Michael Lorenzen",
+      "matchup": "AZ@COL"
+    },
+    {
       "name": "Michael Conforto",
       "rank": 236,
       "composite": 0.333,
       "opp_pitcher": "Erick Fedde",
       "matchup": "CHC@CWS"
+    },
+    {
+      "name": "Gavin Sheets",
+      "rank": 242,
+      "composite": 0.327,
+      "opp_pitcher": "George Kirby",
+      "matchup": "SD@SEA"
     },
     {
       "name": "Luis Arraez",
@@ -325,6 +346,13 @@
       "composite": 0.7,
       "opp_pitcher": "Freddy Peralta",
       "matchup": "NYY@NYM"
+    },
+    {
+      "name": "Corbin Carroll",
+      "rank": 12,
+      "composite": 0.66,
+      "opp_pitcher": "Michael Lorenzen",
+      "matchup": "AZ@COL"
     },
     {
       "name": "Garrett Mitchell",
@@ -446,6 +474,13 @@
       "matchup": "MIL@MIN"
     },
     {
+      "name": "Lourdes Gurriel Jr.",
+      "rank": 164,
+      "composite": 0.4,
+      "opp_pitcher": "Michael Lorenzen",
+      "matchup": "AZ@COL"
+    },
+    {
       "name": "Mike Yastrzemski",
       "rank": 182,
       "composite": 0.392,
@@ -507,6 +542,13 @@
       "composite": 0.32,
       "opp_pitcher": "Richard Lovelady",
       "matchup": "BAL@WSH"
+    },
+    {
+      "name": "Gavin Sheets",
+      "rank": 259,
+      "composite": 0.31,
+      "opp_pitcher": "George Kirby",
+      "matchup": "SD@SEA"
     },
     {
       "name": "Bryson Stott",
