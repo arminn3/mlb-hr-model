@@ -32411,7 +32411,7 @@
     "date": "2026-05-17",
     "total_players_ranked": 302,
     "total_hrs_hit": 37,
-    "total_near_hrs": 0,
+    "total_near_hrs": 19,
     "model_hits": 33,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -32460,7 +32460,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 19,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -32486,28 +32486,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 6,
-        "rate": 20.0
+        "hits": 9,
+        "rate": 30.0
       },
       "all": {
         "total": 302,
-        "hits": 33,
-        "rate": 10.9
+        "hits": 52,
+        "rate": 17.2
       }
     },
     "avg_composite_hr_hitters": 0.456,
-    "avg_composite_non_hitters": 0.42,
-    "composite_separation": 0.036,
+    "avg_composite_non_hitters": 0.417,
+    "composite_separation": 0.039,
     "hr_hitters": [
       {
         "name": "Kyle Manzardo",
@@ -32974,8 +32974,323 @@
         "matchup": "BAL@WSH"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Daulton Varsho",
+        "rank": 7,
+        "composite": 0.696,
+        "opp_pitcher": "Jack Flaherty",
+        "matchup": "TOR@DET"
+      },
+      {
+        "name": "Brandon Lowe",
+        "rank": 21,
+        "composite": 0.636,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "PHI@PIT"
+      },
+      {
+        "name": "Drake Baldwin",
+        "rank": 29,
+        "composite": 0.612,
+        "opp_pitcher": "Brayan Bello",
+        "matchup": "BOS@ATL"
+      },
+      {
+        "name": "Kyle Schwarber",
+        "rank": 40,
+        "composite": 0.596,
+        "opp_pitcher": "Paul Skenes",
+        "matchup": "PHI@PIT"
+      },
+      {
+        "name": "Ryan Waldschmidt",
+        "rank": 45,
+        "composite": 0.587,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "AZ@COL"
+      },
+      {
+        "name": "TJ Rumfield",
+        "rank": 50,
+        "composite": 0.576,
+        "opp_pitcher": "Michael Soroka",
+        "matchup": "AZ@COL"
+      },
+      {
+        "name": "Jeremiah Jackson",
+        "rank": 60,
+        "composite": 0.558,
+        "opp_pitcher": "Richard Lovelady",
+        "matchup": "BAL@WSH"
+      },
+      {
+        "name": "Miguel Vargas",
+        "rank": 84,
+        "composite": 0.512,
+        "opp_pitcher": "Colin Rea",
+        "matchup": "CHC@CWS"
+      },
+      {
+        "name": "Jackson Merrill",
+        "rank": 98,
+        "composite": 0.437,
+        "opp_pitcher": "George Kirby",
+        "matchup": "SD@SEA"
+      },
+      {
+        "name": "Patrick Bailey",
+        "rank": 121,
+        "composite": 0.4,
+        "opp_pitcher": "Brady Singer",
+        "matchup": "CIN@CLE"
+      },
+      {
+        "name": "Yohendrick Pi\u00f1ango",
+        "rank": 130,
+        "composite": 0.4,
+        "opp_pitcher": "Jack Flaherty",
+        "matchup": "TOR@DET"
+      },
+      {
+        "name": "Nolan Arenado",
+        "rank": 194,
+        "composite": 0.372,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "AZ@COL"
+      },
+      {
+        "name": "Willi Castro",
+        "rank": 196,
+        "composite": 0.369,
+        "opp_pitcher": "Michael Soroka",
+        "matchup": "AZ@COL"
+      },
+      {
+        "name": "Dalton Rushing",
+        "rank": 216,
+        "composite": 0.356,
+        "opp_pitcher": "Grayson Rodriguez",
+        "matchup": "LAD@LAA"
+      },
+      {
+        "name": "Gabriel Moreno",
+        "rank": 231,
+        "composite": 0.339,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "AZ@COL"
+      },
+      {
+        "name": "Derek Hill",
+        "rank": 261,
+        "composite": 0.308,
+        "opp_pitcher": "Colin Rea",
+        "matchup": "CHC@CWS"
+      },
+      {
+        "name": "Miguel Andujar",
+        "rank": 267,
+        "composite": 0.303,
+        "opp_pitcher": "George Kirby",
+        "matchup": "SD@SEA"
+      },
+      {
+        "name": "Kevin McGonigle",
+        "rank": 269,
+        "composite": 0.297,
+        "opp_pitcher": "Kevin Gausman",
+        "matchup": "TOR@DET"
+      },
+      {
+        "name": "Zack Gelof",
+        "rank": 292,
+        "composite": 0.224,
+        "opp_pitcher": "Adrian Houser",
+        "matchup": "SF@ATH"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Zack Gelof",
+        "ev": 104.9,
+        "angle": 22.0,
+        "distance": 389.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Houser, Adrian"
+      },
+      {
+        "batter": "Drake Baldwin",
+        "ev": 105.0,
+        "angle": 34.0,
+        "distance": 379.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Bello, Brayan"
+      },
+      {
+        "batter": "Miguel Vargas",
+        "ev": 102.8,
+        "angle": 26.0,
+        "distance": 394.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Rea, Colin"
+      },
+      {
+        "batter": "Derek Hill",
+        "ev": 100.9,
+        "angle": 24.0,
+        "distance": 405.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Rea, Colin"
+      },
+      {
+        "batter": "Patrick Bailey",
+        "ev": 102.9,
+        "angle": 27.0,
+        "distance": 384.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Phillips, Connor"
+      },
+      {
+        "batter": "Gabriel Moreno",
+        "ev": 81.0,
+        "angle": 20.0,
+        "distance": 394.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Casta\u00f1o, Blas"
+      },
+      {
+        "batter": "TJ Rumfield",
+        "ev": 100.5,
+        "angle": 26.0,
+        "distance": 398.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Soroka, Michael"
+      },
+      {
+        "batter": "Nolan Arenado",
+        "ev": 104.5,
+        "angle": 33.0,
+        "distance": 397.0,
+        "hr_in_parks": 4,
+        "result": "",
+        "pitcher": "Casta\u00f1o, Blas"
+      },
+      {
+        "batter": "Willi Castro",
+        "ev": 99.3,
+        "angle": 34.0,
+        "distance": 382.0,
+        "hr_in_parks": 21,
+        "result": "double",
+        "pitcher": "Soroka, Michael"
+      },
+      {
+        "batter": "Ryan Waldschmidt",
+        "ev": 97.6,
+        "angle": 28.0,
+        "distance": 386.0,
+        "hr_in_parks": 24,
+        "result": "field_out",
+        "pitcher": "Lorenzen, Michael"
+      },
+      {
+        "batter": "Kevin McGonigle",
+        "ev": 103.9,
+        "angle": 30.0,
+        "distance": 413.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Gausman, Kevin"
+      },
+      {
+        "batter": "Yohendrick Pi\u00f1ango",
+        "ev": 100.8,
+        "angle": 30.0,
+        "distance": 403.0,
+        "hr_in_parks": 26,
+        "result": "field_out",
+        "pitcher": "Flaherty, Jack"
+      },
+      {
+        "batter": "Daulton Varsho",
+        "ev": 100.8,
+        "angle": 30.0,
+        "distance": 378.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Flaherty, Jack"
+      },
+      {
+        "batter": "Dalton Rushing",
+        "ev": 101.7,
+        "angle": 36.0,
+        "distance": 397.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Rodriguez, Grayson"
+      },
+      {
+        "batter": "Brandon Lowe",
+        "ev": 110.2,
+        "angle": 21.0,
+        "distance": 406.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Wheeler, Zack"
+      },
+      {
+        "batter": "Kyle Schwarber",
+        "ev": 106.0,
+        "angle": 38.0,
+        "distance": 405.0,
+        "hr_in_parks": 19,
+        "result": "",
+        "pitcher": "Skenes, Paul"
+      },
+      {
+        "batter": "Jackson Merrill",
+        "ev": 99.2,
+        "angle": 26.0,
+        "distance": 382.0,
+        "hr_in_parks": 11,
+        "result": "double",
+        "pitcher": "Kirby, George"
+      },
+      {
+        "batter": "Miguel Andujar",
+        "ev": 106.6,
+        "angle": 21.0,
+        "distance": 388.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Kirby, George"
+      },
+      {
+        "batter": "Jeremiah Jackson",
+        "ev": 100.9,
+        "angle": 24.0,
+        "distance": 373.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Schultz, Paxton"
+      },
+      {
+        "batter": "Coby Mayo",
+        "ev": 107.0,
+        "angle": 33.0,
+        "distance": 401.0,
+        "hr_in_parks": 15,
+        "result": "",
+        "pitcher": "Mikolas, Miles"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Tyrone Taylor",
