@@ -33846,7 +33846,7 @@
     "date": "2026-05-19",
     "total_players_ranked": 364,
     "total_hrs_hit": 32,
-    "total_near_hrs": 0,
+    "total_near_hrs": 12,
     "model_hits": 29,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -33895,7 +33895,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 12,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -33921,28 +33921,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 1,
-        "rate": 5.0
+        "hits": 2,
+        "rate": 10.0
       },
       "top_30": {
         "total": 30,
-        "hits": 1,
-        "rate": 3.3
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
         "total": 364,
-        "hits": 29,
-        "rate": 8.0
+        "hits": 41,
+        "rate": 11.3
       }
     },
     "avg_composite_hr_hitters": 0.401,
-    "avg_composite_non_hitters": 0.383,
-    "composite_separation": 0.018,
+    "avg_composite_non_hitters": 0.379,
+    "composite_separation": 0.022,
     "hr_hitters": [
       {
         "name": "Mike Trout",
@@ -34353,8 +34353,229 @@
         "matchup": "PIT@STL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Jorge Soler",
+        "rank": 8,
+        "composite": 0.712,
+        "opp_pitcher": "Jacob Lopez",
+        "matchup": "ATH@LAA"
+      },
+      {
+        "name": "Junior Caminero",
+        "rank": 23,
+        "composite": 0.627,
+        "opp_pitcher": "Kyle Bradish",
+        "matchup": "BAL@TB"
+      },
+      {
+        "name": "Brett Baty",
+        "rank": 51,
+        "composite": 0.548,
+        "opp_pitcher": "Foster Griffin",
+        "matchup": "NYM@WSH"
+      },
+      {
+        "name": "Daniel Susac",
+        "rank": 55,
+        "composite": 0.537,
+        "opp_pitcher": "Ryne Nelson",
+        "matchup": "SF@AZ"
+      },
+      {
+        "name": "William Contreras",
+        "rank": 58,
+        "composite": 0.525,
+        "opp_pitcher": "Ben Brown",
+        "matchup": "MIL@CHC"
+      },
+      {
+        "name": "Corbin Carroll",
+        "rank": 68,
+        "composite": 0.502,
+        "opp_pitcher": "Landen Roupp",
+        "matchup": "SF@AZ"
+      },
+      {
+        "name": "Ty France",
+        "rank": 72,
+        "composite": 0.494,
+        "opp_pitcher": "Emmet Sheehan",
+        "matchup": "LAD@SD"
+      },
+      {
+        "name": "Christian Walker",
+        "rank": 93,
+        "composite": 0.407,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "HOU@MIN"
+      },
+      {
+        "name": "Ezequiel Tovar",
+        "rank": 156,
+        "composite": 0.399,
+        "opp_pitcher": "Kumar Rocker",
+        "matchup": "TEX@COL"
+      },
+      {
+        "name": "Luis Rengifo",
+        "rank": 169,
+        "composite": 0.39,
+        "opp_pitcher": "Ben Brown",
+        "matchup": "MIL@CHC"
+      },
+      {
+        "name": "Mauricio Dub\u00f3n",
+        "rank": 212,
+        "composite": 0.35,
+        "opp_pitcher": "Braxton Garrett",
+        "matchup": "ATL@MIA"
+      },
+      {
+        "name": "Bryan Reynolds",
+        "rank": 223,
+        "composite": 0.344,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "PIT@STL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Ketel Marte",
+        "ev": 104.6,
+        "angle": 34.0,
+        "distance": 410.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Miller, Erik"
+      },
+      {
+        "batter": "Daniel Susac",
+        "ev": 103.7,
+        "angle": 21.0,
+        "distance": 404.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Nelson, Ryne"
+      },
+      {
+        "batter": "Corbin Carroll",
+        "ev": 111.5,
+        "angle": 16.0,
+        "distance": 385.0,
+        "hr_in_parks": 14,
+        "result": "triple",
+        "pitcher": "Roupp, Landen"
+      },
+      {
+        "batter": "William Contreras",
+        "ev": 100.4,
+        "angle": 25.0,
+        "distance": 385.0,
+        "hr_in_parks": 7,
+        "result": "field_out",
+        "pitcher": "Webb, Jacob"
+      },
+      {
+        "batter": "Luis Rengifo",
+        "ev": 87.7,
+        "angle": 30.0,
+        "distance": 403.0,
+        "hr_in_parks": 16,
+        "result": "",
+        "pitcher": "Brown, Ben"
+      },
+      {
+        "batter": "Ezequiel Duran",
+        "ev": 105.4,
+        "angle": 22.0,
+        "distance": 401.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Gordon, Tanner"
+      },
+      {
+        "batter": "Ezequiel Tovar",
+        "ev": 102.1,
+        "angle": 21.0,
+        "distance": 369.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Rocker, Kumar"
+      },
+      {
+        "batter": "Jarren Duran",
+        "ev": 105.1,
+        "angle": 19.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Avila, Luinder"
+      },
+      {
+        "batter": "Jorge Soler",
+        "ev": 111.6,
+        "angle": 35.0,
+        "distance": 420.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "Barlow, Scott"
+      },
+      {
+        "batter": "Mauricio Dub\u00f3n",
+        "ev": 105.9,
+        "angle": 20.0,
+        "distance": 380.0,
+        "hr_in_parks": 20,
+        "result": "double",
+        "pitcher": "Garrett, Braxton"
+      },
+      {
+        "batter": "Christian Walker",
+        "ev": 99.6,
+        "angle": 36.0,
+        "distance": 377.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "Matthews, Zebby"
+      },
+      {
+        "batter": "Ty France",
+        "ev": 100.3,
+        "angle": 29.0,
+        "distance": 372.0,
+        "hr_in_parks": 2,
+        "result": "double",
+        "pitcher": "Sheehan, Emmet"
+      },
+      {
+        "batter": "Bryan Reynolds",
+        "ev": 107.2,
+        "angle": 23.0,
+        "distance": 394.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "Liberatore, Matthew"
+      },
+      {
+        "batter": "Junior Caminero",
+        "ev": 107.8,
+        "angle": 21.0,
+        "distance": 413.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Bradish, Kyle"
+      },
+      {
+        "batter": "Brett Baty",
+        "ev": 97.3,
+        "angle": 29.0,
+        "distance": 373.0,
+        "hr_in_parks": 13,
+        "result": "field_out",
+        "pitcher": "Griffin, Foster"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Brandon Nimmo",
