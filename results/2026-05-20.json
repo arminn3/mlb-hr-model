@@ -1,0 +1,529 @@
+{
+  "date": "2026-05-20",
+  "total_players_ranked": 378,
+  "total_hrs_hit": 31,
+  "total_near_hrs": 0,
+  "model_hits": 30,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 2,
+        "rate": 6.7
+      },
+      "all": {
+        "total": 378,
+        "hits": 30,
+        "rate": 7.9
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 2,
+        "rate": 6.7
+      },
+      "all": {
+        "total": 378,
+        "hits": 30,
+        "rate": 7.9
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 378,
+      "hits": 30,
+      "rate": 7.9
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 378,
+      "hits": 30,
+      "rate": 7.9
+    }
+  },
+  "avg_composite_hr_hitters": 0.413,
+  "avg_composite_non_hitters": 0.382,
+  "composite_separation": 0.031,
+  "hr_hitters": [
+    {
+      "name": "Juan Soto",
+      "rank": 1,
+      "composite": 0.84,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "NYM@WSH"
+    },
+    {
+      "name": "Jacob Young",
+      "rank": 30,
+      "composite": 0.586,
+      "opp_pitcher": "Zach Thornton",
+      "matchup": "NYM@WSH"
+    },
+    {
+      "name": "Pete Alonso",
+      "rank": 46,
+      "composite": 0.542,
+      "opp_pitcher": "Steven Matz",
+      "matchup": "BAL@TB"
+    },
+    {
+      "name": "Randal Grichuk",
+      "rank": 53,
+      "composite": 0.529,
+      "opp_pitcher": "Emerson Hancock",
+      "matchup": "CWS@SEA"
+    },
+    {
+      "name": "Jarren Duran",
+      "rank": 54,
+      "composite": 0.527,
+      "opp_pitcher": "Michael Wacha",
+      "matchup": "BOS@KC"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 62,
+      "composite": 0.508,
+      "opp_pitcher": "Merrill Kelly",
+      "matchup": "SF@AZ"
+    },
+    {
+      "name": "Alec Bohm",
+      "rank": 77,
+      "composite": 0.48,
+      "opp_pitcher": "Andrew Abbott",
+      "matchup": "CIN@PHI"
+    },
+    {
+      "name": "Elias D\u00edaz",
+      "rank": 88,
+      "composite": 0.449,
+      "opp_pitcher": "Connelly Early",
+      "matchup": "BOS@KC"
+    },
+    {
+      "name": "Ryan Kreidler",
+      "rank": 94,
+      "composite": 0.43,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "HOU@MIN"
+    },
+    {
+      "name": "Shohei Ohtani",
+      "rank": 98,
+      "composite": 0.412,
+      "opp_pitcher": "Randy V\u00e1squez",
+      "matchup": "LAD@SD"
+    },
+    {
+      "name": "Sal Stewart",
+      "rank": 101,
+      "composite": 0.4,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "CIN@PHI"
+    },
+    {
+      "name": "Victor Caratini",
+      "rank": 108,
+      "composite": 0.4,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "HOU@MIN"
+    },
+    {
+      "name": "Jake Burger",
+      "rank": 114,
+      "composite": 0.4,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "TEX@COL"
+    },
+    {
+      "name": "Josh Lowe",
+      "rank": 144,
+      "composite": 0.4,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "ATH@LAA"
+    },
+    {
+      "name": "Jeff McNeil",
+      "rank": 157,
+      "composite": 0.396,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "ATH@LAA"
+    },
+    {
+      "name": "Ketel Marte",
+      "rank": 162,
+      "composite": 0.391,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "SF@AZ"
+    },
+    {
+      "name": "Ezequiel Duran",
+      "rank": 173,
+      "composite": 0.385,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "TEX@COL"
+    },
+    {
+      "name": "Jo Adell",
+      "rank": 186,
+      "composite": 0.375,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "ATH@LAA"
+    },
+    {
+      "name": "Jorge Soler",
+      "rank": 195,
+      "composite": 0.37,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "ATH@LAA"
+    },
+    {
+      "name": "Hunter Feduccia",
+      "rank": 196,
+      "composite": 0.369,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "BAL@TB"
+    },
+    {
+      "name": "CJ Abrams",
+      "rank": 222,
+      "composite": 0.356,
+      "opp_pitcher": "Zach Thornton",
+      "matchup": "NYM@WSH"
+    },
+    {
+      "name": "Teoscar Hern\u00e1ndez",
+      "rank": 224,
+      "composite": 0.356,
+      "opp_pitcher": "Randy V\u00e1squez",
+      "matchup": "LAD@SD"
+    },
+    {
+      "name": "Edmundo Sosa",
+      "rank": 229,
+      "composite": 0.35,
+      "opp_pitcher": "Andrew Abbott",
+      "matchup": "CIN@PHI"
+    },
+    {
+      "name": "Spencer Horwitz",
+      "rank": 231,
+      "composite": 0.35,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "PIT@STL"
+    },
+    {
+      "name": "Randy Arozarena",
+      "rank": 236,
+      "composite": 0.347,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@SEA"
+    },
+    {
+      "name": "Dominic Smith",
+      "rank": 240,
+      "composite": 0.345,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "ATL@MIA"
+    },
+    {
+      "name": "Jhonny Pereda",
+      "rank": 275,
+      "composite": 0.318,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@SEA"
+    },
+    {
+      "name": "Austin Riley",
+      "rank": 319,
+      "composite": 0.271,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "ATL@MIA"
+    },
+    {
+      "name": "Salvador Perez",
+      "rank": 323,
+      "composite": 0.268,
+      "opp_pitcher": "Connelly Early",
+      "matchup": "BOS@KC"
+    },
+    {
+      "name": "Samuel Basallo",
+      "rank": 338,
+      "composite": 0.252,
+      "opp_pitcher": "Steven Matz",
+      "matchup": "BAL@TB"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Juan Soto",
+      "rank": 2,
+      "composite": 0.771,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "NYM@WSH"
+    },
+    {
+      "name": "Sal Stewart",
+      "rank": 28,
+      "composite": 0.577,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "CIN@PHI"
+    },
+    {
+      "name": "Teoscar Hern\u00e1ndez",
+      "rank": 43,
+      "composite": 0.539,
+      "opp_pitcher": "Randy V\u00e1squez",
+      "matchup": "LAD@SD"
+    },
+    {
+      "name": "Pete Alonso",
+      "rank": 44,
+      "composite": 0.537,
+      "opp_pitcher": "Steven Matz",
+      "matchup": "BAL@TB"
+    },
+    {
+      "name": "Jorge Soler",
+      "rank": 53,
+      "composite": 0.52,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "ATH@LAA"
+    },
+    {
+      "name": "Dominic Smith",
+      "rank": 55,
+      "composite": 0.517,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "ATL@MIA"
+    },
+    {
+      "name": "Edmundo Sosa",
+      "rank": 61,
+      "composite": 0.497,
+      "opp_pitcher": "Andrew Abbott",
+      "matchup": "CIN@PHI"
+    },
+    {
+      "name": "Ketel Marte",
+      "rank": 62,
+      "composite": 0.496,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "SF@AZ"
+    },
+    {
+      "name": "Jacob Young",
+      "rank": 68,
+      "composite": 0.487,
+      "opp_pitcher": "Zach Thornton",
+      "matchup": "NYM@WSH"
+    },
+    {
+      "name": "Austin Riley",
+      "rank": 73,
+      "composite": 0.48,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "ATL@MIA"
+    },
+    {
+      "name": "Elias D\u00edaz",
+      "rank": 74,
+      "composite": 0.479,
+      "opp_pitcher": "Connelly Early",
+      "matchup": "BOS@KC"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 85,
+      "composite": 0.448,
+      "opp_pitcher": "Merrill Kelly",
+      "matchup": "SF@AZ"
+    },
+    {
+      "name": "Ryan Kreidler",
+      "rank": 98,
+      "composite": 0.424,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "HOU@MIN"
+    },
+    {
+      "name": "Jarren Duran",
+      "rank": 105,
+      "composite": 0.408,
+      "opp_pitcher": "Michael Wacha",
+      "matchup": "BOS@KC"
+    },
+    {
+      "name": "Salvador Perez",
+      "rank": 108,
+      "composite": 0.404,
+      "opp_pitcher": "Connelly Early",
+      "matchup": "BOS@KC"
+    },
+    {
+      "name": "Alec Bohm",
+      "rank": 110,
+      "composite": 0.4,
+      "opp_pitcher": "Andrew Abbott",
+      "matchup": "CIN@PHI"
+    },
+    {
+      "name": "Jake Burger",
+      "rank": 128,
+      "composite": 0.4,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "TEX@COL"
+    },
+    {
+      "name": "Ezequiel Duran",
+      "rank": 132,
+      "composite": 0.4,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "TEX@COL"
+    },
+    {
+      "name": "Randal Grichuk",
+      "rank": 139,
+      "composite": 0.4,
+      "opp_pitcher": "Emerson Hancock",
+      "matchup": "CWS@SEA"
+    },
+    {
+      "name": "Josh Lowe",
+      "rank": 172,
+      "composite": 0.4,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "ATH@LAA"
+    },
+    {
+      "name": "Victor Caratini",
+      "rank": 182,
+      "composite": 0.396,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "HOU@MIN"
+    },
+    {
+      "name": "Jo Adell",
+      "rank": 196,
+      "composite": 0.389,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "ATH@LAA"
+    },
+    {
+      "name": "Randy Arozarena",
+      "rank": 203,
+      "composite": 0.383,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@SEA"
+    },
+    {
+      "name": "CJ Abrams",
+      "rank": 215,
+      "composite": 0.372,
+      "opp_pitcher": "Zach Thornton",
+      "matchup": "NYM@WSH"
+    },
+    {
+      "name": "Shohei Ohtani",
+      "rank": 223,
+      "composite": 0.366,
+      "opp_pitcher": "Randy V\u00e1squez",
+      "matchup": "LAD@SD"
+    },
+    {
+      "name": "Jeff McNeil",
+      "rank": 226,
+      "composite": 0.363,
+      "opp_pitcher": "Jack Kochanowicz",
+      "matchup": "ATH@LAA"
+    },
+    {
+      "name": "Spencer Horwitz",
+      "rank": 243,
+      "composite": 0.35,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "PIT@STL"
+    },
+    {
+      "name": "Hunter Feduccia",
+      "rank": 265,
+      "composite": 0.335,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "BAL@TB"
+    },
+    {
+      "name": "Jhonny Pereda",
+      "rank": 323,
+      "composite": 0.279,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@SEA"
+    },
+    {
+      "name": "Samuel Basallo",
+      "rank": 345,
+      "composite": 0.252,
+      "opp_pitcher": "Steven Matz",
+      "matchup": "BAL@TB"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": []
+}
