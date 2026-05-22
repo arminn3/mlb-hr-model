@@ -2,7 +2,7 @@
   "date": "2026-05-21",
   "total_players_ranked": 166,
   "total_hrs_hit": 13,
-  "total_near_hrs": 0,
+  "total_near_hrs": 7,
   "model_hits": 11,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 7,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -77,28 +77,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 1,
-      "rate": 10.0
+      "hits": 2,
+      "rate": 20.0
     },
     "top_20": {
       "total": 20,
-      "hits": 3,
-      "rate": 15.0
+      "hits": 4,
+      "rate": 20.0
     },
     "top_30": {
       "total": 30,
-      "hits": 4,
-      "rate": 13.3
+      "hits": 6,
+      "rate": 20.0
     },
     "all": {
       "total": 166,
-      "hits": 11,
-      "rate": 6.6
+      "hits": 18,
+      "rate": 10.8
     }
   },
   "avg_composite_hr_hitters": 0.436,
-  "avg_composite_non_hitters": 0.36,
-  "composite_separation": 0.076,
+  "avg_composite_non_hitters": 0.358,
+  "composite_separation": 0.078,
   "hr_hitters": [
     {
       "name": "Brandon Lowe",
@@ -257,7 +257,130 @@
       "matchup": "PIT@STL"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Ernie Clement",
+      "rank": 10,
+      "composite": 0.599,
+      "opp_pitcher": "Carlos Rod\u00f3n",
+      "matchup": "TOR@NYY"
+    },
+    {
+      "name": "Ryan McMahon",
+      "rank": 21,
+      "composite": 0.554,
+      "opp_pitcher": "Braydon Fisher",
+      "matchup": "TOR@NYY"
+    },
+    {
+      "name": "Andr\u00e9s Chaparro",
+      "rank": 37,
+      "composite": 0.416,
+      "opp_pitcher": "David Peterson",
+      "matchup": "NYM@WSH"
+    },
+    {
+      "name": "Liam Hicks",
+      "rank": 79,
+      "composite": 0.361,
+      "opp_pitcher": "Spencer Strider",
+      "matchup": "ATL@MIA"
+    },
+    {
+      "name": "Jake McCarthy",
+      "rank": 112,
+      "composite": 0.313,
+      "opp_pitcher": "Eduardo Rodriguez",
+      "matchup": "COL@AZ"
+    },
+    {
+      "name": "Shea Langeliers",
+      "rank": 122,
+      "composite": 0.283,
+      "opp_pitcher": "Jos\u00e9 Soriano",
+      "matchup": "ATH@LAA"
+    },
+    {
+      "name": "James Wood",
+      "rank": 131,
+      "composite": 0.27,
+      "opp_pitcher": "David Peterson",
+      "matchup": "NYM@WSH"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Jake McCarthy",
+      "ev": 102.8,
+      "angle": 31.0,
+      "distance": 395.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Rodriguez, Eduardo"
+    },
+    {
+      "batter": "Nolan Schanuel",
+      "ev": 104.4,
+      "angle": 30.0,
+      "distance": 379.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Kuhnel, Joel"
+    },
+    {
+      "batter": "Shea Langeliers",
+      "ev": 108.2,
+      "angle": 17.0,
+      "distance": 368.0,
+      "hr_in_parks": 19,
+      "result": "double",
+      "pitcher": "Soriano, Jos\u00e9"
+    },
+    {
+      "batter": "Liam Hicks",
+      "ev": 95.0,
+      "angle": 32.0,
+      "distance": 372.0,
+      "hr_in_parks": 21,
+      "result": "field_out",
+      "pitcher": "Strider, Spencer"
+    },
+    {
+      "batter": "Ernie Clement",
+      "ev": 97.8,
+      "angle": 29.0,
+      "distance": 378.0,
+      "hr_in_parks": 20,
+      "result": "double",
+      "pitcher": "Blackburn, Paul"
+    },
+    {
+      "batter": "Ryan McMahon",
+      "ev": 105.4,
+      "angle": 28.0,
+      "distance": 379.0,
+      "hr_in_parks": 24,
+      "result": "double",
+      "pitcher": "Macko, Adam"
+    },
+    {
+      "batter": "James Wood",
+      "ev": 111.7,
+      "angle": 21.0,
+      "distance": 395.0,
+      "hr_in_parks": 2,
+      "result": "double",
+      "pitcher": "Peterson, David"
+    },
+    {
+      "batter": "Andr\u00e9s Chaparro",
+      "ev": 85.1,
+      "angle": 14.0,
+      "distance": 398.0,
+      "hr_in_parks": 4,
+      "result": "",
+      "pitcher": "Peterson, David"
+    }
+  ],
   "surprise_hrs": []
 }
