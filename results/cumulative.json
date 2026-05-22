@@ -35112,5 +35112,268 @@
     "near_hr_hitters": [],
     "near_hr_events": [],
     "surprise_hrs": []
+  },
+  {
+    "date": "2026-05-21",
+    "total_players_ranked": 166,
+    "total_hrs_hit": 13,
+    "total_near_hrs": 0,
+    "model_hits": 11,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 3,
+          "rate": 15.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 4,
+          "rate": 13.3
+        },
+        "all": {
+          "total": 166,
+          "hits": 11,
+          "rate": 6.6
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
+        },
+        "all": {
+          "total": 166,
+          "hits": 11,
+          "rate": 6.6
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 166,
+        "hits": 11,
+        "rate": 6.6
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 166,
+        "hits": 11,
+        "rate": 6.6
+      }
+    },
+    "avg_composite_hr_hitters": 0.436,
+    "avg_composite_non_hitters": 0.36,
+    "composite_separation": 0.076,
+    "hr_hitters": [
+      {
+        "name": "Brandon Lowe",
+        "rank": 1,
+        "composite": 0.712,
+        "opp_pitcher": "Dustin May",
+        "matchup": "PIT@STL"
+      },
+      {
+        "name": "Dillon Dingler",
+        "rank": 13,
+        "composite": 0.588,
+        "opp_pitcher": "Joey Cantillo",
+        "matchup": "CLE@DET"
+      },
+      {
+        "name": "George Springer",
+        "rank": 18,
+        "composite": 0.573,
+        "opp_pitcher": "Carlos Rod\u00f3n",
+        "matchup": "TOR@NYY"
+      },
+      {
+        "name": "Michael Harris II",
+        "rank": 22,
+        "composite": 0.547,
+        "opp_pitcher": "Sandy Alcantara",
+        "matchup": "ATL@MIA"
+      },
+      {
+        "name": "Kyle Stowers",
+        "rank": 41,
+        "composite": 0.4,
+        "opp_pitcher": "Spencer Strider",
+        "matchup": "ATL@MIA"
+      },
+      {
+        "name": "Owen Caissie",
+        "rank": 43,
+        "composite": 0.4,
+        "opp_pitcher": "Spencer Strider",
+        "matchup": "ATL@MIA"
+      },
+      {
+        "name": "Mike Yastrzemski",
+        "rank": 56,
+        "composite": 0.394,
+        "opp_pitcher": "Sandy Alcantara",
+        "matchup": "ATL@MIA"
+      },
+      {
+        "name": "Patrick Bailey",
+        "rank": 60,
+        "composite": 0.391,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "CLE@DET"
+      },
+      {
+        "name": "Nolan Schanuel",
+        "rank": 87,
+        "composite": 0.356,
+        "opp_pitcher": "Luis Severino",
+        "matchup": "ATH@LAA"
+      },
+      {
+        "name": "Henry Davis",
+        "rank": 142,
+        "composite": 0.234,
+        "opp_pitcher": "Dustin May",
+        "matchup": "PIT@STL"
+      },
+      {
+        "name": "Iv\u00e1n Herrera",
+        "rank": 150,
+        "composite": 0.206,
+        "opp_pitcher": "Braxton Ashcraft",
+        "matchup": "PIT@STL"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Brandon Lowe",
+        "rank": 1,
+        "composite": 0.704,
+        "opp_pitcher": "Dustin May",
+        "matchup": "PIT@STL"
+      },
+      {
+        "name": "George Springer",
+        "rank": 4,
+        "composite": 0.64,
+        "opp_pitcher": "Carlos Rod\u00f3n",
+        "matchup": "TOR@NYY"
+      },
+      {
+        "name": "Mike Yastrzemski",
+        "rank": 26,
+        "composite": 0.486,
+        "opp_pitcher": "Sandy Alcantara",
+        "matchup": "ATL@MIA"
+      },
+      {
+        "name": "Michael Harris II",
+        "rank": 41,
+        "composite": 0.423,
+        "opp_pitcher": "Sandy Alcantara",
+        "matchup": "ATL@MIA"
+      },
+      {
+        "name": "Dillon Dingler",
+        "rank": 47,
+        "composite": 0.4,
+        "opp_pitcher": "Joey Cantillo",
+        "matchup": "CLE@DET"
+      },
+      {
+        "name": "Kyle Stowers",
+        "rank": 51,
+        "composite": 0.4,
+        "opp_pitcher": "Spencer Strider",
+        "matchup": "ATL@MIA"
+      },
+      {
+        "name": "Owen Caissie",
+        "rank": 52,
+        "composite": 0.4,
+        "opp_pitcher": "Spencer Strider",
+        "matchup": "ATL@MIA"
+      },
+      {
+        "name": "Patrick Bailey",
+        "rank": 82,
+        "composite": 0.363,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "CLE@DET"
+      },
+      {
+        "name": "Henry Davis",
+        "rank": 109,
+        "composite": 0.328,
+        "opp_pitcher": "Dustin May",
+        "matchup": "PIT@STL"
+      },
+      {
+        "name": "Nolan Schanuel",
+        "rank": 113,
+        "composite": 0.321,
+        "opp_pitcher": "Luis Severino",
+        "matchup": "ATH@LAA"
+      },
+      {
+        "name": "Iv\u00e1n Herrera",
+        "rank": 152,
+        "composite": 0.208,
+        "opp_pitcher": "Braxton Ashcraft",
+        "matchup": "PIT@STL"
+      }
+    ],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": []
   }
 ]
