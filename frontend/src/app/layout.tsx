@@ -3,6 +3,7 @@ import { Inter, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { AgentationAutoClear } from "./_components/agentation-auto-clear";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const inter = Inter({
@@ -37,6 +38,13 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {children}
+        <Toaster
+          position="bottom-right"
+          theme="dark"
+          toastOptions={{
+            style: { background: "#1c1c1e", border: "1px solid rgba(255,255,255,0.1)", color: "#f5f5f7" },
+          }}
+        />
         {process.env.NODE_ENV === "development" && <AgentationAutoClear />}
       </body>
     </html>

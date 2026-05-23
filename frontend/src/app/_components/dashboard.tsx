@@ -22,6 +22,7 @@ import { LiveFeed } from "./live-feed";
 import { ProjectionsView } from "./projections-view";
 import { UserMenu } from "./user-menu";
 import { MatchupAnalysis } from "./matchup-analysis";
+import { toast } from "sonner";
 import { TeamPitchMixPage } from "./team-pitch-mix-page";
 import { IconButton } from "./ui/icon-button";
 import { teamLogoUrl } from "./game-header";
@@ -417,6 +418,54 @@ export function Dashboard() {
     if (!data?.games || data.games.length === 0) return;
     setSelectedGames(new Set([data.games[0].game_pk]));
   }, [data?.date]);
+
+  // Poll for slate updates every 5 minutes. Only active for today's date.
+  useEffect(() => {
+    if (!data) return;
+    const today = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD in local time
+    if (data.date !== today) return;
+
+    const knownGeneratedAt = data.generated_at ?? "";
+    const knownPosted = new Set(
+      (data.games ?? []).flatMap((g) => {
+        const sides = [];
+        if (g.team_pitch_mix?.home?.lineup_status === "posted") sides.push(`${g.home_team}-home`);
+        if (g.team_pitch_mix?.away?.lineup_status === "posted") sides.push(`${g.away_team}-away`);
+        return sides;
+      })
+    );
+
+    const id = setInterval(async () => {
+      try {
+        const res = await fetch(`/data/${today}.json?t=${Date.now()}`);
+        if (!res.ok) return;
+        const fresh = await res.json();
+        if (!fresh.generated_at || fresh.generated_at === knownGeneratedAt) return;
+
+        // Count newly posted lineups
+        const newlyPosted: string[] = [];
+        for (const g of fresh.games ?? []) {
+          if (g.team_pitch_mix?.home?.lineup_status === "posted" && !knownPosted.has(`${g.home_team}-home`))
+            newlyPosted.push(g.home_team);
+          if (g.team_pitch_mix?.away?.lineup_status === "posted" && !knownPosted.has(`${g.away_team}-away`))
+            newlyPosted.push(g.away_team);
+        }
+
+        const msg = newlyPosted.length > 0
+          ? `Lineups posted: ${newlyPosted.join(", ")}`
+          : "Slate updated with new data";
+
+        toast(msg, {
+          duration: Infinity,
+          action: { label: "Reload", onClick: () => loadDate(today) },
+        });
+
+        clearInterval(id);
+      } catch {}
+    }, 5 * 60 * 1000);
+
+    return () => clearInterval(id);
+  }, [data?.generated_at]);
 
   // Password gate — prod only. null = still checking cookie via API.
   if (unlocked === null) return null;
