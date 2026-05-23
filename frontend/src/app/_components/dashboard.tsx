@@ -389,8 +389,9 @@ export function Dashboard() {
   };
 
   const loadDate = (dateStr: string) => {
-    const url = dateStr ? `/data/${dateStr}.json` : "/data/latest.json";
-    fetch(url)
+    const base = dateStr ? `/data/${dateStr}.json` : "/data/latest.json";
+    const url = `${base}?t=${Date.now()}`;
+    fetch(url, { cache: "no-store" })
       .then((res) => {
         if (!res.ok) throw new Error("No data for this date.");
         return res.json();
