@@ -35503,7 +35503,7 @@
     "date": "2026-05-22",
     "total_players_ranked": 252,
     "total_hrs_hit": 23,
-    "total_near_hrs": 0,
+    "total_near_hrs": 13,
     "model_hits": 21,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -35552,7 +35552,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 13,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -35578,28 +35578,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 3,
+        "rate": 30.0
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 6,
+        "rate": 30.0
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 9,
+        "rate": 30.0
       },
       "all": {
         "total": 252,
-        "hits": 21,
-        "rate": 8.3
+        "hits": 34,
+        "rate": 13.5
       }
     },
     "avg_composite_hr_hitters": 0.462,
-    "avg_composite_non_hitters": 0.401,
-    "composite_separation": 0.061,
+    "avg_composite_non_hitters": 0.399,
+    "composite_separation": 0.063,
     "hr_hitters": [
       {
         "name": "Juan Soto",
@@ -35898,8 +35898,254 @@
         "matchup": "TEX@LAA"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Corbin Carroll",
+        "rank": 3,
+        "composite": 0.739,
+        "opp_pitcher": "Tomoyuki Sugano",
+        "matchup": "COL@AZ"
+      },
+      {
+        "name": "Cam Smith",
+        "rank": 14,
+        "composite": 0.679,
+        "opp_pitcher": "Jameson Taillon",
+        "matchup": "HOU@CHC"
+      },
+      {
+        "name": "Jake McCarthy",
+        "rank": 59,
+        "composite": 0.486,
+        "opp_pitcher": "Michael Soroka",
+        "matchup": "COL@AZ"
+      },
+      {
+        "name": "Willson Contreras",
+        "rank": 88,
+        "composite": 0.4,
+        "opp_pitcher": "Connor Prielipp",
+        "matchup": "MIN@BOS"
+      },
+      {
+        "name": "Carson Benge",
+        "rank": 93,
+        "composite": 0.4,
+        "opp_pitcher": "Eury P\u00e9rez",
+        "matchup": "NYM@MIA"
+      },
+      {
+        "name": "Luis Torrens",
+        "rank": 97,
+        "composite": 0.4,
+        "opp_pitcher": "Eury P\u00e9rez",
+        "matchup": "NYM@MIA"
+      },
+      {
+        "name": "Teoscar Hern\u00e1ndez",
+        "rank": 113,
+        "composite": 0.4,
+        "opp_pitcher": "Logan Henderson",
+        "matchup": "LAD@MIL"
+      },
+      {
+        "name": "Jo Adell",
+        "rank": 116,
+        "composite": 0.4,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@LAA"
+      },
+      {
+        "name": "Gabriel Moreno",
+        "rank": 124,
+        "composite": 0.4,
+        "opp_pitcher": "Tomoyuki Sugano",
+        "matchup": "COL@AZ"
+      },
+      {
+        "name": "Wilyer Abreu",
+        "rank": 142,
+        "composite": 0.384,
+        "opp_pitcher": "Connor Prielipp",
+        "matchup": "MIN@BOS"
+      },
+      {
+        "name": "Aaron Judge",
+        "rank": 202,
+        "composite": 0.297,
+        "opp_pitcher": "Nick Martinez",
+        "matchup": "TB@NYY"
+      },
+      {
+        "name": "Ha-Seong Kim",
+        "rank": 213,
+        "composite": 0.279,
+        "opp_pitcher": "Richard Lovelady",
+        "matchup": "WSH@ATL"
+      },
+      {
+        "name": "Andrew Vaughn",
+        "rank": 229,
+        "composite": 0.254,
+        "opp_pitcher": "Justin Wrobleski",
+        "matchup": "LAD@MIL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Jake McCarthy",
+        "ev": 100.2,
+        "angle": 35.0,
+        "distance": 373.0,
+        "hr_in_parks": 1,
+        "result": "sac_fly",
+        "pitcher": "Soroka, Michael"
+      },
+      {
+        "batter": "Corbin Carroll",
+        "ev": 105.3,
+        "angle": 38.0,
+        "distance": 373.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Sugano, Tomoyuki"
+      },
+      {
+        "batter": "Gabriel Moreno",
+        "ev": 101.6,
+        "angle": 27.0,
+        "distance": 384.0,
+        "hr_in_parks": 12,
+        "result": "field_out",
+        "pitcher": "Sugano, Tomoyuki"
+      },
+      {
+        "batter": "Curtis Mead",
+        "ev": 99.5,
+        "angle": 23.0,
+        "distance": 374.0,
+        "hr_in_parks": 14,
+        "result": "field_out",
+        "pitcher": "Lee, Dylan"
+      },
+      {
+        "batter": "Ha-Seong Kim",
+        "ev": 100.3,
+        "angle": 27.0,
+        "distance": 398.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Mikolas, Miles"
+      },
+      {
+        "batter": "CJ Abrams",
+        "ev": 103.7,
+        "angle": 31.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Elder, Bryce"
+      },
+      {
+        "batter": "Blaze Alexander",
+        "ev": 104.1,
+        "angle": 21.0,
+        "distance": 380.0,
+        "hr_in_parks": 7,
+        "result": "double",
+        "pitcher": "Finnegan, Kyle"
+      },
+      {
+        "batter": "Willson Contreras",
+        "ev": 102.2,
+        "angle": 24.0,
+        "distance": 385.0,
+        "hr_in_parks": 14,
+        "result": "triple",
+        "pitcher": "Prielipp, Connor"
+      },
+      {
+        "batter": "Wilyer Abreu",
+        "ev": 102.0,
+        "angle": 28.0,
+        "distance": 393.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Prielipp, Connor"
+      },
+      {
+        "batter": "Cam Smith",
+        "ev": 106.1,
+        "angle": 27.0,
+        "distance": 382.0,
+        "hr_in_parks": 24,
+        "result": "field_out",
+        "pitcher": "Taillon, Jameson"
+      },
+      {
+        "batter": "Jo Adell",
+        "ev": 114.9,
+        "angle": 16.0,
+        "distance": 369.0,
+        "hr_in_parks": 27,
+        "result": "field_out",
+        "pitcher": "deGrom, Jacob"
+      },
+      {
+        "batter": "Carson Benge",
+        "ev": 104.2,
+        "angle": 26.0,
+        "distance": 406.0,
+        "hr_in_parks": 29,
+        "result": "field_out",
+        "pitcher": "P\u00e9rez, Eury"
+      },
+      {
+        "batter": "Luis Torrens",
+        "ev": 96.1,
+        "angle": 32.0,
+        "distance": 377.0,
+        "hr_in_parks": 18,
+        "result": "field_out",
+        "pitcher": "P\u00e9rez, Eury"
+      },
+      {
+        "batter": "Carson Benge",
+        "ev": 99.9,
+        "angle": 28.0,
+        "distance": 390.0,
+        "hr_in_parks": 24,
+        "result": "field_out",
+        "pitcher": "P\u00e9rez, Eury"
+      },
+      {
+        "batter": "Teoscar Hern\u00e1ndez",
+        "ev": 90.2,
+        "angle": 19.0,
+        "distance": 408.0,
+        "hr_in_parks": 24,
+        "result": "",
+        "pitcher": "Drohan, Shane"
+      },
+      {
+        "batter": "Andrew Vaughn",
+        "ev": 98.2,
+        "angle": 26.0,
+        "distance": 370.0,
+        "hr_in_parks": 5,
+        "result": "double",
+        "pitcher": "Wrobleski, Justin"
+      },
+      {
+        "batter": "Aaron Judge",
+        "ev": 106.6,
+        "angle": 23.0,
+        "distance": 395.0,
+        "hr_in_parks": 25,
+        "result": "field_out",
+        "pitcher": "Baker, Bryan"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Kyle Manzardo",
