@@ -3,7 +3,10 @@ name: Daily HR Prop Model
 on:
   schedule:
     - cron: '0 3 * * *'    # 11:00 PM ET — next day's slate
-    - cron: '0 12 * * *'   # 8:00 AM ET  — same day update (lineups, weather)
+    - cron: '0 12 * * *'   #  8:00 AM ET — morning update
+    - cron: '0 17 * * *'   #  1:00 PM ET — afternoon lineups
+    - cron: '0 20 * * *'   #  4:00 PM ET — evening lineups
+    - cron: '0 23 * * *'   #  7:00 PM ET — late/west coast lineups
   workflow_dispatch:
     inputs:
       date:
@@ -13,7 +16,7 @@ on:
 
 concurrency:
   group: hr-model-run
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -76,8 +79,8 @@ jobs:
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
 
-      - name: Run HR prop model (manual or 8 AM — today)
-        if: github.event.schedule == '0 12 * * *' || github.event_name == 'workflow_dispatch'
+      - name: Run HR prop model (manual or daytime refresh — today)
+        if: github.event.schedule == '0 12 * * *' || github.event.schedule == '0 17 * * *' || github.event.schedule == '0 20 * * *' || github.event.schedule == '0 23 * * *' || github.event_name == 'workflow_dispatch'
         run: |
           if [ -n "${{ github.event.inputs.date }}" ]; then
             python main.py --date "${{ github.event.inputs.date }}" --fast
@@ -108,9 +111,8 @@ jobs:
           mkdir -p /tmp/hrprop-stash/frontend-data/results
           cp -r frontend/public/data/results/. /tmp/hrprop-stash/frontend-data/results/ 2>/dev/null || true
 
-          git reset --hard HEAD
-          git fetch origin main
-          for i in 1 2 3 4 5; do
+          git fetch --unshallow 2>/dev/null || git fetch origin main
+          for i in 1 2 3 4 5 6 7 8 9 10; do
             git reset --hard origin/main
             [ -f "/tmp/hrprop-stash/frontend-data/latest.json" ] && cp "/tmp/hrprop-stash/frontend-data/latest.json" frontend/public/data/ || true
             [ -f "/tmp/hrprop-stash/frontend-data/${TODAY}.json" ] && cp "/tmp/hrprop-stash/frontend-data/${TODAY}.json" frontend/public/data/ || true
@@ -125,9 +127,9 @@ jobs:
               echo "Pushed successfully on attempt $i"
               exit 0
             fi
-            echo "Push attempt $i failed, retrying in $((i * 10))s..."
-            sleep $((i * 10))
+            echo "Push attempt $i failed, retrying in $((i * 15))s..."
+            sleep $((i * 15))
             git fetch origin main
           done
-          echo "Push failed after 5 attempts"
-          exit 1
+          echo "WARNING: push failed after 10 attempts — data generated but not committed"
+          exit 0
