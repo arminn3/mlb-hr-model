@@ -342,6 +342,11 @@ def score_batter_vs_pitcher(
     if p_metrics["total_ip"] < 10 and not blended_with_2025:
         pitcher_score = max(pitcher_score, 0.5)
 
+    # Apply platoon multiplier derived from 541K BIP (2022-2025 Statcast).
+    # Uses overall pitcher stats above + small research-backed platoon factor.
+    platoon_mult = config.PLATOON_MULTIPLIERS.get((batter_hand, pitcher_hand), 1.0)
+    pitcher_score = float(np.clip(pitcher_score * platoon_mult, 0.0, 1.0))
+
     result["pitcher_score"] = pitcher_score
 
     # ── Step 7: Environment factor ──────────────────────────────────────────

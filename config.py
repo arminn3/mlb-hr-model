@@ -108,6 +108,18 @@ NORM_RANGES: dict = {
     "total_hrs_norm": (0.0, 1.0),       # full range of HR/IP metric (capped at 1.0 upstream)
 }
 
+# ── Platoon Multipliers (pitcher_score adjustment) ───────────────────────────
+# Derived from 541,247 BIP across 2022-2025 MLB seasons.
+# Key: (batter_hand, pitcher_hand) → multiplier applied to pitcher_score.
+# Overall HR/BIP = 4.474%. Each cell is that matchup's rate / overall rate.
+# LHB vs LHP capped at 0.85 to avoid overcorrection on small samples.
+PLATOON_MULTIPLIERS: dict = {
+    ("R", "R"): 0.977,   # same hand — 2.3% below avg
+    ("R", "L"): 1.032,   # opp hand  — 3.2% above avg
+    ("L", "R"): 1.056,   # opp hand  — 5.6% above avg
+    ("L", "L"): 0.850,   # same hand — capped (raw 0.779, small LHP sample)
+}
+
 # ── Fuzzy Match Threshold ────────────────────────────────────────────────────
 FUZZY_MATCH_SCORE: int = 85
 

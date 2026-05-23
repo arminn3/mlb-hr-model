@@ -504,10 +504,14 @@ def calc_batter_metrics_for_pitch(pa_pitches: pd.DataFrame) -> dict[str, float]:
 
 
 def calc_pitcher_metrics(
-    pitcher_df: pd.DataFrame, batter_hand: str
+    pitcher_df: pd.DataFrame, batter_hand: str = None
 ) -> dict[str, float]:
     """
-    Compute pitcher metrics split by batter handedness.
+    Compute pitcher metrics using overall stats (all batter hands).
+
+    Platoon adjustment is applied separately via config.PLATOON_MULTIPLIERS
+    so it's anchored to 4-year MLB population data rather than noisy
+    small-sample hand splits.
 
     Returns:
         fb_rate_allowed, hr_per_fb_rate, hr_per_ip, total_hrs, total_ip,
@@ -525,7 +529,7 @@ def calc_pitcher_metrics(
     if pitcher_df.empty:
         return defaults
 
-    df = pitcher_df[pitcher_df["stand"] == batter_hand].copy()
+    df = pitcher_df.copy()
     if df.empty:
         return defaults
 
