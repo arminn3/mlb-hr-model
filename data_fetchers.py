@@ -15,7 +15,7 @@ import requests
 from pybaseball import statcast_batter, statcast_pitcher, playerid_lookup
 from thefuzz import fuzz
 
-pybaseball.cache.enable()
+pybaseball.cache.disable()
 
 import config
 
