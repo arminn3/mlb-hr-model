@@ -36157,53 +36157,53 @@
   {
     "date": "2026-05-23",
     "total_players_ranked": 263,
-    "total_hrs_hit": 14,
+    "total_hrs_hit": 23,
     "total_near_hrs": 0,
-    "model_hits": 12,
+    "model_hits": 18,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
           "total": 30,
-          "hits": 1,
-          "rate": 3.3
+          "hits": 3,
+          "rate": 10.0
         },
         "all": {
           "total": 263,
-          "hits": 12,
-          "rate": 4.6
+          "hits": 18,
+          "rate": 6.8
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.0
         },
         "top_30": {
           "total": 30,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 6.7
         },
         "all": {
           "total": 263,
-          "hits": 12,
-          "rate": 4.6
+          "hits": 18,
+          "rate": 6.8
         }
       }
     },
@@ -36211,51 +36211,65 @@
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 10.0
       },
       "top_30": {
         "total": 30,
-        "hits": 1,
-        "rate": 3.3
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
         "total": 263,
-        "hits": 12,
-        "rate": 4.6
+        "hits": 18,
+        "rate": 6.8
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 10.0
       },
       "top_30": {
         "total": 30,
-        "hits": 1,
-        "rate": 3.3
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
         "total": 263,
-        "hits": 12,
-        "rate": 4.6
+        "hits": 18,
+        "rate": 6.8
       }
     },
-    "avg_composite_hr_hitters": 0.356,
-    "avg_composite_non_hitters": 0.409,
-    "composite_separation": -0.053,
+    "avg_composite_hr_hitters": 0.388,
+    "avg_composite_non_hitters": 0.408,
+    "composite_separation": -0.02,
     "hr_hitters": [
+      {
+        "name": "Elly De La Cruz",
+        "rank": 3,
+        "composite": 0.696,
+        "opp_pitcher": "Kyle Leahy",
+        "matchup": "STL@CIN"
+      },
+      {
+        "name": "Ketel Marte",
+        "rank": 15,
+        "composite": 0.651,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "COL@AZ"
+      },
       {
         "name": "Nathaniel Lowe",
         "rank": 28,
@@ -36276,6 +36290,13 @@
         "composite": 0.4,
         "opp_pitcher": "Freddy Peralta",
         "matchup": "NYM@MIA"
+      },
+      {
+        "name": "Mike Trout",
+        "rank": 122,
+        "composite": 0.4,
+        "opp_pitcher": "Nathan Eovaldi",
+        "matchup": "TEX@LAA"
       },
       {
         "name": "Christian Walker",
@@ -36299,11 +36320,25 @@
         "matchup": "STL@CIN"
       },
       {
+        "name": "Teoscar Hern\u00e1ndez",
+        "rank": 163,
+        "composite": 0.364,
+        "opp_pitcher": "Robert Gasser",
+        "matchup": "LAD@MIL"
+      },
+      {
         "name": "George Springer",
         "rank": 168,
         "composite": 0.36,
         "opp_pitcher": "Paul Skenes",
         "matchup": "PIT@TOR"
+      },
+      {
+        "name": "TJ Rumfield",
+        "rank": 171,
+        "composite": 0.357,
+        "opp_pitcher": "Zac Gallen",
+        "matchup": "COL@AZ"
       },
       {
         "name": "Dylan Crews",
@@ -36327,6 +36362,13 @@
         "matchup": "CWS@SF"
       },
       {
+        "name": "Kyle Higashioka",
+        "rank": 244,
+        "composite": 0.255,
+        "opp_pitcher": "Walbert Ure\u00f1a",
+        "matchup": "TEX@LAA"
+      },
+      {
         "name": "Casey Schmitt",
         "rank": 255,
         "composite": 0.175,
@@ -36342,6 +36384,20 @@
       }
     ],
     "hr_hitters_l10": [
+      {
+        "name": "Elly De La Cruz",
+        "rank": 4,
+        "composite": 0.684,
+        "opp_pitcher": "Kyle Leahy",
+        "matchup": "STL@CIN"
+      },
+      {
+        "name": "Ketel Marte",
+        "rank": 29,
+        "composite": 0.571,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "COL@AZ"
+      },
       {
         "name": "Christian Walker",
         "rank": 66,
@@ -36369,6 +36425,27 @@
         "composite": 0.4,
         "opp_pitcher": "Andre Pallante",
         "matchup": "STL@CIN"
+      },
+      {
+        "name": "Teoscar Hern\u00e1ndez",
+        "rank": 117,
+        "composite": 0.4,
+        "opp_pitcher": "Robert Gasser",
+        "matchup": "LAD@MIL"
+      },
+      {
+        "name": "Mike Trout",
+        "rank": 125,
+        "composite": 0.4,
+        "opp_pitcher": "Nathan Eovaldi",
+        "matchup": "TEX@LAA"
+      },
+      {
+        "name": "TJ Rumfield",
+        "rank": 137,
+        "composite": 0.398,
+        "opp_pitcher": "Zac Gallen",
+        "matchup": "COL@AZ"
       },
       {
         "name": "Liam Hicks",
@@ -36406,6 +36483,13 @@
         "matchup": "PIT@TOR"
       },
       {
+        "name": "Kyle Higashioka",
+        "rank": 243,
+        "composite": 0.255,
+        "opp_pitcher": "Walbert Ure\u00f1a",
+        "matchup": "TEX@LAA"
+      },
+      {
         "name": "Harrison Bader",
         "rank": 246,
         "composite": 0.229,
@@ -36429,6 +36513,12 @@
     ],
     "near_hr_hitters": [],
     "near_hr_events": [],
-    "surprise_hrs": []
+    "surprise_hrs": [
+      {
+        "name": "Jos\u00e9 Ferm\u00edn",
+        "pitcher": "Tony Santillan",
+        "description": "Jos\u00e9 Ferm\u00edn homers (2) on a fly ball to left center field."
+      }
+    ]
   }
 ]
