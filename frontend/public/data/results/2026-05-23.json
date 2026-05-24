@@ -2,7 +2,7 @@
   "date": "2026-05-23",
   "total_players_ranked": 263,
   "total_hrs_hit": 23,
-  "total_near_hrs": 0,
+  "total_near_hrs": 5,
   "model_hits": 18,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 5,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -77,23 +77,23 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 1,
-      "rate": 10.0
+      "hits": 2,
+      "rate": 20.0
     },
     "top_20": {
       "total": 20,
-      "hits": 2,
-      "rate": 10.0
+      "hits": 3,
+      "rate": 15.0
     },
     "top_30": {
       "total": 30,
-      "hits": 3,
-      "rate": 10.0
+      "hits": 4,
+      "rate": 13.3
     },
     "all": {
       "total": 263,
-      "hits": 18,
-      "rate": 6.8
+      "hits": 23,
+      "rate": 8.7
     }
   },
   "avg_composite_hr_hitters": 0.388,
@@ -355,8 +355,99 @@
       "matchup": "STL@CIN"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Jackson Chourio",
+      "rank": 1,
+      "composite": 0.724,
+      "opp_pitcher": "Roki Sasaki",
+      "matchup": "LAD@MIL"
+    },
+    {
+      "name": "Daylen Lile",
+      "rank": 101,
+      "composite": 0.4,
+      "opp_pitcher": "Grant Holmes",
+      "matchup": "WSH@ATL"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 142,
+      "composite": 0.386,
+      "opp_pitcher": "George Kirby",
+      "matchup": "SEA@KC"
+    },
+    {
+      "name": "Dane Myers",
+      "rank": 183,
+      "composite": 0.338,
+      "opp_pitcher": "Andre Pallante",
+      "matchup": "STL@CIN"
+    },
+    {
+      "name": "Kyle Isbel",
+      "rank": 234,
+      "composite": 0.285,
+      "opp_pitcher": "George Kirby",
+      "matchup": "SEA@KC"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Daylen Lile",
+      "ev": 105.6,
+      "angle": 28.0,
+      "distance": 378.0,
+      "hr_in_parks": 6,
+      "result": "triple",
+      "pitcher": "Holmes, Grant"
+    },
+    {
+      "batter": "Dane Myers",
+      "ev": 103.4,
+      "angle": 27.0,
+      "distance": 390.0,
+      "hr_in_parks": 11,
+      "result": "field_out",
+      "pitcher": "Fernandez, Ryan"
+    },
+    {
+      "batter": "Jordan Walker",
+      "ev": 103.9,
+      "angle": 19.0,
+      "distance": 385.0,
+      "hr_in_parks": 3,
+      "result": "double",
+      "pitcher": "Petty, Chase"
+    },
+    {
+      "batter": "Bobby Witt Jr.",
+      "ev": 107.6,
+      "angle": 21.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Kirby, George"
+    },
+    {
+      "batter": "Kyle Isbel",
+      "ev": 106.5,
+      "angle": 31.0,
+      "distance": 395.0,
+      "hr_in_parks": 2,
+      "result": "",
+      "pitcher": "Kirby, George"
+    },
+    {
+      "batter": "Jackson Chourio",
+      "ev": 100.3,
+      "angle": 24.0,
+      "distance": 405.0,
+      "hr_in_parks": 27,
+      "result": "double",
+      "pitcher": "Sasaki, Roki"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Jos\u00e9 Ferm\u00edn",
