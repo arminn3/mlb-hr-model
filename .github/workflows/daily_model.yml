@@ -44,7 +44,6 @@ jobs:
         with:
           path: statcast_cache/
           key: statcast-cache-${{ github.run_id }}
-          restore-keys: statcast-cache-
 
       - name: Run results tracker
         if: github.event.schedule == '0 11 * * *' || github.event.schedule == '0 2 * * *' || github.event.schedule == '0 3 * * *' || github.event.schedule == '0 4 * * *' || github.event_name == 'workflow_dispatch'
