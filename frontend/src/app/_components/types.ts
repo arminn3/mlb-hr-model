@@ -99,6 +99,7 @@ export interface PitcherProfile {
   wins: number;
   losses: number;
   games_started: number;
+  data_year?: number;
 }
 
 export interface PitcherStats {

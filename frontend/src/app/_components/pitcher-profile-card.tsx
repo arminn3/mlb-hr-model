@@ -110,6 +110,7 @@ export function PitcherProfileCard({ pitcher, side }: { pitcher: PitcherInfo; si
   const wins = profile?.wins ?? 0;
   const losses = profile?.losses ?? 0;
   const games_started = profile?.games_started ?? 0;
+  const is2025Fallback = (profile?.data_year ?? 2026) === 2025;
 
   // Build column-group spans for the header row
   const groupSpans: { group: ColumnDef["group"]; span: number }[] = [];
@@ -166,8 +167,13 @@ export function PitcherProfileCard({ pitcher, side }: { pitcher: PitcherInfo; si
         </div>
       </div>
 
+      {is2025Fallback && (
+        <div className="mb-3 px-2 py-1.5 rounded text-[10px] text-amber-400/80 bg-amber-400/8 border border-amber-400/15">
+          2025 data — no 2026 appearances yet
+        </div>
+      )}
       {!rows ? (
-        <div className="text-xs text-muted py-6 text-center">No 2026 Statcast data yet.</div>
+        <div className="text-xs text-muted py-6 text-center">No Statcast data available.</div>
       ) : (
         <div className="overflow-x-auto -mx-1 px-1">
           <table className="w-full text-xs font-mono border-collapse">

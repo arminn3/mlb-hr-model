@@ -595,7 +595,21 @@ def run_model(game_date: date = None, fast: bool = False):
             if df is None:
                 df = get_pitcher_statcast(pid)
                 pitcher_cache[pid] = df
-            pitcher_profiles[pid] = build_pitcher_profile(df, pitcher_id=pid, season=season_year)
+            profile = build_pitcher_profile(df, pitcher_id=pid, season=season_year)
+            # If no 2026 data, fall back to 2025 season data
+            if profile["rows"]["season"]["bf"] == 0 and not profile["arsenal"]:
+                key_2025 = (pid, 2025)
+                if key_2025 not in season_cache:
+                    season_cache[key_2025] = get_season_statcast(pid, "pitcher", 2025)
+                df_2025 = season_cache[key_2025]
+                if df_2025 is not None and not df_2025.empty:
+                    profile = build_pitcher_profile(df_2025, pitcher_id=pid, season=2025)
+                    profile["data_year"] = 2025
+                else:
+                    profile["data_year"] = season_year
+            else:
+                profile["data_year"] = season_year
+            pitcher_profiles[pid] = profile
 
     # ── Phase 3: Build game-grouped output ───────────────────────────────────
     games_out = []
