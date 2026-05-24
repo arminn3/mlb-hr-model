@@ -411,6 +411,9 @@ export function BatterDetailPage({
               <span className="font-mono">{player.batter_hand}HB</span>
               <span className="mx-2 opacity-40">·</span>
               <span>vs {player.opp_pitcher} ({player.pitcher_hand}HP)</span>
+              {player.pitcher_data_year === 2025 && (
+                <span className="ml-2 px-1.5 py-0.5 text-[9px] font-semibold rounded bg-amber-400/15 text-amber-400/90 border border-amber-400/20">2025 data</span>
+              )}
             </div>
             <div className="flex flex-wrap items-center gap-2">
               <RatingBadge composite={scores.composite} />

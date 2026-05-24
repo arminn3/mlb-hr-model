@@ -622,6 +622,17 @@ def run_model(game_date: date = None, fast: bool = False):
         # Sort players by L5 composite descending
         players.sort(key=lambda p: p["scores"].get("L5", {}).get("composite", 0), reverse=True)
 
+        # Inject pitcher_data_year so batter views can flag 2025 fallback profiles
+        for player in players:
+            bs = player.get("batter_side", "away")
+            opp_side = "away_pitcher" if bs == "home" else "home_pitcher"
+            opp_pitcher_info = g.get(opp_side) or {}
+            opp_pid = opp_pitcher_info.get("id")
+            player["pitcher_data_year"] = (
+                pitcher_profiles.get(opp_pid, {}).get("data_year", season_year)
+                if opp_pid else season_year
+            )
+
         # Format game time for display — always EST (UTC-4 during EDT)
         utc_time = g.get("game_datetime_utc", "")
         local_hour = game_hours.get(gpk, 19)  # local to stadium for weather

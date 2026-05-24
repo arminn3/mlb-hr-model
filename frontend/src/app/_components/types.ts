@@ -144,6 +144,7 @@ export interface PlayerData {
     sweet_spot?: number;
   };
   matchup_swstr?: number;
+  pitcher_data_year?: number;
   bvp_stats?: {
     career: {
       abs: number;
