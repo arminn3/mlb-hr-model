@@ -36614,17 +36614,17 @@
   },
   {
     "date": "2026-05-24",
-    "total_players_ranked": 262,
-    "total_hrs_hit": 22,
+    "total_players_ranked": 264,
+    "total_hrs_hit": 24,
     "total_near_hrs": 0,
-    "model_hits": 21,
+    "model_hits": 23,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 2,
-          "rate": 20.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
@@ -36637,9 +36637,9 @@
           "rate": 10.0
         },
         "all": {
-          "total": 262,
-          "hits": 21,
-          "rate": 8.0
+          "total": 264,
+          "hits": 23,
+          "rate": 8.7
         }
       },
       "L10": {
@@ -36659,9 +36659,9 @@
           "rate": 10.0
         },
         "all": {
-          "total": 262,
-          "hits": 21,
-          "rate": 8.0
+          "total": 264,
+          "hits": 23,
+          "rate": 8.7
         }
       }
     },
@@ -36669,8 +36669,8 @@
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
@@ -36683,16 +36683,16 @@
         "rate": 10.0
       },
       "all": {
-        "total": 262,
-        "hits": 21,
-        "rate": 8.0
+        "total": 264,
+        "hits": 23,
+        "rate": 8.7
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
@@ -36705,70 +36705,77 @@
         "rate": 10.0
       },
       "all": {
-        "total": 262,
-        "hits": 21,
-        "rate": 8.0
+        "total": 264,
+        "hits": 23,
+        "rate": 8.7
       }
     },
-    "avg_composite_hr_hitters": 0.434,
-    "avg_composite_non_hitters": 0.396,
-    "composite_separation": 0.038,
+    "avg_composite_hr_hitters": 0.436,
+    "avg_composite_non_hitters": 0.395,
+    "composite_separation": 0.041,
     "hr_hitters": [
       {
         "name": "Gunnar Henderson",
         "rank": 3,
-        "composite": 0.734,
+        "composite": 0.731,
         "opp_pitcher": "Troy Melton",
         "matchup": "DET@BAL"
       },
       {
         "name": "Colton Cowser",
-        "rank": 10,
-        "composite": 0.678,
+        "rank": 11,
+        "composite": 0.672,
         "opp_pitcher": "Troy Melton",
         "matchup": "DET@BAL"
       },
       {
         "name": "Miguel Vargas",
-        "rank": 20,
+        "rank": 19,
         "composite": 0.641,
         "opp_pitcher": "Robbie Ray",
         "matchup": "CWS@SF"
       },
       {
         "name": "Aaron Judge",
-        "rank": 33,
+        "rank": 32,
         "composite": 0.57,
         "opp_pitcher": "Drew Rasmussen",
         "matchup": "TB@NYY"
       },
       {
-        "name": "Michael Busch",
-        "rank": 42,
-        "composite": 0.547,
-        "opp_pitcher": "Peter Lambert",
-        "matchup": "HOU@CHC"
-      },
-      {
         "name": "Jake Meyers",
-        "rank": 45,
-        "composite": 0.542,
+        "rank": 42,
+        "composite": 0.548,
         "opp_pitcher": "Shota Imanaga",
         "matchup": "HOU@CHC"
       },
       {
-        "name": "Masataka Yoshida",
-        "rank": 49,
-        "composite": 0.521,
-        "opp_pitcher": "Bailey Ober",
-        "matchup": "MIN@BOS"
+        "name": "Michael Busch",
+        "rank": 43,
+        "composite": 0.545,
+        "opp_pitcher": "Peter Lambert",
+        "matchup": "HOU@CHC"
+      },
+      {
+        "name": "Dillon Dingler",
+        "rank": 47,
+        "composite": 0.53,
+        "opp_pitcher": "Brandon Young",
+        "matchup": "DET@BAL"
       },
       {
         "name": "Spencer Horwitz",
-        "rank": 54,
+        "rank": 52,
         "composite": 0.511,
         "opp_pitcher": "Dylan Cease",
         "matchup": "PIT@TOR"
+      },
+      {
+        "name": "Masataka Yoshida",
+        "rank": 54,
+        "composite": 0.501,
+        "opp_pitcher": "Bailey Ober",
+        "matchup": "MIN@BOS"
       },
       {
         "name": "Ty France",
@@ -36778,32 +36785,39 @@
         "matchup": "ATH@SD"
       },
       {
-        "name": "Travis Bazzana",
-        "rank": 79,
-        "composite": 0.4,
-        "opp_pitcher": "Andrew Painter",
-        "matchup": "CLE@PHI"
+        "name": "Jake Burger",
+        "rank": 71,
+        "composite": 0.41,
+        "opp_pitcher": "Reid Detmers",
+        "matchup": "TEX@LAA"
       },
       {
         "name": "Andy Pages",
-        "rank": 97,
+        "rank": 98,
         "composite": 0.4,
         "opp_pitcher": "Brandon Sproat",
         "matchup": "LAD@MIL"
       },
       {
         "name": "Christian Walker",
-        "rank": 101,
+        "rank": 102,
         "composite": 0.4,
         "opp_pitcher": "Shota Imanaga",
         "matchup": "HOU@CHC"
       },
       {
         "name": "Chase Meidroth",
-        "rank": 104,
+        "rank": 105,
         "composite": 0.4,
         "opp_pitcher": "Robbie Ray",
         "matchup": "CWS@SF"
+      },
+      {
+        "name": "Travis Bazzana",
+        "rank": 126,
+        "composite": 0.397,
+        "opp_pitcher": "Andrew Painter",
+        "matchup": "CLE@PHI"
       },
       {
         "name": "Casey Schmitt",
@@ -36821,42 +36835,42 @@
       },
       {
         "name": "Julio Rodr\u00edguez",
-        "rank": 188,
-        "composite": 0.322,
+        "rank": 191,
+        "composite": 0.32,
         "opp_pitcher": "Seth Lugo",
         "matchup": "SEA@KC"
       },
       {
         "name": "Nick Allen",
-        "rank": 210,
-        "composite": 0.295,
+        "rank": 212,
+        "composite": 0.301,
         "opp_pitcher": "Shota Imanaga",
         "matchup": "HOU@CHC"
       },
       {
+        "name": "Rafael Devers",
+        "rank": 214,
+        "composite": 0.298,
+        "opp_pitcher": "Noah Schultz",
+        "matchup": "CWS@SF"
+      },
+      {
         "name": "Carlos Cortes",
-        "rank": 212,
+        "rank": 216,
         "composite": 0.292,
         "opp_pitcher": "Michael King",
         "matchup": "ATH@SD"
       },
       {
         "name": "Oneil Cruz",
-        "rank": 214,
+        "rank": 218,
         "composite": 0.289,
         "opp_pitcher": "Dylan Cease",
         "matchup": "PIT@TOR"
       },
       {
-        "name": "Rafael Devers",
-        "rank": 220,
-        "composite": 0.283,
-        "opp_pitcher": "Noah Schultz",
-        "matchup": "CWS@SF"
-      },
-      {
         "name": "Esmerlyn Valdez",
-        "rank": 257,
+        "rank": 258,
         "composite": 0.172,
         "opp_pitcher": "Dylan Cease",
         "matchup": "PIT@TOR"
@@ -36866,7 +36880,7 @@
       {
         "name": "Gunnar Henderson",
         "rank": 3,
-        "composite": 0.736,
+        "composite": 0.733,
         "opp_pitcher": "Troy Melton",
         "matchup": "DET@BAL"
       },
@@ -36879,91 +36893,105 @@
       },
       {
         "name": "Michael Busch",
-        "rank": 23,
-        "composite": 0.568,
+        "rank": 25,
+        "composite": 0.566,
         "opp_pitcher": "Peter Lambert",
         "matchup": "HOU@CHC"
       },
       {
         "name": "Jake Meyers",
         "rank": 33,
-        "composite": 0.542,
+        "composite": 0.548,
         "opp_pitcher": "Shota Imanaga",
         "matchup": "HOU@CHC"
       },
       {
         "name": "Christian Walker",
-        "rank": 51,
-        "composite": 0.481,
+        "rank": 53,
+        "composite": 0.479,
         "opp_pitcher": "Shota Imanaga",
         "matchup": "HOU@CHC"
       },
       {
-        "name": "Masataka Yoshida",
-        "rank": 59,
-        "composite": 0.448,
-        "opp_pitcher": "Bailey Ober",
-        "matchup": "MIN@BOS"
-      },
-      {
         "name": "Ty France",
-        "rank": 60,
+        "rank": 61,
         "composite": 0.435,
         "opp_pitcher": "Luis Medina",
         "matchup": "ATH@SD"
       },
       {
+        "name": "Masataka Yoshida",
+        "rank": 64,
+        "composite": 0.428,
+        "opp_pitcher": "Bailey Ober",
+        "matchup": "MIN@BOS"
+      },
+      {
+        "name": "Jake Burger",
+        "rank": 72,
+        "composite": 0.407,
+        "opp_pitcher": "Reid Detmers",
+        "matchup": "TEX@LAA"
+      },
+      {
         "name": "Spencer Horwitz",
-        "rank": 70,
+        "rank": 74,
         "composite": 0.401,
         "opp_pitcher": "Dylan Cease",
         "matchup": "PIT@TOR"
       },
       {
         "name": "Oneil Cruz",
-        "rank": 71,
+        "rank": 75,
         "composite": 0.401,
         "opp_pitcher": "Dylan Cease",
         "matchup": "PIT@TOR"
       },
       {
+        "name": "Dillon Dingler",
+        "rank": 76,
+        "composite": 0.4,
+        "opp_pitcher": "Brandon Young",
+        "matchup": "DET@BAL"
+      },
+      {
         "name": "Willson Contreras",
-        "rank": 80,
+        "rank": 84,
         "composite": 0.4,
         "opp_pitcher": "Bailey Ober",
         "matchup": "MIN@BOS"
       },
       {
         "name": "Travis Bazzana",
-        "rank": 83,
+        "rank": 90,
         "composite": 0.4,
         "opp_pitcher": "Andrew Painter",
         "matchup": "CLE@PHI"
       },
       {
         "name": "Aaron Judge",
-        "rank": 88,
+        "rank": 92,
         "composite": 0.4,
         "opp_pitcher": "Drew Rasmussen",
         "matchup": "TB@NYY"
       },
       {
         "name": "Andy Pages",
-        "rank": 100,
+        "rank": 105,
         "composite": 0.4,
         "opp_pitcher": "Brandon Sproat",
         "matchup": "LAD@MIL"
       },
       {
         "name": "Chase Meidroth",
-        "rank": 106,
+        "rank": 112,
         "composite": 0.4,
         "opp_pitcher": "Robbie Ray",
         "matchup": "CWS@SF"
       },
       {
         "name": "Colton Cowser",
-        "rank": 122,
+        "rank": 128,
         "composite": 0.4,
         "opp_pitcher": "Troy Melton",
         "matchup": "DET@BAL"
@@ -36977,35 +37005,35 @@
       },
       {
         "name": "Nick Allen",
-        "rank": 208,
-        "composite": 0.3,
+        "rank": 206,
+        "composite": 0.306,
         "opp_pitcher": "Shota Imanaga",
         "matchup": "HOU@CHC"
       },
       {
+        "name": "Rafael Devers",
+        "rank": 222,
+        "composite": 0.284,
+        "opp_pitcher": "Noah Schultz",
+        "matchup": "CWS@SF"
+      },
+      {
         "name": "Julio Rodr\u00edguez",
-        "rank": 224,
-        "composite": 0.277,
+        "rank": 229,
+        "composite": 0.275,
         "opp_pitcher": "Seth Lugo",
         "matchup": "SEA@KC"
       },
       {
         "name": "Carlos Cortes",
-        "rank": 229,
+        "rank": 231,
         "composite": 0.27,
         "opp_pitcher": "Michael King",
         "matchup": "ATH@SD"
       },
       {
-        "name": "Rafael Devers",
-        "rank": 230,
-        "composite": 0.269,
-        "opp_pitcher": "Noah Schultz",
-        "matchup": "CWS@SF"
-      },
-      {
         "name": "Esmerlyn Valdez",
-        "rank": 258,
+        "rank": 259,
         "composite": 0.172,
         "opp_pitcher": "Dylan Cease",
         "matchup": "PIT@TOR"
