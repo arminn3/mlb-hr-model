@@ -36616,7 +36616,7 @@
     "date": "2026-05-24",
     "total_players_ranked": 262,
     "total_hrs_hit": 24,
-    "total_near_hrs": 0,
+    "total_near_hrs": 10,
     "model_hits": 23,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -36665,7 +36665,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 10,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -36691,28 +36691,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 4,
+        "rate": 40.0
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
-        "hits": 3,
-        "rate": 10.0
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
         "total": 262,
-        "hits": 23,
-        "rate": 8.8
+        "hits": 33,
+        "rate": 12.6
       }
     },
     "avg_composite_hr_hitters": 0.436,
-    "avg_composite_non_hitters": 0.395,
-    "composite_separation": 0.041,
+    "avg_composite_non_hitters": 0.394,
+    "composite_separation": 0.042,
     "hr_hitters": [
       {
         "name": "Gunnar Henderson",
@@ -37039,8 +37039,179 @@
         "matchup": "PIT@TOR"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Pete Alonso",
+        "rank": 1,
+        "composite": 0.785,
+        "opp_pitcher": "Troy Melton",
+        "matchup": "DET@BAL"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 6,
+        "composite": 0.721,
+        "opp_pitcher": "Ryan Weathers",
+        "matchup": "TB@NYY"
+      },
+      {
+        "name": "Carter Jensen",
+        "rank": 135,
+        "composite": 0.385,
+        "opp_pitcher": "Bryan Woo",
+        "matchup": "SEA@KC"
+      },
+      {
+        "name": "Geraldo Perdomo",
+        "rank": 141,
+        "composite": 0.373,
+        "opp_pitcher": "Jose Quintana",
+        "matchup": "COL@AZ"
+      },
+      {
+        "name": "Luke Raley",
+        "rank": 151,
+        "composite": 0.363,
+        "opp_pitcher": "Seth Lugo",
+        "matchup": "SEA@KC"
+      },
+      {
+        "name": "Jacob Young",
+        "rank": 154,
+        "composite": 0.363,
+        "opp_pitcher": "Mart\u00edn P\u00e9rez",
+        "matchup": "WSH@ATL"
+      },
+      {
+        "name": "Zack Short",
+        "rank": 158,
+        "composite": 0.36,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "DET@BAL"
+      },
+      {
+        "name": "Brooks Lee",
+        "rank": 183,
+        "composite": 0.329,
+        "opp_pitcher": "Sonny Gray",
+        "matchup": "MIN@BOS"
+      },
+      {
+        "name": "Daylen Lile",
+        "rank": 201,
+        "composite": 0.311,
+        "opp_pitcher": "Mart\u00edn P\u00e9rez",
+        "matchup": "WSH@ATL"
+      },
+      {
+        "name": "Jeremiah Jackson",
+        "rank": 237,
+        "composite": 0.26,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "DET@BAL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Geraldo Perdomo",
+        "ev": 101.8,
+        "angle": 25.0,
+        "distance": 391.0,
+        "hr_in_parks": 1,
+        "result": "sac_fly",
+        "pitcher": "Quintana, Jose"
+      },
+      {
+        "batter": "Daylen Lile",
+        "ev": 106.4,
+        "angle": 19.0,
+        "distance": 370.0,
+        "hr_in_parks": 2,
+        "result": "double",
+        "pitcher": "P\u00e9rez, Mart\u00edn"
+      },
+      {
+        "batter": "Jacob Young",
+        "ev": 100.9,
+        "angle": 31.0,
+        "distance": 380.0,
+        "hr_in_parks": 20,
+        "result": "field_out",
+        "pitcher": "P\u00e9rez, Mart\u00edn"
+      },
+      {
+        "batter": "Jeremiah Jackson",
+        "ev": 105.3,
+        "angle": 21.0,
+        "distance": 380.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Finnegan, Kyle"
+      },
+      {
+        "batter": "Pete Alonso",
+        "ev": 109.4,
+        "angle": 34.0,
+        "distance": 395.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Valdez, Framber"
+      },
+      {
+        "batter": "Zack Short",
+        "ev": 102.8,
+        "angle": 23.0,
+        "distance": 369.0,
+        "hr_in_parks": 4,
+        "result": "double",
+        "pitcher": "Young, Brandon"
+      },
+      {
+        "batter": "Brooks Lee",
+        "ev": 101.9,
+        "angle": 21.0,
+        "distance": 379.0,
+        "hr_in_parks": 21,
+        "result": "double",
+        "pitcher": "Gray, Sonny"
+      },
+      {
+        "batter": "Luke Raley",
+        "ev": 105.2,
+        "angle": 32.0,
+        "distance": 395.0,
+        "hr_in_parks": 18,
+        "result": "field_out",
+        "pitcher": "Lugo, Seth"
+      },
+      {
+        "batter": "Carter Jensen",
+        "ev": 99.1,
+        "angle": 38.0,
+        "distance": 370.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Woo, Bryan"
+      },
+      {
+        "batter": "Yandy D\u00edaz",
+        "ev": 103.9,
+        "angle": 31.0,
+        "distance": 402.0,
+        "hr_in_parks": 16,
+        "result": "",
+        "pitcher": "Weathers, Ryan"
+      },
+      {
+        "batter": "Rafael Devers",
+        "ev": 104.5,
+        "angle": 28.0,
+        "distance": 401.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Schultz, Noah"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Heriberto Hern\u00e1ndez",
