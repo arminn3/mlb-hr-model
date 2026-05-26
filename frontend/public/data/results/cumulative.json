@@ -37224,7 +37224,7 @@
     "date": "2026-05-25",
     "total_players_ranked": 242,
     "total_hrs_hit": 34,
-    "total_near_hrs": 0,
+    "total_near_hrs": 17,
     "model_hits": 32,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -37273,7 +37273,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 17,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -37304,23 +37304,23 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
-        "hits": 4,
-        "rate": 13.3
+        "hits": 7,
+        "rate": 23.3
       },
       "all": {
         "total": 242,
-        "hits": 32,
-        "rate": 13.2
+        "hits": 49,
+        "rate": 20.2
       }
     },
     "avg_composite_hr_hitters": 0.416,
-    "avg_composite_non_hitters": 0.397,
-    "composite_separation": 0.019,
+    "avg_composite_non_hitters": 0.395,
+    "composite_separation": 0.021,
     "hr_hitters": [
       {
         "name": "Kyle Schwarber",
@@ -37773,8 +37773,291 @@
         "matchup": "TB@BAL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Rafael Devers",
+        "rank": 14,
+        "composite": 0.652,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "AZ@SF"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 16,
+        "composite": 0.64,
+        "opp_pitcher": "Kyle Bradish",
+        "matchup": "TB@BAL"
+      },
+      {
+        "name": "Justin Foscue",
+        "rank": 25,
+        "composite": 0.613,
+        "opp_pitcher": "Tatsuya Imai",
+        "matchup": "HOU@TEX"
+      },
+      {
+        "name": "Carlos Cortes",
+        "rank": 32,
+        "composite": 0.58,
+        "opp_pitcher": "Luis Castillo",
+        "matchup": "SEA@ATH"
+      },
+      {
+        "name": "Brandon Lowe",
+        "rank": 41,
+        "composite": 0.552,
+        "opp_pitcher": "Ben Brown",
+        "matchup": "CHC@PIT"
+      },
+      {
+        "name": "Bryson Stott",
+        "rank": 59,
+        "composite": 0.447,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "PHI@SD"
+      },
+      {
+        "name": "Blake Perkins",
+        "rank": 72,
+        "composite": 0.4,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "STL@MIL"
+      },
+      {
+        "name": "Andy Pages",
+        "rank": 90,
+        "composite": 0.4,
+        "opp_pitcher": "Tanner Gordon",
+        "matchup": "COL@LAD"
+      },
+      {
+        "name": "Bryce Harper",
+        "rank": 109,
+        "composite": 0.399,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "PHI@SD"
+      },
+      {
+        "name": "Miguel Vargas",
+        "rank": 127,
+        "composite": 0.389,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@CWS"
+      },
+      {
+        "name": "Taylor Ward",
+        "rank": 160,
+        "composite": 0.348,
+        "opp_pitcher": "Shane McClanahan",
+        "matchup": "TB@BAL"
+      },
+      {
+        "name": "Xander Bogaerts",
+        "rank": 168,
+        "composite": 0.336,
+        "opp_pitcher": "Jes\u00fas Luzardo",
+        "matchup": "PHI@SD"
+      },
+      {
+        "name": "Austin Martin",
+        "rank": 174,
+        "composite": 0.33,
+        "opp_pitcher": "Anthony Kay",
+        "matchup": "MIN@CWS"
+      },
+      {
+        "name": "Dylan Crews",
+        "rank": 181,
+        "composite": 0.318,
+        "opp_pitcher": "Tanner Bibee",
+        "matchup": "WSH@CLE"
+      },
+      {
+        "name": "Kody Clemens",
+        "rank": 201,
+        "composite": 0.289,
+        "opp_pitcher": "Anthony Kay",
+        "matchup": "MIN@CWS"
+      },
+      {
+        "name": "Pedro Pag\u00e9s",
+        "rank": 204,
+        "composite": 0.273,
+        "opp_pitcher": "Jacob Misiorowski",
+        "matchup": "STL@MIL"
+      },
+      {
+        "name": "Konnor Griffin",
+        "rank": 223,
+        "composite": 0.237,
+        "opp_pitcher": "Ben Brown",
+        "matchup": "CHC@PIT"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Carlos Cortes",
+        "ev": 98.5,
+        "angle": 33.0,
+        "distance": 399.0,
+        "hr_in_parks": 9,
+        "result": "field_out",
+        "pitcher": "Castillo, Luis"
+      },
+      {
+        "batter": "Taylor Ward",
+        "ev": 100.3,
+        "angle": 26.0,
+        "distance": 384.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Scholtens, Jesse"
+      },
+      {
+        "batter": "Yandy D\u00edaz",
+        "ev": 104.8,
+        "angle": 26.0,
+        "distance": 377.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Nunez, Anthony"
+      },
+      {
+        "batter": "Austin Martin",
+        "ev": 99.6,
+        "angle": 32.0,
+        "distance": 386.0,
+        "hr_in_parks": 5,
+        "result": "field_error",
+        "pitcher": "Hudson, Bryan"
+      },
+      {
+        "batter": "Miguel Vargas",
+        "ev": 103.0,
+        "angle": 29.0,
+        "distance": 392.0,
+        "hr_in_parks": 24,
+        "result": "field_out",
+        "pitcher": "Matthews, Zebby"
+      },
+      {
+        "batter": "Kody Clemens",
+        "ev": 105.6,
+        "angle": 21.0,
+        "distance": 369.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Kay, Anthony"
+      },
+      {
+        "batter": "Dylan Crews",
+        "ev": 105.3,
+        "angle": 23.0,
+        "distance": 392.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Allen, Logan"
+      },
+      {
+        "batter": "Luis Garc\u00eda Jr.",
+        "ev": 98.9,
+        "angle": 28.0,
+        "distance": 374.0,
+        "hr_in_parks": 8,
+        "result": "double",
+        "pitcher": "Bibee, Tanner"
+      },
+      {
+        "batter": "Andy Pages",
+        "ev": 105.4,
+        "angle": 19.0,
+        "distance": 375.0,
+        "hr_in_parks": 10,
+        "result": "double",
+        "pitcher": "Gordon, Tanner"
+      },
+      {
+        "batter": "Pedro Pag\u00e9s",
+        "ev": 100.9,
+        "angle": 26.0,
+        "distance": 394.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Ashby, Aaron"
+      },
+      {
+        "batter": "Blake Perkins",
+        "ev": 96.9,
+        "angle": 28.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Mautz, Brycen"
+      },
+      {
+        "batter": "Konnor Griffin",
+        "ev": 101.0,
+        "angle": 26.0,
+        "distance": 395.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Webb, Jacob"
+      },
+      {
+        "batter": "Brandon Lowe",
+        "ev": 100.2,
+        "angle": 30.0,
+        "distance": 399.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Brown, Ben"
+      },
+      {
+        "batter": "Bryce Harper",
+        "ev": 108.6,
+        "angle": 32.0,
+        "distance": 397.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Matsui, Yuki"
+      },
+      {
+        "batter": "Xander Bogaerts",
+        "ev": 101.1,
+        "angle": 35.0,
+        "distance": 376.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Luzardo, Jes\u00fas"
+      },
+      {
+        "batter": "Bryson Stott",
+        "ev": 104.9,
+        "angle": 37.0,
+        "distance": 380.0,
+        "hr_in_parks": 14,
+        "result": "field_out",
+        "pitcher": "Canning, Griffin"
+      },
+      {
+        "batter": "Rafael Devers",
+        "ev": 103.5,
+        "angle": 32.0,
+        "distance": 395.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Kelly, Merrill"
+      },
+      {
+        "batter": "Justin Foscue",
+        "ev": 97.3,
+        "angle": 30.0,
+        "distance": 382.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Imai, Tatsuya"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Colton Cowser",
