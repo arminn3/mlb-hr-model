@@ -37219,5 +37219,330 @@
         "description": "Heriberto Hern\u00e1ndez hits a grand slam (2) to center field. Esteury Ruiz scores. Liam Hicks scores. Xavier Edwards scores."
       }
     ]
+  },
+  {
+    "date": "2026-05-25",
+    "total_players_ranked": 242,
+    "total_hrs_hit": 16,
+    "total_near_hrs": 0,
+    "model_hits": 15,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 242,
+          "hits": 15,
+          "rate": 6.2
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 2,
+          "rate": 6.7
+        },
+        "all": {
+          "total": 242,
+          "hits": 15,
+          "rate": 6.2
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 242,
+        "hits": 15,
+        "rate": 6.2
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 242,
+        "hits": 15,
+        "rate": 6.2
+      }
+    },
+    "avg_composite_hr_hitters": 0.364,
+    "avg_composite_non_hitters": 0.402,
+    "composite_separation": -0.038,
+    "hr_hitters": [
+      {
+        "name": "Michael Busch",
+        "rank": 58,
+        "composite": 0.46,
+        "opp_pitcher": "Carmen Mlodzinski",
+        "matchup": "CHC@PIT"
+      },
+      {
+        "name": "Henry Davis",
+        "rank": 61,
+        "composite": 0.444,
+        "opp_pitcher": "Ben Brown",
+        "matchup": "CHC@PIT"
+      },
+      {
+        "name": "Jonathan Aranda",
+        "rank": 68,
+        "composite": 0.4,
+        "opp_pitcher": "Kyle Bradish",
+        "matchup": "TB@BAL"
+      },
+      {
+        "name": "JJ Bleday",
+        "rank": 76,
+        "composite": 0.4,
+        "opp_pitcher": "Nolan McLean",
+        "matchup": "CIN@NYM"
+      },
+      {
+        "name": "Bobby Witt Jr.",
+        "rank": 115,
+        "composite": 0.396,
+        "opp_pitcher": "Will Warren",
+        "matchup": "NYY@KC"
+      },
+      {
+        "name": "Marcus Semien",
+        "rank": 116,
+        "composite": 0.396,
+        "opp_pitcher": "Nick Lodolo",
+        "matchup": "CIN@NYM"
+      },
+      {
+        "name": "Christian Yelich",
+        "rank": 132,
+        "composite": 0.383,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "STL@MIL"
+      },
+      {
+        "name": "Salvador Perez",
+        "rank": 134,
+        "composite": 0.383,
+        "opp_pitcher": "Will Warren",
+        "matchup": "NYY@KC"
+      },
+      {
+        "name": "Cody Bellinger",
+        "rank": 137,
+        "composite": 0.381,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "NYY@KC"
+      },
+      {
+        "name": "Brooks Lee",
+        "rank": 140,
+        "composite": 0.376,
+        "opp_pitcher": "Anthony Kay",
+        "matchup": "MIN@CWS"
+      },
+      {
+        "name": "Tyler Stephenson",
+        "rank": 152,
+        "composite": 0.361,
+        "opp_pitcher": "Nolan McLean",
+        "matchup": "CIN@NYM"
+      },
+      {
+        "name": "Munetaka Murakami",
+        "rank": 157,
+        "composite": 0.353,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@CWS"
+      },
+      {
+        "name": "Drew Romo",
+        "rank": 173,
+        "composite": 0.331,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@CWS"
+      },
+      {
+        "name": "Gabriel Moreno",
+        "rank": 230,
+        "composite": 0.214,
+        "opp_pitcher": "Landen Roupp",
+        "matchup": "AZ@SF"
+      },
+      {
+        "name": "Victor Mesa Jr.",
+        "rank": 236,
+        "composite": 0.187,
+        "opp_pitcher": "Kyle Bradish",
+        "matchup": "TB@BAL"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Christian Yelich",
+        "rank": 23,
+        "composite": 0.555,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "STL@MIL"
+      },
+      {
+        "name": "Jonathan Aranda",
+        "rank": 29,
+        "composite": 0.54,
+        "opp_pitcher": "Kyle Bradish",
+        "matchup": "TB@BAL"
+      },
+      {
+        "name": "Bobby Witt Jr.",
+        "rank": 60,
+        "composite": 0.446,
+        "opp_pitcher": "Will Warren",
+        "matchup": "NYY@KC"
+      },
+      {
+        "name": "Michael Busch",
+        "rank": 70,
+        "composite": 0.4,
+        "opp_pitcher": "Carmen Mlodzinski",
+        "matchup": "CHC@PIT"
+      },
+      {
+        "name": "Brooks Lee",
+        "rank": 74,
+        "composite": 0.4,
+        "opp_pitcher": "Anthony Kay",
+        "matchup": "MIN@CWS"
+      },
+      {
+        "name": "JJ Bleday",
+        "rank": 84,
+        "composite": 0.4,
+        "opp_pitcher": "Nolan McLean",
+        "matchup": "CIN@NYM"
+      },
+      {
+        "name": "Marcus Semien",
+        "rank": 86,
+        "composite": 0.4,
+        "opp_pitcher": "Nick Lodolo",
+        "matchup": "CIN@NYM"
+      },
+      {
+        "name": "Tyler Stephenson",
+        "rank": 88,
+        "composite": 0.4,
+        "opp_pitcher": "Nolan McLean",
+        "matchup": "CIN@NYM"
+      },
+      {
+        "name": "Cody Bellinger",
+        "rank": 150,
+        "composite": 0.364,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "NYY@KC"
+      },
+      {
+        "name": "Henry Davis",
+        "rank": 154,
+        "composite": 0.359,
+        "opp_pitcher": "Ben Brown",
+        "matchup": "CHC@PIT"
+      },
+      {
+        "name": "Munetaka Murakami",
+        "rank": 159,
+        "composite": 0.353,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@CWS"
+      },
+      {
+        "name": "Salvador Perez",
+        "rank": 168,
+        "composite": 0.343,
+        "opp_pitcher": "Will Warren",
+        "matchup": "NYY@KC"
+      },
+      {
+        "name": "Drew Romo",
+        "rank": 206,
+        "composite": 0.304,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@CWS"
+      },
+      {
+        "name": "Gabriel Moreno",
+        "rank": 229,
+        "composite": 0.214,
+        "opp_pitcher": "Landen Roupp",
+        "matchup": "AZ@SF"
+      },
+      {
+        "name": "Victor Mesa Jr.",
+        "rank": 235,
+        "composite": 0.178,
+        "opp_pitcher": "Kyle Bradish",
+        "matchup": "TB@BAL"
+      }
+    ],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [
+      {
+        "name": "Colton Cowser",
+        "pitcher": "Jesse Scholtens",
+        "description": "Colton Cowser homers (3) on a fly ball to right center field. Blaze Alexander scores."
+      }
+    ]
   }
 ]
