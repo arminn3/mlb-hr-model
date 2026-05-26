@@ -1,53 +1,53 @@
 {
   "date": "2026-05-25",
   "total_players_ranked": 242,
-  "total_hrs_hit": 16,
+  "total_hrs_hit": 34,
   "total_near_hrs": 0,
-  "model_hits": 15,
+  "model_hits": 32,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
         "total": 30,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 4,
+        "rate": 13.3
       },
       "all": {
         "total": 242,
-        "hits": 15,
-        "rate": 6.2
+        "hits": 32,
+        "rate": 13.2
       }
     },
     "L10": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 10.0
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 4,
+        "rate": 13.3
       },
       "all": {
         "total": 242,
-        "hits": 15,
-        "rate": 6.2
+        "hits": 32,
+        "rate": 13.2
       }
     }
   },
@@ -55,57 +55,106 @@
   "tier_accuracy": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
       "total": 20,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 3,
+      "rate": 15.0
     },
     "top_30": {
       "total": 30,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 4,
+      "rate": 13.3
     },
     "all": {
       "total": 242,
-      "hits": 15,
-      "rate": 6.2
+      "hits": 32,
+      "rate": 13.2
     }
   },
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
       "total": 20,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 3,
+      "rate": 15.0
     },
     "top_30": {
       "total": 30,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 4,
+      "rate": 13.3
     },
     "all": {
       "total": 242,
-      "hits": 15,
-      "rate": 6.2
+      "hits": 32,
+      "rate": 13.2
     }
   },
-  "avg_composite_hr_hitters": 0.364,
-  "avg_composite_non_hitters": 0.402,
-  "composite_separation": -0.038,
+  "avg_composite_hr_hitters": 0.416,
+  "avg_composite_non_hitters": 0.397,
+  "composite_separation": 0.019,
   "hr_hitters": [
+    {
+      "name": "Kyle Schwarber",
+      "rank": 7,
+      "composite": 0.672,
+      "opp_pitcher": "Griffin Canning",
+      "matchup": "PHI@SD"
+    },
+    {
+      "name": "CJ Abrams",
+      "rank": 17,
+      "composite": 0.639,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "WSH@CLE"
+    },
+    {
+      "name": "Rhys Hoskins",
+      "rank": 20,
+      "composite": 0.636,
+      "opp_pitcher": "PJ Poulin",
+      "matchup": "WSH@CLE"
+    },
+    {
+      "name": "Luke Raley",
+      "rank": 28,
+      "composite": 0.596,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "SEA@ATH"
+    },
+    {
+      "name": "Christian Walker",
+      "rank": 40,
+      "composite": 0.553,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "HOU@TEX"
+    },
+    {
+      "name": "Curtis Mead",
+      "rank": 48,
+      "composite": 0.527,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "WSH@CLE"
+    },
     {
       "name": "Michael Busch",
       "rank": 58,
       "composite": 0.46,
       "opp_pitcher": "Carmen Mlodzinski",
       "matchup": "CHC@PIT"
+    },
+    {
+      "name": "Yordan Alvarez",
+      "rank": 60,
+      "composite": 0.447,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "HOU@TEX"
     },
     {
       "name": "Henry Davis",
@@ -129,6 +178,34 @@
       "matchup": "CIN@NYM"
     },
     {
+      "name": "James Wood",
+      "rank": 82,
+      "composite": 0.4,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "WSH@CLE"
+    },
+    {
+      "name": "Ezequiel Tovar",
+      "rank": 100,
+      "composite": 0.4,
+      "opp_pitcher": "Emmet Sheehan",
+      "matchup": "COL@LAD"
+    },
+    {
+      "name": "Dominic Canzone",
+      "rank": 106,
+      "composite": 0.4,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "SEA@ATH"
+    },
+    {
+      "name": "Randy Arozarena",
+      "rank": 108,
+      "composite": 0.4,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "SEA@ATH"
+    },
+    {
       "name": "Bobby Witt Jr.",
       "rank": 115,
       "composite": 0.396,
@@ -141,6 +218,13 @@
       "composite": 0.396,
       "opp_pitcher": "Nick Lodolo",
       "matchup": "CIN@NYM"
+    },
+    {
+      "name": "J.P. Crawford",
+      "rank": 123,
+      "composite": 0.392,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "SEA@ATH"
     },
     {
       "name": "Christian Yelich",
@@ -171,6 +255,34 @@
       "matchup": "MIN@CWS"
     },
     {
+      "name": "Shea Langeliers",
+      "rank": 143,
+      "composite": 0.372,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "SEA@ATH"
+    },
+    {
+      "name": "Luis Garc\u00eda Jr.",
+      "rank": 146,
+      "composite": 0.366,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "WSH@CLE"
+    },
+    {
+      "name": "Brandon Marsh",
+      "rank": 150,
+      "composite": 0.363,
+      "opp_pitcher": "Griffin Canning",
+      "matchup": "PHI@SD"
+    },
+    {
+      "name": "Jacob Young",
+      "rank": 151,
+      "composite": 0.362,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "WSH@CLE"
+    },
+    {
       "name": "Tyler Stephenson",
       "rank": 152,
       "composite": 0.361,
@@ -183,6 +295,13 @@
       "composite": 0.353,
       "opp_pitcher": "Zebby Matthews",
       "matchup": "MIN@CWS"
+    },
+    {
+      "name": "Ernie Clement",
+      "rank": 169,
+      "composite": 0.335,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "MIA@TOR"
     },
     {
       "name": "Drew Romo",
@@ -208,6 +327,20 @@
   ],
   "hr_hitters_l10": [
     {
+      "name": "Kyle Schwarber",
+      "rank": 2,
+      "composite": 0.711,
+      "opp_pitcher": "Griffin Canning",
+      "matchup": "PHI@SD"
+    },
+    {
+      "name": "Luke Raley",
+      "rank": 5,
+      "composite": 0.652,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "SEA@ATH"
+    },
+    {
       "name": "Christian Yelich",
       "rank": 23,
       "composite": 0.555,
@@ -222,11 +355,53 @@
       "matchup": "TB@BAL"
     },
     {
+      "name": "Christian Walker",
+      "rank": 40,
+      "composite": 0.506,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "HOU@TEX"
+    },
+    {
+      "name": "Rhys Hoskins",
+      "rank": 46,
+      "composite": 0.493,
+      "opp_pitcher": "PJ Poulin",
+      "matchup": "WSH@CLE"
+    },
+    {
+      "name": "Yordan Alvarez",
+      "rank": 49,
+      "composite": 0.486,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "HOU@TEX"
+    },
+    {
+      "name": "Brandon Marsh",
+      "rank": 50,
+      "composite": 0.48,
+      "opp_pitcher": "Griffin Canning",
+      "matchup": "PHI@SD"
+    },
+    {
+      "name": "CJ Abrams",
+      "rank": 57,
+      "composite": 0.463,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "WSH@CLE"
+    },
+    {
       "name": "Bobby Witt Jr.",
       "rank": 60,
       "composite": 0.446,
       "opp_pitcher": "Will Warren",
       "matchup": "NYY@KC"
+    },
+    {
+      "name": "Curtis Mead",
+      "rank": 67,
+      "composite": 0.419,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "WSH@CLE"
     },
     {
       "name": "Michael Busch",
@@ -264,6 +439,62 @@
       "matchup": "CIN@NYM"
     },
     {
+      "name": "Ezequiel Tovar",
+      "rank": 114,
+      "composite": 0.4,
+      "opp_pitcher": "Emmet Sheehan",
+      "matchup": "COL@LAD"
+    },
+    {
+      "name": "Dominic Canzone",
+      "rank": 121,
+      "composite": 0.4,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "SEA@ATH"
+    },
+    {
+      "name": "Randy Arozarena",
+      "rank": 123,
+      "composite": 0.4,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "SEA@ATH"
+    },
+    {
+      "name": "James Wood",
+      "rank": 131,
+      "composite": 0.392,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "WSH@CLE"
+    },
+    {
+      "name": "J.P. Crawford",
+      "rank": 132,
+      "composite": 0.392,
+      "opp_pitcher": "Aaron Civale",
+      "matchup": "SEA@ATH"
+    },
+    {
+      "name": "Jacob Young",
+      "rank": 133,
+      "composite": 0.389,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "WSH@CLE"
+    },
+    {
+      "name": "Shea Langeliers",
+      "rank": 141,
+      "composite": 0.372,
+      "opp_pitcher": "Luis Castillo",
+      "matchup": "SEA@ATH"
+    },
+    {
+      "name": "Luis Garc\u00eda Jr.",
+      "rank": 145,
+      "composite": 0.369,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "WSH@CLE"
+    },
+    {
       "name": "Cody Bellinger",
       "rank": 150,
       "composite": 0.364,
@@ -290,6 +521,13 @@
       "composite": 0.343,
       "opp_pitcher": "Will Warren",
       "matchup": "NYY@KC"
+    },
+    {
+      "name": "Ernie Clement",
+      "rank": 176,
+      "composite": 0.332,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "MIA@TOR"
     },
     {
       "name": "Drew Romo",
