@@ -299,8 +299,14 @@ export function BatterDetailPage({
   const hrFbPct = flyBalls.length > 0 ? (hrInLookback / flyBalls.length) * 100 : null;
   const pullBrl = player.season_profile?.pull_barrel ?? null;
 
+  const isSeasonMode = scores.data_quality === "SEASON";
+  const bip = scores.bip ?? 0;
+
   let displayBarrel = scores.barrel_pct, displayFb = scores.fb_pct;
-  let displayLd = scores.ld_pct ?? 0, displayGb = scores.gb_pct ?? 0;
+  // ld/gb aren't tracked in season_profile — show null (→ "—") in Season mode
+  // Also null when BIP is too low to be meaningful
+  let displayLd: number | null = isSeasonMode ? null : ((bip < 3 && scores.ld_pct === 0) ? null : (scores.ld_pct ?? null));
+  let displayGb: number | null = isSeasonMode ? null : ((bip < 3 && scores.gb_pct === 0) ? null : (scores.gb_pct ?? null));
   let displayHardHit = scores.hard_hit_pct, displayEv = scores.exit_velo;
   let displayHrFb: number | null = hrFbPct;
 
@@ -340,8 +346,8 @@ export function BatterDetailPage({
     { label: "Barrel%",    value: `${displayBarrel}%`,                                       cls: statHighlight(displayBarrel, [8, 15]) },
     { label: "Hard Hit%",  value: `${displayHardHit}%`,                                      cls: statHighlight(displayHardHit, [35, 50]) },
     { label: "HR/FB%",     value: displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`, cls: displayHrFb == null ? "text-muted" : statHighlight(displayHrFb, [10, 18]) },
-    { label: "GB%",        value: `${displayGb}%`,                                           cls: "text-muted" },
-    { label: "LD%",        value: `${displayLd}%`,                                           cls: "text-muted" },
+    { label: "GB%",        value: displayGb === null ? "—" : `${displayGb}%`,               cls: "text-muted" },
+    { label: "LD%",        value: displayLd === null ? "—" : `${displayLd}%`,               cls: "text-muted" },
     { label: "FB%",        value: `${displayFb}%`,                                           cls: statHighlight(displayFb, [25, 40]) },
     { label: "Pull Brl%",  value: pullBrl == null ? "—" : `${pullBrl.toFixed(1)}%`,          cls: pullBrl == null ? "text-muted" : statHighlight(pullBrl, [4, 8]) },
     { label: "Season FB%", value: player.season_profile?.fb != null ? `${player.season_profile.fb}%` : "—", cls: player.season_profile?.fb != null ? statHighlight(player.season_profile.fb, [25, 40]) : "text-muted" },
