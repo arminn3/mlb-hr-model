@@ -1,8 +1,11 @@
+"use client";
+
 import type { PlayerData } from "./types";
 
 interface Signal {
+  key: string;
   label: string;
-  detail: string;
+  stat: string;
   triggered: boolean;
 }
 
@@ -10,56 +13,60 @@ function buildSignals(player: PlayerData): Signal[] {
   const s = player.hr_signals;
   if (!s) return [];
 
+  const sp = player.season_profile;
   const signals: Signal[] = [];
 
   signals.push({
-    label: "Barrel in last 3 games",
-    detail: "Research: 1.34× HR rate when player barreled recently",
+    key: "barrel",
+    label: "Barrel heat",
+    stat: s.barrel_heat ? "barreled in last 3 games" : "no barrel in last 3 games",
     triggered: s.barrel_heat,
   });
 
-  const pullAir = player.season_profile?.pull_air ?? 0;
-  const pullBrl = player.season_profile?.pull_barrel ?? 0;
+  const pullAir = sp?.pull_air ?? 0;
+  const pullBrl = sp?.pull_barrel ?? 0;
   signals.push({
-    label: "Pull-power tendency",
-    detail: `Pull air ${pullAir.toFixed(0)}% · Pull barrel ${pullBrl.toFixed(0)}% — pulled barrels HR 66.5% of the time`,
+    key: "pull",
+    label: "Pull-power profile",
+    stat: `pull air ${pullAir.toFixed(0)}%  ·  pull barrel ${pullBrl.toFixed(0)}%`,
     triggered: s.pull_power,
   });
 
   if (s.drought) {
     const { bips_since_hr, expected_gap, z_score } = s.drought;
     signals.push({
-      label: "HR drought — overdue",
-      detail: `${bips_since_hr} BIPs since last HR · personal avg gap ${expected_gap} · Z ${z_score > 0 ? "+" : ""}${z_score.toFixed(2)}`,
+      key: "drought",
+      label: "HR drought",
+      stat: `${bips_since_hr} BIPs since HR  ·  avg gap ${expected_gap}  ·  Z ${z_score >= 0 ? "+" : ""}${z_score.toFixed(2)}`,
       triggered: s.drought.triggered,
     });
   }
 
   signals.push({
-    label: "Facing HR-prone pitcher",
-    detail: `Pitcher HR/9: ${player.pitcher_stats?.hr_per_9?.toFixed(2) ?? "—"} (MLB avg ~1.3)`,
+    key: "pitcher",
+    label: "Pitcher vulnerable",
+    stat: `${player.opp_pitcher} HR/9: ${player.pitcher_stats?.hr_per_9?.toFixed(2) ?? "—"}  (avg ~1.3)`,
     triggered: s.pitcher_vulnerable,
   });
 
-  const env = player as any;
   signals.push({
+    key: "park",
     label: "HR-friendly park",
-    detail: `Park factor >105 boosts fly-ball carry`,
+    stat: "park factor > 105",
     triggered: s.park_friendly,
   });
 
   return signals;
 }
 
-function label(hit: number, total: number): { text: string; color: string } {
-  if (total === 0) return { text: "No Data", color: "text-muted" };
-  const pct = hit / total;
-  if (pct === 1) return { text: "Locked In", color: "text-amber-400" };
-  if (pct >= 0.8) return { text: "Primed", color: "text-accent-green" };
-  if (pct >= 0.6) return { text: "Warming Up", color: "text-accent-green/70" };
-  if (pct >= 0.4) return { text: "Neutral", color: "text-muted" };
-  return { text: "Cold", color: "text-muted/60" };
-}
+const TIER: Record<number, { label: string; accent: string; glow: string }> = {
+  5: { label: "Locked In", accent: "text-amber-400", glow: "rgba(251,191,36,0.18)" },
+  4: { label: "Primed",    accent: "text-accent-green", glow: "rgba(var(--color-accent-green-rgb, 74,222,128),0.10)" },
+  3: { label: "Warming",   accent: "text-accent-green/70", glow: "transparent" },
+  2: { label: "Neutral",   accent: "text-muted",           glow: "transparent" },
+  1: { label: "Cold",      accent: "text-muted/50",         glow: "transparent" },
+  0: { label: "Cold",      accent: "text-muted/50",         glow: "transparent" },
+};
 
 export function HRSignalCard({ player }: { player: PlayerData }) {
   if (!player.hr_signals) return null;
@@ -67,60 +74,116 @@ export function HRSignalCard({ player }: { player: PlayerData }) {
   const signals = buildSignals(player);
   const hit = signals.filter((s) => s.triggered).length;
   const total = signals.length;
-  const { text: lbl, color } = label(hit, total);
+  const tier = TIER[Math.min(hit, 5)] ?? TIER[0];
   const isGold = hit === total && total > 0;
 
   return (
     <div
-      className="rounded-[var(--radius-md)] p-4"
+      className="rounded-[var(--radius-md)] overflow-hidden"
       style={{
-        background: isGold
-          ? "linear-gradient(180deg, rgba(251,191,36,0.08) 0%, rgba(251,191,36,0.03) 100%)"
-          : "linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.01) 100%)",
-        border: isGold ? "1px solid rgba(251,191,36,0.25)" : "1px solid rgba(255,255,255,0.08)",
+        border: isGold
+          ? "1px solid rgba(251,191,36,0.30)"
+          : "1px solid rgba(255,255,255,0.07)",
+        boxShadow: isGold ? `0 0 24px 0 rgba(251,191,36,0.10)` : "none",
       }}
     >
-      {/* Header */}
-      <div className="flex items-baseline justify-between mb-3">
-        <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-muted/50">
-          HR Signal
+      {/* Header strip */}
+      <div
+        className="flex items-center justify-between px-4 py-3"
+        style={{
+          background: isGold
+            ? "linear-gradient(90deg, rgba(251,191,36,0.12) 0%, rgba(251,191,36,0.04) 100%)"
+            : "rgba(255,255,255,0.04)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+        }}
+      >
+        <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-muted/40">
+          Power Signals
         </span>
-        <div className="flex items-baseline gap-1.5">
-          <span className={`text-sm font-bold font-mono ${isGold ? "text-amber-400" : "text-foreground"}`}>
-            {hit}/{total}
-          </span>
-          <span className={`text-[11px] font-semibold ${color}`}>{lbl}</span>
-          {isGold && <span className="text-amber-400 text-xs">★</span>}
+
+        <div className="flex items-center gap-3">
+          {/* Segmented dot indicators */}
+          <div className="flex items-center gap-1">
+            {signals.map((sig, i) => (
+              <span
+                key={i}
+                className="block rounded-full transition-all duration-300"
+                style={{
+                  width: 7,
+                  height: 7,
+                  background: sig.triggered
+                    ? isGold
+                      ? "rgba(251,191,36,0.9)"
+                      : "rgba(74,222,128,0.85)"
+                    : "rgba(255,255,255,0.12)",
+                  boxShadow: sig.triggered && isGold
+                    ? "0 0 6px 1px rgba(251,191,36,0.5)"
+                    : sig.triggered
+                    ? "0 0 5px 0px rgba(74,222,128,0.4)"
+                    : "none",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Score + label */}
+          <div className="flex items-baseline gap-1.5">
+            <span
+              className={`font-mono text-sm font-bold ${isGold ? "text-amber-400" : "text-foreground"}`}
+            >
+              {hit}/{total}
+            </span>
+            <span className={`text-[11px] font-semibold ${tier.accent}`}>
+              {tier.label}
+            </span>
+            {isGold && (
+              <span className="text-amber-400 text-[11px] leading-none">★</span>
+            )}
+          </div>
         </div>
       </div>
 
       {/* Signal rows */}
-      <div className="space-y-1.5">
+      <div style={{ background: "rgba(255,255,255,0.015)" }}>
         {signals.map((sig, i) => (
           <div
-            key={i}
-            className={`flex gap-2.5 rounded px-2.5 py-1.5 ${
-              sig.triggered
-                ? "bg-accent-green/8 border border-accent-green/15"
-                : "bg-white/[0.02] border border-white/[0.04]"
-            }`}
+            key={sig.key}
+            className="flex items-start gap-3 px-4 py-2.5 relative"
+            style={{
+              borderBottom:
+                i < signals.length - 1 ? "1px solid rgba(255,255,255,0.04)" : "none",
+            }}
           >
-            <span
-              className={`mt-0.5 text-[11px] font-bold flex-shrink-0 ${
-                sig.triggered ? "text-accent-green" : "text-muted/40"
-              }`}
-            >
-              {sig.triggered ? "✓" : "✗"}
-            </span>
-            <div className="min-w-0">
+            {/* Left accent bar */}
+            <div
+              className="flex-shrink-0 rounded-full mt-0.5"
+              style={{
+                width: 3,
+                height: 32,
+                background: sig.triggered
+                  ? isGold
+                    ? "rgba(251,191,36,0.8)"
+                    : "rgba(74,222,128,0.7)"
+                  : "rgba(255,255,255,0.08)",
+              }}
+            />
+
+            {/* Text */}
+            <div className="flex-1 min-w-0">
               <div
                 className={`text-[11px] font-semibold leading-tight ${
-                  sig.triggered ? "text-foreground" : "text-muted/60"
+                  sig.triggered ? "text-foreground" : "text-muted/40"
                 }`}
               >
                 {sig.label}
               </div>
-              <div className="text-[10px] text-muted/50 mt-0.5 leading-tight">{sig.detail}</div>
+              <div
+                className={`text-[10px] font-mono mt-0.5 leading-tight truncate ${
+                  sig.triggered ? "text-muted/70" : "text-muted/25"
+                }`}
+              >
+                {sig.stat}
+              </div>
             </div>
           </div>
         ))}
