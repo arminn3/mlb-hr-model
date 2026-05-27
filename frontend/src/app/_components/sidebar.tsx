@@ -256,15 +256,15 @@ export function Sidebar({
         </div>
       </div>
 
-      {/* How It Works — pinned to bottom */}
-      <div className={collapsed ? "px-2 pb-3" : "px-3 pb-3"}>
+      {/* How It Works — pinned to bottom (hidden for now) */}
+      {/* <div className={collapsed ? "px-2 pb-3" : "px-3 pb-3"}>
         <NavButton
           item={NAV_ITEMS.find((n) => n.key === "methodology")!}
           active={active}
           collapsed={collapsed}
           onChange={onChange}
         />
-      </div>
+      </div> */}
 
       {/* Footer */}
       {!collapsed && (
