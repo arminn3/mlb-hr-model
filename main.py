@@ -210,6 +210,72 @@ def _calc_bvp(batter_df, batter_2025, pitcher_id, batter_id=None) -> dict:
     return {"career": career, "recent_abs": recent}
 
 
+def _compute_hr_signals(
+    batter_df,
+    batter_2025,
+    season_profile: dict,
+    pitcher_hr_per_9: float,
+    park_factor: float,
+) -> dict:
+    """Compute the 5-signal HR indicator from research-validated predictors."""
+    # Combine 2026 + 2025 BIP, sorted oldest→newest
+    frames = [d for d in [batter_2025, batter_df] if d is not None and not d.empty]
+    if not frames:
+        return None
+    bip = pd.concat(frames, ignore_index=True)
+    bip["game_date"] = pd.to_datetime(bip.get("game_date", pd.Series(dtype="datetime64[ns]")), errors="coerce")
+    bip = bip.dropna(subset=["launch_speed"]).sort_values("game_date").reset_index(drop=True)
+    if bip.empty:
+        return None
+
+    # ── Signal 1: Barrel in last 3 game-dates (1.34x HR rate, research-validated) ──
+    recent_dates = sorted(bip["game_date"].dropna().unique())[-3:]
+    recent = bip[bip["game_date"].isin(recent_dates)]
+    barrel_heat = False
+    if "launch_speed_angle" in recent.columns:
+        barrel_heat = bool((recent["launch_speed_angle"].fillna(0) == 6).any())
+    if not barrel_heat and "launch_speed" in recent.columns and "launch_angle" in recent.columns:
+        barrel_heat = bool(
+            ((recent["launch_speed"] >= 98) & recent["launch_angle"].between(18, 32)).any()
+        )
+
+    # ── Signal 2: Pull-power tendency (66.5% HR rate on pulled barrels) ──
+    pull_air = season_profile.get("pull_air", 0) or 0
+    pull_barrel = season_profile.get("pull_barrel", 0) or 0
+    pull_power = pull_air >= 28 or pull_barrel >= 12
+
+    # ── Signal 3: HR drought (bips since last HR vs personal expected gap) ──
+    drought_info = None
+    if "events" in bip.columns:
+        total_bip = len(bip)
+        total_hrs = int((bip["events"] == "home_run").sum())
+        if total_hrs > 0:
+            expected_gap = round(total_bip / total_hrs, 1)
+            hr_indices = bip.index[bip["events"] == "home_run"].tolist()
+            bips_since = total_bip - hr_indices[-1] - 1
+            z = round((bips_since - expected_gap) / max(expected_gap * 0.8, 1), 2)
+            drought_info = {
+                "bips_since_hr": bips_since,
+                "expected_gap": expected_gap,
+                "z_score": z,
+                "triggered": bips_since > expected_gap,
+            }
+
+    # ── Signal 4: Pitcher vulnerable (HR/9 > league avg ~1.3) ──
+    pitcher_vulnerable = (pitcher_hr_per_9 or 0) > 1.3
+
+    # ── Signal 5: Park boosts HRs (park factor > 105) ──
+    park_friendly = (park_factor or 100) > 105
+
+    return {
+        "barrel_heat": barrel_heat,
+        "pull_power": pull_power,
+        "drought": drought_info,
+        "pitcher_vulnerable": pitcher_vulnerable,
+        "park_friendly": park_friendly,
+    }
+
+
 def run_model(game_date: date = None, fast: bool = False):
     """
     Full pipeline: fetch data, score every batter with an HR prop at
@@ -571,6 +637,11 @@ def run_model(game_date: date = None, fast: bool = False):
             },
             "season_stats": season_stats,
             "season_profile": season_profile,
+            "hr_signals": _compute_hr_signals(
+                batter_df, batter_2025, season_profile,
+                pitcher_hr_per_9=round(l5.get("pitcher_hr_per_9", 0), 2),
+                park_factor=env_data.get("park_factor", 100),
+            ),
             "batter_zones": batter_zones,
             "pitcher_zones": pitcher_zones,
             "pitcher_zone_freq": pitcher_zone_freq,

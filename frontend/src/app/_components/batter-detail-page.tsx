@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import type { PlayerData, PitchDetailEntry, ZoneEntry } from "./types";
+import { HRSignalCard } from "./hr-signal-card";
 import { scoreFor, type UILookback } from "./score-utils";
 import { ScoreBar } from "./score-bar";
 import { PitchesTab } from "./pitches-tab";
@@ -444,6 +445,9 @@ export function BatterDetailPage({
             </div>
           ))}
         </div>
+
+        {/* HR Signal */}
+        <HRSignalCard player={player} />
 
         {/* Pitch Matchup */}
         {pitchDetailEntries.length > 0 && (

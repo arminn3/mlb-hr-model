@@ -145,6 +145,18 @@ export interface PlayerData {
   };
   matchup_swstr?: number;
   pitcher_data_year?: number;
+  hr_signals?: {
+    barrel_heat: boolean;
+    pull_power: boolean;
+    drought: {
+      bips_since_hr: number;
+      expected_gap: number;
+      z_score: number;
+      triggered: boolean;
+    } | null;
+    pitcher_vulnerable: boolean;
+    park_friendly: boolean;
+  } | null;
   bvp_stats?: {
     career: {
       abs: number;
