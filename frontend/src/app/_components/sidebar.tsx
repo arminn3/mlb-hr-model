@@ -200,9 +200,9 @@ export function Sidebar({
         <div className="space-y-1 mb-5">
           {(
             [
-              "rankings",
               "ml",
               "slate",
+              "hr_due",
               "matchup",
               "breakouts",
               "projections",
