@@ -39072,7 +39072,7 @@
       {
         "name": "Jose Siri",
         "pitcher": "Tyler Holton",
-        "description": "${person|fullName|642350} homers ${total|homeRuns|642350} on a fly ball to left field.  "
+        "description": "Jose Siri homers (1) on a fly ball to left field."
       },
       {
         "name": "Brett Sullivan",
