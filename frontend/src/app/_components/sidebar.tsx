@@ -27,8 +27,8 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { key: "rankings", label: "HR Rankings", icon: "chart" },
-  { key: "ml", label: "ML Rankings", icon: "brain" },
+  // { key: "rankings", label: "HR Rankings", icon: "chart" },
+  { key: "ml", label: "Rankings", icon: "brain" },
   { key: "slate", label: "Game Slate", icon: "games" },
   { key: "hr_due", label: "HR Due List", icon: "target" },
   { key: "projections", label: "Projections", icon: "target" },

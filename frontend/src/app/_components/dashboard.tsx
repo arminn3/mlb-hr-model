@@ -45,7 +45,7 @@ const TAB_CONFIG: Record<Page, {
   showDatePicker: boolean;
 }> = {
   rankings:    { title: "HR Rankings",       subtitle: "Top HR plays by composite score",      showLookback: true,  showDatePicker: true },
-  ml:          { title: "ML Rankings",       subtitle: "Data-driven — learned from 125k slate samples", showLookback: true,  showDatePicker: true },
+  ml:          { title: "Rankings",           subtitle: "Data-driven — learned from 125k slate samples", showLookback: true,  showDatePicker: true },
   slate:       { title: "Game Slate",        subtitle: "Every game on today's card",           showLookback: true,  showDatePicker: true },
   hr_due:      { title: "HR Due List",       subtitle: "Players with 3+ power signals today",  showLookback: true,  showDatePicker: true },
   projections: { title: "Projections",       subtitle: "Future at-bat modeling",               showLookback: false, showDatePicker: true },
