@@ -123,7 +123,12 @@ function DueCard({
       {/* Name + matchup */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5">
-          <span className="text-sm font-semibold text-foreground leading-tight truncate">{player.name}</span>
+          <span className={`text-sm font-semibold leading-tight truncate ${
+            (() => {
+              const s = scoreFor(player, lookback) ?? scoreFor(player, "L5");
+              return s && (s.data_quality !== "OK" || (s.recent_abs?.length ?? 10) <= 2) ? "text-red-400" : "text-foreground";
+            })()
+          }`}>{player.name}</span>
           <img src={teamLogoUrl(teamAbbr)} alt={teamAbbr} className="w-4 h-4 object-contain flex-shrink-0 opacity-70" />
         </div>
         <div className="text-[10px] text-muted/50 truncate mt-0.5">vs {player.opp_pitcher} · {player.pitcher_hand}HP</div>

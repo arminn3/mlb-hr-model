@@ -430,6 +430,9 @@ export function MLRankings({
           const isCombo = rankingTab === "combined";
           const score = isCombo ? combinedScore(player) : mlComposite(player, lookback, mlWeights);
           const delta = isCombo ? combinedFormDelta(player) : null;
+          const isSmallSample = isCombo
+            ? (!player.season_profile || (player.season_profile.bip_count ?? 0) < 20)
+            : (s.data_quality !== "OK" || (s.recent_abs?.length ?? 10) <= 2);
           return (
             <div
               key={player.name}
@@ -440,7 +443,7 @@ export function MLRankings({
               </span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-foreground">{player.name}</span>
+                  <span className={`text-sm font-semibold ${isSmallSample ? "text-red-400" : "text-foreground"}`}>{player.name}</span>
                   <RatingBadge composite={score} />
                 </div>
                 <div className="text-[10px] text-muted mt-0.5">
@@ -489,6 +492,9 @@ export function MLRankings({
               const score = isCombo ? combinedScore(player) : mlComposite(player, lookback, mlWeights);
               const delta = isCombo ? combinedFormDelta(player) : null;
               const season = isCombo ? computeSeasonScore(player) : null;
+              const isSmallSample = isCombo
+                ? (!player.season_profile || (player.season_profile.bip_count ?? 0) < 20)
+                : (s.data_quality !== "OK" || (s.recent_abs?.length ?? 10) <= 2);
               return (
                 <tr
                   key={player.name}
@@ -496,7 +502,7 @@ export function MLRankings({
                 >
                   <td className="text-center py-2 font-bold text-accent font-mono">{i + 1}</td>
                   <td className="py-2 pr-3">
-                    <span className="font-semibold text-foreground">{player.name}</span>
+                    <span className={`font-semibold ${isSmallSample ? "text-red-400" : "text-foreground"}`}>{player.name}</span>
                   </td>
                   <td className="py-2 pr-3 text-muted">
                     {game.away_team}@{game.home_team} vs {player.opp_pitcher}

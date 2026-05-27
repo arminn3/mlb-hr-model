@@ -61,6 +61,8 @@ interface DayReportData {
     pitcher: string;
     description: string;
   }>;
+  combined_tier_accuracy?: Record<string, { total: number; hits: number; rate: number }>;
+  combined_hr_hitters?: Array<{ name: string; rank: number; composite: number; opp_pitcher: string; matchup: string }>;
 }
 
 export function ResultsView({ selectedDate }: { selectedDate: string }) {
@@ -159,8 +161,10 @@ export function ResultsView({ selectedDate }: { selectedDate: string }) {
 }
 
 function DayReport({ day }: { day: DayReportData }) {
-  const [lb, setLb] = useState<"L5" | "L10">("L5");
-  const tierAccuracy = lb === "L5"
+  const [lb, setLb] = useState<"L5" | "L10" | "Combined">("L5");
+  const tierAccuracy = lb === "Combined"
+    ? (day.combined_tier_accuracy ?? day.tier_accuracy)
+    : lb === "L5"
     ? day.tier_accuracy
     : day.tier_accuracy_by_lookback?.[lb] || day.tier_accuracy;
 
@@ -175,29 +179,26 @@ function DayReport({ day }: { day: DayReportData }) {
                 <span className="text-accent-green font-semibold">{day.model_hits} caught</span>
               </div>
             </div>
-            {/* L5/L10 toggle — prominent */}
+            {/* L5/L10/Combined toggle */}
             <div className="flex items-center gap-1 bg-card border border-card-border rounded-xl p-1">
-              <button
-                onClick={() => setLb("L5")}
-                className={`px-5 py-2 text-sm font-bold rounded-lg cursor-pointer transition-colors ${
-                  lb === "L5" ? "bg-accent text-background" : "text-muted hover:text-foreground"
-                }`}
-              >
-                L5
-              </button>
-              <button
-                onClick={() => setLb("L10")}
-                className={`px-5 py-2 text-sm font-bold rounded-lg cursor-pointer transition-colors ${
-                  lb === "L10" ? "bg-accent text-background" : "text-muted hover:text-foreground"
-                }`}
-              >
-                L10
-              </button>
+              {(["L5", "L10", "Combined"] as const).map((opt) => (
+                <button
+                  key={opt}
+                  onClick={() => setLb(opt)}
+                  className={`px-4 py-2 text-sm font-bold rounded-lg cursor-pointer transition-colors ${
+                    lb === opt ? "bg-accent text-background" : "text-muted hover:text-foreground"
+                  }`}
+                >
+                  {opt}
+                </button>
+              ))}
             </div>
           </div>
 
           {/* Tier accuracy — HRs only */}
-          <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">HR Hit Rate ({lb})</h4>
+          <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
+            {lb === "Combined" ? "HR Hit Rate (Season + Form)" : `HR Hit Rate (${lb})`}
+          </h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
             {Object.entries(tierAccuracy).map(([tier, acc]) => (
               <div key={tier} className="bg-background/30 rounded-lg p-3 text-center">
@@ -234,8 +235,8 @@ function DayReport({ day }: { day: DayReportData }) {
             </div>
           )}
 
-          {/* Lookback comparison */}
-          {day.tier_accuracy_by_lookback && (
+          {/* Lookback comparison — hidden when Combined tab active */}
+          {lb !== "Combined" && day.tier_accuracy_by_lookback && (
             <div className="mb-4">
               <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
                 Performance by Lookback Window
@@ -296,8 +297,13 @@ function DayReport({ day }: { day: DayReportData }) {
           )}
 
           {/* HR hitters */}
-          {day.hr_hitters.length > 0 && (
-            <HRHittersTable l5={day.hr_hitters} l10={day.hr_hitters_l10 || []} activeLb={lb} />
+          {(lb === "Combined" ? (day.combined_hr_hitters ?? []) : day.hr_hitters).length > 0 && (
+            <HRHittersTable
+              l5={day.hr_hitters}
+              l10={day.hr_hitters_l10 || []}
+              combined={day.combined_hr_hitters || []}
+              activeLb={lb}
+            />
           )}
 
           {/* Near HRs — batted ball events */}
@@ -415,16 +421,19 @@ function DayReport({ day }: { day: DayReportData }) {
   );
 }
 
-function HRHittersTable({ l5, l10, activeLb }: {
+function HRHittersTable({ l5, l10, combined, activeLb }: {
   l5: Array<{ name: string; rank: number; composite: number; opp_pitcher: string; matchup: string }>;
   l10: Array<{ name: string; rank: number; composite: number; opp_pitcher: string; matchup: string }>;
-  activeLb: "L5" | "L10";
+  combined: Array<{ name: string; rank: number; composite: number; opp_pitcher: string; matchup: string }>;
+  activeLb: "L5" | "L10" | "Combined";
 }) {
-  const hitters = activeLb === "L10" && l10.length > 0 ? l10 : l5;
+  const hitters = activeLb === "Combined" ? combined : activeLb === "L10" && l10.length > 0 ? l10 : l5;
 
   return (
     <div className="mb-3">
-      <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">HR Hitters in Rankings ({activeLb})</h4>
+      <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
+        {activeLb === "Combined" ? "HR Hitters in Season + Form Rankings" : `HR Hitters in Rankings (${activeLb})`}
+      </h4>
 
       {/* Mobile card view */}
       <div className="md:hidden space-y-1.5">

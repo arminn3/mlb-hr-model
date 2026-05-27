@@ -161,6 +161,55 @@ def get_near_hrs(game_date: date) -> list[dict]:
         return []
 
 
+# ── Season + Form scoring (mirrors score-utils.ts exactly) ───────────────────
+_EV_LO, _EV_HI = 92.0, 102.0
+_BRL_LO, _BRL_HI = 0.0, 0.25
+_FB_LO, _FB_HI = 0.15, 0.55
+
+
+def _norm(v: float, lo: float, hi: float) -> float:
+    return max(0.0, min(1.0, (v - lo) / (hi - lo)))
+
+
+def _compute_season_score(player: dict) -> dict | None:
+    sp = player.get("season_profile")
+    if not sp or sp.get("bip_count", 0) < 20:
+        return None
+    barrel_n = _norm(sp["barrel"] / 100, _BRL_LO, _BRL_HI)
+    fb_n = _norm(sp["fb"] / 100, _FB_LO, _FB_HI)
+    ev_n = _norm(sp["ev"], _EV_LO, _EV_HI)
+    batter = barrel_n * 0.55 + fb_n * 0.25 + ev_n * 0.20
+    l10 = player.get("scores", {}).get("L10", {})
+    return {
+        "batter": batter,
+        "pitcher": l10.get("pitcher_score", 0.5),
+        "env": l10.get("env_score", 0.5),
+    }
+
+
+def _compute_combined_score(player: dict) -> float:
+    season = _compute_season_score(player)
+    scores = player.get("scores", {})
+    l5 = scores.get("L5", {})
+    l10 = scores.get("L10", {})
+    if not l5 and not l10:
+        return 0.0
+    if season:
+        l5_batter = l5.get("batter_score", season["batter"])
+        l10_batter = l10.get("batter_score", season["batter"])
+        form_batter = (l5_batter + l10_batter) / 2
+        delta = max(-0.15, min(0.15, form_batter - season["batter"]))
+        base_batter = season["batter"] + delta
+        pitcher = season["pitcher"]
+        env = season["env"]
+    else:
+        s = l10 if l10 else l5
+        base_batter = s.get("batter_score", 0.0)
+        pitcher = s.get("pitcher_score", 0.5)
+        env = s.get("env_score", 0.5)
+    return base_batter * 0.50 + pitcher * 0.35 + env * 0.15
+
+
 def load_model_predictions(game_date: date) -> dict:
     """Load the model's predictions for a given date."""
     path = Path(f"frontend/public/data/{game_date.isoformat()}.json")
@@ -333,6 +382,43 @@ def compare_results(game_date: date) -> dict:
             "rate": round(len(tier_hr_or_near) / len(tier_players) * 100, 1) if tier_players else 0,
         }
 
+    # ── Season + Form (combined) ranked list ─────────────────────────────────
+    combined_raw = []
+    for game in predictions["games"]:
+        if game.get("game_pk", 0) in postponed_game_pks:
+            continue
+        matchup = f"{game['away_team']}@{game['home_team']}"
+        for player in game["players"]:
+            combined_raw.append({
+                "name": player["name"],
+                "composite": _compute_combined_score(player),
+                "opp_pitcher": player.get("opp_pitcher", ""),
+                "matchup": matchup,
+            })
+    seen_combined: dict[str, dict] = {}
+    for p in combined_raw:
+        if p["name"] not in seen_combined or p["composite"] > seen_combined[p["name"]]["composite"]:
+            seen_combined[p["name"]] = p
+    combined_players = list(seen_combined.values())
+    combined_players.sort(key=lambda x: x["composite"], reverse=True)
+    for i, p in enumerate(combined_players):
+        p["rank"] = i + 1
+
+    combined_tiers = {
+        "top_10": combined_players[:10],
+        "top_20": combined_players[:20],
+        "top_30": combined_players[:30],
+        "all": combined_players,
+    }
+    combined_tier_accuracy: dict[str, dict] = {}
+    for tier_name, tier_players in combined_tiers.items():
+        tier_hits = [p for p in tier_players if any(_name_match(p["name"], hr) for hr in hr_names)]
+        combined_tier_accuracy[tier_name] = {
+            "total": len(tier_players),
+            "hits": len(tier_hits),
+            "rate": round(len(tier_hits) / len(tier_players) * 100, 1) if tier_players else 0,
+        }
+
     # ── HR Signal tier accuracy ───────────────────────────────────────────────
     # For each player in the dated JSON, count their triggered signals (0-5)
     # and check if they hit a HR. Group into tiers: 1, 2, 3, 4, 5 signals.
@@ -417,6 +503,13 @@ def compare_results(game_date: date) -> dict:
             for hr in surprise_hrs
         ],
         "hr_signal_accuracy": hr_signal_accuracy,
+        "combined_tier_accuracy": combined_tier_accuracy,
+        "combined_hr_hitters": [
+            {"name": p["name"], "rank": p["rank"], "composite": round(p["composite"], 3),
+             "opp_pitcher": p["opp_pitcher"], "matchup": p["matchup"]}
+            for p in combined_players
+            if any(_name_match(p["name"], hr) for hr in hr_names)
+        ],
     }
 
     return report

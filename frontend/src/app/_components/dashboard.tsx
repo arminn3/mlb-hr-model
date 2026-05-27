@@ -11,7 +11,6 @@ import { GameSection, type SelectedBatter } from "./game-section";
 import { BatterDetailPage } from "./batter-detail-page";
 import { EnvironmentView } from "./environment-view";
 import { Methodology } from "./methodology";
-import { TopPicks } from "./top-picks";
 import { MLRankings } from "./ml-rankings";
 import { ResultsView } from "./results-view";
 import { MethodologyPage } from "./methodology-page";
@@ -585,7 +584,7 @@ export function Dashboard() {
 
             {/* RIGHT slot (date + lookback + user menu) */}
             <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
-              {tabConfig.showLookback && (
+              {tabConfig.showLookback && !(activePage === "slate" && selectedBatter) && (
                 <LookbackToggle value={lookback} onChange={setLookback} />
               )}
               {tabConfig.showDatePicker && (
@@ -600,10 +599,6 @@ export function Dashboard() {
         <main className="flex-1 p-4 md:p-8">
           {activePage === "ml" && (
             <MLRankings games={data.games} lookback={lookback} currentDate={data.date} />
-          )}
-
-          {activePage === "rankings" && (
-            <TopPicks games={data.games} lookback={lookback} />
           )}
 
           {activePage === "slate" && selectedBatter ? (
