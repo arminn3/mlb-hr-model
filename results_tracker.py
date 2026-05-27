@@ -333,6 +333,48 @@ def compare_results(game_date: date) -> dict:
             "rate": round(len(tier_hr_or_near) / len(tier_players) * 100, 1) if tier_players else 0,
         }
 
+    # ── HR Signal tier accuracy ───────────────────────────────────────────────
+    # For each player in the dated JSON, count their triggered signals (0-5)
+    # and check if they hit a HR. Group into tiers: 1, 2, 3, 4, 5 signals.
+    def _name_match(a: str, b: str) -> bool:
+        return a in b or b in a
+
+    signal_buckets: dict[int, list[dict]] = {1: [], 2: [], 3: [], 4: [], 5: []}
+    for game in predictions["games"]:
+        if game.get("game_pk", 0) in postponed_game_pks:
+            continue
+        for player in game["players"]:
+            sig = player.get("hr_signals")
+            if not sig:
+                continue
+            flags = [
+                bool(sig.get("barrel_heat")),
+                bool(sig.get("pull_power")),
+                bool((sig.get("drought") or {}).get("triggered")),
+                bool(sig.get("pitcher_vulnerable")),
+                bool(sig.get("park_friendly")),
+            ]
+            count = sum(flags)
+            if count >= 1:
+                name = player["name"]
+                hit_hr = any(_name_match(name, hr) for hr in hr_names)
+                entry = {"name": name, "signals": count, "hit_hr": hit_hr}
+                signal_buckets[count].append(entry)
+
+    hr_signal_accuracy: dict[str, dict] = {}
+    for sig_count in range(1, 6):
+        bucket = signal_buckets[sig_count]
+        if not bucket:
+            continue
+        hrs_in_bucket = [e for e in bucket if e["hit_hr"]]
+        hr_signal_accuracy[f"{sig_count}_of_5"] = {
+            "players": len(bucket),
+            "hr_count": len(hrs_in_bucket),
+            "hr_rate": round(len(hrs_in_bucket) / len(bucket) * 100, 1),
+            "names": [e["name"] for e in bucket],
+            "hr_names": [e["name"] for e in hrs_in_bucket],
+        }
+
     report = {
         "date": game_date.isoformat(),
         "total_players_ranked": len(all_players),
@@ -374,6 +416,7 @@ def compare_results(game_date: date) -> dict:
              "description": hr["description"]}
             for hr in surprise_hrs
         ],
+        "hr_signal_accuracy": hr_signal_accuracy,
     }
 
     return report
