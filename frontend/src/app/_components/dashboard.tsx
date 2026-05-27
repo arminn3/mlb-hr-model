@@ -359,7 +359,11 @@ export function Dashboard() {
     return params.get(key) || fallback;
   }
 
-  const [activePage, setActivePageRaw] = useState<Page>(() => getHashParam("page", "rankings") as Page);
+  const [activePage, setActivePageRaw] = useState<Page>(() => {
+    const p = getHashParam("page", "ml");
+    // If stored hash points to hidden rankings page, redirect to ml
+    return (p === "rankings" ? "ml" : p) as Page;
+  });
   const [lookback, setLookbackRaw] = useState<UILookback>(() => getHashParam("lookback", "L5") as UILookback);
   const [selectedDate, setSelectedDate] = useState<string>(() => getHashParam("date", ""));
   const [selectedGames, setSelectedGames] = useState<Set<number>>(new Set()); // empty = all games
