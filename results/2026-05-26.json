@@ -2,7 +2,7 @@
   "date": "2026-05-26",
   "total_players_ranked": 270,
   "total_hrs_hit": 52,
-  "total_near_hrs": 0,
+  "total_near_hrs": 13,
   "model_hits": 47,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 13,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -77,28 +77,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 4,
-      "rate": 40.0
+      "hits": 5,
+      "rate": 50.0
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 5,
+      "rate": 25.0
     },
     "top_30": {
       "total": 30,
-      "hits": 9,
-      "rate": 30.0
+      "hits": 10,
+      "rate": 33.3
     },
     "all": {
       "total": 270,
-      "hits": 47,
-      "rate": 17.4
+      "hits": 60,
+      "rate": 22.2
     }
   },
   "avg_composite_hr_hitters": 0.429,
-  "avg_composite_non_hitters": 0.397,
-  "composite_separation": 0.032,
+  "avg_composite_non_hitters": 0.398,
+  "composite_separation": 0.031,
   "hr_hitters": [
     {
       "name": "Hunter Goodman",
@@ -761,8 +761,245 @@
       "matchup": "COL@LAD"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Brandon Nimmo",
+      "rank": 6,
+      "composite": 0.716,
+      "opp_pitcher": "Jason Alexander",
+      "matchup": "HOU@TEX"
+    },
+    {
+      "name": "George Springer",
+      "rank": 36,
+      "composite": 0.583,
+      "opp_pitcher": "Sandy Alcantara",
+      "matchup": "MIA@TOR"
+    },
+    {
+      "name": "Keibert Ruiz",
+      "rank": 45,
+      "composite": 0.539,
+      "opp_pitcher": "Joey Cantillo",
+      "matchup": "WSH@CLE"
+    },
+    {
+      "name": "Marcelo Mayer",
+      "rank": 93,
+      "composite": 0.4,
+      "opp_pitcher": "Spencer Strider",
+      "matchup": "ATL@BOS"
+    },
+    {
+      "name": "Otto Lopez",
+      "rank": 96,
+      "composite": 0.4,
+      "opp_pitcher": "Braydon Fisher",
+      "matchup": "MIA@TOR"
+    },
+    {
+      "name": "Aaron Judge",
+      "rank": 99,
+      "composite": 0.4,
+      "opp_pitcher": "Bailey Falter",
+      "matchup": "NYY@KC"
+    },
+    {
+      "name": "Ezequiel Duran",
+      "rank": 107,
+      "composite": 0.4,
+      "opp_pitcher": "Jason Alexander",
+      "matchup": "HOU@TEX"
+    },
+    {
+      "name": "Ian Happ",
+      "rank": 176,
+      "composite": 0.344,
+      "opp_pitcher": "Braxton Ashcraft",
+      "matchup": "CHC@PIT"
+    },
+    {
+      "name": "Edmundo Sosa",
+      "rank": 220,
+      "composite": 0.305,
+      "opp_pitcher": "Randy V\u00e1squez",
+      "matchup": "PHI@SD"
+    },
+    {
+      "name": "Curtis Mead",
+      "rank": 233,
+      "composite": 0.288,
+      "opp_pitcher": "Joey Cantillo",
+      "matchup": "WSH@CLE"
+    },
+    {
+      "name": "Elly De La Cruz",
+      "rank": 253,
+      "composite": 0.245,
+      "opp_pitcher": "David Peterson",
+      "matchup": "CIN@NYM"
+    },
+    {
+      "name": "Donovan Walton",
+      "rank": 261,
+      "composite": 0.205,
+      "opp_pitcher": "Keider Montero",
+      "matchup": "LAA@DET"
+    },
+    {
+      "name": "Bryce Eldridge",
+      "rank": 267,
+      "composite": 0.127,
+      "opp_pitcher": "Eduardo Rodriguez",
+      "matchup": "AZ@SF"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Marcelo Mayer",
+      "ev": 109.6,
+      "angle": 28.0,
+      "distance": 411.0,
+      "hr_in_parks": 28,
+      "result": "",
+      "pitcher": "Strider, Spencer"
+    },
+    {
+      "batter": "Keibert Ruiz",
+      "ev": 100.0,
+      "angle": 24.0,
+      "distance": 370.0,
+      "hr_in_parks": 26,
+      "result": "single",
+      "pitcher": "Holderman, Colin"
+    },
+    {
+      "batter": "Curtis Mead",
+      "ev": 102.7,
+      "angle": 28.0,
+      "distance": 388.0,
+      "hr_in_parks": 17,
+      "result": "field_out",
+      "pitcher": "Heuer, Codi"
+    },
+    {
+      "batter": "Donovan Walton",
+      "ev": 100.0,
+      "angle": 26.0,
+      "distance": 409.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Montero, Keider"
+    },
+    {
+      "batter": "Michael Massey",
+      "ev": 99.2,
+      "angle": 41.0,
+      "distance": 370.0,
+      "hr_in_parks": 20,
+      "result": "field_out",
+      "pitcher": "Yarbrough, Ryan"
+    },
+    {
+      "batter": "Aaron Judge",
+      "ev": 107.8,
+      "angle": 20.0,
+      "distance": 396.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Avila, Luinder"
+    },
+    {
+      "batter": "Jazz Chisholm Jr.",
+      "ev": 98.3,
+      "angle": 35.0,
+      "distance": 376.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Falter, Bailey"
+    },
+    {
+      "batter": "Elly De La Cruz",
+      "ev": 104.5,
+      "angle": 19.0,
+      "distance": 373.0,
+      "hr_in_parks": 1,
+      "result": "double",
+      "pitcher": "Peterson, David"
+    },
+    {
+      "batter": "Ian Happ",
+      "ev": 105.8,
+      "angle": 23.0,
+      "distance": 391.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Ashcraft, Braxton"
+    },
+    {
+      "batter": "Edmundo Sosa",
+      "ev": 103.7,
+      "angle": 28.0,
+      "distance": 401.0,
+      "hr_in_parks": 21,
+      "result": "field_out",
+      "pitcher": "V\u00e1squez, Randy"
+    },
+    {
+      "batter": "Bryce Eldridge",
+      "ev": 105.9,
+      "angle": 36.0,
+      "distance": 404.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Rodriguez, Eduardo"
+    },
+    {
+      "batter": "Brandon Nimmo",
+      "ev": 100.3,
+      "angle": 26.0,
+      "distance": 407.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Alexander, Jason"
+    },
+    {
+      "batter": "Ezequiel Duran",
+      "ev": 102.3,
+      "angle": 25.0,
+      "distance": 415.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Alexander, Jason"
+    },
+    {
+      "batter": "Otto Lopez",
+      "ev": 95.2,
+      "angle": 29.0,
+      "distance": 374.0,
+      "hr_in_parks": 10,
+      "result": "field_out",
+      "pitcher": "Andrews, Tanner"
+    },
+    {
+      "batter": "Jes\u00fas S\u00e1nchez",
+      "ev": 101.5,
+      "angle": 28.0,
+      "distance": 374.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Alcantara, Sandy"
+    },
+    {
+      "batter": "George Springer",
+      "ev": 97.1,
+      "angle": 26.0,
+      "distance": 377.0,
+      "hr_in_parks": 14,
+      "result": "field_out",
+      "pitcher": "Alcantara, Sandy"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Jose Siri",
