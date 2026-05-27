@@ -22,6 +22,7 @@ import { LiveFeed } from "./live-feed";
 import { ProjectionsView } from "./projections-view";
 import { UserMenu } from "./user-menu";
 import { MatchupAnalysis } from "./matchup-analysis";
+import { HRDueList } from "./hr-due-list";
 import { toast } from "sonner";
 import { TeamPitchMixPage } from "./team-pitch-mix-page";
 import { IconButton } from "./ui/icon-button";
@@ -46,6 +47,7 @@ const TAB_CONFIG: Record<Page, {
   rankings:    { title: "HR Rankings",       subtitle: "Top HR plays by composite score",      showLookback: true,  showDatePicker: true },
   ml:          { title: "ML Rankings",       subtitle: "Data-driven — learned from 125k slate samples", showLookback: true,  showDatePicker: true },
   slate:       { title: "Game Slate",        subtitle: "Every game on today's card",           showLookback: true,  showDatePicker: true },
+  hr_due:      { title: "HR Due List",       subtitle: "Players with 3+ power signals today",  showLookback: true,  showDatePicker: true },
   projections: { title: "Projections",       subtitle: "Future at-bat modeling",               showLookback: false, showDatePicker: true },
   environment: { title: "Environment",       subtitle: "Park, weather, and wind conditions",   showLookback: false, showDatePicker: true },
   slips:       { title: "Slip Generator",    subtitle: "Build multi-leg parlays",              showLookback: true,  showDatePicker: true },
@@ -633,6 +635,14 @@ export function Dashboard() {
                 <p className="text-center text-muted py-12">No games with scored players today.</p>
               )}
             </>
+          )}
+
+          {activePage === "hr_due" && (
+            <HRDueList
+              games={data.games}
+              lookback={lookback}
+              onSelectBatter={(s) => { setSelectedBatter(s); setActivePage("slate"); }}
+            />
           )}
 
           {activePage === "projections" && (

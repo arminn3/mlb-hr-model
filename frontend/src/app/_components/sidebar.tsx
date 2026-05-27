@@ -8,6 +8,7 @@ export type Page =
   | "rankings"
   | "ml"
   | "slate"
+  | "hr_due"
   | "environment"
   | "projections"
   | "slips"
@@ -29,6 +30,7 @@ const NAV_ITEMS: NavItem[] = [
   { key: "rankings", label: "HR Rankings", icon: "chart" },
   { key: "ml", label: "ML Rankings", icon: "brain" },
   { key: "slate", label: "Game Slate", icon: "games" },
+  { key: "hr_due", label: "HR Due List", icon: "target" },
   { key: "projections", label: "Projections", icon: "target" },
   { key: "environment", label: "Environment", icon: "cloud" },
   { key: "slips", label: "Slip Generator", icon: "slip" },
