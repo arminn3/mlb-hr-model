@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { GameData, PlayerData, ModelData } from "./types";
-import { scoreFor, type UILookback } from "./score-utils";
+import { scoreFor, computeSeasonScore, type UILookback } from "./score-utils";
 import { RatingBadge } from "./rating-badge";
 import { ScoreBar } from "./score-bar";
 
@@ -41,6 +41,47 @@ export const FALLBACK_WEIGHTS: MlWeights = {
   environment: 0.082,
 };
 
+// ── Season-anchored + form modifier ─────────────────────────────────────────
+// Base = season batter score (true ability). Form delta = how L5/L10 batter
+// scores compare to that baseline. Clamped ±0.15 so a hot/cold streak moves
+// players without overriding the season profile. Pitcher/env from today.
+export function combinedScore(player: PlayerData): number {
+  const season = computeSeasonScore(player);
+  const l5 = scoreFor(player, "L5");
+  const l10 = scoreFor(player, "L10");
+  if (!l5 && !l10) return 0;
+
+  let baseBatter: number;
+  let pitcher: number;
+  let env: number;
+
+  if (season) {
+    const formBatter = ((l5?.batter_score ?? season.batter) + (l10?.batter_score ?? season.batter)) / 2;
+    const delta = Math.max(-0.15, Math.min(0.15, formBatter - season.batter));
+    baseBatter = season.batter + delta;
+    pitcher = season.pitcher;
+    env = season.env;
+  } else {
+    // No season data — fall back to L5/L10 average
+    const s = l10 ?? l5!;
+    baseBatter = s.batter_score;
+    pitcher = s.pitcher_score;
+    env = s.env_score;
+  }
+
+  return baseBatter * 0.50 + pitcher * 0.35 + env * 0.15;
+}
+
+export function combinedFormDelta(player: PlayerData): number | null {
+  const season = computeSeasonScore(player);
+  if (!season) return null;
+  const l5 = scoreFor(player, "L5");
+  const l10 = scoreFor(player, "L10");
+  if (!l5 && !l10) return null;
+  const formBatter = ((l5?.batter_score ?? season.batter) + (l10?.batter_score ?? season.batter)) / 2;
+  return Math.max(-0.15, Math.min(0.15, formBatter - season.batter));
+}
+
 export function mlComposite(player: PlayerData, lb: UILookback, w: MlWeights): number {
   const s = scoreFor(player, lb);
   if (!s) return 0;
@@ -64,6 +105,7 @@ export function MLRankings({
   lookback: UILookback;
   currentDate: string;
 }) {
+  const [rankingTab, setRankingTab] = useState<"ml" | "combined">("ml");
   const [filter, setFilter] = useState<number>(10);
   const [mlWeights, setMlWeights] = useState<MlWeights>(FALLBACK_WEIGHTS);
   const [weightSource, setWeightSource] = useState<string>("fallback");
@@ -196,7 +238,22 @@ export function MLRankings({
     });
   }, [games, lookback, mlWeights]);
 
-  const top = filter === 0 ? sorted : sorted.slice(0, filter);
+  const sortedCombined = useMemo(() => {
+    const seen = new Set<string>();
+    const all: { player: PlayerData; game: GameData }[] = [];
+    for (const game of games) {
+      for (const player of game.players) {
+        if (!seen.has(player.name)) {
+          seen.add(player.name);
+          all.push({ player, game });
+        }
+      }
+    }
+    return all.sort((a, b) => combinedScore(b.player) - combinedScore(a.player));
+  }, [games]);
+
+  const activeSorted = rankingTab === "combined" ? sortedCombined : sorted;
+  const top = filter === 0 ? activeSorted : activeSorted.slice(0, filter);
   if (top.length === 0) return null;
 
   const wPct = (n: number) => `${Math.round(n * 100)}%`;
@@ -301,13 +358,15 @@ export function MLRankings({
       className="rounded-[12px] p-6 mb-6"
       style={{ background: "#1c1c1e", border: "1px solid #2c2c2e" }}
     >
-      <div className="flex items-start justify-between gap-3 mb-5 flex-wrap">
+      <div className="flex items-start justify-between gap-3 mb-4 flex-wrap">
         <div>
           <h2 className="text-[15px] leading-[20px] font-semibold tracking-[-0.005em] text-foreground">
-            ML Rankings
+            {rankingTab === "combined" ? "Season + Form" : "ML Rankings"}
           </h2>
           <p className="text-[11px] leading-[14px] font-medium tracking-[0.02em] text-muted mt-0.5">
-            Data-driven — reweighted using what the ML learned from past HR outcomes
+            {rankingTab === "combined"
+              ? "Season power profile anchored · recent form adjusts ±15pts"
+              : "Data-driven — reweighted using what the ML learned from past HR outcomes"}
           </p>
         </div>
         <div
@@ -330,21 +389,47 @@ export function MLRankings({
         </div>
       </div>
 
-      <p className="text-[11px] leading-[16px] text-muted mb-4">
-        Current ML weights:{" "}
-        <span className="text-foreground font-mono">
-          Batter {wPct(mlWeights.batter)} · Pitcher {wPct(mlWeights.pitcher)}
-          · Matchup {wPct(mlWeights.matchup)} · Env {wPct(mlWeights.environment)}
-        </span>{" "}
-        <span className="text-[10px] text-muted/80">({weightSource})</span>
-      </p>
+      {/* Tab toggle */}
+      <div className="flex items-center gap-1 mb-4 p-0.5 rounded-full w-fit" style={{ background: "#141416", border: "1px solid #2c2c2e" }}>
+        <button
+          onClick={() => setRankingTab("ml")}
+          className={`px-4 py-1.5 text-[11px] font-semibold rounded-full cursor-pointer transition-all ${rankingTab === "ml" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+        >
+          ML Model
+        </button>
+        <button
+          onClick={() => setRankingTab("combined")}
+          className={`px-4 py-1.5 text-[11px] font-semibold rounded-full cursor-pointer transition-all ${rankingTab === "combined" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
+        >
+          Season + Form
+        </button>
+      </div>
+
+      {rankingTab === "ml" && (
+        <p className="text-[11px] leading-[16px] text-muted mb-4">
+          Current ML weights:{" "}
+          <span className="text-foreground font-mono">
+            Batter {wPct(mlWeights.batter)} · Pitcher {wPct(mlWeights.pitcher)}
+            · Matchup {wPct(mlWeights.matchup)} · Env {wPct(mlWeights.environment)}
+          </span>{" "}
+          <span className="text-[10px] text-muted/80">({weightSource})</span>
+        </p>
+      )}
+      {rankingTab === "combined" && (
+        <p className="text-[11px] leading-[16px] text-muted mb-4">
+          <span className="text-foreground font-mono">Season batter 50% · Pitcher 35% · Env 15%</span>
+          {" · "}form delta clamped to ±15pts · players with &lt;20 season BIP fall back to L5/L10
+        </p>
+      )}
 
       {/* Mobile card view */}
       <div className="md:hidden space-y-2">
         {top.map(({ player, game }, i) => {
           const s = scoreFor(player, lookback);
           if (!s) return null;
-          const mlScore = mlComposite(player, lookback, mlWeights);
+          const isCombo = rankingTab === "combined";
+          const score = isCombo ? combinedScore(player) : mlComposite(player, lookback, mlWeights);
+          const delta = isCombo ? combinedFormDelta(player) : null;
           return (
             <div
               key={player.name}
@@ -355,30 +440,24 @@ export function MLRankings({
               </span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold text-foreground">
-                    {player.name}
-                  </span>
-                  <RatingBadge composite={mlScore} />
+                  <span className="text-sm font-semibold text-foreground">{player.name}</span>
+                  <RatingBadge composite={score} />
                 </div>
                 <div className="text-[10px] text-muted mt-0.5">
                   {game.away_team}@{game.home_team} vs {player.opp_pitcher}
                 </div>
                 <div className="flex items-center gap-3 mt-1 text-[10px]">
-                  <span className="text-foreground font-mono">
-                    bat {s.batter_score.toFixed(2)}
-                  </span>
-                  <span className="font-mono text-foreground">
-                    pit {s.pitcher_score.toFixed(2)}
-                  </span>
-                  <span className="font-mono text-muted">
-                    env {s.env_score.toFixed(2)}
-                  </span>
+                  <span className="text-foreground font-mono">bat {s.batter_score.toFixed(2)}</span>
+                  <span className="font-mono text-foreground">pit {s.pitcher_score.toFixed(2)}</span>
+                  {delta !== null && (
+                    <span className={`font-mono font-semibold ${delta > 0.01 ? "text-accent-green" : delta < -0.01 ? "text-red-400" : "text-muted"}`}>
+                      form {delta > 0 ? "+" : ""}{(delta * 100).toFixed(0)}
+                    </span>
+                  )}
                 </div>
               </div>
               <div className="text-right shrink-0">
-                <span className="font-mono text-sm font-bold text-foreground">
-                  {mlScore.toFixed(3)}
-                </span>
+                <span className="font-mono text-sm font-bold text-foreground">{score.toFixed(3)}</span>
               </div>
             </div>
           );
@@ -394,30 +473,30 @@ export function MLRankings({
               <th className="text-left py-2 pr-3">Player</th>
               <th className="text-left py-2 pr-3">Matchup</th>
               <th className="text-center py-2 px-2">Hand</th>
-              <th className="text-center py-2 px-2">Batter</th>
+              <th className="text-center py-2 px-2">{rankingTab === "combined" ? "Season Bat" : "Batter"}</th>
               <th className="text-center py-2 px-2">Pitcher</th>
               <th className="text-center py-2 px-2">Env</th>
+              {rankingTab === "combined" && <th className="text-center py-2 px-2">Form</th>}
               <th className="text-center py-2 px-2">Rating</th>
-              <th className="text-center py-2 w-28">ML Score</th>
+              <th className="text-center py-2 w-28">Score</th>
             </tr>
           </thead>
           <tbody>
             {top.map(({ player, game }, i) => {
               const s = scoreFor(player, lookback);
               if (!s) return null;
-              const mlScore = mlComposite(player, lookback, mlWeights);
+              const isCombo = rankingTab === "combined";
+              const score = isCombo ? combinedScore(player) : mlComposite(player, lookback, mlWeights);
+              const delta = isCombo ? combinedFormDelta(player) : null;
+              const season = isCombo ? computeSeasonScore(player) : null;
               return (
                 <tr
                   key={player.name}
                   className="border-b border-card-border/30 last:border-0 hover:bg-card/40"
                 >
-                  <td className="text-center py-2 font-bold text-accent font-mono">
-                    {i + 1}
-                  </td>
+                  <td className="text-center py-2 font-bold text-accent font-mono">{i + 1}</td>
                   <td className="py-2 pr-3">
-                    <span className="font-semibold text-foreground">
-                      {player.name}
-                    </span>
+                    <span className="font-semibold text-foreground">{player.name}</span>
                   </td>
                   <td className="py-2 pr-3 text-muted">
                     {game.away_team}@{game.home_team} vs {player.opp_pitcher}
@@ -426,19 +505,30 @@ export function MLRankings({
                     {player.batter_hand}v{player.pitcher_hand}
                   </td>
                   <td className="text-center py-2 font-mono">
-                    {s.batter_score.toFixed(2)}
+                    {(season?.batter ?? s.batter_score).toFixed(2)}
                   </td>
                   <td className="text-center py-2 font-mono">
-                    {s.pitcher_score.toFixed(2)}
+                    {(season?.pitcher ?? s.pitcher_score).toFixed(2)}
                   </td>
                   <td className="text-center py-2 font-mono text-muted">
-                    {s.env_score.toFixed(2)}
+                    {(season?.env ?? s.env_score).toFixed(2)}
                   </td>
+                  {isCombo && (
+                    <td className="text-center py-2 font-mono font-semibold">
+                      {delta === null ? (
+                        <span className="text-muted/40">—</span>
+                      ) : (
+                        <span className={delta > 0.01 ? "text-accent-green" : delta < -0.01 ? "text-red-400" : "text-muted"}>
+                          {delta > 0 ? "+" : ""}{(delta * 100).toFixed(0)}
+                        </span>
+                      )}
+                    </td>
+                  )}
                   <td className="text-center py-2">
-                    <RatingBadge composite={mlScore} />
+                    <RatingBadge composite={score} />
                   </td>
                   <td className="py-2">
-                    <ScoreBar value={mlScore} />
+                    <ScoreBar value={score} />
                   </td>
                 </tr>
               );

@@ -11,6 +11,17 @@ function norm(v: number, lo: number, hi: number) {
   return Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
 }
 
+export function computeSeasonScore(p: PlayerData): { batter: number; pitcher: number; env: number } | null {
+  const sp = p.season_profile;
+  if (!sp || sp.bip_count < 20) return null;
+  const barrel_n = norm(sp.barrel / 100, BRL_LO, BRL_HI);
+  const fb_n     = norm(sp.fb     / 100, FB_LO,  FB_HI);
+  const ev_n     = norm(sp.ev,           EV_LO,  EV_HI);
+  const batter   = barrel_n * 0.55 + fb_n * 0.25 + ev_n * 0.20;
+  const l10      = p.scores.L10;
+  return { batter, pitcher: l10?.pitcher_score ?? 0.5, env: l10?.env_score ?? 0.5 };
+}
+
 function computeSeasonScoreSet(p: PlayerData): ScoreSet | null {
   const sp = p.season_profile;
   if (!sp || sp.bip_count < 20) return null;
