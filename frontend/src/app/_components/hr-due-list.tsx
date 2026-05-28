@@ -126,7 +126,7 @@ function DueCard({
           <span className={`text-sm font-semibold leading-tight truncate ${
             (() => {
               const s = scoreFor(player, lookback) ?? scoreFor(player, "L5");
-              return s && (s.data_quality !== "OK" || (s.recent_abs?.length ?? 10) <= 2) ? "text-red-400" : "text-foreground";
+              return s && (s.data_quality === "LOW_SAMPLE" || (s.recent_abs?.length ?? 10) <= 2) ? "text-red-400" : "text-foreground";
             })()
           }`}>{player.name}</span>
           <img src={teamLogoUrl(teamAbbr)} alt={teamAbbr} className="w-4 h-4 object-contain flex-shrink-0 opacity-70" />

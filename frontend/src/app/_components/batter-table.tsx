@@ -116,7 +116,7 @@ function BatterMobileCard({
 
         {/* Name + badges */}
         <div className="flex-1 min-w-0">
-          <div className={`text-sm font-semibold leading-tight truncate ${isLowData || hasQualityWarn ? "text-red-400" : "text-foreground"}`}>{p.name}</div>
+          <div className={`text-sm font-semibold leading-tight truncate ${isLowData || scores.data_quality === "LOW_SAMPLE" ? "text-red-400" : "text-foreground"}`}>{p.name}</div>
           <div className="flex items-center gap-1.5 mt-0.5">
             <span className="text-[9px] font-mono text-muted/50">{p.batter_hand}HB</span>
             {isLowData && <span className="px-1 text-[8px] font-bold rounded bg-accent/10 text-accent border border-accent/20">NEW</span>}
@@ -255,7 +255,7 @@ export function BatterRow({
             <div className="w-8 h-8 rounded-full flex-shrink-0" style={{ background: "rgba(255,255,255,0.06)" }} />
           )}
           <div className="min-w-0">
-            <div className={`text-sm font-semibold leading-tight whitespace-nowrap ${isLowData || hasQualityWarn ? "text-red-400" : "text-foreground"}`}>{p.name}</div>
+            <div className={`text-sm font-semibold leading-tight whitespace-nowrap ${isLowData || scores.data_quality === "LOW_SAMPLE" ? "text-red-400" : "text-foreground"}`}>{p.name}</div>
             <div className="flex items-center gap-1 mt-0.5">
               <span className="text-[9px] font-mono text-muted/60">{p.batter_hand}HB</span>
               {isLowData && (

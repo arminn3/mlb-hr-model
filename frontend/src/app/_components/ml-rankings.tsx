@@ -432,7 +432,7 @@ export function MLRankings({
           const delta = isCombo ? combinedFormDelta(player) : null;
           const isSmallSample = isCombo
             ? (!player.season_profile || (player.season_profile.bip_count ?? 0) < 20)
-            : (s.data_quality !== "OK" || (s.recent_abs?.length ?? 10) <= 2);
+            : (s.data_quality === "LOW_SAMPLE" || (s.recent_abs?.length ?? 10) <= 2);
           return (
             <div
               key={player.name}
