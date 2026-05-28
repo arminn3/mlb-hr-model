@@ -171,6 +171,7 @@ _OUTFIELD_AZIMUTH: dict[str, float] = {
     "HOU": 345,  # Daikin Park / Minute Maid — NNW (retractable)
     "LAA":  45,  # Angel Stadium — NE
     "OAK":  60,  # Oakland Coliseum — ENE
+    "ATH":  45,  # Sutter Health Park, Sacramento — NE (2025+)
     "SEA":  45,  # T-Mobile Park — NE (retractable)
     "TEX":  45,  # Globe Life Field — NE (retractable, new stadium 2020)
     # NL East
@@ -190,6 +191,7 @@ _OUTFIELD_AZIMUTH: dict[str, float] = {
     "COL":   0,  # Coors Field — N (confirmed due north)
     "LAD":  30,  # Dodger Stadium — NNE
     "SDP":   0,  # Petco Park — N (confirmed due north)
+    "SD":    0,  # Petco Park — alias for SDP
     "SF":   90,  # Oracle Park — E (confirmed "faces due east")
 }
 
@@ -306,6 +308,9 @@ def _load_fingerprint() -> None:
 
 _load_fingerprint()
 
+# Team-code aliases: historical data uses older codes for relocated/renamed teams
+_FINGERPRINT_TEAM_ALIASES: dict[str, str] = {"ATH": "OAK", "SD": "SDP"}
+
 
 def _fingerprint_temp_bucket(t: float) -> str:
     if t < 55: return "cold"
@@ -337,7 +342,8 @@ def get_empirical_hr_factor(
              "empirical_temp_label": None, "empirical_wind_label": None}
     if not _FINGERPRINT or temp_f is None:
         return empty
-    park_fp = _FINGERPRINT.get("parks", {}).get(home_team)
+    lookup_team = _FINGERPRINT_TEAM_ALIASES.get(home_team, home_team)
+    park_fp = _FINGERPRINT.get("parks", {}).get(lookup_team)
     if not park_fp:
         return empty
     tb = _fingerprint_temp_bucket(temp_f)
@@ -397,7 +403,9 @@ _PARK_WIND_SENSITIVITY: dict[str, float] = {
     "NYY": 0.9,   # Yankee — geometry (short RF) dominates, not wind
     "LAD": 0.9,   # Dodger — mild climate, light typical wind
     "SDP": 0.85,  # Petco — marine layer dampens carry
-    "OAK": 0.9,   # Coliseum — mild bay wind (Sutter 2026 TBD)
+    "SD":  0.85,  # Petco alias
+    "OAK": 0.9,   # Coliseum — mild bay wind
+    "ATH": 0.9,   # Sutter Health Park, Sacramento
     "COL": 0.75,  # Coors — altitude effect dominates, wind is smaller lever
     "SF":  0.55,  # Oracle — notorious swirling coastal, low wind↔HR correlation
     # Retractable roofs — sensitivity only applies when roof is open
