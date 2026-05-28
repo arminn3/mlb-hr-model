@@ -27,6 +27,10 @@ interface GameEnv {
   weather_hr_pct?: number;
   park_hr_pct?: number;
   combined_hr_pct?: number;
+  empirical_hr_pct?: number;
+  empirical_n_games?: number;
+  empirical_temp_label?: string | null;
+  empirical_wind_label?: string | null;
 }
 
 type SortKey = "impact" | "wind" | "temp" | "park" | "game";
@@ -209,6 +213,25 @@ function ExpandedDetail({ g }: { g: GameEnv }) {
       <Stat label="Combined" value={`${combined > 0 ? "+" : ""}${combined}%`} color={tier.color} />
       <Stat label="Weather" value={`${wx > 0 ? "+" : ""}${wx}%`} color={wx > 0 ? "#22c55e" : wx < 0 ? "#ef4444" : undefined} />
       <Stat label="Park" value={`${park > 0 ? "+" : ""}${park}%`} color={park > 0 ? "#22c55e" : park < 0 ? "#ef4444" : undefined} />
+      {g.empirical_hr_pct !== undefined && g.empirical_hr_pct !== null && g.empirical_n_games ? (
+        <div className="col-span-2">
+          <div className="text-[10px] uppercase tracking-[0.06em] text-muted mb-0.5">Historical (10yr)</div>
+          <div className="flex items-baseline gap-1.5">
+            <span
+              className="text-[13px] font-mono font-semibold"
+              style={{ color: g.empirical_hr_pct >= 5 ? "#22c55e" : g.empirical_hr_pct <= -5 ? "#ef4444" : "#a1a1aa" }}
+            >
+              {g.empirical_hr_pct > 0 ? "+" : ""}{g.empirical_hr_pct.toFixed(1)}% HRs
+            </span>
+            <span className="text-[10px] text-muted">vs park avg · {g.empirical_n_games} games</span>
+          </div>
+          {g.empirical_temp_label && g.empirical_wind_label && (
+            <div className="text-[10px] text-muted/60 mt-0.5">
+              {g.empirical_temp_label} · {g.empirical_wind_label}
+            </div>
+          )}
+        </div>
+      ) : null}
       {splits && (
         <>
           <Stat label="LHB" value={`${splitPct("L") > 0 ? "+" : ""}${splitPct("L")}%`} color={splitPct("L") > 0 ? "#22c55e" : splitPct("L") < 0 ? "#ef4444" : undefined} />

@@ -215,6 +215,13 @@ export interface GameEnvironment {
   humid_norm: number;
   pressure_norm?: number;
   env_score: number;
+  weather_hr_pct?: number;
+  park_hr_pct?: number;
+  combined_hr_pct?: number;
+  empirical_hr_pct?: number;
+  empirical_n_games?: number;
+  empirical_temp_label?: string | null;
+  empirical_wind_label?: string | null;
 }
 
 // ── Team vs Pitch Mix ───────────────────────────────────────────────────

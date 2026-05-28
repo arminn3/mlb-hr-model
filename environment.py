@@ -287,6 +287,72 @@ def _calc_wind_score(
 
 import math
 
+# ── Park weather fingerprint (empirical, from historical_backtest.csv) ────────
+# Loaded once at import. Absent if park_weather_fingerprint.py hasn't been run.
+_FINGERPRINT: dict = {}
+
+
+def _load_fingerprint() -> None:
+    import json
+    from pathlib import Path
+    p = Path(__file__).resolve().parent / "frontend/public/data/park_weather_fingerprint.json"
+    if not p.exists():
+        return
+    try:
+        _FINGERPRINT.update(json.loads(p.read_text()))
+    except Exception:
+        pass
+
+
+_load_fingerprint()
+
+
+def _fingerprint_temp_bucket(t: float) -> str:
+    if t < 55: return "cold"
+    if t < 70: return "cool"
+    if t < 80: return "mild"
+    if t < 90: return "warm"
+    return "hot"
+
+
+def _fingerprint_wind_bucket(w: float) -> str:
+    if w < -8: return "strong_in"
+    if w < -3: return "moderate_in"
+    if w <  3: return "calm_cross"
+    if w <  8: return "moderate_out"
+    return "strong_out"
+
+
+def get_empirical_hr_factor(
+    home_team: str,
+    temp_f: Optional[float],
+    wind_term: float,
+) -> dict:
+    """
+    Look up the empirical HR factor for today's park + conditions from
+    the 10-season fingerprint. Returns hr_pct_delta (% vs park baseline),
+    n_games (confidence), and bucket labels. Returns zeros if not found.
+    """
+    empty = {"empirical_hr_pct": 0.0, "empirical_n_games": 0,
+             "empirical_temp_label": None, "empirical_wind_label": None}
+    if not _FINGERPRINT or temp_f is None:
+        return empty
+    park_fp = _FINGERPRINT.get("parks", {}).get(home_team)
+    if not park_fp:
+        return empty
+    tb = _fingerprint_temp_bucket(temp_f)
+    wb = _fingerprint_wind_bucket(wind_term)
+    cond = park_fp.get("conditions", {}).get(f"{tb}__{wb}")
+    if not cond:
+        return empty
+    return {
+        "empirical_hr_pct": cond["hr_pct_delta"],
+        "empirical_n_games": cond["n_games"],
+        "empirical_temp_label": cond["temp_label"],
+        "empirical_wind_label": cond["wind_label"],
+    }
+
+
 # ── Physics-based weather HR boost ───────────────────────────────────────
 # Based on WEATHER_MODEL_RESEARCH.md — humid-air density via Arden Buck,
 # vector wind projection onto HP→CF, calibrated coefficients from
@@ -530,6 +596,19 @@ def calc_environment_score(
     park_hr_pct = round((park - 100.0) * _PARK_STRUCTURAL_SHARE, 2)
     combined_hr_pct = round(weather_boost["total_pct"] + park_hr_pct, 2)
 
+    # Empirical fingerprint lookup (10-season historical HR rates at this park
+    # in conditions matching today's temp + field-relative wind)
+    wind_term_rt = 0.0
+    if not (is_dome or roof_closed):
+        wind_term_rt = (
+            _wind_out_component(
+                weather.get("wind_speed_mph"),
+                weather.get("wind_direction"),
+                home_team,
+            ) * _WIND_HEIGHT_CORRECTION
+        )
+    empirical = get_empirical_hr_factor(home_team, weather.get("temperature_f"), wind_term_rt)
+
     return {
         "park_factor": park,
         "temperature_f": weather["temperature_f"],
@@ -554,4 +633,9 @@ def calc_environment_score(
         "weather_hr_pct": weather_boost["total_pct"],
         "park_hr_pct": park_hr_pct,
         "combined_hr_pct": combined_hr_pct,
+        # Empirical fingerprint (10-season park × condition lookup)
+        "empirical_hr_pct": empirical["empirical_hr_pct"],
+        "empirical_n_games": empirical["empirical_n_games"],
+        "empirical_temp_label": empirical["empirical_temp_label"],
+        "empirical_wind_label": empirical["empirical_wind_label"],
     }
