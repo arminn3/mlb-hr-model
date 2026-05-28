@@ -405,6 +405,9 @@ def compare_results(game_date: date) -> dict:
     for i, p in enumerate(combined_players):
         p["rank"] = i + 1
 
+    def _name_match(a: str, b: str) -> bool:
+        return a in b or b in a
+
     combined_tiers = {
         "top_10": combined_players[:10],
         "top_20": combined_players[:20],
@@ -423,8 +426,6 @@ def compare_results(game_date: date) -> dict:
     # ── HR Signal tier accuracy ───────────────────────────────────────────────
     # For each player in the dated JSON, count their triggered signals (0-5)
     # and check if they hit a HR. Group into tiers: 1, 2, 3, 4, 5 signals.
-    def _name_match(a: str, b: str) -> bool:
-        return a in b or b in a
 
     signal_buckets: dict[int, list[dict]] = {1: [], 2: [], 3: [], 4: [], 5: []}
     for game in predictions["games"]:
