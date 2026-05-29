@@ -646,7 +646,7 @@ export function MLRankings({
           const season = isCombo ? computeSeasonScore(player) : null;
           const isSmallSample = isCombo
             ? (!player.season_profile || (player.season_profile.bip_count ?? 0) < 20)
-            : (s.data_quality === "LOW_SAMPLE" || (s.bip ?? s.recent_abs?.length ?? 15) < 15);
+            : (s.data_quality === "LOW_SAMPLE" || s.data_quality === "NO_BATTER_DATA");
 
           // MLB headshot — match player name in team_pitch_mix batters
           const mixBatters = [
