@@ -254,11 +254,15 @@ export function MLRankings({
       const wmW = ctx.measureText(wm).width;
       ctx.fillText(wm, W / 2 - wmW / 2, fy);
 
-      const link = document.createElement("a");
+      const dataUrl = canvas.toDataURL("image/png");
       const label = filter === 0 ? "all" : `top${filter}`;
+      // Safari mobile blocks programmatic clicks — open in new tab as fallback
+      const link = document.createElement("a");
       link.download = `beeb-rankings-${label}.png`;
-      link.href = canvas.toDataURL("image/png");
+      link.href = dataUrl;
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
       setDownloadState("done");
       setTimeout(() => setDownloadState("idle"), 2500);
     } catch (err) {
@@ -642,7 +646,7 @@ export function MLRankings({
           const season = isCombo ? computeSeasonScore(player) : null;
           const isSmallSample = isCombo
             ? (!player.season_profile || (player.season_profile.bip_count ?? 0) < 20)
-            : (s.data_quality === "LOW_SAMPLE" || (s.recent_abs?.length ?? 10) <= 2);
+            : (s.data_quality === "LOW_SAMPLE" || (s.bip ?? s.recent_abs?.length ?? 15) < 15);
 
           // MLB headshot — match player name in team_pitch_mix batters
           const mixBatters = [
@@ -681,59 +685,67 @@ export function MLRankings({
           return (
             <div
               key={player.name}
-              className="flex items-center gap-4 px-4 py-4 rounded-2xl"
+              className="flex flex-col md:flex-row md:items-center gap-3 px-4 py-4 rounded-2xl"
               style={{
                 background: "linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
                 border: "1px solid rgba(255,255,255,0.09)",
                 boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.08), 0 4px 12px -4px rgba(0,0,0,0.5)",
               }}
             >
-              {/* Rank */}
-              <div
-                className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-[13px] font-bold font-mono"
-                style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.10)", color: "rgba(255,255,255,0.6)" }}
-              >
-                {i + 1}
+              {/* Top row on mobile: rank + headshot + name + score */}
+              <div className="flex items-center gap-3 md:contents">
+                {/* Rank */}
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-[13px] font-bold font-mono"
+                  style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.10)", color: "rgba(255,255,255,0.6)" }}
+                >
+                  {i + 1}
+                </div>
+
+                {/* Headshot */}
+                {mlbId ? (
+                  <img
+                    src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_120,q_auto:best/v1/people/${mlbId}/headshot/67/current`}
+                    alt={player.name}
+                    className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover flex-shrink-0"
+                    style={{ border: "2px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.06)" }}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full flex-shrink-0" style={{ background: "rgba(255,255,255,0.07)", border: "2px solid rgba(255,255,255,0.10)" }} />
+                )}
+
+                {/* Player info — name + matchup */}
+                <div className="flex-1 min-w-0 md:w-56 md:flex-shrink-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className={`text-[16px] font-bold leading-tight ${isSmallSample ? "text-red-400" : "text-foreground"}`}>
+                      {player.name}
+                    </span>
+                    <RatingBadge composite={score} />
+                  </div>
+                  <div className="flex items-center gap-1 mt-0.5 flex-wrap">
+                    <img src={teamLogoUrl(game.away_team)} alt={game.away_team} className="w-3.5 h-3.5 object-contain opacity-80" />
+                    <span className="text-[11px] font-semibold text-foreground/80">{game.away_team}</span>
+                    <span className="text-[10px] text-muted/50">vs</span>
+                    <img src={teamLogoUrl(game.home_team)} alt={game.home_team} className="w-3.5 h-3.5 object-contain opacity-80" />
+                    <span className="text-[11px] font-semibold text-foreground/80">{game.home_team}</span>
+                    <span className="text-[10px] text-muted truncate">· {player.opp_pitcher} ({player.pitcher_hand}HP)</span>
+                  </div>
+                </div>
+
+                {/* Score — visible on mobile in top row */}
+                <div className="text-right flex-shrink-0 md:hidden">
+                  <div className={`text-2xl font-black font-mono leading-none ${scoreColor}`}>{score.toFixed(2)}</div>
+                  <div className="text-[9px] uppercase tracking-wider text-muted/40 mt-0.5">Score</div>
+                </div>
               </div>
 
-              {/* Headshot */}
-              {mlbId ? (
-                <img
-                  src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_120,q_auto:best/v1/people/${mlbId}/headshot/67/current`}
-                  alt={player.name}
-                  className="w-14 h-14 rounded-full object-cover flex-shrink-0"
-                  style={{ border: "2px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.06)" }}
-                  loading="lazy"
-                />
-              ) : (
-                <div className="w-14 h-14 rounded-full flex-shrink-0" style={{ background: "rgba(255,255,255,0.07)", border: "2px solid rgba(255,255,255,0.10)" }} />
-              )}
+              {/* Divider — desktop only */}
+              <div className="hidden md:block w-px self-stretch flex-shrink-0" style={{ background: "rgba(255,255,255,0.06)" }} />
 
-              {/* Player info — name + matchup only */}
-              <div className="w-56 flex-shrink-0 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className={`text-[17px] font-bold leading-tight ${isSmallSample ? "text-red-400" : "text-foreground"}`}>
-                    {player.name}
-                  </span>
-                  <RatingBadge composite={score} />
-                </div>
-                <div className="flex items-center gap-1.5 mt-1 flex-wrap">
-                  <img src={teamLogoUrl(game.away_team)} alt={game.away_team} className="w-4 h-4 object-contain opacity-80" />
-                  <span className="text-[12px] font-semibold text-foreground/80">{game.away_team}</span>
-                  <span className="text-[11px] text-muted/50">vs</span>
-                  <img src={teamLogoUrl(game.home_team)} alt={game.home_team} className="w-4 h-4 object-contain opacity-80" />
-                  <span className="text-[12px] font-semibold text-foreground/80">{game.home_team}</span>
-                  <span className="text-[11px] text-muted truncate">· vs {player.opp_pitcher} ({player.pitcher_hand}HP)</span>
-                </div>
-              </div>
-
-              {/* Divider */}
-              <div className="w-px self-stretch flex-shrink-0" style={{ background: "rgba(255,255,255,0.06)" }} />
-
-              {/* Stats — to the right of player info */}
+              {/* Stats */}
               <div className="flex-1 min-w-0">
-                {/* Stats grid — label above, value below */}
-                <div className="flex items-start gap-6">
+                <div className="flex items-start gap-4 md:gap-6 flex-wrap">
                   {[
                     { label: "EV", value: String(ev), hi: Number(ev) >= 95 },
                     { label: "Brl%", value: `${barrel}%`, hi: Number(barrel) >= 12 },
@@ -742,25 +754,24 @@ export function MLRankings({
                   ].map(({ label, value, hi }) => (
                     <div key={label}>
                       <div className="text-[9px] uppercase tracking-wider text-muted/40 mb-1">{label}</div>
-                      <div className={`text-[14px] font-bold font-mono ${hi ? "text-accent-green" : "text-foreground"}`}>{value}</div>
+                      <div className={`text-[13px] font-bold font-mono ${hi ? "text-accent-green" : "text-foreground"}`}>{value}</div>
                     </div>
                   ))}
                   <div>
                     <div className="text-[9px] uppercase tracking-wider text-muted/40 mb-1">Matchup</div>
-                    <div className={`text-[13px] font-bold uppercase tracking-wide ${matchupColor}`}>{matchupLabel}</div>
+                    <div className={`text-[12px] font-bold uppercase tracking-wide ${matchupColor}`}>{matchupLabel}</div>
                   </div>
                   {delta !== null && Math.abs(delta) > 0.01 && (
                     <div>
                       <div className="text-[9px] uppercase tracking-wider text-muted/40 mb-1">Form</div>
-                      <div className={`text-[13px] font-bold font-mono ${delta > 0 ? "text-accent-green" : "text-red-400"}`}>
+                      <div className={`text-[12px] font-bold font-mono ${delta > 0 ? "text-accent-green" : "text-red-400"}`}>
                         {delta > 0 ? "+" : ""}{(delta * 100).toFixed(0)}
                       </div>
                     </div>
                   )}
                 </div>
 
-                {/* Sub-score bars */}
-                <div className="flex items-center gap-6 mt-3">
+                <div className="flex items-center gap-4 md:gap-6 mt-2.5">
                   {[
                     { label: "BAT", val: season?.batter ?? s.batter_score },
                     { label: "PIT", val: season?.pitcher ?? s.pitcher_score },
@@ -768,10 +779,10 @@ export function MLRankings({
                   ].map(({ label, val }) => {
                     const barColor = val >= 0.65 ? "#22c55e" : val >= 0.45 ? "#eab308" : "rgba(255,255,255,0.2)";
                     return (
-                      <div key={label} className="flex items-center gap-2">
+                      <div key={label} className="flex items-center gap-1.5">
                         <span className="text-[9px] font-bold uppercase tracking-wider w-6" style={{ color: barColor }}>{label}</span>
-                        <div className="w-20 h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
-                          <div className="h-full rounded-full transition-all" style={{ width: `${Math.round(val * 100)}%`, background: barColor }} />
+                        <div className="w-16 md:w-20 h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
+                          <div className="h-full rounded-full" style={{ width: `${Math.round(val * 100)}%`, background: barColor }} />
                         </div>
                         <span className="text-[10px] font-mono" style={{ color: barColor }}>{val.toFixed(2)}</span>
                       </div>
@@ -780,11 +791,9 @@ export function MLRankings({
                 </div>
               </div>
 
-              {/* Score */}
-              <div className="text-right flex-shrink-0 pl-2">
-                <div className={`text-3xl font-black font-mono leading-none ${scoreColor}`}>
-                  {score.toFixed(2)}
-                </div>
+              {/* Score — desktop only */}
+              <div className="hidden md:block text-right flex-shrink-0 pl-2">
+                <div className={`text-3xl font-black font-mono leading-none ${scoreColor}`}>{score.toFixed(2)}</div>
                 <div className="text-[9px] uppercase tracking-[0.12em] text-muted/40 mt-1">Score</div>
               </div>
             </div>
