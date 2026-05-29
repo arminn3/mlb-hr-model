@@ -45,6 +45,19 @@ export const FALLBACK_WEIGHTS: MlWeights = {
 // Base = season batter score (true ability). Form delta = how L5/L10 batter
 // scores compare to that baseline. Clamped ±0.15 so a hot/cold streak moves
 // players without overriding the season profile. Pitcher/env from today.
+// Recompute batter score from raw stats on the same scale as season formula
+function _formBatterFromScoreSet(s: import("./types").ScoreSet, seasonBatter: number): number {
+  const BRL_LO = 0.0, BRL_HI = 0.25;
+  const FB_LO  = 0.15, FB_HI  = 0.55;
+  const EV_LO  = 92.0, EV_HI  = 102.0;
+  const norm = (v: number, lo: number, hi: number) => Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
+  if (s.barrel_pct == null || s.fb_pct == null || s.exit_velo == null) return seasonBatter;
+  const brl = norm(s.barrel_pct / 100, BRL_LO, BRL_HI);
+  const fb  = norm(s.fb_pct    / 100, FB_LO,  FB_HI);
+  const ev  = norm(s.exit_velo,        EV_LO,  EV_HI);
+  return brl * 0.55 + fb * 0.25 + ev * 0.20;
+}
+
 export function combinedScore(player: PlayerData): number {
   const season = computeSeasonScore(player);
   const l5 = scoreFor(player, "L5");
@@ -56,9 +69,11 @@ export function combinedScore(player: PlayerData): number {
   let env: number;
 
   if (season) {
-    const formBatter = ((l5?.batter_score ?? season.batter) + (l10?.batter_score ?? season.batter)) / 2;
-    const delta = Math.max(-0.15, Math.min(0.15, formBatter - season.batter));
-    baseBatter = season.batter + delta;
+    const fb5  = l5  ? _formBatterFromScoreSet(l5,  season.batter) : season.batter;
+    const fb10 = l10 ? _formBatterFromScoreSet(l10, season.batter) : season.batter;
+    const formBatter = (fb5 + fb10) / 2;
+    // 70% season (stable ability), 30% recent form (L5+L10 barrel/FB/EV)
+    baseBatter = season.batter * 0.70 + formBatter * 0.30;
     pitcher = season.pitcher;
     env = season.env;
   } else {
@@ -78,8 +93,10 @@ export function combinedFormDelta(player: PlayerData): number | null {
   const l5 = scoreFor(player, "L5");
   const l10 = scoreFor(player, "L10");
   if (!l5 && !l10) return null;
-  const formBatter = ((l5?.batter_score ?? season.batter) + (l10?.batter_score ?? season.batter)) / 2;
-  return Math.max(-0.15, Math.min(0.15, formBatter - season.batter));
+  const fb5  = l5  ? _formBatterFromScoreSet(l5,  season.batter) : season.batter;
+  const fb10 = l10 ? _formBatterFromScoreSet(l10, season.batter) : season.batter;
+  const formBatter = (fb5 + fb10) / 2;
+  return formBatter - season.batter;
 }
 
 export function mlComposite(player: PlayerData, lb: UILookback, w: MlWeights): number {
