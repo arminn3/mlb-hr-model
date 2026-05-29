@@ -660,7 +660,7 @@ export function MLRankings({
                     return (
                       <div key={label} className="flex items-center gap-2">
                         <span className="text-[9px] font-bold uppercase tracking-wider w-6" style={{ color: barColor }}>{label}</span>
-                        <div className="w-24 h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
+                        <div className="w-20 h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
                           <div className="h-full rounded-full transition-all" style={{ width: `${Math.round(val * 100)}%`, background: barColor }} />
                         </div>
                         <span className="text-[10px] font-mono" style={{ color: barColor }}>{val.toFixed(2)}</span>
