@@ -42,6 +42,20 @@ export const FALLBACK_WEIGHTS: MlWeights = {
   environment: 0.082,
 };
 
+// Pure season score with a 10 BIP floor — used for consensus ranking.
+// Kept at module level so both the sortedSeason memo and the yesterday
+// useEffect can call it without dependency issues.
+function _seasonScoreConsensus(player: PlayerData): number | null {
+  const sp = player.season_profile;
+  if (!sp || sp.bip_count < 10) return null;
+  const n = (v: number, lo: number, hi: number) => Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
+  const batter = n(sp.barrel / 100, 0.0, 0.25) * 0.55
+               + n(sp.fb     / 100, 0.15, 0.55) * 0.25
+               + n(sp.ev,           92,   102)   * 0.20;
+  const l10 = player.scores.L10;
+  return batter * 0.50 + (l10?.pitcher_score ?? 0.5) * 0.35 + (l10?.env_score ?? 0.5) * 0.15;
+}
+
 // ── Season-anchored + form modifier ─────────────────────────────────────────
 // Base = season batter score (true ability). Form delta = how L5/L10 batter
 // scores compare to that baseline. Clamped ±0.15 so a hot/cold streak moves
@@ -281,6 +295,7 @@ export function MLRankings({
     date: string;
     mlPicks: YesterdayPick[];
     combinedPicks: YesterdayPick[];
+    consensusPicks: YesterdayPick[];
     totalHRs: number;
   } | null>(null);
 
@@ -306,12 +321,14 @@ export function MLRankings({
           ...(dayReport?.near_hr_events ?? []).map((h) => h.batter),
         ]);
         const seen = new Set<string>();
+        const allPlayers: { player: PlayerData; game: GameData }[] = [];
         const mlPicksAll: YesterdayPick[] = [];
         const combinedPicksAll: YesterdayPick[] = [];
         for (const game of slate.games ?? []) {
           for (const player of game.players ?? []) {
             if (seen.has(player.name)) continue;
             seen.add(player.name);
+            allPlayers.push({ player, game });
             const mlScore = mlComposite(player, lookback, mlWeights);
             const abs = scoreFor(player, lookback)?.recent_abs?.length ?? 0;
             const reliability = Math.min(1, abs / 10);
@@ -328,10 +345,42 @@ export function MLRankings({
         }
         mlPicksAll.sort((a, b) => b.mlScore - a.mlScore);
         combinedPicksAll.sort((a, b) => b.mlScore - a.mlScore);
+
+        // Consensus: players in top 30 of L5, L10, and Season on yesterday's slate
+        const TOP_N = 30;
+        const yL5 = [...allPlayers].sort((a, b) => {
+          const ra = Math.min(1, (scoreFor(a.player, "L5")?.recent_abs?.length ?? 0) / 10);
+          const rb = Math.min(1, (scoreFor(b.player, "L5")?.recent_abs?.length ?? 0) / 10);
+          return mlComposite(b.player, "L5", mlWeights) * rb - mlComposite(a.player, "L5", mlWeights) * ra;
+        });
+        const yL10 = [...allPlayers].sort((a, b) => {
+          const ra = Math.min(1, (scoreFor(a.player, "L10")?.recent_abs?.length ?? 0) / 10);
+          const rb = Math.min(1, (scoreFor(b.player, "L10")?.recent_abs?.length ?? 0) / 10);
+          return mlComposite(b.player, "L10", mlWeights) * rb - mlComposite(a.player, "L10", mlWeights) * ra;
+        });
+        const ySeason = [...allPlayers]
+          .filter(r => _seasonScoreConsensus(r.player) !== null)
+          .sort((a, b) => (_seasonScoreConsensus(b.player) ?? 0) - (_seasonScoreConsensus(a.player) ?? 0));
+        const l5Ranks = new Map(yL5.slice(0, TOP_N).map((r, i) => [r.player.name, i + 1]));
+        const l10Ranks = new Map(yL10.slice(0, TOP_N).map((r, i) => [r.player.name, i + 1]));
+        const seasonRanks = new Map(ySeason.slice(0, TOP_N).map((r, i) => [r.player.name, i + 1]));
+        const consensusPicksAll: YesterdayPick[] = allPlayers
+          .filter(r => l5Ranks.has(r.player.name) && l10Ranks.has(r.player.name) && seasonRanks.has(r.player.name))
+          .map(r => ({
+            name: r.player.name,
+            matchup: `${r.game.away_team}@${r.game.home_team}`,
+            oppPitcher: r.player.opp_pitcher,
+            hitHR: hrNames.has(r.player.name),
+            nearHR: !hrNames.has(r.player.name) && nearNames.has(r.player.name),
+            mlScore: (l5Ranks.get(r.player.name)! + l10Ranks.get(r.player.name)! + seasonRanks.get(r.player.name)!) / 3,
+          }))
+          .sort((a, b) => a.mlScore - b.mlScore);
+
         setYesterday({
           date: prevStr,
           mlPicks: mlPicksAll.slice(0, 30),
           combinedPicks: combinedPicksAll.slice(0, 30),
+          consensusPicks: consensusPicksAll,
           totalHRs: hrNames.size,
         });
       })
@@ -464,17 +513,6 @@ export function MLRankings({
   // 10 BIP ≈ 3-4 games of contact — noisy but enough to include recently
   // activated or newly called-up players. The global threshold stays at 20
   // so the Season+Form tab isn't affected.
-  const seasonScoreConsensus = (player: PlayerData): number | null => {
-    const sp = player.season_profile;
-    if (!sp || sp.bip_count < 10) return null;
-    const n = (v: number, lo: number, hi: number) => Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
-    const batter = n(sp.barrel / 100, 0.0, 0.25) * 0.55
-                 + n(sp.fb     / 100, 0.15, 0.55) * 0.25
-                 + n(sp.ev,           92,   102)   * 0.20;
-    const l10 = player.scores.L10;
-    return batter * 0.50 + (l10?.pitcher_score ?? 0.5) * 0.35 + (l10?.env_score ?? 0.5) * 0.15;
-  };
-
   const sortedSeason = useMemo(() => {
     const seen = new Set<string>();
     const all: { player: PlayerData; game: GameData }[] = [];
@@ -484,8 +522,8 @@ export function MLRankings({
       }
     }
     return all
-      .filter(r => seasonScoreConsensus(r.player) !== null)
-      .sort((a, b) => (seasonScoreConsensus(b.player) ?? 0) - (seasonScoreConsensus(a.player) ?? 0));
+      .filter(r => _seasonScoreConsensus(r.player) !== null)
+      .sort((a, b) => (_seasonScoreConsensus(b.player) ?? 0) - (_seasonScoreConsensus(a.player) ?? 0));
   }, [games]);
 
   const consensusRows = useMemo(() => {
@@ -605,6 +643,57 @@ export function MLRankings({
           </div>
         </div>
       ) : null;
+
+  const consensusPicks = yesterday?.consensusPicks ?? [];
+  const consensusHits = consensusPicks.filter(p => p.hitHR).length;
+  const consensusNears = consensusPicks.filter(p => p.nearHR).length;
+  const consensusPanel = yesterday && consensusPicks.length > 0 ? (
+    <div className="border border-card-border rounded-xl bg-card/30 p-5 mb-6">
+      <div className="flex items-center justify-between mb-3">
+        <div>
+          <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
+            Yesterday&apos;s Consensus Picks — {yesterday.date}
+          </h3>
+          <p className="text-[11px] text-muted mt-0.5">
+            Players in the top 30 on all three lists yesterday. Sorted by avg rank.
+            Leaguewide: {yesterday.totalHRs} HRs hit.
+          </p>
+        </div>
+        <div className="flex items-center gap-3 text-xs">
+          <div className="text-right">
+            <div className="text-[10px] text-muted uppercase">HR</div>
+            <div className="font-mono font-bold text-accent-green">{consensusHits}/{consensusPicks.length}</div>
+          </div>
+          <div className="text-right">
+            <div className="text-[10px] text-muted uppercase">Near HR</div>
+            <div className="font-mono font-bold text-accent-yellow">{consensusNears}</div>
+          </div>
+        </div>
+      </div>
+      <div className="space-y-1.5 md:columns-2 md:gap-x-1.5">
+        {consensusPicks.map((p, i) => (
+          <div
+            key={p.name}
+            className={`flex items-center gap-2 px-2.5 py-1.5 rounded text-xs break-inside-avoid ${
+              p.hitHR
+                ? "bg-accent-green/10 border border-accent-green/30"
+                : p.nearHR
+                ? "bg-accent-yellow/10 border border-accent-yellow/30"
+                : "bg-background/30 border border-transparent"
+            }`}
+          >
+            <span className="font-mono font-bold text-muted w-5 text-center shrink-0">{i + 1}</span>
+            <span className={`w-4 text-center shrink-0 ${p.hitHR ? "text-accent-green" : p.nearHR ? "text-accent-yellow" : "text-muted/30"}`}>
+              {p.hitHR ? "✓" : p.nearHR ? "◐" : "·"}
+            </span>
+            <span className="flex-1 min-w-0 truncate text-foreground font-medium">{p.name}</span>
+            <span className="text-[10px] text-muted shrink-0">{p.matchup}</span>
+            <span className="font-mono text-muted shrink-0 w-16 text-right">avg #{p.mlScore.toFixed(1)}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  ) : null;
 
   return (
     <>
@@ -968,7 +1057,7 @@ export function MLRankings({
         })}
       </div>}
     </div>
-    {yesterdayPanel}
+    {rankingTab === "consensus" ? consensusPanel : yesterdayPanel}
     </>
   );
 }
