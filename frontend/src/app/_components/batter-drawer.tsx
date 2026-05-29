@@ -376,14 +376,14 @@ export function BatterDrawer({
             >
               <X size={18} />
             </button>
-            <div className="flex items-center p-[3px] rounded-full" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)" }}>
+            <div className="flex items-center p-1 rounded-xl gap-0.5" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }}>
               {(["L5", "L10", "Season"] as UILookback[]).map((lb) => (
                 <button
                   key={lb}
                   onClick={() => setActiveLookback(lb)}
-                  className={`px-3 py-1 text-[11px] font-bold rounded-full cursor-pointer transition-all ${
+                  className={`px-3 py-1 text-[11px] font-bold rounded-lg cursor-pointer transition-all ${
                     activeLookback === lb
-                      ? "bg-accent text-black shadow-[0_1px_3px_0_rgba(0,0,0,0.35)]"
+                      ? "bg-accent text-white shadow-[0_1px_4px_0_rgba(0,0,0,0.4)]"
                       : "text-muted hover:text-foreground"
                   }`}
                 >
@@ -495,16 +495,16 @@ export function BatterDrawer({
           {/* Tabs */}
           <div>
             <div
-              className="inline-flex items-center p-[3px] rounded-full mb-4"
+              className="inline-flex items-center p-1 rounded-2xl mb-4 gap-0.5"
               style={{ background: "rgba(255,255,255,0.035)", border: "1px solid rgba(255,255,255,0.08)" }}
             >
               {(["abs", "statcast", "pitches", "bvp", "profile"] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setDetailTab(tab)}
-                  className={`px-3 py-1 text-[11px] font-semibold rounded-full cursor-pointer transition-all ${
+                  className={`px-3 py-1 text-[11px] font-semibold rounded-lg cursor-pointer transition-all ${
                     detailTab === tab
-                      ? "bg-accent text-black shadow-[0_1px_3px_0_rgba(0,0,0,0.35)]"
+                      ? "bg-accent text-white shadow-[0_1px_4px_0_rgba(0,0,0,0.4)]"
                       : "text-muted hover:text-foreground"
                   }`}
                 >

@@ -51,6 +51,28 @@ function matchupPill(score: number): { label: string; style: React.CSSProperties
   };
 }
 
+function filteredPitchStats(pitchDetail: Record<string, PitchDetailEntry>, filter: Set<string>) {
+  let totalCount = 0, wEv = 0, wBarrel = 0, wHH = 0, wFB = 0;
+  for (const pt of filter) {
+    const d = pitchDetail[pt];
+    if (!d) continue;
+    const c = d.count ?? 1;
+    totalCount += c;
+    wEv     += d.avg_exit_velo * c;
+    wBarrel += d.barrel_rate * c;
+    wHH     += d.hard_hit_rate * c;
+    wFB     += d.fb_rate * c;
+  }
+  if (totalCount === 0) return null;
+  return {
+    exit_velo:    Math.round((wEv     / totalCount) * 10) / 10,
+    barrel_pct:   Math.round((wBarrel / totalCount) * 10) / 10,
+    hard_hit_pct: Math.round((wHH     / totalCount) * 10) / 10,
+    fb_pct:       Math.round((wFB     / totalCount) * 10) / 10,
+    bip: totalCount,
+  };
+}
+
 // ── BatterMobileCard ─────────────────────────────────────────────────────────
 
 export type BatterRowInfo = { p: PlayerData; order: number | null; mlbId?: number };
@@ -77,6 +99,7 @@ function BatterMobileCard({
   const isLowData = scores.recent_abs.length <= 2;
   const hasQualityWarn = !isLowData && scores.data_quality !== "OK";
 
+  // tags for BatterRow are not applicable (desktop only), skip for mobile card
   // HR signals summary
   const sig = p.hr_signals;
   const sigHit = sig
@@ -196,6 +219,8 @@ export function BatterRow({
   onSelect,
   isFavorited,
   onToggleFavorite,
+  pitchFilter,
+  parkFactor,
 }: {
   row: BatterRowInfo;
   lookback: UILookback;
@@ -203,6 +228,8 @@ export function BatterRow({
   onSelect: () => void;
   isFavorited?: boolean;
   onToggleFavorite?: (name: string) => void;
+  pitchFilter?: Set<string>;
+  parkFactor?: number;
 }) {
   const { p, order, mlbId } = row;
   const scores = scoreFor(p, lookback) ?? scoreFor(p, "L5")!;
@@ -212,7 +239,14 @@ export function BatterRow({
   const hrCount   = recentAbs.filter((ab) => ab.result === "home_run").length;
   const hrFbPct   = flyBalls.length > 0 ? (hrCount / flyBalls.length) * 100 : null;
 
-  const mScore = matchupScore(p.pitch_detail || {});
+  const filtered = pitchFilter && pitchFilter.size > 0
+    ? filteredPitchStats(p.pitch_detail || {}, pitchFilter)
+    : null;
+
+  const pitchDetailForMatchup = (pitchFilter && pitchFilter.size > 0)
+    ? Object.fromEntries(Object.entries(p.pitch_detail || {}).filter(([pt]) => pitchFilter.has(pt)))
+    : (p.pitch_detail || {});
+  const mScore = matchupScore(pitchDetailForMatchup);
   const pill = matchupPill(mScore);
   const isLowData = scores.recent_abs.length <= 2;
   const hasQualityWarn = !isLowData && scores.data_quality !== "OK";
@@ -303,18 +337,26 @@ export function BatterRow({
         </span>
       </td>
 
-      {/* Core stats */}
+      {/* Core stats — use filtered pitch stats when a pitch filter is active */}
       <td className="py-2.5 pr-3 w-14 text-center">
-        <span className={`text-xs font-mono ${statColor(scores.exit_velo, 88, 93)}`}>{scores.exit_velo}</span>
+        <span className={`text-xs font-mono ${statColor(filtered ? filtered.exit_velo : scores.exit_velo, 88, 93)}`}>
+          {filtered ? filtered.exit_velo : scores.exit_velo}
+        </span>
       </td>
       <td className="py-2.5 pr-3 w-14 text-center">
-        <span className={`text-xs font-mono ${statColor(scores.barrel_pct, 8, 15)}`}>{scores.barrel_pct}%</span>
+        <span className={`text-xs font-mono ${statColor(filtered ? filtered.barrel_pct : scores.barrel_pct, 8, 15)}`}>
+          {filtered ? filtered.barrel_pct : scores.barrel_pct}%
+        </span>
       </td>
       <td className="py-2.5 pr-3 w-14 text-center">
-        <span className={`text-xs font-mono ${statColor(scores.hard_hit_pct, 35, 50)}`}>{scores.hard_hit_pct}%</span>
+        <span className={`text-xs font-mono ${statColor(filtered ? filtered.hard_hit_pct : scores.hard_hit_pct, 35, 50)}`}>
+          {filtered ? filtered.hard_hit_pct : scores.hard_hit_pct}%
+        </span>
       </td>
       <td className="py-2.5 pr-3 w-14 text-center">
-        <span className={`text-xs font-mono ${statColor(scores.fb_pct, 25, 40)}`}>{scores.fb_pct}%</span>
+        <span className={`text-xs font-mono ${statColor(filtered ? filtered.fb_pct : scores.fb_pct, 25, 40)}`}>
+          {filtered ? filtered.fb_pct : scores.fb_pct}%
+        </span>
       </td>
       <td className="py-2.5 pr-4 w-16 text-center">
         <span className={`text-xs font-mono ${hrFbPct == null ? "text-muted" : statColor(hrFbPct, 10, 18)}`}>
@@ -423,6 +465,8 @@ export function BatterTable({
   onSelect,
   favorites,
   onToggleFavorite,
+  pitcherMix,
+  parkFactor,
 }: {
   teamAbbr: string;
   batters: BatterRowInfo[];
@@ -431,9 +475,13 @@ export function BatterTable({
   onSelect: (row: BatterRowInfo) => void;
   favorites?: Set<string>;
   onToggleFavorite?: (name: string) => void;
+  pitcherMix?: { vs_lhb: Record<string, number>; vs_rhb: Record<string, number> };
+  parkFactor?: number;
 }) {
   const [sortCol, setSortCol] = useState<SortCol>(null);
   const [sortDir, setSortDir] = useState<SortDir>("desc");
+  const [handFilter, setHandFilter] = useState<"all" | "LHB" | "RHB">("all");
+  const [pitchFilter, setPitchFilter] = useState<Set<string>>(new Set());
 
   if (batters.length === 0) return null;
 
@@ -451,28 +499,36 @@ export function BatterTable({
     const recentAbs = sc.recent_abs ?? [];
     const fbs = recentAbs.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
     const hrs = recentAbs.filter((ab) => ab.result === "home_run").length;
+    const filt = pitchFilter.size > 0 ? filteredPitchStats(row.p.pitch_detail || {}, pitchFilter) : null;
+    const pitchDetailForMatchup = pitchFilter.size > 0
+      ? Object.fromEntries(Object.entries(row.p.pitch_detail || {}).filter(([pt]) => pitchFilter.has(pt)))
+      : (row.p.pitch_detail || {});
     switch (sortCol) {
       case "score":   return sc.composite ?? 0;
-      case "pitch":   return matchupScore(row.p.pitch_detail || {});
-      case "ev":      return sc.exit_velo ?? 0;
-      case "barrel":  return sc.barrel_pct ?? 0;
-      case "hh":      return sc.hard_hit_pct ?? 0;
-      case "fb":      return sc.fb_pct ?? 0;
+      case "pitch":   return matchupScore(pitchDetailForMatchup);
+      case "ev":      return filt ? filt.exit_velo : (sc.exit_velo ?? 0);
+      case "barrel":  return filt ? filt.barrel_pct : (sc.barrel_pct ?? 0);
+      case "hh":      return filt ? filt.hard_hit_pct : (sc.hard_hit_pct ?? 0);
+      case "fb":      return filt ? filt.fb_pct : (sc.fb_pct ?? 0);
       case "hrfb":    return fbs.length > 0 ? (hrs / fbs.length) * 100 : -1;
       case "xwoba":   return sc.xwoba ?? -1;
       case "sweet":   return sc.sweet_spot ?? -1;
       case "swstr":   return sc.swstr != null ? -(sc.swstr) : (row.p.matchup_swstr != null ? -(row.p.matchup_swstr) : 1);
       case "pullbrl": return sc.pull_brl ?? -1;
-      case "bip":     return sc.bip ?? -1;
+      case "bip":     return filt ? filt.bip : (sc.bip ?? -1);
       case "gb":      return sc.gb_pct ?? 0;
       case "ld":      return sc.ld_pct ?? 0;
       default:        return 0;
     }
   }
 
+  const handFiltered = handFilter === "all"
+    ? batters
+    : batters.filter((r) => handFilter === "LHB" ? r.p.batter_hand !== "R" : r.p.batter_hand !== "L");
+
   const sorted = sortCol === null
-    ? [...batters]
-    : [...batters].sort((a, b) => {
+    ? [...handFiltered]
+    : [...handFiltered].sort((a, b) => {
         const diff = getVal(a) - getVal(b);
         return sortDir === "desc" ? -diff : diff;
       });
@@ -500,6 +556,54 @@ export function BatterTable({
           <span className="text-[9px] text-muted/40 uppercase tracking-wider">projected order</span>
         )}
       </div>
+
+      {/* Pitcher pitch mix by hand */}
+      {pitcherMix && (() => {
+        const allPitchTypes = [...new Set([...Object.keys(pitcherMix.vs_lhb), ...Object.keys(pitcherMix.vs_rhb)])];
+        const activeMix = handFilter === "LHB" ? pitcherMix.vs_lhb
+          : handFilter === "RHB" ? pitcherMix.vs_rhb
+          : Object.fromEntries(allPitchTypes.map((pt) => [pt, ((pitcherMix.vs_lhb[pt] ?? 0) + (pitcherMix.vs_rhb[pt] ?? 0)) / 2]));
+        return (
+        <div
+          className="flex items-center gap-2 px-4 py-2 flex-wrap"
+          style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.015)" }}
+        >
+          <span className="text-[9px] uppercase tracking-wider text-muted/40 mr-1">Pitch Mix</span>
+          <div className="flex items-center rounded-xl p-[3px] gap-0.5 flex-shrink-0" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }}>
+            {(["all", "LHB", "RHB"] as const).map((h) => (
+              <button key={h} onClick={() => { setHandFilter(h); setPitchFilter(new Set()); }}
+                className={`px-2.5 py-0.5 text-[10px] font-bold rounded-lg cursor-pointer transition-all ${handFilter === h ? "bg-accent text-white shadow-[0_1px_3px_0_rgba(0,0,0,0.4)]" : "text-muted hover:text-foreground"}`}>
+                {h === "all" ? "All" : h}
+              </button>
+            ))}
+          </div>
+          {Object.entries(activeMix)
+            .filter(([, pct]) => pct >= 0.04)
+            .sort(([, a], [, b]) => b - a)
+            .map(([pt, pct]) => {
+              const active = pitchFilter.has(pt);
+              return (
+                <button key={pt}
+                  onClick={() => setPitchFilter((prev) => { const next = new Set(prev); if (next.has(pt)) next.delete(pt); else next.add(pt); return next; })}
+                  className="px-2.5 py-1 text-[10px] font-mono rounded-full flex-shrink-0 cursor-pointer transition-all"
+                  style={active
+                    ? { background: "rgba(96,165,250,0.18)", border: "1px solid rgba(96,165,250,0.45)", color: "rgba(96,165,250,1)" }
+                    : { background: "rgba(255,255,255,0.055)", border: "1px solid rgba(255,255,255,0.11)", color: "rgba(255,255,255,0.72)" }}>
+                  {pt} {(pct * 100).toFixed(1)}%
+                </button>
+              );
+            })
+          }
+          {pitchFilter.size > 0 && (
+            <button onClick={() => setPitchFilter(new Set())}
+              className="px-2 py-1 text-[9px] font-mono rounded-full cursor-pointer transition-all ml-auto flex-shrink-0"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.10)", color: "rgba(255,255,255,0.4)" }}>
+              clear
+            </button>
+          )}
+        </div>
+        );
+      })()}
 
       {/* Mobile card list (hidden on sm+) */}
       <div className="sm:hidden">
@@ -551,6 +655,8 @@ export function BatterTable({
                 onSelect={() => onSelect(row)}
                 isFavorited={favorites?.has(row.p.name)}
                 onToggleFavorite={onToggleFavorite}
+                pitchFilter={pitchFilter.size > 0 ? pitchFilter : undefined}
+                parkFactor={parkFactor}
               />
             ))}
           </tbody>

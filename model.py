@@ -320,6 +320,7 @@ def score_batter_vs_pitcher(
             blended_with_2025 = True
 
     result["pitcher_fb_rate"] = p_metrics["fb_rate_allowed"]
+    result["pitcher_gb_rate"] = p_metrics["gb_rate_allowed"]
     result["pitcher_hr_fb_rate"] = p_metrics["hr_per_fb_rate"]
     result["pitcher_hr_per_9"] = p_metrics["hr_per_ip"]
     result["pitcher_total_hrs"] = p_metrics["total_hrs"]

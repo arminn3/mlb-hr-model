@@ -179,7 +179,7 @@ export function PitcherProfileCard({ pitcher, side }: { pitcher: PitcherInfo; si
           <table className="w-full text-xs font-mono border-collapse">
             <thead>
               <tr className="text-[9px] uppercase tracking-wider text-muted/70">
-                <th className="sticky left-0 bg-transparent text-left font-medium pb-1 pr-2"></th>
+                <th className="text-left font-medium pb-1 pr-2"></th>
                 {groupSpans.map((g, i) => (
                   <th key={i} colSpan={g.span} className="font-medium pb-1 px-1 text-center">
                     {GROUP_LABELS[g.group]}
@@ -187,7 +187,7 @@ export function PitcherProfileCard({ pitcher, side }: { pitcher: PitcherInfo; si
                 ))}
               </tr>
               <tr className="text-[10px] uppercase tracking-wider text-muted">
-                <th className="sticky left-0 bg-transparent text-left font-medium pb-1.5 pr-3">Split</th>
+                <th className="text-left font-medium pb-1.5 pr-3">Split</th>
                 {COLUMNS.map((c) => (
                   <th key={c.key} className="font-medium pb-1.5 px-1.5 text-center whitespace-nowrap">
                     {c.header}
@@ -200,7 +200,7 @@ export function PitcherProfileCard({ pitcher, side }: { pitcher: PitcherInfo; si
                 const row = rows[key];
                 return (
                   <tr key={key} className="border-t border-card-border/40">
-                    <td className="sticky left-0 bg-transparent pl-1 pr-3 py-1.5 text-[11px] uppercase tracking-wider font-semibold text-foreground">
+                    <td className="pl-1 pr-3 py-1.5 text-[11px] uppercase tracking-wider font-semibold text-foreground whitespace-nowrap">
                       {label}
                     </td>
                     {COLUMNS.map((c) => {

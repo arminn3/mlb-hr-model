@@ -1,6 +1,7 @@
 "use client";
 
 import type { PlayerData } from "./types";
+import { scoreFor } from "./score-utils";
 
 interface Signal {
   key: string;
@@ -19,7 +20,7 @@ function buildSignals(player: PlayerData): Signal[] {
   signals.push({
     key: "barrel",
     label: "Barrel heat",
-    stat: s.barrel_heat ? "barreled in last 3 games" : "no barrel in last 3 games",
+    stat: s.barrel_heat ? "barreled in last 5 games" : "no barrel in last 5 games",
     triggered: s.barrel_heat,
   });
 
@@ -56,6 +57,33 @@ function buildSignals(player: PlayerData): Signal[] {
     triggered: s.park_friendly,
   });
 
+  // Barrel surge — last 5 GAMES (group recent_abs by date, take 5 most recent dates)
+  const allAbs = scoreFor(player, "L10")?.recent_abs ?? scoreFor(player, "L5")?.recent_abs ?? [];
+  const seasonBarrel = sp?.barrel ?? null;
+  if (seasonBarrel !== null && allAbs.length > 0) {
+    const dates = [...new Set(allAbs.map((ab) => ab.date))].sort().slice(-5);
+    const g5Abs = allAbs.filter((ab) => dates.includes(ab.date));
+    const bips = g5Abs.filter((ab) => ab.ev > 0);
+    // Statcast barrel approximation: zone expands as EV rises above 98
+    const barrels = bips.filter((ab) => {
+      if (ab.ev < 98) return false;
+      const expand = Math.max(0, ab.ev - 98) * 2;
+      return ab.angle >= Math.max(8, 26 - expand) && ab.angle <= Math.min(50, 30 + expand);
+    }).length;
+    const g5BarrelPct = bips.length > 0 ? Math.round((barrels / bips.length) * 1000) / 10 : null;
+    if (g5BarrelPct !== null) {
+      const ratio = seasonBarrel > 0 ? g5BarrelPct / seasonBarrel : null;
+      const triggered = g5BarrelPct >= 8 && ratio !== null && ratio >= 1.5;
+      const ratioStr = ratio !== null ? `${ratio.toFixed(1)}×` : "—";
+      signals.push({
+        key: "barrel_surge",
+        label: "Barrel surge (G5)",
+        stat: `G5: ${g5BarrelPct}%  ·  season: ${seasonBarrel}%  ·  ${ratioStr} rate  ·  ${bips.length} BIP`,
+        triggered,
+      });
+    }
+  }
+
   return signals;
 }
 
@@ -83,8 +111,10 @@ export function HRSignalCard({ player }: { player: PlayerData }) {
       style={{
         border: isGold
           ? "1px solid rgba(251,191,36,0.30)"
-          : "1px solid rgba(255,255,255,0.07)",
-        boxShadow: isGold ? `0 0 24px 0 rgba(251,191,36,0.10)` : "none",
+          : "1px solid rgba(255,255,255,0.10)",
+        boxShadow: isGold
+          ? `inset 0 1px 0 0 rgba(255,255,255,0.10), inset 0 -1px 0 0 rgba(0,0,0,0.3), 0 4px 10px -2px rgba(0,0,0,0.5), 0 0 24px 0 rgba(251,191,36,0.10)`
+          : "inset 0 1px 0 0 rgba(255,255,255,0.10), inset 0 -1px 0 0 rgba(0,0,0,0.3), 0 4px 10px -2px rgba(0,0,0,0.5)",
       }}
     >
       {/* Header strip */}

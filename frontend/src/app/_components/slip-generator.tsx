@@ -413,8 +413,22 @@ export function SlipGenerator({
   );
   const [sortMode, setSortMode] = useState<SortMode>(initial.sortMode ?? "best");
   const [selectedNames, setSelectedNames] = useState<Set<string>>(
-    () => new Set(initial.selectedNames ?? [])
+    () => new Set([...(initial.selectedNames ?? []), ...(favorites ?? [])])
   );
+
+  // Keep selectedNames in sync with favorites: star → add, unstar → remove
+  const prevFavRef = useRef(new Set(favorites));
+  useEffect(() => {
+    const prev = prevFavRef.current;
+    const curr = favorites ?? new Set<string>();
+    setSelectedNames((s) => {
+      const next = new Set(s);
+      for (const n of curr) if (!prev.has(n)) next.add(n);
+      for (const n of prev) if (!curr.has(n)) next.delete(n);
+      return next;
+    });
+    prevFavRef.current = new Set(curr);
+  }, [favorites]);
   const [search, setSearch] = useState(initial.search ?? "");
   const [mlWeights, setMlWeights] = useState<MlWeights>(FALLBACK_WEIGHTS);
 
@@ -591,23 +605,26 @@ export function SlipGenerator({
           {/* Mode toggle — top row, larger tabs */}
           <div className="flex items-center gap-2">
             <span className="text-[10px] uppercase tracking-wider text-muted">Mode:</span>
-            {([
-              { key: "auto"    as const, label: "Auto",       desc: "Model picks" },
-              { key: "custom"  as const, label: "All Combos", desc: "Every combo" },
-              { key: "optimal" as const, label: "Optimal",    desc: "No repeats" },
-            ]).map((m) => (
-              <button
-                key={m.key}
-                onClick={() => setMode(m.key)}
-                className={`px-4 py-2 text-xs rounded-lg cursor-pointer transition-colors ${
-                  mode === m.key
-                    ? "bg-accent text-background font-bold"
-                    : "bg-card/50 text-muted border border-card-border hover:text-foreground"
-                }`}
-              >
-                {m.label}
-              </button>
-            ))}
+            <div className="flex items-center gap-1">
+              {([
+                { key: "auto"    as const, label: "Auto" },
+                { key: "custom"  as const, label: "All Combos" },
+                { key: "optimal" as const, label: "Optimal" },
+              ]).map((m) => (
+                <button
+                  key={m.key}
+                  onClick={() => setMode(m.key)}
+                  className={
+                    "px-3 py-1.5 text-[12px] font-semibold rounded-[var(--radius-md)] cursor-pointer transition-colors " +
+                    (mode === m.key
+                      ? "bg-accent/15 text-accent border border-accent/40"
+                      : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
+                  }
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
           </div>
           {/* Leg count — stepper */}
           <div className="flex items-center gap-2">

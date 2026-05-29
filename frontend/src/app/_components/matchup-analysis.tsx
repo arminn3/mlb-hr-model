@@ -1456,9 +1456,9 @@ export function MatchupAnalysis({
               <button
                 key={key}
                 onClick={() => setSortBy(key)}
-                className={`px-3 py-1.5 text-xs rounded-full cursor-pointer transition-colors ${
+                className={`px-3 py-1.5 text-xs rounded-lg cursor-pointer transition-all ${
                   sortBy === key
-                    ? "bg-accent text-background font-bold"
+                    ? "bg-accent text-white font-bold shadow-[0_1px_4px_0_rgba(0,0,0,0.4)]"
                     : "bg-card/50 text-muted border border-card-border hover:text-foreground"
                 }`}
               >
@@ -1468,7 +1468,7 @@ export function MatchupAnalysis({
 
             <button
               onClick={() => setExpandAll(!expandAll)}
-              className="ml-auto px-3 py-1.5 text-xs rounded-full bg-card/50 text-muted border border-card-border hover:text-foreground cursor-pointer transition-colors"
+              className="ml-auto px-3 py-1.5 text-xs rounded-xl bg-card/50 text-muted border border-card-border hover:text-foreground cursor-pointer transition-all"
             >
               {expandAll ? "Collapse All" : "Expand All"}
             </button>

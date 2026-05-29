@@ -104,6 +104,7 @@ export interface PitcherProfile {
 
 export interface PitcherStats {
   fb_rate: number;
+  gb_rate: number;
   hr_fb_rate: number;
   hr_per_9: number;
   ip: number;

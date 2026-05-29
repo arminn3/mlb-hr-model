@@ -12,6 +12,7 @@ import { RatingBadge } from "./rating-badge";
 import { Tooltip } from "./tooltip";
 import { BatterProfileRow } from "./batter-profile-row";
 import { teamLogoUrl } from "./game-header";
+import { buildTags, PlayerTagPills } from "./player-tags";
 
 const PITCH_NAMES: Record<string, string[]> = {
   FF: ["4-Seam Fastball", "Four-Seam"],
@@ -27,26 +28,36 @@ const PITCH_NAMES: Record<string, string[]> = {
   SV: ["Slurve"],
 };
 
-function evColor(ev: number) {
-  if (ev >= 95) return "bg-accent-green/80 text-background";
-  if (ev >= 90) return "bg-accent-green/40 text-foreground";
-  return "text-foreground";
+function evColor(_ev: number) {
+  return "";
 }
 function angleColor(angle: number) {
   if (angle >= 25 && angle <= 35) return "bg-accent-green/80 text-background";
   if (angle >= 20 && angle <= 40) return "bg-accent-green/40 text-foreground";
-  return "text-foreground";
+  return "text-red-400";
 }
 function distColor(dist: number | null) {
-  if (!dist) return "text-muted";
+  if (!dist) return "text-red-400/60";
   if (dist >= 350) return "bg-accent-green/80 text-background";
   if (dist >= 300) return "bg-accent-green/40 text-foreground";
-  return "text-foreground";
+  return "text-red-400";
 }
+function evGradient(ev: number | null | undefined): string {
+  if (ev == null || ev === 0) return "rgba(148,163,184,0.35)";
+  if (ev >= 105) return "rgba(0,240,100,1)";
+  if (ev >= 98)  return "rgba(34,197,94,1)";
+  if (ev >= 95)  return "rgba(74,222,128,1)";
+  if (ev >= 93)  return "rgba(134,239,172,0.9)";
+  if (ev >= 90)  return "rgba(187,247,208,0.55)";
+  if (ev >= 88)  return "rgba(252,165,165,0.55)";
+  if (ev >= 85)  return "rgba(248,113,113,0.80)";
+  return "rgba(239,68,68,1)";
+}
+
 function statHighlight(value: number, thresholds: [number, number]) {
   if (value >= thresholds[1]) return "text-accent-green font-semibold";
   if (value >= thresholds[0]) return "text-foreground";
-  return "text-muted";
+  return "text-red-400";
 }
 
 function pitchScore(d: PitchDetailEntry): "great" | "decent" | "tough" | "unknown" {
@@ -215,9 +226,9 @@ function ZoneGrid({
   }
 
   return (
-    <div className="rounded-xl p-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
+    <div className="rounded-xl p-4" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)", border: "1px solid rgba(255,255,255,0.10)", boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.10), inset 0 -1px 0 0 rgba(0,0,0,0.3), 0 4px 10px -2px rgba(0,0,0,0.5)" }}>
       <div className="flex items-center justify-between mb-4">
-        <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted">Zone Overlap</span>
+        <span className="text-[11px] font-bold uppercase tracking-[0.07em] text-foreground/55">Zone Overlap</span>
         <span className={`text-xs font-bold ${overallLabel.color}`}>
           {overlapCount} zone{overlapCount !== 1 ? "s" : ""} overlap · {overallLabel.text}
         </span>
@@ -251,6 +262,7 @@ export function BatterDetailPage({
   onBack,
   isFavorited,
   onToggleFavorite,
+  parkFactor,
 }: {
   player: PlayerData;
   lookback: UILookback;
@@ -260,6 +272,7 @@ export function BatterDetailPage({
   onBack: () => void;
   isFavorited?: boolean;
   onToggleFavorite?: (name: string) => void;
+  parkFactor?: number;
 }) {
   const [detailTab, setDetailTab] = useState<"abs" | "statcast" | "pitches" | "bvp" | "profile">("abs");
   const [pitchFilter, setPitchFilter] = useState<Set<string>>(new Set());
@@ -340,6 +353,7 @@ export function BatterDetailPage({
 
   const pitchDetailEntries = Object.entries(pitchDetail).sort((a, b) => (b[1].usage_pct ?? 0) - (a[1].usage_pct ?? 0));
   const matchup = matchupLabel(pitchDetail);
+  const playerTags = buildTags(player, parkFactor);
 
   const statCards = [
     { label: "Exit Velo",  value: `${displayEv}`,                                           cls: statHighlight(displayEv, [88, 93]) },
@@ -370,10 +384,10 @@ export function BatterDetailPage({
             <img src={teamLogoUrl(teamAbbr)} alt={teamAbbr} className="w-5 h-5 object-contain opacity-60" />
           </>
         )}
-        <div className="flex items-center p-[3px] rounded-full ml-auto" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)" }}>
+        <div className="flex items-center p-1 rounded-xl gap-0.5 ml-auto" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }}>
           {(["L5", "L10", "Season"] as UILookback[]).map((lb) => (
             <button key={lb} onClick={() => setActiveLookback(lb)}
-              className={`px-3 py-1 text-[11px] font-bold rounded-full cursor-pointer transition-all ${activeLookback === lb ? "bg-accent text-black shadow-[0_1px_3px_0_rgba(0,0,0,0.35)]" : "text-muted hover:text-foreground"}`}>
+              className={`px-3 py-1 text-[11px] font-bold rounded-lg cursor-pointer transition-all ${activeLookback === lb ? "bg-accent text-white shadow-[0_1px_4px_0_rgba(0,0,0,0.4)]" : "text-muted hover:text-foreground"}`}>
               {lb}
             </button>
           ))}
@@ -414,12 +428,20 @@ export function BatterDetailPage({
                 </button>
               )}
             </div>
-            <div className="text-sm text-muted mb-2">
-              <span className="font-mono">{player.batter_hand}HB</span>
-              <span className="mx-2 opacity-40">·</span>
-              <span>vs {player.opp_pitcher} ({player.pitcher_hand}HP)</span>
+            {/* Handedness matchup badge — prominent */}
+            <div className="flex items-center gap-2 mb-2 flex-wrap">
+              <div className="flex items-center gap-0 rounded-lg overflow-hidden text-[11px] font-bold font-mono" style={{ border: "1px solid rgba(255,255,255,0.12)" }}>
+                <span className="px-2.5 py-1" style={{ background: "rgba(96,165,250,0.18)", color: "rgba(147,197,253,1)" }}>
+                  {player.batter_hand === "L" ? "LHB" : player.batter_hand === "R" ? "RHB" : "SHB"}
+                </span>
+                <span className="px-1.5 py-1 text-[10px] font-normal" style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.35)" }}>vs</span>
+                <span className="px-2.5 py-1" style={{ background: player.pitcher_hand === "L" ? "rgba(251,191,36,0.18)" : "rgba(248,113,113,0.18)", color: player.pitcher_hand === "L" ? "rgba(253,224,132,1)" : "rgba(252,165,165,1)" }}>
+                  {player.pitcher_hand}HP
+                </span>
+              </div>
+              <span className="text-sm text-muted truncate">vs {player.opp_pitcher}</span>
               {player.pitcher_data_year === 2025 && (
-                <span className="ml-2 px-1.5 py-0.5 text-[9px] font-semibold rounded bg-amber-400/15 text-amber-400/90 border border-amber-400/20">2025 data</span>
+                <span className="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-amber-400/15 text-amber-400/90 border border-amber-400/20">2025 data</span>
               )}
             </div>
             <div className="flex flex-wrap items-center gap-2">
@@ -435,6 +457,11 @@ export function BatterDetailPage({
                 </Tooltip>
               )}
             </div>
+            {playerTags.length > 0 && (
+              <div className="mt-2">
+                <PlayerTagPills tags={playerTags} />
+              </div>
+            )}
           </div>
         </div>
 
@@ -445,8 +472,12 @@ export function BatterDetailPage({
         <div className="grid grid-cols-3 gap-2">
           {statCards.map(({ label, value, cls }) => (
             <div key={label} className="flex flex-col items-center justify-center gap-1.5 px-3 py-3 rounded-xl"
-              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <span className="text-[9px] uppercase tracking-[0.08em] text-muted/70 leading-none">{label}</span>
+              style={{
+                background: "linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)",
+                border: "1px solid rgba(255,255,255,0.10)",
+                boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.14), inset 0 -1px 0 0 rgba(0,0,0,0.35), 0 4px 10px -2px rgba(0,0,0,0.55)",
+              }}>
+              <span className="text-[10px] uppercase tracking-[0.08em] text-muted/60 leading-none">{label}</span>
               <span className={`font-mono text-base font-semibold leading-none ${cls}`}>{value}</span>
             </div>
           ))}
@@ -457,24 +488,43 @@ export function BatterDetailPage({
 
         {/* Pitch Matchup */}
         {pitchDetailEntries.length > 0 && (
-          <div className="rounded-xl p-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
+          <div className="rounded-xl p-4" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)", border: "1px solid rgba(255,255,255,0.10)", boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.10), inset 0 -1px 0 0 rgba(0,0,0,0.3), 0 4px 10px -2px rgba(0,0,0,0.5)" }}>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted">Pitch Matchup</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-bold uppercase tracking-[0.07em] text-foreground/55">Pitch Matchup</span>
+                <div className="flex items-center gap-0 rounded overflow-hidden text-[10px] font-bold font-mono" style={{ border: "1px solid rgba(255,255,255,0.10)" }}>
+                  <span className="px-1.5 py-0.5" style={{ background: "rgba(96,165,250,0.15)", color: "rgba(147,197,253,0.9)" }}>
+                    {player.batter_hand === "L" ? "LHB" : player.batter_hand === "R" ? "RHB" : "SHB"}
+                  </span>
+                  <span className="px-1 py-0.5 text-[9px] font-normal" style={{ background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.3)" }}>vs</span>
+                  <span className="px-1.5 py-0.5" style={{ background: player.pitcher_hand === "L" ? "rgba(251,191,36,0.15)" : "rgba(248,113,113,0.15)", color: player.pitcher_hand === "L" ? "rgba(253,224,132,0.9)" : "rgba(252,165,165,0.9)" }}>
+                    {player.pitcher_hand}HP
+                  </span>
+                </div>
+              </div>
               <span className={`text-xs font-bold ${matchup.color}`}>{matchup.label}</span>
             </div>
             <div className="space-y-1.5">
               {pitchDetailEntries.map(([pt, d]) => {
                 const score = pitchScore(d); const c = SCORE_COLORS[score];
                 return (
-                  <div key={pt} className={`flex items-center gap-2.5 px-3 py-2 rounded-lg border ${c.bg}`}>
+                  <div key={pt} className={`flex items-center px-3 py-2.5 rounded-lg border ${c.bg}`} style={{ boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.08), inset 0 -1px 0 0 rgba(0,0,0,0.25), 0 2px 6px -2px rgba(0,0,0,0.4)" }}>
                     <div className={`w-2 h-2 rounded-full flex-shrink-0 ${c.dot}`} />
-                    <span className="text-xs font-mono font-semibold text-foreground w-7 flex-shrink-0">{pt}</span>
-                    <span className="text-[11px] text-muted flex-1 min-w-0 truncate">{PITCH_NAMES[pt]?.[0] || pt}</span>
-                    <span className="text-[10px] text-muted/60 font-mono flex-shrink-0">{d.usage_pct}%</span>
-                    <div className="flex items-center gap-2 flex-shrink-0 ml-1">
-                      {d.barrel_rate != null && <span className={`text-[11px] font-mono font-semibold ${c.text}`}>{d.barrel_rate}% brl</span>}
-                      {d.avg_exit_velo != null && <span className="text-[11px] font-mono text-muted">{d.avg_exit_velo} EV</span>}
-                      {d.barrel_rate == null && d.avg_exit_velo == null && <span className="text-[11px] text-muted/50">no data</span>}
+                    <span className="text-xs font-mono font-bold text-foreground ml-2.5 w-7 flex-shrink-0">{pt}</span>
+                    <span className="text-[11px] text-muted flex-1 min-w-0 truncate ml-1">{PITCH_NAMES[pt]?.[0] || pt}</span>
+                    <div className="flex items-stretch flex-shrink-0 ml-2" style={{ gap: 0 }}>
+                      <div className="flex flex-col items-center justify-center px-3" style={{ borderLeft: "1px solid rgba(255,255,255,0.08)" }}>
+                        <span className="text-[8px] uppercase tracking-wider text-muted/45 leading-none mb-0.5">Usage</span>
+                        <span className="text-[13px] font-mono text-muted/75 leading-none">{d.usage_pct ?? "—"}%</span>
+                      </div>
+                      <div className="flex flex-col items-center justify-center px-3" style={{ borderLeft: "1px solid rgba(255,255,255,0.08)" }}>
+                        <span className="text-[8px] uppercase tracking-wider text-muted/45 leading-none mb-0.5">Brl%</span>
+                        <span className={`text-[13px] font-mono font-bold leading-none ${c.text}`}>{d.barrel_rate != null ? `${d.barrel_rate}%` : "—"}</span>
+                      </div>
+                      <div className="flex flex-col items-center justify-center px-3" style={{ borderLeft: "1px solid rgba(255,255,255,0.08)" }}>
+                        <span className="text-[8px] uppercase tracking-wider text-muted/45 leading-none mb-0.5">Avg EV</span>
+                        <span className="text-[13px] font-mono font-bold leading-none" style={{ color: evGradient(d.avg_exit_velo) }}>{d.avg_exit_velo != null ? d.avg_exit_velo : "—"}</span>
+                      </div>
                     </div>
                   </div>
                 );
@@ -485,10 +535,19 @@ export function BatterDetailPage({
 
         {/* Per-pitch EV / LA breakdown */}
         {pitchDetailEntries.length > 0 && pitchAbsData && (
-          <div className="rounded-xl overflow-hidden" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)" }}>
-            <div className="px-4 py-2.5" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.025)" }}>
-              <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted">EV &amp; LA vs Arsenal</span>
-              <span className="text-[9px] text-muted/50 ml-2">vs today's pitcher · recent BIPs</span>
+          <div className="rounded-xl overflow-hidden" style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%)", border: "1px solid rgba(255,255,255,0.10)", boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.10), inset 0 -1px 0 0 rgba(0,0,0,0.3), 0 4px 10px -2px rgba(0,0,0,0.5)" }}>
+            <div className="px-4 py-2.5 flex items-center gap-2" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.025)" }}>
+              <span className="text-[11px] font-bold uppercase tracking-[0.07em] text-foreground/55">EV &amp; LA vs Arsenal</span>
+              <div className="flex items-center gap-0 rounded overflow-hidden text-[10px] font-bold font-mono" style={{ border: "1px solid rgba(255,255,255,0.10)" }}>
+                <span className="px-1.5 py-0.5" style={{ background: "rgba(96,165,250,0.15)", color: "rgba(147,197,253,0.9)" }}>
+                  {player.batter_hand === "L" ? "LHB" : player.batter_hand === "R" ? "RHB" : "SHB"}
+                </span>
+                <span className="px-1 py-0.5 text-[9px] font-normal" style={{ background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.3)" }}>vs</span>
+                <span className="px-1.5 py-0.5" style={{ background: player.pitcher_hand === "L" ? "rgba(251,191,36,0.15)" : "rgba(248,113,113,0.15)", color: player.pitcher_hand === "L" ? "rgba(253,224,132,0.9)" : "rgba(252,165,165,0.9)" }}>
+                  {player.pitcher_hand}HP
+                </span>
+              </div>
+              <span className="text-[9px] text-muted/50">recent BIPs</span>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
@@ -504,39 +563,45 @@ export function BatterDetailPage({
                 <tbody>
                   {pitchDetailEntries.map(([pt, d], idx) => {
                     const abs = pitchAbsData[pt] ?? [];
-                    const evColor = (ev: number | null | undefined) => {
-                      if (ev == null || ev === 0) return "text-muted/50";
-                      if (ev >= 95) return "text-accent-green font-semibold";
-                      if (ev >= 90) return "text-foreground";
-                      return "text-muted";
+                    const evPill = (ev: number | null | undefined): { bg: string; cls: string } => {
+                      if (ev == null || ev === 0) return { bg: "transparent", cls: "text-muted/40" };
+                      return { bg: "transparent", cls: "font-bold" };
                     };
-                    const laColor = (la: number | null | undefined) => {
-                      if (la == null) return "text-muted/50";
-                      if (la >= 20 && la <= 35) return "text-accent-green font-semibold";
-                      if (la >= 10 && la <= 45) return "text-foreground";
-                      return "text-muted";
+                    const laPill = (la: number | null | undefined): { bg: string; cls: string } => {
+                      if (la == null) return { bg: "transparent", cls: "text-muted/40" };
+                      if (la >= 20 && la <= 35) return { bg: "rgba(34,197,94,0.20)", cls: "text-accent-green font-bold" };
+                      if (la >= 10 && la <= 45) return { bg: "rgba(34,197,94,0.08)", cls: "text-foreground font-semibold" };
+                      return { bg: "rgba(239,68,68,0.12)", cls: "text-red-400 font-bold" };
                     };
                     const brlPct = d.barrel_rate != null ? d.barrel_rate : null;
-                    const brlColor = brlPct != null && brlPct >= 15 ? "text-accent-green font-semibold" : brlPct != null && brlPct >= 8 ? "text-foreground" : "text-muted/50";
+                    const brlPill: { bg: string; cls: string } = brlPct == null
+                      ? { bg: "transparent", cls: "text-muted/40" }
+                      : brlPct >= 15
+                      ? { bg: "rgba(34,197,94,0.20)", cls: "text-accent-green font-bold" }
+                      : brlPct >= 8
+                      ? { bg: "rgba(34,197,94,0.08)", cls: "text-foreground font-semibold" }
+                      : { bg: "rgba(239,68,68,0.10)", cls: "text-red-400 font-bold" };
                     const pitchName = PITCH_NAMES[pt] ? `${PITCH_NAMES[pt][0]}${PITCH_NAMES[pt][1] ? ` ${PITCH_NAMES[pt][1]}` : ""}` : pt;
+                    const { bg: evBg, cls: evCls } = evPill(d.avg_exit_velo);
+                    const { bg: laBg, cls: laCls } = laPill(d.avg_launch_angle);
                     return (
                       <tr key={pt} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)", background: idx % 2 === 1 ? "rgba(255,255,255,0.015)" : "transparent" }}>
                         <td className="px-4 py-2.5">
                           <span className="text-[11px] font-mono font-bold text-foreground">{pt}</span>
                           <span className="text-[10px] text-muted/60 ml-2">{pitchName}</span>
                         </td>
-                        <td className="px-4 py-2.5 text-right">
-                          <span className={`text-[12px] font-mono ${evColor(d.avg_exit_velo)}`}>
+                        <td className="px-3 py-2 text-right">
+                          <span className={`text-[12px] font-mono px-2 py-0.5 rounded ${evCls}`} style={{ background: evBg, color: d.avg_exit_velo > 0 ? evGradient(d.avg_exit_velo) : undefined }}>
                             {d.avg_exit_velo > 0 ? d.avg_exit_velo : "—"}
                           </span>
                         </td>
-                        <td className="px-4 py-2.5 text-right">
-                          <span className={`text-[12px] font-mono ${laColor(d.avg_launch_angle)}`}>
+                        <td className="px-3 py-2 text-right">
+                          <span className={`text-[12px] font-mono px-2 py-0.5 rounded ${laCls}`} style={{ background: laBg }}>
                             {d.avg_launch_angle != null ? `${d.avg_launch_angle}°` : "—"}
                           </span>
                         </td>
-                        <td className="px-4 py-2.5 text-right">
-                          <span className={`text-[12px] font-mono ${brlColor}`}>
+                        <td className="px-3 py-2 text-right">
+                          <span className={`text-[12px] font-mono px-2 py-0.5 rounded ${brlPill.cls}`} style={{ background: brlPill.bg }}>
                             {brlPct != null ? `${brlPct.toFixed(0)}%` : "—"}
                           </span>
                         </td>
@@ -577,10 +642,10 @@ export function BatterDetailPage({
 
         {/* Tabs */}
         <div>
-          <div className="inline-flex items-center p-[3px] rounded-full mb-4" style={{ background: "rgba(255,255,255,0.035)", border: "1px solid rgba(255,255,255,0.08)" }}>
+          <div className="inline-flex items-center p-1 rounded-2xl mb-4 gap-0.5" style={{ background: "rgba(255,255,255,0.035)", border: "1px solid rgba(255,255,255,0.08)" }}>
             {(["abs", "statcast", "pitches", "bvp", "profile"] as const).map((tab) => (
               <button key={tab} onClick={() => setDetailTab(tab)}
-                className={`px-3 py-1 text-[11px] font-semibold rounded-full cursor-pointer transition-all ${detailTab === tab ? "bg-accent text-black shadow-[0_1px_3px_0_rgba(0,0,0,0.35)]" : "text-muted hover:text-foreground"}`}>
+                className={`px-3 py-1 text-[11px] font-semibold rounded-lg cursor-pointer transition-all ${detailTab === tab ? "bg-accent text-white shadow-[0_1px_4px_0_rgba(0,0,0,0.4)]" : "text-muted hover:text-foreground"}`}>
                 {tab === "profile" ? `Profile · ${activeLookback}` : tab === "abs" ? `ABs · ${activeLookback}` : tab === "statcast" ? "Pitches" : tab === "pitches" ? "Arsenal" : "vs Pitcher"}
               </button>
             ))}
@@ -614,7 +679,7 @@ export function BatterDetailPage({
                         <td className="py-1.5 px-2 text-center text-muted">{String(ab.pitch_arm ?? "")}</td>
                         <td className="py-1.5 pr-3 text-foreground">{String(ab.pitch_type ?? "")}</td>
                         <td className="py-1.5 px-2 text-center">
-                          <span className={`px-1 py-0.5 rounded font-mono ${evColor(Number(ab.ev))}`}>{String(ab.ev)}</span>
+                          <span className="px-1 py-0.5 rounded font-mono font-semibold" style={{ color: evGradient(Number(ab.ev)) }}>{String(ab.ev)}</span>
                         </td>
                         <td className="py-1.5 px-2 text-center">
                           <span className={`px-1 py-0.5 rounded font-mono ${angleColor(Number(ab.angle))}`}>{String(ab.angle)}</span>

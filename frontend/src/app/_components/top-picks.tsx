@@ -75,16 +75,16 @@ export function TopPicks({
           </p>
         </div>
         <div
-          className="inline-flex items-center rounded-full p-0.5"
+          className="inline-flex items-center rounded-xl p-1 gap-0.5"
           style={{ background: "#141416", border: "1px solid #2c2c2e" }}
         >
           {FILTER_OPTIONS.map((opt) => (
             <button
               key={opt.value}
               onClick={() => setFilter(opt.value)}
-              className={`px-3 py-1 text-[11px] font-medium rounded-full cursor-pointer transition-colors ${
+              className={`px-3 py-1 text-[11px] font-semibold rounded-lg cursor-pointer transition-all ${
                 filter === opt.value
-                  ? "bg-accent text-background font-semibold"
+                  ? "bg-accent text-white shadow-[0_1px_4px_0_rgba(0,0,0,0.4)]"
                   : "text-muted hover:text-foreground"
               }`}
             >

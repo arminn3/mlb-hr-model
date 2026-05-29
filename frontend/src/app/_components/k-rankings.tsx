@@ -117,9 +117,9 @@ export function KRankings() {
           <button
             key={s}
             onClick={() => setSortBy(s)}
-            className={`px-3 py-1.5 rounded-full cursor-pointer transition-colors ${
+            className={`px-3 py-1.5 rounded-lg cursor-pointer transition-all ${
               sortBy === s
-                ? "bg-accent text-background font-bold"
+                ? "bg-accent text-white font-bold shadow-[0_1px_4px_0_rgba(0,0,0,0.4)]"
                 : "bg-card/50 text-muted border border-card-border hover:text-foreground"
             }`}
           >

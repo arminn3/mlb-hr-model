@@ -228,8 +228,8 @@ def _compute_hr_signals(
     if bip.empty:
         return None
 
-    # ── Signal 1: Barrel in last 3 game-dates (1.34x HR rate, research-validated) ──
-    recent_dates = sorted(bip["game_date"].dropna().unique())[-3:]
+    # ── Signal 1: Barrel in last 5 game-dates ──
+    recent_dates = sorted(bip["game_date"].dropna().unique())[-5:]
     recent = bip[bip["game_date"].isin(recent_dates)]
     barrel_heat = False
     if "launch_speed_angle" in recent.columns:
@@ -625,6 +625,7 @@ def run_model(game_date: date = None, fast: bool = False):
             "matchup_swstr": round(l5.get("matchup_swstr", 0.0), 1),
             "pitcher_stats": {
                 "fb_rate": round(l5.get("pitcher_fb_rate", 0) * 100, 1),
+                "gb_rate": round(l5.get("pitcher_gb_rate", 0) * 100, 1),
                 "hr_fb_rate": round(l5.get("pitcher_hr_fb_rate", 0) * 100, 1),
                 "hr_per_9": round(l5.get("pitcher_hr_per_9", 0), 2),
                 "ip": round(l5.get("pitcher_ip", 0), 1),

@@ -40,6 +40,7 @@ export type SelectedBatter = {
   mlbId?: number;
   battingOrder: number | null;
   teamAbbr: string;
+  parkFactor?: number;
 };
 
 export function GameSection({
@@ -100,14 +101,20 @@ export function GameSection({
           posted={awayPosted}
           favorites={favorites}
           onToggleFavorite={onToggleFavorite}
+          pitcherMix={game.team_pitch_mix ? {
+            vs_lhb: game.team_pitch_mix.away.pitcher.pitch_mix_vs_lhb,
+            vs_rhb: game.team_pitch_mix.away.pitcher.pitch_mix_vs_rhb,
+          } : undefined}
           onSelect={(row) =>
             onSelectBatter({
               player: row.p,
               mlbId: row.mlbId,
               battingOrder: row.order,
               teamAbbr: game.away_team,
+              parkFactor: game.environment?.park_factor,
             })
           }
+          parkFactor={game.environment?.park_factor}
         />
         <BatterTable
           teamAbbr={game.home_team}
@@ -116,14 +123,20 @@ export function GameSection({
           posted={homePosted}
           favorites={favorites}
           onToggleFavorite={onToggleFavorite}
+          pitcherMix={game.team_pitch_mix ? {
+            vs_lhb: game.team_pitch_mix.home.pitcher.pitch_mix_vs_lhb,
+            vs_rhb: game.team_pitch_mix.home.pitcher.pitch_mix_vs_rhb,
+          } : undefined}
           onSelect={(row) =>
             onSelectBatter({
               player: row.p,
               mlbId: row.mlbId,
               battingOrder: row.order,
               teamAbbr: game.home_team,
+              parkFactor: game.environment?.park_factor,
             })
           }
+          parkFactor={game.environment?.park_factor}
         />
       </div>
 

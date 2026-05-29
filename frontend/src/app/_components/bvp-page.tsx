@@ -167,10 +167,10 @@ export function BvPPage({
           <button
             key={s.col}
             onClick={() => toggleSort(s.col)}
-            className={`px-2.5 py-1 text-[10px] rounded-full cursor-pointer transition-colors ${
+            className={`px-2.5 py-1 text-[10px] rounded-lg cursor-pointer transition-all ${
               sortCol === s.col
-                ? "bg-accent/15 text-accent border border-accent/30 font-semibold"
-                : "bg-card/50 text-muted border border-card-border"
+                ? "bg-accent text-white font-semibold shadow-[0_1px_4px_0_rgba(0,0,0,0.4)]"
+                : "bg-card/50 text-muted border border-card-border hover:text-foreground"
             }`}
           >
             {s.label}{sortCol === s.col ? (sortDir === "desc" ? " ↓" : " ↑") : ""}

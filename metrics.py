@@ -536,22 +536,30 @@ def calc_pitcher_metrics(
     # Balls in play
     bip = df.dropna(subset=["launch_speed"])
 
-    # Fly balls — use Statcast bb_type classification (matches FanGraphs)
+    # Fly balls + ground balls — use Statcast bb_type classification (matches FanGraphs)
     # Falls back to launch angle range if bb_type not available
     if not bip.empty and "bb_type" in bip.columns:
         fly_mask = bip["bb_type"] == "fly_ball"
+        ground_mask = bip["bb_type"] == "ground_ball"
         n_fly = fly_mask.sum()
+        n_ground = ground_mask.sum()
         fb_rate = n_fly / len(bip) if len(bip) > 0 else 0.0
+        gb_rate = n_ground / len(bip) if len(bip) > 0 else 0.0
     elif not bip.empty and "launch_angle" in bip.columns:
         fly_mask = (
             (bip["launch_angle"] >= config.FLY_BALL_LA_MIN)
             & (bip["launch_angle"] <= config.FLY_BALL_LA_MAX)
         )
+        ground_mask = bip["launch_angle"] < 10
         n_fly = fly_mask.sum()
+        n_ground = ground_mask.sum()
         fb_rate = n_fly / len(bip) if len(bip) > 0 else 0.0
+        gb_rate = n_ground / len(bip) if len(bip) > 0 else 0.0
     else:
         n_fly = 0
+        n_ground = 0
         fb_rate = 0.0
+        gb_rate = 0.0
 
     # Home runs
     if "events" in df.columns:
@@ -586,6 +594,7 @@ def calc_pitcher_metrics(
 
     return {
         "fb_rate_allowed": float(fb_rate),
+        "gb_rate_allowed": float(gb_rate),
         "hr_per_fb_rate": float(hr_per_fb),
         "hr_per_ip": float(hr_per_ip),
         "total_hrs": total_hrs,
