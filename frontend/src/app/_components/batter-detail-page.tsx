@@ -488,70 +488,60 @@ export function BatterDetailPage({
           <div className="rounded-xl overflow-hidden" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)" }}>
             <div className="px-4 py-2.5" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.025)" }}>
               <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted">EV &amp; LA vs Arsenal</span>
-              <span className="text-[9px] text-muted/40 ml-2 font-mono">recent · 2026</span>
+              <span className="text-[9px] text-muted/50 ml-2">vs today's pitcher · recent BIPs</span>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-                    <th className="px-4 py-1.5 text-[9px] uppercase tracking-wider text-muted/50 font-semibold text-left w-24">Pitch</th>
-                    <th className="px-3 py-1.5 text-[9px] uppercase tracking-wider text-muted/50 font-semibold text-center">Avg EV</th>
-                    <th className="px-3 py-1.5 text-[9px] uppercase tracking-wider text-muted/50 font-semibold text-center">Avg LA</th>
-                    <th className="px-3 py-1.5 text-[9px] uppercase tracking-wider text-muted/40 font-semibold text-center">EV '26</th>
-                    <th className="px-3 py-1.5 text-[9px] uppercase tracking-wider text-muted/40 font-semibold text-center">LA '26</th>
-                    <th className="px-3 py-1.5 text-[9px] uppercase tracking-wider text-muted/40 font-semibold text-center">n</th>
+                  <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                    <th className="px-4 py-2 text-[10px] uppercase tracking-wider text-muted font-semibold text-left">Pitch</th>
+                    <th className="px-4 py-2 text-[10px] uppercase tracking-wider text-muted font-semibold text-right">Avg EV</th>
+                    <th className="px-4 py-2 text-[10px] uppercase tracking-wider text-muted font-semibold text-right">Avg LA</th>
+                    <th className="px-4 py-2 text-[10px] uppercase tracking-wider text-muted font-semibold text-right">Brl%</th>
+                    <th className="px-4 py-2 text-[10px] uppercase tracking-wider text-muted font-semibold text-right">BIPs</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {pitchDetailEntries.map(([pt, d]) => {
+                  {pitchDetailEntries.map(([pt, d], idx) => {
                     const abs = pitchAbsData[pt] ?? [];
-                    const season26 = abs.filter((ab) => String(ab.date ?? "").startsWith("2026"));
-                    const s26Ev = season26.length > 0
-                      ? season26.reduce((s, ab) => s + (Number(ab.ev) || 0), 0) / season26.length
-                      : null;
-                    const s26La = season26.length > 0
-                      ? season26.reduce((s, ab) => s + (Number(ab.angle) || 0), 0) / season26.length
-                      : null;
                     const evColor = (ev: number | null | undefined) => {
-                      if (ev == null) return "text-muted/40";
+                      if (ev == null || ev === 0) return "text-muted/50";
                       if (ev >= 95) return "text-accent-green font-semibold";
                       if (ev >= 90) return "text-foreground";
                       return "text-muted";
                     };
                     const laColor = (la: number | null | undefined) => {
-                      if (la == null) return "text-muted/40";
+                      if (la == null) return "text-muted/50";
                       if (la >= 20 && la <= 35) return "text-accent-green font-semibold";
                       if (la >= 10 && la <= 45) return "text-foreground";
                       return "text-muted";
                     };
+                    const brlPct = d.barrel_rate != null ? d.barrel_rate * 100 : null;
+                    const brlColor = brlPct != null && brlPct >= 15 ? "text-accent-green font-semibold" : brlPct != null && brlPct >= 8 ? "text-foreground" : "text-muted/50";
+                    const pitchName = PITCH_NAMES[pt] ? `${PITCH_NAMES[pt][0]}${PITCH_NAMES[pt][1] ? ` ${PITCH_NAMES[pt][1]}` : ""}` : pt;
                     return (
-                      <tr key={pt} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                        <td className="px-4 py-2">
-                          <span className="text-xs font-mono font-semibold text-foreground">{pt}</span>
-                          <span className="text-[10px] text-muted/50 ml-1.5">{PITCH_NAMES[pt]?.[0] || ""}</span>
+                      <tr key={pt} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)", background: idx % 2 === 1 ? "rgba(255,255,255,0.015)" : "transparent" }}>
+                        <td className="px-4 py-2.5">
+                          <span className="text-[11px] font-mono font-bold text-foreground">{pt}</span>
+                          <span className="text-[10px] text-muted/60 ml-2">{pitchName}</span>
                         </td>
-                        <td className="px-3 py-2 text-center">
-                          <span className={`text-xs font-mono ${evColor(d.avg_exit_velo)}`}>
+                        <td className="px-4 py-2.5 text-right">
+                          <span className={`text-[12px] font-mono ${evColor(d.avg_exit_velo)}`}>
                             {d.avg_exit_velo > 0 ? d.avg_exit_velo : "—"}
                           </span>
                         </td>
-                        <td className="px-3 py-2 text-center">
-                          <span className={`text-xs font-mono ${laColor(d.avg_launch_angle)}`}>
+                        <td className="px-4 py-2.5 text-right">
+                          <span className={`text-[12px] font-mono ${laColor(d.avg_launch_angle)}`}>
                             {d.avg_launch_angle != null ? `${d.avg_launch_angle}°` : "—"}
                           </span>
                         </td>
-                        <td className="px-3 py-2 text-center">
-                          <span className={`text-xs font-mono ${evColor(s26Ev)}`}>
-                            {s26Ev != null ? s26Ev.toFixed(1) : "—"}
+                        <td className="px-4 py-2.5 text-right">
+                          <span className={`text-[12px] font-mono ${brlColor}`}>
+                            {brlPct != null ? `${brlPct.toFixed(0)}%` : "—"}
                           </span>
                         </td>
-                        <td className="px-3 py-2 text-center">
-                          <span className={`text-xs font-mono ${laColor(s26La)}`}>
-                            {s26La != null ? `${s26La.toFixed(1)}°` : "—"}
-                          </span>
-                        </td>
-                        <td className="px-3 py-2 text-center">
-                          <span className="text-[10px] font-mono text-muted/50">{abs.length}</span>
+                        <td className="px-4 py-2.5 text-right">
+                          <span className="text-[11px] font-mono text-muted/60">{abs.length > 0 ? abs.length : d.count ?? "—"}</span>
                         </td>
                       </tr>
                     );
