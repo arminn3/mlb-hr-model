@@ -128,7 +128,7 @@ export function MLRankings({
   const [rankingTab, setRankingTab] = useState<"ml" | "combined" | "consensus">("ml");
   const setTab = (t: "ml" | "combined" | "consensus") => {
     setRankingTab(t);
-    if (t !== "consensus") onTabChange?.(t);
+    onTabChange?.(t);
   };
   const [filter, setFilter] = useState<number>(10);
   const cardsRef = useRef<HTMLDivElement>(null);
