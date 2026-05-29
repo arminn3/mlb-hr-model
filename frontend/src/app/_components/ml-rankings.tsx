@@ -460,6 +460,21 @@ export function MLRankings({
     });
   }, [games, mlWeights]);
 
+  // Season score with a lower BIP floor (10 instead of the global 20).
+  // 10 BIP ≈ 3-4 games of contact — noisy but enough to include recently
+  // activated or newly called-up players. The global threshold stays at 20
+  // so the Season+Form tab isn't affected.
+  const seasonScoreConsensus = (player: PlayerData): number | null => {
+    const sp = player.season_profile;
+    if (!sp || sp.bip_count < 10) return null;
+    const n = (v: number, lo: number, hi: number) => Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
+    const batter = n(sp.barrel / 100, 0.0, 0.25) * 0.55
+                 + n(sp.fb     / 100, 0.15, 0.55) * 0.25
+                 + n(sp.ev,           92,   102)   * 0.20;
+    const l10 = player.scores.L10;
+    return batter * 0.50 + (l10?.pitcher_score ?? 0.5) * 0.35 + (l10?.env_score ?? 0.5) * 0.15;
+  };
+
   const sortedSeason = useMemo(() => {
     const seen = new Set<string>();
     const all: { player: PlayerData; game: GameData }[] = [];
@@ -469,8 +484,8 @@ export function MLRankings({
       }
     }
     return all
-      .filter(r => scoreFor(r.player, "Season") !== null)
-      .sort((a, b) => (scoreFor(b.player, "Season")?.composite ?? 0) - (scoreFor(a.player, "Season")?.composite ?? 0));
+      .filter(r => seasonScoreConsensus(r.player) !== null)
+      .sort((a, b) => (seasonScoreConsensus(b.player) ?? 0) - (seasonScoreConsensus(a.player) ?? 0));
   }, [games]);
 
   const consensusRows = useMemo(() => {
