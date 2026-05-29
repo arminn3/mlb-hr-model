@@ -460,11 +460,24 @@ export function MLRankings({
     });
   }, [games, mlWeights]);
 
+  const sortedSeason = useMemo(() => {
+    const seen = new Set<string>();
+    const all: { player: PlayerData; game: GameData }[] = [];
+    for (const game of games) {
+      for (const player of game.players) {
+        if (!seen.has(player.name)) { seen.add(player.name); all.push({ player, game }); }
+      }
+    }
+    return all
+      .filter(r => scoreFor(r.player, "Season") !== null)
+      .sort((a, b) => (scoreFor(b.player, "Season")?.composite ?? 0) - (scoreFor(a.player, "Season")?.composite ?? 0));
+  }, [games]);
+
   const consensusRows = useMemo(() => {
     const TOP_N = 30;
     const l5Top = sortedL5.slice(0, TOP_N);
     const l10Top = sortedL10.slice(0, TOP_N);
-    const seasonTop = sortedCombined.slice(0, TOP_N);
+    const seasonTop = sortedSeason.slice(0, TOP_N);
     const l5Ranks = new Map(l5Top.map((r, i) => [r.player.name, i + 1]));
     const l10Ranks = new Map(l10Top.map((r, i) => [r.player.name, i + 1]));
     const seasonRanks = new Map(seasonTop.map((r, i) => [r.player.name, i + 1]));
@@ -479,7 +492,7 @@ export function MLRankings({
         avgRank: (l5Ranks.get(r.player.name)! + l10Ranks.get(r.player.name)! + seasonRanks.get(r.player.name)!) / 3,
       }))
       .sort((a, b) => a.avgRank - b.avgRank);
-  }, [sortedL5, sortedL10, sortedCombined]);
+  }, [sortedL5, sortedL10, sortedSeason]);
 
   const activeSorted = rankingTab === "combined" ? sortedCombined : sorted;
   const top = filter === 0 ? activeSorted : activeSorted.slice(0, filter);
