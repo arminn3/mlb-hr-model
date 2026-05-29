@@ -516,7 +516,7 @@ export function BatterDetailPage({
                       if (la >= 10 && la <= 45) return "text-foreground";
                       return "text-muted";
                     };
-                    const brlPct = d.barrel_rate != null ? d.barrel_rate * 100 : null;
+                    const brlPct = d.barrel_rate != null ? d.barrel_rate : null;
                     const brlColor = brlPct != null && brlPct >= 15 ? "text-accent-green font-semibold" : brlPct != null && brlPct >= 8 ? "text-foreground" : "text-muted/50";
                     const pitchName = PITCH_NAMES[pt] ? `${PITCH_NAMES[pt][0]}${PITCH_NAMES[pt][1] ? ` ${PITCH_NAMES[pt][1]}` : ""}` : pt;
                     return (
