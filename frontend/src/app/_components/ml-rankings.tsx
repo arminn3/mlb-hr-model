@@ -131,11 +131,12 @@ export function MLRankings({
   const [weightSource, setWeightSource] = useState<string>("fallback");
   const [yesterday, setYesterday] = useState<{
     date: string;
-    picks: YesterdayPick[];
+    mlPicks: YesterdayPick[];
+    combinedPicks: YesterdayPick[];
     totalHRs: number;
   } | null>(null);
 
-  // Load yesterday's slate + HR hitters, score with current ML weights.
+  // Load yesterday's slate + HR hitters, score with ML weights AND Season+Form.
   useEffect(() => {
     if (!currentDate) return;
     const [y, m, d] = currentDate.split("-").map(Number);
@@ -157,28 +158,32 @@ export function MLRankings({
           ...(dayReport?.near_hr_events ?? []).map((h) => h.batter),
         ]);
         const seen = new Set<string>();
-        const allPicks: YesterdayPick[] = [];
+        const mlPicksAll: YesterdayPick[] = [];
+        const combinedPicksAll: YesterdayPick[] = [];
         for (const game of slate.games ?? []) {
           for (const player of game.players ?? []) {
             if (seen.has(player.name)) continue;
             seen.add(player.name);
-            const score = mlComposite(player, lookback, mlWeights);
+            const mlScore = mlComposite(player, lookback, mlWeights);
             const abs = scoreFor(player, lookback)?.recent_abs?.length ?? 0;
             const reliability = Math.min(1, abs / 10);
-            allPicks.push({
+            const base = {
               name: player.name,
               matchup: `${game.away_team}@${game.home_team}`,
               oppPitcher: player.opp_pitcher,
-              mlScore: score * reliability,
               hitHR: hrNames.has(player.name),
               nearHR: !hrNames.has(player.name) && nearNames.has(player.name),
-            });
+            };
+            mlPicksAll.push({ ...base, mlScore: mlScore * reliability });
+            combinedPicksAll.push({ ...base, mlScore: combinedScore(player) });
           }
         }
-        allPicks.sort((a, b) => b.mlScore - a.mlScore);
+        mlPicksAll.sort((a, b) => b.mlScore - a.mlScore);
+        combinedPicksAll.sort((a, b) => b.mlScore - a.mlScore);
         setYesterday({
           date: prevStr,
-          picks: allPicks.slice(0, 30),
+          mlPicks: mlPicksAll.slice(0, 30),
+          combinedPicks: combinedPicksAll.slice(0, 30),
           totalHRs: hrNames.size,
         });
       })
@@ -278,28 +283,25 @@ export function MLRankings({
 
   const wPct = (n: number) => `${Math.round(n * 100)}%`;
 
-  const yesterdayHits = yesterday
-    ? yesterday.picks.filter((p) => p.hitHR).length
-    : 0;
-  const yesterdayNears = yesterday
-    ? yesterday.picks.filter((p) => p.nearHR).length
-    : 0;
-  const yesterdayTop20Hits = yesterday
-    ? yesterday.picks.slice(0, 20).filter((p) => p.hitHR).length
-    : 0;
-  const yesterdayTop10Hits = yesterday
-    ? yesterday.picks.slice(0, 10).filter((p) => p.hitHR).length
-    : 0;
+  const activePicks = yesterday
+    ? (rankingTab === "combined" ? yesterday.combinedPicks : yesterday.mlPicks)
+    : [];
+  const yesterdayHits = activePicks.filter((p) => p.hitHR).length;
+  const yesterdayNears = activePicks.filter((p) => p.nearHR).length;
+  const yesterdayTop20Hits = activePicks.slice(0, 20).filter((p) => p.hitHR).length;
+  const yesterdayTop10Hits = activePicks.slice(0, 10).filter((p) => p.hitHR).length;
 
-  const yesterdayPanel = yesterday && yesterday.picks.length > 0 ? (
+  const yesterdayPanel = yesterday && activePicks.length > 0 ? (
         <div className="border border-card-border rounded-xl bg-card/30 p-5 mb-6">
           <div className="flex items-center justify-between mb-3">
             <div>
               <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
-                Yesterday&apos;s ML Picks — {yesterday.date}
+                {rankingTab === "combined" ? "Yesterday's Season + Form Picks" : "Yesterday's ML Picks"} — {yesterday.date}
               </h3>
               <p className="text-[11px] text-muted mt-0.5">
-                How these same ML weights would have ranked yesterday&apos;s slate.
+                {rankingTab === "combined"
+                  ? "How Season + Form would have ranked yesterday's slate."
+                  : "How these same ML weights would have ranked yesterday's slate."}
                 {" "}Leaguewide: {yesterday.totalHRs} HRs hit.
               </p>
             </div>
@@ -331,7 +333,7 @@ export function MLRankings({
             </div>
           </div>
           <div className="space-y-1.5 md:columns-2 md:gap-x-1.5">
-            {yesterday.picks.map((p, i) => (
+            {activePicks.map((p, i) => (
               <div
                 key={p.name}
                 className={`flex items-center gap-2 px-2.5 py-1.5 rounded text-xs break-inside-avoid ${
@@ -385,7 +387,7 @@ export function MLRankings({
           </h2>
           <p className="text-[11px] leading-[14px] font-medium tracking-[0.02em] text-muted mt-0.5">
             {rankingTab === "combined"
-              ? "Season power profile anchored · recent form adjusts ±15pts"
+              ? "Season power profile anchored · recent form adjusts ±15%"
               : "Data-driven — reweighted using what the ML learned from past HR outcomes"}
           </p>
         </div>
@@ -437,8 +439,8 @@ export function MLRankings({
       )}
       {rankingTab === "combined" && (
         <p className="text-[11px] leading-[16px] text-muted mb-4">
-          <span className="text-foreground font-mono">Season batter 50% · Pitcher 35% · Env 15%</span>
-          {" · "}form delta clamped to ±15pts · players with &lt;20 season BIP fall back to L5/L10
+          <span className="text-foreground font-mono">Batter 50% · Pitcher 35% · Env 15%</span>
+          {" · "}batter = 70% season + 30% recent form (L5+L10 barrel/FB/EV) · &lt;20 season BIP falls back to L5/L10
         </p>
       )}
 
