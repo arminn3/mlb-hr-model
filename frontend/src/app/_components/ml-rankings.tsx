@@ -130,6 +130,7 @@ export function MLRankings({
   const [filter, setFilter] = useState<number>(10);
   const cardsRef = useRef<HTMLDivElement>(null);
   const [downloadState, setDownloadState] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [downloadError, setDownloadError] = useState<string>("");
 
   const downloadPng = async () => {
     if (!cardsRef.current || downloadState === "loading") return;
@@ -157,9 +158,11 @@ export function MLRankings({
       setDownloadState("done");
       setTimeout(() => setDownloadState("idle"), 2500);
     } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
       console.error("Download failed:", err);
+      setDownloadError(msg);
       setDownloadState("error");
-      setTimeout(() => setDownloadState("idle"), 2500);
+      setTimeout(() => setDownloadState("idle"), 4000);
     }
   };
   const [mlWeights, setMlWeights] = useState<MlWeights>(FALLBACK_WEIGHTS);
@@ -476,7 +479,7 @@ export function MLRankings({
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
-                Failed
+                {downloadError ? downloadError.slice(0, 40) : "Failed"}
               </>
             ) : (
               <>
