@@ -503,41 +503,21 @@ def calc_batter_metrics_for_pitch(pa_pitches: pd.DataFrame) -> dict[str, float]:
     }
 
 
-def calc_pitcher_metrics(
-    pitcher_df: pd.DataFrame, batter_hand: str = None
-) -> dict[str, float]:
-    """
-    Compute pitcher metrics using overall stats (all batter hands).
-
-    Platoon adjustment is applied separately via config.PLATOON_MULTIPLIERS
-    so it's anchored to 4-year MLB population data rather than noisy
-    small-sample hand splits.
-
-    Returns:
-        fb_rate_allowed, hr_per_fb_rate, hr_per_ip, total_hrs, total_ip,
-        total_hrs_norm (normalized 0-1 based on IP context)
-    """
+def _calc_pitcher_metrics_from_df(df: pd.DataFrame) -> dict[str, float]:
+    """Internal: compute pitcher metrics from a pre-filtered DataFrame."""
     defaults = {
         "fb_rate_allowed": 0.0,
+        "gb_rate_allowed": 0.0,
         "hr_per_fb_rate": 0.0,
         "hr_per_ip": 0.0,
         "total_hrs": 0,
         "total_ip": 0.0,
         "total_hrs_norm": 0.0,
     }
-
-    if pitcher_df.empty:
+    if df is None or df.empty:
         return defaults
 
-    df = pitcher_df.copy()
-    if df.empty:
-        return defaults
-
-    # Balls in play
     bip = df.dropna(subset=["launch_speed"])
-
-    # Fly balls + ground balls — use Statcast bb_type classification (matches FanGraphs)
-    # Falls back to launch angle range if bb_type not available
     if not bip.empty and "bb_type" in bip.columns:
         fly_mask = bip["bb_type"] == "fly_ball"
         ground_mask = bip["bb_type"] == "ground_ball"
@@ -546,50 +526,28 @@ def calc_pitcher_metrics(
         fb_rate = n_fly / len(bip) if len(bip) > 0 else 0.0
         gb_rate = n_ground / len(bip) if len(bip) > 0 else 0.0
     elif not bip.empty and "launch_angle" in bip.columns:
-        fly_mask = (
-            (bip["launch_angle"] >= config.FLY_BALL_LA_MIN)
-            & (bip["launch_angle"] <= config.FLY_BALL_LA_MAX)
-        )
+        fly_mask = (bip["launch_angle"] >= config.FLY_BALL_LA_MIN) & (bip["launch_angle"] <= config.FLY_BALL_LA_MAX)
         ground_mask = bip["launch_angle"] < 10
         n_fly = fly_mask.sum()
         n_ground = ground_mask.sum()
         fb_rate = n_fly / len(bip) if len(bip) > 0 else 0.0
         gb_rate = n_ground / len(bip) if len(bip) > 0 else 0.0
     else:
-        n_fly = 0
-        n_ground = 0
-        fb_rate = 0.0
-        gb_rate = 0.0
+        n_fly = n_ground = 0
+        fb_rate = gb_rate = 0.0
 
-    # Home runs
-    if "events" in df.columns:
-        hr_mask = df["events"] == "home_run"
-        total_hrs = int(hr_mask.sum())
-    else:
-        total_hrs = 0
-
-    # HR / FB rate
+    total_hrs = int(df["events"].eq("home_run").sum()) if "events" in df.columns else 0
     hr_per_fb = total_hrs / n_fly if n_fly > 0 else 0.0
 
-    # Innings pitched estimation from PA-ending events
-    # Events column is non-null when a PA ends
     if "events" in df.columns:
         pa_ending = df["events"].dropna()
-        # Count outs: anything that's not a hit, walk, HBP, error, etc.
-        hit_events = {
-            "single", "double", "triple", "home_run",
-            "walk", "hit_by_pitch", "intent_walk",
-            "catcher_interf",
-        }
+        hit_events = {"single", "double", "triple", "home_run", "walk", "hit_by_pitch", "intent_walk", "catcher_interf"}
         outs = sum(1 for e in pa_ending if e not in hit_events)
         total_ip = outs / 3.0
     else:
         total_ip = 0.0
 
-    # HR per 9 innings
     hr_per_ip = (total_hrs / total_ip * 9.0) if total_ip > 0 else 0.0
-
-    # Normalized HR count (HR per IP as a density, then scale)
     total_hrs_norm = min(total_hrs / max(total_ip, 1.0), 1.0)
 
     return {
@@ -601,6 +559,57 @@ def calc_pitcher_metrics(
         "total_ip": float(total_ip),
         "total_hrs_norm": float(total_hrs_norm),
     }
+
+
+def calc_pitcher_metrics(
+    pitcher_df: pd.DataFrame, batter_hand: str = None
+) -> dict[str, float]:
+    """
+    Compute pitcher metrics, split by batter hand when data allows.
+
+    Uses the hand-specific HR/FB rate and HR/9 when the pitcher has ≥30 BIP
+    against that hand. Below that threshold, blends linearly with overall stats
+    so small-sample splits don't dominate. Falls back to overall if no stand
+    column is present.
+    """
+    defaults = {
+        "fb_rate_allowed": 0.0,
+        "gb_rate_allowed": 0.0,
+        "hr_per_fb_rate": 0.0,
+        "hr_per_ip": 0.0,
+        "total_hrs": 0,
+        "total_ip": 0.0,
+        "total_hrs_norm": 0.0,
+    }
+
+    if pitcher_df is None or pitcher_df.empty:
+        return defaults
+
+    df = pitcher_df.copy()
+    if df.empty:
+        return defaults
+
+    overall = _calc_pitcher_metrics_from_df(df)
+
+    # If batter_hand provided and stand column exists, blend hand-specific stats
+    if batter_hand and "stand" in df.columns:
+        hand_df = df[df["stand"] == batter_hand]
+        hand_bip = hand_df.dropna(subset=["launch_speed"])
+        n_hand_bip = len(hand_bip)
+        MIN_BIP = 30  # full trust at 30+ BIP vs this hand
+        weight = min(1.0, n_hand_bip / MIN_BIP)
+        if weight > 0:
+            hand = _calc_pitcher_metrics_from_df(hand_df)
+            # Blend: at 30+ BIP use hand split fully; below that blend with overall
+            blended = {}
+            for key in overall:
+                if isinstance(overall[key], float):
+                    blended[key] = weight * hand[key] + (1 - weight) * overall[key]
+                else:
+                    blended[key] = overall[key]
+            return blended
+
+    return overall
 
 
 def calc_pitch_type_stats(
