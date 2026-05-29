@@ -135,20 +135,24 @@ export function MLRankings({
     if (!cardsRef.current || downloadState === "loading") return;
     setDownloadState("loading");
     try {
-      const domtoimage = (await import("dom-to-image-more")).default;
-      const dataUrl = await domtoimage.toPng(cardsRef.current, {
-        bgcolor: "#1c1c1e",
+      const html2canvas = (await import("html2canvas")).default;
+      const canvas = await html2canvas(cardsRef.current, {
+        backgroundColor: "#1c1c1e",
         scale: 2,
-        filter: (node: Element) => {
-          // Skip cross-origin images to avoid CORS failures
-          if (node.tagName === "IMG") return false;
-          return true;
+        useCORS: true,
+        allowTaint: true,
+        logging: false,
+        onclone: (_doc, el) => {
+          // Give the cloned node an explicit dark background so cards render correctly
+          el.style.background = "#1c1c1e";
+          el.style.padding = "16px";
+          el.style.borderRadius = "12px";
         },
       });
       const link = document.createElement("a");
       const label = filter === 0 ? "all" : `top${filter}`;
       link.download = `hr-rankings-${label}.png`;
-      link.href = dataUrl;
+      link.href = canvas.toDataURL("image/png");
       link.click();
       setDownloadState("done");
       setTimeout(() => setDownloadState("idle"), 2500);
