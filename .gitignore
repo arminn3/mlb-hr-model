@@ -22,3 +22,4 @@ frontend/.next/
 # Claude Code per-project state
 .claude/
 frontend/.env.local
+.vercel
