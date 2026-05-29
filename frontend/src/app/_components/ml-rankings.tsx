@@ -161,7 +161,7 @@ export function MLRankings({
       ctx.fillText(rankingTab === "combined" ? "Season + Form Rankings" : "ML HR Rankings", PAD, 34);
       ctx.fillStyle = "#71717a";
       ctx.font = "13px Inter, system-ui, sans-serif";
-      ctx.fillText(`${rows.length} players · beebsheets.com`, PAD, 56);
+      ctx.fillText(`${rows.length} players · Beeb Sheets`, PAD, 56);
 
       // Column headers
       const COL = { rank: PAD, name: PAD + 36, ev: 420, brl: 490, hh: 558, fb: 624, matchup: 690, score: W - PAD };
@@ -250,7 +250,7 @@ export function MLRankings({
       const fy = H - 14;
       ctx.fillStyle = "#3f3f46";
       ctx.font = "bold 11px Inter, system-ui, sans-serif";
-      const wm = "Beeb Sheets · beebsheets.com";
+      const wm = "Beeb Sheets";
       const wmW = ctx.measureText(wm).width;
       ctx.fillText(wm, W / 2 - wmW / 2, fy);
 
