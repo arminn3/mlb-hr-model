@@ -123,10 +123,13 @@ export function MLRankings({
   games: GameData[];
   lookback: UILookback;
   currentDate: string;
-  onTabChange?: (tab: "ml" | "combined") => void;
+  onTabChange?: (tab: "ml" | "combined" | "consensus") => void;
 }) {
-  const [rankingTab, setRankingTab] = useState<"ml" | "combined">("ml");
-  const setTab = (t: "ml" | "combined") => { setRankingTab(t); onTabChange?.(t); };
+  const [rankingTab, setRankingTab] = useState<"ml" | "combined" | "consensus">("ml");
+  const setTab = (t: "ml" | "combined" | "consensus") => {
+    setRankingTab(t);
+    if (t !== "consensus") onTabChange?.(t);
+  };
   const [filter, setFilter] = useState<number>(10);
   const cardsRef = useRef<HTMLDivElement>(null);
   const [downloadState, setDownloadState] = useState<"idle" | "loading" | "done" | "error">("idle");
@@ -422,6 +425,62 @@ export function MLRankings({
     return all.sort((a, b) => combinedScore(b.player) - combinedScore(a.player));
   }, [games]);
 
+  // Fixed L5/L10 sorted lists for consensus (independent of current lookback toggle)
+  const sortedL5 = useMemo(() => {
+    const seen = new Set<string>();
+    const all: { player: PlayerData; game: GameData }[] = [];
+    for (const game of games) {
+      for (const player of game.players) {
+        if (!seen.has(player.name)) { seen.add(player.name); all.push({ player, game }); }
+      }
+    }
+    return all.sort((a, b) => {
+      const sa = scoreFor(a.player, "L5");
+      const sb = scoreFor(b.player, "L5");
+      const rA = Math.min(1, (sa?.recent_abs?.length ?? 0) / 10);
+      const rB = Math.min(1, (sb?.recent_abs?.length ?? 0) / 10);
+      return mlComposite(b.player, "L5", mlWeights) * rB - mlComposite(a.player, "L5", mlWeights) * rA;
+    });
+  }, [games, mlWeights]);
+
+  const sortedL10 = useMemo(() => {
+    const seen = new Set<string>();
+    const all: { player: PlayerData; game: GameData }[] = [];
+    for (const game of games) {
+      for (const player of game.players) {
+        if (!seen.has(player.name)) { seen.add(player.name); all.push({ player, game }); }
+      }
+    }
+    return all.sort((a, b) => {
+      const sa = scoreFor(a.player, "L10");
+      const sb = scoreFor(b.player, "L10");
+      const rA = Math.min(1, (sa?.recent_abs?.length ?? 0) / 10);
+      const rB = Math.min(1, (sb?.recent_abs?.length ?? 0) / 10);
+      return mlComposite(b.player, "L10", mlWeights) * rB - mlComposite(a.player, "L10", mlWeights) * rA;
+    });
+  }, [games, mlWeights]);
+
+  const consensusRows = useMemo(() => {
+    const TOP_N = 30;
+    const l5Top = sortedL5.slice(0, TOP_N);
+    const l10Top = sortedL10.slice(0, TOP_N);
+    const seasonTop = sortedCombined.slice(0, TOP_N);
+    const l5Ranks = new Map(l5Top.map((r, i) => [r.player.name, i + 1]));
+    const l10Ranks = new Map(l10Top.map((r, i) => [r.player.name, i + 1]));
+    const seasonRanks = new Map(seasonTop.map((r, i) => [r.player.name, i + 1]));
+    return sortedL5
+      .filter(r => l5Ranks.has(r.player.name) && l10Ranks.has(r.player.name) && seasonRanks.has(r.player.name))
+      .map(r => ({
+        player: r.player,
+        game: r.game,
+        l5Rank: l5Ranks.get(r.player.name)!,
+        l10Rank: l10Ranks.get(r.player.name)!,
+        seasonRank: seasonRanks.get(r.player.name)!,
+        avgRank: (l5Ranks.get(r.player.name)! + l10Ranks.get(r.player.name)! + seasonRanks.get(r.player.name)!) / 3,
+      }))
+      .sort((a, b) => a.avgRank - b.avgRank);
+  }, [sortedL5, sortedL10, sortedCombined]);
+
   const activeSorted = rankingTab === "combined" ? sortedCombined : sorted;
   const top = filter === 0 ? activeSorted : activeSorted.slice(0, filter);
   if (top.length === 0) return null;
@@ -528,15 +587,18 @@ export function MLRankings({
       <div className="flex items-start justify-between gap-3 mb-4 flex-wrap">
         <div>
           <h2 className="text-[15px] leading-[20px] font-semibold tracking-[-0.005em] text-foreground">
-            {rankingTab === "combined" ? "Season + Form" : "ML Rankings"}
+            {rankingTab === "combined" ? "Season + Form" : rankingTab === "consensus" ? "Consensus" : "ML Rankings"}
           </h2>
           <p className="text-[11px] leading-[14px] font-medium tracking-[0.02em] text-muted mt-0.5">
             {rankingTab === "combined"
               ? "Season power profile anchored · recent form adjusts ±15%"
+              : rankingTab === "consensus"
+              ? "Players in the top 30 on every list — L5, L10, and Season"
               : "Data-driven — reweighted using what the ML learned from past HR outcomes"}
           </p>
         </div>
         <div className="flex items-center gap-2">
+        {rankingTab !== "consensus" && (
         <div className="flex items-center gap-1 bg-card/30 border border-card-border rounded-lg p-1 w-fit">
           {FILTER_OPTIONS.map((opt) => (
             <button
@@ -552,7 +614,8 @@ export function MLRankings({
             </button>
           ))}
         </div>
-          <button
+        )}
+          {rankingTab !== "consensus" && <button
             onClick={downloadPng}
             disabled={downloadState === "loading"}
             title="Download as PNG"
@@ -596,13 +659,13 @@ export function MLRankings({
                 PNG
               </>
             )}
-          </button>
+          </button>}
         </div>
       </div>
 
       {/* Tab toggle */}
       <div className="flex items-center gap-1 mb-4">
-        {(["ml", "combined"] as const).map((t) => (
+        {(["ml", "combined", "consensus"] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
@@ -613,7 +676,7 @@ export function MLRankings({
                 : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
             }
           >
-            {t === "ml" ? "ML Model" : "Season + Form"}
+            {t === "ml" ? "ML Model" : t === "combined" ? "Season + Form" : "Consensus"}
           </button>
         ))}
       </div>
@@ -635,8 +698,84 @@ export function MLRankings({
         </p>
       )}
 
+      {/* Consensus table */}
+      {rankingTab === "consensus" && (
+        consensusRows.length === 0 ? (
+          <p className="text-[13px] text-muted text-center py-8">No players appear in the top 30 on all three lists today.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="text-left">
+                  <th className="text-[10px] uppercase tracking-wider text-muted/50 font-semibold pb-2 pr-3 w-6">#</th>
+                  <th className="text-[10px] uppercase tracking-wider text-muted/50 font-semibold pb-2 pr-4">Player</th>
+                  <th className="text-[10px] uppercase tracking-wider text-muted/50 font-semibold pb-2 pr-3 text-center w-14">L5</th>
+                  <th className="text-[10px] uppercase tracking-wider text-muted/50 font-semibold pb-2 pr-3 text-center w-14">L10</th>
+                  <th className="text-[10px] uppercase tracking-wider text-muted/50 font-semibold pb-2 pr-3 text-center w-16">Season</th>
+                  <th className="text-[10px] uppercase tracking-wider text-muted/50 font-semibold pb-2 text-center w-16">Avg Rk</th>
+                </tr>
+              </thead>
+              <tbody>
+                {consensusRows.map((row, i) => {
+                  const mixBatters = [
+                    ...(row.game.team_pitch_mix?.away?.batters ?? []),
+                    ...(row.game.team_pitch_mix?.home?.batters ?? []),
+                  ];
+                  const mlbId = mixBatters.find((b) => b.name === row.player.name)?.id;
+                  const rankChip = (rank: number) => {
+                    const color = rank <= 10 ? "#22c55e" : rank <= 20 ? "#eab308" : "#71717a";
+                    return (
+                      <span
+                        className="inline-flex items-center justify-center w-8 h-6 rounded font-mono font-bold text-[12px]"
+                        style={{ color, background: color + "18" }}
+                      >
+                        #{rank}
+                      </span>
+                    );
+                  };
+                  return (
+                    <tr
+                      key={row.player.name}
+                      className="border-t"
+                      style={{ borderColor: "rgba(255,255,255,0.05)" }}
+                    >
+                      <td className="py-2.5 pr-3 font-mono text-[11px] text-muted/50">{i + 1}</td>
+                      <td className="py-2.5 pr-4">
+                        <div className="flex items-center gap-2.5">
+                          {mlbId ? (
+                            <img
+                              src={`https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_60,q_auto:best/v1/people/${mlbId}/headshot/67/current`}
+                              alt={row.player.name}
+                              className="w-7 h-7 rounded-full object-cover flex-shrink-0"
+                              style={{ border: "1px solid rgba(255,255,255,0.10)" }}
+                              loading="lazy"
+                            />
+                          ) : (
+                            <div className="w-7 h-7 rounded-full flex-shrink-0" style={{ background: "rgba(255,255,255,0.07)" }} />
+                          )}
+                          <div>
+                            <div className="font-semibold text-[13px] text-foreground leading-tight">{row.player.name}</div>
+                            <div className="text-[10px] text-muted leading-tight">
+                              {row.game.away_team} vs {row.game.home_team} · {row.player.opp_pitcher} ({row.player.pitcher_hand}HP)
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="py-2.5 pr-3 text-center">{rankChip(row.l5Rank)}</td>
+                      <td className="py-2.5 pr-3 text-center">{rankChip(row.l10Rank)}</td>
+                      <td className="py-2.5 pr-3 text-center">{rankChip(row.seasonRank)}</td>
+                      <td className="py-2.5 text-center font-mono text-[12px] text-muted">{row.avgRank.toFixed(1)}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )
+      )}
+
       {/* Ranking cards */}
-      <div ref={cardsRef} className="space-y-3">
+      {rankingTab !== "consensus" && <div ref={cardsRef} className="space-y-3">
         {top.map(({ player, game }, i) => {
           const s = scoreFor(player, lookback);
           if (!s) return null;
@@ -799,7 +938,7 @@ export function MLRankings({
             </div>
           );
         })}
-      </div>
+      </div>}
     </div>
     {yesterdayPanel}
     </>

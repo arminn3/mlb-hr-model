@@ -367,7 +367,7 @@ export function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<string>(() => getHashParam("date", ""));
   const [selectedGames, setSelectedGames] = useState<Set<number>>(new Set()); // empty = all games
   const [selectedBatter, setSelectedBatter] = useState<SelectedBatter | null>(null);
-  const [rankingsTab, setRankingsTab] = useState<"ml" | "combined">("ml");
+  const [rankingsTab, setRankingsTab] = useState<"ml" | "combined" | "consensus">("ml");
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
   // Update URL hash when state changes
@@ -585,7 +585,7 @@ export function Dashboard() {
 
             {/* RIGHT slot (date + lookback + user menu) */}
             <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
-              {tabConfig.showLookback && !(activePage === "slate" && selectedBatter) && !(activePage === "ml" && rankingsTab === "combined") && (
+              {tabConfig.showLookback && !(activePage === "slate" && selectedBatter) && !(activePage === "ml" && (rankingsTab === "combined" || rankingsTab === "consensus")) && (
                 <LookbackToggle value={lookback} onChange={setLookback} />
               )}
               {tabConfig.showDatePicker && (
