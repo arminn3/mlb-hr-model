@@ -40121,8 +40121,8 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 6,
-        "rate": 20.0
+        "hits": 7,
+        "rate": 23.3
       },
       "all": {
         "total": 270,
@@ -40134,163 +40134,521 @@
       {
         "name": "Shohei Ohtani",
         "rank": 1,
-        "composite": 0.729,
+        "composite": 0.768,
         "opp_pitcher": "Tomoyuki Sugano",
         "matchup": "COL@LAD"
       },
       {
         "name": "Yordan Alvarez",
         "rank": 3,
-        "composite": 0.649,
+        "composite": 0.7,
         "opp_pitcher": "Jacob deGrom",
         "matchup": "HOU@TEX"
       },
       {
         "name": "Brandon Lowe",
         "rank": 4,
-        "composite": 0.636,
+        "composite": 0.68,
         "opp_pitcher": "Jameson Taillon",
         "matchup": "CHC@PIT"
       },
       {
         "name": "Freddie Freeman",
-        "rank": 12,
-        "composite": 0.583,
+        "rank": 13,
+        "composite": 0.581,
         "opp_pitcher": "Tomoyuki Sugano",
         "matchup": "COL@LAD"
       },
       {
         "name": "Kazuma Okamoto",
-        "rank": 14,
-        "composite": 0.573,
+        "rank": 19,
+        "composite": 0.568,
         "opp_pitcher": "Eury P\u00e9rez",
         "matchup": "MIA@TOR"
       },
       {
         "name": "Joc Pederson",
-        "rank": 23,
-        "composite": 0.531,
+        "rank": 21,
+        "composite": 0.566,
         "opp_pitcher": "Mike Burrows",
         "matchup": "HOU@TEX"
       },
       {
-        "name": "Konnor Griffin",
-        "rank": 44,
-        "composite": 0.496,
-        "opp_pitcher": "Jameson Taillon",
-        "matchup": "CHC@PIT"
-      },
-      {
         "name": "Andy Pages",
-        "rank": 46,
-        "composite": 0.494,
+        "rank": 27,
+        "composite": 0.546,
         "opp_pitcher": "Tomoyuki Sugano",
         "matchup": "COL@LAD"
       },
       {
-        "name": "Byron Buxton",
-        "rank": 48,
-        "composite": 0.488,
-        "opp_pitcher": "David Sandlin",
-        "matchup": "MIN@CWS"
+        "name": "Konnor Griffin",
+        "rank": 37,
+        "composite": 0.516,
+        "opp_pitcher": "Jameson Taillon",
+        "matchup": "CHC@PIT"
       },
       {
         "name": "Juan Soto",
-        "rank": 53,
-        "composite": 0.482,
+        "rank": 54,
+        "composite": 0.498,
         "opp_pitcher": "Andrew Abbott",
         "matchup": "CIN@NYM"
       },
       {
-        "name": "Julio Rodr\u00edguez",
-        "rank": 62,
-        "composite": 0.471,
-        "opp_pitcher": "Jeffrey Springs",
-        "matchup": "SEA@ATH"
-      },
-      {
-        "name": "Rob Refsnyder",
-        "rank": 64,
-        "composite": 0.469,
-        "opp_pitcher": "Jeffrey Springs",
-        "matchup": "SEA@ATH"
-      },
-      {
-        "name": "Blaze Alexander",
-        "rank": 73,
-        "composite": 0.459,
-        "opp_pitcher": "Steven Matz",
-        "matchup": "TB@BAL"
+        "name": "Byron Buxton",
+        "rank": 68,
+        "composite": 0.46,
+        "opp_pitcher": "David Sandlin",
+        "matchup": "MIN@CWS"
       },
       {
         "name": "Ian Happ",
-        "rank": 77,
-        "composite": 0.455,
+        "rank": 79,
+        "composite": 0.448,
         "opp_pitcher": "Bubba Chandler",
         "matchup": "CHC@PIT"
       },
       {
-        "name": "Kody Clemens",
-        "rank": 89,
+        "name": "Blaze Alexander",
+        "rank": 85,
         "composite": 0.441,
+        "opp_pitcher": "Steven Matz",
+        "matchup": "TB@BAL"
+      },
+      {
+        "name": "Rob Refsnyder",
+        "rank": 86,
+        "composite": 0.441,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "SEA@ATH"
+      },
+      {
+        "name": "Kody Clemens",
+        "rank": 98,
+        "composite": 0.429,
         "opp_pitcher": "David Sandlin",
         "matchup": "MIN@CWS"
       },
       {
-        "name": "Munetaka Murakami",
-        "rank": 92,
-        "composite": 0.431,
-        "opp_pitcher": "Connor Prielipp",
-        "matchup": "MIN@CWS"
-      },
-      {
         "name": "Jarren Duran",
-        "rank": 94,
-        "composite": 0.429,
+        "rank": 99,
+        "composite": 0.428,
         "opp_pitcher": "Bryce Elder",
         "matchup": "ATL@BOS"
       },
       {
+        "name": "Julio Rodr\u00edguez",
+        "rank": 102,
+        "composite": 0.426,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "SEA@ATH"
+      },
+      {
+        "name": "Munetaka Murakami",
+        "rank": 106,
+        "composite": 0.424,
+        "opp_pitcher": "Connor Prielipp",
+        "matchup": "MIN@CWS"
+      },
+      {
         "name": "Ryan McMahon",
-        "rank": 139,
-        "composite": 0.392,
+        "rank": 117,
+        "composite": 0.416,
         "opp_pitcher": "Noah Cameron",
         "matchup": "NYY@KC"
       },
       {
-        "name": "Spencer Torkelson",
-        "rank": 151,
-        "composite": 0.385,
-        "opp_pitcher": "Jos\u00e9 Soriano",
-        "matchup": "LAA@DET"
-      },
-      {
-        "name": "Eric Wagaman",
-        "rank": 154,
-        "composite": 0.384,
-        "opp_pitcher": "Andrew Abbott",
-        "matchup": "CIN@NYM"
-      },
-      {
         "name": "Chase Meidroth",
-        "rank": 157,
-        "composite": 0.381,
+        "rank": 127,
+        "composite": 0.4,
         "opp_pitcher": "Connor Prielipp",
         "matchup": "MIN@CWS"
       },
       {
         "name": "Trea Turner",
-        "rank": 179,
-        "composite": 0.362,
+        "rank": 141,
+        "composite": 0.388,
         "opp_pitcher": "Walker Buehler",
         "matchup": "PHI@SD"
       },
       {
+        "name": "Spencer Torkelson",
+        "rank": 183,
+        "composite": 0.341,
+        "opp_pitcher": "Jos\u00e9 Soriano",
+        "matchup": "LAA@DET"
+      },
+      {
+        "name": "Eric Wagaman",
+        "rank": 190,
+        "composite": 0.333,
+        "opp_pitcher": "Andrew Abbott",
+        "matchup": "CIN@NYM"
+      },
+      {
         "name": "Gunnar Henderson",
-        "rank": 197,
-        "composite": 0.349,
+        "rank": 228,
+        "composite": 0.299,
         "opp_pitcher": "Steven Matz",
         "matchup": "TB@BAL"
+      }
+    ]
+  },
+  {
+    "date": "2026-05-28",
+    "total_players_ranked": 112,
+    "total_hrs_hit": 4,
+    "total_near_hrs": 0,
+    "model_hits": 4,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 112,
+          "hits": 4,
+          "rate": 3.6
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 1,
+          "rate": 3.3
+        },
+        "all": {
+          "total": 112,
+          "hits": 4,
+          "rate": 3.6
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 112,
+        "hits": 4,
+        "rate": 3.6
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 112,
+        "hits": 4,
+        "rate": 3.6
+      }
+    },
+    "avg_composite_hr_hitters": 0.323,
+    "avg_composite_non_hitters": 0.394,
+    "composite_separation": -0.071,
+    "hr_hitters": [
+      {
+        "name": "Wenceel P\u00e9rez",
+        "rank": 63,
+        "composite": 0.378,
+        "opp_pitcher": "Grayson Rodriguez",
+        "matchup": "LAA@DET"
+      },
+      {
+        "name": "Ronald Acu\u00f1a Jr.",
+        "rank": 73,
+        "composite": 0.342,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "ATL@BOS"
+      },
+      {
+        "name": "Ozzie Albies",
+        "rank": 86,
+        "composite": 0.318,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "ATL@BOS"
+      },
+      {
+        "name": "Michael Harris II",
+        "rank": 103,
+        "composite": 0.255,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "ATL@BOS"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Ronald Acu\u00f1a Jr.",
+        "rank": 27,
+        "composite": 0.44,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "ATL@BOS"
+      },
+      {
+        "name": "Ozzie Albies",
+        "rank": 55,
+        "composite": 0.396,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "ATL@BOS"
+      },
+      {
+        "name": "Wenceel P\u00e9rez",
+        "rank": 65,
+        "composite": 0.366,
+        "opp_pitcher": "Grayson Rodriguez",
+        "matchup": "LAA@DET"
+      },
+      {
+        "name": "Michael Harris II",
+        "rank": 69,
+        "composite": 0.35,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "ATL@BOS"
+      }
+    ],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 48,
+        "hr_count": 2,
+        "hr_rate": 4.2,
+        "names": [
+          "Riley Greene",
+          "Matt Vierling",
+          "Zach McKinstry",
+          "Zach Neto",
+          "Mike Trout",
+          "Wenceel P\u00e9rez",
+          "Adam Frazier",
+          "Dillon Dingler",
+          "Sebasti\u00e1n Rivero",
+          "Jake Rogers",
+          "Randal Grichuk",
+          "Byron Buxton",
+          "Sam Antonacci",
+          "Edgar Quero",
+          "Trevor Larnach",
+          "Kody Clemens",
+          "Rikuu Nishida",
+          "Josh Bell",
+          "Brooks Lee",
+          "Orlando Arcia",
+          "Isiah Kiner-Falefa",
+          "Ceddanne Rafaela",
+          "Willson Contreras",
+          "Matt Olson",
+          "Carlos Narv\u00e1ez",
+          "Andruw Monasterio",
+          "Mauricio Dub\u00f3n",
+          "Austin Riley",
+          "Jarren Duran",
+          "Michael Harris II",
+          "Sandy Le\u00f3n",
+          "Endy Rodr\u00edguez",
+          "Oneil Cruz",
+          "Michael Busch",
+          "Mois\u00e9s Ballesteros",
+          "Alex Bregman",
+          "Ian Happ",
+          "Jake Mangum",
+          "Nico Hoerner",
+          "Jhostynxon Garcia",
+          "Brandon Nimmo",
+          "Joc Pederson",
+          "Ezequiel Duran",
+          "Kyle Higashioka",
+          "Zach Dezenzo",
+          "Christian V\u00e1zquez",
+          "Jake Burger",
+          "Josh Jung"
+        ],
+        "hr_names": [
+          "Wenceel P\u00e9rez",
+          "Michael Harris II"
+        ]
+      },
+      "2_of_5": {
+        "players": 37,
+        "hr_count": 2,
+        "hr_rate": 5.4,
+        "names": [
+          "Jo Adell",
+          "Spencer Torkelson",
+          "Wade Meckler",
+          "Vaughn Grissom",
+          "Donovan Walton",
+          "Colt Keith",
+          "Munetaka Murakami",
+          "Miguel Vargas",
+          "Chase Meidroth",
+          "Tristan Peters",
+          "Tristan Gray",
+          "Wilyer Abreu",
+          "Ronald Acu\u00f1a Jr.",
+          "Caleb Durbin",
+          "Ozzie Albies",
+          "Coby Mayo",
+          "Ernie Clement",
+          "Blaze Alexander",
+          "George Springer",
+          "Kazuma Okamoto",
+          "Jes\u00fas S\u00e1nchez",
+          "Vladimir Guerrero Jr.",
+          "Gunnar Henderson",
+          "Andr\u00e9s Gim\u00e9nez",
+          "Jackson Holliday",
+          "Brandon Lowe",
+          "Seiya Suzuki",
+          "Esmerlyn Valdez",
+          "Spencer Horwitz",
+          "Konnor Griffin",
+          "Jared Triolo",
+          "Henry Davis",
+          "Cam Smith",
+          "Jeremy Pe\u00f1a",
+          "Yordan Alvarez",
+          "Brice Matthews",
+          "Taylor Trammell"
+        ],
+        "hr_names": [
+          "Ronald Acu\u00f1a Jr.",
+          "Ozzie Albies"
+        ]
+      },
+      "3_of_5": {
+        "players": 13,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Jorge Soler",
+          "Pete Alonso",
+          "Adley Rutschman",
+          "Leody Taveras",
+          "Brandon Valenzuela",
+          "Taylor Ward",
+          "Nathan Lukes",
+          "Pete Crow-Armstrong",
+          "Marcell Ozuna",
+          "Bryan Reynolds",
+          "Nick Gonzales",
+          "Isaac Paredes",
+          "Braden Shewmake"
+        ],
+        "hr_names": []
+      },
+      "4_of_5": {
+        "players": 3,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Colson Montgomery",
+          "Daulton Varsho",
+          "Tyler O'Neill"
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 112,
+        "hits": 4,
+        "rate": 3.6
+      }
+    },
+    "combined_hr_hitters": [
+      {
+        "name": "Wenceel P\u00e9rez",
+        "rank": 65,
+        "composite": 0.342,
+        "opp_pitcher": "Grayson Rodriguez",
+        "matchup": "LAA@DET"
+      },
+      {
+        "name": "Ronald Acu\u00f1a Jr.",
+        "rank": 76,
+        "composite": 0.312,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "ATL@BOS"
+      },
+      {
+        "name": "Ozzie Albies",
+        "rank": 86,
+        "composite": 0.297,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "ATL@BOS"
+      },
+      {
+        "name": "Michael Harris II",
+        "rank": 97,
+        "composite": 0.269,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "ATL@BOS"
       }
     ]
   }
