@@ -188,6 +188,17 @@ def _compute_season_score(player: dict) -> dict | None:
     }
 
 
+def _form_batter_from_scoreset(s: dict, season_batter: float) -> float:
+    brl = s.get("barrel_pct")
+    fb = s.get("fb_pct")
+    ev = s.get("exit_velo")
+    if brl is None or fb is None or ev is None:
+        return season_batter
+    return (_norm(brl / 100, _BRL_LO, _BRL_HI) * 0.55
+            + _norm(fb / 100, _FB_LO, _FB_HI) * 0.25
+            + _norm(ev, _EV_LO, _EV_HI) * 0.20)
+
+
 def _compute_combined_score(player: dict) -> float:
     season = _compute_season_score(player)
     scores = player.get("scores", {})
@@ -196,11 +207,10 @@ def _compute_combined_score(player: dict) -> float:
     if not l5 and not l10:
         return 0.0
     if season:
-        l5_batter = l5.get("batter_score", season["batter"])
-        l10_batter = l10.get("batter_score", season["batter"])
-        form_batter = (l5_batter + l10_batter) / 2
-        delta = max(-0.15, min(0.15, form_batter - season["batter"]))
-        base_batter = season["batter"] + delta
+        fb5 = _form_batter_from_scoreset(l5, season["batter"]) if l5 else season["batter"]
+        fb10 = _form_batter_from_scoreset(l10, season["batter"]) if l10 else season["batter"]
+        form_batter = (fb5 + fb10) / 2
+        base_batter = season["batter"] * 0.70 + form_batter * 0.30
         pitcher = season["pitcher"]
         env = season["env"]
     else:

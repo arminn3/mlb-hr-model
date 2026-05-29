@@ -117,12 +117,15 @@ export function MLRankings({
   games,
   lookback,
   currentDate,
+  onTabChange,
 }: {
   games: GameData[];
   lookback: UILookback;
   currentDate: string;
+  onTabChange?: (tab: "ml" | "combined") => void;
 }) {
   const [rankingTab, setRankingTab] = useState<"ml" | "combined">("ml");
+  const setTab = (t: "ml" | "combined") => { setRankingTab(t); onTabChange?.(t); };
   const [filter, setFilter] = useState<number>(10);
   const [mlWeights, setMlWeights] = useState<MlWeights>(FALLBACK_WEIGHTS);
   const [weightSource, setWeightSource] = useState<string>("fallback");
@@ -409,13 +412,13 @@ export function MLRankings({
       {/* Tab toggle */}
       <div className="flex items-center gap-1 mb-4 p-0.5 rounded-full w-fit" style={{ background: "#141416", border: "1px solid #2c2c2e" }}>
         <button
-          onClick={() => setRankingTab("ml")}
+          onClick={() => setTab("ml")}
           className={`px-4 py-1.5 text-[11px] font-semibold rounded-full cursor-pointer transition-all ${rankingTab === "ml" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
         >
           ML Model
         </button>
         <button
-          onClick={() => setRankingTab("combined")}
+          onClick={() => setTab("combined")}
           className={`px-4 py-1.5 text-[11px] font-semibold rounded-full cursor-pointer transition-all ${rankingTab === "combined" ? "bg-accent text-background" : "text-muted hover:text-foreground"}`}
         >
           Season + Form
