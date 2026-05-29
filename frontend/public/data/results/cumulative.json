@@ -40298,7 +40298,7 @@
     "date": "2026-05-28",
     "total_players_ranked": 112,
     "total_hrs_hit": 11,
-    "total_near_hrs": 0,
+    "total_near_hrs": 3,
     "model_hits": 11,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -40347,7 +40347,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 3,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -40388,8 +40388,8 @@
       },
       "all": {
         "total": 112,
-        "hits": 11,
-        "rate": 9.8
+        "hits": 14,
+        "rate": 12.5
       }
     },
     "avg_composite_hr_hitters": 0.344,
@@ -40553,8 +40553,67 @@
         "matchup": "HOU@TEX"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Mike Trout",
+        "rank": 33,
+        "composite": 0.4,
+        "opp_pitcher": "Jack Flaherty",
+        "matchup": "LAA@DET"
+      },
+      {
+        "name": "Braden Shewmake",
+        "rank": 46,
+        "composite": 0.4,
+        "opp_pitcher": "Nathan Eovaldi",
+        "matchup": "HOU@TEX"
+      },
+      {
+        "name": "George Springer",
+        "rank": 54,
+        "composite": 0.389,
+        "opp_pitcher": "Chris Bassitt",
+        "matchup": "TOR@BAL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "George Springer",
+        "ev": 103.7,
+        "angle": 21.0,
+        "distance": 369.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Nunez, Anthony"
+      },
+      {
+        "batter": "Mike Trout",
+        "ev": 103.9,
+        "angle": 24.0,
+        "distance": 409.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Vanasco, Ricky"
+      },
+      {
+        "batter": "Braden Shewmake",
+        "ev": 98.6,
+        "angle": 38.0,
+        "distance": 372.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Quantrill, Cal"
+      },
+      {
+        "batter": "Braden Shewmake",
+        "ev": 101.0,
+        "angle": 30.0,
+        "distance": 398.0,
+        "hr_in_parks": 27,
+        "result": "field_out",
+        "pitcher": "Eovaldi, Nathan"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
