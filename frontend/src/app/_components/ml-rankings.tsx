@@ -137,17 +137,41 @@ export function MLRankings({
     setDownloadState("loading");
     try {
       const html2canvas = (await import("html2canvas")).default;
+
+      // html2canvas can't parse color-mix()/oklch() from Tailwind opacity modifiers.
+      // Pre-compute every element's resolved colors from the live window and inline them.
+      const COLOR_PROPS = [
+        "color", "background-color",
+        "border-top-color", "border-right-color", "border-bottom-color", "border-left-color",
+        "outline-color", "fill", "stroke",
+      ];
+      const originalEls = Array.from(cardsRef.current.querySelectorAll("*"));
+      const computedColors: Map<Element, Record<string, string>> = new Map();
+      originalEls.forEach((el) => {
+        const cs = window.getComputedStyle(el);
+        const map: Record<string, string> = {};
+        COLOR_PROPS.forEach((p) => { const v = cs.getPropertyValue(p); if (v) map[p] = v; });
+        computedColors.set(el, map);
+      });
+
       const canvas = await html2canvas(cardsRef.current, {
         backgroundColor: "#1c1c1e",
         scale: 2,
         useCORS: true,
         allowTaint: true,
         logging: false,
-        onclone: (_doc, el) => {
-          // Give the cloned node an explicit dark background so cards render correctly
-          el.style.background = "#1c1c1e";
-          el.style.padding = "16px";
-          el.style.borderRadius = "12px";
+        onclone: (_doc, clonedEl) => {
+          clonedEl.style.background = "#1c1c1e";
+          clonedEl.style.padding = "16px";
+          clonedEl.style.borderRadius = "12px";
+          const clonedEls = Array.from(clonedEl.querySelectorAll("*"));
+          originalEls.forEach((orig, i) => {
+            const clone = clonedEls[i];
+            if (!clone || !(clone instanceof HTMLElement)) return;
+            const map = computedColors.get(orig);
+            if (!map) return;
+            COLOR_PROPS.forEach((p) => { if (map[p]) clone.style.setProperty(p, map[p]); });
+          });
         },
       });
       const link = document.createElement("a");
