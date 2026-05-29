@@ -548,7 +548,14 @@ export function MLRankings({
   }, [sortedL5, sortedL10, sortedSeason]);
 
   const activeSorted = rankingTab === "combined" ? sortedCombined : sorted;
-  const top = filter === 0 ? activeSorted : activeSorted.slice(0, filter);
+  // Pre-filter to only players that have a renderable score, so rank numbers
+  // are always sequential (no gaps from silently-skipped null renders).
+  const hasScore = (player: PlayerData) =>
+    rankingTab === "combined"
+      ? !!(scoreFor(player, "L10") ?? scoreFor(player, "L5"))
+      : !!scoreFor(player, lookback);
+  const scoreable = activeSorted.filter(({ player }) => hasScore(player));
+  const top = filter === 0 ? scoreable : scoreable.slice(0, filter);
   if (top.length === 0) return null;
 
   const wPct = (n: number) => `${Math.round(n * 100)}%`;
@@ -894,9 +901,13 @@ export function MLRankings({
       {/* Ranking cards */}
       {rankingTab !== "consensus" && <div ref={cardsRef} className="space-y-3">
         {top.map(({ player, game }, i) => {
-          const s = scoreFor(player, lookback);
-          if (!s) return null;
           const isCombo = rankingTab === "combined";
+          // For combined tab, fall back between L10/L5 so a player with only
+          // one lookback isn't silently skipped (causing rank gaps).
+          const s = isCombo
+            ? (scoreFor(player, "L10") ?? scoreFor(player, "L5"))
+            : scoreFor(player, lookback);
+          if (!s) return null;
           const score = isCombo ? combinedScore(player) : mlComposite(player, lookback, mlWeights);
           const delta = isCombo ? combinedFormDelta(player) : null;
           const season = isCombo ? computeSeasonScore(player) : null;
