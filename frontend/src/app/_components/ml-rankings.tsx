@@ -132,58 +132,137 @@ export function MLRankings({
   const [downloadState, setDownloadState] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [downloadError, setDownloadError] = useState<string>("");
 
-  const downloadPng = async () => {
-    if (!cardsRef.current || downloadState === "loading") return;
+  const downloadPng = () => {
+    if (downloadState === "loading") return;
     setDownloadState("loading");
     try {
-      const html2canvas = (await import("html2canvas")).default;
+      const DPR = 2;
+      const W = 900;
+      const PAD = 28;
+      const ROW_H = 64;
+      const HEADER_H = 72;
+      const FOOTER_H = 44;
+      const rows = filter === 0 ? activeSorted : activeSorted.slice(0, filter);
+      const H = HEADER_H + rows.length * (ROW_H + 8) + FOOTER_H + PAD;
 
-      // html2canvas can't parse color-mix()/oklch() from Tailwind opacity modifiers.
-      // Pre-compute every element's resolved colors from the live window and inline them.
-      const COLOR_PROPS = [
-        "color", "background-color",
-        "border-top-color", "border-right-color", "border-bottom-color", "border-left-color",
-        "outline-color", "fill", "stroke",
-      ];
-      const originalEls = Array.from(cardsRef.current.querySelectorAll("*"));
-      const computedColors: Map<Element, Record<string, string>> = new Map();
-      originalEls.forEach((el) => {
-        const cs = window.getComputedStyle(el);
-        const map: Record<string, string> = {};
-        COLOR_PROPS.forEach((p) => { const v = cs.getPropertyValue(p); if (v) map[p] = v; });
-        computedColors.set(el, map);
+      const canvas = document.createElement("canvas");
+      canvas.width = W * DPR;
+      canvas.height = H * DPR;
+      const ctx = canvas.getContext("2d")!;
+      ctx.scale(DPR, DPR);
+
+      // Background
+      ctx.fillStyle = "#111113";
+      ctx.fillRect(0, 0, W, H);
+
+      // Header
+      ctx.fillStyle = "#e4e4e7";
+      ctx.font = "bold 22px Inter, system-ui, sans-serif";
+      ctx.fillText(rankingTab === "combined" ? "Season + Form Rankings" : "ML HR Rankings", PAD, 34);
+      ctx.fillStyle = "#71717a";
+      ctx.font = "13px Inter, system-ui, sans-serif";
+      ctx.fillText(`${rows.length} players · beebsheets.com`, PAD, 56);
+
+      // Column headers
+      const COL = { rank: PAD, name: PAD + 36, ev: 420, brl: 490, hh: 558, fb: 624, matchup: 690, score: W - PAD };
+      ctx.fillStyle = "#52525b";
+      ctx.font = "bold 9px Inter, system-ui, sans-serif";
+      ["EV", "BRL%", "HH%", "FB%", "MATCHUP", "SCORE"].forEach((lbl, i) => {
+        const x = [COL.ev, COL.brl, COL.hh, COL.fb, COL.matchup, COL.score][i];
+        const tw = ctx.measureText(lbl).width;
+        ctx.fillText(lbl, i === 5 ? x - tw : x, HEADER_H - 10);
       });
 
-      const canvas = await html2canvas(cardsRef.current, {
-        backgroundColor: "#1c1c1e",
-        scale: 2,
-        useCORS: true,
-        allowTaint: true,
-        logging: false,
-        onclone: (_doc, clonedEl) => {
-          clonedEl.style.background = "#1c1c1e";
-          clonedEl.style.padding = "16px";
-          clonedEl.style.borderRadius = "12px";
-          const clonedEls = Array.from(clonedEl.querySelectorAll("*"));
-          originalEls.forEach((orig, i) => {
-            const clone = clonedEls[i];
-            if (!clone || !(clone instanceof HTMLElement)) return;
-            const map = computedColors.get(orig);
-            if (!map) return;
-            COLOR_PROPS.forEach((p) => { if (map[p]) clone.style.setProperty(p, map[p]); });
-          });
-        },
+      rows.forEach(({ player, game }, i) => {
+        const s = scoreFor(player, lookback);
+        if (!s) return;
+        const score = rankingTab === "combined" ? combinedScore(player) : mlComposite(player, lookback, mlWeights);
+        const y = HEADER_H + i * (ROW_H + 8);
+
+        // Card bg
+        const rr = 10;
+        ctx.beginPath();
+        ctx.roundRect(PAD - 8, y, W - (PAD - 8) * 2, ROW_H, rr);
+        ctx.fillStyle = "#1c1c1e";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(255,255,255,0.07)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        const cy = y + ROW_H / 2;
+
+        // Rank
+        ctx.fillStyle = "rgba(255,255,255,0.35)";
+        ctx.font = "bold 13px Inter, system-ui, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(String(i + 1), COL.rank + 6, cy + 5);
+        ctx.textAlign = "left";
+
+        // Name
+        ctx.fillStyle = "#e4e4e7";
+        ctx.font = "bold 15px Inter, system-ui, sans-serif";
+        ctx.fillText(player.name, COL.name, cy - 6);
+
+        // Matchup line
+        ctx.fillStyle = "#71717a";
+        ctx.font = "11px Inter, system-ui, sans-serif";
+        ctx.fillText(`${game.away_team} vs ${game.home_team} · ${player.opp_pitcher} (${player.pitcher_hand}HP)`, COL.name, cy + 10);
+
+        // Stats
+        const ev = s.exit_velo ?? 0;
+        const barrel = s.barrel_pct ?? 0;
+        const hh = s.hard_hit_pct ?? 0;
+        const fb = s.fb_pct ?? 0;
+
+        const drawStat = (val: string, x: number, hi: boolean) => {
+          ctx.fillStyle = hi ? "#4ade80" : "#e4e4e7";
+          ctx.font = "bold 14px Inter, system-ui, sans-serif";
+          ctx.fillText(val, x, cy + 5);
+        };
+
+        drawStat(String(ev), COL.ev, ev >= 95);
+        drawStat(`${barrel}%`, COL.brl, barrel >= 12);
+        drawStat(`${hh}%`, COL.hh, hh >= 45);
+        drawStat(`${fb}%`, COL.fb, fb >= 38);
+
+        // Matchup label
+        const matchupLabel = (() => {
+          const score_s = scoreFor(player, lookback);
+          if (!score_s) return "";
+          const pit = score_s.pitcher_score ?? 0.5;
+          return pit >= 0.65 ? "GREAT" : pit >= 0.5 ? "DECENT" : "TOUGH";
+        })();
+        const matchupColor = matchupLabel === "GREAT" ? "#4ade80" : matchupLabel === "DECENT" ? "#fbbf24" : "#f87171";
+        ctx.fillStyle = matchupColor;
+        ctx.font = "bold 11px Inter, system-ui, sans-serif";
+        ctx.fillText(matchupLabel, COL.matchup, cy + 5);
+
+        // Score
+        const scoreColor = score >= 0.65 ? "#4ade80" : score >= 0.5 ? "#fbbf24" : "#e4e4e7";
+        ctx.fillStyle = scoreColor;
+        ctx.font = "bold 22px Inter, system-ui, sans-serif";
+        const scoreTxt = score.toFixed(2);
+        const scoreW = ctx.measureText(scoreTxt).width;
+        ctx.fillText(scoreTxt, COL.score - scoreW, cy + 8);
       });
+
+      // Footer watermark
+      const fy = H - 14;
+      ctx.fillStyle = "#3f3f46";
+      ctx.font = "bold 11px Inter, system-ui, sans-serif";
+      const wm = "Beeb Sheets · beebsheets.com";
+      const wmW = ctx.measureText(wm).width;
+      ctx.fillText(wm, W / 2 - wmW / 2, fy);
+
       const link = document.createElement("a");
       const label = filter === 0 ? "all" : `top${filter}`;
-      link.download = `hr-rankings-${label}.png`;
+      link.download = `beeb-rankings-${label}.png`;
       link.href = canvas.toDataURL("image/png");
       link.click();
       setDownloadState("done");
       setTimeout(() => setDownloadState("idle"), 2500);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
-      console.error("Download failed:", err);
       setDownloadError(msg);
       setDownloadState("error");
       setTimeout(() => setDownloadState("idle"), 4000);
