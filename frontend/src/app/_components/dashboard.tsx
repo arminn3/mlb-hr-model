@@ -12,7 +12,6 @@ import { BatterDetailPage } from "./batter-detail-page";
 import { EnvironmentView } from "./environment-view";
 import { Methodology } from "./methodology";
 import { MLRankings } from "./ml-rankings";
-import { ResultsView } from "./results-view";
 import { MethodologyPage } from "./methodology-page";
 import { SlipGenerator } from "./slip-generator";
 import { BvPPage } from "./bvp-page";
@@ -54,8 +53,7 @@ const TAB_CONFIG: Record<Page, {
   team_pitch_mix: { title: "Team vs Pitch Mix", subtitle: "Lineup stats vs opposing pitcher's arsenal", showLookback: false, showDatePicker: true },
   breakouts:   { title: "Breakouts & Regression", subtitle: "Over- and under-performers vs xHR from bat-tracking stats", showLookback: false, showDatePicker: false },
   live:        { title: "Live Feed",         subtitle: "Real-time + historical game action",   showLookback: false, showDatePicker: true },
-  results:     { title: "Results Log",       subtitle: "How the model performed",              showLookback: false, showDatePicker: true },
-  methodology: { title: "How It Works",      showLookback: false, showDatePicker: false },
+methodology: { title: "How It Works",      showLookback: false, showDatePicker: false },
   matchup:     { title: "Matchup Analysis",  subtitle: "Season-long hitter vs pitcher",        showLookback: false, showDatePicker: true },
 };
 
@@ -676,10 +674,6 @@ export function Dashboard() {
 
           {activePage === "slips" && (
             <SlipGenerator games={data.games} lookback={lookback} favorites={favorites} onUnfavorite={(name) => setFavorites((prev) => { const n = new Set(prev); n.delete(name); return n; })} />
-          )}
-
-          {activePage === "results" && (
-            <ResultsView selectedDate={selectedDate} />
           )}
 
           {activePage === "methodology" && (

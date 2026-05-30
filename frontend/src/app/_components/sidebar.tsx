@@ -16,7 +16,6 @@ export type Page =
   | "team_pitch_mix"
   | "breakouts"
   | "live"
-  | "results"
   | "methodology"
   | "matchup";
 
@@ -38,7 +37,6 @@ const NAV_ITEMS: NavItem[] = [
   { key: "team_pitch_mix", label: "Team vs Pitch Mix", icon: "matchup" },
   { key: "breakouts", label: "Breakouts & Regression", icon: "gem" },
   { key: "live", label: "Live Feed", icon: "live" },
-  { key: "results", label: "Results Log", icon: "check" },
   { key: "matchup", label: "Matchup Analysis", icon: "matchup" },
   { key: "methodology", label: "How It Works", icon: "info" },
 ];
@@ -241,7 +239,7 @@ export function Sidebar({
 
         <SectionLabel collapsed={collapsed}>Tools</SectionLabel>
         <div className="space-y-1 mb-5">
-          {(["slips", "results"] as const).map((key) => {
+          {(["slips"] as const).map((key) => {
             const item = NAV_ITEMS.find((n) => n.key === key)!;
             return (
               <NavButton
