@@ -1012,33 +1012,37 @@ export function MLRankings({
 
               {/* Stats */}
               <div className="flex-1 min-w-0">
-                <div className="flex items-start gap-4 md:gap-6 flex-wrap">
+                {/* Stat chips + matchup pill */}
+                <div className="flex items-center gap-2 flex-wrap">
                   {[
                     { label: "EV", value: String(ev), hi: Number(ev) >= 95 },
                     { label: "Brl%", value: `${barrel}%`, hi: Number(barrel) >= 12 },
                     { label: "HH%", value: `${hh}%`, hi: Number(hh) >= 45 },
                     { label: "FB%", value: `${fb}%`, hi: Number(fb) >= 38 },
                   ].map(({ label, value, hi }) => (
-                    <div key={label}>
-                      <div className="text-[9px] uppercase tracking-wider text-muted/40 mb-1">{label}</div>
-                      <div className={`text-[13px] font-bold font-mono ${hi ? "text-accent-green" : "text-foreground"}`}>{value}</div>
+                    <div key={label} className="flex flex-col items-center px-2 py-1 rounded-lg" style={{ background: "rgba(255,255,255,0.04)", minWidth: 36 }}>
+                      <span className="text-[9px] uppercase tracking-wider text-muted/50">{label}</span>
+                      <span className={`text-[12px] font-bold font-mono leading-tight ${hi ? "text-accent-green" : "text-foreground"}`}>{value}</span>
                     </div>
                   ))}
-                  <div>
-                    <div className="text-[9px] uppercase tracking-wider text-muted/40 mb-1">Matchup</div>
-                    <div className={`text-[12px] font-bold uppercase tracking-wide ${matchupColor}`}>{matchupLabel}</div>
-                  </div>
+                  {matchupLabel !== "—" && (
+                    <span
+                      className={`px-2 py-1 rounded-lg text-[11px] font-bold uppercase tracking-wide ${matchupColor}`}
+                      style={{ background: matchupLabel === "GREAT" ? "rgba(34,197,94,0.10)" : matchupLabel === "DECENT" ? "rgba(234,179,8,0.10)" : "rgba(248,113,113,0.10)" }}
+                    >
+                      {matchupLabel}
+                    </span>
+                  )}
                   {delta !== null && Math.abs(delta) > 0.01 && (
-                    <div>
-                      <div className="text-[9px] uppercase tracking-wider text-muted/40 mb-1">Form</div>
-                      <div className={`text-[12px] font-bold font-mono ${delta > 0 ? "text-accent-green" : "text-red-400"}`}>
-                        {delta > 0 ? "+" : ""}{(delta * 100).toFixed(0)}
-                      </div>
-                    </div>
+                    <span className={`px-2 py-1 rounded-lg text-[11px] font-bold font-mono ${delta > 0 ? "text-accent-green" : "text-red-400"}`}
+                      style={{ background: delta > 0 ? "rgba(34,197,94,0.10)" : "rgba(248,113,113,0.10)" }}>
+                      {delta > 0 ? "+" : ""}{(delta * 100).toFixed(0)} form
+                    </span>
                   )}
                 </div>
 
-                <div className="flex items-center gap-4 md:gap-6 mt-2.5">
+                {/* BAT/PIT/ENV bars — wrap on mobile so they don't overflow */}
+                <div className="flex items-center gap-2 md:gap-4 mt-2 flex-wrap">
                   {[
                     { label: "BAT", val: season?.batter ?? s.batter_score },
                     { label: "PIT", val: season?.pitcher ?? s.pitcher_score },
@@ -1046,12 +1050,12 @@ export function MLRankings({
                   ].map(({ label, val }) => {
                     const barColor = val >= 0.65 ? "#22c55e" : val >= 0.45 ? "#eab308" : "rgba(255,255,255,0.2)";
                     return (
-                      <div key={label} className="flex items-center gap-1.5">
-                        <span className="text-[9px] font-bold uppercase tracking-wider w-6" style={{ color: barColor }}>{label}</span>
-                        <div className="w-16 md:w-20 h-1 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
+                      <div key={label} className="flex items-center gap-1">
+                        <span className="text-[9px] font-bold uppercase tracking-wider w-6 shrink-0" style={{ color: barColor }}>{label}</span>
+                        <div className="w-10 md:w-20 h-1.5 rounded-full overflow-hidden shrink-0" style={{ background: "rgba(255,255,255,0.07)" }}>
                           <div className="h-full rounded-full" style={{ width: `${Math.round(val * 100)}%`, background: barColor }} />
                         </div>
-                        <span className="text-[10px] font-mono" style={{ color: barColor }}>{val.toFixed(2)}</span>
+                        <span className="text-[10px] font-mono shrink-0" style={{ color: barColor }}>{val.toFixed(2)}</span>
                       </div>
                     );
                   })}
