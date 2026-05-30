@@ -40870,7 +40870,7 @@
     "date": "2026-05-29",
     "total_players_ranked": 293,
     "total_hrs_hit": 51,
-    "total_near_hrs": 0,
+    "total_near_hrs": 16,
     "model_hits": 47,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -40919,7 +40919,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 16,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -40955,18 +40955,18 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 10,
-        "rate": 33.3
+        "hits": 12,
+        "rate": 40.0
       },
       "all": {
         "total": 293,
-        "hits": 47,
-        "rate": 16.0
+        "hits": 63,
+        "rate": 21.5
       }
     },
     "avg_composite_hr_hitters": 0.452,
-    "avg_composite_non_hitters": 0.401,
-    "composite_separation": 0.051,
+    "avg_composite_non_hitters": 0.398,
+    "composite_separation": 0.054,
     "hr_hitters": [
       {
         "name": "Owen Caissie",
@@ -41629,8 +41629,275 @@
         "matchup": "TOR@BAL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Rafael Devers",
+        "rank": 25,
+        "composite": 0.622,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "SF@COL"
+      },
+      {
+        "name": "Gabriel Moreno",
+        "rank": 26,
+        "composite": 0.619,
+        "opp_pitcher": "George Kirby",
+        "matchup": "AZ@SEA"
+      },
+      {
+        "name": "Xavier Edwards",
+        "rank": 36,
+        "composite": 0.586,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "MIA@NYM"
+      },
+      {
+        "name": "Michael Harris II",
+        "rank": 47,
+        "composite": 0.556,
+        "opp_pitcher": "Chris Paddack",
+        "matchup": "ATL@CIN"
+      },
+      {
+        "name": "Bobby Witt Jr.",
+        "rank": 54,
+        "composite": 0.541,
+        "opp_pitcher": "MacKenzie Gore",
+        "matchup": "KC@TEX"
+      },
+      {
+        "name": "Mickey Gasper",
+        "rank": 60,
+        "composite": 0.529,
+        "opp_pitcher": "Slade Cecconi",
+        "matchup": "BOS@CLE"
+      },
+      {
+        "name": "Coby Mayo",
+        "rank": 68,
+        "composite": 0.512,
+        "opp_pitcher": "Adam Macko",
+        "matchup": "TOR@BAL"
+      },
+      {
+        "name": "Harrison Bader",
+        "rank": 79,
+        "composite": 0.487,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "SF@COL"
+      },
+      {
+        "name": "Danny Jansen",
+        "rank": 85,
+        "composite": 0.459,
+        "opp_pitcher": "Stephen Kolek",
+        "matchup": "KC@TEX"
+      },
+      {
+        "name": "Joe Mack",
+        "rank": 113,
+        "composite": 0.4,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "MIA@NYM"
+      },
+      {
+        "name": "Willi Castro",
+        "rank": 150,
+        "composite": 0.393,
+        "opp_pitcher": "Logan Webb",
+        "matchup": "SF@COL"
+      },
+      {
+        "name": "Yordan Alvarez",
+        "rank": 154,
+        "composite": 0.391,
+        "opp_pitcher": "Coleman Crow",
+        "matchup": "MIL@HOU"
+      },
+      {
+        "name": "Willy Adames",
+        "rank": 187,
+        "composite": 0.354,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "SF@COL"
+      },
+      {
+        "name": "Josh Naylor",
+        "rank": 209,
+        "composite": 0.332,
+        "opp_pitcher": "Zac Gallen",
+        "matchup": "AZ@SEA"
+      },
+      {
+        "name": "Daulton Varsho",
+        "rank": 284,
+        "composite": 0.224,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "TOR@BAL"
+      },
+      {
+        "name": "Jose Siri",
+        "rank": 286,
+        "composite": 0.164,
+        "opp_pitcher": "Nick Martinez",
+        "matchup": "LAA@TB"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Coby Mayo",
+        "ev": 112.3,
+        "angle": 34.0,
+        "distance": 420.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "Voth, Austin"
+      },
+      {
+        "batter": "Daulton Varsho",
+        "ev": 100.4,
+        "angle": 26.0,
+        "distance": 403.0,
+        "hr_in_parks": 19,
+        "result": "triple",
+        "pitcher": "Rogers, Trevor"
+      },
+      {
+        "batter": "Michael Harris II",
+        "ev": 102.2,
+        "angle": 33.0,
+        "distance": 378.0,
+        "hr_in_parks": 8,
+        "result": "field_out",
+        "pitcher": "Paddack, Chris"
+      },
+      {
+        "batter": "Mickey Gasper",
+        "ev": 100.5,
+        "angle": 22.0,
+        "distance": 372.0,
+        "hr_in_parks": 12,
+        "result": "double",
+        "pitcher": "Cecconi, Slade"
+      },
+      {
+        "batter": "Rafael Devers",
+        "ev": 102.8,
+        "angle": 31.0,
+        "distance": 412.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Mejia, Juan"
+      },
+      {
+        "batter": "Willi Castro",
+        "ev": 95.1,
+        "angle": 25.0,
+        "distance": 383.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Peguero, Joel"
+      },
+      {
+        "batter": "Willy Adames",
+        "ev": 101.4,
+        "angle": 35.0,
+        "distance": 415.0,
+        "hr_in_parks": 30,
+        "result": "sac_fly",
+        "pitcher": "Lorenzen, Michael"
+      },
+      {
+        "batter": "Harrison Bader",
+        "ev": 96.4,
+        "angle": 27.0,
+        "distance": 393.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Lorenzen, Michael"
+      },
+      {
+        "batter": "Yordan Alvarez",
+        "ev": 112.7,
+        "angle": 20.0,
+        "distance": 407.0,
+        "hr_in_parks": 27,
+        "result": "field_out",
+        "pitcher": "Crow, Coleman"
+      },
+      {
+        "batter": "Joe Mack",
+        "ev": 107.9,
+        "angle": 28.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Myers, Tobias"
+      },
+      {
+        "batter": "Xavier Edwards",
+        "ev": 103.9,
+        "angle": 26.0,
+        "distance": 407.0,
+        "hr_in_parks": 24,
+        "result": "triple",
+        "pitcher": "Peralta, Freddy"
+      },
+      {
+        "batter": "Gabriel Moreno",
+        "ev": 103.1,
+        "angle": 21.0,
+        "distance": 385.0,
+        "hr_in_parks": 8,
+        "result": "double",
+        "pitcher": "Kirby, George"
+      },
+      {
+        "batter": "Josh Naylor",
+        "ev": 103.3,
+        "angle": 23.0,
+        "distance": 378.0,
+        "hr_in_parks": 27,
+        "result": "single",
+        "pitcher": "Gallen, Zac"
+      },
+      {
+        "batter": "Jose Siri",
+        "ev": 105.4,
+        "angle": 21.0,
+        "distance": 386.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Martinez, Nick"
+      },
+      {
+        "batter": "Danny Jansen",
+        "ev": 104.5,
+        "angle": 31.0,
+        "distance": 401.0,
+        "hr_in_parks": 15,
+        "result": "",
+        "pitcher": "Kolek, Stephen"
+      },
+      {
+        "batter": "Brandon Nimmo",
+        "ev": 100.7,
+        "angle": 28.0,
+        "distance": 405.0,
+        "hr_in_parks": 27,
+        "result": "field_out",
+        "pitcher": "Kolek, Stephen"
+      },
+      {
+        "batter": "Bobby Witt Jr.",
+        "ev": 107.4,
+        "angle": 18.0,
+        "distance": 403.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Gore, MacKenzie"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "MJ Melendez",
