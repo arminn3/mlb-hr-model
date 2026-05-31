@@ -2,7 +2,7 @@
   "date": "2026-05-30",
   "total_players_ranked": 306,
   "total_hrs_hit": 42,
-  "total_near_hrs": 0,
+  "total_near_hrs": 25,
   "model_hits": 41,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 25,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -82,18 +82,18 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 2,
-      "rate": 10.0
+      "hits": 4,
+      "rate": 20.0
     },
     "top_30": {
       "total": 30,
-      "hits": 6,
-      "rate": 20.0
+      "hits": 9,
+      "rate": 30.0
     },
     "all": {
       "total": 306,
-      "hits": 41,
-      "rate": 13.4
+      "hits": 66,
+      "rate": 21.6
     }
   },
   "avg_composite_hr_hitters": 0.421,
@@ -677,8 +677,437 @@
       "matchup": "BOS@CLE"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Bryce Eldridge",
+      "rank": 11,
+      "composite": 0.689,
+      "opp_pitcher": "Ryan Feltner",
+      "matchup": "SF@COL"
+    },
+    {
+      "name": "Jes\u00fas S\u00e1nchez",
+      "rank": 17,
+      "composite": 0.662,
+      "opp_pitcher": "Brandon Young",
+      "matchup": "TOR@BAL"
+    },
+    {
+      "name": "Alec Burleson",
+      "rank": 26,
+      "composite": 0.623,
+      "opp_pitcher": "Ben Brown",
+      "matchup": "CHC@STL"
+    },
+    {
+      "name": "Danny Jansen",
+      "rank": 48,
+      "composite": 0.552,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@TEX"
+    },
+    {
+      "name": "Ezequiel Tovar",
+      "rank": 68,
+      "composite": 0.493,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "SF@COL"
+    },
+    {
+      "name": "Brandon Nimmo",
+      "rank": 69,
+      "composite": 0.486,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@TEX"
+    },
+    {
+      "name": "Petey Halpin",
+      "rank": 74,
+      "composite": 0.453,
+      "opp_pitcher": "Sonny Gray",
+      "matchup": "BOS@CLE"
+    },
+    {
+      "name": "Kazuma Okamoto",
+      "rank": 96,
+      "composite": 0.4,
+      "opp_pitcher": "Brandon Young",
+      "matchup": "TOR@BAL"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 123,
+      "composite": 0.4,
+      "opp_pitcher": "Ryan Feltner",
+      "matchup": "SF@COL"
+    },
+    {
+      "name": "Jung Hoo Lee",
+      "rank": 126,
+      "composite": 0.4,
+      "opp_pitcher": "Ryan Feltner",
+      "matchup": "SF@COL"
+    },
+    {
+      "name": "Willy Adames",
+      "rank": 130,
+      "composite": 0.4,
+      "opp_pitcher": "Ryan Feltner",
+      "matchup": "SF@COL"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 149,
+      "composite": 0.4,
+      "opp_pitcher": "Roki Sasaki",
+      "matchup": "PHI@LAD"
+    },
+    {
+      "name": "Jac Caglianone",
+      "rank": 155,
+      "composite": 0.391,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "KC@TEX"
+    },
+    {
+      "name": "Troy Johnston",
+      "rank": 164,
+      "composite": 0.385,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "SF@COL"
+    },
+    {
+      "name": "Randy Arozarena",
+      "rank": 168,
+      "composite": 0.384,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "AZ@SEA"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 173,
+      "composite": 0.38,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "KC@TEX"
+    },
+    {
+      "name": "Connor Wong",
+      "rank": 185,
+      "composite": 0.362,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "BOS@CLE"
+    },
+    {
+      "name": "Kody Clemens",
+      "rank": 204,
+      "composite": 0.346,
+      "opp_pitcher": "Mitch Keller",
+      "matchup": "MIN@PIT"
+    },
+    {
+      "name": "Seiya Suzuki",
+      "rank": 233,
+      "composite": 0.311,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "CHC@STL"
+    },
+    {
+      "name": "Jake Burger",
+      "rank": 237,
+      "composite": 0.297,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@TEX"
+    },
+    {
+      "name": "Jonathan Aranda",
+      "rank": 241,
+      "composite": 0.294,
+      "opp_pitcher": "Reid Detmers",
+      "matchup": "LAA@TB"
+    },
+    {
+      "name": "Alex Bregman",
+      "rank": 249,
+      "composite": 0.283,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "CHC@STL"
+    },
+    {
+      "name": "Orlando Arcia",
+      "rank": 284,
+      "composite": 0.209,
+      "opp_pitcher": "Mitch Keller",
+      "matchup": "MIN@PIT"
+    },
+    {
+      "name": "Kyle Stowers",
+      "rank": 295,
+      "composite": 0.166,
+      "opp_pitcher": "Christian Scott",
+      "matchup": "MIA@NYM"
+    },
+    {
+      "name": "Joe Mack",
+      "rank": 299,
+      "composite": 0.14,
+      "opp_pitcher": "Christian Scott",
+      "matchup": "MIA@NYM"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Jes\u00fas S\u00e1nchez",
+      "ev": 106.4,
+      "angle": 21.0,
+      "distance": 392.0,
+      "hr_in_parks": 10,
+      "result": "double",
+      "pitcher": "Young, Brandon"
+    },
+    {
+      "batter": "Kazuma Okamoto",
+      "ev": 96.3,
+      "angle": 38.0,
+      "distance": 371.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Young, Brandon"
+    },
+    {
+      "batter": "Ronald Acu\u00f1a Jr.",
+      "ev": 112.3,
+      "angle": 31.0,
+      "distance": 401.0,
+      "hr_in_parks": 15,
+      "result": "",
+      "pitcher": "Singer, Brady"
+    },
+    {
+      "batter": "Connor Wong",
+      "ev": 108.3,
+      "angle": 22.0,
+      "distance": 378.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Festa, Matt"
+    },
+    {
+      "batter": "Petey Halpin",
+      "ev": 102.3,
+      "angle": 28.0,
+      "distance": 368.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Gray, Sonny"
+    },
+    {
+      "batter": "Jung Hoo Lee",
+      "ev": 101.3,
+      "angle": 23.0,
+      "distance": 381.0,
+      "hr_in_parks": 7,
+      "result": "triple",
+      "pitcher": "Casta\u00f1o, Blas"
+    },
+    {
+      "batter": "Casey Schmitt",
+      "ev": 103.5,
+      "angle": 22.0,
+      "distance": 383.0,
+      "hr_in_parks": 27,
+      "result": "double",
+      "pitcher": "Bernardino, Brennan"
+    },
+    {
+      "batter": "Troy Johnston",
+      "ev": 104.5,
+      "angle": 21.0,
+      "distance": 400.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Brubaker, JT"
+    },
+    {
+      "batter": "Ezequiel Tovar",
+      "ev": 102.8,
+      "angle": 33.0,
+      "distance": 401.0,
+      "hr_in_parks": 15,
+      "result": "field_out",
+      "pitcher": "Hentges, Sam"
+    },
+    {
+      "batter": "Bryce Eldridge",
+      "ev": 102.8,
+      "angle": 29.0,
+      "distance": 384.0,
+      "hr_in_parks": 29,
+      "result": "field_out",
+      "pitcher": "Feltner, Ryan"
+    },
+    {
+      "batter": "Willy Adames",
+      "ev": 100.6,
+      "angle": 36.0,
+      "distance": 401.0,
+      "hr_in_parks": 29,
+      "result": "field_out",
+      "pitcher": "Feltner, Ryan"
+    },
+    {
+      "batter": "Kyle Schwarber",
+      "ev": 113.5,
+      "angle": 36.0,
+      "distance": 419.0,
+      "hr_in_parks": 29,
+      "result": "",
+      "pitcher": "Sasaki, Roki"
+    },
+    {
+      "batter": "Joe Mack",
+      "ev": 103.1,
+      "angle": 30.0,
+      "distance": 400.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Scott, Christian"
+    },
+    {
+      "batter": "Kyle Stowers",
+      "ev": 97.2,
+      "angle": 30.0,
+      "distance": 378.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Scott, Christian"
+    },
+    {
+      "batter": "Orlando Arcia",
+      "ev": 101.2,
+      "angle": 24.0,
+      "distance": 374.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Soto, Gregory"
+    },
+    {
+      "batter": "Kody Clemens",
+      "ev": 101.8,
+      "angle": 25.0,
+      "distance": 394.0,
+      "hr_in_parks": 6,
+      "result": "triple",
+      "pitcher": "Keller, Mitch"
+    },
+    {
+      "batter": "Kody Clemens",
+      "ev": 101.9,
+      "angle": 22.0,
+      "distance": 371.0,
+      "hr_in_parks": 2,
+      "result": "double",
+      "pitcher": "Keller, Mitch"
+    },
+    {
+      "batter": "Randy Arozarena",
+      "ev": 106.3,
+      "angle": 29.0,
+      "distance": 397.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Nelson, Ryne"
+    },
+    {
+      "batter": "Alec Burleson",
+      "ev": 101.4,
+      "angle": 24.0,
+      "distance": 388.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Brown, Ben"
+    },
+    {
+      "batter": "Seiya Suzuki",
+      "ev": 108.3,
+      "angle": 20.0,
+      "distance": 405.0,
+      "hr_in_parks": 24,
+      "result": "double",
+      "pitcher": "Graceffo, Gordon"
+    },
+    {
+      "batter": "Alex Bregman",
+      "ev": 104.7,
+      "angle": 34.0,
+      "distance": 398.0,
+      "hr_in_parks": 4,
+      "result": "",
+      "pitcher": "Leahy, Kyle"
+    },
+    {
+      "batter": "Jonathan Aranda",
+      "ev": 100.3,
+      "angle": 33.0,
+      "distance": 377.0,
+      "hr_in_parks": 10,
+      "result": "field_out",
+      "pitcher": "Detmers, Reid"
+    },
+    {
+      "batter": "Jake Burger",
+      "ev": 99.1,
+      "angle": 24.0,
+      "distance": 373.0,
+      "hr_in_parks": 9,
+      "result": "double",
+      "pitcher": "Lynch IV, Daniel"
+    },
+    {
+      "batter": "Danny Jansen",
+      "ev": 97.4,
+      "angle": 33.0,
+      "distance": 384.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Lugo, Seth"
+    },
+    {
+      "batter": "Jac Caglianone",
+      "ev": 101.9,
+      "angle": 34.0,
+      "distance": 405.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Rocker, Kumar"
+    },
+    {
+      "batter": "Carter Jensen",
+      "ev": 97.1,
+      "angle": 34.0,
+      "distance": 375.0,
+      "hr_in_parks": 13,
+      "result": "field_out",
+      "pitcher": "Rocker, Kumar"
+    },
+    {
+      "batter": "Brandon Nimmo",
+      "ev": 104.1,
+      "angle": 35.0,
+      "distance": 391.0,
+      "hr_in_parks": 9,
+      "result": "field_out",
+      "pitcher": "Lugo, Seth"
+    },
+    {
+      "batter": "Bobby Witt Jr.",
+      "ev": 101.3,
+      "angle": 28.0,
+      "distance": 389.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Rocker, Kumar"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
