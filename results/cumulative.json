@@ -45254,7 +45254,7 @@
       {
         "name": "Yohendrick Pi\u00f1ango",
         "pitcher": "Tyler Wells",
-        "description": "Yohendrick Pi\u00f1ango homers (3) on a fly ball to right field. Kazuma Okamoto scores. Ernie Clement scores."
+        "description": "${person|fullName|682818} homers ${total|homeRuns|682818} on a fly ball to right field.    ${person|fullName|672960} scores.    ${person|fullName|676391} scores.  "
       },
       {
         "name": "Jesus Rodriguez",
