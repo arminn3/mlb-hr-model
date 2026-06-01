@@ -2,7 +2,7 @@
   "date": "2026-05-31",
   "total_players_ranked": 274,
   "total_hrs_hit": 32,
-  "total_near_hrs": 0,
+  "total_near_hrs": 19,
   "model_hits": 29,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 19,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -87,13 +87,13 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 7,
-      "rate": 23.3
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 274,
-      "hits": 29,
-      "rate": 10.6
+      "hits": 48,
+      "rate": 17.5
     }
   },
   "avg_composite_hr_hitters": 0.487,
@@ -509,8 +509,350 @@
       "matchup": "MIN@PIT"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Jung Hoo Lee",
+      "rank": 24,
+      "composite": 0.66,
+      "opp_pitcher": "Tanner Gordon",
+      "matchup": "SF@COL"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 48,
+      "composite": 0.585,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "KC@TEX"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 52,
+      "composite": 0.581,
+      "opp_pitcher": "Jacob Lopez",
+      "matchup": "NYY@ATH"
+    },
+    {
+      "name": "Caleb Durbin",
+      "rank": 59,
+      "composite": 0.559,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "BOS@CLE"
+    },
+    {
+      "name": "Gunnar Henderson",
+      "rank": 68,
+      "composite": 0.529,
+      "opp_pitcher": "Spencer Miles",
+      "matchup": "TOR@BAL"
+    },
+    {
+      "name": "Manny Machado",
+      "rank": 85,
+      "composite": 0.47,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "SD@WSH"
+    },
+    {
+      "name": "Connor Norby",
+      "rank": 115,
+      "composite": 0.4,
+      "opp_pitcher": "Nolan McLean",
+      "matchup": "MIA@NYM"
+    },
+    {
+      "name": "Tyler Freeman",
+      "rank": 128,
+      "composite": 0.4,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "SF@COL"
+    },
+    {
+      "name": "Kyle Karros",
+      "rank": 130,
+      "composite": 0.4,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "SF@COL"
+    },
+    {
+      "name": "Carlos Cortes",
+      "rank": 134,
+      "composite": 0.4,
+      "opp_pitcher": "Will Warren",
+      "matchup": "NYY@ATH"
+    },
+    {
+      "name": "Nick Kurtz",
+      "rank": 136,
+      "composite": 0.4,
+      "opp_pitcher": "Will Warren",
+      "matchup": "NYY@ATH"
+    },
+    {
+      "name": "Andy Pages",
+      "rank": 148,
+      "composite": 0.4,
+      "opp_pitcher": "Andrew Painter",
+      "matchup": "PHI@LAD"
+    },
+    {
+      "name": "Vinnie Pasquantino",
+      "rank": 158,
+      "composite": 0.399,
+      "opp_pitcher": "Jack Leiter",
+      "matchup": "KC@TEX"
+    },
+    {
+      "name": "Kyle Tucker",
+      "rank": 172,
+      "composite": 0.384,
+      "opp_pitcher": "Andrew Painter",
+      "matchup": "PHI@LAD"
+    },
+    {
+      "name": "Matt Chapman",
+      "rank": 179,
+      "composite": 0.38,
+      "opp_pitcher": "Tanner Gordon",
+      "matchup": "SF@COL"
+    },
+    {
+      "name": "Ezequiel Duran",
+      "rank": 180,
+      "composite": 0.379,
+      "opp_pitcher": "Michael Wacha",
+      "matchup": "KC@TEX"
+    },
+    {
+      "name": "Ian Happ",
+      "rank": 208,
+      "composite": 0.337,
+      "opp_pitcher": "Matthew Liberatore",
+      "matchup": "CHC@STL"
+    },
+    {
+      "name": "Michael Conforto",
+      "rank": 222,
+      "composite": 0.322,
+      "opp_pitcher": "Matthew Liberatore",
+      "matchup": "CHC@STL"
+    },
+    {
+      "name": "Jared Young",
+      "rank": 271,
+      "composite": 0.137,
+      "opp_pitcher": "John King",
+      "matchup": "MIA@NYM"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Nick Kurtz",
+      "ev": 106.6,
+      "angle": 22.0,
+      "distance": 395.0,
+      "hr_in_parks": 23,
+      "result": "double",
+      "pitcher": "Cruz, Fernando"
+    },
+    {
+      "batter": "Ben Rice",
+      "ev": 106.0,
+      "angle": 22.0,
+      "distance": 372.0,
+      "hr_in_parks": 25,
+      "result": "triple",
+      "pitcher": "Kelly, Michael"
+    },
+    {
+      "batter": "Carlos Cortes",
+      "ev": 104.4,
+      "angle": 24.0,
+      "distance": 382.0,
+      "hr_in_parks": 21,
+      "result": "double",
+      "pitcher": "Warren, Will"
+    },
+    {
+      "batter": "Gunnar Henderson",
+      "ev": 102.8,
+      "angle": 21.0,
+      "distance": 382.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Juenger, Hayden"
+    },
+    {
+      "batter": "Caleb Durbin",
+      "ev": 110.6,
+      "angle": 31.0,
+      "distance": 406.0,
+      "hr_in_parks": 19,
+      "result": "",
+      "pitcher": "Dion, Will"
+    },
+    {
+      "batter": "Tyler Freeman",
+      "ev": 103.4,
+      "angle": 21.0,
+      "distance": 388.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Beck, Tristan"
+    },
+    {
+      "batter": "Matt Chapman",
+      "ev": 103.1,
+      "angle": 22.0,
+      "distance": 396.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Agnos, Zach"
+    },
+    {
+      "batter": "Jung Hoo Lee",
+      "ev": 102.5,
+      "angle": 26.0,
+      "distance": 427.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Agnos, Zach"
+    },
+    {
+      "batter": "Kyle Karros",
+      "ev": 101.3,
+      "angle": 27.0,
+      "distance": 397.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Ray, Robbie"
+    },
+    {
+      "batter": "Bryce Eldridge",
+      "ev": 104.4,
+      "angle": 23.0,
+      "distance": 418.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Gordon, Tanner"
+    },
+    {
+      "batter": "Kyle Tucker",
+      "ev": 105.9,
+      "angle": 18.0,
+      "distance": 370.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Banks, Tanner"
+    },
+    {
+      "batter": "Alex Freeland",
+      "ev": 103.1,
+      "angle": 24.0,
+      "distance": 399.0,
+      "hr_in_parks": 16,
+      "result": "double",
+      "pitcher": "Painter, Andrew"
+    },
+    {
+      "batter": "Andy Pages",
+      "ev": 103.3,
+      "angle": 22.0,
+      "distance": 398.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Painter, Andrew"
+    },
+    {
+      "batter": "Jared Young",
+      "ev": 104.6,
+      "angle": 21.0,
+      "distance": 384.0,
+      "hr_in_parks": 14,
+      "result": "field_out",
+      "pitcher": "Sanoja, Javier"
+    },
+    {
+      "batter": "Vidal Bruj\u00e1n",
+      "ev": 100.3,
+      "angle": 22.0,
+      "distance": 386.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Sanoja, Javier"
+    },
+    {
+      "batter": "Connor Norby",
+      "ev": 106.9,
+      "angle": 25.0,
+      "distance": 395.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "McLean, Nolan"
+    },
+    {
+      "batter": "Michael Conforto",
+      "ev": 103.9,
+      "angle": 34.0,
+      "distance": 395.0,
+      "hr_in_parks": 25,
+      "result": "field_out",
+      "pitcher": "Dobbins, Hunter"
+    },
+    {
+      "batter": "Michael Conforto",
+      "ev": 102.4,
+      "angle": 23.0,
+      "distance": 377.0,
+      "hr_in_parks": 15,
+      "result": "double",
+      "pitcher": "Dobbins, Hunter"
+    },
+    {
+      "batter": "Ian Happ",
+      "ev": 112.2,
+      "angle": 28.0,
+      "distance": 412.0,
+      "hr_in_parks": 28,
+      "result": "",
+      "pitcher": "Liberatore, Matthew"
+    },
+    {
+      "batter": "Vinnie Pasquantino",
+      "ev": 98.8,
+      "angle": 29.0,
+      "distance": 395.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Leiter, Jack"
+    },
+    {
+      "batter": "Ezequiel Duran",
+      "ev": 96.9,
+      "angle": 26.0,
+      "distance": 373.0,
+      "hr_in_parks": 26,
+      "result": "triple",
+      "pitcher": "Wacha, Michael"
+    },
+    {
+      "batter": "Bobby Witt Jr.",
+      "ev": 97.2,
+      "angle": 29.0,
+      "distance": 368.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Leiter, Jack"
+    },
+    {
+      "batter": "Manny Machado",
+      "ev": 103.8,
+      "angle": 29.0,
+      "distance": 399.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Ribalta, Orlando"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Yohendrick Pi\u00f1ango",
