@@ -1,9 +1,9 @@
 {
   "date": "2026-05-31",
   "total_players_ranked": 274,
-  "total_hrs_hit": 31,
+  "total_hrs_hit": 32,
   "total_near_hrs": 0,
-  "model_hits": 28,
+  "model_hits": 29,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
     "L5": {
@@ -24,8 +24,8 @@
       },
       "all": {
         "total": 274,
-        "hits": 28,
-        "rate": 10.2
+        "hits": 29,
+        "rate": 10.6
       }
     },
     "L10": {
@@ -46,8 +46,8 @@
       },
       "all": {
         "total": 274,
-        "hits": 28,
-        "rate": 10.2
+        "hits": 29,
+        "rate": 10.6
       }
     }
   },
@@ -70,8 +70,8 @@
     },
     "all": {
       "total": 274,
-      "hits": 28,
-      "rate": 10.2
+      "hits": 29,
+      "rate": 10.6
     }
   },
   "tier_accuracy_with_near": {
@@ -92,13 +92,13 @@
     },
     "all": {
       "total": 274,
-      "hits": 28,
-      "rate": 10.2
+      "hits": 29,
+      "rate": 10.6
     }
   },
-  "avg_composite_hr_hitters": 0.492,
+  "avg_composite_hr_hitters": 0.487,
   "avg_composite_non_hitters": 0.421,
-  "composite_separation": 0.071,
+  "composite_separation": 0.066,
   "hr_hitters": [
     {
       "name": "Bryce Eldridge",
@@ -260,6 +260,13 @@
       "composite": 0.394,
       "opp_pitcher": "Tanner Gordon",
       "matchup": "SF@COL"
+    },
+    {
+      "name": "Alex Bregman",
+      "rank": 214,
+      "composite": 0.332,
+      "opp_pitcher": "Matthew Liberatore",
+      "matchup": "CHC@STL"
     },
     {
       "name": "Brooks Lee",
@@ -481,6 +488,13 @@
       "matchup": "PHI@LAD"
     },
     {
+      "name": "Alex Bregman",
+      "rank": 235,
+      "composite": 0.314,
+      "opp_pitcher": "Matthew Liberatore",
+      "matchup": "CHC@STL"
+    },
+    {
       "name": "Ryan Ward",
       "rank": 238,
       "composite": 0.309,
@@ -512,8 +526,8 @@
   "hr_signal_accuracy": {
     "1_of_5": {
       "players": 73,
-      "hr_count": 10,
-      "hr_rate": 13.7,
+      "hr_count": 11,
+      "hr_rate": 15.1,
       "names": [
         "Colton Cowser",
         "Curtis Mead",
@@ -599,7 +613,8 @@
         "Brent Rooker",
         "Jonah Heim",
         "Ryan Ward",
-        "Alex Freeland"
+        "Alex Freeland",
+        "Alex Bregman"
       ]
     },
     "2_of_5": {
@@ -862,8 +877,8 @@
     },
     "all": {
       "total": 274,
-      "hits": 28,
-      "rate": 10.2
+      "hits": 29,
+      "rate": 10.6
     }
   },
   "combined_hr_hitters": [
@@ -1048,6 +1063,13 @@
       "composite": 0.344,
       "opp_pitcher": "Andrew Painter",
       "matchup": "PHI@LAD"
+    },
+    {
+      "name": "Alex Bregman",
+      "rank": 245,
+      "composite": 0.291,
+      "opp_pitcher": "Matthew Liberatore",
+      "matchup": "CHC@STL"
     },
     {
       "name": "Brooks Lee",
