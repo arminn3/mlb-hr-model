@@ -1,0 +1,317 @@
+{
+  "date": "2026-06-01",
+  "total_players_ranked": 162,
+  "total_hrs_hit": 0,
+  "total_near_hrs": 0,
+  "model_hits": 0,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 162,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 162,
+        "hits": 0,
+        "rate": 0.0
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 162,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 162,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "avg_composite_hr_hitters": 0,
+  "avg_composite_non_hitters": 0.419,
+  "composite_separation": -0.419,
+  "hr_hitters": [],
+  "hr_hitters_l10": [],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 56,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Yandy D\u00edaz",
+        "Chandler Simpson",
+        "Riley Greene",
+        "Zach McKinstry",
+        "Kerry Carpenter",
+        "Colt Keith",
+        "Hao-Yu  Lee",
+        "Wenceel P\u00e9rez",
+        "Curtis Mead",
+        "Jos\u00e9 Tena",
+        "Xavier Edwards",
+        "Owen Caissie",
+        "Joe Mack",
+        "Jakob Marsee",
+        "Jacob Young",
+        "Leo Jim\u00e9nez",
+        "Blake Dunn",
+        "Kody Clemens",
+        "Brooks Lee",
+        "Trevor Larnach",
+        "Chase Meidroth",
+        "Victor Caratini",
+        "Tristan Peters",
+        "Miguel Vargas",
+        "William Contreras",
+        "Willy Adames",
+        "Christian Yelich",
+        "Jackson Chourio",
+        "David Hamilton",
+        "Luis Arraez",
+        "Eric Haase",
+        "Brice Turang",
+        "Evan Carter",
+        "Alejandro Osuna",
+        "Josh Jung",
+        "Sterlin Thompson",
+        "Mookie Betts",
+        "Andy Pages",
+        "Gabriel Moreno",
+        "Geraldo Perdomo",
+        "Jorge Barrosa",
+        "Will Smith",
+        "Shohei Ohtani",
+        "Tommy Troy",
+        "Alex Call",
+        "Miguel Rojas",
+        "Freddie Freeman",
+        "Nolan Arenado",
+        "Luke Raley",
+        "J.P. Crawford",
+        "Cole Young",
+        "Colt Emerson",
+        "Marcus Semien",
+        "Julio Rodr\u00edguez",
+        "Rob Refsnyder",
+        "A.J. Ewing"
+      ],
+      "hr_names": []
+    },
+    "2_of_5": {
+      "players": 67,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Jonathan Aranda",
+        "Hunter Feduccia",
+        "Victor Mesa Jr.",
+        "Richie Palacios",
+        "Junior Caminero",
+        "Spencer Torkelson",
+        "James Wood",
+        "Keibert Ruiz",
+        "Otto Lopez",
+        "Luis Garc\u00eda Jr.",
+        "Daylen Lile",
+        "CJ Abrams",
+        "Kyle Stowers",
+        "Nasim Nu\u00f1ez",
+        "Connor Norby",
+        "JJ Bleday",
+        "Lane Thomas",
+        "Sal Stewart",
+        "Tyler Stephenson",
+        "Nick Loftin",
+        "Nathaniel Lowe",
+        "Bobby Witt Jr.",
+        "Byron Buxton",
+        "Colson Montgomery",
+        "Andrew Benintendi",
+        "Jacob Gonzalez",
+        "Austin Martin",
+        "Luke Keaschall",
+        "Tristan Gray",
+        "Josh Bell",
+        "Casey Schmitt",
+        "Jake Bauers",
+        "Andrew Vaughn",
+        "Luis Rengifo",
+        "Matt Chapman",
+        "Sal Frelick",
+        "Jung Hoo Lee",
+        "Brandon Nimmo",
+        "Iv\u00e1n Herrera",
+        "Joc Pederson",
+        "Nolan Gorman",
+        "Victor Scott II",
+        "Nicky Lopez",
+        "Jordan Walker",
+        "Danny Jansen",
+        "Masyn Winn",
+        "Jake Burger",
+        "Jimmy Crooks",
+        "Ezequiel Tovar",
+        "Jake McCarthy",
+        "Hunter Goodman",
+        "Edouard Julien",
+        "Tyler Freeman",
+        "Kyle Karros",
+        "Corbin Carroll",
+        "Kyle Tucker",
+        "Max Muncy",
+        "Jared Young",
+        "Juan Soto",
+        "MJ Melendez",
+        "Carson Benge",
+        "Brett Baty",
+        "Bo Bichette",
+        "Josh Naylor",
+        "Randy Arozarena",
+        "Luis Torrens",
+        "Mitch Garver"
+      ],
+      "hr_names": []
+    },
+    "3_of_5": {
+      "players": 24,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Cedric Mullins",
+        "Taylor Walls",
+        "Michael Massey",
+        "Eugenio Su\u00e1rez",
+        "Matt McLain",
+        "Spencer Steer",
+        "Isaac Collins",
+        "Kyle Isbel",
+        "Bryce Eldridge",
+        "Rafael Devers",
+        "Bryan Torres",
+        "JJ Wetherholt",
+        "Alec Burleson",
+        "Mike Trout",
+        "Logan O'Hoppe",
+        "Oswald Peraza",
+        "Troy Johnston",
+        "Vaughn Grissom",
+        "Jo Adell",
+        "Willi Castro",
+        "Nick Madrigal",
+        "Pavin Smith",
+        "Ildemaro Vargas",
+        "Ketel Marte"
+      ],
+      "hr_names": []
+    },
+    "4_of_5": {
+      "players": 6,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Jac Caglianone",
+        "Vinnie Pasquantino",
+        "Carter Jensen",
+        "Jose Siri",
+        "Zach Neto",
+        "Jorge Soler"
+      ],
+      "hr_names": []
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 162,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "combined_hr_hitters": []
+}
