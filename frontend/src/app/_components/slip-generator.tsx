@@ -43,10 +43,22 @@ function persistState(state: PersistedState) {
 
 function computeModelOdds(barrelPct: number, pitcherHrFbRate: number, parkFactor: number): number {
   const LEAGUE_AVG_HR_FB = 0.135;
+  const N_PA = 3.8;
   const hrFb = pitcherHrFbRate > 0 ? pitcherHrFbRate : LEAGUE_AVG_HR_FB;
+
+  // Base HR/PA from barrel% (calibrated: ~9-10% for elite, 4-5% for average)
   const baseHrPerPa = (barrelPct / 100) * 0.40;
-  const hrPerPa = Math.min(baseHrPerPa * (hrFb / LEAGUE_AVG_HR_FB) * ((parkFactor > 0 ? parkFactor : 100) / 100), 0.25);
-  const pHr = Math.max(0.04, Math.min(0.85, 1 - Math.pow(1 - hrPerPa, 3.8)));
+
+  // Compress multiplier ranges so they can't compound into impossible probabilities:
+  // pitcher: 0.60× (great pitcher) to 1.60× (homer machine), capped
+  // park: 0.85× (SF/PIT) to 1.20× (Coors/LAD), capped
+  const pitcherMult = Math.max(0.60, Math.min(1.60, hrFb / LEAGUE_AVG_HR_FB));
+  const parkMult = Math.max(0.85, Math.min(1.20, (parkFactor > 0 ? parkFactor : 100) / 100));
+
+  // Hard cap at 10% per PA — even Judge in the best spot doesn't exceed this
+  const hrPerPa = Math.min(baseHrPerPa * pitcherMult * parkMult, 0.10);
+
+  const pHr = Math.max(0.04, Math.min(0.35, 1 - Math.pow(1 - hrPerPa, N_PA)));
   if (pHr >= 0.5) return -Math.round(100 * pHr / (1 - pHr));
   return Math.round(100 * (1 - pHr) / pHr);
 }
