@@ -41,6 +41,20 @@ function persistState(state: PersistedState) {
   } catch {}
 }
 
+function computeModelOdds(barrelPct: number, pitcherHrFbRate: number, parkFactor: number): number {
+  const LEAGUE_AVG_HR_FB = 0.135;
+  const hrFb = pitcherHrFbRate > 0 ? pitcherHrFbRate : LEAGUE_AVG_HR_FB;
+  const baseHrPerPa = (barrelPct / 100) * 0.40;
+  const hrPerPa = Math.min(baseHrPerPa * (hrFb / LEAGUE_AVG_HR_FB) * ((parkFactor > 0 ? parkFactor : 100) / 100), 0.25);
+  const pHr = Math.max(0.04, Math.min(0.85, 1 - Math.pow(1 - hrPerPa, 3.8)));
+  if (pHr >= 0.5) return -Math.round(100 * pHr / (1 - pHr));
+  return Math.round(100 * (1 - pHr) / pHr);
+}
+
+function formatOdds(odds: number): string {
+  return odds >= 0 ? `+${odds}` : `${odds}`;
+}
+
 // Team abbr → searchable synonyms (city + nickname + common variants).
 // Lets users type "dodgers" or "los angeles" and match LAD games.
 const TEAM_SYNONYMS: Record<string, string> = {
@@ -106,6 +120,10 @@ interface SlipPlayer {
   barrel_pct: number;
   fb_pct: number;
   exit_velo: number;
+  pitcherScore: number;
+  envScore: number;
+  modelOdds: number;
+  parkFactor: number;
 }
 
 interface Slip {
@@ -118,12 +136,15 @@ function getAllPlayers(games: GameData[], lookback: UILookback, weights: MlWeigh
   const allPlayers: SlipPlayer[] = [];
   const seen = new Set<string>();
   for (const game of games) {
+    const parkFactor = game.environment?.park_factor ?? 100;
     for (const player of game.players) {
       if (seen.has(player.name)) continue;
       seen.add(player.name);
       const scores = scoreFor(player, lookback);
       const composite = mlComposite(player, lookback, weights);
       if (composite < 0.15) continue;
+      const barrelPct = scores?.barrel_pct ?? 0;
+      const hrFbRate = player.pitcher_stats?.hr_fb_rate ?? 0;
       allPlayers.push({
         name: player.name,
         composite,
@@ -134,9 +155,13 @@ function getAllPlayers(games: GameData[], lookback: UILookback, weights: MlWeigh
         opp_pitcher: player.opp_pitcher,
         batter_hand: player.batter_hand,
         pitcher_hand: player.pitcher_hand,
-        barrel_pct: scores?.barrel_pct ?? 0,
+        barrel_pct: barrelPct,
         fb_pct: scores?.fb_pct ?? 0,
         exit_velo: scores?.exit_velo ?? 0,
+        pitcherScore: scores?.pitcher_score ?? 0.5,
+        envScore: scores?.env_score ?? 0.5,
+        modelOdds: computeModelOdds(barrelPct, hrFbRate, parkFactor),
+        parkFactor,
       });
     }
   }
@@ -171,6 +196,50 @@ function buildSlips(
   }
 
   combine(0, []);
+
+  slips.sort((a, b) => {
+    if (b.gameCount !== a.gameCount) return b.gameCount - a.gameCount;
+    return b.avgComposite - a.avgComposite;
+  });
+
+  return slips.slice(0, 20);
+}
+
+function buildTieredSlips(players: SlipPlayer[], legCount: number): Slip[] {
+  const anchors = new Set(players.slice(0, 8).map((p) => p.name));
+  const valuePicks = players
+    .slice(8, 35)
+    .filter((p) => p.pitcherScore >= 0.60 && p.envScore >= 0.48);
+
+  const pool = [...players.slice(0, 8), ...valuePicks];
+  const cap = Math.min(pool.length, legCount <= 3 ? 25 : 20);
+  const candidates = pool.slice(0, cap);
+  const hasValue = valuePicks.length > 0;
+
+  const slips: Slip[] = [];
+
+  function combine(start: number, combo: SlipPlayer[]) {
+    if (combo.length === legCount) {
+      if (new Set(combo.map((p) => p.gamePk)).size < 2) return;
+      if (!combo.some((p) => anchors.has(p.name))) return;
+      if (hasValue && combo.every((p) => anchors.has(p.name))) return;
+      slips.push({
+        players: [...combo],
+        avgComposite: combo.reduce((s, p) => s + p.composite, 0) / legCount,
+        gameCount: new Set(combo.map((p) => p.gamePk)).size,
+      });
+      return;
+    }
+    const remaining = legCount - combo.length;
+    for (let i = start; i <= candidates.length - remaining; i++) {
+      combine(i + 1, [...combo, candidates[i]]);
+      if (slips.length >= 2000) return;
+    }
+  }
+
+  combine(0, []);
+
+  if (slips.length === 0) return buildSlips(players, legCount);
 
   slips.sort((a, b) => {
     if (b.gameCount !== a.gameCount) return b.gameCount - a.gameCount;
@@ -381,6 +450,9 @@ function PlayerPickRow({
         <span className="text-[11px] text-muted hidden md:inline font-mono">
           {player.barrel_pct.toFixed(0)}% bar
         </span>
+        <span className={`font-mono text-[12px] font-bold hidden md:inline ${player.modelOdds <= 300 ? "text-accent-green" : player.modelOdds <= 500 ? "text-accent-yellow" : "text-muted"}`}>
+          {formatOdds(player.modelOdds)}
+        </span>
         <RatingBadge composite={player.composite} />
         <span className="font-mono text-sm font-semibold text-foreground w-14 text-right">
           {player.composite.toFixed(3)}
@@ -487,7 +559,7 @@ export function SlipGenerator({
   );
 
   const autoSlips = useMemo(
-    () => buildSlips(allPlayers, legCount),
+    () => buildTieredSlips(allPlayers, legCount),
     [allPlayers, legCount]
   );
 
@@ -775,7 +847,6 @@ export function SlipGenerator({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {slips.map((slip, i) => {
             const isSameGame = slip.gameCount === 1;
-            // Check for partial SGP — players sharing a game in a multi-game slip
             const gameFreq: Record<number, string[]> = {};
             for (const p of slip.players) {
               if (!gameFreq[p.gamePk]) gameFreq[p.gamePk] = [];
@@ -786,8 +857,16 @@ export function SlipGenerator({
             const sharedGameLabel = hasPartialSGP
               ? sharedGames.map(([, names]) => names.join(" + ")).join(", ")
               : "";
-
             const cardWarning = isSameGame || hasPartialSGP;
+
+            // Model parlay odds: product of individual HR probabilities
+            const anchorThreshold = allPlayers.length >= 8 ? allPlayers[7].composite : 0;
+            const parlayProb = slip.players.reduce((prod, p) => {
+              const o = p.modelOdds;
+              const prob = o >= 0 ? 100 / (o + 100) : (-o) / (-o + 100);
+              return prod * prob;
+            }, 1);
+            const parlayOdds = Math.round(100 * (1 - parlayProb) / parlayProb);
 
             return (
             <div
@@ -827,10 +906,12 @@ export function SlipGenerator({
                   )}
                 </div>
                 <div className="text-right">
-                  <span className="text-xs text-muted">Avg </span>
-                  <span className="font-mono font-bold text-foreground">
-                    {slip.avgComposite.toFixed(3)}
-                  </span>
+                  <div className="font-mono font-bold text-accent-green text-sm">
+                    {formatOdds(parlayOdds)} model
+                  </div>
+                  <div className="text-[10px] text-muted">
+                    avg {slip.avgComposite.toFixed(3)}
+                  </div>
                 </div>
               </div>
 
@@ -843,6 +924,7 @@ export function SlipGenerator({
               <div className="space-y-2">
                 {slip.players.map((p) => {
                   const isShared = hasPartialSGP && sharedGames.some(([, names]) => names.includes(p.name));
+                  const isValue = mode === "auto" && p.composite < anchorThreshold;
                   return (
                   <div
                     key={p.name}
@@ -851,21 +933,26 @@ export function SlipGenerator({
                     }`}
                   >
                     <div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-sm font-semibold text-foreground">
                           {p.name}
                         </span>
                         <RatingBadge composite={p.composite} />
+                        {isValue && (
+                          <span className="text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded bg-purple-500/15 text-purple-400 border border-purple-500/25">
+                            Value
+                          </span>
+                        )}
                       </div>
                       <div className="text-[10px] text-muted mt-0.5 flex items-center gap-1.5">
                         <TimeSlotPill sort={p.gameTimeSort} />
                         {p.game} vs {p.opp_pitcher} ({p.pitcher_hand}HP)
                       </div>
                     </div>
-                    <div className="text-right">
-                      <span className="font-mono text-xs text-foreground">
-                        {p.composite.toFixed(3)}
-                      </span>
+                    <div className="text-right shrink-0 ml-2">
+                      <div className={`font-mono text-sm font-bold ${p.modelOdds <= 300 ? "text-accent-green" : p.modelOdds <= 500 ? "text-accent-yellow" : "text-muted"}`}>
+                        {formatOdds(p.modelOdds)}
+                      </div>
                       <div className="text-[10px] text-muted">
                         {p.barrel_pct.toFixed(0)}% bar / {p.fb_pct.toFixed(0)}% fb
                       </div>
@@ -890,7 +977,7 @@ export function SlipGenerator({
 
       <div className="mt-6 text-[10px] text-muted">
         {mode === "auto"
-          ? "Slips prioritize game diversity. Players rated 0.15+ composite are eligible. Top 20 shown."
+          ? "Tiered auto: 1+ anchor (top 8 by score) + 1+ value pick (rank 9–35 with strong pitcher/env today). Model odds based on barrel%, pitcher HR/FB, and park. Compare to your book."
           : mode === "optimal"
           ? "Each player used exactly once. Slips sorted by best composite score."
           : "All possible combos from your selections. SGP = Same Game Parlay (1 game). Multi-game parlays shown first."}
