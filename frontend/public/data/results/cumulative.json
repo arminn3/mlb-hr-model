@@ -45830,7 +45830,7 @@
     "date": "2026-06-01",
     "total_players_ranked": 162,
     "total_hrs_hit": 31,
-    "total_near_hrs": 0,
+    "total_near_hrs": 11,
     "model_hits": 27,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -45879,7 +45879,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 11,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -45910,23 +45910,23 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
-        "hits": 4,
-        "rate": 13.3
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 162,
-        "hits": 27,
-        "rate": 16.7
+        "hits": 38,
+        "rate": 23.5
       }
     },
     "avg_composite_hr_hitters": 0.434,
-    "avg_composite_non_hitters": 0.416,
-    "composite_separation": 0.018,
+    "avg_composite_non_hitters": 0.42,
+    "composite_separation": 0.014,
     "hr_hitters": [
       {
         "name": "Jac Caglianone",
@@ -46309,8 +46309,204 @@
         "matchup": "KC@CIN"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Oswald Peraza",
+        "rank": 13,
+        "composite": 0.655,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "COL@LAA"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 15,
+        "composite": 0.627,
+        "opp_pitcher": "Ty Madden",
+        "matchup": "DET@TB"
+      },
+      {
+        "name": "Zach McKinstry",
+        "rank": 60,
+        "composite": 0.4,
+        "opp_pitcher": "Griffin Jax",
+        "matchup": "DET@TB"
+      },
+      {
+        "name": "Jo Adell",
+        "rank": 79,
+        "composite": 0.4,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "COL@LAA"
+      },
+      {
+        "name": "Josh Bell",
+        "rank": 96,
+        "composite": 0.385,
+        "opp_pitcher": "David Sandlin",
+        "matchup": "CWS@MIN"
+      },
+      {
+        "name": "Shohei Ohtani",
+        "rank": 124,
+        "composite": 0.333,
+        "opp_pitcher": "Eduardo Rodriguez",
+        "matchup": "LAD@AZ"
+      },
+      {
+        "name": "Alex Call",
+        "rank": 130,
+        "composite": 0.322,
+        "opp_pitcher": "Eduardo Rodriguez",
+        "matchup": "LAD@AZ"
+      },
+      {
+        "name": "David Hamilton",
+        "rank": 138,
+        "composite": 0.294,
+        "opp_pitcher": "Landen Roupp",
+        "matchup": "SF@MIL"
+      },
+      {
+        "name": "Bobby Witt Jr.",
+        "rank": 143,
+        "composite": 0.282,
+        "opp_pitcher": "Lyon Richardson",
+        "matchup": "KC@CIN"
+      },
+      {
+        "name": "Eric Haase",
+        "rank": 153,
+        "composite": 0.241,
+        "opp_pitcher": "Shane Drohan",
+        "matchup": "SF@MIL"
+      },
+      {
+        "name": "Brice Turang",
+        "rank": 155,
+        "composite": 0.233,
+        "opp_pitcher": "Landen Roupp",
+        "matchup": "SF@MIL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Alex Call",
+        "ev": 99.3,
+        "angle": 30.0,
+        "distance": 384.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Clarke, Taylor"
+      },
+      {
+        "batter": "Shohei Ohtani",
+        "ev": 102.8,
+        "angle": 22.0,
+        "distance": 374.0,
+        "hr_in_parks": 10,
+        "result": "double",
+        "pitcher": "Rodriguez, Eduardo"
+      },
+      {
+        "batter": "Bobby Witt Jr.",
+        "ev": 100.3,
+        "angle": 32.0,
+        "distance": 374.0,
+        "hr_in_parks": 10,
+        "result": "double",
+        "pitcher": "Leibrandt, Brandon"
+      },
+      {
+        "batter": "Jo Adell",
+        "ev": 101.6,
+        "angle": 29.0,
+        "distance": 388.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Halvorsen, Seth"
+      },
+      {
+        "batter": "Oswald Peraza",
+        "ev": 100.7,
+        "angle": 29.0,
+        "distance": 388.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Freeland, Kyle"
+      },
+      {
+        "batter": "David Hamilton",
+        "ev": 100.3,
+        "angle": 27.0,
+        "distance": 373.0,
+        "hr_in_parks": 22,
+        "result": "double",
+        "pitcher": "Kennedy, Buddy"
+      },
+      {
+        "batter": "Brice Turang",
+        "ev": 100.6,
+        "angle": 26.0,
+        "distance": 395.0,
+        "hr_in_parks": 25,
+        "result": "triple",
+        "pitcher": "Roupp, Landen"
+      },
+      {
+        "batter": "Eric Haase",
+        "ev": 103.0,
+        "angle": 22.0,
+        "distance": 373.0,
+        "hr_in_parks": 8,
+        "result": "double",
+        "pitcher": "Drohan, Shane"
+      },
+      {
+        "batter": "Josh Bell",
+        "ev": 105.8,
+        "angle": 24.0,
+        "distance": 401.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Sandlin, David"
+      },
+      {
+        "batter": "Miguel Vargas",
+        "ev": 101.3,
+        "angle": 31.0,
+        "distance": 381.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Ryan, Joe"
+      },
+      {
+        "batter": "Dillon Dingler",
+        "ev": 109.2,
+        "angle": 24.0,
+        "distance": 411.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Sulser, Cole"
+      },
+      {
+        "batter": "Zach McKinstry",
+        "ev": 99.8,
+        "angle": 30.0,
+        "distance": 391.0,
+        "hr_in_parks": 26,
+        "result": "field_out",
+        "pitcher": "Jax, Griffin"
+      },
+      {
+        "batter": "Yandy D\u00edaz",
+        "ev": 101.6,
+        "angle": 30.0,
+        "distance": 394.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Madden, Ty"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Ryan Vilade",
