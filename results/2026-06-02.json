@@ -2,7 +2,7 @@
   "date": "2026-06-02",
   "total_players_ranked": 282,
   "total_hrs_hit": 36,
-  "total_near_hrs": 0,
+  "total_near_hrs": 14,
   "model_hits": 32,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 14,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -82,23 +82,23 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 3,
-      "rate": 15.0
+      "hits": 4,
+      "rate": 20.0
     },
     "top_30": {
       "total": 30,
-      "hits": 5,
-      "rate": 16.7
+      "hits": 6,
+      "rate": 20.0
     },
     "all": {
       "total": 282,
-      "hits": 32,
-      "rate": 11.3
+      "hits": 46,
+      "rate": 16.3
     }
   },
   "avg_composite_hr_hitters": 0.455,
-  "avg_composite_non_hitters": 0.412,
-  "composite_separation": 0.043,
+  "avg_composite_non_hitters": 0.411,
+  "composite_separation": 0.044,
   "hr_hitters": [
     {
       "name": "Brandon Lowe",
@@ -551,8 +551,243 @@
       "matchup": "MIA@WSH"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Jo Adell",
+      "rank": 18,
+      "composite": 0.674,
+      "opp_pitcher": "Tomoyuki Sugano",
+      "matchup": "COL@LAA"
+    },
+    {
+      "name": "Jarren Duran",
+      "rank": 42,
+      "composite": 0.583,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "BAL@BOS"
+    },
+    {
+      "name": "Hunter Feduccia",
+      "rank": 46,
+      "composite": 0.571,
+      "opp_pitcher": "Jack Flaherty",
+      "matchup": "DET@TB"
+    },
+    {
+      "name": "Patrick Bailey",
+      "rank": 66,
+      "composite": 0.516,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "CLE@NYY"
+    },
+    {
+      "name": "Jac Caglianone",
+      "rank": 87,
+      "composite": 0.474,
+      "opp_pitcher": "Andrew Abbott",
+      "matchup": "KC@CIN"
+    },
+    {
+      "name": "Jackson Chourio",
+      "rank": 97,
+      "composite": 0.418,
+      "opp_pitcher": "Trevor McDonald",
+      "matchup": "SF@MIL"
+    },
+    {
+      "name": "Zack Short",
+      "rank": 102,
+      "composite": 0.4,
+      "opp_pitcher": "Steven Matz",
+      "matchup": "DET@TB"
+    },
+    {
+      "name": "Starling Marte",
+      "rank": 163,
+      "composite": 0.369,
+      "opp_pitcher": "Andrew Abbott",
+      "matchup": "KC@CIN"
+    },
+    {
+      "name": "Austin Wells",
+      "rank": 172,
+      "composite": 0.366,
+      "opp_pitcher": "Joey Cantillo",
+      "matchup": "CLE@NYY"
+    },
+    {
+      "name": "Fernando Tatis Jr.",
+      "rank": 180,
+      "composite": 0.357,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "SD@PHI"
+    },
+    {
+      "name": "Matt Vierling",
+      "rank": 199,
+      "composite": 0.338,
+      "opp_pitcher": "Steven Matz",
+      "matchup": "DET@TB"
+    },
+    {
+      "name": "Dalton Rushing",
+      "rank": 207,
+      "composite": 0.331,
+      "opp_pitcher": "Michael Soroka",
+      "matchup": "LAD@AZ"
+    },
+    {
+      "name": "Sam Antonacci",
+      "rank": 221,
+      "composite": 0.318,
+      "opp_pitcher": "Connor Prielipp",
+      "matchup": "CWS@MIN"
+    },
+    {
+      "name": "Andr\u00e9s Gim\u00e9nez",
+      "rank": 257,
+      "composite": 0.269,
+      "opp_pitcher": "Bryce Elder",
+      "matchup": "TOR@ATL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Dalton Rushing",
+      "ev": 107.9,
+      "angle": 21.0,
+      "distance": 414.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Lo\u00e1isiga, Jonathan"
+    },
+    {
+      "batter": "Andr\u00e9s Gim\u00e9nez",
+      "ev": 96.9,
+      "angle": 28.0,
+      "distance": 385.0,
+      "hr_in_parks": 5,
+      "result": "field_out",
+      "pitcher": "Elder, Bryce"
+    },
+    {
+      "batter": "Jarren Duran",
+      "ev": 107.3,
+      "angle": 27.0,
+      "distance": 397.0,
+      "hr_in_parks": 4,
+      "result": "",
+      "pitcher": "Kittredge, Andrew"
+    },
+    {
+      "batter": "Jac Caglianone",
+      "ev": 111.5,
+      "angle": 29.0,
+      "distance": 406.0,
+      "hr_in_parks": 19,
+      "result": "",
+      "pitcher": "Abbott, Andrew"
+    },
+    {
+      "batter": "Starling Marte",
+      "ev": 102.6,
+      "angle": 22.0,
+      "distance": 402.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Abbott, Andrew"
+    },
+    {
+      "batter": "Jo Adell",
+      "ev": 111.0,
+      "angle": 32.0,
+      "distance": 403.0,
+      "hr_in_parks": 16,
+      "result": "",
+      "pitcher": "Sugano, Tomoyuki"
+    },
+    {
+      "batter": "Jackson Chourio",
+      "ev": 104.3,
+      "angle": 29.0,
+      "distance": 395.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Beck, Tristan"
+    },
+    {
+      "batter": "Colson Montgomery",
+      "ev": 100.4,
+      "angle": 36.0,
+      "distance": 383.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "G\u00f3mez, Yoendrys"
+    },
+    {
+      "batter": "Sam Antonacci",
+      "ev": 101.5,
+      "angle": 29.0,
+      "distance": 400.0,
+      "hr_in_parks": 16,
+      "result": "field_out",
+      "pitcher": "Prielipp, Connor"
+    },
+    {
+      "batter": "Austin Wells",
+      "ev": 103.5,
+      "angle": 23.0,
+      "distance": 393.0,
+      "hr_in_parks": 18,
+      "result": "field_out",
+      "pitcher": "Cantillo, Joey"
+    },
+    {
+      "batter": "Patrick Bailey",
+      "ev": 103.5,
+      "angle": 27.0,
+      "distance": 397.0,
+      "hr_in_parks": 19,
+      "result": "triple",
+      "pitcher": "Schlittler, Cam"
+    },
+    {
+      "batter": "Fernando Tatis Jr.",
+      "ev": 113.5,
+      "angle": 16.0,
+      "distance": 379.0,
+      "hr_in_parks": 8,
+      "result": "double",
+      "pitcher": "Nola, Aaron"
+    },
+    {
+      "batter": "Hunter Feduccia",
+      "ev": 102.5,
+      "angle": 23.0,
+      "distance": 389.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "De Jesus, Enmanuel"
+    },
+    {
+      "batter": "Zack Short",
+      "ev": 100.1,
+      "angle": 26.0,
+      "distance": 398.0,
+      "hr_in_parks": 27,
+      "result": "double",
+      "pitcher": "Matz, Steven"
+    },
+    {
+      "batter": "Matt Vierling",
+      "ev": 102.0,
+      "angle": 24.0,
+      "distance": 395.0,
+      "hr_in_parks": 24,
+      "result": "triple",
+      "pitcher": "Matz, Steven"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Will Benson",
