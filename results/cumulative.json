@@ -48336,7 +48336,7 @@
     "date": "2026-06-03",
     "total_players_ranked": 278,
     "total_hrs_hit": 31,
-    "total_near_hrs": 0,
+    "total_near_hrs": 13,
     "model_hits": 30,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -48385,7 +48385,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 13,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -48411,23 +48411,23 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 3,
-        "rate": 30.0
+        "hits": 4,
+        "rate": 40.0
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
-        "hits": 6,
-        "rate": 20.0
+        "hits": 8,
+        "rate": 26.7
       },
       "all": {
         "total": 278,
-        "hits": 30,
-        "rate": 10.8
+        "hits": 43,
+        "rate": 15.5
       }
     },
     "avg_composite_hr_hitters": 0.448,
@@ -48857,8 +48857,245 @@
         "matchup": "CLE@NYY"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Jes\u00fas S\u00e1nchez",
+        "rank": 9,
+        "composite": 0.656,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "TOR@ATL"
+      },
+      {
+        "name": "Adolis Garc\u00eda",
+        "rank": 28,
+        "composite": 0.601,
+        "opp_pitcher": "Walker Buehler",
+        "matchup": "SD@PHI"
+      },
+      {
+        "name": "Mike Trout",
+        "rank": 37,
+        "composite": 0.576,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "COL@LAA"
+      },
+      {
+        "name": "Junior Caminero",
+        "rank": 55,
+        "composite": 0.524,
+        "opp_pitcher": "Troy Melton",
+        "matchup": "DET@TB"
+      },
+      {
+        "name": "Cody Bellinger",
+        "rank": 108,
+        "composite": 0.4,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "CLE@NYY"
+      },
+      {
+        "name": "Joc Pederson",
+        "rank": 160,
+        "composite": 0.373,
+        "opp_pitcher": "Andre Pallante",
+        "matchup": "TEX@STL"
+      },
+      {
+        "name": "Salvador Perez",
+        "rank": 168,
+        "composite": 0.37,
+        "opp_pitcher": "Chase Burns",
+        "matchup": "KC@CIN"
+      },
+      {
+        "name": "Kyle Stowers",
+        "rank": 202,
+        "composite": 0.328,
+        "opp_pitcher": "Andrew Alvarez",
+        "matchup": "MIA@WSH"
+      },
+      {
+        "name": "Oswald Peraza",
+        "rank": 206,
+        "composite": 0.324,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "COL@LAA"
+      },
+      {
+        "name": "Jhostynxon Garcia",
+        "rank": 232,
+        "composite": 0.299,
+        "opp_pitcher": "Spencer Arrighetti",
+        "matchup": "PIT@HOU"
+      },
+      {
+        "name": "Nick Allen",
+        "rank": 240,
+        "composite": 0.291,
+        "opp_pitcher": "Paul Skenes",
+        "matchup": "PIT@HOU"
+      },
+      {
+        "name": "Thomas Saggese",
+        "rank": 250,
+        "composite": 0.263,
+        "opp_pitcher": "MacKenzie Gore",
+        "matchup": "TEX@STL"
+      },
+      {
+        "name": "Adley Rutschman",
+        "rank": 265,
+        "composite": 0.227,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "BAL@BOS"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Jes\u00fas S\u00e1nchez",
+        "ev": 99.6,
+        "angle": 25.0,
+        "distance": 387.0,
+        "hr_in_parks": 18,
+        "result": "field_out",
+        "pitcher": "Holmes, Grant"
+      },
+      {
+        "batter": "Adley Rutschman",
+        "ev": 102.6,
+        "angle": 24.0,
+        "distance": 396.0,
+        "hr_in_parks": 19,
+        "result": "triple",
+        "pitcher": "Watson, Ryan"
+      },
+      {
+        "batter": "Dane Myers",
+        "ev": 102.2,
+        "angle": 21.0,
+        "distance": 376.0,
+        "hr_in_parks": 2,
+        "result": "double",
+        "pitcher": "Lynch IV, Daniel"
+      },
+      {
+        "batter": "Salvador Perez",
+        "ev": 99.7,
+        "angle": 24.0,
+        "distance": 386.0,
+        "hr_in_parks": 6,
+        "result": "field_out",
+        "pitcher": "Burns, Chase"
+      },
+      {
+        "batter": "Nick Allen",
+        "ev": 99.4,
+        "angle": 27.0,
+        "distance": 381.0,
+        "hr_in_parks": 14,
+        "result": "double",
+        "pitcher": "Montgomery, Mason"
+      },
+      {
+        "batter": "Jhostynxon Garcia",
+        "ev": 109.6,
+        "angle": 21.0,
+        "distance": 395.0,
+        "hr_in_parks": 6,
+        "result": "double",
+        "pitcher": "Pearson, Nate"
+      },
+      {
+        "batter": "Oswald Peraza",
+        "ev": 103.9,
+        "angle": 25.0,
+        "distance": 386.0,
+        "hr_in_parks": 15,
+        "result": "double",
+        "pitcher": "Thompson, Keegan"
+      },
+      {
+        "batter": "Mike Trout",
+        "ev": 101.7,
+        "angle": 27.0,
+        "distance": 384.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Thompson, Keegan"
+      },
+      {
+        "batter": "Oswald Peraza",
+        "ev": 97.3,
+        "angle": 28.0,
+        "distance": 375.0,
+        "hr_in_parks": 7,
+        "result": "field_out",
+        "pitcher": "Thompson, Keegan"
+      },
+      {
+        "batter": "Kyle Manzardo",
+        "ev": 103.9,
+        "angle": 30.0,
+        "distance": 404.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Hill, Tim"
+      },
+      {
+        "batter": "Cody Bellinger",
+        "ev": 103.9,
+        "angle": 24.0,
+        "distance": 399.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Williams, Gavin"
+      },
+      {
+        "batter": "Adolis Garc\u00eda",
+        "ev": 108.0,
+        "angle": 16.0,
+        "distance": 388.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Buehler, Walker"
+      },
+      {
+        "batter": "Joc Pederson",
+        "ev": 99.2,
+        "angle": 30.0,
+        "distance": 387.0,
+        "hr_in_parks": 8,
+        "result": "field_out",
+        "pitcher": "O'Brien, Riley"
+      },
+      {
+        "batter": "Thomas Saggese",
+        "ev": 105.6,
+        "angle": 20.0,
+        "distance": 371.0,
+        "hr_in_parks": 23,
+        "result": "triple",
+        "pitcher": "Gore, MacKenzie"
+      },
+      {
+        "batter": "Junior Caminero",
+        "ev": 109.3,
+        "angle": 30.0,
+        "distance": 401.0,
+        "hr_in_parks": 15,
+        "result": "",
+        "pitcher": "Melton, Troy"
+      },
+      {
+        "batter": "Kyle Stowers",
+        "ev": 106.3,
+        "angle": 23.0,
+        "distance": 387.0,
+        "hr_in_parks": 6,
+        "result": "triple",
+        "pitcher": "Varland, Gus"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Colby Thomas",
