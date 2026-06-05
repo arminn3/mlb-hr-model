@@ -1,53 +1,53 @@
 {
   "date": "2026-06-04",
   "total_players_ranked": 170,
-  "total_hrs_hit": 9,
+  "total_hrs_hit": 25,
   "total_near_hrs": 0,
-  "model_hits": 8,
+  "model_hits": 22,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 6,
+        "rate": 30.0
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 170,
-        "hits": 8,
-        "rate": 4.7
+        "hits": 22,
+        "rate": 12.9
       }
     },
     "L10": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 30.0
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 1,
-        "rate": 3.3
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 170,
-        "hits": 8,
-        "rate": 4.7
+        "hits": 22,
+        "rate": 12.9
       }
     }
   },
@@ -55,51 +55,65 @@
   "tier_accuracy": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 20.0
     },
     "top_20": {
       "total": 20,
-      "hits": 2,
-      "rate": 10.0
+      "hits": 6,
+      "rate": 30.0
     },
     "top_30": {
       "total": 30,
-      "hits": 2,
-      "rate": 6.7
+      "hits": 6,
+      "rate": 20.0
     },
     "all": {
       "total": 170,
-      "hits": 8,
-      "rate": 4.7
+      "hits": 22,
+      "rate": 12.9
     }
   },
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 20.0
     },
     "top_20": {
       "total": 20,
-      "hits": 2,
-      "rate": 10.0
+      "hits": 6,
+      "rate": 30.0
     },
     "top_30": {
       "total": 30,
-      "hits": 2,
-      "rate": 6.7
+      "hits": 6,
+      "rate": 20.0
     },
     "all": {
       "total": 170,
-      "hits": 8,
-      "rate": 4.7
+      "hits": 22,
+      "rate": 12.9
     }
   },
-  "avg_composite_hr_hitters": 0.432,
-  "avg_composite_non_hitters": 0.417,
-  "composite_separation": 0.015,
+  "avg_composite_hr_hitters": 0.455,
+  "avg_composite_non_hitters": 0.412,
+  "composite_separation": 0.043,
   "hr_hitters": [
+    {
+      "name": "Pete Crow-Armstrong",
+      "rank": 3,
+      "composite": 0.757,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "ATH@CHC"
+    },
+    {
+      "name": "Shea Langeliers",
+      "rank": 4,
+      "composite": 0.746,
+      "opp_pitcher": "Shota Imanaga",
+      "matchup": "ATH@CHC"
+    },
     {
       "name": "Jackson Merrill",
       "rank": 12,
@@ -108,11 +122,39 @@
       "matchup": "SD@PHI"
     },
     {
+      "name": "Ryan O'Hearn",
+      "rank": 13,
+      "composite": 0.645,
+      "opp_pitcher": "Kai-Wei Teng",
+      "matchup": "PIT@HOU"
+    },
+    {
+      "name": "Tyler Soderstrom",
+      "rank": 19,
+      "composite": 0.615,
+      "opp_pitcher": "Shota Imanaga",
+      "matchup": "ATH@CHC"
+    },
+    {
       "name": "Eric Haase",
       "rank": 20,
       "composite": 0.611,
       "opp_pitcher": "Coleman Crow",
       "matchup": "SF@MIL"
+    },
+    {
+      "name": "Michael Massey",
+      "rank": 46,
+      "composite": 0.457,
+      "opp_pitcher": "Andrew Morris",
+      "matchup": "KC@MIN"
+    },
+    {
+      "name": "Ketel Marte",
+      "rank": 47,
+      "composite": 0.457,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@AZ"
     },
     {
       "name": "Manny Machado",
@@ -129,6 +171,41 @@
       "matchup": "SF@MIL"
     },
     {
+      "name": "Byron Buxton",
+      "rank": 72,
+      "composite": 0.4,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@MIN"
+    },
+    {
+      "name": "Ian Happ",
+      "rank": 75,
+      "composite": 0.4,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "ATH@CHC"
+    },
+    {
+      "name": "Jonah Heim",
+      "rank": 78,
+      "composite": 0.4,
+      "opp_pitcher": "Shota Imanaga",
+      "matchup": "ATH@CHC"
+    },
+    {
+      "name": "Isaac Paredes",
+      "rank": 81,
+      "composite": 0.4,
+      "opp_pitcher": "Jared Jones",
+      "matchup": "PIT@HOU"
+    },
+    {
+      "name": "Corbin Carroll",
+      "rank": 103,
+      "composite": 0.383,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@AZ"
+    },
+    {
       "name": "Willson Contreras",
       "rank": 106,
       "composite": 0.381,
@@ -143,6 +220,20 @@
       "matchup": "SD@PHI"
     },
     {
+      "name": "Mauricio Dub\u00f3n",
+      "rank": 125,
+      "composite": 0.33,
+      "opp_pitcher": "Mason Fluharty",
+      "matchup": "TOR@ATL"
+    },
+    {
+      "name": "Kody Clemens",
+      "rank": 132,
+      "composite": 0.324,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@MIN"
+    },
+    {
       "name": "Casey Schmitt",
       "rank": 140,
       "composite": 0.311,
@@ -155,9 +246,44 @@
       "composite": 0.307,
       "opp_pitcher": "Adrian Houser",
       "matchup": "SF@MIL"
+    },
+    {
+      "name": "Victor Caratini",
+      "rank": 161,
+      "composite": 0.234,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@MIN"
     }
   ],
   "hr_hitters_l10": [
+    {
+      "name": "Ryan O'Hearn",
+      "rank": 2,
+      "composite": 0.762,
+      "opp_pitcher": "Kai-Wei Teng",
+      "matchup": "PIT@HOU"
+    },
+    {
+      "name": "Shea Langeliers",
+      "rank": 7,
+      "composite": 0.705,
+      "opp_pitcher": "Shota Imanaga",
+      "matchup": "ATH@CHC"
+    },
+    {
+      "name": "Pete Crow-Armstrong",
+      "rank": 10,
+      "composite": 0.673,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "ATH@CHC"
+    },
+    {
+      "name": "Ian Happ",
+      "rank": 11,
+      "composite": 0.67,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "ATH@CHC"
+    },
     {
       "name": "Jackson Merrill",
       "rank": 22,
@@ -166,11 +292,39 @@
       "matchup": "SD@PHI"
     },
     {
+      "name": "Tyler Soderstrom",
+      "rank": 30,
+      "composite": 0.583,
+      "opp_pitcher": "Shota Imanaga",
+      "matchup": "ATH@CHC"
+    },
+    {
+      "name": "Jonah Heim",
+      "rank": 38,
+      "composite": 0.534,
+      "opp_pitcher": "Shota Imanaga",
+      "matchup": "ATH@CHC"
+    },
+    {
       "name": "Eric Haase",
       "rank": 43,
       "composite": 0.504,
       "opp_pitcher": "Coleman Crow",
       "matchup": "SF@MIL"
+    },
+    {
+      "name": "Ketel Marte",
+      "rank": 47,
+      "composite": 0.489,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@AZ"
+    },
+    {
+      "name": "Kody Clemens",
+      "rank": 53,
+      "composite": 0.459,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@MIN"
     },
     {
       "name": "Manny Machado",
@@ -194,6 +348,41 @@
       "matchup": "SF@MIL"
     },
     {
+      "name": "Isaac Paredes",
+      "rank": 87,
+      "composite": 0.4,
+      "opp_pitcher": "Jared Jones",
+      "matchup": "PIT@HOU"
+    },
+    {
+      "name": "Michael Massey",
+      "rank": 96,
+      "composite": 0.399,
+      "opp_pitcher": "Andrew Morris",
+      "matchup": "KC@MIN"
+    },
+    {
+      "name": "Byron Buxton",
+      "rank": 100,
+      "composite": 0.397,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@MIN"
+    },
+    {
+      "name": "Corbin Carroll",
+      "rank": 104,
+      "composite": 0.386,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@AZ"
+    },
+    {
+      "name": "Mauricio Dub\u00f3n",
+      "rank": 121,
+      "composite": 0.35,
+      "opp_pitcher": "Mason Fluharty",
+      "matchup": "TOR@ATL"
+    },
+    {
       "name": "Adolis Garc\u00eda",
       "rank": 126,
       "composite": 0.341,
@@ -213,6 +402,13 @@
       "composite": 0.301,
       "opp_pitcher": "Adrian Houser",
       "matchup": "SF@MIL"
+    },
+    {
+      "name": "Victor Caratini",
+      "rank": 163,
+      "composite": 0.224,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@MIN"
     }
   ],
   "near_hr_hitters": [],
@@ -221,8 +417,8 @@
   "hr_signal_accuracy": {
     "1_of_5": {
       "players": 50,
-      "hr_count": 2,
-      "hr_rate": 4.0,
+      "hr_count": 8,
+      "hr_rate": 16.0,
       "names": [
         "Justin Crawford",
         "Trea Turner",
@@ -277,13 +473,19 @@
       ],
       "hr_names": [
         "Eric Haase",
-        "Jackson Chourio"
+        "Jackson Chourio",
+        "Mauricio Dub\u00f3n",
+        "Michael Massey",
+        "Byron Buxton",
+        "Kody Clemens",
+        "Victor Caratini",
+        "Ketel Marte"
       ]
     },
     "2_of_5": {
       "players": 66,
-      "hr_count": 2,
-      "hr_rate": 3.0,
+      "hr_count": 7,
+      "hr_rate": 10.6,
       "names": [
         "J.T. Realmuto",
         "Alec Bohm",
@@ -354,13 +556,18 @@
       ],
       "hr_names": [
         "Manny Machado",
-        "Willson Contreras"
+        "Willson Contreras",
+        "Shea Langeliers",
+        "Tyler Soderstrom",
+        "Ian Happ",
+        "Jonah Heim",
+        "Corbin Carroll"
       ]
     },
     "3_of_5": {
       "players": 41,
-      "hr_count": 4,
-      "hr_rate": 9.8,
+      "hr_count": 6,
+      "hr_rate": 14.6,
       "names": [
         "Kyle Schwarber",
         "Jackson Merrill",
@@ -408,49 +615,74 @@
         "Jackson Merrill",
         "Adolis Garc\u00eda",
         "David Hamilton",
-        "Casey Schmitt"
+        "Casey Schmitt",
+        "Pete Crow-Armstrong",
+        "Ryan O'Hearn"
       ]
     },
     "4_of_5": {
       "players": 2,
-      "hr_count": 0,
-      "hr_rate": 0.0,
+      "hr_count": 1,
+      "hr_rate": 50.0,
       "names": [
         "Brice Turang",
         "Isaac Paredes"
       ],
-      "hr_names": []
+      "hr_names": [
+        "Isaac Paredes"
+      ]
     }
   },
   "combined_tier_accuracy": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 20.0
     },
     "top_20": {
       "total": 20,
-      "hits": 2,
-      "rate": 10.0
+      "hits": 5,
+      "rate": 25.0
     },
     "top_30": {
       "total": 30,
-      "hits": 2,
-      "rate": 6.7
+      "hits": 6,
+      "rate": 20.0
     },
     "all": {
       "total": 170,
-      "hits": 8,
-      "rate": 4.7
+      "hits": 22,
+      "rate": 12.9
     }
   },
   "combined_hr_hitters": [
+    {
+      "name": "Pete Crow-Armstrong",
+      "rank": 7,
+      "composite": 0.58,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "ATH@CHC"
+    },
+    {
+      "name": "Shea Langeliers",
+      "rank": 8,
+      "composite": 0.569,
+      "opp_pitcher": "Shota Imanaga",
+      "matchup": "ATH@CHC"
+    },
     {
       "name": "Eric Haase",
       "rank": 12,
       "composite": 0.56,
       "opp_pitcher": "Coleman Crow",
       "matchup": "SF@MIL"
+    },
+    {
+      "name": "Ryan O'Hearn",
+      "rank": 15,
+      "composite": 0.558,
+      "opp_pitcher": "Kai-Wei Teng",
+      "matchup": "PIT@HOU"
     },
     {
       "name": "Jackson Merrill",
@@ -460,6 +692,27 @@
       "matchup": "SD@PHI"
     },
     {
+      "name": "Ian Happ",
+      "rank": 27,
+      "composite": 0.51,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "ATH@CHC"
+    },
+    {
+      "name": "Tyler Soderstrom",
+      "rank": 34,
+      "composite": 0.487,
+      "opp_pitcher": "Shota Imanaga",
+      "matchup": "ATH@CHC"
+    },
+    {
+      "name": "Byron Buxton",
+      "rank": 40,
+      "composite": 0.47,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@MIN"
+    },
+    {
       "name": "Willson Contreras",
       "rank": 44,
       "composite": 0.454,
@@ -467,11 +720,25 @@
       "matchup": "BAL@BOS"
     },
     {
+      "name": "Jonah Heim",
+      "rank": 47,
+      "composite": 0.449,
+      "opp_pitcher": "Shota Imanaga",
+      "matchup": "ATH@CHC"
+    },
+    {
       "name": "David Hamilton",
       "rank": 51,
       "composite": 0.443,
       "opp_pitcher": "Adrian Houser",
       "matchup": "SF@MIL"
+    },
+    {
+      "name": "Isaac Paredes",
+      "rank": 64,
+      "composite": 0.427,
+      "opp_pitcher": "Jared Jones",
+      "matchup": "PIT@HOU"
     },
     {
       "name": "Manny Machado",
@@ -495,11 +762,53 @@
       "matchup": "SF@MIL"
     },
     {
+      "name": "Corbin Carroll",
+      "rank": 102,
+      "composite": 0.375,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@AZ"
+    },
+    {
+      "name": "Michael Massey",
+      "rank": 103,
+      "composite": 0.373,
+      "opp_pitcher": "Andrew Morris",
+      "matchup": "KC@MIN"
+    },
+    {
+      "name": "Ketel Marte",
+      "rank": 106,
+      "composite": 0.372,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@AZ"
+    },
+    {
+      "name": "Kody Clemens",
+      "rank": 112,
+      "composite": 0.36,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@MIN"
+    },
+    {
       "name": "Jackson Chourio",
       "rank": 131,
       "composite": 0.324,
       "opp_pitcher": "Adrian Houser",
       "matchup": "SF@MIL"
+    },
+    {
+      "name": "Mauricio Dub\u00f3n",
+      "rank": 138,
+      "composite": 0.315,
+      "opp_pitcher": "Mason Fluharty",
+      "matchup": "TOR@ATL"
+    },
+    {
+      "name": "Victor Caratini",
+      "rank": 165,
+      "composite": 0.218,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@MIN"
     }
   ]
 }
