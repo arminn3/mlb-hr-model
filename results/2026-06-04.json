@@ -2,7 +2,7 @@
   "date": "2026-06-04",
   "total_players_ranked": 170,
   "total_hrs_hit": 25,
-  "total_near_hrs": 0,
+  "total_near_hrs": 8,
   "model_hits": 22,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 8,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -77,28 +77,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 2,
-      "rate": 20.0
+      "hits": 3,
+      "rate": 30.0
     },
     "top_20": {
       "total": 20,
-      "hits": 6,
-      "rate": 30.0
+      "hits": 7,
+      "rate": 35.0
     },
     "top_30": {
       "total": 30,
-      "hits": 6,
-      "rate": 20.0
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 170,
-      "hits": 22,
-      "rate": 12.9
+      "hits": 30,
+      "rate": 17.6
     }
   },
   "avg_composite_hr_hitters": 0.455,
-  "avg_composite_non_hitters": 0.412,
-  "composite_separation": 0.043,
+  "avg_composite_non_hitters": 0.41,
+  "composite_separation": 0.045,
   "hr_hitters": [
     {
       "name": "Pete Crow-Armstrong",
@@ -411,8 +411,165 @@
       "matchup": "KC@MIN"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Colby Thomas",
+      "rank": 1,
+      "composite": 0.786,
+      "opp_pitcher": "Shota Imanaga",
+      "matchup": "ATH@CHC"
+    },
+    {
+      "name": "Kazuma Okamoto",
+      "rank": 26,
+      "composite": 0.599,
+      "opp_pitcher": "Chris Sale",
+      "matchup": "TOR@ATL"
+    },
+    {
+      "name": "Nick Gonzales",
+      "rank": 56,
+      "composite": 0.408,
+      "opp_pitcher": "Kai-Wei Teng",
+      "matchup": "PIT@HOU"
+    },
+    {
+      "name": "Taylor Trammell",
+      "rank": 83,
+      "composite": 0.4,
+      "opp_pitcher": "Jared Jones",
+      "matchup": "PIT@HOU"
+    },
+    {
+      "name": "Rafael Devers",
+      "rank": 98,
+      "composite": 0.394,
+      "opp_pitcher": "Coleman Crow",
+      "matchup": "SF@MIL"
+    },
+    {
+      "name": "Mookie Betts",
+      "rank": 99,
+      "composite": 0.39,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "LAD@AZ"
+    },
+    {
+      "name": "Taylor Ward",
+      "rank": 120,
+      "composite": 0.352,
+      "opp_pitcher": "Brayan Bello",
+      "matchup": "BAL@BOS"
+    },
+    {
+      "name": "LaMonte Wade Jr.",
+      "rank": 158,
+      "composite": 0.254,
+      "opp_pitcher": "Jared Jones",
+      "matchup": "PIT@HOU"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Mookie Betts",
+      "ev": 100.4,
+      "angle": 29.0,
+      "distance": 391.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Garcia, Brandyn"
+    },
+    {
+      "batter": "Kazuma Okamoto",
+      "ev": 102.3,
+      "angle": 27.0,
+      "distance": 403.0,
+      "hr_in_parks": 20,
+      "result": "field_out",
+      "pitcher": "Sale, Chris"
+    },
+    {
+      "batter": "Taylor Ward",
+      "ev": 102.7,
+      "angle": 22.0,
+      "distance": 401.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Bello, Brayan"
+    },
+    {
+      "batter": "Colby Thomas",
+      "ev": 100.9,
+      "angle": 35.0,
+      "distance": 396.0,
+      "hr_in_parks": 6,
+      "result": "field_out",
+      "pitcher": "Imanaga, Shota"
+    },
+    {
+      "batter": "Ian Happ",
+      "ev": 108.0,
+      "angle": 31.0,
+      "distance": 399.0,
+      "hr_in_parks": 6,
+      "result": "",
+      "pitcher": "Ginn, J.T."
+    },
+    {
+      "batter": "Nick Gonzales",
+      "ev": 101.5,
+      "angle": 33.0,
+      "distance": 379.0,
+      "hr_in_parks": 12,
+      "result": "field_out",
+      "pitcher": "De Los Santos, Enyel"
+    },
+    {
+      "batter": "Taylor Trammell",
+      "ev": 106.0,
+      "angle": 23.0,
+      "distance": 382.0,
+      "hr_in_parks": 21,
+      "result": "double",
+      "pitcher": "Jones, Jared"
+    },
+    {
+      "batter": "LaMonte Wade Jr.",
+      "ev": 101.0,
+      "angle": 28.0,
+      "distance": 391.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Jones, Jared"
+    },
+    {
+      "batter": "David Hamilton",
+      "ev": 101.9,
+      "angle": 32.0,
+      "distance": 393.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Kilian, Caleb"
+    },
+    {
+      "batter": "Rafael Devers",
+      "ev": 97.2,
+      "angle": 28.0,
+      "distance": 379.0,
+      "hr_in_parks": 13,
+      "result": "double",
+      "pitcher": "Woodford, Jake"
+    },
+    {
+      "batter": "Andrew Vaughn",
+      "ev": 100.3,
+      "angle": 34.0,
+      "distance": 387.0,
+      "hr_in_parks": 23,
+      "result": "field_out",
+      "pitcher": "Brubaker, JT"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
