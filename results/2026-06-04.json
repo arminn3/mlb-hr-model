@@ -1,0 +1,505 @@
+{
+  "date": "2026-06-04",
+  "total_players_ranked": 170,
+  "total_hrs_hit": 9,
+  "total_near_hrs": 0,
+  "model_hits": 8,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 2,
+        "rate": 6.7
+      },
+      "all": {
+        "total": 170,
+        "hits": 8,
+        "rate": 4.7
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
+      },
+      "all": {
+        "total": 170,
+        "hits": 8,
+        "rate": 4.7
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 170,
+      "hits": 8,
+      "rate": 4.7
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 170,
+      "hits": 8,
+      "rate": 4.7
+    }
+  },
+  "avg_composite_hr_hitters": 0.432,
+  "avg_composite_non_hitters": 0.417,
+  "composite_separation": 0.015,
+  "hr_hitters": [
+    {
+      "name": "Jackson Merrill",
+      "rank": 12,
+      "composite": 0.647,
+      "opp_pitcher": "Zack Wheeler",
+      "matchup": "SD@PHI"
+    },
+    {
+      "name": "Eric Haase",
+      "rank": 20,
+      "composite": 0.611,
+      "opp_pitcher": "Coleman Crow",
+      "matchup": "SF@MIL"
+    },
+    {
+      "name": "Manny Machado",
+      "rank": 48,
+      "composite": 0.446,
+      "opp_pitcher": "Zack Wheeler",
+      "matchup": "SD@PHI"
+    },
+    {
+      "name": "David Hamilton",
+      "rank": 71,
+      "composite": 0.4,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "SF@MIL"
+    },
+    {
+      "name": "Willson Contreras",
+      "rank": 106,
+      "composite": 0.381,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "BAL@BOS"
+    },
+    {
+      "name": "Adolis Garc\u00eda",
+      "rank": 119,
+      "composite": 0.354,
+      "opp_pitcher": "Lucas Giolito",
+      "matchup": "SD@PHI"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 140,
+      "composite": 0.311,
+      "opp_pitcher": "Coleman Crow",
+      "matchup": "SF@MIL"
+    },
+    {
+      "name": "Jackson Chourio",
+      "rank": 146,
+      "composite": 0.307,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "SF@MIL"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Jackson Merrill",
+      "rank": 22,
+      "composite": 0.62,
+      "opp_pitcher": "Zack Wheeler",
+      "matchup": "SD@PHI"
+    },
+    {
+      "name": "Eric Haase",
+      "rank": 43,
+      "composite": 0.504,
+      "opp_pitcher": "Coleman Crow",
+      "matchup": "SF@MIL"
+    },
+    {
+      "name": "Manny Machado",
+      "rank": 54,
+      "composite": 0.456,
+      "opp_pitcher": "Zack Wheeler",
+      "matchup": "SD@PHI"
+    },
+    {
+      "name": "Willson Contreras",
+      "rank": 67,
+      "composite": 0.4,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "BAL@BOS"
+    },
+    {
+      "name": "David Hamilton",
+      "rank": 78,
+      "composite": 0.4,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "SF@MIL"
+    },
+    {
+      "name": "Adolis Garc\u00eda",
+      "rank": 126,
+      "composite": 0.341,
+      "opp_pitcher": "Lucas Giolito",
+      "matchup": "SD@PHI"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 128,
+      "composite": 0.338,
+      "opp_pitcher": "Coleman Crow",
+      "matchup": "SF@MIL"
+    },
+    {
+      "name": "Jackson Chourio",
+      "rank": 147,
+      "composite": 0.301,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "SF@MIL"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 50,
+      "hr_count": 2,
+      "hr_rate": 4.0,
+      "names": [
+        "Justin Crawford",
+        "Trea Turner",
+        "Coby Mayo",
+        "Taylor Ward",
+        "Pete Alonso",
+        "Wilyer Abreu",
+        "Jarren Duran",
+        "Jos\u00e9 Caballero",
+        "Angel Mart\u00ednez",
+        "Stuart Fairchild",
+        "Eric Haase",
+        "Matt Chapman",
+        "Luis Arraez",
+        "Willy Adames",
+        "Jackson Chourio",
+        "Ernie Clement",
+        "Ozzie Albies",
+        "Matt Olson",
+        "Mauricio Dub\u00f3n",
+        "Tyler Heineman",
+        "Ronald Acu\u00f1a Jr.",
+        "Sandy Le\u00f3n",
+        "Michael Harris II",
+        "Mike Yastrzemski",
+        "Yohendrick Pi\u00f1ango",
+        "Charles McAdoo",
+        "Vinnie Pasquantino",
+        "Brooks Lee",
+        "Michael Massey",
+        "Byron Buxton",
+        "Luke Keaschall",
+        "Kyle Isbel",
+        "Nick Loftin",
+        "Jac Caglianone",
+        "Kody Clemens",
+        "Bobby Witt Jr.",
+        "James Outman",
+        "Trevor Larnach",
+        "Isaac Collins",
+        "Victor Caratini",
+        "Alex Bregman",
+        "Henry Bolte",
+        "Dansby Swanson",
+        "Pedro Ram\u00edrez",
+        "Alika Williams",
+        "Nolan Arenado",
+        "Ketel Marte",
+        "Mookie Betts",
+        "Jose Fernandez",
+        "Tommy Troy"
+      ],
+      "hr_names": [
+        "Eric Haase",
+        "Jackson Chourio"
+      ]
+    },
+    "2_of_5": {
+      "players": 66,
+      "hr_count": 2,
+      "hr_rate": 3.0,
+      "names": [
+        "J.T. Realmuto",
+        "Alec Bohm",
+        "Bryson Stott",
+        "Manny Machado",
+        "Bryce Johnson",
+        "Brandon Marsh",
+        "Bryce Harper",
+        "Fernando Tatis Jr.",
+        "Ty France",
+        "Xander Bogaerts",
+        "Ceddanne Rafaela",
+        "Colton Cowser",
+        "Samuel Basallo",
+        "Andruw Monasterio",
+        "Jackson Holliday",
+        "Leody Taveras",
+        "Isiah Kiner-Falefa",
+        "Willson Contreras",
+        "Carlos Narv\u00e1ez",
+        "Connor Wong",
+        "Rhys Hoskins",
+        "Ryan McMahon",
+        "Jazz Chisholm Jr.",
+        "Trent Grisham",
+        "Paul Goldschmidt",
+        "Max Schuemann",
+        "J.C. Escarra",
+        "Travis Bazzana",
+        "Jos\u00e9 Ram\u00edrez",
+        "Steven Kwan",
+        "David Fry",
+        "Drew Gilbert",
+        "Jung Hoo Lee",
+        "Bryce Eldridge",
+        "Garrett Mitchell",
+        "Rafael Devers",
+        "William Contreras",
+        "George Springer",
+        "Kazuma Okamoto",
+        "Austin Riley",
+        "Vladimir Guerrero Jr.",
+        "Salvador Perez",
+        "Carter Jensen",
+        "Colby Thomas",
+        "Shea Langeliers",
+        "Michael Conforto",
+        "Tyler Soderstrom",
+        "Nick Kurtz",
+        "Ian Happ",
+        "Mois\u00e9s Ballesteros",
+        "Jonah Heim",
+        "Jeff McNeil",
+        "Nico Hoerner",
+        "Jhostynxon Garcia",
+        "Nick Gonzales",
+        "Tyler Callihan",
+        "Henry Davis",
+        "Kyle Tucker",
+        "Freddie Freeman",
+        "Ryan Ward",
+        "Will Smith",
+        "Miguel Rojas",
+        "Corbin Carroll",
+        "Alex Freeland",
+        "Santiago Espinal",
+        "Ildemaro Vargas"
+      ],
+      "hr_names": [
+        "Manny Machado",
+        "Willson Contreras"
+      ]
+    },
+    "3_of_5": {
+      "players": 41,
+      "hr_count": 4,
+      "hr_rate": 9.8,
+      "names": [
+        "Kyle Schwarber",
+        "Jackson Merrill",
+        "Gavin Sheets",
+        "Freddy Fermin",
+        "Adolis Garc\u00eda",
+        "Miguel Andujar",
+        "Gunnar Henderson",
+        "Adley Rutschman",
+        "Caleb Durbin",
+        "Ben Rice",
+        "Cody Bellinger",
+        "Christian Yelich",
+        "Jake Bauers",
+        "Sal Frelick",
+        "Luis Rengifo",
+        "David Hamilton",
+        "Casey Schmitt",
+        "Pete Crow-Armstrong",
+        "Michael Busch",
+        "Zack Gelof",
+        "Endy Rodr\u00edguez",
+        "Spencer Horwitz",
+        "Ryan O'Hearn",
+        "Oneil Cruz",
+        "Christian Walker",
+        "Marcell Ozuna",
+        "Jeremy Pe\u00f1a",
+        "Yordan Alvarez",
+        "Cam Smith",
+        "Taylor Trammell",
+        "Brandon Lowe",
+        "Bryan Reynolds",
+        "Jake Mangum",
+        "Nick Allen",
+        "Jared Triolo",
+        "LaMonte Wade Jr.",
+        "Max Muncy",
+        "Alex Call",
+        "Dalton Rushing",
+        "Andy Pages",
+        "Shohei Ohtani"
+      ],
+      "hr_names": [
+        "Jackson Merrill",
+        "Adolis Garc\u00eda",
+        "David Hamilton",
+        "Casey Schmitt"
+      ]
+    },
+    "4_of_5": {
+      "players": 2,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Brice Turang",
+        "Isaac Paredes"
+      ],
+      "hr_names": []
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 170,
+      "hits": 8,
+      "rate": 4.7
+    }
+  },
+  "combined_hr_hitters": [
+    {
+      "name": "Eric Haase",
+      "rank": 12,
+      "composite": 0.56,
+      "opp_pitcher": "Coleman Crow",
+      "matchup": "SF@MIL"
+    },
+    {
+      "name": "Jackson Merrill",
+      "rank": 20,
+      "composite": 0.541,
+      "opp_pitcher": "Zack Wheeler",
+      "matchup": "SD@PHI"
+    },
+    {
+      "name": "Willson Contreras",
+      "rank": 44,
+      "composite": 0.454,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "BAL@BOS"
+    },
+    {
+      "name": "David Hamilton",
+      "rank": 51,
+      "composite": 0.443,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "SF@MIL"
+    },
+    {
+      "name": "Manny Machado",
+      "rank": 77,
+      "composite": 0.406,
+      "opp_pitcher": "Zack Wheeler",
+      "matchup": "SD@PHI"
+    },
+    {
+      "name": "Adolis Garc\u00eda",
+      "rank": 90,
+      "composite": 0.391,
+      "opp_pitcher": "Lucas Giolito",
+      "matchup": "SD@PHI"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 91,
+      "composite": 0.39,
+      "opp_pitcher": "Coleman Crow",
+      "matchup": "SF@MIL"
+    },
+    {
+      "name": "Jackson Chourio",
+      "rank": 131,
+      "composite": 0.324,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "SF@MIL"
+    }
+  ]
+}
