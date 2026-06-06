@@ -5,7 +5,7 @@ import type { PlayerData, PitchDetailEntry } from "./types";
 import { scoreFor, type UILookback } from "./score-utils";
 import { teamLogoUrl, teamName } from "./game-header";
 
-type SortCol = "score" | "pitch" | "ev" | "barrel" | "hh" | "fb" | "hrfb" | "xwoba" | "sweet" | "swstr" | "pullbrl" | "bip" | "gb" | "ld" | null;
+type SortCol = "score" | "pitch" | "ev" | "barrel" | "hh" | "fb" | "hrfb" | "xwoba" | "sweet" | "swstr" | "pullbrl" | "bip" | "gb" | "ld" | "bzm" | null;
 type SortDir = "desc" | "asc";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -404,6 +404,24 @@ export function BatterRow({
         <span className="text-xs font-mono text-muted">{scores.ld_pct ?? "—"}%</span>
       </td>
 
+      {/* BZM */}
+      <td className="py-2.5 pr-3 w-12 text-center">
+        {(() => {
+          const bz = Object.fromEntries((p.batter_zones ?? []).map(z => [z.zone, z]));
+          const pz = Object.fromEntries((p.pitcher_zones ?? []).map(z => [z.zone, z]));
+          let n = 0;
+          for (let zone = 1; zone <= 9; zone++) {
+            const b = bz[zone]; const pzz = pz[zone];
+            if (b && pzz && b.bip >= 3 && pzz.bip >= 3 && b.barrel_rate >= 8 && pzz.barrel_rate >= 8) n++;
+          }
+          return (
+            <span className={`text-xs font-mono font-bold ${n >= 3 ? "text-accent-green" : n >= 1 ? "text-accent-yellow" : "text-muted/30"}`}>
+              {n}/9
+            </span>
+          );
+        })()}
+      </td>
+
       {/* Star / favorite */}
       <td className="py-2.5 pr-2 w-8 text-center">
         {onToggleFavorite && (
@@ -518,6 +536,16 @@ export function BatterTable({
       case "bip":     return filt ? filt.bip : (sc.bip ?? -1);
       case "gb":      return sc.gb_pct ?? 0;
       case "ld":      return sc.ld_pct ?? 0;
+      case "bzm": {
+        const bz = Object.fromEntries((row.p.batter_zones ?? []).map(z => [z.zone, z]));
+        const pz = Object.fromEntries((row.p.pitcher_zones ?? []).map(z => [z.zone, z]));
+        let n = 0;
+        for (let zone = 1; zone <= 9; zone++) {
+          const b = bz[zone]; const p = pz[zone];
+          if (b && p && b.bip >= 3 && p.bip >= 3 && b.barrel_rate >= 8 && p.barrel_rate >= 8) n++;
+        }
+        return n;
+      }
       default:        return 0;
     }
   }
@@ -641,6 +669,7 @@ export function BatterTable({
               <SortTh label="BIP"      col="bip"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("bip")} />
               <SortTh label="GB%"      col="gb"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("gb")} />
               <SortTh label="LD%"      col="ld"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("ld")} />
+              <SortTh label="BZM"      col="bzm"     active={sortCol} dir={sortDir} onClick={handleSort} className="pr-3 w-12 text-center" />
               <th className="w-8" />
               <th className="w-6" />
             </tr>
