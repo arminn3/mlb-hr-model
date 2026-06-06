@@ -2,7 +2,7 @@
   "date": "2026-06-05",
   "total_players_ranked": 298,
   "total_hrs_hit": 42,
-  "total_near_hrs": 0,
+  "total_near_hrs": 14,
   "model_hits": 36,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 14,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -82,23 +82,23 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 6,
+      "rate": 30.0
     },
     "top_30": {
       "total": 30,
-      "hits": 9,
-      "rate": 30.0
+      "hits": 11,
+      "rate": 36.7
     },
     "all": {
       "total": 298,
-      "hits": 36,
-      "rate": 12.1
+      "hits": 50,
+      "rate": 16.8
     }
   },
   "avg_composite_hr_hitters": 0.46,
-  "avg_composite_non_hitters": 0.407,
-  "composite_separation": 0.053,
+  "avg_composite_non_hitters": 0.408,
+  "composite_separation": 0.052,
   "hr_hitters": [
     {
       "name": "Seiya Suzuki",
@@ -607,8 +607,243 @@
       "matchup": "CWS@PHI"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Ketel Marte",
+      "rank": 11,
+      "composite": 0.724,
+      "opp_pitcher": "Foster Griffin",
+      "matchup": "WSH@AZ"
+    },
+    {
+      "name": "Jac Caglianone",
+      "rank": 19,
+      "composite": 0.674,
+      "opp_pitcher": "Zebby Matthews",
+      "matchup": "KC@MIN"
+    },
+    {
+      "name": "Riley Greene",
+      "rank": 87,
+      "composite": 0.4,
+      "opp_pitcher": "Bryan Woo",
+      "matchup": "SEA@DET"
+    },
+    {
+      "name": "Ozzie Albies",
+      "rank": 111,
+      "composite": 0.4,
+      "opp_pitcher": "Mitch Keller",
+      "matchup": "PIT@ATL"
+    },
+    {
+      "name": "Carter Jensen",
+      "rank": 125,
+      "composite": 0.4,
+      "opp_pitcher": "Zebby Matthews",
+      "matchup": "KC@MIN"
+    },
+    {
+      "name": "Ezequiel Tovar",
+      "rank": 131,
+      "composite": 0.4,
+      "opp_pitcher": "Brandon Sproat",
+      "matchup": "MIL@COL"
+    },
+    {
+      "name": "Sal Frelick",
+      "rank": 143,
+      "composite": 0.4,
+      "opp_pitcher": "Ryan Feltner",
+      "matchup": "MIL@COL"
+    },
+    {
+      "name": "William Contreras",
+      "rank": 144,
+      "composite": 0.4,
+      "opp_pitcher": "Ryan Feltner",
+      "matchup": "MIL@COL"
+    },
+    {
+      "name": "Nathaniel Lowe",
+      "rank": 177,
+      "composite": 0.389,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "CIN@STL"
+    },
+    {
+      "name": "Dylan Crews",
+      "rank": 266,
+      "composite": 0.279,
+      "opp_pitcher": "Merrill Kelly",
+      "matchup": "WSH@AZ"
+    },
+    {
+      "name": "Michael Busch",
+      "rank": 267,
+      "composite": 0.277,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "SF@CHC"
+    },
+    {
+      "name": "Luisangel Acu\u00f1a",
+      "rank": 270,
+      "composite": 0.268,
+      "opp_pitcher": "Jes\u00fas Luzardo",
+      "matchup": "CWS@PHI"
+    },
+    {
+      "name": "Lars Nootbaar",
+      "rank": 273,
+      "composite": 0.261,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "CIN@STL"
+    },
+    {
+      "name": "Spencer Steer",
+      "rank": 282,
+      "composite": 0.225,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "CIN@STL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Dylan Crews",
+      "ev": 99.8,
+      "angle": 27.0,
+      "distance": 391.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Del Castillo, Adrian"
+    },
+    {
+      "batter": "Ketel Marte",
+      "ev": 101.9,
+      "angle": 24.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Schultz, Paxton"
+    },
+    {
+      "batter": "Dylan Crews",
+      "ev": 102.6,
+      "angle": 25.0,
+      "distance": 394.0,
+      "hr_in_parks": 14,
+      "result": "field_out",
+      "pitcher": "Kelly, Merrill"
+    },
+    {
+      "batter": "Ozzie Albies",
+      "ev": 97.9,
+      "angle": 28.0,
+      "distance": 389.0,
+      "hr_in_parks": 18,
+      "result": "field_out",
+      "pitcher": "Keller, Mitch"
+    },
+    {
+      "batter": "Michael Busch",
+      "ev": 100.6,
+      "angle": 39.0,
+      "distance": 398.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Seymour, Carson"
+    },
+    {
+      "batter": "William Contreras",
+      "ev": 100.5,
+      "angle": 22.0,
+      "distance": 402.0,
+      "hr_in_parks": 18,
+      "result": "field_out",
+      "pitcher": "Feltner, Ryan"
+    },
+    {
+      "batter": "Ezequiel Tovar",
+      "ev": 103.0,
+      "angle": 24.0,
+      "distance": 401.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Sproat, Brandon"
+    },
+    {
+      "batter": "Sal Frelick",
+      "ev": 106.7,
+      "angle": 22.0,
+      "distance": 393.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Feltner, Ryan"
+    },
+    {
+      "batter": "Riley Greene",
+      "ev": 105.0,
+      "angle": 20.0,
+      "distance": 391.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Woo, Bryan"
+    },
+    {
+      "batter": "Carter Jensen",
+      "ev": 102.7,
+      "angle": 25.0,
+      "distance": 405.0,
+      "hr_in_parks": 21,
+      "result": "field_out",
+      "pitcher": "Matthews, Zebby"
+    },
+    {
+      "batter": "Jac Caglianone",
+      "ev": 111.1,
+      "angle": 18.0,
+      "distance": 411.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Matthews, Zebby"
+    },
+    {
+      "batter": "Luisangel Acu\u00f1a",
+      "ev": 109.3,
+      "angle": 19.0,
+      "distance": 400.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Luzardo, Jes\u00fas"
+    },
+    {
+      "batter": "Spencer Steer",
+      "ev": 106.1,
+      "angle": 30.0,
+      "distance": 421.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Dobbins, Hunter"
+    },
+    {
+      "batter": "Lars Nootbaar",
+      "ev": 105.8,
+      "angle": 21.0,
+      "distance": 395.0,
+      "hr_in_parks": 27,
+      "result": "double",
+      "pitcher": "Maxwell, Zach"
+    },
+    {
+      "batter": "Nathaniel Lowe",
+      "ev": 103.9,
+      "angle": 32.0,
+      "distance": 398.0,
+      "hr_in_parks": 14,
+      "result": "field_out",
+      "pitcher": "Leahy, Kyle"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Jonah Cox",
