@@ -33,6 +33,17 @@ export function BatterCard({
   const hrInLookback = recentAbsArr.filter((ab) => ab.result === "home_run").length;
   const hrFbPct = flyBalls.length > 0 ? (hrInLookback / flyBalls.length) * 100 : null;
 
+  // BZM — zones where batter barrels ≥8% (vs this pitcher's hand) AND
+  // pitcher allows barrels ≥8% (vs this batter's hand). Both already hand-split by backend.
+  const bzByZone = Object.fromEntries((player.batter_zones ?? []).map(z => [z.zone, z]));
+  const pzByZone = Object.fromEntries((player.pitcher_zones ?? []).map(z => [z.zone, z]));
+  let bzm = 0;
+  for (let zone = 1; zone <= 9; zone++) {
+    const b = bzByZone[zone];
+    const p = pzByZone[zone];
+    if (b && p && b.bip >= 3 && p.bip >= 3 && b.barrel_rate >= 8 && p.barrel_rate >= 8) bzm++;
+  }
+
   return (
     <div
       role="button"
@@ -94,13 +105,14 @@ export function BatterCard({
         </div>
 
         {/* Stat mini-cards */}
-        <div className="grid grid-cols-6 gap-2 mt-3">
+        <div className="grid grid-cols-7 gap-2 mt-3">
           <StatMiniCard label="Exit Velo"  value={`${scores.exit_velo}`}                                            cls={statHighlight(scores.exit_velo, [88, 93])} />
           <StatMiniCard label="Barrel%"    value={`${scores.barrel_pct}%`}                                          cls={statHighlight(scores.barrel_pct, [8, 15])} />
           <StatMiniCard label="Hard Hit%"  value={`${scores.hard_hit_pct}%`}                                        cls={statHighlight(scores.hard_hit_pct, [35, 50])} />
           <StatMiniCard label="HR/FB%"     value={hrFbPct == null ? "—" : `${hrFbPct.toFixed(1)}%`}               cls={hrFbPct == null ? "text-muted" : statHighlight(hrFbPct, [10, 18])} />
           <StatMiniCard label="FB%"        value={`${scores.fb_pct}%`}                                              cls={statHighlight(scores.fb_pct, [25, 40])} />
           <StatMiniCard label="Pull Brl%"  value={pullBrl == null ? "—" : `${pullBrl.toFixed(1)}%`}               cls={pullBrl == null ? "text-muted" : statHighlight(pullBrl, [4, 8])} />
+          <StatMiniCard label="BZM"        value={`${bzm}/9`}                                                       cls={bzm >= 3 ? "text-accent-green" : bzm >= 1 ? "text-accent-yellow" : "text-muted"} />
         </div>
       </div>
     </div>

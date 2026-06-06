@@ -947,19 +947,6 @@ export function MLRankings({
             else { matchupLabel = "TOUGH"; matchupColor = "text-red-400/80"; }
           }
 
-          // Barrel Zone Matches — zones where batter barrels ≥8% AND pitcher allows barrels ≥8%
-          // Both datasets are already filtered by handedness (batter_zones vs pitcher_hand,
-          // pitcher_zones vs batter_hand) so this is a true hand-specific zone overlap.
-          const BZM_THRESH = 8;
-          const bzByZone = Object.fromEntries((player.batter_zones ?? []).map(z => [z.zone, z]));
-          const pzByZone = Object.fromEntries((player.pitcher_zones ?? []).map(z => [z.zone, z]));
-          let bzm = 0;
-          for (let zone = 1; zone <= 9; zone++) {
-            const b = bzByZone[zone];
-            const p = pzByZone[zone];
-            if (b && p && b.bip >= 3 && p.bip >= 3 && b.barrel_rate >= BZM_THRESH && p.barrel_rate >= BZM_THRESH) bzm++;
-          }
-
           const scoreColor = score >= 0.65 ? "text-accent-green" : score >= 0.50 ? "text-accent-yellow" : "text-foreground";
 
           return (
@@ -1046,16 +1033,6 @@ export function MLRankings({
                       {matchupLabel}
                     </span>
                   )}
-                  <div
-                    className="flex flex-col items-center px-2 py-1 rounded-lg"
-                    style={{ background: "rgba(255,255,255,0.04)", minWidth: 36 }}
-                    title={`${bzm} barrel zone match${bzm !== 1 ? "es" : ""} — zones where batter barrels ≥8% vs this pitcher's hand AND pitcher allows barrels ≥8% vs this batter's hand`}
-                  >
-                    <span className="text-[9px] uppercase tracking-wider text-muted/50">BZM</span>
-                    <span className={`text-[12px] font-bold font-mono leading-tight ${bzm >= 3 ? "text-accent-green" : bzm >= 1 ? "text-accent-yellow" : "text-muted/40"}`}>
-                      {bzm}
-                    </span>
-                  </div>
                   {delta !== null && Math.abs(delta) > 0.01 && (
                     <span className={`px-2 py-1 rounded-lg text-[11px] font-bold font-mono ${delta > 0 ? "text-accent-green" : "text-red-400"}`}
                       style={{ background: delta > 0 ? "rgba(34,197,94,0.10)" : "rgba(248,113,113,0.10)" }}>
