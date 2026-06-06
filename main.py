@@ -1008,29 +1008,30 @@ def print_results(games_out: list, game_date: date, schedule: list = None) -> No
                     existing = json.load(f)
                 existing_games = {g["game_pk"]: g for g in existing.get("games", [])}
 
-                # Merge: keep locked games from existing, use new data for unstarted
+                # Once ANY game has started, freeze ALL existing game scores so
+                # the global ranking order never shifts mid-day. Only truly new
+                # games (not in existing data at all) get fresh scores.
                 merged_games = []
                 new_game_pks = {g["game_pk"] for g in games_out}
                 for game in games_out:
                     gpk = game["game_pk"]
-                    if gpk in started_pks and gpk in existing_games:
-                        # Game already started — keep the locked scores
+                    if gpk in existing_games:
+                        # Score is frozen — use existing data regardless of game status
                         merged_games.append(existing_games[gpk])
                     else:
-                        # Game hasn't started — use fresh scores
+                        # Brand-new game not in today's existing data — include fresh
                         merged_games.append(game)
 
-                # Also keep any locked games that aren't in the new run
+                # Keep any existing games that aren't in the new run
                 for gpk, existing_game in existing_games.items():
-                    if gpk in started_pks and gpk not in new_game_pks:
+                    if gpk not in new_game_pks:
                         merged_games.append(existing_game)
 
                 games_out = merged_games
                 frontend_data["games"] = _clean_for_json(games_out)
 
-                started_count = len([g for g in games_out if g["game_pk"] in started_pks])
-                updated_count = len(games_out) - started_count
-                print(f"  Per-game lock: {started_count} games locked, {updated_count} games updated.")
+                locked_count = len([g for g in games_out if g["game_pk"] in existing_games])
+                print(f"  Full slate lock: {locked_count}/{len(games_out)} games frozen (any game started).")
         except Exception:
             pass
 
