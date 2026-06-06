@@ -1,0 +1,539 @@
+{
+  "date": "2026-06-05",
+  "total_players_ranked": 298,
+  "total_hrs_hit": 8,
+  "total_near_hrs": 0,
+  "model_hits": 4,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
+      },
+      "all": {
+        "total": 298,
+        "hits": 4,
+        "rate": 1.3
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
+      },
+      "all": {
+        "total": 298,
+        "hits": 4,
+        "rate": 1.3
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 1,
+      "rate": 3.3
+    },
+    "all": {
+      "total": 298,
+      "hits": 4,
+      "rate": 1.3
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 1,
+      "rate": 3.3
+    },
+    "all": {
+      "total": 298,
+      "hits": 4,
+      "rate": 1.3
+    }
+  },
+  "avg_composite_hr_hitters": 0.466,
+  "avg_composite_non_hitters": 0.413,
+  "composite_separation": 0.053,
+  "hr_hitters": [
+    {
+      "name": "Seiya Suzuki",
+      "rank": 4,
+      "composite": 0.744,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "SF@CHC"
+    },
+    {
+      "name": "Matt Chapman",
+      "rank": 84,
+      "composite": 0.4,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "SF@CHC"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 196,
+      "composite": 0.365,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "SF@CHC"
+    },
+    {
+      "name": "Willy Adames",
+      "rank": 208,
+      "composite": 0.355,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "SF@CHC"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Seiya Suzuki",
+      "rank": 5,
+      "composite": 0.696,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "SF@CHC"
+    },
+    {
+      "name": "Matt Chapman",
+      "rank": 61,
+      "composite": 0.515,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "SF@CHC"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 106,
+      "composite": 0.4,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "SF@CHC"
+    },
+    {
+      "name": "Willy Adames",
+      "rank": 227,
+      "composite": 0.338,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "SF@CHC"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [
+    {
+      "name": "Jonah Cox",
+      "pitcher": "Carson Kelly",
+      "description": "Jonah Cox homers (1) on a fly ball to center field."
+    }
+  ],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 93,
+      "hr_count": 2,
+      "hr_rate": 2.2,
+      "names": [
+        "Bryce Eldridge",
+        "Pete Crow-Armstrong",
+        "Miguel Amaya",
+        "Rafael Devers",
+        "Matt Chapman",
+        "Jung Hoo Lee",
+        "Willy Adames",
+        "Kerry Carpenter",
+        "Rob Refsnyder",
+        "Kevin McGonigle",
+        "Julio Rodr\u00edguez",
+        "Colt Emerson",
+        "Dillon Dingler",
+        "Riley Greene",
+        "Gleyber Torres",
+        "Colt Keith",
+        "Mitch Garver",
+        "Cole Young",
+        "Josh Naylor",
+        "J.P. Crawford",
+        "Derek Hill",
+        "Randal Grichuk",
+        "Brandon Marsh",
+        "Anthony Volpe",
+        "Spencer Jones",
+        "Otto Lopez",
+        "Ryan Vilade",
+        "Owen Caissie",
+        "Jakob Marsee",
+        "Chandler Simpson",
+        "Xavier Edwards",
+        "Yandy D\u00edaz",
+        "Junior Caminero",
+        "Esteury Ruiz",
+        "Bryan Reynolds",
+        "Matt Olson",
+        "Nick Gonzales",
+        "Mauricio Dub\u00f3n",
+        "Dominic Smith",
+        "Spencer Horwitz",
+        "Oneil Cruz",
+        "Brandon Lowe",
+        "Ronald Acu\u00f1a Jr.",
+        "Henry Bolte",
+        "Jose Altuve",
+        "Jake Meyers",
+        "Cam Smith",
+        "Christian V\u00e1zquez",
+        "Blake Dunn",
+        "Jimmy Crooks",
+        "Noelvi Marte",
+        "Tyler Stephenson",
+        "Spencer Steer",
+        "Justin Foscue",
+        "Brandon Nimmo",
+        "Travis Bazzana",
+        "Kyle Manzardo",
+        "Steven Kwan",
+        "Daniel Schneemann",
+        "Kyle Higashioka",
+        "Wyatt Langford",
+        "Evan Carter",
+        "Brooks Lee",
+        "Byron Buxton",
+        "Nick Loftin",
+        "Kody Clemens",
+        "Luke Keaschall",
+        "Geraldo Perdomo",
+        "Gabriel Moreno",
+        "Ryan Waldschmidt",
+        "Jos\u00e9 Tena",
+        "Keibert Ruiz",
+        "Adrian Del Castillo",
+        "Jacob Young",
+        "Andr\u00e9s Chaparro",
+        "Jared Young",
+        "Manny Machado",
+        "Rodolfo Dur\u00e1n",
+        "Carson Benge",
+        "Ty France",
+        "Mark Vientos",
+        "MJ Melendez",
+        "Fernando Tatis Jr.",
+        "Juan Soto",
+        "Jackson Merrill",
+        "Marcus Semien",
+        "Brett Baty",
+        "Luis Torrens",
+        "Eric Wagaman",
+        "Xander Bogaerts",
+        "Vidal Bruj\u00e1n",
+        "Gavin Sheets",
+        "Santiago Espinal"
+      ],
+      "hr_names": [
+        "Matt Chapman",
+        "Willy Adames"
+      ]
+    },
+    "2_of_5": {
+      "players": 109,
+      "hr_count": 2,
+      "hr_rate": 1.8,
+      "names": [
+        "Seiya Suzuki",
+        "Carson Kelly",
+        "Alex Bregman",
+        "Ian Happ",
+        "Dansby Swanson",
+        "Casey Schmitt",
+        "Michael Busch",
+        "Zach McKinstry",
+        "Randy Arozarena",
+        "Zack Short",
+        "Sam Antonacci",
+        "Colson Montgomery",
+        "Trea Turner",
+        "Chase Meidroth",
+        "Bryce Harper",
+        "Miguel Vargas",
+        "Edgar Quero",
+        "Luisangel Acu\u00f1a",
+        "Tristan Peters",
+        "Paul Goldschmidt",
+        "Willson Contreras",
+        "Isiah Kiner-Falefa",
+        "Trent Grisham",
+        "Connor Wong",
+        "Austin Wells",
+        "Jazz Chisholm Jr.",
+        "Mickey Gasper",
+        "Ryan McMahon",
+        "Samuel Basallo",
+        "Andr\u00e9s Gim\u00e9nez",
+        "Jackson Holliday",
+        "Nathan Lukes",
+        "Ernie Clement",
+        "Colton Cowser",
+        "Leody Taveras",
+        "Pete Alonso",
+        "Jonathan Aranda",
+        "Kyle Stowers",
+        "Liam Hicks",
+        "Joe Mack",
+        "Richie Palacios",
+        "Nick Fortes",
+        "Ozzie Albies",
+        "Henry Davis",
+        "Jared Triolo",
+        "Marcell Ozuna",
+        "Austin Riley",
+        "Jhostynxon Garcia",
+        "Shea Langeliers",
+        "Nick Kurtz",
+        "Tyler Soderstrom",
+        "Brent Rooker",
+        "Jeremy Pe\u00f1a",
+        "Christian Walker",
+        "Carlos Cortes",
+        "Darell Hernaiz",
+        "Nick Allen",
+        "Yordan Alvarez",
+        "Jeff McNeil",
+        "JJ Bleday",
+        "Nolan Gorman",
+        "Victor Scott II",
+        "Nathaniel Lowe",
+        "Masyn Winn",
+        "Sal Stewart",
+        "Eugenio Su\u00e1rez",
+        "Jake Burger",
+        "Rhys Hoskins",
+        "Chase DeLauter",
+        "Joc Pederson",
+        "Jos\u00e9 Ram\u00edrez",
+        "Michael Helman",
+        "Danny Jansen",
+        "Corey Seager",
+        "Vinnie Pasquantino",
+        "Michael Massey",
+        "Jac Caglianone",
+        "Josh Bell",
+        "Carter Jensen",
+        "Bobby Witt Jr.",
+        "Isaac Collins",
+        "Kyle Isbel",
+        "Orlando Arcia",
+        "Alex Jackson",
+        "Salvador Perez",
+        "Garrett Mitchell",
+        "Joey Ortiz",
+        "Nolan Arenado",
+        "Ketel Marte",
+        "James Wood",
+        "Jorbit Vivas",
+        "Corbin Carroll",
+        "Jorge Barrosa",
+        "Daylen Lile",
+        "Drew Millas",
+        "Luis Garc\u00eda Jr.",
+        "Nasim Nu\u00f1ez",
+        "Tommy Troy",
+        "Pavin Smith",
+        "Bo Bichette",
+        "Will Smith",
+        "Freddie Freeman",
+        "Kyle Tucker",
+        "Miguel Rojas",
+        "Mookie Betts",
+        "Adam Frazier",
+        "Nick Madrigal",
+        "Sebasti\u00e1n Rivero",
+        "Ryan Ward"
+      ],
+      "hr_names": [
+        "Seiya Suzuki",
+        "Casey Schmitt"
+      ]
+    },
+    "3_of_5": {
+      "players": 57,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Nico Hoerner",
+        "Spencer Torkelson",
+        "Edmundo Sosa",
+        "Alec Bohm",
+        "J.T. Realmuto",
+        "Adolis Garc\u00eda",
+        "Kyle Schwarber",
+        "Steward Berroa",
+        "Caleb Durbin",
+        "Ben Rice",
+        "Cody Bellinger",
+        "Ceddanne Rafaela",
+        "Andruw Monasterio",
+        "Jarren Duran",
+        "Wilyer Abreu",
+        "Adley Rutschman",
+        "Jes\u00fas S\u00e1nchez",
+        "Kazuma Okamoto",
+        "Coby Mayo",
+        "Gunnar Henderson",
+        "Taylor Ward",
+        "Cedric Mullins",
+        "Taylor Walls",
+        "Isaac Paredes",
+        "Zack Gelof",
+        "Alec Burleson",
+        "Jordan Walker",
+        "Bryan Torres",
+        "Iv\u00e1n Herrera",
+        "Lars Nootbaar",
+        "Edwin Arroyo",
+        "Jackson Chourio",
+        "Willi Castro",
+        "Hunter Goodman",
+        "Jake McCarthy",
+        "Tyler Freeman",
+        "Jake Bauers",
+        "Ezequiel Tovar",
+        "Sterlin Thompson",
+        "Edouard Julien",
+        "David Hamilton",
+        "Gary S\u00e1nchez",
+        "Luis Rengifo",
+        "Sal Frelick",
+        "Ildemaro Vargas",
+        "CJ Abrams",
+        "Aramis Garcia",
+        "Vaughn Grissom",
+        "Donovan Walton",
+        "Logan O'Hoppe",
+        "Oswald Peraza",
+        "Andy Pages",
+        "Wade Meckler",
+        "Shohei Ohtani",
+        "Alex Call",
+        "Alex Freeland",
+        "Jose Siri"
+      ],
+      "hr_names": []
+    },
+    "4_of_5": {
+      "players": 17,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Brandon Valenzuela",
+        "George Springer",
+        "Vladimir Guerrero Jr.",
+        "Daulton Varsho",
+        "TJ Rumfield",
+        "Troy Johnston",
+        "Andrew Vaughn",
+        "Blake Perkins",
+        "Brice Turang",
+        "Christian Yelich",
+        "William Contreras",
+        "Mike Trout",
+        "Jo Adell",
+        "Max Muncy",
+        "Jorge Soler",
+        "Zach Neto",
+        "Dalton Rushing"
+      ],
+      "hr_names": []
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 1,
+      "rate": 3.3
+    },
+    "all": {
+      "total": 298,
+      "hits": 4,
+      "rate": 1.3
+    }
+  },
+  "combined_hr_hitters": [
+    {
+      "name": "Seiya Suzuki",
+      "rank": 1,
+      "composite": 0.643,
+      "opp_pitcher": "Robbie Ray",
+      "matchup": "SF@CHC"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 107,
+      "composite": 0.437,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "SF@CHC"
+    },
+    {
+      "name": "Matt Chapman",
+      "rank": 155,
+      "composite": 0.397,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "SF@CHC"
+    },
+    {
+      "name": "Willy Adames",
+      "rank": 156,
+      "composite": 0.397,
+      "opp_pitcher": "Edward Cabrera",
+      "matchup": "SF@CHC"
+    }
+  ]
+}
