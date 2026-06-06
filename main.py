@@ -982,58 +982,62 @@ def print_results(games_out: list, game_date: date, schedule: list = None) -> No
     }
 
     # Save as latest + dated archive in frontend/public/data/
-    # NEVER overwrite a date's data once games have started — lock in morning predictions
+    # NEVER overwrite scores once the first game has started — lock in pre-game predictions.
+    # Use scheduled start times (not live status) so the freeze is predictable and instant.
     data_dir = Path("frontend/public/data")
     data_dir.mkdir(parents=True, exist_ok=True)
     dated_name = f"{game_date.isoformat()}.json"
     dated_path = data_dir / dated_name
 
-    if dated_path.exists():
-        # Per-game locking: keep locked scores for started games, update only unstarted
+    # Determine first scheduled game time from today's slate
+    from datetime import datetime, timezone
+    first_game_utc: datetime | None = None
+    for g in schedule:
+        utc_str = g.get("game_datetime_utc", "")
+        if utc_str:
+            try:
+                t = datetime.fromisoformat(utc_str.replace("Z", "+00:00"))
+                if first_game_utc is None or t < first_game_utc:
+                    first_game_utc = t
+            except ValueError:
+                pass
+
+    now_utc = datetime.now(timezone.utc)
+    slate_locked = first_game_utc is not None and now_utc >= first_game_utc
+
+    if first_game_utc:
+        first_et_hour = (first_game_utc.hour - 4) % 24
+        first_et_min = first_game_utc.minute
+        ampm = "AM" if first_et_hour < 12 else "PM"
+        display_h = first_et_hour % 12 or 12
+        print(f"  First game: {display_h}:{first_et_min:02d} {ampm} ET  |  Slate locked: {slate_locked}")
+
+    if dated_path.exists() and slate_locked:
+        # First game has started — freeze ALL existing scores so global rankings never drift.
+        # Only brand-new games not previously in the data get fresh scores.
         try:
-            sched_check = requests.get(
-                f"https://statsapi.mlb.com/api/v1/schedule?date={game_date.isoformat()}&sportId=1",
-                timeout=10,
-            )
-            started_pks = set()
-            for d in sched_check.json().get("dates", []):
-                for g in d.get("games", []):
-                    status = g.get("status", {}).get("detailedState", "")
-                    if status not in ("Scheduled", "Pre-Game", "Warmup", "Postponed", ""):
-                        started_pks.add(g.get("gamePk", 0))
+            with open(dated_path) as f:
+                existing = json.load(f)
+            existing_games = {g["game_pk"]: g for g in existing.get("games", [])}
 
-            if started_pks:
-                # Load existing locked data
-                with open(dated_path) as f:
-                    existing = json.load(f)
-                existing_games = {g["game_pk"]: g for g in existing.get("games", [])}
+            merged_games = []
+            new_game_pks = {g["game_pk"] for g in games_out}
+            for game in games_out:
+                gpk = game["game_pk"]
+                if gpk in existing_games:
+                    merged_games.append(existing_games[gpk])
+                else:
+                    merged_games.append(game)
 
-                # Once ANY game has started, freeze ALL existing game scores so
-                # the global ranking order never shifts mid-day. Only truly new
-                # games (not in existing data at all) get fresh scores.
-                merged_games = []
-                new_game_pks = {g["game_pk"] for g in games_out}
-                for game in games_out:
-                    gpk = game["game_pk"]
-                    if gpk in existing_games:
-                        # Score is frozen — use existing data regardless of game status
-                        merged_games.append(existing_games[gpk])
-                    else:
-                        # Brand-new game not in today's existing data — include fresh
-                        merged_games.append(game)
+            for gpk, existing_game in existing_games.items():
+                if gpk not in new_game_pks:
+                    merged_games.append(existing_game)
 
-                # Keep any existing games that aren't in the new run
-                for gpk, existing_game in existing_games.items():
-                    if gpk not in new_game_pks:
-                        merged_games.append(existing_game)
-
-                games_out = merged_games
-                frontend_data["games"] = _clean_for_json(games_out)
-
-                locked_count = len([g for g in games_out if g["game_pk"] in existing_games])
-                print(f"  Full slate lock: {locked_count}/{len(games_out)} games frozen (any game started).")
-        except Exception:
-            pass
+            games_out = merged_games
+            frontend_data["games"] = _clean_for_json(games_out)
+            print(f"  Slate frozen: {len(existing_games)} games locked, rankings will not change.")
+        except Exception as e:
+            print(f"  WARNING: slate lock failed ({e}) — writing fresh data.")
 
     for path in [data_dir / "latest.json", dated_path]:
         with open(path, "w") as f:
