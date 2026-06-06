@@ -1,9 +1,11 @@
 "use client";
 
-import type { GameData, PlayerData, TeamPitchMixSide } from "./types";
+import { useState } from "react";
+import type { GameData, PitcherInfo, PlayerData, TeamPitchMixSide } from "./types";
 import { scoreFor, type UILookback } from "./score-utils";
 import { GameHeader } from "./game-header";
 import { PitcherProfileCard } from "./pitcher-profile-card";
+import { PitcherStatsPanel } from "./pitcher-stats-panel";
 import { BatterTable, type BatterRowInfo } from "./batter-table";
 import { BullpenSection } from "./bullpen-section";
 
@@ -56,6 +58,8 @@ export function GameSection({
   favorites?: Set<string>;
   onToggleFavorite?: (name: string) => void;
 }) {
+  const [selectedPitcher, setSelectedPitcher] = useState<PitcherInfo | null>(null);
+
   const homeSide = game.team_pitch_mix?.home;
   const awaySide = game.team_pitch_mix?.away;
   const homeLookup = buildLineupLookup(homeSide);
@@ -88,9 +92,14 @@ export function GameSection({
 
       {/* Pitcher cards — 2-col side by side */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
-        <PitcherProfileCard pitcher={game.away_pitcher} side="away" />
-        <PitcherProfileCard pitcher={game.home_pitcher} side="home" />
+        <PitcherProfileCard pitcher={game.away_pitcher} side="away" teamAbbr={game.away_team} onNameClick={() => setSelectedPitcher(game.away_pitcher)} />
+        <PitcherProfileCard pitcher={game.home_pitcher} side="home" teamAbbr={game.home_team} onNameClick={() => setSelectedPitcher(game.home_pitcher)} />
       </div>
+
+      {/* Pitcher stats panel — fixed overlay, rendered per game section */}
+      {selectedPitcher && (
+        <PitcherStatsPanel pitcher={selectedPitcher} onClose={() => setSelectedPitcher(null)} />
+      )}
 
       {/* Batter tables */}
       <div className="mt-8 space-y-4">

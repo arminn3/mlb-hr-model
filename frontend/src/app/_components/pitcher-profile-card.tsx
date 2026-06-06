@@ -104,7 +104,7 @@ const GROUP_LABELS: Record<ColumnDef["group"], string> = {
   statcast: "Statcast",
 };
 
-export function PitcherProfileCard({ pitcher, side }: { pitcher: PitcherInfo; side?: "away" | "home" }) {
+export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { pitcher: PitcherInfo; side?: "away" | "home"; teamAbbr?: string; onNameClick?: () => void }) {
   const profile = pitcher.profile ?? null;
   const rows = profile?.rows ?? null;
   const wins = profile?.wins ?? 0;
@@ -134,7 +134,7 @@ export function PitcherProfileCard({ pitcher, side }: { pitcher: PitcherInfo; si
       {side && (
         <div className="mb-3">
           <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-muted/50">
-            {side === "away" ? "Away Starter" : "Home Starter"}
+            {teamAbbr ? `${teamAbbr} Starter` : side === "away" ? "Away Starter" : "Home Starter"}
           </span>
         </div>
       )}
@@ -152,7 +152,16 @@ export function PitcherProfileCard({ pitcher, side }: { pitcher: PitcherInfo; si
           <div className="w-12 h-12 rounded-full bg-card-border/40 flex-shrink-0" />
         )}
         <div className="flex flex-col min-w-0">
-          <span className="text-base font-semibold text-foreground leading-tight">{pitcher.name}</span>
+          {onNameClick ? (
+            <button
+              onClick={onNameClick}
+              className="text-base font-semibold text-foreground leading-tight text-left cursor-pointer hover:text-accent transition-colors"
+            >
+              {pitcher.name}
+            </button>
+          ) : (
+            <span className="text-base font-semibold text-foreground leading-tight">{pitcher.name}</span>
+          )}
           <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
             <span className="px-1.5 py-0.5 text-[10px] font-mono font-semibold rounded bg-card-border/60 text-muted">
               {pitcher.hand}HP

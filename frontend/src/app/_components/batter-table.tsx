@@ -412,7 +412,7 @@ export function BatterRow({
           let n = 0;
           for (let zone = 1; zone <= 9; zone++) {
             const b = bz[zone]; const pzz = pz[zone];
-            if (b && pzz && b.bip >= 3 && pzz.bip >= 3 && b.barrel_rate >= 8 && pzz.barrel_rate >= 8) n++;
+            if (b && pzz && b.bip >= 3 && pzz.bip >= 3 && b.barrel_rate >= 10 && pzz.barrel_rate >= 6) n++;
           }
           return (
             <span className={`text-xs font-mono font-bold ${n >= 3 ? "text-accent-green" : n >= 1 ? "text-accent-yellow" : "text-muted/30"}`}>
@@ -542,7 +542,7 @@ export function BatterTable({
         let n = 0;
         for (let zone = 1; zone <= 9; zone++) {
           const b = bz[zone]; const p = pz[zone];
-          if (b && p && b.bip >= 3 && p.bip >= 3 && b.barrel_rate >= 8 && p.barrel_rate >= 8) n++;
+          if (b && p && b.bip >= 3 && p.bip >= 3 && b.barrel_rate >= 10 && p.barrel_rate >= 6) n++;
         }
         return n;
       }
