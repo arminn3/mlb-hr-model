@@ -127,6 +127,21 @@ function ZoneGrid({ freqs }: { freqs: ZoneFreq[] }) {
   );
 }
 
+// ── Pitch outcome cell (table <td>) ─────────────────────────────────────────
+
+function PitchCell({ v, lo, hi, ba, pct, invert }: {
+  v: number | null | undefined;
+  lo: number;
+  hi: number;
+  ba?: boolean;
+  pct?: boolean;
+  invert?: boolean;
+}) {
+  const colorCls = statCell(v, lo, hi, invert);
+  const display = ba ? fmt(v, { ba: true }) : pct ? fmt(v, { pct: true }) : fmt(v);
+  return <td className={`text-center py-2 px-1.5 ${colorCls}`}>{display}</td>;
+}
+
 // ── Platoon comparison ────────────────────────────────────────────────────────
 
 function PlatoonRow({ label, row, highlight }: { label: string; row: PitcherStatRow; highlight?: boolean }) {
@@ -179,8 +194,8 @@ export function PitcherStatsPanel({
   const zoneFreq = hand === "vs_L" ? zoneFreqLhb : zoneFreqRhb;
   const hasZones = zoneFreq && zoneFreq.length > 0 && zoneFreq.some(z => z.pct > 0);
 
-  // Pitcher type tags derived from arsenal
-  const arsenal = profile?.arsenal ?? [];
+  // Pitcher type tags derived from arsenal — use hand-split data when available
+  const arsenal = (hand === "vs_L" ? profile?.arsenal_vs_L : profile?.arsenal_vs_R) ?? profile?.arsenal ?? [];
   const topPitch = arsenal[0];
   const hasSweeper = arsenal.some(e => e.type === "ST" && e.usage_pct >= 10);
   const highK = rows?.season?.k_pct != null && rows.season.k_pct >= 25;
@@ -288,38 +303,51 @@ export function PitcherStatsPanel({
               {/* Arsenal */}
               {arsenal.length > 0 && (
                 <div className="px-5 py-4" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-                  <p className="text-[9px] uppercase tracking-[0.12em] font-bold mb-3" style={{ color: "rgba(255,255,255,0.35)" }}>Arsenal</p>
-                  <div className="overflow-x-auto -mx-1 px-1">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-[9px] uppercase tracking-[0.12em] font-bold" style={{ color: "rgba(255,255,255,0.35)" }}>Pitch Results — {hand === "vs_L" ? "vs LHB" : "vs RHB"}</p>
+                    <span className="text-[8px]" style={{ color: "rgba(255,255,255,0.25)" }}>green = batter favorable · red = pitcher favorable</span>
+                  </div>
+                  <div className="overflow-x-auto">
                     <table className="w-full text-xs font-mono border-collapse">
                       <thead>
-                        <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-                          {["Type", "#", "%", "Velo", "Spin", "Whiff%"].map(h => (
-                            <th key={h} className={`py-1.5 font-medium text-[9px] uppercase tracking-wider ${h === "Type" ? "text-left pr-2" : "text-center px-2"}`}
-                              style={{ color: "rgba(255,255,255,0.35)" }}>
-                              {h}
-                            </th>
-                          ))}
+                        <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+                          <th className="text-left py-1.5 pr-3 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>Type</th>
+                          <th className="text-center py-1.5 px-1.5 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>#</th>
+                          <th className="text-center py-1.5 px-1.5 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>%</th>
+                          <th className="text-center py-1.5 px-1.5 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>BBE</th>
+                          <th className="text-center py-1.5 px-1.5 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>BA</th>
+                          <th className="text-center py-1.5 px-1.5 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>wOBA</th>
+                          <th className="text-center py-1.5 px-1.5 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>SLG</th>
+                          <th className="text-center py-1.5 px-1.5 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>ISO</th>
+                          <th className="text-center py-1.5 px-1.5 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>HR</th>
+                          <th className="text-center py-1.5 px-1.5 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>BB%</th>
+                          <th className="text-center py-1.5 px-1.5 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>Whiff%</th>
+                          <th className="text-center py-1.5 px-1.5 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>K%</th>
+                          <th className="text-center py-1.5 pl-1.5 font-medium text-[9px] uppercase tracking-wider" style={{ color: "rgba(255,255,255,0.35)" }}>Velo</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {[...arsenal].sort((a, b) => b.usage_pct - a.usage_pct).map((entry) => (
+                        {arsenal.map((entry) => (
                           <tr key={entry.type} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                            <td className="py-2 pr-2">
+                            <td className="py-2 pr-3">
                               <div className="flex items-center gap-1.5">
                                 <span className="text-[9px] font-bold w-5 flex-shrink-0" style={{ color: "rgba(255,255,255,0.35)" }}>{entry.type}</span>
-                                <span className="text-xs text-foreground">{entry.name}</span>
+                                <span className="text-xs text-foreground whitespace-nowrap">{entry.name}</span>
                               </div>
                             </td>
-                            <td className="text-center py-2 px-2" style={{ color: "var(--muted)" }}>{entry.count}</td>
-                            <td className="text-center py-2 px-2 font-semibold text-foreground">{entry.usage_pct.toFixed(1)}%</td>
-                            <td className={`text-center py-2 px-2 ${entry.avg_velo != null ? veloColor(entry.avg_velo, entry.type) : "text-muted"}`}>
+                            <td className="text-center py-2 px-1.5" style={{ color: "var(--muted)" }}>{entry.count}</td>
+                            <td className="text-center py-2 px-1.5 font-semibold text-foreground">{entry.usage_pct.toFixed(1)}%</td>
+                            <td className="text-center py-2 px-1.5" style={{ color: "var(--muted)" }}>{entry.bbe ?? DASH}</td>
+                            <PitchCell v={entry.ba}   lo={0.225} hi={0.270} ba />
+                            <PitchCell v={entry.woba} lo={0.295} hi={0.340} ba />
+                            <PitchCell v={entry.slg}  lo={0.360} hi={0.450} ba />
+                            <PitchCell v={entry.iso}  lo={0.135} hi={0.200} ba />
+                            <td className="text-center py-2 px-1.5 text-foreground">{entry.hr ?? DASH}</td>
+                            <PitchCell v={entry.bb_pct}   lo={6.5} hi={10} pct />
+                            <PitchCell v={entry.whiff_pct} lo={28} hi={35} pct invert />
+                            <PitchCell v={entry.k_pct}    lo={26} hi={33} pct invert />
+                            <td className={`text-center py-2 pl-1.5 ${entry.avg_velo != null ? veloColor(entry.avg_velo, entry.type) : "text-muted"}`}>
                               {entry.avg_velo != null ? entry.avg_velo.toFixed(1) : DASH}
-                            </td>
-                            <td className="text-center py-2 px-2" style={{ color: "var(--muted)" }}>
-                              {entry.avg_spin != null ? entry.avg_spin.toLocaleString() : DASH}
-                            </td>
-                            <td className={`text-center py-2 px-2 ${whiffColor(entry.whiff_pct)}`}>
-                              {entry.whiff_pct.toFixed(1)}%
                             </td>
                           </tr>
                         ))}

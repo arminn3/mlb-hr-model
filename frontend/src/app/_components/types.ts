@@ -91,11 +91,21 @@ export interface PitcherArsenalEntry {
   avg_spin?: number | null;
   whiff_pct: number;
   count: number;
+  bbe?: number;
+  ba?: number | null;
+  woba?: number | null;
+  slg?: number | null;
+  iso?: number | null;
+  hr?: number;
+  bb_pct?: number | null;
+  k_pct?: number | null;
 }
 
 export interface PitcherProfile {
   rows: { season: PitcherStatRow; vs_L: PitcherStatRow; vs_R: PitcherStatRow };
   arsenal: PitcherArsenalEntry[];
+  arsenal_vs_L?: PitcherArsenalEntry[];
+  arsenal_vs_R?: PitcherArsenalEntry[];
   wins: number;
   losses: number;
   games_started: number;

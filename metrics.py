@@ -93,32 +93,102 @@ def build_pitcher_profile(pitcher_df: pd.DataFrame, pitcher_id: int = None,
         out["rows"]["vs_L"] = _compute_row(df[df["stand"] == "L"])
         out["rows"]["vs_R"] = _compute_row(df[df["stand"] == "R"])
 
-    # Arsenal
+    # Arsenal — overall + per-hand outcome tables
     if "pitch_type" in df.columns and len(df) > 0:
-        total = len(df)
-        arsenal = []
-        for pt, group in df.groupby("pitch_type"):
-            if pd.isna(pt) or pt == "":
-                continue
-            n = len(group)
-            velo = group["release_speed"].dropna() if "release_speed" in group.columns else pd.Series(dtype=float)
-            spin = group["release_spin_rate"].dropna() if "release_spin_rate" in group.columns else pd.Series(dtype=float)
-            desc = group["description"] if "description" in group.columns else pd.Series(dtype=object)
-            n_swings = int(desc.isin(_SWING_DESCRIPTIONS).sum())
-            n_whiffs = int(desc.isin(_WHIFF_DESCRIPTIONS).sum())
-            arsenal.append({
-                "type": pt,
-                "name": _PITCH_NAMES.get(pt, pt),
-                "usage_pct": round(n / total * 100, 1),
-                "avg_velo": round(float(velo.mean()), 1) if len(velo) > 0 else None,
-                "avg_spin": int(round(float(spin.mean()))) if len(spin) > 0 else None,
-                "whiff_pct": round(n_whiffs / n_swings * 100, 1) if n_swings > 0 else 0.0,
-                "count": n,
-            })
-        arsenal.sort(key=lambda a: a["usage_pct"], reverse=True)
-        out["arsenal"] = arsenal
+        out["arsenal"] = _build_arsenal(df, df)
+        if "stand" in df.columns:
+            out["arsenal_vs_L"] = _build_arsenal(df[df["stand"] == "L"], df)
+            out["arsenal_vs_R"] = _build_arsenal(df[df["stand"] == "R"], df)
 
     return out
+
+
+def _build_arsenal(hand_df: pd.DataFrame, full_df: pd.DataFrame) -> list:
+    """Build arsenal list from hand_df (filtered by batter hand), using full_df
+    for velo/spin (which don't depend on batter hand)."""
+    if hand_df is None or len(hand_df) == 0:
+        return []
+
+    # Velo/spin come from all pitches regardless of batter hand
+    velo_by_pt: dict = {}
+    spin_by_pt: dict = {}
+    if "pitch_type" in full_df.columns:
+        for pt, grp in full_df.groupby("pitch_type"):
+            if pd.isna(pt) or pt == "":
+                continue
+            v = grp["release_speed"].dropna() if "release_speed" in grp.columns else pd.Series(dtype=float)
+            s = grp["release_spin_rate"].dropna() if "release_spin_rate" in grp.columns else pd.Series(dtype=float)
+            velo_by_pt[pt] = round(float(v.mean()), 1) if len(v) > 0 else None
+            spin_by_pt[pt] = int(round(float(s.mean()))) if len(s) > 0 else None
+
+    total = len(hand_df)
+    entries = []
+    for pt, grp in hand_df.groupby("pitch_type"):
+        if pd.isna(pt) or pt == "":
+            continue
+        n = len(grp)
+
+        # Whiff% from description
+        desc = grp["description"] if "description" in grp.columns else pd.Series(dtype=object)
+        n_swings = int(desc.isin(_SWING_DESCRIPTIONS).sum())
+        n_whiffs = int(desc.isin(_WHIFF_DESCRIPTIONS).sum())
+
+        # Outcome stats from PA-ending rows
+        pa_rows = grp[grp["events"].notna()] if "events" in grp.columns else pd.DataFrame()
+        n_pa = len(pa_rows)
+
+        bbe = int(grp["launch_speed"].notna().sum()) if "launch_speed" in grp.columns else 0
+
+        ba = slg = iso = woba_val = None
+        n_hr = 0
+        bb_pct = k_pct = None
+
+        if n_pa > 0:
+            events = pa_rows["events"]
+            n_hits = int(events.isin(_HIT_EVENTS).sum())
+            n_hr   = int((events == "home_run").sum())
+            n_bb   = int(events.isin(_BB_EVENTS).sum())
+            n_k    = int(events.isin({"strikeout", "strikeout_double_play"}).sum())
+            n_hbp  = int((events == "hit_by_pitch").sum())
+            n_sf   = int(events.isin({"sac_fly", "sac_fly_double_play"}).sum())
+            n_ab   = n_pa - n_bb - n_hbp - n_sf
+
+            if n_ab > 0:
+                doubles = int((events == "double").sum())
+                triples = int((events == "triple").sum())
+                total_bases = n_hits + doubles + 2 * triples + 3 * n_hr
+                ba  = round(n_hits / n_ab, 3)
+                slg = round(total_bases / n_ab, 3)
+                iso = round(slg - ba, 3)
+
+            denom = n_ab + n_bb + n_hbp + n_sf
+            if denom > 0:
+                w = sum(_WOBA_WEIGHTS.get(e, 0) for e in events if isinstance(e, str))
+                woba_val = round(w / denom, 3)
+
+            bb_pct = round(n_bb / n_pa * 100, 1)
+            k_pct  = round(n_k  / n_pa * 100, 1)
+
+        entries.append({
+            "type": pt,
+            "name": _PITCH_NAMES.get(pt, pt),
+            "usage_pct": round(n / total * 100, 1),
+            "avg_velo": velo_by_pt.get(pt),
+            "avg_spin": spin_by_pt.get(pt),
+            "whiff_pct": round(n_whiffs / n_swings * 100, 1) if n_swings > 0 else 0.0,
+            "count": n,
+            "bbe": bbe,
+            "ba": ba,
+            "woba": woba_val,
+            "slg": slg,
+            "iso": iso,
+            "hr": n_hr,
+            "bb_pct": bb_pct,
+            "k_pct": k_pct,
+        })
+
+    entries.sort(key=lambda a: a["usage_pct"], reverse=True)
+    return entries
 
 
 def _empty_row() -> dict:
