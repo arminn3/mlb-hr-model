@@ -26,45 +26,53 @@ function fmtNum(v: number | null | undefined, d = 2): string {
   return v.toFixed(d);
 }
 
-// invert=false → lower is better for pitcher (green when low, red when high)
-// invert=true  → higher is better for pitcher (green when high, red when low)
-function cellCls(v: number | null | undefined, lo: number, hi: number, invert = false): string {
-  if (v == null) return "text-muted";
+type CellHeat = "green" | "red" | null;
+
+// Returns the heat level from the HR-prop bettor's perspective:
+// invert=true  → high = green (HR/9, ISO, wOBA…)
+// invert=false → low = green (K%, Whiff%)
+function cellHeat(v: number | null | undefined, lo: number, hi: number, invert = false): CellHeat {
+  if (v == null) return null;
   if (invert) {
-    if (v >= hi) return "text-accent-green font-semibold";
-    if (v >= lo) return "text-foreground";
-    return "text-accent-red/80";
+    if (v >= hi) return "green";
+    if (v < lo)  return "red";
+    return null;
   }
-  if (v <= lo) return "text-accent-green font-semibold";
-  if (v <= hi) return "text-foreground";
-  return "text-accent-red/80";
+  if (v <= lo) return "green";
+  if (v > hi)  return "red";
+  return null;
 }
+
+const HEAT_BG: Record<"green" | "red", React.CSSProperties> = {
+  green: { background: "rgba(34,197,94,0.20)",  border: "1px solid rgba(34,197,94,0.35)",  color: "rgb(134,239,172)", fontWeight: 600 },
+  red:   { background: "rgba(239,68,68,0.18)",  border: "1px solid rgba(239,68,68,0.30)",  color: "rgb(252,165,165)", fontWeight: 600 },
+};
 
 interface ColDef {
   key: SortKey;
   label: string;
   render: (row: PitcherStatRow) => string;
-  color?: (row: PitcherStatRow) => string;
+  heat?: (row: PitcherStatRow) => CellHeat;
 }
 
 // All coloring is from the HR-prop bettor's perspective:
 // GREEN = pitcher is vulnerable (high HR/9, ISO, wOBA etc.)
 // RED   = pitcher is dominant (high K%, Whiff%)
 const COLUMNS: ColDef[] = [
-  { key: "hr_per_9",     label: "HR/9",   render: r => fmtNum(r.hr_per_9),      color: r => cellCls(r.hr_per_9, 0.90, 1.30, true) },
-  { key: "iso",          label: "ISO",    render: r => fmtBa(r.iso),            color: r => cellCls(r.iso, 0.130, 0.175, true) },
-  { key: "hr_fb_pct",   label: "HR/FB%", render: r => fmtPct(r.hr_fb_pct),     color: r => cellCls(r.hr_fb_pct, 8, 13, true) },
-  { key: "woba",         label: "wOBA",   render: r => fmtBa(r.woba),           color: r => cellCls(r.woba, 0.295, 0.330, true) },
-  { key: "slg",          label: "SLG",    render: r => fmtBa(r.slg),            color: r => cellCls(r.slg, 0.350, 0.420, true) },
-  { key: "barrel_pct",   label: "Brl%",   render: r => fmtPct(r.barrel_pct),    color: r => cellCls(r.barrel_pct, 5, 8, true) },
-  { key: "hard_hit_pct", label: "HH%",    render: r => fmtPct(r.hard_hit_pct),  color: r => cellCls(r.hard_hit_pct, 30, 38, true) },
-  { key: "fb_pct",       label: "FB%",    render: r => fmtPct(r.fb_pct),        color: r => cellCls(r.fb_pct, 28, 36, true) },
-  { key: "baa",          label: "BAA",    render: r => fmtBa(r.baa),            color: r => cellCls(r.baa, 0.220, 0.260, true) },
-  { key: "whip",         label: "WHIP",   render: r => fmtNum(r.whip),          color: r => cellCls(r.whip, 1.10, 1.35, true) },
+  { key: "hr_per_9",     label: "HR/9",   render: r => fmtNum(r.hr_per_9),      heat: r => cellHeat(r.hr_per_9, 0.90, 1.30, true) },
+  { key: "iso",          label: "ISO",    render: r => fmtBa(r.iso),            heat: r => cellHeat(r.iso, 0.130, 0.175, true) },
+  { key: "hr_fb_pct",   label: "HR/FB%", render: r => fmtPct(r.hr_fb_pct),     heat: r => cellHeat(r.hr_fb_pct, 8, 13, true) },
+  { key: "woba",         label: "wOBA",   render: r => fmtBa(r.woba),           heat: r => cellHeat(r.woba, 0.295, 0.330, true) },
+  { key: "slg",          label: "SLG",    render: r => fmtBa(r.slg),            heat: r => cellHeat(r.slg, 0.350, 0.420, true) },
+  { key: "barrel_pct",   label: "Brl%",   render: r => fmtPct(r.barrel_pct),    heat: r => cellHeat(r.barrel_pct, 5, 8, true) },
+  { key: "hard_hit_pct", label: "HH%",    render: r => fmtPct(r.hard_hit_pct),  heat: r => cellHeat(r.hard_hit_pct, 30, 38, true) },
+  { key: "fb_pct",       label: "FB%",    render: r => fmtPct(r.fb_pct),        heat: r => cellHeat(r.fb_pct, 28, 36, true) },
+  { key: "baa",          label: "BAA",    render: r => fmtBa(r.baa),            heat: r => cellHeat(r.baa, 0.220, 0.260, true) },
+  { key: "whip",         label: "WHIP",   render: r => fmtNum(r.whip),          heat: r => cellHeat(r.whip, 1.10, 1.35, true) },
   { key: "hr",           label: "HR",     render: r => String(r.hr) },
-  { key: "bb_pct",       label: "BB%",    render: r => fmtPct(r.bb_pct),        color: r => cellCls(r.bb_pct, 6.5, 9.5, true) },
-  { key: "k_pct",        label: "K%",     render: r => fmtPct(r.k_pct),         color: r => cellCls(r.k_pct, 20, 27) },
-  { key: "whiff_pct",    label: "Whiff%", render: r => fmtPct(r.whiff_pct),     color: r => cellCls(r.whiff_pct, 22, 30) },
+  { key: "bb_pct",       label: "BB%",    render: r => fmtPct(r.bb_pct),        heat: r => cellHeat(r.bb_pct, 6.5, 9.5, true) },
+  { key: "k_pct",        label: "K%",     render: r => fmtPct(r.k_pct),         heat: r => cellHeat(r.k_pct, 20, 27) },
+  { key: "whiff_pct",    label: "Whiff%", render: r => fmtPct(r.whiff_pct),     heat: r => cellHeat(r.whiff_pct, 22, 30) },
   { key: "ip",           label: "IP",     render: r => r.ip != null ? r.ip.toFixed(1) : DASH },
   { key: "bf",           label: "BF",     render: r => String(r.bf) },
 ];
@@ -278,16 +286,21 @@ export function PitcherSummaryPage({ games }: { games: GameData[] }) {
                 {COLUMNS.map(col => {
                   if (!entry.row) {
                     return (
-                      <td key={col.key} className="text-center px-2 py-2.5 text-muted">
-                        {DASH}
+                      <td key={col.key} className="text-center px-1.5 py-1.5">
+                        <div className="px-2 py-1.5 text-center rounded" style={{ color: "var(--muted)" }}>{DASH}</div>
                       </td>
                     );
                   }
                   const val = col.render(entry.row);
-                  const cls = col.color ? col.color(entry.row) : "text-foreground";
+                  const heat = col.heat ? col.heat(entry.row) : null;
                   return (
-                    <td key={col.key} className={`text-center px-2 py-2.5 ${cls}`}>
-                      {val}
+                    <td key={col.key} className="text-center px-1.5 py-1.5">
+                      <div
+                        className="px-2 py-1.5 text-center rounded text-xs font-mono"
+                        style={heat ? { ...HEAT_BG[heat], borderRadius: 5 } : { color: "rgba(255,255,255,0.55)" }}
+                      >
+                        {val}
+                      </div>
                     </td>
                   );
                 })}
