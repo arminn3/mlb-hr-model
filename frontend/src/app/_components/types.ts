@@ -167,6 +167,7 @@ export interface PlayerData {
     pull_air?: number;
     xwoba?: number;
     sweet_spot?: number;
+    season_abs?: RecentAB[];
   };
   matchup_swstr?: number;
   pitcher_data_year?: number;

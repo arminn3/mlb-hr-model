@@ -286,7 +286,7 @@ export function BatterDetailPage({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pitchAbsData = (scores as any).pitch_abs as Record<string, Array<Record<string, unknown>>> | undefined;
-  const limit = activeLookback === "L5" ? 5 : 10;
+  const limit = activeLookback === "L5" ? 5 : activeLookback === "Season" ? 25 : 10;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let filteredABs: any[];
   if (pitchFilter.size === 0) {

@@ -574,6 +574,23 @@ def run_model(game_date: date = None, fast: bool = False):
                     ba = hits_mask.sum() / ab
                     slg = total_bases / ab
                     season_profile["iso"] = round(float(slg - ba), 3)
+            # Last 25 BIPs across the full season pool — used for Season tab AB log
+            _sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in all_bip.columns else ["game_date"]
+            _sabs_pool = all_bip.sort_values(_sort_cols, ascending=False).head(25)
+            season_abs = []
+            for _, _r in _sabs_pool.iterrows():
+                season_abs.append({
+                    "date": str(_r.get("game_date", ""))[:10],
+                    "pitcher_name": str(_r.get("player_name", "")),
+                    "pitch_arm": str(_r.get("p_throws", pitcher_hand)),
+                    "pitch_type": str(_r.get("pitch_name", _r.get("pitch_type", ""))),
+                    "ev": round(float(_r.get("launch_speed", 0) or 0), 1),
+                    "angle": round(float(_r.get("launch_angle", 0) or 0), 1),
+                    "distance": round(float(_r.get("hit_distance_sc", 0) or 0), 0)
+                        if pd.notna(_r.get("hit_distance_sc")) else None,
+                    "result": str(_r.get("events", "")),
+                })
+            season_profile["season_abs"] = season_abs
 
         # Zone grids — batter hot zones and pitcher vulnerable zones (pitch location 1-9)
         _bz_frames = []
