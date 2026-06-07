@@ -286,7 +286,7 @@ export function BatterDetailPage({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pitchAbsData = (scores as any).pitch_abs as Record<string, Array<Record<string, unknown>>> | undefined;
-  const limit = activeLookback === "L10" ? 10 : 5;
+  const limit = activeLookback === "L5" ? 5 : 10;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let filteredABs: any[];
   if (pitchFilter.size === 0) {
@@ -316,10 +316,8 @@ export function BatterDetailPage({
   const bip = scores.bip ?? 0;
 
   let displayBarrel = scores.barrel_pct, displayFb = scores.fb_pct;
-  // ld/gb aren't tracked in season_profile — show null (→ "—") in Season mode
-  // Also null when BIP is too low to be meaningful
-  let displayLd: number | null = isSeasonMode ? null : ((bip < 3 && scores.ld_pct === 0) ? null : (scores.ld_pct ?? null));
-  let displayGb: number | null = isSeasonMode ? null : ((bip < 3 && scores.gb_pct === 0) ? null : (scores.gb_pct ?? null));
+  let displayLd: number | null = (bip < 3 && scores.ld_pct === 0) ? null : (scores.ld_pct ?? null);
+  let displayGb: number | null = (bip < 3 && scores.gb_pct === 0) ? null : (scores.gb_pct ?? null);
   let displayHardHit = scores.hard_hit_pct, displayEv = scores.exit_velo;
   let displayHrFb: number | null = hrFbPct;
 
