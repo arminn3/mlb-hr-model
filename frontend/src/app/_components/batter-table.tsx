@@ -320,7 +320,7 @@ export function BatterRow({
               )}
               {hasQualityWarn && (
                 <span className="px-1 py-0 text-[8px] rounded bg-accent-yellow/10 text-accent-yellow">
-                  {scores.data_quality === "LOW_SAMPLE" ? "SMALL" : "P-SAMPLE"}
+                  {scores.data_quality === "LOW_SAMPLE" ? "SMALL" : scores.data_quality === "LOW_PITCHER_IP" ? "LOW IP" : "SMALL"}
                 </span>
               )}
             </div>
