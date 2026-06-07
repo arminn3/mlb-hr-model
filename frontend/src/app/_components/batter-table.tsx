@@ -22,6 +22,16 @@ function statColor(value: number, lo: number, hi: number): string {
   return "text-muted";
 }
 
+const HEAT_GREEN: React.CSSProperties = { background: "rgba(34,197,94,0.20)", border: "1px solid rgba(34,197,94,0.35)", color: "rgb(134,239,172)", fontWeight: 600, borderRadius: 4, padding: "2px 6px", display: "inline-block" };
+const HEAT_NONE: React.CSSProperties  = { color: "rgba(255,255,255,0.55)", padding: "2px 6px", display: "inline-block" };
+const HEAT_MUTED: React.CSSProperties = { color: "rgba(255,255,255,0.25)", padding: "2px 6px", display: "inline-block" };
+
+function heatBox(value: number | null | undefined, lo: number, hi: number, label: string): React.ReactNode {
+  if (value == null) return <span style={HEAT_MUTED}>—</span>;
+  const style = value >= hi ? HEAT_GREEN : value >= lo ? HEAT_NONE : HEAT_MUTED;
+  return <span style={style}>{label}</span>;
+}
+
 function matchupScore(pitchDetail: Record<string, PitchDetailEntry>): number {
   const entries = Object.entries(pitchDetail).filter(([, d]) => (d.usage_pct ?? 0) >= 12);
   if (!entries.length) return 0.5;
@@ -338,74 +348,53 @@ export function BatterRow({
       </td>
 
       {/* Core stats — use filtered pitch stats when a pitch filter is active */}
-      <td className="py-2.5 pr-3 w-14 text-center">
-        <span className={`text-xs font-mono ${statColor(filtered ? filtered.exit_velo : scores.exit_velo, 88, 93)}`}>
-          {filtered ? filtered.exit_velo : scores.exit_velo}
-        </span>
+      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
+        {heatBox(filtered ? filtered.exit_velo : scores.exit_velo, 88, 93, String(filtered ? filtered.exit_velo : scores.exit_velo))}
       </td>
-      <td className="py-2.5 pr-3 w-14 text-center">
-        <span className={`text-xs font-mono ${statColor(filtered ? filtered.barrel_pct : scores.barrel_pct, 8, 15)}`}>
-          {filtered ? filtered.barrel_pct : scores.barrel_pct}%
-        </span>
+      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
+        {heatBox(filtered ? filtered.barrel_pct : scores.barrel_pct, 8, 15, `${filtered ? filtered.barrel_pct : scores.barrel_pct}%`)}
       </td>
-      <td className="py-2.5 pr-3 w-14 text-center">
-        <span className={`text-xs font-mono ${statColor(filtered ? filtered.hard_hit_pct : scores.hard_hit_pct, 35, 50)}`}>
-          {filtered ? filtered.hard_hit_pct : scores.hard_hit_pct}%
-        </span>
+      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
+        {heatBox(filtered ? filtered.hard_hit_pct : scores.hard_hit_pct, 35, 50, `${filtered ? filtered.hard_hit_pct : scores.hard_hit_pct}%`)}
       </td>
-      <td className="py-2.5 pr-3 w-14 text-center">
-        <span className={`text-xs font-mono ${statColor(filtered ? filtered.fb_pct : scores.fb_pct, 25, 40)}`}>
-          {filtered ? filtered.fb_pct : scores.fb_pct}%
-        </span>
+      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
+        {heatBox(filtered ? filtered.fb_pct : scores.fb_pct, 25, 40, `${filtered ? filtered.fb_pct : scores.fb_pct}%`)}
       </td>
-      <td className="py-2.5 pr-4 w-16 text-center">
-        <span className={`text-xs font-mono ${hrFbPct == null ? "text-muted" : statColor(hrFbPct, 10, 18)}`}>
-          {hrFbPct == null ? "—" : `${hrFbPct.toFixed(0)}%`}
-        </span>
+      <td className="py-1.5 pr-3 w-16 text-center text-xs font-mono">
+        {heatBox(hrFbPct, 10, 18, hrFbPct == null ? "—" : `${hrFbPct.toFixed(0)}%`)}
       </td>
 
       {/* Advanced / display-only columns */}
-      <td className="py-2.5 pr-3 w-16 text-center">
-        <span className={`text-xs font-mono ${xwoba == null ? "text-muted" : statColor(xwoba, 0.32, 0.40)}`}>
-          {xwoba == null || xwoba === 0 ? "—" : xwoba.toFixed(3)}
-        </span>
+      <td className="py-1.5 pr-2 w-16 text-center text-xs font-mono">
+        {heatBox(xwoba && xwoba !== 0 ? xwoba : null, 0.32, 0.40, xwoba == null || xwoba === 0 ? "—" : xwoba.toFixed(3))}
       </td>
-      <td className="py-2.5 pr-3 w-16 text-center">
-        <span className={`text-xs font-mono ${sweet == null ? "text-muted" : statColor(sweet, 35, 50)}`}>
-          {sweet == null || sweet === 0 ? "—" : `${sweet.toFixed(1)}%`}
-        </span>
+      <td className="py-1.5 pr-2 w-16 text-center text-xs font-mono">
+        {heatBox(sweet && sweet !== 0 ? sweet : null, 35, 50, sweet == null || sweet === 0 ? "—" : `${sweet.toFixed(1)}%`)}
       </td>
-      <td className="py-2.5 pr-3 w-16 text-center">
-        <span className={`text-xs font-mono ${swstr == null || swstr === 0 ? "text-muted" : statColor(100 - swstr, 60, 75)}`}>
-          {swstr == null || swstr === 0 ? "—" : `${swstr.toFixed(1)}%`}
-        </span>
+      <td className="py-1.5 pr-2 w-16 text-center text-xs font-mono">
+        {heatBox(swstr && swstr !== 0 ? 100 - swstr : null, 60, 75, swstr == null || swstr === 0 ? "—" : `${swstr.toFixed(1)}%`)}
       </td>
-      <td className="py-2.5 pr-3 w-16 text-center">
-        <span className={`text-xs font-mono ${pullBrl == null ? "text-muted" : statColor(pullBrl, 4, 8)}`}>
-          {pullBrl == null || pullBrl === 0 ? "—" : `${pullBrl.toFixed(1)}%`}
-        </span>
+      <td className="py-1.5 pr-2 w-16 text-center text-xs font-mono">
+        {heatBox(pullBrl && pullBrl !== 0 ? pullBrl : null, 4, 8, pullBrl == null || pullBrl === 0 ? "—" : `${pullBrl.toFixed(1)}%`)}
       </td>
-      <td className="py-2.5 pr-3 w-14 text-center">
+      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
         {(() => {
           const bip = scores.bip ?? p.season_profile?.bip_count ?? 0;
-          return (
-            <span className={`text-xs font-mono ${bip >= 50 ? "text-foreground" : bip >= 20 ? "text-accent-yellow" : "text-muted"}`}>
-              {bip > 0 ? bip : "—"}
-            </span>
-          );
+          const style = bip >= 50 ? HEAT_NONE : bip >= 20 ? { ...HEAT_NONE, color: "rgba(251,191,36,0.85)" } : HEAT_MUTED;
+          return <span style={style}>{bip > 0 ? bip : "—"}</span>;
         })()}
       </td>
 
       {/* Contact shape (less important — at the end) */}
-      <td className="py-2.5 pr-3 w-14 text-center">
-        <span className="text-xs font-mono text-muted">{scores.gb_pct ?? "—"}%</span>
+      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
+        <span style={HEAT_MUTED}>{scores.gb_pct ?? "—"}%</span>
       </td>
-      <td className="py-2.5 pr-3 w-14 text-center">
-        <span className="text-xs font-mono text-muted">{scores.ld_pct ?? "—"}%</span>
+      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
+        <span style={HEAT_MUTED}>{scores.ld_pct ?? "—"}%</span>
       </td>
 
       {/* BZM */}
-      <td className="py-2.5 pr-3 w-12 text-center">
+      <td className="py-1.5 pr-2 w-12 text-center text-xs font-mono">
         {(() => {
           const bz = Object.fromEntries((p.batter_zones ?? []).map(z => [z.zone, z]));
           const pz = Object.fromEntries((p.pitcher_zones ?? []).map(z => [z.zone, z]));
@@ -414,11 +403,12 @@ export function BatterRow({
             const b = bz[zone]; const pzz = pz[zone];
             if (b && pzz && b.bip >= 3 && pzz.bip >= 3 && b.barrel_rate >= 10 && pzz.barrel_rate >= 6) n++;
           }
-          return (
-            <span className={`text-xs font-mono font-bold ${n >= 3 ? "text-accent-green" : n >= 1 ? "text-accent-yellow" : "text-muted/30"}`}>
-              {n}/9
-            </span>
-          );
+          const bzmStyle: React.CSSProperties = n >= 3
+            ? { ...HEAT_GREEN, color: "rgb(134,239,172)" }
+            : n >= 1
+            ? { ...HEAT_NONE, color: "rgba(251,191,36,0.9)", fontWeight: 600 }
+            : HEAT_MUTED;
+          return <span style={bzmStyle}>{n}/9</span>;
         })()}
       </td>
 
