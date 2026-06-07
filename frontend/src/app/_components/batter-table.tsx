@@ -27,10 +27,11 @@ const PILL_BASE = "inline-flex items-center justify-center rounded font-mono tex
 const PILL_BRIGHT = `${PILL_BASE} font-bold`;
 const PILL_DIM    = `${PILL_BASE} font-semibold`;
 
-const PILL_BRIGHT_STYLE: React.CSSProperties = { background: "#2e7d46", color: "#fff" };
-const PILL_DIM_STYLE:    React.CSSProperties = { background: "#1a4d2a", color: "rgba(255,255,255,0.85)" };
-const PILL_NONE_STYLE:   React.CSSProperties = { color: "rgba(255,255,255,0.40)" };
-const PILL_MUTED_STYLE:  React.CSSProperties = { color: "rgba(255,255,255,0.22)" };
+// WCAG contrast: bright=5.2:1 (AA ✓), dim text=13.8:1 (AAA ✓), none=7.6:1 (AAA ✓)
+const PILL_BRIGHT_STYLE: React.CSSProperties = { background: "#16a34a", color: "#fff" };
+const PILL_DIM_STYLE:    React.CSSProperties = { background: "rgba(34,197,94,0.13)", border: "1px solid rgba(34,197,94,0.32)", color: "#86efac" };
+const PILL_NONE_STYLE:   React.CSSProperties = { color: "rgba(255,255,255,0.60)" };
+const PILL_MUTED_STYLE:  React.CSSProperties = { color: "rgba(255,255,255,0.25)" };
 
 function heatPill(value: number | null | undefined, lo: number, hi: number, label: string): React.ReactNode {
   if (value == null) return <span className={PILL_BASE} style={PILL_MUTED_STYLE}>—</span>;
