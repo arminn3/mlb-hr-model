@@ -47,23 +47,26 @@ interface ColDef {
   color?: (row: PitcherStatRow) => string;
 }
 
+// All coloring is from the HR-prop bettor's perspective:
+// GREEN = pitcher is vulnerable (high HR/9, ISO, wOBA etc.)
+// RED   = pitcher is dominant (high K%, Whiff%)
 const COLUMNS: ColDef[] = [
+  { key: "hr_per_9",     label: "HR/9",   render: r => fmtNum(r.hr_per_9),      color: r => cellCls(r.hr_per_9, 0.90, 1.30, true) },
+  { key: "iso",          label: "ISO",    render: r => fmtBa(r.iso),            color: r => cellCls(r.iso, 0.130, 0.175, true) },
+  { key: "hr_fb_pct",   label: "HR/FB%", render: r => fmtPct(r.hr_fb_pct),     color: r => cellCls(r.hr_fb_pct, 8, 13, true) },
+  { key: "woba",         label: "wOBA",   render: r => fmtBa(r.woba),           color: r => cellCls(r.woba, 0.295, 0.330, true) },
+  { key: "slg",          label: "SLG",    render: r => fmtBa(r.slg),            color: r => cellCls(r.slg, 0.350, 0.420, true) },
+  { key: "barrel_pct",   label: "Brl%",   render: r => fmtPct(r.barrel_pct),    color: r => cellCls(r.barrel_pct, 5, 8, true) },
+  { key: "hard_hit_pct", label: "HH%",    render: r => fmtPct(r.hard_hit_pct),  color: r => cellCls(r.hard_hit_pct, 30, 38, true) },
+  { key: "fb_pct",       label: "FB%",    render: r => fmtPct(r.fb_pct),        color: r => cellCls(r.fb_pct, 28, 36, true) },
+  { key: "baa",          label: "BAA",    render: r => fmtBa(r.baa),            color: r => cellCls(r.baa, 0.220, 0.260, true) },
+  { key: "whip",         label: "WHIP",   render: r => fmtNum(r.whip),          color: r => cellCls(r.whip, 1.10, 1.35, true) },
+  { key: "hr",           label: "HR",     render: r => String(r.hr) },
+  { key: "bb_pct",       label: "BB%",    render: r => fmtPct(r.bb_pct),        color: r => cellCls(r.bb_pct, 6.5, 9.5, true) },
+  { key: "k_pct",        label: "K%",     render: r => fmtPct(r.k_pct),         color: r => cellCls(r.k_pct, 20, 27) },
+  { key: "whiff_pct",    label: "Whiff%", render: r => fmtPct(r.whiff_pct),     color: r => cellCls(r.whiff_pct, 22, 30) },
   { key: "ip",           label: "IP",     render: r => r.ip != null ? r.ip.toFixed(1) : DASH },
   { key: "bf",           label: "BF",     render: r => String(r.bf) },
-  { key: "baa",          label: "BAA",    render: r => fmtBa(r.baa),            color: r => cellCls(r.baa, 0.220, 0.260) },
-  { key: "woba",         label: "wOBA",   render: r => fmtBa(r.woba),           color: r => cellCls(r.woba, 0.295, 0.330) },
-  { key: "slg",          label: "SLG",    render: r => fmtBa(r.slg),            color: r => cellCls(r.slg, 0.350, 0.420) },
-  { key: "iso",          label: "ISO",    render: r => fmtBa(r.iso),            color: r => cellCls(r.iso, 0.130, 0.175) },
-  { key: "whip",         label: "WHIP",   render: r => fmtNum(r.whip),          color: r => cellCls(r.whip, 1.10, 1.35) },
-  { key: "hr",           label: "HR",     render: r => String(r.hr) },
-  { key: "hr_per_9",     label: "HR/9",   render: r => fmtNum(r.hr_per_9),      color: r => cellCls(r.hr_per_9, 0.90, 1.30) },
-  { key: "bb_pct",       label: "BB%",    render: r => fmtPct(r.bb_pct),        color: r => cellCls(r.bb_pct, 6.5, 9.5) },
-  { key: "k_pct",        label: "K%",     render: r => fmtPct(r.k_pct),         color: r => cellCls(r.k_pct, 20, 27, true) },
-  { key: "whiff_pct",    label: "Whiff%", render: r => fmtPct(r.whiff_pct),     color: r => cellCls(r.whiff_pct, 22, 30, true) },
-  { key: "barrel_pct",   label: "Brl%",   render: r => fmtPct(r.barrel_pct),    color: r => cellCls(r.barrel_pct, 5, 8) },
-  { key: "hard_hit_pct", label: "HH%",    render: r => fmtPct(r.hard_hit_pct),  color: r => cellCls(r.hard_hit_pct, 30, 38) },
-  { key: "fb_pct",       label: "FB%",    render: r => fmtPct(r.fb_pct),        color: r => cellCls(r.fb_pct, 28, 36) },
-  { key: "hr_fb_pct",    label: "HR/FB%", render: r => fmtPct(r.hr_fb_pct),     color: r => cellCls(r.hr_fb_pct, 8, 13) },
 ];
 
 interface PitcherEntry {
@@ -193,11 +196,11 @@ export function PitcherSummaryPage({ games }: { games: GameData[] }) {
         <div className="flex items-center gap-3 ml-auto text-[10px]" style={{ color: "rgba(255,255,255,0.35)" }}>
           <span className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full inline-block" style={{ background: "rgba(74,222,128,0.8)" }} />
-            Good for pitcher
+            HR-friendly
           </span>
           <span className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full inline-block" style={{ background: "rgba(248,113,113,0.8)" }} />
-            Vulnerable
+            Pitcher dominant
           </span>
         </div>
       </div>
