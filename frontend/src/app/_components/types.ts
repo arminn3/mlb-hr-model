@@ -157,6 +157,8 @@ export interface PlayerData {
     barrel: number;
     ev: number;
     fb: number;
+    ld: number;
+    gb: number;
     hard_hit: number;
     bip_count: number;
     hrs: number;

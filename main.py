@@ -544,6 +544,8 @@ def run_model(game_date: date = None, fast: bool = False):
                 season_profile["barrel"] = round(float((all_bip["launch_speed_angle"] == 6).sum() / n * 100), 1)
             if "launch_angle" in all_bip.columns:
                 season_profile["fb"] = round(float(((all_bip["launch_angle"] >= 25) & (all_bip["launch_angle"] <= 50)).sum() / n * 100), 1)
+                season_profile["ld"] = round(float(((all_bip["launch_angle"] >= 10) & (all_bip["launch_angle"] < 25)).sum() / n * 100), 1)
+                season_profile["gb"] = round(float((all_bip["launch_angle"] < 10).sum() / n * 100), 1)
             season_profile["hard_hit"] = round(float((all_bip["launch_speed"] >= 95).sum() / n * 100), 1)
             if "launch_angle" in all_bip.columns:
                 sweet_mask = (all_bip["launch_angle"] >= 8) & (all_bip["launch_angle"] <= 32)
