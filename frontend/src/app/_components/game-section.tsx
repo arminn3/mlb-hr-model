@@ -59,6 +59,7 @@ export function GameSection({
   onToggleFavorite?: (name: string) => void;
 }) {
   const [selectedPitcher, setSelectedPitcher] = useState<PitcherInfo | null>(null);
+  const [selectedPitcherSide, setSelectedPitcherSide] = useState<"away" | "home">("away");
 
   const homeSide = game.team_pitch_mix?.home;
   const awaySide = game.team_pitch_mix?.away;
@@ -92,14 +93,25 @@ export function GameSection({
 
       {/* Pitcher cards — 2-col side by side */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
-        <PitcherProfileCard pitcher={game.away_pitcher} side="away" teamAbbr={game.away_team} onNameClick={() => setSelectedPitcher(game.away_pitcher)} />
-        <PitcherProfileCard pitcher={game.home_pitcher} side="home" teamAbbr={game.home_team} onNameClick={() => setSelectedPitcher(game.home_pitcher)} />
+        <PitcherProfileCard pitcher={game.away_pitcher} side="away" teamAbbr={game.away_team} onNameClick={() => { setSelectedPitcher(game.away_pitcher); setSelectedPitcherSide("away"); }} />
+        <PitcherProfileCard pitcher={game.home_pitcher} side="home" teamAbbr={game.home_team} onNameClick={() => { setSelectedPitcher(game.home_pitcher); setSelectedPitcherSide("home"); }} />
       </div>
 
-      {/* Pitcher stats panel — fixed overlay, rendered per game section */}
-      {selectedPitcher && (
-        <PitcherStatsPanel pitcher={selectedPitcher} onClose={() => setSelectedPitcher(null)} />
-      )}
+      {/* Pitcher stats panel — fixed overlay */}
+      {selectedPitcher && (() => {
+        // Batters facing this pitcher: home batters face away pitcher, away batters face home pitcher
+        const facingBatters = game.players.filter(p => p.batter_side === (selectedPitcherSide === "away" ? "home" : "away"));
+        const lhbPlayer = facingBatters.find(p => p.batter_hand !== "R");
+        const rhbPlayer = facingBatters.find(p => p.batter_hand !== "L");
+        return (
+          <PitcherStatsPanel
+            pitcher={selectedPitcher}
+            zoneFreqLhb={lhbPlayer?.pitcher_zone_freq}
+            zoneFreqRhb={rhbPlayer?.pitcher_zone_freq}
+            onClose={() => setSelectedPitcher(null)}
+          />
+        );
+      })()}
 
       {/* Batter tables */}
       <div className="mt-8 space-y-4">
