@@ -204,6 +204,7 @@ export function Sidebar({
               "slate",
               "hr_due",
               "matchup",
+              "pitcher_summary",
               "breakouts",
               "projections",
               "environment",
