@@ -22,18 +22,19 @@ function statColor(value: number, lo: number, hi: number): string {
   return "text-muted";
 }
 
-// Tier 1 (lo→hi): light green box — decent
-// Tier 2 (hi+):   bright green box — excellent
-const HEAT_BRIGHT: React.CSSProperties = { background: "rgba(34,197,94,0.22)", border: "1px solid rgba(34,197,94,0.40)", color: "rgb(134,239,172)", fontWeight: 700, borderRadius: 4, padding: "2px 6px", display: "inline-block" };
-const HEAT_DIM:    React.CSSProperties = { background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.18)", color: "rgb(134,239,172)", fontWeight: 500, borderRadius: 4, padding: "2px 6px", display: "inline-block" };
-const HEAT_NONE:   React.CSSProperties = { color: "rgba(255,255,255,0.40)", padding: "2px 6px", display: "inline-block" };
-const HEAT_MUTED:  React.CSSProperties = { color: "rgba(255,255,255,0.20)", padding: "2px 6px", display: "inline-block" };
-
-function heatBox(value: number | null | undefined, lo: number, hi: number, label: string): React.ReactNode {
-  if (value == null) return <span style={HEAT_MUTED}>—</span>;
-  const style = value >= hi ? HEAT_BRIGHT : value >= lo ? HEAT_DIM : HEAT_NONE;
-  return <span style={style}>{label}</span>;
+// Returns <td> inline style — solid cell fill like PropFinder
+// bright = vivid green, dim = darker green, null = no fill
+function heatTd(value: number | null | undefined, lo: number, hi: number): React.CSSProperties {
+  if (value != null && value >= hi) return { background: "#2e7d46", color: "#fff", fontWeight: 700 };
+  if (value != null && value >= lo) return { background: "#1a4d2a", color: "rgba(255,255,255,0.85)", fontWeight: 500 };
+  return { color: "rgba(255,255,255,0.35)" };
 }
+
+// For non-numeric heat (BZM yellow, BIP)
+const HEAT_BRIGHT: React.CSSProperties = { background: "#2e7d46", color: "#fff", fontWeight: 700 };
+const HEAT_DIM:    React.CSSProperties = { background: "#1a4d2a", color: "rgba(255,255,255,0.85)", fontWeight: 500 };
+const HEAT_NONE:   React.CSSProperties = { color: "rgba(255,255,255,0.35)" };
+const HEAT_MUTED:  React.CSSProperties = { color: "rgba(255,255,255,0.20)" };
 
 function matchupScore(pitchDetail: Record<string, PitchDetailEntry>): number {
   const entries = Object.entries(pitchDetail).filter(([, d]) => (d.usage_pct ?? 0) >= 12);
@@ -351,53 +352,61 @@ export function BatterRow({
       </td>
 
       {/* Core stats — use filtered pitch stats when a pitch filter is active */}
-      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
-        {heatBox(filtered ? filtered.exit_velo : scores.exit_velo, 88, 93, String(filtered ? filtered.exit_velo : scores.exit_velo))}
+      <td className="py-2.5 pr-2 w-14 text-center text-xs font-mono" style={heatTd(filtered ? filtered.exit_velo : scores.exit_velo, 88, 93)}>
+        {filtered ? filtered.exit_velo : scores.exit_velo}
       </td>
-      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
-        {heatBox(filtered ? filtered.barrel_pct : scores.barrel_pct, 8, 15, `${filtered ? filtered.barrel_pct : scores.barrel_pct}%`)}
+      <td className="py-2.5 pr-2 w-14 text-center text-xs font-mono" style={heatTd(filtered ? filtered.barrel_pct : scores.barrel_pct, 8, 15)}>
+        {filtered ? filtered.barrel_pct : scores.barrel_pct}%
       </td>
-      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
-        {heatBox(filtered ? filtered.hard_hit_pct : scores.hard_hit_pct, 35, 50, `${filtered ? filtered.hard_hit_pct : scores.hard_hit_pct}%`)}
+      <td className="py-2.5 pr-2 w-14 text-center text-xs font-mono" style={heatTd(filtered ? filtered.hard_hit_pct : scores.hard_hit_pct, 35, 50)}>
+        {filtered ? filtered.hard_hit_pct : scores.hard_hit_pct}%
       </td>
-      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
-        {heatBox(filtered ? filtered.fb_pct : scores.fb_pct, 25, 40, `${filtered ? filtered.fb_pct : scores.fb_pct}%`)}
+      <td className="py-2.5 pr-2 w-14 text-center text-xs font-mono" style={heatTd(filtered ? filtered.fb_pct : scores.fb_pct, 30, 45)}>
+        {filtered ? filtered.fb_pct : scores.fb_pct}%
       </td>
-      <td className="py-1.5 pr-3 w-16 text-center text-xs font-mono">
-        {heatBox(hrFbPct, 10, 18, hrFbPct == null ? "—" : `${hrFbPct.toFixed(0)}%`)}
+      <td className="py-2.5 pr-3 w-16 text-center text-xs font-mono" style={heatTd(hrFbPct, 10, 20)}>
+        {hrFbPct == null ? "—" : `${hrFbPct.toFixed(0)}%`}
       </td>
 
       {/* Advanced / display-only columns */}
-      <td className="py-1.5 pr-2 w-16 text-center text-xs font-mono">
-        {heatBox(xwoba && xwoba !== 0 ? xwoba : null, 0.32, 0.40, xwoba == null || xwoba === 0 ? "—" : xwoba.toFixed(3))}
+      <td className="py-2.5 pr-2 w-16 text-center text-xs font-mono" style={heatTd(xwoba && xwoba !== 0 ? xwoba : null, 0.32, 0.40)}>
+        {xwoba == null || xwoba === 0 ? "—" : xwoba.toFixed(3)}
       </td>
-      <td className="py-1.5 pr-2 w-16 text-center text-xs font-mono">
-        {heatBox(sweet && sweet !== 0 ? sweet : null, 35, 50, sweet == null || sweet === 0 ? "—" : `${sweet.toFixed(1)}%`)}
+      <td className="py-2.5 pr-2 w-16 text-center text-xs font-mono" style={heatTd(sweet && sweet !== 0 ? sweet : null, 35, 50)}>
+        {sweet == null || sweet === 0 ? "—" : `${sweet.toFixed(1)}%`}
       </td>
-      <td className="py-1.5 pr-2 w-16 text-center text-xs font-mono">
-        {heatBox(swstr && swstr !== 0 ? 100 - swstr : null, 60, 75, swstr == null || swstr === 0 ? "—" : `${swstr.toFixed(1)}%`)}
+      <td className="py-2.5 pr-2 w-16 text-center text-xs font-mono" style={heatTd(swstr && swstr !== 0 ? 100 - swstr : null, 60, 75)}>
+        {swstr == null || swstr === 0 ? "—" : `${swstr.toFixed(1)}%`}
       </td>
-      <td className="py-1.5 pr-2 w-16 text-center text-xs font-mono">
-        {heatBox(pullBrl && pullBrl !== 0 ? pullBrl : null, 4, 8, pullBrl == null || pullBrl === 0 ? "—" : `${pullBrl.toFixed(1)}%`)}
+      <td className="py-2.5 pr-2 w-16 text-center text-xs font-mono" style={heatTd(pullBrl && pullBrl !== 0 ? pullBrl : null, 4, 8)}>
+        {pullBrl == null || pullBrl === 0 ? "—" : `${pullBrl.toFixed(1)}%`}
       </td>
-      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
-        {(() => {
-          const bip = scores.bip ?? p.season_profile?.bip_count ?? 0;
-          const style = bip >= 50 ? HEAT_NONE : bip >= 20 ? { ...HEAT_NONE, color: "rgba(251,191,36,0.85)" } : HEAT_MUTED;
-          return <span style={style}>{bip > 0 ? bip : "—"}</span>;
-        })()}
+      <td className="py-2.5 pr-2 w-14 text-center text-xs font-mono" style={(() => {
+        const bip = scores.bip ?? p.season_profile?.bip_count ?? 0;
+        return bip >= 50 ? HEAT_NONE : bip >= 20 ? { color: "rgba(251,191,36,0.85)" } : HEAT_MUTED;
+      })()}>
+        {(() => { const bip = scores.bip ?? p.season_profile?.bip_count ?? 0; return bip > 0 ? bip : "—"; })()}
       </td>
 
       {/* Contact shape (less important — at the end) */}
-      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
-        <span style={HEAT_MUTED}>{scores.gb_pct ?? "—"}%</span>
+      <td className="py-2.5 pr-2 w-14 text-center text-xs font-mono" style={HEAT_MUTED}>
+        {scores.gb_pct ?? "—"}%
       </td>
-      <td className="py-1.5 pr-2 w-14 text-center text-xs font-mono">
-        <span style={HEAT_MUTED}>{scores.ld_pct ?? "—"}%</span>
+      <td className="py-2.5 pr-2 w-14 text-center text-xs font-mono" style={HEAT_MUTED}>
+        {scores.ld_pct ?? "—"}%
       </td>
 
       {/* BZM */}
-      <td className="py-1.5 pr-2 w-12 text-center text-xs font-mono">
+      <td className="py-2.5 pr-2 w-12 text-center text-xs font-mono" style={(() => {
+        const bz = Object.fromEntries((p.batter_zones ?? []).map(z => [z.zone, z]));
+        const pz = Object.fromEntries((p.pitcher_zones ?? []).map(z => [z.zone, z]));
+        let n = 0;
+        for (let zone = 1; zone <= 9; zone++) {
+          const b = bz[zone]; const pzz = pz[zone];
+          if (b && pzz && b.bip >= 3 && pzz.bip >= 3 && b.barrel_rate >= 10 && pzz.barrel_rate >= 6) n++;
+        }
+        return n >= 3 ? HEAT_BRIGHT : n >= 1 ? { background: "#4a3a10", color: "rgba(251,191,36,0.95)", fontWeight: 700 } : HEAT_MUTED;
+      })()}>
         {(() => {
           const bz = Object.fromEntries((p.batter_zones ?? []).map(z => [z.zone, z]));
           const pz = Object.fromEntries((p.pitcher_zones ?? []).map(z => [z.zone, z]));
@@ -406,12 +415,7 @@ export function BatterRow({
             const b = bz[zone]; const pzz = pz[zone];
             if (b && pzz && b.bip >= 3 && pzz.bip >= 3 && b.barrel_rate >= 10 && pzz.barrel_rate >= 6) n++;
           }
-          const bzmStyle: React.CSSProperties = n >= 3
-            ? HEAT_BRIGHT
-            : n >= 1
-            ? { ...HEAT_DIM, color: "rgba(251,191,36,0.9)", border: "1px solid rgba(251,191,36,0.25)" }
-            : HEAT_MUTED;
-          return <span style={bzmStyle}>{n}/9</span>;
+          return `${n}/9`;
         })()}
       </td>
 
