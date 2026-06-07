@@ -185,15 +185,17 @@ export function PitcherSummaryPage({ games }: { games: GameData[] }) {
       {/* Controls */}
       <div className="flex flex-wrap items-center gap-3 mb-6">
         {/* Split toggle */}
-        <div className="flex rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.10)" }}>
+        <div className="flex items-center gap-1">
           {SPLITS.map(s => (
             <button
               key={s.key}
               onClick={() => setSplit(s.key)}
-              className="px-3 py-1.5 text-xs font-semibold cursor-pointer transition-all"
-              style={split === s.key
-                ? { background: "var(--accent)", color: "#000" }
-                : { background: "transparent", color: "var(--muted)" }}
+              className={
+                "px-3 py-1.5 text-[12px] font-semibold rounded-[var(--radius-md)] cursor-pointer transition-colors " +
+                (split === s.key
+                  ? "bg-accent/15 text-accent border border-accent/40"
+                  : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
+              }
             >
               {s.label}
             </button>
