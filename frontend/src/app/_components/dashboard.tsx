@@ -23,6 +23,7 @@ import { MatchupAnalysis } from "./matchup-analysis";
 import { HRDueList } from "./hr-due-list";
 import { toast } from "sonner";
 import { TeamPitchMixPage } from "./team-pitch-mix-page";
+import { PitcherSummaryPage } from "./pitcher-summary-page";
 import { IconButton } from "./ui/icon-button";
 import { teamLogoUrl } from "./game-header";
 
@@ -54,7 +55,8 @@ const TAB_CONFIG: Record<Page, {
   breakouts:   { title: "Breakouts & Regression", subtitle: "Over- and under-performers vs xHR from bat-tracking stats", showLookback: false, showDatePicker: false },
   live:        { title: "Live Feed",         subtitle: "Real-time + historical game action",   showLookback: false, showDatePicker: true },
 methodology: { title: "How It Works",      showLookback: false, showDatePicker: false },
-  matchup:     { title: "Matchup Analysis",  subtitle: "Season-long hitter vs pitcher",        showLookback: false, showDatePicker: true },
+  matchup:         { title: "Matchup Analysis",  subtitle: "Season-long hitter vs pitcher",          showLookback: false, showDatePicker: true },
+  pitcher_summary: { title: "Pitcher Summary",   subtitle: "All starters on today's slate — sortable by any stat", showLookback: false, showDatePicker: true },
 };
 
 // When MAINTENANCE_MODE_PROD is true, show the error page ONLY on
@@ -674,6 +676,10 @@ export function Dashboard() {
 
           {activePage === "slips" && (
             <SlipGenerator games={data.games} lookback={lookback} favorites={favorites} onUnfavorite={(name) => setFavorites((prev) => { const n = new Set(prev); n.delete(name); return n; })} />
+          )}
+
+          {activePage === "pitcher_summary" && (
+            <PitcherSummaryPage games={data.games} />
           )}
 
           {activePage === "methodology" && (

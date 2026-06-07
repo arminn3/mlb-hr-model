@@ -17,7 +17,8 @@ export type Page =
   | "breakouts"
   | "live"
   | "methodology"
-  | "matchup";
+  | "matchup"
+  | "pitcher_summary";
 
 interface NavItem {
   key: Page;
@@ -37,6 +38,7 @@ const NAV_ITEMS: NavItem[] = [
   { key: "team_pitch_mix", label: "Team vs Pitch Mix", icon: "matchup" },
   { key: "breakouts", label: "Breakouts & Regression", icon: "gem" },
   { key: "live", label: "Live Feed", icon: "live" },
+  { key: "pitcher_summary", label: "Pitcher Summary", icon: "chart" },
   { key: "matchup", label: "Matchup Analysis", icon: "matchup" },
   { key: "methodology", label: "How It Works", icon: "info" },
 ];
