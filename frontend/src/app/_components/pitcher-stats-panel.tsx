@@ -67,36 +67,31 @@ const STAT_STRIP: StatDef[] = [
 ];
 
 function SplitStrip({ row }: { row: PitcherStatRow }) {
+  const allStats = [
+    ...STAT_STRIP,
+    { label: "IP",  key: "ip"  as keyof PitcherStatRow, render: (v: number | null | undefined) => v != null ? v.toFixed(1) : DASH, lo: 0, hi: 0 },
+    { label: "BF",  key: "bf"  as keyof PitcherStatRow, render: (v: number | null | undefined) => v != null ? String(v) : DASH,   lo: 0, hi: 0 },
+  ];
   return (
-    <div className="overflow-x-auto -mx-5 px-5">
-      <div className="flex items-stretch gap-0 min-w-max">
-        {STAT_STRIP.map(({ label, key, render, lo, hi, invert }) => {
-          const val = row[key] as number | null;
-          const colorCls = key === "hr" ? "text-foreground" : statCell(val, lo, hi, invert);
-          return (
-            <div
-              key={key}
-              className="flex flex-col items-center gap-1 px-3 py-2 first:pl-0"
-              style={{ borderRight: "1px solid rgba(255,255,255,0.06)" }}
-            >
-              <span className="text-[8px] uppercase tracking-[0.08em] font-semibold whitespace-nowrap" style={{ color: "rgba(255,255,255,0.35)" }}>
-                {label}
-              </span>
-              <span className={`text-sm font-mono font-bold leading-none ${colorCls}`}>
-                {render(val)}
-              </span>
-            </div>
-          );
-        })}
-        <div className="flex flex-col items-center gap-1 px-3 py-2" style={{ borderRight: "1px solid rgba(255,255,255,0.06)" }}>
-          <span className="text-[8px] uppercase tracking-[0.08em] font-semibold whitespace-nowrap" style={{ color: "rgba(255,255,255,0.35)" }}>IP</span>
-          <span className="text-sm font-mono font-bold leading-none text-foreground">{row.ip != null ? row.ip.toFixed(1) : DASH}</span>
-        </div>
-        <div className="flex flex-col items-center gap-1 px-3 py-2">
-          <span className="text-[8px] uppercase tracking-[0.08em] font-semibold whitespace-nowrap" style={{ color: "rgba(255,255,255,0.35)" }}>BF</span>
-          <span className="text-sm font-mono font-bold leading-none text-foreground">{row.bf ?? DASH}</span>
-        </div>
-      </div>
+    <div className="grid grid-cols-5 gap-2">
+      {allStats.map(({ label, key, render, lo, hi, invert }) => {
+        const val = row[key] as number | null;
+        const colorCls = (key === "hr" || key === "ip" || key === "bf") ? "text-foreground" : statCell(val, lo, hi, (invert as boolean | undefined));
+        return (
+          <div
+            key={key}
+            className="flex flex-col items-center gap-1 px-2 py-2 rounded-lg"
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
+          >
+            <span className="text-[8px] uppercase tracking-[0.08em] font-semibold whitespace-nowrap" style={{ color: "rgba(255,255,255,0.35)" }}>
+              {label}
+            </span>
+            <span className={`text-sm font-mono font-bold leading-none ${colorCls}`}>
+              {render(val)}
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -200,7 +195,7 @@ export function PitcherStatsPanel({
 
       {/* Panel */}
       <div
-        className="fixed inset-y-0 right-0 z-50 flex flex-col overflow-hidden w-full max-w-xl"
+        className="fixed inset-y-0 right-0 z-50 flex flex-col overflow-hidden w-full max-w-3xl"
         style={{
           background: "linear-gradient(180deg, rgba(14,14,20,0.99) 0%, rgba(10,10,15,1) 100%)",
           borderLeft: "1px solid rgba(255,255,255,0.10)",
