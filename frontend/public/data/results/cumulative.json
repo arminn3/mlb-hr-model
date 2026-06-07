@@ -52130,7 +52130,7 @@
     "date": "2026-06-06",
     "total_players_ranked": 272,
     "total_hrs_hit": 36,
-    "total_near_hrs": 0,
+    "total_near_hrs": 16,
     "model_hits": 32,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -52179,7 +52179,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 16,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -52205,28 +52205,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 1,
-        "rate": 5.0
+        "hits": 2,
+        "rate": 10.0
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
         "total": 272,
-        "hits": 32,
-        "rate": 11.8
+        "hits": 48,
+        "rate": 17.6
       }
     },
     "avg_composite_hr_hitters": 0.383,
-    "avg_composite_non_hitters": 0.417,
-    "composite_separation": -0.034,
+    "avg_composite_non_hitters": 0.418,
+    "composite_separation": -0.035,
     "hr_hitters": [
       {
         "name": "Colson Montgomery",
@@ -52679,8 +52679,302 @@
         "matchup": "WSH@AZ"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Kyle Schwarber",
+        "rank": 7,
+        "composite": 0.694,
+        "opp_pitcher": "Brandon Eisert",
+        "matchup": "CWS@PHI"
+      },
+      {
+        "name": "Brandon Valenzuela",
+        "rank": 35,
+        "composite": 0.601,
+        "opp_pitcher": "Kyle Bradish",
+        "matchup": "BAL@TOR"
+      },
+      {
+        "name": "Victor Caratini",
+        "rank": 40,
+        "composite": 0.581,
+        "opp_pitcher": "Luinder Avila",
+        "matchup": "KC@MIN"
+      },
+      {
+        "name": "Dillon Dingler",
+        "rank": 80,
+        "composite": 0.4,
+        "opp_pitcher": "Bryce Miller",
+        "matchup": "SEA@DET"
+      },
+      {
+        "name": "Bryan Reynolds",
+        "rank": 112,
+        "composite": 0.4,
+        "opp_pitcher": "Spencer Strider",
+        "matchup": "PIT@ATL"
+      },
+      {
+        "name": "Brandon Nimmo",
+        "rank": 121,
+        "composite": 0.4,
+        "opp_pitcher": "Tanner Bibee",
+        "matchup": "CLE@TEX"
+      },
+      {
+        "name": "Andrew Vaughn",
+        "rank": 128,
+        "composite": 0.4,
+        "opp_pitcher": "Zach Agnos",
+        "matchup": "MIL@COL"
+      },
+      {
+        "name": "Joey Ortiz",
+        "rank": 130,
+        "composite": 0.4,
+        "opp_pitcher": "Zach Agnos",
+        "matchup": "MIL@COL"
+      },
+      {
+        "name": "Ryan Ward",
+        "rank": 134,
+        "composite": 0.4,
+        "opp_pitcher": "Jack Kochanowicz",
+        "matchup": "LAA@LAD"
+      },
+      {
+        "name": "Luke Raley",
+        "rank": 163,
+        "composite": 0.381,
+        "opp_pitcher": "Keider Montero",
+        "matchup": "SEA@DET"
+      },
+      {
+        "name": "Jared Triolo",
+        "rank": 180,
+        "composite": 0.362,
+        "opp_pitcher": "Spencer Strider",
+        "matchup": "PIT@ATL"
+      },
+      {
+        "name": "Ryan Waldschmidt",
+        "rank": 194,
+        "composite": 0.349,
+        "opp_pitcher": "Zack Littell",
+        "matchup": "WSH@AZ"
+      },
+      {
+        "name": "Sal Stewart",
+        "rank": 215,
+        "composite": 0.327,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "CIN@STL"
+      },
+      {
+        "name": "Kyle Karros",
+        "rank": 233,
+        "composite": 0.29,
+        "opp_pitcher": "Jacob Misiorowski",
+        "matchup": "MIL@COL"
+      },
+      {
+        "name": "CJ Abrams",
+        "rank": 250,
+        "composite": 0.254,
+        "opp_pitcher": "Eduardo Rodriguez",
+        "matchup": "WSH@AZ"
+      },
+      {
+        "name": "Joe Mack",
+        "rank": 272,
+        "composite": 0.146,
+        "opp_pitcher": "Shane McClanahan",
+        "matchup": "TB@MIA"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "CJ Abrams",
+        "ev": 108.8,
+        "angle": 31.0,
+        "distance": 416.0,
+        "hr_in_parks": 29,
+        "result": "",
+        "pitcher": "Lo\u00e1isiga, Jonathan"
+      },
+      {
+        "batter": "Ryan Waldschmidt",
+        "ev": 102.8,
+        "angle": 24.0,
+        "distance": 401.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Parker, Mitchell"
+      },
+      {
+        "batter": "Jared Triolo",
+        "ev": 100.2,
+        "angle": 20.0,
+        "distance": 372.0,
+        "hr_in_parks": 7,
+        "result": "field_out",
+        "pitcher": "Lee, Dylan"
+      },
+      {
+        "batter": "Bryan Reynolds",
+        "ev": 108.5,
+        "angle": 19.0,
+        "distance": 397.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Strider, Spencer"
+      },
+      {
+        "batter": "Dominic Smith",
+        "ev": 102.0,
+        "angle": 25.0,
+        "distance": 396.0,
+        "hr_in_parks": 24,
+        "result": "field_out",
+        "pitcher": "Ashcraft, Braxton"
+      },
+      {
+        "batter": "Kyle Karros",
+        "ev": 106.1,
+        "angle": 21.0,
+        "distance": 404.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Rom, Drew"
+      },
+      {
+        "batter": "Kyle Karros",
+        "ev": 101.1,
+        "angle": 21.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Misiorowski, Jacob"
+      },
+      {
+        "batter": "Joey Ortiz",
+        "ev": 96.2,
+        "angle": 28.0,
+        "distance": 395.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Agnos, Zach"
+      },
+      {
+        "batter": "Andrew Vaughn",
+        "ev": 96.6,
+        "angle": 30.0,
+        "distance": 401.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "Agnos, Zach"
+      },
+      {
+        "batter": "Luke Raley",
+        "ev": 100.5,
+        "angle": 34.0,
+        "distance": 390.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Sommers, Drew"
+      },
+      {
+        "batter": "Dillon Dingler",
+        "ev": 102.2,
+        "angle": 29.0,
+        "distance": 405.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Miller, Bryce"
+      },
+      {
+        "batter": "Dominic Canzone",
+        "ev": 105.5,
+        "angle": 24.0,
+        "distance": 416.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "Montero, Keider"
+      },
+      {
+        "batter": "Ryan Ward",
+        "ev": 101.4,
+        "angle": 22.0,
+        "distance": 375.0,
+        "hr_in_parks": 15,
+        "result": "double",
+        "pitcher": "Kochanowicz, Jack"
+      },
+      {
+        "batter": "Liam Hicks",
+        "ev": 98.0,
+        "angle": 33.0,
+        "distance": 375.0,
+        "hr_in_parks": 1,
+        "result": "sac_fly",
+        "pitcher": "Legumina, Casey"
+      },
+      {
+        "batter": "Joe Mack",
+        "ev": 101.9,
+        "angle": 25.0,
+        "distance": 376.0,
+        "hr_in_parks": 15,
+        "result": "double",
+        "pitcher": "McClanahan, Shane"
+      },
+      {
+        "batter": "Victor Caratini",
+        "ev": 101.7,
+        "angle": 24.0,
+        "distance": 375.0,
+        "hr_in_parks": 27,
+        "result": "double",
+        "pitcher": "Avila, Luinder"
+      },
+      {
+        "batter": "Kyle Schwarber",
+        "ev": 113.0,
+        "angle": 29.0,
+        "distance": 407.0,
+        "hr_in_parks": 22,
+        "result": "",
+        "pitcher": "Burke, Sean"
+      },
+      {
+        "batter": "Sal Stewart",
+        "ev": 104.1,
+        "angle": 39.0,
+        "distance": 381.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Graceffo, Gordon"
+      },
+      {
+        "batter": "Brandon Nimmo",
+        "ev": 102.4,
+        "angle": 20.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Bibee, Tanner"
+      },
+      {
+        "batter": "Brandon Valenzuela",
+        "ev": 97.4,
+        "angle": 29.0,
+        "distance": 388.0,
+        "hr_in_parks": 22,
+        "result": "double",
+        "pitcher": "Su\u00e1rez, Albert"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Orlando Arcia",
