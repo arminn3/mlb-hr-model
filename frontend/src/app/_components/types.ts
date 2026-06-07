@@ -101,11 +101,23 @@ export interface PitcherArsenalEntry {
   k_pct?: number | null;
 }
 
+export interface PitcherGameLog {
+  date: string;
+  bf: number;
+  hits: number;
+  hr: number;
+  k: number;
+  bb: number;
+  woba: number | null;
+}
+
 export interface PitcherProfile {
   rows: { season: PitcherStatRow; vs_L: PitcherStatRow; vs_R: PitcherStatRow };
   arsenal: PitcherArsenalEntry[];
   arsenal_vs_L?: PitcherArsenalEntry[];
   arsenal_vs_R?: PitcherArsenalEntry[];
+  recent_logs_vs_L?: PitcherGameLog[];
+  recent_logs_vs_R?: PitcherGameLog[];
   wins: number;
   losses: number;
   games_started: number;

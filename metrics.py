@@ -100,6 +100,11 @@ def build_pitcher_profile(pitcher_df: pd.DataFrame, pitcher_id: int = None,
             out["arsenal_vs_L"] = _build_arsenal(df[df["stand"] == "L"], df)
             out["arsenal_vs_R"] = _build_arsenal(df[df["stand"] == "R"], df)
 
+    # Recent game logs per hand (last 7 dates)
+    if "stand" in df.columns:
+        out["recent_logs_vs_L"] = _build_game_logs(df[df["stand"] == "L"])
+        out["recent_logs_vs_R"] = _build_game_logs(df[df["stand"] == "R"])
+
     return out
 
 
@@ -189,6 +194,50 @@ def _build_arsenal(hand_df: pd.DataFrame, full_df: pd.DataFrame) -> list:
 
     entries.sort(key=lambda a: a["usage_pct"], reverse=True)
     return entries
+
+
+def _build_game_logs(hand_df: pd.DataFrame, n: int = 7) -> list:
+    """Return the last n game dates with per-game outcome stats for a given hand split."""
+    if hand_df is None or len(hand_df) == 0 or "game_date" not in hand_df.columns:
+        return []
+
+    logs = []
+    # Group by game date (each date = one start or appearance)
+    dates = sorted(hand_df["game_date"].dropna().unique(), reverse=True)
+    for date in dates[:n]:
+        grp = hand_df[hand_df["game_date"] == date]
+        pa_rows = grp[grp["events"].notna()] if "events" in grp.columns else pd.DataFrame()
+        n_pa = len(pa_rows)
+        if n_pa == 0:
+            continue
+
+        events = pa_rows["events"]
+        n_hits = int(events.isin(_HIT_EVENTS).sum())
+        n_hr   = int((events == "home_run").sum())
+        n_bb   = int(events.isin(_BB_EVENTS).sum())
+        n_k    = int(events.isin({"strikeout", "strikeout_double_play"}).sum())
+        n_hbp  = int((events == "hit_by_pitch").sum())
+        n_sf   = int(events.isin({"sac_fly", "sac_fly_double_play"}).sum())
+        n_ab   = n_pa - n_bb - n_hbp - n_sf
+
+        woba_val = None
+        denom = n_ab + n_bb + n_hbp + n_sf
+        if denom > 0:
+            w = sum(_WOBA_WEIGHTS.get(e, 0) for e in events if isinstance(e, str))
+            woba_val = round(w / denom, 3)
+
+        date_str = str(date)[:10] if date is not None else ""
+        logs.append({
+            "date":  date_str,
+            "bf":    n_pa,
+            "hits":  n_hits,
+            "hr":    n_hr,
+            "k":     n_k,
+            "bb":    n_bb,
+            "woba":  woba_val,
+        })
+
+    return logs
 
 
 def _empty_row() -> dict:

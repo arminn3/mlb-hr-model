@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { PitcherInfo, PitcherStatRow } from "./types";
+import type { PitcherInfo, PitcherStatRow, PitcherGameLog } from "./types";
 
 type HandTab = "vs_L" | "vs_R";
 
@@ -123,6 +123,54 @@ function ZoneGrid({ freqs }: { freqs: ZoneFreq[] }) {
           </div>
         );
       })}
+    </div>
+  );
+}
+
+// ── Recent game logs ──────────────────────────────────────────────────────────
+
+function RecentLogs({ logs, hand }: { logs: PitcherGameLog[]; hand: HandTab }) {
+  if (logs.length === 0) return null;
+  return (
+    <div className="px-5 py-4" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+      <p className="text-[9px] uppercase tracking-[0.12em] font-bold mb-3" style={{ color: "rgba(255,255,255,0.35)" }}>
+        Recent Logs — {hand === "vs_L" ? "vs LHB" : "vs RHB"}
+      </p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-xs font-mono border-collapse">
+          <thead>
+            <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+              {["Date", "BF", "H", "HR", "K", "BB", "wOBA"].map(h => (
+                <th key={h} className={`py-1.5 ${h === "Date" ? "text-left pr-4" : "text-center px-2"} text-[9px] uppercase tracking-wider font-semibold`} style={{ color: "rgba(255,255,255,0.35)" }}>
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {logs.map((log) => {
+              const wobaCls = log.woba == null ? "text-muted"
+                : log.woba >= 0.370 ? "text-accent-red/80"
+                : log.woba >= 0.310 ? "text-foreground"
+                : "text-accent-green font-semibold";
+              const hrCls = log.hr >= 2 ? "text-accent-red/80" : log.hr === 1 ? "text-foreground" : "text-muted";
+              return (
+                <tr key={log.date} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                  <td className="py-2 pr-4 text-left whitespace-nowrap" style={{ color: "var(--muted)" }}>{log.date}</td>
+                  <td className="text-center py-2 px-2 text-foreground">{log.bf}</td>
+                  <td className="text-center py-2 px-2 text-foreground">{log.hits}</td>
+                  <td className={`text-center py-2 px-2 font-semibold ${hrCls}`}>{log.hr}</td>
+                  <td className="text-center py-2 px-2 text-accent-green">{log.k}</td>
+                  <td className="text-center py-2 px-2 text-foreground">{log.bb}</td>
+                  <td className={`text-center py-2 px-2 ${wobaCls}`}>
+                    {log.woba != null ? log.woba.toFixed(3).replace(/^0/, "") : DASH}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -356,6 +404,16 @@ export function PitcherStatsPanel({
                   </div>
                 </div>
               )}
+
+              {/* Recent game logs */}
+              {(() => {
+                const logs = hand === "vs_L"
+                  ? profile?.recent_logs_vs_L
+                  : profile?.recent_logs_vs_R;
+                return logs && logs.length > 0
+                  ? <RecentLogs logs={logs} hand={hand} />
+                  : null;
+              })()}
 
               {/* Zone frequency */}
               {hasZones && (
