@@ -502,19 +502,13 @@ export function BatterTable({
   const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [handFilter, setHandFilter] = useState<"all" | "LHB" | "RHB">("all");
   const [pitchFilter, setPitchFilter] = useState<Set<string>>(new Set());
+  // Snapshot of row order taken at sort time — toggling lookback updates numbers
+  // without reshuffling rows so users can compare the same batter across L5/L10/Season.
+  const [lockedOrder, setLockedOrder] = useState<string[] | null>(null);
 
   if (batters.length === 0) return null;
 
-  function handleSort(col: Exclude<SortCol, null>) {
-    if (col === sortCol) {
-      setSortDir((d) => (d === "desc" ? "asc" : "desc"));
-    } else {
-      setSortCol(col);
-      setSortDir("desc");
-    }
-  }
-
-  function getVal(row: BatterRowInfo): number {
+  function getVal(row: BatterRowInfo, col: Exclude<SortCol, null>): number {
     const sc = scoreFor(row.p, lookback) ?? scoreFor(row.p, "L5")!;
     const recentAbs = sc.recent_abs ?? [];
     const fbs = recentAbs.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
@@ -523,7 +517,7 @@ export function BatterTable({
     const pitchDetailForMatchup = pitchFilter.size > 0
       ? Object.fromEntries(Object.entries(row.p.pitch_detail || {}).filter(([pt]) => pitchFilter.has(pt)))
       : (row.p.pitch_detail || {});
-    switch (sortCol) {
+    switch (col) {
       case "score":   return sc.composite ?? 0;
       case "pitch":   return matchupScore(pitchDetailForMatchup);
       case "ev":      return filt ? filt.exit_velo : (sc.exit_velo ?? 0);
@@ -548,20 +542,40 @@ export function BatterTable({
         }
         return n;
       }
-      default:        return 0;
+      default: return 0;
     }
+  }
+
+  function handleSort(col: Exclude<SortCol, null>) {
+    const newDir: SortDir = col === sortCol ? (sortDir === "desc" ? "asc" : "desc") : "desc";
+    setSortCol(col);
+    setSortDir(newDir);
+    // Freeze row order at this moment so lookback toggle won't reshuffle
+    const currentFiltered = handFilter === "all"
+      ? batters
+      : batters.filter((r) => handFilter === "LHB" ? r.p.batter_hand !== "R" : r.p.batter_hand !== "L");
+    const ordered = [...currentFiltered]
+      .sort((a, b) => {
+        const diff = getVal(a, col) - getVal(b, col);
+        return newDir === "desc" ? -diff : diff;
+      })
+      .map((r) => r.p.name);
+    setLockedOrder(ordered);
   }
 
   const handFiltered = handFilter === "all"
     ? batters
     : batters.filter((r) => handFilter === "LHB" ? r.p.batter_hand !== "R" : r.p.batter_hand !== "L");
 
-  const sorted = sortCol === null
-    ? [...handFiltered]
-    : [...handFiltered].sort((a, b) => {
-        const diff = getVal(a) - getVal(b);
-        return sortDir === "desc" ? -diff : diff;
-      });
+  const sorted = lockedOrder && sortCol !== null
+    ? [...handFiltered].sort((a, b) => {
+        const ai = lockedOrder.indexOf(a.p.name);
+        const bi = lockedOrder.indexOf(b.p.name);
+        if (ai === -1) return 1;
+        if (bi === -1) return -1;
+        return ai - bi;
+      })
+    : [...handFiltered];
 
   const thCls = (col: SortCol) => `pr-3 w-14 text-center`;
   const thWide = (col: SortCol) => `pr-3 w-16 text-center`;
@@ -601,7 +615,7 @@ export function BatterTable({
           <span className="text-[9px] uppercase tracking-wider text-muted/40 mr-1">Pitch Mix</span>
           <div className="flex items-center rounded-xl p-[3px] gap-0.5 flex-shrink-0" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }}>
             {(["all", "LHB", "RHB"] as const).map((h) => (
-              <button key={h} onClick={() => { setHandFilter(h); setPitchFilter(new Set()); }}
+              <button key={h} onClick={() => { setHandFilter(h); setPitchFilter(new Set()); setLockedOrder(null); setSortCol(null); }}
                 className={`px-2.5 py-0.5 text-[10px] font-bold rounded-lg cursor-pointer transition-all ${handFilter === h ? "bg-accent text-white shadow-[0_1px_3px_0_rgba(0,0,0,0.4)]" : "text-muted hover:text-foreground"}`}>
                 {h === "all" ? "All" : h}
               </button>
@@ -614,7 +628,7 @@ export function BatterTable({
               const active = pitchFilter.has(pt);
               return (
                 <button key={pt}
-                  onClick={() => setPitchFilter((prev) => { const next = new Set(prev); if (next.has(pt)) next.delete(pt); else next.add(pt); return next; })}
+                  onClick={() => { setLockedOrder(null); setSortCol(null); setPitchFilter((prev) => { const next = new Set(prev); if (next.has(pt)) next.delete(pt); else next.add(pt); return next; }); }}
                   className="px-2.5 py-1 text-[10px] font-mono rounded-full flex-shrink-0 cursor-pointer transition-all"
                   style={active
                     ? { background: "rgba(96,165,250,0.18)", border: "1px solid rgba(96,165,250,0.45)", color: "rgba(96,165,250,1)" }
@@ -625,7 +639,7 @@ export function BatterTable({
             })
           }
           {pitchFilter.size > 0 && (
-            <button onClick={() => setPitchFilter(new Set())}
+            <button onClick={() => { setPitchFilter(new Set()); setLockedOrder(null); setSortCol(null); }}
               className="px-2 py-1 text-[9px] font-mono rounded-full cursor-pointer transition-all ml-auto flex-shrink-0"
               style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.10)", color: "rgba(255,255,255,0.4)" }}>
               clear
