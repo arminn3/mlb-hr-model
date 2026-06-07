@@ -120,7 +120,7 @@ function BatterMobileCard({
   const mScore = matchupScore(p.pitch_detail || {});
   const pill = matchupPill(mScore);
   const isLowData = scores.recent_abs.length <= 2;
-  const hasQualityWarn = !isLowData && scores.data_quality !== "OK";
+  const hasQualityWarn = !isLowData && scores.data_quality === "LOW_SAMPLE";
 
   // tags for BatterRow are not applicable (desktop only), skip for mobile card
   // HR signals summary
@@ -272,7 +272,7 @@ export function BatterRow({
   const mScore = matchupScore(pitchDetailForMatchup);
   const pill = matchupPill(mScore);
   const isLowData = scores.recent_abs.length <= 2;
-  const hasQualityWarn = !isLowData && scores.data_quality !== "OK";
+  const hasQualityWarn = !isLowData && scores.data_quality === "LOW_SAMPLE";
 
   const xwoba = scores.xwoba ?? null;
   const sweet = scores.sweet_spot ?? null;
