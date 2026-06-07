@@ -22,13 +22,16 @@ function statColor(value: number, lo: number, hi: number): string {
   return "text-muted";
 }
 
-const HEAT_GREEN: React.CSSProperties = { background: "rgba(34,197,94,0.20)", border: "1px solid rgba(34,197,94,0.35)", color: "rgb(134,239,172)", fontWeight: 600, borderRadius: 4, padding: "2px 6px", display: "inline-block" };
-const HEAT_NONE: React.CSSProperties  = { color: "rgba(255,255,255,0.55)", padding: "2px 6px", display: "inline-block" };
-const HEAT_MUTED: React.CSSProperties = { color: "rgba(255,255,255,0.25)", padding: "2px 6px", display: "inline-block" };
+// Tier 1 (lo→hi): light green box — decent
+// Tier 2 (hi+):   bright green box — excellent
+const HEAT_BRIGHT: React.CSSProperties = { background: "rgba(34,197,94,0.22)", border: "1px solid rgba(34,197,94,0.40)", color: "rgb(134,239,172)", fontWeight: 700, borderRadius: 4, padding: "2px 6px", display: "inline-block" };
+const HEAT_DIM:    React.CSSProperties = { background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.18)", color: "rgb(134,239,172)", fontWeight: 500, borderRadius: 4, padding: "2px 6px", display: "inline-block" };
+const HEAT_NONE:   React.CSSProperties = { color: "rgba(255,255,255,0.40)", padding: "2px 6px", display: "inline-block" };
+const HEAT_MUTED:  React.CSSProperties = { color: "rgba(255,255,255,0.20)", padding: "2px 6px", display: "inline-block" };
 
 function heatBox(value: number | null | undefined, lo: number, hi: number, label: string): React.ReactNode {
   if (value == null) return <span style={HEAT_MUTED}>—</span>;
-  const style = value >= hi ? HEAT_GREEN : value >= lo ? HEAT_NONE : HEAT_MUTED;
+  const style = value >= hi ? HEAT_BRIGHT : value >= lo ? HEAT_DIM : HEAT_NONE;
   return <span style={style}>{label}</span>;
 }
 
@@ -404,9 +407,9 @@ export function BatterRow({
             if (b && pzz && b.bip >= 3 && pzz.bip >= 3 && b.barrel_rate >= 10 && pzz.barrel_rate >= 6) n++;
           }
           const bzmStyle: React.CSSProperties = n >= 3
-            ? { ...HEAT_GREEN, color: "rgb(134,239,172)" }
+            ? HEAT_BRIGHT
             : n >= 1
-            ? { ...HEAT_NONE, color: "rgba(251,191,36,0.9)", fontWeight: 600 }
+            ? { ...HEAT_DIM, color: "rgba(251,191,36,0.9)", border: "1px solid rgba(251,191,36,0.25)" }
             : HEAT_MUTED;
           return <span style={bzmStyle}>{n}/9</span>;
         })()}
