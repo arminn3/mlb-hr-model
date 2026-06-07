@@ -120,13 +120,12 @@ function ZoneGrid({
   const bzMap = Object.fromEntries(batter_zones.map((z) => [z.zone, z]));
   const pfMap = Object.fromEntries(pitcher_zone_freq.map((z) => [z.zone, z]));
 
-  // Find pitcher's top-5 most-used zones
-  const sorted = [...pitcher_zone_freq].sort((a, b) => b.pct - a.pct);
-  const top5Zones = new Set(sorted.slice(0, 5).map((z) => z.zone));
+  // Pitcher "attacks" a zone if they throw there ≥8% of pitches (~above-average for a 9-zone grid)
+  const activeZones = new Set(pitcher_zone_freq.filter((z) => z.pct >= 8).map((z) => z.zone));
 
-  // Overlap: batter's hot HR zone AND pitcher frequently attacks it (top 5 zones)
+  // Overlap: batter's hot HR zone (≥2 BIP, ≥4% HR rate) AND pitcher attacks it
   const isBatterHot = (zn: number) => { const z = bzMap[zn]; return !!(z && z.bip >= 2 && z.hr_rate >= 4); };
-  const isPitcherFrequent = (zn: number) => top5Zones.has(zn);
+  const isPitcherFrequent = (zn: number) => activeZones.has(zn);
   const overlapZones = new Set(ZONE_ROWS.flatMap((r) => r.zones).filter((zn) => isBatterHot(zn) && isPitcherFrequent(zn)));
   const overlapCount = overlapZones.size;
   const overallLabel = overlapCount >= 3
@@ -194,17 +193,17 @@ function ZoneGrid({
               const pf = pfMap[zn];
               const pct = pf?.pct ?? 0;
               const isOverlap = overlapZones.has(zn);
-              const isTop5 = top5Zones.has(zn);
+              const isActive = activeZones.has(zn);
 
               // Blue intensity proportional to frequency vs max zone
               const t = Math.min(pct / maxPct, 1);
               const alpha = 0.07 + t * 0.73;
               const cellSty: React.CSSProperties = isOverlap
                 ? { background: "rgba(250,204,21,0.22)", border: "1.5px solid rgba(250,204,21,0.65)" }
-                : isTop5
+                : isActive
                 ? { background: `rgba(59,130,246,${alpha})`, border: `1px solid rgba(59,130,246,${Math.min(alpha + 0.2, 0.95)})` }
                 : { background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" };
-              const textColor = isOverlap ? "text-yellow-300" : isTop5 ? "text-white" : "text-foreground/50";
+              const textColor = isOverlap ? "text-yellow-300" : isActive ? "text-white" : "text-foreground/50";
 
               return (
                 <div key={zn} title={pf ? `Zone ${zn}: ${pct.toFixed(1)}% of pitches (${pf.count} pitches)` : "No data"}
@@ -213,7 +212,6 @@ function ZoneGrid({
                   {pct > 0 ? (
                     <>
                       <span className={`text-[11px] font-mono font-bold leading-none ${textColor}`}>{pct.toFixed(1)}%</span>
-                      {isTop5 && <span className="text-[7px] leading-none" style={{ color: "rgba(148,163,184,0.5)" }}>top 5</span>}
                     </>
                   ) : <span className="text-[10px] text-muted/20">—</span>}
                 </div>
@@ -230,7 +228,7 @@ function ZoneGrid({
       <div className="flex items-center justify-between mb-4">
         <span className="text-[11px] font-bold uppercase tracking-[0.07em] text-foreground/55">Zone Overlap</span>
         <span className={`text-xs font-bold ${overallLabel.color}`}>
-          {overlapCount} zone{overlapCount !== 1 ? "s" : ""} overlap · {overallLabel.text}
+          {overlapCount}/9 zones · {overallLabel.text}
         </span>
       </div>
       <div className="flex flex-wrap items-start gap-6 justify-center overflow-x-auto">
