@@ -53567,7 +53567,7 @@
     "date": "2026-06-07",
     "total_players_ranked": 391,
     "total_hrs_hit": 35,
-    "total_near_hrs": 0,
+    "total_near_hrs": 23,
     "model_hits": 34,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -53616,7 +53616,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 23,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -53652,18 +53652,18 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 3,
-        "rate": 10.0
+        "hits": 4,
+        "rate": 13.3
       },
       "all": {
         "total": 391,
-        "hits": 34,
-        "rate": 8.7
+        "hits": 57,
+        "rate": 14.6
       }
     },
     "avg_composite_hr_hitters": 0.425,
-    "avg_composite_non_hitters": 0.391,
-    "composite_separation": 0.034,
+    "avg_composite_non_hitters": 0.39,
+    "composite_separation": 0.035,
     "hr_hitters": [
       {
         "name": "Nick Kurtz",
@@ -54144,8 +54144,414 @@
         "matchup": "CIN@STL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Luis Torrens",
+        "rank": 23,
+        "composite": 0.643,
+        "opp_pitcher": "Randy V\u00e1squez",
+        "matchup": "NYM@SD"
+      },
+      {
+        "name": "Cedric Mullins",
+        "rank": 31,
+        "composite": 0.624,
+        "opp_pitcher": "Sandy Alcantara",
+        "matchup": "TB@MIA"
+      },
+      {
+        "name": "Riley Greene",
+        "rank": 43,
+        "composite": 0.601,
+        "opp_pitcher": "Luis Castillo",
+        "matchup": "SEA@DET"
+      },
+      {
+        "name": "Trea Turner",
+        "rank": 63,
+        "composite": 0.564,
+        "opp_pitcher": "Tyler Gilbert",
+        "matchup": "CWS@PHI"
+      },
+      {
+        "name": "Pavin Smith",
+        "rank": 71,
+        "composite": 0.551,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "WSH@AZ"
+      },
+      {
+        "name": "Bryce Harper",
+        "rank": 73,
+        "composite": 0.548,
+        "opp_pitcher": "Tyler Gilbert",
+        "matchup": "CWS@PHI"
+      },
+      {
+        "name": "Willson Contreras",
+        "rank": 107,
+        "composite": 0.45,
+        "opp_pitcher": "Cam Schlittler",
+        "matchup": "BOS@NYY"
+      },
+      {
+        "name": "Mike Yastrzemski",
+        "rank": 118,
+        "composite": 0.4,
+        "opp_pitcher": "Bubba Chandler",
+        "matchup": "PIT@ATL"
+      },
+      {
+        "name": "Tristan Peters",
+        "rank": 126,
+        "composite": 0.4,
+        "opp_pitcher": "Aaron Nola",
+        "matchup": "CWS@PHI"
+      },
+      {
+        "name": "Jackson Holliday",
+        "rank": 130,
+        "composite": 0.4,
+        "opp_pitcher": "Kevin Gausman",
+        "matchup": "BAL@TOR"
+      },
+      {
+        "name": "Randy Arozarena",
+        "rank": 133,
+        "composite": 0.4,
+        "opp_pitcher": "Jack Flaherty",
+        "matchup": "SEA@DET"
+      },
+      {
+        "name": "Owen Caissie",
+        "rank": 141,
+        "composite": 0.4,
+        "opp_pitcher": "Griffin Jax",
+        "matchup": "TB@MIA"
+      },
+      {
+        "name": "Blake Perkins",
+        "rank": 162,
+        "composite": 0.4,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "MIL@COL"
+      },
+      {
+        "name": "Jackson Chourio",
+        "rank": 164,
+        "composite": 0.4,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "MIL@COL"
+      },
+      {
+        "name": "Joey Ortiz",
+        "rank": 165,
+        "composite": 0.4,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "MIL@COL"
+      },
+      {
+        "name": "Tommy Troy",
+        "rank": 205,
+        "composite": 0.379,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "WSH@AZ"
+      },
+      {
+        "name": "Anthony Volpe",
+        "rank": 218,
+        "composite": 0.371,
+        "opp_pitcher": "Ranger Suarez",
+        "matchup": "BOS@NYY"
+      },
+      {
+        "name": "Troy Johnston",
+        "rank": 219,
+        "composite": 0.37,
+        "opp_pitcher": "Shane Drohan",
+        "matchup": "MIL@COL"
+      },
+      {
+        "name": "David Fry",
+        "rank": 258,
+        "composite": 0.331,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "CLE@TEX"
+      },
+      {
+        "name": "Braxton Fulford",
+        "rank": 303,
+        "composite": 0.293,
+        "opp_pitcher": "Shane Drohan",
+        "matchup": "MIL@COL"
+      },
+      {
+        "name": "Fernando Tatis Jr.",
+        "rank": 333,
+        "composite": 0.266,
+        "opp_pitcher": "Huascar Brazob\u00e1n",
+        "matchup": "NYM@SD"
+      },
+      {
+        "name": "Garrett Mitchell",
+        "rank": 358,
+        "composite": 0.224,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "MIL@COL"
+      },
+      {
+        "name": "Jase Bowen",
+        "rank": 376,
+        "composite": 0.141,
+        "opp_pitcher": "Huascar Brazob\u00e1n",
+        "matchup": "NYM@SD"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Pavin Smith",
+        "ev": 99.0,
+        "angle": 30.0,
+        "distance": 388.0,
+        "hr_in_parks": 1,
+        "result": "sac_fly",
+        "pitcher": "Cornelio, Riley"
+      },
+      {
+        "batter": "Tommy Troy",
+        "ev": 103.3,
+        "angle": 33.0,
+        "distance": 402.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "Cavalli, Cade"
+      },
+      {
+        "batter": "Spencer Horwitz",
+        "ev": 105.1,
+        "angle": 36.0,
+        "distance": 420.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "L\u00f3pez, Reynaldo"
+      },
+      {
+        "batter": "Mike Yastrzemski",
+        "ev": 96.8,
+        "angle": 24.0,
+        "distance": 386.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Chandler, Bubba"
+      },
+      {
+        "batter": "Garrett Mitchell",
+        "ev": 101.0,
+        "angle": 26.0,
+        "distance": 407.0,
+        "hr_in_parks": 22,
+        "result": "triple",
+        "pitcher": "Thompson, Keegan"
+      },
+      {
+        "batter": "Garrett Mitchell",
+        "ev": 102.9,
+        "angle": 23.0,
+        "distance": 384.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Thompson, Keegan"
+      },
+      {
+        "batter": "Gary S\u00e1nchez",
+        "ev": 97.7,
+        "angle": 37.0,
+        "distance": 368.0,
+        "hr_in_parks": 7,
+        "result": "field_out",
+        "pitcher": "Thompson, Keegan"
+      },
+      {
+        "batter": "Garrett Mitchell",
+        "ev": 105.5,
+        "angle": 21.0,
+        "distance": 402.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Hill, Jaden"
+      },
+      {
+        "batter": "Braxton Fulford",
+        "ev": 107.0,
+        "angle": 23.0,
+        "distance": 415.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Drohan, Shane"
+      },
+      {
+        "batter": "Jackson Chourio",
+        "ev": 104.3,
+        "angle": 23.0,
+        "distance": 370.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Freeland, Kyle"
+      },
+      {
+        "batter": "Joey Ortiz",
+        "ev": 99.3,
+        "angle": 38.0,
+        "distance": 392.0,
+        "hr_in_parks": 9,
+        "result": "field_out",
+        "pitcher": "Freeland, Kyle"
+      },
+      {
+        "batter": "Troy Johnston",
+        "ev": 100.9,
+        "angle": 23.0,
+        "distance": 397.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "Drohan, Shane"
+      },
+      {
+        "batter": "Blake Perkins",
+        "ev": 105.6,
+        "angle": 26.0,
+        "distance": 411.0,
+        "hr_in_parks": 28,
+        "result": "",
+        "pitcher": "Freeland, Kyle"
+      },
+      {
+        "batter": "Riley Greene",
+        "ev": 101.3,
+        "angle": 34.0,
+        "distance": 385.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Castillo, Luis"
+      },
+      {
+        "batter": "Randy Arozarena",
+        "ev": 104.6,
+        "angle": 30.0,
+        "distance": 397.0,
+        "hr_in_parks": 12,
+        "result": "field_out",
+        "pitcher": "Flaherty, Jack"
+      },
+      {
+        "batter": "Cedric Mullins",
+        "ev": 100.4,
+        "angle": 32.0,
+        "distance": 390.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Alcantara, Sandy"
+      },
+      {
+        "batter": "Owen Caissie",
+        "ev": 103.7,
+        "angle": 25.0,
+        "distance": 399.0,
+        "hr_in_parks": 25,
+        "result": "field_out",
+        "pitcher": "Jax, Griffin"
+      },
+      {
+        "batter": "Willson Contreras",
+        "ev": 110.0,
+        "angle": 19.0,
+        "distance": 371.0,
+        "hr_in_parks": 19,
+        "result": "double",
+        "pitcher": "Schlittler, Cam"
+      },
+      {
+        "batter": "Anthony Volpe",
+        "ev": 101.3,
+        "angle": 30.0,
+        "distance": 393.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Suarez, Ranger"
+      },
+      {
+        "batter": "Bryce Harper",
+        "ev": 104.4,
+        "angle": 30.0,
+        "distance": 399.0,
+        "hr_in_parks": 26,
+        "result": "field_out",
+        "pitcher": "Richards, Trevor"
+      },
+      {
+        "batter": "Trea Turner",
+        "ev": 102.6,
+        "angle": 19.0,
+        "distance": 388.0,
+        "hr_in_parks": 10,
+        "result": "field_out",
+        "pitcher": "Hudson, Bryan"
+      },
+      {
+        "batter": "Tristan Peters",
+        "ev": 104.2,
+        "angle": 24.0,
+        "distance": 387.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "Nola, Aaron"
+      },
+      {
+        "batter": "Fernando Tatis Jr.",
+        "ev": 103.8,
+        "angle": 29.0,
+        "distance": 395.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Weaver, Luke"
+      },
+      {
+        "batter": "Jase Bowen",
+        "ev": 100.1,
+        "angle": 33.0,
+        "distance": 395.0,
+        "hr_in_parks": 18,
+        "result": "field_out",
+        "pitcher": "Minter, A.J."
+      },
+      {
+        "batter": "Luis Torrens",
+        "ev": 99.2,
+        "angle": 28.0,
+        "distance": 385.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "V\u00e1squez, Randy"
+      },
+      {
+        "batter": "David Fry",
+        "ev": 104.6,
+        "angle": 22.0,
+        "distance": 369.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Curvelo, Luis"
+      },
+      {
+        "batter": "Jackson Holliday",
+        "ev": 100.8,
+        "angle": 28.0,
+        "distance": 383.0,
+        "hr_in_parks": 19,
+        "result": "triple",
+        "pitcher": "Gausman, Kevin"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
