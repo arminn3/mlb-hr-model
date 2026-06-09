@@ -55259,10 +55259,10 @@
   {
     "date": "2026-06-08",
     "total_players_ranked": 164,
-    "total_hrs_hit": 0,
+    "total_hrs_hit": 21,
     "total_near_hrs": 0,
-    "model_hits": 0,
-    "best_lookback": "L5",
+    "model_hits": 18,
+    "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
@@ -55272,40 +55272,40 @@
         },
         "top_20": {
           "total": 20,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.0
         },
         "top_30": {
           "total": 30,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 4,
+          "rate": 13.3
         },
         "all": {
           "total": 164,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 18,
+          "rate": 11.0
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 20,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 15.0
         },
         "top_30": {
           "total": 30,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 6,
+          "rate": 20.0
         },
         "all": {
           "total": 164,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 18,
+          "rate": 11.0
         }
       }
     },
@@ -55318,18 +55318,18 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
         "total": 30,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 4,
+        "rate": 13.3
       },
       "all": {
         "total": 164,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 18,
+        "rate": 11.0
       }
     },
     "tier_accuracy_with_near": {
@@ -55340,33 +55340,293 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
         "total": 30,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 4,
+        "rate": 13.3
       },
       "all": {
         "total": 164,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 18,
+        "rate": 11.0
       }
     },
-    "avg_composite_hr_hitters": 0,
+    "avg_composite_hr_hitters": 0.414,
     "avg_composite_non_hitters": 0.412,
-    "composite_separation": -0.412,
-    "hr_hitters": [],
-    "hr_hitters_l10": [],
+    "composite_separation": 0.002,
+    "hr_hitters": [
+      {
+        "name": "Zach Neto",
+        "rank": 20,
+        "composite": 0.618,
+        "opp_pitcher": "Spencer Arrighetti",
+        "matchup": "HOU@LAA"
+      },
+      {
+        "name": "Shea Langeliers",
+        "rank": 21,
+        "composite": 0.617,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Adolis Garc\u00eda",
+        "rank": 25,
+        "composite": 0.583,
+        "opp_pitcher": "Patrick Corbin",
+        "matchup": "PHI@TOR"
+      },
+      {
+        "name": "Freddy Fermin",
+        "rank": 29,
+        "composite": 0.559,
+        "opp_pitcher": "Andrew Abbott",
+        "matchup": "CIN@SD"
+      },
+      {
+        "name": "Jake Bauers",
+        "rank": 31,
+        "composite": 0.548,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 56,
+        "composite": 0.4,
+        "opp_pitcher": "Connelly Early",
+        "matchup": "BOS@TB"
+      },
+      {
+        "name": "Angel Mart\u00ednez",
+        "rank": 63,
+        "composite": 0.4,
+        "opp_pitcher": "Will Warren",
+        "matchup": "NYY@CLE"
+      },
+      {
+        "name": "Ryan McMahon",
+        "rank": 68,
+        "composite": 0.4,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "NYY@CLE"
+      },
+      {
+        "name": "Andrew Vaughn",
+        "rank": 90,
+        "composite": 0.4,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "William Contreras",
+        "rank": 95,
+        "composite": 0.4,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Nick Kurtz",
+        "rank": 97,
+        "composite": 0.397,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Josh Naylor",
+        "rank": 100,
+        "composite": 0.389,
+        "opp_pitcher": "Trey Gibson",
+        "matchup": "SEA@BAL"
+      },
+      {
+        "name": "Brice Turang",
+        "rank": 113,
+        "composite": 0.345,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Paul Goldschmidt",
+        "rank": 127,
+        "composite": 0.31,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "NYY@CLE"
+      },
+      {
+        "name": "Marcelo Mayer",
+        "rank": 129,
+        "composite": 0.305,
+        "opp_pitcher": "Ian Seymour",
+        "matchup": "BOS@TB"
+      },
+      {
+        "name": "Tyler Soderstrom",
+        "rank": 137,
+        "composite": 0.284,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Zack Gelof",
+        "rank": 148,
+        "composite": 0.254,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Ernie Clement",
+        "rank": 153,
+        "composite": 0.239,
+        "opp_pitcher": "Cristopher S\u00e1nchez",
+        "matchup": "PHI@TOR"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Shea Langeliers",
+        "rank": 7,
+        "composite": 0.621,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Ryan McMahon",
+        "rank": 9,
+        "composite": 0.601,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "NYY@CLE"
+      },
+      {
+        "name": "William Contreras",
+        "rank": 15,
+        "composite": 0.57,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Adolis Garc\u00eda",
+        "rank": 22,
+        "composite": 0.539,
+        "opp_pitcher": "Patrick Corbin",
+        "matchup": "PHI@TOR"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 23,
+        "composite": 0.53,
+        "opp_pitcher": "Connelly Early",
+        "matchup": "BOS@TB"
+      },
+      {
+        "name": "Jake Bauers",
+        "rank": 27,
+        "composite": 0.507,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Zach Neto",
+        "rank": 33,
+        "composite": 0.481,
+        "opp_pitcher": "Spencer Arrighetti",
+        "matchup": "HOU@LAA"
+      },
+      {
+        "name": "Freddy Fermin",
+        "rank": 68,
+        "composite": 0.4,
+        "opp_pitcher": "Andrew Abbott",
+        "matchup": "CIN@SD"
+      },
+      {
+        "name": "Andrew Vaughn",
+        "rank": 84,
+        "composite": 0.4,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Josh Naylor",
+        "rank": 94,
+        "composite": 0.385,
+        "opp_pitcher": "Trey Gibson",
+        "matchup": "SEA@BAL"
+      },
+      {
+        "name": "Angel Mart\u00ednez",
+        "rank": 108,
+        "composite": 0.368,
+        "opp_pitcher": "Will Warren",
+        "matchup": "NYY@CLE"
+      },
+      {
+        "name": "Brice Turang",
+        "rank": 112,
+        "composite": 0.356,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Nick Kurtz",
+        "rank": 113,
+        "composite": 0.354,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Paul Goldschmidt",
+        "rank": 129,
+        "composite": 0.321,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "NYY@CLE"
+      },
+      {
+        "name": "Marcelo Mayer",
+        "rank": 131,
+        "composite": 0.317,
+        "opp_pitcher": "Ian Seymour",
+        "matchup": "BOS@TB"
+      },
+      {
+        "name": "Zack Gelof",
+        "rank": 137,
+        "composite": 0.274,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Ernie Clement",
+        "rank": 149,
+        "composite": 0.246,
+        "opp_pitcher": "Cristopher S\u00e1nchez",
+        "matchup": "PHI@TOR"
+      },
+      {
+        "name": "Tyler Soderstrom",
+        "rank": 154,
+        "composite": 0.228,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@ATH"
+      }
+    ],
     "near_hr_hitters": [],
     "near_hr_events": [],
-    "surprise_hrs": [],
+    "surprise_hrs": [
+      {
+        "name": "Jonah Heim",
+        "pitcher": "Aaron Ashby",
+        "description": "Jonah Heim homers (4) on a fly ball to right field."
+      }
+    ],
     "hr_signal_accuracy": {
       "1_of_5": {
         "players": 54,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 7,
+        "hr_rate": 13.0,
         "names": [
           "Cole Young",
           "Willson Contreras",
@@ -55423,12 +55683,20 @@
           "David Hamilton",
           "Alika Williams"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Paul Goldschmidt",
+          "Freddy Fermin",
+          "Shea Langeliers",
+          "Jake Bauers",
+          "Nick Kurtz",
+          "Brice Turang",
+          "Tyler Soderstrom"
+        ]
       },
       "2_of_5": {
         "players": 69,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 7,
+        "hr_rate": 10.1,
         "names": [
           "Dominic Canzone",
           "Pete Alonso",
@@ -55500,12 +55768,20 @@
           "Sal Frelick",
           "Zack Gelof"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Josh Naylor",
+          "Yandy D\u00edaz",
+          "Angel Mart\u00ednez",
+          "Ryan McMahon",
+          "Zach Neto",
+          "William Contreras",
+          "Zack Gelof"
+        ]
       },
       "3_of_5": {
         "players": 33,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 4,
+        "hr_rate": 12.1,
         "names": [
           "Colton Cowser",
           "Jhonny Pereda",
@@ -55541,7 +55817,12 @@
           "Blake Perkins",
           "Luis Rengifo"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Marcelo Mayer",
+          "Adolis Garc\u00eda",
+          "Ernie Clement",
+          "Andrew Vaughn"
+        ]
       },
       "4_of_5": {
         "players": 5,
@@ -55565,20 +55846,147 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
         "total": 30,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
         "total": 164,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 18,
+        "rate": 11.0
       }
     },
-    "combined_hr_hitters": []
+    "combined_hr_hitters": [
+      {
+        "name": "Ryan McMahon",
+        "rank": 20,
+        "composite": 0.506,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "NYY@CLE"
+      },
+      {
+        "name": "Adolis Garc\u00eda",
+        "rank": 26,
+        "composite": 0.495,
+        "opp_pitcher": "Patrick Corbin",
+        "matchup": "PHI@TOR"
+      },
+      {
+        "name": "Zach Neto",
+        "rank": 28,
+        "composite": 0.494,
+        "opp_pitcher": "Spencer Arrighetti",
+        "matchup": "HOU@LAA"
+      },
+      {
+        "name": "Andrew Vaughn",
+        "rank": 34,
+        "composite": 0.481,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Shea Langeliers",
+        "rank": 35,
+        "composite": 0.476,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "William Contreras",
+        "rank": 37,
+        "composite": 0.46,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Jake Bauers",
+        "rank": 47,
+        "composite": 0.451,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 66,
+        "composite": 0.412,
+        "opp_pitcher": "Connelly Early",
+        "matchup": "BOS@TB"
+      },
+      {
+        "name": "Freddy Fermin",
+        "rank": 79,
+        "composite": 0.395,
+        "opp_pitcher": "Andrew Abbott",
+        "matchup": "CIN@SD"
+      },
+      {
+        "name": "Josh Naylor",
+        "rank": 86,
+        "composite": 0.38,
+        "opp_pitcher": "Trey Gibson",
+        "matchup": "SEA@BAL"
+      },
+      {
+        "name": "Angel Mart\u00ednez",
+        "rank": 87,
+        "composite": 0.38,
+        "opp_pitcher": "Will Warren",
+        "matchup": "NYY@CLE"
+      },
+      {
+        "name": "Paul Goldschmidt",
+        "rank": 125,
+        "composite": 0.332,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "NYY@CLE"
+      },
+      {
+        "name": "Nick Kurtz",
+        "rank": 126,
+        "composite": 0.332,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Brice Turang",
+        "rank": 137,
+        "composite": 0.313,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Marcelo Mayer",
+        "rank": 138,
+        "composite": 0.309,
+        "opp_pitcher": "Ian Seymour",
+        "matchup": "BOS@TB"
+      },
+      {
+        "name": "Zack Gelof",
+        "rank": 142,
+        "composite": 0.292,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Tyler Soderstrom",
+        "rank": 151,
+        "composite": 0.255,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@ATH"
+      },
+      {
+        "name": "Ernie Clement",
+        "rank": 157,
+        "composite": 0.235,
+        "opp_pitcher": "Cristopher S\u00e1nchez",
+        "matchup": "PHI@TOR"
+      }
+    ]
   }
 ]
