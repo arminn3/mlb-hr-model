@@ -2,7 +2,7 @@
   "date": "2026-06-08",
   "total_players_ranked": 164,
   "total_hrs_hit": 21,
-  "total_near_hrs": 0,
+  "total_near_hrs": 8,
   "model_hits": 18,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 8,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -77,28 +77,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 3,
+      "rate": 30.0
     },
     "top_20": {
       "total": 20,
-      "hits": 1,
-      "rate": 5.0
+      "hits": 5,
+      "rate": 25.0
     },
     "top_30": {
       "total": 30,
-      "hits": 4,
-      "rate": 13.3
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 164,
-      "hits": 18,
-      "rate": 11.0
+      "hits": 26,
+      "rate": 15.9
     }
   },
   "avg_composite_hr_hitters": 0.414,
-  "avg_composite_non_hitters": 0.412,
-  "composite_separation": 0.002,
+  "avg_composite_non_hitters": 0.407,
+  "composite_separation": 0.007,
   "hr_hitters": [
     {
       "name": "Zach Neto",
@@ -355,8 +355,165 @@
       "matchup": "MIL@ATH"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Colby Thomas",
+      "rank": 2,
+      "composite": 0.693,
+      "opp_pitcher": "Kyle Harrison",
+      "matchup": "MIL@ATH"
+    },
+    {
+      "name": "Matt McLain",
+      "rank": 3,
+      "composite": 0.685,
+      "opp_pitcher": "Walker Buehler",
+      "matchup": "CIN@SD"
+    },
+    {
+      "name": "Yordan Alvarez",
+      "rank": 7,
+      "composite": 0.67,
+      "opp_pitcher": "Grayson Rodriguez",
+      "matchup": "HOU@LAA"
+    },
+    {
+      "name": "Mike Trout",
+      "rank": 13,
+      "composite": 0.647,
+      "opp_pitcher": "Spencer Arrighetti",
+      "matchup": "HOU@LAA"
+    },
+    {
+      "name": "Bryce Eldridge",
+      "rank": 82,
+      "composite": 0.4,
+      "opp_pitcher": "Miles Mikolas",
+      "matchup": "WSH@SF"
+    },
+    {
+      "name": "Luis Garc\u00eda Jr.",
+      "rank": 121,
+      "composite": 0.334,
+      "opp_pitcher": "Logan Webb",
+      "matchup": "WSH@SF"
+    },
+    {
+      "name": "JJ Bleday",
+      "rank": 149,
+      "composite": 0.246,
+      "opp_pitcher": "Walker Buehler",
+      "matchup": "CIN@SD"
+    },
+    {
+      "name": "Yohendrick Pi\u00f1ango",
+      "rank": 156,
+      "composite": 0.221,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@TOR"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Andrew Vaughn",
+      "ev": 96.7,
+      "angle": 26.0,
+      "distance": 382.0,
+      "hr_in_parks": 21,
+      "result": "double",
+      "pitcher": "Springs, Jeffrey"
+    },
+    {
+      "batter": "Colby Thomas",
+      "ev": 99.4,
+      "angle": 37.0,
+      "distance": 404.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Anderson, Grant"
+    },
+    {
+      "batter": "Jake Bauers",
+      "ev": 107.2,
+      "angle": 43.0,
+      "distance": 403.0,
+      "hr_in_parks": 16,
+      "result": "",
+      "pitcher": "Springs, Jeffrey"
+    },
+    {
+      "batter": "Yordan Alvarez",
+      "ev": 104.3,
+      "angle": 33.0,
+      "distance": 399.0,
+      "hr_in_parks": 16,
+      "result": "field_error",
+      "pitcher": "Rodriguez, Grayson"
+    },
+    {
+      "batter": "Mike Trout",
+      "ev": 99.2,
+      "angle": 30.0,
+      "distance": 377.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Arrighetti, Spencer"
+    },
+    {
+      "batter": "Matt McLain",
+      "ev": 104.2,
+      "angle": 27.0,
+      "distance": 378.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Rodriguez, Bradgley"
+    },
+    {
+      "batter": "JJ Bleday",
+      "ev": 106.6,
+      "angle": 20.0,
+      "distance": 380.0,
+      "hr_in_parks": 2,
+      "result": "double",
+      "pitcher": "Buehler, Walker"
+    },
+    {
+      "batter": "Luis Garc\u00eda Jr.",
+      "ev": 105.1,
+      "angle": 26.0,
+      "distance": 396.0,
+      "hr_in_parks": 15,
+      "result": "double",
+      "pitcher": "Winn, Keaton"
+    },
+    {
+      "batter": "Bryce Eldridge",
+      "ev": 100.2,
+      "angle": 38.0,
+      "distance": 373.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Mikolas, Miles"
+    },
+    {
+      "batter": "Yandy D\u00edaz",
+      "ev": 102.5,
+      "angle": 25.0,
+      "distance": 401.0,
+      "hr_in_parks": 26,
+      "result": "sac_fly",
+      "pitcher": "Gamboa, Alec"
+    },
+    {
+      "batter": "Yohendrick Pi\u00f1ango",
+      "ev": 111.6,
+      "angle": 15.0,
+      "distance": 394.0,
+      "hr_in_parks": 19,
+      "result": "double",
+      "pitcher": "S\u00e1nchez, Cristopher"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Jonah Heim",
