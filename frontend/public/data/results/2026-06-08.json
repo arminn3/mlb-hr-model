@@ -1,0 +1,325 @@
+{
+  "date": "2026-06-08",
+  "total_players_ranked": 164,
+  "total_hrs_hit": 0,
+  "total_near_hrs": 0,
+  "model_hits": 0,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 164,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 164,
+        "hits": 0,
+        "rate": 0.0
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 164,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 164,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "avg_composite_hr_hitters": 0,
+  "avg_composite_non_hitters": 0.412,
+  "composite_separation": -0.412,
+  "hr_hitters": [],
+  "hr_hitters_l10": [],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 54,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Cole Young",
+        "Willson Contreras",
+        "Ben Williamson",
+        "Ceddanne Rafaela",
+        "Mickey Gasper",
+        "Carlos Narv\u00e1ez",
+        "Isiah Kiner-Falefa",
+        "Spencer Jones",
+        "Paul Goldschmidt",
+        "Andr\u00e9s Gim\u00e9nez",
+        "Myles Straw",
+        "Nathan Lukes",
+        "Jose Altuve",
+        "Jake Meyers",
+        "Sebasti\u00e1n Rivero",
+        "Christian V\u00e1zquez",
+        "Cam Smith",
+        "Shay Whitcomb",
+        "Adam Frazier",
+        "Collin Price",
+        "Freddy Fermin",
+        "Jackson Merrill",
+        "Nathaniel Lowe",
+        "Fernando Tatis Jr.",
+        "Will Benson",
+        "Jase Bowen",
+        "Manny Machado",
+        "Xander Bogaerts",
+        "Ty France",
+        "Edwin Arroyo",
+        "Gavin Sheets",
+        "Samad Taylor",
+        "James Wood",
+        "Daylen Lile",
+        "Dylan Crews",
+        "Bryce Eldridge",
+        "Daniel Susac",
+        "Drew Gilbert",
+        "CJ Abrams",
+        "Luis Garc\u00eda Jr.",
+        "Jorbit Vivas",
+        "Nasim Nu\u00f1ez",
+        "Curtis Mead",
+        "Colby Thomas",
+        "Shea Langeliers",
+        "Jake Bauers",
+        "Brent Rooker",
+        "Nick Kurtz",
+        "Brice Turang",
+        "Max Muncy",
+        "Garrett Mitchell",
+        "Tyler Soderstrom",
+        "David Hamilton",
+        "Alika Williams"
+      ],
+      "hr_names": []
+    },
+    "2_of_5": {
+      "players": 69,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Dominic Canzone",
+        "Pete Alonso",
+        "Coby Mayo",
+        "Josh Naylor",
+        "Taylor Ward",
+        "Blaze Alexander",
+        "Sam Huff",
+        "Jonathan Aranda",
+        "Caleb Durbin",
+        "Yandy D\u00edaz",
+        "Austin Slater",
+        "Cedric Mullins",
+        "Taylor Walls",
+        "Jarren Duran",
+        "Wilyer Abreu",
+        "Ryan Vilade",
+        "Cody Bellinger",
+        "Ben Rice",
+        "Trent Grisham",
+        "Kyle Manzardo",
+        "Angel Mart\u00ednez",
+        "Steven Kwan",
+        "Patrick Bailey",
+        "Jazz Chisholm Jr.",
+        "Ryan McMahon",
+        "J.C. Escarra",
+        "Travis Bazzana",
+        "Brayan Rocchio",
+        "Bryson Stott",
+        "Kazuma Okamoto",
+        "Brandon Marsh",
+        "Bryce Harper",
+        "Tyler Heineman",
+        "Yohendrick Pi\u00f1ango",
+        "Vaughn Grissom",
+        "Zach Neto",
+        "Jo Adell",
+        "Donovan Walton",
+        "Logan O'Hoppe",
+        "Nick Madrigal",
+        "Christian Walker",
+        "Brice Matthews",
+        "Oswald Peraza",
+        "Jose Siri",
+        "Nolan Schanuel",
+        "Matt McLain",
+        "Tyler Stephenson",
+        "Dane Myers",
+        "Blake Dunn",
+        "Noelvi Marte",
+        "P.J. Higgins",
+        "Spencer Steer",
+        "JJ Bleday",
+        "Willy Adames",
+        "Eric Haase",
+        "Jung Hoo Lee",
+        "Luis Arraez",
+        "Matt Chapman",
+        "Rafael Devers",
+        "Jonah Cox",
+        "Victor Bericoto",
+        "Buddy Kennedy",
+        "Jackson Chourio",
+        "Christian Yelich",
+        "Gary S\u00e1nchez",
+        "Joey Ortiz",
+        "William Contreras",
+        "Sal Frelick",
+        "Zack Gelof"
+      ],
+      "hr_names": []
+    },
+    "3_of_5": {
+      "players": 33,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Colton Cowser",
+        "Jhonny Pereda",
+        "Luke Raley",
+        "Gunnar Henderson",
+        "Leody Taveras",
+        "Jackson Holliday",
+        "Ryan Bliss",
+        "Junior Caminero",
+        "Nick Fortes",
+        "Marcelo Mayer",
+        "Jos\u00e9 Ram\u00edrez",
+        "Chase DeLauter",
+        "Daniel Schneemann",
+        "Edmundo Sosa",
+        "Adolis Garc\u00eda",
+        "J.T. Realmuto",
+        "Alec Bohm",
+        "Trea Turner",
+        "Vladimir Guerrero Jr.",
+        "George Springer",
+        "Ernie Clement",
+        "LaMonte Wade Jr.",
+        "Yordan Alvarez",
+        "Isaac Paredes",
+        "Mike Trout",
+        "Jeremy Pe\u00f1a",
+        "Wade Meckler",
+        "Sal Stewart",
+        "Eugenio Su\u00e1rez",
+        "Casey Schmitt",
+        "Andrew Vaughn",
+        "Blake Perkins",
+        "Luis Rengifo"
+      ],
+      "hr_names": []
+    },
+    "4_of_5": {
+      "players": 5,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Julio Rodr\u00edguez",
+        "Patrick Wisdom",
+        "Randy Arozarena",
+        "Kyle Schwarber",
+        "Taylor Trammell"
+      ],
+      "hr_names": []
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 164,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "combined_hr_hitters": []
+}
