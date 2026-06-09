@@ -433,11 +433,34 @@ export function MLRankings({
       });
   }, []);
 
+  // Build confirmed starter set: posted lineups → only order 1-9; unposted → all players
+  const confirmedStarters = useMemo(() => {
+    const s = new Set<string>();
+    for (const game of games) {
+      const tpm = game.team_pitch_mix;
+      for (const side of ["away", "home"] as const) {
+        const sideData = tpm?.[side];
+        if (sideData?.lineup_status === "posted") {
+          for (const b of sideData.batters) {
+            if (b.order != null && b.order >= 1 && b.order <= 9) s.add(b.name);
+          }
+        } else {
+          const bside = side === "away" ? "away" : "home";
+          for (const p of game.players) {
+            if (p.batter_side === bside) s.add(p.name);
+          }
+        }
+      }
+    }
+    return s;
+  }, [games]);
+
   const sorted = useMemo(() => {
     const seen = new Set<string>();
     const all: { player: PlayerData; game: GameData }[] = [];
     for (const game of games) {
       for (const player of game.players) {
+        if (!confirmedStarters.has(player.name)) continue;
         if (!seen.has(player.name)) {
           seen.add(player.name);
           all.push({ player, game });
@@ -465,6 +488,7 @@ export function MLRankings({
     const all: { player: PlayerData; game: GameData }[] = [];
     for (const game of games) {
       for (const player of game.players) {
+        if (!confirmedStarters.has(player.name)) continue;
         if (!seen.has(player.name)) {
           seen.add(player.name);
           all.push({ player, game });
@@ -472,7 +496,7 @@ export function MLRankings({
       }
     }
     return all.sort((a, b) => combinedScore(b.player) - combinedScore(a.player));
-  }, [games]);
+  }, [games, confirmedStarters]);
 
   // Fixed L5/L10 sorted lists for consensus (independent of current lookback toggle)
   const sortedL5 = useMemo(() => {
@@ -480,6 +504,7 @@ export function MLRankings({
     const all: { player: PlayerData; game: GameData }[] = [];
     for (const game of games) {
       for (const player of game.players) {
+        if (!confirmedStarters.has(player.name)) continue;
         if (!seen.has(player.name)) { seen.add(player.name); all.push({ player, game }); }
       }
     }
@@ -490,13 +515,14 @@ export function MLRankings({
       const rB = Math.min(1, (sb?.recent_abs?.length ?? 0) / 10);
       return mlComposite(b.player, "L5", mlWeights) * rB - mlComposite(a.player, "L5", mlWeights) * rA;
     });
-  }, [games, mlWeights]);
+  }, [games, mlWeights, confirmedStarters]);
 
   const sortedL10 = useMemo(() => {
     const seen = new Set<string>();
     const all: { player: PlayerData; game: GameData }[] = [];
     for (const game of games) {
       for (const player of game.players) {
+        if (!confirmedStarters.has(player.name)) continue;
         if (!seen.has(player.name)) { seen.add(player.name); all.push({ player, game }); }
       }
     }
@@ -507,24 +533,21 @@ export function MLRankings({
       const rB = Math.min(1, (sb?.recent_abs?.length ?? 0) / 10);
       return mlComposite(b.player, "L10", mlWeights) * rB - mlComposite(a.player, "L10", mlWeights) * rA;
     });
-  }, [games, mlWeights]);
+  }, [games, mlWeights, confirmedStarters]);
 
-  // Season score with a lower BIP floor (10 instead of the global 20).
-  // 10 BIP ≈ 3-4 games of contact — noisy but enough to include recently
-  // activated or newly called-up players. The global threshold stays at 20
-  // so the Season+Form tab isn't affected.
   const sortedSeason = useMemo(() => {
     const seen = new Set<string>();
     const all: { player: PlayerData; game: GameData }[] = [];
     for (const game of games) {
       for (const player of game.players) {
+        if (!confirmedStarters.has(player.name)) continue;
         if (!seen.has(player.name)) { seen.add(player.name); all.push({ player, game }); }
       }
     }
     return all
       .filter(r => _seasonScoreConsensus(r.player) !== null)
       .sort((a, b) => (_seasonScoreConsensus(b.player) ?? 0) - (_seasonScoreConsensus(a.player) ?? 0));
-  }, [games]);
+  }, [games, confirmedStarters]);
 
   const consensusRows = useMemo(() => {
     const TOP_N = 30;
