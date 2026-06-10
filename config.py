@@ -187,6 +187,11 @@ PARK_HR_FACTORS: dict = {
     "SF":  {"overall": 75,  "L": 70,  "R": 80},   # triples alley kills LHB power
     "TB":  {"overall": 95,  "L": 93,  "R": 97},
     "OAK": {"overall": 108, "L": 110, "R": 106},  # Sutter Health Park 2026
+    # ATH playing June 2026 homestand at Las Vegas Ballpark (Summerlin).
+    # Hot dry desert air + no third deck = wind blows out to CF unobstructed.
+    # 2-game sample (6/8 and 6/9) saw 17 HRs combined. Treating as Coors-tier
+    # while in Vegas until larger sample emerges.
+    "ATH": {"overall": 122, "L": 124, "R": 120},
 }
 
 # ── Stadium Coordinates ──────────────────────────────────────────────────────
@@ -197,7 +202,7 @@ STADIUM_COORDS: dict = {
     "CLE": (41.4963, -81.6860), "DET": (42.3384, -83.0481),
     "KC":  (39.0519, -94.4807), "MIN": (44.9821, -93.2784),
     "HOU": (29.7570, -95.3562), "LAA": (33.8006, -117.8834),
-    "OAK": (37.7515, -122.2007),"ATH": (38.5735, -121.4988),  # Sutter Health Park, Sacramento
+    "OAK": (37.7515, -122.2007),"ATH": (36.1716, -115.3275),  # Las Vegas Ballpark, Summerlin (June 2026 homestand)
     "SEA": (47.5915, -122.3329),
     "TEX": (32.7478, -97.0840), "ATL": (33.8908, -84.4682),
     "MIA": (25.7783, -80.2204), "NYM": (40.7573, -73.8462),

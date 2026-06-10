@@ -171,7 +171,7 @@ _OUTFIELD_AZIMUTH: dict[str, float] = {
     "HOU": 345,  # Daikin Park / Minute Maid — NNW (retractable)
     "LAA":  45,  # Angel Stadium — NE
     "OAK":  60,  # Oakland Coliseum — ENE
-    "ATH":  45,  # Sutter Health Park, Sacramento — NE (2025+)
+    "ATH":  60,  # Las Vegas Ballpark, Summerlin — wind blows out to CF (no third deck)
     "SEA":  45,  # T-Mobile Park — NE (retractable)
     "TEX":  45,  # Globe Life Field — NE (retractable, new stadium 2020)
     # NL East
@@ -309,7 +309,9 @@ def _load_fingerprint() -> None:
 _load_fingerprint()
 
 # Team-code aliases: historical data uses older codes for relocated/renamed teams
-_FINGERPRINT_TEAM_ALIASES: dict[str, str] = {"ATH": "OAK", "SD": "SDP"}
+# ATH no longer aliased to OAK — playing in Vegas, OAK history not applicable.
+# Empirical lookup will return zero sample, so we fall back to physics + park factor.
+_FINGERPRINT_TEAM_ALIASES: dict[str, str] = {"SD": "SDP"}
 
 
 def _fingerprint_temp_bucket(t: float) -> str:
@@ -405,7 +407,7 @@ _PARK_WIND_SENSITIVITY: dict[str, float] = {
     "SDP": 0.85,  # Petco — marine layer dampens carry
     "SD":  0.85,  # Petco alias
     "OAK": 0.9,   # Coliseum — mild bay wind
-    "ATH": 0.9,   # Sutter Health Park, Sacramento
+    "ATH": 1.5,   # Las Vegas Ballpark — no third deck, wind carries unobstructed
     "COL": 0.75,  # Coors — altitude effect dominates, wind is smaller lever
     "SF":  0.55,  # Oracle — notorious swirling coastal, low wind↔HR correlation
     # Retractable roofs — sensitivity only applies when roof is open
