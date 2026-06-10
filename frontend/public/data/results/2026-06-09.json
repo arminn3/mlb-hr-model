@@ -2,7 +2,7 @@
   "date": "2026-06-09",
   "total_players_ranked": 297,
   "total_hrs_hit": 38,
-  "total_near_hrs": 0,
+  "total_near_hrs": 21,
   "model_hits": 35,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -51,7 +51,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 21,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -77,23 +77,23 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
       "total": 20,
-      "hits": 1,
-      "rate": 5.0
+      "hits": 2,
+      "rate": 10.0
     },
     "top_30": {
       "total": 30,
-      "hits": 3,
-      "rate": 10.0
+      "hits": 6,
+      "rate": 20.0
     },
     "all": {
       "total": 297,
-      "hits": 35,
-      "rate": 11.8
+      "hits": 56,
+      "rate": 18.9
     }
   },
   "avg_composite_hr_hitters": 0.472,
@@ -593,8 +593,373 @@
       "matchup": "ATL@CWS"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Andrew Benintendi",
+      "rank": 8,
+      "composite": 0.732,
+      "opp_pitcher": "Grant Holmes",
+      "matchup": "ATL@CWS"
+    },
+    {
+      "name": "Garrett Mitchell",
+      "rank": 22,
+      "composite": 0.653,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "MIL@ATH"
+    },
+    {
+      "name": "Daylen Lile",
+      "rank": 25,
+      "composite": 0.646,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "WSH@SF"
+    },
+    {
+      "name": "Marcus Semien",
+      "rank": 83,
+      "composite": 0.481,
+      "opp_pitcher": "Dustin May",
+      "matchup": "STL@NYM"
+    },
+    {
+      "name": "Julio Rodr\u00edguez",
+      "rank": 96,
+      "composite": 0.4,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "SEA@BAL"
+    },
+    {
+      "name": "Otto Lopez",
+      "rank": 110,
+      "composite": 0.4,
+      "opp_pitcher": "Zac Gallen",
+      "matchup": "AZ@MIA"
+    },
+    {
+      "name": "Connor Norby",
+      "rank": 113,
+      "composite": 0.4,
+      "opp_pitcher": "Zac Gallen",
+      "matchup": "AZ@MIA"
+    },
+    {
+      "name": "Vinnie Pasquantino",
+      "rank": 135,
+      "composite": 0.4,
+      "opp_pitcher": "Nathan Eovaldi",
+      "matchup": "TEX@KC"
+    },
+    {
+      "name": "Isaac Collins",
+      "rank": 138,
+      "composite": 0.4,
+      "opp_pitcher": "Nathan Eovaldi",
+      "matchup": "TEX@KC"
+    },
+    {
+      "name": "Edouard Julien",
+      "rank": 176,
+      "composite": 0.386,
+      "opp_pitcher": "Colin Rea",
+      "matchup": "CHC@COL"
+    },
+    {
+      "name": "Victor Robles",
+      "rank": 181,
+      "composite": 0.383,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "SEA@BAL"
+    },
+    {
+      "name": "Maikel Garcia",
+      "rank": 183,
+      "composite": 0.383,
+      "opp_pitcher": "Nathan Eovaldi",
+      "matchup": "TEX@KC"
+    },
+    {
+      "name": "Colt Keith",
+      "rank": 186,
+      "composite": 0.379,
+      "opp_pitcher": "Taj Bradley",
+      "matchup": "MIN@DET"
+    },
+    {
+      "name": "Tyler O'Neill",
+      "rank": 197,
+      "composite": 0.371,
+      "opp_pitcher": "Logan Gilbert",
+      "matchup": "SEA@BAL"
+    },
+    {
+      "name": "Austin Hedges",
+      "rank": 205,
+      "composite": 0.367,
+      "opp_pitcher": "Gerrit Cole",
+      "matchup": "NYY@CLE"
+    },
+    {
+      "name": "Patrick Wisdom",
+      "rank": 210,
+      "composite": 0.36,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "SEA@BAL"
+    },
+    {
+      "name": "Zach McKinstry",
+      "rank": 219,
+      "composite": 0.348,
+      "opp_pitcher": "Taj Bradley",
+      "matchup": "MIN@DET"
+    },
+    {
+      "name": "Wilyer Abreu",
+      "rank": 225,
+      "composite": 0.337,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "BOS@TB"
+    },
+    {
+      "name": "Mookie Betts",
+      "rank": 264,
+      "composite": 0.281,
+      "opp_pitcher": "Paul Skenes",
+      "matchup": "LAD@PIT"
+    },
+    {
+      "name": "Junior Caminero",
+      "rank": 272,
+      "composite": 0.262,
+      "opp_pitcher": "Payton Tolle",
+      "matchup": "BOS@TB"
+    },
+    {
+      "name": "Jacob Young",
+      "rank": 280,
+      "composite": 0.24,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "WSH@SF"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Garrett Mitchell",
+      "ev": 110.5,
+      "angle": 18.0,
+      "distance": 380.0,
+      "hr_in_parks": 18,
+      "result": "double",
+      "pitcher": "Ginn, J.T."
+    },
+    {
+      "batter": "Patrick Wisdom",
+      "ev": 105.0,
+      "angle": 35.0,
+      "distance": 380.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Garcia, Rico"
+    },
+    {
+      "batter": "Tyler O'Neill",
+      "ev": 104.2,
+      "angle": 22.0,
+      "distance": 369.0,
+      "hr_in_parks": 6,
+      "result": "double",
+      "pitcher": "Ferrer, Jos\u00e9 A."
+    },
+    {
+      "batter": "Julio Rodr\u00edguez",
+      "ev": 105.7,
+      "angle": 36.0,
+      "distance": 394.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Rogers, Trevor"
+    },
+    {
+      "batter": "Victor Robles",
+      "ev": 96.8,
+      "angle": 33.0,
+      "distance": 371.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Rogers, Trevor"
+    },
+    {
+      "batter": "Eli White",
+      "ev": 96.3,
+      "angle": 27.0,
+      "distance": 375.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Taylor, Grant"
+    },
+    {
+      "batter": "Andrew Benintendi",
+      "ev": 104.2,
+      "angle": 26.0,
+      "distance": 394.0,
+      "hr_in_parks": 5,
+      "result": "field_out",
+      "pitcher": "Dodd, Dylan"
+    },
+    {
+      "batter": "Matt Olson",
+      "ev": 104.4,
+      "angle": 30.0,
+      "distance": 396.0,
+      "hr_in_parks": 25,
+      "result": "field_out",
+      "pitcher": "Fedde, Erick"
+    },
+    {
+      "batter": "Austin Hedges",
+      "ev": 109.6,
+      "angle": 19.0,
+      "distance": 372.0,
+      "hr_in_parks": 30,
+      "result": "single",
+      "pitcher": "Cole, Gerrit"
+    },
+    {
+      "batter": "Edouard Julien",
+      "ev": 106.6,
+      "angle": 23.0,
+      "distance": 381.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Rea, Colin"
+    },
+    {
+      "batter": "Zach McKinstry",
+      "ev": 100.6,
+      "angle": 23.0,
+      "distance": 385.0,
+      "hr_in_parks": 25,
+      "result": "triple",
+      "pitcher": "Orze, Eric"
+    },
+    {
+      "batter": "Colt Keith",
+      "ev": 97.5,
+      "angle": 27.0,
+      "distance": 383.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Orze, Eric"
+    },
+    {
+      "batter": "Colt Keith",
+      "ev": 98.0,
+      "angle": 30.0,
+      "distance": 387.0,
+      "hr_in_parks": 14,
+      "result": "field_out",
+      "pitcher": "Bradley, Taj"
+    },
+    {
+      "batter": "Vinnie Pasquantino",
+      "ev": 102.5,
+      "angle": 23.0,
+      "distance": 396.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Eovaldi, Nathan"
+    },
+    {
+      "batter": "Maikel Garcia",
+      "ev": 101.6,
+      "angle": 30.0,
+      "distance": 406.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Eovaldi, Nathan"
+    },
+    {
+      "batter": "Isaac Collins",
+      "ev": 101.6,
+      "angle": 24.0,
+      "distance": 408.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Eovaldi, Nathan"
+    },
+    {
+      "batter": "Connor Norby",
+      "ev": 98.3,
+      "angle": 33.0,
+      "distance": 390.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Gallen, Zac"
+    },
+    {
+      "batter": "Otto Lopez",
+      "ev": 106.0,
+      "angle": 21.0,
+      "distance": 396.0,
+      "hr_in_parks": 14,
+      "result": "double",
+      "pitcher": "Gallen, Zac"
+    },
+    {
+      "batter": "Marcus Semien",
+      "ev": 101.0,
+      "angle": 28.0,
+      "distance": 399.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "May, Dustin"
+    },
+    {
+      "batter": "Mookie Betts",
+      "ev": 105.2,
+      "angle": 19.0,
+      "distance": 375.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Skenes, Paul"
+    },
+    {
+      "batter": "Daylen Lile",
+      "ev": 100.7,
+      "angle": 32.0,
+      "distance": 391.0,
+      "hr_in_parks": 24,
+      "result": "triple",
+      "pitcher": "Beck, Tristan"
+    },
+    {
+      "batter": "Jacob Young",
+      "ev": 101.3,
+      "angle": 30.0,
+      "distance": 385.0,
+      "hr_in_parks": 29,
+      "result": "triple",
+      "pitcher": "Houser, Adrian"
+    },
+    {
+      "batter": "Wilyer Abreu",
+      "ev": 101.7,
+      "angle": 23.0,
+      "distance": 390.0,
+      "hr_in_parks": 27,
+      "result": "double",
+      "pitcher": "Martinez, Nick"
+    },
+    {
+      "batter": "Junior Caminero",
+      "ev": 109.3,
+      "angle": 19.0,
+      "distance": 386.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Tolle, Payton"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
