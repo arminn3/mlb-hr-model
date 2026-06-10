@@ -73,33 +73,36 @@ function _formBatterFromScoreSet(s: import("./types").ScoreSet, seasonBatter: nu
   return brl * 0.55 + fb * 0.25 + ev * 0.20;
 }
 
+// Balanced Edge — geometric mean of 5 factors. Weakness in any single factor
+// (cold form, soft pitcher matchup, flat park, bad mix vs arsenal) actively
+// drags the score down. Nothing can carry.
 export function combinedScore(player: PlayerData): number {
-  const season = computeSeasonScore(player);
-  const l5 = scoreFor(player, "L5");
   const l10 = scoreFor(player, "L10");
-  if (!l5 && !l10) return 0;
+  const l5  = scoreFor(player, "L5");
+  if (!l10 && !l5) return 0;
+  const s = l10 ?? l5!;
 
-  let baseBatter: number;
-  let pitcher: number;
-  let env: number;
+  const norm = (v: number, lo: number, hi: number) =>
+    Math.max(0.05, Math.min(1, (v - lo) / (hi - lo)));
 
-  if (season) {
-    const fb5  = l5  ? _formBatterFromScoreSet(l5,  season.batter) : season.batter;
-    const fb10 = l10 ? _formBatterFromScoreSet(l10, season.batter) : season.batter;
-    const formBatter = (fb5 + fb10) / 2;
-    // 70% season (stable ability), 30% recent form (L5+L10 barrel/FB/EV)
-    baseBatter = season.batter * 0.70 + formBatter * 0.30;
-    pitcher = season.pitcher;
-    env = season.env;
-  } else {
-    // No season data — fall back to L5/L10 average
-    const s = l10 ?? l5!;
-    baseBatter = s.batter_score;
-    pitcher = s.pitcher_score;
-    env = s.env_score;
+  const fL10 = norm((l10 ?? s).batter_score, 0.2, 0.8);
+  const fL5  = norm((l5  ?? l10!).batter_score, 0.2, 0.8);
+  const fPit = norm(s.pitcher_score, 0.2, 0.8);
+  const fEnv = norm(s.env_score, 0.2, 0.8);
+
+  // Weighted barrel + hard-hit across pitcher's pitch types
+  const pd = player.pitch_detail ?? {};
+  let wbBrl = 0, wbHh = 0, wt = 0;
+  for (const dd of Object.values(pd)) {
+    const u = dd.usage_pct ?? 0;
+    wt += u;
+    wbBrl += (dd.barrel_rate ?? 0) * u;
+    wbHh  += (dd.hard_hit_rate ?? 0) * u;
   }
+  if (wt > 0) { wbBrl /= wt; wbHh /= wt; }
+  const fMix = (norm(wbBrl, 5, 35) + norm(wbHh, 20, 60)) / 2;
 
-  return baseBatter * 0.50 + pitcher * 0.35 + env * 0.15;
+  return Math.pow(fL10 * fL5 * fPit * fEnv * fMix, 1 / 5);
 }
 
 export function combinedFormDelta(player: PlayerData): number | null {
@@ -175,7 +178,7 @@ export function MLRankings({
       // Header
       ctx.fillStyle = "#e4e4e7";
       ctx.font = "bold 22px Inter, system-ui, sans-serif";
-      ctx.fillText(rankingTab === "combined" ? "Season + Form Rankings" : "ML HR Rankings", PAD, 34);
+      ctx.fillText(rankingTab === "combined" ? "Balanced Edge Rankings" : "ML HR Rankings", PAD, 34);
       ctx.fillStyle = "#71717a";
       ctx.font = "13px Inter, system-ui, sans-serif";
       ctx.fillText(`${rows.length} players · Beeb Sheets`, PAD, 56);
@@ -596,11 +599,11 @@ export function MLRankings({
           <div className="flex items-center justify-between mb-3">
             <div>
               <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
-                {rankingTab === "combined" ? "Yesterday's Season + Form Picks" : "Yesterday's ML Picks"} — {yesterday.date}
+                {rankingTab === "combined" ? "Yesterday's Balanced Edge Picks" : "Yesterday's ML Picks"} — {yesterday.date}
               </h3>
               <p className="text-[11px] text-muted mt-0.5">
                 {rankingTab === "combined"
-                  ? "How Season + Form would have ranked yesterday's slate."
+                  ? "How Balanced Edge would have ranked yesterday's slate."
                   : "How these same ML weights would have ranked yesterday's slate."}
                 {" "}Leaguewide: {yesterday.totalHRs} HRs hit.
               </p>
@@ -734,7 +737,7 @@ export function MLRankings({
       <div className="flex items-start justify-between gap-3 mb-4 flex-wrap">
         <div>
           <h2 className="text-[15px] leading-[20px] font-semibold tracking-[-0.005em] text-foreground">
-            {rankingTab === "combined" ? "Season + Form" : rankingTab === "consensus" ? "Consensus" : "ML Rankings"}
+            {rankingTab === "combined" ? "Balanced Edge" : rankingTab === "consensus" ? "Consensus" : "ML Rankings"}
           </h2>
           <p className="text-[11px] leading-[14px] font-medium tracking-[0.02em] text-muted mt-0.5">
             {rankingTab === "combined"
@@ -823,7 +826,7 @@ export function MLRankings({
                 : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
             }
           >
-            {t === "ml" ? "ML Model" : t === "combined" ? "Season + Form" : "Consensus"}
+            {t === "ml" ? "ML Model" : t === "combined" ? "Balanced Edge" : "Consensus"}
           </button>
         ))}
       </div>
@@ -840,8 +843,8 @@ export function MLRankings({
       )}
       {rankingTab === "combined" && (
         <p className="text-[11px] leading-[16px] text-muted mb-4">
-          <span className="text-foreground font-mono">Batter 50% · Pitcher 35% · Env 15%</span>
-          {" · "}batter = 70% season + 30% recent form (L5+L10 barrel/FB/EV) · &lt;20 season BIP falls back to L5/L10
+          <span className="text-foreground font-mono">Geometric mean</span>
+          {" · "}L10 form × L5 form × pitcher vs-hand × park+weather × weighted barrel/HH vs pitcher's pitch mix · weakness in any one factor drags the rank down
         </p>
       )}
 

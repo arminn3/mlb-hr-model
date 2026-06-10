@@ -189,7 +189,7 @@ function DayReport({ day }: { day: DayReportData }) {
                     lb === opt ? "bg-accent text-background" : "text-muted hover:text-foreground"
                   }`}
                 >
-                  {opt}
+                  {opt === "Combined" ? "Balanced Edge" : opt}
                 </button>
               ))}
             </div>
@@ -197,7 +197,7 @@ function DayReport({ day }: { day: DayReportData }) {
 
           {/* Tier accuracy — HRs only */}
           <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
-            {lb === "Combined" ? "HR Hit Rate (Season + Form)" : `HR Hit Rate (${lb})`}
+            {lb === "Combined" ? "HR Hit Rate (Balanced Edge)" : `HR Hit Rate (${lb})`}
           </h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
             {Object.entries(tierAccuracy).map(([tier, acc]) => (
@@ -432,7 +432,7 @@ function HRHittersTable({ l5, l10, combined, activeLb }: {
   return (
     <div className="mb-3">
       <h4 className="text-[10px] uppercase tracking-wider text-muted mb-2">
-        {activeLb === "Combined" ? "HR Hitters in Season + Form Rankings" : `HR Hitters in Rankings (${activeLb})`}
+        {activeLb === "Combined" ? "HR Hitters in Balanced Edge Rankings" : `HR Hitters in Rankings (${activeLb})`}
       </h4>
 
       {/* Mobile card view */}

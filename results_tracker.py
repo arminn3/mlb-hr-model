@@ -200,25 +200,36 @@ def _form_batter_from_scoreset(s: dict, season_batter: float) -> float:
 
 
 def _compute_combined_score(player: dict) -> float:
-    season = _compute_season_score(player)
+    """Balanced Edge — geometric mean across 5 factors. Mirrors TS combinedScore
+    in ml-rankings.tsx. Weakness in any single factor drags the score down."""
     scores = player.get("scores", {})
-    l5 = scores.get("L5", {})
-    l10 = scores.get("L10", {})
+    l5 = scores.get("L5") or {}
+    l10 = scores.get("L10") or {}
     if not l5 and not l10:
         return 0.0
-    if season:
-        fb5 = _form_batter_from_scoreset(l5, season["batter"]) if l5 else season["batter"]
-        fb10 = _form_batter_from_scoreset(l10, season["batter"]) if l10 else season["batter"]
-        form_batter = (fb5 + fb10) / 2
-        base_batter = season["batter"] * 0.70 + form_batter * 0.30
-        pitcher = season["pitcher"]
-        env = season["env"]
-    else:
-        s = l10 if l10 else l5
-        base_batter = s.get("batter_score", 0.0)
-        pitcher = s.get("pitcher_score", 0.5)
-        env = s.get("env_score", 0.5)
-    return base_batter * 0.50 + pitcher * 0.35 + env * 0.15
+    s = l10 if l10 else l5
+
+    def n(v, lo, hi):
+        if v is None: return 0.5
+        return max(0.05, min(1.0, (v - lo) / (hi - lo)))
+
+    f_l10 = n((l10 or s).get("batter_score", 0.5), 0.2, 0.8)
+    f_l5  = n((l5  or l10).get("batter_score", 0.5), 0.2, 0.8)
+    f_pit = n(s.get("pitcher_score", 0.5), 0.2, 0.8)
+    f_env = n(s.get("env_score", 0.5), 0.2, 0.8)
+
+    pd = player.get("pitch_detail") or {}
+    wb_brl = wb_hh = wt = 0.0
+    for dd in pd.values():
+        u = dd.get("usage_pct", 0) or 0
+        wt += u
+        wb_brl += (dd.get("barrel_rate", 0) or 0) * u
+        wb_hh  += (dd.get("hard_hit_rate", 0) or 0) * u
+    if wt > 0:
+        wb_brl /= wt; wb_hh /= wt
+    f_mix = (n(wb_brl, 5, 35) + n(wb_hh, 20, 60)) / 2
+
+    return (f_l10 * f_l5 * f_pit * f_env * f_mix) ** (1/5)
 
 
 def load_model_predictions(game_date: date) -> dict:

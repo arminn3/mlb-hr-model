@@ -1,8 +1,14 @@
 {
   "date": "2026-06-09",
+<<<<<<< HEAD
   "total_players_ranked": 297,
   "total_hrs_hit": 38,
   "total_near_hrs": 21,
+=======
+  "total_players_ranked": 349,
+  "total_hrs_hit": 38,
+  "total_near_hrs": 22,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
   "model_hits": 35,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -23,9 +29,15 @@
         "rate": 10.0
       },
       "all": {
+<<<<<<< HEAD
         "total": 297,
         "hits": 35,
         "rate": 11.8
+=======
+        "total": 349,
+        "hits": 35,
+        "rate": 10.0
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       }
     },
     "L10": {
@@ -41,6 +53,7 @@
       },
       "top_30": {
         "total": 30,
+<<<<<<< HEAD
         "hits": 7,
         "rate": 23.3
       },
@@ -52,6 +65,19 @@
     }
   },
   "model_near_hits": 21,
+=======
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 349,
+        "hits": 35,
+        "rate": 10.0
+      }
+    }
+  },
+  "model_near_hits": 22,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -69,9 +95,15 @@
       "rate": 10.0
     },
     "all": {
+<<<<<<< HEAD
       "total": 297,
       "hits": 35,
       "rate": 11.8
+=======
+      "total": 349,
+      "hits": 35,
+      "rate": 10.0
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
     }
   },
   "tier_accuracy_with_near": {
@@ -87,6 +119,7 @@
     },
     "top_30": {
       "total": 30,
+<<<<<<< HEAD
       "hits": 6,
       "rate": 20.0
     },
@@ -98,37 +131,70 @@
   },
   "avg_composite_hr_hitters": 0.472,
   "avg_composite_non_hitters": 0.417,
+=======
+      "hits": 4,
+      "rate": 13.3
+    },
+    "all": {
+      "total": 349,
+      "hits": 57,
+      "rate": 16.3
+    }
+  },
+  "avg_composite_hr_hitters": 0.469,
+  "avg_composite_non_hitters": 0.414,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
   "composite_separation": 0.055,
   "hr_hitters": [
     {
       "name": "Henry Bolte",
+<<<<<<< HEAD
       "rank": 18,
       "composite": 0.674,
+=======
+      "rank": 20,
+      "composite": 0.684,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Robert Gasser",
       "matchup": "MIL@ATH"
     },
     {
       "name": "Luis Garc\u00eda Jr.",
       "rank": 24,
+<<<<<<< HEAD
       "composite": 0.647,
+=======
+      "composite": 0.664,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Adrian Houser",
       "matchup": "WSH@SF"
     },
     {
       "name": "Zack Gelof",
+<<<<<<< HEAD
       "rank": 26,
       "composite": 0.644,
+=======
+      "rank": 30,
+      "composite": 0.654,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Robert Gasser",
       "matchup": "MIL@ATH"
     },
     {
       "name": "Byron Buxton",
+<<<<<<< HEAD
       "rank": 31,
       "composite": 0.629,
+=======
+      "rank": 35,
+      "composite": 0.636,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Troy Melton",
       "matchup": "MIN@DET"
     },
     {
+<<<<<<< HEAD
       "name": "Hunter Goodman",
       "rank": 33,
       "composite": 0.625,
@@ -139,17 +205,42 @@
       "name": "Riley Greene",
       "rank": 35,
       "composite": 0.619,
+=======
+      "name": "Jonah Heim",
+      "rank": 38,
+      "composite": 0.627,
+      "opp_pitcher": "Robert Gasser",
+      "matchup": "MIL@ATH"
+    },
+    {
+      "name": "Riley Greene",
+      "rank": 39,
+      "composite": 0.625,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@DET"
     },
     {
+<<<<<<< HEAD
       "name": "Coby Mayo",
       "rank": 37,
+=======
+      "name": "Bryan Reynolds",
+      "rank": 41,
+      "composite": 0.62,
+      "opp_pitcher": "Eric Lauer",
+      "matchup": "LAD@PIT"
+    },
+    {
+      "name": "Coby Mayo",
+      "rank": 43,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.618,
       "opp_pitcher": "Logan Gilbert",
       "matchup": "SEA@BAL"
     },
     {
+<<<<<<< HEAD
       "name": "Jonah Heim",
       "rank": 40,
       "composite": 0.617,
@@ -159,11 +250,16 @@
     {
       "name": "Randy Arozarena",
       "rank": 42,
+=======
+      "name": "Randy Arozarena",
+      "rank": 48,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.613,
       "opp_pitcher": "Trevor Rogers",
       "matchup": "SEA@BAL"
     },
     {
+<<<<<<< HEAD
       "name": "Bryan Reynolds",
       "rank": 44,
       "composite": 0.612,
@@ -173,25 +269,48 @@
     {
       "name": "Nick Kurtz",
       "rank": 45,
+=======
+      "name": "Nick Kurtz",
+      "rank": 50,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.608,
       "opp_pitcher": "Robert Gasser",
       "matchup": "MIL@ATH"
     },
     {
+<<<<<<< HEAD
       "name": "Sal Stewart",
       "rank": 55,
       "composite": 0.564,
+=======
+      "name": "Hunter Goodman",
+      "rank": 55,
+      "composite": 0.599,
+      "opp_pitcher": "Colin Rea",
+      "matchup": "CHC@COL"
+    },
+    {
+      "name": "Sal Stewart",
+      "rank": 59,
+      "composite": 0.566,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Lucas Giolito",
       "matchup": "CIN@SD"
     },
     {
       "name": "Kody Clemens",
+<<<<<<< HEAD
       "rank": 64,
       "composite": 0.545,
+=======
+      "rank": 75,
+      "composite": 0.535,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Troy Melton",
       "matchup": "MIN@DET"
     },
     {
+<<<<<<< HEAD
       "name": "Matt Olson",
       "rank": 72,
       "composite": 0.516,
@@ -202,38 +321,60 @@
       "name": "Dillon Dingler",
       "rank": 79,
       "composite": 0.494,
+=======
+      "name": "Dillon Dingler",
+      "rank": 88,
+      "composite": 0.501,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@DET"
     },
     {
       "name": "Tyler Soderstrom",
+<<<<<<< HEAD
       "rank": 82,
+=======
+      "rank": 92,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.484,
       "opp_pitcher": "Robert Gasser",
       "matchup": "MIL@ATH"
     },
     {
       "name": "Corbin Carroll",
+<<<<<<< HEAD
       "rank": 88,
+=======
+      "rank": 99,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.457,
       "opp_pitcher": "Max Meyer",
       "matchup": "AZ@MIA"
     },
     {
       "name": "Mitch Garver",
+<<<<<<< HEAD
       "rank": 98,
+=======
+      "rank": 111,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Trevor Rogers",
       "matchup": "SEA@BAL"
     },
     {
       "name": "Kerry Carpenter",
+<<<<<<< HEAD
       "rank": 103,
+=======
+      "rank": 116,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@DET"
     },
     {
+<<<<<<< HEAD
       "name": "Brooks Lee",
       "rank": 104,
       "composite": 0.4,
@@ -243,19 +384,28 @@
     {
       "name": "Josh Bell",
       "rank": 105,
+=======
+      "name": "Josh Bell",
+      "rank": 117,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Troy Melton",
       "matchup": "MIN@DET"
     },
     {
       "name": "Gabriel Moreno",
+<<<<<<< HEAD
       "rank": 114,
+=======
+      "rank": 126,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Max Meyer",
       "matchup": "AZ@MIA"
     },
     {
       "name": "Jazz Chisholm Jr.",
+<<<<<<< HEAD
       "rank": 122,
       "composite": 0.4,
       "opp_pitcher": "Slade Cecconi",
@@ -264,83 +414,158 @@
     {
       "name": "Spencer Jones",
       "rank": 123,
+=======
+      "rank": 136,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Slade Cecconi",
       "matchup": "NYY@CLE"
     },
     {
       "name": "Alec Burleson",
+<<<<<<< HEAD
       "rank": 132,
+=======
+      "rank": 146,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Freddy Peralta",
       "matchup": "STL@NYM"
     },
     {
       "name": "Jac Caglianone",
+<<<<<<< HEAD
       "rank": 136,
+=======
+      "rank": 151,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Nathan Eovaldi",
       "matchup": "TEX@KC"
     },
     {
       "name": "Miguel Vargas",
+<<<<<<< HEAD
       "rank": 144,
+=======
+      "rank": 159,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Grant Holmes",
       "matchup": "ATL@CWS"
     },
     {
+<<<<<<< HEAD
       "name": "Michael Busch",
       "rank": 151,
+=======
+      "name": "Matt Olson",
+      "rank": 165,
+      "composite": 0.4,
+      "opp_pitcher": "Erick Fedde",
+      "matchup": "ATL@CWS"
+    },
+    {
+      "name": "Michael Busch",
+      "rank": 172,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Tomoyuki Sugano",
       "matchup": "CHC@COL"
     },
     {
+<<<<<<< HEAD
       "name": "Ezequiel Tovar",
       "rank": 172,
       "composite": 0.393,
+=======
+      "name": "Brooks Lee",
+      "rank": 192,
+      "composite": 0.393,
+      "opp_pitcher": "Troy Melton",
+      "matchup": "MIN@DET"
+    },
+    {
+      "name": "Ezequiel Tovar",
+      "rank": 198,
+      "composite": 0.389,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Colin Rea",
       "matchup": "CHC@COL"
     },
     {
+<<<<<<< HEAD
       "name": "Jes\u00fas S\u00e1nchez",
       "rank": 191,
+=======
+      "name": "Spencer Jones",
+      "rank": 210,
+      "composite": 0.379,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "NYY@CLE"
+    },
+    {
+      "name": "Jes\u00fas S\u00e1nchez",
+      "rank": 216,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.377,
       "opp_pitcher": "Zack Wheeler",
       "matchup": "PHI@TOR"
     },
     {
       "name": "Bryce Eldridge",
+<<<<<<< HEAD
       "rank": 234,
+=======
+      "rank": 268,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.33,
       "opp_pitcher": "Andrew Alvarez",
       "matchup": "WSH@SF"
     },
     {
       "name": "Jackson Chourio",
+<<<<<<< HEAD
       "rank": 236,
       "composite": 0.327,
+=======
+      "rank": 283,
+      "composite": 0.318,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "J.T. Ginn",
       "matchup": "MIL@ATH"
     },
     {
       "name": "Andy Pages",
+<<<<<<< HEAD
       "rank": 257,
       "composite": 0.293,
+=======
+      "rank": 296,
+      "composite": 0.3,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Paul Skenes",
       "matchup": "LAD@PIT"
     },
     {
       "name": "Ryan O'Hearn",
+<<<<<<< HEAD
       "rank": 263,
       "composite": 0.283,
+=======
+      "rank": 302,
+      "composite": 0.291,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Eric Lauer",
       "matchup": "LAD@PIT"
     },
     {
       "name": "Braden Montgomery",
+<<<<<<< HEAD
       "rank": 292,
+=======
+      "rank": 345,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.14,
       "opp_pitcher": "Grant Holmes",
       "matchup": "ATL@CWS"
@@ -349,12 +574,18 @@
   "hr_hitters_l10": [
     {
       "name": "Miguel Vargas",
+<<<<<<< HEAD
       "rank": 11,
       "composite": 0.677,
+=======
+      "rank": 14,
+      "composite": 0.682,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Grant Holmes",
       "matchup": "ATL@CWS"
     },
     {
+<<<<<<< HEAD
       "name": "Brooks Lee",
       "rank": 12,
       "composite": 0.676,
@@ -365,10 +596,16 @@
       "name": "Jonah Heim",
       "rank": 13,
       "composite": 0.666,
+=======
+      "name": "Jonah Heim",
+      "rank": 15,
+      "composite": 0.676,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Robert Gasser",
       "matchup": "MIL@ATH"
     },
     {
+<<<<<<< HEAD
       "name": "Hunter Goodman",
       "rank": 22,
       "composite": 0.631,
@@ -379,17 +616,35 @@
       "name": "Kody Clemens",
       "rank": 25,
       "composite": 0.622,
+=======
+      "name": "Brooks Lee",
+      "rank": 16,
+      "composite": 0.666,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Troy Melton",
       "matchup": "MIN@DET"
     },
     {
+<<<<<<< HEAD
       "name": "Coby Mayo",
       "rank": 28,
+=======
+      "name": "Bryan Reynolds",
+      "rank": 31,
+      "composite": 0.621,
+      "opp_pitcher": "Eric Lauer",
+      "matchup": "LAD@PIT"
+    },
+    {
+      "name": "Coby Mayo",
+      "rank": 34,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.613,
       "opp_pitcher": "Logan Gilbert",
       "matchup": "SEA@BAL"
     },
     {
+<<<<<<< HEAD
       "name": "Bryan Reynolds",
       "rank": 29,
       "composite": 0.613,
@@ -400,59 +655,113 @@
       "name": "Sal Stewart",
       "rank": 36,
       "composite": 0.592,
+=======
+      "name": "Kody Clemens",
+      "rank": 36,
+      "composite": 0.612,
+      "opp_pitcher": "Troy Melton",
+      "matchup": "MIN@DET"
+    },
+    {
+      "name": "Hunter Goodman",
+      "rank": 38,
+      "composite": 0.605,
+      "opp_pitcher": "Colin Rea",
+      "matchup": "CHC@COL"
+    },
+    {
+      "name": "Sal Stewart",
+      "rank": 43,
+      "composite": 0.594,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Lucas Giolito",
       "matchup": "CIN@SD"
     },
     {
       "name": "Jes\u00fas S\u00e1nchez",
+<<<<<<< HEAD
       "rank": 44,
+=======
+      "rank": 51,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.583,
       "opp_pitcher": "Zack Wheeler",
       "matchup": "PHI@TOR"
     },
     {
       "name": "Randy Arozarena",
+<<<<<<< HEAD
       "rank": 48,
       "composite": 0.567,
+=======
+      "rank": 55,
+      "composite": 0.568,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Trevor Rogers",
       "matchup": "SEA@BAL"
     },
     {
+<<<<<<< HEAD
       "name": "Kerry Carpenter",
       "rank": 49,
+=======
+      "name": "Dillon Dingler",
+      "rank": 56,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.567,
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@DET"
     },
     {
+<<<<<<< HEAD
       "name": "Dillon Dingler",
       "rank": 51,
       "composite": 0.561,
+=======
+      "name": "Kerry Carpenter",
+      "rank": 58,
+      "composite": 0.563,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@DET"
     },
     {
       "name": "Henry Bolte",
+<<<<<<< HEAD
       "rank": 58,
       "composite": 0.553,
+=======
+      "rank": 60,
+      "composite": 0.562,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Robert Gasser",
       "matchup": "MIL@ATH"
     },
     {
       "name": "Riley Greene",
+<<<<<<< HEAD
       "rank": 67,
       "composite": 0.534,
+=======
+      "rank": 76,
+      "composite": 0.541,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@DET"
     },
     {
       "name": "Nick Kurtz",
+<<<<<<< HEAD
       "rank": 70,
+=======
+      "rank": 84,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.53,
       "opp_pitcher": "Robert Gasser",
       "matchup": "MIL@ATH"
     },
     {
+<<<<<<< HEAD
       "name": "Matt Olson",
       "rank": 74,
       "composite": 0.527,
@@ -470,17 +779,35 @@
       "name": "Byron Buxton",
       "rank": 77,
       "composite": 0.516,
+=======
+      "name": "Byron Buxton",
+      "rank": 88,
+      "composite": 0.523,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Troy Melton",
       "matchup": "MIN@DET"
     },
     {
+<<<<<<< HEAD
       "name": "Tyler Soderstrom",
       "rank": 78,
+=======
+      "name": "Zack Gelof",
+      "rank": 91,
+      "composite": 0.521,
+      "opp_pitcher": "Robert Gasser",
+      "matchup": "MIL@ATH"
+    },
+    {
+      "name": "Tyler Soderstrom",
+      "rank": 95,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.516,
       "opp_pitcher": "Robert Gasser",
       "matchup": "MIL@ATH"
     },
     {
+<<<<<<< HEAD
       "name": "Zack Gelof",
       "rank": 84,
       "composite": 0.511,
@@ -491,25 +818,53 @@
       "name": "Andy Pages",
       "rank": 113,
       "composite": 0.416,
+=======
+      "name": "Jackson Chourio",
+      "rank": 102,
+      "composite": 0.51,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "MIL@ATH"
+    },
+    {
+      "name": "Matt Olson",
+      "rank": 120,
+      "composite": 0.48,
+      "opp_pitcher": "Erick Fedde",
+      "matchup": "ATL@CWS"
+    },
+    {
+      "name": "Andy Pages",
+      "rank": 131,
+      "composite": 0.424,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Paul Skenes",
       "matchup": "LAD@PIT"
     },
     {
       "name": "Josh Bell",
+<<<<<<< HEAD
       "rank": 129,
+=======
+      "rank": 150,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Troy Melton",
       "matchup": "MIN@DET"
     },
     {
       "name": "Gabriel Moreno",
+<<<<<<< HEAD
       "rank": 135,
+=======
+      "rank": 155,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Max Meyer",
       "matchup": "AZ@MIA"
     },
     {
       "name": "Jazz Chisholm Jr.",
+<<<<<<< HEAD
       "rank": 142,
       "composite": 0.4,
       "opp_pitcher": "Slade Cecconi",
@@ -518,76 +873,130 @@
     {
       "name": "Spencer Jones",
       "rank": 143,
+=======
+      "rank": 164,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Slade Cecconi",
       "matchup": "NYY@CLE"
     },
     {
       "name": "Alec Burleson",
+<<<<<<< HEAD
       "rank": 148,
+=======
+      "rank": 173,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Freddy Peralta",
       "matchup": "STL@NYM"
     },
     {
       "name": "Jac Caglianone",
+<<<<<<< HEAD
       "rank": 150,
+=======
+      "rank": 177,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Nathan Eovaldi",
       "matchup": "TEX@KC"
     },
     {
       "name": "Michael Busch",
+<<<<<<< HEAD
       "rank": 161,
+=======
+      "rank": 192,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Tomoyuki Sugano",
       "matchup": "CHC@COL"
     },
     {
       "name": "Ezequiel Tovar",
+<<<<<<< HEAD
       "rank": 164,
+=======
+      "rank": 195,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Colin Rea",
       "matchup": "CHC@COL"
     },
     {
       "name": "Luis Garc\u00eda Jr.",
+<<<<<<< HEAD
       "rank": 176,
+=======
+      "rank": 207,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Adrian Houser",
       "matchup": "WSH@SF"
     },
     {
       "name": "Mitch Garver",
+<<<<<<< HEAD
       "rank": 198,
       "composite": 0.384,
+=======
+      "rank": 230,
+      "composite": 0.385,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Trevor Rogers",
       "matchup": "SEA@BAL"
     },
     {
+<<<<<<< HEAD
       "name": "Bryce Eldridge",
       "rank": 201,
       "composite": 0.381,
+=======
+      "name": "Spencer Jones",
+      "rank": 232,
+      "composite": 0.382,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "NYY@CLE"
+    },
+    {
+      "name": "Bryce Eldridge",
+      "rank": 237,
+      "composite": 0.38,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Andrew Alvarez",
       "matchup": "WSH@SF"
     },
     {
       "name": "Corbin Carroll",
+<<<<<<< HEAD
       "rank": 211,
+=======
+      "rank": 247,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.369,
       "opp_pitcher": "Max Meyer",
       "matchup": "AZ@MIA"
     },
     {
       "name": "Ryan O'Hearn",
+<<<<<<< HEAD
       "rank": 271,
       "composite": 0.283,
+=======
+      "rank": 313,
+      "composite": 0.291,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Eric Lauer",
       "matchup": "LAD@PIT"
     },
     {
       "name": "Braden Montgomery",
+<<<<<<< HEAD
       "rank": 292,
+=======
+      "rank": 345,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.14,
       "opp_pitcher": "Grant Holmes",
       "matchup": "ATL@CWS"
@@ -596,12 +1005,18 @@
   "near_hr_hitters": [
     {
       "name": "Andrew Benintendi",
+<<<<<<< HEAD
       "rank": 8,
       "composite": 0.732,
+=======
+      "rank": 9,
+      "composite": 0.737,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Grant Holmes",
       "matchup": "ATL@CWS"
     },
     {
+<<<<<<< HEAD
       "name": "Garrett Mitchell",
       "rank": 22,
       "composite": 0.653,
@@ -612,66 +1027,123 @@
       "name": "Daylen Lile",
       "rank": 25,
       "composite": 0.646,
+=======
+      "name": "Daylen Lile",
+      "rank": 32,
+      "composite": 0.645,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Adrian Houser",
       "matchup": "WSH@SF"
     },
     {
+<<<<<<< HEAD
       "name": "Marcus Semien",
       "rank": 83,
       "composite": 0.481,
+=======
+      "name": "Garrett Mitchell",
+      "rank": 33,
+      "composite": 0.643,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "MIL@ATH"
+    },
+    {
+      "name": "Marcus Semien",
+      "rank": 94,
+      "composite": 0.48,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Dustin May",
       "matchup": "STL@NYM"
     },
     {
       "name": "Julio Rodr\u00edguez",
+<<<<<<< HEAD
       "rank": 96,
+=======
+      "rank": 109,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Trevor Rogers",
       "matchup": "SEA@BAL"
     },
     {
       "name": "Otto Lopez",
+<<<<<<< HEAD
       "rank": 110,
+=======
+      "rank": 122,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Zac Gallen",
       "matchup": "AZ@MIA"
     },
     {
       "name": "Connor Norby",
+<<<<<<< HEAD
       "rank": 113,
+=======
+      "rank": 125,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Zac Gallen",
       "matchup": "AZ@MIA"
     },
     {
+<<<<<<< HEAD
       "name": "Vinnie Pasquantino",
       "rank": 135,
+=======
+      "name": "Isaac Collins",
+      "rank": 150,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Nathan Eovaldi",
       "matchup": "TEX@KC"
     },
     {
+<<<<<<< HEAD
       "name": "Isaac Collins",
       "rank": 138,
+=======
+      "name": "Vinnie Pasquantino",
+      "rank": 155,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.4,
       "opp_pitcher": "Nathan Eovaldi",
       "matchup": "TEX@KC"
+    },
+    {
+<<<<<<< HEAD
+      "name": "Edouard Julien",
+      "rank": 176,
+=======
+      "name": "Eli White",
+      "rank": 163,
+      "composite": 0.4,
+      "opp_pitcher": "Erick Fedde",
+      "matchup": "ATL@CWS"
     },
     {
       "name": "Edouard Julien",
-      "rank": 176,
+      "rank": 203,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.386,
       "opp_pitcher": "Colin Rea",
       "matchup": "CHC@COL"
     },
     {
       "name": "Victor Robles",
+<<<<<<< HEAD
       "rank": 181,
+=======
+      "rank": 205,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.383,
       "opp_pitcher": "Trevor Rogers",
       "matchup": "SEA@BAL"
     },
     {
+<<<<<<< HEAD
       "name": "Maikel Garcia",
       "rank": 183,
       "composite": 0.383,
@@ -688,55 +1160,104 @@
     {
       "name": "Tyler O'Neill",
       "rank": 197,
+=======
+      "name": "Tyler O'Neill",
+      "rank": 226,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.371,
       "opp_pitcher": "Logan Gilbert",
       "matchup": "SEA@BAL"
     },
     {
+<<<<<<< HEAD
       "name": "Austin Hedges",
       "rank": 205,
+=======
+      "name": "Colt Keith",
+      "rank": 230,
+      "composite": 0.369,
+      "opp_pitcher": "Taj Bradley",
+      "matchup": "MIN@DET"
+    },
+    {
+      "name": "Austin Hedges",
+      "rank": 233,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.367,
       "opp_pitcher": "Gerrit Cole",
       "matchup": "NYY@CLE"
     },
     {
       "name": "Patrick Wisdom",
+<<<<<<< HEAD
       "rank": 210,
+=======
+      "rank": 240,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.36,
       "opp_pitcher": "Trevor Rogers",
       "matchup": "SEA@BAL"
     },
     {
       "name": "Zach McKinstry",
+<<<<<<< HEAD
       "rank": 219,
       "composite": 0.348,
+=======
+      "rank": 246,
+      "composite": 0.355,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@DET"
     },
     {
+<<<<<<< HEAD
       "name": "Wilyer Abreu",
       "rank": 225,
+=======
+      "name": "Maikel Garcia",
+      "rank": 254,
+      "composite": 0.346,
+      "opp_pitcher": "Nathan Eovaldi",
+      "matchup": "TEX@KC"
+    },
+    {
+      "name": "Wilyer Abreu",
+      "rank": 262,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.337,
       "opp_pitcher": "Nick Martinez",
       "matchup": "BOS@TB"
     },
     {
       "name": "Mookie Betts",
+<<<<<<< HEAD
       "rank": 264,
+=======
+      "rank": 310,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.281,
       "opp_pitcher": "Paul Skenes",
       "matchup": "LAD@PIT"
     },
     {
       "name": "Junior Caminero",
+<<<<<<< HEAD
       "rank": 272,
+=======
+      "rank": 316,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.262,
       "opp_pitcher": "Payton Tolle",
       "matchup": "BOS@TB"
     },
     {
       "name": "Jacob Young",
+<<<<<<< HEAD
       "rank": 280,
+=======
+      "rank": 329,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "composite": 0.24,
       "opp_pitcher": "Adrian Houser",
       "matchup": "WSH@SF"
@@ -963,18 +1484,34 @@
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
+<<<<<<< HEAD
       "players": 95,
       "hr_count": 10,
       "hr_rate": 10.5,
+=======
+      "players": 113,
+      "hr_count": 10,
+      "hr_rate": 8.8,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "names": [
         "Cole Young",
         "Dalton Rushing",
         "Freddie Freeman",
+<<<<<<< HEAD
         "Jake Mangum",
+=======
+        "Spencer Horwitz",
+        "Jake Mangum",
+        "Oneil Cruz",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Shohei Ohtani",
         "Andy Pages",
         "Ryan O'Hearn",
         "Kyle Tucker",
+<<<<<<< HEAD
+=======
+        "Tyler Callihan",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Willson Contreras",
         "Isiah Kiner-Falefa",
         "Ceddanne Rafaela",
@@ -995,8 +1532,13 @@
         "Dillon Dingler",
         "Gleyber Torres",
         "Luke Keaschall",
+<<<<<<< HEAD
         "Colt Keith",
         "Royce Lewis",
+=======
+        "Royce Lewis",
+        "Colt Keith",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Xavier Edwards",
         "Corbin Carroll",
         "Liam Hicks",
@@ -1010,15 +1552,25 @@
         "Ben Rice",
         "Jazz Chisholm Jr.",
         "J.C. Escarra",
+<<<<<<< HEAD
         "Andr\u00e9s Gim\u00e9nez",
         "Justin Crawford",
         "Nathan Lukes",
+=======
+        "Ali S\u00e1nchez",
+        "Andr\u00e9s Gim\u00e9nez",
+        "Justin Crawford",
+        "Garrett Stubbs",
+        "Nathan Lukes",
+        "Myles Straw",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "A.J. Ewing",
         "Juan Soto",
         "Jared Young",
         "Jimmy Crooks",
         "Brett Baty",
         "Carson Benge",
+<<<<<<< HEAD
         "Joc Pederson",
         "Corey Seager",
         "Maikel Garcia",
@@ -1026,6 +1578,23 @@
         "Kyle Higashioka",
         "Josh Jung",
         "Mike Yastrzemski",
+=======
+        "Nelson Vel\u00e1zquez",
+        "Starling Marte",
+        "Nick Loftin",
+        "Corey Seager",
+        "Joc Pederson",
+        "Lane Thomas",
+        "Maikel Garcia",
+        "Wyatt Langford",
+        "Elias D\u00edaz",
+        "Justin Foscue",
+        "Josh Jung",
+        "Kyle Higashioka",
+        "Josh Rojas",
+        "Dominic Smith",
+        "Chad Stevens",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Jake McCarthy",
         "Kevin Alc\u00e1ntara",
         "Shay Whitcomb",
@@ -1034,20 +1603,37 @@
         "Christian V\u00e1zquez",
         "Collin Price",
         "Sebasti\u00e1n Rivero",
+<<<<<<< HEAD
+=======
+        "Trey Mancini",
+        "Rodolfo Dur\u00e1n",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Fernando Tatis Jr.",
         "Will Benson",
         "Bryce Johnson",
         "Sung-Mun Song",
         "Nathaniel Lowe",
         "Edwin Arroyo",
+<<<<<<< HEAD
         "Freddy Fermin",
         "Manny Machado",
+=======
+        "Ty France",
+        "Freddy Fermin",
+        "Manny Machado",
+        "Jase Bowen",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Willy Adames",
         "Keibert Ruiz",
         "Dylan Crews",
         "Matt Chapman",
+<<<<<<< HEAD
         "Victor Bericoto",
         "Eric Haase",
+=======
+        "Eric Haase",
+        "Victor Bericoto",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Drew Gilbert",
         "Curtis Mead",
         "Jacob Young",
@@ -1059,9 +1645,15 @@
         "Andrew Vaughn",
         "William Contreras",
         "Jackson Chourio",
+<<<<<<< HEAD
         "Lawrence Butler",
         "Joey Ortiz",
         "Jeff McNeil"
+=======
+        "Joey Ortiz",
+        "Jeff McNeil",
+        "Lawrence Butler"
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       ],
       "hr_names": [
         "Andy Pages",
@@ -1077,27 +1669,45 @@
       ]
     },
     "2_of_5": {
+<<<<<<< HEAD
       "players": 127,
       "hr_count": 18,
       "hr_rate": 14.2,
+=======
+      "players": 150,
+      "hr_count": 19,
+      "hr_rate": 12.7,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "names": [
         "Rob Refsnyder",
         "Mitch Garver",
         "Josh Naylor",
         "Bryan Reynolds",
         "Nick Gonzales",
+<<<<<<< HEAD
         "Ryan Ward",
         "Brandon Lowe",
+=======
+        "Brandon Lowe",
+        "Ryan Ward",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Mookie Betts",
         "Cedric Mullins",
         "Junior Caminero",
         "Victor Caratini",
         "Kody Clemens",
         "Kerry Carpenter",
+<<<<<<< HEAD
         "Brooks Lee",
         "Josh Bell",
         "Trevor Larnach",
         "Tristan Gray",
+=======
+        "Josh Bell",
+        "Trevor Larnach",
+        "Tristan Gray",
+        "Brooks Lee",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Spencer Torkelson",
         "Zach McKinstry",
         "Matt Vierling",
@@ -1117,9 +1727,21 @@
         "Angel Mart\u00ednez",
         "Steven Kwan",
         "Brayan Rocchio",
+<<<<<<< HEAD
         "Austin Hedges",
         "Brandon Marsh",
         "J.T. Realmuto",
+=======
+        "Amed Rosario",
+        "Jos\u00e9 Caballero",
+        "Max Schuemann",
+        "Austin Hedges",
+        "Brandon Marsh",
+        "Tyler Heineman",
+        "J.T. Realmuto",
+        "Edmundo Sosa",
+        "Rafael March\u00e1n",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Adolis Garc\u00eda",
         "Yohendrick Pi\u00f1ango",
         "Bryson Stott",
@@ -1127,6 +1749,7 @@
         "Ernie Clement",
         "Alec Bohm",
         "Charles McAdoo",
+<<<<<<< HEAD
         "Nolan Gorman",
         "Lars Nootbaar",
         "Marcus Semien",
@@ -1134,10 +1757,23 @@
         "JJ Wetherholt",
         "Alec Burleson",
         "MJ Melendez",
+=======
+        "Steward Berroa",
+        "Nolan Gorman",
+        "Bryan Torres",
+        "Lars Nootbaar",
+        "Marcus Semien",
+        "Masyn Winn",
+        "Alec Burleson",
+        "JJ Wetherholt",
+        "MJ Melendez",
+        "Pedro Pag\u00e9s",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Jordan Walker",
         "Salvador Perez",
         "Bobby Witt Jr.",
         "Carter Jensen",
+<<<<<<< HEAD
         "Vinnie Pasquantino",
         "Jac Caglianone",
         "Michael Massey",
@@ -1157,10 +1793,39 @@
         "Hunter Goodman",
         "Willi Castro",
         "Kyle Karros",
+=======
+        "Isaac Collins",
+        "Jac Caglianone",
+        "Kyle Isbel",
+        "Michael Massey",
+        "Vinnie Pasquantino",
+        "Brandon Nimmo",
+        "Jake Burger",
+        "Jorge Mateo",
+        "Mauricio Dub\u00f3n",
+        "Edgar Quero",
+        "Ozzie Albies",
+        "Miguel Vargas",
+        "Randal Grichuk",
+        "Sam Antonacci",
+        "Austin Wynns",
+        "Eli White",
+        "Matt Olson",
+        "Chase Meidroth",
+        "Luisangel Acu\u00f1a",
+        "Derek Hill",
+        "Michael Harris II",
+        "Michael Conforto",
+        "Willi Castro",
+        "Hunter Goodman",
+        "Kyle Karros",
+        "Tyler Freeman",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Alex Bregman",
         "Pedro Ram\u00edrez",
         "Ezequiel Tovar",
         "Edouard Julien",
+<<<<<<< HEAD
         "Seiya Suzuki",
         "Dansby Swanson",
         "Yordan Alvarez",
@@ -1169,6 +1834,22 @@
         "Jo Adell",
         "Christian Walker",
         "Brice Matthews",
+=======
+        "Sterlin Thompson",
+        "Seiya Suzuki",
+        "Dansby Swanson",
+        "Braxton Fulford",
+        "Brett Sullivan",
+        "Yordan Alvarez",
+        "Cam Smith",
+        "Zach Neto",
+        "LaMonte Wade Jr.",
+        "Jo Adell",
+        "Christian Walker",
+        "Brice Matthews",
+        "Logan O'Hoppe",
+        "Nick Madrigal",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Oswald Peraza",
         "Jose Siri",
         "Denzer Guzman",
@@ -1182,17 +1863,30 @@
         "Noelvi Marte",
         "Tyler Stephenson",
         "Blake Dunn",
+<<<<<<< HEAD
         "Will Wagner",
         "James Wood",
         "Rafael Devers",
         "Luis Garc\u00eda Jr.",
+=======
+        "Miguel Andujar",
+        "Will Wagner",
+        "James Wood",
+        "Luis Garc\u00eda Jr.",
+        "Rafael Devers",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Daylen Lile",
         "Drew Millas",
         "Jos\u00e9 Tena",
         "CJ Abrams",
         "Jorbit Vivas",
+<<<<<<< HEAD
         "Jung Hoo Lee",
         "Nasim Nu\u00f1ez",
+=======
+        "Nasim Nu\u00f1ez",
+        "Jung Hoo Lee",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Luis Arraez",
         "Bryce Eldridge",
         "Casey Schmitt",
@@ -1202,9 +1896,15 @@
         "Colby Thomas",
         "Henry Bolte",
         "Brice Turang",
+<<<<<<< HEAD
         "Garrett Mitchell",
         "Brent Rooker",
         "Zack Gelof",
+=======
+        "Zack Gelof",
+        "Garrett Mitchell",
+        "Brent Rooker",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Jonah Heim",
         "Alika Williams",
         "Carlos Cortes"
@@ -1214,13 +1914,22 @@
         "Bryan Reynolds",
         "Kody Clemens",
         "Kerry Carpenter",
+<<<<<<< HEAD
         "Brooks Lee",
         "Josh Bell",
+=======
+        "Josh Bell",
+        "Brooks Lee",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Gabriel Moreno",
         "Jes\u00fas S\u00e1nchez",
         "Alec Burleson",
         "Jac Caglianone",
         "Miguel Vargas",
+<<<<<<< HEAD
+=======
+        "Matt Olson",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Hunter Goodman",
         "Ezequiel Tovar",
         "Luis Garc\u00eda Jr.",
@@ -1231,25 +1940,47 @@
       ]
     },
     "3_of_5": {
+<<<<<<< HEAD
       "players": 56,
       "hr_count": 4,
       "hr_rate": 7.1,
+=======
+      "players": 61,
+      "hr_count": 3,
+      "hr_rate": 4.9,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "names": [
         "Jackson Holliday",
         "Pete Alonso",
         "Coby Mayo",
         "Taylor Ward",
+<<<<<<< HEAD
         "Gunnar Henderson",
         "Colton Cowser",
         "Julio Rodr\u00edguez",
         "Victor Robles",
+=======
+        "Adley Rutschman",
+        "Colton Cowser",
+        "Gunnar Henderson",
+        "Julio Rodr\u00edguez",
+        "Victor Robles",
+        "Blaze Alexander",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Patrick Wisdom",
         "Sam Huff",
         "Ryan Bliss",
         "Henry Davis",
+<<<<<<< HEAD
         "Marcell Ozuna",
         "Jared Triolo",
         "Max Muncy",
+=======
+        "Jared Triolo",
+        "Marcell Ozuna",
+        "Max Muncy",
+        "Endy Rodr\u00edguez",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Richie Palacios",
         "Connor Norby",
         "Jos\u00e9 Ram\u00edrez",
@@ -1258,11 +1989,17 @@
         "Anthony Volpe",
         "Brandon Valenzuela",
         "Bryce Harper",
+<<<<<<< HEAD
+=======
+        "Daulton Varsho",
+        "George Springer",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Kazuma Okamoto",
         "Vladimir Guerrero Jr.",
         "Trea Turner",
         "Bo Bichette",
         "Francisco Alvarez",
+<<<<<<< HEAD
         "Nathan Church",
         "Iv\u00e1n Herrera",
         "Andrew Benintendi",
@@ -1272,19 +2009,39 @@
         "Matt Olson",
         "Ronald Acu\u00f1a Jr.",
         "Michael Harris II",
+=======
+        "Jos\u00e9 Ferm\u00edn",
+        "Iv\u00e1n Herrera",
+        "Andrew Benintendi",
+        "Colson Montgomery",
+        "Tristan Peters",
+        "Austin Riley",
+        "Jacob Gonzalez",
+        "Ha-Seong Kim",
+        "Ronald Acu\u00f1a Jr.",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Ian Happ",
         "Miguel Amaya",
         "Michael Busch",
         "Mois\u00e9s Ballesteros",
         "Nico Hoerner",
+<<<<<<< HEAD
         "Troy Johnston",
         "Carson Kelly",
+=======
+        "Carson Kelly",
+        "Troy Johnston",
+        "Donovan Walton",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Nolan Schanuel",
         "Mike Trout",
         "Isaac Paredes",
         "Jeremy Pe\u00f1a",
         "Taylor Trammell",
+<<<<<<< HEAD
         "Joey Loperfido",
+=======
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Sal Stewart",
         "Max Muncy",
         "Christian Yelich",
@@ -1294,18 +2051,32 @@
       ],
       "hr_names": [
         "Coby Mayo",
+<<<<<<< HEAD
         "Matt Olson",
+=======
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Michael Busch",
         "Sal Stewart"
       ]
     },
     "4_of_5": {
+<<<<<<< HEAD
       "players": 7,
       "hr_count": 1,
       "hr_rate": 14.3,
       "names": [
         "Leody Taveras",
         "Randy Arozarena",
+=======
+      "players": 9,
+      "hr_count": 1,
+      "hr_rate": 11.1,
+      "names": [
+        "Leody Taveras",
+        "Samuel Basallo",
+        "Randy Arozarena",
+        "Jeremiah Jackson",
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
         "Kyle Schwarber",
         "Drew Romo",
         "Pete Crow-Armstrong",
@@ -1330,6 +2101,7 @@
   "combined_tier_accuracy": {
     "top_10": {
       "total": 10,
+<<<<<<< HEAD
       "hits": 1,
       "rate": 10.0
     },
@@ -1337,6 +2109,15 @@
       "total": 20,
       "hits": 2,
       "rate": 10.0
+=======
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
     },
     "top_30": {
       "total": 30,
@@ -1344,13 +2125,20 @@
       "rate": 20.0
     },
     "all": {
+<<<<<<< HEAD
       "total": 297,
       "hits": 35,
       "rate": 11.8
+=======
+      "total": 349,
+      "hits": 35,
+      "rate": 10.0
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
     }
   },
   "combined_hr_hitters": [
     {
+<<<<<<< HEAD
       "name": "Michael Busch",
       "rank": 7,
       "composite": 0.6,
@@ -1375,10 +2163,16 @@
       "name": "Hunter Goodman",
       "rank": 26,
       "composite": 0.533,
+=======
+      "name": "Hunter Goodman",
+      "rank": 17,
+      "composite": 0.626,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Colin Rea",
       "matchup": "CHC@COL"
     },
     {
+<<<<<<< HEAD
       "name": "Byron Buxton",
       "rank": 29,
       "composite": 0.53,
@@ -1431,17 +2225,35 @@
       "name": "Sal Stewart",
       "rank": 55,
       "composite": 0.5,
+=======
+      "name": "Coby Mayo",
+      "rank": 23,
+      "composite": 0.603,
+      "opp_pitcher": "Logan Gilbert",
+      "matchup": "SEA@BAL"
+    },
+    {
+      "name": "Sal Stewart",
+      "rank": 24,
+      "composite": 0.599,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Lucas Giolito",
       "matchup": "CIN@SD"
     },
     {
       "name": "Randy Arozarena",
+<<<<<<< HEAD
       "rank": 57,
       "composite": 0.493,
+=======
+      "rank": 25,
+      "composite": 0.597,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Trevor Rogers",
       "matchup": "SEA@BAL"
     },
     {
+<<<<<<< HEAD
       "name": "Coby Mayo",
       "rank": 58,
       "composite": 0.491,
@@ -1494,10 +2306,16 @@
       "name": "Brooks Lee",
       "rank": 109,
       "composite": 0.442,
+=======
+      "name": "Kody Clemens",
+      "rank": 29,
+      "composite": 0.566,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Troy Melton",
       "matchup": "MIN@DET"
     },
     {
+<<<<<<< HEAD
       "name": "Josh Bell",
       "rank": 110,
       "composite": 0.441,
@@ -1515,10 +2333,16 @@
       "name": "Dillon Dingler",
       "rank": 130,
       "composite": 0.423,
+=======
+      "name": "Dillon Dingler",
+      "rank": 30,
+      "composite": 0.565,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@DET"
     },
     {
+<<<<<<< HEAD
       "name": "Ezequiel Tovar",
       "rank": 133,
       "composite": 0.421,
@@ -1529,10 +2353,23 @@
       "name": "Tyler Soderstrom",
       "rank": 138,
       "composite": 0.418,
+=======
+      "name": "Riley Greene",
+      "rank": 34,
+      "composite": 0.549,
+      "opp_pitcher": "Taj Bradley",
+      "matchup": "MIN@DET"
+    },
+    {
+      "name": "Jonah Heim",
+      "rank": 40,
+      "composite": 0.532,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Robert Gasser",
       "matchup": "MIL@ATH"
     },
     {
+<<<<<<< HEAD
       "name": "Jackson Chourio",
       "rank": 144,
       "composite": 0.415,
@@ -1578,22 +2415,209 @@
       "name": "Braden Montgomery",
       "rank": 215,
       "composite": 0.356,
+=======
+      "name": "Nick Kurtz",
+      "rank": 45,
+      "composite": 0.515,
+      "opp_pitcher": "Robert Gasser",
+      "matchup": "MIL@ATH"
+    },
+    {
+      "name": "Tyler Soderstrom",
+      "rank": 49,
+      "composite": 0.497,
+      "opp_pitcher": "Robert Gasser",
+      "matchup": "MIL@ATH"
+    },
+    {
+      "name": "Zack Gelof",
+      "rank": 51,
+      "composite": 0.489,
+      "opp_pitcher": "Robert Gasser",
+      "matchup": "MIL@ATH"
+    },
+    {
+      "name": "Byron Buxton",
+      "rank": 55,
+      "composite": 0.473,
+      "opp_pitcher": "Troy Melton",
+      "matchup": "MIN@DET"
+    },
+    {
+      "name": "Bryan Reynolds",
+      "rank": 68,
+      "composite": 0.431,
+      "opp_pitcher": "Eric Lauer",
+      "matchup": "LAD@PIT"
+    },
+    {
+      "name": "Henry Bolte",
+      "rank": 69,
+      "composite": 0.429,
+      "opp_pitcher": "Robert Gasser",
+      "matchup": "MIL@ATH"
+    },
+    {
+      "name": "Miguel Vargas",
+      "rank": 85,
+      "composite": 0.372,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Grant Holmes",
       "matchup": "ATL@CWS"
     },
     {
+<<<<<<< HEAD
       "name": "Andy Pages",
       "rank": 231,
       "composite": 0.337,
+=======
+      "name": "Jes\u00fas S\u00e1nchez",
+      "rank": 95,
+      "composite": 0.353,
+      "opp_pitcher": "Zack Wheeler",
+      "matchup": "PHI@TOR"
+    },
+    {
+      "name": "Corbin Carroll",
+      "rank": 98,
+      "composite": 0.348,
+      "opp_pitcher": "Max Meyer",
+      "matchup": "AZ@MIA"
+    },
+    {
+      "name": "Kerry Carpenter",
+      "rank": 99,
+      "composite": 0.342,
+      "opp_pitcher": "Taj Bradley",
+      "matchup": "MIN@DET"
+    },
+    {
+      "name": "Brooks Lee",
+      "rank": 110,
+      "composite": 0.317,
+      "opp_pitcher": "Troy Melton",
+      "matchup": "MIN@DET"
+    },
+    {
+      "name": "Jackson Chourio",
+      "rank": 115,
+      "composite": 0.312,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "MIL@ATH"
+    },
+    {
+      "name": "Luis Garc\u00eda Jr.",
+      "rank": 125,
+      "composite": 0.292,
+      "opp_pitcher": "Adrian Houser",
+      "matchup": "WSH@SF"
+    },
+    {
+      "name": "Matt Olson",
+      "rank": 133,
+      "composite": 0.282,
+      "opp_pitcher": "Erick Fedde",
+      "matchup": "ATL@CWS"
+    },
+    {
+      "name": "Michael Busch",
+      "rank": 143,
+      "composite": 0.249,
+      "opp_pitcher": "Tomoyuki Sugano",
+      "matchup": "CHC@COL"
+    },
+    {
+      "name": "Alec Burleson",
+      "rank": 154,
+      "composite": 0.233,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "STL@NYM"
+    },
+    {
+      "name": "Jac Caglianone",
+      "rank": 157,
+      "composite": 0.219,
+      "opp_pitcher": "Nathan Eovaldi",
+      "matchup": "TEX@KC"
+    },
+    {
+      "name": "Bryce Eldridge",
+      "rank": 175,
+      "composite": 0.206,
+      "opp_pitcher": "Andrew Alvarez",
+      "matchup": "WSH@SF"
+    },
+    {
+      "name": "Josh Bell",
+      "rank": 179,
+      "composite": 0.203,
+      "opp_pitcher": "Troy Melton",
+      "matchup": "MIN@DET"
+    },
+    {
+      "name": "Andy Pages",
+      "rank": 186,
+      "composite": 0.194,
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
       "opp_pitcher": "Paul Skenes",
       "matchup": "LAD@PIT"
     },
     {
+<<<<<<< HEAD
       "name": "Ryan O'Hearn",
       "rank": 269,
       "composite": 0.287,
       "opp_pitcher": "Eric Lauer",
       "matchup": "LAD@PIT"
+=======
+      "name": "Gabriel Moreno",
+      "rank": 188,
+      "composite": 0.193,
+      "opp_pitcher": "Max Meyer",
+      "matchup": "AZ@MIA"
+    },
+    {
+      "name": "Ryan O'Hearn",
+      "rank": 207,
+      "composite": 0.174,
+      "opp_pitcher": "Eric Lauer",
+      "matchup": "LAD@PIT"
+    },
+    {
+      "name": "Jazz Chisholm Jr.",
+      "rank": 216,
+      "composite": 0.171,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "NYY@CLE"
+    },
+    {
+      "name": "Ezequiel Tovar",
+      "rank": 220,
+      "composite": 0.169,
+      "opp_pitcher": "Colin Rea",
+      "matchup": "CHC@COL"
+    },
+    {
+      "name": "Mitch Garver",
+      "rank": 222,
+      "composite": 0.169,
+      "opp_pitcher": "Trevor Rogers",
+      "matchup": "SEA@BAL"
+    },
+    {
+      "name": "Braden Montgomery",
+      "rank": 285,
+      "composite": 0.139,
+      "opp_pitcher": "Grant Holmes",
+      "matchup": "ATL@CWS"
+    },
+    {
+      "name": "Spencer Jones",
+      "rank": 316,
+      "composite": 0.126,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "NYY@CLE"
+>>>>>>> 3fcab7a8 (feat: Balanced Edge replaces Season + Form — geometric mean of 5 factors (L10 + L5 form, pitcher vs-hand, env, mix vs arsenal); weakness in any factor drags rank down. Yesterday's tier accuracy refreshed across all stored dates.)
     }
   ]
 }
