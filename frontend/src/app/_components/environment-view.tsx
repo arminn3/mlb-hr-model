@@ -53,7 +53,11 @@ const PARK_SPLITS: Record<string, { L: number; R: number }> = {
 // ── Impact calcs ─────────────────────────────────────────────────────────
 function weatherPct(g: GameEnv): number {
   if (g.weather_hr_pct !== undefined && g.weather_hr_pct !== null) {
-    return Math.round(g.weather_hr_pct * 10) / 10;
+    // Clamp the physics formula — backend calibration overfits and produces
+    // implausible outputs (Coors air density alone hits +94%). ±30% is the
+    // sane envelope based on long-run park-weather research.
+    const clamped = Math.max(-30, Math.min(30, g.weather_hr_pct));
+    return Math.round(clamped * 10) / 10;
   }
   if (g.is_dome) return 0;
   let pct = (g.wind_score ?? 0) * 1.2;
@@ -71,8 +75,17 @@ function parkPct(g: GameEnv): number {
   return Math.round((g.park_factor - 100) * 10) / 10;
 }
 function combinedPct(g: GameEnv): number {
+  // Prefer empirical (real historical games at same park + similar weather)
+  // when we have enough sample. Empirical is "% vs park baseline" so we add
+  // park_hr_pct back in to get the league-relative impact.
+  if (g.empirical_hr_pct !== undefined && g.empirical_hr_pct !== null && g.empirical_n_games && g.empirical_n_games >= 20) {
+    const empiricalVsLeague = g.empirical_hr_pct + parkPct(g);
+    return Math.round(empiricalVsLeague * 10) / 10;
+  }
   if (g.combined_hr_pct !== undefined && g.combined_hr_pct !== null) {
-    return Math.round(g.combined_hr_pct * 10) / 10;
+    // Cap physics fallback — backend overfit calibration produces wild values
+    const clamped = Math.max(-30, Math.min(30, g.combined_hr_pct));
+    return Math.round(clamped * 10) / 10;
   }
   return Math.round((weatherPct(g) + parkPct(g)) * 10) / 10;
 }
