@@ -57727,7 +57727,7 @@
     "date": "2026-06-10",
     "total_players_ranked": 381,
     "total_hrs_hit": 45,
-    "total_near_hrs": 0,
+    "total_near_hrs": 15,
     "model_hits": 42,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -57776,7 +57776,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 15,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -57802,28 +57802,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
-        "hits": 4,
-        "rate": 13.3
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 381,
-        "hits": 42,
-        "rate": 11.0
+        "hits": 57,
+        "rate": 15.0
       }
     },
     "avg_composite_hr_hitters": 0.41,
-    "avg_composite_non_hitters": 0.401,
-    "composite_separation": 0.009,
+    "avg_composite_non_hitters": 0.402,
+    "composite_separation": 0.008,
     "hr_hitters": [
       {
         "name": "Kyle Stowers",
@@ -58416,8 +58416,268 @@
         "matchup": "LAD@PIT"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Michael Busch",
+        "rank": 10,
+        "composite": 0.749,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Dalton Rushing",
+        "rank": 12,
+        "composite": 0.712,
+        "opp_pitcher": "Jared Jones",
+        "matchup": "LAD@PIT"
+      },
+      {
+        "name": "Ketel Marte",
+        "rank": 157,
+        "composite": 0.4,
+        "opp_pitcher": "Ryan Gusto",
+        "matchup": "AZ@MIA"
+      },
+      {
+        "name": "Pete Crow-Armstrong",
+        "rank": 183,
+        "composite": 0.4,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Corey Seager",
+        "rank": 212,
+        "composite": 0.38,
+        "opp_pitcher": "Seth Lugo",
+        "matchup": "TEX@KC"
+      },
+      {
+        "name": "Luis Arraez",
+        "rank": 231,
+        "composite": 0.365,
+        "opp_pitcher": "Foster Griffin",
+        "matchup": "WSH@SF"
+      },
+      {
+        "name": "Nick Loftin",
+        "rank": 239,
+        "composite": 0.359,
+        "opp_pitcher": "MacKenzie Gore",
+        "matchup": "TEX@KC"
+      },
+      {
+        "name": "Nick Fortes",
+        "rank": 264,
+        "composite": 0.337,
+        "opp_pitcher": "Jake Bennett",
+        "matchup": "BOS@TB"
+      },
+      {
+        "name": "Maikel Garcia",
+        "rank": 265,
+        "composite": 0.337,
+        "opp_pitcher": "MacKenzie Gore",
+        "matchup": "TEX@KC"
+      },
+      {
+        "name": "Blaze Alexander",
+        "rank": 272,
+        "composite": 0.332,
+        "opp_pitcher": "George Kirby",
+        "matchup": "SEA@BAL"
+      },
+      {
+        "name": "Matt Vierling",
+        "rank": 292,
+        "composite": 0.309,
+        "opp_pitcher": "Mike Paredes",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Joc Pederson",
+        "rank": 320,
+        "composite": 0.29,
+        "opp_pitcher": "Seth Lugo",
+        "matchup": "TEX@KC"
+      },
+      {
+        "name": "Austin Hedges",
+        "rank": 325,
+        "composite": 0.284,
+        "opp_pitcher": "Carlos Rod\u00f3n",
+        "matchup": "NYY@CLE"
+      },
+      {
+        "name": "Nicky Lopez",
+        "rank": 344,
+        "composite": 0.259,
+        "opp_pitcher": "Seth Lugo",
+        "matchup": "TEX@KC"
+      },
+      {
+        "name": "Cole Carrigg",
+        "rank": 377,
+        "composite": 0.14,
+        "opp_pitcher": "Shota Imanaga",
+        "matchup": "CHC@COL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Blaze Alexander",
+        "ev": 101.3,
+        "angle": 25.0,
+        "distance": 372.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Kirby, George"
+      },
+      {
+        "batter": "Austin Hedges",
+        "ev": 104.5,
+        "angle": 22.0,
+        "distance": 389.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Yarbrough, Ryan"
+      },
+      {
+        "batter": "Cole Carrigg",
+        "ev": 100.2,
+        "angle": 28.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Thielbar, Caleb"
+      },
+      {
+        "batter": "Michael Busch",
+        "ev": 96.8,
+        "angle": 38.0,
+        "distance": 396.0,
+        "hr_in_parks": 14,
+        "result": "field_out",
+        "pitcher": "Bernardino, Brennan"
+      },
+      {
+        "batter": "Pete Crow-Armstrong",
+        "ev": 94.8,
+        "angle": 32.0,
+        "distance": 400.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Lorenzen, Michael"
+      },
+      {
+        "batter": "Matt Vierling",
+        "ev": 102.5,
+        "angle": 28.0,
+        "distance": 407.0,
+        "hr_in_parks": 26,
+        "result": "field_out",
+        "pitcher": "G\u00f3mez, Yoendrys"
+      },
+      {
+        "batter": "Nick Loftin",
+        "ev": 99.3,
+        "angle": 29.0,
+        "distance": 372.0,
+        "hr_in_parks": 27,
+        "result": "triple",
+        "pitcher": "Alexander, Tyler"
+      },
+      {
+        "batter": "Corey Seager",
+        "ev": 104.8,
+        "angle": 37.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Black, Mason"
+      },
+      {
+        "batter": "Maikel Garcia",
+        "ev": 104.7,
+        "angle": 23.0,
+        "distance": 407.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Gore, MacKenzie"
+      },
+      {
+        "batter": "Nicky Lopez",
+        "ev": 99.9,
+        "angle": 23.0,
+        "distance": 379.0,
+        "hr_in_parks": 2,
+        "result": "double",
+        "pitcher": "Lugo, Seth"
+      },
+      {
+        "batter": "Joc Pederson",
+        "ev": 100.2,
+        "angle": 31.0,
+        "distance": 402.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Lugo, Seth"
+      },
+      {
+        "batter": "Ketel Marte",
+        "ev": 113.3,
+        "angle": 27.0,
+        "distance": 422.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "Gusto, Ryan"
+      },
+      {
+        "batter": "Dalton Rushing",
+        "ev": 102.7,
+        "angle": 32.0,
+        "distance": 391.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Mlodzinski, Carmen"
+      },
+      {
+        "batter": "Shohei Ohtani",
+        "ev": 101.7,
+        "angle": 29.0,
+        "distance": 382.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Jones, Jared"
+      },
+      {
+        "batter": "Luis Arraez",
+        "ev": 99.0,
+        "angle": 24.0,
+        "distance": 379.0,
+        "hr_in_parks": 12,
+        "result": "double",
+        "pitcher": "Varland, Gus"
+      },
+      {
+        "batter": "Nick Fortes",
+        "ev": 100.8,
+        "angle": 21.0,
+        "distance": 398.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Bennett, Jake"
+      },
+      {
+        "batter": "Nick Fortes",
+        "ev": 102.3,
+        "angle": 26.0,
+        "distance": 405.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "Bennett, Jake"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
