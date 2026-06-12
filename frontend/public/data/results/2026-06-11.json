@@ -1,12 +1,34 @@
 {
   "date": "2026-06-11",
-  "total_players_ranked": 180,
-  "total_hrs_hit": 19,
+  "total_players_ranked": 154,
+  "total_hrs_hit": 27,
   "total_near_hrs": 0,
-  "model_hits": 17,
+  "model_hits": 25,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 4,
+        "rate": 40.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 6,
+        "rate": 30.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 8,
+        "rate": 26.7
+      },
+      "all": {
+        "total": 154,
+        "hits": 25,
+        "rate": 16.2
+      }
+    },
+    "L10": {
       "top_10": {
         "total": 10,
         "hits": 3,
@@ -19,35 +41,13 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 4,
-        "rate": 13.3
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
-        "total": 180,
-        "hits": 17,
-        "rate": 9.4
-      }
-    },
-    "L10": {
-      "top_10": {
-        "total": 10,
-        "hits": 2,
-        "rate": 20.0
-      },
-      "top_20": {
-        "total": 20,
-        "hits": 2,
-        "rate": 10.0
-      },
-      "top_30": {
-        "total": 30,
-        "hits": 2,
-        "rate": 6.7
-      },
-      "all": {
-        "total": 180,
-        "hits": 17,
-        "rate": 9.4
+        "total": 154,
+        "hits": 25,
+        "rate": 16.2
       }
     }
   },
@@ -55,50 +55,50 @@
   "tier_accuracy": {
     "top_10": {
       "total": 10,
-      "hits": 3,
-      "rate": 30.0
+      "hits": 4,
+      "rate": 40.0
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 6,
+      "rate": 30.0
     },
     "top_30": {
       "total": 30,
-      "hits": 4,
-      "rate": 13.3
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
-      "total": 180,
-      "hits": 17,
-      "rate": 9.4
+      "total": 154,
+      "hits": 25,
+      "rate": 16.2
     }
   },
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 3,
-      "rate": 30.0
+      "hits": 4,
+      "rate": 40.0
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 6,
+      "rate": 30.0
     },
     "top_30": {
       "total": 30,
-      "hits": 4,
-      "rate": 13.3
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
-      "total": 180,
-      "hits": 17,
-      "rate": 9.4
+      "total": 154,
+      "hits": 25,
+      "rate": 16.2
     }
   },
-  "avg_composite_hr_hitters": 0.442,
-  "avg_composite_non_hitters": 0.394,
-  "composite_separation": 0.048,
+  "avg_composite_hr_hitters": 0.446,
+  "avg_composite_non_hitters": 0.393,
+  "composite_separation": 0.053,
   "hr_hitters": [
     {
       "name": "Riley Greene",
@@ -115,11 +115,25 @@
       "matchup": "MIN@DET"
     },
     {
+      "name": "Colton Cowser",
+      "rank": 7,
+      "composite": 0.666,
+      "opp_pitcher": "Bryan Woo",
+      "matchup": "SEA@BAL"
+    },
+    {
       "name": "Zach McKinstry",
       "rank": 9,
       "composite": 0.652,
       "opp_pitcher": "Zebby Matthews",
       "matchup": "MIN@DET"
+    },
+    {
+      "name": "Shohei Ohtani",
+      "rank": 11,
+      "composite": 0.647,
+      "opp_pitcher": "Mitch Keller",
+      "matchup": "LAD@PIT"
     },
     {
       "name": "Spencer Torkelson",
@@ -129,95 +143,137 @@
       "matchup": "MIN@DET"
     },
     {
+      "name": "Luke Raley",
+      "rank": 26,
+      "composite": 0.562,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "SEA@BAL"
+    },
+    {
+      "name": "Pete Alonso",
+      "rank": 30,
+      "composite": 0.539,
+      "opp_pitcher": "Bryan Woo",
+      "matchup": "SEA@BAL"
+    },
+    {
       "name": "Juan Soto",
-      "rank": 35,
+      "rank": 31,
       "composite": 0.532,
       "opp_pitcher": "Hunter Dobbins",
       "matchup": "STL@NYM"
     },
     {
+      "name": "Dominic Canzone",
+      "rank": 41,
+      "composite": 0.46,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "SEA@BAL"
+    },
+    {
       "name": "Alex Bregman",
-      "rank": 70,
+      "rank": 63,
       "composite": 0.4,
       "opp_pitcher": "Ryan Feltner",
       "matchup": "CHC@COL"
     },
     {
       "name": "Seiya Suzuki",
-      "rank": 77,
+      "rank": 70,
       "composite": 0.4,
       "opp_pitcher": "Ryan Feltner",
       "matchup": "CHC@COL"
     },
     {
       "name": "Corey Seager",
-      "rank": 88,
+      "rank": 77,
       "composite": 0.394,
       "opp_pitcher": "Michael Wacha",
       "matchup": "TEX@KC"
     },
     {
       "name": "Jared Young",
-      "rank": 89,
+      "rank": 78,
       "composite": 0.388,
       "opp_pitcher": "Hunter Dobbins",
       "matchup": "STL@NYM"
     },
     {
       "name": "Carson Kelly",
-      "rank": 92,
+      "rank": 81,
       "composite": 0.385,
       "opp_pitcher": "Ryan Feltner",
       "matchup": "CHC@COL"
     },
     {
       "name": "Alec Burleson",
-      "rank": 93,
+      "rank": 82,
       "composite": 0.384,
       "opp_pitcher": "Christian Scott",
       "matchup": "STL@NYM"
     },
     {
       "name": "Bo Bichette",
-      "rank": 103,
+      "rank": 90,
       "composite": 0.372,
       "opp_pitcher": "Hunter Dobbins",
       "matchup": "STL@NYM"
     },
     {
+      "name": "Cole Young",
+      "rank": 96,
+      "composite": 0.353,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "SEA@BAL"
+    },
+    {
       "name": "Brett Sullivan",
-      "rank": 115,
+      "rank": 99,
       "composite": 0.347,
       "opp_pitcher": "Edward Cabrera",
       "matchup": "CHC@COL"
     },
     {
       "name": "Gleyber Torres",
-      "rank": 125,
+      "rank": 109,
       "composite": 0.331,
       "opp_pitcher": "Zebby Matthews",
       "matchup": "MIN@DET"
     },
     {
+      "name": "Brandon Lowe",
+      "rank": 114,
+      "composite": 0.321,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@PIT"
+    },
+    {
       "name": "Jimmy Crooks",
-      "rank": 139,
+      "rank": 121,
       "composite": 0.304,
       "opp_pitcher": "Christian Scott",
       "matchup": "STL@NYM"
     },
     {
       "name": "Cole Carrigg",
-      "rank": 162,
+      "rank": 138,
       "composite": 0.25,
       "opp_pitcher": "Edward Cabrera",
       "matchup": "CHC@COL"
     },
     {
       "name": "Lars Nootbaar",
-      "rank": 172,
+      "rank": 148,
       "composite": 0.186,
       "opp_pitcher": "Christian Scott",
       "matchup": "STL@NYM"
+    },
+    {
+      "name": "Rafael Flores Jr.",
+      "rank": 154,
+      "composite": 0.09,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@PIT"
     }
   ],
   "hr_hitters_l10": [
@@ -236,109 +292,165 @@
       "matchup": "MIN@DET"
     },
     {
+      "name": "Shohei Ohtani",
+      "rank": 10,
+      "composite": 0.606,
+      "opp_pitcher": "Mitch Keller",
+      "matchup": "LAD@PIT"
+    },
+    {
+      "name": "Dominic Canzone",
+      "rank": 18,
+      "composite": 0.567,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "SEA@BAL"
+    },
+    {
+      "name": "Colton Cowser",
+      "rank": 25,
+      "composite": 0.547,
+      "opp_pitcher": "Bryan Woo",
+      "matchup": "SEA@BAL"
+    },
+    {
+      "name": "Pete Alonso",
+      "rank": 32,
+      "composite": 0.499,
+      "opp_pitcher": "Bryan Woo",
+      "matchup": "SEA@BAL"
+    },
+    {
       "name": "Juan Soto",
-      "rank": 48,
+      "rank": 45,
       "composite": 0.4,
       "opp_pitcher": "Hunter Dobbins",
       "matchup": "STL@NYM"
     },
     {
       "name": "Zach McKinstry",
-      "rank": 49,
+      "rank": 46,
       "composite": 0.4,
       "opp_pitcher": "Zebby Matthews",
       "matchup": "MIN@DET"
     },
     {
       "name": "Spencer Torkelson",
-      "rank": 50,
+      "rank": 47,
       "composite": 0.4,
       "opp_pitcher": "Zebby Matthews",
       "matchup": "MIN@DET"
     },
     {
       "name": "Corey Seager",
-      "rank": 62,
+      "rank": 59,
       "composite": 0.4,
       "opp_pitcher": "Michael Wacha",
       "matchup": "TEX@KC"
     },
     {
       "name": "Alex Bregman",
-      "rank": 69,
+      "rank": 66,
       "composite": 0.4,
       "opp_pitcher": "Ryan Feltner",
       "matchup": "CHC@COL"
     },
     {
       "name": "Seiya Suzuki",
-      "rank": 73,
+      "rank": 70,
       "composite": 0.4,
       "opp_pitcher": "Ryan Feltner",
       "matchup": "CHC@COL"
     },
     {
+      "name": "Luke Raley",
+      "rank": 72,
+      "composite": 0.4,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "SEA@BAL"
+    },
+    {
       "name": "Jared Young",
-      "rank": 85,
+      "rank": 76,
       "composite": 0.398,
       "opp_pitcher": "Hunter Dobbins",
       "matchup": "STL@NYM"
     },
     {
       "name": "Carson Kelly",
-      "rank": 97,
+      "rank": 87,
       "composite": 0.385,
       "opp_pitcher": "Ryan Feltner",
       "matchup": "CHC@COL"
     },
     {
       "name": "Bo Bichette",
-      "rank": 100,
+      "rank": 90,
       "composite": 0.38,
       "opp_pitcher": "Hunter Dobbins",
       "matchup": "STL@NYM"
     },
     {
       "name": "Brett Sullivan",
-      "rank": 110,
+      "rank": 98,
       "composite": 0.36,
       "opp_pitcher": "Edward Cabrera",
       "matchup": "CHC@COL"
     },
     {
+      "name": "Cole Young",
+      "rank": 105,
+      "composite": 0.353,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "SEA@BAL"
+    },
+    {
       "name": "Jimmy Crooks",
-      "rank": 122,
+      "rank": 107,
       "composite": 0.348,
       "opp_pitcher": "Christian Scott",
       "matchup": "STL@NYM"
     },
     {
       "name": "Gleyber Torres",
-      "rank": 137,
+      "rank": 119,
       "composite": 0.323,
       "opp_pitcher": "Zebby Matthews",
       "matchup": "MIN@DET"
     },
     {
+      "name": "Brandon Lowe",
+      "rank": 126,
+      "composite": 0.306,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@PIT"
+    },
+    {
       "name": "Alec Burleson",
-      "rank": 153,
+      "rank": 132,
       "composite": 0.281,
       "opp_pitcher": "Christian Scott",
       "matchup": "STL@NYM"
     },
     {
       "name": "Lars Nootbaar",
-      "rank": 162,
+      "rank": 138,
       "composite": 0.258,
       "opp_pitcher": "Christian Scott",
       "matchup": "STL@NYM"
     },
     {
       "name": "Cole Carrigg",
-      "rank": 166,
+      "rank": 142,
       "composite": 0.25,
       "opp_pitcher": "Edward Cabrera",
       "matchup": "CHC@COL"
+    },
+    {
+      "name": "Rafael Flores Jr.",
+      "rank": 154,
+      "composite": 0.09,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@PIT"
     }
   ],
   "near_hr_hitters": [],
@@ -347,14 +459,14 @@
     {
       "name": "Wenceel P\u00e9rez",
       "pitcher": "Alex Jackson",
-      "description": "Wenceel P\u00e9rez homers (7) on a fly ball to left center field. Jake Rogers scores."
+      "description": "${person|fullName|672761} homers ${total|homeRuns|672761} on a fly ball to left center field.   ${person|fullName|668670} scores.  "
     }
   ],
   "hr_signal_accuracy": {
     "1_of_5": {
-      "players": 64,
-      "hr_count": 5,
-      "hr_rate": 7.8,
+      "players": 53,
+      "hr_count": 7,
+      "hr_rate": 13.2,
       "names": [
         "A.J. Ewing",
         "Nolan Gorman",
@@ -408,31 +520,22 @@
         "Will Smith",
         "Rafael Flores Jr.",
         "Colt Emerson",
-        "Josh Naylor",
-        "Colson Montgomery",
-        "Randal Grichuk",
-        "Derek Hill",
-        "Matt Olson",
-        "Luisangel Acu\u00f1a",
-        "Miguel Vargas",
-        "Tristan Peters",
-        "Mike Yastrzemski",
-        "Jacob Gonzalez",
-        "Dominic Smith",
-        "Rowdy Tellez"
+        "Josh Naylor"
       ],
       "hr_names": [
         "Alec Burleson",
         "Jimmy Crooks",
         "Lars Nootbaar",
         "Gleyber Torres",
-        "Corey Seager"
+        "Corey Seager",
+        "Shohei Ohtani",
+        "Rafael Flores Jr."
       ]
     },
     "2_of_5": {
-      "players": 71,
-      "hr_count": 6,
-      "hr_rate": 8.5,
+      "players": 61,
+      "hr_count": 11,
+      "hr_rate": 18.0,
       "names": [
         "Marcus Semien",
         "Francisco Alvarez",
@@ -494,17 +597,7 @@
         "Taylor Ward",
         "Jeremiah Jackson",
         "Coby Mayo",
-        "Miles Mastrobuoni",
-        "Jorge Mateo",
-        "Andrew Benintendi",
-        "Mauricio Dub\u00f3n",
-        "Austin Wynns",
-        "Eli White",
-        "Ozzie Albies",
-        "Sandy Le\u00f3n",
-        "Michael Harris II",
-        "Drew Romo",
-        "Braden Montgomery"
+        "Miles Mastrobuoni"
       ],
       "hr_names": [
         "Juan Soto",
@@ -512,13 +605,18 @@
         "Riley Greene",
         "Spencer Torkelson",
         "Brett Sullivan",
-        "Cole Carrigg"
+        "Cole Carrigg",
+        "Brandon Lowe",
+        "Colton Cowser",
+        "Pete Alonso",
+        "Dominic Canzone",
+        "Cole Young"
       ]
     },
     "3_of_5": {
-      "players": 25,
-      "hr_count": 5,
-      "hr_rate": 20.0,
+      "players": 23,
+      "hr_count": 6,
+      "hr_rate": 26.1,
       "names": [
         "Bo Bichette",
         "Colt Keith",
@@ -542,16 +640,15 @@
         "Leody Taveras",
         "Randy Arozarena",
         "Jhonny Pereda",
-        "Victor Robles",
-        "Austin Riley",
-        "Ha-Seong Kim"
+        "Victor Robles"
       ],
       "hr_names": [
         "Bo Bichette",
         "Colt Keith",
         "Zach McKinstry",
         "Alex Bregman",
-        "Seiya Suzuki"
+        "Seiya Suzuki",
+        "Luke Raley"
       ]
     },
     "4_of_5": {
@@ -574,23 +671,23 @@
   "combined_tier_accuracy": {
     "top_10": {
       "total": 10,
-      "hits": 2,
-      "rate": 20.0
+      "hits": 3,
+      "rate": 30.0
     },
     "top_20": {
       "total": 20,
-      "hits": 2,
-      "rate": 10.0
+      "hits": 5,
+      "rate": 25.0
     },
     "top_30": {
       "total": 30,
-      "hits": 3,
-      "rate": 10.0
+      "hits": 7,
+      "rate": 23.3
     },
     "all": {
-      "total": 180,
-      "hits": 17,
-      "rate": 9.4
+      "total": 154,
+      "hits": 25,
+      "rate": 16.2
     }
   },
   "combined_hr_hitters": [
@@ -609,109 +706,165 @@
       "matchup": "MIN@DET"
     },
     {
+      "name": "Shohei Ohtani",
+      "rank": 10,
+      "composite": 0.652,
+      "opp_pitcher": "Mitch Keller",
+      "matchup": "LAD@PIT"
+    },
+    {
+      "name": "Colton Cowser",
+      "rank": 18,
+      "composite": 0.542,
+      "opp_pitcher": "Bryan Woo",
+      "matchup": "SEA@BAL"
+    },
+    {
+      "name": "Dominic Canzone",
+      "rank": 20,
+      "composite": 0.492,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "SEA@BAL"
+    },
+    {
+      "name": "Luke Raley",
+      "rank": 25,
+      "composite": 0.417,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "SEA@BAL"
+    },
+    {
       "name": "Juan Soto",
-      "rank": 30,
+      "rank": 28,
       "composite": 0.407,
       "opp_pitcher": "Hunter Dobbins",
       "matchup": "STL@NYM"
     },
     {
+      "name": "Pete Alonso",
+      "rank": 32,
+      "composite": 0.376,
+      "opp_pitcher": "Bryan Woo",
+      "matchup": "SEA@BAL"
+    },
+    {
       "name": "Spencer Torkelson",
-      "rank": 41,
+      "rank": 39,
       "composite": 0.324,
       "opp_pitcher": "Zebby Matthews",
       "matchup": "MIN@DET"
     },
     {
       "name": "Zach McKinstry",
-      "rank": 52,
+      "rank": 47,
       "composite": 0.289,
       "opp_pitcher": "Zebby Matthews",
       "matchup": "MIN@DET"
     },
     {
       "name": "Jimmy Crooks",
-      "rank": 54,
+      "rank": 49,
       "composite": 0.287,
       "opp_pitcher": "Christian Scott",
       "matchup": "STL@NYM"
     },
     {
       "name": "Alec Burleson",
-      "rank": 56,
+      "rank": 50,
       "composite": 0.272,
       "opp_pitcher": "Christian Scott",
       "matchup": "STL@NYM"
     },
     {
       "name": "Corey Seager",
-      "rank": 84,
+      "rank": 73,
       "composite": 0.196,
       "opp_pitcher": "Michael Wacha",
       "matchup": "TEX@KC"
     },
     {
       "name": "Seiya Suzuki",
-      "rank": 85,
+      "rank": 74,
       "composite": 0.195,
       "opp_pitcher": "Ryan Feltner",
       "matchup": "CHC@COL"
     },
     {
+      "name": "Cole Young",
+      "rank": 80,
+      "composite": 0.186,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "SEA@BAL"
+    },
+    {
       "name": "Bo Bichette",
-      "rank": 96,
+      "rank": 85,
       "composite": 0.182,
       "opp_pitcher": "Hunter Dobbins",
       "matchup": "STL@NYM"
     },
     {
       "name": "Gleyber Torres",
-      "rank": 100,
+      "rank": 89,
       "composite": 0.178,
       "opp_pitcher": "Zebby Matthews",
       "matchup": "MIN@DET"
     },
     {
       "name": "Lars Nootbaar",
-      "rank": 111,
+      "rank": 98,
       "composite": 0.16,
       "opp_pitcher": "Christian Scott",
       "matchup": "STL@NYM"
     },
     {
       "name": "Jared Young",
-      "rank": 118,
+      "rank": 103,
       "composite": 0.153,
       "opp_pitcher": "Hunter Dobbins",
       "matchup": "STL@NYM"
     },
     {
       "name": "Alex Bregman",
-      "rank": 125,
+      "rank": 109,
       "composite": 0.145,
       "opp_pitcher": "Ryan Feltner",
       "matchup": "CHC@COL"
     },
     {
       "name": "Carson Kelly",
-      "rank": 127,
+      "rank": 111,
       "composite": 0.145,
       "opp_pitcher": "Ryan Feltner",
       "matchup": "CHC@COL"
     },
     {
+      "name": "Brandon Lowe",
+      "rank": 115,
+      "composite": 0.144,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@PIT"
+    },
+    {
       "name": "Brett Sullivan",
-      "rank": 133,
+      "rank": 117,
       "composite": 0.143,
       "opp_pitcher": "Edward Cabrera",
       "matchup": "CHC@COL"
     },
     {
       "name": "Cole Carrigg",
-      "rank": 134,
+      "rank": 118,
       "composite": 0.143,
       "opp_pitcher": "Edward Cabrera",
       "matchup": "CHC@COL"
+    },
+    {
+      "name": "Rafael Flores Jr.",
+      "rank": 148,
+      "composite": 0.108,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@PIT"
     }
   ]
 }
