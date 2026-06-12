@@ -59449,5 +59449,722 @@
         "matchup": "LAD@PIT"
       }
     ]
+  },
+  {
+    "date": "2026-06-11",
+    "total_players_ranked": 180,
+    "total_hrs_hit": 19,
+    "total_near_hrs": 0,
+    "model_hits": 17,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 3,
+          "rate": 30.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 4,
+          "rate": 20.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 4,
+          "rate": 13.3
+        },
+        "all": {
+          "total": 180,
+          "hits": 17,
+          "rate": 9.4
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 2,
+          "rate": 6.7
+        },
+        "all": {
+          "total": 180,
+          "hits": 17,
+          "rate": 9.4
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 3,
+        "rate": 30.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 180,
+        "hits": 17,
+        "rate": 9.4
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 3,
+        "rate": 30.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 180,
+        "hits": 17,
+        "rate": 9.4
+      }
+    },
+    "avg_composite_hr_hitters": 0.442,
+    "avg_composite_non_hitters": 0.394,
+    "composite_separation": 0.048,
+    "hr_hitters": [
+      {
+        "name": "Riley Greene",
+        "rank": 1,
+        "composite": 0.807,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Colt Keith",
+        "rank": 2,
+        "composite": 0.775,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Zach McKinstry",
+        "rank": 9,
+        "composite": 0.652,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Spencer Torkelson",
+        "rank": 18,
+        "composite": 0.611,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Juan Soto",
+        "rank": 35,
+        "composite": 0.532,
+        "opp_pitcher": "Hunter Dobbins",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Alex Bregman",
+        "rank": 70,
+        "composite": 0.4,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Seiya Suzuki",
+        "rank": 77,
+        "composite": 0.4,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Corey Seager",
+        "rank": 88,
+        "composite": 0.394,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "TEX@KC"
+      },
+      {
+        "name": "Jared Young",
+        "rank": 89,
+        "composite": 0.388,
+        "opp_pitcher": "Hunter Dobbins",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Carson Kelly",
+        "rank": 92,
+        "composite": 0.385,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Alec Burleson",
+        "rank": 93,
+        "composite": 0.384,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Bo Bichette",
+        "rank": 103,
+        "composite": 0.372,
+        "opp_pitcher": "Hunter Dobbins",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Brett Sullivan",
+        "rank": 115,
+        "composite": 0.347,
+        "opp_pitcher": "Edward Cabrera",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Gleyber Torres",
+        "rank": 125,
+        "composite": 0.331,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Jimmy Crooks",
+        "rank": 139,
+        "composite": 0.304,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Cole Carrigg",
+        "rank": 162,
+        "composite": 0.25,
+        "opp_pitcher": "Edward Cabrera",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Lars Nootbaar",
+        "rank": 172,
+        "composite": 0.186,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "STL@NYM"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Riley Greene",
+        "rank": 1,
+        "composite": 0.786,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Colt Keith",
+        "rank": 3,
+        "composite": 0.744,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Juan Soto",
+        "rank": 48,
+        "composite": 0.4,
+        "opp_pitcher": "Hunter Dobbins",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Zach McKinstry",
+        "rank": 49,
+        "composite": 0.4,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Spencer Torkelson",
+        "rank": 50,
+        "composite": 0.4,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Corey Seager",
+        "rank": 62,
+        "composite": 0.4,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "TEX@KC"
+      },
+      {
+        "name": "Alex Bregman",
+        "rank": 69,
+        "composite": 0.4,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Seiya Suzuki",
+        "rank": 73,
+        "composite": 0.4,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Jared Young",
+        "rank": 85,
+        "composite": 0.398,
+        "opp_pitcher": "Hunter Dobbins",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Carson Kelly",
+        "rank": 97,
+        "composite": 0.385,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Bo Bichette",
+        "rank": 100,
+        "composite": 0.38,
+        "opp_pitcher": "Hunter Dobbins",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Brett Sullivan",
+        "rank": 110,
+        "composite": 0.36,
+        "opp_pitcher": "Edward Cabrera",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Jimmy Crooks",
+        "rank": 122,
+        "composite": 0.348,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Gleyber Torres",
+        "rank": 137,
+        "composite": 0.323,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Alec Burleson",
+        "rank": 153,
+        "composite": 0.281,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Lars Nootbaar",
+        "rank": 162,
+        "composite": 0.258,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Cole Carrigg",
+        "rank": 166,
+        "composite": 0.25,
+        "opp_pitcher": "Edward Cabrera",
+        "matchup": "CHC@COL"
+      }
+    ],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [
+      {
+        "name": "Wenceel P\u00e9rez",
+        "pitcher": "Alex Jackson",
+        "description": "Wenceel P\u00e9rez homers (7) on a fly ball to left center field. Jake Rogers scores."
+      }
+    ],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 64,
+        "hr_count": 5,
+        "hr_rate": 7.8,
+        "names": [
+          "A.J. Ewing",
+          "Nolan Gorman",
+          "Alec Burleson",
+          "Carson Benge",
+          "Jimmy Crooks",
+          "Masyn Winn",
+          "JJ Wetherholt",
+          "Lars Nootbaar",
+          "Byron Buxton",
+          "Tristan Gray",
+          "Dillon Dingler",
+          "Gleyber Torres",
+          "Royce Lewis",
+          "Jake Rogers",
+          "Corbin Carroll",
+          "Tommy Troy",
+          "Liam Hicks",
+          "Xavier Edwards",
+          "Gabriel Moreno",
+          "Otto Lopez",
+          "Ketel Marte",
+          "Aramis Garcia",
+          "Jake Burger",
+          "Ezequiel Duran",
+          "Corey Seager",
+          "Nick Loftin",
+          "Kyle Higashioka",
+          "Wyatt Langford",
+          "Evan Carter",
+          "Elias D\u00edaz",
+          "Justin Foscue",
+          "Lane Thomas",
+          "Josh Jung",
+          "Nicky Lopez",
+          "Ian Happ",
+          "Jake McCarthy",
+          "Willi Castro",
+          "Michael Conforto",
+          "Pedro Ram\u00edrez",
+          "Sterlin Thompson",
+          "Shohei Ohtani",
+          "Spencer Horwitz",
+          "Freddie Freeman",
+          "Dalton Rushing",
+          "Kyle Tucker",
+          "Alex Freeland",
+          "Andy Pages",
+          "Bryan Reynolds",
+          "Tyler Callihan",
+          "Will Smith",
+          "Rafael Flores Jr.",
+          "Colt Emerson",
+          "Josh Naylor",
+          "Colson Montgomery",
+          "Randal Grichuk",
+          "Derek Hill",
+          "Matt Olson",
+          "Luisangel Acu\u00f1a",
+          "Miguel Vargas",
+          "Tristan Peters",
+          "Mike Yastrzemski",
+          "Jacob Gonzalez",
+          "Dominic Smith",
+          "Rowdy Tellez"
+        ],
+        "hr_names": [
+          "Alec Burleson",
+          "Jimmy Crooks",
+          "Lars Nootbaar",
+          "Gleyber Torres",
+          "Corey Seager"
+        ]
+      },
+      "2_of_5": {
+        "players": 71,
+        "hr_count": 6,
+        "hr_rate": 8.5,
+        "names": [
+          "Marcus Semien",
+          "Francisco Alvarez",
+          "Juan Soto",
+          "Jared Young",
+          "MJ Melendez",
+          "Brett Baty",
+          "Iv\u00e1n Herrera",
+          "Jordan Walker",
+          "Nathan Church",
+          "Riley Greene",
+          "Josh Bell",
+          "Victor Caratini",
+          "Spencer Torkelson",
+          "Kody Clemens",
+          "Kevin McGonigle",
+          "Kerry Carpenter",
+          "Trevor Larnach",
+          "Brooks Lee",
+          "Kyle Stowers",
+          "Owen Caissie",
+          "Jakob Marsee",
+          "Joe Mack",
+          "Nolan Arenado",
+          "Geraldo Perdomo",
+          "Esteury Ruiz",
+          "Jac Caglianone",
+          "Bobby Witt Jr.",
+          "Carter Jensen",
+          "Brandon Nimmo",
+          "Michael Massey",
+          "Joc Pederson",
+          "Kameron Misner",
+          "Michael Busch",
+          "Chad Stevens",
+          "TJ Rumfield",
+          "Matt Shaw",
+          "Mois\u00e9s Ballesteros",
+          "Brett Sullivan",
+          "Cole Carrigg",
+          "Miguel Rojas",
+          "Ryan Ward",
+          "Brandon Lowe",
+          "Jared Triolo",
+          "Alex Call",
+          "Marcell Ozuna",
+          "Mookie Betts",
+          "Endy Rodr\u00edguez",
+          "Jackson Holliday",
+          "Colton Cowser",
+          "Adley Rutschman",
+          "Blaze Alexander",
+          "Pete Alonso",
+          "Dominic Canzone",
+          "Sam Huff",
+          "Gunnar Henderson",
+          "Rob Refsnyder",
+          "Cole Young",
+          "Taylor Ward",
+          "Jeremiah Jackson",
+          "Coby Mayo",
+          "Miles Mastrobuoni",
+          "Jorge Mateo",
+          "Andrew Benintendi",
+          "Mauricio Dub\u00f3n",
+          "Austin Wynns",
+          "Eli White",
+          "Ozzie Albies",
+          "Sandy Le\u00f3n",
+          "Michael Harris II",
+          "Drew Romo",
+          "Braden Montgomery"
+        ],
+        "hr_names": [
+          "Juan Soto",
+          "Jared Young",
+          "Riley Greene",
+          "Spencer Torkelson",
+          "Brett Sullivan",
+          "Cole Carrigg"
+        ]
+      },
+      "3_of_5": {
+        "players": 25,
+        "hr_count": 5,
+        "hr_rate": 20.0,
+        "names": [
+          "Bo Bichette",
+          "Colt Keith",
+          "Zach McKinstry",
+          "Isaac Collins",
+          "Vinnie Pasquantino",
+          "Hunter Goodman",
+          "Ezequiel Tovar",
+          "Edouard Julien",
+          "Kyle Karros",
+          "Alex Bregman",
+          "Dansby Swanson",
+          "Pete Crow-Armstrong",
+          "Seiya Suzuki",
+          "Troy Johnston",
+          "Nico Hoerner",
+          "Braxton Fulford",
+          "Max Muncy",
+          "Samuel Basallo",
+          "Luke Raley",
+          "Leody Taveras",
+          "Randy Arozarena",
+          "Jhonny Pereda",
+          "Victor Robles",
+          "Austin Riley",
+          "Ha-Seong Kim"
+        ],
+        "hr_names": [
+          "Bo Bichette",
+          "Colt Keith",
+          "Zach McKinstry",
+          "Alex Bregman",
+          "Seiya Suzuki"
+        ]
+      },
+      "4_of_5": {
+        "players": 6,
+        "hr_count": 1,
+        "hr_rate": 16.7,
+        "names": [
+          "Miguel Amaya",
+          "Carson Kelly",
+          "Patrick Wisdom",
+          "Tyler O'Neill",
+          "Julio Rodr\u00edguez",
+          "Mitch Garver"
+        ],
+        "hr_names": [
+          "Carson Kelly"
+        ]
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 180,
+        "hits": 17,
+        "rate": 9.4
+      }
+    },
+    "combined_hr_hitters": [
+      {
+        "name": "Riley Greene",
+        "rank": 1,
+        "composite": 0.878,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Colt Keith",
+        "rank": 5,
+        "composite": 0.713,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Juan Soto",
+        "rank": 30,
+        "composite": 0.407,
+        "opp_pitcher": "Hunter Dobbins",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Spencer Torkelson",
+        "rank": 41,
+        "composite": 0.324,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Zach McKinstry",
+        "rank": 52,
+        "composite": 0.289,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Jimmy Crooks",
+        "rank": 54,
+        "composite": 0.287,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Alec Burleson",
+        "rank": 56,
+        "composite": 0.272,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Corey Seager",
+        "rank": 84,
+        "composite": 0.196,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "TEX@KC"
+      },
+      {
+        "name": "Seiya Suzuki",
+        "rank": 85,
+        "composite": 0.195,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Bo Bichette",
+        "rank": 96,
+        "composite": 0.182,
+        "opp_pitcher": "Hunter Dobbins",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Gleyber Torres",
+        "rank": 100,
+        "composite": 0.178,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Lars Nootbaar",
+        "rank": 111,
+        "composite": 0.16,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Jared Young",
+        "rank": 118,
+        "composite": 0.153,
+        "opp_pitcher": "Hunter Dobbins",
+        "matchup": "STL@NYM"
+      },
+      {
+        "name": "Alex Bregman",
+        "rank": 125,
+        "composite": 0.145,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Carson Kelly",
+        "rank": 127,
+        "composite": 0.145,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Brett Sullivan",
+        "rank": 133,
+        "composite": 0.143,
+        "opp_pitcher": "Edward Cabrera",
+        "matchup": "CHC@COL"
+      },
+      {
+        "name": "Cole Carrigg",
+        "rank": 134,
+        "composite": 0.143,
+        "opp_pitcher": "Edward Cabrera",
+        "matchup": "CHC@COL"
+      }
+    ]
   }
 ]
