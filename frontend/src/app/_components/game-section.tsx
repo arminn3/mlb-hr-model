@@ -23,11 +23,16 @@ function sortBatters(
   lookup: Map<string, LineupInfo>,
   posted: boolean,
   lookback: UILookback,
+  override?: Set<string> | null,
 ): BatterRowInfo[] {
   const rows: BatterRowInfo[] = players.map((p) => {
     const info = lookup.get(p.name);
     return { p, order: posted ? (info?.order ?? null) : null, mlbId: info?.id };
   });
+  // Live-refresh override wins — show only players in the live MLB lineup.
+  if (override && override.size > 0) {
+    return rows.filter(({ p }) => override.has(p.name));
+  }
   if (posted) {
     return rows
       .filter(({ order }) => order != null && order >= 1 && order <= 9)
@@ -51,12 +56,14 @@ export function GameSection({
   onSelectBatter,
   favorites,
   onToggleFavorite,
+  lineupOverride,
 }: {
   game: GameData;
   lookback: UILookback;
   onSelectBatter: (s: SelectedBatter) => void;
   favorites?: Set<string>;
   onToggleFavorite?: (name: string) => void;
+  lineupOverride?: Set<string> | null;
 }) {
   const [selectedPitcher, setSelectedPitcher] = useState<PitcherInfo | null>(null);
   const [selectedPitcherSide, setSelectedPitcherSide] = useState<"away" | "home">("away");
@@ -73,12 +80,14 @@ export function GameSection({
     homeLookup,
     homePosted,
     lookback,
+    lineupOverride,
   );
   const awayBatters = sortBatters(
     game.players.filter((p) => p.batter_side === "away"),
     awayLookup,
     awayPosted,
     lookback,
+    lineupOverride,
   );
 
   return (

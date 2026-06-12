@@ -136,11 +136,13 @@ export function MLRankings({
   lookback,
   currentDate,
   onTabChange,
+  lineupOverride,
 }: {
   games: GameData[];
   lookback: UILookback;
   currentDate: string;
   onTabChange?: (tab: "ml" | "combined" | "consensus") => void;
+  lineupOverride?: { starters: string[] } | null;
 }) {
   const [rankingTab, setRankingTab] = useState<"ml" | "combined" | "consensus">("ml");
   const setTab = (t: "ml" | "combined" | "consensus") => {
@@ -436,8 +438,14 @@ export function MLRankings({
       });
   }, []);
 
-  // Build confirmed starter set: posted lineups → only order 1-9; unposted → all players
+  // Build confirmed starter set.
+  // If the user clicked "Refresh Lineups", the live MLB API override is the
+  // single source of truth — slate's team_pitch_mix is stale by then.
+  // Otherwise: posted lineups → only order 1-9; unposted → all players.
   const confirmedStarters = useMemo(() => {
+    if (lineupOverride && lineupOverride.starters.length > 0) {
+      return new Set(lineupOverride.starters);
+    }
     const s = new Set<string>();
     for (const game of games) {
       const tpm = game.team_pitch_mix;
@@ -456,7 +464,7 @@ export function MLRankings({
       }
     }
     return s;
-  }, [games]);
+  }, [games, lineupOverride]);
 
   const sorted = useMemo(() => {
     const seen = new Set<string>();

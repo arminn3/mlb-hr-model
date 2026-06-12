@@ -25,6 +25,8 @@ import { toast } from "sonner";
 import { TeamPitchMixPage } from "./team-pitch-mix-page";
 import { PitcherSummaryPage } from "./pitcher-summary-page";
 import { IconButton } from "./ui/icon-button";
+import { RefreshLineupsButton } from "./refresh-lineups-button";
+import type { LineupOverride } from "./lineup-refresh";
 import { teamLogoUrl } from "./game-header";
 
 function formatLongDate(dateStr: string): string {
@@ -369,6 +371,7 @@ export function Dashboard() {
   const [selectedBatter, setSelectedBatter] = useState<SelectedBatter | null>(null);
   const [rankingsTab, setRankingsTab] = useState<"ml" | "combined" | "consensus">("ml");
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [lineupOverride, setLineupOverride] = useState<LineupOverride | null>(null);
 
   // Update URL hash when state changes
   function updateHash(page: string, date: string, lb: string) {
@@ -591,6 +594,9 @@ export function Dashboard() {
               {tabConfig.showDatePicker && (
                 <DatePicker currentDate={selectedDate} onChange={loadDate} />
               )}
+              {(activePage === "ml" || activePage === "slate") && data?.date && (
+                <RefreshLineupsButton date={data.date} onOverrideChange={setLineupOverride} />
+              )}
               <UserMenu />
             </div>
           </div>
@@ -599,7 +605,7 @@ export function Dashboard() {
         {/* Page content */}
         <main className="flex-1 p-4 md:p-8">
           {activePage === "ml" && (
-            <MLRankings games={data.games} lookback={lookback} currentDate={data.date} onTabChange={setRankingsTab} />
+            <MLRankings games={data.games} lookback={lookback} currentDate={data.date} onTabChange={setRankingsTab} lineupOverride={lineupOverride} />
           )}
 
           {activePage === "slate" && selectedBatter ? (
@@ -630,6 +636,7 @@ export function Dashboard() {
                   onSelectBatter={setSelectedBatter}
                   favorites={favorites}
                   onToggleFavorite={onToggleFavorite}
+                  lineupOverride={lineupOverride ? new Set(lineupOverride.starters) : null}
                 />
               ))}
               {data.games.length === 0 && (
