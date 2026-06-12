@@ -59454,7 +59454,7 @@
     "date": "2026-06-11",
     "total_players_ranked": 154,
     "total_hrs_hit": 27,
-    "total_near_hrs": 0,
+    "total_near_hrs": 5,
     "model_hits": 25,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -59503,7 +59503,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 5,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -59544,13 +59544,13 @@
       },
       "all": {
         "total": 154,
-        "hits": 25,
-        "rate": 16.2
+        "hits": 30,
+        "rate": 19.5
       }
     },
     "avg_composite_hr_hitters": 0.446,
-    "avg_composite_non_hitters": 0.393,
-    "composite_separation": 0.053,
+    "avg_composite_non_hitters": 0.397,
+    "composite_separation": 0.049,
     "hr_hitters": [
       {
         "name": "Riley Greene",
@@ -59905,8 +59905,108 @@
         "matchup": "LAD@PIT"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Kerry Carpenter",
+        "rank": 46,
+        "composite": 0.4,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Austin Martin",
+        "rank": 112,
+        "composite": 0.323,
+        "opp_pitcher": "Keider Montero",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Ketel Marte",
+        "rank": 129,
+        "composite": 0.278,
+        "opp_pitcher": "Tyler Phillips",
+        "matchup": "AZ@MIA"
+      },
+      {
+        "name": "Bryan Reynolds",
+        "rank": 132,
+        "composite": 0.267,
+        "opp_pitcher": "Justin Wrobleski",
+        "matchup": "LAD@PIT"
+      },
+      {
+        "name": "Mookie Betts",
+        "rank": 142,
+        "composite": 0.223,
+        "opp_pitcher": "Mitch Keller",
+        "matchup": "LAD@PIT"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Austin Martin",
+        "ev": 96.8,
+        "angle": 27.0,
+        "distance": 374.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Montero, Keider"
+      },
+      {
+        "batter": "Kerry Carpenter",
+        "ev": 102.8,
+        "angle": 29.0,
+        "distance": 401.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Matthews, Zebby"
+      },
+      {
+        "batter": "Ketel Marte",
+        "ev": 100.3,
+        "angle": 27.0,
+        "distance": 379.0,
+        "hr_in_parks": 7,
+        "result": "double",
+        "pitcher": "Phillips, Tyler"
+      },
+      {
+        "batter": "Jimmy Crooks",
+        "ev": 103.9,
+        "angle": 28.0,
+        "distance": 400.0,
+        "hr_in_parks": 25,
+        "result": "field_out",
+        "pitcher": "Minter, A.J."
+      },
+      {
+        "batter": "Esmerlyn Valdez",
+        "ev": 104.1,
+        "angle": 22.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Wrobleski, Justin"
+      },
+      {
+        "batter": "Mookie Betts",
+        "ev": 96.7,
+        "angle": 27.0,
+        "distance": 380.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Keller, Mitch"
+      },
+      {
+        "batter": "Bryan Reynolds",
+        "ev": 97.3,
+        "angle": 33.0,
+        "distance": 372.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Wrobleski, Justin"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Wenceel P\u00e9rez",
