@@ -315,7 +315,7 @@ export function MLRankings({
       fetch(`/data/${prevStr}.json`).then((r) => (r.ok ? r.json() : null)),
       fetch("/data/results/cumulative.json").then((r) => (r.ok ? r.json() : [])),
     ])
-      .then(([slate, cum]: [ModelData | null, Array<{ date: string; hr_hitters: Array<{ name: string }>; near_hr_hitters?: Array<{ name: string }>; near_hr_events?: Array<{ batter: string }> }>]) => {
+      .then(([slate, cum]: [ModelData | null, Array<{ date: string; players_who_batted?: string[]; hr_hitters: Array<{ name: string }>; near_hr_hitters?: Array<{ name: string }>; near_hr_events?: Array<{ batter: string }> }>]) => {
         if (!slate) return;
         const dayReport = cum.find((x) => x.date === prevStr);
         const hrNames = new Set<string>(
@@ -325,12 +325,19 @@ export function MLRankings({
           ...(dayReport?.near_hr_hitters ?? []).map((h) => h.name),
           ...(dayReport?.near_hr_events ?? []).map((h) => h.batter),
         ]);
+        // Only count players who actually batted yesterday. Excludes bench /
+        // scratched / players in postponed games. Falls back to "include all"
+        // if the report is missing the field (older results before this change).
+        const playedSet: Set<string> | null = dayReport?.players_who_batted
+          ? new Set(dayReport.players_who_batted)
+          : null;
         const seen = new Set<string>();
         const allPlayers: { player: PlayerData; game: GameData }[] = [];
         const mlPicksAll: YesterdayPick[] = [];
         const combinedPicksAll: YesterdayPick[] = [];
         for (const game of slate.games ?? []) {
           for (const player of game.players ?? []) {
+            if (playedSet && !playedSet.has(player.name)) continue;
             if (seen.has(player.name)) continue;
             seen.add(player.name);
             allPlayers.push({ player, game });

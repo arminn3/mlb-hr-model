@@ -516,6 +516,7 @@ def compare_results(game_date: date) -> dict:
 
     report = {
         "date": game_date.isoformat(),
+        "players_who_batted": sorted(players_who_batted),
         "total_players_ranked": len(all_players),
         "total_hrs_hit": len(actual_hrs),
         "total_near_hrs": len(near_hits),
