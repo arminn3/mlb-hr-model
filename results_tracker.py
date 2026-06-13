@@ -273,6 +273,29 @@ def compare_results(game_date: date) -> dict:
     except Exception:
         pass
 
+    # Fetch every player who actually had a plate appearance per game.
+    # Anyone in the slate's player list who's NOT in this set didn't play
+    # (scratched, bench, called up but unused, etc.) and must be excluded
+    # from tier denominators so hit-rates aren't artificially deflated.
+    players_who_batted: set[str] = set()
+    for gpk in completed_game_pks:
+        try:
+            box_url = f"https://statsapi.mlb.com/api/v1/game/{gpk}/boxscore"
+            box_resp = requests.get(box_url, timeout=15)
+            box = box_resp.json()
+            for side in ("home", "away"):
+                team = box.get("teams", {}).get(side, {})
+                for pid, info in (team.get("players") or {}).items():
+                    stats = info.get("stats", {}).get("batting") or {}
+                    pa = (stats.get("plateAppearances") or 0) + (stats.get("atBats") or 0)
+                    if pa > 0:
+                        name = (info.get("person") or {}).get("fullName")
+                        if name:
+                            players_who_batted.add(name)
+        except Exception:
+            continue
+    print(f"Players who actually batted on {game_date}: {len(players_who_batted)}")
+
     # Build ranked lists — exclude postponed/cancelled games only
     lookback_results = {}
     for lb in ["L5", "L10"]:
@@ -284,6 +307,11 @@ def compare_results(game_date: date) -> dict:
                 continue
             matchup = f"{game['away_team']}@{game['home_team']}"
             for player in game["players"]:
+                # Skip players who never batted today (scratched / bench / unused call-ups).
+                # If we couldn't fetch any box scores, players_who_batted is empty —
+                # fall back to including everyone so we don't accidentally zero out the day.
+                if players_who_batted and player["name"] not in players_who_batted:
+                    continue
                 scores = player.get("scores", {}).get(lb, player.get("scores", {}).get("L5", {}))
                 players_lb.append({
                     "name": player["name"],
@@ -404,13 +432,15 @@ def compare_results(game_date: date) -> dict:
             "rate": round(len(tier_hr_or_near) / len(tier_players) * 100, 1) if tier_players else 0,
         }
 
-    # ── Season + Form (combined) ranked list ─────────────────────────────────
+    # ── Balanced Edge ranked list ────────────────────────────────────────────
     combined_raw = []
     for game in predictions["games"]:
         if game.get("game_pk", 0) in postponed_game_pks:
             continue
         matchup = f"{game['away_team']}@{game['home_team']}"
         for player in game["players"]:
+            if players_who_batted and player["name"] not in players_who_batted:
+                continue
             combined_raw.append({
                 "name": player["name"],
                 "composite": _compute_combined_score(player),
