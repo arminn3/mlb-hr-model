@@ -301,7 +301,7 @@
   ],
   "total_players_ranked": 277,
   "total_hrs_hit": 39,
-  "total_near_hrs": 0,
+  "total_near_hrs": 17,
   "model_hits": 37,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -350,7 +350,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 17,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -381,23 +381,23 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 6,
-      "rate": 30.0
+      "hits": 8,
+      "rate": 40.0
     },
     "top_30": {
       "total": 30,
-      "hits": 8,
-      "rate": 26.7
+      "hits": 11,
+      "rate": 36.7
     },
     "all": {
       "total": 277,
-      "hits": 37,
-      "rate": 13.4
+      "hits": 54,
+      "rate": 19.5
     }
   },
   "avg_composite_hr_hitters": 0.445,
-  "avg_composite_non_hitters": 0.402,
-  "composite_separation": 0.043,
+  "avg_composite_non_hitters": 0.398,
+  "composite_separation": 0.047,
   "hr_hitters": [
     {
       "name": "Bryce Eldridge",
@@ -920,8 +920,309 @@
       "matchup": "HOU@KC"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Isaac Collins",
+      "rank": 15,
+      "composite": 0.66,
+      "opp_pitcher": "Tatsuya Imai",
+      "matchup": "HOU@KC"
+    },
+    {
+      "name": "Miguel Vargas",
+      "rank": 18,
+      "composite": 0.647,
+      "opp_pitcher": "Roki Sasaki",
+      "matchup": "LAD@CWS"
+    },
+    {
+      "name": "Jorbit Vivas",
+      "rank": 27,
+      "composite": 0.629,
+      "opp_pitcher": "Bryce Miller",
+      "matchup": "SEA@WSH"
+    },
+    {
+      "name": "Josh Bell",
+      "rank": 36,
+      "composite": 0.599,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@MIN"
+    },
+    {
+      "name": "Owen Caissie",
+      "rank": 44,
+      "composite": 0.574,
+      "opp_pitcher": "Braxton Ashcraft",
+      "matchup": "MIA@PIT"
+    },
+    {
+      "name": "Pete Crow-Armstrong",
+      "rank": 45,
+      "composite": 0.572,
+      "opp_pitcher": "Landen Roupp",
+      "matchup": "CHC@SF"
+    },
+    {
+      "name": "Gleyber Torres",
+      "rank": 49,
+      "composite": 0.565,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "DET@CLE"
+    },
+    {
+      "name": "Jac Caglianone",
+      "rank": 67,
+      "composite": 0.502,
+      "opp_pitcher": "Tatsuya Imai",
+      "matchup": "HOU@KC"
+    },
+    {
+      "name": "Max Muncy",
+      "rank": 121,
+      "composite": 0.4,
+      "opp_pitcher": "Sean Sullivan",
+      "matchup": "COL@ATH"
+    },
+    {
+      "name": "Keibert Ruiz",
+      "rank": 142,
+      "composite": 0.396,
+      "opp_pitcher": "Bryce Miller",
+      "matchup": "SEA@WSH"
+    },
+    {
+      "name": "Matt McLain",
+      "rank": 161,
+      "composite": 0.377,
+      "opp_pitcher": "Eduardo Rodriguez",
+      "matchup": "AZ@CIN"
+    },
+    {
+      "name": "Lawrence Butler",
+      "rank": 194,
+      "composite": 0.344,
+      "opp_pitcher": "Sean Sullivan",
+      "matchup": "COL@ATH"
+    },
+    {
+      "name": "Chase DeLauter",
+      "rank": 201,
+      "composite": 0.337,
+      "opp_pitcher": "Jack Flaherty",
+      "matchup": "DET@CLE"
+    },
+    {
+      "name": "Joe Mack",
+      "rank": 203,
+      "composite": 0.332,
+      "opp_pitcher": "Braxton Ashcraft",
+      "matchup": "MIA@PIT"
+    },
+    {
+      "name": "Seiya Suzuki",
+      "rank": 208,
+      "composite": 0.322,
+      "opp_pitcher": "Landen Roupp",
+      "matchup": "CHC@SF"
+    },
+    {
+      "name": "Jose Siri",
+      "rank": 216,
+      "composite": 0.309,
+      "opp_pitcher": "Shane McClanahan",
+      "matchup": "TB@LAA"
+    },
+    {
+      "name": "LuJames Groover",
+      "rank": 263,
+      "composite": 0.2,
+      "opp_pitcher": "Nick Lodolo",
+      "matchup": "AZ@CIN"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Lawrence Butler",
+      "ev": 92.0,
+      "angle": 28.0,
+      "distance": 379.0,
+      "hr_in_parks": 23,
+      "result": "double",
+      "pitcher": "Agnos, Zach"
+    },
+    {
+      "batter": "Max Muncy",
+      "ev": 103.5,
+      "angle": 23.0,
+      "distance": 396.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Agnos, Zach"
+    },
+    {
+      "batter": "Miguel Vargas",
+      "ev": 102.0,
+      "angle": 26.0,
+      "distance": 374.0,
+      "hr_in_parks": 17,
+      "result": "double",
+      "pitcher": "Sasaki, Roki"
+    },
+    {
+      "batter": "LuJames Groover",
+      "ev": 101.2,
+      "angle": 24.0,
+      "distance": 375.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Burke, Brock"
+    },
+    {
+      "batter": "Matt McLain",
+      "ev": 104.7,
+      "angle": 23.0,
+      "distance": 393.0,
+      "hr_in_parks": 11,
+      "result": "field_out",
+      "pitcher": "Thompson, Ryan"
+    },
+    {
+      "batter": "Chase DeLauter",
+      "ev": 103.7,
+      "angle": 19.0,
+      "distance": 392.0,
+      "hr_in_parks": 3,
+      "result": "double",
+      "pitcher": "Madden, Ty"
+    },
+    {
+      "batter": "Gleyber Torres",
+      "ev": 100.2,
+      "angle": 30.0,
+      "distance": 389.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Bibee, Tanner"
+    },
+    {
+      "batter": "Isaac Collins",
+      "ev": 95.5,
+      "angle": 25.0,
+      "distance": 373.0,
+      "hr_in_parks": 15,
+      "result": "field_out",
+      "pitcher": "Pearson, Nate"
+    },
+    {
+      "batter": "Jac Caglianone",
+      "ev": 102.1,
+      "angle": 37.0,
+      "distance": 380.0,
+      "hr_in_parks": 7,
+      "result": "field_out",
+      "pitcher": "Okert, Steven"
+    },
+    {
+      "batter": "Jose Siri",
+      "ev": 106.1,
+      "angle": 44.0,
+      "distance": 372.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "McClanahan, Shane"
+    },
+    {
+      "batter": "Josh Bell",
+      "ev": 103.4,
+      "angle": 22.0,
+      "distance": 371.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Leahy, Kyle"
+    },
+    {
+      "batter": "Royce Lewis",
+      "ev": 99.1,
+      "angle": 31.0,
+      "distance": 388.0,
+      "hr_in_parks": 22,
+      "result": "field_out",
+      "pitcher": "Leahy, Kyle"
+    },
+    {
+      "batter": "Joe Mack",
+      "ev": 110.2,
+      "angle": 26.0,
+      "distance": 406.0,
+      "hr_in_parks": 19,
+      "result": "",
+      "pitcher": "Kelly, Antwone"
+    },
+    {
+      "batter": "Owen Caissie",
+      "ev": 106.7,
+      "angle": 22.0,
+      "distance": 400.0,
+      "hr_in_parks": 13,
+      "result": "double",
+      "pitcher": "Dotel, Wilber"
+    },
+    {
+      "batter": "Liam Hicks",
+      "ev": 101.1,
+      "angle": 23.0,
+      "distance": 382.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Ashcraft, Braxton"
+    },
+    {
+      "batter": "Seiya Suzuki",
+      "ev": 112.9,
+      "angle": 16.0,
+      "distance": 398.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Roupp, Landen"
+    },
+    {
+      "batter": "Pete Crow-Armstrong",
+      "ev": 110.9,
+      "angle": 39.0,
+      "distance": 393.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Roupp, Landen"
+    },
+    {
+      "batter": "Keibert Ruiz",
+      "ev": 104.5,
+      "angle": 41.0,
+      "distance": 370.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Miller, Bryce"
+    },
+    {
+      "batter": "Jorbit Vivas",
+      "ev": 103.7,
+      "angle": 32.0,
+      "distance": 396.0,
+      "hr_in_parks": 4,
+      "result": "",
+      "pitcher": "Miller, Bryce"
+    },
+    {
+      "batter": "Dominic Canzone",
+      "ev": 106.4,
+      "angle": 23.0,
+      "distance": 397.0,
+      "hr_in_parks": 18,
+      "result": "triple",
+      "pitcher": "Littell, Zack"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
