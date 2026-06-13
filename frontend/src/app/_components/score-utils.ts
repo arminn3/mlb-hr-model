@@ -55,6 +55,7 @@ function computeSeasonScoreSet(p: PlayerData): ScoreSet | null {
     recent_abs:    sp.season_abs ?? l10?.recent_abs ?? [],
     xwoba:         sp.xwoba,
     sweet_spot:    sp.sweet_spot,
+    blast_pct:     sp.blast,
     pull_brl:      sp.pull_barrel,
     swstr:         undefined,
     bip:           sp.bip_count,

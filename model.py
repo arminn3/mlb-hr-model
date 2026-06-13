@@ -232,6 +232,16 @@ def score_batter_vs_pitcher(
                 result["sweet_spot"] = round(float(_sweet.sum() / _n_bip * 100), 1)
             else:
                 result["sweet_spot"] = 0.0
+            # Blast% — approximate Statcast definition: fast swing (bat_speed >= 75 mph)
+            # squared up enough to produce hard contact (EV >= 95 mph). Strong HR signal
+            # (r=0.79 vs barrels/PA on 2024-25 leaderboard sample).
+            if "bat_speed" in recent_bip.columns and "launch_speed" in recent_bip.columns:
+                _bs = recent_bip["bat_speed"]
+                _ls = recent_bip["launch_speed"]
+                _blast = ((_bs >= 75) & (_ls >= 95)).sum()
+                result["blast_pct"] = round(float(_blast / _n_bip * 100), 1)
+            else:
+                result["blast_pct"] = 0.0
             if {"hc_x", "hc_y", "stand", "launch_speed_angle"}.issubset(recent_bip.columns):
                 _sub = recent_bip.dropna(subset=["hc_x", "hc_y"])
                 if len(_sub) > 0:

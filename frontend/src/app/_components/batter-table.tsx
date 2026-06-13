@@ -5,7 +5,7 @@ import type { PlayerData, PitchDetailEntry } from "./types";
 import { scoreFor, type UILookback } from "./score-utils";
 import { teamLogoUrl, teamName } from "./game-header";
 
-type SortCol = "score" | "pitch" | "ev" | "barrel" | "hh" | "fb" | "hrfb" | "xwoba" | "sweet" | "swstr" | "pullbrl" | "bip" | "gb" | "ld" | "bzm" | null;
+type SortCol = "score" | "pitch" | "ev" | "barrel" | "blast" | "hh" | "fb" | "hrfb" | "xwoba" | "sweet" | "swstr" | "pullbrl" | "bip" | "gb" | "ld" | "bzm" | null;
 type SortDir = "desc" | "asc";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -368,6 +368,9 @@ export function BatterRow({
         {heatPill(filtered ? filtered.barrel_pct : scores.barrel_pct, 8, 15, `${filtered ? filtered.barrel_pct : scores.barrel_pct}%`)}
       </td>
       <td className="py-2 pr-2 w-14 text-center">
+        {heatPill(scores.blast_pct ?? null, 10, 18, scores.blast_pct == null ? "—" : `${scores.blast_pct}%`)}
+      </td>
+      <td className="py-2 pr-2 w-14 text-center">
         {heatPill(filtered ? filtered.hard_hit_pct : scores.hard_hit_pct, 35, 50, `${filtered ? filtered.hard_hit_pct : scores.hard_hit_pct}%`)}
       </td>
       <td className="py-2 pr-2 w-14 text-center">
@@ -522,6 +525,7 @@ export function BatterTable({
       case "pitch":   return matchupScore(pitchDetailForMatchup);
       case "ev":      return filt ? filt.exit_velo : (sc.exit_velo ?? 0);
       case "barrel":  return filt ? filt.barrel_pct : (sc.barrel_pct ?? 0);
+      case "blast":   return sc.blast_pct ?? 0;
       case "hh":      return filt ? filt.hard_hit_pct : (sc.hard_hit_pct ?? 0);
       case "fb":      return filt ? filt.fb_pct : (sc.fb_pct ?? 0);
       case "hrfb":    return fbs.length > 0 ? (hrs / fbs.length) * 100 : -1;
@@ -675,6 +679,7 @@ export function BatterTable({
               <SortTh label="Pitch"    col="pitch"   active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-20 text-left" />
               <SortTh label="EV"       col="ev"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("ev")} />
               <SortTh label="Brl%"     col="barrel"  active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("barrel")} />
+              <SortTh label="Blast%"   col="blast"   active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("blast")} />
               <SortTh label="HH%"      col="hh"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("hh")} />
               <SortTh label="FB%"      col="fb"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("fb")} />
               <SortTh label="HR/FB"    col="hrfb"    active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-16 text-center" />

@@ -547,6 +547,11 @@ def run_model(game_date: date = None, fast: bool = False):
                 season_profile["ld"] = round(float(((all_bip["launch_angle"] >= 10) & (all_bip["launch_angle"] < 25)).sum() / n * 100), 1)
                 season_profile["gb"] = round(float((all_bip["launch_angle"] < 10).sum() / n * 100), 1)
             season_profile["hard_hit"] = round(float((all_bip["launch_speed"] >= 95).sum() / n * 100), 1)
+            # Blast% — approx Statcast: fast swing (bat_speed >= 75) producing hard contact (EV >= 95)
+            if "bat_speed" in all_bip.columns:
+                bs = all_bip["bat_speed"]
+                ls = all_bip["launch_speed"]
+                season_profile["blast"] = round(float(((bs >= 75) & (ls >= 95)).sum() / n * 100), 1)
             if "launch_angle" in all_bip.columns:
                 sweet_mask = (all_bip["launch_angle"] >= 8) & (all_bip["launch_angle"] <= 32)
                 season_profile["sweet_spot"] = round(float(sweet_mask.sum() / n * 100), 1)
