@@ -969,6 +969,7 @@ export function MLRankings({
           const fb = s.fb_pct;
           const hh = s.hard_hit_pct;
           const blast = s.blast_pct;
+          const pullBrl = s.pull_brl;
 
           // Matchup quality from pitch_detail
           const pitchEntries = Object.entries(player.pitch_detail ?? {}).filter(([, d]) => (d.usage_pct ?? 0) >= 12);
@@ -1060,6 +1061,7 @@ export function MLRankings({
                     { label: "EV", value: String(ev), hi: Number(ev) >= 95 },
                     { label: "Brl%", value: `${barrel}%`, hi: Number(barrel) >= 12 },
                     { label: "Blast%", value: blast == null ? "—" : `${blast}%`, hi: Number(blast) >= 15 },
+                    { label: "PullBrl%", value: pullBrl == null || pullBrl === 0 ? "—" : `${pullBrl}%`, hi: Number(pullBrl) >= 6 },
                     { label: "HH%", value: `${hh}%`, hi: Number(hh) >= 45 },
                     { label: "FB%", value: `${fb}%`, hi: Number(fb) >= 38 },
                   ].map(({ label, value, hi }) => (
