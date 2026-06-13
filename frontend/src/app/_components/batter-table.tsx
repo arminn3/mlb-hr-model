@@ -382,16 +382,16 @@ export function BatterRow({
 
       {/* Advanced / display-only columns */}
       <td className="py-2 pr-2 w-16 text-center">
-        {heatPill(xwoba && xwoba !== 0 ? xwoba : null, 0.32, 0.40, xwoba == null || xwoba === 0 ? "—" : xwoba.toFixed(3))}
+        {heatPill(xwoba, 0.32, 0.40, xwoba == null ? "—" : xwoba.toFixed(3))}
       </td>
       <td className="py-2 pr-2 w-16 text-center">
-        {heatPill(sweet && sweet !== 0 ? sweet : null, 35, 50, sweet == null || sweet === 0 ? "—" : `${sweet.toFixed(1)}%`)}
+        {heatPill(sweet, 35, 50, sweet == null ? "—" : `${sweet.toFixed(1)}%`)}
       </td>
       <td className="py-2 pr-2 w-16 text-center">
-        {heatPill(swstr && swstr !== 0 ? 100 - swstr : null, 60, 75, swstr == null || swstr === 0 ? "—" : `${swstr.toFixed(1)}%`)}
+        {heatPill(swstr == null ? null : 100 - swstr, 60, 75, swstr == null ? "—" : `${swstr.toFixed(1)}%`)}
       </td>
       <td className="py-2 pr-2 w-16 text-center">
-        {heatPill(pullBrl && pullBrl !== 0 ? pullBrl : null, 4, 8, pullBrl == null || pullBrl === 0 ? "—" : `${pullBrl.toFixed(1)}%`)}
+        {heatPill(pullBrl, 4, 8, pullBrl == null ? "—" : `${pullBrl.toFixed(1)}%`)}
       </td>
       <td className="py-2 pr-2 w-14 text-center">
         {(() => {
