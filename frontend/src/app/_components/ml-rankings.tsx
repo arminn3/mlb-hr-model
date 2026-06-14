@@ -445,29 +445,18 @@ export function MLRankings({
       });
   }, []);
 
-  // Build confirmed starter set.
-  // If the user clicked "Refresh Lineups", the live MLB API override is the
-  // single source of truth — slate's team_pitch_mix is stale by then.
-  // Otherwise: posted lineups → only order 1-9; unposted → all players.
+  // Default ranking pool = all players whose game is on (not postponed/cancelled).
+  // Posted lineups DO NOT auto-filter the pool — bench guys can still HR.
+  // Only the manual "Refresh Lineups" override aggressively narrows to the 9
+  // confirmed starters (user explicitly opts in by clicking).
   const confirmedStarters = useMemo(() => {
     if (lineupOverride && lineupOverride.starters.length > 0) {
       return new Set(lineupOverride.starters);
     }
     const s = new Set<string>();
     for (const game of games) {
-      const tpm = game.team_pitch_mix;
-      for (const side of ["away", "home"] as const) {
-        const sideData = tpm?.[side];
-        if (sideData?.lineup_status === "posted") {
-          for (const b of sideData.batters) {
-            if (b.order != null && b.order >= 1 && b.order <= 9) s.add(b.name);
-          }
-        } else {
-          const bside = side === "away" ? "away" : "home";
-          for (const p of game.players) {
-            if (p.batter_side === bside) s.add(p.name);
-          }
-        }
+      for (const p of game.players) {
+        s.add(p.name);
       }
     }
     return s;
