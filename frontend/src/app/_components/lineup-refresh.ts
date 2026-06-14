@@ -8,7 +8,8 @@ const LS_KEY_PREFIX = "lineup-override:";
 
 export type LineupOverride = {
   date: string;             // YYYY-MM-DD
-  starters: string[];       // confirmed starter names
+  starters: string[];       // confirmed starter names (across all posted lineups)
+  postedTeams: string[];    // team abbrevs whose lineup is posted (3-letter MLB codes)
   fetchedAt: number;        // unix ms — when we pulled the data
   gamesWithLineups: number; // how many games had posted lineups
 };
@@ -37,31 +38,34 @@ export async function fetchLiveLineups(date: string): Promise<LineupOverride> {
   const data = await resp.json();
 
   const starters = new Set<string>();
+  const postedTeams = new Set<string>();
   let gamesWithLineups = 0;
 
   const dates = data?.dates ?? [];
   for (const dateBlock of dates) {
     const games: ScheduleGame[] = dateBlock?.games ?? [];
     for (const g of games) {
-      // Skip postponed/cancelled games
+      // Skip postponed/cancelled games entirely
       const state = g?.status?.detailedState?.toLowerCase() ?? "";
       if (state.includes("postponed") || state.includes("cancelled") || state.includes("canceled")) {
         continue;
       }
       const home = g?.lineups?.homePlayers ?? [];
       const away = g?.lineups?.awayPlayers ?? [];
+      const homeAbbr = g?.teams?.home?.team?.abbreviation;
+      const awayAbbr = g?.teams?.away?.team?.abbreviation;
       let hasAnyPosted = false;
-      for (const p of home) {
-        if (p?.fullName) {
-          starters.add(p.fullName);
-          hasAnyPosted = true;
-        }
+      // Track which TEAMS posted — only those teams' rosters get filtered.
+      // If a team hasn't posted yet, all their candidate players stay visible.
+      if (home.length > 0 && homeAbbr) {
+        postedTeams.add(homeAbbr);
+        hasAnyPosted = true;
+        for (const p of home) if (p?.fullName) starters.add(p.fullName);
       }
-      for (const p of away) {
-        if (p?.fullName) {
-          starters.add(p.fullName);
-          hasAnyPosted = true;
-        }
+      if (away.length > 0 && awayAbbr) {
+        postedTeams.add(awayAbbr);
+        hasAnyPosted = true;
+        for (const p of away) if (p?.fullName) starters.add(p.fullName);
       }
       if (hasAnyPosted) gamesWithLineups += 1;
     }
@@ -70,6 +74,7 @@ export async function fetchLiveLineups(date: string): Promise<LineupOverride> {
   return {
     date,
     starters: Array.from(starters),
+    postedTeams: Array.from(postedTeams),
     fetchedAt: Date.now(),
     gamesWithLineups,
   };

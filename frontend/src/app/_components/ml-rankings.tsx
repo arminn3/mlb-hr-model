@@ -142,7 +142,7 @@ export function MLRankings({
   lookback: UILookback;
   currentDate: string;
   onTabChange?: (tab: "ml" | "combined" | "consensus") => void;
-  lineupOverride?: { starters: string[] } | null;
+  lineupOverride?: { starters: string[]; postedTeams?: string[] } | null;
 }) {
   const [rankingTab, setRankingTab] = useState<"ml" | "combined" | "consensus">("ml");
   const setTab = (t: "ml" | "combined" | "consensus") => {
@@ -445,21 +445,29 @@ export function MLRankings({
       });
   }, []);
 
-  // Default ranking pool = all players whose game is on (not postponed/cancelled).
-  // Posted lineups DO NOT auto-filter the pool — bench guys can still HR.
-  // Only the manual "Refresh Lineups" override aggressively narrows to the 9
-  // confirmed starters (user explicitly opts in by clicking).
+  // Default pool = every player whose game is being played. The "Refresh Lineups"
+  // override is team-aware: for teams that have posted a lineup, only their 9
+  // starters survive; for teams that haven't posted yet, all candidates remain.
+  // This way we never hide someone based on a non-decision.
   const confirmedStarters = useMemo(() => {
-    if (lineupOverride && lineupOverride.starters.length > 0) {
-      return new Set(lineupOverride.starters);
-    }
-    const s = new Set<string>();
+    const starterSet = new Set(lineupOverride?.starters ?? []);
+    const postedTeamSet = new Set(lineupOverride?.postedTeams ?? []);
+    const result = new Set<string>();
     for (const game of games) {
+      const awayTeam = game.away_team;
+      const homeTeam = game.home_team;
       for (const p of game.players) {
-        s.add(p.name);
+        const team = p.batter_side === "away" ? awayTeam : homeTeam;
+        // If this player's team has a posted lineup, only include them if in the 9.
+        // Otherwise keep them — we don't know they're out.
+        if (postedTeamSet.has(team)) {
+          if (starterSet.has(p.name)) result.add(p.name);
+        } else {
+          result.add(p.name);
+        }
       }
     }
-    return s;
+    return result;
   }, [games, lineupOverride]);
 
   const sorted = useMemo(() => {
