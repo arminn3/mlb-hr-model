@@ -64652,7 +64652,7 @@
     ],
     "total_players_ranked": 272,
     "total_hrs_hit": 44,
-    "total_near_hrs": 0,
+    "total_near_hrs": 6,
     "model_hits": 41,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -64701,7 +64701,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 6,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -64742,8 +64742,8 @@
       },
       "all": {
         "total": 272,
-        "hits": 41,
-        "rate": 15.1
+        "hits": 47,
+        "rate": 17.3
       }
     },
     "avg_composite_hr_hitters": 0.424,
@@ -65327,8 +65327,124 @@
         "matchup": "PHI@MIL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Jacob Young",
+        "rank": 55,
+        "composite": 0.532,
+        "opp_pitcher": "Emerson Hancock",
+        "matchup": "SEA@WSH"
+      },
+      {
+        "name": "Jo Adell",
+        "rank": 56,
+        "composite": 0.532,
+        "opp_pitcher": "Casey Legumina",
+        "matchup": "TB@LAA"
+      },
+      {
+        "name": "Eugenio Su\u00e1rez",
+        "rank": 103,
+        "composite": 0.4,
+        "opp_pitcher": "Zac Gallen",
+        "matchup": "AZ@CIN"
+      },
+      {
+        "name": "Ezequiel Tovar",
+        "rank": 134,
+        "composite": 0.4,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "COL@ATH"
+      },
+      {
+        "name": "Ryan Kreidler",
+        "rank": 194,
+        "composite": 0.344,
+        "opp_pitcher": "Michael McGreevy",
+        "matchup": "STL@MIN"
+      },
+      {
+        "name": "Michael Massey",
+        "rank": 261,
+        "composite": 0.219,
+        "opp_pitcher": "Spencer Arrighetti",
+        "matchup": "HOU@KC"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Ezequiel Tovar",
+        "ev": 96.9,
+        "angle": 28.0,
+        "distance": 393.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Basso, Brady"
+      },
+      {
+        "batter": "Troy Johnston",
+        "ev": 97.5,
+        "angle": 31.0,
+        "distance": 399.0,
+        "hr_in_parks": 19,
+        "result": "double",
+        "pitcher": "Medina, Luis"
+      },
+      {
+        "batter": "Eugenio Su\u00e1rez",
+        "ev": 98.2,
+        "angle": 27.0,
+        "distance": 383.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Gallen, Zac"
+      },
+      {
+        "batter": "Michael Massey",
+        "ev": 100.9,
+        "angle": 29.0,
+        "distance": 393.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Pearson, Nate"
+      },
+      {
+        "batter": "Jo Adell",
+        "ev": 112.1,
+        "angle": 29.0,
+        "distance": 403.0,
+        "hr_in_parks": 16,
+        "result": "",
+        "pitcher": "Seymour, Ian"
+      },
+      {
+        "batter": "Blake Perkins",
+        "ev": 105.1,
+        "angle": 18.0,
+        "distance": 369.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "S\u00e1nchez, Cristopher"
+      },
+      {
+        "batter": "Ryan Kreidler",
+        "ev": 101.2,
+        "angle": 27.0,
+        "distance": 393.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Soriano, George"
+      },
+      {
+        "batter": "Jacob Young",
+        "ev": 100.8,
+        "angle": 26.0,
+        "distance": 383.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "Hancock, Emerson"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
