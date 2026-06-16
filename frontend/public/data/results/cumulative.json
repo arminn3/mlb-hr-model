@@ -66924,7 +66924,7 @@
       {
         "name": "Miguel Rojas",
         "pitcher": "Steven Matz",
-        "description": "${person|fullName|500743} homers ${total|homeRuns|500743} on a fly ball to left center field.  "
+        "description": "Miguel Rojas homers (2) on a fly ball to left center field."
       }
     ],
     "hr_signal_accuracy": {
