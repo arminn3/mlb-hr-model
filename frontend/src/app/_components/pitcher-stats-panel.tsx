@@ -253,16 +253,18 @@ export function PitcherStatsPanel({
 
   return (
     <>
-      {/* Backdrop */}
-      <div className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+      {/* Backdrop — backdrop-blur removed (was main lag source on lower-end GPUs) */}
+      <div className="fixed inset-0 z-40 bg-black/80" onClick={onClose} />
 
-      {/* Panel */}
+      {/* Panel — promote to its own compositor layer; lighter shadow */}
       <div
         className="fixed inset-y-0 right-0 z-50 flex flex-col overflow-hidden w-full max-w-3xl"
         style={{
-          background: "linear-gradient(180deg, rgba(14,14,20,0.99) 0%, rgba(10,10,15,1) 100%)",
+          background: "#0a0a0f",
           borderLeft: "1px solid rgba(255,255,255,0.10)",
-          boxShadow: "-16px 0 48px rgba(0,0,0,0.7)",
+          boxShadow: "-8px 0 24px rgba(0,0,0,0.55)",
+          transform: "translateZ(0)",
+          willChange: "transform",
         }}
       >
         {/* ── Header ── */}
