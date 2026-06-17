@@ -954,9 +954,9 @@
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
-      "players": 91,
+      "players": 95,
       "hr_count": 7,
-      "hr_rate": 7.7,
+      "hr_rate": 7.4,
       "names": [
         "Justin Crawford",
         "Javier Sanoja",
@@ -987,6 +987,10 @@
         "Paul Goldschmidt",
         "Blake Dunn",
         "Tyler Stephenson",
+        "Dominic Smith",
+        "Drew Gilbert",
+        "Daniel Susac",
+        "Mauricio Dub\u00f3n",
         "Andrew Vaughn",
         "Brayan Rocchio",
         "David Hamilton",
@@ -1061,9 +1065,9 @@
       ]
     },
     "2_of_5": {
-      "players": 138,
+      "players": 148,
       "hr_count": 18,
-      "hr_rate": 13.0,
+      "hr_rate": 12.2,
       "names": [
         "Heriberto Hern\u00e1ndez",
         "J.T. Realmuto",
@@ -1097,6 +1101,16 @@
         "Carson Benge",
         "Mark Vientos",
         "Spencer Steer",
+        "Bryce Eldridge",
+        "Matt Chapman",
+        "Matt Olson",
+        "Drake Baldwin",
+        "Luis Arraez",
+        "Michael Harris II",
+        "Mike Yastrzemski",
+        "Rafael Devers",
+        "Austin Riley",
+        "Ha-Seong Kim",
         "Gary S\u00e1nchez",
         "Jake Bauers",
         "Angel Mart\u00ednez",
@@ -1226,9 +1240,9 @@
       ]
     },
     "3_of_5": {
-      "players": 57,
+      "players": 60,
       "hr_count": 3,
-      "hr_rate": 5.3,
+      "hr_rate": 5.0,
       "names": [
         "Gabriel Rincones Jr.",
         "Connor Norby",
@@ -1255,6 +1269,9 @@
         "MJ Melendez",
         "Luis Torrens",
         "Eric Wagaman",
+        "Jung Hoo Lee",
+        "Willy Adames",
+        "Casey Schmitt",
         "Daniel Schneemann",
         "Austin Hedges",
         "Rhys Hoskins",
@@ -1295,11 +1312,12 @@
       ]
     },
     "4_of_5": {
-      "players": 7,
+      "players": 8,
       "hr_count": 1,
-      "hr_rate": 14.3,
+      "hr_rate": 12.5,
       "names": [
         "Kyle Schwarber",
+        "Ozzie Albies",
         "Kyle Manzardo",
         "Chase DeLauter",
         "David Fry",
