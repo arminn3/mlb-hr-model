@@ -67381,6 +67381,7 @@
       "Andy Pages",
       "Anthony Volpe",
       "Austin Hedges",
+      "Austin Riley",
       "Austin Slater",
       "Ben Rice",
       "Ben Williamson",
@@ -67400,6 +67401,7 @@
       "Brice Turang",
       "Brooks Lee",
       "Bryan Reynolds",
+      "Bryce Eldridge",
       "Bryce Harper",
       "Bryson Stott",
       "Byron Buxton",
@@ -67409,6 +67411,7 @@
       "Cam Smith",
       "Carlos Cortes",
       "Carson Benge",
+      "Casey Schmitt",
       "Ceddanne Rafaela",
       "Chandler Simpson",
       "Chase Meidroth",
@@ -67430,6 +67433,7 @@
       "Curtis Mead",
       "Dane Myers",
       "Daniel Schneemann",
+      "Daniel Susac",
       "Dansby Swanson",
       "David Fry",
       "David Hamilton",
@@ -67439,13 +67443,17 @@
       "Derek Hill",
       "Dillon Dingler",
       "Dominic Canzone",
+      "Dominic Smith",
       "Donovan Walton",
+      "Drake Baldwin",
+      "Drew Gilbert",
       "Drew Millas",
       "Drew Romo",
       "Dylan Crews",
       "Edmundo Sosa",
       "Edouard Julien",
       "Edwin Arroyo",
+      "Eli White",
       "Elias D\u00edaz",
       "Endy Rodr\u00edguez",
       "Eric Wagaman",
@@ -67465,6 +67473,7 @@
       "George Springer",
       "Geraldo Perdomo",
       "Gunnar Henderson",
+      "Ha-Seong Kim",
       "Hao-Yu  Lee",
       "Henry Bolte",
       "Heriberto Hern\u00e1ndez",
@@ -67519,6 +67528,7 @@
       "Jos\u00e9 Tena",
       "Juan Soto",
       "Julio Rodr\u00edguez",
+      "Jung Hoo Lee",
       "Junior Caminero",
       "Justin Crawford",
       "Justin Foscue",
@@ -67541,6 +67551,7 @@
       "Logan O'Hoppe",
       "Lourdes Gurriel Jr.",
       "LuJames Groover",
+      "Luis Arraez",
       "Luis Garc\u00eda Jr.",
       "Luisangel Acu\u00f1a",
       "Luke Keaschall",
@@ -67552,18 +67563,23 @@
       "Mark Vientos",
       "Masataka Yoshida",
       "Masyn Winn",
+      "Matt Chapman",
       "Matt McLain",
+      "Matt Olson",
       "Matt Shaw",
       "Matt Vierling",
+      "Mauricio Dub\u00f3n",
       "Max Muncy",
       "Max Schuemann",
       "Michael Busch",
       "Michael Conforto",
+      "Michael Harris II",
       "Michael Massey",
       "Mickey Gasper",
       "Miguel Amaya",
       "Miguel Vargas",
       "Mike Trout",
+      "Mike Yastrzemski",
       "Miles Mastrobuoni",
       "Mois\u00e9s Ballesteros",
       "Mookie Betts",
@@ -67582,12 +67598,14 @@
       "Nolan Arenado",
       "Nolan Schanuel",
       "Otto Lopez",
+      "Ozzie Albies",
       "Paul Goldschmidt",
       "Pavin Smith",
       "Pedro Ram\u00edrez",
       "Pete Alonso",
       "Pete Crow-Armstrong",
       "Petey Halpin",
+      "Rafael Devers",
       "Randal Grichuk",
       "Raynel Delgado",
       "Rhys Hoskins",
@@ -67638,6 +67656,7 @@
       "Willi Castro",
       "William Contreras",
       "Willson Contreras",
+      "Willy Adames",
       "Wilyer Abreu",
       "Wyatt Langford",
       "Xander Bogaerts",
@@ -67649,10 +67668,10 @@
       "Zach Neto",
       "Zack Gelof"
     ],
-    "total_players_ranked": 268,
-    "total_hrs_hit": 31,
+    "total_players_ranked": 286,
+    "total_hrs_hit": 35,
     "total_near_hrs": 8,
-    "model_hits": 30,
+    "model_hits": 34,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
@@ -67672,16 +67691,16 @@
           "rate": 10.0
         },
         "all": {
-          "total": 268,
-          "hits": 30,
-          "rate": 11.2
+          "total": 286,
+          "hits": 34,
+          "rate": 11.9
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 2,
-          "rate": 20.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
@@ -67694,9 +67713,9 @@
           "rate": 6.7
         },
         "all": {
-          "total": 268,
-          "hits": 30,
-          "rate": 11.2
+          "total": 286,
+          "hits": 34,
+          "rate": 11.9
         }
       }
     },
@@ -67718,9 +67737,9 @@
         "rate": 10.0
       },
       "all": {
-        "total": 268,
-        "hits": 30,
-        "rate": 11.2
+        "total": 286,
+        "hits": 34,
+        "rate": 11.9
       }
     },
     "tier_accuracy_with_near": {
@@ -67740,13 +67759,13 @@
         "rate": 10.0
       },
       "all": {
-        "total": 268,
-        "hits": 38,
-        "rate": 14.2
+        "total": 286,
+        "hits": 42,
+        "rate": 14.7
       }
     },
-    "avg_composite_hr_hitters": 0.418,
-    "avg_composite_non_hitters": 0.414,
+    "avg_composite_hr_hitters": 0.42,
+    "avg_composite_non_hitters": 0.416,
     "composite_separation": 0.004,
     "hr_hitters": [
       {
@@ -67758,203 +67777,231 @@
       },
       {
         "name": "Pete Crow-Armstrong",
-        "rank": 15,
+        "rank": 18,
         "composite": 0.647,
         "opp_pitcher": "Ryan Feltner",
         "matchup": "COL@CHC"
       },
       {
         "name": "Sal Stewart",
-        "rank": 27,
+        "rank": 30,
         "composite": 0.607,
         "opp_pitcher": "Kodai Senga",
         "matchup": "NYM@CIN"
       },
       {
         "name": "Esteury Ruiz",
-        "rank": 31,
+        "rank": 34,
         "composite": 0.592,
         "opp_pitcher": "Jes\u00fas Luzardo",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Kyle Schwarber",
-        "rank": 33,
+        "rank": 36,
         "composite": 0.586,
         "opp_pitcher": "Tyler Phillips",
         "matchup": "MIA@PHI"
       },
       {
+        "name": "Drake Baldwin",
+        "rank": 49,
+        "composite": 0.553,
+        "opp_pitcher": "Adrian Houser",
+        "matchup": "SF@ATL"
+      },
+      {
         "name": "Trevor Larnach",
-        "rank": 52,
+        "rank": 56,
         "composite": 0.541,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "MIN@TEX"
       },
       {
         "name": "Bryan Reynolds",
-        "rank": 53,
+        "rank": 57,
         "composite": 0.539,
         "opp_pitcher": "Jack Perkins",
         "matchup": "PIT@ATH"
       },
       {
         "name": "Andrew Benintendi",
-        "rank": 56,
+        "rank": 61,
         "composite": 0.529,
         "opp_pitcher": "Gerrit Cole",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Mike Trout",
-        "rank": 64,
+        "rank": 69,
         "composite": 0.49,
         "opp_pitcher": "Merrill Kelly",
         "matchup": "LAA@AZ"
       },
       {
         "name": "Jos\u00e9 Caballero",
-        "rank": 65,
+        "rank": 70,
         "composite": 0.488,
         "opp_pitcher": "Davis Martin",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Jarren Duran",
-        "rank": 69,
+        "rank": 74,
         "composite": 0.476,
         "opp_pitcher": "Dylan Cease",
         "matchup": "TOR@BOS"
       },
       {
         "name": "Spencer Jones",
-        "rank": 71,
+        "rank": 76,
         "composite": 0.472,
         "opp_pitcher": "Davis Martin",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Lane Thomas",
-        "rank": 81,
+        "rank": 86,
         "composite": 0.4,
         "opp_pitcher": "Foster Griffin",
         "matchup": "KC@WSH"
       },
       {
         "name": "Mark Vientos",
-        "rank": 94,
+        "rank": 99,
         "composite": 0.4,
         "opp_pitcher": "Brady Singer",
         "matchup": "NYM@CIN"
       },
       {
+        "name": "Rafael Devers",
+        "rank": 104,
+        "composite": 0.4,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "SF@ATL"
+      },
+      {
+        "name": "Jung Hoo Lee",
+        "rank": 105,
+        "composite": 0.4,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "SF@ATL"
+      },
+      {
+        "name": "Willy Adames",
+        "rank": 106,
+        "composite": 0.4,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "SF@ATL"
+      },
+      {
         "name": "Brice Turang",
-        "rank": 96,
+        "rank": 110,
         "composite": 0.4,
         "opp_pitcher": "Slade Cecconi",
         "matchup": "CLE@MIL"
       },
       {
         "name": "TJ Rumfield",
-        "rank": 114,
+        "rank": 128,
         "composite": 0.4,
         "opp_pitcher": "Edward Cabrera",
         "matchup": "COL@CHC"
       },
       {
         "name": "Kody Clemens",
-        "rank": 123,
+        "rank": 137,
         "composite": 0.4,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "MIN@TEX"
       },
       {
         "name": "Brandon Marsh",
-        "rank": 181,
+        "rank": 197,
         "composite": 0.359,
         "opp_pitcher": "Tyler Phillips",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Spencer Steer",
-        "rank": 191,
+        "rank": 207,
         "composite": 0.35,
         "opp_pitcher": "Kodai Senga",
         "matchup": "NYM@CIN"
       },
       {
         "name": "Alec Bohm",
-        "rank": 201,
+        "rank": 217,
         "composite": 0.338,
         "opp_pitcher": "Tyler Phillips",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Zach Neto",
-        "rank": 202,
+        "rank": 218,
         "composite": 0.338,
         "opp_pitcher": "Merrill Kelly",
         "matchup": "LAA@AZ"
       },
       {
         "name": "Garrett Mitchell",
-        "rank": 213,
+        "rank": 229,
         "composite": 0.322,
         "opp_pitcher": "Slade Cecconi",
         "matchup": "CLE@MIL"
       },
       {
         "name": "Curtis Mead",
-        "rank": 223,
+        "rank": 239,
         "composite": 0.312,
         "opp_pitcher": "Michael Wacha",
         "matchup": "KC@WSH"
       },
       {
         "name": "Brandon Lowe",
-        "rank": 230,
+        "rank": 247,
         "composite": 0.309,
         "opp_pitcher": "Jack Perkins",
         "matchup": "PIT@ATH"
       },
       {
         "name": "Ben Rice",
-        "rank": 233,
+        "rank": 250,
         "composite": 0.303,
         "opp_pitcher": "Davis Martin",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Paul Goldschmidt",
-        "rank": 241,
+        "rank": 258,
         "composite": 0.292,
         "opp_pitcher": "Davis Martin",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Andr\u00e9s Gim\u00e9nez",
-        "rank": 245,
+        "rank": 263,
         "composite": 0.287,
         "opp_pitcher": "Payton Tolle",
         "matchup": "TOR@BOS"
       },
       {
         "name": "Zack Gelof",
-        "rank": 255,
+        "rank": 273,
         "composite": 0.231,
         "opp_pitcher": "Mitch Keller",
         "matchup": "PIT@ATH"
       },
       {
         "name": "Davis Schneider",
-        "rank": 259,
+        "rank": 277,
         "composite": 0.212,
         "opp_pitcher": "Payton Tolle",
         "matchup": "TOR@BOS"
       },
       {
         "name": "George Springer",
-        "rank": 261,
+        "rank": 279,
         "composite": 0.205,
         "opp_pitcher": "Payton Tolle",
         "matchup": "TOR@BOS"
@@ -67970,203 +68017,231 @@
       },
       {
         "name": "Andrew Benintendi",
-        "rank": 10,
+        "rank": 11,
         "composite": 0.653,
         "opp_pitcher": "Gerrit Cole",
         "matchup": "CWS@NYY"
       },
       {
+        "name": "Drake Baldwin",
+        "rank": 38,
+        "composite": 0.559,
+        "opp_pitcher": "Adrian Houser",
+        "matchup": "SF@ATL"
+      },
+      {
         "name": "Pete Crow-Armstrong",
-        "rank": 40,
+        "rank": 43,
         "composite": 0.55,
         "opp_pitcher": "Ryan Feltner",
         "matchup": "COL@CHC"
       },
       {
         "name": "Sal Stewart",
-        "rank": 44,
+        "rank": 47,
         "composite": 0.537,
         "opp_pitcher": "Kodai Senga",
         "matchup": "NYM@CIN"
       },
       {
         "name": "Garrett Mitchell",
-        "rank": 49,
+        "rank": 52,
         "composite": 0.524,
         "opp_pitcher": "Slade Cecconi",
         "matchup": "CLE@MIL"
       },
       {
         "name": "Esteury Ruiz",
-        "rank": 51,
+        "rank": 54,
         "composite": 0.521,
         "opp_pitcher": "Jes\u00fas Luzardo",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Mark Vientos",
-        "rank": 73,
+        "rank": 76,
         "composite": 0.493,
         "opp_pitcher": "Brady Singer",
         "matchup": "NYM@CIN"
       },
       {
         "name": "Mike Trout",
-        "rank": 77,
+        "rank": 80,
         "composite": 0.484,
         "opp_pitcher": "Merrill Kelly",
         "matchup": "LAA@AZ"
       },
       {
         "name": "Bryan Reynolds",
-        "rank": 82,
+        "rank": 85,
         "composite": 0.466,
         "opp_pitcher": "Jack Perkins",
         "matchup": "PIT@ATH"
       },
       {
         "name": "Zach Neto",
-        "rank": 88,
+        "rank": 91,
         "composite": 0.45,
         "opp_pitcher": "Merrill Kelly",
         "matchup": "LAA@AZ"
       },
       {
         "name": "Brandon Marsh",
-        "rank": 89,
+        "rank": 92,
         "composite": 0.449,
         "opp_pitcher": "Tyler Phillips",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Trevor Larnach",
-        "rank": 93,
+        "rank": 96,
         "composite": 0.433,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "MIN@TEX"
       },
       {
         "name": "Kyle Schwarber",
-        "rank": 98,
+        "rank": 101,
         "composite": 0.4,
         "opp_pitcher": "Tyler Phillips",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Lane Thomas",
-        "rank": 102,
+        "rank": 105,
         "composite": 0.4,
         "opp_pitcher": "Foster Griffin",
         "matchup": "KC@WSH"
       },
       {
         "name": "Jarren Duran",
-        "rank": 106,
+        "rank": 109,
         "composite": 0.4,
         "opp_pitcher": "Dylan Cease",
         "matchup": "TOR@BOS"
       },
       {
+        "name": "Rafael Devers",
+        "rank": 124,
+        "composite": 0.4,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "SF@ATL"
+      },
+      {
+        "name": "Jung Hoo Lee",
+        "rank": 125,
+        "composite": 0.4,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "SF@ATL"
+      },
+      {
+        "name": "Willy Adames",
+        "rank": 126,
+        "composite": 0.4,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "SF@ATL"
+      },
+      {
         "name": "Brice Turang",
-        "rank": 117,
+        "rank": 131,
         "composite": 0.4,
         "opp_pitcher": "Slade Cecconi",
         "matchup": "CLE@MIL"
       },
       {
         "name": "TJ Rumfield",
-        "rank": 135,
+        "rank": 149,
         "composite": 0.4,
         "opp_pitcher": "Edward Cabrera",
         "matchup": "COL@CHC"
       },
       {
         "name": "Kody Clemens",
-        "rank": 145,
+        "rank": 159,
         "composite": 0.4,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "MIN@TEX"
       },
       {
         "name": "Spencer Jones",
-        "rank": 173,
+        "rank": 187,
         "composite": 0.389,
         "opp_pitcher": "Davis Martin",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Alec Bohm",
-        "rank": 180,
+        "rank": 195,
         "composite": 0.377,
         "opp_pitcher": "Tyler Phillips",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Spencer Steer",
-        "rank": 202,
+        "rank": 218,
         "composite": 0.34,
         "opp_pitcher": "Kodai Senga",
         "matchup": "NYM@CIN"
       },
       {
         "name": "George Springer",
-        "rank": 207,
+        "rank": 223,
         "composite": 0.335,
         "opp_pitcher": "Payton Tolle",
         "matchup": "TOR@BOS"
       },
       {
         "name": "Jos\u00e9 Caballero",
-        "rank": 218,
+        "rank": 236,
         "composite": 0.324,
         "opp_pitcher": "Davis Martin",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Curtis Mead",
-        "rank": 229,
+        "rank": 247,
         "composite": 0.309,
         "opp_pitcher": "Michael Wacha",
         "matchup": "KC@WSH"
       },
       {
         "name": "Ben Rice",
-        "rank": 233,
+        "rank": 251,
         "composite": 0.304,
         "opp_pitcher": "Davis Martin",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Brandon Lowe",
-        "rank": 239,
+        "rank": 257,
         "composite": 0.298,
         "opp_pitcher": "Jack Perkins",
         "matchup": "PIT@ATH"
       },
       {
         "name": "Paul Goldschmidt",
-        "rank": 242,
+        "rank": 260,
         "composite": 0.292,
         "opp_pitcher": "Davis Martin",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Davis Schneider",
-        "rank": 248,
+        "rank": 266,
         "composite": 0.276,
         "opp_pitcher": "Payton Tolle",
         "matchup": "TOR@BOS"
       },
       {
         "name": "Andr\u00e9s Gim\u00e9nez",
-        "rank": 254,
+        "rank": 272,
         "composite": 0.261,
         "opp_pitcher": "Payton Tolle",
         "matchup": "TOR@BOS"
       },
       {
         "name": "Zack Gelof",
-        "rank": 259,
+        "rank": 277,
         "composite": 0.231,
         "opp_pitcher": "Mitch Keller",
         "matchup": "PIT@ATH"
@@ -68175,56 +68250,56 @@
     "near_hr_hitters": [
       {
         "name": "Jordan Walker",
-        "rank": 46,
+        "rank": 50,
         "composite": 0.551,
         "opp_pitcher": "Michael King",
         "matchup": "SD@STL"
       },
       {
         "name": "Michael Busch",
-        "rank": 54,
+        "rank": 59,
         "composite": 0.536,
         "opp_pitcher": "Ryan Feltner",
         "matchup": "COL@CHC"
       },
       {
         "name": "Blaze Alexander",
-        "rank": 68,
+        "rank": 73,
         "composite": 0.48,
         "opp_pitcher": "Logan Gilbert",
         "matchup": "BAL@SEA"
       },
       {
         "name": "Jackson Merrill",
-        "rank": 106,
+        "rank": 120,
         "composite": 0.4,
         "opp_pitcher": "Andre Pallante",
         "matchup": "SD@STL"
       },
       {
         "name": "Drew Millas",
-        "rank": 174,
+        "rank": 190,
         "composite": 0.362,
         "opp_pitcher": "Michael Wacha",
         "matchup": "KC@WSH"
       },
       {
         "name": "Nasim Nu\u00f1ez",
-        "rank": 182,
+        "rank": 198,
         "composite": 0.357,
         "opp_pitcher": "Michael Wacha",
         "matchup": "KC@WSH"
       },
       {
         "name": "Jo Adell",
-        "rank": 211,
+        "rank": 227,
         "composite": 0.327,
         "opp_pitcher": "Merrill Kelly",
         "matchup": "LAA@AZ"
       },
       {
         "name": "Bryson Stott",
-        "rank": 248,
+        "rank": 266,
         "composite": 0.281,
         "opp_pitcher": "Tyler Phillips",
         "matchup": "MIA@PHI"
@@ -68428,8 +68503,8 @@
       },
       "2_of_5": {
         "players": 148,
-        "hr_count": 18,
-        "hr_rate": 12.2,
+        "hr_count": 20,
+        "hr_rate": 13.5,
         "names": [
           "Heriberto Hern\u00e1ndez",
           "J.T. Realmuto",
@@ -68590,6 +68665,8 @@
           "Ben Rice",
           "Mark Vientos",
           "Spencer Steer",
+          "Drake Baldwin",
+          "Rafael Devers",
           "Brice Turang",
           "Garrett Mitchell",
           "Pete Crow-Armstrong",
@@ -68603,8 +68680,8 @@
       },
       "3_of_5": {
         "players": 60,
-        "hr_count": 3,
-        "hr_rate": 5.0,
+        "hr_count": 5,
+        "hr_rate": 8.3,
         "names": [
           "Gabriel Rincones Jr.",
           "Connor Norby",
@@ -68670,6 +68747,8 @@
         "hr_names": [
           "Andrew Benintendi",
           "Sal Stewart",
+          "Jung Hoo Lee",
+          "Willy Adames",
           "TJ Rumfield"
         ]
       },
@@ -68709,9 +68788,9 @@
         "rate": 16.7
       },
       "all": {
-        "total": 268,
-        "hits": 30,
-        "rate": 11.2
+        "total": 286,
+        "hits": 34,
+        "rate": 11.9
       }
     },
     "combined_hr_hitters": [
@@ -68724,203 +68803,231 @@
       },
       {
         "name": "Pete Crow-Armstrong",
-        "rank": 11,
+        "rank": 12,
         "composite": 0.621,
         "opp_pitcher": "Ryan Feltner",
         "matchup": "COL@CHC"
       },
       {
         "name": "Andrew Benintendi",
-        "rank": 16,
+        "rank": 17,
         "composite": 0.572,
         "opp_pitcher": "Gerrit Cole",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Sal Stewart",
-        "rank": 22,
+        "rank": 24,
         "composite": 0.53,
         "opp_pitcher": "Kodai Senga",
         "matchup": "NYM@CIN"
       },
       {
         "name": "Mike Trout",
-        "rank": 23,
+        "rank": 25,
         "composite": 0.528,
         "opp_pitcher": "Merrill Kelly",
         "matchup": "LAA@AZ"
       },
       {
         "name": "Esteury Ruiz",
-        "rank": 32,
+        "rank": 34,
         "composite": 0.484,
         "opp_pitcher": "Jes\u00fas Luzardo",
         "matchup": "MIA@PHI"
       },
       {
+        "name": "Drake Baldwin",
+        "rank": 36,
+        "composite": 0.481,
+        "opp_pitcher": "Adrian Houser",
+        "matchup": "SF@ATL"
+      },
+      {
         "name": "Bryan Reynolds",
-        "rank": 39,
+        "rank": 42,
         "composite": 0.466,
         "opp_pitcher": "Jack Perkins",
         "matchup": "PIT@ATH"
       },
       {
         "name": "Kyle Schwarber",
-        "rank": 42,
+        "rank": 45,
         "composite": 0.46,
         "opp_pitcher": "Tyler Phillips",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Garrett Mitchell",
-        "rank": 56,
+        "rank": 60,
         "composite": 0.39,
         "opp_pitcher": "Slade Cecconi",
         "matchup": "CLE@MIL"
       },
       {
         "name": "Spencer Jones",
-        "rank": 57,
+        "rank": 61,
         "composite": 0.389,
         "opp_pitcher": "Davis Martin",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Trevor Larnach",
-        "rank": 86,
+        "rank": 90,
         "composite": 0.287,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "MIN@TEX"
       },
       {
         "name": "Jos\u00e9 Caballero",
-        "rank": 88,
+        "rank": 93,
         "composite": 0.274,
         "opp_pitcher": "Davis Martin",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Jarren Duran",
-        "rank": 92,
+        "rank": 97,
         "composite": 0.266,
         "opp_pitcher": "Dylan Cease",
         "matchup": "TOR@BOS"
       },
       {
         "name": "Kody Clemens",
-        "rank": 94,
+        "rank": 99,
         "composite": 0.263,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "MIN@TEX"
       },
       {
         "name": "Brandon Marsh",
-        "rank": 102,
+        "rank": 107,
         "composite": 0.249,
         "opp_pitcher": "Tyler Phillips",
         "matchup": "MIA@PHI"
       },
       {
+        "name": "Willy Adames",
+        "rank": 109,
+        "composite": 0.242,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "SF@ATL"
+      },
+      {
         "name": "Zach Neto",
-        "rank": 107,
+        "rank": 113,
         "composite": 0.232,
         "opp_pitcher": "Merrill Kelly",
         "matchup": "LAA@AZ"
       },
       {
         "name": "Brice Turang",
-        "rank": 118,
+        "rank": 124,
         "composite": 0.221,
         "opp_pitcher": "Slade Cecconi",
         "matchup": "CLE@MIL"
       },
       {
         "name": "Mark Vientos",
-        "rank": 143,
+        "rank": 149,
         "composite": 0.195,
         "opp_pitcher": "Brady Singer",
         "matchup": "NYM@CIN"
       },
       {
+        "name": "Rafael Devers",
+        "rank": 154,
+        "composite": 0.192,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "SF@ATL"
+      },
+      {
         "name": "Spencer Steer",
-        "rank": 161,
+        "rank": 170,
         "composite": 0.176,
         "opp_pitcher": "Kodai Senga",
         "matchup": "NYM@CIN"
       },
       {
         "name": "Ben Rice",
-        "rank": 168,
+        "rank": 178,
         "composite": 0.169,
         "opp_pitcher": "Davis Martin",
         "matchup": "CWS@NYY"
       },
       {
+        "name": "Jung Hoo Lee",
+        "rank": 198,
+        "composite": 0.16,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "SF@ATL"
+      },
+      {
         "name": "Alec Bohm",
-        "rank": 185,
+        "rank": 199,
         "composite": 0.159,
         "opp_pitcher": "Tyler Phillips",
         "matchup": "MIA@PHI"
       },
       {
         "name": "George Springer",
-        "rank": 194,
+        "rank": 210,
         "composite": 0.151,
         "opp_pitcher": "Payton Tolle",
         "matchup": "TOR@BOS"
       },
       {
         "name": "Brandon Lowe",
-        "rank": 205,
+        "rank": 221,
         "composite": 0.143,
         "opp_pitcher": "Jack Perkins",
         "matchup": "PIT@ATH"
       },
       {
         "name": "Lane Thomas",
-        "rank": 206,
+        "rank": 222,
         "composite": 0.143,
         "opp_pitcher": "Foster Griffin",
         "matchup": "KC@WSH"
       },
       {
         "name": "Zack Gelof",
-        "rank": 211,
+        "rank": 227,
         "composite": 0.141,
         "opp_pitcher": "Mitch Keller",
         "matchup": "PIT@ATH"
       },
       {
         "name": "TJ Rumfield",
-        "rank": 212,
+        "rank": 228,
         "composite": 0.14,
         "opp_pitcher": "Edward Cabrera",
         "matchup": "COL@CHC"
       },
       {
         "name": "Curtis Mead",
-        "rank": 221,
+        "rank": 237,
         "composite": 0.137,
         "opp_pitcher": "Michael Wacha",
         "matchup": "KC@WSH"
       },
       {
         "name": "Paul Goldschmidt",
-        "rank": 228,
+        "rank": 244,
         "composite": 0.134,
         "opp_pitcher": "Davis Martin",
         "matchup": "CWS@NYY"
       },
       {
         "name": "Davis Schneider",
-        "rank": 254,
+        "rank": 272,
         "composite": 0.116,
         "opp_pitcher": "Payton Tolle",
         "matchup": "TOR@BOS"
       },
       {
         "name": "Andr\u00e9s Gim\u00e9nez",
-        "rank": 261,
+        "rank": 279,
         "composite": 0.112,
         "opp_pitcher": "Payton Tolle",
         "matchup": "TOR@BOS"
