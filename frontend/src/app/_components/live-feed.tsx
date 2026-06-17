@@ -237,7 +237,7 @@ export function LiveFeed({ selectedDate: dashboardDate }: { selectedDate?: strin
       setLoading(true);
       fetchFromMLB(selectedDate);
       if (!autoRefresh) return;
-      const interval = setInterval(() => fetchFromMLB(selectedDate), 10000);
+      const interval = setInterval(() => fetchFromMLB(selectedDate), 5000);
       return () => clearInterval(interval);
     } else {
       // Past date: load from saved JSON file
