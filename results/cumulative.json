@@ -69323,7 +69323,7 @@
     ],
     "total_players_ranked": 278,
     "total_hrs_hit": 47,
-    "total_near_hrs": 0,
+    "total_near_hrs": 17,
     "model_hits": 43,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -69372,7 +69372,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 17,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -69413,13 +69413,13 @@
       },
       "all": {
         "total": 278,
-        "hits": 43,
-        "rate": 15.5
+        "hits": 60,
+        "rate": 21.6
       }
     },
     "avg_composite_hr_hitters": 0.427,
-    "avg_composite_non_hitters": 0.41,
-    "composite_separation": 0.017,
+    "avg_composite_non_hitters": 0.411,
+    "composite_separation": 0.016,
     "hr_hitters": [
       {
         "name": "Owen Caissie",
@@ -70026,8 +70026,318 @@
         "matchup": "KC@WSH"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Carson Benge",
+        "rank": 35,
+        "composite": 0.582,
+        "opp_pitcher": "Nick Lodolo",
+        "matchup": "NYM@CIN"
+      },
+      {
+        "name": "Brice Turang",
+        "rank": 37,
+        "composite": 0.576,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "CLE@MIL"
+      },
+      {
+        "name": "Hunter Feduccia",
+        "rank": 47,
+        "composite": 0.537,
+        "opp_pitcher": "Shohei Ohtani",
+        "matchup": "TB@LAD"
+      },
+      {
+        "name": "Michael Busch",
+        "rank": 49,
+        "composite": 0.536,
+        "opp_pitcher": "Sean Sullivan",
+        "matchup": "COL@CHC"
+      },
+      {
+        "name": "Tommy Troy",
+        "rank": 68,
+        "composite": 0.471,
+        "opp_pitcher": "Sam Aldegheri",
+        "matchup": "LAA@AZ"
+      },
+      {
+        "name": "Mickey Gasper",
+        "rank": 137,
+        "composite": 0.4,
+        "opp_pitcher": "Max Scherzer",
+        "matchup": "TOR@BOS"
+      },
+      {
+        "name": "Travis Bazzana",
+        "rank": 146,
+        "composite": 0.4,
+        "opp_pitcher": "Brandon Sproat",
+        "matchup": "CLE@MIL"
+      },
+      {
+        "name": "TJ Rumfield",
+        "rank": 151,
+        "composite": 0.4,
+        "opp_pitcher": "Javier Assad",
+        "matchup": "COL@CHC"
+      },
+      {
+        "name": "Isaac Paredes",
+        "rank": 169,
+        "composite": 0.396,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "DET@HOU"
+      },
+      {
+        "name": "Joey Loperfido",
+        "rank": 198,
+        "composite": 0.366,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "DET@HOU"
+      },
+      {
+        "name": "William Contreras",
+        "rank": 207,
+        "composite": 0.352,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "CLE@MIL"
+      },
+      {
+        "name": "Trea Turner",
+        "rank": 230,
+        "composite": 0.309,
+        "opp_pitcher": "Sandy Alcantara",
+        "matchup": "MIA@PHI"
+      },
+      {
+        "name": "Miguel Vargas",
+        "rank": 239,
+        "composite": 0.301,
+        "opp_pitcher": "Carlos Rod\u00f3n",
+        "matchup": "CWS@NYY"
+      },
+      {
+        "name": "A.J. Ewing",
+        "rank": 240,
+        "composite": 0.298,
+        "opp_pitcher": "Nick Lodolo",
+        "matchup": "NYM@CIN"
+      },
+      {
+        "name": "Jos\u00e9 Ferm\u00edn",
+        "rank": 241,
+        "composite": 0.292,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@STL"
+      },
+      {
+        "name": "Ben Rice",
+        "rank": 248,
+        "composite": 0.276,
+        "opp_pitcher": "Anthony Kay",
+        "matchup": "CWS@NYY"
+      },
+      {
+        "name": "Yordan Alvarez",
+        "rank": 253,
+        "composite": 0.256,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "DET@HOU"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Tommy Troy",
+        "ev": 106.7,
+        "angle": 18.0,
+        "distance": 388.0,
+        "hr_in_parks": 1,
+        "result": "triple",
+        "pitcher": "Aldegheri, Sam"
+      },
+      {
+        "batter": "Ryan O'Hearn",
+        "ev": 99.7,
+        "angle": 27.0,
+        "distance": 376.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Civale, Aaron"
+      },
+      {
+        "batter": "Mauricio Dub\u00f3n",
+        "ev": 97.2,
+        "angle": 34.0,
+        "distance": 384.0,
+        "hr_in_parks": 23,
+        "result": "field_out",
+        "pitcher": "Whisenhunt, Carson"
+      },
+      {
+        "batter": "Mauricio Dub\u00f3n",
+        "ev": 96.0,
+        "angle": 32.0,
+        "distance": 375.0,
+        "hr_in_parks": 26,
+        "result": "field_out",
+        "pitcher": "Whisenhunt, Carson"
+      },
+      {
+        "batter": "Mickey Gasper",
+        "ev": 102.1,
+        "angle": 30.0,
+        "distance": 390.0,
+        "hr_in_parks": 17,
+        "result": "field_out",
+        "pitcher": "Woods Richardson, Simeon"
+      },
+      {
+        "batter": "Michael Busch",
+        "ev": 102.1,
+        "angle": 40.0,
+        "distance": 401.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Sullivan, Sean"
+      },
+      {
+        "batter": "TJ Rumfield",
+        "ev": 97.9,
+        "angle": 26.0,
+        "distance": 383.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Assad, Javier"
+      },
+      {
+        "batter": "Carson Benge",
+        "ev": 99.8,
+        "angle": 31.0,
+        "distance": 398.0,
+        "hr_in_parks": 18,
+        "result": "triple",
+        "pitcher": "Paddack, Chris"
+      },
+      {
+        "batter": "A.J. Ewing",
+        "ev": 100.2,
+        "angle": 34.0,
+        "distance": 370.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Lodolo, Nick"
+      },
+      {
+        "batter": "Joey Loperfido",
+        "ev": 106.2,
+        "angle": 23.0,
+        "distance": 372.0,
+        "hr_in_parks": 16,
+        "result": "double",
+        "pitcher": "Finnegan, Kyle"
+      },
+      {
+        "batter": "Isaac Paredes",
+        "ev": 96.0,
+        "angle": 28.0,
+        "distance": 382.0,
+        "hr_in_parks": 18,
+        "result": "double",
+        "pitcher": "Finnegan, Kyle"
+      },
+      {
+        "batter": "Yordan Alvarez",
+        "ev": 102.6,
+        "angle": 24.0,
+        "distance": 397.0,
+        "hr_in_parks": 24,
+        "result": "field_out",
+        "pitcher": "Mize, Casey"
+      },
+      {
+        "batter": "Hunter Feduccia",
+        "ev": 106.8,
+        "angle": 18.0,
+        "distance": 381.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Ohtani, Shohei"
+      },
+      {
+        "batter": "Travis Bazzana",
+        "ev": 99.1,
+        "angle": 24.0,
+        "distance": 372.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Patrick, Chad"
+      },
+      {
+        "batter": "William Contreras",
+        "ev": 106.3,
+        "angle": 19.0,
+        "distance": 387.0,
+        "hr_in_parks": 14,
+        "result": "field_out",
+        "pitcher": "Williams, Gavin"
+      },
+      {
+        "batter": "Brice Turang",
+        "ev": 103.9,
+        "angle": 22.0,
+        "distance": 373.0,
+        "hr_in_parks": 4,
+        "result": "double",
+        "pitcher": "Williams, Gavin"
+      },
+      {
+        "batter": "Miguel Vargas",
+        "ev": 103.9,
+        "angle": 32.0,
+        "distance": 401.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Bird, Jake"
+      },
+      {
+        "batter": "Ben Rice",
+        "ev": 104.3,
+        "angle": 25.0,
+        "distance": 399.0,
+        "hr_in_parks": 29,
+        "result": "field_out",
+        "pitcher": "Richards, Trevor"
+      },
+      {
+        "batter": "Trea Turner",
+        "ev": 99.3,
+        "angle": 22.0,
+        "distance": 382.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "King, John"
+      },
+      {
+        "batter": "Jos\u00e9 Ferm\u00edn",
+        "ev": 97.0,
+        "angle": 27.0,
+        "distance": 389.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Hart, Kyle"
+      },
+      {
+        "batter": "John Rave",
+        "ev": 102.8,
+        "angle": 23.0,
+        "distance": 374.0,
+        "hr_in_parks": 29,
+        "result": "triple",
+        "pitcher": "Parker, Mitchell"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
