@@ -111,6 +111,12 @@ export function GameSection({
       <GameTop3
         rows={[...awayBatters, ...homeBatters]}
         lookback={lookback}
+        awayTeam={game.away_team}
+        homeTeam={game.home_team}
+        posted={awayPosted || homePosted}
+        favorites={favorites}
+        onToggleFavorite={onToggleFavorite}
+        parkFactor={game.environment?.park_factor}
         onSelect={(row) =>
           onSelectBatter({
             player: row.p,
