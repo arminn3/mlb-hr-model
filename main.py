@@ -95,6 +95,73 @@ def _compute_pitcher_zone_freq(df: pd.DataFrame, batter_hand: str) -> list:
     return result
 
 
+def _pitcher_score_from_profile_row(row: dict) -> float:
+    """Compute pitcher_score directly from a profile vs-hand row (vs_L or vs_R).
+    Uses the same metric mapping + NORM_RANGES the model uses internally so the
+    result is on the same scale. Bypasses the broken hand-split blend in
+    calc_pitcher_metrics for pitchers with strong reverse splits (e.g. Skubal).
+    """
+    def n(v, lo, hi):
+        if v is None: return 0.5
+        return max(0.0, min(1.0, (v - lo) / (hi - lo)))
+
+    hr_per_9   = float(row.get("hr_per_9") or 0.0)
+    hr_fb_pct  = float(row.get("hr_fb_pct") or 0.0) / 100.0
+    fb_pct     = float(row.get("fb_pct")    or 0.0) / 100.0
+    hr_count   = float(row.get("hr")        or 0.0)
+
+    # Mirror config.NORM_RANGES + PITCHER_WEIGHTS
+    f_fb     = n(fb_pct,    0.04, 0.20)
+    f_hrfb   = n(hr_fb_pct, 0.0,  0.24)
+    f_hr9    = n(hr_per_9,  0.0,  2.4)
+    f_hrtot  = n(hr_count / 20.0, 0.0, 1.0)  # rough HR volume normalization
+
+    return f_fb * 0.25 + f_hrfb * 0.40 + f_hr9 * 0.20 + f_hrtot * 0.15
+
+
+def _apply_pitcher_split_override(players_by_game: dict, schedule: list, pitcher_profiles: dict) -> int:
+    """Walk every player and override pitcher_score / composite using the
+    pitcher profile's vs-hand row when sample is sufficient (BF >= 30).
+
+    Returns the number of overrides applied. Required because
+    calc_pitcher_metrics' hand-split blend has a bug that leaves pitchers
+    with strong reverse splits (Skubal vs LHB) showing overall-pitcher stats.
+    """
+    MIN_BF = 30
+    fixed = 0
+    for g in schedule:
+        gpk = g.get("game_pk")
+        players = players_by_game.get(gpk, [])
+        for player in players:
+            bs = player.get("batter_side", "away")
+            opp_side = "away_pitcher" if bs == "home" else "home_pitcher"
+            opp_pid = (g.get(opp_side) or {}).get("id")
+            profile = pitcher_profiles.get(opp_pid) if opp_pid else None
+            if not profile:
+                continue
+            batter_hand = player.get("batter_hand", "R")
+            row_key = "vs_L" if batter_hand == "L" else "vs_R"
+            row = profile.get("rows", {}).get(row_key, {})
+            bf = int(row.get("bf") or 0)
+            if bf < MIN_BF:
+                continue
+
+            new_pitcher_score = round(_pitcher_score_from_profile_row(row), 3)
+
+            # Override pitcher_score + recompute composite for every lookback.
+            # composite_new = composite_old + (new - old) * pitcher_weight
+            w_p = config.PITCHER_COMPOSITE_WEIGHT
+            for lb in ("L5", "L10"):
+                s = player.get("scores", {}).get(lb)
+                if not s: continue
+                old_pitcher = float(s.get("pitcher_score") or 0.0)
+                delta = (new_pitcher_score - old_pitcher) * w_p
+                s["pitcher_score"] = new_pitcher_score
+                s["composite"]     = round(float(s.get("composite") or 0.0) + delta, 3)
+            fixed += 1
+    return fixed
+
+
 def _format_score(result: dict) -> dict:
     """Format a single lookback's score result for JSON output."""
     return {
@@ -710,6 +777,14 @@ def run_model(game_date: date = None, fast: bool = False):
             else:
                 profile["data_year"] = season_year
             pitcher_profiles[pid] = profile
+
+    # ── Phase 2.6: Override pitcher_score using profile vs-hand row ──────────
+    # The hand-split blend in calc_pitcher_metrics is unreliable for pitchers
+    # with strong reverse splits (Skubal: HR/9 2.16 vs LHB but 0.55 overall).
+    # Profile rows have correct vs_L / vs_R stats — use them directly.
+    n_overrides = _apply_pitcher_split_override(players_by_game, schedule, pitcher_profiles)
+    if n_overrides:
+        print(f"Applied {n_overrides} hand-split pitcher_score overrides")
 
     # ── Phase 3: Build game-grouped output ───────────────────────────────────
     games_out = []
