@@ -654,40 +654,53 @@ export function BatterDetailPage({
           {detailTab === "abs" && (
             <div className="overflow-x-auto">
               {filteredABs.length > 0 ? (
-                <table className="w-full text-xs">
+                <table className="w-full text-[13px]">
                   <thead>
-                    <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
-                      <th className="text-left py-1.5 pr-3">Date</th>
-                      <th className="text-left py-1.5 pr-3">Pitcher</th>
-                      <th className="text-center py-1.5 px-2">Arm</th>
-                      <th className="text-left py-1.5 pr-3">Pitch</th>
-                      <th className="text-center py-1.5 px-2">EV</th>
-                      <th className="text-center py-1.5 px-2">Angle</th>
-                      <th className="text-center py-1.5 px-2">Dist</th>
-                      <th className="text-left py-1.5">Result</th>
+                    <tr className="text-[11px] uppercase tracking-wider text-foreground/65 border-b border-card-border">
+                      <th className="text-left py-2.5 pr-3 font-semibold">Date</th>
+                      <th className="text-left py-2.5 pr-3 font-semibold">Pitcher</th>
+                      <th className="text-center py-2.5 px-2 font-semibold">Arm</th>
+                      <th className="text-left py-2.5 pr-3 font-semibold">Pitch</th>
+                      <th className="text-center py-2.5 px-2 font-semibold">EV</th>
+                      <th className="text-center py-2.5 px-2 font-semibold">Angle</th>
+                      <th className="text-center py-2.5 px-2 font-semibold">Dist</th>
+                      <th className="text-left py-2.5 font-semibold">Result</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredABs.map((ab, i) => (
-                      <tr key={i} className="border-b border-card-border/30 last:border-0">
-                        <td className="py-1.5 pr-3 text-muted font-mono">{String(ab.date).slice(5)}</td>
-                        <td className="py-1.5 pr-3 text-foreground">{String(ab.pitcher_name ?? "")}</td>
-                        <td className="py-1.5 px-2 text-center text-muted">{String(ab.pitch_arm ?? "")}</td>
-                        <td className="py-1.5 pr-3 text-foreground">{String(ab.pitch_type ?? "")}</td>
-                        <td className="py-1.5 px-2 text-center">
-                          <span className="px-1 py-0.5 rounded font-mono font-semibold" style={{ color: evGradient(Number(ab.ev)) }}>{String(ab.ev)}</span>
+                    {filteredABs.map((ab, i) => {
+                      const isHR = ab.result === "home_run";
+                      // Statcast barrel: EV>=98 AND launch angle 26-30 (the canonical
+                      // "barrel" zone). Excludes HRs since they already get their own row tint.
+                      const ev = Number(ab.ev);
+                      const la = Number(ab.angle);
+                      const isBarrel = !isHR && ev >= 98 && la >= 26 && la <= 30;
+                      const rowBg = isHR
+                        ? "rgba(74,222,128,0.12)"          // light green — HR
+                        : isBarrel
+                        ? "rgba(96,165,250,0.12)"          // light blue — barrel
+                        : "transparent";
+                      return (
+                      <tr key={i} className="border-b border-card-border/30 last:border-0" style={{ background: rowBg }}>
+                        <td className="py-3 pr-3 text-foreground/75 font-mono">{String(ab.date).slice(5)}</td>
+                        <td className="py-3 pr-3 text-foreground">{String(ab.pitcher_name ?? "")}</td>
+                        <td className="py-3 px-2 text-center text-foreground/70 font-mono">{String(ab.pitch_arm ?? "")}</td>
+                        <td className="py-3 pr-3 text-foreground">{String(ab.pitch_type ?? "")}</td>
+                        <td className="py-3 px-2 text-center">
+                          <span className="px-1.5 py-0.5 rounded font-mono font-semibold" style={{ color: evGradient(Number(ab.ev)) }}>{String(ab.ev)}</span>
                         </td>
-                        <td className="py-1.5 px-2 text-center">
-                          <span className={`px-1 py-0.5 rounded font-mono ${angleColor(Number(ab.angle))}`}>{String(ab.angle)}</span>
+                        <td className="py-3 px-2 text-center">
+                          <span className={`px-1.5 py-0.5 rounded font-mono ${angleColor(Number(ab.angle))}`}>{String(ab.angle)}</span>
                         </td>
-                        <td className="py-1.5 px-2 text-center">
-                          <span className={`px-1 py-0.5 rounded font-mono ${distColor(ab.distance != null ? Number(ab.distance) : null)}`}>
+                        <td className="py-3 px-2 text-center">
+                          <span className={`px-1.5 py-0.5 rounded font-mono ${distColor(ab.distance != null ? Number(ab.distance) : null)}`}>
                             {ab.distance ? String(ab.distance) : "-"}
                           </span>
                         </td>
-                        <td className="py-1.5 text-muted capitalize">{String(ab.result ?? "").replace(/_/g, " ")}</td>
+                        <td className="py-3 text-foreground/80 capitalize">{String(ab.result ?? "").replace(/_/g, " ")}</td>
                       </tr>
-                    ))}
+                      );
+                    })}
                   </tbody>
                 </table>
               ) : (
