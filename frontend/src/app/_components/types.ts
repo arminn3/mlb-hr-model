@@ -26,6 +26,7 @@ export interface ScoreSet {
   recent_abs: RecentAB[];
   xwoba?: number;
   sweet_spot?: number;
+  avg_la?: number;
   blast_pct?: number;
   pull_brl?: number;
   swstr?: number;
@@ -168,6 +169,7 @@ export interface PlayerData {
     pull_air?: number;
     xwoba?: number;
     sweet_spot?: number;
+    avg_la?: number;
     blast?: number;
     season_abs?: RecentAB[];
   };

@@ -230,8 +230,11 @@ def score_batter_vs_pitcher(
             if "launch_angle" in recent_bip.columns:
                 _sweet = (recent_bip["launch_angle"] >= 8) & (recent_bip["launch_angle"] <= 32)
                 result["sweet_spot"] = round(float(_sweet.sum() / _n_bip * 100), 1)
+                _la_vals = recent_bip["launch_angle"].dropna()
+                result["avg_la"] = round(float(_la_vals.mean()), 1) if len(_la_vals) > 0 else 0.0
             else:
                 result["sweet_spot"] = 0.0
+                result["avg_la"] = 0.0
             # Blast% — approximate Statcast definition: fast swing (bat_speed >= 75 mph)
             # squared up enough to produce hard contact (EV >= 95 mph). Strong HR signal
             # (r=0.79 vs barrels/PA on 2024-25 leaderboard sample).

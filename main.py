@@ -113,6 +113,7 @@ def _format_score(result: dict) -> dict:
         "pitch_abs": result.get("pitch_abs", {}),
         "xwoba": result.get("xwoba", 0.0),
         "sweet_spot": result.get("sweet_spot", 0.0),
+        "avg_la": result.get("avg_la", 0.0),
         "blast_pct": result.get("blast_pct", 0.0),
         "pull_brl": result.get("pull_brl", 0.0),
         "swstr": round(result.get("matchup_swstr", 0.0), 1),
@@ -556,6 +557,8 @@ def run_model(game_date: date = None, fast: bool = False):
             if "launch_angle" in all_bip.columns:
                 sweet_mask = (all_bip["launch_angle"] >= 8) & (all_bip["launch_angle"] <= 32)
                 season_profile["sweet_spot"] = round(float(sweet_mask.sum() / n * 100), 1)
+                _la_vals = all_bip["launch_angle"].dropna()
+                season_profile["avg_la"] = round(float(_la_vals.mean()), 1) if len(_la_vals) > 0 else 0.0
             if "estimated_woba_using_speedangle" in all_bip.columns:
                 xw_vals = all_bip["estimated_woba_using_speedangle"].dropna()
                 if len(xw_vals) > 0:

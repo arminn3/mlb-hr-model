@@ -5,7 +5,7 @@ import type { PlayerData, PitchDetailEntry } from "./types";
 import { scoreFor, type UILookback } from "./score-utils";
 import { teamLogoUrl, teamName } from "./game-header";
 
-type SortCol = "score" | "pitch" | "ev" | "barrel" | "blast" | "hh" | "fb" | "hrfb" | "xwoba" | "sweet" | "swstr" | "pullbrl" | "bip" | "gb" | "ld" | "bzm" | null;
+type SortCol = "score" | "pitch" | "ev" | "barrel" | "blast" | "hh" | "fb" | "hrfb" | "xwoba" | "sweet" | "la" | "swstr" | "pullbrl" | "bip" | "gb" | "ld" | "bzm" | null;
 type SortDir = "desc" | "asc";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -258,9 +258,14 @@ export function BatterRow({
   const scores = scoreFor(p, lookback) ?? scoreFor(p, "L5")!;
 
   const recentAbs = scores.recent_abs ?? [];
-  const flyBalls  = recentAbs.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
+  // Every HR counts as a fly-ball event regardless of its launch angle —
+  // a 20° line-drive HR is still a HR/FB hit. Without this, HR-heavy samples
+  // could produce HR/FB > 100% (one HR at 22°, no FBs → 1/0).
+  const flyBallEvents = recentAbs.filter(
+    (ab) => ab.result === "home_run" || (ab.angle >= 25 && ab.angle <= 50)
+  );
   const hrCount   = recentAbs.filter((ab) => ab.result === "home_run").length;
-  const hrFbPct   = flyBalls.length > 0 ? (hrCount / flyBalls.length) * 100 : null;
+  const hrFbPct   = flyBallEvents.length > 0 ? (hrCount / flyBallEvents.length) * 100 : null;
 
   const filtered = pitchFilter && pitchFilter.size > 0
     ? filteredPitchStats(p.pitch_detail || {}, pitchFilter)
@@ -276,6 +281,7 @@ export function BatterRow({
 
   const xwoba = scores.xwoba ?? null;
   const sweet = scores.sweet_spot ?? null;
+  const avgLa = scores.avg_la ?? null;
   const swstr = scores.swstr ?? p.matchup_swstr ?? null;
   const pullBrl = scores.pull_brl ?? null;
 
@@ -386,6 +392,9 @@ export function BatterRow({
       </td>
       <td className="py-2 pr-2 w-16 text-center">
         {heatPill(sweet, 35, 50, sweet == null ? "—" : `${sweet.toFixed(1)}%`)}
+      </td>
+      <td className="py-2 pr-2 w-14 text-center">
+        {heatPill(avgLa, 12, 18, avgLa == null ? "—" : `${avgLa.toFixed(1)}°`)}
       </td>
       <td className="py-2 pr-2 w-16 text-center">
         {heatPill(swstr == null ? null : 100 - swstr, 60, 75, swstr == null ? "—" : `${swstr.toFixed(1)}%`)}
@@ -531,6 +540,7 @@ export function BatterTable({
       case "hrfb":    return fbs.length > 0 ? (hrs / fbs.length) * 100 : -1;
       case "xwoba":   return sc.xwoba ?? -1;
       case "sweet":   return sc.sweet_spot ?? -1;
+      case "la":      return sc.avg_la ?? -999;
       case "swstr":   return sc.swstr != null ? -(sc.swstr) : (row.p.matchup_swstr != null ? -(row.p.matchup_swstr) : 1);
       case "pullbrl": return sc.pull_brl ?? -1;
       case "bip":     return filt ? filt.bip : (sc.bip ?? -1);
@@ -685,6 +695,7 @@ export function BatterTable({
               <SortTh label="HR/FB"    col="hrfb"    active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-16 text-center" />
               <SortTh label="xwOBA"    col="xwoba"   active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("xwoba")} />
               <SortTh label="Sweet%"   col="sweet"   active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("sweet")} />
+              <SortTh label="LA"       col="la"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("la")} />
               <SortTh label="SwStr%"   col="swstr"   active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("swstr")} />
               <SortTh label="PullBrl%" col="pullbrl" active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("pullbrl")} />
               <SortTh label="BIP"      col="bip"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("bip")} />
