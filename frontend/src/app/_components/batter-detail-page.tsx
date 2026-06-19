@@ -657,7 +657,7 @@ export function BatterDetailPage({
                 <table className="w-full text-[13px]">
                   <thead>
                     <tr className="text-[11px] uppercase tracking-wider text-foreground/65 border-b border-card-border">
-                      <th className="text-left py-2.5 pr-3 font-semibold">Date</th>
+                      <th className="text-left py-2.5 pl-3 pr-3 font-semibold">Date</th>
                       <th className="text-left py-2.5 pr-3 font-semibold">Pitcher</th>
                       <th className="text-center py-2.5 px-2 font-semibold">Arm</th>
                       <th className="text-left py-2.5 pr-3 font-semibold">Pitch</th>
@@ -682,7 +682,7 @@ export function BatterDetailPage({
                         : "transparent";
                       return (
                       <tr key={i} className="border-b border-card-border/30 last:border-0" style={{ background: rowBg }}>
-                        <td className="py-3 pr-3 text-foreground/75 font-mono">{String(ab.date).slice(5)}</td>
+                        <td className="py-3 pl-3 pr-3 text-foreground/75 font-mono">{String(ab.date).slice(5)}</td>
                         <td className="py-3 pr-3 text-foreground">{String(ab.pitcher_name ?? "")}</td>
                         <td className="py-3 px-2 text-center text-foreground/70 font-mono">{String(ab.pitch_arm ?? "")}</td>
                         <td className="py-3 pr-3 text-foreground">{String(ab.pitch_type ?? "")}</td>
