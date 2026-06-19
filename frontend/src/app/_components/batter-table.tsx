@@ -164,7 +164,7 @@ function BatterMobileCard({
         <div className="flex-1 min-w-0">
           <div className={`text-sm font-semibold leading-tight truncate ${isLowData || scores.data_quality === "LOW_SAMPLE" ? "text-red-400" : "text-foreground"}`}>{p.name}</div>
           <div className="flex items-center gap-1.5 mt-0.5">
-            <span className="text-[9px] font-mono text-muted/50">{p.batter_hand}HB</span>
+            <span className="text-[10px] font-mono font-semibold text-foreground/70">{p.batter_hand}HB</span>
             {isLowData && <span className="px-1 text-[8px] font-bold rounded bg-accent/10 text-accent border border-accent/20">NEW</span>}
             {hasQualityWarn && <span className="px-1 text-[8px] rounded bg-accent-yellow/10 text-accent-yellow">SMALL</span>}
             {/* Matchup pill */}
@@ -314,7 +314,7 @@ export function BatterRow({
           <div className="min-w-0">
             <div className={`text-sm font-semibold leading-tight whitespace-nowrap ${isLowData || scores.data_quality === "LOW_SAMPLE" ? "text-red-400" : "text-foreground"}`}>{p.name}</div>
             <div className="flex items-center gap-1 mt-0.5">
-              <span className="text-[9px] font-mono text-muted/60">{p.batter_hand}HB</span>
+              <span className="text-[10px] font-mono font-semibold text-foreground/70">{p.batter_hand}HB</span>
               {isLowData && (
                 <span className="px-1 py-0 text-[8px] font-bold rounded bg-accent/10 text-accent border border-accent/20">NEW</span>
               )}
