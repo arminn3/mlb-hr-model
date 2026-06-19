@@ -97,26 +97,37 @@ def _compute_pitcher_zone_freq(df: pd.DataFrame, batter_hand: str) -> list:
 
 def _pitcher_score_from_profile_row(row: dict) -> float:
     """Compute pitcher_score directly from a profile vs-hand row (vs_L or vs_R).
-    Uses the same metric mapping + NORM_RANGES the model uses internally so the
-    result is on the same scale. Bypasses the broken hand-split blend in
-    calc_pitcher_metrics for pitchers with strong reverse splits (e.g. Skubal).
+
+    Foundation per research: ISO + HR/9 vs that batter handedness are the two
+    biggest signals of how vulnerable a pitcher is. Everything else is supporting.
+    Skubal vs LHB illustrates why: ISO .205, HR/9 2.16 (both elite-vulnerable)
+    while overall ISO .119, HR/9 0.55 looks fine.
+
+    Weights:
+      ISO vs hand     35%   ← foundation
+      HR/9 vs hand    35%   ← foundation
+      HR/FB%          15%   ← supporting (HRs per opportunity)
+      FB% allowed     10%   ← supporting (opportunity volume)
+      HR volume        5%   ← tie-breaker
     """
     def n(v, lo, hi):
         if v is None: return 0.5
         return max(0.0, min(1.0, (v - lo) / (hi - lo)))
 
-    hr_per_9   = float(row.get("hr_per_9") or 0.0)
+    iso        = float(row.get("iso")       or 0.0)
+    hr_per_9   = float(row.get("hr_per_9")  or 0.0)
     hr_fb_pct  = float(row.get("hr_fb_pct") or 0.0) / 100.0
     fb_pct     = float(row.get("fb_pct")    or 0.0) / 100.0
     hr_count   = float(row.get("hr")        or 0.0)
 
-    # Mirror config.NORM_RANGES + PITCHER_WEIGHTS
-    f_fb     = n(fb_pct,    0.04, 0.20)
-    f_hrfb   = n(hr_fb_pct, 0.0,  0.24)
+    # ISO range: league avg ~.150, elite power suppressor ~.080, vulnerable .200+
+    f_iso    = n(iso,       0.08, 0.24)
     f_hr9    = n(hr_per_9,  0.0,  2.4)
-    f_hrtot  = n(hr_count / 20.0, 0.0, 1.0)  # rough HR volume normalization
+    f_hrfb   = n(hr_fb_pct, 0.0,  0.24)
+    f_fb     = n(fb_pct,    0.04, 0.20)
+    f_hrtot  = n(hr_count / 20.0, 0.0, 1.0)
 
-    return f_fb * 0.25 + f_hrfb * 0.40 + f_hr9 * 0.20 + f_hrtot * 0.15
+    return f_iso * 0.35 + f_hr9 * 0.35 + f_hrfb * 0.15 + f_fb * 0.10 + f_hrtot * 0.05
 
 
 def _apply_pitcher_split_override(players_by_game: dict, schedule: list, pitcher_profiles: dict) -> int:
