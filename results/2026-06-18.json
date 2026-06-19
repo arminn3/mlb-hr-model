@@ -168,7 +168,7 @@
   ],
   "total_players_ranked": 162,
   "total_hrs_hit": 23,
-  "total_near_hrs": 0,
+  "total_near_hrs": 5,
   "model_hits": 22,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -217,7 +217,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 5,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -243,28 +243,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
       "total": 20,
-      "hits": 2,
-      "rate": 10.0
+      "hits": 5,
+      "rate": 25.0
     },
     "top_30": {
       "total": 30,
-      "hits": 3,
-      "rate": 10.0
+      "hits": 6,
+      "rate": 20.0
     },
     "all": {
       "total": 162,
-      "hits": 22,
-      "rate": 13.6
+      "hits": 27,
+      "rate": 16.7
     }
   },
   "avg_composite_hr_hitters": 0.365,
-  "avg_composite_non_hitters": 0.395,
-  "composite_separation": -0.03,
+  "avg_composite_non_hitters": 0.391,
+  "composite_separation": -0.026,
   "hr_hitters": [
     {
       "name": "Trevor Larnach",
@@ -577,8 +577,99 @@
       "matchup": "CLE@MIL"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Miguel Vargas",
+      "rank": 4,
+      "composite": 0.655,
+      "opp_pitcher": "Ryan Weathers",
+      "matchup": "CWS@NYY"
+    },
+    {
+      "name": "Marcus Semien",
+      "rank": 16,
+      "composite": 0.576,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "NYM@PHI"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 19,
+      "composite": 0.569,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@NYY"
+    },
+    {
+      "name": "Jasson Dom\u00ednguez",
+      "rank": 75,
+      "composite": 0.394,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@NYY"
+    },
+    {
+      "name": "JJ Wetherholt",
+      "rank": 96,
+      "composite": 0.361,
+      "opp_pitcher": "Noah Cameron",
+      "matchup": "STL@KC"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Salvador Perez",
+      "ev": 102.3,
+      "angle": 29.0,
+      "distance": 382.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Liberatore, Matthew"
+    },
+    {
+      "batter": "JJ Wetherholt",
+      "ev": 101.6,
+      "angle": 27.0,
+      "distance": 400.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Cameron, Noah"
+    },
+    {
+      "batter": "Ben Rice",
+      "ev": 102.8,
+      "angle": 28.0,
+      "distance": 409.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Burke, Sean"
+    },
+    {
+      "batter": "Miguel Vargas",
+      "ev": 100.1,
+      "angle": 29.0,
+      "distance": 404.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Doval, Camilo"
+    },
+    {
+      "batter": "Jasson Dom\u00ednguez",
+      "ev": 101.5,
+      "angle": 28.0,
+      "distance": 401.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Hudson, Bryan"
+    },
+    {
+      "batter": "Marcus Semien",
+      "ev": 99.6,
+      "angle": 37.0,
+      "distance": 400.0,
+      "hr_in_parks": 28,
+      "result": "triple",
+      "pitcher": "Alvarado, Jos\u00e9"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
