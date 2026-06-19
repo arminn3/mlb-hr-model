@@ -637,6 +637,7 @@ export function Dashboard() {
                   favorites={favorites}
                   onToggleFavorite={onToggleFavorite}
                   lineupOverride={lineupOverride ? new Set(lineupOverride.starters) : null}
+                  slateDate={data.date}
                 />
               ))}
               {data.games.length === 0 && (

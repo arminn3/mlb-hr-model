@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { GameData, PitcherInfo, PlayerData, TeamPitchMixSide } from "./types";
 import { scoreFor, type UILookback } from "./score-utils";
 import { GameHeader } from "./game-header";
@@ -9,6 +9,8 @@ import { PitcherStatsPanel } from "./pitcher-stats-panel";
 import { BatterTable, type BatterRowInfo } from "./batter-table";
 import { BullpenSection } from "./bullpen-section";
 import { GameTop3 } from "./game-top3";
+import { loadScratches, saveScratch, clearScratch, type PitcherScratch } from "./pitcher-scratch";
+import { ScratchedPitcherBanner, MarkScratchedButton } from "./scratched-pitcher-banner";
 
 type LineupInfo = { order: number | null; id: number };
 
@@ -58,6 +60,7 @@ export function GameSection({
   favorites,
   onToggleFavorite,
   lineupOverride,
+  slateDate,
 }: {
   game: GameData;
   lookback: UILookback;
@@ -65,9 +68,37 @@ export function GameSection({
   favorites?: Set<string>;
   onToggleFavorite?: (name: string) => void;
   lineupOverride?: Set<string> | null;
+  slateDate: string;
 }) {
   const [selectedPitcher, setSelectedPitcher] = useState<PitcherInfo | null>(null);
   const [selectedPitcherSide, setSelectedPitcherSide] = useState<"away" | "home">("away");
+
+  // Scratched-pitcher overrides for this slate date (localStorage-backed).
+  // Hydrate once on mount; subsequent saves bump local state so the banner
+  // re-renders without a page refresh.
+  const [scratchesForGame, setScratchesForGame] = useState<{ away?: PitcherScratch; home?: PitcherScratch }>({});
+  useEffect(() => {
+    const all = loadScratches(slateDate);
+    setScratchesForGame(all[game.game_pk] ?? {});
+  }, [slateDate, game.game_pk]);
+
+  const handleScratchSave = (side: "away" | "home", originalName: string, replacementName: string, replacementHand: "L" | "R") => {
+    const scratch: PitcherScratch = {
+      gamePk: game.game_pk, side, originalName, replacementName, replacementHand,
+      markedAt: Date.now(),
+    };
+    saveScratch(slateDate, scratch);
+    setScratchesForGame((prev) => ({ ...prev, [side]: scratch }));
+  };
+
+  const handleScratchClear = (side: "away" | "home") => {
+    clearScratch(slateDate, game.game_pk, side);
+    setScratchesForGame((prev) => {
+      const next = { ...prev };
+      delete next[side];
+      return next;
+    });
+  };
 
   const homeSide = game.team_pitch_mix?.home;
   const awaySide = game.team_pitch_mix?.away;
@@ -103,8 +134,44 @@ export function GameSection({
 
       {/* Pitcher cards — 2-col side by side */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
-        <PitcherProfileCard pitcher={game.away_pitcher} side="away" teamAbbr={game.away_team} onNameClick={() => { setSelectedPitcher(game.away_pitcher); setSelectedPitcherSide("away"); }} />
-        <PitcherProfileCard pitcher={game.home_pitcher} side="home" teamAbbr={game.home_team} onNameClick={() => { setSelectedPitcher(game.home_pitcher); setSelectedPitcherSide("home"); }} />
+        <div>
+          {scratchesForGame.away && (
+            <ScratchedPitcherBanner
+              scratch={scratchesForGame.away}
+              originalHand={(game.away_pitcher.hand as "L" | "R") ?? "R"}
+              onClear={() => handleScratchClear("away")}
+            />
+          )}
+          <PitcherProfileCard pitcher={game.away_pitcher} side="away" teamAbbr={game.away_team} onNameClick={() => { setSelectedPitcher(game.away_pitcher); setSelectedPitcherSide("away"); }} />
+          {!scratchesForGame.away && (
+            <div className="mt-2 flex justify-end">
+              <MarkScratchedButton
+                originalName={game.away_pitcher.name}
+                originalHand={(game.away_pitcher.hand as "L" | "R") ?? "R"}
+                onSave={(name, hand) => handleScratchSave("away", game.away_pitcher.name, name, hand)}
+              />
+            </div>
+          )}
+        </div>
+        <div>
+          {scratchesForGame.home && (
+            <ScratchedPitcherBanner
+              scratch={scratchesForGame.home}
+              originalHand={(game.home_pitcher.hand as "L" | "R") ?? "R"}
+              onClear={() => handleScratchClear("home")}
+            />
+          )}
+          <PitcherProfileCard pitcher={game.home_pitcher} side="home" teamAbbr={game.home_team} onNameClick={() => { setSelectedPitcher(game.home_pitcher); setSelectedPitcherSide("home"); }} />
+          {!scratchesForGame.home && (
+            <div className="mt-2 flex justify-end">
+              <MarkScratchedButton
+                originalName={game.home_pitcher.name}
+                originalHand={(game.home_pitcher.hand as "L" | "R") ?? "R"}
+                onSave={(name, hand) => handleScratchSave("home", game.home_pitcher.name, name, hand)}
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Top 3 HR candidates across both lineups for the active lookback */}
