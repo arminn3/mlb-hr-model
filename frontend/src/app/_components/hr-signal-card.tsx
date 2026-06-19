@@ -91,9 +91,9 @@ const TIER: Record<number, { label: string; accent: string; glow: string }> = {
   5: { label: "Locked In", accent: "text-amber-400", glow: "rgba(251,191,36,0.18)" },
   4: { label: "Primed",    accent: "text-accent-green", glow: "rgba(var(--color-accent-green-rgb, 74,222,128),0.10)" },
   3: { label: "Warming",   accent: "text-accent-green/70", glow: "transparent" },
-  2: { label: "Neutral",   accent: "text-muted",           glow: "transparent" },
-  1: { label: "Cold",      accent: "text-muted/50",         glow: "transparent" },
-  0: { label: "Cold",      accent: "text-muted/50",         glow: "transparent" },
+  2: { label: "Neutral",   accent: "text-foreground/70",    glow: "transparent" },
+  1: { label: "Cold",      accent: "text-foreground/60",    glow: "transparent" },
+  0: { label: "Cold",      accent: "text-foreground/60",    glow: "transparent" },
 };
 
 export function HRSignalCard({ player }: { player: PlayerData }) {
@@ -127,7 +127,7 @@ export function HRSignalCard({ player }: { player: PlayerData }) {
           borderBottom: "1px solid rgba(255,255,255,0.06)",
         }}
       >
-        <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-muted/40">
+        <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-foreground/65">
           Power Signals
         </span>
 
@@ -201,15 +201,15 @@ export function HRSignalCard({ player }: { player: PlayerData }) {
             {/* Text */}
             <div className="flex-1 min-w-0">
               <div
-                className={`text-[11px] font-semibold leading-tight ${
-                  sig.triggered ? "text-foreground" : "text-muted/40"
+                className={`text-[12px] font-semibold leading-tight ${
+                  sig.triggered ? "text-foreground" : "text-foreground/55"
                 }`}
               >
                 {sig.label}
               </div>
               <div
-                className={`text-[10px] font-mono mt-0.5 leading-tight truncate ${
-                  sig.triggered ? "text-muted/70" : "text-muted/25"
+                className={`text-[11px] font-mono mt-0.5 leading-tight truncate ${
+                  sig.triggered ? "text-foreground/80" : "text-foreground/45"
                 }`}
               >
                 {sig.stat}
