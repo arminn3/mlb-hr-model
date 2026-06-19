@@ -8,6 +8,7 @@ import { PitcherProfileCard } from "./pitcher-profile-card";
 import { PitcherStatsPanel } from "./pitcher-stats-panel";
 import { BatterTable, type BatterRowInfo } from "./batter-table";
 import { BullpenSection } from "./bullpen-section";
+import { GameTop3 } from "./game-top3";
 
 type LineupInfo = { order: number | null; id: number };
 
@@ -105,6 +106,21 @@ export function GameSection({
         <PitcherProfileCard pitcher={game.away_pitcher} side="away" teamAbbr={game.away_team} onNameClick={() => { setSelectedPitcher(game.away_pitcher); setSelectedPitcherSide("away"); }} />
         <PitcherProfileCard pitcher={game.home_pitcher} side="home" teamAbbr={game.home_team} onNameClick={() => { setSelectedPitcher(game.home_pitcher); setSelectedPitcherSide("home"); }} />
       </div>
+
+      {/* Top 3 HR candidates across both lineups for the active lookback */}
+      <GameTop3
+        rows={[...awayBatters, ...homeBatters]}
+        lookback={lookback}
+        onSelect={(row) =>
+          onSelectBatter({
+            player: row.p,
+            mlbId: row.mlbId,
+            battingOrder: row.order,
+            teamAbbr: row.p.batter_side === "away" ? game.away_team : game.home_team,
+            parkFactor: game.environment?.park_factor,
+          })
+        }
+      />
 
       {/* Pitcher stats panel — fixed overlay */}
       {selectedPitcher && (() => {
