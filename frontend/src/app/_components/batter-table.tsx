@@ -499,6 +499,7 @@ export function BatterTable({
   onToggleFavorite,
   pitcherMix,
   parkFactor,
+  headerLabel,
 }: {
   teamAbbr: string;
   batters: BatterRowInfo[];
@@ -509,6 +510,9 @@ export function BatterTable({
   onToggleFavorite?: (name: string) => void;
   pitcherMix?: { vs_lhb: Record<string, number>; vs_rhb: Record<string, number> };
   parkFactor?: number;
+  // When set, the header renders this label and skips the team logo +
+  // teamName(teamAbbr) lookup. Used for cross-team displays (Top 3, favorites).
+  headerLabel?: string;
 }) {
   const [sortCol, setSortCol] = useState<SortCol>(null);
   const [sortDir, setSortDir] = useState<SortDir>("desc");
@@ -607,8 +611,14 @@ export function BatterTable({
         className="flex items-center gap-3 px-4 py-3"
         style={{ borderBottom: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.025)" }}
       >
-        <img src={teamLogoUrl(teamAbbr)} alt={teamAbbr} className="w-7 h-7 object-contain" />
-        <span className="font-bold text-foreground text-base">{teamName(teamAbbr)}</span>
+        {headerLabel ? (
+          <span className="font-bold text-foreground text-base">{headerLabel}</span>
+        ) : (
+          <>
+            <img src={teamLogoUrl(teamAbbr)} alt={teamAbbr} className="w-7 h-7 object-contain" />
+            <span className="font-bold text-foreground text-base">{teamName(teamAbbr)}</span>
+          </>
+        )}
         <span className="text-xs text-muted/60 ml-auto">{batters.length} batters</span>
         {!posted && (
           <span className="text-[9px] text-muted/40 uppercase tracking-wider">projected order</span>

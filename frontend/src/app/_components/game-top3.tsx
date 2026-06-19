@@ -52,16 +52,9 @@ export function GameTop3({
   // (BatterTable already shows team via teamAbbr prop, so use a neutral label).
   return (
     <div className="mt-6">
-      <div className="flex items-center justify-between mb-2 px-1">
-        <span className="text-[11px] font-bold uppercase tracking-[0.07em] text-accent-green/80">
-          Top 3 HR Candidates · {lookback}
-        </span>
-        <span className="text-[9px] text-muted/60">
-          Confidence-weighted composite across both lineups
-        </span>
-      </div>
       <BatterTable
-        teamAbbr={`${awayTeam} / ${homeTeam}`}
+        teamAbbr={awayTeam}
+        headerLabel={`Top 3 HR Candidates · ${lookback}`}
         batters={top3}
         lookback={lookback}
         posted={true}
