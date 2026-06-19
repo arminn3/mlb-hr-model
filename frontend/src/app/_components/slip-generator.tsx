@@ -152,8 +152,14 @@ function getAllPlayers(games: GameData[], lookback: UILookback, weights: MlWeigh
     for (const player of game.players) {
       if (seen.has(player.name)) continue;
       seen.add(player.name);
-      const scores = scoreFor(player, lookback);
-      const composite = mlComposite(player, lookback, weights);
+      // Try the active lookback first; if it has no data (e.g. Season lookback
+      // for a low-sample rookie), fall back to L10 then L5 so the player still
+      // surfaces in the slip generator.
+      let effectiveLookback: UILookback = lookback;
+      let scores = scoreFor(player, lookback);
+      if (!scores) { scores = scoreFor(player, "L10"); effectiveLookback = "L10"; }
+      if (!scores) { scores = scoreFor(player, "L5");  effectiveLookback = "L5"; }
+      const composite = mlComposite(player, effectiveLookback, weights);
       if (composite < 0.15) continue;
       const barrelPct = scores?.barrel_pct ?? 0;
       const hrFbRate = player.pitcher_stats?.hr_fb_rate ?? 0;
