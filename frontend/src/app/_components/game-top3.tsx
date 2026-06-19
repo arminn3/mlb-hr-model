@@ -42,7 +42,9 @@ export function GameTop3({
     .filter((x) => x.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, 3)
-    .map((x) => x.row);
+    // Overwrite the batting order with the top-3 rank (1, 2, 3). The team batter
+    // tables below still get the real lineup order — this is local to the top-3.
+    .map((x, i) => ({ ...x.row, order: i + 1 }));
 
   if (top3.length === 0) return null;
 
@@ -62,7 +64,7 @@ export function GameTop3({
         teamAbbr={`${awayTeam} / ${homeTeam}`}
         batters={top3}
         lookback={lookback}
-        posted={posted}
+        posted={true}
         favorites={favorites}
         onToggleFavorite={onToggleFavorite}
         pitcherMix={pitcherMix}
