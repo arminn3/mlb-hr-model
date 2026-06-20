@@ -68,10 +68,18 @@ export function MarkScratchedButton({
     return (
       <button
         onClick={() => setOpen(true)}
-        className="text-[10px] text-muted/70 hover:text-foreground/80 cursor-pointer underline-offset-2 hover:underline"
+        className="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider rounded-md cursor-pointer transition-colors flex items-center gap-1.5"
+        style={{
+          background: "rgba(239,68,68,0.12)",
+          border: "1px solid rgba(239,68,68,0.40)",
+          color: "rgb(252,165,165)",
+        }}
         title={`Mark ${originalName} as scratched`}
       >
-        scratched?
+        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        Mark Scratched
       </button>
     );
   }
