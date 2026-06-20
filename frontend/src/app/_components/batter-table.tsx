@@ -262,16 +262,24 @@ export function BatterRow({
   // Apply scratched-pitcher override: replace this row's pitcher_score with
   // the replacement pitcher's vs-hand score and rebalance composite. Only
   // affects display in this table — the slate JSON and ML Rankings are untouched.
-  const scores = (() => {
-    if (!pitcherScratch) return rawScores;
+  const overrideInfo = (() => {
+    if (!pitcherScratch) return null;
     const newPitcher = p.batter_hand === "L"
       ? pitcherScratch.pitcherScoreVsL
       : pitcherScratch.pitcherScoreVsR;
-    if (newPitcher == null) return rawScores;
+    if (newPitcher == null) return null;
     const W_PITCHER = 0.40; // matches backend PITCHER_COMPOSITE_WEIGHT
     const delta = (newPitcher - rawScores.pitcher_score) * W_PITCHER;
-    return { ...rawScores, pitcher_score: newPitcher, composite: rawScores.composite + delta };
+    return {
+      newPitcher,
+      delta,
+      oldComposite: rawScores.composite,
+      newComposite: rawScores.composite + delta,
+    };
   })();
+  const scores = overrideInfo
+    ? { ...rawScores, pitcher_score: overrideInfo.newPitcher, composite: overrideInfo.newComposite }
+    : rawScores;
 
   const recentAbs = scores.recent_abs ?? [];
   // Every HR counts as a fly-ball event regardless of its launch angle —
@@ -369,6 +377,17 @@ export function BatterRow({
           <span className={`text-xs font-mono font-bold w-10 text-right flex-shrink-0 ${scoreColor(scores.composite)}`}>
             {scores.composite.toFixed(2)}
           </span>
+          {overrideInfo && Math.abs(overrideInfo.delta) >= 0.005 && (
+            <span
+              className="text-[9px] font-mono font-bold px-1 py-0.5 rounded flex-shrink-0"
+              style={overrideInfo.delta > 0
+                ? { background: "rgba(34,197,94,0.18)", color: "rgb(134,239,172)" }
+                : { background: "rgba(239,68,68,0.18)", color: "rgb(252,165,165)" }}
+              title={`Pitcher override · was ${overrideInfo.oldComposite.toFixed(2)} (vs ${pitcherScratch?.replacementHand === "L" ? "the original RHP" : "the original LHP"}), now ${overrideInfo.newComposite.toFixed(2)} vs replacement ${pitcherScratch?.replacementHand}HP`}
+            >
+              {overrideInfo.delta > 0 ? "+" : ""}{overrideInfo.delta.toFixed(2)}
+            </span>
+          )}
         </div>
       </td>
 
@@ -546,7 +565,16 @@ export function BatterTable({
   if (batters.length === 0) return null;
 
   function getVal(row: BatterRowInfo, col: Exclude<SortCol, null>): number {
-    const sc = scoreFor(row.p, lookback) ?? scoreFor(row.p, "L5")!;
+    const rawSc = scoreFor(row.p, lookback) ?? scoreFor(row.p, "L5")!;
+    // Apply pitcher scratch override to composite for sort purposes too.
+    let sc = rawSc;
+    if (pitcherScratch) {
+      const newP = row.p.batter_hand === "L" ? pitcherScratch.pitcherScoreVsL : pitcherScratch.pitcherScoreVsR;
+      if (newP != null) {
+        const delta = (newP - rawSc.pitcher_score) * 0.40;
+        sc = { ...rawSc, pitcher_score: newP, composite: rawSc.composite + delta };
+      }
+    }
     const recentAbs = sc.recent_abs ?? [];
     const fbs = recentAbs.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
     const hrs = recentAbs.filter((ab) => ab.result === "home_run").length;

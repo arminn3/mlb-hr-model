@@ -67,22 +67,25 @@ export async function fetchReplacementPitcherScores(personId: number): Promise<{
     return Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
   }
   function score(splitStat: Record<string, unknown>): number {
-    const iso        = parseFloat(String(splitStat?.slg ?? 0)) - parseFloat(String(splitStat?.avg ?? 0));
-    const hrPer9     = parseFloat(String(splitStat?.homeRunsPer9 ?? 0));
-    const hr         = parseFloat(String(splitStat?.homeRuns ?? 0));
-    const fb         = parseFloat(String(splitStat?.flyOuts ?? 0));
-    // hr_fb is HRs / fly balls. MLB API gives flyOuts (outs) so we approximate
-    // total FB as flyOuts + homeRuns (HRs are also fly balls). Conservative.
-    const fbTotal = fb + hr;
+    const slg        = parseFloat(String(splitStat?.slg ?? "0"));
+    const avg        = parseFloat(String(splitStat?.avg ?? "0"));
+    const iso        = slg - avg;
+    const hrPer9     = parseFloat(String(splitStat?.homeRunsPer9 ?? "0"));
+    const hr         = Number(splitStat?.homeRuns ?? 0);
+    // MLB Stats API returns `airOuts` (fly outs + popouts) — not `flyOuts`.
+    const air        = Number(splitStat?.airOuts ?? 0);
+    const ground     = Number(splitStat?.groundOuts ?? 0);
+    // HRs are fly balls that didn't get caught, so total FBs ≈ airOuts + HRs.
+    const fbTotal    = air + hr;
     const hrFb       = fbTotal > 0 ? hr / fbTotal : 0;
-    // FB rate as % of BIP — approximation using inningsPitched as denominator
-    const ip         = parseFloat(String(splitStat?.inningsPitched ?? 0));
-    const fbPct      = ip > 0 ? fb / (ip * 3) : 0;
+    // FB rate as fraction of contact-result events (air + ground + HRs).
+    const contactEvents = air + ground + hr;
+    const fbPct      = contactEvents > 0 ? fbTotal / contactEvents : 0;
 
     const fIso   = n(iso,    0.08, 0.24);
     const fHr9   = n(hrPer9, 0.0,  2.4);
     const fHrFb  = n(hrFb,   0.0,  0.24);
-    const fFb    = n(fbPct,  0.04, 0.20);
+    const fFb    = n(fbPct,  0.20, 0.60);
     const fHrTot = n(hr / 20.0, 0.0, 1.0);
     return fIso * 0.35 + fHr9 * 0.35 + fHrFb * 0.15 + fFb * 0.10 + fHrTot * 0.05;
   }
