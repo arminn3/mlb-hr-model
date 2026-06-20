@@ -96,10 +96,13 @@ export function ScratchedPitcherBanner({
 export function MarkScratchedButton({
   originalName,
   originalHand,
+  teamAbbr,
   onSave,
 }: {
   originalName: string;
   originalHand: "L" | "R";
+  /** Filter the autocomplete to this team's active pitchers only */
+  teamAbbr: string;
   onSave: (replacementName: string, replacementHand: "L" | "R") => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -131,11 +134,17 @@ export function MarkScratchedButton({
     return () => document.removeEventListener("mousedown", onClick);
   }, [open]);
 
-  const suggestions = query.trim().length === 0
-    ? []
-    : pitchers
-        .filter((p) => p.name.toLowerCase().includes(query.trim().toLowerCase()))
-        .slice(0, 8);
+  // Only this team's pitchers — replacements come from the team's own roster.
+  // ATH/OAK alias maps to the same Athletics team for the Vegas-era roster.
+  const teamPitchers = pitchers.filter((p) => p.teamAbbr === teamAbbr
+    || (teamAbbr === "ATH" && p.teamAbbr === "OAK")
+    || (teamAbbr === "OAK" && p.teamAbbr === "ATH"));
+
+  // When the input is empty, show the whole roster so the user can browse.
+  const suggestions = (query.trim().length === 0
+    ? teamPitchers
+    : teamPitchers.filter((p) => p.name.toLowerCase().includes(query.trim().toLowerCase()))
+  ).slice(0, 10);
 
   const commit = (pitcher: PitcherOption) => {
     onSave(pitcher.name, pitcher.hand);
@@ -240,7 +249,7 @@ export function MarkScratchedButton({
       {query.trim().length > 0 && pitchers.length > 0 && suggestions.length === 0 && (
         <div className="absolute z-50 mt-1 rounded-md px-3 py-2 text-[11px] text-foreground/65"
           style={{ background: "#0d0d12", border: "1px solid rgba(255,255,255,0.16)" }}>
-          No matches
+          No {teamAbbr} pitchers match &quot;{query}&quot;
         </div>
       )}
     </div>

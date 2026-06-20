@@ -148,6 +148,7 @@ export function GameSection({
               <MarkScratchedButton
                 originalName={game.away_pitcher.name}
                 originalHand={(game.away_pitcher.hand as "L" | "R") ?? "R"}
+                teamAbbr={game.away_team}
                 onSave={(name, hand) => handleScratchSave("away", game.away_pitcher.name, name, hand)}
               />
             </div>
@@ -167,6 +168,7 @@ export function GameSection({
               <MarkScratchedButton
                 originalName={game.home_pitcher.name}
                 originalHand={(game.home_pitcher.hand as "L" | "R") ?? "R"}
+                teamAbbr={game.home_team}
                 onSave={(name, hand) => handleScratchSave("home", game.home_pitcher.name, name, hand)}
               />
             </div>
