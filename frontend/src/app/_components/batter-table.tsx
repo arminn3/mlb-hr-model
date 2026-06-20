@@ -244,6 +244,7 @@ export function BatterRow({
   onToggleFavorite,
   pitchFilter,
   parkFactor,
+  pitcherScratch,
 }: {
   row: BatterRowInfo;
   lookback: UILookback;
@@ -253,9 +254,24 @@ export function BatterRow({
   onToggleFavorite?: (name: string) => void;
   pitchFilter?: Set<string>;
   parkFactor?: number;
+  pitcherScratch?: { replacementHand: "L" | "R"; pitcherScoreVsL?: number; pitcherScoreVsR?: number };
 }) {
   const { p, order, mlbId } = row;
-  const scores = scoreFor(p, lookback) ?? scoreFor(p, "L5")!;
+  const rawScores = scoreFor(p, lookback) ?? scoreFor(p, "L5")!;
+
+  // Apply scratched-pitcher override: replace this row's pitcher_score with
+  // the replacement pitcher's vs-hand score and rebalance composite. Only
+  // affects display in this table — the slate JSON and ML Rankings are untouched.
+  const scores = (() => {
+    if (!pitcherScratch) return rawScores;
+    const newPitcher = p.batter_hand === "L"
+      ? pitcherScratch.pitcherScoreVsL
+      : pitcherScratch.pitcherScoreVsR;
+    if (newPitcher == null) return rawScores;
+    const W_PITCHER = 0.40; // matches backend PITCHER_COMPOSITE_WEIGHT
+    const delta = (newPitcher - rawScores.pitcher_score) * W_PITCHER;
+    return { ...rawScores, pitcher_score: newPitcher, composite: rawScores.composite + delta };
+  })();
 
   const recentAbs = scores.recent_abs ?? [];
   // Every HR counts as a fly-ball event regardless of its launch angle —
@@ -500,6 +516,7 @@ export function BatterTable({
   pitcherMix,
   parkFactor,
   headerLabel,
+  pitcherScratch,
 }: {
   teamAbbr: string;
   batters: BatterRowInfo[];
@@ -513,6 +530,10 @@ export function BatterTable({
   // When set, the header renders this label and skips the team logo +
   // teamName(teamAbbr) lookup. Used for cross-team displays (Top 3, favorites).
   headerLabel?: string;
+  // When set, each row's pitcher_score + composite is overridden using the
+  // replacement pitcher's vs-hand score so the per-game numbers reflect the
+  // actual matchup. Doesn't touch the slate JSON or the ML Rankings page.
+  pitcherScratch?: { replacementHand: "L" | "R"; pitcherScoreVsL?: number; pitcherScoreVsR?: number };
 }) {
   const [sortCol, setSortCol] = useState<SortCol>(null);
   const [sortDir, setSortDir] = useState<SortDir>("desc");
@@ -728,6 +749,7 @@ export function BatterTable({
                 onToggleFavorite={onToggleFavorite}
                 pitchFilter={pitchFilter.size > 0 ? pitchFilter : undefined}
                 parkFactor={parkFactor}
+                pitcherScratch={pitcherScratch}
               />
             ))}
           </tbody>

@@ -9,7 +9,7 @@ import { PitcherStatsPanel } from "./pitcher-stats-panel";
 import { BatterTable, type BatterRowInfo } from "./batter-table";
 import { BullpenSection } from "./bullpen-section";
 import { GameTop3 } from "./game-top3";
-import { loadScratches, saveScratch, clearScratch, type PitcherScratch } from "./pitcher-scratch";
+import { loadScratches, saveScratch, clearScratch, fetchReplacementPitcherScores, type PitcherScratch } from "./pitcher-scratch";
 import { ScratchedPitcherBanner, MarkScratchedButton } from "./scratched-pitcher-banner";
 
 type LineupInfo = { order: number | null; id: number };
@@ -82,13 +82,21 @@ export function GameSection({
     setScratchesForGame(all[game.game_pk] ?? {});
   }, [slateDate, game.game_pk]);
 
-  const handleScratchSave = (side: "away" | "home", originalName: string, replacementName: string, replacementHand: "L" | "R") => {
-    const scratch: PitcherScratch = {
+  const handleScratchSave = async (side: "away" | "home", originalName: string, replacementName: string, replacementHand: "L" | "R", replacementId: number) => {
+    // Optimistic save so banner renders instantly
+    const baseScratch: PitcherScratch = {
       gamePk: game.game_pk, side, originalName, replacementName, replacementHand,
-      markedAt: Date.now(),
+      replacementId, markedAt: Date.now(),
     };
-    saveScratch(slateDate, scratch);
-    setScratchesForGame((prev) => ({ ...prev, [side]: scratch }));
+    saveScratch(slateDate, baseScratch);
+    setScratchesForGame((prev) => ({ ...prev, [side]: baseScratch }));
+
+    // Fetch real split stats from MLB Stats API; update once they arrive so
+    // the batter table can recompute pitcher_score / composite from real data.
+    const { vsL, vsR } = await fetchReplacementPitcherScores(replacementId);
+    const enriched: PitcherScratch = { ...baseScratch, pitcherScoreVsL: vsL, pitcherScoreVsR: vsR };
+    saveScratch(slateDate, enriched);
+    setScratchesForGame((prev) => ({ ...prev, [side]: enriched }));
   };
 
   const handleScratchClear = (side: "away" | "home") => {
@@ -149,7 +157,7 @@ export function GameSection({
                 originalName={game.away_pitcher.name}
                 originalHand={(game.away_pitcher.hand as "L" | "R") ?? "R"}
                 teamAbbr={game.away_team}
-                onSave={(name, hand) => handleScratchSave("away", game.away_pitcher.name, name, hand)}
+                onSave={(name, hand, id) => handleScratchSave("away", game.away_pitcher.name, name, hand, id)}
               />
             </div>
           )}
@@ -169,7 +177,7 @@ export function GameSection({
                 originalName={game.home_pitcher.name}
                 originalHand={(game.home_pitcher.hand as "L" | "R") ?? "R"}
                 teamAbbr={game.home_team}
-                onSave={(name, hand) => handleScratchSave("home", game.home_pitcher.name, name, hand)}
+                onSave={(name, hand, id) => handleScratchSave("home", game.home_pitcher.name, name, hand, id)}
               />
             </div>
           )}
@@ -236,6 +244,7 @@ export function GameSection({
             })
           }
           parkFactor={game.environment?.park_factor}
+          pitcherScratch={scratchesForGame.home /* away batters face HOME pitcher */}
         />
         <BatterTable
           teamAbbr={game.home_team}
@@ -258,6 +267,7 @@ export function GameSection({
             })
           }
           parkFactor={game.environment?.park_factor}
+          pitcherScratch={scratchesForGame.away /* home batters face AWAY pitcher */}
         />
       </div>
 

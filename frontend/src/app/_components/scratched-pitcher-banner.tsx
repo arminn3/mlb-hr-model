@@ -116,7 +116,7 @@ export function MarkScratchedButton({
   originalHand: "L" | "R";
   /** Filter the autocomplete to this team's active pitchers only */
   teamAbbr: string;
-  onSave: (replacementName: string, replacementHand: "L" | "R") => void;
+  onSave: (replacementName: string, replacementHand: "L" | "R", replacementId: number) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -154,7 +154,7 @@ export function MarkScratchedButton({
   ).slice(0, 12);
 
   const commit = (pitcher: PitcherOption) => {
-    onSave(pitcher.name, pitcher.hand);
+    onSave(pitcher.name, pitcher.hand, pitcher.id);
     setOpen(false);
     setQuery("");
     setSelected(null);
