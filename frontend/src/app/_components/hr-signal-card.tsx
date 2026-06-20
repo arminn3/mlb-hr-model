@@ -57,10 +57,15 @@ function buildSignals(player: PlayerData): Signal[] {
     triggered: s.park_friendly,
   });
 
-  // Barrel surge — last 5 GAMES (group recent_abs by date, take 5 most recent dates)
+  // Barrel surge — only meaningful with enough season sample (>=30 BIP) AND a
+  // non-zero season barrel baseline. Without that, the ratio is undefined or
+  // infinite and the signal bloats the X/total denominator for low-sample bats
+  // (e.g. Alex Freeland w/ 17 BIP, 0% season barrel → '6/6' instead of '5/5').
   const allAbs = scoreFor(player, "L10")?.recent_abs ?? scoreFor(player, "L5")?.recent_abs ?? [];
   const seasonBarrel = sp?.barrel ?? null;
-  if (seasonBarrel !== null && allAbs.length > 0) {
+  const seasonBip = sp?.bip_count ?? 0;
+  const surgeMeaningful = seasonBarrel !== null && seasonBarrel > 0 && seasonBip >= 30 && allAbs.length > 0;
+  if (surgeMeaningful) {
     const dates = [...new Set(allAbs.map((ab) => ab.date))].sort().slice(-5);
     const g5Abs = allAbs.filter((ab) => dates.includes(ab.date));
     const bips = g5Abs.filter((ab) => ab.ev > 0);
@@ -72,13 +77,12 @@ function buildSignals(player: PlayerData): Signal[] {
     }).length;
     const g5BarrelPct = bips.length > 0 ? Math.round((barrels / bips.length) * 1000) / 10 : null;
     if (g5BarrelPct !== null) {
-      const ratio = seasonBarrel > 0 ? g5BarrelPct / seasonBarrel : null;
-      const triggered = g5BarrelPct >= 8 && ratio !== null && ratio >= 1.5;
-      const ratioStr = ratio !== null ? `${ratio.toFixed(1)}×` : "—";
+      const ratio = g5BarrelPct / seasonBarrel!;
+      const triggered = g5BarrelPct >= 8 && ratio >= 1.5;
       signals.push({
         key: "barrel_surge",
         label: "Barrel surge (G5)",
-        stat: `G5: ${g5BarrelPct}%  ·  season: ${seasonBarrel}%  ·  ${ratioStr} rate  ·  ${bips.length} BIP`,
+        stat: `G5: ${g5BarrelPct}%  ·  season: ${seasonBarrel}%  ·  ${ratio.toFixed(1)}× rate  ·  ${bips.length} BIP`,
         triggered,
       });
     }
