@@ -1,7 +1,49 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import type { PitcherScratch } from "./pitcher-scratch";
+
+// Cached list of active MLB pitchers — fetched once per page load, shared
+// across every Mark Scratched button so the autocomplete is instant.
+type PitcherOption = { id: number; name: string; hand: "L" | "R"; teamAbbr: string };
+let _pitcherCache: PitcherOption[] | null = null;
+let _pitcherCachePromise: Promise<PitcherOption[]> | null = null;
+
+async function loadActivePitchers(): Promise<PitcherOption[]> {
+  if (_pitcherCache) return _pitcherCache;
+  if (_pitcherCachePromise) return _pitcherCachePromise;
+  _pitcherCachePromise = (async () => {
+    try {
+      const year = new Date().getFullYear();
+      const url = `https://statsapi.mlb.com/api/v1/sports/1/players?season=${year}`;
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error(`MLB API ${resp.status}`);
+      const data = await resp.json();
+      type RawPerson = {
+        id: number;
+        fullName?: string;
+        primaryPosition?: { code?: string };
+        pitchHand?: { code?: string };
+        currentTeam?: { abbreviation?: string };
+      };
+      const list: PitcherOption[] = ((data?.people ?? []) as RawPerson[])
+        .filter((p) => p?.primaryPosition?.code === "1") // pitchers
+        .map((p) => ({
+          id: p.id,
+          name: p.fullName || "",
+          hand: (p?.pitchHand?.code === "L" ? "L" : "R") as "L" | "R",
+          teamAbbr: p?.currentTeam?.abbreviation || "",
+        }))
+        .filter((p) => p.name);
+      _pitcherCache = list;
+      return list;
+    } catch {
+      _pitcherCache = [];
+      return [];
+    }
+  })();
+  return _pitcherCachePromise;
+}
 
 export function ScratchedPitcherBanner({
   scratch,
@@ -61,8 +103,46 @@ export function MarkScratchedButton({
   onSave: (replacementName: string, replacementHand: "L" | "R") => void;
 }) {
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [hand, setHand] = useState<"L" | "R">(originalHand);
+  const [query, setQuery] = useState("");
+  const [selected, setSelected] = useState<PitcherOption | null>(null);
+  const [pitchers, setPitchers] = useState<PitcherOption[]>([]);
+  const [highlight, setHighlight] = useState(0);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+
+  // Lazy-load pitcher list the first time the user opens the form.
+  useEffect(() => {
+    if (!open || pitchers.length > 0) return;
+    let cancelled = false;
+    loadActivePitchers().then((list) => { if (!cancelled) setPitchers(list); });
+    return () => { cancelled = true; };
+  }, [open, pitchers.length]);
+
+  // Close on outside click.
+  useEffect(() => {
+    if (!open) return;
+    function onClick(e: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setOpen(false);
+        setQuery("");
+        setSelected(null);
+      }
+    }
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [open]);
+
+  const suggestions = query.trim().length === 0
+    ? []
+    : pitchers
+        .filter((p) => p.name.toLowerCase().includes(query.trim().toLowerCase()))
+        .slice(0, 8);
+
+  const commit = (pitcher: PitcherOption) => {
+    onSave(pitcher.name, pitcher.hand);
+    setOpen(false);
+    setQuery("");
+    setSelected(null);
+  };
 
   if (!open) {
     return (
@@ -85,47 +165,84 @@ export function MarkScratchedButton({
   }
 
   return (
-    <div
-      className="rounded-md px-2 py-1.5 flex items-center gap-1.5"
-      style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}
-    >
-      <input
-        autoFocus
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Replacement"
-        className="bg-transparent text-[11px] text-foreground placeholder:text-muted/50 outline-none w-28"
-      />
-      <div className="flex">
-        {(["L", "R"] as const).map((h) => (
-          <button
-            key={h}
-            onClick={() => setHand(h)}
-            className={`px-1.5 py-0.5 text-[10px] font-mono font-bold cursor-pointer ${
-              hand === h ? "bg-accent text-background" : "text-foreground/55 hover:text-foreground"
-            }`}
+    <div ref={wrapperRef} className="relative">
+      <div
+        className="rounded-md px-2 py-1.5 flex items-center gap-2"
+        style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.16)" }}
+      >
+        <input
+          autoFocus
+          value={query}
+          onChange={(e) => { setQuery(e.target.value); setHighlight(0); setSelected(null); }}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowDown") { e.preventDefault(); setHighlight((h) => Math.min(h + 1, suggestions.length - 1)); }
+            else if (e.key === "ArrowUp") { e.preventDefault(); setHighlight((h) => Math.max(h - 1, 0)); }
+            else if (e.key === "Enter" && suggestions[highlight]) { e.preventDefault(); commit(suggestions[highlight]); }
+            else if (e.key === "Escape") { setOpen(false); setQuery(""); }
+          }}
+          placeholder="Type replacement name…"
+          className="bg-transparent text-[12px] text-foreground placeholder:text-foreground/45 outline-none w-44 font-medium"
+        />
+        {selected && (
+          <span
+            className="px-1.5 py-0.5 text-[10px] font-mono font-bold rounded"
+            style={{ background: "rgba(34,197,94,0.18)", color: "rgb(134,239,172)" }}
+            title={`${selected.name} throws ${selected.hand === "L" ? "left" : "right"}-handed`}
           >
-            {h}
-          </button>
-        ))}
+            {selected.hand}HP
+          </span>
+        )}
+        <button
+          onClick={() => { setOpen(false); setQuery(""); setSelected(null); }}
+          className="text-[11px] text-foreground/55 hover:text-foreground cursor-pointer"
+          title="Cancel"
+        >
+          ✕
+        </button>
       </div>
-      <button
-        onClick={() => {
-          if (!name.trim()) return;
-          onSave(name.trim(), hand);
-          setOpen(false);
-          setName("");
-        }}
-        className="text-[10px] font-bold text-accent-green hover:text-accent-green/80 cursor-pointer ml-1"
-      >
-        save
-      </button>
-      <button
-        onClick={() => { setOpen(false); setName(""); }}
-        className="text-[10px] text-muted hover:text-foreground cursor-pointer"
-      >
-        ✕
-      </button>
+      {suggestions.length > 0 && (
+        <div
+          className="absolute z-50 mt-1 rounded-md overflow-hidden w-full"
+          style={{ background: "#0d0d12", border: "1px solid rgba(255,255,255,0.16)", boxShadow: "0 8px 24px rgba(0,0,0,0.6)" }}
+        >
+          {suggestions.map((p, i) => (
+            <button
+              key={p.id}
+              onMouseDown={(e) => { e.preventDefault(); commit(p); }}
+              onMouseEnter={() => setHighlight(i)}
+              className="w-full text-left px-3 py-2 cursor-pointer flex items-center justify-between gap-2 transition-colors"
+              style={{ background: i === highlight ? "rgba(255,255,255,0.07)" : "transparent" }}
+            >
+              <span className="text-[13px] text-foreground font-medium truncate">{p.name}</span>
+              <span className="flex items-center gap-1.5 flex-shrink-0">
+                {p.teamAbbr && (
+                  <span className="text-[10px] text-foreground/55 font-mono">{p.teamAbbr}</span>
+                )}
+                <span
+                  className="px-1.5 py-0.5 text-[10px] font-mono font-bold rounded"
+                  style={p.hand === "L"
+                    ? { background: "rgba(96,165,250,0.18)", color: "rgb(147,197,253)" }
+                    : { background: "rgba(251,191,36,0.18)", color: "rgb(253,224,71)" }}
+                >
+                  {p.hand}HP
+                </span>
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+      {query.trim().length > 0 && pitchers.length === 0 && (
+        <div className="absolute z-50 mt-1 rounded-md px-3 py-2 text-[11px] text-foreground/65"
+          style={{ background: "#0d0d12", border: "1px solid rgba(255,255,255,0.16)" }}>
+          Loading pitchers…
+        </div>
+      )}
+      {query.trim().length > 0 && pitchers.length > 0 && suggestions.length === 0 && (
+        <div className="absolute z-50 mt-1 rounded-md px-3 py-2 text-[11px] text-foreground/65"
+          style={{ background: "#0d0d12", border: "1px solid rgba(255,255,255,0.16)" }}>
+          No matches
+        </div>
+      )}
     </div>
   );
 }
