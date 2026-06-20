@@ -72467,7 +72467,7 @@
     ],
     "total_players_ranked": 262,
     "total_hrs_hit": 42,
-    "total_near_hrs": 0,
+    "total_near_hrs": 19,
     "model_hits": 40,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -72516,7 +72516,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 19,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -72542,28 +72542,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 3,
+        "rate": 30.0
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 5,
-        "rate": 16.7
+        "hits": 7,
+        "rate": 23.3
       },
       "all": {
         "total": 262,
-        "hits": 40,
-        "rate": 15.3
+        "hits": 59,
+        "rate": 22.5
       }
     },
     "avg_composite_hr_hitters": 0.403,
-    "avg_composite_non_hitters": 0.4,
-    "composite_separation": 0.003,
+    "avg_composite_non_hitters": 0.397,
+    "composite_separation": 0.006,
     "hr_hitters": [
       {
         "name": "Gunnar Henderson",
@@ -73128,8 +73128,350 @@
         "matchup": "CWS@DET"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Sterlin Thompson",
+        "rank": 10,
+        "composite": 0.671,
+        "opp_pitcher": "Bubba Chandler",
+        "matchup": "PIT@COL"
+      },
+      {
+        "name": "Salvador Perez",
+        "rank": 15,
+        "composite": 0.642,
+        "opp_pitcher": "Michael McGreevy",
+        "matchup": "STL@KC"
+      },
+      {
+        "name": "Brandon Lowe",
+        "rank": 35,
+        "composite": 0.555,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "PIT@COL"
+      },
+      {
+        "name": "Esmerlyn Valdez",
+        "rank": 48,
+        "composite": 0.53,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "PIT@COL"
+      },
+      {
+        "name": "Spencer Steer",
+        "rank": 56,
+        "composite": 0.512,
+        "opp_pitcher": "Cam Schlittler",
+        "matchup": "CIN@NYY"
+      },
+      {
+        "name": "Kazuma Okamoto",
+        "rank": 61,
+        "composite": 0.49,
+        "opp_pitcher": "Ben Brown",
+        "matchup": "TOR@CHC"
+      },
+      {
+        "name": "LuJames Groover",
+        "rank": 75,
+        "composite": 0.467,
+        "opp_pitcher": "Connor Prielipp",
+        "matchup": "MIN@AZ"
+      },
+      {
+        "name": "Marcell Ozuna",
+        "rank": 82,
+        "composite": 0.452,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "PIT@COL"
+      },
+      {
+        "name": "Oswald Peraza",
+        "rank": 90,
+        "composite": 0.443,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "LAA@ATH"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 99,
+        "composite": 0.431,
+        "opp_pitcher": "PJ Poulin",
+        "matchup": "WSH@TB"
+      },
+      {
+        "name": "James Wood",
+        "rank": 137,
+        "composite": 0.374,
+        "opp_pitcher": "Griffin Jax",
+        "matchup": "WSH@TB"
+      },
+      {
+        "name": "J.C. Escarra",
+        "rank": 142,
+        "composite": 0.372,
+        "opp_pitcher": "Rhett Lowder",
+        "matchup": "CIN@NYY"
+      },
+      {
+        "name": "Corbin Carroll",
+        "rank": 149,
+        "composite": 0.367,
+        "opp_pitcher": "Connor Prielipp",
+        "matchup": "MIN@AZ"
+      },
+      {
+        "name": "Cam Smith",
+        "rank": 172,
+        "composite": 0.344,
+        "opp_pitcher": "Tanner Bibee",
+        "matchup": "CLE@HOU"
+      },
+      {
+        "name": "Tyler Tolbert",
+        "rank": 181,
+        "composite": 0.335,
+        "opp_pitcher": "Michael McGreevy",
+        "matchup": "STL@KC"
+      },
+      {
+        "name": "Brandon Nimmo",
+        "rank": 182,
+        "composite": 0.331,
+        "opp_pitcher": "Randy V\u00e1squez",
+        "matchup": "SD@TEX"
+      },
+      {
+        "name": "Daniel Susac",
+        "rank": 185,
+        "composite": 0.326,
+        "opp_pitcher": "Lake Bachar",
+        "matchup": "SF@MIA"
+      },
+      {
+        "name": "Dominic Smith",
+        "rank": 211,
+        "composite": 0.287,
+        "opp_pitcher": "Jacob Misiorowski",
+        "matchup": "MIL@ATL"
+      },
+      {
+        "name": "Edgar Quero",
+        "rank": 244,
+        "composite": 0.216,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "CWS@DET"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Corbin Carroll",
+        "ev": 103.4,
+        "angle": 23.0,
+        "distance": 382.0,
+        "hr_in_parks": 27,
+        "result": "double",
+        "pitcher": "Prielipp, Connor"
+      },
+      {
+        "batter": "LuJames Groover",
+        "ev": 105.8,
+        "angle": 21.0,
+        "distance": 370.0,
+        "hr_in_parks": 20,
+        "result": "double",
+        "pitcher": "Prielipp, Connor"
+      },
+      {
+        "batter": "Oswald Peraza",
+        "ev": 108.7,
+        "angle": 21.0,
+        "distance": 405.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "Springs, Jeffrey"
+      },
+      {
+        "batter": "Dominic Smith",
+        "ev": 101.7,
+        "angle": 22.0,
+        "distance": 376.0,
+        "hr_in_parks": 16,
+        "result": "double",
+        "pitcher": "Yoho, Craig"
+      },
+      {
+        "batter": "Kazuma Okamoto",
+        "ev": 106.8,
+        "angle": 28.0,
+        "distance": 396.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Brown, Ben"
+      },
+      {
+        "batter": "Sterlin Thompson",
+        "ev": 100.9,
+        "angle": 33.0,
+        "distance": 406.0,
+        "hr_in_parks": 27,
+        "result": "field_out",
+        "pitcher": "Chandler, Bubba"
+      },
+      {
+        "batter": "Marcell Ozuna",
+        "ev": 100.7,
+        "angle": 35.0,
+        "distance": 412.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Freeland, Kyle"
+      },
+      {
+        "batter": "Esmerlyn Valdez",
+        "ev": 99.2,
+        "angle": 30.0,
+        "distance": 399.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Freeland, Kyle"
+      },
+      {
+        "batter": "Brandon Lowe",
+        "ev": 107.5,
+        "angle": 20.0,
+        "distance": 386.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Freeland, Kyle"
+      },
+      {
+        "batter": "Randal Grichuk",
+        "ev": 104.3,
+        "angle": 20.0,
+        "distance": 370.0,
+        "hr_in_parks": 2,
+        "result": "double",
+        "pitcher": "Anderson, Drew"
+      },
+      {
+        "batter": "Edgar Quero",
+        "ev": 102.9,
+        "angle": 29.0,
+        "distance": 414.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Skubal, Tarik"
+      },
+      {
+        "batter": "Cam Smith",
+        "ev": 108.9,
+        "angle": 29.0,
+        "distance": 394.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Sabrowski, Erik"
+      },
+      {
+        "batter": "Cam Smith",
+        "ev": 113.0,
+        "angle": 29.0,
+        "distance": 408.0,
+        "hr_in_parks": 24,
+        "result": "",
+        "pitcher": "Sabrowski, Erik"
+      },
+      {
+        "batter": "Jose Altuve",
+        "ev": 103.7,
+        "angle": 39.0,
+        "distance": 382.0,
+        "hr_in_parks": 15,
+        "result": "double",
+        "pitcher": "Espino, Daniel"
+      },
+      {
+        "batter": "Tyler Tolbert",
+        "ev": 102.2,
+        "angle": 29.0,
+        "distance": 400.0,
+        "hr_in_parks": 16,
+        "result": "sac_fly",
+        "pitcher": "Soriano, George"
+      },
+      {
+        "batter": "Salvador Perez",
+        "ev": 95.9,
+        "angle": 36.0,
+        "distance": 370.0,
+        "hr_in_parks": 22,
+        "result": "field_out",
+        "pitcher": "McGreevy, Michael"
+      },
+      {
+        "batter": "Daniel Susac",
+        "ev": 99.2,
+        "angle": 25.0,
+        "distance": 374.0,
+        "hr_in_parks": 25,
+        "result": "sac_fly",
+        "pitcher": "Bachar, Lake"
+      },
+      {
+        "batter": "Spencer Steer",
+        "ev": 101.3,
+        "angle": 28.0,
+        "distance": 400.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "Bednar, David"
+      },
+      {
+        "batter": "Jazz Chisholm Jr.",
+        "ev": 101.1,
+        "angle": 37.0,
+        "distance": 368.0,
+        "hr_in_parks": 12,
+        "result": "field_out",
+        "pitcher": "Lowder, Rhett"
+      },
+      {
+        "batter": "J.C. Escarra",
+        "ev": 97.7,
+        "angle": 28.0,
+        "distance": 393.0,
+        "hr_in_parks": 24,
+        "result": "field_out",
+        "pitcher": "Lowder, Rhett"
+      },
+      {
+        "batter": "Yandy D\u00edaz",
+        "ev": 97.0,
+        "angle": 29.0,
+        "distance": 388.0,
+        "hr_in_parks": 22,
+        "result": "field_out",
+        "pitcher": "Mikolas, Miles"
+      },
+      {
+        "batter": "James Wood",
+        "ev": 105.9,
+        "angle": 29.0,
+        "distance": 399.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Jax, Griffin"
+      },
+      {
+        "batter": "Brandon Nimmo",
+        "ev": 102.7,
+        "angle": 25.0,
+        "distance": 399.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "V\u00e1squez, Randy"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
