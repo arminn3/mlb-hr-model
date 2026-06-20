@@ -797,6 +797,7 @@ export function SlipGenerator({
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs bg-accent/15 text-accent border border-accent/30 rounded-full cursor-pointer hover:bg-accent/25"
                   >
                     {p.name}
+                    <span className="font-mono font-bold text-accent/90">{p.composite.toFixed(3)}</span>
                     <span className="text-accent/60">x</span>
                   </button>
                 ))}
