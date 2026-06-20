@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '0 3 * * *'    # 11:00 PM ET — next day's slate
     - cron: '0 12 * * *'   #  8:00 AM ET — morning update
-    - cron: '30 16 * * *'  # 12:30 PM ET — final pre-first-pitch lock (gives ~30min buffer before 1 PM day games)
+    - cron: '30 15 * * *'  # 11:30 AM ET — final pre-first-pitch lock (gives 90min buffer before 1 PM day games)
     - cron: '0 20 * * *'   #  4:00 PM ET — evening lineups (no-op if slate already locked)
     - cron: '0 23 * * *'   #  7:00 PM ET — late/west coast lineups (no-op if locked)
   workflow_dispatch:
