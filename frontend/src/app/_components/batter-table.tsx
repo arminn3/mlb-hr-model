@@ -377,7 +377,7 @@ export function BatterRow({
           <span className={`text-xs font-mono font-bold w-10 text-right flex-shrink-0 ${scoreColor(scores.composite)}`}>
             {scores.composite.toFixed(2)}
           </span>
-          {overrideInfo && Math.abs(overrideInfo.delta) >= 0.005 && (
+          {overrideInfo && Math.abs(overrideInfo.delta) >= 0.001 && (
             <span
               className="text-[9px] font-mono font-bold px-1 py-0.5 rounded flex-shrink-0"
               style={overrideInfo.delta > 0

@@ -67,6 +67,7 @@ export function ScratchedPitcherBanner({
   originalHand: "L" | "R";
   onClear: () => void;
 }) {
+  const hasScores = scratch.pitcherScoreVsL != null && scratch.pitcherScoreVsR != null;
   // Platoon flip = if the replacement throws with the opposite hand, every batter's
   // platoon advantage just flipped. Critical signal for HR betting.
   const platoonFlip = scratch.replacementHand !== originalHand;
@@ -91,7 +92,16 @@ export function ScratchedPitcherBanner({
         </span>
         {platoonFlip && (
           <span className="ml-2 text-[11px] font-semibold text-amber-400">
-            Platoon flip — ratings stale
+            Platoon flip
+          </span>
+        )}
+        {hasScores ? (
+          <span className="ml-2 text-[11px] font-mono text-foreground/70">
+            pitcher_score: vsL={scratch.pitcherScoreVsL!.toFixed(2)} · vsR={scratch.pitcherScoreVsR!.toFixed(2)}
+          </span>
+        ) : (
+          <span className="ml-2 text-[11px] font-mono text-amber-400">
+            Fetching split stats from MLB…
           </span>
         )}
       </div>
