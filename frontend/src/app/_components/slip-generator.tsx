@@ -468,9 +468,6 @@ function PlayerPickRow({
         <span className="text-[11px] text-muted hidden md:inline font-mono">
           {player.barrel_pct.toFixed(0)}% bar
         </span>
-        <span className={`font-mono text-[12px] font-bold hidden md:inline ${player.modelOdds <= 300 ? "text-accent-green" : player.modelOdds <= 500 ? "text-accent-yellow" : "text-muted"}`}>
-          {formatOdds(player.modelOdds)}
-        </span>
         <RatingBadge composite={player.composite} />
         <span className="font-mono text-sm font-semibold text-foreground w-14 text-right">
           {player.composite.toFixed(3)}
@@ -878,14 +875,7 @@ export function SlipGenerator({
               : "";
             const cardWarning = isSameGame || hasPartialSGP;
 
-            // Model parlay odds: product of individual HR probabilities
             const anchorThreshold = allPlayers.length >= 8 ? allPlayers[7].composite : 0;
-            const parlayProb = slip.players.reduce((prod, p) => {
-              const o = p.modelOdds;
-              const prob = o >= 0 ? 100 / (o + 100) : (-o) / (-o + 100);
-              return prod * prob;
-            }, 1);
-            const parlayOdds = Math.round(100 * (1 - parlayProb) / parlayProb);
 
             return (
             <div
@@ -925,11 +915,9 @@ export function SlipGenerator({
                   )}
                 </div>
                 <div className="text-right">
+                  <div className="text-[10px] uppercase tracking-wider text-muted/70">avg composite</div>
                   <div className="font-mono font-bold text-accent-green text-sm">
-                    {formatOdds(parlayOdds)} model
-                  </div>
-                  <div className="text-[10px] text-muted">
-                    avg {slip.avgComposite.toFixed(3)}
+                    {slip.avgComposite.toFixed(3)}
                   </div>
                 </div>
               </div>
@@ -969,8 +957,8 @@ export function SlipGenerator({
                       </div>
                     </div>
                     <div className="text-right shrink-0 ml-2">
-                      <div className={`font-mono text-sm font-bold ${p.modelOdds <= 300 ? "text-accent-green" : p.modelOdds <= 500 ? "text-accent-yellow" : "text-muted"}`}>
-                        {formatOdds(p.modelOdds)}
+                      <div className="font-mono text-sm font-bold text-foreground">
+                        {p.composite.toFixed(3)}
                       </div>
                       <div className="text-[10px] text-muted">
                         {p.barrel_pct.toFixed(0)}% bar / {p.fb_pct.toFixed(0)}% fb
@@ -996,7 +984,7 @@ export function SlipGenerator({
 
       <div className="mt-6 text-[10px] text-muted">
         {mode === "auto"
-          ? "Tiered auto: 1+ anchor (top 8 by score) + 1+ value pick (rank 9–35 with strong pitcher/env today). Model odds based on barrel%, pitcher HR/FB, and park. Compare to your book."
+          ? "Tiered auto: 1+ anchor (top 8 by score) + 1+ value pick (rank 9–35 with strong pitcher/env today)."
           : mode === "optimal"
           ? "Each player used exactly once. Slips sorted by best composite score."
           : "All possible combos from your selections. SGP = Same Game Parlay (1 game). Multi-game parlays shown first."}
