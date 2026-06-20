@@ -1096,60 +1096,64 @@ def print_results(games_out: list, game_date: date, schedule: list = None) -> No
     }
 
     # Save as latest + dated archive in frontend/public/data/
-    # Per-game lock: each game's scores freeze at its OWN scheduled start time.
-    # A 2 PM game locks at 2 PM, leaving 6 PM games still updateable. The old
-    # slate-wide lock locked all 14 games at the first game's start, which was
-    # unfair to the 13 later games when only 1 early game had started.
+    # SLATE-WIDE LOCK: once the first scheduled game of the day starts, ALL
+    # rankings for ALL games freeze. Composite/batter/pitcher/env scores stay
+    # identical for the rest of the day. The only allowed post-lock "change"
+    # is the UI filtering out batters who aren't playing (Refresh Lineups
+    # button) — that's a display-side filter, not a re-score.
     data_dir = Path("frontend/public/data")
     data_dir.mkdir(parents=True, exist_ok=True)
     dated_name = f"{game_date.isoformat()}.json"
     dated_path = data_dir / dated_name
 
     from datetime import datetime, timezone
-    now_utc = datetime.now(timezone.utc)
-
-    # Map each game_pk to its scheduled start time for the per-game lock.
-    game_start_utc: dict[int, datetime] = {}
+    first_game_utc: datetime | None = None
     for g in schedule:
         utc_str = g.get("game_datetime_utc", "")
         if utc_str:
             try:
-                game_start_utc[g["game_pk"]] = datetime.fromisoformat(utc_str.replace("Z", "+00:00"))
+                t = datetime.fromisoformat(utc_str.replace("Z", "+00:00"))
+                if first_game_utc is None or t < first_game_utc:
+                    first_game_utc = t
             except ValueError:
                 pass
 
-    if dated_path.exists():
+    now_utc = datetime.now(timezone.utc)
+    slate_locked = first_game_utc is not None and now_utc >= first_game_utc
+
+    if first_game_utc:
+        first_et_hour = (first_game_utc.hour - 4) % 24
+        first_et_min = first_game_utc.minute
+        ampm = "AM" if first_et_hour < 12 else "PM"
+        display_h = first_et_hour % 12 or 12
+        print(f"  First game: {display_h}:{first_et_min:02d} {ampm} ET  |  Slate locked: {slate_locked}")
+
+    if dated_path.exists() and slate_locked:
+        # First game has started — freeze ALL existing scores so global rankings never drift.
+        # Only brand-new games not previously in the data get fresh scores.
         try:
             with open(dated_path) as f:
                 existing = json.load(f)
             existing_games = {g["game_pk"]: g for g in existing.get("games", [])}
-            new_game_pks = {g["game_pk"] for g in games_out}
 
             merged_games = []
-            locked_count = 0
-            updated_count = 0
+            new_game_pks = {g["game_pk"] for g in games_out}
             for game in games_out:
                 gpk = game["game_pk"]
-                start = game_start_utc.get(gpk)
-                # Lock this game only if its OWN start time has passed.
-                game_locked = start is not None and now_utc >= start
-                if game_locked and gpk in existing_games:
+                if gpk in existing_games:
                     merged_games.append(existing_games[gpk])
-                    locked_count += 1
                 else:
                     merged_games.append(game)
-                    updated_count += 1
 
-            # Carry over any existing game that's no longer in today's schedule
             for gpk, existing_game in existing_games.items():
                 if gpk not in new_game_pks:
                     merged_games.append(existing_game)
 
             games_out = merged_games
             frontend_data["games"] = _clean_for_json(games_out)
-            print(f"  Per-game lock: {locked_count} games frozen (started), {updated_count} updated.")
+            print(f"  Slate frozen: {len(existing_games)} games locked, rankings will not change.")
         except Exception as e:
-            print(f"  WARNING: per-game lock failed ({e}) — writing fresh data.")
+            print(f"  WARNING: slate lock failed ({e}) — writing fresh data.")
 
     for path in [data_dir / "latest.json", dated_path]:
         with open(path, "w") as f:
