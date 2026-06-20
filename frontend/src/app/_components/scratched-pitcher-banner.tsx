@@ -136,15 +136,24 @@ export function MarkScratchedButton({
 
   // Only this team's pitchers — replacements come from the team's own roster.
   // ATH/OAK alias maps to the same Athletics team for the Vegas-era roster.
-  const teamPitchers = pitchers.filter((p) => p.teamAbbr === teamAbbr
+  // Unassigned pitchers (no team in MLB API — usually just-traded / call-ups
+  // whose roster hasn't propagated yet) are included as a fallback so the user
+  // can still find them. Empty-string teamAbbr means "no team data."
+  const teamPitchers = pitchers.filter((p) =>
+    p.teamAbbr === teamAbbr
     || (teamAbbr === "ATH" && p.teamAbbr === "OAK")
-    || (teamAbbr === "OAK" && p.teamAbbr === "ATH"));
+    || (teamAbbr === "OAK" && p.teamAbbr === "ATH")
+    || p.teamAbbr === ""
+  );
 
   // When the input is empty, show the whole roster so the user can browse.
+  // Surface real team members first, unassigned ("just traded") below them.
   const suggestions = (query.trim().length === 0
     ? teamPitchers
     : teamPitchers.filter((p) => p.name.toLowerCase().includes(query.trim().toLowerCase()))
-  ).slice(0, 10);
+  )
+    .sort((a, b) => (a.teamAbbr === "" ? 1 : 0) - (b.teamAbbr === "" ? 1 : 0))
+    .slice(0, 12);
 
   const commit = (pitcher: PitcherOption) => {
     onSave(pitcher.name, pitcher.hand);
@@ -224,8 +233,12 @@ export function MarkScratchedButton({
             >
               <span className="text-[13px] text-foreground font-medium truncate">{p.name}</span>
               <span className="flex items-center gap-1.5 flex-shrink-0">
-                {p.teamAbbr && (
+                {p.teamAbbr ? (
                   <span className="text-[10px] text-foreground/55 font-mono">{p.teamAbbr}</span>
+                ) : (
+                  <span className="text-[9px] uppercase tracking-wider font-bold text-amber-400/85" title="No team data in MLB API — recently traded/promoted">
+                    Recent move
+                  </span>
                 )}
                 <span
                   className="px-1.5 py-0.5 text-[10px] font-mono font-bold rounded"
