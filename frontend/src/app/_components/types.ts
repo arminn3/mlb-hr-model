@@ -120,6 +120,9 @@ export interface PitcherProfile {
   arsenal_vs_R?: PitcherArsenalEntry[];
   recent_logs_vs_L?: PitcherGameLog[];
   recent_logs_vs_R?: PitcherGameLog[];
+  /** Rolling stat rows over the pitcher's most recent N starts. Same shape
+   *  as `rows.season`. Populated by metrics.build_pitcher_profile. */
+  windows?: Partial<Record<"last_1" | "last_3" | "last_5" | "last_7" | "last_10", PitcherStatRow>>;
   wins: number;
   losses: number;
   games_started: number;

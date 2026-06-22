@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import type { GameData, PitcherStatRow } from "./types";
 
 type Split = "season" | "vs_L" | "vs_R";
+type Window = "season" | "last_10" | "last_7" | "last_5" | "last_3" | "last_1";
 type SortDir = "asc" | "desc";
 type SortKey =
   | "name" | "team" | "gameTime"
@@ -110,6 +111,7 @@ function SortTh({
 
 export function PitcherSummaryPage({ games }: { games: GameData[] }) {
   const [split, setSplit] = useState<Split>("season");
+  const [windowKey, setWindowKey] = useState<Window>("season");
   const [sortKey, setSortKey] = useState<SortKey>("gameTime");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
 
@@ -123,10 +125,16 @@ export function PitcherSummaryPage({ games }: { games: GameData[] }) {
         if (!pitcher?.name) continue;
         const profile = pitcher.profile ?? null;
         let row: PitcherStatRow | null = null;
-        if (profile?.rows) {
-          row = split === "vs_L" ? profile.rows.vs_L
-              : split === "vs_R" ? profile.rows.vs_R
-              : profile.rows.season;
+        if (profile) {
+          // Window selector overrides the L/R split — windows are overall only.
+          // Falls back to season if the window data isn't available.
+          if (windowKey !== "season") {
+            row = profile.windows?.[windowKey] ?? profile.rows?.season ?? null;
+          } else if (profile.rows) {
+            row = split === "vs_L" ? profile.rows.vs_L
+                : split === "vs_R" ? profile.rows.vs_R
+                : profile.rows.season;
+          }
         }
         entries.push({
           name: pitcher.name,
@@ -163,7 +171,7 @@ export function PitcherSummaryPage({ games }: { games: GameData[] }) {
       if (typeof va === "string" && typeof vb === "string") return mult * va.localeCompare(vb);
       return mult * ((va as number) - (vb as number));
     });
-  }, [games, split, sortKey, sortDir]);
+  }, [games, split, windowKey, sortKey, sortDir]);
 
   function handleSort(key: SortKey) {
     if (key === sortKey) {
@@ -180,26 +188,67 @@ export function PitcherSummaryPage({ games }: { games: GameData[] }) {
     { key: "vs_R",   label: "vs RHB" },
   ];
 
+  const WINDOWS: { key: Window; label: string }[] = [
+    { key: "season",  label: "Season" },
+    { key: "last_10", label: "Last 10" },
+    { key: "last_7",  label: "Last 7" },
+    { key: "last_5",  label: "Last 5" },
+    { key: "last_3",  label: "Last 3" },
+    { key: "last_1",  label: "Last 1" },
+  ];
+
+  // Selecting a non-season window forces the L/R split back to season (the
+  // window stats are overall only — we don't compute L/R splits per window).
+  const onWindowChange = (k: Window) => {
+    setWindowKey(k);
+    if (k !== "season") setSplit("season");
+  };
+
   return (
     <div>
       {/* Controls */}
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        {/* Split toggle */}
+        {/* Window selector — Season / Last N starts (overall, no L/R) */}
         <div className="flex items-center gap-1">
-          {SPLITS.map(s => (
+          {WINDOWS.map(w => (
             <button
-              key={s.key}
-              onClick={() => setSplit(s.key)}
+              key={w.key}
+              onClick={() => onWindowChange(w.key)}
               className={
                 "px-3 py-1.5 text-[12px] font-semibold rounded-[var(--radius-md)] cursor-pointer transition-colors " +
-                (split === s.key
+                (windowKey === w.key
                   ? "bg-accent/15 text-accent border border-accent/40"
                   : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
               }
             >
-              {s.label}
+              {w.label}
             </button>
           ))}
+        </div>
+
+        {/* Split toggle — disabled when a Last-N window is active */}
+        <div className="flex items-center gap-1">
+          {SPLITS.map(s => {
+            const disabled = windowKey !== "season";
+            return (
+              <button
+                key={s.key}
+                onClick={() => !disabled && setSplit(s.key)}
+                disabled={disabled}
+                title={disabled ? "L/R splits unavailable inside Last N windows" : undefined}
+                className={
+                  "px-3 py-1.5 text-[12px] font-semibold rounded-[var(--radius-md)] transition-colors " +
+                  (disabled
+                    ? "bg-transparent text-foreground/30 border border-[#2c2c2e] cursor-not-allowed"
+                    : split === s.key
+                      ? "bg-accent/15 text-accent border border-accent/40 cursor-pointer"
+                      : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e] cursor-pointer")
+                }
+              >
+                {s.label}
+              </button>
+            );
+          })}
         </div>
 
         {/* Legend */}

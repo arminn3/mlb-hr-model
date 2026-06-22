@@ -105,6 +105,20 @@ def build_pitcher_profile(pitcher_df: pd.DataFrame, pitcher_id: int = None,
         out["recent_logs_vs_L"] = _build_game_logs(df[df["stand"] == "L"])
         out["recent_logs_vs_R"] = _build_game_logs(df[df["stand"] == "R"])
 
+    # Rolling-window stat rows — Last N starts for the pitcher summary page.
+    # We reuse _compute_row on a date-filtered subset of pitcher_df for each
+    # window so every column lines up exactly with the Season row.
+    if "game_date" in df.columns:
+        all_dates = sorted(pd.to_datetime(df["game_date"], errors="coerce").dropna().dt.date.unique(), reverse=True)
+        windows: dict = {}
+        for n in (1, 3, 5, 7, 10):
+            window_dates = set(all_dates[:n])
+            if not window_dates:
+                continue
+            sub = df[pd.to_datetime(df["game_date"], errors="coerce").dt.date.isin(window_dates)]
+            windows[f"last_{n}"] = _compute_row(sub)
+        out["windows"] = windows
+
     return out
 
 
