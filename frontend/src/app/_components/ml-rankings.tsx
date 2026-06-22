@@ -450,20 +450,45 @@ export function MLRankings({
   // starters survive; for teams that haven't posted yet, all candidates remain.
   // This way we never hide someone based on a non-decision.
   const confirmedStarters = useMemo(() => {
-    const starterSet = new Set(lineupOverride?.starters ?? []);
-    const postedTeamSet = new Set(lineupOverride?.postedTeams ?? []);
+    // Two sources of truth, in priority order:
+    //   1. Manual lineup override (user clicked "Refresh Lineups") — wins for
+    //      teams the user explicitly fetched. Lets them force a refresh when
+    //      the cron is behind.
+    //   2. Slate's team_pitch_mix.lineup_status — populated by patch_lineups.py
+    //      every 15 min. When status === "posted", only batters with order 1-9
+    //      are in tonight's lineup. Otherwise we don't know yet, include all
+    //      candidates from that team.
+    const overrideStarters = new Set(lineupOverride?.starters ?? []);
+    const overridePostedTeams = new Set(lineupOverride?.postedTeams ?? []);
+
     const result = new Set<string>();
     for (const game of games) {
-      const awayTeam = game.away_team;
-      const homeTeam = game.home_team;
-      for (const p of game.players) {
-        const team = p.batter_side === "away" ? awayTeam : homeTeam;
-        // If this player's team has a posted lineup, only include them if in the 9.
-        // Otherwise keep them — we don't know they're out.
-        if (postedTeamSet.has(team)) {
-          if (starterSet.has(p.name)) result.add(p.name);
+      const tpm = game.team_pitch_mix;
+      for (const side of ["away", "home"] as const) {
+        const team = side === "away" ? game.away_team : game.home_team;
+        const sideData = tpm?.[side];
+        const overrideHasThisTeam = overridePostedTeams.has(team);
+        const slatePosted = sideData?.lineup_status === "posted";
+
+        if (overrideHasThisTeam) {
+          // Manual override is the truth for this team.
+          for (const p of game.players) {
+            if (p.batter_side === side && overrideStarters.has(p.name)) {
+              result.add(p.name);
+            }
+          }
+        } else if (slatePosted && sideData) {
+          // Slate's posted lineup wins — only the 9 starters survive.
+          for (const b of sideData.batters) {
+            if (b.order != null && b.order >= 1 && b.order <= 9) {
+              result.add(b.name);
+            }
+          }
         } else {
-          result.add(p.name);
+          // Lineup not yet posted for this team — keep all candidates.
+          for (const p of game.players) {
+            if (p.batter_side === side) result.add(p.name);
+          }
         }
       }
     }

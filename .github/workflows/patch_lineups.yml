@@ -1,0 +1,63 @@
+name: Patch Posted Lineups
+
+# Runs every 15 min during the pre-game window. Calls patch_lineups.py which
+# reads each team's posted lineup from MLB Stats API and patches
+# team_pitch_mix.{side}.lineup_status / batters[].order in the slate JSON.
+# This is what makes the rankings auto-filter to the 9 confirmed starters
+# without the user needing to click "Refresh Lineups" — the slate itself
+# carries the posted-lineup state, and the frontend reads it.
+
+on:
+  schedule:
+    - cron: '*/15 12-20 * * *'   # 8:00 AM - 4:45 PM ET, every 15 min
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Date (YYYY-MM-DD). Default: today.'
+        required: false
+        default: ''
+
+concurrency:
+  group: patch-lineups
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Run patch
+        run: |
+          if [ -n "${{ github.event.inputs.date }}" ]; then
+            python3 patch_lineups.py --date ${{ github.event.inputs.date }}
+          else
+            python3 patch_lineups.py --date $(date -u +'%Y-%m-%d')
+          fi
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet frontend/public/data; then
+            echo "no lineup changes — skipping commit"
+            exit 0
+          fi
+          git add frontend/public/data
+          git commit -m "auto: patch posted lineups $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase
+          git push
