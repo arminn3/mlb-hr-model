@@ -619,6 +619,22 @@ export function Dashboard() {
               isFavorited={favorites.has(selectedBatter.player.name)}
               onToggleFavorite={onToggleFavorite}
               parkFactor={selectedBatter.parkFactor}
+              opposingArsenal={(() => {
+                // Find the opposing pitcher's full vs-hand arsenal. batter_side
+                // "home" faces away_pitcher; "away" faces home_pitcher. Falls
+                // back to the overall arsenal if no hand-specific one exists.
+                const game = data.games.find((g) =>
+                  g.players.some((p) => p.name === selectedBatter.player.name)
+                );
+                if (!game) return null;
+                const oppPitcher = selectedBatter.player.batter_side === "home"
+                  ? game.away_pitcher : game.home_pitcher;
+                const prof = oppPitcher?.profile;
+                if (!prof) return null;
+                if (selectedBatter.player.batter_hand === "L") return prof.arsenal_vs_L ?? prof.arsenal ?? null;
+                if (selectedBatter.player.batter_hand === "R") return prof.arsenal_vs_R ?? prof.arsenal ?? null;
+                return prof.arsenal ?? null;
+              })()}
             />
           ) : activePage === "slate" && (
             <>

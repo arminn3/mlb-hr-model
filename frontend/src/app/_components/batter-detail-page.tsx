@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ArrowLeft } from "lucide-react";
 import type { PlayerData, PitchDetailEntry, ZoneEntry } from "./types";
 import { HRSignalCard } from "./hr-signal-card";
@@ -264,6 +264,7 @@ export function BatterDetailPage({
   isFavorited,
   onToggleFavorite,
   parkFactor,
+  opposingArsenal,
 }: {
   player: PlayerData;
   lookback: UILookback;
@@ -274,9 +275,13 @@ export function BatterDetailPage({
   isFavorited?: boolean;
   onToggleFavorite?: (name: string) => void;
   parkFactor?: number;
+  /** Full arsenal the opposing pitcher throws vs this batter's hand. Sourced
+   *  from `pitcher.profile.arsenal_vs_L | arsenal_vs_R`. When present, this is
+   *  the authoritative pitch-chip source — overrides `player.pitch_types`
+   *  which is pre-stripped at backend's 12% min usage. */
+  opposingArsenal?: import("./types").PitcherArsenalEntry[] | null;
 }) {
   const [detailTab, setDetailTab] = useState<"abs" | "statcast" | "pitches" | "bvp" | "profile">("abs");
-  const [pitchFilter, setPitchFilter] = useState<Set<string>>(new Set());
   const [activeLookback, setActiveLookback] = useState<UILookback>(lookback);
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }); }, []);
@@ -284,6 +289,31 @@ export function BatterDetailPage({
   const scores = scoreFor(player, activeLookback) ?? scoreFor(player, "L5")!;
   const pitchDetail = player.pitch_detail || {};
   const pitchTypes = player.pitch_types || [];
+
+  // Authoritative chip list: prefer the opposing pitcher's vs-hand arsenal
+  // (every pitch the pitcher actually throws to this batter's hand, even
+  // sub-12% rarities). Falls back to the stripped player.pitch_types only
+  // when the pitcher profile isn't loaded.
+  const chipList = useMemo<{ type: string; usage: number }[]>(() => {
+    const fromArsenal = (opposingArsenal ?? [])
+      .filter((e) => (e.usage_pct ?? 0) > 0)
+      .map((e) => ({ type: e.type, usage: e.usage_pct }));
+    if (fromArsenal.length > 0) return fromArsenal.sort((a, b) => b.usage - a.usage);
+    // Fallback: use the stripped pitch_types list.
+    return pitchTypes
+      .map((pt) => ({ type: pt, usage: pitchDetail[pt]?.usage_pct ?? 0 }))
+      .sort((a, b) => b.usage - a.usage);
+  }, [opposingArsenal, pitchTypes, pitchDetail]);
+
+  // Default-select pitches >= 12% usage. Re-defaults whenever the chip list
+  // changes (different batter / different game / lookback updates).
+  const defaultSelected = useMemo(
+    () => new Set(chipList.filter((c) => c.usage >= 12).map((c) => c.type)),
+    [chipList]
+  );
+  const [pitchFilter, setPitchFilter] = useState<Set<string>>(defaultSelected);
+  // When the chip list changes (new batter opened), reset to the new default.
+  useEffect(() => { setPitchFilter(defaultSelected); }, [defaultSelected]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pitchAbsData = (scores as any).pitch_abs as Record<string, Array<Record<string, unknown>>> | undefined;
@@ -467,21 +497,6 @@ export function BatterDetailPage({
         {/* Score bar */}
         <ScoreBar value={scores.composite} />
 
-        {/* Stat cards */}
-        <div className="grid grid-cols-3 gap-2">
-          {statCards.map(({ label, value, cls }) => (
-            <div key={label} className="flex flex-col items-center justify-center gap-1.5 px-3 py-3 rounded-xl"
-              style={{
-                background: "linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)",
-                border: "1px solid rgba(255,255,255,0.10)",
-                boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.14), inset 0 -1px 0 0 rgba(0,0,0,0.35), 0 4px 10px -2px rgba(0,0,0,0.55)",
-              }}>
-              <span className="text-[10px] uppercase tracking-[0.08em] text-muted/60 leading-none">{label}</span>
-              <span className={`font-mono text-base font-semibold leading-none ${cls}`}>{value}</span>
-            </div>
-          ))}
-        </div>
-
         {/* HR Signal */}
         <HRSignalCard player={player} />
 
@@ -616,37 +631,58 @@ export function BatterDetailPage({
           </div>
         )}
 
-        {/* Pitch filter chips — strictly the opposing pitcher's arsenal.
-            Filtered to types with non-trivial usage (≥5%) so phantom or
-            once-thrown pitches don't clutter the chip row. Sorted by usage
-            descending so the primary pitch is leftmost. */}
-        {(() => {
-          const arsenalChips = pitchTypes
-            .filter((pt) => (pitchDetail[pt]?.usage_pct ?? 0) >= 5)
-            .sort((a, b) => (pitchDetail[b]?.usage_pct ?? 0) - (pitchDetail[a]?.usage_pct ?? 0));
-          if (arsenalChips.length === 0) return null;
-          return (
-            <div className="flex flex-wrap items-center gap-1.5">
-              <button onClick={() => setPitchFilter(new Set())}
-                className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all ${pitchFilter.size === 0 ? "bg-accent/20 text-accent border border-accent/40" : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"}`}>
-                All Pitches
-              </button>
-              {arsenalChips.map((pt) => {
-                const detail = pitchDetail[pt];
-                const tipText = detail ? `${PITCH_NAMES[pt]?.[0] || pt} — ${detail.usage_pct}% of pitches. Barrel: ${detail.barrel_rate}%, FB: ${detail.fb_rate}%, EV: ${detail.avg_exit_velo}` : (PITCH_NAMES[pt]?.[0] || pt);
-                const sel = pitchFilter.has(pt);
-                return (
-                  <Tooltip key={pt} text={tipText}>
-                    <button onClick={() => setPitchFilter((prev) => { const next = new Set(prev); if (next.has(pt)) next.delete(pt); else next.add(pt); return next; })}
-                      className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all ${sel ? "bg-accent/20 text-accent border border-accent/40" : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"}`}>
-                      {pt}{detail ? ` ${detail.usage_pct}%` : ""}
-                    </button>
-                  </Tooltip>
-                );
-              })}
+        {/* Stat cards — sit directly above the pitch filter so the user can
+            see the numbers and the chip controls together. Both windows
+            (L5/L10/Season) AND selected pitches drive these values. */}
+        <div className="grid grid-cols-3 gap-2">
+          {statCards.map(({ label, value, cls }) => (
+            <div key={label} className="flex flex-col items-center justify-center gap-1.5 px-3 py-3 rounded-xl"
+              style={{
+                background: "linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)",
+                border: "1px solid rgba(255,255,255,0.10)",
+                boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.14), inset 0 -1px 0 0 rgba(0,0,0,0.35), 0 4px 10px -2px rgba(0,0,0,0.55)",
+              }}>
+              <span className="text-[10px] uppercase tracking-[0.08em] text-muted/60 leading-none">{label}</span>
+              <span className={`font-mono text-base font-semibold leading-none ${cls}`}>{value}</span>
             </div>
-          );
-        })()}
+          ))}
+        </div>
+
+        {/* Pitch filter chips — strictly the opposing pitcher's vs-hand arsenal.
+            Every pitch the pitcher actually throws to this hand appears (no
+            usage threshold). Default selection is ≥12% (auto-set). Clicking
+            "All Pitches" toggles between selecting everything and clearing
+            so the user can isolate single pitches. */}
+        {chipList.length > 0 && (
+          <div className="flex flex-wrap items-center gap-1.5">
+            <button
+              onClick={() => {
+                // Toggle: if everything is already selected, clear so the user
+                // can hand-pick chips. Otherwise select the whole arsenal.
+                if (pitchFilter.size === chipList.length) setPitchFilter(new Set());
+                else setPitchFilter(new Set(chipList.map((c) => c.type)));
+              }}
+              className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all ${pitchFilter.size === chipList.length ? "bg-accent/20 text-accent border border-accent/40" : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"}`}>
+              All Pitches
+            </button>
+            {chipList.map(({ type: pt, usage }) => {
+              const detail = pitchDetail[pt];
+              const name = PITCH_NAMES[pt]?.[0] || pt;
+              const tipText = detail
+                ? `${name} — ${usage}% of pitches. Barrel: ${detail.barrel_rate}%, FB: ${detail.fb_rate}%, EV: ${detail.avg_exit_velo}`
+                : `${name} — ${usage}% of pitches`;
+              const sel = pitchFilter.has(pt);
+              return (
+                <Tooltip key={pt} text={tipText}>
+                  <button onClick={() => setPitchFilter((prev) => { const next = new Set(prev); if (next.has(pt)) next.delete(pt); else next.add(pt); return next; })}
+                    className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all ${sel ? "bg-accent/20 text-accent border border-accent/40" : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"}`}>
+                    {pt} {usage}%
+                  </button>
+                </Tooltip>
+              );
+            })}
+          </div>
+        )}
 
         {/* Tabs */}
         <div>
