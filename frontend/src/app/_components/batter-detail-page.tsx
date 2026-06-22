@@ -616,28 +616,37 @@ export function BatterDetailPage({
           </div>
         )}
 
-        {/* Pitch filter chips */}
-        {pitchTypes.length > 0 && (
-          <div className="flex flex-wrap items-center gap-1.5">
-            <button onClick={() => setPitchFilter(new Set())}
-              className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all ${pitchFilter.size === 0 ? "bg-accent/20 text-accent border border-accent/40" : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"}`}>
-              All Pitches
-            </button>
-            {pitchTypes.map((pt) => {
-              const detail = pitchDetail[pt];
-              const tipText = detail ? `${PITCH_NAMES[pt]?.[0] || pt} — ${detail.usage_pct}% of pitches. Barrel: ${detail.barrel_rate}%, FB: ${detail.fb_rate}%, EV: ${detail.avg_exit_velo}` : (PITCH_NAMES[pt]?.[0] || pt);
-              const sel = pitchFilter.has(pt);
-              return (
-                <Tooltip key={pt} text={tipText}>
-                  <button onClick={() => setPitchFilter((prev) => { const next = new Set(prev); if (next.has(pt)) next.delete(pt); else next.add(pt); return next; })}
-                    className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all ${sel ? "bg-accent/20 text-accent border border-accent/40" : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"}`}>
-                    {pt}{detail ? ` ${detail.usage_pct}%` : ""}
-                  </button>
-                </Tooltip>
-              );
-            })}
-          </div>
-        )}
+        {/* Pitch filter chips — strictly the opposing pitcher's arsenal.
+            Filtered to types with non-trivial usage (≥5%) so phantom or
+            once-thrown pitches don't clutter the chip row. Sorted by usage
+            descending so the primary pitch is leftmost. */}
+        {(() => {
+          const arsenalChips = pitchTypes
+            .filter((pt) => (pitchDetail[pt]?.usage_pct ?? 0) >= 5)
+            .sort((a, b) => (pitchDetail[b]?.usage_pct ?? 0) - (pitchDetail[a]?.usage_pct ?? 0));
+          if (arsenalChips.length === 0) return null;
+          return (
+            <div className="flex flex-wrap items-center gap-1.5">
+              <button onClick={() => setPitchFilter(new Set())}
+                className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all ${pitchFilter.size === 0 ? "bg-accent/20 text-accent border border-accent/40" : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"}`}>
+                All Pitches
+              </button>
+              {arsenalChips.map((pt) => {
+                const detail = pitchDetail[pt];
+                const tipText = detail ? `${PITCH_NAMES[pt]?.[0] || pt} — ${detail.usage_pct}% of pitches. Barrel: ${detail.barrel_rate}%, FB: ${detail.fb_rate}%, EV: ${detail.avg_exit_velo}` : (PITCH_NAMES[pt]?.[0] || pt);
+                const sel = pitchFilter.has(pt);
+                return (
+                  <Tooltip key={pt} text={tipText}>
+                    <button onClick={() => setPitchFilter((prev) => { const next = new Set(prev); if (next.has(pt)) next.delete(pt); else next.add(pt); return next; })}
+                      className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all ${sel ? "bg-accent/20 text-accent border border-accent/40" : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"}`}>
+                      {pt}{detail ? ` ${detail.usage_pct}%` : ""}
+                    </button>
+                  </Tooltip>
+                );
+              })}
+            </div>
+          );
+        })()}
 
         {/* Tabs */}
         <div>
