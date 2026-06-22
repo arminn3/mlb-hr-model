@@ -22,10 +22,13 @@ const PITCH_NAMES: Record<string, string[]> = {
   CU: ["Curveball", "Curve"],
   CH: ["Changeup"],
   FS: ["Split-Finger", "Splitter"],
+  FO: ["Forkball"],
   KC: ["Knuckle Curve"],
   KN: ["Knuckleball"],
   ST: ["Sweeper"],
   SV: ["Slurve"],
+  SC: ["Screwball"],
+  EP: ["Eephus"],
 };
 
 function evColor(_ev: number) {
