@@ -294,7 +294,7 @@
   ],
   "total_players_ranked": 263,
   "total_hrs_hit": 36,
-  "total_near_hrs": 0,
+  "total_near_hrs": 14,
   "model_hits": 33,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -343,7 +343,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 14,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -369,28 +369,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 3,
-      "rate": 30.0
+      "hits": 4,
+      "rate": 40.0
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 6,
+      "rate": 30.0
     },
     "top_30": {
       "total": 30,
-      "hits": 5,
-      "rate": 16.7
+      "hits": 7,
+      "rate": 23.3
     },
     "all": {
       "total": 263,
-      "hits": 33,
-      "rate": 12.5
+      "hits": 47,
+      "rate": 17.9
     }
   },
   "avg_composite_hr_hitters": 0.446,
-  "avg_composite_non_hitters": 0.399,
-  "composite_separation": 0.047,
+  "avg_composite_non_hitters": 0.396,
+  "composite_separation": 0.05,
   "hr_hitters": [
     {
       "name": "Ben Rice",
@@ -857,8 +857,252 @@
       "matchup": "WSH@TB"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Logan O'Hoppe",
+      "rank": 8,
+      "composite": 0.753,
+      "opp_pitcher": "Jack Perkins",
+      "matchup": "LAA@ATH"
+    },
+    {
+      "name": "Daniel Schneemann",
+      "rank": 14,
+      "composite": 0.717,
+      "opp_pitcher": "Kai-Wei Teng",
+      "matchup": "CLE@HOU"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 33,
+      "composite": 0.595,
+      "opp_pitcher": "Ryan Gusto",
+      "matchup": "SF@MIA"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 34,
+      "composite": 0.593,
+      "opp_pitcher": "Keider Montero",
+      "matchup": "CWS@DET"
+    },
+    {
+      "name": "Josh Naylor",
+      "rank": 81,
+      "composite": 0.451,
+      "opp_pitcher": "Payton Tolle",
+      "matchup": "BOS@SEA"
+    },
+    {
+      "name": "Petey Halpin",
+      "rank": 85,
+      "composite": 0.444,
+      "opp_pitcher": "Kai-Wei Teng",
+      "matchup": "CLE@HOU"
+    },
+    {
+      "name": "Junior Caminero",
+      "rank": 88,
+      "composite": 0.435,
+      "opp_pitcher": "Andrew Alvarez",
+      "matchup": "WSH@TB"
+    },
+    {
+      "name": "Kerry Carpenter",
+      "rank": 128,
+      "composite": 0.397,
+      "opp_pitcher": "Davis Martin",
+      "matchup": "CWS@DET"
+    },
+    {
+      "name": "Ketel Marte",
+      "rank": 132,
+      "composite": 0.389,
+      "opp_pitcher": "Mike Paredes",
+      "matchup": "MIN@AZ"
+    },
+    {
+      "name": "Luke Keaschall",
+      "rank": 184,
+      "composite": 0.307,
+      "opp_pitcher": "Jose Cabrera",
+      "matchup": "MIN@AZ"
+    },
+    {
+      "name": "Dylan Crews",
+      "rank": 185,
+      "composite": 0.306,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "WSH@TB"
+    },
+    {
+      "name": "James Wood",
+      "rank": 195,
+      "composite": 0.291,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "WSH@TB"
+    },
+    {
+      "name": "Alec Burleson",
+      "rank": 222,
+      "composite": 0.257,
+      "opp_pitcher": "Stephen Kolek",
+      "matchup": "STL@KC"
+    },
+    {
+      "name": "David Hamilton",
+      "rank": 232,
+      "composite": 0.245,
+      "opp_pitcher": "Bryce Elder",
+      "matchup": "MIL@ATL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Ketel Marte",
+      "ev": 109.1,
+      "angle": 17.0,
+      "distance": 399.0,
+      "hr_in_parks": 18,
+      "result": "field_out",
+      "pitcher": "Morris, Andrew"
+    },
+    {
+      "batter": "Luke Keaschall",
+      "ev": 102.9,
+      "angle": 35.0,
+      "distance": 390.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Cabrera, Jose"
+    },
+    {
+      "batter": "Logan O'Hoppe",
+      "ev": 98.4,
+      "angle": 33.0,
+      "distance": 399.0,
+      "hr_in_parks": 21,
+      "result": "field_out",
+      "pitcher": "Alvarado, Elvis"
+    },
+    {
+      "batter": "David Hamilton",
+      "ev": 104.6,
+      "angle": 21.0,
+      "distance": 387.0,
+      "hr_in_parks": 17,
+      "result": "double",
+      "pitcher": "Elder, Bryce"
+    },
+    {
+      "batter": "Billy Cook",
+      "ev": 102.5,
+      "angle": 29.0,
+      "distance": 420.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Brebbia, John"
+    },
+    {
+      "batter": "Billy Cook",
+      "ev": 108.2,
+      "angle": 30.0,
+      "distance": 423.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Brebbia, John"
+    },
+    {
+      "batter": "Kerry Carpenter",
+      "ev": 100.6,
+      "angle": 35.0,
+      "distance": 389.0,
+      "hr_in_parks": 25,
+      "result": "field_out",
+      "pitcher": "Taylor, Grant"
+    },
+    {
+      "batter": "Colson Montgomery",
+      "ev": 102.4,
+      "angle": 31.0,
+      "distance": 401.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Montero, Keider"
+    },
+    {
+      "batter": "Daniel Schneemann",
+      "ev": 99.2,
+      "angle": 33.0,
+      "distance": 391.0,
+      "hr_in_parks": 5,
+      "result": "field_out",
+      "pitcher": "Teng, Kai-Wei"
+    },
+    {
+      "batter": "Petey Halpin",
+      "ev": 99.1,
+      "angle": 30.0,
+      "distance": 395.0,
+      "hr_in_parks": 29,
+      "result": "triple",
+      "pitcher": "Teng, Kai-Wei"
+    },
+    {
+      "batter": "Alec Burleson",
+      "ev": 104.6,
+      "angle": 32.0,
+      "distance": 414.0,
+      "hr_in_parks": 28,
+      "result": "",
+      "pitcher": "Strahm, Matt"
+    },
+    {
+      "batter": "Casey Schmitt",
+      "ev": 101.8,
+      "angle": 32.0,
+      "distance": 398.0,
+      "hr_in_parks": 25,
+      "result": "field_out",
+      "pitcher": "Petersen, Michael"
+    },
+    {
+      "batter": "Josh Naylor",
+      "ev": 100.6,
+      "angle": 25.0,
+      "distance": 389.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Tolle, Payton"
+    },
+    {
+      "batter": "Junior Caminero",
+      "ev": 113.3,
+      "angle": 26.0,
+      "distance": 398.0,
+      "hr_in_parks": 4,
+      "result": "",
+      "pitcher": "Ribalta, Orlando"
+    },
+    {
+      "batter": "Dylan Crews",
+      "ev": 107.6,
+      "angle": 16.0,
+      "distance": 378.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Martinez, Nick"
+    },
+    {
+      "batter": "James Wood",
+      "ev": 104.7,
+      "angle": 29.0,
+      "distance": 410.0,
+      "hr_in_parks": 30,
+      "result": "sac_fly",
+      "pitcher": "Martinez, Nick"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Rowdy Tellez",
