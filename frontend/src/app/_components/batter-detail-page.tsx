@@ -330,8 +330,25 @@ export function BatterDetailPage({
       filteredABs = (scores.recent_abs || []).slice(0, limit);
     }
   } else {
+    // Primary: pitch_abs is a code-keyed lookup populated for L5/L10 lookbacks.
     const selected: Array<Record<string, unknown>> = [];
     for (const pt of pitchFilter) selected.push(...(pitchAbsData?.[pt] || []));
+    // Fallback: Season mode (and any case where pitch_abs wasn't emitted) —
+    // filter scores.recent_abs by matching the AB's pitch_type against the
+    // selected codes OR their friendly names (Statcast logs sometimes store
+    // 'FF' and sometimes 'Four-Seam Fastball', so we accept both).
+    if (selected.length === 0) {
+      const matches = (scores.recent_abs || []).filter((ab) => {
+        const pt = ab.pitch_type ?? "";
+        if (pitchFilter.has(pt)) return true;
+        for (const code of pitchFilter) {
+          if (code === pt) return true;
+          if ((PITCH_NAMES[code] || []).includes(pt)) return true;
+        }
+        return false;
+      });
+      selected.push(...(matches as unknown as Array<Record<string, unknown>>));
+    }
     selected.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
     const seen = new Set<string>();
     filteredABs = selected.filter((ab) => { const k = `${ab.date}-${ab.ev}-${ab.angle}`; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, limit);
