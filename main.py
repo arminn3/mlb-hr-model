@@ -789,6 +789,16 @@ def run_model(game_date: date = None, fast: bool = False):
                 profile["data_year"] = season_year
             pitcher_profiles[pid] = profile
 
+            # Persist each profile to disk so refresh_pitchers.py can hit a cache
+            # instead of redoing the heavyweight build for known pitchers.
+            try:
+                cache_dir = Path("pitcher_profile_cache")
+                cache_dir.mkdir(exist_ok=True)
+                with open(cache_dir / f"{pid}.json", "w") as f:
+                    json.dump(profile, f, default=str)
+            except (OSError, ValueError):
+                pass
+
     # ── Phase 2.6: Override pitcher_score using profile vs-hand row ──────────
     # The hand-split blend in calc_pitcher_metrics is unreliable for pitchers
     # with strong reverse splits (Skubal: HR/9 2.16 vs LHB but 0.55 overall).

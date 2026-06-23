@@ -92,8 +92,74 @@ def _fetch_pitch_hand(person_id: int) -> str | None:
         return None
 
 
-def apply_to_slate(slate_path: Path, probables: dict[int, dict]) -> tuple[int, list[str]]:
-    """Patch the slate file in place. Only touches pitcher name/id/hand fields.
+CACHE_DIR = Path("pitcher_profile_cache")
+
+
+def _load_cached_profile(pid: int) -> Optional[dict]:
+    p = CACHE_DIR / f"{pid}.json"
+    if not p.exists():
+        return None
+    try:
+        with open(p) as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
+
+
+def _save_cached_profile(pid: int, profile: dict) -> None:
+    CACHE_DIR.mkdir(exist_ok=True)
+    try:
+        with open(CACHE_DIR / f"{pid}.json", "w") as f:
+            json.dump(profile, f, default=str)
+    except OSError:
+        pass
+
+
+def _build_full_profile(pid: int, season_year: int) -> Optional[dict]:
+    """Pull the full pitcher profile for one pitcher — Statcast df → build_pitcher_profile.
+    Falls back to 2025 data if the pitcher has no 2026 BIP yet (rookie / call-up).
+    Heavyweight call (~5–15s per pitcher) but only runs when we detect a NEW
+    probable starter that wasn't in this morning's big regen."""
+    try:
+        from data_fetchers import get_pitcher_statcast, get_season_statcast
+        from metrics import build_pitcher_profile
+    except ImportError:
+        return None
+
+    try:
+        df = get_pitcher_statcast(pid)
+        profile = build_pitcher_profile(df, pitcher_id=pid, season=season_year)
+        if profile["rows"]["season"]["bf"] == 0 and not profile["arsenal"]:
+            df_2025 = get_season_statcast(pid, "pitcher", 2025)
+            if df_2025 is not None and not df_2025.empty:
+                profile = build_pitcher_profile(df_2025, pitcher_id=pid, season=2025)
+                profile["data_year"] = 2025
+            else:
+                profile["data_year"] = season_year
+        else:
+            profile["data_year"] = season_year
+        return profile
+    except Exception as e:
+        print(f"    profile build failed for {pid}: {e}")
+        return None
+
+
+def _get_or_build_profile(pid: int, season_year: int) -> Optional[dict]:
+    cached = _load_cached_profile(pid)
+    if cached is not None:
+        return cached
+    print(f"    fetching new pitcher profile (id={pid})…")
+    profile = _build_full_profile(pid, season_year)
+    if profile is not None:
+        _save_cached_profile(pid, profile)
+    return profile
+
+
+def apply_to_slate(slate_path: Path, probables: dict[int, dict], season_year: int) -> tuple[int, list[str]]:
+    """Patch the slate in place. When the probable starter changes to a new ID
+    that wasn't in this morning's regen, also injects the new pitcher's full
+    profile (arsenal, vs_L/vs_R rows, windows, recent logs) so the UI has real
+    data — not just the new name attached to the old guy's profile.
     Returns (n_changes, change_log)."""
     if not slate_path.exists():
         print(f"  slate file missing: {slate_path}")
@@ -112,19 +178,30 @@ def apply_to_slate(slate_path: Path, probables: dict[int, dict]) -> tuple[int, l
             if not new:
                 continue
             old = g.get(side) or {}
-            # Only patch when something actually differs to keep diffs small.
-            if (old.get("name") == new["name"]
-                and old.get("id") == new["id"]
-                and old.get("hand") == new["hand"]):
+            same = (old.get("name") == new["name"]
+                    and old.get("id") == new["id"]
+                    and old.get("hand") == new["hand"])
+            if same:
                 continue
-            # Preserve profile + any other downstream fields by mutating in place.
+
+            old_id = old.get("id")
             old["name"] = new["name"]
             old["id"] = new["id"]
             old["hand"] = new["hand"]
+
+            # If the ID actually changed, the existing profile is wrong — fetch
+            # the new pitcher's full profile (with cache so we only pay the cost
+            # the first time any slate sees this pitcher).
+            if old_id != new["id"]:
+                profile = _get_or_build_profile(new["id"], season_year)
+                if profile is not None:
+                    old["profile"] = profile
+
             g[side] = old
             n_changes += 1
             matchup = f"{g.get('away_team','?')}@{g.get('home_team','?')}"
-            log.append(f"{matchup}  {side}: {new['name']} ({new['hand']}HP)")
+            id_note = " + profile injected" if old_id != new["id"] else ""
+            log.append(f"{matchup}  {side}: {new['name']} ({new['hand']}HP){id_note}")
 
     if n_changes:
         with open(slate_path, "w") as f:
@@ -151,8 +228,9 @@ def main() -> int:
     data_dir = Path("frontend/public/data")
     paths = [data_dir / f"{game_date.isoformat()}.json", data_dir / "latest.json"]
     total_changes = 0
+    season_year = game_date.year
     for p in paths:
-        n, log = apply_to_slate(p, probables)
+        n, log = apply_to_slate(p, probables, season_year)
         if n:
             total_changes += n
             print(f"  {p.name}: {n} pitcher field(s) updated")
