@@ -126,10 +126,18 @@ export function PitcherSummaryPage({ games }: { games: GameData[] }) {
         const profile = pitcher.profile ?? null;
         let row: PitcherStatRow | null = null;
         if (profile) {
-          // Window selector overrides the L/R split — windows are overall only.
-          // Falls back to season if the window data isn't available.
+          // Window selector now carries hand sub-rows, so L/R works inside any
+          // window. Falls back to overall window row if a specific hand split
+          // isn't available (e.g. a pitcher with no LHB sample in last 1 start).
           if (windowKey !== "season") {
-            row = profile.windows?.[windowKey] ?? profile.rows?.season ?? null;
+            const w = profile.windows?.[windowKey];
+            if (w) {
+              row = split === "vs_L" ? (w.vs_L ?? w.season)
+                  : split === "vs_R" ? (w.vs_R ?? w.season)
+                  : w.season;
+            } else {
+              row = profile.rows?.season ?? null;
+            }
           } else if (profile.rows) {
             row = split === "vs_L" ? profile.rows.vs_L
                 : split === "vs_R" ? profile.rows.vs_R
@@ -197,23 +205,17 @@ export function PitcherSummaryPage({ games }: { games: GameData[] }) {
     { key: "last_1",  label: "Last 1" },
   ];
 
-  // Selecting a non-season window forces the L/R split back to season (the
-  // window stats are overall only — we don't compute L/R splits per window).
-  const onWindowChange = (k: Window) => {
-    setWindowKey(k);
-    if (k !== "season") setSplit("season");
-  };
 
   return (
     <div>
-      {/* Controls */}
-      <div className="flex flex-wrap items-center gap-3 mb-6">
-        {/* Window selector — Season / Last N starts (overall, no L/R) */}
-        <div className="flex items-center gap-1">
+      {/* Controls — stacked: window row on top, hand-split row below it */}
+      <div className="flex flex-col gap-2 mb-6">
+        {/* Window selector — Season / Last N starts */}
+        <div className="flex flex-wrap items-center gap-1">
           {WINDOWS.map(w => (
             <button
               key={w.key}
-              onClick={() => onWindowChange(w.key)}
+              onClick={() => setWindowKey(w.key)}
               className={
                 "px-3 py-1.5 text-[12px] font-semibold rounded-[var(--radius-md)] cursor-pointer transition-colors " +
                 (windowKey === w.key
@@ -226,41 +228,38 @@ export function PitcherSummaryPage({ games }: { games: GameData[] }) {
           ))}
         </div>
 
-        {/* Split toggle — disabled when a Last-N window is active */}
-        <div className="flex items-center gap-1">
-          {SPLITS.map(s => {
-            const disabled = windowKey !== "season";
-            return (
+        {/* Hand-split toggle + legend on the same row so the legend stays
+            right-aligned alongside the L/R buttons. Hand splits are now
+            active inside any window (windows carry their own vs_L/vs_R rows). */}
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-1">
+            {SPLITS.map(s => (
               <button
                 key={s.key}
-                onClick={() => !disabled && setSplit(s.key)}
-                disabled={disabled}
-                title={disabled ? "L/R splits unavailable inside Last N windows" : undefined}
+                onClick={() => setSplit(s.key)}
                 className={
-                  "px-3 py-1.5 text-[12px] font-semibold rounded-[var(--radius-md)] transition-colors " +
-                  (disabled
-                    ? "bg-transparent text-foreground/30 border border-[#2c2c2e] cursor-not-allowed"
-                    : split === s.key
-                      ? "bg-accent/15 text-accent border border-accent/40 cursor-pointer"
-                      : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e] cursor-pointer")
+                  "px-3 py-1.5 text-[12px] font-semibold rounded-[var(--radius-md)] cursor-pointer transition-colors " +
+                  (split === s.key
+                    ? "bg-accent/15 text-accent border border-accent/40"
+                    : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
                 }
               >
                 {s.label}
               </button>
-            );
-          })}
-        </div>
+            ))}
+          </div>
 
-        {/* Legend */}
-        <div className="flex items-center gap-3 ml-auto text-[10px]" style={{ color: "rgba(255,255,255,0.35)" }}>
-          <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full inline-block" style={{ background: "rgba(74,222,128,0.8)" }} />
-            HR-friendly
-          </span>
-          <span className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full inline-block" style={{ background: "rgba(248,113,113,0.8)" }} />
-            Pitcher dominant
-          </span>
+          {/* Legend */}
+          <div className="flex items-center gap-3 ml-auto text-[10px]" style={{ color: "rgba(255,255,255,0.35)" }}>
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full inline-block" style={{ background: "rgba(74,222,128,0.8)" }} />
+              HR-friendly
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full inline-block" style={{ background: "rgba(248,113,113,0.8)" }} />
+              Pitcher dominant
+            </span>
+          </div>
         </div>
       </div>
 
