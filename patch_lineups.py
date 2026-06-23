@@ -71,7 +71,14 @@ def main() -> int:
     y, m, d = args.date.split("-")
     target_date = date(int(y), int(m), int(d))
 
-    slate_path, slate = load_slate(args.date)
+    try:
+        slate_path, slate = load_slate(args.date)
+    except FileNotFoundError:
+        # Daily regen hasn't produced today's slate yet — this is normal when
+        # the patch cron fires before main.py finishes its 8 AM ET run. Exit
+        # cleanly so the workflow doesn't email a failure for an expected race.
+        print(f"slate for {args.date} not present yet — skipping (will retry next cron tick)")
+        return 0
     print(f"loaded {slate_path} ({slate_path.stat().st_size:,} bytes)")
 
     print(f"fetching MLB schedule for {target_date}...")
