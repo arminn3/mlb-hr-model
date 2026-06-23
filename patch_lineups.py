@@ -16,7 +16,49 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from data_fetchers import get_todays_schedule
+import requests
+
+MLB_API_BASE = "https://statsapi.mlb.com/api/v1"
+
+
+def get_todays_schedule(game_date: date) -> list[dict]:
+    """Minimal inlined schedule fetch — just what patch_lineups needs.
+
+    Avoids importing data_fetchers (which pulls pandas + pybaseball) so the
+    GitHub Actions runner can run this with only `pip install requests`.
+    """
+    url = (
+        f"{MLB_API_BASE}/schedule"
+        f"?date={game_date.isoformat()}&sportId=1"
+        f"&hydrate=probablePitcher,team,lineups"
+    )
+    resp = requests.get(url, timeout=15)
+    resp.raise_for_status()
+    data = resp.json()
+
+    games: list[dict] = []
+    for date_entry in data.get("dates", []):
+        for g in date_entry.get("games", []):
+            status = g.get("status", {}).get("detailedState", "")
+            if status in ("Postponed", "Cancelled", "Suspended"):
+                continue
+            lineups = g.get("lineups", {}) or {}
+            away_lineup = [
+                {"id": p["id"], "name": p.get("fullName", "")}
+                for p in lineups.get("awayPlayers", []) or []
+            ]
+            home_lineup = [
+                {"id": p["id"], "name": p.get("fullName", "")}
+                for p in lineups.get("homePlayers", []) or []
+            ]
+            games.append({
+                "game_pk": g["gamePk"],
+                "away_team": (g.get("teams", {}).get("away", {}).get("team") or {}).get("abbreviation", ""),
+                "home_team": (g.get("teams", {}).get("home", {}).get("team") or {}).get("abbreviation", ""),
+                "away_lineup": away_lineup,
+                "home_lineup": home_lineup,
+            })
+    return games
 
 
 SLATE_PATHS = [
