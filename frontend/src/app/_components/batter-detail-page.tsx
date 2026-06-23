@@ -368,6 +368,14 @@ export function BatterDetailPage({
   let displayGb: number | null = (bip < 3 && scores.gb_pct === 0) ? null : (scores.gb_pct ?? null);
   let displayHardHit = scores.hard_hit_pct, displayEv = scores.exit_velo;
   let displayHrFb: number | null = hrFbPct;
+  // PU% (pop-ups) — Statcast doesn't surface this directly, but the four
+  // launch-angle buckets (GB/LD/FB/PU) sum to 100% of BIP. Derive PU% by
+  // subtracting the three we do have. Falls back to null if any input is
+  // unknown so we don't render a misleading number.
+  const _puFromBuckets = (gb: number | null, ld: number | null, fb: number | null): number | null =>
+    (gb == null || ld == null || fb == null) ? null
+      : Math.max(0, Math.round((100 - gb - ld - fb) * 10) / 10);
+  let displayPu: number | null = _puFromBuckets(displayGb, displayLd, displayFb);
 
   if (pitchFilter.size > 0) {
     let totalCount = 0, wBarrel = 0, wFb = 0, wLd = 0, wGb = 0, wHard = 0, wEv = 0;
@@ -385,7 +393,8 @@ export function BatterDetailPage({
       displayGb = Math.round((wGb / totalCount) * 10) / 10;
       displayHardHit = Math.round((wHard / totalCount) * 10) / 10;
       displayEv = Math.round((wEv / totalCount) * 10) / 10;
-    } else { displayBarrel = 0; displayFb = 0; displayLd = 0; displayGb = 0; displayHardHit = 0; displayEv = 0; }
+      displayPu = _puFromBuckets(displayGb, displayLd, displayFb);
+    } else { displayBarrel = 0; displayFb = 0; displayLd = 0; displayGb = 0; displayHardHit = 0; displayEv = 0; displayPu = null; }
     const filterAbs = recentAbsArr.filter((ab) => {
       const pt = ab.pitch_type ?? "";
       if (pitchFilter.has(pt)) return true;
@@ -401,16 +410,18 @@ export function BatterDetailPage({
   const matchup = matchupLabel(pitchDetail);
   const playerTags = buildTags(player, parkFactor);
 
+  // Order requested: EV, Barrel%, then the contact-shape buckets (GB→FB→LD→PU)
+  // followed by HR/FB% and Hard Hit%. All values driven by the active lookback
+  // window AND the current pitch filter selection above the cards.
   const statCards = [
-    { label: "Exit Velo",  value: `${displayEv}`,                                           cls: statHighlight(displayEv, [88, 93]) },
-    { label: "Barrel%",    value: `${displayBarrel}%`,                                       cls: statHighlight(displayBarrel, [8, 15]) },
-    { label: "Hard Hit%",  value: `${displayHardHit}%`,                                      cls: statHighlight(displayHardHit, [35, 50]) },
-    { label: "HR/FB%",     value: displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`, cls: displayHrFb == null ? "text-muted" : statHighlight(displayHrFb, [10, 18]) },
-    { label: "GB%",        value: displayGb === null ? "—" : `${displayGb}%`,               cls: "text-muted" },
-    { label: "LD%",        value: displayLd === null ? "—" : `${displayLd}%`,               cls: "text-muted" },
-    { label: "FB%",        value: `${displayFb}%`,                                           cls: statHighlight(displayFb, [25, 40]) },
-    { label: "Pull Brl%",  value: pullBrl == null ? "—" : `${pullBrl.toFixed(1)}%`,          cls: pullBrl == null ? "text-muted" : statHighlight(pullBrl, [4, 8]) },
-    { label: "Season FB%", value: player.season_profile?.fb != null ? `${player.season_profile.fb}%` : "—", cls: player.season_profile?.fb != null ? statHighlight(player.season_profile.fb, [25, 40]) : "text-muted" },
+    { label: "Exit Velo", value: `${displayEv}`,                                            cls: statHighlight(displayEv, [88, 93]) },
+    { label: "Barrel%",   value: `${displayBarrel}%`,                                        cls: statHighlight(displayBarrel, [8, 15]) },
+    { label: "GB%",       value: displayGb === null ? "—" : `${displayGb}%`,                cls: "text-muted" },
+    { label: "FB%",       value: `${displayFb}%`,                                            cls: statHighlight(displayFb, [25, 40]) },
+    { label: "LD%",       value: displayLd === null ? "—" : `${displayLd}%`,                cls: "text-muted" },
+    { label: "PU%",       value: displayPu === null ? "—" : `${displayPu}%`,                cls: "text-muted" },
+    { label: "HR/FB%",    value: displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`,  cls: displayHrFb == null ? "text-muted" : statHighlight(displayHrFb, [10, 18]) },
+    { label: "Hard Hit%", value: `${displayHardHit}%`,                                       cls: statHighlight(displayHardHit, [35, 50]) },
   ];
 
   return (
