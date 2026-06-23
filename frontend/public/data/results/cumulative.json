@@ -77763,7 +77763,7 @@
     ],
     "total_players_ranked": 247,
     "total_hrs_hit": 16,
-    "total_near_hrs": 0,
+    "total_near_hrs": 12,
     "model_hits": 15,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -77812,7 +77812,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 12,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -77843,23 +77843,23 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
         "total": 30,
-        "hits": 3,
-        "rate": 10.0
+        "hits": 4,
+        "rate": 13.3
       },
       "all": {
         "total": 247,
-        "hits": 15,
-        "rate": 6.1
+        "hits": 27,
+        "rate": 10.9
       }
     },
     "avg_composite_hr_hitters": 0.414,
-    "avg_composite_non_hitters": 0.4,
-    "composite_separation": 0.014,
+    "avg_composite_non_hitters": 0.399,
+    "composite_separation": 0.015,
     "hr_hitters": [
       {
         "name": "Byron Buxton",
@@ -78074,8 +78074,211 @@
         "matchup": "TEX@MIA"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Brice Turang",
+        "rank": 11,
+        "composite": 0.706,
+        "opp_pitcher": "Brady Singer",
+        "matchup": "MIL@CIN"
+      },
+      {
+        "name": "Jac Caglianone",
+        "rank": 39,
+        "composite": 0.528,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "KC@TB"
+      },
+      {
+        "name": "Andruw Monasterio",
+        "rank": 58,
+        "composite": 0.462,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "BOS@COL"
+      },
+      {
+        "name": "Alec Burleson",
+        "rank": 69,
+        "composite": 0.444,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "AZ@STL"
+      },
+      {
+        "name": "Cole Carrigg",
+        "rank": 78,
+        "composite": 0.437,
+        "opp_pitcher": "Jake Bennett",
+        "matchup": "BOS@COL"
+      },
+      {
+        "name": "Corbin Carroll",
+        "rank": 128,
+        "composite": 0.371,
+        "opp_pitcher": "Andre Pallante",
+        "matchup": "AZ@STL"
+      },
+      {
+        "name": "Ildemaro Vargas",
+        "rank": 130,
+        "composite": 0.371,
+        "opp_pitcher": "Andre Pallante",
+        "matchup": "AZ@STL"
+      },
+      {
+        "name": "Ozzie Albies",
+        "rank": 144,
+        "composite": 0.359,
+        "opp_pitcher": "Michael King",
+        "matchup": "ATL@SD"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 150,
+        "composite": 0.354,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "KC@TB"
+      },
+      {
+        "name": "Max Muncy",
+        "rank": 162,
+        "composite": 0.346,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "LAD@MIN"
+      },
+      {
+        "name": "Cody Bellinger",
+        "rank": 169,
+        "composite": 0.332,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "NYY@DET"
+      },
+      {
+        "name": "Michael Harris II",
+        "rank": 179,
+        "composite": 0.319,
+        "opp_pitcher": "Michael King",
+        "matchup": "ATL@SD"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Brice Turang",
+        "ev": 101.1,
+        "angle": 28.0,
+        "distance": 392.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Singer, Brady"
+      },
+      {
+        "batter": "Cole Carrigg",
+        "ev": 95.4,
+        "angle": 28.0,
+        "distance": 375.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Guerrero, Tyron"
+      },
+      {
+        "batter": "Andruw Monasterio",
+        "ev": 99.2,
+        "angle": 42.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Bernardino, Brennan"
+      },
+      {
+        "batter": "Cody Bellinger",
+        "ev": 101.4,
+        "angle": 33.0,
+        "distance": 390.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Valdez, Framber"
+      },
+      {
+        "batter": "Max Muncy",
+        "ev": 103.4,
+        "angle": 23.0,
+        "distance": 383.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Orze, Eric"
+      },
+      {
+        "batter": "Michael Harris II",
+        "ev": 102.2,
+        "angle": 23.0,
+        "distance": 397.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "King, Michael"
+      },
+      {
+        "batter": "Ozzie Albies",
+        "ev": 98.3,
+        "angle": 34.0,
+        "distance": 384.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "King, Michael"
+      },
+      {
+        "batter": "Ildemaro Vargas",
+        "ev": 101.5,
+        "angle": 23.0,
+        "distance": 390.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Romero, JoJo"
+      },
+      {
+        "batter": "Corbin Carroll",
+        "ev": 112.9,
+        "angle": 21.0,
+        "distance": 372.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Pallante, Andre"
+      },
+      {
+        "batter": "Alec Burleson",
+        "ev": 114.6,
+        "angle": 36.0,
+        "distance": 425.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "Kelly, Merrill"
+      },
+      {
+        "batter": "Alec Burleson",
+        "ev": 91.4,
+        "angle": 25.0,
+        "distance": 402.0,
+        "hr_in_parks": 16,
+        "result": "",
+        "pitcher": "Kelly, Merrill"
+      },
+      {
+        "batter": "Yandy D\u00edaz",
+        "ev": 102.2,
+        "angle": 20.0,
+        "distance": 388.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Wacha, Michael"
+      },
+      {
+        "batter": "Jac Caglianone",
+        "ev": 107.6,
+        "angle": 35.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Rasmussen, Drew"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Jorge Soler",
