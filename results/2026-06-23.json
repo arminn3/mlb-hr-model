@@ -301,7 +301,7 @@
   ],
   "total_players_ranked": 293,
   "total_hrs_hit": 39,
-  "total_near_hrs": 0,
+  "total_near_hrs": 9,
   "model_hits": 38,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -350,7 +350,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 9,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -381,18 +381,18 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 1,
-      "rate": 5.0
+      "hits": 2,
+      "rate": 10.0
     },
     "top_30": {
       "total": 30,
-      "hits": 2,
-      "rate": 6.7
+      "hits": 3,
+      "rate": 10.0
     },
     "all": {
       "total": 293,
-      "hits": 38,
-      "rate": 13.0
+      "hits": 47,
+      "rate": 16.0
     }
   },
   "avg_composite_hr_hitters": 0.387,
@@ -934,8 +934,226 @@
       "matchup": "HOU@TOR"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Ketel Marte",
+      "rank": 15,
+      "composite": 0.649,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "AZ@STL"
+    },
+    {
+      "name": "Zach Neto",
+      "rank": 49,
+      "composite": 0.549,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "BAL@LAA"
+    },
+    {
+      "name": "Rowdy Tellez",
+      "rank": 80,
+      "composite": 0.477,
+      "opp_pitcher": "Michael King",
+      "matchup": "ATL@SD"
+    },
+    {
+      "name": "Salvador Perez",
+      "rank": 136,
+      "composite": 0.415,
+      "opp_pitcher": "Shane McClanahan",
+      "matchup": "KC@TB"
+    },
+    {
+      "name": "Myles Straw",
+      "rank": 161,
+      "composite": 0.388,
+      "opp_pitcher": "Peter Lambert",
+      "matchup": "HOU@TOR"
+    },
+    {
+      "name": "Yordan Alvarez",
+      "rank": 196,
+      "composite": 0.331,
+      "opp_pitcher": "Shane Bieber",
+      "matchup": "HOU@TOR"
+    },
+    {
+      "name": "Michael Harris II",
+      "rank": 208,
+      "composite": 0.312,
+      "opp_pitcher": "Michael King",
+      "matchup": "ATL@SD"
+    },
+    {
+      "name": "LuJames Groover",
+      "rank": 214,
+      "composite": 0.297,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "AZ@STL"
+    },
+    {
+      "name": "Lars Nootbaar",
+      "rank": 286,
+      "composite": 0.147,
+      "opp_pitcher": "Eduardo Rodriguez",
+      "matchup": "AZ@STL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Miguel Vargas",
+      "ev": 104.3,
+      "angle": 27.0,
+      "distance": 388.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Messick, Parker"
+    },
+    {
+      "batter": "Ezequiel Tovar",
+      "ev": 90.8,
+      "angle": 28.0,
+      "distance": 371.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Gray, Sonny"
+    },
+    {
+      "batter": "Zach Neto",
+      "ev": 108.7,
+      "angle": 21.0,
+      "distance": 389.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Baz, Shane"
+    },
+    {
+      "batter": "Owen Caissie",
+      "ev": 100.6,
+      "angle": 30.0,
+      "distance": 386.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Ross, Joe"
+    },
+    {
+      "batter": "Heriberto Hern\u00e1ndez",
+      "ev": 97.3,
+      "angle": 26.0,
+      "distance": 376.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Corniell, Jose"
+    },
+    {
+      "batter": "Brooks Lee",
+      "ev": 104.0,
+      "angle": 35.0,
+      "distance": 392.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Wrobleski, Justin"
+    },
+    {
+      "batter": "Rowdy Tellez",
+      "ev": 103.2,
+      "angle": 27.0,
+      "distance": 372.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Hart, Kyle"
+    },
+    {
+      "batter": "Michael Harris II",
+      "ev": 106.2,
+      "angle": 19.0,
+      "distance": 374.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Canning, Griffin"
+    },
+    {
+      "batter": "Lars Nootbaar",
+      "ev": 99.9,
+      "angle": 29.0,
+      "distance": 376.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Sewald, Paul"
+    },
+    {
+      "batter": "LuJames Groover",
+      "ev": 101.9,
+      "angle": 22.0,
+      "distance": 381.0,
+      "hr_in_parks": 1,
+      "result": "double",
+      "pitcher": "Leahy, Kyle"
+    },
+    {
+      "batter": "Ketel Marte",
+      "ev": 107.6,
+      "angle": 16.0,
+      "distance": 372.0,
+      "hr_in_parks": 2,
+      "result": "double",
+      "pitcher": "Leahy, Kyle"
+    },
+    {
+      "batter": "Josh Rojas",
+      "ev": 97.3,
+      "angle": 27.0,
+      "distance": 379.0,
+      "hr_in_parks": 24,
+      "result": "double",
+      "pitcher": "Williamson, Ben"
+    },
+    {
+      "batter": "Salvador Perez",
+      "ev": 102.8,
+      "angle": 21.0,
+      "distance": 388.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Matz, Steven"
+    },
+    {
+      "batter": "Myles Straw",
+      "ev": 97.4,
+      "angle": 31.0,
+      "distance": 380.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Okert, Steven"
+    },
+    {
+      "batter": "Yordan Alvarez",
+      "ev": 105.0,
+      "angle": 34.0,
+      "distance": 385.0,
+      "hr_in_parks": 19,
+      "result": "double",
+      "pitcher": "Bieber, Shane"
+    },
+    {
+      "batter": "Yainer Diaz",
+      "ev": 98.4,
+      "angle": 28.0,
+      "distance": 392.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Bieber, Shane"
+    },
+    {
+      "batter": "Edmundo Sosa",
+      "ev": 106.5,
+      "angle": 21.0,
+      "distance": 416.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Schultz, Paxton"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
