@@ -80955,7 +80955,7 @@
     ],
     "total_players_ranked": 315,
     "total_hrs_hit": 40,
-    "total_near_hrs": 0,
+    "total_near_hrs": 18,
     "model_hits": 36,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -81004,7 +81004,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 18,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -81030,28 +81030,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 3,
-        "rate": 30.0
+        "hits": 5,
+        "rate": 50.0
       },
       "top_20": {
         "total": 20,
-        "hits": 5,
-        "rate": 25.0
+        "hits": 7,
+        "rate": 35.0
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 12,
+        "rate": 40.0
       },
       "all": {
         "total": 315,
-        "hits": 36,
-        "rate": 11.4
+        "hits": 54,
+        "rate": 17.1
       }
     },
     "avg_composite_hr_hitters": 0.464,
-    "avg_composite_non_hitters": 0.412,
-    "composite_separation": 0.052,
+    "avg_composite_non_hitters": 0.405,
+    "composite_separation": 0.059,
     "hr_hitters": [
       {
         "name": "Andruw Monasterio",
@@ -81560,8 +81560,325 @@
         "matchup": "ATH@SF"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Daulton Varsho",
+        "rank": 1,
+        "composite": 0.814,
+        "opp_pitcher": "Mike Burrows",
+        "matchup": "HOU@TOR"
+      },
+      {
+        "name": "Willson Contreras",
+        "rank": 4,
+        "composite": 0.783,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "BOS@COL"
+      },
+      {
+        "name": "Henry Bolte",
+        "rank": 22,
+        "composite": 0.681,
+        "opp_pitcher": "Tyler Mahle",
+        "matchup": "ATH@SF"
+      },
+      {
+        "name": "Ian Happ",
+        "rank": 28,
+        "composite": 0.636,
+        "opp_pitcher": "Sean Manaea",
+        "matchup": "CHC@NYM"
+      },
+      {
+        "name": "Bryson Stott",
+        "rank": 29,
+        "composite": 0.636,
+        "opp_pitcher": "Miles Mikolas",
+        "matchup": "PHI@WSH"
+      },
+      {
+        "name": "Tommy Troy",
+        "rank": 35,
+        "composite": 0.619,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "AZ@STL"
+      },
+      {
+        "name": "Brandon Nimmo",
+        "rank": 62,
+        "composite": 0.522,
+        "opp_pitcher": "Eury P\u00e9rez",
+        "matchup": "TEX@MIA"
+      },
+      {
+        "name": "Joey Loperfido",
+        "rank": 71,
+        "composite": 0.494,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "HOU@TOR"
+      },
+      {
+        "name": "Shea Langeliers",
+        "rank": 84,
+        "composite": 0.473,
+        "opp_pitcher": "Tyler Mahle",
+        "matchup": "ATH@SF"
+      },
+      {
+        "name": "John Rave",
+        "rank": 103,
+        "composite": 0.454,
+        "opp_pitcher": "Griffin Jax",
+        "matchup": "KC@TB"
+      },
+      {
+        "name": "Carlos Narv\u00e1ez",
+        "rank": 105,
+        "composite": 0.453,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "BOS@COL"
+      },
+      {
+        "name": "Esmerlyn Valdez",
+        "rank": 108,
+        "composite": 0.448,
+        "opp_pitcher": "Bryan Woo",
+        "matchup": "SEA@PIT"
+      },
+      {
+        "name": "Nick Kurtz",
+        "rank": 111,
+        "composite": 0.445,
+        "opp_pitcher": "Tyler Mahle",
+        "matchup": "ATH@SF"
+      },
+      {
+        "name": "Nolan Arenado",
+        "rank": 157,
+        "composite": 0.403,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "AZ@STL"
+      },
+      {
+        "name": "Marcelo Mayer",
+        "rank": 163,
+        "composite": 0.398,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "BOS@COL"
+      },
+      {
+        "name": "Kevin McGonigle",
+        "rank": 176,
+        "composite": 0.38,
+        "opp_pitcher": "Ryan Weathers",
+        "matchup": "NYY@DET"
+      },
+      {
+        "name": "Colt Emerson",
+        "rank": 229,
+        "composite": 0.333,
+        "opp_pitcher": "Braxton Ashcraft",
+        "matchup": "SEA@PIT"
+      },
+      {
+        "name": "Lars Nootbaar",
+        "rank": 265,
+        "composite": 0.285,
+        "opp_pitcher": "Mitch Bratt",
+        "matchup": "AZ@STL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Andruw Monasterio",
+        "ev": 98.1,
+        "angle": 29.0,
+        "distance": 391.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Freeland, Kyle"
+      },
+      {
+        "batter": "Marcelo Mayer",
+        "ev": 101.8,
+        "angle": 25.0,
+        "distance": 405.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Freeland, Kyle"
+      },
+      {
+        "batter": "Carlos Narv\u00e1ez",
+        "ev": 104.8,
+        "angle": 34.0,
+        "distance": 415.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Freeland, Kyle"
+      },
+      {
+        "batter": "Willson Contreras",
+        "ev": 102.2,
+        "angle": 34.0,
+        "distance": 395.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Freeland, Kyle"
+      },
+      {
+        "batter": "Kevin McGonigle",
+        "ev": 105.3,
+        "angle": 24.0,
+        "distance": 409.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "Weathers, Ryan"
+      },
+      {
+        "batter": "Brandon Nimmo",
+        "ev": 103.8,
+        "angle": 30.0,
+        "distance": 402.0,
+        "hr_in_parks": 26,
+        "result": "field_out",
+        "pitcher": "Fairbanks, Pete"
+      },
+      {
+        "batter": "Brandon Nimmo",
+        "ev": 100.5,
+        "angle": 31.0,
+        "distance": 390.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "P\u00e9rez, Eury"
+      },
+      {
+        "batter": "Ian Happ",
+        "ev": 106.1,
+        "angle": 20.0,
+        "distance": 390.0,
+        "hr_in_parks": 17,
+        "result": "double",
+        "pitcher": "McLean, Nolan"
+      },
+      {
+        "batter": "A.J. Ewing",
+        "ev": 94.0,
+        "angle": 29.0,
+        "distance": 370.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Assad, Javier"
+      },
+      {
+        "batter": "Colt Emerson",
+        "ev": 101.0,
+        "angle": 28.0,
+        "distance": 401.0,
+        "hr_in_parks": 16,
+        "result": "field_out",
+        "pitcher": "Mlodzinski, Carmen"
+      },
+      {
+        "batter": "Esmerlyn Valdez",
+        "ev": 106.8,
+        "angle": 22.0,
+        "distance": 400.0,
+        "hr_in_parks": 19,
+        "result": "single",
+        "pitcher": "Woo, Bryan"
+      },
+      {
+        "batter": "Nick Kurtz",
+        "ev": 105.8,
+        "angle": 23.0,
+        "distance": 384.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Hentges, Sam"
+      },
+      {
+        "batter": "Henry Bolte",
+        "ev": 106.3,
+        "angle": 22.0,
+        "distance": 402.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Mahle, Tyler"
+      },
+      {
+        "batter": "Shea Langeliers",
+        "ev": 103.6,
+        "angle": 25.0,
+        "distance": 379.0,
+        "hr_in_parks": 27,
+        "result": "field_out",
+        "pitcher": "Mahle, Tyler"
+      },
+      {
+        "batter": "Lars Nootbaar",
+        "ev": 105.3,
+        "angle": 24.0,
+        "distance": 401.0,
+        "hr_in_parks": 26,
+        "result": "triple",
+        "pitcher": "Jameson, Drey"
+      },
+      {
+        "batter": "Tommy Troy",
+        "ev": 103.7,
+        "angle": 21.0,
+        "distance": 379.0,
+        "hr_in_parks": 21,
+        "result": "double",
+        "pitcher": "Graceffo, Gordon"
+      },
+      {
+        "batter": "Nolan Arenado",
+        "ev": 100.9,
+        "angle": 25.0,
+        "distance": 386.0,
+        "hr_in_parks": 5,
+        "result": "double",
+        "pitcher": "Liberatore, Matthew"
+      },
+      {
+        "batter": "John Rave",
+        "ev": 106.1,
+        "angle": 24.0,
+        "distance": 388.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Jax, Griffin"
+      },
+      {
+        "batter": "Joey Loperfido",
+        "ev": 104.8,
+        "angle": 23.0,
+        "distance": 405.0,
+        "hr_in_parks": 21,
+        "result": "triple",
+        "pitcher": "Hoffman, Jeff"
+      },
+      {
+        "batter": "Daulton Varsho",
+        "ev": 107.5,
+        "angle": 30.0,
+        "distance": 394.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Burrows, Mike"
+      },
+      {
+        "batter": "Bryson Stott",
+        "ev": 106.2,
+        "angle": 21.0,
+        "distance": 368.0,
+        "hr_in_parks": 15,
+        "result": "double",
+        "pitcher": "Mikolas, Miles"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
