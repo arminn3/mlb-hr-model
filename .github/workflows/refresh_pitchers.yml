@@ -15,7 +15,10 @@ on:
         default: ''
 
 concurrency:
-  group: refresh-pitchers
+  # Shared with patch_lineups so the two `*/15` cron jobs don't race on the
+  # same slate JSON — concurrent writes to frontend/public/data caused
+  # `git pull --rebase` conflicts in the Commit step.
+  group: slate-data-write
   cancel-in-progress: false
 
 permissions:

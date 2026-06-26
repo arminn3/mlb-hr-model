@@ -18,7 +18,11 @@ on:
         default: ''
 
 concurrency:
-  group: patch-lineups
+  # Shared with refresh_pitchers + daily_model so the two `*/15` cron jobs
+  # don't race on the same slate JSON. Both modifying frontend/public/data
+  # concurrently caused `git pull --rebase` to hit conflicts in the Commit
+  # step and exit 1, which is what fired the "All jobs have failed" emails.
+  group: slate-data-write
   cancel-in-progress: false
 
 permissions:
