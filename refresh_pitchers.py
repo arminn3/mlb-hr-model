@@ -37,9 +37,23 @@ def fetch_probables(game_date: date) -> dict[int, dict]:
     Pitcher dicts hold name/id/hand, matching the shape stored in our slate JSON.
     """
     url = SCHEDULE_URL.format(d=game_date.isoformat())
-    resp = requests.get(url, timeout=15)
-    resp.raise_for_status()
-    data = resp.json()
+    # Retry transient MLB API hiccups so one bad fetch doesn't fire a workflow
+    # failure email — the cron retries every 15 min anyway.
+    import time as _time
+    last_err: Exception | None = None
+    for attempt in range(3):
+        try:
+            resp = requests.get(url, timeout=20)
+            resp.raise_for_status()
+            data = resp.json()
+            break
+        except (requests.exceptions.RequestException, ValueError) as e:
+            last_err = e
+            if attempt < 2:
+                _time.sleep(3 * (attempt + 1))
+    else:
+        print(f"  MLB API unreachable after 3 attempts ({last_err}) — skipping this tick")
+        return {}
 
     out: dict[int, dict] = {}
     for dt in data.get("dates", []):

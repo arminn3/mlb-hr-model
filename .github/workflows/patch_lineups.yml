@@ -45,23 +45,40 @@ jobs:
       - name: Install deps
         run: pip install requests
 
-      - name: Run patch
-        run: |
-          if [ -n "${{ github.event.inputs.date }}" ]; then
-            python3 patch_lineups.py --date ${{ github.event.inputs.date }}
-          else
-            python3 patch_lineups.py --date $(date -u +'%Y-%m-%d')
-          fi
-
-      - name: Commit if changed
+      - name: Patch + commit (with retry on push race)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet frontend/public/data; then
-            echo "no lineup changes — skipping commit"
-            exit 0
+
+          if [ -n "${{ github.event.inputs.date }}" ]; then
+            DATE="${{ github.event.inputs.date }}"
+          else
+            DATE="$(date -u +'%Y-%m-%d')"
           fi
-          git add frontend/public/data
-          git commit -m "auto: patch posted lineups $(date -u +'%Y-%m-%d %H:%M UTC')"
-          git pull --rebase
-          git push
+
+          git fetch origin main
+
+          # Retry loop survives push-races against daily_model.yml. patch_lineups.py
+          # is idempotent — on rejection we reset to fresh origin/main and re-run the
+          # patch so we keep whatever the racing workflow added (e.g. updated pitcher
+          # profile, regenerated batter scores) while still applying our lineup patch.
+          for attempt in 1 2 3 4 5; do
+            git reset --hard origin/main
+            python3 patch_lineups.py --date "$DATE"
+            if git diff --quiet frontend/public/data; then
+              echo "no lineup changes — done"
+              exit 0
+            fi
+            git add frontend/public/data
+            git commit -m "auto: patch posted lineups $(date -u +'%Y-%m-%d %H:%M UTC')"
+            if git push origin main; then
+              echo "pushed on attempt $attempt"
+              exit 0
+            fi
+            echo "push attempt $attempt rejected — fetching fresh and re-running patch"
+            git fetch origin main
+            sleep $((attempt * 5))
+          done
+
+          echo "all 5 attempts failed — likely an auth issue, not a race"
+          exit 1

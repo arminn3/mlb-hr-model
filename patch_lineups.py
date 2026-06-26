@@ -32,9 +32,23 @@ def get_todays_schedule(game_date: date) -> list[dict]:
         f"?date={game_date.isoformat()}&sportId=1"
         f"&hydrate=probablePitcher,team,lineups"
     )
-    resp = requests.get(url, timeout=15)
-    resp.raise_for_status()
-    data = resp.json()
+    # Retry transient MLB API hiccups so one bad fetch doesn't fire a workflow
+    # failure email — the cron retries every 15 min anyway.
+    last_err: Exception | None = None
+    for attempt in range(3):
+        try:
+            resp = requests.get(url, timeout=20)
+            resp.raise_for_status()
+            data = resp.json()
+            break
+        except (requests.exceptions.RequestException, ValueError) as e:
+            last_err = e
+            if attempt < 2:
+                import time
+                time.sleep(3 * (attempt + 1))
+    else:
+        print(f"MLB API unreachable after 3 attempts ({last_err}) — skipping this tick")
+        return []
 
     games: list[dict] = []
     for date_entry in data.get("dates", []):
