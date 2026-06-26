@@ -166,7 +166,7 @@
   ],
   "total_players_ranked": 156,
   "total_hrs_hit": 23,
-  "total_near_hrs": 0,
+  "total_near_hrs": 5,
   "model_hits": 21,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -215,7 +215,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 5,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -256,13 +256,13 @@
     },
     "all": {
       "total": 156,
-      "hits": 21,
-      "rate": 13.5
+      "hits": 26,
+      "rate": 16.7
     }
   },
   "avg_composite_hr_hitters": 0.431,
-  "avg_composite_non_hitters": 0.377,
-  "composite_separation": 0.054,
+  "avg_composite_non_hitters": 0.378,
+  "composite_separation": 0.053,
   "hr_hitters": [
     {
       "name": "Taylor Trammell",
@@ -561,8 +561,90 @@
       "matchup": "CHC@NYM"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Luke Raley",
+      "rank": 43,
+      "composite": 0.45,
+      "opp_pitcher": "Bubba Chandler",
+      "matchup": "SEA@PIT"
+    },
+    {
+      "name": "James Outman",
+      "rank": 75,
+      "composite": 0.396,
+      "opp_pitcher": "Tatsuya Imai",
+      "matchup": "HOU@DET"
+    },
+    {
+      "name": "Yandy D\u00edaz",
+      "rank": 79,
+      "composite": 0.387,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@TB"
+    },
+    {
+      "name": "J.T. Realmuto",
+      "rank": 120,
+      "composite": 0.27,
+      "opp_pitcher": "Cade Cavalli",
+      "matchup": "PHI@WSH"
+    },
+    {
+      "name": "Lawrence Butler",
+      "rank": 123,
+      "composite": 0.259,
+      "opp_pitcher": "Landen Roupp",
+      "matchup": "ATH@SF"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "James Outman",
+      "ev": 102.9,
+      "angle": 22.0,
+      "distance": 400.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Imai, Tatsuya"
+    },
+    {
+      "batter": "Luke Raley",
+      "ev": 97.8,
+      "angle": 30.0,
+      "distance": 371.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Chandler, Bubba"
+    },
+    {
+      "batter": "Lawrence Butler",
+      "ev": 100.5,
+      "angle": 33.0,
+      "distance": 395.0,
+      "hr_in_parks": 14,
+      "result": "double",
+      "pitcher": "Smith, Dylan"
+    },
+    {
+      "batter": "Yandy D\u00edaz",
+      "ev": 103.5,
+      "angle": 21.0,
+      "distance": 397.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Seabold, Connor"
+    },
+    {
+      "batter": "J.T. Realmuto",
+      "ev": 104.6,
+      "angle": 22.0,
+      "distance": 391.0,
+      "hr_in_parks": 17,
+      "result": "double",
+      "pitcher": "Varland, Gus"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
