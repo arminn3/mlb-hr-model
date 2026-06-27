@@ -678,7 +678,11 @@ export function MLRankings({
         : !!scoreFor(player, lookback);
   const scoreable = activeSorted.filter(({ player }) => hasScore(player));
   const top = filter === 0 ? scoreable : scoreable.slice(0, filter);
-  if (top.length === 0) return null;
+  // Don't blank the whole page when the current sub-tab has no data — the
+  // user can still switch tabs. Only kill the render when there's literally
+  // nothing in any pool (no games loaded yet).
+  const hasAnyData = sorted.length > 0 || sortedCombined.length > 0 || sortedTest.length > 0;
+  if (!hasAnyData) return null;
 
   const wPct = (n: number) => `${Math.round(n * 100)}%`;
 
@@ -1039,8 +1043,19 @@ export function MLRankings({
         )
       )}
 
+      {/* Empty state — current sub-tab has no scoreable players (e.g. Test
+       *  before backend has injected three_year_profile, or any tab when
+       *  three_year_profile is missing from a cached client JSON). */}
+      {rankingTab !== "consensus" && top.length === 0 && (
+        <p className="text-[13px] text-muted text-center py-12">
+          {rankingTab === "test"
+            ? "No 3-year profile data on this slate yet. Try a hard refresh (Cmd+Shift+R) — the JSON may be cached."
+            : "No scoreable players for this view yet."}
+        </p>
+      )}
+
       {/* Ranking cards */}
-      {rankingTab !== "consensus" && <div ref={cardsRef} className="space-y-3">
+      {rankingTab !== "consensus" && top.length > 0 && <div ref={cardsRef} className="space-y-3">
         {top.map(({ player, game }, i) => {
           const isCombo = rankingTab === "combined";
           const isTest  = rankingTab === "test";
