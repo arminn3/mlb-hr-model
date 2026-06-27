@@ -83987,7 +83987,7 @@
     ],
     "total_players_ranked": 271,
     "total_hrs_hit": 29,
-    "total_near_hrs": 0,
+    "total_near_hrs": 18,
     "model_hits": 28,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -84036,7 +84036,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 18,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -84077,13 +84077,13 @@
       },
       "all": {
         "total": 271,
-        "hits": 28,
-        "rate": 10.3
+        "hits": 46,
+        "rate": 17.0
       }
     },
     "avg_composite_hr_hitters": 0.452,
-    "avg_composite_non_hitters": 0.421,
-    "composite_separation": 0.031,
+    "avg_composite_non_hitters": 0.419,
+    "composite_separation": 0.033,
     "hr_hitters": [
       {
         "name": "William Contreras",
@@ -84480,8 +84480,316 @@
         "matchup": "CHC@MIL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Manny Machado",
+        "rank": 31,
+        "composite": 0.619,
+        "opp_pitcher": "Roki Sasaki",
+        "matchup": "LAD@SD"
+      },
+      {
+        "name": "Hunter Feduccia",
+        "rank": 39,
+        "composite": 0.595,
+        "opp_pitcher": "Zac Gallen",
+        "matchup": "AZ@TB"
+      },
+      {
+        "name": "Byron Buxton",
+        "rank": 52,
+        "composite": 0.557,
+        "opp_pitcher": "Tomoyuki Sugano",
+        "matchup": "COL@MIN"
+      },
+      {
+        "name": "Christian Yelich",
+        "rank": 56,
+        "composite": 0.542,
+        "opp_pitcher": "Colin Rea",
+        "matchup": "CHC@MIL"
+      },
+      {
+        "name": "Rafael Devers",
+        "rank": 58,
+        "composite": 0.535,
+        "opp_pitcher": "Reynaldo L\u00f3pez",
+        "matchup": "ATL@SF"
+      },
+      {
+        "name": "Nick Kurtz",
+        "rank": 66,
+        "composite": 0.516,
+        "opp_pitcher": "Walbert Ure\u00f1a",
+        "matchup": "ATH@LAA"
+      },
+      {
+        "name": "Fernando Tatis Jr.",
+        "rank": 71,
+        "composite": 0.49,
+        "opp_pitcher": "Roki Sasaki",
+        "matchup": "LAD@SD"
+      },
+      {
+        "name": "Matt Olson",
+        "rank": 98,
+        "composite": 0.442,
+        "opp_pitcher": "Trevor Mcdonald",
+        "matchup": "ATL@SF"
+      },
+      {
+        "name": "Jonah Heim",
+        "rank": 104,
+        "composite": 0.434,
+        "opp_pitcher": "Walbert Ure\u00f1a",
+        "matchup": "ATH@LAA"
+      },
+      {
+        "name": "Willy Adames",
+        "rank": 139,
+        "composite": 0.406,
+        "opp_pitcher": "Reynaldo L\u00f3pez",
+        "matchup": "ATL@SF"
+      },
+      {
+        "name": "Trea Turner",
+        "rank": 141,
+        "composite": 0.4,
+        "opp_pitcher": "Zach Thornton",
+        "matchup": "PHI@NYM"
+      },
+      {
+        "name": "Juan Soto",
+        "rank": 151,
+        "composite": 0.392,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "PHI@NYM"
+      },
+      {
+        "name": "Taylor Walls",
+        "rank": 154,
+        "composite": 0.389,
+        "opp_pitcher": "Zac Gallen",
+        "matchup": "AZ@TB"
+      },
+      {
+        "name": "Jacob Young",
+        "rank": 164,
+        "composite": 0.373,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "WSH@BAL"
+      },
+      {
+        "name": "Corbin Carroll",
+        "rank": 167,
+        "composite": 0.37,
+        "opp_pitcher": "Nick Martinez",
+        "matchup": "AZ@TB"
+      },
+      {
+        "name": "Wilyer Abreu",
+        "rank": 187,
+        "composite": 0.345,
+        "opp_pitcher": "Will Warren",
+        "matchup": "NYY@BOS"
+      },
+      {
+        "name": "Graham Pauley",
+        "rank": 190,
+        "composite": 0.342,
+        "opp_pitcher": "Michael McGreevy",
+        "matchup": "MIA@STL"
+      },
+      {
+        "name": "Luis Arraez",
+        "rank": 238,
+        "composite": 0.285,
+        "opp_pitcher": "Reynaldo L\u00f3pez",
+        "matchup": "ATL@SF"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Jacob Young",
+        "ev": 105.2,
+        "angle": 20.0,
+        "distance": 384.0,
+        "hr_in_parks": 19,
+        "result": "double",
+        "pitcher": "Rogers, Trevor"
+      },
+      {
+        "batter": "Tsung-Che Cheng",
+        "ev": 101.5,
+        "angle": 28.0,
+        "distance": 405.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Warren, Will"
+      },
+      {
+        "batter": "Wilyer Abreu",
+        "ev": 105.8,
+        "angle": 24.0,
+        "distance": 406.0,
+        "hr_in_parks": 27,
+        "result": "triple",
+        "pitcher": "Warren, Will"
+      },
+      {
+        "batter": "Jonah Heim",
+        "ev": 94.6,
+        "angle": 30.0,
+        "distance": 373.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Suter, Brent"
+      },
+      {
+        "batter": "Nick Kurtz",
+        "ev": 100.5,
+        "angle": 29.0,
+        "distance": 369.0,
+        "hr_in_parks": 27,
+        "result": "field_out",
+        "pitcher": "Ure\u00f1a, Walbert"
+      },
+      {
+        "batter": "Christian Yelich",
+        "ev": 99.1,
+        "angle": 29.0,
+        "distance": 376.0,
+        "hr_in_parks": 9,
+        "result": "double",
+        "pitcher": "Murray, Jayden"
+      },
+      {
+        "batter": "Byron Buxton",
+        "ev": 104.3,
+        "angle": 32.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Sugano, Tomoyuki"
+      },
+      {
+        "batter": "Trea Turner",
+        "ev": 101.2,
+        "angle": 30.0,
+        "distance": 394.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Thornton, Zach"
+      },
+      {
+        "batter": "Juan Soto",
+        "ev": 104.1,
+        "angle": 29.0,
+        "distance": 395.0,
+        "hr_in_parks": 26,
+        "result": "field_out",
+        "pitcher": "Wheeler, Zack"
+      },
+      {
+        "batter": "Fernando Tatis Jr.",
+        "ev": 111.1,
+        "angle": 17.0,
+        "distance": 388.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Sasaki, Roki"
+      },
+      {
+        "batter": "Manny Machado",
+        "ev": 103.6,
+        "angle": 26.0,
+        "distance": 393.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Sasaki, Roki"
+      },
+      {
+        "batter": "Willy Adames",
+        "ev": 101.0,
+        "angle": 24.0,
+        "distance": 393.0,
+        "hr_in_parks": 17,
+        "result": "double",
+        "pitcher": "Lee, Dylan"
+      },
+      {
+        "batter": "Matt Olson",
+        "ev": 103.2,
+        "angle": 38.0,
+        "distance": 392.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "McDonald, Trevor"
+      },
+      {
+        "batter": "Rafael Devers",
+        "ev": 106.6,
+        "angle": 24.0,
+        "distance": 403.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "L\u00f3pez, Reynaldo"
+      },
+      {
+        "batter": "Luis Arraez",
+        "ev": 97.5,
+        "angle": 34.0,
+        "distance": 377.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "L\u00f3pez, Reynaldo"
+      },
+      {
+        "batter": "Graham Pauley",
+        "ev": 95.9,
+        "angle": 28.0,
+        "distance": 380.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "McGreevy, Michael"
+      },
+      {
+        "batter": "Hunter Feduccia",
+        "ev": 100.9,
+        "angle": 28.0,
+        "distance": 392.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "Gallen, Zac"
+      },
+      {
+        "batter": "Taylor Walls",
+        "ev": 101.7,
+        "angle": 28.0,
+        "distance": 398.0,
+        "hr_in_parks": 25,
+        "result": "field_out",
+        "pitcher": "Gallen, Zac"
+      },
+      {
+        "batter": "Hunter Feduccia",
+        "ev": 104.1,
+        "angle": 35.0,
+        "distance": 396.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Gallen, Zac"
+      },
+      {
+        "batter": "Corbin Carroll",
+        "ev": 103.8,
+        "angle": 39.0,
+        "distance": 385.0,
+        "hr_in_parks": 25,
+        "result": "triple",
+        "pitcher": "Martinez, Nick"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Noelvi Marte",
