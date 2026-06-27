@@ -1047,11 +1047,33 @@ export function MLRankings({
        *  before backend has injected three_year_profile, or any tab when
        *  three_year_profile is missing from a cached client JSON). */}
       {rankingTab !== "consensus" && top.length === 0 && (
-        <p className="text-[13px] text-muted text-center py-12">
-          {rankingTab === "test"
-            ? "No 3-year profile data on this slate yet. Try a hard refresh (Cmd+Shift+R) — the JSON may be cached."
-            : "No scoreable players for this view yet."}
-        </p>
+        <div className="text-center py-12">
+          <p className="text-[13px] text-muted">
+            {rankingTab === "test"
+              ? "No 3-year profile data loaded."
+              : "No scoreable players for this view yet."}
+          </p>
+          {rankingTab === "test" && (() => {
+            let totalPlayers = 0;
+            let withTp = 0;
+            const seen = new Set<string>();
+            for (const game of games) {
+              for (const player of game.players) {
+                if (seen.has(player.name)) continue;
+                seen.add(player.name);
+                totalPlayers++;
+                if (player.three_year_profile) withTp++;
+              }
+            }
+            return (
+              <p className="text-[11px] text-muted/60 mt-2 font-mono">
+                debug: {totalPlayers} players in state, {withTp} have three_year_profile
+                {" · "}confirmedStarters: {confirmedStarters.size}
+                {withTp === 0 && " · client JSON is stale — restart the dev server or hard-refresh again"}
+              </p>
+            );
+          })()}
+        </div>
       )}
 
       {/* Ranking cards */}
