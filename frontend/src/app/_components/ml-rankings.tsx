@@ -56,6 +56,21 @@ function _seasonScoreConsensus(player: PlayerData): number | null {
   return batter * 0.50 + (l10?.pitcher_score ?? 0.5) * 0.35 + (l10?.env_score ?? 0.5) * 0.15;
 }
 
+// "Test" — same formula as the season consensus, but the batter side reads
+// 3-year aggregated stats (2024+2025+current) instead of just the current
+// season. Pitcher + env still come from today's L10 matchup. Higher BIP
+// floor since the sample pool spans 3 seasons.
+export function testScoreConsensus(player: PlayerData): number | null {
+  const tp = player.three_year_profile;
+  if (!tp || tp.bip_count < 50) return null;
+  const n = (v: number, lo: number, hi: number) => Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
+  const batter = n(tp.barrel / 100, 0.0, 0.25) * 0.55
+               + n(tp.fb     / 100, 0.15, 0.55) * 0.25
+               + n(tp.ev,           92,   102)   * 0.20;
+  const l10 = player.scores.L10;
+  return batter * 0.50 + (l10?.pitcher_score ?? 0.5) * 0.35 + (l10?.env_score ?? 0.5) * 0.15;
+}
+
 // ── Season-anchored + form modifier ─────────────────────────────────────────
 // Base = season batter score (true ability). Form delta = how L5/L10 batter
 // scores compare to that baseline. Clamped ±0.15 so a hot/cold streak moves
@@ -141,11 +156,11 @@ export function MLRankings({
   games: GameData[];
   lookback: UILookback;
   currentDate: string;
-  onTabChange?: (tab: "ml" | "combined" | "consensus") => void;
+  onTabChange?: (tab: "ml" | "combined" | "consensus" | "test") => void;
   lineupOverride?: { starters: string[]; postedTeams?: string[] } | null;
 }) {
-  const [rankingTab, setRankingTab] = useState<"ml" | "combined" | "consensus">("ml");
-  const setTab = (t: "ml" | "combined" | "consensus") => {
+  const [rankingTab, setRankingTab] = useState<"ml" | "combined" | "consensus" | "test">("ml");
+  const setTab = (t: "ml" | "combined" | "consensus" | "test") => {
     setRankingTab(t);
     onTabChange?.(t);
   };
@@ -180,7 +195,12 @@ export function MLRankings({
       // Header
       ctx.fillStyle = "#e4e4e7";
       ctx.font = "bold 22px Inter, system-ui, sans-serif";
-      ctx.fillText(rankingTab === "combined" ? "Balanced Edge Rankings" : "ML HR Rankings", PAD, 34);
+      ctx.fillText(
+        rankingTab === "combined" ? "Balanced Edge Rankings"
+          : rankingTab === "test" ? "Test (3-yr) Rankings"
+          : "ML HR Rankings",
+        PAD, 34
+      );
       ctx.fillStyle = "#71717a";
       ctx.font = "13px Inter, system-ui, sans-serif";
       ctx.fillText(`${rows.length} players · Beeb Sheets`, PAD, 56);
@@ -198,7 +218,10 @@ export function MLRankings({
       rows.forEach(({ player, game }, i) => {
         const s = scoreFor(player, lookback);
         if (!s) return;
-        const score = rankingTab === "combined" ? combinedScore(player) : mlComposite(player, lookback, mlWeights);
+        const score =
+          rankingTab === "combined" ? combinedScore(player)
+          : rankingTab === "test"   ? (testScoreConsensus(player) ?? 0)
+          : mlComposite(player, lookback, mlWeights);
         const y = HEADER_H + i * (ROW_H + 8);
 
         // Card bg
@@ -301,6 +324,7 @@ export function MLRankings({
     mlPicks: YesterdayPick[];
     combinedPicks: YesterdayPick[];
     consensusPicks: YesterdayPick[];
+    testPicks: YesterdayPick[];
     totalHRs: number;
   } | null>(null);
 
@@ -388,11 +412,27 @@ export function MLRankings({
           }))
           .sort((a, b) => a.mlScore - b.mlScore);
 
+        // Test rankings — same shape as season consensus but reads
+        // three_year_profile. Will be empty for any historical slate that
+        // pre-dates the compute_three_year_batter.py wiring.
+        const testPicksAll: YesterdayPick[] = allPlayers
+          .filter(r => testScoreConsensus(r.player) !== null)
+          .map(r => ({
+            name: r.player.name,
+            matchup: `${r.game.away_team}@${r.game.home_team}`,
+            oppPitcher: r.player.opp_pitcher,
+            hitHR: hrNames.has(r.player.name),
+            nearHR: !hrNames.has(r.player.name) && nearNames.has(r.player.name),
+            mlScore: testScoreConsensus(r.player) ?? 0,
+          }))
+          .sort((a, b) => b.mlScore - a.mlScore);
+
         setYesterday({
           date: prevStr,
           mlPicks: mlPicksAll.slice(0, 30),
           combinedPicks: combinedPicksAll.slice(0, 30),
           consensusPicks: consensusPicksAll,
+          testPicks: testPicksAll.slice(0, 30),
           totalHRs: hrNames.size,
         });
       })
@@ -589,6 +629,20 @@ export function MLRankings({
       .sort((a, b) => (_seasonScoreConsensus(b.player) ?? 0) - (_seasonScoreConsensus(a.player) ?? 0));
   }, [games, confirmedStarters]);
 
+  const sortedTest = useMemo(() => {
+    const seen = new Set<string>();
+    const all: { player: PlayerData; game: GameData }[] = [];
+    for (const game of games) {
+      for (const player of game.players) {
+        if (!confirmedStarters.has(player.name)) continue;
+        if (!seen.has(player.name)) { seen.add(player.name); all.push({ player, game }); }
+      }
+    }
+    return all
+      .filter(r => testScoreConsensus(r.player) !== null)
+      .sort((a, b) => (testScoreConsensus(b.player) ?? 0) - (testScoreConsensus(a.player) ?? 0));
+  }, [games, confirmedStarters]);
+
   const consensusRows = useMemo(() => {
     const TOP_N = 30;
     const l5Top = sortedL5.slice(0, TOP_N);
@@ -610,13 +664,18 @@ export function MLRankings({
       .sort((a, b) => a.avgRank - b.avgRank);
   }, [sortedL5, sortedL10, sortedSeason]);
 
-  const activeSorted = rankingTab === "combined" ? sortedCombined : sorted;
+  const activeSorted =
+    rankingTab === "combined" ? sortedCombined
+    : rankingTab === "test"   ? sortedTest
+    : sorted;
   // Pre-filter to only players that have a renderable score, so rank numbers
   // are always sequential (no gaps from silently-skipped null renders).
   const hasScore = (player: PlayerData) =>
     rankingTab === "combined"
       ? !!(scoreFor(player, "L10") ?? scoreFor(player, "L5"))
-      : !!scoreFor(player, lookback);
+      : rankingTab === "test"
+        ? testScoreConsensus(player) !== null
+        : !!scoreFor(player, lookback);
   const scoreable = activeSorted.filter(({ player }) => hasScore(player));
   const top = filter === 0 ? scoreable : scoreable.slice(0, filter);
   if (top.length === 0) return null;
@@ -624,7 +683,9 @@ export function MLRankings({
   const wPct = (n: number) => `${Math.round(n * 100)}%`;
 
   const activePicks = yesterday
-    ? (rankingTab === "combined" ? yesterday.combinedPicks : yesterday.mlPicks)
+    ? (rankingTab === "combined" ? yesterday.combinedPicks
+      : rankingTab === "test"     ? yesterday.testPicks
+      : yesterday.mlPicks)
     : [];
   const yesterdayHits = activePicks.filter((p) => p.hitHR).length;
   const yesterdayNears = activePicks.filter((p) => p.nearHR).length;
@@ -636,12 +697,16 @@ export function MLRankings({
           <div className="flex items-center justify-between mb-3">
             <div>
               <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
-                {rankingTab === "combined" ? "Yesterday's Balanced Edge Picks" : "Yesterday's ML Picks"} — {yesterday.date}
+                {rankingTab === "combined" ? "Yesterday's Balanced Edge Picks"
+                  : rankingTab === "test" ? "Yesterday's Test Picks"
+                  : "Yesterday's ML Picks"} — {yesterday.date}
               </h3>
               <p className="text-[11px] text-muted mt-0.5">
                 {rankingTab === "combined"
                   ? "How Balanced Edge would have ranked yesterday's slate."
-                  : "How these same ML weights would have ranked yesterday's slate."}
+                  : rankingTab === "test"
+                    ? "How the 3-year batter profile (2024+2025+2026) would have ranked yesterday's slate."
+                    : "How these same ML weights would have ranked yesterday's slate."}
                 {" "}Leaguewide: {yesterday.totalHRs} HRs hit.
               </p>
             </div>
@@ -774,13 +839,18 @@ export function MLRankings({
       <div className="flex items-start justify-between gap-3 mb-4 flex-wrap">
         <div>
           <h2 className="text-[15px] leading-[20px] font-semibold tracking-[-0.005em] text-foreground">
-            {rankingTab === "combined" ? "Balanced Edge" : rankingTab === "consensus" ? "Consensus" : "ML Rankings"}
+            {rankingTab === "combined" ? "Balanced Edge"
+              : rankingTab === "consensus" ? "Consensus"
+              : rankingTab === "test" ? "Test (3-yr profile)"
+              : "ML Rankings"}
           </h2>
           <p className="text-[11px] leading-[14px] font-medium tracking-[0.02em] text-muted mt-0.5">
             {rankingTab === "combined"
               ? "Season power profile anchored · recent form adjusts ±15%"
               : rankingTab === "consensus"
               ? "Players in the top 30 on every list — L5, L10, and Season"
+              : rankingTab === "test"
+              ? "Career power profile (2024+2025+2026) × today's pitcher & park"
               : "Data-driven — reweighted using what the ML learned from past HR outcomes"}
           </p>
         </div>
@@ -852,7 +922,7 @@ export function MLRankings({
 
       {/* Tab toggle */}
       <div className="flex items-center gap-1 mb-4">
-        {(["ml", "combined", "consensus"] as const).map((t) => (
+        {(["ml", "combined", "consensus", "test"] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
@@ -863,7 +933,7 @@ export function MLRankings({
                 : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
             }
           >
-            {t === "ml" ? "ML Model" : t === "combined" ? "Balanced Edge" : "Consensus"}
+            {t === "ml" ? "ML Model" : t === "combined" ? "Balanced Edge" : t === "consensus" ? "Consensus" : "Test"}
           </button>
         ))}
       </div>
@@ -882,6 +952,14 @@ export function MLRankings({
         <p className="text-[11px] leading-[16px] text-muted mb-4">
           <span className="text-foreground font-mono">Geometric mean</span>
           {" · "}L10 form × L5 form × pitcher vs-hand × park+weather × weighted barrel/HH vs pitcher's pitch mix · weakness in any one factor drags the rank down
+        </p>
+      )}
+      {rankingTab === "test" && (
+        <p className="text-[11px] leading-[16px] text-muted mb-4">
+          <span className="text-foreground font-mono">3-year batter profile</span>
+          {" · "}barrel 55% · FB 25% · EV 20%
+          {" · "}rolled with pitcher (35%) + park/weather (15%) from today&apos;s L10 matchup
+          {" · "}50-BIP floor across 2024 + 2025 + 2026 (vs opposing hand)
         </p>
       )}
 
@@ -965,18 +1043,24 @@ export function MLRankings({
       {rankingTab !== "consensus" && <div ref={cardsRef} className="space-y-3">
         {top.map(({ player, game }, i) => {
           const isCombo = rankingTab === "combined";
-          // For combined tab, fall back between L10/L5 so a player with only
+          const isTest  = rankingTab === "test";
+          // For combined/test, fall back between L10/L5 so a player with only
           // one lookback isn't silently skipped (causing rank gaps).
-          const s = isCombo
+          const s = (isCombo || isTest)
             ? (scoreFor(player, "L10") ?? scoreFor(player, "L5"))
             : scoreFor(player, lookback);
           if (!s) return null;
-          const score = isCombo ? combinedScore(player) : mlComposite(player, lookback, mlWeights);
+          const score =
+            isCombo ? combinedScore(player)
+            : isTest ? (testScoreConsensus(player) ?? 0)
+            : mlComposite(player, lookback, mlWeights);
           const delta = isCombo ? combinedFormDelta(player) : null;
           const season = isCombo ? computeSeasonScore(player) : null;
           const isSmallSample = isCombo
             ? (!player.season_profile || (player.season_profile.bip_count ?? 0) < 20)
-            : (s.data_quality === "LOW_SAMPLE" || s.data_quality === "NO_BATTER_DATA");
+            : isTest
+              ? (!player.three_year_profile || (player.three_year_profile.bip_count ?? 0) < 50)
+              : (s.data_quality === "LOW_SAMPLE" || s.data_quality === "NO_BATTER_DATA");
 
           // MLB headshot — match player name in team_pitch_mix batters
           const mixBatters = [
@@ -985,13 +1069,15 @@ export function MLRankings({
           ];
           const mlbId = mixBatters.find((b) => b.name === player.name)?.id;
 
-          // Key stats
-          const ev = s.exit_velo;
-          const barrel = s.barrel_pct;
-          const fb = s.fb_pct;
-          const hh = s.hard_hit_pct;
-          const blast = s.blast_pct;
-          const pullBrl = s.pull_brl;
+          // Key stats — Test tab MUST display 3-yr profile values (the same
+          // numbers that drive testScoreConsensus). Display = Score rule.
+          const tp = player.three_year_profile;
+          const ev = isTest && tp ? tp.ev : s.exit_velo;
+          const barrel = isTest && tp ? tp.barrel : s.barrel_pct;
+          const fb = isTest && tp ? tp.fb : s.fb_pct;
+          const hh = isTest && tp ? (tp.hard_hit ?? null) : s.hard_hit_pct;
+          const blast = isTest && tp ? (tp.blast ?? null) : s.blast_pct;
+          const pullBrl = isTest && tp ? (tp.pull_barrel ?? null) : s.pull_brl;
 
           // Matchup quality from pitch_detail
           const pitchEntries = Object.entries(player.pitch_detail ?? {}).filter(([, d]) => (d.usage_pct ?? 0) >= 12);

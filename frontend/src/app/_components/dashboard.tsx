@@ -369,7 +369,7 @@ export function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<string>(() => getHashParam("date", ""));
   const [selectedGames, setSelectedGames] = useState<Set<number>>(new Set()); // empty = all games
   const [selectedBatter, setSelectedBatter] = useState<SelectedBatter | null>(null);
-  const [rankingsTab, setRankingsTab] = useState<"ml" | "combined" | "consensus">("ml");
+  const [rankingsTab, setRankingsTab] = useState<"ml" | "combined" | "consensus" | "test">("ml");
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const [lineupOverride, setLineupOverride] = useState<LineupOverride | null>(null);
 
@@ -588,7 +588,7 @@ export function Dashboard() {
 
             {/* RIGHT slot (date + lookback + user menu) */}
             <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
-              {tabConfig.showLookback && !(activePage === "slate" && selectedBatter) && !(activePage === "ml" && (rankingsTab === "combined" || rankingsTab === "consensus")) && (
+              {tabConfig.showLookback && !(activePage === "slate" && selectedBatter) && !(activePage === "ml" && (rankingsTab === "combined" || rankingsTab === "consensus" || rankingsTab === "test")) && (
                 <LookbackToggle value={lookback} onChange={setLookback} />
               )}
               {tabConfig.showDatePicker && (

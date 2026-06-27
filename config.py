@@ -246,6 +246,7 @@ NORM_RANGES_ENV: dict = {
 
 # ── Season Dates ─────────────────────────────────────────────────────────────
 SEASON_DATES: dict = {
+    2024: ("2024-03-28", "2024-10-30"),  # regular season + postseason
     2025: ("2025-03-27", "2025-11-05"),  # includes postseason through World Series
     2026: ("2026-03-26", None),  # None = use today's date
 }

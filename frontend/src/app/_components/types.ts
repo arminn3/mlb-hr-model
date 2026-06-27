@@ -179,6 +179,27 @@ export interface PlayerData {
     blast?: number;
     season_abs?: RecentAB[];
   };
+  /** 3-year aggregate (2024+2025+current) of season_profile-shape stats,
+   *  BIP-weighted merged with the existing season_profile. Used by the
+   *  Test sub-tab on the Rankings page. */
+  three_year_profile?: {
+    barrel: number;
+    ev: number;
+    fb: number;
+    ld?: number;
+    gb?: number;
+    hard_hit?: number;
+    bip_count: number;
+    hrs?: number;
+    iso?: number;
+    pull_barrel?: number;
+    pull_air?: number;
+    xwoba?: number;
+    sweet_spot?: number;
+    avg_la?: number;
+    blast?: number;
+    years?: string;
+  };
   matchup_swstr?: number;
   pitcher_data_year?: number;
   hr_signals?: {

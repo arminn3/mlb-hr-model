@@ -312,6 +312,7 @@ _bulk_statcast_date: Optional[str] = None
 
 # Bulk 2025 season cache — loaded once for all players
 _bulk_2025_cache: Optional[pd.DataFrame] = None
+_bulk_2024_cache: Optional[pd.DataFrame] = None
 
 
 def load_bulk_statcast(lookback_days: int = None) -> pd.DataFrame:
@@ -406,6 +407,51 @@ def load_bulk_2025() -> pd.DataFrame:
                 # Include regular season + postseason (exclude spring training)
                 df = df[df["game_type"].isin(["R", "F", "D", "L", "W"])].copy()
             _bulk_2025_cache = df
+            print(f"{len(df)} rows loaded.")
+            return df
+    except Exception as e:
+        print(f"FAILED ({e})")
+    return pd.DataFrame()
+
+
+def load_bulk_2024() -> pd.DataFrame:
+    """Load ALL 2024 season Statcast data in one pull. Used by the 3-yr
+    aggregation for the Test rankings tab (compute_three_year_batter.py).
+
+    Caches to disk as a parquet so the second invocation is instant —
+    pybaseball.statcast() for a full season is ~90s and ~700K rows."""
+    global _bulk_2024_cache
+    if _bulk_2024_cache is not None:
+        return _bulk_2024_cache
+
+    dates = config.SEASON_DATES.get(2024)
+    if not dates:
+        return pd.DataFrame()
+
+    cache_dir = Path(config.STATCAST_CACHE_DIR)
+    cache_dir.mkdir(exist_ok=True)
+    cache_file = cache_dir / "bulk_2024.parquet"
+    if cache_file.exists():
+        try:
+            df = pd.read_parquet(cache_file)
+            _bulk_2024_cache = df
+            print(f"  Loaded bulk 2024 from cache: {len(df)} rows")
+            return df
+        except Exception:
+            pass
+
+    from pybaseball import statcast
+    print(f"  Loading bulk 2024 season data (first time, ~90s)...", end=" ", flush=True)
+    try:
+        df = statcast(start_dt=dates[0], end_dt=dates[1])
+        if df is not None and not df.empty:
+            if "game_type" in df.columns:
+                df = df[df["game_type"].isin(["R", "F", "D", "L", "W"])].copy()
+            try:
+                df.to_parquet(cache_file)
+            except Exception:
+                pass
+            _bulk_2024_cache = df
             print(f"{len(df)} rows loaded.")
             return df
     except Exception as e:
