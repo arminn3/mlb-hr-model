@@ -1191,6 +1191,22 @@ def print_results(games_out: list, game_date: date, schedule: list = None) -> No
     print(f"JSON saved to {data_dir / dated_name}")
     print(f"Total players scored: {total_players}")
 
+    # ── Three-year batter profile injection ────────────────────────────────
+    # Keeps the Test sub-tab on the Rankings page populated. Runs as a
+    # subprocess so a failure (e.g., MLB API blip pulling the 2024 bulk
+    # frame on the runner) doesn't kill the whole regen — the rest of the
+    # slate is still good and a manual re-run can patch the 3-yr field.
+    print()
+    print("Injecting 3-year batter profile for Test tab...")
+    rc = subprocess.run(
+        [sys.executable, "compute_three_year_batter.py",
+         "--date", game_date.isoformat()],
+        cwd=Path(__file__).resolve().parent,
+        check=False,
+    ).returncode
+    if rc != 0:
+        print(f"  [three-yr injector] exited {rc} — Test tab will be empty until next regen")
+
 
 def _refresh_results_and_ml(game_date: date) -> None:
     """Reconcile yesterday's predictions vs actual HRs and refresh ML analysis,
