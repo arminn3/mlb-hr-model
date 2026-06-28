@@ -14,9 +14,12 @@ export type LineupOverride = {
   gamesWithLineups: number; // how many games had posted lineups
 };
 
-// MLB Stats API — public, no auth. hydrate=person,lineups gets starter names.
+// MLB Stats API — public, no auth. `team` MUST be in hydrate or
+// teams.{home,away}.team.abbreviation comes back undefined, which silently
+// kills the override (postedTeams + starters end up empty). `lineups` and
+// `person` carry the actual starter names.
 const SCHEDULE_URL = (date: string) =>
-  `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${date}&hydrate=lineups,probablePitcher,person`;
+  `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${date}&hydrate=team,lineups,probablePitcher,person`;
 
 type ScheduleGame = {
   gamePk: number;
