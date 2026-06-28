@@ -85677,7 +85677,7 @@
     ],
     "total_players_ranked": 308,
     "total_hrs_hit": 34,
-    "total_near_hrs": 0,
+    "total_near_hrs": 14,
     "model_hits": 30,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -85726,7 +85726,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 14,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -85752,23 +85752,23 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 3,
-        "rate": 30.0
+        "hits": 4,
+        "rate": 40.0
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
-        "hits": 3,
-        "rate": 10.0
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 308,
-        "hits": 30,
-        "rate": 9.7
+        "hits": 44,
+        "rate": 14.3
       }
     },
     "avg_composite_hr_hitters": 0.433,
@@ -86198,8 +86198,252 @@
         "matchup": "HOU@DET"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Francisco Lindor",
+        "rank": 9,
+        "composite": 0.685,
+        "opp_pitcher": "Alan Rangel",
+        "matchup": "PHI@NYM"
+      },
+      {
+        "name": "Brandon Nimmo",
+        "rank": 14,
+        "composite": 0.658,
+        "opp_pitcher": "Dylan Cease",
+        "matchup": "TEX@TOR"
+      },
+      {
+        "name": "Taylor Walls",
+        "rank": 29,
+        "composite": 0.596,
+        "opp_pitcher": "Jose Cabrera",
+        "matchup": "AZ@TB"
+      },
+      {
+        "name": "Victor Mesa Jr.",
+        "rank": 53,
+        "composite": 0.528,
+        "opp_pitcher": "Jose Cabrera",
+        "matchup": "AZ@TB"
+      },
+      {
+        "name": "Noelvi Marte",
+        "rank": 63,
+        "composite": 0.504,
+        "opp_pitcher": "Jared Jones",
+        "matchup": "CIN@PIT"
+      },
+      {
+        "name": "Josh Bell",
+        "rank": 82,
+        "composite": 0.463,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "COL@MIN"
+      },
+      {
+        "name": "Trevor Larnach",
+        "rank": 84,
+        "composite": 0.463,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "COL@MIN"
+      },
+      {
+        "name": "Shea Langeliers",
+        "rank": 192,
+        "composite": 0.347,
+        "opp_pitcher": "Reid Detmers",
+        "matchup": "ATH@LAA"
+      },
+      {
+        "name": "Mike Yastrzemski",
+        "rank": 197,
+        "composite": 0.337,
+        "opp_pitcher": "Logan Webb",
+        "matchup": "ATL@SF"
+      },
+      {
+        "name": "Tommy Edman",
+        "rank": 216,
+        "composite": 0.318,
+        "opp_pitcher": "Randy V\u00e1squez",
+        "matchup": "LAD@SD"
+      },
+      {
+        "name": "Josh Jung",
+        "rank": 288,
+        "composite": 0.225,
+        "opp_pitcher": "Dylan Cease",
+        "matchup": "TEX@TOR"
+      },
+      {
+        "name": "Geraldo Perdomo",
+        "rank": 303,
+        "composite": 0.161,
+        "opp_pitcher": "Cole Sulser",
+        "matchup": "AZ@TB"
+      },
+      {
+        "name": "Jose Trevino",
+        "rank": 305,
+        "composite": 0.135,
+        "opp_pitcher": "Jared Jones",
+        "matchup": "CIN@PIT"
+      },
+      {
+        "name": "Max Kepler",
+        "rank": 308,
+        "composite": 0.095,
+        "opp_pitcher": "Cole Sulser",
+        "matchup": "AZ@TB"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Shea Langeliers",
+        "ev": 105.5,
+        "angle": 35.0,
+        "distance": 396.0,
+        "hr_in_parks": 4,
+        "result": "",
+        "pitcher": "Detmers, Reid"
+      },
+      {
+        "batter": "Trevor Larnach",
+        "ev": 101.2,
+        "angle": 22.0,
+        "distance": 386.0,
+        "hr_in_parks": 17,
+        "result": "double",
+        "pitcher": "Agnos, Zach"
+      },
+      {
+        "batter": "Josh Bell",
+        "ev": 104.4,
+        "angle": 36.0,
+        "distance": 407.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Lorenzen, Michael"
+      },
+      {
+        "batter": "Kyle Karros",
+        "ev": 96.4,
+        "angle": 27.0,
+        "distance": 381.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Paredes, Mike"
+      },
+      {
+        "batter": "Francisco Lindor",
+        "ev": 97.9,
+        "angle": 34.0,
+        "distance": 370.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Rangel, Alan"
+      },
+      {
+        "batter": "Noelvi Marte",
+        "ev": 102.8,
+        "angle": 31.0,
+        "distance": 388.0,
+        "hr_in_parks": 17,
+        "result": "field_out",
+        "pitcher": "Mattson, Isaac"
+      },
+      {
+        "batter": "Jose Trevino",
+        "ev": 103.3,
+        "angle": 23.0,
+        "distance": 384.0,
+        "hr_in_parks": 14,
+        "result": "double",
+        "pitcher": "Jones, Jared"
+      },
+      {
+        "batter": "Tommy Edman",
+        "ev": 102.1,
+        "angle": 23.0,
+        "distance": 391.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Hart, Kyle"
+      },
+      {
+        "batter": "Mike Yastrzemski",
+        "ev": 100.5,
+        "angle": 32.0,
+        "distance": 395.0,
+        "hr_in_parks": 23,
+        "result": "field_out",
+        "pitcher": "Webb, Logan"
+      },
+      {
+        "batter": "Rafael Devers",
+        "ev": 87.5,
+        "angle": 25.0,
+        "distance": 399.0,
+        "hr_in_parks": 6,
+        "result": "",
+        "pitcher": "Elder, Bryce"
+      },
+      {
+        "batter": "Max Kepler",
+        "ev": 102.6,
+        "angle": 29.0,
+        "distance": 405.0,
+        "hr_in_parks": 27,
+        "result": "field_out",
+        "pitcher": "Grove, Michael"
+      },
+      {
+        "batter": "Taylor Walls",
+        "ev": 102.3,
+        "angle": 27.0,
+        "distance": 404.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Cabrera, Jose"
+      },
+      {
+        "batter": "Victor Mesa Jr.",
+        "ev": 108.4,
+        "angle": 17.0,
+        "distance": 383.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Cabrera, Jose"
+      },
+      {
+        "batter": "Geraldo Perdomo",
+        "ev": 100.7,
+        "angle": 31.0,
+        "distance": 391.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Sulser, Cole"
+      },
+      {
+        "batter": "Josh Jung",
+        "ev": 99.5,
+        "angle": 24.0,
+        "distance": 378.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Hoffman, Jeff"
+      },
+      {
+        "batter": "Brandon Nimmo",
+        "ev": 104.3,
+        "angle": 23.0,
+        "distance": 399.0,
+        "hr_in_parks": 18,
+        "result": "field_out",
+        "pitcher": "Fisher, Braydon"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Yohendrick Pi\u00f1ango",
