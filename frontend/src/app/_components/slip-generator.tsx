@@ -16,6 +16,7 @@ interface PersistedState {
   mode: "auto" | "custom" | "optimal";
   sortMode: SortMode;
   search: string;
+  selectedGames?: string[];
 }
 
 function loadPersistedState(): Partial<PersistedState> {
@@ -517,6 +518,9 @@ export function SlipGenerator({
     prevFavRef.current = new Set(curr);
   }, [favorites]);
   const [search, setSearch] = useState(initial.search ?? "");
+  const [selectedGames, setSelectedGames] = useState<Set<string>>(
+    () => new Set(initial.selectedGames ?? [])
+  );
   const [mlWeights, setMlWeights] = useState<MlWeights>(FALLBACK_WEIGHTS);
 
   useEffect(() => {
@@ -563,19 +567,41 @@ export function SlipGenerator({
         mode,
         sortMode,
         search,
+        selectedGames: [...selectedGames],
       });
     }, 150);
     return () => clearTimeout(t);
-  }, [selectedNames, legCount, mode, sortMode, search]);
+  }, [selectedNames, legCount, mode, sortMode, search, selectedGames]);
 
   const allPlayers = useMemo(
     () => getAllPlayers(games, lookback, mlWeights),
     [games, lookback, mlWeights]
   );
 
+  // Unique game options for the multi-select chip filter, sorted by game time.
+  const gameOptions = useMemo(() => {
+    const seen = new Map<string, { key: string; time: number }>();
+    for (const g of games) {
+      const key = `${g.away_team}@${g.home_team}`;
+      if (!seen.has(key)) {
+        seen.set(key, { key, time: g.game_time_sort ?? 0 });
+      }
+    }
+    return [...seen.values()].sort((a, b) => a.time - b.time);
+  }, [games]);
+
+  // When no game chips are selected the filter is a no-op (show all). When
+  // any chip is on, the pool restricts to those games. Applied to autoSlips
+  // and the picker list — does NOT touch already-selected players so users
+  // don't lose their custom picks when toggling game filters.
+  const gamePool = useMemo(() => {
+    if (selectedGames.size === 0) return allPlayers;
+    return allPlayers.filter((p) => selectedGames.has(p.game));
+  }, [allPlayers, selectedGames]);
+
   const autoSlips = useMemo(
-    () => buildTieredSlips(allPlayers, legCount),
-    [allPlayers, legCount]
+    () => buildTieredSlips(gamePool, legCount),
+    [gamePool, legCount]
   );
 
   const selectedPlayers = useMemo(
@@ -605,13 +631,13 @@ export function SlipGenerator({
   };
 
   const filteredPlayers = search
-    ? allPlayers.filter((p) => {
+    ? gamePool.filter((p) => {
         const q = search.toLowerCase();
         if (p.name.toLowerCase().includes(q)) return true;
         if (gameMatchesQuery(p.game, q)) return true;
         return false;
       })
-    : allPlayers;
+    : gamePool;
 
   if (games.length === 0) {
     return <p className="text-center text-muted py-12">No games available.</p>;
@@ -736,6 +762,55 @@ export function SlipGenerator({
           </div>
         </div>
       </div>
+
+      {/* Game filter — multi-select chips. Applies to autoSlips and the
+          picker list. Selected players persist across game-filter toggles. */}
+      {gameOptions.length > 0 && (
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[10px] uppercase tracking-wider text-muted">Games</span>
+            {selectedGames.size > 0 && (
+              <button
+                onClick={() => setSelectedGames(new Set())}
+                className="text-[10px] uppercase tracking-wider text-accent-red/80 hover:text-accent-red cursor-pointer"
+              >
+                Clear ({selectedGames.size})
+              </button>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {gameOptions.map((g) => {
+              const on = selectedGames.has(g.key);
+              return (
+                <button
+                  key={g.key}
+                  onClick={() => {
+                    setSelectedGames((prev) => {
+                      const next = new Set(prev);
+                      if (next.has(g.key)) next.delete(g.key);
+                      else next.add(g.key);
+                      return next;
+                    });
+                  }}
+                  className={
+                    "px-2.5 py-1 text-[12px] font-mono rounded-md cursor-pointer transition-colors border " +
+                    (on
+                      ? "bg-accent/15 text-accent border-accent/40"
+                      : "bg-transparent text-muted border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
+                  }
+                >
+                  {g.key}
+                </button>
+              );
+            })}
+          </div>
+          {selectedGames.size > 0 && gamePool.length === 0 && (
+            <p className="text-[11px] text-muted/70 mt-2">
+              No players matched. Toggle a different game or clear the filter.
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Sort-by filter stashed for future — chalk/longshot/diverse modes
           aren't wired up yet. Optimal slips are sorted by best score. */}
