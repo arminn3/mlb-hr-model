@@ -270,6 +270,17 @@ def score_batter_vs_pitcher(
             pt_rows = recent_bip[recent_bip["pitch_type"].isin(pt_codes)] if "pitch_type" in recent_bip.columns else pd.DataFrame()
             per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pt_rows) if len(pt_rows) >= 3 else pool_metrics
 
+        # Raw pool stats — used ONLY for UI display so the L5/L10 numbers the
+        # user sees match what "last N BBE" actually means (e.g. with N=10 and
+        # 4 hard-hit balls, hard_hit_pct = 40.0, not 47.6). The weighted_*
+        # fields below stay in for scoring (which weights by pitch mix).
+        result["pool_exit_velo"]     = pool_metrics["avg_exit_velo"]
+        result["pool_barrel_rate"]   = pool_metrics["barrel_rate"]
+        result["pool_fb_rate"]       = pool_metrics["fly_ball_rate"]
+        result["pool_ld_rate"]       = pool_metrics["line_drive_rate"]
+        result["pool_gb_rate"]       = pool_metrics["ground_ball_rate"]
+        result["pool_hard_hit_rate"] = pool_metrics["hard_hit_rate"]
+
         # Default to pool; override with pitch-weighted blend when weights exist
         result["weighted_exit_velo"]     = pool_metrics["avg_exit_velo"]
         result["weighted_barrel_rate"]   = pool_metrics["barrel_rate"]

@@ -174,18 +174,25 @@ def _apply_pitcher_split_override(players_by_game: dict, schedule: list, pitcher
 
 
 def _format_score(result: dict) -> dict:
-    """Format a single lookback's score result for JSON output."""
+    """Format a single lookback's score result for JSON output.
+
+    Note: display stats read from `pool_*` (raw last-N BBE rates) — these are
+    what "last 5/10" actually means at a glance. Scoring still uses the
+    pitch-mix-weighted `weighted_*` values internally (see model.py Step 5),
+    so batter_score may not exactly reconstruct from the displayed pct values.
+    User-approved tradeoff — they wanted honest L5/L10 columns.
+    """
     return {
         "composite": round(result["composite_score"], 3),
         "batter_score": round(result["batter_score"], 3),
         "pitcher_score": round(result["pitcher_score"], 3),
         "env_score": round(result.get("env_score", 0.5), 3),
-        "exit_velo": round(result["weighted_exit_velo"], 1),
-        "barrel_pct": round(result["weighted_barrel_rate"] * 100, 1),
-        "fb_pct": round(result["weighted_fb_rate"] * 100, 1),
-        "ld_pct": round(result["weighted_ld_rate"] * 100, 1),
-        "gb_pct": round(result["weighted_gb_rate"] * 100, 1),
-        "hard_hit_pct": round(result["weighted_hard_hit_rate"] * 100, 1),
+        "exit_velo": round(result.get("pool_exit_velo", result["weighted_exit_velo"]), 1),
+        "barrel_pct": round(result.get("pool_barrel_rate", result["weighted_barrel_rate"]) * 100, 1),
+        "fb_pct": round(result.get("pool_fb_rate", result["weighted_fb_rate"]) * 100, 1),
+        "ld_pct": round(result.get("pool_ld_rate", result["weighted_ld_rate"]) * 100, 1),
+        "gb_pct": round(result.get("pool_gb_rate", result["weighted_gb_rate"]) * 100, 1),
+        "hard_hit_pct": round(result.get("pool_hard_hit_rate", result["weighted_hard_hit_rate"]) * 100, 1),
         "data_quality": result["data_quality"],
         "recent_abs": result.get("recent_abs", []),
         "pitch_abs": result.get("pitch_abs", {}),
