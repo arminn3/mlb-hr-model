@@ -513,62 +513,47 @@ export function BatterDetailPage({
       : Math.max(0, Math.round((100 - gb - ld - fb) * 10) / 10);
   let displayPu: number | null = _puFromBuckets(displayGb, displayLd, displayFb);
 
-  // Pitch-filter aware stat recompute — uses RAW COUNTS over the filtered
-  // pool, not pitch-mix weighted averages. With 10 BBE in the pool and the
-  // user selecting Cutter only, the stats reflect "of my last 10 BBE, X
-  // were cutters, and Y of those were GB". Result is always count/count*100
-  // → clean fractions of the filtered N. No hidden weighting at any layer.
-  if (pitchFilter.size > 0) {
-    // Pull the lookback pool — for L5/L10 that's recent_abs (5/10 entries),
-    // for L15/L20/L25 it's the slice (15/20/25 entries) returned by
-    // computeSliceScoreSet.
-    const pool = (scores.recent_abs ?? []).slice(0, limit);
-    const matchesFilter = (ab: import("./types").RecentAB) => {
-      const pt = ab.pitch_type ?? "";
-      if (pitchFilter.has(pt)) return true;
-      for (const code of pitchFilter) {
-        if (code === pt) return true;
-        if ((PITCH_NAMES[code] || []).includes(pt)) return true;
-      }
-      return false;
-    };
-    const filteredPool = pool.filter(matchesFilter);
-    const n = filteredPool.length;
-    if (n > 0) {
-      const pct = (count: number) => Math.round((count / n) * 1000) / 10;
-      let gb = 0, ld = 0, fb = 0, pu = 0, brl = 0, hh = 0, blast = 0;
-      let evSum = 0;
-      let fbCt = 0, hrCt = 0;
-      for (const ab of filteredPool) {
-        const ev = Number(ab.ev || 0);
-        const la = Number(ab.angle || 0);
-        const bs = ab.bat_speed == null ? null : Number(ab.bat_speed);
-        evSum += ev;
-        if (ev >= 95) hh += 1;
-        if (ev >= 98 && la >= 26 && la <= 30) brl += 1;
-        if (la >= 25 && la <= 50) { fb += 1; fbCt += 1; if (ab.result === "home_run") hrCt += 1; }
-        else if (la >= 10 && la < 25) ld += 1;
-        else if (la < 10) gb += 1;
-        else pu += 1;
-        if (bs != null && bs >= 75 && ev >= 95) blast += 1;
-      }
-      displayBarrel  = pct(brl);
-      displayFb      = pct(fb);
-      displayLd      = pct(ld);
-      displayGb     = pct(gb);
-      displayHardHit = pct(hh);
-      displayEv      = Math.round((evSum / n) * 10) / 10;
-      displayPu      = pct(pu);
-      displayHrFb    = fbCt > 0 ? Math.round((hrCt / fbCt) * 1000) / 10 : null;
-      // Blast% — same raw-count basis; mirrors the AB table's Blast column.
-      const _blastShadow = pct(blast);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (recentAbsArr as any)._blast = _blastShadow;
-    } else {
-      displayBarrel = 0; displayFb = 0; displayLd = 0;
-      displayGb = 0; displayHardHit = 0; displayEv = 0;
-      displayPu = null; displayHrFb = null;
+  // Pitch-filter aware stat recompute. Computes raw counts over the same
+  // pool the AB table below shows (filteredABs) — so the cards and the log
+  // can never disagree. No pitch-mix weighting at any layer.
+  //
+  // Note: for L5/L10 the AB table source is `pitchAbsData[pitch]` (the
+  // per-pitch BBE log baked into the slate), which can hold more entries
+  // than scores.recent_abs's 10-row arsenal pool. That's why "Cutter only"
+  // can show a populated table while scores.recent_abs has zero cutters.
+  // Using filteredABs as the stat pool keeps them in sync.
+  if (pitchFilter.size > 0 && filteredABs.length > 0) {
+    const n = filteredABs.length;
+    const pct = (count: number) => Math.round((count / n) * 1000) / 10;
+    let gb = 0, ld = 0, fb = 0, pu = 0, brl = 0, hh = 0, blast = 0;
+    let evSum = 0;
+    let fbCt = 0, hrCt = 0;
+    for (const ab of filteredABs) {
+      const ev = Number(ab.ev || 0);
+      const la = Number(ab.angle || 0);
+      const bs = ab.bat_speed == null ? null : Number(ab.bat_speed);
+      evSum += ev;
+      if (ev >= 95) hh += 1;
+      if (ev >= 98 && la >= 26 && la <= 30) brl += 1;
+      if (la >= 25 && la <= 50) { fb += 1; fbCt += 1; if (ab.result === "home_run") hrCt += 1; }
+      else if (la >= 10 && la < 25) ld += 1;
+      else if (la < 10) gb += 1;
+      else pu += 1;
+      if (bs != null && bs >= 75 && ev >= 95) blast += 1;
     }
+    displayBarrel  = pct(brl);
+    displayFb      = pct(fb);
+    displayLd      = pct(ld);
+    displayGb      = pct(gb);
+    displayHardHit = pct(hh);
+    displayEv      = Math.round((evSum / n) * 10) / 10;
+    displayPu      = pct(pu);
+    displayHrFb    = fbCt > 0 ? Math.round((hrCt / fbCt) * 1000) / 10 : null;
+    void blast;
+  } else if (pitchFilter.size > 0) {
+    displayBarrel = 0; displayFb = 0; displayLd = 0;
+    displayGb = 0; displayHardHit = 0; displayEv = 0;
+    displayPu = null; displayHrFb = null;
   }
   void recentAbsArr;
 
@@ -856,17 +841,11 @@ export function BatterDetailPage({
         )}
 
         {/* Filter dropdown row — Events / Pitch Arm / Day-Night / Home-Away /
-            Pitch Type. Sticky-pinned to the top of the viewport so the user
-            doesn't lose the filter controls when the AB table below grows or
-            shrinks (L5 → L25 changes row count and total page height). */}
-        <div
-          className="grid grid-cols-2 md:grid-cols-5 gap-3 sticky z-20 -mx-1 px-1 py-2"
-          style={{
-            top: 0,
-            background: "linear-gradient(180deg, rgba(15,15,17,0.95) 80%, rgba(15,15,17,0.0) 100%)",
-            backdropFilter: "blur(6px)",
-          }}
-        >
+            Pitch Type. Was sticky-pinned but the top:0 anchored it to the
+            window, not the dashboard chrome — so it punched up over the page
+            header / sidebar. Reverted to inline. AB table below scrolls
+            internally instead so toggling Events doesn't reflow the page. */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           <FilterDropdown
             label="Events"
             value={activeLookback}
@@ -935,16 +914,16 @@ export function BatterDetailPage({
           ))}
         </div>
 
-        {/* AB log — 12 columns matching the PropFinder screenshot. Natural
-            height — let the table fit its rows so L5 doesn't have a blank
-            slab below it. The reflow concern is handled higher up by
-            sticky-positioning the filter row (CSS `position: sticky`) so it
-            doesn't slide out of view when the table size changes. */}
+        {/* AB log — 12 columns. Fixed 520px height with internal scroll
+            so swapping Events (L5/L10/L15/L20/L25) keeps the page height
+            constant. L5 leaves some blank space below the rows; the
+            stability is worth more than the empty pixels. */}
         <div>
-          <div className="overflow-x-auto rounded-xl"
+          <div className="overflow-auto rounded-xl"
             style={{
               background: "linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%)",
               border: "1px solid rgba(255,255,255,0.10)",
+              height: 520,
             }}>
             {filteredABs.length > 0 ? (
               <table className="w-full text-[13px]">
