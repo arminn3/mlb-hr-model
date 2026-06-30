@@ -88719,8 +88719,8 @@
       "CJ Abrams",
       "Cal Raleigh",
       "Caleb Durbin",
+      "Cam Cauley",
       "Cam Smith",
-      "Cameron Cauley",
       "Carlos Cortes",
       "Carlos Narv\u00e1ez",
       "Carson Benge",
@@ -88944,7 +88944,7 @@
       "Zach McKinstry",
       "Zach Neto"
     ],
-    "total_players_ranked": 247,
+    "total_players_ranked": 246,
     "total_hrs_hit": 36,
     "total_near_hrs": 15,
     "model_hits": 32,
@@ -88967,7 +88967,7 @@
           "rate": 20.0
         },
         "all": {
-          "total": 247,
+          "total": 246,
           "hits": 32,
           "rate": 13.0
         }
@@ -88989,7 +88989,7 @@
           "rate": 20.0
         },
         "all": {
-          "total": 247,
+          "total": 246,
           "hits": 32,
           "rate": 13.0
         }
@@ -89013,7 +89013,7 @@
         "rate": 20.0
       },
       "all": {
-        "total": 247,
+        "total": 246,
         "hits": 32,
         "rate": 13.0
       }
@@ -89035,14 +89035,14 @@
         "rate": 30.0
       },
       "all": {
-        "total": 247,
+        "total": 246,
         "hits": 47,
-        "rate": 19.0
+        "rate": 19.1
       }
     },
     "avg_composite_hr_hitters": 0.462,
-    "avg_composite_non_hitters": 0.41,
-    "composite_separation": 0.052,
+    "avg_composite_non_hitters": 0.412,
+    "composite_separation": 0.05,
     "hr_hitters": [
       {
         "name": "Ketel Marte",
@@ -90135,7 +90135,7 @@
         "rate": 26.7
       },
       "all": {
-        "total": 247,
+        "total": 246,
         "hits": 32,
         "rate": 13.0
       }
@@ -90346,21 +90346,21 @@
       },
       {
         "name": "Brice Turang",
-        "rank": 208,
+        "rank": 207,
         "composite": 0.124,
         "opp_pitcher": "Nick Lodolo",
         "matchup": "CIN@MIL"
       },
       {
         "name": "Victor Caratini",
-        "rank": 232,
+        "rank": 231,
         "composite": 0.097,
         "opp_pitcher": "Peter Lambert",
         "matchup": "MIN@HOU"
       },
       {
         "name": "Trea Turner",
-        "rank": 241,
+        "rank": 240,
         "composite": 0.085,
         "opp_pitcher": "Braxton Ashcraft",
         "matchup": "PIT@PHI"
