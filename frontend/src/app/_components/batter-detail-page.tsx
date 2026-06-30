@@ -520,6 +520,10 @@ export function BatterDetailPage({
     (gb == null || ld == null || fb == null) ? null
       : Math.max(0, Math.round((100 - gb - ld - fb) * 10) / 10);
   let displayPu: number | null = _puFromBuckets(displayGb, displayLd, displayFb);
+  // Blast% — must be `let` so the pitch-filter recompute can override with
+  // a raw count over the filtered pool (otherwise it locks to the season /
+  // L10 value regardless of which pitch chip is on).
+  let displayBlast: number | null = scores.blast_pct ?? player.season_profile?.blast ?? null;
 
   // Pitch-filter aware stat recompute. Computes raw counts over the same
   // pool the AB table below shows (filteredABs) — so the cards and the log
@@ -557,11 +561,16 @@ export function BatterDetailPage({
     displayEv      = Math.round((evSum / n) * 10) / 10;
     displayPu      = pct(pu);
     displayHrFb    = fbCt > 0 ? Math.round((hrCt / fbCt) * 1000) / 10 : null;
-    void blast;
+    // Blast% = bat_speed >= 75 AND launch_speed >= 95, raw count over
+    // filtered pool. Will show null on slates pre-dating the bat_speed
+    // backend field — every ab.bat_speed null → blast count stays 0 but
+    // the % is meaningful only when the field exists.
+    const haveBatSpeed = filteredABs.some((ab) => ab.bat_speed != null);
+    displayBlast = haveBatSpeed ? pct(blast) : null;
   } else if (pitchFilter.size > 0) {
     displayBarrel = 0; displayFb = 0; displayLd = 0;
     displayGb = 0; displayHardHit = 0; displayEv = 0;
-    displayPu = null; displayHrFb = null;
+    displayPu = null; displayHrFb = null; displayBlast = null;
   }
   void recentAbsArr;
 
@@ -569,12 +578,8 @@ export function BatterDetailPage({
   const matchup = matchupLabel(pitchDetail);
   const playerTags = buildTags(player, parkFactor);
 
-  // User-locked card order (per feedback memory): EV → Barrel% first since
-  // those are the lead power signals, then the launch-angle buckets, then
-  // HR/FB%, Hard Hit%, Blast%, Pull Brl%. All react to active lookback +
-  // pitch filter. Blast% and Pull Brl% currently season-level (not L5/L10
-  // reactive yet — flagged for later).
-  const displayBlast = scores.blast_pct ?? player.season_profile?.blast ?? null;
+  // displayBlast is declared up with the other display lets (above the
+  // pitch-filter recompute block) so the recompute branch can override it.
   const displayPullBrl = player.season_profile?.pull_barrel ?? null;
   const statCards = [
     { label: "Avg EV",     value: `${displayEv}`,                                             cls: statHighlight(displayEv, [88, 93]) },
