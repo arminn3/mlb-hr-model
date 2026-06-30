@@ -388,9 +388,17 @@ export function BatterDetailPage({
   // drives the view, and Season's season_profile isn't a true ordered log.
   // If the global lookback is "Season", land on L10 instead.
   const [activeLookback, setActiveLookback] = useState<UILookback>(lookback === "Season" ? "L10" : lookback);
-  // New filter dropdowns (PropFinder-style). Default to "Both" / "Any" so
-  // initial view matches the old behavior.
-  const [armFilter, setArmFilter] = useState<"L" | "R" | "Both">("Both");
+  // New filter dropdowns. Pitch Arm defaults to the opposing pitcher's
+  // hand — the matchup-relevant pool. Picking the other hand currently
+  // returns no rows because the backend's recent_abs / season_abs are
+  // pre-filtered to the same hand as the opposing pitcher (see model.py
+  // line ~493 and main.py line ~611). Extending the slate to carry
+  // both-hand pools is a separate task flagged below.
+  const _initialArm: "L" | "R" | "Both" =
+    player.pitcher_hand === "L" ? "L"
+    : player.pitcher_hand === "R" ? "R"
+    : "Both";
+  const [armFilter, setArmFilter] = useState<"L" | "R" | "Both">(_initialArm);
   const [dnFilter,  setDnFilter]  = useState<"D" | "N" | "Both">("Both");
   const [haFilter,  setHaFilter]  = useState<"H" | "A" | "Both">("Both");
 
@@ -927,7 +935,7 @@ export function BatterDetailPage({
             }}>
             {filteredABs.length > 0 ? (
               <table className="w-full text-[13px]">
-                <thead className="sticky top-0 z-10" style={{ background: "rgba(20,20,22,0.95)", backdropFilter: "blur(6px)" }}>
+                <thead style={{ background: "rgba(20,20,22,0.95)" }}>
                   <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
                     <th className="text-left  py-2 pl-3 pr-2 font-semibold">Date</th>
                     <th className="text-left  py-2 px-2 font-semibold">Pitcher</th>
