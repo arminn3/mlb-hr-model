@@ -425,7 +425,7 @@ export function BatterDetailPage({
   ];
 
   return (
-    <div className="max-w-3xl mx-auto px-1 py-2 space-y-5">
+    <div className="max-w-5xl mx-auto px-1 py-2 space-y-5">
       {/* Back row */}
       <div className="flex items-center gap-3">
         <button
