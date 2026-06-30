@@ -432,7 +432,15 @@ export function BatterDetailPage({
   : 10;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let filteredABs: any[];
-  if (pitchFilter.size === 0) {
+  // For L15/L20/L25 and Season, the AB table shows the last N BBE outright —
+  // pitch filter narrows the stat cards above but does NOT shrink the log.
+  // Otherwise picking L25 with the default ≥12% pitch chips selected drops
+  // the table well below 25, which is the bug the user just flagged.
+  const isWideWindow = activeLookback === "L15" || activeLookback === "L20"
+                    || activeLookback === "L25" || activeLookback === "Season";
+  if (isWideWindow) {
+    filteredABs = (scores.recent_abs || []).slice(0, limit);
+  } else if (pitchFilter.size === 0) {
     if (pitchAbsData && Object.keys(pitchAbsData).length > 0) {
       const all = Object.values(pitchAbsData).flat();
       all.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
@@ -873,13 +881,19 @@ export function BatterDetailPage({
           ))}
         </div>
 
-        {/* AB log — 12 columns matching the PropFinder screenshot. */}
+        {/* AB log — 12 columns matching the PropFinder screenshot. Capped at
+            ~500px tall with vertical scroll so an L25 or Season window doesn't
+            push the page to a mile long. */}
         <div>
-          <div className="overflow-x-auto rounded-xl"
-            style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%)", border: "1px solid rgba(255,255,255,0.10)" }}>
+          <div className="overflow-auto rounded-xl"
+            style={{
+              background: "linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%)",
+              border: "1px solid rgba(255,255,255,0.10)",
+              maxHeight: 500,
+            }}>
             {filteredABs.length > 0 ? (
               <table className="w-full text-[13px]">
-                <thead>
+                <thead className="sticky top-0 z-10" style={{ background: "rgba(20,20,22,0.95)", backdropFilter: "blur(6px)" }}>
                   <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
                     <th className="text-left  py-2 pl-3 pr-2 font-semibold">Date</th>
                     <th className="text-left  py-2 px-2 font-semibold">Pitcher</th>
