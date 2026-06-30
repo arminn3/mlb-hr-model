@@ -877,15 +877,15 @@ export function BatterDetailPage({
           ))}
         </div>
 
-        {/* AB log — 12 columns matching the PropFinder screenshot. Capped at
-            ~500px tall with vertical scroll so an L25 or Season window doesn't
-            push the page to a mile long. */}
+        {/* AB log — 12 columns matching the PropFinder screenshot. Fixed
+            height so toggling L5 ↔ L25 doesn't reflow the rest of the page;
+            internal scroll picks up the slack when the row count grows. */}
         <div>
           <div className="overflow-auto rounded-xl"
             style={{
               background: "linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%)",
               border: "1px solid rgba(255,255,255,0.10)",
-              maxHeight: 500,
+              height: 500,
             }}>
             {filteredABs.length > 0 ? (
               <table className="w-full text-[13px]">
