@@ -318,7 +318,7 @@ function PitchMultiSelect({
         </svg>
       </button>
       {open && chipList.length > 0 && (
-        <div className="absolute z-10 mt-1 w-64 max-h-72 overflow-y-auto bg-card border border-card-border rounded-lg shadow-lg p-2">
+        <div className="absolute z-50 mt-1 w-64 max-h-72 overflow-y-auto bg-card border border-card-border rounded-lg shadow-lg p-2">
           <div className="flex items-center justify-between gap-3 px-2 py-1 mb-1 border-b border-card-border/50">
             <button onClick={onSelectAll} className="text-[10px] uppercase tracking-wider text-muted hover:text-foreground cursor-pointer">All</button>
             <button onClick={onSelectArsenal} className="text-[10px] uppercase tracking-wider text-accent hover:text-accent/80 cursor-pointer font-semibold">Arsenal (12%+)</button>
