@@ -16,6 +16,52 @@ from metrics import (
 )
 
 
+def _ab_extras(row) -> dict:
+    """Per-batted-ball display fields shared by recent_abs and pitch_abs.
+
+    Keeping this in one place is the fix for the recurring bug where the AB
+    log shown in the batter card was missing direction / home_away / bat_speed
+    (the pitch-keyed pitch_abs entries used to omit them, which silently broke
+    the Home/Away filter and the Blast% / Direction columns in the default
+    L5/L10 view). Every AB dict now carries the same field set.
+    """
+    # Direction (pull/center/oppo) — spray-angle math relative to home plate.
+    direction = None
+    hx = row.get("hc_x"); hy = row.get("hc_y"); stand = row.get("stand")
+    if pd.notna(hx) and pd.notna(hy) and stand in ("L", "R"):
+        spray = np.degrees(np.arctan2(float(hx) - 125.42, 198.27 - float(hy)))
+        if -15 <= spray <= 15:
+            direction = "center"
+        elif (stand == "R" and spray < -15) or (stand == "L" and spray > 15):
+            direction = "pull"
+        else:
+            direction = "oppo"
+
+    # Home/Away — inning_topbot "Top" = away team batting, "Bot" = home.
+    home_away = None
+    itb = str(row.get("inning_topbot", "") or "").strip()
+    if itb in ("Top", "Bot"):
+        home_away = "A" if itb == "Top" else "H"
+
+    # bat_speed (2024+ Statcast) — powers the Blast column.
+    bat_speed = None
+    bs = row.get("bat_speed")
+    if pd.notna(bs):
+        try:
+            bat_speed = round(float(bs), 1)
+        except (TypeError, ValueError):
+            bat_speed = None
+
+    return {
+        "bat_speed": bat_speed,
+        "direction": direction,
+        "home_away": home_away,
+        # Statcast events carry no start time; Day/Night is derived nowhere.
+        "day_night": None,
+        "game_pk": int(row["game_pk"]) if pd.notna(row.get("game_pk")) else None,
+    }
+
+
 def normalize_metric(value: float, metric_name: str) -> float:
     """Normalize a raw metric to [0, 1] using fixed empirical ranges."""
     if metric_name not in config.NORM_RANGES:
@@ -522,42 +568,6 @@ def score_batter_vs_pitcher(
             _recent_pool = pd.concat([_recent_pool, _s_pool], ignore_index=True)
     if not _recent_pool.empty:
         for _, row in _recent_pool.iterrows():
-            # Direction (pull/center/oppo) — spray-angle math: arctan2 of hit
-            # coords relative to home plate. ±15° = center; same-side as stand
-            # = pull, opposite = oppo. Matches the convention used elsewhere in
-            # main.py for pull_barrel calc.
-            _direction = None
-            _hx = row.get("hc_x")
-            _hy = row.get("hc_y")
-            _stand = row.get("stand")
-            if pd.notna(_hx) and pd.notna(_hy) and _stand in ("L", "R"):
-                _spray = np.degrees(np.arctan2(float(_hx) - 125.42, 198.27 - float(_hy)))
-                if -15 <= _spray <= 15:
-                    _direction = "center"
-                elif (_stand == "R" and _spray < -15) or (_stand == "L" and _spray > 15):
-                    _direction = "pull"
-                else:
-                    _direction = "oppo"
-
-            # Home/Away — inning_topbot "Top" means away team batting, "Bot"
-            # means home team batting. So if batter's team == home_team and
-            # inning_topbot is Bot, they're home.
-            _home_away = None
-            _itb = str(row.get("inning_topbot", "") or "").strip()
-            if _itb in ("Top", "Bot"):
-                _home_away = "A" if _itb == "Top" else "H"
-
-            # bat_speed — newer Statcast field (2024+). May be missing for older
-            # rows or non-tracked stadiums. Used by the Blast column (Blast = 1
-            # when bat_speed >= 75 AND launch_speed >= 95).
-            _bat_speed = None
-            _bs = row.get("bat_speed")
-            if pd.notna(_bs):
-                try:
-                    _bat_speed = round(float(_bs), 1)
-                except (TypeError, ValueError):
-                    _bat_speed = None
-
             recent_abs.append({
                 "date": str(row.get("game_date", ""))[:10],
                 "pitcher_name": str(row.get("player_name", "")),
@@ -568,16 +578,7 @@ def score_batter_vs_pitcher(
                 "distance": round(float(row.get("hit_distance_sc", 0)), 0)
                     if pd.notna(row.get("hit_distance_sc")) else None,
                 "result": str(row.get("events", row.get("description", ""))),
-                # New fields powering the redesigned batter detail page:
-                "bat_speed": _bat_speed,
-                "direction": _direction,
-                "home_away": _home_away,
-                # day_night intentionally not derived here — Statcast events
-                # don't carry start time. Frontend renders "—" and the D/N
-                # filter is effectively a no-op until we cache game_pk → start
-                # time from MLB Stats API in a future pass.
-                "day_night": None,
-                "game_pk": int(row["game_pk"]) if pd.notna(row.get("game_pk")) else None,
+                **_ab_extras(row),
             })
     # Sort by date descending
     recent_abs.sort(key=lambda x: x["date"], reverse=True)
@@ -643,6 +644,10 @@ def score_batter_vs_pitcher(
                         "distance": round(float(row.get("hit_distance_sc", 0)), 0)
                             if pd.notna(row.get("hit_distance_sc")) else None,
                         "result": str(row.get("events", row.get("description", ""))),
+                        # Same enrichment as recent_abs so the default L5/L10
+                        # view (which sources from pitch_abs) has working
+                        # Home/Away + Direction + Blast.
+                        **_ab_extras(row),
                     })
                 pitch_abs[pt] = pt_list
     result["pitch_abs"] = pitch_abs

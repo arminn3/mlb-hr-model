@@ -14,11 +14,20 @@ import argparse
 import json
 import math
 import shutil
+import socket
 import subprocess
 import sys
 from collections import defaultdict
 from datetime import date, timedelta
 from pathlib import Path
+
+# Global socket timeout — pybaseball / requests calls have no read timeout by
+# default, so a single slow Baseball Savant / MLB API response can hang the
+# whole slate run indefinitely (it stalled ~13 min on one batter on 2026-06-30).
+# This caps per-recv inactivity at 60s; legit large transfers keep streaming so
+# they're unaffected, while true hangs raise (caught by the fetchers → empty df,
+# player scored at low confidence) instead of blocking forever.
+socket.setdefaulttimeout(60)
 
 import numpy as np
 import pandas as pd
@@ -36,7 +45,7 @@ from data_fetchers import (
     get_batter_hand,
     get_bullpen_freshness_bulk,
 )
-from model import score_batter_multi_lookback
+from model import score_batter_multi_lookback, _ab_extras
 from metrics import calc_pitch_type_stats, build_batter_pa_history, get_pitch_mix, build_pitcher_profile
 from environment import calc_environment_score
 import config
@@ -668,52 +677,48 @@ def run_model(game_date: date = None, fast: bool = False):
                     ba = hits_mask.sum() / ab
                     slg = total_bases / ab
                     season_profile["iso"] = round(float(slg - ba), 3)
-            # Last 25 BIPs across the full season pool — used for Season tab AB log
+            # season_abs = AB log for the batter card. Same-hand block FIRST
+            # (last 25 vs the opposing hand — the matchup-relevant default and
+            # the pool score-utils slices for L15/L20/L25), then an opposite-
+            # hand block (last 25) appended so the Pitch Arm filter pulls real
+            # data when a user toggles to the other hand. pitch_arm is tagged
+            # from each row's actual p_throws.
             _sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in all_bip.columns else ["game_date"]
-            _sabs_pool = all_bip.sort_values(_sort_cols, ascending=False).head(25)
-            season_abs = []
-            for _, _r in _sabs_pool.iterrows():
-                # Mirror the per-AB enrichment we do in model.py recent_abs so
-                # the Season-window AB log carries the same columns the
-                # redesigned batter detail page expects.
-                _sa_dir = None
-                _shx = _r.get("hc_x"); _shy = _r.get("hc_y"); _sst = _r.get("stand")
-                if pd.notna(_shx) and pd.notna(_shy) and _sst in ("L", "R"):
-                    _ssp = np.degrees(np.arctan2(float(_shx) - 125.42, 198.27 - float(_shy)))
-                    if -15 <= _ssp <= 15:
-                        _sa_dir = "center"
-                    elif (_sst == "R" and _ssp < -15) or (_sst == "L" and _ssp > 15):
-                        _sa_dir = "pull"
-                    else:
-                        _sa_dir = "oppo"
-                _sa_ha = None
-                _itb = str(_r.get("inning_topbot", "") or "").strip()
-                if _itb in ("Top", "Bot"):
-                    _sa_ha = "A" if _itb == "Top" else "H"
-                _sa_bs = None
-                _sbs = _r.get("bat_speed")
-                if pd.notna(_sbs):
-                    try:
-                        _sa_bs = round(float(_sbs), 1)
-                    except (TypeError, ValueError):
-                        _sa_bs = None
-                season_abs.append({
-                    "date": str(_r.get("game_date", ""))[:10],
-                    "pitcher_name": str(_r.get("player_name", "")),
-                    "pitch_arm": str(_r.get("p_throws", pitcher_hand)),
-                    "pitch_type": str(_r.get("pitch_name", _r.get("pitch_type", ""))),
-                    "ev": round(float(_r.get("launch_speed", 0) or 0), 1),
-                    "angle": round(float(_r.get("launch_angle", 0) or 0), 1),
-                    "distance": round(float(_r.get("hit_distance_sc", 0) or 0), 0)
-                        if pd.notna(_r.get("hit_distance_sc")) else None,
-                    "result": str(_r.get("events", "")),
-                    "bat_speed": _sa_bs,
-                    "direction": _sa_dir,
-                    "home_away": _sa_ha,
-                    "day_night": None,
-                    "game_pk": int(_r["game_pk"]) if pd.notna(_r.get("game_pk")) else None,
-                })
-            season_profile["season_abs"] = season_abs
+
+            def _build_abs(pool_df):
+                if pool_df is None or pool_df.empty:
+                    return []
+                _pool = pool_df.sort_values(_sort_cols, ascending=False).head(25)
+                out = []
+                for _, _r in _pool.iterrows():
+                    out.append({
+                        "date": str(_r.get("game_date", ""))[:10],
+                        "pitcher_name": str(_r.get("player_name", "")),
+                        "pitch_arm": str(_r.get("p_throws", pitcher_hand)),
+                        "pitch_type": str(_r.get("pitch_name", _r.get("pitch_type", ""))),
+                        "ev": round(float(_r.get("launch_speed", 0) or 0), 1),
+                        "angle": round(float(_r.get("launch_angle", 0) or 0), 1),
+                        "distance": round(float(_r.get("hit_distance_sc", 0) or 0), 0)
+                            if pd.notna(_r.get("hit_distance_sc")) else None,
+                        "result": str(_r.get("events", "")),
+                        **_ab_extras(_r),
+                    })
+                return out
+
+            # Opposite-hand pool (for the Pitch Arm "other hand" view).
+            _off_hand = "L" if pitcher_hand == "R" else "R"
+            _off_frames = []
+            if not batter_df.empty:
+                _ob = batter_df[(batter_df["p_throws"] == _off_hand) & (batter_df["launch_speed"].notna()) & (batter_df["events"].notna())]
+                if not _ob.empty:
+                    _off_frames.append(_ob)
+            if batter_2025 is not None and not batter_2025.empty:
+                _ob25 = batter_2025[(batter_2025["p_throws"] == _off_hand) & (batter_2025["launch_speed"].notna()) & (batter_2025["events"].notna())]
+                if not _ob25.empty:
+                    _off_frames.append(_ob25)
+            _all_off = pd.concat(_off_frames) if _off_frames else pd.DataFrame()
+
+            season_profile["season_abs"] = _build_abs(all_bip) + _build_abs(_all_off)
 
         # Zone grids — batter hot zones and pitcher vulnerable zones (pitch location 1-9)
         _bz_frames = []

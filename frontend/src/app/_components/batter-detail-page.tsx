@@ -318,7 +318,7 @@ function PitchMultiSelect({
         </svg>
       </button>
       {open && chipList.length > 0 && (
-        <div className="absolute z-50 mt-1 w-64 max-h-72 overflow-y-auto bg-card border border-card-border rounded-lg shadow-lg p-2">
+        <div className="absolute right-0 z-50 mt-1 w-[min(16rem,calc(100vw-2rem))] max-h-72 overflow-y-auto bg-card border border-card-border rounded-lg shadow-lg p-2">
           <div className="flex items-center justify-between gap-3 px-2 py-1 mb-1 border-b border-card-border/50">
             <button onClick={onSelectAll} className="text-[10px] uppercase tracking-wider text-muted hover:text-foreground cursor-pointer">All</button>
             <button onClick={onSelectArsenal} className="text-[10px] uppercase tracking-wider text-accent hover:text-accent/80 cursor-pointer font-semibold">Arsenal (12%+)</button>
@@ -388,18 +388,15 @@ export function BatterDetailPage({
   // drives the view, and Season's season_profile isn't a true ordered log.
   // If the global lookback is "Season", land on L10 instead.
   const [activeLookback, setActiveLookback] = useState<UILookback>(lookback === "Season" ? "L10" : lookback);
-  // New filter dropdowns. Pitch Arm defaults to the opposing pitcher's
-  // hand — the matchup-relevant pool. Picking the other hand currently
-  // returns no rows because the backend's recent_abs / season_abs are
-  // pre-filtered to the same hand as the opposing pitcher (see model.py
-  // line ~493 and main.py line ~611). Extending the slate to carry
-  // both-hand pools is a separate task flagged below.
+  // New filter dropdowns. Pitch Arm defaults to the opposing pitcher's hand —
+  // the matchup-relevant pool. season_abs now carries BOTH hands (same-hand
+  // block first, then an opposite-hand block tagged by pitch_arm), so picking
+  // the other hand or "Both" pulls real data via the needBothHand branch below.
   const _initialArm: "L" | "R" | "Both" =
     player.pitcher_hand === "L" ? "L"
     : player.pitcher_hand === "R" ? "R"
     : "Both";
   const [armFilter, setArmFilter] = useState<"L" | "R" | "Both">(_initialArm);
-  const [dnFilter,  setDnFilter]  = useState<"D" | "N" | "Both">("Both");
   const [haFilter,  setHaFilter]  = useState<"H" | "A" | "Both">("Both");
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }); }, []);
@@ -453,7 +450,17 @@ export function BatterDetailPage({
   // the table well below 25, which is the bug the user just flagged.
   const isWideWindow = activeLookback === "L15" || activeLookback === "L20"
                     || activeLookback === "L25" || activeLookback === "Season";
-  if (isWideWindow) {
+  // The per-pitch pitch_abs log (and the same-hand-first slice used for wide
+  // windows) only surfaces opposing-hand BBE. When the user toggles Pitch Arm
+  // off the default opposing hand (other hand OR "Both"), source from the
+  // unsliced both-hand season_abs pool — the arm filter + cap below then narrow
+  // it. Checked BEFORE isWideWindow so the appended opposite-hand block isn't
+  // sliced away.
+  const bothHandPool = (player.season_profile?.season_abs ?? []) as typeof filteredABs;
+  const needBothHand = armFilter !== player.pitcher_hand;
+  if (needBothHand) {
+    filteredABs = bothHandPool.slice();
+  } else if (isWideWindow) {
     filteredABs = (scores.recent_abs || []).slice(0, limit);
   } else if (pitchFilter.size === 0) {
     if (pitchAbsData && Object.keys(pitchAbsData).length > 0) {
@@ -489,14 +496,16 @@ export function BatterDetailPage({
     filteredABs = selected.filter((ab) => { const k = `${ab.date}-${ab.ev}-${ab.angle}`; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, limit);
   }
 
-  // Apply the new PropFinder-style filters (Arm/Day-Night/Home-Away) on top
-  // of the pitch-type filter. Each is a no-op when set to "Both".
+  // Apply the PropFinder-style filters (Pitch Arm / Home-Away) on top of the
+  // pitch-type filter. Each is a no-op when set to "Both".
   filteredABs = filteredABs.filter((ab) => {
     if (armFilter !== "Both" && String(ab.pitch_arm ?? "") !== armFilter) return false;
-    if (dnFilter  !== "Both" && String(ab.day_night ?? "") !== dnFilter)  return false;
     if (haFilter  !== "Both" && String(ab.home_away ?? "") !== haFilter)  return false;
     return true;
   });
+  // The both-hand branch isn't pre-sliced, so cap it to the window N after the
+  // arm filter has narrowed to the chosen hand.
+  if (needBothHand) filteredABs = filteredABs.slice(0, limit);
 
   const recentAbsArr = scores.recent_abs ?? [];
   const flyBalls = recentAbsArr.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
@@ -534,7 +543,12 @@ export function BatterDetailPage({
   // than scores.recent_abs's 10-row arsenal pool. That's why "Cutter only"
   // can show a populated table while scores.recent_abs has zero cutters.
   // Using filteredABs as the stat pool keeps them in sync.
-  if (pitchFilter.size > 0 && filteredABs.length > 0) {
+  // Recompute the stat cards from the exact pool the AB table shows whenever
+  // ANY filter is narrowing the view — pitch chips, Pitch Arm (defaults to the
+  // opposing hand, so this is almost always on), or Home/Away. Keeps the cards
+  // and the log in lockstep: the numbers are raw counts over the visible ABs.
+  const anyFilterActive = pitchFilter.size > 0 || armFilter !== "Both" || haFilter !== "Both";
+  if (anyFilterActive && filteredABs.length > 0) {
     const n = filteredABs.length;
     const pct = (count: number) => Math.round((count / n) * 1000) / 10;
     let gb = 0, ld = 0, fb = 0, pu = 0, brl = 0, hh = 0, blast = 0;
@@ -567,7 +581,7 @@ export function BatterDetailPage({
     // the % is meaningful only when the field exists.
     const haveBatSpeed = filteredABs.some((ab) => ab.bat_speed != null);
     displayBlast = haveBatSpeed ? pct(blast) : null;
-  } else if (pitchFilter.size > 0) {
+  } else if (anyFilterActive) {
     displayBarrel = 0; displayFb = 0; displayLd = 0;
     displayGb = 0; displayHardHit = 0; displayEv = 0;
     displayPu = null; displayHrFb = null; displayBlast = null;
@@ -864,12 +878,11 @@ export function BatterDetailPage({
           </div>
         )}
 
-        {/* Filter dropdown row — Events / Pitch Arm / Day-Night / Home-Away /
-            Pitch Type. Was sticky-pinned but the top:0 anchored it to the
-            window, not the dashboard chrome — so it punched up over the page
-            header / sidebar. Reverted to inline. AB table below scrolls
-            internally instead so toggling Events doesn't reflow the page. */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        {/* Filter dropdown row — Events / Pitch Arm / Home-Away / Pitch Type.
+            (Day/Night was removed: Statcast batted-ball data carries no game
+            start time, so it could never pull accurate data.) AB table below
+            scrolls internally so toggling Events doesn't reflow the page. */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <FilterDropdown
             label="Events"
             value={activeLookback}
@@ -890,16 +903,6 @@ export function BatterDetailPage({
               { value: "Both", label: "Both" },
               { value: "L", label: "LHP" },
               { value: "R", label: "RHP" },
-            ]}
-          />
-          <FilterDropdown
-            label="Day / Night"
-            value={dnFilter}
-            onChange={(v) => setDnFilter(v as "D" | "N" | "Both")}
-            options={[
-              { value: "Both", label: "Both" },
-              { value: "D", label: "Day" },
-              { value: "N", label: "Night" },
             ]}
           />
           <FilterDropdown
@@ -951,13 +954,12 @@ export function BatterDetailPage({
               overflowAnchor: "none",
             }}>
             {filteredABs.length > 0 ? (
-              <table className="w-full text-[13px]">
+              <table className="w-full min-w-[680px] text-[13px]">
                 <thead style={{ background: "rgba(20,20,22,0.95)" }}>
                   <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
                     <th className="text-left  py-2 pl-3 pr-2 font-semibold">Date</th>
                     <th className="text-left  py-2 px-2 font-semibold">Pitcher</th>
                     <th className="text-center py-2 px-2 font-semibold">Arm</th>
-                    <th className="text-center py-2 px-2 font-semibold">D/N</th>
                     <th className="text-left  py-2 px-2 font-semibold">Pitch Type</th>
                     <th className="text-center py-2 px-2 font-semibold">EV</th>
                     <th className="text-center py-2 px-2 font-semibold">LA</th>
@@ -992,7 +994,6 @@ export function BatterDetailPage({
                         <td className="py-2.5 pl-3 pr-2 text-foreground/75 font-mono text-[12px]">{String(ab.date)}</td>
                         <td className="py-2.5 px-2 text-foreground text-[12px]">{String(ab.pitcher_name ?? "")}</td>
                         <td className="py-2.5 px-2 text-center text-foreground/70 font-mono">{String(ab.pitch_arm ?? "—")}</td>
-                        <td className="py-2.5 px-2 text-center text-muted/50 font-mono">{String(ab.day_night ?? "—")}</td>
                         <td className="py-2.5 px-2 text-foreground/85 text-[12px]">{String(ab.pitch_type ?? "—")}</td>
                         <td className="py-2.5 px-2 text-center">
                           <span className="font-mono font-semibold" style={{ color: evGradient(ev) }}>{String(ab.ev)}</span>

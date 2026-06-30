@@ -75,7 +75,16 @@ function computeSeasonScoreSet(p: PlayerData): ScoreSet | null {
  *  whenever the pitch filter is on. */
 function computeSliceScoreSet(p: PlayerData, n: 15 | 20 | 25): ScoreSet | null {
   const fullSeasonAbs: RecentAB[] = p.season_profile?.season_abs ?? [];
-  const pool: RecentAB[] = fullSeasonAbs.slice(0, n);
+  // season_abs now carries BOTH hands (same-hand block first, then an
+  // opposite-hand block for the Pitch Arm filter). The default matchup view —
+  // and the stats that feed this composite — must be the opposing-hand pool
+  // only, so filter to it before slicing. The full both-hand list is still
+  // returned as recent_abs so the AB table's arm filter can pull either hand.
+  const oppHand = p.pitcher_hand;
+  const sameHandAbs = oppHand
+    ? fullSeasonAbs.filter((ab) => ab.pitch_arm === oppHand)
+    : fullSeasonAbs;
+  const pool: RecentAB[] = sameHandAbs.slice(0, n);
   if (pool.length === 0) return null;
 
   const cnt = pool.length;
