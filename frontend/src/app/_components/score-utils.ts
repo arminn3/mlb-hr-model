@@ -63,12 +63,19 @@ function computeSeasonScoreSet(p: PlayerData): ScoreSet | null {
   };
 }
 
-/** Synthesize a raw-pool ScoreSet from the most recent N entries of
- *  season_abs. Used for L15/L20/L25 — those aren't pre-computed by main.py
- *  (LOOKBACK_WINDOWS is L5/L10 only per the scoring-lookback memory rule).
- *  This is purely display-side so it doesn't touch ranking composites. */
+/** Synthesize a raw-pool ScoreSet from season_abs for L15/L20/L25.
+ *  Those windows aren't pre-computed by main.py (LOOKBACK_WINDOWS is L5/L10
+ *  only per the scoring-lookback memory rule). Purely display-side — doesn't
+ *  touch ranking composites.
+ *
+ *  Stats are computed from the most-recent-N slice (matches the label "L15"
+ *  = "last 15 BBE"). recent_abs is returned as the FULL season_abs (up to
+ *  25) so the AB table can apply the user's pitch filter first and then cap
+ *  at N — otherwise pre-slicing makes the table show fewer than N entries
+ *  whenever the pitch filter is on. */
 function computeSliceScoreSet(p: PlayerData, n: 15 | 20 | 25): ScoreSet | null {
-  const pool: RecentAB[] = (p.season_profile?.season_abs ?? []).slice(0, n);
+  const fullSeasonAbs: RecentAB[] = p.season_profile?.season_abs ?? [];
+  const pool: RecentAB[] = fullSeasonAbs.slice(0, n);
   if (pool.length === 0) return null;
 
   const cnt = pool.length;
@@ -114,7 +121,9 @@ function computeSliceScoreSet(p: PlayerData, n: 15 | 20 | 25): ScoreSet | null {
     gb_pct:       pct(gb),
     hard_hit_pct: pct(hh),
     data_quality: "OK",
-    recent_abs:   pool,
+    // Full season_abs so the AB table can pitch-filter then slice — pool
+    // (15/20/25 pre-filter) drives the stats above.
+    recent_abs:   fullSeasonAbs,
     blast_pct:    pct(blast),
     pull_brl:     p.season_profile?.pull_barrel ?? 0,
     xwoba:        p.season_profile?.xwoba,
