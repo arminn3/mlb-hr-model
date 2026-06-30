@@ -513,40 +513,14 @@ export function BatterDetailPage({
       : Math.max(0, Math.round((100 - gb - ld - fb) * 10) / 10);
   let displayPu: number | null = _puFromBuckets(displayGb, displayLd, displayFb);
 
-  // Pitch-filter stat recompute — only fires for L5/L10. The wide windows
-  // (L15/L20/L25/Season) already carry slice-specific stats from
-  // computeSliceScoreSet and the user is choosing those windows to see how
-  // the player has done over the last N BBE — overriding with
-  // pitchDetail-weighted averages would make L15/L20/L25 all show the same
-  // numbers regardless of N (which is the bug the user just flagged).
-  if (pitchFilter.size > 0 && !isWideWindow) {
-    let totalCount = 0, wBarrel = 0, wFb = 0, wLd = 0, wGb = 0, wHard = 0, wEv = 0;
-    for (const pt of pitchFilter) {
-      const d = pitchDetail[pt]; if (!d) continue;
-      const c = d.count ?? 0; totalCount += c;
-      wBarrel += (d.barrel_rate ?? 0) * c; wFb += (d.fb_rate ?? 0) * c;
-      wLd += (d.ld_rate ?? 0) * c; wGb += (d.gb_rate ?? 0) * c;
-      wHard += (d.hard_hit_rate ?? 0) * c; wEv += (d.avg_exit_velo ?? 0) * c;
-    }
-    if (totalCount > 0) {
-      displayBarrel = Math.round((wBarrel / totalCount) * 10) / 10;
-      displayFb = Math.round((wFb / totalCount) * 10) / 10;
-      displayLd = Math.round((wLd / totalCount) * 10) / 10;
-      displayGb = Math.round((wGb / totalCount) * 10) / 10;
-      displayHardHit = Math.round((wHard / totalCount) * 10) / 10;
-      displayEv = Math.round((wEv / totalCount) * 10) / 10;
-      displayPu = _puFromBuckets(displayGb, displayLd, displayFb);
-    } else { displayBarrel = 0; displayFb = 0; displayLd = 0; displayGb = 0; displayHardHit = 0; displayEv = 0; displayPu = null; }
-    const filterAbs = recentAbsArr.filter((ab) => {
-      const pt = ab.pitch_type ?? "";
-      if (pitchFilter.has(pt)) return true;
-      for (const code of pitchFilter) if ((PITCH_NAMES[code] || []).includes(pt)) return true;
-      return false;
-    });
-    const fFb = filterAbs.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
-    const fHr = filterAbs.filter((ab) => ab.result === "home_run").length;
-    displayHrFb = fFb.length > 0 ? (fHr / fFb.length) * 100 : null;
-  }
+  // Stat cards always display the raw pool stats for the active lookback
+  // window — no more pitch-filter recompute. With 10 BBE in the pool, GB%
+  // must be a clean multiple of 10 (1 GB → 10%, 3 GB → 30%, etc.). The old
+  // recompute branch was weighting per-pitch rates from pitchDetail and
+  // producing fractional values like 33.3% which can't come from 10 events.
+  // HR/FB% still needs derivation since it's not a direct ScoreSet field —
+  // compute from the recent_abs pool the lookback corresponds to.
+  void recentAbsArr; // referenced by HR/FB% derivation up above; keep linter quiet
 
   const pitchDetailEntries = Object.entries(pitchDetail).sort((a, b) => (b[1].usage_pct ?? 0) - (a[1].usage_pct ?? 0));
   const matchup = matchupLabel(pitchDetail);
