@@ -420,7 +420,16 @@ export function BatterDetailPage({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pitchAbsData = (scores as any).pitch_abs as Record<string, Array<Record<string, unknown>>> | undefined;
-  const limit = activeLookback === "L5" ? 5 : activeLookback === "Season" ? 25 : 10;
+  // Match the slice size of computeSliceScoreSet for L15/L20/L25 so the AB
+  // table renders the same N rows the stat cards summarized.
+  const limit =
+    activeLookback === "L5"    ? 5
+  : activeLookback === "L10"   ? 10
+  : activeLookback === "L15"   ? 15
+  : activeLookback === "L20"   ? 20
+  : activeLookback === "L25"   ? 25
+  : activeLookback === "Season" ? 25
+  : 10;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let filteredABs: any[];
   if (pitchFilter.size === 0) {
@@ -801,8 +810,11 @@ export function BatterDetailPage({
             value={activeLookback}
             onChange={(v) => setActiveLookback(v as UILookback)}
             options={[
-              { value: "L5", label: "L5" },
-              { value: "L10", label: "L10" },
+              { value: "L5",     label: "L5" },
+              { value: "L10",    label: "L10" },
+              { value: "L15",    label: "L15" },
+              { value: "L20",    label: "L20" },
+              { value: "L25",    label: "L25" },
               { value: "Season", label: "Season" },
             ]}
           />
