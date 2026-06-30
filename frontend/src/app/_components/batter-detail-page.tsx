@@ -531,22 +531,22 @@ export function BatterDetailPage({
   const matchup = matchupLabel(pitchDetail);
   const playerTags = buildTags(player, parkFactor);
 
-  // PropFinder-style 10-card layout (matches user-supplied screenshot):
-  // GB% · FB% · LD% · PU% · HR/FB% · Hard Hit% · Avg EV · Barrel% · Blast% · Pull Barrel%
-  // All values react to the active lookback + pitch filter. Blast% and
-  // Pull Barrel% sourced from season_profile (window-specific not available
-  // yet — flagged so we know they're not L5/L10 reactive).
+  // User-locked card order (per feedback memory): EV → Barrel% first since
+  // those are the lead power signals, then the launch-angle buckets, then
+  // HR/FB%, Hard Hit%, Blast%, Pull Brl%. All react to active lookback +
+  // pitch filter. Blast% and Pull Brl% currently season-level (not L5/L10
+  // reactive yet — flagged for later).
   const displayBlast = scores.blast_pct ?? player.season_profile?.blast ?? null;
   const displayPullBrl = player.season_profile?.pull_barrel ?? null;
   const statCards = [
+    { label: "Avg EV",     value: `${displayEv}`,                                             cls: statHighlight(displayEv, [88, 93]) },
+    { label: "Barrel%",    value: `${displayBarrel}%`,                                        cls: statHighlight(displayBarrel, [8, 15]) },
     { label: "GB%",        value: displayGb === null ? "—" : `${displayGb}%`,                cls: "text-muted" },
     { label: "FB%",        value: `${displayFb}%`,                                            cls: statHighlight(displayFb, [25, 40]) },
     { label: "LD%",        value: displayLd === null ? "—" : `${displayLd}%`,                cls: "text-muted" },
     { label: "PU%",        value: displayPu === null ? "—" : `${displayPu}%`,                cls: "text-muted" },
     { label: "HR/FB%",     value: displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`,  cls: displayHrFb == null ? "text-muted" : statHighlight(displayHrFb, [10, 18]) },
     { label: "Hard Hit%",  value: `${displayHardHit}%`,                                       cls: statHighlight(displayHardHit, [35, 50]) },
-    { label: "Avg EV",     value: `${displayEv}`,                                             cls: statHighlight(displayEv, [88, 93]) },
-    { label: "Barrel%",    value: `${displayBarrel}%`,                                        cls: statHighlight(displayBarrel, [8, 15]) },
     { label: "Blast%",     value: displayBlast == null ? "—" : `${displayBlast}%`,           cls: displayBlast == null ? "text-muted" : statHighlight(displayBlast, [10, 20]) },
     { label: "Pull Brl%",  value: displayPullBrl == null ? "—" : `${displayPullBrl}%`,       cls: displayPullBrl == null ? "text-muted" : statHighlight(displayPullBrl, [3, 8]) },
   ];
