@@ -640,13 +640,17 @@ export function Dashboard() {
                   g.players.some((p) => p.name === selectedBatter.player.name)
                 );
                 if (!game) return undefined;
-                // Build name → batting-order lookup from posted/projected lineup
-                // entries in team_pitch_mix. Players without a lineup slot get
-                // null order (still selectable, sorted to the bottom).
+                // Restrict the Switch Hitter dropdown to the batter's OWN
+                // team only — opposing-team hitters live in their own card.
+                const targetSide = selectedBatter.player.batter_side;
+                // Build name → batting-order lookup from that side's posted /
+                // projected lineup. Players without a lineup slot get null
+                // order (still selectable, sorted to the bottom).
                 const orderByName = new Map<string, number>();
-                for (const side of ["away", "home"] as const) {
-                  const sd = game.team_pitch_mix?.[side];
-                  if (!sd) continue;
+                const sd = targetSide === "home" || targetSide === "away"
+                  ? game.team_pitch_mix?.[targetSide]
+                  : undefined;
+                if (sd) {
                   for (const b of sd.batters) {
                     if (b.name && b.order != null && b.order >= 1 && b.order <= 9) {
                       orderByName.set(b.name, b.order);
@@ -656,6 +660,7 @@ export function Dashboard() {
                 const seen = new Set<string>();
                 const list: Array<{ name: string; battingOrder: number | null; hand: string; isSelf: boolean }> = [];
                 for (const p of game.players) {
+                  if (p.batter_side !== targetSide) continue;
                   if (seen.has(p.name)) continue;
                   seen.add(p.name);
                   list.push({
@@ -666,7 +671,7 @@ export function Dashboard() {
                   });
                 }
                 // Sort: posted-order batters first (1..9), then everyone else
-                // alphabetically. Posted slots first matches the screenshot.
+                // alphabetically.
                 list.sort((a, b) => {
                   if (a.battingOrder != null && b.battingOrder == null) return -1;
                   if (a.battingOrder == null && b.battingOrder != null) return 1;

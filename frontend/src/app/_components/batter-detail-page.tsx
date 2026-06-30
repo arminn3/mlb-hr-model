@@ -279,13 +279,16 @@ function FilterDropdown({
 }
 
 function PitchMultiSelect({
-  chipList, selected, onToggle, onClearAll, onSelectAll, pitchNames,
+  chipList, selected, onToggle, onClearAll, onSelectAll, onSelectArsenal, pitchNames,
 }: {
   chipList: Array<{ type: string; usage: number }>;
   selected: Set<string>;
   onToggle: (pt: string) => void;
   onClearAll: () => void;
   onSelectAll: () => void;
+  /** Selects every pitch in the opposing pitcher's vs-hand arsenal with
+   *  ≥12% usage — the same set the dropdown opens with by default. */
+  onSelectArsenal: () => void;
   pitchNames: Record<string, string[]>;
 }) {
   const [open, setOpen] = useState(false);
@@ -316,8 +319,9 @@ function PitchMultiSelect({
       </button>
       {open && chipList.length > 0 && (
         <div className="absolute z-10 mt-1 w-64 max-h-72 overflow-y-auto bg-card border border-card-border rounded-lg shadow-lg p-2">
-          <div className="flex items-center justify-between px-2 py-1 mb-1 border-b border-card-border/50">
+          <div className="flex items-center justify-between gap-3 px-2 py-1 mb-1 border-b border-card-border/50">
             <button onClick={onSelectAll} className="text-[10px] uppercase tracking-wider text-muted hover:text-foreground cursor-pointer">All</button>
+            <button onClick={onSelectArsenal} className="text-[10px] uppercase tracking-wider text-accent hover:text-accent/80 cursor-pointer font-semibold">Arsenal (12%+)</button>
             <button onClick={onClearAll} className="text-[10px] uppercase tracking-wider text-accent-red/80 hover:text-accent-red cursor-pointer">Clear</button>
           </div>
           {chipList.map((c) => {
@@ -380,7 +384,10 @@ export function BatterDetailPage({
   gamePlayers?: Array<{ name: string; battingOrder: number | null; hand: string; isSelf: boolean }>;
   onSwitchPlayer?: (name: string) => void;
 }) {
-  const [activeLookback, setActiveLookback] = useState<UILookback>(lookback);
+  // Season is no longer a valid option on this page — the BBE log is what
+  // drives the view, and Season's season_profile isn't a true ordered log.
+  // If the global lookback is "Season", land on L10 instead.
+  const [activeLookback, setActiveLookback] = useState<UILookback>(lookback === "Season" ? "L10" : lookback);
   // New filter dropdowns (PropFinder-style). Default to "Both" / "Any" so
   // initial view matches the old behavior.
   const [armFilter, setArmFilter] = useState<"L" | "R" | "Both">("Both");
@@ -506,7 +513,13 @@ export function BatterDetailPage({
       : Math.max(0, Math.round((100 - gb - ld - fb) * 10) / 10);
   let displayPu: number | null = _puFromBuckets(displayGb, displayLd, displayFb);
 
-  if (pitchFilter.size > 0) {
+  // Pitch-filter stat recompute — only fires for L5/L10. The wide windows
+  // (L15/L20/L25/Season) already carry slice-specific stats from
+  // computeSliceScoreSet and the user is choosing those windows to see how
+  // the player has done over the last N BBE — overriding with
+  // pitchDetail-weighted averages would make L15/L20/L25 all show the same
+  // numbers regardless of N (which is the bug the user just flagged).
+  if (pitchFilter.size > 0 && !isWideWindow) {
     let totalCount = 0, wBarrel = 0, wFb = 0, wLd = 0, wGb = 0, wHard = 0, wEv = 0;
     for (const pt of pitchFilter) {
       const d = pitchDetail[pt]; if (!d) continue;
@@ -549,14 +562,14 @@ export function BatterDetailPage({
   const statCards = [
     { label: "Avg EV",     value: `${displayEv}`,                                             cls: statHighlight(displayEv, [88, 93]) },
     { label: "Barrel%",    value: `${displayBarrel}%`,                                        cls: statHighlight(displayBarrel, [8, 15]) },
-    { label: "GB%",        value: displayGb === null ? "—" : `${displayGb}%`,                cls: "text-muted" },
+    { label: "GB%",        value: displayGb === null ? "—" : `${displayGb}%`,                cls: "text-foreground" },
     { label: "FB%",        value: `${displayFb}%`,                                            cls: statHighlight(displayFb, [25, 40]) },
-    { label: "LD%",        value: displayLd === null ? "—" : `${displayLd}%`,                cls: "text-muted" },
-    { label: "PU%",        value: displayPu === null ? "—" : `${displayPu}%`,                cls: "text-muted" },
-    { label: "HR/FB%",     value: displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`,  cls: displayHrFb == null ? "text-muted" : statHighlight(displayHrFb, [10, 18]) },
+    { label: "LD%",        value: displayLd === null ? "—" : `${displayLd}%`,                cls: "text-foreground" },
+    { label: "PU%",        value: displayPu === null ? "—" : `${displayPu}%`,                cls: "text-foreground" },
+    { label: "HR/FB%",     value: displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`,  cls: displayHrFb == null ? "text-foreground" : statHighlight(displayHrFb, [10, 18]) },
     { label: "Hard Hit%",  value: `${displayHardHit}%`,                                       cls: statHighlight(displayHardHit, [35, 50]) },
-    { label: "Blast%",     value: displayBlast == null ? "—" : `${displayBlast}%`,           cls: displayBlast == null ? "text-muted" : statHighlight(displayBlast, [10, 20]) },
-    { label: "Pull Brl%",  value: displayPullBrl == null ? "—" : `${displayPullBrl}%`,       cls: displayPullBrl == null ? "text-muted" : statHighlight(displayPullBrl, [3, 8]) },
+    { label: "Blast%",     value: displayBlast == null ? "—" : `${displayBlast}%`,           cls: displayBlast == null ? "text-foreground" : statHighlight(displayBlast, [10, 20]) },
+    { label: "Pull Brl%",  value: displayPullBrl == null ? "—" : `${displayPullBrl}%`,       cls: displayPullBrl == null ? "text-foreground" : statHighlight(displayPullBrl, [3, 8]) },
   ];
 
   return (
@@ -653,8 +666,17 @@ export function BatterDetailPage({
         {/* Score bar */}
         <ScoreBar value={scores.composite} />
 
-        {/* HR Signal */}
-        <HRSignalCard player={player} />
+        {/* HR Signal — collapsed by default to save vertical space; users
+            who want the breakdown can click open. */}
+        <details className="rounded-xl" style={{ background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.08)" }}>
+          <summary className="px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-muted cursor-pointer flex items-center justify-between">
+            <span>Power Signals</span>
+            <span className="text-[10px] text-muted/50 normal-case tracking-normal">click to expand</span>
+          </summary>
+          <div className="px-1 pb-2">
+            <HRSignalCard player={player} />
+          </div>
+        </details>
 
         {/* Pitch Matchup */}
         {pitchDetailEntries.length > 0 && (
@@ -818,12 +840,11 @@ export function BatterDetailPage({
             value={activeLookback}
             onChange={(v) => setActiveLookback(v as UILookback)}
             options={[
-              { value: "L5",     label: "L5" },
-              { value: "L10",    label: "L10" },
-              { value: "L15",    label: "L15" },
-              { value: "L20",    label: "L20" },
-              { value: "L25",    label: "L25" },
-              { value: "Season", label: "Season" },
+              { value: "L5",  label: "L5" },
+              { value: "L10", label: "L10" },
+              { value: "L15", label: "L15" },
+              { value: "L20", label: "L20" },
+              { value: "L25", label: "L25" },
             ]}
           />
           <FilterDropdown
@@ -862,6 +883,7 @@ export function BatterDetailPage({
             onToggle={(pt) => setPitchFilter((prev) => { const next = new Set(prev); if (next.has(pt)) next.delete(pt); else next.add(pt); return next; })}
             onClearAll={() => setPitchFilter(new Set())}
             onSelectAll={() => setPitchFilter(new Set(chipList.map((c) => c.type)))}
+            onSelectArsenal={() => setPitchFilter(new Set(chipList.filter((c) => c.usage >= 12).map((c) => c.type)))}
             pitchNames={PITCH_NAMES}
           />
         </div>
