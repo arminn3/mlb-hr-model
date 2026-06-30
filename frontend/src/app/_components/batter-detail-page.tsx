@@ -665,17 +665,28 @@ export function BatterDetailPage({
               )}
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              <RatingBadge composite={scores.composite} />
-              {scores.recent_abs.length <= 2 && (
-                <Tooltip text="Limited MLB data — score may not reflect true ability">
-                  <span className="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-accent/10 text-accent border border-accent/20">NEW</span>
-                </Tooltip>
-              )}
-              {scores.data_quality !== "OK" && scores.recent_abs.length > 2 && (
-                <Tooltip text={scores.data_quality === "LOW_SAMPLE" ? "Fewer than 5 balls in play" : "Pitcher has less than 10 innings"}>
-                  <span className="px-1.5 py-0.5 text-[9px] rounded bg-accent-yellow/10 text-accent-yellow">{scores.data_quality.replace(/_/g, " ")}</span>
-                </Tooltip>
-              )}
+              {/* Badges read from the L10 score directly — decoupled from
+                  activeLookback so swapping Events doesn't toggle NEW /
+                  LOW_SAMPLE chips, which was causing the visible page
+                  shift the user kept calling out. */}
+              {(() => {
+                const lockedScores = player.scores.L10 ?? scores;
+                return (
+                  <>
+                    <RatingBadge composite={lockedScores.composite} />
+                    {lockedScores.recent_abs.length <= 2 && (
+                      <Tooltip text="Limited MLB data — score may not reflect true ability">
+                        <span className="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-accent/10 text-accent border border-accent/20">NEW</span>
+                      </Tooltip>
+                    )}
+                    {lockedScores.data_quality !== "OK" && lockedScores.recent_abs.length > 2 && (
+                      <Tooltip text={lockedScores.data_quality === "LOW_SAMPLE" ? "Fewer than 5 balls in play" : "Pitcher has less than 10 innings"}>
+                        <span className="px-1.5 py-0.5 text-[9px] rounded bg-accent-yellow/10 text-accent-yellow">{lockedScores.data_quality.replace(/_/g, " ")}</span>
+                      </Tooltip>
+                    )}
+                  </>
+                );
+              })()}
             </div>
             {playerTags.length > 0 && (
               <div className="mt-2">
@@ -927,16 +938,18 @@ export function BatterDetailPage({
           ))}
         </div>
 
-        {/* AB log — 12 columns. Fixed 520px height with internal scroll
-            so swapping Events (L5/L10/L15/L20/L25) keeps the page height
-            constant. L5 leaves some blank space below the rows; the
-            stability is worth more than the empty pixels. */}
+        {/* AB log — 12 columns. Natural height so L5 doesn't have an empty
+            slab below. The reflow problem was actually in the badges
+            above the table (LOW_SAMPLE / NEW toggling with the lookback
+            window); those are now locked to L10 so the area above the
+            table doesn't move when the user changes Events. The table at
+            the bottom of the page can grow / shrink freely — anything
+            above it stays anchored. */}
         <div>
-          <div className="overflow-auto rounded-xl"
+          <div className="overflow-x-auto rounded-xl"
             style={{
               background: "linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%)",
               border: "1px solid rgba(255,255,255,0.10)",
-              height: 520,
             }}>
             {filteredABs.length > 0 ? (
               <table className="w-full text-[13px]">
