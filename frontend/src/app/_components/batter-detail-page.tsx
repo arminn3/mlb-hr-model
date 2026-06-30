@@ -938,18 +938,17 @@ export function BatterDetailPage({
           ))}
         </div>
 
-        {/* AB log — 12 columns. Natural height so L5 doesn't have an empty
-            slab below. The reflow problem was actually in the badges
-            above the table (LOW_SAMPLE / NEW toggling with the lookback
-            window); those are now locked to L10 so the area above the
-            table doesn't move when the user changes Events. The table at
-            the bottom of the page can grow / shrink freely — anything
-            above it stays anchored. */}
+        {/* AB log — fixed height with internal scroll. User explicitly chose
+            "no page shift on Events change" over "no empty space at L5".
+            Browser scroll position is preserved between L5 and L25 because
+            the table container size doesn't change. */}
         <div>
-          <div className="overflow-x-auto rounded-xl"
+          <div className="overflow-auto rounded-xl"
             style={{
               background: "linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%)",
               border: "1px solid rgba(255,255,255,0.10)",
+              height: 560,
+              overflowAnchor: "none",
             }}>
             {filteredABs.length > 0 ? (
               <table className="w-full text-[13px]">

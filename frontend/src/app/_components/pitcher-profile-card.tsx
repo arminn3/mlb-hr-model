@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { PitcherInfo, PitcherStatRow } from "./types";
 
 const DASH = "—";
@@ -104,13 +107,30 @@ const GROUP_LABELS: Record<ColumnDef["group"], string> = {
   statcast: "Statcast",
 };
 
+type WindowKey = "season" | "last_3" | "last_5" | "last_7" | "last_10";
+const WINDOW_OPTIONS: { key: WindowKey; label: string }[] = [
+  { key: "season",  label: "Season" },
+  { key: "last_3",  label: "Last 3" },
+  { key: "last_5",  label: "Last 5" },
+  { key: "last_7",  label: "Last 7" },
+  { key: "last_10", label: "Last 10" },
+];
+
 export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { pitcher: PitcherInfo; side?: "away" | "home"; teamAbbr?: string; onNameClick?: () => void }) {
   const profile = pitcher.profile ?? null;
-  const rows = profile?.rows ?? null;
+  const seasonRows = profile?.rows ?? null;
   const wins = profile?.wins ?? 0;
   const losses = profile?.losses ?? 0;
   const games_started = profile?.games_started ?? 0;
   const is2025Fallback = (profile?.data_year ?? 2026) === 2025;
+
+  const [windowKey, setWindowKey] = useState<WindowKey>("season");
+  // Window data lives under profile.windows[key] with the same shape as
+  // profile.rows ({ season, vs_L, vs_R }). Fall back to season rows when
+  // a window is missing (older slates pre-windows).
+  const windowsData = profile?.windows ?? null;
+  const activeWindow = windowKey === "season" ? null : (windowsData?.[windowKey] ?? null);
+  const rows = activeWindow ?? seasonRows;
 
   // Build column-group spans for the header row
   const groupSpans: { group: ColumnDef["group"]; span: number }[] = [];
@@ -181,6 +201,36 @@ export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { p
           2025 data — no 2026 appearances yet
         </div>
       )}
+
+      {/* Window selector — Season / Last 3 / Last 5 / Last 7 / Last 10.
+          Same pool the Pitcher Summary page uses, just exposed here so users
+          can see recent-form splits without leaving the Game Slate. */}
+      {windowsData && (
+        <div className="flex items-center gap-1 mb-3 flex-wrap">
+          {WINDOW_OPTIONS.map((opt) => {
+            const hasData = opt.key === "season" || windowsData[opt.key] != null;
+            const on = windowKey === opt.key;
+            return (
+              <button
+                key={opt.key}
+                onClick={() => hasData && setWindowKey(opt.key)}
+                disabled={!hasData}
+                className={
+                  "px-2 py-1 text-[10px] font-mono rounded cursor-pointer transition-colors border " +
+                  (on
+                    ? "bg-accent/15 text-accent border-accent/40"
+                    : hasData
+                      ? "bg-transparent text-muted border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]"
+                      : "bg-transparent text-muted/30 border-[#1c1c1e] cursor-not-allowed")
+                }
+              >
+                {opt.label}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       {!rows ? (
         <div className="text-xs text-muted py-6 text-center">No Statcast data available.</div>
       ) : (
@@ -213,7 +263,7 @@ export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { p
                       {label}
                     </td>
                     {COLUMNS.map((c) => {
-                      const value = row[c.key] as number | null;
+                      const value = (row ? row[c.key] : null) as number | null;
                       const text = c.render ? c.render(value) : (value == null ? DASH : String(value));
                       const colorCls = cellColor(c.key, value);
                       return (
