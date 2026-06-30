@@ -673,6 +673,30 @@ def run_model(game_date: date = None, fast: bool = False):
             _sabs_pool = all_bip.sort_values(_sort_cols, ascending=False).head(25)
             season_abs = []
             for _, _r in _sabs_pool.iterrows():
+                # Mirror the per-AB enrichment we do in model.py recent_abs so
+                # the Season-window AB log carries the same columns the
+                # redesigned batter detail page expects.
+                _sa_dir = None
+                _shx = _r.get("hc_x"); _shy = _r.get("hc_y"); _sst = _r.get("stand")
+                if pd.notna(_shx) and pd.notna(_shy) and _sst in ("L", "R"):
+                    _ssp = np.degrees(np.arctan2(float(_shx) - 125.42, 198.27 - float(_shy)))
+                    if -15 <= _ssp <= 15:
+                        _sa_dir = "center"
+                    elif (_sst == "R" and _ssp < -15) or (_sst == "L" and _ssp > 15):
+                        _sa_dir = "pull"
+                    else:
+                        _sa_dir = "oppo"
+                _sa_ha = None
+                _itb = str(_r.get("inning_topbot", "") or "").strip()
+                if _itb in ("Top", "Bot"):
+                    _sa_ha = "A" if _itb == "Top" else "H"
+                _sa_bs = None
+                _sbs = _r.get("bat_speed")
+                if pd.notna(_sbs):
+                    try:
+                        _sa_bs = round(float(_sbs), 1)
+                    except (TypeError, ValueError):
+                        _sa_bs = None
                 season_abs.append({
                     "date": str(_r.get("game_date", ""))[:10],
                     "pitcher_name": str(_r.get("player_name", "")),
@@ -683,6 +707,11 @@ def run_model(game_date: date = None, fast: bool = False):
                     "distance": round(float(_r.get("hit_distance_sc", 0) or 0), 0)
                         if pd.notna(_r.get("hit_distance_sc")) else None,
                     "result": str(_r.get("events", "")),
+                    "bat_speed": _sa_bs,
+                    "direction": _sa_dir,
+                    "home_away": _sa_ha,
+                    "day_night": None,
+                    "game_pk": int(_r["game_pk"]) if pd.notna(_r.get("game_pk")) else None,
                 })
             season_profile["season_abs"] = season_abs
 

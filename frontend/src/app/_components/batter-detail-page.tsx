@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { ArrowLeft } from "lucide-react";
 import type { PlayerData, PitchDetailEntry, ZoneEntry } from "./types";
 import { HRSignalCard } from "./hr-signal-card";
@@ -252,6 +252,99 @@ function ZoneGrid({
   );
 }
 
+// ── Filter helpers ───────────────────────────────────────────────────────────
+
+function FilterDropdown({
+  label, value, onChange, options,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: Array<{ value: string; label: string }>;
+}) {
+  return (
+    <div>
+      <div className="text-[10px] uppercase tracking-[0.08em] text-muted/60 mb-1.5">{label}</div>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full px-3 py-2 text-sm bg-card/50 border border-card-border rounded-lg text-foreground focus:outline-none focus:border-accent/50 cursor-pointer"
+      >
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>{o.label}</option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+function PitchMultiSelect({
+  chipList, selected, onToggle, onClearAll, onSelectAll, pitchNames,
+}: {
+  chipList: Array<{ type: string; usage: number }>;
+  selected: Set<string>;
+  onToggle: (pt: string) => void;
+  onClearAll: () => void;
+  onSelectAll: () => void;
+  pitchNames: Record<string, string[]>;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    function onDoc(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+  const summary = selected.size === 0
+    ? "All pitches"
+    : selected.size <= 2
+      ? [...selected].map((pt) => pitchNames[pt]?.[0] ?? pt).join(", ")
+      : `${selected.size} selected`;
+  return (
+    <div ref={ref} className="relative">
+      <div className="text-[10px] uppercase tracking-[0.08em] text-muted/60 mb-1.5">Pitch Type</div>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="w-full px-3 py-2 text-sm bg-card/50 border border-card-border rounded-lg text-foreground hover:border-accent/50 cursor-pointer text-left flex items-center justify-between"
+      >
+        <span className="truncate">{summary}</span>
+        <svg className="w-3.5 h-3.5 flex-shrink-0 text-muted ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {open && chipList.length > 0 && (
+        <div className="absolute z-10 mt-1 w-64 max-h-72 overflow-y-auto bg-card border border-card-border rounded-lg shadow-lg p-2">
+          <div className="flex items-center justify-between px-2 py-1 mb-1 border-b border-card-border/50">
+            <button onClick={onSelectAll} className="text-[10px] uppercase tracking-wider text-muted hover:text-foreground cursor-pointer">All</button>
+            <button onClick={onClearAll} className="text-[10px] uppercase tracking-wider text-accent-red/80 hover:text-accent-red cursor-pointer">Clear</button>
+          </div>
+          {chipList.map((c) => {
+            const on = selected.has(c.type);
+            const name = pitchNames[c.type]?.[0] ?? c.type;
+            return (
+              <button
+                key={c.type}
+                onClick={() => onToggle(c.type)}
+                className={`w-full flex items-center justify-between px-2 py-1.5 text-[12px] rounded cursor-pointer ${on ? "bg-accent/15 text-accent" : "text-foreground hover:bg-white/5"}`}
+              >
+                <span className="flex items-center gap-2">
+                  <span className={`w-3.5 h-3.5 rounded border ${on ? "bg-accent border-accent" : "border-muted/40"} flex items-center justify-center`}>
+                    {on && <svg className="w-2.5 h-2.5 text-background" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>}
+                  </span>
+                  <span>{name}</span>
+                </span>
+                <span className="text-[10px] font-mono text-muted/60">{c.usage}%</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ── BatterDetailPage ─────────────────────────────────────────────────────────
 
 export function BatterDetailPage({
@@ -265,6 +358,8 @@ export function BatterDetailPage({
   onToggleFavorite,
   parkFactor,
   opposingArsenal,
+  gamePlayers,
+  onSwitchPlayer,
 }: {
   player: PlayerData;
   lookback: UILookback;
@@ -280,9 +375,17 @@ export function BatterDetailPage({
    *  the authoritative pitch-chip source — overrides `player.pitch_types`
    *  which is pre-stripped at backend's 12% min usage. */
   opposingArsenal?: import("./types").PitcherArsenalEntry[] | null;
+  /** Other batters in the same game, used by the Switch Hitter dropdown so
+   *  the user can navigate between players without losing filter selections. */
+  gamePlayers?: Array<{ name: string; battingOrder: number | null; hand: string; isSelf: boolean }>;
+  onSwitchPlayer?: (name: string) => void;
 }) {
-  const [detailTab, setDetailTab] = useState<"abs" | "statcast" | "pitches" | "bvp" | "profile">("abs");
   const [activeLookback, setActiveLookback] = useState<UILookback>(lookback);
+  // New filter dropdowns (PropFinder-style). Default to "Both" / "Any" so
+  // initial view matches the old behavior.
+  const [armFilter, setArmFilter] = useState<"L" | "R" | "Both">("Both");
+  const [dnFilter,  setDnFilter]  = useState<"D" | "N" | "Both">("Both");
+  const [haFilter,  setHaFilter]  = useState<"H" | "A" | "Both">("Both");
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }); }, []);
 
@@ -354,6 +457,15 @@ export function BatterDetailPage({
     filteredABs = selected.filter((ab) => { const k = `${ab.date}-${ab.ev}-${ab.angle}`; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, limit);
   }
 
+  // Apply the new PropFinder-style filters (Arm/Day-Night/Home-Away) on top
+  // of the pitch-type filter. Each is a no-op when set to "Both".
+  filteredABs = filteredABs.filter((ab) => {
+    if (armFilter !== "Both" && String(ab.pitch_arm ?? "") !== armFilter) return false;
+    if (dnFilter  !== "Both" && String(ab.day_night ?? "") !== dnFilter)  return false;
+    if (haFilter  !== "Both" && String(ab.home_away ?? "") !== haFilter)  return false;
+    return true;
+  });
+
   const recentAbsArr = scores.recent_abs ?? [];
   const flyBalls = recentAbsArr.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
   const hrInLookback = recentAbsArr.filter((ab) => ab.result === "home_run").length;
@@ -410,23 +522,30 @@ export function BatterDetailPage({
   const matchup = matchupLabel(pitchDetail);
   const playerTags = buildTags(player, parkFactor);
 
-  // Order requested: EV, Barrel%, then the contact-shape buckets (GB→FB→LD→PU)
-  // followed by HR/FB% and Hard Hit%. All values driven by the active lookback
-  // window AND the current pitch filter selection above the cards.
+  // PropFinder-style 10-card layout (matches user-supplied screenshot):
+  // GB% · FB% · LD% · PU% · HR/FB% · Hard Hit% · Avg EV · Barrel% · Blast% · Pull Barrel%
+  // All values react to the active lookback + pitch filter. Blast% and
+  // Pull Barrel% sourced from season_profile (window-specific not available
+  // yet — flagged so we know they're not L5/L10 reactive).
+  const displayBlast = scores.blast_pct ?? player.season_profile?.blast ?? null;
+  const displayPullBrl = player.season_profile?.pull_barrel ?? null;
   const statCards = [
-    { label: "Exit Velo", value: `${displayEv}`,                                            cls: statHighlight(displayEv, [88, 93]) },
-    { label: "Barrel%",   value: `${displayBarrel}%`,                                        cls: statHighlight(displayBarrel, [8, 15]) },
-    { label: "GB%",       value: displayGb === null ? "—" : `${displayGb}%`,                cls: "text-muted" },
-    { label: "FB%",       value: `${displayFb}%`,                                            cls: statHighlight(displayFb, [25, 40]) },
-    { label: "LD%",       value: displayLd === null ? "—" : `${displayLd}%`,                cls: "text-muted" },
-    { label: "PU%",       value: displayPu === null ? "—" : `${displayPu}%`,                cls: "text-muted" },
-    { label: "HR/FB%",    value: displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`,  cls: displayHrFb == null ? "text-muted" : statHighlight(displayHrFb, [10, 18]) },
-    { label: "Hard Hit%", value: `${displayHardHit}%`,                                       cls: statHighlight(displayHardHit, [35, 50]) },
+    { label: "GB%",        value: displayGb === null ? "—" : `${displayGb}%`,                cls: "text-muted" },
+    { label: "FB%",        value: `${displayFb}%`,                                            cls: statHighlight(displayFb, [25, 40]) },
+    { label: "LD%",        value: displayLd === null ? "—" : `${displayLd}%`,                cls: "text-muted" },
+    { label: "PU%",        value: displayPu === null ? "—" : `${displayPu}%`,                cls: "text-muted" },
+    { label: "HR/FB%",     value: displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`,  cls: displayHrFb == null ? "text-muted" : statHighlight(displayHrFb, [10, 18]) },
+    { label: "Hard Hit%",  value: `${displayHardHit}%`,                                       cls: statHighlight(displayHardHit, [35, 50]) },
+    { label: "Avg EV",     value: `${displayEv}`,                                             cls: statHighlight(displayEv, [88, 93]) },
+    { label: "Barrel%",    value: `${displayBarrel}%`,                                        cls: statHighlight(displayBarrel, [8, 15]) },
+    { label: "Blast%",     value: displayBlast == null ? "—" : `${displayBlast}%`,           cls: displayBlast == null ? "text-muted" : statHighlight(displayBlast, [10, 20]) },
+    { label: "Pull Brl%",  value: displayPullBrl == null ? "—" : `${displayPullBrl}%`,       cls: displayPullBrl == null ? "text-muted" : statHighlight(displayPullBrl, [3, 8]) },
   ];
 
   return (
     <div className="max-w-5xl mx-auto px-1 py-2 space-y-5">
-      {/* Back row */}
+      {/* Back row — lookback toggle moved into the filter dropdown row below
+          so it's part of the unified Events/Arm/D-N/H-A/Pitch filter group. */}
       <div className="flex items-center gap-3">
         <button
           onClick={onBack}
@@ -441,14 +560,6 @@ export function BatterDetailPage({
             <img src={teamLogoUrl(teamAbbr)} alt={teamAbbr} className="w-5 h-5 object-contain opacity-60" />
           </>
         )}
-        <div className="flex items-center p-1 rounded-xl gap-0.5 ml-auto" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }}>
-          {(["L5", "L10", "Season"] as UILookback[]).map((lb) => (
-            <button key={lb} onClick={() => setActiveLookback(lb)}
-              className={`px-3 py-1 text-[11px] font-bold rounded-lg cursor-pointer transition-all ${activeLookback === lb ? "bg-accent text-white shadow-[0_1px_4px_0_rgba(0,0,0,0.4)]" : "text-muted hover:text-foreground"}`}>
-              {lb}
-            </button>
-          ))}
-        </div>
       </div>
 
         {/* Player header */}
@@ -659,170 +770,189 @@ export function BatterDetailPage({
           </div>
         )}
 
-        {/* Stat cards — sit directly above the pitch filter so the user can
-            see the numbers and the chip controls together. Both windows
-            (L5/L10/Season) AND selected pitches drive these values. */}
-        <div className="grid grid-cols-3 gap-2">
+        {/* Switch Hitter dropdown — preserves filter selections while jumping
+            to another batter in the same game. Hidden when no callback supplied
+            (e.g. unit tests, embedded views). */}
+        {gamePlayers && onSwitchPlayer && gamePlayers.length > 1 && (
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.08em] text-muted/60 mb-1.5">
+              Switch Hitter <span className="text-muted/40 normal-case tracking-normal">· keeps your filters</span>
+            </div>
+            <select
+              value={player.name}
+              onChange={(e) => { if (e.target.value !== player.name) onSwitchPlayer(e.target.value); }}
+              className="w-full max-w-xs px-3 py-2 text-sm bg-card/50 border border-card-border rounded-lg text-foreground focus:outline-none focus:border-accent/50 cursor-pointer"
+            >
+              {gamePlayers.map((gp) => (
+                <option key={gp.name} value={gp.name}>
+                  {gp.battingOrder != null ? `${gp.battingOrder}. ` : ""}{gp.name} ({gp.hand})
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {/* Filter dropdown row — Events / Pitch Arm / Day-Night / Home-Away /
+            Pitch Type. Replaces the prior chip layout. Day/Night currently
+            only filters when ab.day_night is populated (backend lookup TBD). */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          <FilterDropdown
+            label="Events"
+            value={activeLookback}
+            onChange={(v) => setActiveLookback(v as UILookback)}
+            options={[
+              { value: "L5", label: "L5" },
+              { value: "L10", label: "L10" },
+              { value: "Season", label: "Season" },
+            ]}
+          />
+          <FilterDropdown
+            label="Pitch Arm"
+            value={armFilter}
+            onChange={(v) => setArmFilter(v as "L" | "R" | "Both")}
+            options={[
+              { value: "Both", label: "Both" },
+              { value: "L", label: "LHP" },
+              { value: "R", label: "RHP" },
+            ]}
+          />
+          <FilterDropdown
+            label="Day / Night"
+            value={dnFilter}
+            onChange={(v) => setDnFilter(v as "D" | "N" | "Both")}
+            options={[
+              { value: "Both", label: "Both" },
+              { value: "D", label: "Day" },
+              { value: "N", label: "Night" },
+            ]}
+          />
+          <FilterDropdown
+            label="Home / Away"
+            value={haFilter}
+            onChange={(v) => setHaFilter(v as "H" | "A" | "Both")}
+            options={[
+              { value: "Both", label: "Both" },
+              { value: "H", label: "Home" },
+              { value: "A", label: "Away" },
+            ]}
+          />
+          <PitchMultiSelect
+            chipList={chipList}
+            selected={pitchFilter}
+            onToggle={(pt) => setPitchFilter((prev) => { const next = new Set(prev); if (next.has(pt)) next.delete(pt); else next.add(pt); return next; })}
+            onClearAll={() => setPitchFilter(new Set())}
+            onSelectAll={() => setPitchFilter(new Set(chipList.map((c) => c.type)))}
+            pitchNames={PITCH_NAMES}
+          />
+        </div>
+
+        {/* 10 stat cards — GB FB LD PU HRFB HH AvgEV Brl Blast PullBrl */}
+        <div className="grid grid-cols-5 md:grid-cols-10 gap-2">
           {statCards.map(({ label, value, cls }) => (
-            <div key={label} className="flex flex-col items-center justify-center gap-1.5 px-3 py-3 rounded-xl"
+            <div key={label} className="flex flex-col items-center justify-center gap-1.5 px-2 py-3 rounded-xl"
               style={{
                 background: "linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)",
                 border: "1px solid rgba(255,255,255,0.10)",
                 boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.14), inset 0 -1px 0 0 rgba(0,0,0,0.35), 0 4px 10px -2px rgba(0,0,0,0.55)",
               }}>
-              <span className="text-[10px] uppercase tracking-[0.08em] text-muted/60 leading-none">{label}</span>
-              <span className={`font-mono text-base font-semibold leading-none ${cls}`}>{value}</span>
+              <span className="text-[9px] uppercase tracking-[0.08em] text-muted/60 leading-none text-center">{label}</span>
+              <span className={`font-mono text-[14px] font-semibold leading-none ${cls}`}>{value}</span>
             </div>
           ))}
         </div>
 
-        {/* Pitch filter chips — strictly the opposing pitcher's vs-hand arsenal.
-            Every pitch the pitcher actually throws to this hand appears (no
-            usage threshold). Default selection is ≥12% (auto-set). Clicking
-            "All Pitches" toggles between selecting everything and clearing
-            so the user can isolate single pitches. */}
-        {chipList.length > 0 && (
-          <div className="flex flex-wrap items-center gap-1.5">
-            <button
-              onClick={() => {
-                // Toggle: if everything is already selected, clear so the user
-                // can hand-pick chips. Otherwise select the whole arsenal.
-                if (pitchFilter.size === chipList.length) setPitchFilter(new Set());
-                else setPitchFilter(new Set(chipList.map((c) => c.type)));
-              }}
-              className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all ${pitchFilter.size === chipList.length ? "bg-accent/20 text-accent border border-accent/40" : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"}`}>
-              All Pitches
-            </button>
-            {chipList.map(({ type: pt, usage }) => {
-              const detail = pitchDetail[pt];
-              const name = PITCH_NAMES[pt]?.[0] || pt;
-              const tipText = detail
-                ? `${name} — ${usage}% of pitches. Barrel: ${detail.barrel_rate}%, FB: ${detail.fb_rate}%, EV: ${detail.avg_exit_velo}`
-                : `${name} — ${usage}% of pitches`;
-              const sel = pitchFilter.has(pt);
-              return (
-                <Tooltip key={pt} text={tipText}>
-                  <button onClick={() => setPitchFilter((prev) => { const next = new Set(prev); if (next.has(pt)) next.delete(pt); else next.add(pt); return next; })}
-                    className={`px-2.5 py-1 text-[10px] font-mono rounded-full cursor-pointer transition-all ${sel ? "bg-accent/20 text-accent border border-accent/40" : "bg-white/[0.04] text-muted border border-white/10 hover:text-foreground hover:border-white/20"}`}>
-                    {pt} {usage}%
-                  </button>
-                </Tooltip>
-              );
-            })}
-          </div>
-        )}
-
-        {/* Tabs */}
+        {/* AB log — 12 columns matching the PropFinder screenshot. */}
         <div>
-          <div className="inline-flex items-center p-1 rounded-2xl mb-4 gap-0.5" style={{ background: "rgba(255,255,255,0.035)", border: "1px solid rgba(255,255,255,0.08)" }}>
-            {(["abs", "statcast", "pitches", "bvp", "profile"] as const).map((tab) => (
-              <button key={tab} onClick={() => setDetailTab(tab)}
-                className={`px-3 py-1 text-[11px] font-semibold rounded-lg cursor-pointer transition-all ${detailTab === tab ? "bg-accent text-white shadow-[0_1px_4px_0_rgba(0,0,0,0.4)]" : "text-muted hover:text-foreground"}`}>
-                {tab === "profile" ? `Profile · ${activeLookback}` : tab === "abs" ? `ABs · ${activeLookback}` : tab === "statcast" ? "Pitches" : tab === "pitches" ? "Arsenal" : "vs Pitcher"}
-              </button>
-            ))}
-          </div>
-
-          {detailTab === "profile" && (
-            <BatterProfileRow recentAbs={scores.recent_abs ?? []} pitcherName={player.opp_pitcher} pitcherHand={player.pitcher_hand} batterHand={player.batter_hand} pitchTypes={pitchTypes} lookback={activeLookback} />
-          )}
-
-          {detailTab === "abs" && (
-            <div className="overflow-x-auto">
-              {filteredABs.length > 0 ? (
-                <table className="w-full text-[13px]">
-                  <thead>
-                    <tr className="text-[11px] uppercase tracking-wider text-foreground/65 border-b border-card-border">
-                      <th className="text-left py-2.5 pl-3 pr-3 font-semibold">Date</th>
-                      <th className="text-left py-2.5 pr-3 font-semibold">Pitcher</th>
-                      <th className="text-center py-2.5 px-2 font-semibold">Arm</th>
-                      <th className="text-left py-2.5 pr-3 font-semibold">Pitch</th>
-                      <th className="text-center py-2.5 px-2 font-semibold">EV</th>
-                      <th className="text-center py-2.5 px-2 font-semibold">Angle</th>
-                      <th className="text-center py-2.5 px-2 font-semibold">Dist</th>
-                      <th className="text-left py-2.5 font-semibold">Result</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredABs.map((ab, i) => {
-                      const isHR = ab.result === "home_run";
-                      // Statcast barrel: EV>=98 AND launch angle 26-30 (the canonical
-                      // "barrel" zone). Excludes HRs since they already get their own row tint.
-                      const ev = Number(ab.ev);
-                      const la = Number(ab.angle);
-                      const isBarrel = !isHR && ev >= 98 && la >= 26 && la <= 30;
-                      const rowBg = isHR
-                        ? "rgba(74,222,128,0.12)"          // light green — HR
-                        : isBarrel
-                        ? "rgba(96,165,250,0.12)"          // light blue — barrel
-                        : "transparent";
-                      return (
+          <div className="overflow-x-auto rounded-xl"
+            style={{ background: "linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%)", border: "1px solid rgba(255,255,255,0.10)" }}>
+            {filteredABs.length > 0 ? (
+              <table className="w-full text-[13px]">
+                <thead>
+                  <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
+                    <th className="text-left  py-2 pl-3 pr-2 font-semibold">Date</th>
+                    <th className="text-left  py-2 px-2 font-semibold">Pitcher</th>
+                    <th className="text-center py-2 px-2 font-semibold">Arm</th>
+                    <th className="text-center py-2 px-2 font-semibold">D/N</th>
+                    <th className="text-left  py-2 px-2 font-semibold">Pitch Type</th>
+                    <th className="text-center py-2 px-2 font-semibold">EV</th>
+                    <th className="text-center py-2 px-2 font-semibold">LA</th>
+                    <th className="text-center py-2 px-2 font-semibold">Dist</th>
+                    <th className="text-center py-2 px-2 font-semibold">Brl</th>
+                    <th className="text-center py-2 px-2 font-semibold">Blast</th>
+                    <th className="text-center py-2 px-2 font-semibold">Dir</th>
+                    <th className="text-left  py-2 px-2 font-semibold">Event</th>
+                    <th className="text-left  py-2 px-2 pr-3 font-semibold">BB Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredABs.map((ab, i) => {
+                    const ev = Number(ab.ev);
+                    const la = Number(ab.angle);
+                    const isHR = ab.result === "home_run";
+                    const isBarrel = ev >= 98 && la >= 26 && la <= 30;
+                    const bs = ab.bat_speed == null ? null : Number(ab.bat_speed);
+                    const isBlast = bs != null && bs >= 75 && ev >= 95;
+                    const bbType: string =
+                      la == null || Number.isNaN(la) ? "—"
+                      : la < 10 ? "Ground Ball"
+                      : la < 25 ? "Line Drive"
+                      : la <= 50 ? "Fly Ball"
+                      : "Pop Up";
+                    const dirRaw = String(ab.direction ?? "");
+                    const dir = dirRaw === "pull" ? "pull" : dirRaw === "center" ? "center" : dirRaw === "oppo" ? "oppo" : "—";
+                    const dirCls = dir === "pull" ? "text-accent-yellow" : dir === "oppo" ? "text-accent-green" : dir === "center" ? "text-foreground/70" : "text-muted/40";
+                    const rowBg = isHR ? "rgba(74,222,128,0.12)" : isBarrel ? "rgba(96,165,250,0.08)" : "transparent";
+                    return (
                       <tr key={i} className="border-b border-card-border/30 last:border-0" style={{ background: rowBg }}>
-                        <td className="py-3 pl-3 pr-3 text-foreground/75 font-mono">{String(ab.date).slice(5)}</td>
-                        <td className="py-3 pr-3 text-foreground">{String(ab.pitcher_name ?? "")}</td>
-                        <td className="py-3 px-2 text-center text-foreground/70 font-mono">{String(ab.pitch_arm ?? "")}</td>
-                        <td className="py-3 pr-3 text-foreground">{String(ab.pitch_type ?? "")}</td>
-                        <td className="py-3 px-2 text-center">
-                          <span className="px-1.5 py-0.5 rounded font-mono font-semibold" style={{ color: evGradient(Number(ab.ev)) }}>{String(ab.ev)}</span>
+                        <td className="py-2.5 pl-3 pr-2 text-foreground/75 font-mono text-[12px]">{String(ab.date)}</td>
+                        <td className="py-2.5 px-2 text-foreground text-[12px]">{String(ab.pitcher_name ?? "")}</td>
+                        <td className="py-2.5 px-2 text-center text-foreground/70 font-mono">{String(ab.pitch_arm ?? "—")}</td>
+                        <td className="py-2.5 px-2 text-center text-muted/50 font-mono">{String(ab.day_night ?? "—")}</td>
+                        <td className="py-2.5 px-2 text-foreground/85 text-[12px]">{String(ab.pitch_type ?? "—")}</td>
+                        <td className="py-2.5 px-2 text-center">
+                          <span className="font-mono font-semibold" style={{ color: evGradient(ev) }}>{String(ab.ev)}</span>
                         </td>
-                        <td className="py-3 px-2 text-center">
-                          <span className={`px-1.5 py-0.5 rounded font-mono ${angleColor(Number(ab.angle))}`}>{String(ab.angle)}</span>
+                        <td className="py-2.5 px-2 text-center">
+                          <span className={`px-1 py-0.5 rounded font-mono ${angleColor(la)}`}>{String(ab.angle)}</span>
                         </td>
-                        <td className="py-3 px-2 text-center">
-                          <span className={`px-1.5 py-0.5 rounded font-mono ${distColor(ab.distance != null ? Number(ab.distance) : null)}`}>
-                            {ab.distance ? String(ab.distance) : "-"}
+                        <td className="py-2.5 px-2 text-center">
+                          <span className={`px-1 py-0.5 rounded font-mono ${distColor(ab.distance != null ? Number(ab.distance) : null)}`}>
+                            {ab.distance ? String(ab.distance) : "—"}
                           </span>
                         </td>
-                        <td className="py-3 text-foreground/80 capitalize">{String(ab.result ?? "").replace(/_/g, " ")}</td>
+                        <td className={`py-2.5 px-2 text-center font-mono ${isBarrel ? "text-accent-green font-bold" : "text-muted/40"}`}>
+                          {isBarrel ? 1 : 0}
+                        </td>
+                        <td className={`py-2.5 px-2 text-center font-mono ${isBlast ? "text-accent-green font-bold" : "text-muted/40"}`}>
+                          {bs == null ? "—" : isBlast ? 1 : 0}
+                        </td>
+                        <td className={`py-2.5 px-2 text-center font-mono ${dirCls}`}>{dir}</td>
+                        <td className={`py-2.5 px-2 text-[12px] capitalize ${isHR ? "text-accent-green font-bold" : "text-foreground/80"}`}>
+                          {String(ab.result ?? "").replace(/_/g, " ")}
+                        </td>
+                        <td className="py-2.5 px-2 pr-3 text-foreground/65 text-[12px]">{bbType}</td>
                       </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              ) : (
-                <p className="text-xs text-muted py-2">No recent AB data{pitchFilter.size > 0 ? ` against ${[...pitchFilter].join(", ")}` : ""}.</p>
-              )}
-            </div>
-          )}
-
-          {detailTab === "statcast" && (
-            <div className="overflow-x-auto">
-              {Object.keys(pitchDetail).length > 0 ? (
-                <table className="w-full text-xs">
-                  <thead>
-                    <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
-                      <th className="text-left py-1.5 pr-3">Pitch</th>
-                      <th className="text-center py-1.5 px-2">Usage%</th>
-                      <th className="text-center py-1.5 px-2">Weight%</th>
-                      <th className="text-center py-1.5 px-2">Barrel%</th>
-                      <th className="text-center py-1.5 px-2">FB%</th>
-                      <th className="text-center py-1.5 px-2">HH%</th>
-                      <th className="text-center py-1.5 px-2">Avg EV</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Object.entries(pitchDetail).map(([pt, d]: [string, PitchDetailEntry]) => (
-                      <tr key={pt} className="border-b border-card-border/30 last:border-0">
-                        <td className="py-1.5 pr-3 font-medium text-foreground">{pt}</td>
-                        <td className="py-1.5 px-2 text-center font-mono text-muted">{d.usage_pct}%</td>
-                        <td className="py-1.5 px-2 text-center font-mono text-accent">{d.weight}%</td>
-                        <td className="py-1.5 px-2 text-center font-mono">{d.barrel_rate}%</td>
-                        <td className="py-1.5 px-2 text-center font-mono">{d.fb_rate}%</td>
-                        <td className="py-1.5 px-2 text-center font-mono">{d.hard_hit_rate}%</td>
-                        <td className="py-1.5 px-2 text-center font-mono">{d.avg_exit_velo}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              ) : (
-                <p className="text-xs text-muted py-2">No pitch breakdown data.</p>
-              )}
-            </div>
-          )}
-
-          {detailTab === "pitches" && <PitchesTab player={player} />}
-          {detailTab === "bvp" && <BvPTab player={player} />}
+                    );
+                  })}
+                </tbody>
+              </table>
+            ) : (
+              <p className="text-xs text-muted px-4 py-8 text-center">No ABs match these filters.</p>
+            )}
+          </div>
         </div>
+
+        {/* Profile (per-pitch detail) and BvP collapsed below the AB table —
+            still accessible, just no longer the lead. Wrap in <details> so
+            users who don't need them aren't paying for the screen real estate. */}
+        <details className="rounded-xl" style={{ background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.08)" }}>
+          <summary className="px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-muted cursor-pointer">More — Pitch Profile · Arsenal · vs Pitcher</summary>
+          <div className="px-4 pb-4 pt-1 space-y-4">
+            <BatterProfileRow recentAbs={scores.recent_abs ?? []} pitcherName={player.opp_pitcher} pitcherHand={player.pitcher_hand} batterHand={player.batter_hand} pitchTypes={pitchTypes} lookback={activeLookback} />
+            <PitchesTab player={player} />
+            <BvPTab player={player} />
+          </div>
+        </details>
 
         {/* Zone Overlap */}
         {player.batter_zones && (

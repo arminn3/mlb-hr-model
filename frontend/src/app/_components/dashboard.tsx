@@ -635,6 +635,64 @@ export function Dashboard() {
                 if (selectedBatter.player.batter_hand === "R") return prof.arsenal_vs_R ?? prof.arsenal ?? null;
                 return prof.arsenal ?? null;
               })()}
+              gamePlayers={(() => {
+                const game = data.games.find((g) =>
+                  g.players.some((p) => p.name === selectedBatter.player.name)
+                );
+                if (!game) return undefined;
+                // Build name → batting-order lookup from posted/projected lineup
+                // entries in team_pitch_mix. Players without a lineup slot get
+                // null order (still selectable, sorted to the bottom).
+                const orderByName = new Map<string, number>();
+                for (const side of ["away", "home"] as const) {
+                  const sd = game.team_pitch_mix?.[side];
+                  if (!sd) continue;
+                  for (const b of sd.batters) {
+                    if (b.name && b.order != null && b.order >= 1 && b.order <= 9) {
+                      orderByName.set(b.name, b.order);
+                    }
+                  }
+                }
+                const seen = new Set<string>();
+                const list: Array<{ name: string; battingOrder: number | null; hand: string; isSelf: boolean }> = [];
+                for (const p of game.players) {
+                  if (seen.has(p.name)) continue;
+                  seen.add(p.name);
+                  list.push({
+                    name: p.name,
+                    battingOrder: orderByName.get(p.name) ?? null,
+                    hand: p.batter_hand ?? "?",
+                    isSelf: p.name === selectedBatter.player.name,
+                  });
+                }
+                // Sort: posted-order batters first (1..9), then everyone else
+                // alphabetically. Posted slots first matches the screenshot.
+                list.sort((a, b) => {
+                  if (a.battingOrder != null && b.battingOrder == null) return -1;
+                  if (a.battingOrder == null && b.battingOrder != null) return 1;
+                  if (a.battingOrder != null && b.battingOrder != null) return a.battingOrder - b.battingOrder;
+                  return a.name.localeCompare(b.name);
+                });
+                return list;
+              })()}
+              onSwitchPlayer={(name) => {
+                const game = data.games.find((g) =>
+                  g.players.some((p) => p.name === name)
+                );
+                if (!game) return;
+                const player = game.players.find((p) => p.name === name);
+                if (!player) return;
+                const sideKey = player.batter_side === "home" ? "home" : "away";
+                const battersBlock = game.team_pitch_mix?.[sideKey]?.batters ?? [];
+                const matched = battersBlock.find((b) => b.name === name);
+                setSelectedBatter({
+                  player,
+                  mlbId: matched?.id,
+                  battingOrder: matched?.order ?? null,
+                  teamAbbr: sideKey === "home" ? game.home_team : game.away_team,
+                  parkFactor: game.environment?.park_factor ?? undefined,
+                });
+              }}
             />
           ) : activePage === "slate" && (
             <>

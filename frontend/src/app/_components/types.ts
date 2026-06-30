@@ -9,6 +9,18 @@ export interface RecentAB {
   angle: number;
   distance: number | null;
   result: string;
+  /** Bat speed (mph) — Statcast `bat_speed`. Drives the Blast column on the
+   *  batter detail page. May be null for older rows or untracked stadiums. */
+  bat_speed?: number | null;
+  /** Spray direction relative to batter's stand: "pull" | "center" | "oppo". */
+  direction?: "pull" | "center" | "oppo" | null;
+  /** Was the batter's team home or away in this AB. "H" | "A". */
+  home_away?: "H" | "A" | null;
+  /** Day or night game. "D" | "N". Currently null — needs game start time
+   *  caching from MLB Stats API (Statcast events don't carry start time). */
+  day_night?: "D" | "N" | null;
+  /** Statcast game_pk — used for future game start time lookups. */
+  game_pk?: number | null;
 }
 
 export interface ScoreSet {
