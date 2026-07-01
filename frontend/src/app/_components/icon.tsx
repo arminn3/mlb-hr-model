@@ -19,6 +19,7 @@ import {
   Menu,
   ReceiptText,
   Search,
+  Star,
   Swords,
   Target,
   TrendingUp,
@@ -43,6 +44,7 @@ export const ICONS = {
   matchup: Swords,
   info: Info,
   trend: TrendingUp,
+  star: Star,
 
   // Shell / controls
   menu: Menu,

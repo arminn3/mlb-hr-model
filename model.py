@@ -52,6 +52,19 @@ def _ab_extras(row) -> dict:
         except (TypeError, ValueError):
             bat_speed = None
 
+    # launch_speed_angle — Statcast's precomputed batted-ball classification;
+    # value 6 == barrel. Carried per-AB so the frontend can compute barrel% /
+    # pull-barrel% with the SAME definition the backend uses (launch_speed_angle
+    # == 6) across every window, instead of the coarse EV>=98 & LA 26-30
+    # heuristic that undercounts barrels and disagreed with the L5/L10 cards.
+    lsa = None
+    _lsa = row.get("launch_speed_angle")
+    if pd.notna(_lsa):
+        try:
+            lsa = int(_lsa)
+        except (TypeError, ValueError):
+            lsa = None
+
     return {
         "bat_speed": bat_speed,
         "direction": direction,
@@ -59,6 +72,7 @@ def _ab_extras(row) -> dict:
         # Statcast events carry no start time; Day/Night is derived nowhere.
         "day_night": None,
         "game_pk": int(row["game_pk"]) if pd.notna(row.get("game_pk")) else None,
+        "lsa": lsa,
     }
 
 

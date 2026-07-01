@@ -21,6 +21,10 @@ export interface RecentAB {
   day_night?: "D" | "N" | null;
   /** Statcast game_pk — used for future game start time lookups. */
   game_pk?: number | null;
+  /** Statcast launch_speed_angle: 6 == barrel. Lets the frontend compute
+   *  barrel% / pull-barrel% with the exact backend definition across windows.
+   *  May be null for older rows. */
+  lsa?: number | null;
 }
 
 export interface ScoreSet {

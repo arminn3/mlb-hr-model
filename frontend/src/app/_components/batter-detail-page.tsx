@@ -560,7 +560,9 @@ export function BatterDetailPage({
       const bs = ab.bat_speed == null ? null : Number(ab.bat_speed);
       evSum += ev;
       if (ev >= 95) hh += 1;
-      if (ev >= 98 && la >= 26 && la <= 30) brl += 1;
+      // Barrel = Statcast launch_speed_angle 6 when present (matches backend +
+      // all windows); heuristic fallback only for legacy slates without `lsa`.
+      if (ab.lsa != null ? ab.lsa === 6 : (ev >= 98 && la >= 26 && la <= 30)) brl += 1;
       if (la >= 25 && la <= 50) { fb += 1; fbCt += 1; if (ab.result === "home_run") hrCt += 1; }
       else if (la >= 10 && la < 25) ld += 1;
       else if (la < 10) gb += 1;
@@ -976,7 +978,7 @@ export function BatterDetailPage({
                     const ev = Number(ab.ev);
                     const la = Number(ab.angle);
                     const isHR = ab.result === "home_run";
-                    const isBarrel = ev >= 98 && la >= 26 && la <= 30;
+                    const isBarrel = ab.lsa != null ? ab.lsa === 6 : (ev >= 98 && la >= 26 && la <= 30);
                     const bs = ab.bat_speed == null ? null : Number(ab.bat_speed);
                     const isBlast = bs != null && bs >= 75 && ev >= 95;
                     const bbType: string =

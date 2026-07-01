@@ -42,7 +42,7 @@ function persistState(state: PersistedState) {
   } catch {}
 }
 
-function computeModelOdds(barrelPct: number, pitcherHrFbRate: number, parkFactor: number): number {
+export function computeModelOdds(barrelPct: number, pitcherHrFbRate: number, parkFactor: number): number {
   const LEAGUE_AVG_HR_FB = 0.135;
   const N_PA = 3.8;
   const hrFb = pitcherHrFbRate > 0 ? pitcherHrFbRate : LEAGUE_AVG_HR_FB;
@@ -64,7 +64,7 @@ function computeModelOdds(barrelPct: number, pitcherHrFbRate: number, parkFactor
   return Math.round(100 * (1 - pHr) / pHr);
 }
 
-function formatOdds(odds: number): string {
+export function formatOdds(odds: number): string {
   return odds >= 0 ? `+${odds}` : `${odds}`;
 }
 

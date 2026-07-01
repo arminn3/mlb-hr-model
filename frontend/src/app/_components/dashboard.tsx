@@ -14,6 +14,9 @@ import { Methodology } from "./methodology";
 import { MLRankings } from "./ml-rankings";
 import { MethodologyPage } from "./methodology-page";
 import { SlipGenerator } from "./slip-generator";
+import { FavoritesPage } from "./favorites-page";
+import { BatterFilterPage } from "./batter-filter-page";
+import { DEFAULT_CRITERIA, type FilterCriteria } from "./batter-filter-bar";
 import { BvPPage } from "./bvp-page";
 import { Breakouts } from "./breakouts";
 import { LiveFeed } from "./live-feed";
@@ -46,6 +49,8 @@ const TAB_CONFIG: Record<Page, {
   showDatePicker: boolean;
 }> = {
   rankings:    { title: "HR Rankings",       subtitle: "Top HR plays by composite score",      showLookback: true,  showDatePicker: true },
+  favorites:   { title: "Favorites",         subtitle: "Your starred batters for this slate",  showLookback: false, showDatePicker: true },
+  batter_filter: { title: "Batter Filter",   subtitle: "Screen every batter by HR criteria",   showLookback: false, showDatePicker: true },
   ml:          { title: "Rankings",           subtitle: "",                                              showLookback: true,  showDatePicker: true },
   slate:       { title: "Game Slate",        subtitle: "Every game on today's card",           showLookback: true,  showDatePicker: true },
   hr_due:      { title: "HR Due List",       subtitle: "Players with 3+ power signals today",  showLookback: true,  showDatePicker: true },
@@ -370,7 +375,41 @@ export function Dashboard() {
   const [selectedGames, setSelectedGames] = useState<Set<number>>(new Set()); // empty = all games
   const [selectedBatter, setSelectedBatter] = useState<SelectedBatter | null>(null);
   const [rankingsTab, setRankingsTab] = useState<"ml" | "combined" | "consensus" | "test">("ml");
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [favorites, setFavorites] = useState<Set<string>>(() => {
+    if (typeof window === "undefined") return new Set();
+    try {
+      const raw = window.localStorage.getItem("beeb:favorites");
+      return raw ? new Set<string>(JSON.parse(raw)) : new Set();
+    } catch {
+      return new Set();
+    }
+  });
+  // Persist favorites so they survive reloads and stay in sync across the
+  // Game Slate, Favorites tab, and Slip Generator.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      window.localStorage.setItem("beeb:favorites", JSON.stringify([...favorites]));
+    } catch {}
+  }, [favorites]);
+
+  // Shared HR filter criteria — one setting drives both the Batter Filter tab
+  // and the Favorites tab. Persisted so it survives reloads.
+  const [filterCriteria, setFilterCriteria] = useState<FilterCriteria>(() => {
+    if (typeof window === "undefined") return DEFAULT_CRITERIA;
+    try {
+      const raw = window.localStorage.getItem("beeb:filter-criteria");
+      return raw ? { ...DEFAULT_CRITERIA, ...JSON.parse(raw) } : DEFAULT_CRITERIA;
+    } catch {
+      return DEFAULT_CRITERIA;
+    }
+  });
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      window.localStorage.setItem("beeb:filter-criteria", JSON.stringify(filterCriteria));
+    } catch {}
+  }, [filterCriteria]);
   const [lineupOverride, setLineupOverride] = useState<LineupOverride | null>(null);
 
   // Update URL hash when state changes
@@ -759,6 +798,28 @@ export function Dashboard() {
 
           {activePage === "matchup" && (
             <MatchupAnalysis games={data.games} />
+          )}
+
+          {activePage === "favorites" && (
+            <FavoritesPage
+              games={data.games}
+              favorites={favorites}
+              onToggleFavorite={onToggleFavorite}
+              onSelectBatter={(s) => { setSelectedBatter(s); setActivePage("slate"); }}
+              criteria={filterCriteria}
+              onCriteriaChange={setFilterCriteria}
+            />
+          )}
+
+          {activePage === "batter_filter" && (
+            <BatterFilterPage
+              games={data.games}
+              favorites={favorites}
+              onToggleFavorite={onToggleFavorite}
+              onSelectBatter={(s) => { setSelectedBatter(s); setActivePage("slate"); }}
+              criteria={filterCriteria}
+              onCriteriaChange={setFilterCriteria}
+            />
           )}
 
           {activePage === "slips" && (

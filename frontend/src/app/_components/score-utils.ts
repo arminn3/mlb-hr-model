@@ -91,16 +91,23 @@ function computeSliceScoreSet(p: PlayerData, n: 15 | 20 | 25): ScoreSet | null {
   // Pool-level rates over the N most recent BBE — match the convention used
   // for L5/L10 display (raw counts / total BBE, no pitch-mix weighting).
   let evSum = 0, brl = 0, hh = 0, fb = 0, ld = 0, gb = 0, pu = 0, blast = 0;
-  let hr = 0, fbForHr = 0;
+  let hr = 0, fbForHr = 0, pullBrl = 0;
   for (const ab of pool) {
     const ev = Number(ab.ev || 0);
     const la = Number(ab.angle || 0);
     const bs = ab.bat_speed == null ? null : Number(ab.bat_speed);
     evSum += ev;
     if (ev >= 95) hh += 1;
-    // Statcast barrel: EV >= 98 AND LA between 26 and 30. Matches the
-    // canonical Savant definition used elsewhere in the UI.
-    if (ev >= 98 && la >= 26 && la <= 30) brl += 1;
+    // Barrel: prefer Statcast's precomputed launch_speed_angle == 6 (same
+    // definition the backend uses for L5/L10 + season, so barrel% is consistent
+    // across every window). Fall back to the EV>=98 & LA 26-30 heuristic only
+    // for legacy slates that predate the `lsa` field.
+    const isBarrel = ab.lsa != null ? ab.lsa === 6 : (ev >= 98 && la >= 26 && la <= 30);
+    if (isBarrel) brl += 1;
+    // Pull-barrel: barrel hit to the pull side. season_abs carries `direction`
+    // so this is window-specific (L5/L10 get it from the backend; here we make
+    // L15/L20/L25 consistent instead of falling back to the season value).
+    if (isBarrel && ab.direction === "pull") pullBrl += 1;
     if (la >= 25 && la <= 50) { fb += 1; if (ab.result === "home_run") { fbForHr += 1; hr += 1; } }
     else if (la >= 10 && la < 25) ld += 1;
     else if (la < 10) gb += 1;
@@ -134,7 +141,7 @@ function computeSliceScoreSet(p: PlayerData, n: 15 | 20 | 25): ScoreSet | null {
     // (15/20/25 pre-filter) drives the stats above.
     recent_abs:   fullSeasonAbs,
     blast_pct:    pct(blast),
-    pull_brl:     p.season_profile?.pull_barrel ?? 0,
+    pull_brl:     pct(pullBrl),
     xwoba:        p.season_profile?.xwoba,
     sweet_spot:   p.season_profile?.sweet_spot,
     avg_la:       p.season_profile?.avg_la,

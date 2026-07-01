@@ -6,6 +6,8 @@ import { Icon, type IconName } from "./icon";
 
 export type Page =
   | "rankings"
+  | "favorites"
+  | "batter_filter"
   | "ml"
   | "slate"
   | "hr_due"
@@ -28,6 +30,8 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   // { key: "rankings", label: "HR Rankings", icon: "chart" },
+  { key: "favorites", label: "Favorites", icon: "star" },
+  { key: "batter_filter", label: "Batter Filter", icon: "target" },
   { key: "ml", label: "Rankings", icon: "brain" },
   { key: "slate", label: "Game Slate", icon: "games" },
   { key: "hr_due", label: "HR Due List", icon: "target" },
@@ -196,6 +200,22 @@ export function Sidebar({
 
       {/* Nav groups */}
       <div className={(collapsed ? "px-2" : "px-3") + " py-4 flex-1 overflow-y-auto overflow-x-visible"}>
+        <SectionLabel collapsed={collapsed}>My List</SectionLabel>
+        <div className="space-y-1 mb-5">
+          {(["favorites", "batter_filter"] as const).map((key) => {
+            const item = NAV_ITEMS.find((n) => n.key === key)!;
+            return (
+              <NavButton
+                key={key}
+                item={item}
+                active={active}
+                collapsed={collapsed}
+                onChange={onChange}
+              />
+            );
+          })}
+        </div>
+
         <SectionLabel collapsed={collapsed}>Analysis</SectionLabel>
         <div className="space-y-1 mb-5">
           {(
