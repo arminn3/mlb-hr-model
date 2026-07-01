@@ -91567,7 +91567,7 @@
       {
         "name": "Gavin Sheets",
         "pitcher": "Javier Assad",
-        "description": "${person|fullName|657757} homers ${total|homeRuns|657757} on a fly ball to right center field.    ${person|fullName|664034} scores.    ${person|fullName|593428} scores.  "
+        "description": "Gavin Sheets homers (14) on a fly ball to right center field. Ty France scores. Xander Bogaerts scores."
       }
     ],
     "hr_signal_accuracy": {
