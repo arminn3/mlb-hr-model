@@ -298,7 +298,7 @@
   ],
   "total_players_ranked": 273,
   "total_hrs_hit": 46,
-  "total_near_hrs": 0,
+  "total_near_hrs": 13,
   "model_hits": 41,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -347,7 +347,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 13,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -373,28 +373,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 2,
-      "rate": 20.0
+      "hits": 5,
+      "rate": 50.0
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 8,
+      "rate": 40.0
     },
     "top_30": {
       "total": 30,
-      "hits": 6,
-      "rate": 20.0
+      "hits": 10,
+      "rate": 33.3
     },
     "all": {
       "total": 273,
-      "hits": 41,
-      "rate": 15.0
+      "hits": 54,
+      "rate": 19.8
     }
   },
   "avg_composite_hr_hitters": 0.455,
-  "avg_composite_non_hitters": 0.432,
-  "composite_separation": 0.023,
+  "avg_composite_non_hitters": 0.426,
+  "composite_separation": 0.029,
   "hr_hitters": [
     {
       "name": "Rafael Devers",
@@ -973,13 +973,232 @@
       "matchup": "MIA@COL"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Andy Pages",
+      "rank": 6,
+      "composite": 0.821,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "LAD@ATH"
+    },
+    {
+      "name": "Josh Bell",
+      "rank": 8,
+      "composite": 0.813,
+      "opp_pitcher": "Mike Burrows",
+      "matchup": "MIN@HOU"
+    },
+    {
+      "name": "Pete Alonso",
+      "rank": 9,
+      "composite": 0.797,
+      "opp_pitcher": "Erick Fedde",
+      "matchup": "CWS@BAL"
+    },
+    {
+      "name": "Kyle Stowers",
+      "rank": 11,
+      "composite": 0.743,
+      "opp_pitcher": "Tanner Gordon",
+      "matchup": "MIA@COL"
+    },
+    {
+      "name": "Dillon Dingler",
+      "rank": 43,
+      "composite": 0.584,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "DET@NYY"
+    },
+    {
+      "name": "Matt Olson",
+      "rank": 64,
+      "composite": 0.522,
+      "opp_pitcher": "Matthew Liberatore",
+      "matchup": "STL@ATL"
+    },
+    {
+      "name": "Mookie Betts",
+      "rank": 101,
+      "composite": 0.447,
+      "opp_pitcher": "Jeffrey Springs",
+      "matchup": "LAD@ATH"
+    },
+    {
+      "name": "Mauricio Dub\u00f3n",
+      "rank": 121,
+      "composite": 0.417,
+      "opp_pitcher": "Matthew Liberatore",
+      "matchup": "STL@ATL"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 185,
+      "composite": 0.373,
+      "opp_pitcher": "Brandon Pfaadt",
+      "matchup": "SF@AZ"
+    },
+    {
+      "name": "Nick Loftin",
+      "rank": 188,
+      "composite": 0.372,
+      "opp_pitcher": "Griffin Jax",
+      "matchup": "TB@KC"
+    },
+    {
+      "name": "Hao-Yu Lee",
+      "rank": 200,
+      "composite": 0.348,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "DET@NYY"
+    },
+    {
+      "name": "Jacob Gonzalez",
+      "rank": 217,
+      "composite": 0.324,
+      "opp_pitcher": "Trey Gibson",
+      "matchup": "CWS@BAL"
+    },
+    {
+      "name": "Shea Langeliers",
+      "rank": 234,
+      "composite": 0.296,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@ATH"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Casey Schmitt",
+      "ev": 103.5,
+      "angle": 31.0,
+      "distance": 411.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Clarke, Taylor"
+    },
+    {
+      "batter": "Mookie Betts",
+      "ev": 97.5,
+      "angle": 36.0,
+      "distance": 383.0,
+      "hr_in_parks": 19,
+      "result": "double",
+      "pitcher": "Hartlieb, Geoff"
+    },
+    {
+      "batter": "Shea Langeliers",
+      "ev": 98.3,
+      "angle": 30.0,
+      "distance": 390.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Wrobleski, Justin"
+    },
+    {
+      "batter": "Andy Pages",
+      "ev": 99.7,
+      "angle": 30.0,
+      "distance": 397.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Springs, Jeffrey"
+    },
+    {
+      "batter": "Matt Olson",
+      "ev": 107.7,
+      "angle": 19.0,
+      "distance": 391.0,
+      "hr_in_parks": 11,
+      "result": "double",
+      "pitcher": "O'Brien, Riley"
+    },
+    {
+      "batter": "Mauricio Dub\u00f3n",
+      "ev": 98.6,
+      "angle": 22.0,
+      "distance": 368.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Liberatore, Matthew"
+    },
+    {
+      "batter": "Jacob Gonzalez",
+      "ev": 99.5,
+      "angle": 33.0,
+      "distance": 390.0,
+      "hr_in_parks": 17,
+      "result": "field_out",
+      "pitcher": "Garcia, Rico"
+    },
+    {
+      "batter": "Pete Alonso",
+      "ev": 109.6,
+      "angle": 31.0,
+      "distance": 395.0,
+      "hr_in_parks": 2,
+      "result": "",
+      "pitcher": "Fedde, Erick"
+    },
+    {
+      "batter": "Fernando Tatis Jr.",
+      "ev": 98.4,
+      "angle": 29.0,
+      "distance": 396.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Boyd, Matthew"
+    },
+    {
+      "batter": "Kyle Stowers",
+      "ev": 92.4,
+      "angle": 34.0,
+      "distance": 379.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Sullivan, Brett"
+    },
+    {
+      "batter": "Josh Bell",
+      "ev": 109.6,
+      "angle": 22.0,
+      "distance": 412.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Burrows, Mike"
+    },
+    {
+      "batter": "Nick Loftin",
+      "ev": 97.2,
+      "angle": 25.0,
+      "distance": 398.0,
+      "hr_in_parks": 22,
+      "result": "field_out",
+      "pitcher": "Jax, Griffin"
+    },
+    {
+      "batter": "Dillon Dingler",
+      "ev": 99.8,
+      "angle": 26.0,
+      "distance": 402.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Schlittler, Cam"
+    },
+    {
+      "batter": "Hao-Yu Lee",
+      "ev": 99.8,
+      "angle": 31.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Schlittler, Cam"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Gavin Sheets",
       "pitcher": "Javier Assad",
-      "description": "Gavin Sheets homers (14) on a fly ball to right center field. Ty France scores. Xander Bogaerts scores."
+      "description": "${person|fullName|657757} homers ${total|homeRuns|657757} on a fly ball to right center field.    ${person|fullName|664034} scores.    ${person|fullName|593428} scores.  "
     }
   ],
   "hr_signal_accuracy": {
