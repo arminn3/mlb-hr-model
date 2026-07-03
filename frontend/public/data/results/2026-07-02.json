@@ -187,7 +187,7 @@
   ],
   "total_players_ranked": 182,
   "total_hrs_hit": 26,
-  "total_near_hrs": 0,
+  "total_near_hrs": 12,
   "model_hits": 26,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -236,7 +236,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 12,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -267,23 +267,23 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 2,
-      "rate": 10.0
+      "hits": 3,
+      "rate": 15.0
     },
     "top_30": {
       "total": 30,
-      "hits": 6,
-      "rate": 20.0
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 182,
-      "hits": 26,
-      "rate": 14.3
+      "hits": 38,
+      "rate": 20.9
     }
   },
   "avg_composite_hr_hitters": 0.41,
-  "avg_composite_non_hitters": 0.431,
-  "composite_separation": -0.021,
+  "avg_composite_non_hitters": 0.434,
+  "composite_separation": -0.024,
   "hr_hitters": [
     {
       "name": "Manny Machado",
@@ -652,8 +652,229 @@
       "matchup": "STL@ATL"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Denzer Guzman",
+      "rank": 12,
+      "composite": 0.749,
+      "opp_pitcher": "Bryce Miller",
+      "matchup": "LAA@SEA"
+    },
+    {
+      "name": "Hunter Feduccia",
+      "rank": 21,
+      "composite": 0.677,
+      "opp_pitcher": "Stephen Kolek",
+      "matchup": "TB@KC"
+    },
+    {
+      "name": "Bryson Stott",
+      "rank": 65,
+      "composite": 0.454,
+      "opp_pitcher": "Jared Jones",
+      "matchup": "PIT@PHI"
+    },
+    {
+      "name": "Ryan O'Hearn",
+      "rank": 76,
+      "composite": 0.441,
+      "opp_pitcher": "Alan Rangel",
+      "matchup": "PIT@PHI"
+    },
+    {
+      "name": "Jake Bauers",
+      "rank": 94,
+      "composite": 0.396,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "CIN@MIL"
+    },
+    {
+      "name": "Randal Grichuk",
+      "rank": 110,
+      "composite": 0.364,
+      "opp_pitcher": "Slade Cecconi",
+      "matchup": "CWS@CLE"
+    },
+    {
+      "name": "Mike Yastrzemski",
+      "rank": 111,
+      "composite": 0.364,
+      "opp_pitcher": "Dustin May",
+      "matchup": "STL@ATL"
+    },
+    {
+      "name": "JJ Wetherholt",
+      "rank": 140,
+      "composite": 0.289,
+      "opp_pitcher": "Hurston Waldrep",
+      "matchup": "STL@ATL"
+    },
+    {
+      "name": "Otto Lopez",
+      "rank": 146,
+      "composite": 0.281,
+      "opp_pitcher": "Michael Lorenzen",
+      "matchup": "MIA@COL"
+    },
+    {
+      "name": "Patrick Bailey",
+      "rank": 147,
+      "composite": 0.281,
+      "opp_pitcher": "Davis Martin",
+      "matchup": "CWS@CLE"
+    },
+    {
+      "name": "Cole Carrigg",
+      "rank": 169,
+      "composite": 0.229,
+      "opp_pitcher": "Ryan Gusto",
+      "matchup": "MIA@COL"
+    },
+    {
+      "name": "Troy Johnston",
+      "rank": 172,
+      "composite": 0.229,
+      "opp_pitcher": "Ryan Gusto",
+      "matchup": "MIA@COL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "JJ Wetherholt",
+      "ev": 99.7,
+      "angle": 32.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Lee, Dylan"
+    },
+    {
+      "batter": "Mike Yastrzemski",
+      "ev": 99.2,
+      "angle": 34.0,
+      "distance": 390.0,
+      "hr_in_parks": 11,
+      "result": "sac_fly",
+      "pitcher": "May, Dustin"
+    },
+    {
+      "batter": "Randal Grichuk",
+      "ev": 100.4,
+      "angle": 28.0,
+      "distance": 398.0,
+      "hr_in_parks": 14,
+      "result": "field_out",
+      "pitcher": "Herrin, Tim"
+    },
+    {
+      "batter": "Patrick Bailey",
+      "ev": 107.0,
+      "angle": 17.0,
+      "distance": 376.0,
+      "hr_in_parks": 5,
+      "result": "double",
+      "pitcher": "Martin, Davis"
+    },
+    {
+      "batter": "Troy Johnston",
+      "ev": 91.7,
+      "angle": 31.0,
+      "distance": 369.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Sanoja, Javier"
+    },
+    {
+      "batter": "Troy Johnston",
+      "ev": 99.8,
+      "angle": 35.0,
+      "distance": 415.0,
+      "hr_in_parks": 29,
+      "result": "",
+      "pitcher": "Sanoja, Javier"
+    },
+    {
+      "batter": "Cole Carrigg",
+      "ev": 107.9,
+      "angle": 33.0,
+      "distance": 424.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Gusto, Ryan"
+    },
+    {
+      "batter": "Otto Lopez",
+      "ev": 103.6,
+      "angle": 25.0,
+      "distance": 413.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Lorenzen, Michael"
+    },
+    {
+      "batter": "Otto Lopez",
+      "ev": 98.4,
+      "angle": 23.0,
+      "distance": 374.0,
+      "hr_in_parks": 27,
+      "result": "double",
+      "pitcher": "Lorenzen, Michael"
+    },
+    {
+      "batter": "Hunter Feduccia",
+      "ev": 94.2,
+      "angle": 26.0,
+      "distance": 378.0,
+      "hr_in_parks": 29,
+      "result": "triple",
+      "pitcher": "Kolek, Stephen"
+    },
+    {
+      "batter": "Jake Cronenworth",
+      "ev": 99.2,
+      "angle": 26.0,
+      "distance": 400.0,
+      "hr_in_parks": 13,
+      "result": "field_out",
+      "pitcher": "Gervase, Paul"
+    },
+    {
+      "batter": "Jake Bauers",
+      "ev": 99.4,
+      "angle": 25.0,
+      "distance": 388.0,
+      "hr_in_parks": 6,
+      "result": "field_out",
+      "pitcher": "Burns, Chase"
+    },
+    {
+      "batter": "Ryan O'Hearn",
+      "ev": 105.1,
+      "angle": 37.0,
+      "distance": 402.0,
+      "hr_in_parks": 16,
+      "result": "",
+      "pitcher": "Rangel, Alan"
+    },
+    {
+      "batter": "Bryson Stott",
+      "ev": 107.7,
+      "angle": 27.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Jones, Jared"
+    },
+    {
+      "batter": "Denzer Guzman",
+      "ev": 110.3,
+      "angle": 24.0,
+      "distance": 404.0,
+      "hr_in_parks": 19,
+      "result": "",
+      "pitcher": "Mu\u00f1oz, Andr\u00e9s"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
