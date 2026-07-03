@@ -1,0 +1,640 @@
+{
+  "date": "2026-07-02",
+  "players_who_batted": [
+    "Alec Bohm",
+    "Brandon Lowe",
+    "Brandon Marsh",
+    "Brett Sullivan",
+    "Brice Turang",
+    "Bryan Reynolds",
+    "Bryce Harper",
+    "Bryson Stott",
+    "Christian Yelich",
+    "Cole Carrigg",
+    "Cooper Pratt",
+    "David Hamilton",
+    "Edouard Julien",
+    "Edwin Arroyo",
+    "Elly De La Cruz",
+    "Endy Rodr\u00edguez",
+    "Esmerlyn Valdez",
+    "Eugenio Su\u00e1rez",
+    "Ezequiel Tovar",
+    "Gabriel Rincones Jr.",
+    "Garrett Mitchell",
+    "Griffin Conine",
+    "Heriberto Hern\u00e1ndez",
+    "JJ Bleday",
+    "Jackson Chourio",
+    "Jake Bauers",
+    "Jake Mangum",
+    "Jake McCarthy",
+    "Jakob Marsee",
+    "Jared Triolo",
+    "Javier Sanoja",
+    "Joe Mack",
+    "Joey Ortiz",
+    "Jose Trevino",
+    "Justin Crawford",
+    "Kyle Karros",
+    "Kyle Schwarber",
+    "Kyle Stowers",
+    "Leo Jim\u00e9nez",
+    "Liam Hicks",
+    "Marcell Ozuna",
+    "Matt McLain",
+    "Mickey Moniak",
+    "Nathaniel Lowe",
+    "Nick Gonzales",
+    "Noelvi Marte",
+    "Otto Lopez",
+    "Owen Caissie",
+    "Rafael March\u00e1n",
+    "Ryan O'Hearn",
+    "Sal Frelick",
+    "Sal Stewart",
+    "Spencer Steer",
+    "TJ Friedl",
+    "TJ Rumfield",
+    "Trea Turner",
+    "Troy Johnston",
+    "Willi Castro",
+    "William Contreras",
+    "Xavier Edwards"
+  ],
+  "total_players_ranked": 60,
+  "total_hrs_hit": 8,
+  "total_near_hrs": 0,
+  "model_hits": 8,
+  "best_lookback": "L10",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 2,
+        "rate": 6.7
+      },
+      "all": {
+        "total": 60,
+        "hits": 8,
+        "rate": 13.3
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 60,
+        "hits": 8,
+        "rate": 13.3
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 60,
+      "hits": 8,
+      "rate": 13.3
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 60,
+      "hits": 8,
+      "rate": 13.3
+    }
+  },
+  "avg_composite_hr_hitters": 0.381,
+  "avg_composite_non_hitters": 0.457,
+  "composite_separation": -0.076,
+  "hr_hitters": [
+    {
+      "name": "Mickey Moniak",
+      "rank": 10,
+      "composite": 0.62,
+      "opp_pitcher": "Ryan Gusto",
+      "matchup": "MIA@COL"
+    },
+    {
+      "name": "Sal Stewart",
+      "rank": 30,
+      "composite": 0.436,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "CIN@MIL"
+    },
+    {
+      "name": "Endy Rodr\u00edguez",
+      "rank": 31,
+      "composite": 0.432,
+      "opp_pitcher": "Alan Rangel",
+      "matchup": "PIT@PHI"
+    },
+    {
+      "name": "Jose Trevino",
+      "rank": 34,
+      "composite": 0.397,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "CIN@MIL"
+    },
+    {
+      "name": "Garrett Mitchell",
+      "rank": 37,
+      "composite": 0.396,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "CIN@MIL"
+    },
+    {
+      "name": "Nick Gonzales",
+      "rank": 47,
+      "composite": 0.323,
+      "opp_pitcher": "Alan Rangel",
+      "matchup": "PIT@PHI"
+    },
+    {
+      "name": "Jake McCarthy",
+      "rank": 57,
+      "composite": 0.229,
+      "opp_pitcher": "Ryan Gusto",
+      "matchup": "MIA@COL"
+    },
+    {
+      "name": "TJ Friedl",
+      "rank": 60,
+      "composite": 0.213,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "CIN@MIL"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Mickey Moniak",
+      "rank": 8,
+      "composite": 0.605,
+      "opp_pitcher": "Ryan Gusto",
+      "matchup": "MIA@COL"
+    },
+    {
+      "name": "Endy Rodr\u00edguez",
+      "rank": 14,
+      "composite": 0.498,
+      "opp_pitcher": "Alan Rangel",
+      "matchup": "PIT@PHI"
+    },
+    {
+      "name": "Sal Stewart",
+      "rank": 16,
+      "composite": 0.498,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "CIN@MIL"
+    },
+    {
+      "name": "Jake McCarthy",
+      "rank": 31,
+      "composite": 0.424,
+      "opp_pitcher": "Ryan Gusto",
+      "matchup": "MIA@COL"
+    },
+    {
+      "name": "Garrett Mitchell",
+      "rank": 37,
+      "composite": 0.396,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "CIN@MIL"
+    },
+    {
+      "name": "Nick Gonzales",
+      "rank": 45,
+      "composite": 0.303,
+      "opp_pitcher": "Alan Rangel",
+      "matchup": "PIT@PHI"
+    },
+    {
+      "name": "Jose Trevino",
+      "rank": 52,
+      "composite": 0.272,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "CIN@MIL"
+    },
+    {
+      "name": "TJ Friedl",
+      "rank": 59,
+      "composite": 0.217,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "CIN@MIL"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 77,
+      "hr_count": 2,
+      "hr_rate": 2.6,
+      "names": [
+        "Nick Gonzales",
+        "Jackson Chourio",
+        "Joey Ortiz",
+        "Gary S\u00e1nchez",
+        "Sal Stewart",
+        "Eugenio Su\u00e1rez",
+        "Tyler Stephenson",
+        "Noelvi Marte",
+        "Cooper Pratt",
+        "Edwin Arroyo",
+        "Ivan Johnson",
+        "Ezequiel Tovar",
+        "Kyle Manzardo",
+        "Kyle Teel",
+        "Austin Hedges",
+        "Sam Antonacci",
+        "Chase Meidroth",
+        "Jacob Gonzalez",
+        "Brayan Rocchio",
+        "Chase DeLauter",
+        "Travis Bazzana",
+        "Braden Montgomery",
+        "Steven Kwan",
+        "Tristan Peters",
+        "Kahlil Watson",
+        "Patrick Bailey",
+        "Gabriel Arias",
+        "Rowdy Tellez",
+        "Blaze Jordan",
+        "Jos\u00e9 Ferm\u00edn",
+        "Mike Yastrzemski",
+        "Nathan Church",
+        "Austin Riley",
+        "JJ Wetherholt",
+        "Mauricio Dub\u00f3n",
+        "Eli White",
+        "Pedro Pag\u00e9s",
+        "Nelson Vel\u00e1zquez",
+        "Jordan Walker",
+        "Joey Bart",
+        "Jorge Mateo",
+        "Junior Caminero",
+        "Hunter Feduccia",
+        "Ryan Vilade",
+        "Michael Massey",
+        "Bobby Witt Jr.",
+        "Jonny DeLuca",
+        "Jonathan Aranda",
+        "Richie Palacios",
+        "Ben Williamson",
+        "Starling Marte",
+        "Victor Mesa Jr.",
+        "Tyler Tolbert",
+        "Isaac Collins",
+        "Salvador Perez",
+        "Lane Thomas",
+        "Jake Rogers",
+        "Brandon Nimmo",
+        "Joc Pederson",
+        "Elias D\u00edaz",
+        "Zach McKinstry",
+        "Jake Burger",
+        "Josh Jung",
+        "Ezequiel Duran",
+        "Josh Smith",
+        "Jose Siri",
+        "Tyler Heineman",
+        "Vaughn Grissom",
+        "Dominic Canzone",
+        "Randy Arozarena",
+        "Cole Young",
+        "Donovan Walton",
+        "J.P. Crawford",
+        "Nolan Schanuel",
+        "Mitch Garver",
+        "Colt Emerson",
+        "Buddy Kennedy"
+      ],
+      "hr_names": [
+        "Nick Gonzales",
+        "Sal Stewart"
+      ]
+    },
+    "2_of_5": {
+      "players": 92,
+      "hr_count": 3,
+      "hr_rate": 3.3,
+      "names": [
+        "Brandon Lowe",
+        "Marcell Ozuna",
+        "Henry Davis",
+        "Trea Turner",
+        "Edmundo Sosa",
+        "Derek Hill",
+        "Alec Bohm",
+        "Bryson Stott",
+        "Gabriel Rincones Jr.",
+        "Garrett Stubbs",
+        "Ryan O'Hearn",
+        "Endy Rodr\u00edguez",
+        "Bryan Reynolds",
+        "Jake Mangum",
+        "Konnor Griffin",
+        "Jared Triolo",
+        "Billy Cook",
+        "J.T. Realmuto",
+        "Elly De La Cruz",
+        "Jose Trevino",
+        "JJ Bleday",
+        "Andrew Vaughn",
+        "Matt McLain",
+        "Nathaniel Lowe",
+        "Javier Sanoja",
+        "Jakob Marsee",
+        "Hunter Goodman",
+        "Kyle Karros",
+        "Heriberto Hern\u00e1ndez",
+        "Braxton Fulford",
+        "Otto Lopez",
+        "Tyler Freeman",
+        "Leo Jim\u00e9nez",
+        "Brett Sullivan",
+        "Jake McCarthy",
+        "Brian Navarreto",
+        "Miguel Vargas",
+        "Drew Romo",
+        "Daniel Schneemann",
+        "Randal Grichuk",
+        "Luisangel Acu\u00f1a",
+        "Colson Montgomery",
+        "Andrew Benintendi",
+        "Junior Perez",
+        "David Fry",
+        "Matt Olson",
+        "Alec Burleson",
+        "Bryan Torres",
+        "Ozzie Albies",
+        "Drake Baldwin",
+        "Michael Harris II",
+        "Dominic Smith",
+        "Ha-Seong Kim",
+        "Lars Nootbaar",
+        "Iv\u00e1n Herrera",
+        "Carter Jensen",
+        "Cedric Mullins",
+        "Yandy D\u00edaz",
+        "Nick Fortes",
+        "Kameron Misner",
+        "Taylor Walls",
+        "Josh Rojas",
+        "Riley Greene",
+        "Kevin McGonigle",
+        "Kerry Carpenter",
+        "Kyle Higashioka",
+        "Justin Foscue",
+        "Colt Keith",
+        "James Outman",
+        "Hao-Yu Lee",
+        "Matt Vierling",
+        "Jahmai Jones",
+        "Alejandro Osuna",
+        "Evan Carter",
+        "Ben Malgeri",
+        "Jo Adell",
+        "Zach Neto",
+        "Jorge Soler",
+        "Logan O'Hoppe",
+        "Oswald Peraza",
+        "Josh Lowe",
+        "Luke Raley",
+        "Julio Rodr\u00edguez",
+        "Josh Naylor",
+        "Freddie Freeman",
+        "Dalton Rushing",
+        "Kyle Tucker",
+        "Tommy Edman",
+        "Chuckie Robinson",
+        "Shohei Ohtani",
+        "Jase Bowen",
+        "Alex Freeland"
+      ],
+      "hr_names": [
+        "Endy Rodr\u00edguez",
+        "Jose Trevino",
+        "Jake McCarthy"
+      ]
+    },
+    "3_of_5": {
+      "players": 43,
+      "hr_count": 2,
+      "hr_rate": 4.7,
+      "names": [
+        "Bryce Harper",
+        "Brandon Marsh",
+        "Rafael March\u00e1n",
+        "Justin Crawford",
+        "Tyler Callihan",
+        "Blake Perkins",
+        "Brice Turang",
+        "David Hamilton",
+        "Garrett Mitchell",
+        "Jake Bauers",
+        "TJ Friedl",
+        "Griffin Conine",
+        "Owen Caissie",
+        "Joe Mack",
+        "Willi Castro",
+        "Esteury Ruiz",
+        "Cole Carrigg",
+        "Edouard Julien",
+        "Rhys Hoskins",
+        "Jac Caglianone",
+        "John Rave",
+        "Spencer Torkelson",
+        "Dillon Dingler",
+        "Denzer Guzman",
+        "Cal Raleigh",
+        "Wade Meckler",
+        "Manny Machado",
+        "Ty France",
+        "Gavin Sheets",
+        "Jake Cronenworth",
+        "Miguel Rojas",
+        "Sung-Mun Song",
+        "Fernando Tatis Jr.",
+        "Freddy Fermin",
+        "Rodolfo Dur\u00e1n",
+        "Samad Taylor",
+        "Xander Bogaerts",
+        "Alex Call",
+        "Andy Pages",
+        "Mookie Betts",
+        "Teoscar Hern\u00e1ndez",
+        "Max Muncy",
+        "Jackson Merrill"
+      ],
+      "hr_names": [
+        "Garrett Mitchell",
+        "TJ Friedl"
+      ]
+    },
+    "4_of_5": {
+      "players": 9,
+      "hr_count": 1,
+      "hr_rate": 11.1,
+      "names": [
+        "Esmerlyn Valdez",
+        "Christian Yelich",
+        "Sal Frelick",
+        "Kyle Stowers",
+        "Mickey Moniak",
+        "Liam Hicks",
+        "Xavier Edwards",
+        "Troy Johnston",
+        "Miguel Andujar"
+      ],
+      "hr_names": [
+        "Mickey Moniak"
+      ]
+    },
+    "5_of_5": {
+      "players": 2,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Kyle Schwarber",
+        "TJ Rumfield"
+      ],
+      "hr_names": []
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 3,
+      "rate": 10.0
+    },
+    "all": {
+      "total": 60,
+      "hits": 8,
+      "rate": 13.3
+    }
+  },
+  "combined_hr_hitters": [
+    {
+      "name": "Mickey Moniak",
+      "rank": 9,
+      "composite": 0.546,
+      "opp_pitcher": "Ryan Gusto",
+      "matchup": "MIA@COL"
+    },
+    {
+      "name": "Sal Stewart",
+      "rank": 16,
+      "composite": 0.437,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "CIN@MIL"
+    },
+    {
+      "name": "Endy Rodr\u00edguez",
+      "rank": 25,
+      "composite": 0.258,
+      "opp_pitcher": "Alan Rangel",
+      "matchup": "PIT@PHI"
+    },
+    {
+      "name": "Jose Trevino",
+      "rank": 32,
+      "composite": 0.202,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "CIN@MIL"
+    },
+    {
+      "name": "Jake McCarthy",
+      "rank": 35,
+      "composite": 0.192,
+      "opp_pitcher": "Ryan Gusto",
+      "matchup": "MIA@COL"
+    },
+    {
+      "name": "Nick Gonzales",
+      "rank": 40,
+      "composite": 0.176,
+      "opp_pitcher": "Alan Rangel",
+      "matchup": "PIT@PHI"
+    },
+    {
+      "name": "Garrett Mitchell",
+      "rank": 44,
+      "composite": 0.171,
+      "opp_pitcher": "Chase Burns",
+      "matchup": "CIN@MIL"
+    },
+    {
+      "name": "TJ Friedl",
+      "rank": 60,
+      "composite": 0.082,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "CIN@MIL"
+    }
+  ]
+}
