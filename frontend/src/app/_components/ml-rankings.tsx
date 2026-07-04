@@ -243,10 +243,26 @@ export function MLRankings({
         ctx.fillText(String(i + 1), COL.rank + 6, cy + 5);
         ctx.textAlign = "left";
 
-        // Name
-        ctx.fillStyle = "#e4e4e7";
+        // Name — red for small-sample players, same rule as the on-screen
+        // cards so the exported PNG never presents a fluke as trustworthy.
+        const isSmallSample =
+          rankingTab === "combined"
+            ? (!player.season_profile || (player.season_profile.bip_count ?? 0) < 20)
+            : rankingTab === "test"
+              ? (!player.three_year_profile || (player.three_year_profile.bip_count ?? 0) < 50)
+              : (s.data_quality === "LOW_SAMPLE" || s.data_quality === "NO_BATTER_DATA");
+        ctx.fillStyle = isSmallSample ? "#f87171" : "#e4e4e7";
         ctx.font = "bold 15px Inter, system-ui, sans-serif";
         ctx.fillText(player.name, COL.name, cy - 6);
+        if (isSmallSample) {
+          const nameW = ctx.measureText(player.name).width;
+          const bbe = rankingTab === "test"
+            ? (player.three_year_profile?.bip_count ?? 0)
+            : (player.season_profile?.bip_count ?? 0);
+          ctx.font = "bold 10px Inter, system-ui, sans-serif";
+          ctx.fillStyle = "#f87171";
+          ctx.fillText(`${bbe} BBE`, COL.name + nameW + 8, cy - 6);
+        }
 
         // Matchup line
         ctx.fillStyle = "#71717a";
@@ -317,6 +333,119 @@ export function MLRankings({
       setTimeout(() => setDownloadState("idle"), 4000);
     }
   };
+
+  // Consensus uses a different table layout (L5/L10/Season rank chips + avg),
+  // so it gets its own canvas renderer. Small-sample names render red with a
+  // BBE tag, same rule as the score-card export and the on-screen tables.
+  const downloadConsensusPng = () => {
+    if (downloadState === "loading") return;
+    setDownloadState("loading");
+    try {
+      const DPR = 2, W = 900, PAD = 28, ROW_H = 64, HEADER_H = 72, FOOTER_H = 44;
+      const rows = consensusRows;
+      const H = HEADER_H + rows.length * (ROW_H + 8) + FOOTER_H + PAD;
+      const canvas = document.createElement("canvas");
+      canvas.width = W * DPR;
+      canvas.height = H * DPR;
+      const ctx = canvas.getContext("2d")!;
+      ctx.scale(DPR, DPR);
+      ctx.fillStyle = "#111113";
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.fillStyle = "#e4e4e7";
+      ctx.font = "bold 22px Inter, system-ui, sans-serif";
+      ctx.fillText("Consensus Rankings", PAD, 34);
+      ctx.fillStyle = "#71717a";
+      ctx.font = "13px Inter, system-ui, sans-serif";
+      ctx.fillText(`${rows.length} players · avg of L5 / L10 / Season rank · Beeb Sheets`, PAD, 56);
+
+      const COL = { rank: PAD, name: PAD + 36, l5: 590, l10: 660, season: 740, avg: W - PAD };
+      ctx.fillStyle = "#52525b";
+      ctx.font = "bold 9px Inter, system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("L5", COL.l5, HEADER_H - 10);
+      ctx.fillText("L10", COL.l10, HEADER_H - 10);
+      ctx.fillText("SEASON", COL.season, HEADER_H - 10);
+      ctx.textAlign = "right";
+      ctx.fillText("AVG RK", COL.avg, HEADER_H - 10);
+      ctx.textAlign = "left";
+
+      const chip = (rank: number, x: number, cy: number) => {
+        ctx.fillStyle = rank <= 10 ? "#22c55e" : rank <= 20 ? "#eab308" : "#a1a1aa";
+        ctx.font = "bold 14px Inter, system-ui, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(`#${rank}`, x, cy + 5);
+        ctx.textAlign = "left";
+      };
+
+      rows.forEach((row, i) => {
+        const { player, game } = row;
+        const y = HEADER_H + i * (ROW_H + 8);
+        ctx.beginPath();
+        ctx.roundRect(PAD - 8, y, W - (PAD - 8) * 2, ROW_H, 10);
+        ctx.fillStyle = "#1c1c1e";
+        ctx.fill();
+        ctx.strokeStyle = "rgba(255,255,255,0.07)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        const cy = y + ROW_H / 2;
+
+        ctx.fillStyle = "rgba(255,255,255,0.35)";
+        ctx.font = "bold 13px Inter, system-ui, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(String(i + 1), COL.rank + 6, cy + 5);
+        ctx.textAlign = "left";
+
+        const seasonBip = player.season_profile?.bip_count ?? 0;
+        const low = seasonBip < 20;
+        ctx.fillStyle = low ? "#f87171" : "#e4e4e7";
+        ctx.font = "bold 15px Inter, system-ui, sans-serif";
+        ctx.fillText(player.name, COL.name, cy - 6);
+        if (low) {
+          const nameW = ctx.measureText(player.name).width;
+          ctx.font = "bold 10px Inter, system-ui, sans-serif";
+          ctx.fillStyle = "#f87171";
+          ctx.fillText(`${seasonBip} BBE`, COL.name + nameW + 8, cy - 6);
+        }
+
+        ctx.fillStyle = "#71717a";
+        ctx.font = "11px Inter, system-ui, sans-serif";
+        ctx.fillText(`${game.away_team} vs ${game.home_team} · ${player.opp_pitcher} (${player.pitcher_hand}HP)`, COL.name, cy + 10);
+
+        chip(row.l5Rank, COL.l5, cy);
+        chip(row.l10Rank, COL.l10, cy);
+        chip(row.seasonRank, COL.season, cy);
+
+        ctx.fillStyle = "#a1a1aa";
+        ctx.font = "bold 15px Inter, system-ui, sans-serif";
+        ctx.textAlign = "right";
+        ctx.fillText(row.avgRank.toFixed(1), COL.avg, cy + 5);
+        ctx.textAlign = "left";
+      });
+
+      const fy = H - 14;
+      ctx.fillStyle = "#3f3f46";
+      ctx.font = "bold 11px Inter, system-ui, sans-serif";
+      const wm = "Beeb Sheets";
+      const wmW = ctx.measureText(wm).width;
+      ctx.fillText(wm, W / 2 - wmW / 2, fy);
+
+      const link = document.createElement("a");
+      link.download = "beeb-consensus.png";
+      link.href = canvas.toDataURL("image/png");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setDownloadState("done");
+      setTimeout(() => setDownloadState("idle"), 2500);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setDownloadError(msg);
+      setDownloadState("error");
+      setTimeout(() => setDownloadState("idle"), 4000);
+    }
+  };
+
   const [mlWeights, setMlWeights] = useState<MlWeights>(FALLBACK_WEIGHTS);
   const [weightSource, setWeightSource] = useState<string>("fallback");
   const [yesterday, setYesterday] = useState<{
@@ -876,8 +1005,8 @@ export function MLRankings({
           ))}
         </div>
         )}
-          {rankingTab !== "consensus" && <button
-            onClick={downloadPng}
+          {<button
+            onClick={rankingTab === "consensus" ? downloadConsensusPng : downloadPng}
             disabled={downloadState === "loading"}
             title="Download as PNG"
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg cursor-pointer transition-all text-[11px] font-semibold border ${
@@ -991,6 +1120,13 @@ export function MLRankings({
                     ...(row.game.team_pitch_mix?.home?.batters ?? []),
                   ];
                   const mlbId = mixBatters.find((b) => b.name === row.player.name)?.id;
+                  // Low season sample — the Consensus's Season leg lets players
+                  // in at ≥10 BBE, but every other ranking requires ≥20. Rather
+                  // than drop these, keep them and flag the name red (same
+                  // convention as the batter tables) so a small-sample #1 like
+                  // a 15-BBE hot streak reads as untrustworthy, not gospel.
+                  const seasonBip = row.player.season_profile?.bip_count ?? 0;
+                  const lowSample = seasonBip < 20;
                   const rankChip = (rank: number) => {
                     const color = rank <= 10 ? "#22c55e" : rank <= 20 ? "#eab308" : "#71717a";
                     return (
@@ -1023,7 +1159,14 @@ export function MLRankings({
                             <div className="w-7 h-7 rounded-full flex-shrink-0" style={{ background: "rgba(255,255,255,0.07)" }} />
                           )}
                           <div>
-                            <div className="font-semibold text-[13px] text-foreground leading-tight">{row.player.name}</div>
+                            <div className={`font-semibold text-[13px] leading-tight flex items-center gap-1.5 ${lowSample ? "text-red-400" : "text-foreground"}`}>
+                              {row.player.name}
+                              {lowSample && (
+                                <span className="px-1 py-0 text-[8px] font-bold rounded bg-accent-red/10 text-red-400 border border-accent-red/20">
+                                  {seasonBip} BBE
+                                </span>
+                              )}
+                            </div>
                             <div className="text-[10px] text-muted leading-tight">
                               {row.game.away_team} vs {row.game.home_team} · {row.player.opp_pitcher} ({row.player.pitcher_hand}HP)
                             </div>
