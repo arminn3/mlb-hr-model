@@ -33,8 +33,13 @@ function sortBatters(
     return { p, order: posted ? (info?.order ?? null) : null, mlbId: info?.id };
   });
   // Live-refresh override wins — show only players in the live MLB lineup.
+  // BUT only for games the override actually covers: the override is a flat
+  // set of starter names across the games that HAVE posted lineups. A game
+  // that isn't posted yet (e.g. a late night game) has zero matches — in that
+  // case fall through to normal handling instead of hiding the whole game.
   if (override && override.size > 0) {
-    return rows.filter(({ p }) => override.has(p.name));
+    const filtered = rows.filter(({ p }) => override.has(p.name));
+    if (filtered.length > 0) return filtered;
   }
   if (posted) {
     return rows
