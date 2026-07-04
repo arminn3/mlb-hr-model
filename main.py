@@ -372,10 +372,15 @@ def _compute_hr_signals(
     }
 
 
-def run_model(game_date: date = None, fast: bool = False):
+def run_model(game_date: date = None, fast: bool = False, only_game_pks=None):
     """
     Full pipeline: fetch data, score every batter with an HR prop at
     L5/L10 lookbacks, return game-grouped results.
+
+    only_game_pks: if set, score ONLY the batters in those games and return just
+    those games. Used by rescore_game.py to re-score a single game's lineup
+    against a newly-announced starter (pitching change) without touching the
+    other 14 games. The scoring path is identical — this only narrows the input.
     """
     if game_date is None:
         game_date = date.today()
@@ -502,6 +507,12 @@ def run_model(game_date: date = None, fast: bool = False):
 
         src = "lineup" if home_lineup or away_lineup else "roster"
         print(f"  {away}@{home}: {len(home_batters)} home + {len(away_batters)} away batters ({src})")
+
+    # Targeted rescore: keep only the requested games' batters (pitching-change
+    # re-score). games_out then contains just those games (empty ones are
+    # skipped downstream), which the caller merges into the existing slate.
+    if only_game_pks is not None:
+        batters_to_score = [b for b in batters_to_score if b["game_pk"] in only_game_pks]
 
     total = len(batters_to_score)
     if total == 0:
