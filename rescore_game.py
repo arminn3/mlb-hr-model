@@ -101,6 +101,15 @@ def main() -> None:
     for g in slate["games"]:
         repl = fresh_by_pk.get(g["game_pk"])
         if repl is not None:
+            # three_year_profile is batter-intrinsic (not pitcher-dependent) and
+            # is added by a separate post-step, so run_model doesn't emit it.
+            # Carry it over from the existing slate player-by-player so the Test
+            # tab keeps working after a rescore.
+            old_tyr = {p["name"]: p.get("three_year_profile")
+                       for p in g.get("players", [])}
+            for p in repl.get("players", []):
+                if "three_year_profile" not in p and old_tyr.get(p["name"]) is not None:
+                    p["three_year_profile"] = old_tyr[p["name"]]
             merged.append(repl)
             replaced += 1
         else:
