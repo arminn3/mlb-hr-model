@@ -30,6 +30,79 @@ ODDS_CACHE_FILE = Path("odds_cache.json")
 ROTOWIRE_LINEUPS_URL = "https://www.rotowire.com/baseball/daily-lineups.php"
 _rotowire_cache: Optional[dict] = None  # team-pair → pitcher dicts, fetched once per process
 
+# game_pk → "D"/"N" from the MLB schedule. Statcast batted-ball rows carry no
+# game start time, so day/night must be derived from the schedule by game_pk.
+_game_daynight_cache: Optional[dict] = None
+_DAYNIGHT_CACHE_FILE = Path(config.STATCAST_CACHE_DIR) / "game_daynight.json"
+
+
+def _fetch_schedule_daynight(start: str, end: str) -> dict:
+    """{str(game_pk): 'D'|'N'} for every game in [start, end]."""
+    out: dict = {}
+    url = f"{MLB_API_BASE}/schedule?sportId=1&startDate={start}&endDate={end}"
+    try:
+        r = requests.get(url, timeout=45)
+        r.raise_for_status()
+        for d in r.json().get("dates", []):
+            for g in d.get("games", []):
+                dn = g.get("dayNight")
+                if dn:
+                    out[str(g["gamePk"])] = "D" if dn == "day" else "N"
+    except Exception as e:
+        print(f"WARNING: day/night schedule fetch {start}..{end} failed ({e})")
+    return out
+
+
+def load_game_daynight_map() -> dict:
+    """Load (and cache) the game_pk → day/night map for 2024-2026.
+
+    Past seasons are immutable so they're persisted to disk and only fetched
+    once; the current season is refetched each process so newly-played games
+    get tagged. One schedule call per season (~a few MB)."""
+    global _game_daynight_cache
+    if _game_daynight_cache is not None:
+        return _game_daynight_cache
+
+    cache: dict = {}
+    if _DAYNIGHT_CACHE_FILE.exists():
+        try:
+            cache = json.loads(_DAYNIGHT_CACHE_FILE.read_text())
+        except Exception:
+            cache = {}
+
+    for yr in (2024, 2025, 2026):
+        dates = config.SEASON_DATES.get(yr)
+        if not dates:
+            continue
+        # Past seasons: fetch once, then trust the disk cache.
+        if yr < 2026 and cache.get(f"_has_{yr}"):
+            continue
+        start = dates[0]
+        end = dates[1] or date.today().isoformat()
+        got = _fetch_schedule_daynight(start, end)
+        if got:
+            cache.update(got)
+            if yr < 2026:
+                cache[f"_has_{yr}"] = True
+
+    try:
+        _DAYNIGHT_CACHE_FILE.parent.mkdir(exist_ok=True)
+        _DAYNIGHT_CACHE_FILE.write_text(json.dumps(cache))
+    except Exception:
+        pass
+    _game_daynight_cache = cache
+    return cache
+
+
+def get_game_daynight(game_pk) -> Optional[str]:
+    """'D' | 'N' | None for a game_pk (lazy-loads the season map)."""
+    if game_pk is None:
+        return None
+    try:
+        return load_game_daynight_map().get(str(int(game_pk)))
+    except (TypeError, ValueError):
+        return None
+
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Rotowire fallback (for pitchers MLB API hasn't published yet)

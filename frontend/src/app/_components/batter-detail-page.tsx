@@ -398,6 +398,7 @@ export function BatterDetailPage({
     : "Both";
   const [armFilter, setArmFilter] = useState<"L" | "R" | "Both">(_initialArm);
   const [haFilter,  setHaFilter]  = useState<"H" | "A" | "Both">("Both");
+  const [dnFilter,  setDnFilter]  = useState<"D" | "N" | "Both">("Both");
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }); }, []);
 
@@ -444,24 +445,38 @@ export function BatterDetailPage({
   : 10;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let filteredABs: any[];
-  // For L15/L20/L25 and Season, the AB table shows the last N BBE outright —
-  // pitch filter narrows the stat cards above but does NOT shrink the log.
-  // Otherwise picking L25 with the default ≥12% pitch chips selected drops
-  // the table well below 25, which is the bug the user just flagged.
+  // For L15/L20/L25 and Season the log = last N BBE of the current pitch
+  // selection (window N caps how many of the filtered pitch to show), so
+  // selecting "4-Seam" shows only 4-seam in every window, not just L5/L10.
   const isWideWindow = activeLookback === "L15" || activeLookback === "L20"
                     || activeLookback === "L25" || activeLookback === "Season";
+  // Does an AB match the current pitch-type selection? (Statcast logs store
+  // either the code 'FF' or the friendly name 'Four-Seam Fastball', so accept
+  // both.) Empty selection = match everything.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const pitchMatch = (ab: any): boolean => {
+    if (pitchFilter.size === 0) return true;
+    const pt = String(ab.pitch_type ?? "");
+    if (pitchFilter.has(pt)) return true;
+    for (const code of pitchFilter) {
+      if (code === pt) return true;
+      if ((PITCH_NAMES[code] || []).includes(pt)) return true;
+    }
+    return false;
+  };
   // The per-pitch pitch_abs log (and the same-hand-first slice used for wide
   // windows) only surfaces opposing-hand BBE. When the user toggles Pitch Arm
   // off the default opposing hand (other hand OR "Both"), source from the
   // unsliced both-hand season_abs pool — the arm filter + cap below then narrow
   // it. Checked BEFORE isWideWindow so the appended opposite-hand block isn't
-  // sliced away.
+  // sliced away. Every path applies the pitch filter so the log always reflects
+  // the selected pitch(es), in every window.
   const bothHandPool = (player.season_profile?.season_abs ?? []) as typeof filteredABs;
   const needBothHand = armFilter !== player.pitcher_hand;
   if (needBothHand) {
-    filteredABs = bothHandPool.slice();
+    filteredABs = bothHandPool.filter(pitchMatch);
   } else if (isWideWindow) {
-    filteredABs = (scores.recent_abs || []).slice(0, limit);
+    filteredABs = (scores.recent_abs || []).filter(pitchMatch).slice(0, limit);
   } else if (pitchFilter.size === 0) {
     if (pitchAbsData && Object.keys(pitchAbsData).length > 0) {
       const all = Object.values(pitchAbsData).flat();
@@ -496,10 +511,11 @@ export function BatterDetailPage({
     filteredABs = selected.filter((ab) => { const k = `${ab.date}-${ab.ev}-${ab.angle}`; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, limit);
   }
 
-  // Apply the PropFinder-style filters (Pitch Arm / Home-Away) on top of the
-  // pitch-type filter. Each is a no-op when set to "Both".
+  // Apply the PropFinder-style filters (Pitch Arm / Day-Night / Home-Away) on
+  // top of the pitch-type filter. Each is a no-op when set to "Both".
   filteredABs = filteredABs.filter((ab) => {
     if (armFilter !== "Both" && String(ab.pitch_arm ?? "") !== armFilter) return false;
+    if (dnFilter  !== "Both" && String(ab.day_night ?? "") !== dnFilter)  return false;
     if (haFilter  !== "Both" && String(ab.home_away ?? "") !== haFilter)  return false;
     return true;
   });
@@ -547,7 +563,7 @@ export function BatterDetailPage({
   // ANY filter is narrowing the view — pitch chips, Pitch Arm (defaults to the
   // opposing hand, so this is almost always on), or Home/Away. Keeps the cards
   // and the log in lockstep: the numbers are raw counts over the visible ABs.
-  const anyFilterActive = pitchFilter.size > 0 || armFilter !== "Both" || haFilter !== "Both";
+  const anyFilterActive = pitchFilter.size > 0 || armFilter !== "Both" || dnFilter !== "Both" || haFilter !== "Both";
   if (anyFilterActive && filteredABs.length > 0) {
     const n = filteredABs.length;
     const pct = (count: number) => Math.round((count / n) * 1000) / 10;
@@ -880,11 +896,11 @@ export function BatterDetailPage({
           </div>
         )}
 
-        {/* Filter dropdown row — Events / Pitch Arm / Home-Away / Pitch Type.
-            (Day/Night was removed: Statcast batted-ball data carries no game
-            start time, so it could never pull accurate data.) AB table below
-            scrolls internally so toggling Events doesn't reflow the page. */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {/* Filter dropdown row — Events / Pitch Arm / Day-Night / Home-Away /
+            Pitch Type. Day/Night is derived from the MLB schedule by game_pk
+            (Statcast events carry no start time). AB table below scrolls
+            internally so toggling Events doesn't reflow the page. */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           <FilterDropdown
             label="Events"
             value={activeLookback}
@@ -905,6 +921,16 @@ export function BatterDetailPage({
               { value: "Both", label: "Both" },
               { value: "L", label: "LHP" },
               { value: "R", label: "RHP" },
+            ]}
+          />
+          <FilterDropdown
+            label="Day / Night"
+            value={dnFilter}
+            onChange={(v) => setDnFilter(v as "D" | "N" | "Both")}
+            options={[
+              { value: "Both", label: "Both" },
+              { value: "D", label: "Day" },
+              { value: "N", label: "Night" },
             ]}
           />
           <FilterDropdown
@@ -956,12 +982,13 @@ export function BatterDetailPage({
               overflowAnchor: "none",
             }}>
             {filteredABs.length > 0 ? (
-              <table className="w-full min-w-[680px] text-[13px]">
+              <table className="w-full min-w-[720px] text-[13px]">
                 <thead style={{ background: "rgba(20,20,22,0.95)" }}>
                   <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
                     <th className="text-left  py-2 pl-3 pr-2 font-semibold">Date</th>
                     <th className="text-left  py-2 px-2 font-semibold">Pitcher</th>
                     <th className="text-center py-2 px-2 font-semibold">Arm</th>
+                    <th className="text-center py-2 px-2 font-semibold">D/N</th>
                     <th className="text-left  py-2 px-2 font-semibold">Pitch Type</th>
                     <th className="text-center py-2 px-2 font-semibold">EV</th>
                     <th className="text-center py-2 px-2 font-semibold">LA</th>
@@ -996,6 +1023,7 @@ export function BatterDetailPage({
                         <td className="py-2.5 pl-3 pr-2 text-foreground/75 font-mono text-[12px]">{String(ab.date)}</td>
                         <td className="py-2.5 px-2 text-foreground text-[12px]">{String(ab.pitcher_name ?? "")}</td>
                         <td className="py-2.5 px-2 text-center text-foreground/70 font-mono">{String(ab.pitch_arm ?? "—")}</td>
+                        <td className="py-2.5 px-2 text-center text-foreground/70 font-mono">{String(ab.day_night ?? "—")}</td>
                         <td className="py-2.5 px-2 text-foreground/85 text-[12px]">{String(ab.pitch_type ?? "—")}</td>
                         <td className="py-2.5 px-2 text-center">
                           <span className="font-mono font-semibold" style={{ color: evGradient(ev) }}>{String(ab.ev)}</span>

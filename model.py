@@ -14,6 +14,7 @@ from metrics import (
     calc_batter_metrics_for_pitch,
     calc_pitcher_metrics,
 )
+from data_fetchers import get_game_daynight
 
 
 def _ab_extras(row) -> dict:
@@ -65,13 +66,16 @@ def _ab_extras(row) -> dict:
         except (TypeError, ValueError):
             lsa = None
 
+    _game_pk = int(row["game_pk"]) if pd.notna(row.get("game_pk")) else None
+
     return {
         "bat_speed": bat_speed,
         "direction": direction,
         "home_away": home_away,
-        # Statcast events carry no start time; Day/Night is derived nowhere.
-        "day_night": None,
-        "game_pk": int(row["game_pk"]) if pd.notna(row.get("game_pk")) else None,
+        # Day/Night — derived from the MLB schedule by game_pk (Statcast events
+        # don't carry start time). "D" | "N" | None.
+        "day_night": get_game_daynight(_game_pk),
+        "game_pk": _game_pk,
         "lsa": lsa,
     }
 

@@ -107,13 +107,16 @@ const GROUP_LABELS: Record<ColumnDef["group"], string> = {
   statcast: "Statcast",
 };
 
-type WindowKey = "season" | "last_3" | "last_5" | "last_7" | "last_10";
+type WindowKey = "season" | "last_10" | "last_7" | "last_5" | "last_3" | "last_1";
+// Ordered longest → most recent, so the single most-recent start ("Last")
+// sits at the right end.
 const WINDOW_OPTIONS: { key: WindowKey; label: string }[] = [
   { key: "season",  label: "Season" },
-  { key: "last_3",  label: "Last 3" },
-  { key: "last_5",  label: "Last 5" },
-  { key: "last_7",  label: "Last 7" },
   { key: "last_10", label: "Last 10" },
+  { key: "last_7",  label: "Last 7" },
+  { key: "last_5",  label: "Last 5" },
+  { key: "last_3",  label: "Last 3" },
+  { key: "last_1",  label: "Last" },
 ];
 
 export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { pitcher: PitcherInfo; side?: "away" | "home"; teamAbbr?: string; onNameClick?: () => void }) {
