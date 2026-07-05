@@ -304,7 +304,7 @@
   ],
   "total_players_ranked": 297,
   "total_hrs_hit": 45,
-  "total_near_hrs": 0,
+  "total_near_hrs": 12,
   "model_hits": 43,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -353,7 +353,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 12,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -379,28 +379,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 5,
-      "rate": 50.0
+      "hits": 6,
+      "rate": 60.0
     },
     "top_20": {
       "total": 20,
-      "hits": 7,
-      "rate": 35.0
+      "hits": 9,
+      "rate": 45.0
     },
     "top_30": {
       "total": 30,
-      "hits": 9,
-      "rate": 30.0
+      "hits": 11,
+      "rate": 36.7
     },
     "all": {
       "total": 297,
-      "hits": 43,
-      "rate": 14.5
+      "hits": 55,
+      "rate": 18.5
     }
   },
   "avg_composite_hr_hitters": 0.476,
-  "avg_composite_non_hitters": 0.41,
-  "composite_separation": 0.066,
+  "avg_composite_non_hitters": 0.406,
+  "composite_separation": 0.07,
   "hr_hitters": [
     {
       "name": "Kyle Stowers",
@@ -1007,8 +1007,229 @@
       "matchup": "NYM@ATL"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Garrett Mitchell",
+      "rank": 7,
+      "composite": 0.787,
+      "opp_pitcher": "Merrill Kelly",
+      "matchup": "MIL@AZ"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 13,
+      "composite": 0.739,
+      "opp_pitcher": "Sean Sullivan",
+      "matchup": "SF@COL"
+    },
+    {
+      "name": "Spencer Torkelson",
+      "rank": 33,
+      "composite": 0.629,
+      "opp_pitcher": "Cal Quantrill",
+      "matchup": "DET@TEX"
+    },
+    {
+      "name": "Brandon Nimmo",
+      "rank": 35,
+      "composite": 0.614,
+      "opp_pitcher": "Jack Flaherty",
+      "matchup": "DET@TEX"
+    },
+    {
+      "name": "Trea Turner",
+      "rank": 56,
+      "composite": 0.564,
+      "opp_pitcher": "Michael Wacha",
+      "matchup": "PHI@KC"
+    },
+    {
+      "name": "Josh Smith",
+      "rank": 66,
+      "composite": 0.527,
+      "opp_pitcher": "Jack Flaherty",
+      "matchup": "DET@TEX"
+    },
+    {
+      "name": "Cooper Pratt",
+      "rank": 83,
+      "composite": 0.471,
+      "opp_pitcher": "Merrill Kelly",
+      "matchup": "MIL@AZ"
+    },
+    {
+      "name": "Joey Bart",
+      "rank": 131,
+      "composite": 0.403,
+      "opp_pitcher": "Sean Manaea",
+      "matchup": "NYM@ATL"
+    },
+    {
+      "name": "Trent Grisham",
+      "rank": 171,
+      "composite": 0.372,
+      "opp_pitcher": "Zebby Matthews",
+      "matchup": "MIN@NYY"
+    },
+    {
+      "name": "Kerry Carpenter",
+      "rank": 221,
+      "composite": 0.313,
+      "opp_pitcher": "Cal Quantrill",
+      "matchup": "DET@TEX"
+    },
+    {
+      "name": "Mookie Betts",
+      "rank": 246,
+      "composite": 0.288,
+      "opp_pitcher": "Wandy Peralta",
+      "matchup": "SD@LAD"
+    },
+    {
+      "name": "A.J. Ewing",
+      "rank": 284,
+      "composite": 0.23,
+      "opp_pitcher": "Chris Sale",
+      "matchup": "NYM@ATL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Garrett Mitchell",
+      "ev": 108.0,
+      "angle": 26.0,
+      "distance": 420.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Kelly, Merrill"
+    },
+    {
+      "batter": "Cooper Pratt",
+      "ev": 100.8,
+      "angle": 25.0,
+      "distance": 388.0,
+      "hr_in_parks": 17,
+      "result": "field_out",
+      "pitcher": "Kelly, Merrill"
+    },
+    {
+      "batter": "Garrett Mitchell",
+      "ev": 101.0,
+      "angle": 30.0,
+      "distance": 389.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Kelly, Merrill"
+    },
+    {
+      "batter": "A.J. Ewing",
+      "ev": 99.5,
+      "angle": 29.0,
+      "distance": 378.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Ritchie, JR"
+    },
+    {
+      "batter": "Joey Bart",
+      "ev": 105.3,
+      "angle": 21.0,
+      "distance": 398.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Warren, Austin"
+    },
+    {
+      "batter": "Bryce Eldridge",
+      "ev": 101.2,
+      "angle": 37.0,
+      "distance": 410.0,
+      "hr_in_parks": 28,
+      "result": "",
+      "pitcher": "Sullivan, Sean"
+    },
+    {
+      "batter": "Bryce Eldridge",
+      "ev": 103.6,
+      "angle": 33.0,
+      "distance": 414.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Sullivan, Sean"
+    },
+    {
+      "batter": "Casey Schmitt",
+      "ev": 104.7,
+      "angle": 18.0,
+      "distance": 392.0,
+      "hr_in_parks": 27,
+      "result": "double",
+      "pitcher": "Sullivan, Sean"
+    },
+    {
+      "batter": "Trea Turner",
+      "ev": 97.9,
+      "angle": 27.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "double_play",
+      "pitcher": "Wacha, Michael"
+    },
+    {
+      "batter": "Mookie Betts",
+      "ev": 99.1,
+      "angle": 27.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Canning, Griffin"
+    },
+    {
+      "batter": "Trent Grisham",
+      "ev": 105.6,
+      "angle": 27.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Matthews, Zebby"
+    },
+    {
+      "batter": "Brandon Nimmo",
+      "ev": 102.4,
+      "angle": 32.0,
+      "distance": 401.0,
+      "hr_in_parks": 24,
+      "result": "field_out",
+      "pitcher": "Montero, Keider"
+    },
+    {
+      "batter": "Spencer Torkelson",
+      "ev": 101.6,
+      "angle": 34.0,
+      "distance": 398.0,
+      "hr_in_parks": 20,
+      "result": "field_out",
+      "pitcher": "Peoples, Ben"
+    },
+    {
+      "batter": "Kerry Carpenter",
+      "ev": 98.8,
+      "angle": 27.0,
+      "distance": 387.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Quantrill, Cal"
+    },
+    {
+      "batter": "Josh Smith",
+      "ev": 101.1,
+      "angle": 26.0,
+      "distance": 395.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Flaherty, Jack"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
