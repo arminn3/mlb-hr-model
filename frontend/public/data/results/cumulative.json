@@ -99781,7 +99781,7 @@
     ],
     "total_players_ranked": 307,
     "total_hrs_hit": 35,
-    "total_near_hrs": 0,
+    "total_near_hrs": 13,
     "model_hits": 33,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -99830,7 +99830,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 13,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -99856,28 +99856,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 3,
+        "rate": 30.0
       },
       "top_20": {
         "total": 20,
-        "hits": 5,
-        "rate": 25.0
+        "hits": 6,
+        "rate": 30.0
       },
       "top_30": {
         "total": 30,
-        "hits": 5,
-        "rate": 16.7
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 307,
-        "hits": 33,
-        "rate": 10.7
+        "hits": 46,
+        "rate": 15.0
       }
     },
     "avg_composite_hr_hitters": 0.448,
-    "avg_composite_non_hitters": 0.425,
-    "composite_separation": 0.023,
+    "avg_composite_non_hitters": 0.424,
+    "composite_separation": 0.024,
     "hr_hitters": [
       {
         "name": "Willson Contreras",
@@ -100344,8 +100344,218 @@
         "matchup": "CWS@CLE"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Victor Caratini",
+        "rank": 2,
+        "composite": 0.805,
+        "opp_pitcher": "Ryan Weathers",
+        "matchup": "MIN@NYY"
+      },
+      {
+        "name": "Carlos Narv\u00e1ez",
+        "rank": 32,
+        "composite": 0.679,
+        "opp_pitcher": "Ryan Johnson",
+        "matchup": "BOS@LAA"
+      },
+      {
+        "name": "Bryson Stott",
+        "rank": 78,
+        "composite": 0.474,
+        "opp_pitcher": "Luinder Avila",
+        "matchup": "PHI@KC"
+      },
+      {
+        "name": "Miguel Andujar",
+        "rank": 91,
+        "composite": 0.453,
+        "opp_pitcher": "Emmet Sheehan",
+        "matchup": "SD@LAD"
+      },
+      {
+        "name": "Royce Lewis",
+        "rank": 146,
+        "composite": 0.412,
+        "opp_pitcher": "Ryan Weathers",
+        "matchup": "MIN@NYY"
+      },
+      {
+        "name": "Kahlil Watson",
+        "rank": 156,
+        "composite": 0.405,
+        "opp_pitcher": "Chris Murphy",
+        "matchup": "CWS@CLE"
+      },
+      {
+        "name": "Braden Montgomery",
+        "rank": 173,
+        "composite": 0.396,
+        "opp_pitcher": "Tanner Bibee",
+        "matchup": "CWS@CLE"
+      },
+      {
+        "name": "Gabriel Rincones Jr.",
+        "rank": 193,
+        "composite": 0.381,
+        "opp_pitcher": "Luinder Avila",
+        "matchup": "PHI@KC"
+      },
+      {
+        "name": "Kyle Schwarber",
+        "rank": 194,
+        "composite": 0.381,
+        "opp_pitcher": "Luinder Avila",
+        "matchup": "PHI@KC"
+      },
+      {
+        "name": "Jackson Chourio",
+        "rank": 201,
+        "composite": 0.379,
+        "opp_pitcher": "Eduardo Rodriguez",
+        "matchup": "MIL@AZ"
+      },
+      {
+        "name": "Bo Bichette",
+        "rank": 211,
+        "composite": 0.369,
+        "opp_pitcher": "Mart\u00edn P\u00e9rez",
+        "matchup": "NYM@ATL"
+      },
+      {
+        "name": "Brandon Marsh",
+        "rank": 243,
+        "composite": 0.32,
+        "opp_pitcher": "Luinder Avila",
+        "matchup": "PHI@KC"
+      },
+      {
+        "name": "Jonathan Aranda",
+        "rank": 265,
+        "composite": 0.266,
+        "opp_pitcher": "Peter Lambert",
+        "matchup": "TB@HOU"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Jackson Chourio",
+        "ev": 108.6,
+        "angle": 25.0,
+        "distance": 421.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Rodriguez, Eduardo"
+      },
+      {
+        "batter": "Bo Bichette",
+        "ev": 102.1,
+        "angle": 26.0,
+        "distance": 406.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Carrasco, Carlos"
+      },
+      {
+        "batter": "Braden Montgomery",
+        "ev": 99.8,
+        "angle": 36.0,
+        "distance": 374.0,
+        "hr_in_parks": 17,
+        "result": "field_out",
+        "pitcher": "Gaddis, Hunter"
+      },
+      {
+        "batter": "Kahlil Watson",
+        "ev": 98.5,
+        "angle": 21.0,
+        "distance": 394.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Fedde, Erick"
+      },
+      {
+        "batter": "Jonathan Aranda",
+        "ev": 100.1,
+        "angle": 31.0,
+        "distance": 389.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Lambert, Peter"
+      },
+      {
+        "batter": "Brandon Marsh",
+        "ev": 104.5,
+        "angle": 22.0,
+        "distance": 395.0,
+        "hr_in_parks": 25,
+        "result": "field_out",
+        "pitcher": "Lynch IV, Daniel"
+      },
+      {
+        "batter": "Bryson Stott",
+        "ev": 98.3,
+        "angle": 25.0,
+        "distance": 404.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Avila, Luinder"
+      },
+      {
+        "batter": "Kyle Schwarber",
+        "ev": 98.5,
+        "angle": 35.0,
+        "distance": 381.0,
+        "hr_in_parks": 8,
+        "result": "field_out",
+        "pitcher": "Avila, Luinder"
+      },
+      {
+        "batter": "Gabriel Rincones Jr.",
+        "ev": 106.5,
+        "angle": 21.0,
+        "distance": 415.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "Avila, Luinder"
+      },
+      {
+        "batter": "Carlos Narv\u00e1ez",
+        "ev": 100.1,
+        "angle": 37.0,
+        "distance": 376.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "Johnson, Ryan"
+      },
+      {
+        "batter": "Miguel Andujar",
+        "ev": 105.2,
+        "angle": 34.0,
+        "distance": 400.0,
+        "hr_in_parks": 13,
+        "result": "",
+        "pitcher": "Gervase, Paul"
+      },
+      {
+        "batter": "Royce Lewis",
+        "ev": 109.4,
+        "angle": 18.0,
+        "distance": 402.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Chivilli, Angel"
+      },
+      {
+        "batter": "Victor Caratini",
+        "ev": 99.6,
+        "angle": 28.0,
+        "distance": 386.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Bird, Jake"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
