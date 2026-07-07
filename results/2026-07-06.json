@@ -1,0 +1,466 @@
+{
+  "date": "2026-07-06",
+  "players_who_batted": [
+    "Alec Bohm",
+    "Bobby Witt Jr.",
+    "Brandon Marsh",
+    "Bryce Harper",
+    "Bryson Stott",
+    "Derek Hill",
+    "Edmundo Sosa",
+    "Gabriel Rincones Jr.",
+    "Garrett Stubbs",
+    "Isaac Collins",
+    "J.T. Realmuto",
+    "Jac Caglianone",
+    "Josh Rojas",
+    "Justin Crawford",
+    "Kameron Misner",
+    "Kyle Schwarber",
+    "Lane Thomas",
+    "Luke Maile",
+    "Michael Massey",
+    "Nick Loftin",
+    "Rafael March\u00e1n",
+    "Salvador Perez",
+    "Starling Marte",
+    "Trea Turner",
+    "Tyler Tolbert"
+  ],
+  "total_players_ranked": 22,
+  "total_hrs_hit": 4,
+  "total_near_hrs": 0,
+  "model_hits": 4,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 22,
+        "hits": 4,
+        "rate": 18.2
+      },
+      "all": {
+        "total": 22,
+        "hits": 4,
+        "rate": 18.2
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 22,
+        "hits": 4,
+        "rate": 18.2
+      },
+      "all": {
+        "total": 22,
+        "hits": 4,
+        "rate": 18.2
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 22,
+      "hits": 4,
+      "rate": 18.2
+    },
+    "all": {
+      "total": 22,
+      "hits": 4,
+      "rate": 18.2
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 22,
+      "hits": 4,
+      "rate": 18.2
+    },
+    "all": {
+      "total": 22,
+      "hits": 4,
+      "rate": 18.2
+    }
+  },
+  "avg_composite_hr_hitters": 0.235,
+  "avg_composite_non_hitters": 0.355,
+  "composite_separation": -0.12,
+  "hr_hitters": [
+    {
+      "name": "Lane Thomas",
+      "rank": 10,
+      "composite": 0.347,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@KC"
+    },
+    {
+      "name": "Tyler Tolbert",
+      "rank": 14,
+      "composite": 0.287,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@KC"
+    },
+    {
+      "name": "Salvador Perez",
+      "rank": 17,
+      "composite": 0.23,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@KC"
+    },
+    {
+      "name": "Luke Maile",
+      "rank": 22,
+      "composite": 0.075,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@KC"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Salvador Perez",
+      "rank": 9,
+      "composite": 0.364,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@KC"
+    },
+    {
+      "name": "Lane Thomas",
+      "rank": 11,
+      "composite": 0.319,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@KC"
+    },
+    {
+      "name": "Tyler Tolbert",
+      "rank": 17,
+      "composite": 0.261,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@KC"
+    },
+    {
+      "name": "Luke Maile",
+      "rank": 22,
+      "composite": 0.075,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@KC"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 81,
+      "hr_count": 3,
+      "hr_rate": 3.7,
+      "names": [
+        "Derek Hill",
+        "Starling Marte",
+        "Alec Bohm",
+        "Trea Turner",
+        "Lane Thomas",
+        "J.T. Realmuto",
+        "Edmundo Sosa",
+        "Tyler Tolbert",
+        "Salvador Perez",
+        "Bobby Witt Jr.",
+        "Garrett Stubbs",
+        "Max Schuemann",
+        "Nick Fortes",
+        "Amed Rosario",
+        "Anthony Volpe",
+        "Junior Caminero",
+        "Jonny DeLuca",
+        "Yandy D\u00edaz",
+        "Richie Palacios",
+        "Victor Mesa Jr.",
+        "Ben Williamson",
+        "Ryan Vilade",
+        "Cedric Mullins",
+        "Zach Dezenzo",
+        "Nick Allen",
+        "Drew Millas",
+        "Jorbit Vivas",
+        "Taylor Trammell",
+        "Ronny Mauricio",
+        "Juan Soto",
+        "Jim Jarvis",
+        "Jared Young",
+        "A.J. Ewing",
+        "Francisco Lindor",
+        "Brett Baty",
+        "Carson Benge",
+        "Austin Riley",
+        "Eli White",
+        "Joey Bart",
+        "Garrett Mitchell",
+        "Christian Yelich",
+        "Jake Bauers",
+        "Jordan Walker",
+        "Cooper Pratt",
+        "JJ Wetherholt",
+        "Nelson Vel\u00e1zquez",
+        "Jackson Chourio",
+        "Jos\u00e9 Ferm\u00edn",
+        "Blaze Jordan",
+        "Nathan Church",
+        "David Hamilton",
+        "Masyn Winn",
+        "Pedro Pag\u00e9s",
+        "Blake Perkins",
+        "William Contreras",
+        "Bryan Torres",
+        "Gary S\u00e1nchez",
+        "Alec Burleson",
+        "Joey Ortiz",
+        "Manny Machado",
+        "Tim Tawa",
+        "Adrian Del Castillo",
+        "Fernando Tatis Jr.",
+        "Rodolfo Dur\u00e1n",
+        "Miguel Andujar",
+        "Samad Taylor",
+        "Pavin Smith",
+        "Jorge Barrosa",
+        "Ildemaro Vargas",
+        "Rafael Devers",
+        "Jonah Cox",
+        "Luis Ur\u00edas",
+        "Daulton Varsho",
+        "Alejandro Kirk",
+        "Luis Arraez",
+        "Ernie Clement",
+        "Drew Cavanaugh",
+        "Sean Keys",
+        "Yohendrick Pi\u00f1ango",
+        "Bryce Eldridge",
+        "Andr\u00e9s Gim\u00e9nez"
+      ],
+      "hr_names": [
+        "Lane Thomas",
+        "Tyler Tolbert",
+        "Salvador Perez"
+      ]
+    },
+    "2_of_5": {
+      "players": 67,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Brandon Marsh",
+        "Bryce Harper",
+        "Justin Crawford",
+        "Gabriel Rincones Jr.",
+        "Jac Caglianone",
+        "Ryan McMahon",
+        "Ben Rice",
+        "Jasson Dom\u00ednguez",
+        "Trent Grisham",
+        "Paul Goldschmidt",
+        "Taylor Walls",
+        "Jonathan Aranda",
+        "Daylen Lile",
+        "Luis Garc\u00eda Jr.",
+        "Christian Walker",
+        "Yainer Diaz",
+        "James Wood",
+        "Yordan Alvarez",
+        "Brice Matthews",
+        "Cam Smith",
+        "CJ Abrams",
+        "Jos\u00e9 Tena",
+        "Keibert Ruiz",
+        "Nasim Nu\u00f1ez",
+        "LaMonte Wade Jr.",
+        "Dylan Crews",
+        "Jacob Young",
+        "Matt Olson",
+        "Francisco Alvarez",
+        "Michael Harris II",
+        "Tyrone Taylor",
+        "Mike Yastrzemski",
+        "Mark Vientos",
+        "Eric Wagaman",
+        "Drake Baldwin",
+        "Luis Torrens",
+        "Jorge Mateo",
+        "Iv\u00e1n Herrera",
+        "Brice Turang",
+        "Sal Frelick",
+        "Andrew Vaughn",
+        "Lars Nootbaar",
+        "Jackson Merrill",
+        "Jake Cronenworth",
+        "Gavin Sheets",
+        "Sung-Mun Song",
+        "Gabriel Moreno",
+        "Lourdes Gurriel Jr.",
+        "Nolan Arenado",
+        "Max Kepler",
+        "Xander Bogaerts",
+        "Ketel Marte",
+        "Corbin Carroll",
+        "Victor Bericoto",
+        "Vladimir Guerrero Jr.",
+        "Casey Schmitt",
+        "Christian Koss",
+        "Heliot Ramos",
+        "Willy Adames",
+        "Brandon Valenzuela",
+        "Andy Pages",
+        "Braxton Fulford",
+        "Tyler Freeman",
+        "Shohei Ohtani",
+        "Kyle Tucker",
+        "Freddie Freeman",
+        "Eliezer Alfonzo"
+      ],
+      "hr_names": []
+    },
+    "3_of_5": {
+      "players": 31,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Kyle Schwarber",
+        "Bryson Stott",
+        "Jazz Chisholm Jr.",
+        "Austin Wells",
+        "Cody Bellinger",
+        "Christian V\u00e1zquez",
+        "Isaac Paredes",
+        "Jose Altuve",
+        "Raynel Delgado",
+        "Curtis Mead",
+        "Andr\u00e9s Chaparro",
+        "Ozzie Albies",
+        "Dominic Smith",
+        "Bo Bichette",
+        "Tommy Troy",
+        "Kazuma Okamoto",
+        "Eric Haase",
+        "Mickey Moniak",
+        "Jake McCarthy",
+        "Cole Carrigg",
+        "TJ Rumfield",
+        "Kyle Karros",
+        "Brett Sullivan",
+        "Edouard Julien",
+        "Alex Call",
+        "Miguel Rojas",
+        "Teoscar Hern\u00e1ndez",
+        "Tommy Edman",
+        "Ezequiel Tovar",
+        "Willi Castro",
+        "Dalton Rushing"
+      ],
+      "hr_names": []
+    },
+    "4_of_5": {
+      "players": 5,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Hunter Goodman",
+        "Troy Johnston",
+        "Max Muncy",
+        "Alex Freeland",
+        "Mookie Betts"
+      ],
+      "hr_names": []
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 4,
+      "rate": 20.0
+    },
+    "top_30": {
+      "total": 22,
+      "hits": 4,
+      "rate": 18.2
+    },
+    "all": {
+      "total": 22,
+      "hits": 4,
+      "rate": 18.2
+    }
+  },
+  "combined_hr_hitters": [
+    {
+      "name": "Salvador Perez",
+      "rank": 6,
+      "composite": 0.183,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@KC"
+    },
+    {
+      "name": "Lane Thomas",
+      "rank": 10,
+      "composite": 0.146,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@KC"
+    },
+    {
+      "name": "Luke Maile",
+      "rank": 18,
+      "composite": 0.111,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@KC"
+    },
+    {
+      "name": "Tyler Tolbert",
+      "rank": 19,
+      "composite": 0.108,
+      "opp_pitcher": "Cristopher S\u00e1nchez",
+      "matchup": "PHI@KC"
+    }
+  ]
+}
