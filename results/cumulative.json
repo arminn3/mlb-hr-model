@@ -101428,7 +101428,7 @@
     ],
     "total_players_ranked": 162,
     "total_hrs_hit": 25,
-    "total_near_hrs": 0,
+    "total_near_hrs": 11,
     "model_hits": 22,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -101477,7 +101477,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 11,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -101503,28 +101503,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
-        "hits": 4,
-        "rate": 13.3
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 162,
-        "hits": 22,
-        "rate": 13.6
+        "hits": 33,
+        "rate": 20.4
       }
     },
     "avg_composite_hr_hitters": 0.428,
-    "avg_composite_non_hitters": 0.41,
-    "composite_separation": 0.018,
+    "avg_composite_non_hitters": 0.411,
+    "composite_separation": 0.017,
     "hr_hitters": [
       {
         "name": "Matt Olson",
@@ -101837,8 +101837,222 @@
         "matchup": "PHI@KC"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Ozzie Albies",
+        "rank": 10,
+        "composite": 0.719,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "NYM@ATL"
+      },
+      {
+        "name": "Christian Walker",
+        "rank": 11,
+        "composite": 0.718,
+        "opp_pitcher": "Miles Mikolas",
+        "matchup": "HOU@WSH"
+      },
+      {
+        "name": "Cooper Pratt",
+        "rank": 66,
+        "composite": 0.429,
+        "opp_pitcher": "Dustin May",
+        "matchup": "MIL@STL"
+      },
+      {
+        "name": "Drake Baldwin",
+        "rank": 72,
+        "composite": 0.419,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "NYM@ATL"
+      },
+      {
+        "name": "Alec Bohm",
+        "rank": 82,
+        "composite": 0.393,
+        "opp_pitcher": "Noah Cameron",
+        "matchup": "PHI@KC"
+      },
+      {
+        "name": "Trea Turner",
+        "rank": 86,
+        "composite": 0.373,
+        "opp_pitcher": "Noah Cameron",
+        "matchup": "PHI@KC"
+      },
+      {
+        "name": "Dalton Rushing",
+        "rank": 91,
+        "composite": 0.362,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "COL@LAD"
+      },
+      {
+        "name": "Luis Arraez",
+        "rank": 120,
+        "composite": 0.299,
+        "opp_pitcher": "Kevin Gausman",
+        "matchup": "TOR@SF"
+      },
+      {
+        "name": "Ketel Marte",
+        "rank": 142,
+        "composite": 0.231,
+        "opp_pitcher": "Walker Buehler",
+        "matchup": "AZ@SD"
+      },
+      {
+        "name": "Bobby Witt Jr.",
+        "rank": 146,
+        "composite": 0.226,
+        "opp_pitcher": "Cristopher S\u00e1nchez",
+        "matchup": "PHI@KC"
+      },
+      {
+        "name": "Joey Bart",
+        "rank": 158,
+        "composite": 0.155,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "NYM@ATL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Joey Bart",
+        "ev": 110.9,
+        "angle": 36.0,
+        "distance": 405.0,
+        "hr_in_parks": 19,
+        "result": "",
+        "pitcher": "Minter, A.J."
+      },
+      {
+        "batter": "Ozzie Albies",
+        "ev": 96.5,
+        "angle": 30.0,
+        "distance": 374.0,
+        "hr_in_parks": 13,
+        "result": "double",
+        "pitcher": "Peralta, Freddy"
+      },
+      {
+        "batter": "Drake Baldwin",
+        "ev": 100.5,
+        "angle": 35.0,
+        "distance": 391.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Peralta, Freddy"
+      },
+      {
+        "batter": "Salvador Perez",
+        "ev": 102.0,
+        "angle": 31.0,
+        "distance": 390.0,
+        "hr_in_parks": 6,
+        "result": "field_out",
+        "pitcher": "Backhus, Kyle"
+      },
+      {
+        "batter": "Bobby Witt Jr.",
+        "ev": 99.2,
+        "angle": 28.0,
+        "distance": 387.0,
+        "hr_in_parks": 22,
+        "result": "double_play",
+        "pitcher": "S\u00e1nchez, Cristopher"
+      },
+      {
+        "batter": "Alec Bohm",
+        "ev": 102.3,
+        "angle": 25.0,
+        "distance": 412.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Cameron, Noah"
+      },
+      {
+        "batter": "Trea Turner",
+        "ev": 99.9,
+        "angle": 24.0,
+        "distance": 404.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Cameron, Noah"
+      },
+      {
+        "batter": "Dalton Rushing",
+        "ev": 103.1,
+        "angle": 23.0,
+        "distance": 370.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Freeland, Kyle"
+      },
+      {
+        "batter": "Ketel Marte",
+        "ev": 105.6,
+        "angle": 19.0,
+        "distance": 396.0,
+        "hr_in_parks": 4,
+        "result": "triple",
+        "pitcher": "Buehler, Walker"
+      },
+      {
+        "batter": "Luis Arraez",
+        "ev": 97.6,
+        "angle": 36.0,
+        "distance": 372.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Macko, Adam"
+      },
+      {
+        "batter": "Heliot Ramos",
+        "ev": 104.3,
+        "angle": 27.0,
+        "distance": 397.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Gausman, Kevin"
+      },
+      {
+        "batter": "Cooper Pratt",
+        "ev": 99.5,
+        "angle": 31.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Graceffo, Gordon"
+      },
+      {
+        "batter": "Curtis Mead",
+        "ev": 104.4,
+        "angle": 19.0,
+        "distance": 368.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Burrows, Mike"
+      },
+      {
+        "batter": "Christian Walker",
+        "ev": 103.6,
+        "angle": 23.0,
+        "distance": 405.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Mikolas, Miles"
+      },
+      {
+        "batter": "Christian Walker",
+        "ev": 108.9,
+        "angle": 41.0,
+        "distance": 414.0,
+        "hr_in_parks": 28,
+        "result": "",
+        "pitcher": "Mikolas, Miles"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
