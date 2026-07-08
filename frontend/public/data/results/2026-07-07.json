@@ -312,7 +312,7 @@
   ],
   "total_players_ranked": 304,
   "total_hrs_hit": 33,
-  "total_near_hrs": 0,
+  "total_near_hrs": 14,
   "model_hits": 31,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -361,7 +361,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 14,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -387,28 +387,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 2,
-      "rate": 20.0
+      "hits": 3,
+      "rate": 30.0
     },
     "top_20": {
       "total": 20,
-      "hits": 3,
-      "rate": 15.0
+      "hits": 4,
+      "rate": 20.0
     },
     "top_30": {
       "total": 30,
-      "hits": 3,
-      "rate": 10.0
+      "hits": 4,
+      "rate": 13.3
     },
     "all": {
       "total": 304,
-      "hits": 31,
-      "rate": 10.2
+      "hits": 45,
+      "rate": 14.8
     }
   },
   "avg_composite_hr_hitters": 0.439,
-  "avg_composite_non_hitters": 0.417,
-  "composite_separation": 0.022,
+  "avg_composite_non_hitters": 0.414,
+  "composite_separation": 0.025,
   "hr_hitters": [
     {
       "name": "James Wood",
@@ -847,8 +847,234 @@
       "matchup": "TOR@SF"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Salvador Perez",
+      "rank": 1,
+      "composite": 0.831,
+      "opp_pitcher": "Kodai Senga",
+      "matchup": "KC@NYM"
+    },
+    {
+      "name": "Pete Crow-Armstrong",
+      "rank": 31,
+      "composite": 0.64,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "CHC@BAL"
+    },
+    {
+      "name": "Trea Turner",
+      "rank": 32,
+      "composite": 0.639,
+      "opp_pitcher": "Andrew Abbott",
+      "matchup": "PHI@CIN"
+    },
+    {
+      "name": "Jase Bowen",
+      "rank": 35,
+      "composite": 0.63,
+      "opp_pitcher": "Zac Gallen",
+      "matchup": "AZ@SD"
+    },
+    {
+      "name": "Joc Pederson",
+      "rank": 52,
+      "composite": 0.579,
+      "opp_pitcher": "Jos\u00e9 Soriano",
+      "matchup": "LAA@TEX"
+    },
+    {
+      "name": "Trent Grisham",
+      "rank": 81,
+      "composite": 0.484,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "NYY@TB"
+    },
+    {
+      "name": "Bryan Torres",
+      "rank": 83,
+      "composite": 0.48,
+      "opp_pitcher": "Robert Gasser",
+      "matchup": "MIL@STL"
+    },
+    {
+      "name": "Jazz Chisholm Jr.",
+      "rank": 84,
+      "composite": 0.479,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "NYY@TB"
+    },
+    {
+      "name": "Michael Massey",
+      "rank": 88,
+      "composite": 0.477,
+      "opp_pitcher": "Kodai Senga",
+      "matchup": "KC@NYM"
+    },
+    {
+      "name": "Jorge Soler",
+      "rank": 144,
+      "composite": 0.394,
+      "opp_pitcher": "Jacob deGrom",
+      "matchup": "LAA@TEX"
+    },
+    {
+      "name": "Logan O'Hoppe",
+      "rank": 229,
+      "composite": 0.33,
+      "opp_pitcher": "Jacob deGrom",
+      "matchup": "LAA@TEX"
+    },
+    {
+      "name": "Dominic Canzone",
+      "rank": 260,
+      "composite": 0.284,
+      "opp_pitcher": "Max Meyer",
+      "matchup": "SEA@MIA"
+    },
+    {
+      "name": "Matt Vierling",
+      "rank": 268,
+      "composite": 0.268,
+      "opp_pitcher": "J.T. Ginn",
+      "matchup": "ATH@DET"
+    },
+    {
+      "name": "Ernie Clement",
+      "rank": 304,
+      "composite": 0.112,
+      "opp_pitcher": "Trevor McDonald",
+      "matchup": "TOR@SF"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Pete Crow-Armstrong",
+      "ev": 115.6,
+      "angle": 35.0,
+      "distance": 419.0,
+      "hr_in_parks": 29,
+      "result": "",
+      "pitcher": "Raquet, Nick"
+    },
+    {
+      "batter": "Trea Turner",
+      "ev": 101.3,
+      "angle": 27.0,
+      "distance": 396.0,
+      "hr_in_parks": 15,
+      "result": "field_out",
+      "pitcher": "Abbott, Andrew"
+    },
+    {
+      "batter": "Matt Vierling",
+      "ev": 98.7,
+      "angle": 38.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Alvarado, Elvis"
+    },
+    {
+      "batter": "Dominic Canzone",
+      "ev": 102.5,
+      "angle": 24.0,
+      "distance": 385.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Meyer, Max"
+    },
+    {
+      "batter": "Michael Massey",
+      "ev": 100.4,
+      "angle": 33.0,
+      "distance": 403.0,
+      "hr_in_parks": 27,
+      "result": "field_out",
+      "pitcher": "Seelinger, Matt"
+    },
+    {
+      "batter": "Salvador Perez",
+      "ev": 96.4,
+      "angle": 27.0,
+      "distance": 378.0,
+      "hr_in_parks": 1,
+      "result": "double",
+      "pitcher": "Seelinger, Matt"
+    },
+    {
+      "batter": "Jase Bowen",
+      "ev": 105.5,
+      "angle": 39.0,
+      "distance": 380.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Gallen, Zac"
+    },
+    {
+      "batter": "Ernie Clement",
+      "ev": 94.7,
+      "angle": 25.0,
+      "distance": 379.0,
+      "hr_in_parks": 7,
+      "result": "double",
+      "pitcher": "McDonald, Trevor"
+    },
+    {
+      "batter": "Bryan Torres",
+      "ev": 97.2,
+      "angle": 29.0,
+      "distance": 369.0,
+      "hr_in_parks": 17,
+      "result": "field_out",
+      "pitcher": "Misiorowski, Jacob"
+    },
+    {
+      "batter": "Trent Grisham",
+      "ev": 99.3,
+      "angle": 33.0,
+      "distance": 386.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Booser, Cam"
+    },
+    {
+      "batter": "Jazz Chisholm Jr.",
+      "ev": 106.9,
+      "angle": 38.0,
+      "distance": 392.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Seymour, Ian"
+    },
+    {
+      "batter": "Logan O'Hoppe",
+      "ev": 99.4,
+      "angle": 27.0,
+      "distance": 391.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Alexander, Tyler"
+    },
+    {
+      "batter": "Joc Pederson",
+      "ev": 100.5,
+      "angle": 40.0,
+      "distance": 371.0,
+      "hr_in_parks": 23,
+      "result": "field_out",
+      "pitcher": "Soriano, Jos\u00e9"
+    },
+    {
+      "batter": "Jorge Soler",
+      "ev": 110.9,
+      "angle": 16.0,
+      "distance": 392.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "deGrom, Jacob"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
