@@ -266,7 +266,7 @@
   ],
   "total_players_ranked": 253,
   "total_hrs_hit": 39,
-  "total_near_hrs": 0,
+  "total_near_hrs": 9,
   "model_hits": 36,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -315,7 +315,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 9,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -341,28 +341,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 3,
-      "rate": 30.0
+      "hits": 5,
+      "rate": 50.0
     },
     "top_20": {
       "total": 20,
-      "hits": 3,
-      "rate": 15.0
+      "hits": 6,
+      "rate": 30.0
     },
     "top_30": {
       "total": 30,
-      "hits": 7,
-      "rate": 23.3
+      "hits": 10,
+      "rate": 33.3
     },
     "all": {
       "total": 253,
-      "hits": 36,
-      "rate": 14.2
+      "hits": 45,
+      "rate": 17.8
     }
   },
   "avg_composite_hr_hitters": 0.438,
-  "avg_composite_non_hitters": 0.419,
-  "composite_separation": 0.019,
+  "avg_composite_non_hitters": 0.418,
+  "composite_separation": 0.02,
   "hr_hitters": [
     {
       "name": "Matt Olson",
@@ -871,8 +871,181 @@
       "matchup": "AZ@SD"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Cal Raleigh",
+      "rank": 6,
+      "composite": 0.693,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "SEA@MIA"
+    },
+    {
+      "name": "Spencer Torkelson",
+      "rank": 9,
+      "composite": 0.682,
+      "opp_pitcher": "Jack Perkins",
+      "matchup": "ATH@DET"
+    },
+    {
+      "name": "Andruw Monasterio",
+      "rank": 17,
+      "composite": 0.64,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "BOS@CWS"
+    },
+    {
+      "name": "Braxton Fulford",
+      "rank": 73,
+      "composite": 0.479,
+      "opp_pitcher": "Carson Whisenhunt",
+      "matchup": "COL@SF"
+    },
+    {
+      "name": "Cole Carrigg",
+      "rank": 86,
+      "composite": 0.444,
+      "opp_pitcher": "Carson Whisenhunt",
+      "matchup": "COL@SF"
+    },
+    {
+      "name": "Zach Neto",
+      "rank": 157,
+      "composite": 0.379,
+      "opp_pitcher": "Nathan Eovaldi",
+      "matchup": "LAA@TEX"
+    },
+    {
+      "name": "Jake Burger",
+      "rank": 199,
+      "composite": 0.32,
+      "opp_pitcher": "Reid Detmers",
+      "matchup": "LAA@TEX"
+    },
+    {
+      "name": "Kyle Karros",
+      "rank": 228,
+      "composite": 0.263,
+      "opp_pitcher": "Carson Whisenhunt",
+      "matchup": "COL@SF"
+    },
+    {
+      "name": "Jonathan Aranda",
+      "rank": 248,
+      "composite": 0.204,
+      "opp_pitcher": "Ryan Yarbrough",
+      "matchup": "NYY@TB"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Andruw Monasterio",
+      "ev": 95.5,
+      "angle": 35.0,
+      "distance": 369.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Davis, Tyler"
+    },
+    {
+      "batter": "Spencer Torkelson",
+      "ev": 99.7,
+      "angle": 38.0,
+      "distance": 371.0,
+      "hr_in_parks": 11,
+      "result": "field_out",
+      "pitcher": "Perkins, Jack"
+    },
+    {
+      "batter": "Cal Raleigh",
+      "ev": 111.1,
+      "angle": 32.0,
+      "distance": 402.0,
+      "hr_in_parks": 16,
+      "result": "",
+      "pitcher": "Bachar, Lake"
+    },
+    {
+      "batter": "Lane Thomas",
+      "ev": 97.0,
+      "angle": 25.0,
+      "distance": 369.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Manaea, Sean"
+    },
+    {
+      "batter": "Casey Schmitt",
+      "ev": 102.9,
+      "angle": 19.0,
+      "distance": 374.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Shook, TJ"
+    },
+    {
+      "batter": "Kyle Karros",
+      "ev": 101.5,
+      "angle": 39.0,
+      "distance": 371.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Whisenhunt, Carson"
+    },
+    {
+      "batter": "Cole Carrigg",
+      "ev": 99.7,
+      "angle": 29.0,
+      "distance": 387.0,
+      "hr_in_parks": 12,
+      "result": "field_out",
+      "pitcher": "Whisenhunt, Carson"
+    },
+    {
+      "batter": "Braxton Fulford",
+      "ev": 99.7,
+      "angle": 30.0,
+      "distance": 395.0,
+      "hr_in_parks": 2,
+      "result": "double",
+      "pitcher": "Whisenhunt, Carson"
+    },
+    {
+      "batter": "Jonathan Aranda",
+      "ev": 101.9,
+      "angle": 35.0,
+      "distance": 373.0,
+      "hr_in_parks": 15,
+      "result": "single",
+      "pitcher": "Bird, Jake"
+    },
+    {
+      "batter": "Wyatt Langford",
+      "ev": 98.1,
+      "angle": 25.0,
+      "distance": 372.0,
+      "hr_in_parks": 28,
+      "result": "single",
+      "pitcher": "Yates, Kirby"
+    },
+    {
+      "batter": "Jake Burger",
+      "ev": 105.5,
+      "angle": 35.0,
+      "distance": 386.0,
+      "hr_in_parks": 17,
+      "result": "field_out",
+      "pitcher": "Silseth, Chase"
+    },
+    {
+      "batter": "Zach Neto",
+      "ev": 103.0,
+      "angle": 32.0,
+      "distance": 394.0,
+      "hr_in_parks": 24,
+      "result": "field_out",
+      "pitcher": "Eovaldi, Nathan"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Tyrone Taylor",
