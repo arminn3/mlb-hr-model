@@ -969,16 +969,15 @@ export function BatterDetailPage({
           ))}
         </div>
 
-        {/* AB log — fixed height with internal scroll. User explicitly chose
-            "no page shift on Events change" over "no empty space at L5".
-            Browser scroll position is preserved between L5 and L25 because
-            the table container size doesn't change. */}
+        {/* AB log — max-height, not fixed height: the container hugs the rows
+            for short windows (L5/L10 → no dead space) and only scrolls once a
+            big window (L15-L25) exceeds the cap. */}
         <div>
           <div className="overflow-auto rounded-xl"
             style={{
               background: "linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%)",
               border: "1px solid rgba(255,255,255,0.10)",
-              height: 560,
+              maxHeight: 560,
               overflowAnchor: "none",
             }}>
             {filteredABs.length > 0 ? (
