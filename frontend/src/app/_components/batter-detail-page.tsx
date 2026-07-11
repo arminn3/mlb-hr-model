@@ -969,15 +969,15 @@ export function BatterDetailPage({
           ))}
         </div>
 
-        {/* AB log — max-height, not fixed height: the container hugs the rows
-            for short windows (L5/L10 → no dead space) and only scrolls once a
-            big window (L15-L25) exceeds the cap. */}
+        {/* AB log — max-height sized to ~20 rows: L5-L20 show every row with no
+            dead space and no internal scroll; only L25 exceeds the cap and
+            scrolls. (~46px/row × 20 + header.) */}
         <div>
           <div className="overflow-auto rounded-xl"
             style={{
               background: "linear-gradient(180deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%)",
               border: "1px solid rgba(255,255,255,0.10)",
-              maxHeight: 560,
+              maxHeight: 960,
               overflowAnchor: "none",
             }}>
             {filteredABs.length > 0 ? (
