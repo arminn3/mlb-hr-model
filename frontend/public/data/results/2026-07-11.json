@@ -313,7 +313,7 @@
   ],
   "total_players_ranked": 309,
   "total_hrs_hit": 39,
-  "total_near_hrs": 0,
+  "total_near_hrs": 14,
   "model_hits": 35,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -362,7 +362,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 14,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -388,28 +388,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 3,
-      "rate": 30.0
+      "hits": 4,
+      "rate": 40.0
     },
     "top_20": {
       "total": 20,
-      "hits": 3,
-      "rate": 15.0
+      "hits": 4,
+      "rate": 20.0
     },
     "top_30": {
       "total": 30,
-      "hits": 7,
-      "rate": 23.3
+      "hits": 9,
+      "rate": 30.0
     },
     "all": {
       "total": 309,
-      "hits": 35,
-      "rate": 11.3
+      "hits": 49,
+      "rate": 15.9
     }
   },
   "avg_composite_hr_hitters": 0.467,
-  "avg_composite_non_hitters": 0.418,
-  "composite_separation": 0.049,
+  "avg_composite_non_hitters": 0.419,
+  "composite_separation": 0.048,
   "hr_hitters": [
     {
       "name": "Esmerlyn Valdez",
@@ -904,8 +904,243 @@
       "matchup": "PHI@DET"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Elly De La Cruz",
+      "rank": 4,
+      "composite": 0.765,
+      "opp_pitcher": "Javier Assad",
+      "matchup": "CHC@CIN"
+    },
+    {
+      "name": "Cal Raleigh",
+      "rank": 24,
+      "composite": 0.644,
+      "opp_pitcher": "Griffin Jax",
+      "matchup": "SEA@TB"
+    },
+    {
+      "name": "Kyle Tucker",
+      "rank": 84,
+      "composite": 0.48,
+      "opp_pitcher": "Brandon Pfaadt",
+      "matchup": "AZ@LAD"
+    },
+    {
+      "name": "Gary S\u00e1nchez",
+      "rank": 129,
+      "composite": 0.426,
+      "opp_pitcher": "Bubba Chandler",
+      "matchup": "MIL@PIT"
+    },
+    {
+      "name": "Colt Emerson",
+      "rank": 171,
+      "composite": 0.4,
+      "opp_pitcher": "Griffin Jax",
+      "matchup": "SEA@TB"
+    },
+    {
+      "name": "Josh Naylor",
+      "rank": 173,
+      "composite": 0.4,
+      "opp_pitcher": "Griffin Jax",
+      "matchup": "SEA@TB"
+    },
+    {
+      "name": "Yandy D\u00edaz",
+      "rank": 179,
+      "composite": 0.396,
+      "opp_pitcher": "Logan Gilbert",
+      "matchup": "SEA@TB"
+    },
+    {
+      "name": "Vinnie Pasquantino",
+      "rank": 181,
+      "composite": 0.393,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "KC@BAL"
+    },
+    {
+      "name": "Jonathan Aranda",
+      "rank": 185,
+      "composite": 0.389,
+      "opp_pitcher": "Logan Gilbert",
+      "matchup": "SEA@TB"
+    },
+    {
+      "name": "Pete Crow-Armstrong",
+      "rank": 229,
+      "composite": 0.336,
+      "opp_pitcher": "Nick Lodolo",
+      "matchup": "CHC@CIN"
+    },
+    {
+      "name": "Patrick Bailey",
+      "rank": 235,
+      "composite": 0.328,
+      "opp_pitcher": "Eury P\u00e9rez",
+      "matchup": "CLE@MIA"
+    },
+    {
+      "name": "Teoscar Hern\u00e1ndez",
+      "rank": 244,
+      "composite": 0.314,
+      "opp_pitcher": "Brandon Pfaadt",
+      "matchup": "AZ@LAD"
+    },
+    {
+      "name": "Brandon Marsh",
+      "rank": 276,
+      "composite": 0.266,
+      "opp_pitcher": "Casey Mize",
+      "matchup": "PHI@DET"
+    },
+    {
+      "name": "Joey Ortiz",
+      "rank": 295,
+      "composite": 0.2,
+      "opp_pitcher": "Bubba Chandler",
+      "matchup": "MIL@PIT"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Vinnie Pasquantino",
+      "ev": 107.8,
+      "angle": 25.0,
+      "distance": 403.0,
+      "hr_in_parks": 16,
+      "result": "",
+      "pitcher": "Bradish, Kyle"
+    },
+    {
+      "batter": "Pete Crow-Armstrong",
+      "ev": 110.3,
+      "angle": 34.0,
+      "distance": 403.0,
+      "hr_in_parks": 16,
+      "result": "",
+      "pitcher": "Garcia, Julian"
+    },
+    {
+      "batter": "Elly De La Cruz",
+      "ev": 98.8,
+      "angle": 25.0,
+      "distance": 377.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Assad, Javier"
+    },
+    {
+      "batter": "Brandon Marsh",
+      "ev": 104.5,
+      "angle": 41.0,
+      "distance": 368.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Mize, Casey"
+    },
+    {
+      "batter": "Kyle Tucker",
+      "ev": 99.4,
+      "angle": 27.0,
+      "distance": 369.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Abner, Philip"
+    },
+    {
+      "batter": "Teoscar Hern\u00e1ndez",
+      "ev": 99.5,
+      "angle": 27.0,
+      "distance": 391.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Pfaadt, Brandon"
+    },
+    {
+      "batter": "Patrick Bailey",
+      "ev": 98.6,
+      "angle": 24.0,
+      "distance": 368.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Kempner, William"
+    },
+    {
+      "batter": "Andruw Monasterio",
+      "ev": 100.5,
+      "angle": 27.0,
+      "distance": 380.0,
+      "hr_in_parks": 1,
+      "result": "triple",
+      "pitcher": "Minter, A.J."
+    },
+    {
+      "batter": "Gary S\u00e1nchez",
+      "ev": 111.0,
+      "angle": 29.0,
+      "distance": 410.0,
+      "hr_in_parks": 28,
+      "result": "",
+      "pitcher": "Santana, Dennis"
+    },
+    {
+      "batter": "Joey Ortiz",
+      "ev": 104.4,
+      "angle": 26.0,
+      "distance": 403.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Ram\u00edrez, Yohan"
+    },
+    {
+      "batter": "Josh Naylor",
+      "ev": 107.4,
+      "angle": 19.0,
+      "distance": 397.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Cleavinger, Garrett"
+    },
+    {
+      "batter": "Jonathan Aranda",
+      "ev": 106.6,
+      "angle": 21.0,
+      "distance": 390.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Gilbert, Logan"
+    },
+    {
+      "batter": "Colt Emerson",
+      "ev": 101.5,
+      "angle": 33.0,
+      "distance": 385.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Jax, Griffin"
+    },
+    {
+      "batter": "Yandy D\u00edaz",
+      "ev": 103.2,
+      "angle": 29.0,
+      "distance": 389.0,
+      "hr_in_parks": 19,
+      "result": "double",
+      "pitcher": "Gilbert, Logan"
+    },
+    {
+      "batter": "Cal Raleigh",
+      "ev": 109.3,
+      "angle": 35.0,
+      "distance": 405.0,
+      "hr_in_parks": 19,
+      "result": "",
+      "pitcher": "Jax, Griffin"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
