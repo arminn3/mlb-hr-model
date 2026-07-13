@@ -310,7 +310,7 @@
   ],
   "total_players_ranked": 304,
   "total_hrs_hit": 30,
-  "total_near_hrs": 0,
+  "total_near_hrs": 14,
   "model_hits": 30,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -359,7 +359,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 14,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -390,23 +390,23 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 1,
-      "rate": 5.0
+      "hits": 2,
+      "rate": 10.0
     },
     "top_30": {
       "total": 30,
-      "hits": 6,
-      "rate": 20.0
+      "hits": 7,
+      "rate": 23.3
     },
     "all": {
       "total": 304,
-      "hits": 30,
-      "rate": 9.9
+      "hits": 44,
+      "rate": 14.5
     }
   },
   "avg_composite_hr_hitters": 0.47,
-  "avg_composite_non_hitters": 0.43,
-  "composite_separation": 0.04,
+  "avg_composite_non_hitters": 0.429,
+  "composite_separation": 0.041,
   "hr_hitters": [
     {
       "name": "Tim Tawa",
@@ -831,8 +831,270 @@
       "matchup": "SEA@TB"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Xander Bogaerts",
+      "rank": 19,
+      "composite": 0.66,
+      "opp_pitcher": "Kevin Gausman",
+      "matchup": "TOR@SD"
+    },
+    {
+      "name": "Kazuma Okamoto",
+      "rank": 52,
+      "composite": 0.587,
+      "opp_pitcher": "Germ\u00e1n M\u00e1rquez",
+      "matchup": "TOR@SD"
+    },
+    {
+      "name": "Michael Massey",
+      "rank": 73,
+      "composite": 0.533,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "KC@BAL"
+    },
+    {
+      "name": "Jeremy Pe\u00f1a",
+      "rank": 81,
+      "composite": 0.523,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "HOU@TEX"
+    },
+    {
+      "name": "Jim Jarvis",
+      "rank": 92,
+      "composite": 0.501,
+      "opp_pitcher": "Dustin May",
+      "matchup": "ATL@STL"
+    },
+    {
+      "name": "Jeremiah Jackson",
+      "rank": 94,
+      "composite": 0.489,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@BAL"
+    },
+    {
+      "name": "Josh Jung",
+      "rank": 117,
+      "composite": 0.453,
+      "opp_pitcher": "Cristian Javier",
+      "matchup": "HOU@TEX"
+    },
+    {
+      "name": "Ty France",
+      "rank": 135,
+      "composite": 0.441,
+      "opp_pitcher": "Kevin Gausman",
+      "matchup": "TOR@SD"
+    },
+    {
+      "name": "Edwin Arroyo",
+      "rank": 140,
+      "composite": 0.432,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "CHC@CIN"
+    },
+    {
+      "name": "Daylen Lile",
+      "rank": 168,
+      "composite": 0.396,
+      "opp_pitcher": "Will Warren",
+      "matchup": "NYY@WSH"
+    },
+    {
+      "name": "Carter Jensen",
+      "rank": 177,
+      "composite": 0.39,
+      "opp_pitcher": "Shane Baz",
+      "matchup": "KC@BAL"
+    },
+    {
+      "name": "Liam Hicks",
+      "rank": 240,
+      "composite": 0.336,
+      "opp_pitcher": "Joey Cantillo",
+      "matchup": "CLE@MIA"
+    },
+    {
+      "name": "Cal Raleigh",
+      "rank": 279,
+      "composite": 0.256,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "SEA@TB"
+    },
+    {
+      "name": "Joc Pederson",
+      "rank": 296,
+      "composite": 0.161,
+      "opp_pitcher": "Cristian Javier",
+      "matchup": "HOU@TEX"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Carter Jensen",
+      "ev": 102.8,
+      "angle": 35.0,
+      "distance": 393.0,
+      "hr_in_parks": 6,
+      "result": "field_out",
+      "pitcher": "Kittredge, Andrew"
+    },
+    {
+      "batter": "Michael Massey",
+      "ev": 96.9,
+      "angle": 31.0,
+      "distance": 371.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Garcia, Rico"
+    },
+    {
+      "batter": "Jeremiah Jackson",
+      "ev": 100.0,
+      "angle": 27.0,
+      "distance": 375.0,
+      "hr_in_parks": 6,
+      "result": "double",
+      "pitcher": "Strahm, Matt"
+    },
+    {
+      "batter": "Edwin Arroyo",
+      "ev": 105.1,
+      "angle": 22.0,
+      "distance": 370.0,
+      "hr_in_parks": 16,
+      "result": "single",
+      "pitcher": "Thielbar, Caleb"
+    },
+    {
+      "batter": "Shohei Ohtani",
+      "ev": 108.5,
+      "angle": 20.0,
+      "distance": 372.0,
+      "hr_in_parks": 1,
+      "result": "double",
+      "pitcher": "Bratt, Mitch"
+    },
+    {
+      "batter": "Chase DeLauter",
+      "ev": 103.3,
+      "angle": 34.0,
+      "distance": 393.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Faucher, Calvin"
+    },
+    {
+      "batter": "Liam Hicks",
+      "ev": 103.8,
+      "angle": 19.0,
+      "distance": 386.0,
+      "hr_in_parks": 29,
+      "result": "single",
+      "pitcher": "Cantillo, Joey"
+    },
+    {
+      "batter": "Josh Lowe",
+      "ev": 100.9,
+      "angle": 27.0,
+      "distance": 379.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Bradley, Taj"
+    },
+    {
+      "batter": "Ty France",
+      "ev": 101.9,
+      "angle": 30.0,
+      "distance": 387.0,
+      "hr_in_parks": 25,
+      "result": "sac_fly",
+      "pitcher": "Hoffman, Jeff"
+    },
+    {
+      "batter": "Xander Bogaerts",
+      "ev": 101.4,
+      "angle": 25.0,
+      "distance": 389.0,
+      "hr_in_parks": 6,
+      "result": "field_out",
+      "pitcher": "Gausman, Kevin"
+    },
+    {
+      "batter": "Kazuma Okamoto",
+      "ev": 108.1,
+      "angle": 22.0,
+      "distance": 397.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "M\u00e1rquez, Germ\u00e1n"
+    },
+    {
+      "batter": "Jim Jarvis",
+      "ev": 102.4,
+      "angle": 22.0,
+      "distance": 396.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Bruihl, Justin"
+    },
+    {
+      "batter": "Cal Raleigh",
+      "ev": 110.5,
+      "angle": 37.0,
+      "distance": 417.0,
+      "hr_in_parks": 29,
+      "result": "",
+      "pitcher": "Kimbrel, Craig"
+    },
+    {
+      "batter": "Cal Raleigh",
+      "ev": 107.3,
+      "angle": 36.0,
+      "distance": 395.0,
+      "hr_in_parks": 2,
+      "result": "",
+      "pitcher": "Kimbrel, Craig"
+    },
+    {
+      "batter": "Jeremy Pe\u00f1a",
+      "ev": 103.7,
+      "angle": 40.0,
+      "distance": 382.0,
+      "hr_in_parks": 14,
+      "result": "sac_fly",
+      "pitcher": "Gray, Peyton"
+    },
+    {
+      "batter": "Joc Pederson",
+      "ev": 94.9,
+      "angle": 26.0,
+      "distance": 378.0,
+      "hr_in_parks": 8,
+      "result": "double",
+      "pitcher": "Javier, Cristian"
+    },
+    {
+      "batter": "Josh Jung",
+      "ev": 102.5,
+      "angle": 27.0,
+      "distance": 414.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Javier, Cristian"
+    },
+    {
+      "batter": "Daylen Lile",
+      "ev": 102.2,
+      "angle": 30.0,
+      "distance": 396.0,
+      "hr_in_parks": 18,
+      "result": "field_out",
+      "pitcher": "Blackburn, Paul"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
