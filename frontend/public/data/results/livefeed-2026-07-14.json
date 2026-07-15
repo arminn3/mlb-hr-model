@@ -1,0 +1,84 @@
+{
+  "date": "2026-07-14",
+  "games": [
+    {
+      "gamePk": 823443,
+      "away": "AL",
+      "home": "NL",
+      "status": "Final",
+      "awayScore": 4,
+      "homeScore": 0
+    }
+  ],
+  "plays": [
+    {
+      "batter": "Miguel Vargas",
+      "pitcher": "Justin Wrobleski",
+      "game": "AL@NL",
+      "ev": 107.3,
+      "angle": 32.0,
+      "distance": 433.0,
+      "result": "Home Run",
+      "inning": 8,
+      "timestamp": "2026-07-15T02:44:32.462Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Cody Bellinger",
+      "pitcher": "Raisel Iglesias",
+      "game": "AL@NL",
+      "ev": 97.9,
+      "angle": 23.0,
+      "distance": 354.0,
+      "result": "Lineout",
+      "inning": 6,
+      "timestamp": "2026-07-15T02:08:24.394Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Miguel Vargas",
+      "pitcher": "Foster Griffin",
+      "game": "AL@NL",
+      "ev": 104.3,
+      "angle": 20.0,
+      "distance": 362.0,
+      "result": "Lineout",
+      "inning": 5,
+      "timestamp": "2026-07-15T01:52:49.240Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Max Muncy",
+      "pitcher": "Joe Ryan",
+      "game": "AL@NL",
+      "ev": 95.4,
+      "angle": 61.0,
+      "distance": 200.0,
+      "result": "Pop Out",
+      "inning": 4,
+      "timestamp": "2026-07-15T01:40:27.482Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Shea Langeliers",
+      "pitcher": "Riley O'Brien",
+      "game": "AL@NL",
+      "ev": 91.1,
+      "angle": 22.0,
+      "distance": 308.0,
+      "result": "Single",
+      "inning": 3,
+      "timestamp": "2026-07-15T01:10:45.496Z",
+      "isHR": false,
+      "isNearHR": false
+    }
+  ],
+  "totalHRs": 1,
+  "nearHRs": 0,
+  "hardHitAir": 2,
+  "totalAirBalls": 5
+}
