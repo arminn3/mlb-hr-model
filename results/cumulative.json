@@ -113427,5 +113427,180 @@
         "matchup": "BOS@NYM"
       }
     ]
+  },
+  {
+    "date": "2026-07-14",
+    "players_who_batted": [],
+    "total_players_ranked": 18,
+    "total_hrs_hit": 0,
+    "total_near_hrs": 0,
+    "model_hits": 0,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "avg_composite_hr_hitters": 0,
+    "avg_composite_non_hitters": 0.365,
+    "composite_separation": -0.365,
+    "hr_hitters": [],
+    "hr_hitters_l10": [],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 10,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Junior Caminero",
+          "Juan Soto",
+          "Bobby Witt Jr.",
+          "Shea Langeliers",
+          "CJ Abrams",
+          "Brandon Marsh",
+          "Yordan Alvarez",
+          "Ben Rice",
+          "Andy Pages",
+          "Cody Bellinger"
+        ],
+        "hr_names": []
+      },
+      "2_of_5": {
+        "players": 6,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Drake Baldwin",
+          "Mike Trout",
+          "Ernie Clement",
+          "Freddie Freeman",
+          "Ozzie Albies",
+          "Riley Greene"
+        ],
+        "hr_names": []
+      },
+      "3_of_5": {
+        "players": 2,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Kyle Schwarber",
+          "Max Muncy"
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "combined_hr_hitters": []
   }
 ]
