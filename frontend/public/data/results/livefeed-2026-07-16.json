@@ -1,0 +1,149 @@
+{
+  "date": "2026-07-16",
+  "games": [
+    {
+      "gamePk": 823440,
+      "away": "NYM",
+      "home": "PHI",
+      "status": "Final",
+      "awayScore": 4,
+      "homeScore": 1
+    }
+  ],
+  "plays": [
+    {
+      "batter": "Trea Turner",
+      "pitcher": "Luke Weaver",
+      "game": "NYM@PHI",
+      "ev": 101.2,
+      "angle": 35.0,
+      "distance": 383.0,
+      "result": "Home Run",
+      "inning": 8,
+      "timestamp": "2026-07-17T00:29:08.438Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Gabriel Rincones Jr.",
+      "pitcher": "Luke Weaver",
+      "game": "NYM@PHI",
+      "ev": 103.3,
+      "angle": 35.0,
+      "distance": 373.0,
+      "result": "Flyout",
+      "inning": 8,
+      "timestamp": "2026-07-17T00:27:38.725Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Francisco Lindor",
+      "pitcher": "Seth Johnson",
+      "game": "NYM@PHI",
+      "ev": 94.5,
+      "angle": 58.0,
+      "distance": 198.0,
+      "result": "Flyout",
+      "inning": 8,
+      "timestamp": "2026-07-17T00:22:14.613Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Bryson Stott",
+      "pitcher": "Huascar Brazob\u00e1n",
+      "game": "NYM@PHI",
+      "ev": 97.1,
+      "angle": 27.0,
+      "distance": 383.0,
+      "result": "Flyout",
+      "inning": 7,
+      "timestamp": "2026-07-17T00:14:41.051Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Francisco Alvarez",
+      "pitcher": "Aaron Nola",
+      "game": "NYM@PHI",
+      "ev": 104.4,
+      "angle": 21.0,
+      "distance": 363.0,
+      "result": "Home Run",
+      "inning": 7,
+      "timestamp": "2026-07-17T00:01:46.562Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Brett Baty",
+      "pitcher": "Aaron Nola",
+      "game": "NYM@PHI",
+      "ev": 95.6,
+      "angle": 36.0,
+      "distance": 378.0,
+      "result": "Home Run",
+      "inning": 7,
+      "timestamp": "2026-07-17T00:00:42.384Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Kyle Schwarber",
+      "pitcher": "Christian Scott",
+      "game": "NYM@PHI",
+      "ev": 98.3,
+      "angle": 32.0,
+      "distance": 345.0,
+      "result": "Double",
+      "inning": 6,
+      "timestamp": "2026-07-16T23:49:55.588Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Francisco Alvarez",
+      "pitcher": "Aaron Nola",
+      "game": "NYM@PHI",
+      "ev": 100.2,
+      "angle": 32.0,
+      "distance": 416.0,
+      "result": "Home Run",
+      "inning": 3,
+      "timestamp": "2026-07-16T22:42:52.892Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Brett Baty",
+      "pitcher": "Aaron Nola",
+      "game": "NYM@PHI",
+      "ev": 90.5,
+      "angle": 52.0,
+      "distance": 242.0,
+      "result": "Flyout",
+      "inning": 3,
+      "timestamp": "2026-07-16T22:41:35.801Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Trea Turner",
+      "pitcher": "Christian Scott",
+      "game": "NYM@PHI",
+      "ev": 92.0,
+      "angle": 23.0,
+      "distance": 336.0,
+      "result": "Lineout",
+      "inning": 1,
+      "timestamp": "2026-07-16T22:22:03.534Z",
+      "isHR": false,
+      "isNearHR": false
+    }
+  ],
+  "totalHRs": 4,
+  "nearHRs": 3,
+  "hardHitAir": 6,
+  "totalAirBalls": 10
+}

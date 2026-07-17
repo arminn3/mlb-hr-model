@@ -113653,55 +113653,75 @@
   },
   {
     "date": "2026-07-16",
-    "players_who_batted": [],
+    "players_who_batted": [
+      "A.J. Ewing",
+      "Alec Bohm",
+      "Bo Bichette",
+      "Brandon Marsh",
+      "Brett Baty",
+      "Bryce Harper",
+      "Bryson Stott",
+      "Carson Benge",
+      "Francisco Alvarez",
+      "Francisco Lindor",
+      "Gabriel Rincones Jr.",
+      "J.T. Realmuto",
+      "Jared Young",
+      "Jorge Polanco",
+      "Juan Soto",
+      "Justin Crawford",
+      "Kyle Schwarber",
+      "Trea Turner",
+      "Tyrone Taylor"
+    ],
     "total_players_ranked": 18,
-    "total_hrs_hit": 0,
+    "total_hrs_hit": 4,
     "total_near_hrs": 0,
-    "model_hits": 0,
+    "model_hits": 3,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         }
       }
     },
@@ -113709,52 +113729,96 @@
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       }
     },
-    "avg_composite_hr_hitters": 0,
-    "avg_composite_non_hitters": 0.502,
-    "composite_separation": -0.502,
-    "hr_hitters": [],
-    "hr_hitters_l10": [],
+    "avg_composite_hr_hitters": 0.495,
+    "avg_composite_non_hitters": 0.504,
+    "composite_separation": -0.009,
+    "hr_hitters": [
+      {
+        "name": "Brett Baty",
+        "rank": 2,
+        "composite": 0.803,
+        "opp_pitcher": "Aaron Nola",
+        "matchup": "NYM@PHI"
+      },
+      {
+        "name": "Francisco Alvarez",
+        "rank": 8,
+        "composite": 0.437,
+        "opp_pitcher": "Aaron Nola",
+        "matchup": "NYM@PHI"
+      },
+      {
+        "name": "Trea Turner",
+        "rank": 18,
+        "composite": 0.244,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "NYM@PHI"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Brett Baty",
+        "rank": 3,
+        "composite": 0.734,
+        "opp_pitcher": "Aaron Nola",
+        "matchup": "NYM@PHI"
+      },
+      {
+        "name": "Francisco Alvarez",
+        "rank": 7,
+        "composite": 0.437,
+        "opp_pitcher": "Aaron Nola",
+        "matchup": "NYM@PHI"
+      },
+      {
+        "name": "Trea Turner",
+        "rank": 16,
+        "composite": 0.378,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "NYM@PHI"
+      }
+    ],
     "near_hr_hitters": [],
     "near_hr_events": [],
     "surprise_hrs": [],
@@ -113770,19 +113834,21 @@
       },
       "2_of_5": {
         "players": 3,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 1,
+        "hr_rate": 33.3,
         "names": [
           "Carson Benge",
           "Alec Bohm",
           "Trea Turner"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Trea Turner"
+        ]
       },
       "3_of_5": {
         "players": 9,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 2,
+        "hr_rate": 22.2,
         "names": [
           "Francisco Lindor",
           "Brett Baty",
@@ -113794,7 +113860,10 @@
           "Brandon Marsh",
           "Justin Crawford"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Brett Baty",
+          "Francisco Alvarez"
+        ]
       },
       "4_of_5": {
         "players": 4,
@@ -113821,25 +113890,47 @@
     "combined_tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       }
     },
-    "combined_hr_hitters": []
+    "combined_hr_hitters": [
+      {
+        "name": "Brett Baty",
+        "rank": 3,
+        "composite": 0.755,
+        "opp_pitcher": "Aaron Nola",
+        "matchup": "NYM@PHI"
+      },
+      {
+        "name": "Francisco Alvarez",
+        "rank": 10,
+        "composite": 0.192,
+        "opp_pitcher": "Aaron Nola",
+        "matchup": "NYM@PHI"
+      },
+      {
+        "name": "Trea Turner",
+        "rank": 17,
+        "composite": 0.146,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "NYM@PHI"
+      }
+    ]
   }
 ]
