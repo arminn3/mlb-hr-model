@@ -285,7 +285,7 @@
   ],
   "total_players_ranked": 280,
   "total_hrs_hit": 35,
-  "total_near_hrs": 0,
+  "total_near_hrs": 17,
   "model_hits": 31,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -334,7 +334,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 17,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -360,28 +360,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 1,
-      "rate": 10.0
+      "hits": 3,
+      "rate": 30.0
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 6,
+      "rate": 30.0
     },
     "top_30": {
       "total": 30,
-      "hits": 4,
-      "rate": 13.3
+      "hits": 6,
+      "rate": 20.0
     },
     "all": {
       "total": 280,
-      "hits": 31,
-      "rate": 11.1
+      "hits": 48,
+      "rate": 17.1
     }
   },
   "avg_composite_hr_hitters": 0.433,
-  "avg_composite_non_hitters": 0.427,
-  "composite_separation": 0.006,
+  "avg_composite_non_hitters": 0.424,
+  "composite_separation": 0.009,
   "hr_hitters": [
     {
       "name": "Tyler Soderstrom",
@@ -820,8 +820,291 @@
       "matchup": "MIN@CHC"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Miguel Vargas",
+      "rank": 2,
+      "composite": 0.819,
+      "opp_pitcher": "Shane Bieber",
+      "matchup": "CWS@TOR"
+    },
+    {
+      "name": "Chase DeLauter",
+      "rank": 9,
+      "composite": 0.736,
+      "opp_pitcher": "Jared Jones",
+      "matchup": "PIT@CLE"
+    },
+    {
+      "name": "Bryan Reynolds",
+      "rank": 38,
+      "composite": 0.646,
+      "opp_pitcher": "Gavin Williams",
+      "matchup": "PIT@CLE"
+    },
+    {
+      "name": "Otto Lopez",
+      "rank": 45,
+      "composite": 0.605,
+      "opp_pitcher": "Shane Drohan",
+      "matchup": "MIA@MIL"
+    },
+    {
+      "name": "Jake Burger",
+      "rank": 49,
+      "composite": 0.599,
+      "opp_pitcher": "Owen Murphy",
+      "matchup": "TEX@ATL"
+    },
+    {
+      "name": "Mike Trout",
+      "rank": 59,
+      "composite": 0.557,
+      "opp_pitcher": "Tarik Skubal",
+      "matchup": "DET@LAA"
+    },
+    {
+      "name": "Jac Caglianone",
+      "rank": 85,
+      "composite": 0.469,
+      "opp_pitcher": "Griffin Canning",
+      "matchup": "SD@KC"
+    },
+    {
+      "name": "Lawrence Butler",
+      "rank": 112,
+      "composite": 0.424,
+      "opp_pitcher": "Zack Littell",
+      "matchup": "WSH@ATH"
+    },
+    {
+      "name": "Vladimir Guerrero Jr.",
+      "rank": 121,
+      "composite": 0.414,
+      "opp_pitcher": "Davis Martin",
+      "matchup": "CWS@TOR"
+    },
+    {
+      "name": "Brett Sullivan",
+      "rank": 136,
+      "composite": 0.398,
+      "opp_pitcher": "Rhett Lowder",
+      "matchup": "CIN@COL"
+    },
+    {
+      "name": "Edouard Julien",
+      "rank": 138,
+      "composite": 0.398,
+      "opp_pitcher": "Rhett Lowder",
+      "matchup": "CIN@COL"
+    },
+    {
+      "name": "Troy Johnston",
+      "rank": 141,
+      "composite": 0.398,
+      "opp_pitcher": "Rhett Lowder",
+      "matchup": "CIN@COL"
+    },
+    {
+      "name": "Dansby Swanson",
+      "rank": 195,
+      "composite": 0.347,
+      "opp_pitcher": "Taj Bradley",
+      "matchup": "MIN@CHC"
+    },
+    {
+      "name": "William Contreras",
+      "rank": 196,
+      "composite": 0.346,
+      "opp_pitcher": "Max Meyer",
+      "matchup": "MIA@MIL"
+    },
+    {
+      "name": "Matt Vierling",
+      "rank": 204,
+      "composite": 0.339,
+      "opp_pitcher": "Grayson Rodriguez",
+      "matchup": "DET@LAA"
+    },
+    {
+      "name": "Bryson Stott",
+      "rank": 208,
+      "composite": 0.33,
+      "opp_pitcher": "Sean Manaea",
+      "matchup": "NYM@PHI"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 272,
+      "composite": 0.187,
+      "opp_pitcher": "Griffin Canning",
+      "matchup": "SD@KC"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Lawrence Butler",
+      "ev": 100.4,
+      "angle": 39.0,
+      "distance": 369.0,
+      "hr_in_parks": 27,
+      "result": "field_out",
+      "pitcher": "Vivas, Jorbit"
+    },
+    {
+      "batter": "Carlos Cortes",
+      "ev": 109.2,
+      "angle": 31.0,
+      "distance": 402.0,
+      "hr_in_parks": 16,
+      "result": "",
+      "pitcher": "Littell, Zack"
+    },
+    {
+      "batter": "Jake Burger",
+      "ev": 103.9,
+      "angle": 22.0,
+      "distance": 385.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Fuentes, Didier"
+    },
+    {
+      "batter": "Dansby Swanson",
+      "ev": 96.8,
+      "angle": 29.0,
+      "distance": 375.0,
+      "hr_in_parks": 3,
+      "result": "triple",
+      "pitcher": "Paredes, Mike"
+    },
+    {
+      "batter": "Chase DeLauter",
+      "ev": 100.8,
+      "angle": 31.0,
+      "distance": 391.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Curtis, Khristian"
+    },
+    {
+      "batter": "Bryan Reynolds",
+      "ev": 104.5,
+      "angle": 25.0,
+      "distance": 375.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Allen, Logan"
+    },
+    {
+      "batter": "Troy Johnston",
+      "ev": 105.0,
+      "angle": 31.0,
+      "distance": 429.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Moll, Sam"
+    },
+    {
+      "batter": "Brett Sullivan",
+      "ev": 99.1,
+      "angle": 28.0,
+      "distance": 406.0,
+      "hr_in_parks": 19,
+      "result": "",
+      "pitcher": "Garcia, Julian"
+    },
+    {
+      "batter": "Edouard Julien",
+      "ev": 108.0,
+      "angle": 24.0,
+      "distance": 404.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Lowder, Rhett"
+    },
+    {
+      "batter": "Jac Caglianone",
+      "ev": 109.8,
+      "angle": 17.0,
+      "distance": 373.0,
+      "hr_in_parks": 10,
+      "result": "double",
+      "pitcher": "Canning, Griffin"
+    },
+    {
+      "batter": "Bobby Witt Jr.",
+      "ev": 101.8,
+      "angle": 27.0,
+      "distance": 409.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Canning, Griffin"
+    },
+    {
+      "batter": "Mike Trout",
+      "ev": 90.1,
+      "angle": 15.0,
+      "distance": 425.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Skubal, Tarik"
+    },
+    {
+      "batter": "Matt Vierling",
+      "ev": 99.7,
+      "angle": 31.0,
+      "distance": 389.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Rodriguez, Grayson"
+    },
+    {
+      "batter": "William Contreras",
+      "ev": 105.5,
+      "angle": 22.0,
+      "distance": 380.0,
+      "hr_in_parks": 21,
+      "result": "double",
+      "pitcher": "Meyer, Max"
+    },
+    {
+      "batter": "Otto Lopez",
+      "ev": 101.8,
+      "angle": 27.0,
+      "distance": 388.0,
+      "hr_in_parks": 17,
+      "result": "sac_fly",
+      "pitcher": "Drohan, Shane"
+    },
+    {
+      "batter": "Bryson Stott",
+      "ev": 106.7,
+      "angle": 17.0,
+      "distance": 393.0,
+      "hr_in_parks": 28,
+      "result": "triple",
+      "pitcher": "Senga, Kodai"
+    },
+    {
+      "batter": "Vladimir Guerrero Jr.",
+      "ev": 106.7,
+      "angle": 22.0,
+      "distance": 400.0,
+      "hr_in_parks": 18,
+      "result": "double",
+      "pitcher": "Martin, Davis"
+    },
+    {
+      "batter": "Miguel Vargas",
+      "ev": 102.8,
+      "angle": 20.0,
+      "distance": 372.0,
+      "hr_in_parks": 2,
+      "result": "double",
+      "pitcher": "Bieber, Shane"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
