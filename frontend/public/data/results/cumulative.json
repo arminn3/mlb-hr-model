@@ -117893,7 +117893,7 @@
     ],
     "total_players_ranked": 306,
     "total_hrs_hit": 42,
-    "total_near_hrs": 0,
+    "total_near_hrs": 14,
     "model_hits": 35,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -117942,7 +117942,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 14,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -117968,28 +117968,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 3,
-        "rate": 30.0
+        "hits": 6,
+        "rate": 60.0
       },
       "top_20": {
         "total": 20,
-        "hits": 5,
-        "rate": 25.0
+        "hits": 9,
+        "rate": 45.0
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 12,
+        "rate": 40.0
       },
       "all": {
         "total": 306,
-        "hits": 35,
-        "rate": 11.4
+        "hits": 49,
+        "rate": 16.0
       }
     },
     "avg_composite_hr_hitters": 0.489,
-    "avg_composite_non_hitters": 0.449,
-    "composite_separation": 0.04,
+    "avg_composite_non_hitters": 0.444,
+    "composite_separation": 0.045,
     "hr_hitters": [
       {
         "name": "Trent Grisham",
@@ -118484,8 +118484,270 @@
         "matchup": "SF@SEA"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Ben Rice",
+        "rank": 2,
+        "composite": 0.79,
+        "opp_pitcher": "Emmet Sheehan",
+        "matchup": "LAD@NYY"
+      },
+      {
+        "name": "Ryan McMahon",
+        "rank": 3,
+        "composite": 0.786,
+        "opp_pitcher": "Emmet Sheehan",
+        "matchup": "LAD@NYY"
+      },
+      {
+        "name": "Spencer Steer",
+        "rank": 8,
+        "composite": 0.757,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "CIN@COL"
+      },
+      {
+        "name": "Shea Langeliers",
+        "rank": 18,
+        "composite": 0.716,
+        "opp_pitcher": "Foster Griffin",
+        "matchup": "WSH@ATH"
+      },
+      {
+        "name": "Matt Olson",
+        "rank": 27,
+        "composite": 0.68,
+        "opp_pitcher": "Nathan Eovaldi",
+        "matchup": "TEX@ATL"
+      },
+      {
+        "name": "Mitch Garver",
+        "rank": 44,
+        "composite": 0.635,
+        "opp_pitcher": "Robbie Ray",
+        "matchup": "SF@SEA"
+      },
+      {
+        "name": "Jordan Walker",
+        "rank": 115,
+        "composite": 0.46,
+        "opp_pitcher": "Eduardo Rodriguez",
+        "matchup": "STL@AZ"
+      },
+      {
+        "name": "Daulton Varsho",
+        "rank": 160,
+        "composite": 0.406,
+        "opp_pitcher": "Sean Burke",
+        "matchup": "CWS@TOR"
+      },
+      {
+        "name": "TJ Rumfield",
+        "rank": 172,
+        "composite": 0.4,
+        "opp_pitcher": "Hunter Greene",
+        "matchup": "CIN@COL"
+      },
+      {
+        "name": "Troy Johnston",
+        "rank": 173,
+        "composite": 0.4,
+        "opp_pitcher": "Hunter Greene",
+        "matchup": "CIN@COL"
+      },
+      {
+        "name": "Dane Myers",
+        "rank": 184,
+        "composite": 0.394,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "CIN@COL"
+      },
+      {
+        "name": "Nick Loftin",
+        "rank": 185,
+        "composite": 0.393,
+        "opp_pitcher": "Germ\u00e1n M\u00e1rquez",
+        "matchup": "SD@KC"
+      },
+      {
+        "name": "Corbin Carroll",
+        "rank": 221,
+        "composite": 0.378,
+        "opp_pitcher": "Andre Pallante",
+        "matchup": "STL@AZ"
+      },
+      {
+        "name": "Tyler Freeman",
+        "rank": 270,
+        "composite": 0.309,
+        "opp_pitcher": "Hunter Greene",
+        "matchup": "CIN@COL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Corbin Carroll",
+        "ev": 104.2,
+        "angle": 21.0,
+        "distance": 413.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "Pallante, Andre"
+      },
+      {
+        "batter": "Jordan Walker",
+        "ev": 104.0,
+        "angle": 20.0,
+        "distance": 380.0,
+        "hr_in_parks": 19,
+        "result": "double",
+        "pitcher": "Rodriguez, Eduardo"
+      },
+      {
+        "batter": "Shea Langeliers",
+        "ev": 109.6,
+        "angle": 18.0,
+        "distance": 376.0,
+        "hr_in_parks": 8,
+        "result": "double",
+        "pitcher": "Griffin, Foster"
+      },
+      {
+        "batter": "Matt Olson",
+        "ev": 104.9,
+        "angle": 22.0,
+        "distance": 395.0,
+        "hr_in_parks": 8,
+        "result": "double",
+        "pitcher": "Alexander, Tyler"
+      },
+      {
+        "batter": "TJ Rumfield",
+        "ev": 104.4,
+        "angle": 31.0,
+        "distance": 401.0,
+        "hr_in_parks": 15,
+        "result": "",
+        "pitcher": "Moll, Sam"
+      },
+      {
+        "batter": "Troy Johnston",
+        "ev": 99.3,
+        "angle": 23.0,
+        "distance": 397.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Burke, Brock"
+      },
+      {
+        "batter": "Tyler Freeman",
+        "ev": 99.5,
+        "angle": 24.0,
+        "distance": 395.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Greene, Hunter"
+      },
+      {
+        "batter": "Tyler Stephenson",
+        "ev": 103.9,
+        "angle": 34.0,
+        "distance": 404.0,
+        "hr_in_parks": 26,
+        "result": "field_out",
+        "pitcher": "Feltner, Ryan"
+      },
+      {
+        "batter": "Spencer Steer",
+        "ev": 99.7,
+        "angle": 40.0,
+        "distance": 391.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Feltner, Ryan"
+      },
+      {
+        "batter": "Dane Myers",
+        "ev": 100.3,
+        "angle": 21.0,
+        "distance": 381.0,
+        "hr_in_parks": 18,
+        "result": "double",
+        "pitcher": "Feltner, Ryan"
+      },
+      {
+        "batter": "Nick Loftin",
+        "ev": 96.8,
+        "angle": 32.0,
+        "distance": 386.0,
+        "hr_in_parks": 14,
+        "result": "field_out",
+        "pitcher": "V\u00e1squez, Randy"
+      },
+      {
+        "batter": "Trent Grisham",
+        "ev": 100.1,
+        "angle": 25.0,
+        "distance": 376.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Yamamoto, Yoshinobu"
+      },
+      {
+        "batter": "Ryan McMahon",
+        "ev": 100.6,
+        "angle": 24.0,
+        "distance": 391.0,
+        "hr_in_parks": 5,
+        "result": "double",
+        "pitcher": "Phillips, Evan"
+      },
+      {
+        "batter": "Ben Rice",
+        "ev": 103.5,
+        "angle": 29.0,
+        "distance": 399.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Hurt, Kyle"
+      },
+      {
+        "batter": "Francisco Lindor",
+        "ev": 106.3,
+        "angle": 20.0,
+        "distance": 397.0,
+        "hr_in_parks": 14,
+        "result": "double",
+        "pitcher": "Johnson, Seth"
+      },
+      {
+        "batter": "Mitch Garver",
+        "ev": 104.1,
+        "angle": 31.0,
+        "distance": 391.0,
+        "hr_in_parks": 5,
+        "result": "double",
+        "pitcher": "Houser, Adrian"
+      },
+      {
+        "batter": "Mitch Garver",
+        "ev": 111.7,
+        "angle": 33.0,
+        "distance": 394.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Houser, Adrian"
+      },
+      {
+        "batter": "Daulton Varsho",
+        "ev": 102.8,
+        "angle": 34.0,
+        "distance": 377.0,
+        "hr_in_parks": 6,
+        "result": "field_out",
+        "pitcher": "Burke, Sean"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
