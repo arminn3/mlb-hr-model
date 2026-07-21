@@ -119818,7 +119818,7 @@
     ],
     "total_players_ranked": 282,
     "total_hrs_hit": 53,
-    "total_near_hrs": 0,
+    "total_near_hrs": 17,
     "model_hits": 45,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -119867,7 +119867,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 17,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -119898,23 +119898,23 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 7,
-        "rate": 35.0
+        "hits": 9,
+        "rate": 45.0
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 9,
+        "rate": 30.0
       },
       "all": {
         "total": 282,
-        "hits": 45,
-        "rate": 16.0
+        "hits": 62,
+        "rate": 22.0
       }
     },
     "avg_composite_hr_hitters": 0.428,
-    "avg_composite_non_hitters": 0.424,
-    "composite_separation": 0.004,
+    "avg_composite_non_hitters": 0.422,
+    "composite_separation": 0.006,
     "hr_hitters": [
       {
         "name": "Riley Greene",
@@ -120549,8 +120549,309 @@
         "matchup": "BAL@BOS"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Shea Langeliers",
+        "rank": 14,
+        "composite": 0.704,
+        "opp_pitcher": "Mitch Bratt",
+        "matchup": "ATH@AZ"
+      },
+      {
+        "name": "Austin Riley",
+        "rank": 16,
+        "composite": 0.688,
+        "opp_pitcher": "JP Sears",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Vinnie Pasquantino",
+        "rank": 32,
+        "composite": 0.634,
+        "opp_pitcher": "Trevor McDonald",
+        "matchup": "SF@KC"
+      },
+      {
+        "name": "Chase DeLauter",
+        "rank": 62,
+        "composite": 0.515,
+        "opp_pitcher": "Joe Ryan",
+        "matchup": "MIN@CLE"
+      },
+      {
+        "name": "Jorge Barrosa",
+        "rank": 91,
+        "composite": 0.447,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "ATH@AZ"
+      },
+      {
+        "name": "Tim Tawa",
+        "rank": 94,
+        "composite": 0.447,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "ATH@AZ"
+      },
+      {
+        "name": "Dansby Swanson",
+        "rank": 101,
+        "composite": 0.434,
+        "opp_pitcher": "Jack Flaherty",
+        "matchup": "DET@CHC"
+      },
+      {
+        "name": "James Outman",
+        "rank": 110,
+        "composite": 0.416,
+        "opp_pitcher": "Jameson Taillon",
+        "matchup": "DET@CHC"
+      },
+      {
+        "name": "Carter Jensen",
+        "rank": 122,
+        "composite": 0.41,
+        "opp_pitcher": "Trevor McDonald",
+        "matchup": "SF@KC"
+      },
+      {
+        "name": "Lucas Spence",
+        "rank": 126,
+        "composite": 0.409,
+        "opp_pitcher": "Janson Junk",
+        "matchup": "MIA@HOU"
+      },
+      {
+        "name": "Jared Triolo",
+        "rank": 135,
+        "composite": 0.404,
+        "opp_pitcher": "Ryan Weathers",
+        "matchup": "PIT@NYY"
+      },
+      {
+        "name": "Jasson Dom\u00ednguez",
+        "rank": 140,
+        "composite": 0.402,
+        "opp_pitcher": "Braxton Ashcraft",
+        "matchup": "PIT@NYY"
+      },
+      {
+        "name": "Junior Caminero",
+        "rank": 164,
+        "composite": 0.388,
+        "opp_pitcher": "Dylan Cease",
+        "matchup": "TB@TOR"
+      },
+      {
+        "name": "Tristan Peters",
+        "rank": 185,
+        "composite": 0.371,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "CWS@TEX"
+      },
+      {
+        "name": "Alec Burleson",
+        "rank": 195,
+        "composite": 0.361,
+        "opp_pitcher": "Jos\u00e9 Soriano",
+        "matchup": "STL@LAA"
+      },
+      {
+        "name": "Daylen Lile",
+        "rank": 228,
+        "composite": 0.304,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "WSH@COL"
+      },
+      {
+        "name": "Willi Castro",
+        "rank": 278,
+        "composite": 0.205,
+        "opp_pitcher": "Andrew Alvarez",
+        "matchup": "WSH@COL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Jorge Barrosa",
+        "ev": 100.3,
+        "angle": 23.0,
+        "distance": 373.0,
+        "hr_in_parks": 6,
+        "result": "double",
+        "pitcher": "Springs, Jeffrey"
+      },
+      {
+        "batter": "Shea Langeliers",
+        "ev": 114.1,
+        "angle": 26.0,
+        "distance": 408.0,
+        "hr_in_parks": 24,
+        "result": "",
+        "pitcher": "Bratt, Mitch"
+      },
+      {
+        "batter": "Tim Tawa",
+        "ev": 100.5,
+        "angle": 29.0,
+        "distance": 393.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Springs, Jeffrey"
+      },
+      {
+        "batter": "Manny Machado",
+        "ev": 102.1,
+        "angle": 34.0,
+        "distance": 382.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Elder, Bryce"
+      },
+      {
+        "batter": "Austin Riley",
+        "ev": 106.3,
+        "angle": 40.0,
+        "distance": 373.0,
+        "hr_in_parks": 9,
+        "result": "field_out",
+        "pitcher": "Sears, JP"
+      },
+      {
+        "batter": "James Outman",
+        "ev": 99.9,
+        "angle": 40.0,
+        "distance": 383.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Hollowell, Gavin"
+      },
+      {
+        "batter": "Dansby Swanson",
+        "ev": 97.7,
+        "angle": 31.0,
+        "distance": 394.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Flaherty, Jack"
+      },
+      {
+        "batter": "Chase DeLauter",
+        "ev": 105.0,
+        "angle": 17.0,
+        "distance": 377.0,
+        "hr_in_parks": 11,
+        "result": "double",
+        "pitcher": "Go, Woo-Suk"
+      },
+      {
+        "batter": "Chase DeLauter",
+        "ev": 101.1,
+        "angle": 22.0,
+        "distance": 384.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Ryan, Joe"
+      },
+      {
+        "batter": "Daylen Lile",
+        "ev": 104.8,
+        "angle": 22.0,
+        "distance": 417.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Vodnik, Victor"
+      },
+      {
+        "batter": "Willi Castro",
+        "ev": 101.8,
+        "angle": 26.0,
+        "distance": 413.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Alvarez, Andrew"
+      },
+      {
+        "batter": "Lucas Spence",
+        "ev": 101.1,
+        "angle": 33.0,
+        "distance": 374.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Fulton, Dax"
+      },
+      {
+        "batter": "Vinnie Pasquantino",
+        "ev": 94.4,
+        "angle": 31.0,
+        "distance": 390.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Foley, Jason"
+      },
+      {
+        "batter": "Carter Jensen",
+        "ev": 104.3,
+        "angle": 39.0,
+        "distance": 403.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Brubaker, JT"
+      },
+      {
+        "batter": "Alec Burleson",
+        "ev": 106.0,
+        "angle": 37.0,
+        "distance": 387.0,
+        "hr_in_parks": 16,
+        "result": "field_out",
+        "pitcher": "Soriano, Jos\u00e9"
+      },
+      {
+        "batter": "Jared Triolo",
+        "ev": 100.6,
+        "angle": 28.0,
+        "distance": 390.0,
+        "hr_in_parks": 13,
+        "result": "double",
+        "pitcher": "Weathers, Ryan"
+      },
+      {
+        "batter": "Jasson Dom\u00ednguez",
+        "ev": 106.3,
+        "angle": 19.0,
+        "distance": 395.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Ashcraft, Braxton"
+      },
+      {
+        "batter": "Tristan Peters",
+        "ev": 102.9,
+        "angle": 26.0,
+        "distance": 383.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "deGrom, Jacob"
+      },
+      {
+        "batter": "Junior Caminero",
+        "ev": 109.2,
+        "angle": 18.0,
+        "distance": 374.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Fisher, Braydon"
+      },
+      {
+        "batter": "Junior Caminero",
+        "ev": 102.8,
+        "angle": 21.0,
+        "distance": 378.0,
+        "hr_in_parks": 7,
+        "result": "double",
+        "pitcher": "Cease, Dylan"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Derek Hill",
