@@ -8,6 +8,7 @@ import { Chip } from "../_components/ui/chip";
 import { EmptyState } from "../_components/ui/empty-state";
 import { IconButton } from "../_components/ui/icon-button";
 import { Skeleton } from "../_components/ui/skeleton";
+import { CARD, heat, color, surface } from "../_design";
 
 export default function DesignPage() {
   return (
@@ -143,6 +144,44 @@ export default function DesignPage() {
             action={<Button variant="secondary" size="sm">Clear filters</Button>}
           />
         </Card>
+      </Section>
+
+      <Section title="Surface presets (_design/CARD)">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {(["elevated", "simple", "filterBar", "panel"] as const).map((k) => (
+            <div key={k} className="rounded-xl p-4" style={CARD[k]}>
+              <p className="text-[12px] font-mono text-foreground">CARD.{k}</p>
+              <p className="text-[11px] text-muted mt-1">Spread into style=&#123;&#125; next to a rounded/padding class.</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section title="Heat pills (_design/heat)">
+        <div className="space-y-2">
+          {(["green", "yellow", "red", "blue"] as const).map((intent) => (
+            <div key={intent} className="flex items-center gap-2">
+              <span className="text-[11px] text-muted w-14">{intent}</span>
+              {([0, 1, 2] as const).map((lvl) => (
+                <span key={lvl} className="px-2 py-1 rounded font-mono text-[12px] text-foreground" style={heat(intent, lvl)}>
+                  level {lvl}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section title="Color tokens (_design/tokens)">
+        <div className="flex flex-wrap gap-3">
+          {Object.entries({ ...color, ...surface }).map(([name, hex]) => (
+            <div key={name} className="flex flex-col items-center gap-1">
+              <div className="w-14 h-14 rounded-lg border border-card-border" style={{ background: hex as string }} />
+              <span className="text-[10px] text-muted">{name}</span>
+              <span className="text-[9px] font-mono text-muted/60">{hex as string}</span>
+            </div>
+          ))}
+        </div>
       </Section>
     </div>
   );
