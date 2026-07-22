@@ -265,7 +265,7 @@
   ],
   "total_players_ranked": 246,
   "total_hrs_hit": 31,
-  "total_near_hrs": 0,
+  "total_near_hrs": 9,
   "model_hits": 29,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -314,7 +314,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 9,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -345,23 +345,23 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 5,
-      "rate": 25.0
+      "hits": 7,
+      "rate": 35.0
     },
     "top_30": {
       "total": 30,
-      "hits": 6,
-      "rate": 20.0
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 246,
-      "hits": 29,
-      "rate": 11.8
+      "hits": 38,
+      "rate": 15.4
     }
   },
   "avg_composite_hr_hitters": 0.452,
-  "avg_composite_non_hitters": 0.415,
-  "composite_separation": 0.037,
+  "avg_composite_non_hitters": 0.412,
+  "composite_separation": 0.04,
   "hr_hitters": [
     {
       "name": "CJ Abrams",
@@ -772,8 +772,190 @@
       "matchup": "DET@CHC"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Willi Castro",
+      "rank": 11,
+      "composite": 0.708,
+      "opp_pitcher": "Carson Palmquist",
+      "matchup": "WSH@COL"
+    },
+    {
+      "name": "Munetaka Murakami",
+      "rank": 19,
+      "composite": 0.662,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "CWS@TEX"
+    },
+    {
+      "name": "Heriberto Hern\u00e1ndez",
+      "rank": 39,
+      "composite": 0.573,
+      "opp_pitcher": "Tatsuya Imai",
+      "matchup": "MIA@HOU"
+    },
+    {
+      "name": "Brandon Marsh",
+      "rank": 81,
+      "composite": 0.457,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "LAD@PHI"
+    },
+    {
+      "name": "Xander Bogaerts",
+      "rank": 127,
+      "composite": 0.398,
+      "opp_pitcher": "Reynaldo L\u00f3pez",
+      "matchup": "SD@ATL"
+    },
+    {
+      "name": "Tyler Tolbert",
+      "rank": 137,
+      "composite": 0.378,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "SF@KC"
+    },
+    {
+      "name": "Luis Campusano",
+      "rank": 157,
+      "composite": 0.353,
+      "opp_pitcher": "Reynaldo L\u00f3pez",
+      "matchup": "SD@ATL"
+    },
+    {
+      "name": "Jackson Chourio",
+      "rank": 158,
+      "composite": 0.351,
+      "opp_pitcher": "Zac Thornton",
+      "matchup": "NYM@MIL"
+    },
+    {
+      "name": "George Springer",
+      "rank": 186,
+      "composite": 0.312,
+      "opp_pitcher": "Drew Rasmussen",
+      "matchup": "TB@TOR"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Luis Campusano",
+      "ev": 100.3,
+      "angle": 27.0,
+      "distance": 397.0,
+      "hr_in_parks": 20,
+      "result": "field_out",
+      "pitcher": "Ritchie, JR"
+    },
+    {
+      "batter": "Xander Bogaerts",
+      "ev": 102.3,
+      "angle": 24.0,
+      "distance": 405.0,
+      "hr_in_parks": 25,
+      "result": "field_out",
+      "pitcher": "L\u00f3pez, Reynaldo"
+    },
+    {
+      "batter": "Willi Castro",
+      "ev": 99.1,
+      "angle": 34.0,
+      "distance": 399.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Beeter, Clayton"
+    },
+    {
+      "batter": "Hunter Goodman",
+      "ev": 104.5,
+      "angle": 40.0,
+      "distance": 409.0,
+      "hr_in_parks": 25,
+      "result": "",
+      "pitcher": "Ribalta, Orlando"
+    },
+    {
+      "batter": "Hunter Goodman",
+      "ev": 104.8,
+      "angle": 22.0,
+      "distance": 389.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Mikolas, Miles"
+    },
+    {
+      "batter": "Willi Castro",
+      "ev": 100.0,
+      "angle": 26.0,
+      "distance": 396.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Mikolas, Miles"
+    },
+    {
+      "batter": "Heriberto Hern\u00e1ndez",
+      "ev": 96.8,
+      "angle": 36.0,
+      "distance": 374.0,
+      "hr_in_parks": 10,
+      "result": "double",
+      "pitcher": "Blubaugh, AJ"
+    },
+    {
+      "batter": "Heriberto Hern\u00e1ndez",
+      "ev": 101.2,
+      "angle": 30.0,
+      "distance": 385.0,
+      "hr_in_parks": 12,
+      "result": "field_out",
+      "pitcher": "Imai, Tatsuya"
+    },
+    {
+      "batter": "Tyler Tolbert",
+      "ev": 95.9,
+      "angle": 25.0,
+      "distance": 380.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Kilian, Caleb"
+    },
+    {
+      "batter": "Jackson Chourio",
+      "ev": 102.0,
+      "angle": 23.0,
+      "distance": 389.0,
+      "hr_in_parks": 8,
+      "result": "field_out",
+      "pitcher": "Thornton, Zac"
+    },
+    {
+      "batter": "Brandon Marsh",
+      "ev": 101.2,
+      "angle": 23.0,
+      "distance": 378.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Wrobleski, Justin"
+    },
+    {
+      "batter": "Munetaka Murakami",
+      "ev": 100.0,
+      "angle": 36.0,
+      "distance": 398.0,
+      "hr_in_parks": 17,
+      "result": "field_out",
+      "pitcher": "Rocker, Kumar"
+    },
+    {
+      "batter": "George Springer",
+      "ev": 108.6,
+      "angle": 20.0,
+      "distance": 399.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Rasmussen, Drew"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
