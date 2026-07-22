@@ -1054,8 +1054,11 @@ export function MLRankings({
       </div>
 
       {/* Tab toggle */}
+      {/* Balanced Edge ("combined") and Test tabs hidden per user request —
+          keep only ML Model + Consensus. All their logic remains intact; to
+          restore, add "combined" / "test" back to the array below. */}
       <div className="flex items-center gap-1 mb-4">
-        {(["ml", "combined", "consensus", "test"] as const).map((t) => (
+        {(["ml", "consensus"] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
@@ -1066,7 +1069,7 @@ export function MLRankings({
                 : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
             }
           >
-            {t === "ml" ? "ML Model" : t === "combined" ? "Balanced Edge" : t === "consensus" ? "Consensus" : "Test"}
+            {t === "ml" ? "ML Model" : "Consensus"}
           </button>
         ))}
       </div>
