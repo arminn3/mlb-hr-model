@@ -36,8 +36,10 @@ export default function DesignPage() {
       <Section title="Button variants">
         <div className="flex flex-wrap gap-3 items-center">
           <Button variant="primary">Primary</Button>
+          <Button variant="accent">Accent</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="ghost">Ghost</Button>
+          <Button variant="success">Success</Button>
           <Button variant="danger">Danger</Button>
           <Button variant="primary" disabled>Disabled</Button>
           <Button variant="primary" loading>Loading</Button>

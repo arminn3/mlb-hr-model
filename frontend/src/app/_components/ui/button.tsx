@@ -3,24 +3,33 @@
 import type { LucideIcon } from "lucide-react";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 
-type Variant = "primary" | "secondary" | "ghost" | "danger" | "success";
+type Variant = "primary" | "accent" | "secondary" | "ghost" | "danger" | "success";
 type Size = "sm" | "md" | "lg";
 
-interface VariantTokens {
-  from: string;
-  to: string;
-  ring: string;
-  text: string;
-}
-
-// 3D button colors per variant. The Figma source spec is the primary entry
-// (#4476f5 → #3461d1, ring rgba(55,93,187,0.65)). Other variants follow the
-// same lighter-top → darker-bottom gradient pattern with a tinted outer ring.
-const VARIANT_TOKENS: Record<Exclude<Variant, "ghost">, VariantTokens> = {
-  primary:   { from: "#60a5fa", to: "#3b82f6", ring: "rgba(29,78,216,0.65)",   text: "#ffffff" },
-  success:   { from: "#22c55e", to: "#16a34a", ring: "rgba(21,128,61,0.65)",   text: "#ffffff" },
-  danger:    { from: "#ef4444", to: "#dc2626", ring: "rgba(185,28,28,0.65)",   text: "#ffffff" },
-  secondary: { from: "#3f3f46", to: "#27272a", ring: "rgba(63,63,70,0.65)",    text: "#ffffff" },
+/**
+ * Flat button variants that mirror the styles ACTUALLY used across the app, so a
+ * <Button> is visually identical to the rest of the platform (MLB today, NFL
+ * going forward). This is the design-system source of truth for buttons.
+ *
+ * - primary   → solid accent CTA        (`bg-accent text-background`, e.g. selected filters)
+ * - accent    → tinted accent / toggle  (`bg-accent/15 text-accent border`, e.g. active tabs)
+ * - secondary → neutral control         (`bg-card/50 border`, e.g. dropdown triggers)
+ * - ghost     → flat text
+ * - danger/success → tinted red/green
+ */
+const VARIANT_CLASSES: Record<Variant, string> = {
+  primary:
+    "bg-accent text-background hover:bg-[#7cb6fb] active:bg-[#4d90e8]",
+  accent:
+    "bg-accent/15 text-accent border border-accent/40 hover:bg-accent/25",
+  secondary:
+    "bg-card/50 text-foreground border border-card-border hover:bg-[var(--surface-2)] hover:border-[var(--border-strong)]",
+  ghost:
+    "bg-transparent text-muted hover:bg-[var(--surface-2)] hover:text-foreground active:bg-[var(--surface-sunken)]",
+  danger:
+    "bg-accent-red/15 text-accent-red border border-accent-red/30 hover:bg-accent-red/25",
+  success:
+    "bg-accent-green/15 text-accent-green border border-accent-green/30 hover:bg-accent-green/25",
 };
 
 const SIZE: Record<Size, string> = {
@@ -46,33 +55,11 @@ export type ButtonProps =
   | (CommonProps & ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined })
   | (CommonProps & AnchorHTMLAttributes<HTMLAnchorElement> & { href: string });
 
-function Button3DLayers({ from, to }: { from: string; to: string }) {
-  return (
-    <>
-      {/* gradient background */}
-      <span
-        aria-hidden
-        className="absolute inset-0 pointer-events-none rounded-[inherit]"
-        style={{ backgroundImage: `linear-gradient(to bottom, ${from}, ${to})` }}
-      />
-      {/* inner top-highlight + bottom-shade — the depth cue */}
-      <span
-        aria-hidden
-        className="absolute inset-0 pointer-events-none rounded-[inherit]"
-        style={{
-          boxShadow:
-            "inset 0 1px 0 0 rgba(255,255,255,0.18), inset 0 -1px 0 0 rgba(10,13,18,0.12)",
-        }}
-      />
-    </>
-  );
-}
-
 function Spinner({ size }: { size: number }) {
   return (
     <span
       aria-hidden
-      className="relative inline-block animate-spin rounded-full border-2 border-current border-t-transparent"
+      className="inline-block animate-spin rounded-full border-2 border-current border-t-transparent"
       style={{ width: size, height: size }}
     />
   );
@@ -91,51 +78,30 @@ export function Button(props: ButtonProps) {
     ...rest
   } = props;
 
-  const isGhost = variant === "ghost";
-  const tokens = isGhost ? null : VARIANT_TOKENS[variant];
-
-  const baseClasses =
-    "relative inline-flex items-center justify-center whitespace-nowrap font-semibold cursor-pointer overflow-hidden " +
-    "transition-transform duration-75 active:translate-y-px " +
+  const classes =
+    "inline-flex items-center justify-center whitespace-nowrap font-semibold cursor-pointer " +
+    "transition-colors duration-[120ms] active:translate-y-px " +
     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " +
     "disabled:cursor-not-allowed disabled:opacity-40 " +
+    VARIANT_CLASSES[variant] +
+    " " +
     SIZE[size] +
     (fullWidth ? " w-full" : "") +
     (className ? " " + className : "");
 
-  const flatGhostClasses =
-    "bg-transparent text-muted hover:bg-[var(--surface-2)] hover:text-foreground active:bg-[var(--surface-sunken)]";
-
-  const style: React.CSSProperties | undefined = tokens
-    ? {
-        color: tokens.text,
-        boxShadow: `0 1px 2px 0 rgba(10,13,18,0.12), 0 0 0 1px ${tokens.ring}`,
-      }
-    : undefined;
-
   const inner = (
     <>
-      {tokens && <Button3DLayers from={tokens.from} to={tokens.to} />}
-      {LeadingIcon && !loading && (
-        <LeadingIcon className="relative" size={ICON_SIZE[size]} />
-      )}
+      {LeadingIcon && !loading && <LeadingIcon size={ICON_SIZE[size]} />}
       {loading && <Spinner size={ICON_SIZE[size]} />}
-      {children != null && <span className="relative">{children}</span>}
-      {TrailingIcon && (
-        <TrailingIcon className="relative" size={ICON_SIZE[size]} />
-      )}
+      {children != null && <span>{children}</span>}
+      {TrailingIcon && <TrailingIcon size={ICON_SIZE[size]} />}
     </>
   );
 
   if ("href" in props && props.href) {
     const { href, ...anchorRest } = rest as AnchorHTMLAttributes<HTMLAnchorElement> & { href: string };
     return (
-      <a
-        {...anchorRest}
-        href={href}
-        className={baseClasses + (isGhost ? " " + flatGhostClasses : "")}
-        style={style}
-      >
+      <a {...anchorRest} href={href} className={classes}>
         {inner}
       </a>
     );
@@ -146,8 +112,7 @@ export function Button(props: ButtonProps) {
     <button
       {...buttonRest}
       disabled={buttonRest.disabled || loading}
-      className={baseClasses + (isGhost ? " " + flatGhostClasses : "")}
-      style={style}
+      className={classes}
     >
       {inner}
     </button>
