@@ -123415,7 +123415,7 @@
     ],
     "total_players_ranked": 308,
     "total_hrs_hit": 36,
-    "total_near_hrs": 0,
+    "total_near_hrs": 16,
     "model_hits": 36,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -123464,7 +123464,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 16,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -123490,28 +123490,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 6,
+        "rate": 30.0
       },
       "top_30": {
         "total": 30,
-        "hits": 6,
-        "rate": 20.0
+        "hits": 8,
+        "rate": 26.7
       },
       "all": {
         "total": 308,
-        "hits": 36,
-        "rate": 11.7
+        "hits": 52,
+        "rate": 16.9
       }
     },
     "avg_composite_hr_hitters": 0.448,
-    "avg_composite_non_hitters": 0.424,
-    "composite_separation": 0.024,
+    "avg_composite_non_hitters": 0.422,
+    "composite_separation": 0.026,
     "hr_hitters": [
       {
         "name": "Ben Rice",
@@ -124020,8 +124020,302 @@
         "matchup": "LAD@PHI"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Trea Turner",
+        "rank": 3,
+        "composite": 0.821,
+        "opp_pitcher": "Eric Lauer",
+        "matchup": "LAD@PHI"
+      },
+      {
+        "name": "Heriberto Hern\u00e1ndez",
+        "rank": 13,
+        "composite": 0.73,
+        "opp_pitcher": "Peter Lambert",
+        "matchup": "MIA@HOU"
+      },
+      {
+        "name": "Griffin Conine",
+        "rank": 70,
+        "composite": 0.536,
+        "opp_pitcher": "Peter Lambert",
+        "matchup": "MIA@HOU"
+      },
+      {
+        "name": "Bryson Stott",
+        "rank": 72,
+        "composite": 0.526,
+        "opp_pitcher": "Eric Lauer",
+        "matchup": "LAD@PHI"
+      },
+      {
+        "name": "Manny Machado",
+        "rank": 86,
+        "composite": 0.493,
+        "opp_pitcher": "Mart\u00edn P\u00e9rez",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Tim Tawa",
+        "rank": 101,
+        "composite": 0.462,
+        "opp_pitcher": "Gage Jump",
+        "matchup": "ATH@AZ"
+      },
+      {
+        "name": "James Wood",
+        "rank": 103,
+        "composite": 0.457,
+        "opp_pitcher": "Gabriel Hughes",
+        "matchup": "WSH@COL"
+      },
+      {
+        "name": "Brandon Lowe",
+        "rank": 137,
+        "composite": 0.419,
+        "opp_pitcher": "Max Fried",
+        "matchup": "PIT@NYY"
+      },
+      {
+        "name": "Vladimir Guerrero Jr.",
+        "rank": 154,
+        "composite": 0.408,
+        "opp_pitcher": "Griffin Jax",
+        "matchup": "TB@TOR"
+      },
+      {
+        "name": "Christian Yelich",
+        "rank": 159,
+        "composite": 0.401,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "NYM@MIL"
+      },
+      {
+        "name": "Gavin Sheets",
+        "rank": 162,
+        "composite": 0.397,
+        "opp_pitcher": "Mart\u00edn P\u00e9rez",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Sean Keys",
+        "rank": 166,
+        "composite": 0.396,
+        "opp_pitcher": "Griffin Jax",
+        "matchup": "TB@TOR"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 194,
+        "composite": 0.368,
+        "opp_pitcher": "Braydon Fisher",
+        "matchup": "TB@TOR"
+      },
+      {
+        "name": "Kyle Stowers",
+        "rank": 210,
+        "composite": 0.348,
+        "opp_pitcher": "Peter Lambert",
+        "matchup": "MIA@HOU"
+      },
+      {
+        "name": "Brewer Hicklen",
+        "rank": 251,
+        "composite": 0.289,
+        "opp_pitcher": "Michael King",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Jorbit Vivas",
+        "rank": 293,
+        "composite": 0.22,
+        "opp_pitcher": "Gabriel Hughes",
+        "matchup": "WSH@COL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Tim Tawa",
+        "ev": 102.3,
+        "angle": 25.0,
+        "distance": 411.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Juenger, Hayden"
+      },
+      {
+        "batter": "Corbin Carroll",
+        "ev": 99.8,
+        "angle": 26.0,
+        "distance": 393.0,
+        "hr_in_parks": 28,
+        "result": "triple",
+        "pitcher": "Tur, Yunior"
+      },
+      {
+        "batter": "Jeff McNeil",
+        "ev": 104.4,
+        "angle": 34.0,
+        "distance": 395.0,
+        "hr_in_parks": 2,
+        "result": "",
+        "pitcher": "Kelly, Merrill"
+      },
+      {
+        "batter": "Manny Machado",
+        "ev": 106.6,
+        "angle": 32.0,
+        "distance": 407.0,
+        "hr_in_parks": 22,
+        "result": "",
+        "pitcher": "Iglesias, Raisel"
+      },
+      {
+        "batter": "Gavin Sheets",
+        "ev": 106.8,
+        "angle": 35.0,
+        "distance": 417.0,
+        "hr_in_parks": 29,
+        "result": "",
+        "pitcher": "Fuentes, Didier"
+      },
+      {
+        "batter": "Brewer Hicklen",
+        "ev": 101.2,
+        "angle": 27.0,
+        "distance": 391.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "King, Michael"
+      },
+      {
+        "batter": "James Wood",
+        "ev": 100.0,
+        "angle": 38.0,
+        "distance": 388.0,
+        "hr_in_parks": 25,
+        "result": "sac_fly",
+        "pitcher": "Hughes, Gabriel"
+      },
+      {
+        "batter": "Jorbit Vivas",
+        "ev": 96.5,
+        "angle": 40.0,
+        "distance": 369.0,
+        "hr_in_parks": 29,
+        "result": "triple",
+        "pitcher": "Hughes, Gabriel"
+      },
+      {
+        "batter": "Heriberto Hern\u00e1ndez",
+        "ev": 107.1,
+        "angle": 23.0,
+        "distance": 386.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Lambert, Peter"
+      },
+      {
+        "batter": "Kyle Stowers",
+        "ev": 98.5,
+        "angle": 31.0,
+        "distance": 398.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Lambert, Peter"
+      },
+      {
+        "batter": "Griffin Conine",
+        "ev": 102.6,
+        "angle": 37.0,
+        "distance": 389.0,
+        "hr_in_parks": 24,
+        "result": "field_out",
+        "pitcher": "Lambert, Peter"
+      },
+      {
+        "batter": "Christian Yelich",
+        "ev": 104.3,
+        "angle": 23.0,
+        "distance": 401.0,
+        "hr_in_parks": 16,
+        "result": "triple",
+        "pitcher": "Minter, A.J."
+      },
+      {
+        "batter": "Brandon Lowe",
+        "ev": 102.7,
+        "angle": 37.0,
+        "distance": 388.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Cole, Gerrit"
+      },
+      {
+        "batter": "Trea Turner",
+        "ev": 106.6,
+        "angle": 32.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Lauer, Eric"
+      },
+      {
+        "batter": "Bryson Stott",
+        "ev": 105.9,
+        "angle": 21.0,
+        "distance": 393.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Lauer, Eric"
+      },
+      {
+        "batter": "JJ Bleday",
+        "ev": 103.5,
+        "angle": 31.0,
+        "distance": 393.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Bazardo, Eduard"
+      },
+      {
+        "batter": "Yandy D\u00edaz",
+        "ev": 103.9,
+        "angle": 21.0,
+        "distance": 381.0,
+        "hr_in_parks": 4,
+        "result": "field_error",
+        "pitcher": "Hoffman, Jeff"
+      },
+      {
+        "batter": "Sean Keys",
+        "ev": 98.5,
+        "angle": 29.0,
+        "distance": 390.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Jax, Griffin"
+      },
+      {
+        "batter": "Vladimir Guerrero Jr.",
+        "ev": 104.5,
+        "angle": 20.0,
+        "distance": 374.0,
+        "hr_in_parks": 17,
+        "result": "double",
+        "pitcher": "Jax, Griffin"
+      },
+      {
+        "batter": "Vladimir Guerrero Jr.",
+        "ev": 107.8,
+        "angle": 29.0,
+        "distance": 410.0,
+        "hr_in_parks": 28,
+        "result": "",
+        "pitcher": "Jax, Griffin"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
