@@ -1,43 +1,43 @@
 {
-  "trained_on": 28198,
-  "hr_count": 2827,
-  "hr_rate": 10.03,
+  "trained_on": 28644,
+  "hr_count": 2851,
+  "hr_rate": 9.95,
   "category_weights": {
-    "batter": 0.285,
-    "matchup": 0.1,
-    "pitcher": 0.405,
-    "environment": 0.21
+    "batter": 0.288,
+    "matchup": 0.099,
+    "pitcher": 0.397,
+    "environment": 0.216
   },
   "features": [
     {
       "name": "barrel_pct",
-      "coefficient": -0.0169,
-      "weight_pct": 1.6
+      "coefficient": -0.0243,
+      "weight_pct": 2.2
     },
     {
       "name": "fb_pct",
-      "coefficient": 0.0229,
-      "weight_pct": 2.1
+      "coefficient": 0.0198,
+      "weight_pct": 1.8
     },
     {
       "name": "hard_hit_pct",
-      "coefficient": -0.0071,
-      "weight_pct": 0.6
+      "coefficient": -0.009,
+      "weight_pct": 0.8
     },
     {
       "name": "exit_velo_norm",
-      "coefficient": 0.0313,
-      "weight_pct": 2.9
+      "coefficient": 0.0311,
+      "weight_pct": 2.8
     },
     {
       "name": "batter_score",
-      "coefficient": 0.0806,
-      "weight_pct": 7.4
+      "coefficient": 0.088,
+      "weight_pct": 7.9
     },
     {
       "name": "pitcher_score",
-      "coefficient": 0.0351,
-      "weight_pct": 3.2
+      "coefficient": 0.0307,
+      "weight_pct": 2.8
     },
     {
       "name": "matchup_score",
@@ -46,83 +46,83 @@
     },
     {
       "name": "pitcher_hr_fb",
-      "coefficient": -0.0453,
-      "weight_pct": 4.2
+      "coefficient": -0.0474,
+      "weight_pct": 4.3
     },
     {
       "name": "pitcher_hr_9",
-      "coefficient": 0.0566,
-      "weight_pct": 5.2
+      "coefficient": 0.0624,
+      "weight_pct": 5.6
     },
     {
       "name": "pitcher_fb_rate",
-      "coefficient": -0.0207,
-      "weight_pct": 1.9
+      "coefficient": -0.022,
+      "weight_pct": 2.0
     },
     {
       "name": "env_score",
-      "coefficient": 0.1132,
+      "coefficient": 0.1152,
       "weight_pct": 10.4
     },
     {
       "name": "park_factor_norm",
-      "coefficient": -0.0304,
-      "weight_pct": 2.8
+      "coefficient": -0.0351,
+      "weight_pct": 3.2
     },
     {
       "name": "pitcher_velo",
-      "coefficient": -0.088,
-      "weight_pct": 8.1
+      "coefficient": -0.0829,
+      "weight_pct": 7.5
     },
     {
       "name": "pitcher_spin",
-      "coefficient": -0.0227,
-      "weight_pct": 2.1
+      "coefficient": -0.0226,
+      "weight_pct": 2.0
     },
     {
       "name": "pitcher_vert_break",
       "coefficient": 0.0072,
-      "weight_pct": 0.7
+      "weight_pct": 0.6
     },
     {
       "name": "pitcher_horiz_break",
-      "coefficient": -0.001,
+      "coefficient": 0.0007,
       "weight_pct": 0.1
     },
     {
       "name": "platoon",
-      "coefficient": 0.0682,
-      "weight_pct": 6.3
+      "coefficient": 0.0685,
+      "weight_pct": 6.2
     },
     {
       "name": "dom_pitch_ev",
-      "coefficient": 0.1294,
-      "weight_pct": 11.9
+      "coefficient": 0.1292,
+      "weight_pct": 11.7
     },
     {
       "name": "dom_pitch_barrel",
-      "coefficient": 0.0664,
+      "coefficient": 0.0673,
       "weight_pct": 6.1
     },
     {
       "name": "dom_pitch_fb",
-      "coefficient": -0.0152,
-      "weight_pct": 1.4
+      "coefficient": -0.0126,
+      "weight_pct": 1.1
     },
     {
       "name": "dom_pitch_usage",
-      "coefficient": 0.0072,
-      "weight_pct": 0.7
+      "coefficient": 0.0092,
+      "weight_pct": 0.8
     },
     {
       "name": "sec_pitch_ev",
-      "coefficient": 0.119,
-      "weight_pct": 10.9
+      "coefficient": 0.1182,
+      "weight_pct": 10.7
     },
     {
       "name": "sec_pitch_barrel",
-      "coefficient": 0.1033,
-      "weight_pct": 9.5
+      "coefficient": 0.1036,
+      "weight_pct": 9.4
     }
   ]
 }
