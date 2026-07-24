@@ -1,71 +1,112 @@
 {
   "date": "2026-07-23",
   "players_who_batted": [
+    "Adrian Del Castillo",
     "Alan Roden",
+    "Alec Burleson",
     "Alejandro Kirk",
+    "Andrew Velazquez",
     "Austin Martin",
     "Austin Riley",
     "Ben Williamson",
+    "Blaze Jordan",
     "Brayan Rocchio",
     "Brooks Lee",
+    "Bryan Torres",
     "Byron Buxton",
+    "Carter Jensen",
     "Chandler Simpson",
     "Chase DeLauter",
+    "Colt Keith",
+    "Corbin Carroll",
     "Daniel Schneemann",
     "Davis Schneider",
+    "Dillon Dingler",
     "Dominic Smith",
     "Drake Baldwin",
     "Ernie Clement",
     "Fernando Tatis Jr.",
     "Freddy Fermin",
     "Gabriel Arias",
+    "Gabriel Moreno",
     "Gavin Sheets",
     "George Springer",
+    "Geraldo Perdomo",
+    "Gleyber Torres",
+    "Hao-Yu Lee",
     "Hunter Feduccia",
+    "Ildemaro Vargas",
+    "Isaac Collins",
+    "JJ Wetherholt",
     "Jackson Merrill",
     "Jake Cronenworth",
+    "James Outman",
     "Jase Bowen",
     "Jim Jarvis",
+    "Jimmy Crooks",
     "Jonathan Aranda",
     "Jonny DeLuca",
+    "Jordan Walker",
     "Josh Bell",
+    "Josh Rojas",
+    "Jos\u00e9 Ferm\u00edn",
     "Jos\u00e9 Ram\u00edrez",
     "Junior Caminero",
     "Kazuma Okamoto",
+    "Kerry Carpenter",
+    "Kevin McGonigle",
     "Kody Clemens",
     "Kyle Manzardo",
+    "Lane Thomas",
+    "Lars Nootbaar",
     "Luis Rengifo",
     "Luis Ur\u00edas",
     "Luke Keaschall",
     "Manny Machado",
+    "Masyn Winn",
     "Matt Olson",
     "Mauricio Dub\u00f3n",
+    "Max Kepler",
     "Michael Harris II",
+    "Michael Massey",
     "Mike Yastrzemski",
     "Myles Straw",
+    "Nathan Church",
+    "Nelson Vel\u00e1zquez",
+    "Nick Loftin",
+    "Nolan Arenado",
     "Ozzie Albies",
     "Patrick Bailey",
+    "Pedro Pag\u00e9s",
     "Petey Halpin",
     "Rhys Hoskins",
     "Richie Palacios",
+    "Riley Greene",
     "Royce Lewis",
     "Ryan Jeffers",
     "Ryan Kreidler",
+    "Ryan Waldschmidt",
+    "Salvador Perez",
+    "Spencer Torkelson",
     "Steven Kwan",
     "Sung-Mun Song",
+    "Tim Tawa",
     "Travis Bazzana",
     "Trevor Larnach",
     "Ty France",
+    "Tyler Locklear",
     "Victor Mesa Jr.",
+    "Vinnie Pasquantino",
     "Vladimir Guerrero Jr.",
     "Xander Bogaerts",
     "Yandy D\u00edaz",
-    "Yohendrick Pi\u00f1ango"
+    "Yohendrick Pi\u00f1ango",
+    "Zach McKinstry"
   ],
-  "total_players_ranked": 59,
-  "total_hrs_hit": 6,
+  "total_players_ranked": 100,
+  "total_hrs_hit": 9,
   "total_near_hrs": 0,
-  "model_hits": 6,
+  "model_hits": 9,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
@@ -81,20 +122,20 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 5,
-        "rate": 16.7
+        "hits": 2,
+        "rate": 6.7
       },
       "all": {
-        "total": 59,
-        "hits": 6,
-        "rate": 10.2
+        "total": 100,
+        "hits": 9,
+        "rate": 9.0
       }
     },
     "L10": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
@@ -103,13 +144,13 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 6,
-        "rate": 20.0
+        "hits": 2,
+        "rate": 6.7
       },
       "all": {
-        "total": 59,
-        "hits": 6,
-        "rate": 10.2
+        "total": 100,
+        "hits": 9,
+        "rate": 9.0
       }
     }
   },
@@ -127,13 +168,13 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 5,
-      "rate": 16.7
+      "hits": 2,
+      "rate": 6.7
     },
     "all": {
-      "total": 59,
-      "hits": 6,
-      "rate": 10.2
+      "total": 100,
+      "hits": 9,
+      "rate": 9.0
     }
   },
   "tier_accuracy_with_near": {
@@ -149,104 +190,146 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 5,
-      "rate": 16.7
+      "hits": 2,
+      "rate": 6.7
     },
     "all": {
-      "total": 59,
-      "hits": 6,
-      "rate": 10.2
+      "total": 100,
+      "hits": 9,
+      "rate": 9.0
     }
   },
-  "avg_composite_hr_hitters": 0.508,
-  "avg_composite_non_hitters": 0.456,
-  "composite_separation": 0.052,
+  "avg_composite_hr_hitters": 0.453,
+  "avg_composite_non_hitters": 0.435,
+  "composite_separation": 0.018,
   "hr_hitters": [
     {
       "name": "Patrick Bailey",
-      "rank": 6,
+      "rank": 8,
       "composite": 0.672,
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@CLE"
     },
     {
       "name": "Drake Baldwin",
-      "rank": 8,
+      "rank": 10,
       "composite": 0.669,
       "opp_pitcher": "Griffin Canning",
       "matchup": "SD@ATL"
     },
     {
       "name": "Dominic Smith",
-      "rank": 23,
+      "rank": 34,
       "composite": 0.461,
       "opp_pitcher": "Griffin Canning",
       "matchup": "SD@ATL"
     },
     {
       "name": "Michael Harris II",
-      "rank": 26,
+      "rank": 37,
       "composite": 0.461,
       "opp_pitcher": "Griffin Canning",
       "matchup": "SD@ATL"
     },
     {
       "name": "Ozzie Albies",
-      "rank": 27,
+      "rank": 38,
       "composite": 0.461,
       "opp_pitcher": "Griffin Canning",
       "matchup": "SD@ATL"
     },
     {
+      "name": "Isaac Collins",
+      "rank": 50,
+      "composite": 0.416,
+      "opp_pitcher": "Troy Melton",
+      "matchup": "KC@DET"
+    },
+    {
+      "name": "James Outman",
+      "rank": 72,
+      "composite": 0.353,
+      "opp_pitcher": "Randy Dobnak",
+      "matchup": "KC@DET"
+    },
+    {
       "name": "Ty France",
-      "rank": 46,
+      "rank": 75,
       "composite": 0.325,
       "opp_pitcher": "Chris Sale",
       "matchup": "SD@ATL"
+    },
+    {
+      "name": "Tyler Locklear",
+      "rank": 86,
+      "composite": 0.256,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "AZ@STL"
     }
   ],
   "hr_hitters_l10": [
     {
       "name": "Patrick Bailey",
-      "rank": 7,
+      "rank": 9,
       "composite": 0.651,
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@CLE"
     },
     {
       "name": "Drake Baldwin",
-      "rank": 10,
+      "rank": 12,
       "composite": 0.628,
       "opp_pitcher": "Griffin Canning",
       "matchup": "SD@ATL"
     },
     {
       "name": "Dominic Smith",
-      "rank": 24,
+      "rank": 32,
       "composite": 0.461,
       "opp_pitcher": "Griffin Canning",
       "matchup": "SD@ATL"
     },
     {
       "name": "Michael Harris II",
-      "rank": 26,
+      "rank": 34,
       "composite": 0.461,
       "opp_pitcher": "Griffin Canning",
       "matchup": "SD@ATL"
     },
     {
       "name": "Ozzie Albies",
-      "rank": 27,
+      "rank": 35,
       "composite": 0.461,
       "opp_pitcher": "Griffin Canning",
       "matchup": "SD@ATL"
     },
     {
       "name": "Ty France",
-      "rank": 30,
+      "rank": 38,
       "composite": 0.453,
       "opp_pitcher": "Chris Sale",
       "matchup": "SD@ATL"
+    },
+    {
+      "name": "Isaac Collins",
+      "rank": 49,
+      "composite": 0.416,
+      "opp_pitcher": "Troy Melton",
+      "matchup": "KC@DET"
+    },
+    {
+      "name": "James Outman",
+      "rank": 76,
+      "composite": 0.332,
+      "opp_pitcher": "Randy Dobnak",
+      "matchup": "KC@DET"
+    },
+    {
+      "name": "Tyler Locklear",
+      "rank": 85,
+      "composite": 0.256,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "AZ@STL"
     }
   ],
   "near_hr_hitters": [],
@@ -255,8 +338,8 @@
   "hr_signal_accuracy": {
     "1_of_5": {
       "players": 49,
-      "hr_count": 1,
-      "hr_rate": 2.0,
+      "hr_count": 3,
+      "hr_rate": 6.1,
       "names": [
         "Manny Machado",
         "Fernando Tatis Jr.",
@@ -309,13 +392,15 @@
         "Luke Maile"
       ],
       "hr_names": [
-        "Ty France"
+        "Ty France",
+        "Tyler Locklear",
+        "James Outman"
       ]
     },
     "2_of_5": {
       "players": 46,
-      "hr_count": 4,
-      "hr_rate": 8.7,
+      "hr_count": 5,
+      "hr_rate": 10.9,
       "names": [
         "Mike Yastrzemski",
         "Drake Baldwin",
@@ -368,7 +453,8 @@
         "Drake Baldwin",
         "Dominic Smith",
         "Michael Harris II",
-        "Patrick Bailey"
+        "Patrick Bailey",
+        "Isaac Collins"
       ]
     },
     "3_of_5": {
@@ -431,57 +517,78 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 3,
-      "rate": 10.0
+      "hits": 2,
+      "rate": 6.7
     },
     "all": {
-      "total": 59,
-      "hits": 6,
-      "rate": 10.2
+      "total": 100,
+      "hits": 9,
+      "rate": 9.0
     }
   },
   "combined_hr_hitters": [
     {
       "name": "Patrick Bailey",
-      "rank": 1,
+      "rank": 2,
       "composite": 0.691,
       "opp_pitcher": "Taj Bradley",
       "matchup": "MIN@CLE"
     },
     {
       "name": "Drake Baldwin",
-      "rank": 12,
+      "rank": 16,
       "composite": 0.444,
       "opp_pitcher": "Griffin Canning",
       "matchup": "SD@ATL"
     },
     {
       "name": "Ty France",
-      "rank": 26,
+      "rank": 37,
       "composite": 0.251,
       "opp_pitcher": "Chris Sale",
       "matchup": "SD@ATL"
     },
     {
+      "name": "Isaac Collins",
+      "rank": 40,
+      "composite": 0.226,
+      "opp_pitcher": "Troy Melton",
+      "matchup": "KC@DET"
+    },
+    {
       "name": "Michael Harris II",
-      "rank": 35,
+      "rank": 51,
       "composite": 0.19,
       "opp_pitcher": "Griffin Canning",
       "matchup": "SD@ATL"
     },
     {
       "name": "Ozzie Albies",
-      "rank": 37,
+      "rank": 56,
       "composite": 0.176,
       "opp_pitcher": "Griffin Canning",
       "matchup": "SD@ATL"
     },
     {
+      "name": "James Outman",
+      "rank": 68,
+      "composite": 0.145,
+      "opp_pitcher": "Randy Dobnak",
+      "matchup": "KC@DET"
+    },
+    {
       "name": "Dominic Smith",
-      "rank": 48,
+      "rank": 74,
       "composite": 0.139,
       "opp_pitcher": "Griffin Canning",
       "matchup": "SD@ATL"
+    },
+    {
+      "name": "Tyler Locklear",
+      "rank": 87,
+      "composite": 0.113,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "AZ@STL"
     }
   ]
 }
