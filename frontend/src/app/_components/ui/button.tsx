@@ -7,35 +7,36 @@ type Variant = "primary" | "accent" | "secondary" | "ghost" | "danger" | "succes
 type Size = "sm" | "md" | "lg";
 
 /**
- * Flat button variants that mirror the styles ACTUALLY used across the app, so a
- * <Button> is visually identical to the rest of the platform (MLB today, NFL
- * going forward). This is the design-system source of truth for buttons.
+ * Button variants copied verbatim from the buttons ACTUALLY rendered across the
+ * app, so a <Button> is visually identical to the rest of the platform (MLB
+ * today, NFL going forward). Each maps to a real on-screen button:
  *
- * - primary   → solid accent CTA        (`bg-accent text-background`, e.g. selected filters)
- * - accent    → tinted accent / toggle  (`bg-accent/15 text-accent border`, e.g. active tabs)
- * - secondary → neutral control         (`bg-card/50 border`, e.g. dropdown triggers)
- * - ghost     → flat text
- * - danger/success → tinted red/green
+ * - primary   → solid-accent CTA   (dashboard.tsx:100 "View Live Feed" / Unlock)
+ * - secondary → neutral control    (date-picker.tsx:64 date select / arrows)
+ * - accent    → selected segment   (lookback-toggle.tsx:22 active L5/L10 pill)
+ * - ghost     → unselected segment (lookback-toggle.tsx:23 inactive pill)
+ * - danger/success → tinted red/green (matches the app's tinted pill convention)
  */
 const VARIANT_CLASSES: Record<Variant, string> = {
   primary:
-    "bg-accent text-background hover:bg-[#7cb6fb] active:bg-[#4d90e8]",
-  accent:
-    "bg-accent/15 text-accent border border-accent/40 hover:bg-accent/25",
+    "bg-accent text-background font-semibold hover:bg-accent/90",
   secondary:
     "bg-card/50 text-foreground border border-card-border hover:bg-[var(--surface-2)] hover:border-[var(--border-strong)]",
+  accent:
+    "bg-accent/15 text-accent font-semibold hover:bg-accent/25",
   ghost:
-    "bg-transparent text-muted hover:bg-[var(--surface-2)] hover:text-foreground active:bg-[var(--surface-sunken)]",
+    "bg-transparent text-muted hover:text-foreground",
   danger:
     "bg-accent-red/15 text-accent-red border border-accent-red/30 hover:bg-accent-red/25",
   success:
     "bg-accent-green/15 text-accent-green border border-accent-green/30 hover:bg-accent-green/25",
 };
 
+// Sizing matches the app's real controls (text-xs, px-3 py-1.5 for the default).
 const SIZE: Record<Size, string> = {
-  sm: "h-7 px-2.5 text-[12px] gap-1.5 rounded-md",
-  md: "h-9 px-3.5 text-[13px] gap-2 rounded-lg",
-  lg: "h-11 px-5 text-[14px] gap-2 rounded-lg",
+  sm: "px-2.5 py-1 text-[11px] gap-1.5 rounded-md",
+  md: "px-3 py-1.5 text-xs gap-1.5 rounded-lg",
+  lg: "px-4 py-2 text-xs gap-2 rounded-lg",
 };
 
 const ICON_SIZE: Record<Size, number> = { sm: 14, md: 15, lg: 16 };
@@ -79,8 +80,8 @@ export function Button(props: ButtonProps) {
   } = props;
 
   const classes =
-    "inline-flex items-center justify-center whitespace-nowrap font-semibold cursor-pointer " +
-    "transition-colors duration-[120ms] active:translate-y-px " +
+    "inline-flex items-center justify-center whitespace-nowrap cursor-pointer " +
+    "transition-colors duration-[120ms] " +
     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " +
     "disabled:cursor-not-allowed disabled:opacity-40 " +
     VARIANT_CLASSES[variant] +
