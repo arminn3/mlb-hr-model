@@ -125079,5 +125079,492 @@
         "matchup": "ATH@AZ"
       }
     ]
+  },
+  {
+    "date": "2026-07-23",
+    "players_who_batted": [
+      "Alan Roden",
+      "Alejandro Kirk",
+      "Austin Martin",
+      "Austin Riley",
+      "Ben Williamson",
+      "Brayan Rocchio",
+      "Brooks Lee",
+      "Byron Buxton",
+      "Chandler Simpson",
+      "Chase DeLauter",
+      "Daniel Schneemann",
+      "Davis Schneider",
+      "Dominic Smith",
+      "Drake Baldwin",
+      "Ernie Clement",
+      "Fernando Tatis Jr.",
+      "Freddy Fermin",
+      "Gabriel Arias",
+      "Gavin Sheets",
+      "George Springer",
+      "Hunter Feduccia",
+      "Jackson Merrill",
+      "Jake Cronenworth",
+      "Jase Bowen",
+      "Jim Jarvis",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Josh Bell",
+      "Jos\u00e9 Ram\u00edrez",
+      "Junior Caminero",
+      "Kazuma Okamoto",
+      "Kody Clemens",
+      "Kyle Manzardo",
+      "Luis Rengifo",
+      "Luis Ur\u00edas",
+      "Luke Keaschall",
+      "Manny Machado",
+      "Matt Olson",
+      "Mauricio Dub\u00f3n",
+      "Michael Harris II",
+      "Mike Yastrzemski",
+      "Myles Straw",
+      "Ozzie Albies",
+      "Patrick Bailey",
+      "Petey Halpin",
+      "Rhys Hoskins",
+      "Richie Palacios",
+      "Royce Lewis",
+      "Ryan Jeffers",
+      "Ryan Kreidler",
+      "Steven Kwan",
+      "Sung-Mun Song",
+      "Travis Bazzana",
+      "Trevor Larnach",
+      "Ty France",
+      "Victor Mesa Jr.",
+      "Vladimir Guerrero Jr.",
+      "Xander Bogaerts",
+      "Yandy D\u00edaz",
+      "Yohendrick Pi\u00f1ango"
+    ],
+    "total_players_ranked": 59,
+    "total_hrs_hit": 6,
+    "total_near_hrs": 0,
+    "model_hits": 6,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 5,
+          "rate": 16.7
+        },
+        "all": {
+          "total": 59,
+          "hits": 6,
+          "rate": 10.2
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 6,
+          "rate": 20.0
+        },
+        "all": {
+          "total": 59,
+          "hits": 6,
+          "rate": 10.2
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 59,
+        "hits": 6,
+        "rate": 10.2
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 59,
+        "hits": 6,
+        "rate": 10.2
+      }
+    },
+    "avg_composite_hr_hitters": 0.508,
+    "avg_composite_non_hitters": 0.456,
+    "composite_separation": 0.052,
+    "hr_hitters": [
+      {
+        "name": "Patrick Bailey",
+        "rank": 6,
+        "composite": 0.672,
+        "opp_pitcher": "Taj Bradley",
+        "matchup": "MIN@CLE"
+      },
+      {
+        "name": "Drake Baldwin",
+        "rank": 8,
+        "composite": 0.669,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Dominic Smith",
+        "rank": 23,
+        "composite": 0.461,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Michael Harris II",
+        "rank": 26,
+        "composite": 0.461,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Ozzie Albies",
+        "rank": 27,
+        "composite": 0.461,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Ty France",
+        "rank": 46,
+        "composite": 0.325,
+        "opp_pitcher": "Chris Sale",
+        "matchup": "SD@ATL"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Patrick Bailey",
+        "rank": 7,
+        "composite": 0.651,
+        "opp_pitcher": "Taj Bradley",
+        "matchup": "MIN@CLE"
+      },
+      {
+        "name": "Drake Baldwin",
+        "rank": 10,
+        "composite": 0.628,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Dominic Smith",
+        "rank": 24,
+        "composite": 0.461,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Michael Harris II",
+        "rank": 26,
+        "composite": 0.461,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Ozzie Albies",
+        "rank": 27,
+        "composite": 0.461,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Ty France",
+        "rank": 30,
+        "composite": 0.453,
+        "opp_pitcher": "Chris Sale",
+        "matchup": "SD@ATL"
+      }
+    ],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 49,
+        "hr_count": 1,
+        "hr_rate": 2.0,
+        "names": [
+          "Manny Machado",
+          "Fernando Tatis Jr.",
+          "Jim Jarvis",
+          "Luis Rengifo",
+          "Rodolfo Dur\u00e1n",
+          "Brewer Hicklen",
+          "Ty France",
+          "Jase Bowen",
+          "Jackson Merrill",
+          "Xander Bogaerts",
+          "Austin Riley",
+          "Eli White",
+          "Freddy Fermin",
+          "Luis Campusano",
+          "Jake Cronenworth",
+          "Mauricio Dub\u00f3n",
+          "Gavin Sheets",
+          "Austin Hedges",
+          "Luke Keaschall",
+          "Austin Martin",
+          "Gabriel Arias",
+          "Richie Palacios",
+          "Hunter Feduccia",
+          "Chandler Simpson",
+          "Tim Tawa",
+          "Corbin Carroll",
+          "Adrian Del Castillo",
+          "Nolan Arenado",
+          "Ryan Waldschmidt",
+          "James McCann",
+          "Ketel Marte",
+          "Gabriel Moreno",
+          "Max Kepler",
+          "Jorge Barrosa",
+          "Nelson Vel\u00e1zquez",
+          "Tyler Locklear",
+          "Iv\u00e1n Herrera",
+          "Jos\u00e9 Ferm\u00edn",
+          "Pedro Pag\u00e9s",
+          "Riley Greene",
+          "Salvador Perez",
+          "James Outman",
+          "Kevin McGonigle",
+          "Kerry Carpenter",
+          "Colt Keith",
+          "Tyler Tolbert",
+          "Andrew Velazquez",
+          "Lane Thomas",
+          "Luke Maile"
+        ],
+        "hr_names": [
+          "Ty France"
+        ]
+      },
+      "2_of_5": {
+        "players": 46,
+        "hr_count": 4,
+        "hr_rate": 8.7,
+        "names": [
+          "Mike Yastrzemski",
+          "Drake Baldwin",
+          "Dominic Smith",
+          "Matt Olson",
+          "Michael Harris II",
+          "Jorge Mateo",
+          "Travis Bazzana",
+          "Patrick Bailey",
+          "Brayan Rocchio",
+          "Kyle Manzardo",
+          "Trevor Larnach",
+          "Rhys Hoskins",
+          "Brooks Lee",
+          "Ryan Jeffers",
+          "Alex Jackson",
+          "Josh Bell",
+          "Kody Clemens",
+          "Petey Halpin",
+          "Steven Kwan",
+          "Alan Roden",
+          "Kazuma Okamoto",
+          "Jonathan Aranda",
+          "Victor Mesa Jr.",
+          "Nathan Lukes",
+          "Myles Straw",
+          "Ben Williamson",
+          "George Springer",
+          "Vladimir Guerrero Jr.",
+          "Alejandro Kirk",
+          "Brandon Valenzuela",
+          "Luis Ur\u00edas",
+          "Jimmy Crooks",
+          "JJ Wetherholt",
+          "Lars Nootbaar",
+          "Ildemaro Vargas",
+          "Jordan Walker",
+          "Carter Jensen",
+          "Jac Caglianone",
+          "Isaac Collins",
+          "Josh Rojas",
+          "Dillon Dingler",
+          "Gleyber Torres",
+          "Hao-Yu Lee",
+          "Jake Rogers",
+          "Ben Malgeri",
+          "Starling Marte"
+        ],
+        "hr_names": [
+          "Drake Baldwin",
+          "Dominic Smith",
+          "Michael Harris II",
+          "Patrick Bailey"
+        ]
+      },
+      "3_of_5": {
+        "players": 24,
+        "hr_count": 1,
+        "hr_rate": 4.2,
+        "names": [
+          "Ozzie Albies",
+          "Daniel Schneemann",
+          "Byron Buxton",
+          "Royce Lewis",
+          "Ryan Kreidler",
+          "Victor Caratini",
+          "Chase DeLauter",
+          "Jos\u00e9 Ram\u00edrez",
+          "David Fry",
+          "Yandy D\u00edaz",
+          "Yohendrick Pi\u00f1ango",
+          "Nick Fortes",
+          "Cedric Mullins",
+          "Jonny DeLuca",
+          "Taylor Walls",
+          "Sean Keys",
+          "Ryan Vilade",
+          "Ernie Clement",
+          "Alec Burleson",
+          "Nathan Church",
+          "Michael Massey",
+          "Vinnie Pasquantino",
+          "Spencer Torkelson",
+          "Matt Vierling"
+        ],
+        "hr_names": [
+          "Ozzie Albies"
+        ]
+      },
+      "4_of_5": {
+        "players": 4,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Daulton Varsho",
+          "Andr\u00e9s Gim\u00e9nez",
+          "Junior Caminero",
+          "Bryan Torres"
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 59,
+        "hits": 6,
+        "rate": 10.2
+      }
+    },
+    "combined_hr_hitters": [
+      {
+        "name": "Patrick Bailey",
+        "rank": 1,
+        "composite": 0.691,
+        "opp_pitcher": "Taj Bradley",
+        "matchup": "MIN@CLE"
+      },
+      {
+        "name": "Drake Baldwin",
+        "rank": 12,
+        "composite": 0.444,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Ty France",
+        "rank": 26,
+        "composite": 0.251,
+        "opp_pitcher": "Chris Sale",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Michael Harris II",
+        "rank": 35,
+        "composite": 0.19,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Ozzie Albies",
+        "rank": 37,
+        "composite": 0.176,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@ATL"
+      },
+      {
+        "name": "Dominic Smith",
+        "rank": 48,
+        "composite": 0.139,
+        "opp_pitcher": "Griffin Canning",
+        "matchup": "SD@ATL"
+      }
+    ]
   }
 ]
