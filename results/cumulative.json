@@ -125187,7 +125187,7 @@
     ],
     "total_players_ranked": 100,
     "total_hrs_hit": 9,
-    "total_near_hrs": 0,
+    "total_near_hrs": 5,
     "model_hits": 9,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -125236,7 +125236,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 5,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -125262,28 +125262,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 3,
+        "rate": 30.0
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 100,
-        "hits": 9,
-        "rate": 9.0
+        "hits": 14,
+        "rate": 14.0
       }
     },
     "avg_composite_hr_hitters": 0.453,
-    "avg_composite_non_hitters": 0.435,
-    "composite_separation": 0.018,
+    "avg_composite_non_hitters": 0.425,
+    "composite_separation": 0.028,
     "hr_hitters": [
       {
         "name": "Patrick Bailey",
@@ -125414,8 +125414,90 @@
         "matchup": "AZ@STL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Carter Jensen",
+        "rank": 2,
+        "composite": 0.822,
+        "opp_pitcher": "Troy Melton",
+        "matchup": "KC@DET"
+      },
+      {
+        "name": "Riley Greene",
+        "rank": 13,
+        "composite": 0.655,
+        "opp_pitcher": "Randy Dobnak",
+        "matchup": "KC@DET"
+      },
+      {
+        "name": "Corbin Carroll",
+        "rank": 21,
+        "composite": 0.577,
+        "opp_pitcher": "Michael McGreevy",
+        "matchup": "AZ@STL"
+      },
+      {
+        "name": "Jonathan Aranda",
+        "rank": 23,
+        "composite": 0.565,
+        "opp_pitcher": "Shane Bieber",
+        "matchup": "TB@TOR"
+      },
+      {
+        "name": "Gabriel Moreno",
+        "rank": 68,
+        "composite": 0.373,
+        "opp_pitcher": "Michael McGreevy",
+        "matchup": "AZ@STL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Riley Greene",
+        "ev": 104.3,
+        "angle": 31.0,
+        "distance": 406.0,
+        "hr_in_parks": 29,
+        "result": "field_out",
+        "pitcher": "Strahm, Matt"
+      },
+      {
+        "batter": "Carter Jensen",
+        "ev": 99.5,
+        "angle": 27.0,
+        "distance": 385.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Melton, Troy"
+      },
+      {
+        "batter": "Gabriel Moreno",
+        "ev": 107.2,
+        "angle": 21.0,
+        "distance": 381.0,
+        "hr_in_parks": 15,
+        "result": "double",
+        "pitcher": "Bruihl, Justin"
+      },
+      {
+        "batter": "Corbin Carroll",
+        "ev": 102.6,
+        "angle": 27.0,
+        "distance": 386.0,
+        "hr_in_parks": 26,
+        "result": "triple",
+        "pitcher": "McGreevy, Michael"
+      },
+      {
+        "batter": "Jonathan Aranda",
+        "ev": 103.9,
+        "angle": 24.0,
+        "distance": 387.0,
+        "hr_in_parks": 6,
+        "result": "field_out",
+        "pitcher": "Bieber, Shane"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
