@@ -126072,7 +126072,7 @@
     ],
     "total_players_ranked": 308,
     "total_hrs_hit": 27,
-    "total_near_hrs": 0,
+    "total_near_hrs": 19,
     "model_hits": 27,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -126121,7 +126121,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 19,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -126152,18 +126152,18 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
-        "hits": 5,
-        "rate": 16.7
+        "hits": 7,
+        "rate": 23.3
       },
       "all": {
         "total": 308,
-        "hits": 27,
-        "rate": 8.8
+        "hits": 46,
+        "rate": 14.9
       }
     },
     "avg_composite_hr_hitters": 0.436,
@@ -126551,8 +126551,341 @@
         "matchup": "ATL@BAL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Jimmy Crooks",
+        "rank": 19,
+        "composite": 0.671,
+        "opp_pitcher": "Rhett Lowder",
+        "matchup": "CIN@STL"
+      },
+      {
+        "name": "Tim Tawa",
+        "rank": 24,
+        "composite": 0.639,
+        "opp_pitcher": "Carson Palmquist",
+        "matchup": "AZ@WSH"
+      },
+      {
+        "name": "Salvador Perez",
+        "rank": 48,
+        "composite": 0.566,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "KC@DET"
+      },
+      {
+        "name": "Jacob Wilson",
+        "rank": 70,
+        "composite": 0.496,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "ATH@MIN"
+      },
+      {
+        "name": "Tommy White",
+        "rank": 71,
+        "composite": 0.496,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "ATH@MIN"
+      },
+      {
+        "name": "Dansby Swanson",
+        "rank": 75,
+        "composite": 0.486,
+        "opp_pitcher": "Jared Jones",
+        "matchup": "CHC@PIT"
+      },
+      {
+        "name": "Chase DeLauter",
+        "rank": 82,
+        "composite": 0.466,
+        "opp_pitcher": "Shane McClanahan",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Eli White",
+        "rank": 126,
+        "composite": 0.414,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "ATL@BAL"
+      },
+      {
+        "name": "Pete Alonso",
+        "rank": 155,
+        "composite": 0.391,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "ATL@BAL"
+      },
+      {
+        "name": "Joey Bart",
+        "rank": 159,
+        "composite": 0.39,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "ATL@BAL"
+      },
+      {
+        "name": "Colton Cowser",
+        "rank": 170,
+        "composite": 0.386,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "ATL@BAL"
+      },
+      {
+        "name": "Elias D\u00edaz",
+        "rank": 178,
+        "composite": 0.381,
+        "opp_pitcher": "Bryce Miller",
+        "matchup": "SEA@TEX"
+      },
+      {
+        "name": "Sam Antonacci",
+        "rank": 180,
+        "composite": 0.38,
+        "opp_pitcher": "Spencer Arrighetti",
+        "matchup": "HOU@CWS"
+      },
+      {
+        "name": "Cole Carrigg",
+        "rank": 239,
+        "composite": 0.305,
+        "opp_pitcher": "Shane Drohan",
+        "matchup": "COL@MIL"
+      },
+      {
+        "name": "Zach Neto",
+        "rank": 243,
+        "composite": 0.302,
+        "opp_pitcher": "Logan Webb",
+        "matchup": "LAA@SF"
+      },
+      {
+        "name": "Edwin Arroyo",
+        "rank": 257,
+        "composite": 0.28,
+        "opp_pitcher": "Dustin May",
+        "matchup": "CIN@STL"
+      },
+      {
+        "name": "Chase Meidroth",
+        "rank": 263,
+        "composite": 0.273,
+        "opp_pitcher": "Spencer Arrighetti",
+        "matchup": "HOU@CWS"
+      },
+      {
+        "name": "Christian Walker",
+        "rank": 277,
+        "composite": 0.242,
+        "opp_pitcher": "Davis Martin",
+        "matchup": "HOU@CWS"
+      },
+      {
+        "name": "Tyler Heineman",
+        "rank": 279,
+        "composite": 0.24,
+        "opp_pitcher": "Logan Webb",
+        "matchup": "LAA@SF"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Joey Bart",
+        "ev": 96.6,
+        "angle": 28.0,
+        "distance": 368.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Rogers, Trevor"
+      },
+      {
+        "batter": "Colton Cowser",
+        "ev": 113.5,
+        "angle": 30.0,
+        "distance": 412.0,
+        "hr_in_parks": 28,
+        "result": "",
+        "pitcher": "Holmes, Grant"
+      },
+      {
+        "batter": "Pete Alonso",
+        "ev": 104.3,
+        "angle": 32.0,
+        "distance": 387.0,
+        "hr_in_parks": 25,
+        "result": "field_out",
+        "pitcher": "Holmes, Grant"
+      },
+      {
+        "batter": "Eli White",
+        "ev": 108.4,
+        "angle": 34.0,
+        "distance": 395.0,
+        "hr_in_parks": 2,
+        "result": "",
+        "pitcher": "Rogers, Trevor"
+      },
+      {
+        "batter": "Christian Walker",
+        "ev": 104.0,
+        "angle": 33.0,
+        "distance": 395.0,
+        "hr_in_parks": 2,
+        "result": "",
+        "pitcher": "Murphy, Chris"
+      },
+      {
+        "batter": "Sam Antonacci",
+        "ev": 100.9,
+        "angle": 31.0,
+        "distance": 382.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Teng, Kai-Wei"
+      },
+      {
+        "batter": "Chase Meidroth",
+        "ev": 100.5,
+        "angle": 30.0,
+        "distance": 384.0,
+        "hr_in_parks": 16,
+        "result": "double",
+        "pitcher": "Teng, Kai-Wei"
+      },
+      {
+        "batter": "Salvador Perez",
+        "ev": 107.1,
+        "angle": 20.0,
+        "distance": 386.0,
+        "hr_in_parks": 17,
+        "result": "double",
+        "pitcher": "Skubal, Tarik"
+      },
+      {
+        "batter": "Joe Mack",
+        "ev": 100.1,
+        "angle": 33.0,
+        "distance": 389.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Hart, Kyle"
+      },
+      {
+        "batter": "Christian Yelich",
+        "ev": 98.2,
+        "angle": 30.0,
+        "distance": 390.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Sugano, Tomoyuki"
+      },
+      {
+        "batter": "Cole Carrigg",
+        "ev": 100.4,
+        "angle": 22.0,
+        "distance": 369.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Drohan, Shane"
+      },
+      {
+        "batter": "Tommy White",
+        "ev": 93.9,
+        "angle": 27.0,
+        "distance": 377.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Anderson, Jack"
+      },
+      {
+        "batter": "Jacob Wilson",
+        "ev": 93.4,
+        "angle": 29.0,
+        "distance": 369.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Adams, Travis"
+      },
+      {
+        "batter": "Dansby Swanson",
+        "ev": 100.7,
+        "angle": 34.0,
+        "distance": 395.0,
+        "hr_in_parks": 12,
+        "result": "field_out",
+        "pitcher": "Jones, Jared"
+      },
+      {
+        "batter": "Pete Crow-Armstrong",
+        "ev": 100.3,
+        "angle": 27.0,
+        "distance": 408.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Jones, Jared"
+      },
+      {
+        "batter": "Tyler Heineman",
+        "ev": 95.8,
+        "angle": 31.0,
+        "distance": 384.0,
+        "hr_in_parks": 25,
+        "result": "triple",
+        "pitcher": "Webb, Logan"
+      },
+      {
+        "batter": "Zach Neto",
+        "ev": 102.7,
+        "angle": 28.0,
+        "distance": 376.0,
+        "hr_in_parks": 23,
+        "result": "triple",
+        "pitcher": "Webb, Logan"
+      },
+      {
+        "batter": "Edwin Arroyo",
+        "ev": 98.2,
+        "angle": 35.0,
+        "distance": 374.0,
+        "hr_in_parks": 11,
+        "result": "field_out",
+        "pitcher": "May, Dustin"
+      },
+      {
+        "batter": "Jimmy Crooks",
+        "ev": 105.5,
+        "angle": 22.0,
+        "distance": 391.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Lowder, Rhett"
+      },
+      {
+        "batter": "Chase DeLauter",
+        "ev": 107.1,
+        "angle": 22.0,
+        "distance": 395.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "McClanahan, Shane"
+      },
+      {
+        "batter": "Elias D\u00edaz",
+        "ev": 97.7,
+        "angle": 33.0,
+        "distance": 385.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Miller, Bryce"
+      },
+      {
+        "batter": "Tim Tawa",
+        "ev": 100.8,
+        "angle": 35.0,
+        "distance": 372.0,
+        "hr_in_parks": 10,
+        "result": "field_out",
+        "pitcher": "Littell, Zack"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
