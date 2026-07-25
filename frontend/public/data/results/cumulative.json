@@ -125759,61 +125759,350 @@
   {
     "date": "2026-07-24",
     "players_who_batted": [
+      "A.J. Ewing",
+      "Adrian Del Castillo",
+      "Alec Bohm",
+      "Alec Burleson",
+      "Alejandro Kirk",
+      "Alejandro Osuna",
+      "Alex Bregman",
+      "Ali S\u00e1nchez",
+      "Alika Williams",
+      "Amed Rosario",
+      "Andrew Benintendi",
       "Andrew Vaughn",
+      "Andruw Monasterio",
+      "Andr\u00e9s Chaparro",
+      "Andr\u00e9s Gim\u00e9nez",
+      "Andy Pages",
+      "Angel Mart\u00ednez",
+      "Anthony Seigler",
+      "Anthony Volpe",
+      "Austin Hedges",
+      "Austin Martin",
+      "Austin Riley",
+      "Ben Malgeri",
+      "Ben Rice",
+      "Ben Williamson",
+      "Blaze Jordan",
+      "Bo Bichette",
+      "Braden Montgomery",
+      "Brandon Lowe",
+      "Brandon Marsh",
+      "Brandon Nimmo",
+      "Brayan Rocchio",
       "Brice Turang",
+      "Brooks Lee",
+      "Bryan Reynolds",
+      "Bryce Eldridge",
+      "Bryce Harper",
+      "Bryson Stott",
+      "Buddy Kennedy",
+      "Byron Buxton",
+      "CJ Abrams",
+      "Cal Raleigh",
+      "Caleb Durbin",
+      "Cam Cauley",
+      "Cam Smith",
+      "Carlos Cortes",
+      "Carson Benge",
+      "Carson Kelly",
+      "Carter Jensen",
+      "Casey Schmitt",
+      "Ceddanne Rafaela",
+      "Cedric Mullins",
+      "Chadwick Tromp",
+      "Chandler Simpson",
+      "Chase DeLauter",
+      "Chase Meidroth",
+      "Christian Encarnacion-Strand",
+      "Christian V\u00e1zquez",
+      "Christian Walker",
       "Christian Yelich",
+      "Coby Mayo",
+      "Cody Bellinger",
       "Cole Carrigg",
+      "Cole Young",
+      "Colson Montgomery",
+      "Colt Emerson",
+      "Colt Keith",
+      "Colton Cowser",
+      "Connor Wong",
+      "Corbin Carroll",
+      "Curtis Mead",
+      "Dalton Rushing",
+      "Dane Myers",
+      "Daniel Susac",
+      "Dansby Swanson",
+      "Daulton Varsho",
+      "David Fry",
       "David Hamilton",
+      "Davis Schneider",
+      "Daylen Lile",
+      "Denzer Guzman",
+      "Dillon Dingler",
+      "Dominic Canzone",
+      "Dominic Smith",
+      "Donovan Walton",
+      "Drake Baldwin",
+      "Drew Cavanaugh",
+      "Drew Gilbert",
+      "Drew Romo",
+      "Dylan Beavers",
+      "Dylan Crews",
+      "Edmundo Sosa",
+      "Edwin Arroyo",
+      "Eli White",
+      "Elias D\u00edaz",
+      "Elly De La Cruz",
+      "Ernie Clement",
+      "Esmerlyn Valdez",
+      "Esteury Ruiz",
+      "Eugenio Su\u00e1rez",
+      "Evan Carter",
+      "Ezequiel Duran",
       "Ezequiel Tovar",
+      "Fernando Tatis Jr.",
+      "Francisco Alvarez",
+      "Francisco Lindor",
+      "Freddie Freeman",
+      "Gabriel Arias",
+      "Gabriel Moreno",
+      "Gabriel Rincones Jr.",
       "Garrett Mitchell",
       "Gary S\u00e1nchez",
+      "Gavin Sheets",
+      "George Springer",
+      "Geraldo Perdomo",
+      "Gleyber Torres",
+      "Grant McCray",
+      "Griffin Conine",
+      "Gunnar Henderson",
+      "Hao-Yu Lee",
+      "Harry Ford",
+      "Heliot Ramos",
+      "Henry Bolte",
+      "Henry Davis",
+      "Heriberto Hern\u00e1ndez",
       "Hunter Goodman",
+      "Ian Happ",
+      "Isaac Collins",
+      "Isaac Paredes",
+      "Iv\u00e1n Herrera",
+      "J.T. Realmuto",
+      "JJ Bleday",
+      "JJ Wetherholt",
+      "Jac Caglianone",
       "Jackson Chourio",
+      "Jackson Holliday",
+      "Jackson Merrill",
+      "Jacob Wilson",
+      "Jacob Young",
+      "Jahmai Jones",
       "Jake Bauers",
+      "Jake Burger",
+      "Jake Cronenworth",
+      "Jake Mangum",
       "Jake McCarthy",
+      "Jakob Marsee",
+      "James Wood",
+      "Jared Triolo",
+      "Jared Young",
+      "Jarren Duran",
+      "Jase Bowen",
+      "Jasson Dom\u00ednguez",
+      "Javier Sanoja",
+      "Jeff McNeil",
+      "Jeremiah Jackson",
+      "Jeremy Pe\u00f1a",
+      "Jim Jarvis",
+      "Jimmy Crooks",
+      "Jo Adell",
+      "Joc Pederson",
+      "Joe Mack",
+      "Joey Bart",
       "Joey Ortiz",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Jorbit Vivas",
+      "Jordan Walker",
+      "Jorge Mateo",
+      "Jorge Polanco",
+      "Jorge Soler",
+      "Jose Altuve",
+      "Josh Bell",
+      "Josh Naylor",
+      "Jos\u00e9 Caballero",
+      "Jos\u00e9 Tena",
+      "Juan Soto",
+      "Julio Rodr\u00edguez",
+      "Jung Hoo Lee",
+      "Junior Caminero",
+      "Justin Crawford",
+      "Justin Foscue",
+      "Kazuma Okamoto",
+      "Keibert Ruiz",
+      "Ketel Marte",
       "Kyle Karros",
+      "Kyle Schwarber",
+      "Kyle Stowers",
+      "Kyle Tucker",
+      "LaMonte Wade Jr.",
+      "Lane Thomas",
+      "Lars Nootbaar",
+      "Lawrence Butler",
+      "Leo Jim\u00e9nez",
+      "Leody Taveras",
+      "Liam Hicks",
+      "Lucas Spence",
+      "Luis Arraez",
+      "Luis Campusano",
+      "Luis Garc\u00eda Jr.",
       "Luis Lara",
+      "Luis Rengifo",
+      "Luis Robert Jr.",
+      "Luis Ur\u00edas",
+      "Luisangel Acu\u00f1a",
+      "Luke Keaschall",
+      "Luke Raley",
+      "Manny Machado",
+      "Marcell Ozuna",
+      "Marcus Semien",
+      "Masataka Yoshida",
+      "Masyn Winn",
+      "Matt Olson",
+      "Matt Vierling",
+      "Mauricio Dub\u00f3n",
+      "Max Kepler",
+      "Michael Busch",
+      "Michael Conforto",
+      "Michael Harris II",
+      "Michael Massey",
       "Mickey Moniak",
+      "Miguel Rojas",
+      "Miguel Vargas",
+      "Mike Trout",
+      "Mike Yastrzemski",
+      "Mitch Garver",
+      "Mookie Betts",
+      "Munetaka Murakami",
+      "Myles Straw",
+      "Nasim Nu\u00f1ez",
+      "Nathan Church",
+      "Nathan Lukes",
+      "Nathaniel Lowe",
+      "Nelson Vel\u00e1zquez",
+      "Nick Fortes",
+      "Nick Gonzales",
+      "Nick Loftin",
+      "Nicky Lopez",
+      "Nico Hoerner",
+      "Nolan Arenado",
+      "Nolan Schanuel",
+      "Otto Lopez",
+      "Ozzie Albies",
+      "Paul Goldschmidt",
+      "Pedro Ram\u00edrez",
+      "Pete Alonso",
+      "Pete Crow-Armstrong",
+      "Petey Halpin",
+      "Rafael Devers",
+      "Randal Grichuk",
+      "Randy Arozarena",
+      "Rhys Hoskins",
+      "Richie Palacios",
+      "Riley Greene",
+      "Romy Gonzalez",
+      "Royce Lewis",
+      "Ryan Jeffers",
+      "Ryan Kreidler",
+      "Ryan McMahon",
+      "Ryan O'Hearn",
+      "Ryan Vilade",
+      "Sal Stewart",
+      "Salvador Perez",
+      "Sam Antonacci",
+      "Sam Huff",
+      "Seiya Suzuki",
+      "Shea Langeliers",
+      "Shohei Ohtani",
+      "Spencer Steer",
+      "Spencer Torkelson",
+      "Starling Marte",
+      "Sung-Mun Song",
       "TJ Rumfield",
+      "Taylor Trammell",
+      "Taylor Ward",
+      "Teoscar Hern\u00e1ndez",
+      "Tim Tawa",
+      "Tommy Edman",
+      "Tommy White",
+      "Travis Bazzana",
+      "Trea Turner",
+      "Trent Grisham",
+      "Tristan Peters",
       "Troy Johnston",
+      "Ty France",
       "Tyler Freeman",
+      "Tyler Heineman",
+      "Tyler Locklear",
+      "Tyler O'Neill",
+      "Tyler Soderstrom",
+      "Tyler Stephenson",
+      "Tyler Tolbert",
+      "Vaughn Grissom",
+      "Victor Caratini",
+      "Vinnie Pasquantino",
+      "Vladimir Guerrero Jr.",
+      "Wade Meckler",
+      "Weston Wilson",
       "Willi Castro",
-      "William Contreras"
+      "William Contreras",
+      "Willson Contreras",
+      "Willy Adames",
+      "Wilyer Abreu",
+      "Wyatt Langford",
+      "Xander Bogaerts",
+      "Xavier Edwards",
+      "Yandy D\u00edaz",
+      "Yohendrick Pi\u00f1ango",
+      "Yordan Alvarez",
+      "Zach McKinstry",
+      "Zach Neto"
     ],
-    "total_players_ranked": 20,
-    "total_hrs_hit": 2,
+    "total_players_ranked": 308,
+    "total_hrs_hit": 27,
     "total_near_hrs": 0,
-    "model_hits": 2,
+    "model_hits": 27,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 2,
-          "rate": 20.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
-          "hits": 2,
-          "rate": 10.0
+          "hits": 4,
+          "rate": 20.0
         },
         "top_30": {
-          "total": 20,
-          "hits": 2,
-          "rate": 10.0
+          "total": 30,
+          "hits": 5,
+          "rate": 16.7
         },
         "all": {
-          "total": 20,
-          "hits": 2,
-          "rate": 10.0
+          "total": 308,
+          "hits": 27,
+          "rate": 8.8
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 2,
-          "rate": 20.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
@@ -125821,14 +126110,14 @@
           "rate": 10.0
         },
         "top_30": {
-          "total": 20,
-          "hits": 2,
-          "rate": 10.0
+          "total": 30,
+          "hits": 5,
+          "rate": 16.7
         },
         "all": {
-          "total": 20,
-          "hits": 2,
-          "rate": 10.0
+          "total": 308,
+          "hits": 27,
+          "rate": 8.8
         }
       }
     },
@@ -125836,80 +126125,430 @@
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
-        "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
-        "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "total": 308,
+        "hits": 27,
+        "rate": 8.8
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
-        "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
-        "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "total": 308,
+        "hits": 27,
+        "rate": 8.8
       }
     },
-    "avg_composite_hr_hitters": 0.561,
-    "avg_composite_non_hitters": 0.392,
-    "composite_separation": 0.169,
+    "avg_composite_hr_hitters": 0.436,
+    "avg_composite_non_hitters": 0.408,
+    "composite_separation": 0.028,
     "hr_hitters": [
       {
-        "name": "Brice Turang",
+        "name": "Francisco Alvarez",
         "rank": 2,
+        "composite": 0.821,
+        "opp_pitcher": "Roki Sasaki",
+        "matchup": "LAD@NYM"
+      },
+      {
+        "name": "Joe Mack",
+        "rank": 11,
+        "composite": 0.724,
+        "opp_pitcher": "Germ\u00e1n M\u00e1rquez",
+        "matchup": "SD@MIA"
+      },
+      {
+        "name": "Casey Schmitt",
+        "rank": 12,
+        "composite": 0.711,
+        "opp_pitcher": "Grayson Rodriguez",
+        "matchup": "LAA@SF"
+      },
+      {
+        "name": "Brice Turang",
+        "rank": 14,
         "composite": 0.703,
         "opp_pitcher": "Tomoyuki Sugano",
         "matchup": "COL@MIL"
       },
       {
+        "name": "Heriberto Hern\u00e1ndez",
+        "rank": 27,
+        "composite": 0.629,
+        "opp_pitcher": "Germ\u00e1n M\u00e1rquez",
+        "matchup": "SD@MIA"
+      },
+      {
+        "name": "Jake Burger",
+        "rank": 57,
+        "composite": 0.523,
+        "opp_pitcher": "Bryce Miller",
+        "matchup": "SEA@TEX"
+      },
+      {
+        "name": "Luis Rengifo",
+        "rank": 67,
+        "composite": 0.497,
+        "opp_pitcher": "Ryan Gusto",
+        "matchup": "SD@MIA"
+      },
+      {
+        "name": "Luis Robert Jr.",
+        "rank": 73,
+        "composite": 0.493,
+        "opp_pitcher": "Roki Sasaki",
+        "matchup": "LAD@NYM"
+      },
+      {
+        "name": "Rafael Devers",
+        "rank": 78,
+        "composite": 0.483,
+        "opp_pitcher": "Grayson Rodriguez",
+        "matchup": "LAA@SF"
+      },
+      {
+        "name": "Kazuma Okamoto",
+        "rank": 85,
+        "composite": 0.456,
+        "opp_pitcher": "Patrick Sandoval",
+        "matchup": "TOR@BOS"
+      },
+      {
+        "name": "Eugenio Su\u00e1rez",
+        "rank": 87,
+        "composite": 0.454,
+        "opp_pitcher": "Dustin May",
+        "matchup": "CIN@STL"
+      },
+      {
+        "name": "Vaughn Grissom",
+        "rank": 109,
+        "composite": 0.44,
+        "opp_pitcher": "Logan Webb",
+        "matchup": "LAA@SF"
+      },
+      {
         "name": "Christian Yelich",
-        "rank": 7,
+        "rank": 116,
         "composite": 0.419,
         "opp_pitcher": "Tomoyuki Sugano",
         "matchup": "COL@MIL"
+      },
+      {
+        "name": "Pete Crow-Armstrong",
+        "rank": 131,
+        "composite": 0.413,
+        "opp_pitcher": "Jared Jones",
+        "matchup": "CHC@PIT"
+      },
+      {
+        "name": "Ceddanne Rafaela",
+        "rank": 132,
+        "composite": 0.413,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@BOS"
+      },
+      {
+        "name": "Dylan Crews",
+        "rank": 135,
+        "composite": 0.41,
+        "opp_pitcher": "Eduardo Rodriguez",
+        "matchup": "AZ@WSH"
+      },
+      {
+        "name": "Wyatt Langford",
+        "rank": 169,
+        "composite": 0.388,
+        "opp_pitcher": "Bryce Miller",
+        "matchup": "SEA@TEX"
+      },
+      {
+        "name": "Paul Goldschmidt",
+        "rank": 186,
+        "composite": 0.371,
+        "opp_pitcher": "Jes\u00fas Luzardo",
+        "matchup": "NYY@PHI"
+      },
+      {
+        "name": "Christian Encarnacion-Strand",
+        "rank": 204,
+        "composite": 0.347,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "ATL@BAL"
+      },
+      {
+        "name": "Kyle Tucker",
+        "rank": 223,
+        "composite": 0.327,
+        "opp_pitcher": "Sean Manaea",
+        "matchup": "LAD@NYM"
+      },
+      {
+        "name": "Ryan Vilade",
+        "rank": 229,
+        "composite": 0.318,
+        "opp_pitcher": "Joey Cantillo",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Matt Olson",
+        "rank": 258,
+        "composite": 0.277,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "ATL@BAL"
+      },
+      {
+        "name": "Richie Palacios",
+        "rank": 260,
+        "composite": 0.275,
+        "opp_pitcher": "Joey Cantillo",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Anthony Seigler",
+        "rank": 278,
+        "composite": 0.241,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@BOS"
+      },
+      {
+        "name": "Drake Baldwin",
+        "rank": 280,
+        "composite": 0.239,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "ATL@BAL"
+      },
+      {
+        "name": "Cam Smith",
+        "rank": 290,
+        "composite": 0.208,
+        "opp_pitcher": "Davis Martin",
+        "matchup": "HOU@CWS"
+      },
+      {
+        "name": "Austin Hedges",
+        "rank": 296,
+        "composite": 0.199,
+        "opp_pitcher": "Shane McClanahan",
+        "matchup": "CLE@TB"
       }
     ],
     "hr_hitters_l10": [
       {
+        "name": "Joe Mack",
+        "rank": 6,
+        "composite": 0.74,
+        "opp_pitcher": "Germ\u00e1n M\u00e1rquez",
+        "matchup": "SD@MIA"
+      },
+      {
+        "name": "Casey Schmitt",
+        "rank": 12,
+        "composite": 0.693,
+        "opp_pitcher": "Grayson Rodriguez",
+        "matchup": "LAA@SF"
+      },
+      {
         "name": "Brice Turang",
-        "rank": 2,
+        "rank": 23,
         "composite": 0.636,
         "opp_pitcher": "Tomoyuki Sugano",
         "matchup": "COL@MIL"
       },
       {
+        "name": "Heriberto Hern\u00e1ndez",
+        "rank": 24,
+        "composite": 0.636,
+        "opp_pitcher": "Germ\u00e1n M\u00e1rquez",
+        "matchup": "SD@MIA"
+      },
+      {
+        "name": "Jake Burger",
+        "rank": 27,
+        "composite": 0.626,
+        "opp_pitcher": "Bryce Miller",
+        "matchup": "SEA@TEX"
+      },
+      {
+        "name": "Kyle Tucker",
+        "rank": 56,
+        "composite": 0.521,
+        "opp_pitcher": "Sean Manaea",
+        "matchup": "LAD@NYM"
+      },
+      {
+        "name": "Francisco Alvarez",
+        "rank": 71,
+        "composite": 0.493,
+        "opp_pitcher": "Roki Sasaki",
+        "matchup": "LAD@NYM"
+      },
+      {
+        "name": "Luis Robert Jr.",
+        "rank": 73,
+        "composite": 0.493,
+        "opp_pitcher": "Roki Sasaki",
+        "matchup": "LAD@NYM"
+      },
+      {
+        "name": "Rafael Devers",
+        "rank": 77,
+        "composite": 0.483,
+        "opp_pitcher": "Grayson Rodriguez",
+        "matchup": "LAA@SF"
+      },
+      {
+        "name": "Ryan Vilade",
+        "rank": 82,
+        "composite": 0.47,
+        "opp_pitcher": "Joey Cantillo",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Eugenio Su\u00e1rez",
+        "rank": 103,
+        "composite": 0.442,
+        "opp_pitcher": "Dustin May",
+        "matchup": "CIN@STL"
+      },
+      {
+        "name": "Pete Crow-Armstrong",
+        "rank": 114,
+        "composite": 0.439,
+        "opp_pitcher": "Jared Jones",
+        "matchup": "CHC@PIT"
+      },
+      {
+        "name": "Christian Encarnacion-Strand",
+        "rank": 125,
+        "composite": 0.423,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "ATL@BAL"
+      },
+      {
         "name": "Christian Yelich",
-        "rank": 10,
+        "rank": 128,
         "composite": 0.419,
         "opp_pitcher": "Tomoyuki Sugano",
         "matchup": "COL@MIL"
+      },
+      {
+        "name": "Luis Rengifo",
+        "rank": 132,
+        "composite": 0.415,
+        "opp_pitcher": "Ryan Gusto",
+        "matchup": "SD@MIA"
+      },
+      {
+        "name": "Wyatt Langford",
+        "rank": 138,
+        "composite": 0.413,
+        "opp_pitcher": "Bryce Miller",
+        "matchup": "SEA@TEX"
+      },
+      {
+        "name": "Paul Goldschmidt",
+        "rank": 169,
+        "composite": 0.388,
+        "opp_pitcher": "Jes\u00fas Luzardo",
+        "matchup": "NYY@PHI"
+      },
+      {
+        "name": "Dylan Crews",
+        "rank": 175,
+        "composite": 0.385,
+        "opp_pitcher": "Eduardo Rodriguez",
+        "matchup": "AZ@WSH"
+      },
+      {
+        "name": "Ceddanne Rafaela",
+        "rank": 177,
+        "composite": 0.385,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@BOS"
+      },
+      {
+        "name": "Vaughn Grissom",
+        "rank": 191,
+        "composite": 0.375,
+        "opp_pitcher": "Logan Webb",
+        "matchup": "LAA@SF"
+      },
+      {
+        "name": "Kazuma Okamoto",
+        "rank": 221,
+        "composite": 0.332,
+        "opp_pitcher": "Patrick Sandoval",
+        "matchup": "TOR@BOS"
+      },
+      {
+        "name": "Anthony Seigler",
+        "rank": 222,
+        "composite": 0.327,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@BOS"
+      },
+      {
+        "name": "Austin Hedges",
+        "rank": 229,
+        "composite": 0.315,
+        "opp_pitcher": "Shane McClanahan",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Cam Smith",
+        "rank": 230,
+        "composite": 0.315,
+        "opp_pitcher": "Davis Martin",
+        "matchup": "HOU@CWS"
+      },
+      {
+        "name": "Richie Palacios",
+        "rank": 265,
+        "composite": 0.264,
+        "opp_pitcher": "Joey Cantillo",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Matt Olson",
+        "rank": 267,
+        "composite": 0.263,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "ATL@BAL"
+      },
+      {
+        "name": "Drake Baldwin",
+        "rank": 287,
+        "composite": 0.225,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "ATL@BAL"
       }
     ],
     "near_hr_hitters": [],
@@ -125918,8 +126557,8 @@
     "hr_signal_accuracy": {
       "1_of_5": {
         "players": 150,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 11,
+        "hr_rate": 7.3,
         "names": [
           "Hunter Goodman",
           "Willi Castro",
@@ -126072,12 +126711,24 @@
           "Tyler Heineman",
           "Logan O'Hoppe"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Dylan Crews",
+          "Ryan Vilade",
+          "Austin Hedges",
+          "Kazuma Okamoto",
+          "Ceddanne Rafaela",
+          "Anthony Seigler",
+          "Cam Smith",
+          "Eugenio Su\u00e1rez",
+          "Casey Schmitt",
+          "Rafael Devers",
+          "Vaughn Grissom"
+        ]
       },
       "2_of_5": {
         "players": 142,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 7,
+        "hr_rate": 4.9,
         "names": [
           "Gary S\u00e1nchez",
           "Jackson Chourio",
@@ -126222,12 +126873,20 @@
           "Wade Meckler",
           "Oswald Peraza"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Paul Goldschmidt",
+          "Drake Baldwin",
+          "Kyle Tucker",
+          "Joe Mack",
+          "Luis Rengifo",
+          "Jake Burger",
+          "Wyatt Langford"
+        ]
       },
       "3_of_5": {
         "players": 53,
-        "hr_count": 1,
-        "hr_rate": 1.9,
+        "hr_count": 6,
+        "hr_rate": 11.3,
         "names": [
           "Luis Lara",
           "Brice Turang",
@@ -126284,13 +126943,18 @@
           "Grant McCray"
         ],
         "hr_names": [
-          "Brice Turang"
+          "Brice Turang",
+          "Christian Encarnacion-Strand",
+          "Matt Olson",
+          "Francisco Alvarez",
+          "Luis Robert Jr.",
+          "Heriberto Hern\u00e1ndez"
         ]
       },
       "4_of_5": {
         "players": 13,
-        "hr_count": 1,
-        "hr_rate": 7.7,
+        "hr_count": 2,
+        "hr_rate": 15.4,
         "names": [
           "Braden Shewmake",
           "Christian Yelich",
@@ -126307,7 +126971,8 @@
           "Bryan Torres"
         ],
         "hr_names": [
-          "Christian Yelich"
+          "Christian Yelich",
+          "Pete Crow-Armstrong"
         ]
       },
       "5_of_5": {
@@ -126328,34 +126993,209 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
-        "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
-        "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "total": 308,
+        "hits": 27,
+        "rate": 8.8
       }
     },
     "combined_hr_hitters": [
       {
+        "name": "Heriberto Hern\u00e1ndez",
+        "rank": 9,
+        "composite": 0.689,
+        "opp_pitcher": "Germ\u00e1n M\u00e1rquez",
+        "matchup": "SD@MIA"
+      },
+      {
+        "name": "Casey Schmitt",
+        "rank": 14,
+        "composite": 0.644,
+        "opp_pitcher": "Grayson Rodriguez",
+        "matchup": "LAA@SF"
+      },
+      {
+        "name": "Jake Burger",
+        "rank": 17,
+        "composite": 0.614,
+        "opp_pitcher": "Bryce Miller",
+        "matchup": "SEA@TEX"
+      },
+      {
         "name": "Brice Turang",
-        "rank": 2,
+        "rank": 26,
         "composite": 0.548,
         "opp_pitcher": "Tomoyuki Sugano",
         "matchup": "COL@MIL"
       },
       {
+        "name": "Joe Mack",
+        "rank": 29,
+        "composite": 0.535,
+        "opp_pitcher": "Germ\u00e1n M\u00e1rquez",
+        "matchup": "SD@MIA"
+      },
+      {
+        "name": "Francisco Alvarez",
+        "rank": 41,
+        "composite": 0.457,
+        "opp_pitcher": "Roki Sasaki",
+        "matchup": "LAD@NYM"
+      },
+      {
+        "name": "Kazuma Okamoto",
+        "rank": 63,
+        "composite": 0.357,
+        "opp_pitcher": "Patrick Sandoval",
+        "matchup": "TOR@BOS"
+      },
+      {
+        "name": "Eugenio Su\u00e1rez",
+        "rank": 82,
+        "composite": 0.322,
+        "opp_pitcher": "Dustin May",
+        "matchup": "CIN@STL"
+      },
+      {
+        "name": "Ryan Vilade",
+        "rank": 89,
+        "composite": 0.291,
+        "opp_pitcher": "Joey Cantillo",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Kyle Tucker",
+        "rank": 104,
+        "composite": 0.261,
+        "opp_pitcher": "Sean Manaea",
+        "matchup": "LAD@NYM"
+      },
+      {
+        "name": "Luis Rengifo",
+        "rank": 107,
+        "composite": 0.254,
+        "opp_pitcher": "Ryan Gusto",
+        "matchup": "SD@MIA"
+      },
+      {
+        "name": "Vaughn Grissom",
+        "rank": 114,
+        "composite": 0.238,
+        "opp_pitcher": "Logan Webb",
+        "matchup": "LAA@SF"
+      },
+      {
+        "name": "Pete Crow-Armstrong",
+        "rank": 117,
+        "composite": 0.23,
+        "opp_pitcher": "Jared Jones",
+        "matchup": "CHC@PIT"
+      },
+      {
+        "name": "Christian Encarnacion-Strand",
+        "rank": 118,
+        "composite": 0.23,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "ATL@BAL"
+      },
+      {
+        "name": "Dylan Crews",
+        "rank": 125,
+        "composite": 0.218,
+        "opp_pitcher": "Eduardo Rodriguez",
+        "matchup": "AZ@WSH"
+      },
+      {
         "name": "Christian Yelich",
-        "rank": 11,
+        "rank": 142,
         "composite": 0.194,
         "opp_pitcher": "Tomoyuki Sugano",
         "matchup": "COL@MIL"
+      },
+      {
+        "name": "Rafael Devers",
+        "rank": 152,
+        "composite": 0.188,
+        "opp_pitcher": "Grayson Rodriguez",
+        "matchup": "LAA@SF"
+      },
+      {
+        "name": "Cam Smith",
+        "rank": 161,
+        "composite": 0.181,
+        "opp_pitcher": "Davis Martin",
+        "matchup": "HOU@CWS"
+      },
+      {
+        "name": "Wyatt Langford",
+        "rank": 173,
+        "composite": 0.171,
+        "opp_pitcher": "Bryce Miller",
+        "matchup": "SEA@TEX"
+      },
+      {
+        "name": "Paul Goldschmidt",
+        "rank": 182,
+        "composite": 0.165,
+        "opp_pitcher": "Jes\u00fas Luzardo",
+        "matchup": "NYY@PHI"
+      },
+      {
+        "name": "Austin Hedges",
+        "rank": 202,
+        "composite": 0.153,
+        "opp_pitcher": "Shane McClanahan",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Luis Robert Jr.",
+        "rank": 207,
+        "composite": 0.151,
+        "opp_pitcher": "Roki Sasaki",
+        "matchup": "LAD@NYM"
+      },
+      {
+        "name": "Anthony Seigler",
+        "rank": 211,
+        "composite": 0.148,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@BOS"
+      },
+      {
+        "name": "Drake Baldwin",
+        "rank": 223,
+        "composite": 0.141,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "ATL@BAL"
+      },
+      {
+        "name": "Ceddanne Rafaela",
+        "rank": 229,
+        "composite": 0.138,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@BOS"
+      },
+      {
+        "name": "Matt Olson",
+        "rank": 234,
+        "composite": 0.134,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "ATL@BAL"
+      },
+      {
+        "name": "Richie Palacios",
+        "rank": 261,
+        "composite": 0.119,
+        "opp_pitcher": "Joey Cantillo",
+        "matchup": "CLE@TB"
       }
     ]
   }
