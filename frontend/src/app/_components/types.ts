@@ -14,6 +14,9 @@ export interface RecentAB {
   bat_speed?: number | null;
   /** Spray direction relative to batter's stand: "pull" | "center" | "oppo". */
   direction?: "pull" | "center" | "oppo" | null;
+  /** Raw spray angle in degrees (field bearing): ~-45 = LF line, 0 = center,
+   *  +45 = RF line. Used to plot the spray chart. Null on legacy slates. */
+  spray_deg?: number | null;
   /** Was the batter's team home or away in this AB. "H" | "A". */
   home_away?: "H" | "A" | null;
   /** Day or night game. "D" | "N". Currently null — needs game start time

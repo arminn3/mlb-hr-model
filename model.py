@@ -26,17 +26,24 @@ def _ab_extras(row) -> dict:
     the Home/Away filter and the Blast% / Direction columns in the default
     L5/L10 view). Every AB dict now carries the same field set.
     """
-    # Direction (pull/center/oppo) — spray-angle math relative to home plate.
+    # Direction (pull/center/oppo) + raw spray angle relative to home plate.
+    # spray_deg is the actual field bearing: ~-45 = left-field line, 0 = dead
+    # center, +45 = right-field line (NOT hand-adjusted), so the frontend can
+    # plot a real spray chart at (spray_deg, distance). direction is the
+    # hand-adjusted bucket used by the pull/center/oppo filter + column.
     direction = None
+    spray_deg = None
     hx = row.get("hc_x"); hy = row.get("hc_y"); stand = row.get("stand")
-    if pd.notna(hx) and pd.notna(hy) and stand in ("L", "R"):
-        spray = np.degrees(np.arctan2(float(hx) - 125.42, 198.27 - float(hy)))
-        if -15 <= spray <= 15:
-            direction = "center"
-        elif (stand == "R" and spray < -15) or (stand == "L" and spray > 15):
-            direction = "pull"
-        else:
-            direction = "oppo"
+    if pd.notna(hx) and pd.notna(hy):
+        spray = float(np.degrees(np.arctan2(float(hx) - 125.42, 198.27 - float(hy))))
+        spray_deg = round(spray, 1)
+        if stand in ("L", "R"):
+            if -15 <= spray <= 15:
+                direction = "center"
+            elif (stand == "R" and spray < -15) or (stand == "L" and spray > 15):
+                direction = "pull"
+            else:
+                direction = "oppo"
 
     # Home/Away — inning_topbot "Top" = away team batting, "Bot" = home.
     home_away = None
@@ -71,6 +78,7 @@ def _ab_extras(row) -> dict:
     return {
         "bat_speed": bat_speed,
         "direction": direction,
+        "spray_deg": spray_deg,
         "home_away": home_away,
         # Day/Night — derived from the MLB schedule by game_pk (Statcast events
         # don't carry start time). "D" | "N" | None.

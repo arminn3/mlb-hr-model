@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import { ArrowLeft } from "lucide-react";
-import type { PlayerData, PitchDetailEntry, ZoneEntry } from "./types";
+import type { PlayerData, PitchDetailEntry, ZoneEntry, RecentAB } from "./types";
 import { HRSignalCard } from "./hr-signal-card";
+import { SprayChart } from "./spray-chart";
 import { scoreFor, type UILookback } from "./score-utils";
 import { ScoreBar } from "./score-bar";
 import { PitchesTab } from "./pitches-tab";
@@ -1083,6 +1084,11 @@ export function BatterDetailPage({
         {/* Zone Overlap */}
         {player.batter_zones && (
           <ZoneGrid batter_zones={player.batter_zones} pitcher_zone_freq={player.pitcher_zone_freq ?? []} />
+        )}
+
+        {/* Spray chart — where the current window's batted balls landed */}
+        {filteredABs.length > 0 && (
+          <SprayChart abs={filteredABs as RecentAB[]} batterHand={player.batter_hand} />
         )}
       </div>
   );
