@@ -362,6 +362,7 @@ export function BatterDetailPage({
   isFavorited,
   onToggleFavorite,
   parkFactor,
+  parkTeam,
   opposingArsenal,
   gamePlayers,
   onSwitchPlayer,
@@ -375,6 +376,9 @@ export function BatterDetailPage({
   isFavorited?: boolean;
   onToggleFavorite?: (name: string) => void;
   parkFactor?: number;
+  /** Home-team abbr of today's game = the park being played in, for the spray
+   *  chart to draw the correct outfield wall. */
+  parkTeam?: string;
   /** Full arsenal the opposing pitcher throws vs this batter's hand. Sourced
    *  from `pitcher.profile.arsenal_vs_L | arsenal_vs_R`. When present, this is
    *  the authoritative pitch-chip source — overrides `player.pitch_types`
@@ -1086,9 +1090,10 @@ export function BatterDetailPage({
           <ZoneGrid batter_zones={player.batter_zones} pitcher_zone_freq={player.pitcher_zone_freq ?? []} />
         )}
 
-        {/* Spray chart — where the current window's batted balls landed */}
-        {filteredABs.length > 0 && (
-          <SprayChart abs={filteredABs as RecentAB[]} batterHand={player.batter_hand} />
+        {/* Spray chart — self-contained (own hand/pitch/count filters), sourced
+            from the full season_abs pool so it can plot well past 10 BBE. */}
+        {(player.season_profile?.season_abs?.length ?? 0) > 0 && (
+          <SprayChart abs={(player.season_profile?.season_abs ?? []) as RecentAB[]} batterHand={player.batter_hand} parkTeam={parkTeam} />
         )}
       </div>
   );

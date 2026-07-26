@@ -658,6 +658,7 @@ export function Dashboard() {
               isFavorited={favorites.has(selectedBatter.player.name)}
               onToggleFavorite={onToggleFavorite}
               parkFactor={selectedBatter.parkFactor}
+              parkTeam={data.games.find((g) => g.players.some((p) => p.name === selectedBatter.player.name))?.home_team}
               opposingArsenal={(() => {
                 // Find the opposing pitcher's full vs-hand arsenal. batter_side
                 // "home" faces away_pitcher; "away" faces home_pitcher. Falls
