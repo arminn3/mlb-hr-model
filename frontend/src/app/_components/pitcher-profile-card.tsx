@@ -211,7 +211,15 @@ export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { p
       {windowsData && (
         <div className="flex items-center gap-1 mb-3 flex-wrap">
           {WINDOW_OPTIONS.map((opt) => {
-            const hasData = opt.key === "season" || windowsData[opt.key] != null;
+            // A window only adds signal if it's a STRICT subset of the season
+            // sample. For a pitcher with few starts (e.g. 1 GS) every window
+            // equals the season, so those buttons are disabled — otherwise they
+            // look broken (you click and nothing changes).
+            const seasonBf = seasonRows?.season?.bf ?? 0;
+            const win = opt.key !== "season" ? windowsData[opt.key] : undefined;
+            const winBf = win?.season?.bf ?? 0;
+            const hasData =
+              opt.key === "season" || (win != null && winBf > 0 && winBf < seasonBf);
             const on = windowKey === opt.key;
             return (
               <button
