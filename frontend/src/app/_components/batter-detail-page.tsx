@@ -473,10 +473,21 @@ export function BatterDetailPage({
   // the selected pitch(es), in every window.
   const bothHandPool = (player.season_profile?.season_abs ?? []) as typeof filteredABs;
   const needBothHand = armFilter !== player.pitcher_hand;
+  // Is the pitch selection still the untouched default (the pitcher's ≥12%
+  // arsenal)? For the wide windows the source is the CHRONOLOGICAL season_abs
+  // log, so arsenal-filtering it decimates the sample (L20/L25 show far fewer
+  // than 20/25 BBE). Treat the default selection as "no pitch narrowing" for
+  // those windows so they show the true last-N — only an explicit, narrower
+  // pick actually filters. (L5/L10 use the per-pitch log, unaffected.)
+  const isDefaultPitchSelection =
+    pitchFilter.size === defaultSelected.size &&
+    [...pitchFilter].every((p) => defaultSelected.has(p));
+  const applyPitchToLog = pitchFilter.size > 0 && !isDefaultPitchSelection;
   if (needBothHand) {
-    filteredABs = bothHandPool.filter(pitchMatch);
+    filteredABs = applyPitchToLog ? bothHandPool.filter(pitchMatch) : bothHandPool.slice();
   } else if (isWideWindow) {
-    filteredABs = (scores.recent_abs || []).filter(pitchMatch).slice(0, limit);
+    const pool = applyPitchToLog ? (scores.recent_abs || []).filter(pitchMatch) : (scores.recent_abs || []);
+    filteredABs = pool.slice(0, limit);
   } else if (pitchFilter.size === 0) {
     if (pitchAbsData && Object.keys(pitchAbsData).length > 0) {
       const all = Object.values(pitchAbsData).flat();
