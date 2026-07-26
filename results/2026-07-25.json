@@ -308,7 +308,7 @@
   ],
   "total_players_ranked": 302,
   "total_hrs_hit": 14,
-  "total_near_hrs": 0,
+  "total_near_hrs": 11,
   "model_hits": 14,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -357,7 +357,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 11,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -393,18 +393,18 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 1,
-      "rate": 3.3
+      "hits": 4,
+      "rate": 13.3
     },
     "all": {
       "total": 302,
-      "hits": 14,
-      "rate": 4.6
+      "hits": 25,
+      "rate": 8.3
     }
   },
   "avg_composite_hr_hitters": 0.475,
-  "avg_composite_non_hitters": 0.424,
-  "composite_separation": 0.051,
+  "avg_composite_non_hitters": 0.423,
+  "composite_separation": 0.052,
   "hr_hitters": [
     {
       "name": "Rafael Devers",
@@ -605,8 +605,213 @@
       "matchup": "TOR@BOS"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Riley Greene",
+      "rank": 21,
+      "composite": 0.654,
+      "opp_pitcher": "Michael Wacha",
+      "matchup": "KC@DET"
+    },
+    {
+      "name": "Munetaka Murakami",
+      "rank": 24,
+      "composite": 0.646,
+      "opp_pitcher": "Hunter Brown",
+      "matchup": "HOU@CWS"
+    },
+    {
+      "name": "Byron Buxton",
+      "rank": 25,
+      "composite": 0.637,
+      "opp_pitcher": "Mason Barnett",
+      "matchup": "ATH@MIN"
+    },
+    {
+      "name": "Junior Caminero",
+      "rank": 78,
+      "composite": 0.492,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "CLE@TB"
+    },
+    {
+      "name": "Luis Rengifo",
+      "rank": 90,
+      "composite": 0.465,
+      "opp_pitcher": "Eury P\u00e9rez",
+      "matchup": "SD@MIA"
+    },
+    {
+      "name": "Casey Schmitt",
+      "rank": 105,
+      "composite": 0.436,
+      "opp_pitcher": "Ryan Johnson",
+      "matchup": "LAA@SF"
+    },
+    {
+      "name": "Randy Arozarena",
+      "rank": 134,
+      "composite": 0.411,
+      "opp_pitcher": "Nathan Eovaldi",
+      "matchup": "SEA@TEX"
+    },
+    {
+      "name": "Jonathan Aranda",
+      "rank": 180,
+      "composite": 0.386,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "CLE@TB"
+    },
+    {
+      "name": "Christian Walker",
+      "rank": 229,
+      "composite": 0.351,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "HOU@CWS"
+    },
+    {
+      "name": "Zach McKinstry",
+      "rank": 231,
+      "composite": 0.343,
+      "opp_pitcher": "Michael Wacha",
+      "matchup": "KC@DET"
+    },
+    {
+      "name": "Michael Massey",
+      "rank": 295,
+      "composite": 0.173,
+      "opp_pitcher": "Casey Mize",
+      "matchup": "KC@DET"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Munetaka Murakami",
+      "ev": 102.2,
+      "angle": 35.0,
+      "distance": 389.0,
+      "hr_in_parks": 8,
+      "result": "field_out",
+      "pitcher": "Sousa, Bennett"
+    },
+    {
+      "batter": "Christian Walker",
+      "ev": 108.1,
+      "angle": 25.0,
+      "distance": 400.0,
+      "hr_in_parks": 13,
+      "result": "",
+      "pitcher": "Burke, Sean"
+    },
+    {
+      "batter": "Michael Massey",
+      "ev": 91.1,
+      "angle": 18.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Waguespack, Jacob"
+    },
+    {
+      "batter": "Zach McKinstry",
+      "ev": 99.4,
+      "angle": 27.0,
+      "distance": 388.0,
+      "hr_in_parks": 5,
+      "result": "field_out",
+      "pitcher": "Wacha, Michael"
+    },
+    {
+      "batter": "Riley Greene",
+      "ev": 103.9,
+      "angle": 27.0,
+      "distance": 397.0,
+      "hr_in_parks": 20,
+      "result": "field_out",
+      "pitcher": "Wacha, Michael"
+    },
+    {
+      "batter": "Riley Greene",
+      "ev": 104.5,
+      "angle": 22.0,
+      "distance": 376.0,
+      "hr_in_parks": 17,
+      "result": "double",
+      "pitcher": "Wacha, Michael"
+    },
+    {
+      "batter": "Michael Massey",
+      "ev": 99.9,
+      "angle": 31.0,
+      "distance": 407.0,
+      "hr_in_parks": 30,
+      "result": "sac_fly",
+      "pitcher": "Mize, Casey"
+    },
+    {
+      "batter": "Luis Rengifo",
+      "ev": 96.9,
+      "angle": 29.0,
+      "distance": 369.0,
+      "hr_in_parks": 21,
+      "result": "field_out",
+      "pitcher": "P\u00e9rez, Eury"
+    },
+    {
+      "batter": "Byron Buxton",
+      "ev": 100.0,
+      "angle": 23.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Barnett, Mason"
+    },
+    {
+      "batter": "Pete Crow-Armstrong",
+      "ev": 109.9,
+      "angle": 29.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Skenes, Paul"
+    },
+    {
+      "batter": "Casey Schmitt",
+      "ev": 109.5,
+      "angle": 32.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Johnson, Ryan"
+    },
+    {
+      "batter": "Jonathan Aranda",
+      "ev": 104.2,
+      "angle": 24.0,
+      "distance": 389.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Dion, Will"
+    },
+    {
+      "batter": "Junior Caminero",
+      "ev": 110.8,
+      "angle": 17.0,
+      "distance": 374.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Bibee, Tanner"
+    },
+    {
+      "batter": "Randy Arozarena",
+      "ev": 99.7,
+      "angle": 27.0,
+      "distance": 384.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Eovaldi, Nathan"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
