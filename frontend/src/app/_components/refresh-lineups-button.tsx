@@ -1,9 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { fetchLiveLineups, loadOverride, saveOverride, clearOverride, type LineupOverride } from "./lineup-refresh";
 
 type State = "idle" | "loading" | "done" | "error";
+
+// Auto-refresh cadence. Posted lineups trickle in over the afternoon, so polling
+// the MLB API every few minutes keeps the override fresh without a slate regen.
+const REFRESH_MS = 180_000;
+const REFRESH_SECONDS = REFRESH_MS / 1000;
+
+const fmt = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
 export function RefreshLineupsButton({
   date,
@@ -15,6 +22,13 @@ export function RefreshLineupsButton({
   const [state, setState] = useState<State>("idle");
   const [error, setError] = useState<string>("");
   const [override, setOverrideLocal] = useState<LineupOverride | null>(null);
+  const [secondsLeft, setSecondsLeft] = useState(REFRESH_SECONDS);
+
+  // Next scheduled auto-fetch (epoch ms). A ref so the 1s ticker reads it without
+  // re-subscribing, and so both manual + auto paths can push it forward.
+  const nextFireRef = useRef(Date.now() + REFRESH_MS);
+  const stateRef = useRef(state);
+  stateRef.current = state;
 
   // Hydrate from localStorage on mount
   useEffect(() => {
@@ -25,23 +39,54 @@ export function RefreshLineupsButton({
     }
   }, [date, onOverrideChange]);
 
-  const refresh = async () => {
-    if (state === "loading") return;
-    setState("loading");
-    setError("");
-    try {
-      const o = await fetchLiveLineups(date);
-      saveOverride(o);
-      setOverrideLocal(o);
-      onOverrideChange(o);
-      setState("done");
-      setTimeout(() => setState("idle"), 2000);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Failed");
-      setState("error");
-      setTimeout(() => setState("idle"), 3000);
-    }
-  };
+  const refresh = useCallback(
+    async (silent = false) => {
+      if (stateRef.current === "loading") return;
+      // Reset the countdown immediately (manual click or auto fire both restart it).
+      nextFireRef.current = Date.now() + REFRESH_MS;
+      setSecondsLeft(REFRESH_SECONDS);
+      if (!silent) {
+        setState("loading");
+        setError("");
+      }
+      try {
+        const o = await fetchLiveLineups(date);
+        saveOverride(o);
+        setOverrideLocal(o);
+        onOverrideChange(o);
+        if (!silent) {
+          setState("done");
+          setTimeout(() => setState("idle"), 2000);
+        }
+      } catch (e) {
+        if (!silent) {
+          setError(e instanceof Error ? e.message : "Failed");
+          setState("error");
+          setTimeout(() => setState("idle"), 3000);
+        }
+        // Silent (auto) errors are swallowed — the next tick retries in REFRESH_MS.
+      }
+    },
+    [date, onOverrideChange],
+  );
+
+  // Latest refresh() for the ticker to call without re-arming the interval.
+  const refreshRef = useRef(refresh);
+  refreshRef.current = refresh;
+
+  // 1-second ticker: updates the visible countdown and fires a silent auto-fetch
+  // when it reaches zero.
+  useEffect(() => {
+    const id = setInterval(() => {
+      const remaining = Math.max(0, Math.round((nextFireRef.current - Date.now()) / 1000));
+      setSecondsLeft(remaining);
+      if (remaining === 0) {
+        nextFireRef.current = Date.now() + REFRESH_MS; // re-arm even if the fetch no-ops
+        refreshRef.current(true);
+      }
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
 
   const clear = () => {
     clearOverride(date);
@@ -62,7 +107,7 @@ export function RefreshLineupsButton({
   return (
     <div className="flex items-center gap-2">
       <button
-        onClick={refresh}
+        onClick={() => refresh(false)}
         disabled={state === "loading"}
         className={
           "px-3 py-1.5 text-[12px] font-semibold rounded-[var(--radius-md)] cursor-pointer transition-colors border " +
@@ -100,6 +145,16 @@ export function RefreshLineupsButton({
           </span>
         )}
       </button>
+
+      {/* Auto-refresh countdown — fetches on its own at 0:00; the button above
+          triggers it early and resets this. */}
+      <span
+        className="text-[11px] text-muted/70 font-mono tabular-nums"
+        title={`Auto-refreshes every ${REFRESH_SECONDS}s — next in ${fmt(secondsLeft)}. Click the button to refresh now.`}
+      >
+        ↻ {fmt(secondsLeft)}
+      </span>
+
       {override && state !== "loading" && (
         <button
           onClick={clear}
