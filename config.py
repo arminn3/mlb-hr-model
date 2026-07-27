@@ -33,17 +33,26 @@ PITCH_WEIGHT_TIERS: list = [
 ]
 
 # ── Batter Metric Weights (sum to 1.0) ──────────────────────────────────────
-# Fly ball rate and barrel rate weighted highest — HRs need the ball airborne
-# with power behind it.
+# HRs need the ball airborne with power behind it AND consistent hard contact.
 BATTER_WEIGHTS: dict = {
-    "avg_exit_velo": 0.20,
-    "barrel_rate": 0.55,
-    "fly_ball_rate": 0.25,
-    # barrel rate gets more weight because Statcast's barrel definition
-    # already uses a sliding EV × angle window (98 mph = 26-30°, 106 mph
-    # = ~14-36°, 116 mph = 8-50°). It captures the same signal as FB%
-    # but more accurately. FB% still has value for air-ball tendency on
-    # non-barrel contact, just shouldn't be weighted nearly as high.
+    "barrel_rate": 0.45,
+    "hard_hit_rate": 0.25,
+    "fly_ball_rate": 0.15,
+    "avg_exit_velo": 0.15,
+    # Barrel rate stays the highest weight — Statcast's barrel definition uses a
+    # sliding EV × angle window (98 mph = 26-30°, 106 mph = ~14-36°, 116 mph =
+    # 8-50°) and captures HR contact most directly. But at 0.55 a two-barrel
+    # spike over a 10-BBE window fully dominated even when the rest of a hitter's
+    # contact was weak (Willy Adames: 2 HRs but 30% HH / 80.9 EV ranked #1).
+    #
+    # Hard-hit% (EV ≥ 95, added at 0.25) is the fix: contact quality now counts
+    # on its own. A ~40% HH floor is the practical minimum for a good L10 play,
+    # so a sub-40% profile can no longer ride two barrels into the top 10.
+    #
+    # Fly-ball% is now QUALITY-GATED (only flies hit ≥ 90 EV count — see
+    # metrics.calc_batter_metrics_for_pitch), so soft pop-flies stop inflating
+    # the air-ball signal. Its weight drops to 0.15 since HH% now carries most
+    # of the contact-quality load. Avg EV overlaps with HH% so it trims to 0.15.
 }
 
 # ── Pitcher Metric Weights (sum to 1.0) ─────────────────────────────────────
@@ -91,14 +100,24 @@ BARREL_VALUE: int = 6              # launch_speed_angle == 6 means barrel
 FLY_BALL_LA_MIN: float = 25.0     # launch angle range for fly balls
 FLY_BALL_LA_MAX: float = 50.0
 HARD_HIT_THRESHOLD: float = 95.0  # mph exit velo for "hard hit"
+HARD_FLY_EV_MIN: float = 90.0     # min EV for a fly ball to count toward the
+                                  # scoring fly-ball rate (soft flies aren't HRs)
 
 # ── Normalization Ranges (for 0-1 scaling) ───────────────────────────────────
 # Fixed empirical ranges so scores are comparable day-to-day.
 NORM_RANGES: dict = {
     "avg_exit_velo": (92.0, 102.0),
     "barrel_rate": (0.0, 0.25),
-    "fly_ball_rate": (0.15, 0.55),
-    "hard_hit_rate": (0.20, 0.65),
+    # Fly-ball rate is now the QUALITY-GATED hard-fly rate (flies ≥ 90 EV only).
+    # Measured league distribution of that metric over same-hand season pools:
+    # p10 ~4%, p50 ~12%, p90 ~24%. Range set to 0.04–0.24 so the median grades
+    # ~0.35 and an elite hard-fly hitter tops out. (Old 0.15–0.55 was for raw FB%.)
+    "fly_ball_rate": (0.04, 0.24),
+    # Hard-hit% is a first-class batter-score input (0.25 weight). Calibrated to
+    # the L10-window targets we bet on: ~40% HH is the floor for a good play,
+    # ~50% is the golden target, 60%+ is elite. So 30%→0 (weak contact zeroed),
+    # 40%→0.33, 50%→0.67, 60%+→1.0.
+    "hard_hit_rate": (0.30, 0.60),
     # Pitcher vulnerability ranges calibrated to MLB averages:
     # League avg FB% (bb_type) ~12%, HR/FB ~12%, HR/9 ~1.2
     # Ranges set so league avg = ~0.5, vulnerable (15%+ HR/FB) = 0.65+

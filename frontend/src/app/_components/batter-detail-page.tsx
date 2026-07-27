@@ -595,7 +595,15 @@ export function BatterDetailPage({
       // Barrel = Statcast launch_speed_angle 6 when present (matches backend +
       // all windows); heuristic fallback only for legacy slates without `lsa`.
       if (ab.lsa != null ? ab.lsa === 6 : (ev >= 98 && la >= 26 && la <= 30)) brl += 1;
-      if (la >= 25 && la <= 50) { fb += 1; fbCt += 1; if (ab.result === "home_run") hrCt += 1; }
+      // FB% is QUALITY-GATED: only flies hit >= 90 EV count (soft flies aren't
+      // homer-worthy — matches the scoring fly-ball rate). Soft flies fall into
+      // the pop-up bucket so the GB/LD/FB/PU profile still sums to 100%. HR/FB
+      // keeps all flies as its denominator (standard definition).
+      if (la >= 25 && la <= 50) {
+        fbCt += 1;
+        if (ev >= 90) fb += 1; else pu += 1;
+        if (ab.result === "home_run") hrCt += 1;
+      }
       else if (la >= 10 && la < 25) ld += 1;
       else if (la < 10) gb += 1;
       else pu += 1;
@@ -633,11 +641,11 @@ export function BatterDetailPage({
     { label: "Avg EV",     value: `${displayEv}`,                                             cls: statHighlight(displayEv, [88, 93]) },
     { label: "Barrel%",    value: `${displayBarrel}%`,                                        cls: statHighlight(displayBarrel, [8, 15]) },
     { label: "GB%",        value: displayGb === null ? "—" : `${displayGb}%`,                cls: "text-foreground" },
-    { label: "FB%",        value: `${displayFb}%`,                                            cls: statHighlight(displayFb, [25, 40]) },
+    { label: "FB% 90+",    value: `${displayFb}%`,                                            cls: statHighlight(displayFb, [12, 20]) },
     { label: "LD%",        value: displayLd === null ? "—" : `${displayLd}%`,                cls: "text-foreground" },
     { label: "PU%",        value: displayPu === null ? "—" : `${displayPu}%`,                cls: "text-foreground" },
     { label: "HR/FB%",     value: displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`,  cls: displayHrFb == null ? "text-foreground" : statHighlight(displayHrFb, [10, 18]) },
-    { label: "Hard Hit%",  value: `${displayHardHit}%`,                                       cls: statHighlight(displayHardHit, [35, 50]) },
+    { label: "Hard Hit%",  value: `${displayHardHit}%`,                                       cls: statHighlight(displayHardHit, [40, 50]) },
     { label: "Blast%",     value: displayBlast == null ? "—" : `${displayBlast}%`,           cls: displayBlast == null ? "text-foreground" : statHighlight(displayBlast, [10, 20]) },
     { label: "Pull Brl%",  value: displayPullBrl == null ? "—" : `${displayPullBrl}%`,       cls: displayPullBrl == null ? "text-foreground" : statHighlight(displayPullBrl, [3, 8]) },
   ];
