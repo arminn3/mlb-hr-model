@@ -129212,7 +129212,7 @@
     ],
     "total_players_ranked": 321,
     "total_hrs_hit": 40,
-    "total_near_hrs": 0,
+    "total_near_hrs": 11,
     "model_hits": 36,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -129261,7 +129261,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 11,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -129292,23 +129292,23 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 5,
-        "rate": 25.0
+        "hits": 6,
+        "rate": 30.0
       },
       "top_30": {
         "total": 30,
-        "hits": 5,
-        "rate": 16.7
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 321,
-        "hits": 36,
-        "rate": 11.2
+        "hits": 47,
+        "rate": 14.6
       }
     },
     "avg_composite_hr_hitters": 0.429,
-    "avg_composite_non_hitters": 0.424,
-    "composite_separation": 0.005,
+    "avg_composite_non_hitters": 0.422,
+    "composite_separation": 0.007,
     "hr_hitters": [
       {
         "name": "Esmerlyn Valdez",
@@ -129817,8 +129817,186 @@
         "matchup": "COL@MIL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Jackson Chourio",
+        "rank": 12,
+        "composite": 0.729,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "COL@MIL"
+      },
+      {
+        "name": "Hao-Yu Lee",
+        "rank": 45,
+        "composite": 0.599,
+        "opp_pitcher": "Luinder Avila",
+        "matchup": "KC@DET"
+      },
+      {
+        "name": "Mookie Betts",
+        "rank": 49,
+        "composite": 0.588,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "LAD@NYM"
+      },
+      {
+        "name": "Dylan Crews",
+        "rank": 56,
+        "composite": 0.573,
+        "opp_pitcher": "Kohl Drake",
+        "matchup": "AZ@WSH"
+      },
+      {
+        "name": "Ryan Kreidler",
+        "rank": 116,
+        "composite": 0.443,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "ATH@MIN"
+      },
+      {
+        "name": "Jahmai Jones",
+        "rank": 126,
+        "composite": 0.424,
+        "opp_pitcher": "Kevin Gausman",
+        "matchup": "TOR@BOS"
+      },
+      {
+        "name": "Blaze Jordan",
+        "rank": 173,
+        "composite": 0.391,
+        "opp_pitcher": "Andrew Abbott",
+        "matchup": "CIN@STL"
+      },
+      {
+        "name": "Cole Young",
+        "rank": 219,
+        "composite": 0.357,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "SEA@TEX"
+      },
+      {
+        "name": "Drew Gilbert",
+        "rank": 227,
+        "composite": 0.35,
+        "opp_pitcher": "Jos\u00e9 Soriano",
+        "matchup": "LAA@SF"
+      },
+      {
+        "name": "Alec Burleson",
+        "rank": 245,
+        "composite": 0.329,
+        "opp_pitcher": "Andrew Abbott",
+        "matchup": "CIN@STL"
+      },
+      {
+        "name": "Luis Garc\u00eda Jr.",
+        "rank": 285,
+        "composite": 0.27,
+        "opp_pitcher": "Kohl Drake",
+        "matchup": "AZ@WSH"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Jahmai Jones",
+        "ev": 100.8,
+        "angle": 25.0,
+        "distance": 391.0,
+        "hr_in_parks": 8,
+        "result": "double",
+        "pitcher": "Little, Brendon"
+      },
+      {
+        "batter": "Hao-Yu Lee",
+        "ev": 102.1,
+        "angle": 23.0,
+        "distance": 386.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Avila, Luinder"
+      },
+      {
+        "batter": "Jackson Chourio",
+        "ev": 101.6,
+        "angle": 27.0,
+        "distance": 397.0,
+        "hr_in_parks": 15,
+        "result": "double",
+        "pitcher": "Sullivan, Brett"
+      },
+      {
+        "batter": "Ryan Kreidler",
+        "ev": 100.6,
+        "angle": 32.0,
+        "distance": 390.0,
+        "hr_in_parks": 23,
+        "result": "triple",
+        "pitcher": "Hartlieb, Geoff"
+      },
+      {
+        "batter": "Mookie Betts",
+        "ev": 99.9,
+        "angle": 24.0,
+        "distance": 377.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "P\u00e9rez, Cionel"
+      },
+      {
+        "batter": "Drew Gilbert",
+        "ev": 101.7,
+        "angle": 28.0,
+        "distance": 387.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Soriano, Jos\u00e9"
+      },
+      {
+        "batter": "Blaze Jordan",
+        "ev": 100.3,
+        "angle": 25.0,
+        "distance": 392.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Johnson, Pierce"
+      },
+      {
+        "batter": "Alec Burleson",
+        "ev": 105.0,
+        "angle": 23.0,
+        "distance": 386.0,
+        "hr_in_parks": 27,
+        "result": "double",
+        "pitcher": "Abbott, Andrew"
+      },
+      {
+        "batter": "Cole Young",
+        "ev": 102.1,
+        "angle": 30.0,
+        "distance": 381.0,
+        "hr_in_parks": 13,
+        "result": "triple",
+        "pitcher": "deGrom, Jacob"
+      },
+      {
+        "batter": "Luis Garc\u00eda Jr.",
+        "ev": 104.1,
+        "angle": 21.0,
+        "distance": 369.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Thompson, Ryan"
+      },
+      {
+        "batter": "Dylan Crews",
+        "ev": 99.5,
+        "angle": 28.0,
+        "distance": 378.0,
+        "hr_in_parks": 4,
+        "result": "double",
+        "pitcher": "Drake, Kohl"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
