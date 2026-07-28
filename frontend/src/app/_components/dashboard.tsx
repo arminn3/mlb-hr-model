@@ -374,7 +374,7 @@ export function Dashboard() {
   const [selectedDate, setSelectedDate] = useState<string>(() => getHashParam("date", ""));
   const [selectedGames, setSelectedGames] = useState<Set<number>>(new Set()); // empty = all games
   const [selectedBatter, setSelectedBatter] = useState<SelectedBatter | null>(null);
-  const [rankingsTab, setRankingsTab] = useState<"ml" | "combined" | "consensus" | "test">("ml");
+  const [rankingsTab, setRankingsTab] = useState<"ml" | "combined" | "consensus" | "test" | "ml2026">("ml");
   const [favorites, setFavorites] = useState<Set<string>>(() => {
     if (typeof window === "undefined") return new Set();
     try {

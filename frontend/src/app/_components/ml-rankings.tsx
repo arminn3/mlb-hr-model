@@ -159,11 +159,11 @@ export function MLRankings({
   games: GameData[];
   lookback: UILookback;
   currentDate: string;
-  onTabChange?: (tab: "ml" | "combined" | "consensus" | "test") => void;
+  onTabChange?: (tab: "ml" | "combined" | "consensus" | "test" | "ml2026") => void;
   lineupOverride?: { starters: string[]; postedTeams?: string[] } | null;
 }) {
-  const [rankingTab, setRankingTab] = useState<"ml" | "combined" | "consensus" | "test">("ml");
-  const setTab = (t: "ml" | "combined" | "consensus" | "test") => {
+  const [rankingTab, setRankingTab] = useState<"ml" | "combined" | "consensus" | "test" | "ml2026">("ml");
+  const setTab = (t: "ml" | "combined" | "consensus" | "test" | "ml2026") => {
     setRankingTab(t);
     onTabChange?.(t);
   };
@@ -451,12 +451,17 @@ export function MLRankings({
 
   const [mlWeights, setMlWeights] = useState<MlWeights>(FALLBACK_WEIGHTS);
   const [weightSource, setWeightSource] = useState<string>("fallback");
+  // 2026 test tab: the weights the ML retrains on 2026-only outcomes each day
+  // (ml_analysis.json category_weights). Independent of the live ML tab's
+  // matchup_v2 weights — this is a pure A/B of the season-learned weights.
+  const [ml2026Weights, setMl2026Weights] = useState<MlWeights>(FALLBACK_WEIGHTS);
   const [yesterday, setYesterday] = useState<{
     date: string;
     mlPicks: YesterdayPick[];
     combinedPicks: YesterdayPick[];
     consensusPicks: YesterdayPick[];
     testPicks: YesterdayPick[];
+    ml2026Picks: YesterdayPick[];
     totalHRs: number;
   } | null>(null);
 
@@ -491,6 +496,7 @@ export function MLRankings({
         const allPlayers: { player: PlayerData; game: GameData }[] = [];
         const mlPicksAll: YesterdayPick[] = [];
         const combinedPicksAll: YesterdayPick[] = [];
+        const ml2026PicksAll: YesterdayPick[] = [];
         for (const game of slate.games ?? []) {
           for (const player of game.players ?? []) {
             if (playedSet && !playedSet.has(player.name)) continue;
@@ -509,10 +515,12 @@ export function MLRankings({
             };
             mlPicksAll.push({ ...base, mlScore: mlScore * reliability });
             combinedPicksAll.push({ ...base, mlScore: combinedScore(player) });
+            ml2026PicksAll.push({ ...base, mlScore: mlComposite(player, lookback, ml2026Weights) * reliability });
           }
         }
         mlPicksAll.sort((a, b) => b.mlScore - a.mlScore);
         combinedPicksAll.sort((a, b) => b.mlScore - a.mlScore);
+        ml2026PicksAll.sort((a, b) => b.mlScore - a.mlScore);
 
         // Consensus: players in top 30 of L5, L10, and Season on yesterday's slate
         const TOP_N = 30;
@@ -565,11 +573,12 @@ export function MLRankings({
           combinedPicks: combinedPicksAll.slice(0, 30),
           consensusPicks: consensusPicksAll,
           testPicks: testPicksAll.slice(0, 30),
+          ml2026Picks: ml2026PicksAll.slice(0, 30),
           totalHRs: hrNames.size,
         });
       })
       .catch(() => setYesterday(null));
-  }, [currentDate, lookback, mlWeights]);
+  }, [currentDate, lookback, mlWeights, ml2026Weights]);
 
   // Prefer the 3-year Matchup v2 weights (125k samples, stable) over the
   // 2026-only ml_analysis.json (~5k samples, noisy). Fall back to the
@@ -615,6 +624,25 @@ export function MLRankings({
       .catch(() => {
         // keep fallback
       });
+  }, []);
+
+  // 2026 test tab weights — always the 2026-only ml_analysis.json (retrained
+  // daily by ml_trainer.py). Loaded separately so the live ML tab keeps its
+  // matchup_v2 weights untouched; this tab is a pure A/B of the season weights.
+  useEffect(() => {
+    fetch("/data/results/ml_analysis.json")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((d) => {
+        if (d?.category_weights) {
+          setMl2026Weights({
+            batter: d.category_weights.batter ?? FALLBACK_WEIGHTS.batter,
+            matchup: d.category_weights.matchup ?? FALLBACK_WEIGHTS.matchup,
+            pitcher: d.category_weights.pitcher ?? FALLBACK_WEIGHTS.pitcher,
+            environment: d.category_weights.environment ?? FALLBACK_WEIGHTS.environment,
+          });
+        }
+      })
+      .catch(() => {});
   }, []);
 
   // Default pool = every player whose game is being played. The "Refresh Lineups"
@@ -694,6 +722,29 @@ export function MLRankings({
       return a.player.name.localeCompare(b.player.name);
     });
   }, [games, lookback, mlWeights]);
+
+  // 2026 test tab — identical ranking method to the ML tab (mlComposite +
+  // confidence reliability), but using the 2026-season-learned weights.
+  const sortedMl2026 = useMemo(() => {
+    const seen = new Set<string>();
+    const all: { player: PlayerData; game: GameData }[] = [];
+    for (const game of games) {
+      for (const player of game.players) {
+        if (!confirmedStarters.has(player.name)) continue;
+        if (!seen.has(player.name)) { seen.add(player.name); all.push({ player, game }); }
+      }
+    }
+    const adj = (pair: typeof all[number]) => {
+      const s = scoreFor(pair.player, lookback);
+      if (!s) return 0;
+      const reliability = Math.min(1, (s.recent_abs?.length ?? 0) / 10);
+      return mlComposite(pair.player, lookback, ml2026Weights) * reliability;
+    };
+    return all.sort((a, b) => {
+      const diff = adj(b) - adj(a);
+      return diff !== 0 ? diff : a.player.name.localeCompare(b.player.name);
+    });
+  }, [games, lookback, ml2026Weights, confirmedStarters]);
 
   const sortedCombined = useMemo(() => {
     const seen = new Set<string>();
@@ -799,6 +850,7 @@ export function MLRankings({
   const activeSorted =
     rankingTab === "combined" ? sortedCombined
     : rankingTab === "test"   ? sortedTest
+    : rankingTab === "ml2026" ? sortedMl2026
     : sorted;
   // Pre-filter to only players that have a renderable score, so rank numbers
   // are always sequential (no gaps from silently-skipped null renders).
@@ -821,6 +873,7 @@ export function MLRankings({
   const activePicks = yesterday
     ? (rankingTab === "combined" ? yesterday.combinedPicks
       : rankingTab === "test"     ? yesterday.testPicks
+      : rankingTab === "ml2026"   ? yesterday.ml2026Picks
       : yesterday.mlPicks)
     : [];
   const yesterdayHits = activePicks.filter((p) => p.hitHR).length;
@@ -835,6 +888,7 @@ export function MLRankings({
               <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
                 {rankingTab === "combined" ? "Yesterday's Balanced Edge Picks"
                   : rankingTab === "test" ? "Yesterday's Test Picks"
+                  : rankingTab === "ml2026" ? "Yesterday's 2026 ML Picks"
                   : "Yesterday's ML Picks"} — {yesterday.date}
               </h3>
               <p className="text-[11px] text-muted mt-0.5">
@@ -978,6 +1032,7 @@ export function MLRankings({
             {rankingTab === "combined" ? "Balanced Edge"
               : rankingTab === "consensus" ? "Consensus"
               : rankingTab === "test" ? "Test (3-yr profile)"
+              : rankingTab === "ml2026" ? "2026 ML (test)"
               : "ML Rankings"}
           </h2>
           <p className="text-[11px] leading-[14px] font-medium tracking-[0.02em] text-muted mt-0.5">
@@ -987,6 +1042,8 @@ export function MLRankings({
               ? "Players in the top 30 on every list — L5, L10, and Season"
               : rankingTab === "test"
               ? "Career power profile (2024+2025+2026) × today's pitcher & park"
+              : rankingTab === "ml2026"
+              ? "A/B test — weights the ML learned from 2026 outcomes only, retrained daily · tracked separately"
               : "Data-driven — reweighted using what the ML learned from past HR outcomes"}
           </p>
         </div>
@@ -1061,7 +1118,7 @@ export function MLRankings({
           keep only ML Model + Consensus. All their logic remains intact; to
           restore, add "combined" / "test" back to the array below. */}
       <div className="flex items-center gap-1 mb-4">
-        {(["ml", "consensus"] as const).map((t) => (
+        {(["ml", "consensus", "ml2026"] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
@@ -1072,7 +1129,7 @@ export function MLRankings({
                 : "bg-transparent text-muted border border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
             }
           >
-            {t === "ml" ? "ML Model" : "Consensus"}
+            {t === "ml" ? "ML Model" : t === "consensus" ? "Consensus" : "2026 ML (test)"}
           </button>
         ))}
       </div>
@@ -1085,6 +1142,16 @@ export function MLRankings({
             · Matchup {wPct(mlWeights.matchup)} · Env {wPct(mlWeights.environment)}
           </span>{" "}
           <span className="text-[10px] text-muted/80">({weightSource})</span>
+        </p>
+      )}
+      {rankingTab === "ml2026" && (
+        <p className="text-[11px] leading-[16px] text-muted mb-4">
+          2026-learned weights:{" "}
+          <span className="text-foreground font-mono">
+            Batter {wPct(ml2026Weights.batter)} · Pitcher {wPct(ml2026Weights.pitcher)}
+            · Matchup {wPct(ml2026Weights.matchup)} · Env {wPct(ml2026Weights.environment)}
+          </span>{" "}
+          <span className="text-[10px] text-muted/80">(2026 only · retrained daily · tracked separately)</span>
         </p>
       )}
       {rankingTab === "combined" && (

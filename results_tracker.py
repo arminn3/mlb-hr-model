@@ -232,6 +232,40 @@ def _compute_combined_score(player: dict) -> float:
     return (f_l10 * f_l5 * f_pit * f_env * f_mix) ** (1/5)
 
 
+# ── 2026 ML test track ────────────────────────────────────────────────────
+# Ranks players by the weights the ML retrains on 2026-only outcomes each day
+# (ml_analysis.json category_weights), tracked SEPARATELY from the primary
+# composite so we can A/B whether the season-learned weights actually beat it.
+# Mirrors the frontend mlComposite + hard-hit floor exactly.
+def _load_ml2026_weights() -> dict:
+    for p in ("results/ml_analysis.json", "frontend/public/data/results/ml_analysis.json"):
+        try:
+            with open(p) as f:
+                cw = json.load(f).get("category_weights")
+            if cw:
+                return {
+                    "batter": cw.get("batter", 0.35),
+                    "matchup": cw.get("matchup", 0.1),
+                    "pitcher": cw.get("pitcher", 0.4),
+                    "environment": cw.get("environment", 0.15),
+                }
+        except Exception:
+            continue
+    return {"batter": 0.35, "matchup": 0.1, "pitcher": 0.4, "environment": 0.15}
+
+
+def _ml2026_score(scores: dict, w: dict) -> float:
+    """mlComposite with the 2026 weights + the 40% hard-hit floor (matches
+    frontend ml-rankings.tsx). scores is a per-lookback ScoreSet dict."""
+    bs = scores.get("batter_score", 0) or 0
+    ps = scores.get("pitcher_score", 0) or 0
+    es = scores.get("env_score", 0) or 0
+    raw = w["batter"] * bs + w["matchup"] * bs + w["pitcher"] * ps + w["environment"] * es
+    if (scores.get("hard_hit_pct", 0) or 0) < 40:
+        raw = min(raw, 0.58)
+    return raw
+
+
 def load_model_predictions(game_date: date) -> dict:
     """Load the model's predictions for a given date."""
     path = Path(f"frontend/public/data/{game_date.isoformat()}.json")
@@ -297,6 +331,7 @@ def compare_results(game_date: date) -> dict:
     print(f"Players who actually batted on {game_date}: {len(players_who_batted)}")
 
     # Build ranked lists — exclude postponed/cancelled games only
+    ml2026_w = _load_ml2026_weights()
     lookback_results = {}
     for lb in ["L5", "L10"]:
         players_lb = []
@@ -316,6 +351,7 @@ def compare_results(game_date: date) -> dict:
                 players_lb.append({
                     "name": player["name"],
                     "composite": scores.get("composite", 0),
+                    "ml2026_score": _ml2026_score(scores, ml2026_w),
                     "batter_score": scores.get("batter_score", 0),
                     "pitcher_score": scores.get("pitcher_score", 0),
                     "env_score": scores.get("env_score", 0),
@@ -403,6 +439,25 @@ def compare_results(game_date: date) -> dict:
 
     # Use L5 as the primary tier_accuracy (backward compat)
     tier_accuracy = tier_accuracy_by_lookback.get("L5", {})
+
+    # ── 2026 ML test track (separate) ─────────────────────────────────────────
+    # Re-rank the same players by the 2026-learned weights and compute a fully
+    # separate tier accuracy so the A/B can be tracked over time.
+    tier_accuracy_ml2026_by_lookback = {}
+    for lb, lb_players in lookback_results.items():
+        ranked = sorted(lb_players, key=lambda x: x.get("ml2026_score", 0), reverse=True)
+        lb_acc = {}
+        for tier_name, tier_players in {
+            "top_10": ranked[:10], "top_20": ranked[:20], "top_30": ranked[:30], "all": ranked,
+        }.items():
+            tier_hits = [p for p in tier_players if any(p["name"] in hr or hr in p["name"] for hr in hr_names)]
+            lb_acc[tier_name] = {
+                "total": len(tier_players),
+                "hits": len(tier_hits),
+                "rate": round(len(tier_hits) / len(tier_players) * 100, 1) if tier_players else 0,
+            }
+        tier_accuracy_ml2026_by_lookback[lb] = lb_acc
+    tier_accuracy_ml2026 = tier_accuracy_ml2026_by_lookback.get("L5", {})
 
     # Find which lookback performed best on this date
     best_lookback = "L5"
@@ -523,6 +578,10 @@ def compare_results(game_date: date) -> dict:
         "model_hits": len(hits),
         "best_lookback": best_lookback,
         "tier_accuracy_by_lookback": tier_accuracy_by_lookback,
+        # 2026 ML test track — separate A/B, ranked by the daily-retrained
+        # 2026-only weights (ml_analysis.json). Do not merge with tier_accuracy.
+        "tier_accuracy_ml2026": tier_accuracy_ml2026,
+        "tier_accuracy_ml2026_by_lookback": tier_accuracy_ml2026_by_lookback,
         "model_near_hits": len(near_hits),
         "tier_accuracy": tier_accuracy,
         "tier_accuracy_with_near": tier_accuracy_with_near,
