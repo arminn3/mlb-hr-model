@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { ArrowLeft } from "lucide-react";
 import type { PlayerData, PitchDetailEntry, ZoneEntry, RecentAB } from "./types";
 import { HRSignalCard } from "./hr-signal-card";
-import { SprayChart } from "./spray-chart";
+import { SprayChart, PITCH_CODE_TO_NAME } from "./spray-chart";
 import { scoreFor, type UILookback } from "./score-utils";
 import { ScoreBar } from "./score-bar";
 import { PitchesTab } from "./pitches-tab";
@@ -1101,7 +1101,16 @@ export function BatterDetailPage({
         {/* Spray chart — self-contained (own hand/pitch/count filters), sourced
             from the full season_abs pool so it can plot well past 10 BBE. */}
         {(player.season_profile?.season_abs?.length ?? 0) > 0 && (
-          <SprayChart abs={(player.season_profile?.season_abs ?? []) as RecentAB[]} batterHand={player.batter_hand} parkTeam={parkTeam} />
+          <SprayChart
+            key={player.name}
+            abs={(player.season_profile?.season_abs ?? []) as RecentAB[]}
+            batterHand={player.batter_hand}
+            parkTeam={parkTeam}
+            pitcherHand={player.pitcher_hand}
+            arsenal={Object.entries(player.pitch_detail ?? {})
+              .map(([code, d]) => ({ name: PITCH_CODE_TO_NAME[code] ?? code, usage: d.usage_pct ?? 0 }))
+              .filter((a) => a.usage > 0)}
+          />
         )}
       </div>
   );

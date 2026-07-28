@@ -27,6 +27,14 @@ function batterScore(barrelFrac: number, hardHitFrac: number, hardFlyFrac: numbe
   );
 }
 
+// Hard-hit floor — mirrors model.py. A batter below ~40% hard-hit in the window
+// isn't a top play regardless of matchup, so the composite is capped.
+export const HH_FLOOR = 0.40;
+export const HH_FLOOR_CAP = 0.58;
+export function applyHhFloor(composite: number, hardHitFrac: number): number {
+  return hardHitFrac < HH_FLOOR ? Math.min(composite, HH_FLOOR_CAP) : composite;
+}
+
 /** Hard-fly rate (flies LA 25-50 hit >= 90 EV, per BBE) over an AB pool.
  *  Mirrors metrics.calc_batter_metrics_for_pitch's gated fly_ball_rate. */
 function hardFlyFrac(abs: RecentAB[]): number {
@@ -67,7 +75,10 @@ function computeSeasonScoreSet(p: PlayerData): ScoreSet | null {
   const env_score     = l10?.env_score     ?? 0.5;
 
   // Season mode: batter 50%, pitcher 35%, env 15%
-  const composite = batter_score * 0.50 + pitcher_score * 0.35 + env_score * 0.15;
+  const composite = applyHhFloor(
+    batter_score * 0.50 + pitcher_score * 0.35 + env_score * 0.15,
+    sp.hard_hit / 100,
+  );
 
   return {
     composite,
@@ -152,7 +163,10 @@ function computeSliceScoreSet(p: PlayerData, n: 15 | 20 | 25): ScoreSet | null {
   const pitcher_score = l10?.pitcher_score ?? 0.5;
   const env_score     = l10?.env_score     ?? 0.5;
   const batter_score = batterScore(brl / cnt, hh / cnt, fb / cnt, evSum / cnt);
-  const composite = batter_score * 0.50 + pitcher_score * 0.35 + env_score * 0.15;
+  const composite = applyHhFloor(
+    batter_score * 0.50 + pitcher_score * 0.35 + env_score * 0.15,
+    hh / cnt,
+  );
 
   return {
     composite,

@@ -200,6 +200,13 @@ def score_batter_vs_pitcher(
         "weighted_ld_rate": 0.0,
         "weighted_gb_rate": 0.0,
         "weighted_hard_hit_rate": 0.0,
+        # Pool (raw last-N BBE) metrics — the numbers the batter card shows and
+        # the ones batter_score is computed from. Defaulted here so the scoring
+        # loop is safe even when the BBE pool is empty.
+        "pool_exit_velo": 0.0,
+        "pool_barrel_rate": 0.0,
+        "pool_fb_rate": 0.0,
+        "pool_hard_hit_rate": 0.0,
         "pitcher_fb_rate": 0.0,
         "pitcher_hr_fb_rate": 0.0,
         "pitcher_hr_per_9": 0.0,
@@ -382,11 +389,16 @@ def score_batter_vs_pitcher(
 
     # ── Step 5: Normalize and weight batter metrics ──────────────────────────
     # Score from the same metrics the user sees — no hidden numbers
+    # Score off the POOL (raw last-N BBE) metrics — the exact numbers shown on
+    # the batter card — NOT the pitch-mix-weighted blend. Pitch-mix weighting
+    # was silently inflating weak contact above what the card displays (e.g.
+    # Willy Adames' card shows 30% HH / 20% barrel but the weighted blend scored
+    # like ~48% HH). display = score: the ranking must use the visible numbers.
     batter_metric_map = {
-        "weighted_exit_velo": "avg_exit_velo",
-        "weighted_barrel_rate": "barrel_rate",
-        "weighted_fb_rate": "fly_ball_rate",
-        "weighted_hard_hit_rate": "hard_hit_rate",
+        "pool_exit_velo": "avg_exit_velo",
+        "pool_barrel_rate": "barrel_rate",
+        "pool_fb_rate": "fly_ball_rate",
+        "pool_hard_hit_rate": "hard_hit_rate",
     }
     batter_score = 0.0
     for result_key, config_key in batter_metric_map.items():
@@ -520,6 +532,15 @@ def score_batter_vs_pitcher(
     # If batter_score < 0.30, cap composite at 0.40 regardless of pitcher/env
     if batter_score < 0.30:
         composite = min(composite, 0.40)
+
+    # Hard-hit floor — ~40% hard-hit is the minimum for a good play in the recent
+    # window. A batter below it isn't a top play no matter how bombable the
+    # pitcher is, so cap the composite to keep weak contact out of the top tier
+    # (top plays sit ~0.70+). This is what stops a 2-barrel spike on otherwise
+    # soft contact (e.g. 30% HH) from riding a batting-practice arm into the top 10.
+    pool_hh = result.get("pool_hard_hit_rate", 0.0)
+    if pool_hh < 0.40:
+        composite = min(composite, 0.58)
 
     result["composite_score"] = composite
 

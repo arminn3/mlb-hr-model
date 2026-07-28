@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { GameData, PlayerData, ModelData } from "./types";
-import { scoreFor, computeSeasonScore, type UILookback } from "./score-utils";
+import { scoreFor, computeSeasonScore, applyHhFloor, type UILookback } from "./score-utils";
 import { RatingBadge } from "./rating-badge";
 import { ScoreBar } from "./score-bar";
 import { teamLogoUrl } from "./game-header";
@@ -138,12 +138,15 @@ export function mlComposite(player: PlayerData, lb: UILookback, w: MlWeights): n
   // Use backend's batter/pitcher/env scores but reweight them with
   // ML-learned category weights. matchup_score isn't stored
   // separately in the JSON, so we split batter contribution lightly.
-  return (
+  const raw =
     w.batter * s.batter_score +
     w.matchup * s.batter_score + // matchup proxy — same direction as batter
     w.pitcher * s.pitcher_score +
-    w.environment * s.env_score
-  );
+    w.environment * s.env_score;
+  // Hard-hit floor — a bat below ~40% hard-hit in the window can't be a top
+  // play no matter how bombable the pitcher is (matches model.py). This is the
+  // real L5/L10 sort key, so the cap has to live here too.
+  return applyHhFloor(raw, (s.hard_hit_pct ?? 0) / 100);
 }
 
 export function MLRankings({

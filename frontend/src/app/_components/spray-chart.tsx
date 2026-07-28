@@ -1,9 +1,22 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import type { RecentAB } from "./types";
 import { CARD } from "../_design";
 import { parkDimsFor } from "./park-dimensions";
+
+/** Statcast pitch code → the full name used in AB `pitch_type` strings.
+ *  Lets us match today's pitcher's arsenal (keyed by code in pitch_detail)
+ *  against the batter's batted balls (tagged with the full pitch name). */
+export const PITCH_CODE_TO_NAME: Record<string, string> = {
+  FF: "4-Seam Fastball", SI: "Sinker", FC: "Cutter", CH: "Changeup",
+  CU: "Curveball", KC: "Knuckle Curve", SL: "Slider", ST: "Sweeper",
+  SV: "Slurve", FS: "Split-Finger", FO: "Forkball", KN: "Knuckleball",
+  EP: "Eephus", CS: "Slow Curve",
+};
+
+/** One pitch in today's pitcher's arsenal: display name + how often they throw it. */
+export interface ArsenalPitch { name: string; usage: number }
 
 // Fence sample bearings (deg from center), left→right: LF line, LF alley, CF,
 // RF alley, RF line.
@@ -73,10 +86,23 @@ const HAND_OPTIONS = [
   { v: "L", label: "vs LHP" },
 ] as const;
 
-export function SprayChart({ abs, batterHand, parkTeam }: { abs: RecentAB[]; batterHand: string; parkTeam?: string }) {
-  const [hand, setHand] = useState<"Both" | "L" | "R">("Both");
+export function SprayChart({ abs, batterHand, parkTeam, pitcherHand, arsenal }: { abs: RecentAB[]; batterHand: string; parkTeam?: string; pitcherHand?: string; arsenal?: ArsenalPitch[] }) {
+  const initialHand: "Both" | "L" | "R" = pitcherHand === "L" ? "L" : pitcherHand === "R" ? "R" : "Both";
+  const arsenalNames = useMemo(() => (arsenal ?? []).map((a) => a.name), [arsenal]);
+  const arsenalKey = arsenalNames.join("|");
+  // Defaults: auto-select the hand today's pitcher throws with, and pre-select
+  // the pitches he actually throws.
+  const [hand, setHand] = useState<"Both" | "L" | "R">(initialHand);
   const [count, setCount] = useState<number>(25);
-  const [pitches, setPitches] = useState<Set<string>>(new Set()); // empty = all
+  const [pitches, setPitches] = useState<Set<string>>(() => new Set(arsenalNames)); // empty = all pitches
+
+  // Re-sync to the new pitcher's defaults when the batter changes (the component
+  // is reused in place, so state wouldn't reset on its own).
+  useEffect(() => {
+    setHand(initialHand);
+    setPitches(new Set(arsenalNames));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pitcherHand, arsenalKey]);
 
   // Today's park wall — sampled at the 5 fence bearings from real dimensions.
   const dims = parkDimsFor(parkTeam);
@@ -89,10 +115,15 @@ export function SprayChart({ abs, batterHand, parkTeam }: { abs: RecentAB[]; bat
     () => abs.filter((a) => a.distance != null && Number(a.distance) > 0),
     [abs],
   );
-  const pitchTypes = useMemo(
-    () => [...new Set(pool.map((a) => a.pitch_type).filter(Boolean))].sort(),
-    [pool],
-  );
+  // Chips = today's pitcher's arsenal (name + usage%), most-thrown first. Falls
+  // back to the pitch types present in the batted-ball pool on legacy slates
+  // that don't pass an arsenal.
+  const chips = useMemo<ArsenalPitch[]>(() => {
+    if (arsenal && arsenal.length) return [...arsenal].sort((a, b) => b.usage - a.usage);
+    return [...new Set(pool.map((a) => a.pitch_type).filter(Boolean))]
+      .sort()
+      .map((name) => ({ name, usage: NaN }));
+  }, [arsenal, pool]);
 
   const plotted = useMemo(
     () =>
@@ -134,22 +165,28 @@ export function SprayChart({ abs, batterHand, parkTeam }: { abs: RecentAB[]; bat
           </button>
         )}
       </div>
-      {pitchTypes.length > 0 && (
+      {chips.length > 0 && (
         <div className="flex flex-wrap gap-1.5 mb-3">
-          {pitchTypes.map((pt) => {
-            const on = pitches.has(pt);
+          {chips.map((c) => {
+            const on = pitches.has(c.name);
+            const hasUsage = Number.isFinite(c.usage);
             return (
               <button
-                key={pt}
-                onClick={() => togglePitch(pt)}
+                key={c.name}
+                onClick={() => togglePitch(c.name)}
                 className={
-                  "px-2 py-1 text-[10px] rounded-md border cursor-pointer transition-colors " +
+                  "px-2 py-1 text-[10px] rounded-md border cursor-pointer transition-colors inline-flex items-center gap-1.5 " +
                   (on
                     ? "bg-accent/15 text-accent border-accent/40"
                     : "bg-transparent text-muted border-[#2c2c2e] hover:text-foreground hover:border-[#3a3a3e]")
                 }
               >
-                {pt}
+                <span>{c.name}</span>
+                {hasUsage && (
+                  <span className={"font-mono tabular-nums " + (on ? "text-accent/70" : "text-muted/60")}>
+                    {c.usage.toFixed(0)}%
+                  </span>
+                )}
               </button>
             );
           })}
