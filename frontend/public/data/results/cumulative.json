@@ -132480,7 +132480,7 @@
     ],
     "total_players_ranked": 296,
     "total_hrs_hit": 29,
-    "total_near_hrs": 0,
+    "total_near_hrs": 18,
     "model_hits": 26,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -132597,7 +132597,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 18,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -132628,23 +132628,23 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 6,
-        "rate": 30.0
+        "hits": 8,
+        "rate": 40.0
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 10,
+        "rate": 33.3
       },
       "all": {
         "total": 296,
-        "hits": 26,
-        "rate": 8.8
+        "hits": 44,
+        "rate": 14.9
       }
     },
     "avg_composite_hr_hitters": 0.497,
-    "avg_composite_non_hitters": 0.441,
-    "composite_separation": 0.056,
+    "avg_composite_non_hitters": 0.438,
+    "composite_separation": 0.059,
     "hr_hitters": [
       {
         "name": "Shohei Ohtani",
@@ -133013,8 +133013,307 @@
         "matchup": "BOS@ATH"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Corbin Carroll",
+        "rank": 16,
+        "composite": 0.727,
+        "opp_pitcher": "Bubba Chandler",
+        "matchup": "AZ@PIT"
+      },
+      {
+        "name": "Bryce Harper",
+        "rank": 20,
+        "composite": 0.697,
+        "opp_pitcher": "Sandy Alcantara",
+        "matchup": "PHI@MIA"
+      },
+      {
+        "name": "Petey Halpin",
+        "rank": 28,
+        "composite": 0.668,
+        "opp_pitcher": "Brady Singer",
+        "matchup": "CLE@CIN"
+      },
+      {
+        "name": "Pete Crow-Armstrong",
+        "rank": 31,
+        "composite": 0.665,
+        "opp_pitcher": "Michael Mcgreevy",
+        "matchup": "CHC@STL"
+      },
+      {
+        "name": "Geraldo Perdomo",
+        "rank": 56,
+        "composite": 0.578,
+        "opp_pitcher": "Bubba Chandler",
+        "matchup": "AZ@PIT"
+      },
+      {
+        "name": "Jimmy Crooks",
+        "rank": 61,
+        "composite": 0.566,
+        "opp_pitcher": "Colin Rea",
+        "matchup": "CHC@STL"
+      },
+      {
+        "name": "Alec Burleson",
+        "rank": 70,
+        "composite": 0.541,
+        "opp_pitcher": "Colin Rea",
+        "matchup": "CHC@STL"
+      },
+      {
+        "name": "Kody Clemens",
+        "rank": 75,
+        "composite": 0.524,
+        "opp_pitcher": "Seth Lugo",
+        "matchup": "KC@MIN"
+      },
+      {
+        "name": "Isaac Paredes",
+        "rank": 92,
+        "composite": 0.472,
+        "opp_pitcher": "Reid Detmers",
+        "matchup": "HOU@LAA"
+      },
+      {
+        "name": "Royce Lewis",
+        "rank": 95,
+        "composite": 0.469,
+        "opp_pitcher": "Seth Lugo",
+        "matchup": "KC@MIN"
+      },
+      {
+        "name": "Alex Bregman",
+        "rank": 121,
+        "composite": 0.443,
+        "opp_pitcher": "Michael Mcgreevy",
+        "matchup": "CHC@STL"
+      },
+      {
+        "name": "Anthony Volpe",
+        "rank": 153,
+        "composite": 0.419,
+        "opp_pitcher": "Anthony Kay",
+        "matchup": "NYY@CWS"
+      },
+      {
+        "name": "Anthony Seigler",
+        "rank": 161,
+        "composite": 0.415,
+        "opp_pitcher": "Gage Jump",
+        "matchup": "BOS@ATH"
+      },
+      {
+        "name": "Taylor Ward",
+        "rank": 170,
+        "composite": 0.409,
+        "opp_pitcher": "Troy Melton",
+        "matchup": "BAL@DET"
+      },
+      {
+        "name": "Vinnie Pasquantino",
+        "rank": 186,
+        "composite": 0.398,
+        "opp_pitcher": "Taj Bradley",
+        "matchup": "KC@MIN"
+      },
+      {
+        "name": "Daulton Varsho",
+        "rank": 228,
+        "composite": 0.345,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "TOR@WSH"
+      },
+      {
+        "name": "Ryan Waldschmidt",
+        "rank": 248,
+        "composite": 0.318,
+        "opp_pitcher": "Bubba Chandler",
+        "matchup": "AZ@PIT"
+      },
+      {
+        "name": "Lawrence Butler",
+        "rank": 293,
+        "composite": 0.178,
+        "opp_pitcher": "Jake Bennett",
+        "matchup": "BOS@ATH"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Anthony Seigler",
+        "ev": 98.8,
+        "angle": 27.0,
+        "distance": 395.0,
+        "hr_in_parks": 25,
+        "result": "field_out",
+        "pitcher": "Harris, Hogan"
+      },
+      {
+        "batter": "Lawrence Butler",
+        "ev": 106.8,
+        "angle": 19.0,
+        "distance": 398.0,
+        "hr_in_parks": 20,
+        "result": "double",
+        "pitcher": "Watson, Ryan"
+      },
+      {
+        "batter": "Anthony Volpe",
+        "ev": 98.6,
+        "angle": 28.0,
+        "distance": 394.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Kay, Anthony"
+      },
+      {
+        "batter": "JJ Bleday",
+        "ev": 102.9,
+        "angle": 26.0,
+        "distance": 398.0,
+        "hr_in_parks": 13,
+        "result": "field_out",
+        "pitcher": "Holderman, Colin"
+      },
+      {
+        "batter": "Petey Halpin",
+        "ev": 100.6,
+        "angle": 32.0,
+        "distance": 381.0,
+        "hr_in_parks": 6,
+        "result": "field_out",
+        "pitcher": "Pag\u00e1n, Emilio"
+      },
+      {
+        "batter": "Taylor Ward",
+        "ev": 98.2,
+        "angle": 35.0,
+        "distance": 387.0,
+        "hr_in_parks": 16,
+        "result": "field_out",
+        "pitcher": "Melton, Troy"
+      },
+      {
+        "batter": "Isaac Paredes",
+        "ev": 96.4,
+        "angle": 19.0,
+        "distance": 431.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "Detmers, Reid"
+      },
+      {
+        "batter": "Bryce Harper",
+        "ev": 106.0,
+        "angle": 25.0,
+        "distance": 396.0,
+        "hr_in_parks": 26,
+        "result": "field_out",
+        "pitcher": "Alcantara, Sandy"
+      },
+      {
+        "batter": "Royce Lewis",
+        "ev": 104.7,
+        "angle": 31.0,
+        "distance": 397.0,
+        "hr_in_parks": 24,
+        "result": "triple",
+        "pitcher": "Lange, Alex"
+      },
+      {
+        "batter": "Kody Clemens",
+        "ev": 98.8,
+        "angle": 28.0,
+        "distance": 376.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Lugo, Seth"
+      },
+      {
+        "batter": "Vinnie Pasquantino",
+        "ev": 107.7,
+        "angle": 34.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Bradley, Taj"
+      },
+      {
+        "batter": "Ryan Waldschmidt",
+        "ev": 102.6,
+        "angle": 25.0,
+        "distance": 384.0,
+        "hr_in_parks": 17,
+        "result": "double",
+        "pitcher": "Mattson, Isaac"
+      },
+      {
+        "batter": "Geraldo Perdomo",
+        "ev": 98.6,
+        "angle": 34.0,
+        "distance": 373.0,
+        "hr_in_parks": 16,
+        "result": "triple",
+        "pitcher": "Chandler, Bubba"
+      },
+      {
+        "batter": "Corbin Carroll",
+        "ev": 102.3,
+        "angle": 29.0,
+        "distance": 395.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Chandler, Bubba"
+      },
+      {
+        "batter": "Jimmy Crooks",
+        "ev": 100.0,
+        "angle": 26.0,
+        "distance": 388.0,
+        "hr_in_parks": 22,
+        "result": "field_out",
+        "pitcher": "Rea, Colin"
+      },
+      {
+        "batter": "Pete Crow-Armstrong",
+        "ev": 102.9,
+        "angle": 28.0,
+        "distance": 401.0,
+        "hr_in_parks": 26,
+        "result": "sac_fly",
+        "pitcher": "McGreevy, Michael"
+      },
+      {
+        "batter": "Alec Burleson",
+        "ev": 102.1,
+        "angle": 26.0,
+        "distance": 399.0,
+        "hr_in_parks": 17,
+        "result": "field_out",
+        "pitcher": "Rea, Colin"
+      },
+      {
+        "batter": "Alex Bregman",
+        "ev": 98.0,
+        "angle": 24.0,
+        "distance": 375.0,
+        "hr_in_parks": 5,
+        "result": "double",
+        "pitcher": "McGreevy, Michael"
+      },
+      {
+        "batter": "Daulton Varsho",
+        "ev": 109.1,
+        "angle": 19.0,
+        "distance": 380.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Cavalli, Cade"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Rob Refsnyder",
