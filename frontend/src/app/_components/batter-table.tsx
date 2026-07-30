@@ -5,7 +5,23 @@ import type { PlayerData, PitchDetailEntry } from "./types";
 import { scoreFor, type UILookback } from "./score-utils";
 import { teamLogoUrl, teamName } from "./game-header";
 
-type SortCol = "score" | "pitch" | "ev" | "barrel" | "blast" | "hh" | "fb" | "hrfb" | "xwoba" | "sweet" | "la" | "swstr" | "pullbrl" | "bip" | "gb" | "ld" | "bzm" | null;
+type SortCol = "score" | "pitch" | "ev" | "barrel" | "blast" | "hh" | "fb" | "hrfb" | "xwoba" | "sweet" | "la" | "swstr" | "pullbrl" | "bip" | "gb" | "ld" | "bzm" | "iso" | "air" | "hr" | null;
+
+// ISO = (total bases − hits) / AB over the BBE pool (matches the current window).
+// recent_abs are batted-ball at-bats, so pool size ≈ AB. null under 3 BBE.
+function isoFromAbs(abs: { result: string }[]): number | null {
+  if (abs.length < 3) return null;
+  const bases = (r: string) => (r === "home_run" ? 4 : r === "triple" ? 3 : r === "double" ? 2 : r === "single" ? 1 : 0);
+  let h = 0, tb = 0;
+  for (const ab of abs) { const b = bases(ab.result); if (b > 0) h += 1; tb += b; }
+  return (tb - h) / abs.length;
+}
+// AIR% = balls hit in the air (LA ≥ 10) over BBE — the complement of GB%.
+function airPctFromAbs(abs: { angle: number }[]): number | null {
+  if (abs.length < 2) return null;
+  return (abs.filter((a) => Number(a.angle) >= 10).length / abs.length) * 100;
+}
+const fmtIso = (v: number | null) => (v == null ? "—" : v.toFixed(3).replace(/^0/, ""));
 type SortDir = "desc" | "asc";
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -290,6 +306,8 @@ export function BatterRow({
   );
   const hrCount   = recentAbs.filter((ab) => ab.result === "home_run").length;
   const hrFbPct   = flyBallEvents.length > 0 ? (hrCount / flyBallEvents.length) * 100 : null;
+  const iso       = isoFromAbs(recentAbs);
+  const airPct    = airPctFromAbs(recentAbs);
 
   const filtered = pitchFilter && pitchFilter.size > 0
     ? filteredPitchStats(p.pitch_detail || {}, pitchFilter)
@@ -401,42 +419,9 @@ export function BatterRow({
         </span>
       </td>
 
-      {/* Core stats — use filtered pitch stats when a pitch filter is active */}
-      <td className="py-2 pr-2 w-14 text-center">
-        {heatPill(filtered ? filtered.exit_velo : scores.exit_velo, 88, 93, String(filtered ? filtered.exit_velo : scores.exit_velo))}
-      </td>
-      <td className="py-2 pr-2 w-14 text-center">
-        {heatPill(filtered ? filtered.barrel_pct : scores.barrel_pct, 8, 15, `${filtered ? filtered.barrel_pct : scores.barrel_pct}%`)}
-      </td>
-      <td className="py-2 pr-2 w-14 text-center">
-        {heatPill(scores.blast_pct ?? null, 10, 18, scores.blast_pct == null ? "—" : `${scores.blast_pct}%`)}
-      </td>
-      <td className="py-2 pr-2 w-14 text-center">
-        {heatPill(filtered ? filtered.hard_hit_pct : scores.hard_hit_pct, 35, 50, `${filtered ? filtered.hard_hit_pct : scores.hard_hit_pct}%`)}
-      </td>
-      <td className="py-2 pr-2 w-14 text-center">
-        {heatPill(filtered ? filtered.fb_pct : scores.fb_pct, 30, 45, `${filtered ? filtered.fb_pct : scores.fb_pct}%`)}
-      </td>
-      <td className="py-2 pr-3 w-16 text-center">
-        {heatPill(hrFbPct, 10, 20, hrFbPct == null ? "—" : `${hrFbPct.toFixed(0)}%`)}
-      </td>
-
-      {/* Advanced / display-only columns */}
-      <td className="py-2 pr-2 w-16 text-center">
-        {heatPill(xwoba, 0.32, 0.40, xwoba == null ? "—" : xwoba.toFixed(3))}
-      </td>
-      <td className="py-2 pr-2 w-16 text-center">
-        {heatPill(sweet, 35, 50, sweet == null ? "—" : `${sweet.toFixed(1)}%`)}
-      </td>
-      <td className="py-2 pr-2 w-14 text-center">
-        {heatPill(avgLa, 12, 18, avgLa == null ? "—" : `${avgLa.toFixed(1)}°`)}
-      </td>
-      <td className="py-2 pr-2 w-16 text-center">
-        {heatPill(swstr == null ? null : 100 - swstr, 60, 75, swstr == null ? "—" : `${swstr.toFixed(1)}%`)}
-      </td>
-      <td className="py-2 pr-2 w-16 text-center">
-        {heatPill(pullBrl, 4, 8, pullBrl == null ? "—" : `${pullBrl.toFixed(1)}%`)}
-      </td>
+      {/* Stat columns — HRP reference order. Uses filtered pitch stats when a
+          pitch filter is active. */}
+      {/* BIP */}
       <td className="py-2 pr-2 w-14 text-center">
         {(() => {
           const bip = scores.bip ?? p.season_profile?.bip_count ?? 0;
@@ -445,11 +430,69 @@ export function BatterRow({
           return <span className={PILL_BASE} style={{ ...style, ...extra }}>{bip > 0 ? bip : "—"}</span>;
         })()}
       </td>
-
-      {/* Contact shape (less important — at the end) */}
+      {/* ISO */}
+      <td className="py-2 pr-2 w-14 text-center">
+        {heatPill(iso, 0.13, 0.20, fmtIso(iso))}
+      </td>
+      {/* Avg EV */}
+      <td className="py-2 pr-2 w-14 text-center">
+        {heatPill(filtered ? filtered.exit_velo : scores.exit_velo, 88, 93, String(filtered ? filtered.exit_velo : scores.exit_velo))}
+      </td>
+      {/* HH% */}
+      <td className="py-2 pr-2 w-14 text-center">
+        {heatPill(filtered ? filtered.hard_hit_pct : scores.hard_hit_pct, 35, 50, `${filtered ? filtered.hard_hit_pct : scores.hard_hit_pct}%`)}
+      </td>
+      {/* Brl% */}
+      <td className="py-2 pr-2 w-14 text-center">
+        {heatPill(filtered ? filtered.barrel_pct : scores.barrel_pct, 8, 15, `${filtered ? filtered.barrel_pct : scores.barrel_pct}%`)}
+      </td>
+      {/* Blast% */}
+      <td className="py-2 pr-2 w-14 text-center">
+        {heatPill(scores.blast_pct ?? null, 10, 18, scores.blast_pct == null ? "—" : `${scores.blast_pct}%`)}
+      </td>
+      {/* Avg LA */}
+      <td className="py-2 pr-2 w-14 text-center">
+        {heatPill(avgLa, 12, 18, avgLa == null ? "—" : `${avgLa.toFixed(1)}°`)}
+      </td>
+      {/* FB% */}
+      <td className="py-2 pr-2 w-14 text-center">
+        {heatPill(filtered ? filtered.fb_pct : scores.fb_pct, 30, 45, `${filtered ? filtered.fb_pct : scores.fb_pct}%`)}
+      </td>
+      {/* GB% */}
       <td className="py-2 pr-2 w-14 text-center">
         <span className={PILL_BASE} style={PILL_MUTED_STYLE}>{scores.gb_pct ?? "—"}%</span>
       </td>
+      {/* Air% */}
+      <td className="py-2 pr-2 w-14 text-center">
+        <span className={PILL_BASE} style={PILL_MUTED_STYLE}>{airPct == null ? "—" : `${airPct.toFixed(0)}%`}</span>
+      </td>
+      {/* PullBrl% */}
+      <td className="py-2 pr-2 w-16 text-center">
+        {heatPill(pullBrl, 4, 8, pullBrl == null ? "—" : `${pullBrl.toFixed(1)}%`)}
+      </td>
+      {/* HR */}
+      <td className="py-2 pr-2 w-12 text-center">
+        <span className={PILL_BASE} style={hrCount > 0 ? HEAT_NONE : HEAT_MUTED}>{hrCount}</span>
+      </td>
+
+      {/* Existing extras (kept, appended after the reference set) */}
+      {/* HR/FB */}
+      <td className="py-2 pr-3 w-16 text-center">
+        {heatPill(hrFbPct, 10, 20, hrFbPct == null ? "—" : `${hrFbPct.toFixed(0)}%`)}
+      </td>
+      {/* xwOBA */}
+      <td className="py-2 pr-2 w-16 text-center">
+        {heatPill(xwoba, 0.32, 0.40, xwoba == null ? "—" : xwoba.toFixed(3))}
+      </td>
+      {/* Sweet% */}
+      <td className="py-2 pr-2 w-16 text-center">
+        {heatPill(sweet, 35, 50, sweet == null ? "—" : `${sweet.toFixed(1)}%`)}
+      </td>
+      {/* SwStr% */}
+      <td className="py-2 pr-2 w-16 text-center">
+        {heatPill(swstr == null ? null : 100 - swstr, 60, 75, swstr == null ? "—" : `${swstr.toFixed(1)}%`)}
+      </td>
+      {/* LD% */}
       <td className="py-2 pr-2 w-14 text-center">
         <span className={PILL_BASE} style={PILL_MUTED_STYLE}>{scores.ld_pct ?? "—"}%</span>
       </td>
@@ -597,6 +640,9 @@ export function BatterTable({
       case "swstr":   return sc.swstr != null ? -(sc.swstr) : (row.p.matchup_swstr != null ? -(row.p.matchup_swstr) : 1);
       case "pullbrl": return sc.pull_brl ?? -1;
       case "bip":     return filt ? filt.bip : (sc.bip ?? -1);
+      case "iso":     return isoFromAbs(recentAbs) ?? -1;
+      case "air":     return airPctFromAbs(recentAbs) ?? -1;
+      case "hr":      return hrs;
       case "gb":      return sc.gb_pct ?? 0;
       case "ld":      return sc.ld_pct ?? 0;
       case "bzm": {
@@ -746,19 +792,23 @@ export function BatterTable({
               <th className="py-2 pr-4 text-[9px] uppercase tracking-widest text-muted/50 font-semibold text-left">Player</th>
               <SortTh label="Score"    col="score"   active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-24 text-left" />
               <SortTh label="Pitch"    col="pitch"   active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-20 text-left" />
+              {/* Column order per HRP reference: BIP · ISO · EV · HH · Brl · Blast · LA · FB · GB · Air · PullBrl · HR, then existing extras */}
+              <SortTh label="BIP"      col="bip"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("bip")} />
+              <SortTh label="ISO"      col="iso"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("iso")} />
               <SortTh label="EV"       col="ev"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("ev")} />
+              <SortTh label="HH%"      col="hh"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("hh")} />
               <SortTh label="Brl%"     col="barrel"  active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("barrel")} />
               <SortTh label="Blast%"   col="blast"   active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("blast")} />
-              <SortTh label="HH%"      col="hh"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("hh")} />
+              <SortTh label="LA"       col="la"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("la")} />
               <SortTh label="FB%"      col="fb"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("fb")} />
+              <SortTh label="GB%"      col="gb"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("gb")} />
+              <SortTh label="Air%"     col="air"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("air")} />
+              <SortTh label="PullBrl%" col="pullbrl" active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("pullbrl")} />
+              <SortTh label="HR"       col="hr"      active={sortCol} dir={sortDir} onClick={handleSort} className="pr-2 w-12 text-center" />
               <SortTh label="HR/FB"    col="hrfb"    active={sortCol} dir={sortDir} onClick={handleSort} className="pr-4 w-16 text-center" />
               <SortTh label="xwOBA"    col="xwoba"   active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("xwoba")} />
               <SortTh label="Sweet%"   col="sweet"   active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("sweet")} />
-              <SortTh label="LA"       col="la"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("la")} />
               <SortTh label="SwStr%"   col="swstr"   active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("swstr")} />
-              <SortTh label="PullBrl%" col="pullbrl" active={sortCol} dir={sortDir} onClick={handleSort} className={thWide("pullbrl")} />
-              <SortTh label="BIP"      col="bip"     active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("bip")} />
-              <SortTh label="GB%"      col="gb"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("gb")} />
               <SortTh label="LD%"      col="ld"      active={sortCol} dir={sortDir} onClick={handleSort} className={thCls("ld")} />
               <SortTh label="BZM"      col="bzm"     active={sortCol} dir={sortDir} onClick={handleSort} className="pr-3 w-12 text-center" />
               <th className="w-8" />
