@@ -137,6 +137,7 @@ function BatterMobileCard({
   const pill = matchupPill(mScore);
   const isLowData = scores.recent_abs.length <= 2;
   const hasQualityWarn = !isLowData && scores.data_quality === "LOW_SAMPLE";
+  const isoCompact = isoFromAbs(scores.recent_abs ?? []);
 
   // tags for BatterRow are not applicable (desktop only), skip for mobile card
   // HR signals summary
@@ -228,6 +229,7 @@ function BatterMobileCard({
 
       {/* Stats row */}
       <div className="flex items-center gap-3 mt-2 ml-0 pl-[calc(0.625rem+2.25rem+0.625rem)]">
+        <StatPair label="ISO" value={fmtIso(isoCompact)} color={statColor(isoCompact ?? 0, 0.13, 0.20)} />
         <StatPair label="EV" value={`${scores.exit_velo}`} color={statColor(scores.exit_velo, 88, 93)} />
         <StatPair label="Brl" value={`${scores.barrel_pct}%`} color={statColor(scores.barrel_pct, 8, 15)} />
         <StatPair label="HH" value={`${scores.hard_hit_pct}%`} color={statColor(scores.hard_hit_pct, 35, 50)} />
