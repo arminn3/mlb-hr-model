@@ -764,6 +764,41 @@ export function BatterDetailPage({
         {/* Score bar */}
         <ScoreBar value={scores.composite} />
 
+        {/* Head-to-head vs today's pitcher — surfaced immediately on open
+            (was buried in the collapsed "More" section). Data: bvp_stats.career.
+            NOTE: the season "Splits vs hand" card (AB/BA/HR/K%/BB% vs the
+            pitcher's hand) needs a backend field that isn't in the slate yet. */}
+        {player.bvp_stats?.career && player.bvp_stats.career.abs > 0 && (() => {
+          const c = player.bvp_stats!.career;
+          const strip0 = (v: number) => v.toFixed(3).replace(/^0/, "");
+          const cells: [string, string][] = [
+            ["AB", `${c.abs}`],
+            ["H", `${c.hits}`],
+            ["HR", `${c.hrs}`],
+            ["BA", strip0(c.ba)],
+            ["SLG", strip0(c.slg)],
+            ["ISO", strip0(c.iso)],
+            ["OPS", c.ops != null ? String(c.ops) : "—"],
+            ["K%", `${c.k_pct.toFixed(0)}%`],
+          ];
+          return (
+            <div className="rounded-xl p-4" style={{ background: "linear-gradient(180deg, rgba(96,165,250,0.08) 0%, rgba(255,255,255,0.02) 100%)", border: "1px solid rgba(96,165,250,0.20)" }}>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-[11px] font-bold uppercase tracking-[0.07em] text-foreground/70">{player.name} vs {player.opp_pitcher}</span>
+                <span className="text-[10px] text-muted/60">career head-to-head</span>
+              </div>
+              <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
+                {cells.map(([label, value]) => (
+                  <div key={label} className="flex flex-col items-center justify-center gap-1 px-2 py-2.5 rounded-lg" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                    <span className="text-[9px] uppercase tracking-[0.08em] text-muted/60 leading-none">{label}</span>
+                    <span className={`font-mono text-[14px] font-semibold leading-none ${label === "HR" && c.hrs > 0 ? "text-accent-green" : "text-foreground"}`}>{value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
+
         {/* HR Signal — collapsed by default to save vertical space; users
             who want the breakdown can click open. */}
         <details className="rounded-xl" style={{ background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.08)" }}>
