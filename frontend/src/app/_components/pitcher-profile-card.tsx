@@ -128,6 +128,10 @@ export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { p
   const is2025Fallback = (profile?.data_year ?? 2026) === 2025;
 
   const [windowKey, setWindowKey] = useState<WindowKey>("season");
+  // "Mix vs Hand" — per-pitch breakdown vs a batter hand (all starts). Sourced
+  // from profile.arsenal_vs_L / _vs_R. (Per-pitch × per-window isn't in the
+  // slate, so this table is season/all-starts.)
+  const [mixHand, setMixHand] = useState<"R" | "L">("R");
   // Window data lives under profile.windows[key] with the same shape as
   // profile.rows ({ season, vs_L, vs_R }). Fall back to season rows when
   // a window is missing (older slates pre-windows).
@@ -293,6 +297,83 @@ export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { p
           </table>
         </div>
       )}
+
+      {/* Mix vs Hand — how the pitcher performs on each individual pitch vs a
+          batter hand (all starts; per-pitch × per-window isn't in the slate). */}
+      {(() => {
+        const arsenal = (mixHand === "R" ? profile?.arsenal_vs_R : profile?.arsenal_vs_L) ?? [];
+        if (!arsenal.length) return null;
+        const summary = mixHand === "R" ? seasonRows?.vs_R : seasonRows?.vs_L;
+        const sorted = [...arsenal].sort((a, b) => (b.usage_pct ?? 0) - (a.usage_pct ?? 0));
+        const s0 = (v: number | null | undefined) => (v == null ? DASH : v.toFixed(3).replace(/^0/, ""));
+        const cards: [string, string | number][] = summary ? [
+          ["BIP", summary.bf ?? DASH],
+          ["AVG", s0(summary.baa)],
+          ["HR/9", summary.hr_per_9 ?? DASH],
+          ["HH%", summary.hard_hit_pct != null ? `${summary.hard_hit_pct}%` : DASH],
+          ["FB%", summary.fb_pct != null ? `${summary.fb_pct}%` : DASH],
+        ] : [];
+        return (
+          <div className="mt-4 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] font-bold uppercase tracking-[0.07em] text-foreground/55">Mix vs Hand</span>
+              <div className="flex items-center gap-0 rounded overflow-hidden text-[10px] font-bold font-mono" style={{ border: "1px solid rgba(255,255,255,0.10)" }}>
+                {(["R", "L"] as const).map((h) => (
+                  <button key={h} onClick={() => setMixHand(h)}
+                    className={"px-2 py-0.5 cursor-pointer transition-colors " + (mixHand === h ? "bg-accent/15 text-accent" : "text-muted hover:text-foreground")}>
+                    vs {h}HB
+                  </button>
+                ))}
+              </div>
+            </div>
+            {cards.length > 0 && (
+              <div className="grid grid-cols-5 gap-1.5 mb-2 text-center">
+                {cards.map(([l, v]) => (
+                  <div key={l} className="rounded px-1 py-1" style={{ background: "rgba(255,255,255,0.04)" }}>
+                    <div className="text-[8px] uppercase tracking-wider text-muted/60">{l}</div>
+                    <div className="text-[12px] font-mono font-semibold text-foreground">{v}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="overflow-x-auto -mx-1 px-1">
+              <table className="w-full text-xs font-mono border-collapse">
+                <thead>
+                  <tr className="text-[10px] uppercase tracking-wider text-muted">
+                    <th className="text-left font-medium pb-1.5 pr-2">Pitch</th>
+                    {["Usage", "Velo", "BIP", "AVG", "SLG", "ISO", "HR%", "K%"].map((h) => (
+                      <th key={h} className="font-medium pb-1.5 px-1 text-center">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {sorted.map((a) => {
+                    const hrPct = a.bbe && a.bbe > 0 ? ((a.hr ?? 0) / a.bbe) * 100 : null;
+                    const isTarget = (a.iso ?? 0) >= 0.2 && (a.bbe ?? 0) >= 8;
+                    return (
+                      <tr key={a.type} className="border-t border-card-border/40">
+                        <td className="pl-1 pr-2 py-1.5 whitespace-nowrap">
+                          {isTarget && <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-green mr-1.5 align-middle" />}
+                          <span className="text-[11px] font-bold text-foreground">{a.type}</span>
+                          <span className="text-[10px] text-muted/60 ml-1.5">{a.name}</span>
+                        </td>
+                        <td className="text-center px-1 py-1.5">{a.usage_pct != null ? `${a.usage_pct}%` : DASH}</td>
+                        <td className="text-center px-1 py-1.5">{a.avg_velo != null ? a.avg_velo.toFixed(1) : DASH}</td>
+                        <td className="text-center px-1 py-1.5">{a.bbe ?? DASH}</td>
+                        <td className="text-center px-1 py-1.5">{s0(a.ba)}</td>
+                        <td className="text-center px-1 py-1.5">{s0(a.slg)}</td>
+                        <td className={"text-center px-1 py-1.5 " + (isTarget ? "text-accent-green font-bold" : "")}>{s0(a.iso)}</td>
+                        <td className="text-center px-1 py-1.5">{hrPct != null ? `${hrPct.toFixed(1)}%` : DASH}</td>
+                        <td className="text-center px-1 py-1.5">{a.k_pct != null ? `${a.k_pct}%` : DASH}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }
