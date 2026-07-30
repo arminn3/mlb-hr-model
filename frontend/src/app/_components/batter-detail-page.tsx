@@ -435,6 +435,13 @@ export function BatterDetailPage({
   const [pitchFilter, setPitchFilter] = useState<Set<string>>(defaultSelected);
   // When the chip list changes (new batter opened), reset to the new default.
   useEffect(() => { setPitchFilter(defaultSelected); }, [defaultSelected]);
+  // "All pitches selected" must behave EXACTLY like "no pitch filter" — otherwise
+  // clicking Select All routes through the narrowing path and, when a code has no
+  // per-pitch log rows, collapses the pool to empty and blanks every stat (the
+  // "stats break when I select all the pitches" bug). Treat it as no narrowing.
+  const allPitchesSelected =
+    chipList.length > 0 && chipList.every((c) => pitchFilter.has(c.type));
+  const pitchNarrowing = pitchFilter.size > 0 && !allPitchesSelected;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pitchAbsData = (scores as any).pitch_abs as Record<string, Array<Record<string, unknown>>> | undefined;
@@ -460,7 +467,7 @@ export function BatterDetailPage({
   // both.) Empty selection = match everything.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pitchMatch = (ab: any): boolean => {
-    if (pitchFilter.size === 0) return true;
+    if (!pitchNarrowing) return true;
     const pt = String(ab.pitch_type ?? "");
     if (pitchFilter.has(pt)) return true;
     for (const code of pitchFilter) {
@@ -487,13 +494,13 @@ export function BatterDetailPage({
   const isDefaultPitchSelection =
     pitchFilter.size === defaultSelected.size &&
     [...pitchFilter].every((p) => defaultSelected.has(p));
-  const applyPitchToLog = pitchFilter.size > 0 && !isDefaultPitchSelection;
+  const applyPitchToLog = pitchNarrowing && !isDefaultPitchSelection;
   if (needBothHand) {
     filteredABs = applyPitchToLog ? bothHandPool.filter(pitchMatch) : bothHandPool.slice();
   } else if (isWideWindow) {
     const pool = applyPitchToLog ? (scores.recent_abs || []).filter(pitchMatch) : (scores.recent_abs || []);
     filteredABs = pool.slice(0, limit);
-  } else if (pitchFilter.size === 0) {
+  } else if (!pitchNarrowing) {
     if (pitchAbsData && Object.keys(pitchAbsData).length > 0) {
       const all = Object.values(pitchAbsData).flat();
       all.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
@@ -548,10 +555,10 @@ export function BatterDetailPage({
   const isSeasonMode = scores.data_quality === "SEASON";
   const bip = scores.bip ?? 0;
 
-  let displayBarrel = scores.barrel_pct, displayFb = scores.fb_pct;
+  let displayBarrel: number | null = scores.barrel_pct, displayFb: number | null = scores.fb_pct;
   let displayLd: number | null = (bip < 3 && scores.ld_pct === 0) ? null : (scores.ld_pct ?? null);
   let displayGb: number | null = (bip < 3 && scores.gb_pct === 0) ? null : (scores.gb_pct ?? null);
-  let displayHardHit = scores.hard_hit_pct, displayEv = scores.exit_velo;
+  let displayHardHit: number | null = scores.hard_hit_pct, displayEv: number | null = scores.exit_velo;
   let displayHrFb: number | null = hrFbPct;
   // PU% (pop-ups) — Statcast doesn't surface this directly, but the four
   // launch-angle buckets (GB/LD/FB/PU) sum to 100% of BIP. Derive PU% by
@@ -579,7 +586,7 @@ export function BatterDetailPage({
   // ANY filter is narrowing the view — pitch chips, Pitch Arm (defaults to the
   // opposing hand, so this is almost always on), or Home/Away. Keeps the cards
   // and the log in lockstep: the numbers are raw counts over the visible ABs.
-  const anyFilterActive = pitchFilter.size > 0 || armFilter !== "Both" || dnFilter !== "Both" || haFilter !== "Both";
+  const anyFilterActive = pitchNarrowing || armFilter !== "Both" || dnFilter !== "Both" || haFilter !== "Both";
   if (anyFilterActive && filteredABs.length > 0) {
     const n = filteredABs.length;
     const pct = (count: number) => Math.round((count / n) * 1000) / 10;
@@ -624,8 +631,10 @@ export function BatterDetailPage({
     const haveBatSpeed = filteredABs.some((ab) => ab.bat_speed != null);
     displayBlast = haveBatSpeed ? pct(blast) : null;
   } else if (anyFilterActive) {
-    displayBarrel = 0; displayFb = 0; displayLd = 0;
-    displayGb = 0; displayHardHit = 0; displayEv = 0;
+    // No ABs match the active filter — show "—" everywhere, never 0s (0 EV /
+    // 0% across the card is the "stats broke" look the user reported).
+    displayBarrel = null; displayFb = null; displayLd = null;
+    displayGb = null; displayHardHit = null; displayEv = null;
     displayPu = null; displayHrFb = null; displayBlast = null;
   }
   void recentAbsArr;
@@ -638,14 +647,14 @@ export function BatterDetailPage({
   // pitch-filter recompute block) so the recompute branch can override it.
   const displayPullBrl = player.season_profile?.pull_barrel ?? null;
   const statCards = [
-    { label: "Avg EV",     value: `${displayEv}`,                                             cls: statHighlight(displayEv, [88, 93]) },
-    { label: "Barrel%",    value: `${displayBarrel}%`,                                        cls: statHighlight(displayBarrel, [8, 15]) },
+    { label: "Avg EV",     value: displayEv === null ? "—" : `${displayEv}`,                  cls: displayEv === null ? "text-foreground" : statHighlight(displayEv, [88, 93]) },
+    { label: "Barrel%",    value: displayBarrel === null ? "—" : `${displayBarrel}%`,         cls: displayBarrel === null ? "text-foreground" : statHighlight(displayBarrel, [8, 15]) },
     { label: "GB%",        value: displayGb === null ? "—" : `${displayGb}%`,                cls: "text-foreground" },
-    { label: "FB% 90+",    value: `${displayFb}%`,                                            cls: statHighlight(displayFb, [12, 20]) },
+    { label: "FB% 90+",    value: displayFb === null ? "—" : `${displayFb}%`,                 cls: displayFb === null ? "text-foreground" : statHighlight(displayFb, [12, 20]) },
     { label: "LD%",        value: displayLd === null ? "—" : `${displayLd}%`,                cls: "text-foreground" },
     { label: "PU%",        value: displayPu === null ? "—" : `${displayPu}%`,                cls: "text-foreground" },
     { label: "HR/FB%",     value: displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`,  cls: displayHrFb == null ? "text-foreground" : statHighlight(displayHrFb, [10, 18]) },
-    { label: "Hard Hit%",  value: `${displayHardHit}%`,                                       cls: statHighlight(displayHardHit, [40, 50]) },
+    { label: "Hard Hit%",  value: displayHardHit === null ? "—" : `${displayHardHit}%`,       cls: displayHardHit === null ? "text-foreground" : statHighlight(displayHardHit, [40, 50]) },
     { label: "Blast%",     value: displayBlast == null ? "—" : `${displayBlast}%`,           cls: displayBlast == null ? "text-foreground" : statHighlight(displayBlast, [10, 20]) },
     { label: "Pull Brl%",  value: displayPullBrl == null ? "—" : `${displayPullBrl}%`,       cls: displayPullBrl == null ? "text-foreground" : statHighlight(displayPullBrl, [3, 8]) },
   ];
