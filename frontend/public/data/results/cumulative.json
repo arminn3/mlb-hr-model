@@ -134286,7 +134286,7 @@
     ],
     "total_players_ranked": 314,
     "total_hrs_hit": 23,
-    "total_near_hrs": 0,
+    "total_near_hrs": 21,
     "model_hits": 22,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -134403,7 +134403,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 21,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -134429,28 +134429,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 3,
+        "rate": 30.0
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 4,
-        "rate": 13.3
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 314,
-        "hits": 22,
-        "rate": 7.0
+        "hits": 43,
+        "rate": 13.7
       }
     },
     "avg_composite_hr_hitters": 0.445,
-    "avg_composite_non_hitters": 0.403,
-    "composite_separation": 0.042,
+    "avg_composite_non_hitters": 0.4,
+    "composite_separation": 0.045,
     "hr_hitters": [
       {
         "name": "Kyle Manzardo",
@@ -134763,8 +134763,364 @@
         "matchup": "PHI@MIA"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Cal Raleigh",
+        "rank": 2,
+        "composite": 0.843,
+        "opp_pitcher": "Eric Lauer",
+        "matchup": "SEA@LAD"
+      },
+      {
+        "name": "Coby Mayo",
+        "rank": 12,
+        "composite": 0.694,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "BAL@DET"
+      },
+      {
+        "name": "Ben Rice",
+        "rank": 53,
+        "composite": 0.539,
+        "opp_pitcher": "Davis Martin",
+        "matchup": "NYY@CWS"
+      },
+      {
+        "name": "Christian Encarnacion-Strand",
+        "rank": 61,
+        "composite": 0.516,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "BAL@DET"
+      },
+      {
+        "name": "Tyrone Taylor",
+        "rank": 72,
+        "composite": 0.485,
+        "opp_pitcher": "Chris Sale",
+        "matchup": "ATL@NYM"
+      },
+      {
+        "name": "Salvador Perez",
+        "rank": 81,
+        "composite": 0.47,
+        "opp_pitcher": "Joe Ryan",
+        "matchup": "KC@MIN"
+      },
+      {
+        "name": "Isaac Paredes",
+        "rank": 85,
+        "composite": 0.468,
+        "opp_pitcher": "Grayson Rodriguez",
+        "matchup": "HOU@LAA"
+      },
+      {
+        "name": "Jonathan Aranda",
+        "rank": 88,
+        "composite": 0.467,
+        "opp_pitcher": "MacKenzie Gore",
+        "matchup": "TEX@TB"
+      },
+      {
+        "name": "Julio Rodr\u00edguez",
+        "rank": 110,
+        "composite": 0.436,
+        "opp_pitcher": "Eric Lauer",
+        "matchup": "SEA@LAD"
+      },
+      {
+        "name": "Steven Kwan",
+        "rank": 133,
+        "composite": 0.414,
+        "opp_pitcher": "Brady Singer",
+        "matchup": "CLE@CIN"
+      },
+      {
+        "name": "Jackson Merrill",
+        "rank": 135,
+        "composite": 0.413,
+        "opp_pitcher": "Gabriel Hughes",
+        "matchup": "COL@SD"
+      },
+      {
+        "name": "Gunnar Henderson",
+        "rank": 141,
+        "composite": 0.412,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "BAL@DET"
+      },
+      {
+        "name": "Jake Burger",
+        "rank": 156,
+        "composite": 0.395,
+        "opp_pitcher": "Casey Legumina",
+        "matchup": "TEX@TB"
+      },
+      {
+        "name": "Tyler O'Neill",
+        "rank": 166,
+        "composite": 0.391,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "BAL@DET"
+      },
+      {
+        "name": "Francisco Lindor",
+        "rank": 192,
+        "composite": 0.357,
+        "opp_pitcher": "Chris Sale",
+        "matchup": "ATL@NYM"
+      },
+      {
+        "name": "Noelvi Marte",
+        "rank": 195,
+        "composite": 0.353,
+        "opp_pitcher": "Joey Cantillo",
+        "matchup": "CLE@CIN"
+      },
+      {
+        "name": "Brady House",
+        "rank": 208,
+        "composite": 0.34,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@WSH"
+      },
+      {
+        "name": "Elias D\u00edaz",
+        "rank": 221,
+        "composite": 0.326,
+        "opp_pitcher": "Casey Legumina",
+        "matchup": "TEX@TB"
+      },
+      {
+        "name": "Nathan Church",
+        "rank": 230,
+        "composite": 0.317,
+        "opp_pitcher": "Matthew Boyd",
+        "matchup": "CHC@STL"
+      },
+      {
+        "name": "Josh Bell",
+        "rank": 281,
+        "composite": 0.234,
+        "opp_pitcher": "Randy Dobnak",
+        "matchup": "KC@MIN"
+      },
+      {
+        "name": "Alex Bregman",
+        "rank": 298,
+        "composite": 0.194,
+        "opp_pitcher": "Dustin May",
+        "matchup": "CHC@STL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Lawrence Butler",
+        "ev": 98.4,
+        "angle": 30.0,
+        "distance": 384.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Chapman, Aroldis"
+      },
+      {
+        "batter": "Ben Rice",
+        "ev": 108.8,
+        "angle": 33.0,
+        "distance": 398.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Taylor, Grant"
+      },
+      {
+        "batter": "Noelvi Marte",
+        "ev": 99.6,
+        "angle": 27.0,
+        "distance": 368.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Cantillo, Joey"
+      },
+      {
+        "batter": "Steven Kwan",
+        "ev": 80.8,
+        "angle": 21.0,
+        "distance": 411.0,
+        "hr_in_parks": 28,
+        "result": "",
+        "pitcher": "Singer, Brady"
+      },
+      {
+        "batter": "Gunnar Henderson",
+        "ev": 100.0,
+        "angle": 30.0,
+        "distance": 384.0,
+        "hr_in_parks": 25,
+        "result": "field_out",
+        "pitcher": "Jansen, Kenley"
+      },
+      {
+        "batter": "Coby Mayo",
+        "ev": 105.6,
+        "angle": 26.0,
+        "distance": 415.0,
+        "hr_in_parks": 29,
+        "result": "triple",
+        "pitcher": "Anderson, Drew"
+      },
+      {
+        "batter": "Coby Mayo",
+        "ev": 103.1,
+        "angle": 32.0,
+        "distance": 411.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Skubal, Tarik"
+      },
+      {
+        "batter": "Christian Encarnacion-Strand",
+        "ev": 100.4,
+        "angle": 31.0,
+        "distance": 405.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Skubal, Tarik"
+      },
+      {
+        "batter": "Tyler O'Neill",
+        "ev": 97.1,
+        "angle": 28.0,
+        "distance": 393.0,
+        "hr_in_parks": 9,
+        "result": "field_out",
+        "pitcher": "Skubal, Tarik"
+      },
+      {
+        "batter": "Isaac Paredes",
+        "ev": 101.8,
+        "angle": 26.0,
+        "distance": 389.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Rodriguez, Grayson"
+      },
+      {
+        "batter": "Cal Raleigh",
+        "ev": 103.7,
+        "angle": 24.0,
+        "distance": 391.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Lauer, Eric"
+      },
+      {
+        "batter": "Julio Rodr\u00edguez",
+        "ev": 110.6,
+        "angle": 33.0,
+        "distance": 405.0,
+        "hr_in_parks": 19,
+        "result": "",
+        "pitcher": "Lauer, Eric"
+      },
+      {
+        "batter": "Salvador Perez",
+        "ev": 101.8,
+        "angle": 25.0,
+        "distance": 410.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Ryan, Joe"
+      },
+      {
+        "batter": "Josh Bell",
+        "ev": 101.6,
+        "angle": 23.0,
+        "distance": 392.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Dobnak, Randy"
+      },
+      {
+        "batter": "Tyrone Taylor",
+        "ev": 101.4,
+        "angle": 30.0,
+        "distance": 392.0,
+        "hr_in_parks": 6,
+        "result": "field_out",
+        "pitcher": "Kinley, Tyler"
+      },
+      {
+        "batter": "Francisco Lindor",
+        "ev": 104.1,
+        "angle": 35.0,
+        "distance": 404.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "Smith-Shawver, AJ"
+      },
+      {
+        "batter": "Jackson Merrill",
+        "ev": 103.5,
+        "angle": 33.0,
+        "distance": 393.0,
+        "hr_in_parks": 17,
+        "result": "field_out",
+        "pitcher": "Hughes, Gabriel"
+      },
+      {
+        "batter": "Nathan Church",
+        "ev": 99.4,
+        "angle": 25.0,
+        "distance": 375.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Boyd, Matthew"
+      },
+      {
+        "batter": "Alex Bregman",
+        "ev": 101.2,
+        "angle": 24.0,
+        "distance": 372.0,
+        "hr_in_parks": 2,
+        "result": "double",
+        "pitcher": "May, Dustin"
+      },
+      {
+        "batter": "Jake Burger",
+        "ev": 110.2,
+        "angle": 17.0,
+        "distance": 411.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Seymour, Ian"
+      },
+      {
+        "batter": "Elias D\u00edaz",
+        "ev": 96.7,
+        "angle": 28.0,
+        "distance": 384.0,
+        "hr_in_parks": 21,
+        "result": "double",
+        "pitcher": "Seymour, Ian"
+      },
+      {
+        "batter": "Jonathan Aranda",
+        "ev": 101.5,
+        "angle": 27.0,
+        "distance": 391.0,
+        "hr_in_parks": 17,
+        "result": "double",
+        "pitcher": "Gore, MacKenzie"
+      },
+      {
+        "batter": "Brady House",
+        "ev": 102.6,
+        "angle": 36.0,
+        "distance": 398.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Yesavage, Trey"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
