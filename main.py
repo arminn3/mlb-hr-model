@@ -1274,6 +1274,25 @@ def print_results(games_out: list, game_date: date, schedule: list = None) -> No
     with open(f"hr_props_{game_date.isoformat()}.json", "w") as f:
         json.dump(frontend_data, f, indent=2, default=str)
 
+    # ── Automatic data-integrity check ────────────────────────────────────────
+    # Runs the internal validator on the slate we just wrote (arsenal leaks,
+    # stat-vs-pool mismatches, bad values, thin depth). Advisory: prints a clear
+    # PASS/FAIL so a bad slate is caught here instead of by a user on the site.
+    try:
+        import validate_slate
+        _rep = validate_slate.Report()
+        validate_slate.check_internal(frontend_data, _rep)
+        if _rep.errors:
+            print(f"\n⚠️  DATA VALIDATION: {len(_rep.errors)} integrity errors in {dated_name}:")
+            for _e in _rep.errors[:25]:
+                print("   " + _e)
+            if len(_rep.errors) > 25:
+                print(f"   … and {len(_rep.errors) - 25} more (run: python validate_slate.py --date {game_date.isoformat()})")
+        else:
+            print(f"✅ DATA VALIDATION: {dated_name} passed ({_rep.checked} pools checked).")
+    except Exception as _ve:
+        print(f"  (data validation skipped: {_ve})")
+
     # Update the date index so the frontend knows which dates are available
     index_path = data_dir / "index.json"
     existing_dates: list[str] = []

@@ -643,16 +643,12 @@ def calc_batter_metrics_for_pitch(pa_pitches: pd.DataFrame) -> dict[str, float]:
     line_drive_rate  = line_drives / n_bip
     ground_ball_rate = ground_balls / n_bip
 
-    # Hard hit rate: exit velo >= 95 mph AND launch angle > 0° (exclude popups/grounders)
-    # A 96 EV popup at 66° or grounder at -10° has zero HR potential
-    if "launch_angle" in bip.columns:
-        hard_hits = (
-            (bip["launch_speed"] >= config.HARD_HIT_THRESHOLD)
-            & (bip["launch_angle"] > 0)
-            & (bip["launch_angle"] <= 50)
-        ).sum()
-    else:
-        hard_hits = (bip["launch_speed"] >= config.HARD_HIT_THRESHOLD).sum()
+    # Hard hit rate: STANDARD definition = exit velo >= 95 mph over BIP (no
+    # launch-angle gate). This matches Statcast/reference sites, the season
+    # profile, and the frontend recompute — the old LA-gated version here made
+    # L5/L10 hard-hit% disagree with every other view (the number changed when a
+    # filter was toggled). Kept identical everywhere so it's always the same #.
+    hard_hits = (bip["launch_speed"] >= config.HARD_HIT_THRESHOLD).sum()
     hard_hit_rate = hard_hits / n_bip
 
     return {
