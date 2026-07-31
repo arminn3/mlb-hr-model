@@ -732,17 +732,22 @@ def run_model(game_date: date = None, fast: bool = False, only_game_pks=None):
                     slg = total_bases / ab
                     season_profile["iso"] = round(float(slg - ba), 3)
             # season_abs = AB log for the batter card. Same-hand block FIRST
-            # (last 25 vs the opposing hand — the matchup-relevant default and
+            # (last N vs the opposing hand — the matchup-relevant default and
             # the pool score-utils slices for L15/L20/L25), then an opposite-
-            # hand block (last 25) appended so the Pitch Arm filter pulls real
+            # hand block (last N) appended so the Pitch Arm filter pulls real
             # data when a user toggles to the other hand. pitch_arm is tagged
             # from each row's actual p_throws.
+            # N=50/hand (was 25): a pitch-filtered L10 needs enough depth to still
+            # reach 10 BBE of ONE pitch — at ~20% usage that takes ~50 balls, so
+            # 25 was cutting pitch-filtered views short (showed 5 where a deeper
+            # log has 10). Matches reference sites' pitch-filtered depth.
+            _SEASON_ABS_PER_HAND = 50
             _sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in all_bip.columns else ["game_date"]
 
             def _build_abs(pool_df):
                 if pool_df is None or pool_df.empty:
                     return []
-                _pool = pool_df.sort_values(_sort_cols, ascending=False).head(25)
+                _pool = pool_df.sort_values(_sort_cols, ascending=False).head(_SEASON_ABS_PER_HAND)
                 out = []
                 for _, _r in _pool.iterrows():
                     out.append({
