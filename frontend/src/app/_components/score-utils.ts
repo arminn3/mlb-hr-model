@@ -5,19 +5,17 @@ export type UILookback = "L5" | "L10" | "L15" | "L20" | "L25" | "Season";
 // Normalization ranges — must match config.py NORM_RANGES
 const EV_LO = 92.0, EV_HI = 102.0;
 const BRL_LO = 0.0, BRL_HI = 0.25;
-// Fly-ball rate is the QUALITY-GATED hard-fly rate (flies >= 90 EV only).
-const FB_LO = 0.04, FB_HI = 0.24;
+// Fly-ball rate = STANDARD raw fly-ball % (LA 25-50, any EV). Separate stat
+// from Hard-Hit% — never EV-gated.
+const FB_LO = 0.15, FB_HI = 0.55;
 const HH_LO = 0.30, HH_HI = 0.60;
-// Min EV (mph) for a fly ball to count toward the scoring fly-ball rate —
-// must match config.HARD_FLY_EV_MIN.
-const HARD_FLY_EV_MIN = 90;
 
 function norm(v: number, lo: number, hi: number) {
   return Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
 }
 
 // Batter score from raw rates — must match config.BATTER_WEIGHTS + NORM_RANGES.
-// barrel 0.45 · hard-hit 0.25 · hard-fly 0.15 · avg EV 0.15.
+// barrel 0.45 · hard-hit 0.25 · fly-ball 0.15 · avg EV 0.15.
 function batterScore(barrelFrac: number, hardHitFrac: number, hardFlyFrac: number, ev: number) {
   return (
     norm(barrelFrac, BRL_LO, BRL_HI) * 0.45 +
@@ -35,30 +33,29 @@ export function applyHhFloor(composite: number, hardHitFrac: number): number {
   return hardHitFrac < HH_FLOOR ? Math.min(composite, HH_FLOOR_CAP) : composite;
 }
 
-/** Hard-fly rate (flies LA 25-50 hit >= 90 EV, per BBE) over an AB pool.
- *  Mirrors metrics.calc_batter_metrics_for_pitch's gated fly_ball_rate. */
-function hardFlyFrac(abs: RecentAB[]): number {
+/** Standard fly-ball rate (flies LA 25-50, any EV, per BBE) over an AB pool.
+ *  Mirrors metrics.calc_batter_metrics_for_pitch's fly_ball_rate. */
+function flyBallFrac(abs: RecentAB[]): number {
   if (abs.length === 0) return 0;
   let n = 0;
   for (const ab of abs) {
-    const ev = Number(ab.ev || 0), la = Number(ab.angle || 0);
-    if (la >= 25 && la <= 50 && ev >= HARD_FLY_EV_MIN) n += 1;
+    const la = Number(ab.angle || 0);
+    if (la >= 25 && la <= 50) n += 1;
   }
   return n / abs.length;
 }
 
-/** Season-long same-hand hard-fly rate from season_abs (best available gated
- *  fly-ball signal — the season aggregate `sp.fb` is raw/ungated). */
-function seasonHardFlyFrac(p: PlayerData): number {
+/** Season-long same-hand fly-ball rate from season_abs. */
+function seasonFlyBallFrac(p: PlayerData): number {
   const sp = p.season_profile;
   const abs = (sp?.season_abs ?? []).filter((ab) => !p.pitcher_hand || ab.pitch_arm === p.pitcher_hand);
-  return abs.length ? hardFlyFrac(abs) : (sp ? sp.fb / 100 : 0);
+  return abs.length ? flyBallFrac(abs) : (sp ? sp.fb / 100 : 0);
 }
 
 export function computeSeasonScore(p: PlayerData): { batter: number; pitcher: number; env: number } | null {
   const sp = p.season_profile;
   if (!sp || sp.bip_count < 20) return null;
-  const batter = batterScore(sp.barrel / 100, sp.hard_hit / 100, seasonHardFlyFrac(p), sp.ev);
+  const batter = batterScore(sp.barrel / 100, sp.hard_hit / 100, seasonFlyBallFrac(p), sp.ev);
   const l10    = p.scores.L10;
   return { batter, pitcher: l10?.pitcher_score ?? 0.5, env: l10?.env_score ?? 0.5 };
 }
@@ -67,7 +64,7 @@ function computeSeasonScoreSet(p: PlayerData): ScoreSet | null {
   const sp = p.season_profile;
   if (!sp || sp.bip_count < 20) return null;
 
-  const batter_score = batterScore(sp.barrel / 100, sp.hard_hit / 100, seasonHardFlyFrac(p), sp.ev);
+  const batter_score = batterScore(sp.barrel / 100, sp.hard_hit / 100, seasonFlyBallFrac(p), sp.ev);
 
   // Keep today's pitcher/env context from L10 so the composite is still useful for betting
   const l10 = p.scores.L10;
@@ -87,8 +84,8 @@ function computeSeasonScoreSet(p: PlayerData): ScoreSet | null {
     env_score,
     exit_velo:     sp.ev,
     barrel_pct:    sp.barrel,
-    // Gated hard-fly% (>= 90 EV) so the displayed FB% equals the score input.
-    fb_pct:        Math.round(seasonHardFlyFrac(p) * 1000) / 10,
+    // Standard fly-ball% (all flies) — separate from HH%, equals the score input.
+    fb_pct:        Math.round(seasonFlyBallFrac(p) * 1000) / 10,
     ld_pct:        sp.ld ?? 0,
     gb_pct:        sp.gb ?? 0,
     hard_hit_pct:  sp.hard_hit,
@@ -149,9 +146,9 @@ function computeSliceScoreSet(p: PlayerData, n: 15 | 20 | 25): ScoreSet | null {
     // so this is window-specific (L5/L10 get it from the backend; here we make
     // L15/L20/L25 consistent instead of falling back to the season value).
     if (isBarrel && ab.direction === "pull") pullBrl += 1;
-    // Fly-ball rate is QUALITY-GATED: only flies hit >= 90 EV count (soft flies
-    // aren't homer-worthy). Matches metrics.calc_batter_metrics_for_pitch.
-    if (la >= 25 && la <= 50 && ev >= HARD_FLY_EV_MIN) { fb += 1; if (ab.result === "home_run") { fbForHr += 1; hr += 1; } }
+    // Standard fly-ball rate: all flies LA 25-50, any EV. Separate stat from
+    // HH% — never EV-gated. Matches metrics.calc_batter_metrics_for_pitch.
+    if (la >= 25 && la <= 50) { fb += 1; if (ab.result === "home_run") { fbForHr += 1; hr += 1; } }
     else if (la >= 10 && la < 25) ld += 1;
     else if (la < 10) gb += 1;
     else pu += 1;

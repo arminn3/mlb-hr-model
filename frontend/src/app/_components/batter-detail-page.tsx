@@ -560,13 +560,11 @@ export function BatterDetailPage({
       // Pull-barrel = barrel hit to the pull side — recomputed over the FILTERED
       // pool (was locking to the season value regardless of the active filter).
       if (isBarrelAb && ab.direction === "pull") pullBrl += 1;
-      // FB% is QUALITY-GATED: only flies hit >= 90 EV count (soft flies aren't
-      // homer-worthy — matches the scoring fly-ball rate). Soft flies fall into
-      // the pop-up bucket so the GB/LD/FB/PU profile still sums to 100%. HR/FB
-      // keeps all flies as its denominator (standard definition).
+      // FB% = STANDARD fly-ball rate: all flies LA 25-50, any EV. Separate stat
+      // from Hard-Hit% (EV>=95) — never EV-gated. HR/FB uses all flies too.
       if (la >= 25 && la <= 50) {
         fbCt += 1;
-        if (ev >= 90) fb += 1; else pu += 1;
+        fb += 1;
         if (ab.result === "home_run") hrCt += 1;
       }
       else if (la >= 10 && la < 25) ld += 1;
@@ -607,7 +605,7 @@ export function BatterDetailPage({
     { label: "Avg EV",     value: displayEv === null ? "—" : `${displayEv}`,                  cls: displayEv === null ? "text-foreground" : statHighlight(displayEv, [88, 93]) },
     { label: "Barrel%",    value: displayBarrel === null ? "—" : `${displayBarrel}%`,         cls: displayBarrel === null ? "text-foreground" : statHighlight(displayBarrel, [8, 15]) },
     { label: "GB%",        value: displayGb === null ? "—" : `${displayGb}%`,                cls: "text-foreground" },
-    { label: "FB% 90+",    value: displayFb === null ? "—" : `${displayFb}%`,                 cls: displayFb === null ? "text-foreground" : statHighlight(displayFb, [12, 20]) },
+    { label: "FB%",        value: displayFb === null ? "—" : `${displayFb}%`,                 cls: displayFb === null ? "text-foreground" : statHighlight(displayFb, [25, 40]) },
     { label: "LD%",        value: displayLd === null ? "—" : `${displayLd}%`,                cls: "text-foreground" },
     { label: "PU%",        value: displayPu === null ? "—" : `${displayPu}%`,                cls: "text-foreground" },
     { label: "HR/FB%",     value: displayHrFb == null ? "—" : `${displayHrFb.toFixed(1)}%`,  cls: displayHrFb == null ? "text-foreground" : statHighlight(displayHrFb, [10, 18]) },
@@ -1034,22 +1032,22 @@ export function BatterDetailPage({
               overflowAnchor: "none",
             }}>
             {filteredABs.length > 0 ? (
-              <table className="w-full min-w-[720px] text-[13px]">
+              <table className="w-full min-w-[420px] sm:min-w-[720px] text-[13px]">
                 <thead style={{ background: "rgba(20,20,22,0.95)" }}>
                   <tr className="text-[10px] uppercase tracking-wider text-muted border-b border-card-border">
                     <th className="text-left  py-2 pl-3 pr-2 font-semibold">Date</th>
                     <th className="text-left  py-2 px-2 font-semibold">Pitcher</th>
-                    <th className="text-center py-2 px-2 font-semibold">Arm</th>
-                    <th className="text-center py-2 px-2 font-semibold">D/N</th>
+                    <th className="text-center py-2 px-2 font-semibold hidden sm:table-cell">Arm</th>
+                    <th className="text-center py-2 px-2 font-semibold hidden sm:table-cell">D/N</th>
                     <th className="text-left  py-2 px-2 font-semibold">Pitch Type</th>
                     <th className="text-center py-2 px-2 font-semibold">EV</th>
                     <th className="text-center py-2 px-2 font-semibold">LA</th>
                     <th className="text-center py-2 px-2 font-semibold">Dist</th>
                     <th className="text-center py-2 px-2 font-semibold">Brl</th>
-                    <th className="text-center py-2 px-2 font-semibold">Blast</th>
-                    <th className="text-center py-2 px-2 font-semibold">Dir</th>
+                    <th className="text-center py-2 px-2 font-semibold hidden sm:table-cell">Blast</th>
+                    <th className="text-center py-2 px-2 font-semibold hidden sm:table-cell">Dir</th>
                     <th className="text-left  py-2 px-2 font-semibold">Event</th>
-                    <th className="text-left  py-2 px-2 pr-3 font-semibold">BB Type</th>
+                    <th className="text-left  py-2 px-2 pr-3 font-semibold hidden sm:table-cell">BB Type</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1074,8 +1072,8 @@ export function BatterDetailPage({
                       <tr key={i} className="border-b border-card-border/30 last:border-0" style={{ background: rowBg }}>
                         <td className="py-2.5 pl-3 pr-2 text-foreground/75 font-mono text-[12px]">{String(ab.date)}</td>
                         <td className="py-2.5 px-2 text-foreground text-[12px]">{String(ab.pitcher_name ?? "")}</td>
-                        <td className="py-2.5 px-2 text-center text-foreground/70 font-mono">{String(ab.pitch_arm ?? "—")}</td>
-                        <td className="py-2.5 px-2 text-center text-foreground/70 font-mono">{String(ab.day_night ?? "—")}</td>
+                        <td className="py-2.5 px-2 text-center text-foreground/70 font-mono hidden sm:table-cell">{String(ab.pitch_arm ?? "—")}</td>
+                        <td className="py-2.5 px-2 text-center text-foreground/70 font-mono hidden sm:table-cell">{String(ab.day_night ?? "—")}</td>
                         <td className="py-2.5 px-2 text-foreground/85 text-[12px]">{String(ab.pitch_type ?? "—")}</td>
                         <td className="py-2.5 px-2 text-center">
                           <span className="font-mono font-semibold" style={{ color: evGradient(ev) }}>{String(ab.ev)}</span>
@@ -1091,14 +1089,14 @@ export function BatterDetailPage({
                         <td className={`py-2.5 px-2 text-center font-mono ${isBarrel ? "text-accent-green font-bold" : "text-muted/40"}`}>
                           {isBarrel ? 1 : 0}
                         </td>
-                        <td className={`py-2.5 px-2 text-center font-mono ${isBlast ? "text-accent-green font-bold" : "text-muted/40"}`}>
+                        <td className={`py-2.5 px-2 text-center font-mono hidden sm:table-cell ${isBlast ? "text-accent-green font-bold" : "text-muted/40"}`}>
                           {bs == null ? "—" : isBlast ? 1 : 0}
                         </td>
-                        <td className={`py-2.5 px-2 text-center font-mono ${dirCls}`}>{dir}</td>
+                        <td className={`py-2.5 px-2 text-center font-mono hidden sm:table-cell ${dirCls}`}>{dir}</td>
                         <td className={`py-2.5 px-2 text-[12px] capitalize ${isHR ? "text-accent-green font-bold" : "text-foreground/80"}`}>
                           {String(ab.result ?? "").replace(/_/g, " ")}
                         </td>
-                        <td className="py-2.5 px-2 pr-3 text-foreground/65 text-[12px]">{bbType}</td>
+                        <td className="py-2.5 px-2 pr-3 text-foreground/65 text-[12px] hidden sm:table-cell">{bbType}</td>
                       </tr>
                     );
                   })}

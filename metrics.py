@@ -623,16 +623,12 @@ def calc_batter_metrics_for_pitch(pa_pitches: pd.DataFrame) -> dict[str, float]:
         barrels = bip.get("barrel", pd.Series(dtype=float)).fillna(0).astype(bool).sum()
     barrel_rate = barrels / n_bip
 
-    # Contact type rates from launch angle.
-    # Fly-ball rate is QUALITY-GATED: only fly balls hit 90+ EV count toward the
-    # scoring fly-ball rate. A soft pop-fly (LA in range but weak EV) is not
-    # homer-worthy and should not inflate the air-ball signal. line_drive_rate
-    # and ground_ball_rate stay ungated (display/context only).
+    # Contact type rates from launch angle. FB% is the STANDARD fly-ball rate
+    # (LA 25-50, any EV) — a separate stat from Hard-Hit%. Do NOT gate it by EV;
+    # weak-contact handling lives in the HH% weight + the 40% hard-hit floor.
     if "launch_angle" in bip.columns:
         la = bip["launch_angle"]
-        in_fb_window = (la >= config.FLY_BALL_LA_MIN) & (la <= config.FLY_BALL_LA_MAX)
-        hard_enough  = bip["launch_speed"] >= config.HARD_FLY_EV_MIN
-        fly_balls   = (in_fb_window & hard_enough).sum()
+        fly_balls   = ((la >= config.FLY_BALL_LA_MIN) & (la <= config.FLY_BALL_LA_MAX)).sum()
         line_drives = ((la >= 10) & (la < config.FLY_BALL_LA_MIN)).sum()
         ground_balls = (la < 10).sum()
         avg_la = float(la.dropna().mean()) if la.notna().any() else 0.0

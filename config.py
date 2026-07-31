@@ -49,10 +49,10 @@ BATTER_WEIGHTS: dict = {
     # on its own. A ~40% HH floor is the practical minimum for a good L10 play,
     # so a sub-40% profile can no longer ride two barrels into the top 10.
     #
-    # Fly-ball% is now QUALITY-GATED (only flies hit ≥ 90 EV count — see
-    # metrics.calc_batter_metrics_for_pitch), so soft pop-flies stop inflating
-    # the air-ball signal. Its weight drops to 0.15 since HH% now carries most
-    # of the contact-quality load. Avg EV overlaps with HH% so it trims to 0.15.
+    # Fly-ball% is the STANDARD raw fly-ball rate (all flies LA 25-50, any EV) —
+    # a separate signal from HH%, never EV-gated. Its weight is 0.15 since HH%
+    # now carries most of the contact-quality load. Avg EV overlaps with HH% so
+    # it trims to 0.15.
 }
 
 # ── Pitcher Metric Weights (sum to 1.0) ─────────────────────────────────────
@@ -100,19 +100,16 @@ BARREL_VALUE: int = 6              # launch_speed_angle == 6 means barrel
 FLY_BALL_LA_MIN: float = 25.0     # launch angle range for fly balls
 FLY_BALL_LA_MAX: float = 50.0
 HARD_HIT_THRESHOLD: float = 95.0  # mph exit velo for "hard hit"
-HARD_FLY_EV_MIN: float = 90.0     # min EV for a fly ball to count toward the
-                                  # scoring fly-ball rate (soft flies aren't HRs)
 
 # ── Normalization Ranges (for 0-1 scaling) ───────────────────────────────────
 # Fixed empirical ranges so scores are comparable day-to-day.
 NORM_RANGES: dict = {
     "avg_exit_velo": (92.0, 102.0),
     "barrel_rate": (0.0, 0.25),
-    # Fly-ball rate is now the QUALITY-GATED hard-fly rate (flies ≥ 90 EV only).
-    # Measured league distribution of that metric over same-hand season pools:
-    # p10 ~4%, p50 ~12%, p90 ~24%. Range set to 0.04–0.24 so the median grades
-    # ~0.35 and an elite hard-fly hitter tops out. (Old 0.15–0.55 was for raw FB%.)
-    "fly_ball_rate": (0.04, 0.24),
+    # Fly-ball rate = STANDARD raw fly-ball % (LA 25-50, any EV). Separate stat
+    # from Hard-Hit%; never EV-gated. Weak contact is handled by the HH% weight
+    # and the 40% hard-hit floor, not by gating FB.
+    "fly_ball_rate": (0.15, 0.55),
     # Hard-hit% is a first-class batter-score input (0.25 weight). Calibrated to
     # the L10-window targets we bet on: ~40% HH is the floor for a good play,
     # ~50% is the golden target, 60%+ is elite. So 30%→0 (weak contact zeroed),
