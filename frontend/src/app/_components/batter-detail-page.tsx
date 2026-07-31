@@ -19,7 +19,10 @@ const PITCH_NAMES: Record<string, string[]> = {
   FF: ["4-Seam Fastball", "Four-Seam"],
   SI: ["Sinker"],
   FC: ["Cutter"],
-  SL: ["Slider", "Sweeper"],
+  // SL must NOT alias to "Sweeper": Sweeper is its own selectable chip (ST), so
+  // aliasing made a Slider selection silently pull in Sweeper balls — extra
+  // pop-ups that dragged the line down and pushed real hits out of the window.
+  SL: ["Slider"],
   CU: ["Curveball", "Curve"],
   CH: ["Changeup"],
   FS: ["Split-Finger", "Splitter"],
@@ -457,11 +460,6 @@ export function BatterDetailPage({
   : 10;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let filteredABs: any[];
-  // For L15/L20/L25 and Season the log = last N BBE of the current pitch
-  // selection (window N caps how many of the filtered pitch to show), so
-  // selecting "4-Seam" shows only 4-seam in every window, not just L5/L10.
-  const isWideWindow = activeLookback === "L15" || activeLookback === "L20"
-                    || activeLookback === "L25" || activeLookback === "Season";
   // Does an AB match the current pitch-type selection? (Statcast logs store
   // either the code 'FF' or the friendly name 'Four-Seam Fastball', so accept
   // both.) Empty selection = match everything.
@@ -483,45 +481,22 @@ export function BatterDetailPage({
   // it. Checked BEFORE isWideWindow so the appended opposite-hand block isn't
   // sliced away. Every path applies the pitch filter so the log always reflects
   // the selected pitch(es), in every window.
+  // Display pool: the batter's BBE (season_abs, both hands) narrowed by every
+  // active filter, newest-first, then capped at the window N. This is
+  // FILTER-then-WINDOW, matching the reference sites: "L10 + Slider" = the last
+  // 10 sliders (reaching back as far as the data goes), and a pitch you did NOT
+  // select (e.g. Sweeper) is never pulled in. pitchMatch already returns true
+  // when the selection isn't narrowing (default all / cleared).
   const bothHandPool = (player.season_profile?.season_abs ?? []) as typeof filteredABs;
-  const needBothHand = armFilter !== player.pitcher_hand;
-  // Is the pitch selection still the untouched default (the pitcher's ≥12%
-  // arsenal)? For the wide windows the source is the CHRONOLOGICAL season_abs
-  // log, so arsenal-filtering it decimates the sample (L20/L25 show far fewer
-  // than 20/25 BBE). Treat the default selection as "no pitch narrowing" for
-  // those windows so they show the true last-N — only an explicit, narrower
-  // pick actually filters. (L5/L10 use the per-pitch log, unaffected.)
-  const isDefaultPitchSelection =
-    pitchFilter.size === defaultSelected.size &&
-    [...pitchFilter].every((p) => defaultSelected.has(p));
-  const applyPitchToLog = pitchNarrowing && !isDefaultPitchSelection;
-  if (needBothHand) {
-    filteredABs = applyPitchToLog ? bothHandPool.filter(pitchMatch) : bothHandPool.slice();
-  } else if (isWideWindow) {
-    const pool = applyPitchToLog ? (scores.recent_abs || []).filter(pitchMatch) : (scores.recent_abs || []);
-    filteredABs = pool.slice(0, limit);
-  } else {
-    // L5/L10: the window IS the last-N overall BBE (recent_abs). A pitch filter
-    // must stay INSIDE that window. The old path used pitch_abs, which holds
-    // each pitch's own last-N independently (a rare pitch's 4 BBE, NOT the last
-    // 10) — that produced impossible rates like "25% barrel in L10". Now we take
-    // the last-N overall and narrow by pitch, so every stat is a true subset of
-    // the selected window.
-    const windowPool = (scores.recent_abs || []).slice(0, limit);
-    filteredABs = applyPitchToLog ? windowPool.filter(pitchMatch) : windowPool;
-  }
-
-  // Apply the PropFinder-style filters (Pitch Arm / Day-Night / Home-Away) on
-  // top of the pitch-type filter. Each is a no-op when set to "Both".
-  filteredABs = filteredABs.filter((ab) => {
-    if (armFilter !== "Both" && String(ab.pitch_arm ?? "") !== armFilter) return false;
-    if (dnFilter  !== "Both" && String(ab.day_night ?? "") !== dnFilter)  return false;
-    if (haFilter  !== "Both" && String(ab.home_away ?? "") !== haFilter)  return false;
-    return true;
-  });
-  // The both-hand branch isn't pre-sliced, so cap it to the window N after the
-  // arm filter has narrowed to the chosen hand.
-  if (needBothHand) filteredABs = filteredABs.slice(0, limit);
+  filteredABs = bothHandPool
+    .filter((ab) => armFilter === "Both" || String(ab.pitch_arm ?? "") === armFilter)
+    .filter(pitchMatch)
+    .filter((ab) =>
+      (dnFilter === "Both" || String(ab.day_night ?? "") === dnFilter) &&
+      (haFilter === "Both" || String(ab.home_away ?? "") === haFilter))
+    .slice()
+    .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))
+    .slice(0, limit);
 
   const recentAbsArr = scores.recent_abs ?? [];
   const flyBalls = recentAbsArr.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
