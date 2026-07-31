@@ -240,13 +240,11 @@ def score_batter_vs_pitcher(
     per_pitch_metrics: dict[str, dict] = {}
 
     # Get last N BIP vs this pitcher hand, filtered to pitcher's pitch types
-    # If pitcher has ST (sweeper) but no SL (slider), add SL to search —
-    # PropFinder shows both in arsenal and batters face both interchangeably
+    # Pool = EXACTLY the pitcher's arsenal pitch types. (Previously we cross-added
+    # sweeper<->slider, which pulled the batter's sweeper BBE off OTHER pitchers
+    # into the pool — corrupting recent_abs / ISO vs reference sites. Sweeper and
+    # slider are tracked as separate pitch codes, so match them exactly.)
     pitcher_pitch_types = set(pitch_mix.keys())
-    if "ST" in pitcher_pitch_types and "SL" not in pitcher_pitch_types:
-        pitcher_pitch_types.add("SL")
-    if "SL" in pitcher_pitch_types and "ST" not in pitcher_pitch_types:
-        pitcher_pitch_types.add("ST")
     recent_bip = pd.DataFrame()
     if not batter_df.empty and "p_throws" in batter_df.columns:
         hand_mask = batter_df["p_throws"] == pitcher_hand
@@ -343,10 +341,7 @@ def score_batter_vs_pitcher(
         # Per-pitch metrics — need ≥3 BIP to trust; otherwise fall back to pool avg.
         # 1-2 BIP per pitch type is pure noise (2 GBs on FF ≠ "can't hit fastballs").
         for pt in pitch_mix:
-            pt_codes = {pt}
-            if pt == "ST": pt_codes.add("SL")
-            if pt == "SL": pt_codes.add("ST")
-            pt_rows = recent_bip[recent_bip["pitch_type"].isin(pt_codes)] if "pitch_type" in recent_bip.columns else pd.DataFrame()
+            pt_rows = recent_bip[recent_bip["pitch_type"] == pt] if "pitch_type" in recent_bip.columns else pd.DataFrame()
             per_pitch_metrics[pt] = calc_batter_metrics_for_pitch(pt_rows) if len(pt_rows) >= 3 else pool_metrics
 
         # Raw pool stats — used ONLY for UI display so the L5/L10 numbers the
