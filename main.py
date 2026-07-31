@@ -10,6 +10,8 @@ Usage:
     python main.py --date 2026-04-01  # specific date
 """
 
+from __future__ import annotations  # PEP 563 — keeps `X | None` annotations lazy so this runs on Python 3.9 too
+
 import argparse
 import json
 import math
