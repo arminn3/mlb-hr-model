@@ -500,38 +500,15 @@ export function BatterDetailPage({
   } else if (isWideWindow) {
     const pool = applyPitchToLog ? (scores.recent_abs || []).filter(pitchMatch) : (scores.recent_abs || []);
     filteredABs = pool.slice(0, limit);
-  } else if (!pitchNarrowing) {
-    if (pitchAbsData && Object.keys(pitchAbsData).length > 0) {
-      const all = Object.values(pitchAbsData).flat();
-      all.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
-      const seen = new Set<string>();
-      filteredABs = all.filter((ab) => { const k = `${ab.date}-${ab.ev}-${ab.angle}`; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, limit);
-    } else {
-      filteredABs = (scores.recent_abs || []).slice(0, limit);
-    }
   } else {
-    // Primary: pitch_abs is a code-keyed lookup populated for L5/L10 lookbacks.
-    const selected: Array<Record<string, unknown>> = [];
-    for (const pt of pitchFilter) selected.push(...(pitchAbsData?.[pt] || []));
-    // Fallback: Season mode (and any case where pitch_abs wasn't emitted) —
-    // filter scores.recent_abs by matching the AB's pitch_type against the
-    // selected codes OR their friendly names (Statcast logs sometimes store
-    // 'FF' and sometimes 'Four-Seam Fastball', so we accept both).
-    if (selected.length === 0) {
-      const matches = (scores.recent_abs || []).filter((ab) => {
-        const pt = ab.pitch_type ?? "";
-        if (pitchFilter.has(pt)) return true;
-        for (const code of pitchFilter) {
-          if (code === pt) return true;
-          if ((PITCH_NAMES[code] || []).includes(pt)) return true;
-        }
-        return false;
-      });
-      selected.push(...(matches as unknown as Array<Record<string, unknown>>));
-    }
-    selected.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
-    const seen = new Set<string>();
-    filteredABs = selected.filter((ab) => { const k = `${ab.date}-${ab.ev}-${ab.angle}`; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, limit);
+    // L5/L10: the window IS the last-N overall BBE (recent_abs). A pitch filter
+    // must stay INSIDE that window. The old path used pitch_abs, which holds
+    // each pitch's own last-N independently (a rare pitch's 4 BBE, NOT the last
+    // 10) — that produced impossible rates like "25% barrel in L10". Now we take
+    // the last-N overall and narrow by pitch, so every stat is a true subset of
+    // the selected window.
+    const windowPool = (scores.recent_abs || []).slice(0, limit);
+    filteredABs = applyPitchToLog ? windowPool.filter(pitchMatch) : windowPool;
   }
 
   // Apply the PropFinder-style filters (Pitch Arm / Day-Night / Home-Away) on
