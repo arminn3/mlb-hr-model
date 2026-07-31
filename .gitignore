@@ -24,3 +24,4 @@ frontend/.next/
 frontend/.env.local
 .vercel
 pitcher_profile_cache/
+TASKS.md
