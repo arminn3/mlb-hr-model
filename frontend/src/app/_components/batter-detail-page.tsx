@@ -523,6 +523,9 @@ export function BatterDetailPage({
   // a raw count over the filtered pool (otherwise it locks to the season /
   // L10 value regardless of which pitch chip is on).
   let displayBlast: number | null = scores.blast_pct ?? player.season_profile?.blast ?? null;
+  // Pull-barrel% — defaults to the season value, overridden below with a raw
+  // count over the filtered pool so it reflects the active window/filters.
+  let displayPullBrl: number | null = player.season_profile?.pull_barrel ?? null;
 
   // Pitch-filter aware stat recompute. Computes raw counts over the same
   // pool the AB table below shows (filteredABs) — so the cards and the log
@@ -541,7 +544,7 @@ export function BatterDetailPage({
   if (anyFilterActive && filteredABs.length > 0) {
     const n = filteredABs.length;
     const pct = (count: number) => Math.round((count / n) * 1000) / 10;
-    let gb = 0, ld = 0, fb = 0, pu = 0, brl = 0, hh = 0, blast = 0;
+    let gb = 0, ld = 0, fb = 0, pu = 0, brl = 0, hh = 0, blast = 0, pullBrl = 0;
     let evSum = 0;
     let fbCt = 0, hrCt = 0;
     for (const ab of filteredABs) {
@@ -552,7 +555,11 @@ export function BatterDetailPage({
       if (ev >= 95) hh += 1;
       // Barrel = Statcast launch_speed_angle 6 when present (matches backend +
       // all windows); heuristic fallback only for legacy slates without `lsa`.
-      if (ab.lsa != null ? ab.lsa === 6 : (ev >= 98 && la >= 26 && la <= 30)) brl += 1;
+      const isBarrelAb = ab.lsa != null ? ab.lsa === 6 : (ev >= 98 && la >= 26 && la <= 30);
+      if (isBarrelAb) brl += 1;
+      // Pull-barrel = barrel hit to the pull side — recomputed over the FILTERED
+      // pool (was locking to the season value regardless of the active filter).
+      if (isBarrelAb && ab.direction === "pull") pullBrl += 1;
       // FB% is QUALITY-GATED: only flies hit >= 90 EV count (soft flies aren't
       // homer-worthy — matches the scoring fly-ball rate). Soft flies fall into
       // the pop-up bucket so the GB/LD/FB/PU profile still sums to 100%. HR/FB
@@ -581,12 +588,14 @@ export function BatterDetailPage({
     // the % is meaningful only when the field exists.
     const haveBatSpeed = filteredABs.some((ab) => ab.bat_speed != null);
     displayBlast = haveBatSpeed ? pct(blast) : null;
+    displayPullBrl = pct(pullBrl);
   } else if (anyFilterActive) {
     // No ABs match the active filter — show "—" everywhere, never 0s (0 EV /
     // 0% across the card is the "stats broke" look the user reported).
     displayBarrel = null; displayFb = null; displayLd = null;
     displayGb = null; displayHardHit = null; displayEv = null;
     displayPu = null; displayHrFb = null; displayBlast = null;
+    displayPullBrl = null;
   }
   void recentAbsArr;
 
@@ -594,9 +603,6 @@ export function BatterDetailPage({
   const matchup = matchupLabel(pitchDetail);
   const playerTags = buildTags(player, parkFactor);
 
-  // displayBlast is declared up with the other display lets (above the
-  // pitch-filter recompute block) so the recompute branch can override it.
-  const displayPullBrl = player.season_profile?.pull_barrel ?? null;
   const statCards = [
     { label: "Avg EV",     value: displayEv === null ? "—" : `${displayEv}`,                  cls: displayEv === null ? "text-foreground" : statHighlight(displayEv, [88, 93]) },
     { label: "Barrel%",    value: displayBarrel === null ? "—" : `${displayBarrel}%`,         cls: displayBarrel === null ? "text-foreground" : statHighlight(displayBarrel, [8, 15]) },
