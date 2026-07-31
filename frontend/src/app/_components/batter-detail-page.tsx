@@ -438,13 +438,12 @@ export function BatterDetailPage({
   const [pitchFilter, setPitchFilter] = useState<Set<string>>(defaultSelected);
   // When the chip list changes (new batter opened), reset to the new default.
   useEffect(() => { setPitchFilter(defaultSelected); }, [defaultSelected]);
-  // "All pitches selected" must behave EXACTLY like "no pitch filter" — otherwise
-  // clicking Select All routes through the narrowing path and, when a code has no
-  // per-pitch log rows, collapses the pool to empty and blanks every stat (the
-  // "stats break when I select all the pitches" bug). Treat it as no narrowing.
-  const allPitchesSelected =
-    chipList.length > 0 && chipList.every((c) => pitchFilter.has(c.type));
-  const pitchNarrowing = pitchFilter.size > 0 && !allPitchesSelected;
+  // Any selected pitches → filter to them. The chips are only the pitcher's
+  // ARSENAL, but season_abs holds BBE off many other pitchers' pitch types
+  // (sweepers, cutters, etc.). So "all arsenal chips selected" must STILL filter
+  // to the arsenal — it can't mean "show everything", or those foreign pitches
+  // leak in. Only CLEAR (empty selection) shows all pitch types.
+  const pitchNarrowing = pitchFilter.size > 0;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pitchAbsData = (scores as any).pitch_abs as Record<string, Array<Record<string, unknown>>> | undefined;
