@@ -571,7 +571,7 @@ export function Dashboard() {
   const tabConfig = TAB_CONFIG[activePage];
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen overflow-x-hidden">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
@@ -19,6 +19,13 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Beeb Sheets",
   description: "Daily MLB home run prop scoring — pitch-type matchup analysis powered by Statcast data.",
+};
+
+// Explicit mobile viewport: render at device width (not the ~980px desktop
+// fallback that makes phones load zoomed-out and forces pinch-to-fit).
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 // ClerkProvider only renders if the publishable key is set. This way the app
