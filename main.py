@@ -243,6 +243,44 @@ def _estimate_local_game_hour(game_datetime_utc: str, home_team: str) -> int:
         return 19
 
 
+def _calc_splits_vs_hand(batter_df, pitcher_hand: str) -> dict | None:
+    """Batter's season line vs a pitcher hand: AB, BA, HR, % of HRs, K%, BB%,
+    TB per hit. Powers the batter-detail 'Splits vs [hand]' card."""
+    if batter_df is None or batter_df.empty or "p_throws" not in batter_df.columns or "events" not in batter_df.columns:
+        return None
+    pa_all = batter_df[batter_df["events"].notna()]
+    if pa_all.empty:
+        return None
+    total_hr = int((pa_all["events"] == "home_run").sum())
+    vs = pa_all[pa_all["p_throws"] == pitcher_hand]
+    ev = vs["events"]
+    pa = len(ev)
+    if pa == 0:
+        return None
+    hits_set = {"single", "double", "triple", "home_run"}
+    hits = int(ev.isin(hits_set).sum())
+    hr = int((ev == "home_run").sum())
+    bb = int(ev.isin({"walk", "intent_walk"}).sum())
+    hbp = int((ev == "hit_by_pitch").sum())
+    sf = int(ev.isin({"sac_fly", "sac_fly_double_play"}).sum())
+    k = int(ev.isin({"strikeout", "strikeout_double_play"}).sum())
+    ab = pa - bb - hbp - sf
+    singles = int((ev == "single").sum())
+    doubles = int((ev == "double").sum())
+    triples = int((ev == "triple").sum())
+    tb = singles + 2 * doubles + 3 * triples + 4 * hr
+    return {
+        "hand": pitcher_hand,
+        "ab": ab,
+        "ba": round(hits / ab, 3) if ab > 0 else None,
+        "hr": hr,
+        "pct_of_hrs": round(hr / total_hr * 100) if total_hr > 0 else None,
+        "k_pct": round(k / pa * 100) if pa > 0 else None,
+        "bb_pct": round(bb / pa * 100) if pa > 0 else None,
+        "tb_per_hit": round(tb / hits, 2) if hits > 0 else None,
+    }
+
+
 def _calc_bvp(batter_df, batter_2025, pitcher_id, batter_id=None) -> dict:
     """Calculate batter vs specific pitcher head-to-head stats.
     Uses MLB Stats API for career stats + Statcast for recent BIP detail."""
@@ -613,6 +651,9 @@ def run_model(game_date: date = None, fast: bool = False, only_game_pks=None):
         # BvP (Batter vs Pitcher) history
         bvp_stats = _calc_bvp(batter_df, batter_2025, pid, batter_id=batter_id)
 
+        # Season splits vs today's pitcher hand (AB/BA/HR/%HR/K%/BB%/TB-per-hit)
+        splits_vs_hand = _calc_splits_vs_hand(batter_df, pitcher_hand)
+
         # Pitcher pitch quality metrics
         pitcher_quality = {"avg_velo": 0, "avg_spin": 0, "avg_vert_break": 0, "avg_horiz_break": 0}
         if not pitcher_df.empty:
@@ -777,6 +818,7 @@ def run_model(game_date: date = None, fast: bool = False, only_game_pks=None):
             "platoon": platoon,
             "game_num": entry.get("game_num", 1),
             "bvp_stats": bvp_stats,
+            "splits_vs_hand": splits_vs_hand,
             "batter_side": entry["batter_side"],
             "pitch_types": l5.get("pitch_types_used", []),
             "pitch_detail": l5.get("pitch_detail", {}),

@@ -120,6 +120,11 @@ def build_pitcher_profile(pitcher_df: pd.DataFrame, pitcher_id: int = None,
             if "stand" in sub.columns:
                 entry["vs_L"] = _compute_row(sub[sub["stand"] == "L"])
                 entry["vs_R"] = _compute_row(sub[sub["stand"] == "R"])
+                # Per-pitch arsenal per hand for THIS window — lets the pitcher
+                # card's Mix-vs-Hand table switch between L5 / L3 / Last start.
+                if "pitch_type" in sub.columns:
+                    entry["arsenal_vs_L"] = _build_arsenal(sub[sub["stand"] == "L"], sub)
+                    entry["arsenal_vs_R"] = _build_arsenal(sub[sub["stand"] == "R"], sub)
             windows[f"last_{n}"] = entry
         out["windows"] = windows
 
@@ -161,6 +166,19 @@ def _build_arsenal(hand_df: pd.DataFrame, full_df: pd.DataFrame) -> list:
         n_pa = len(pa_rows)
 
         bbe = int(grp["launch_speed"].notna().sum()) if "launch_speed" in grp.columns else 0
+
+        # Per-pitch contact quality vs this batter-hand split: hard-hit% (EV>=95)
+        # and fly-ball% (LA 25-50), both over this pitch's balls in play. Powers
+        # the pitcher card's Mix-vs-Hand HH%/FB% columns.
+        hard_hit_rate = fb_rate = None
+        if "launch_speed" in grp.columns:
+            _bip = grp.dropna(subset=["launch_speed"])
+            _nb = len(_bip)
+            if _nb > 0:
+                hard_hit_rate = round(int((_bip["launch_speed"] >= config.HARD_HIT_THRESHOLD).sum()) / _nb * 100, 1)
+                if "launch_angle" in _bip.columns:
+                    _fb = int(((_bip["launch_angle"] >= config.FLY_BALL_LA_MIN) & (_bip["launch_angle"] <= config.FLY_BALL_LA_MAX)).sum())
+                    fb_rate = round(_fb / _nb * 100, 1)
 
         ba = slg = iso = woba_val = None
         n_hr = 0
@@ -208,6 +226,8 @@ def _build_arsenal(hand_df: pd.DataFrame, full_df: pd.DataFrame) -> list:
             "hr": n_hr,
             "bb_pct": bb_pct,
             "k_pct": k_pct,
+            "hard_hit_rate": hard_hit_rate,
+            "fb_rate": fb_rate,
         })
 
     entries.sort(key=lambda a: a["usage_pct"], reverse=True)

@@ -132,6 +132,7 @@ export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { p
   // from profile.arsenal_vs_L / _vs_R. (Per-pitch × per-window isn't in the
   // slate, so this table is season/all-starts.)
   const [mixHand, setMixHand] = useState<"R" | "L">("R");
+  const [mixWindow, setMixWindow] = useState<"season" | "last_5" | "last_3" | "last_1">("season");
   // Window data lives under profile.windows[key] with the same shape as
   // profile.rows ({ season, vs_L, vs_R }). Fall back to season rows when
   // a window is missing (older slates pre-windows).
@@ -301,9 +302,15 @@ export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { p
       {/* Mix vs Hand — how the pitcher performs on each individual pitch vs a
           batter hand (all starts; per-pitch × per-window isn't in the slate). */}
       {(() => {
-        const arsenal = (mixHand === "R" ? profile?.arsenal_vs_R : profile?.arsenal_vs_L) ?? [];
+        const win = mixWindow === "season" ? null : profile?.windows?.[mixWindow];
+        const arsenal = (mixWindow === "season"
+          ? (mixHand === "R" ? profile?.arsenal_vs_R : profile?.arsenal_vs_L)
+          : (mixHand === "R" ? win?.arsenal_vs_R : win?.arsenal_vs_L)) ?? [];
         if (!arsenal.length) return null;
-        const summary = mixHand === "R" ? seasonRows?.vs_R : seasonRows?.vs_L;
+        const summary = mixWindow === "season"
+          ? (mixHand === "R" ? seasonRows?.vs_R : seasonRows?.vs_L)
+          : (mixHand === "R" ? win?.vs_R : win?.vs_L);
+        const WIN_OPTS: [typeof mixWindow, string][] = [["season", "All"], ["last_5", "L5"], ["last_3", "L3"], ["last_1", "Last"]];
         const sorted = [...arsenal].sort((a, b) => (b.usage_pct ?? 0) - (a.usage_pct ?? 0));
         const s0 = (v: number | null | undefined) => (v == null ? DASH : v.toFixed(3).replace(/^0/, ""));
         const cards: [string, string | number][] = summary ? [
@@ -315,15 +322,29 @@ export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { p
         ] : [];
         return (
           <div className="mt-4 pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
               <span className="text-[10px] font-bold uppercase tracking-[0.07em] text-foreground/55">Mix vs Hand</span>
-              <div className="flex items-center gap-0 rounded overflow-hidden text-[10px] font-bold font-mono" style={{ border: "1px solid rgba(255,255,255,0.10)" }}>
-                {(["R", "L"] as const).map((h) => (
-                  <button key={h} onClick={() => setMixHand(h)}
-                    className={"px-2 py-0.5 cursor-pointer transition-colors " + (mixHand === h ? "bg-accent/15 text-accent" : "text-muted hover:text-foreground")}>
-                    vs {h}HB
-                  </button>
-                ))}
+              <div className="flex items-center gap-1.5">
+                {/* window toggle — disabled options fall back gracefully (season) */}
+                <div className="flex items-center gap-0 rounded overflow-hidden text-[10px] font-bold font-mono" style={{ border: "1px solid rgba(255,255,255,0.10)" }}>
+                  {WIN_OPTS.map(([key, label]) => {
+                    const hasWin = key === "season" || !!profile?.windows?.[key];
+                    return (
+                      <button key={key} onClick={() => hasWin && setMixWindow(key)} disabled={!hasWin}
+                        className={"px-2 py-0.5 transition-colors " + (mixWindow === key ? "bg-accent/15 text-accent" : hasWin ? "text-muted hover:text-foreground cursor-pointer" : "text-muted/30 cursor-not-allowed")}>
+                        {label}
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="flex items-center gap-0 rounded overflow-hidden text-[10px] font-bold font-mono" style={{ border: "1px solid rgba(255,255,255,0.10)" }}>
+                  {(["R", "L"] as const).map((h) => (
+                    <button key={h} onClick={() => setMixHand(h)}
+                      className={"px-2 py-0.5 cursor-pointer transition-colors " + (mixHand === h ? "bg-accent/15 text-accent" : "text-muted hover:text-foreground")}>
+                      vs {h}HB
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
             {cards.length > 0 && (
@@ -341,7 +362,7 @@ export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { p
                 <thead>
                   <tr className="text-[10px] uppercase tracking-wider text-muted">
                     <th className="text-left font-medium pb-1.5 pr-2">Pitch</th>
-                    {["Usage", "Velo", "BIP", "AVG", "SLG", "ISO", "HR%", "K%"].map((h) => (
+                    {["Usage", "Velo", "BIP", "AVG", "SLG", "ISO", "HR%", "HH%", "FB%", "K%"].map((h) => (
                       <th key={h} className="font-medium pb-1.5 px-1 text-center">{h}</th>
                     ))}
                   </tr>
@@ -364,6 +385,8 @@ export function PitcherProfileCard({ pitcher, side, teamAbbr, onNameClick }: { p
                         <td className="text-center px-1 py-1.5">{s0(a.slg)}</td>
                         <td className={"text-center px-1 py-1.5 " + (isTarget ? "text-accent-green font-bold" : "")}>{s0(a.iso)}</td>
                         <td className="text-center px-1 py-1.5">{hrPct != null ? `${hrPct.toFixed(1)}%` : DASH}</td>
+                        <td className="text-center px-1 py-1.5">{a.hard_hit_rate != null ? `${a.hard_hit_rate}%` : DASH}</td>
+                        <td className="text-center px-1 py-1.5">{a.fb_rate != null ? `${a.fb_rate}%` : DASH}</td>
                         <td className="text-center px-1 py-1.5">{a.k_pct != null ? `${a.k_pct}%` : DASH}</td>
                       </tr>
                     );

@@ -120,6 +120,10 @@ export interface PitcherArsenalEntry {
   hr?: number;
   bb_pct?: number | null;
   k_pct?: number | null;
+  /** Per-pitch hard-hit% (EV≥95) and fly-ball% (LA 25-50) over this pitch's BIP,
+   *  for the pitcher card's Mix-vs-Hand columns. Null when no BIP. */
+  hard_hit_rate?: number | null;
+  fb_rate?: number | null;
 }
 
 export interface PitcherGameLog {
@@ -143,7 +147,8 @@ export interface PitcherProfile {
    *  has three sub-rows so the vs LHB / vs RHB filter works inside any window. */
   windows?: Partial<Record<
     "last_1" | "last_3" | "last_5" | "last_7" | "last_10",
-    { season: PitcherStatRow; vs_L?: PitcherStatRow; vs_R?: PitcherStatRow }
+    { season: PitcherStatRow; vs_L?: PitcherStatRow; vs_R?: PitcherStatRow;
+      arsenal_vs_L?: PitcherArsenalEntry[]; arsenal_vs_R?: PitcherArsenalEntry[] }
   >>;
   wins: number;
   losses: number;
@@ -221,6 +226,17 @@ export interface PlayerData {
   };
   matchup_swstr?: number;
   pitcher_data_year?: number;
+  /** Batter's season line vs today's pitcher hand — for the detail Splits card. */
+  splits_vs_hand?: {
+    hand: string;
+    ab: number;
+    ba: number | null;
+    hr: number;
+    pct_of_hrs: number | null;
+    k_pct: number | null;
+    bb_pct: number | null;
+    tb_per_hit: number | null;
+  } | null;
   hr_signals?: {
     barrel_heat: boolean;
     pull_power: boolean;
