@@ -135,21 +135,41 @@ function filteredPitchStats(recentAbs: RecentAB[], filter: Set<string>) {
   const pool = recentAbs.filter((ab) => abMatchesPitchFilter(ab, filter));
   const n = pool.length;
   if (n === 0) return null;
-  let evSum = 0, hh = 0, brl = 0, fb = 0;
+  let evSum = 0, laSum = 0, hh = 0, brl = 0, fb = 0, gb = 0, ld = 0, pu = 0;
+  let sweet = 0, pullBrl = 0, blast = 0, haveBatSpeed = false;
   for (const ab of pool) {
     const ev = Number(ab.ev || 0);
     const la = Number(ab.angle || 0);
     evSum += ev;
+    laSum += la;
     if (ev >= 95) hh += 1;
     const isBarrel = ab.lsa != null ? ab.lsa === 6 : (ev >= 98 && la >= 26 && la <= 30);
     if (isBarrel) brl += 1;
+    if (isBarrel && ab.direction === "pull") pullBrl += 1;
+    // Contact-type buckets (must all sum to 100% over the SAME pool).
     if (la >= 25 && la <= 50) fb += 1;   // standard FB% (all flies, any EV)
+    else if (la >= 10 && la < 25) ld += 1;
+    else if (la < 10) gb += 1;
+    else pu += 1;
+    if (la >= 8 && la <= 32) sweet += 1;
+    if (ab.bat_speed != null) {
+      haveBatSpeed = true;
+      if (Number(ab.bat_speed) >= 75 && ev >= 95) blast += 1;
+    }
   }
+  const pct = (x: number) => Math.round((x / n) * 1000) / 10;
   return {
     exit_velo:    Math.round((evSum / n) * 10) / 10,
-    barrel_pct:   Math.round((brl  / n) * 1000) / 10,
-    hard_hit_pct: Math.round((hh   / n) * 1000) / 10,
-    fb_pct:       Math.round((fb   / n) * 1000) / 10,
+    avg_la:       Math.round((laSum / n) * 10) / 10,
+    barrel_pct:   pct(brl),
+    hard_hit_pct: pct(hh),
+    fb_pct:       pct(fb),
+    gb_pct:       pct(gb),
+    ld_pct:       pct(ld),
+    pu_pct:       pct(pu),
+    sweet_pct:    pct(sweet),
+    pullbrl_pct:  pct(pullBrl),
+    blast_pct:    haveBatSpeed ? pct(blast) : null,
     bip: n,
   };
 }
@@ -502,11 +522,17 @@ export function BatterRow({
       </td>
       {/* Blast% */}
       <td className="py-2 pr-2 w-14 text-center">
-        {heatPill(scores.blast_pct ?? null, 10, 18, scores.blast_pct == null ? "—" : `${scores.blast_pct}%`)}
+        {(() => {
+          const v = filtered ? filtered.blast_pct : (scores.blast_pct ?? null);
+          return heatPill(v, 10, 18, v == null ? "—" : `${v}%`);
+        })()}
       </td>
       {/* Avg LA */}
       <td className="py-2 pr-2 w-14 text-center">
-        {heatPill(avgLa, 12, 18, avgLa == null ? "—" : `${avgLa.toFixed(1)}°`)}
+        {(() => {
+          const v = filtered ? filtered.avg_la : avgLa;
+          return heatPill(v, 12, 18, v == null ? "—" : `${v.toFixed(1)}°`);
+        })()}
       </td>
       {/* FB% */}
       <td className="py-2 pr-2 w-14 text-center">
@@ -514,7 +540,7 @@ export function BatterRow({
       </td>
       {/* GB% */}
       <td className="py-2 pr-2 w-14 text-center">
-        <span className={PILL_BASE} style={PILL_MUTED_STYLE}>{scores.gb_pct ?? "—"}%</span>
+        <span className={PILL_BASE} style={PILL_MUTED_STYLE}>{filtered ? filtered.gb_pct : (scores.gb_pct ?? "—")}%</span>
       </td>
       {/* Air% */}
       <td className="py-2 pr-2 w-14 text-center">
@@ -522,7 +548,10 @@ export function BatterRow({
       </td>
       {/* PullBrl% */}
       <td className="py-2 pr-2 w-16 text-center">
-        {heatPill(pullBrl, 4, 8, pullBrl == null ? "—" : `${pullBrl.toFixed(1)}%`)}
+        {(() => {
+          const v = filtered ? filtered.pullbrl_pct : pullBrl;
+          return heatPill(v, 4, 8, v == null ? "—" : `${v.toFixed(1)}%`);
+        })()}
       </td>
       {/* HR */}
       <td className="py-2 pr-2 w-12 text-center">
@@ -534,13 +563,20 @@ export function BatterRow({
       <td className="py-2 pr-3 w-16 text-center">
         {heatPill(hrFbPct, 10, 20, hrFbPct == null ? "—" : `${hrFbPct.toFixed(0)}%`)}
       </td>
-      {/* xwOBA */}
+      {/* xwOBA — not stored per batted ball, so it can't be recomputed over a
+          pitch-filtered pool. Show "—" when filtering rather than a full-pool
+          number that would silently disagree with the filtered columns. */}
       <td className="py-2 pr-2 w-16 text-center">
-        {heatPill(xwoba, 0.32, 0.40, xwoba == null ? "—" : xwoba.toFixed(3))}
+        {pitchActive
+          ? <span className={PILL_BASE} style={PILL_MUTED_STYLE}>—</span>
+          : heatPill(xwoba, 0.32, 0.40, xwoba == null ? "—" : xwoba.toFixed(3))}
       </td>
       {/* Sweet% */}
       <td className="py-2 pr-2 w-16 text-center">
-        {heatPill(sweet, 35, 50, sweet == null ? "—" : `${sweet.toFixed(1)}%`)}
+        {(() => {
+          const v = filtered ? filtered.sweet_pct : sweet;
+          return heatPill(v, 35, 50, v == null ? "—" : `${v.toFixed(1)}%`);
+        })()}
       </td>
       {/* SwStr% */}
       <td className="py-2 pr-2 w-16 text-center">
@@ -548,7 +584,7 @@ export function BatterRow({
       </td>
       {/* LD% */}
       <td className="py-2 pr-2 w-14 text-center">
-        <span className={PILL_BASE} style={PILL_MUTED_STYLE}>{scores.ld_pct ?? "—"}%</span>
+        <span className={PILL_BASE} style={PILL_MUTED_STYLE}>{filtered ? filtered.ld_pct : (scores.ld_pct ?? "—")}%</span>
       </td>
 
       {/* BZM */}
