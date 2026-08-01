@@ -738,11 +738,16 @@ def run_model(game_date: date = None, fast: bool = False, only_game_pks=None):
             # hand block (last N) appended so the Pitch Arm filter pulls real
             # data when a user toggles to the other hand. pitch_arm is tagged
             # from each row's actual p_throws.
-            # N=50/hand (was 25): a pitch-filtered L10 needs enough depth to still
-            # reach 10 BBE of ONE pitch — at ~20% usage that takes ~50 balls, so
-            # 25 was cutting pitch-filtered views short (showed 5 where a deeper
-            # log has 10). Matches reference sites' pitch-filtered depth.
-            _SEASON_ABS_PER_HAND = 50
+            # N=400/hand (was 50): store the batter's FULL current-season BBE per
+            # hand, with reach-back into last season built in — `all_bip` already
+            # merges 2026 + 2025 (see above), sorted newest-first, so when 2026 is
+            # thin (rookies, rare pitches, early season) the tail fills from 2025.
+            # 50 was starving rare-pitch / wide-window (L20/L25) views: an everyday
+            # hitter's newest 50 same-hand BBE is ~4 weeks, so a low-usage pitch
+            # like a splitter showed 1 where the reference sites (rudebets) show the
+            # whole season's 10. 400 is a safety ceiling above a full same-hand
+            # season (~270). The slate-prune keeps the size cost contained.
+            _SEASON_ABS_PER_HAND = 400
             _sort_cols = ["game_date", "at_bat_number"] if "at_bat_number" in all_bip.columns else ["game_date"]
 
             def _build_abs(pool_df):
