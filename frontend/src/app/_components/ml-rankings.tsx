@@ -171,11 +171,12 @@ export function MLRankings({
   const cardsRef = useRef<HTMLDivElement>(null);
   const [downloadState, setDownloadState] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [downloadError, setDownloadError] = useState<string>("");
+  const [copyState, setCopyState] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [copyError, setCopyError] = useState<string>("");
 
-  const downloadPng = () => {
-    if (downloadState === "loading") return;
-    setDownloadState("loading");
-    try {
+  // Pure canvas builder for the main rankings image — returns the canvas so both
+  // the download and the copy-to-clipboard paths render the EXACT same picture.
+  const buildRankingsCanvas = (): HTMLCanvasElement => {
       const DPR = 2;
       const W = 900;
       const PAD = 28;
@@ -318,32 +319,13 @@ export function MLRankings({
       const wmW = ctx.measureText(wm).width;
       ctx.fillText(wm, W / 2 - wmW / 2, fy);
 
-      const dataUrl = canvas.toDataURL("image/png");
-      const label = filter === 0 ? "all" : `top${filter}`;
-      // Safari mobile blocks programmatic clicks — open in new tab as fallback
-      const link = document.createElement("a");
-      link.download = `beeb-rankings-${label}.png`;
-      link.href = dataUrl;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setDownloadState("done");
-      setTimeout(() => setDownloadState("idle"), 2500);
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      setDownloadError(msg);
-      setDownloadState("error");
-      setTimeout(() => setDownloadState("idle"), 4000);
-    }
+      return canvas;
   };
 
   // Consensus uses a different table layout (L5/L10/Season rank chips + avg),
   // so it gets its own canvas renderer. Small-sample names render red with a
   // BBE tag, same rule as the score-card export and the on-screen tables.
-  const downloadConsensusPng = () => {
-    if (downloadState === "loading") return;
-    setDownloadState("loading");
-    try {
+  const buildConsensusCanvas = (): HTMLCanvasElement => {
       const DPR = 2, W = 900, PAD = 28, ROW_H = 64, HEADER_H = 72, FOOTER_H = 44;
       const rows = consensusRows;
       const H = HEADER_H + rows.length * (ROW_H + 8) + FOOTER_H + PAD;
@@ -433,8 +415,25 @@ export function MLRankings({
       const wmW = ctx.measureText(wm).width;
       ctx.fillText(wm, W / 2 - wmW / 2, fy);
 
+      return canvas;
+  };
+
+  // Render the canvas for whichever tab is active — one source of truth for both
+  // download and copy so the two produce byte-identical images.
+  const buildActiveCanvas = (): HTMLCanvasElement =>
+    rankingTab === "consensus" ? buildConsensusCanvas() : buildRankingsCanvas();
+
+  const downloadPng = () => {
+    if (downloadState === "loading") return;
+    setDownloadState("loading");
+    try {
+      const canvas = buildActiveCanvas();
+      const name = rankingTab === "consensus"
+        ? "beeb-consensus.png"
+        : `beeb-rankings-${filter === 0 ? "all" : `top${filter}`}.png`;
+      // Safari mobile blocks programmatic clicks — open in new tab as fallback
       const link = document.createElement("a");
-      link.download = "beeb-consensus.png";
+      link.download = name;
       link.href = canvas.toDataURL("image/png");
       document.body.appendChild(link);
       link.click();
@@ -442,10 +441,37 @@ export function MLRankings({
       setDownloadState("done");
       setTimeout(() => setDownloadState("idle"), 2500);
     } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      setDownloadError(msg);
+      setDownloadError(err instanceof Error ? err.message : String(err));
       setDownloadState("error");
       setTimeout(() => setDownloadState("idle"), 4000);
+    }
+  };
+
+  const copyPng = () => {
+    if (copyState === "loading") return;
+    setCopyState("loading");
+    try {
+      const canvas = buildActiveCanvas();
+      // Pass a Promise<Blob> to ClipboardItem so navigator.clipboard.write()
+      // stays inside the click gesture (Safari requirement). Same PNG as the
+      // download button.
+      const item = new ClipboardItem({
+        "image/png": new Promise<Blob>((res, rej) =>
+          canvas.toBlob((b) => (b ? res(b) : rej(new Error("toBlob failed"))), "image/png"),
+        ),
+      });
+      navigator.clipboard.write([item]).then(
+        () => { setCopyState("done"); setTimeout(() => setCopyState("idle"), 2500); },
+        (err) => {
+          setCopyError(err instanceof Error ? err.message : String(err));
+          setCopyState("error");
+          setTimeout(() => setCopyState("idle"), 4000);
+        },
+      );
+    } catch (err) {
+      setCopyError(err instanceof Error ? err.message : String(err));
+      setCopyState("error");
+      setTimeout(() => setCopyState("idle"), 4000);
     }
   };
 
@@ -1066,7 +1092,7 @@ export function MLRankings({
         </div>
         )}
           {<button
-            onClick={rankingTab === "consensus" ? downloadConsensusPng : downloadPng}
+            onClick={downloadPng}
             disabled={downloadState === "loading"}
             title="Download as PNG"
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg cursor-pointer transition-all text-[11px] font-semibold border ${
@@ -1107,6 +1133,52 @@ export function MLRankings({
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
                 </svg>
                 PNG
+              </>
+            )}
+          </button>}
+          {<button
+            onClick={copyPng}
+            disabled={copyState === "loading"}
+            title="Copy image to clipboard (same as PNG)"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg cursor-pointer transition-all text-[11px] font-semibold border ${
+              copyState === "done"
+                ? "bg-accent-green/15 border-accent-green/40 text-accent-green"
+                : copyState === "error"
+                ? "bg-red-500/15 border-red-500/40 text-red-400"
+                : copyState === "loading"
+                ? "bg-card/50 border-card-border text-muted opacity-60"
+                : "bg-card/50 border-card-border text-muted hover:border-accent/40 hover:text-accent"
+            }`}
+          >
+            {copyState === "loading" ? (
+              <>
+                <svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                </svg>
+                Copying…
+              </>
+            ) : copyState === "done" ? (
+              <>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                Copied!
+              </>
+            ) : copyState === "error" ? (
+              <>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                {copyError ? copyError.slice(0, 40) : "Failed"}
+              </>
+            ) : (
+              <>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                </svg>
+                Copy
               </>
             )}
           </button>}

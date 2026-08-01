@@ -26,6 +26,9 @@ const PITCH_NAMES: Record<string, string[]> = {
   EP: ["Eephus"],
 };
 
+// Window size (BBE) per lookback — used to filter-then-window the season log.
+const WINDOW_N: Record<UILookback, number> = { L5: 5, L10: 10, L15: 15, L20: 20, L25: 25, Season: 25 };
+
 function abMatchesPitchFilter(ab: { pitch_type?: string | null }, filter: Set<string>): boolean {
   const pt = String(ab.pitch_type ?? "");
   if (filter.has(pt)) return true;
@@ -363,12 +366,23 @@ export function BatterRow({
 
   const fullRecentAbs = scores.recent_abs ?? [];
   // When a pitch filter is active, EVERY column reads from the same filtered
-  // slice of the BBE pool — EV/barrel/HH/FB, ISO, air%, HR, HR/FB — so they can
-  // never disagree with each other or with the BIP count shown. (Before, only
-  // EV/barrel/HH/FB were filtered while ISO/air/HR stayed on the full pool.)
+  // slice — EV/barrel/HH/FB, ISO, air%, HR, HR/FB — so they can never disagree
+  // with each other or with the BIP count shown.
+  //
+  // FILTER-THEN-WINDOW from the full season log (identical to the batter-detail
+  // page): take the last N batted balls OFF THE SELECTED PITCH(ES) vs the
+  // matchup hand — NOT the N-most-recent arsenal balls then filtered, which
+  // under-counts (e.g. L10 filtered to 3 pitches showed 7 of the 10 arsenal
+  // balls instead of the last 10 of those pitches). This makes the table's
+  // filtered stats match the detail page and divide cleanly by the shown BIP.
   const pitchActive = !!(pitchFilter && pitchFilter.size > 0);
-  const recentAbs = pitchActive
-    ? fullRecentAbs.filter((ab) => abMatchesPitchFilter(ab, pitchFilter))
+  const recentAbs: RecentAB[] = pitchActive
+    ? ((p.season_profile?.season_abs ?? []) as RecentAB[])
+        .filter((ab) => !p.pitcher_hand || ab.pitch_arm === p.pitcher_hand)
+        .filter((ab) => abMatchesPitchFilter(ab, pitchFilter))
+        .slice()
+        .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))
+        .slice(0, WINDOW_N[lookback] ?? 10)
     : fullRecentAbs;
   // Every HR counts as a fly-ball event regardless of its launch angle —
   // a 20° line-drive HR is still a HR/FB hit. Without this, HR-heavy samples
@@ -382,7 +396,7 @@ export function BatterRow({
   const airPct    = airPctFromAbs(recentAbs);
 
   const filtered = pitchActive
-    ? filteredPitchStats(fullRecentAbs, pitchFilter)
+    ? filteredPitchStats(recentAbs, pitchFilter)
     : null;
 
   const pitchDetailForMatchup = (pitchFilter && pitchFilter.size > 0)
@@ -710,12 +724,19 @@ export function BatterTable({
     }
     const fullAbs = sc.recent_abs ?? [];
     const pitchActive = pitchFilter.size > 0;
-    // Sort over the same filtered pool the row displays, so the ordering matches
-    // the visible numbers when a pitch filter is on.
-    const recentAbs = pitchActive ? fullAbs.filter((ab) => abMatchesPitchFilter(ab, pitchFilter)) : fullAbs;
+    // Sort over the same filter-then-window season pool the row displays, so the
+    // ordering matches the visible numbers when a pitch filter is on.
+    const recentAbs: RecentAB[] = pitchActive
+      ? ((row.p.season_profile?.season_abs ?? []) as RecentAB[])
+          .filter((ab) => !row.p.pitcher_hand || ab.pitch_arm === row.p.pitcher_hand)
+          .filter((ab) => abMatchesPitchFilter(ab, pitchFilter))
+          .slice()
+          .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")))
+          .slice(0, WINDOW_N[lookback] ?? 10)
+      : fullAbs;
     const fbs = recentAbs.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
     const hrs = recentAbs.filter((ab) => ab.result === "home_run").length;
-    const filt = pitchActive ? filteredPitchStats(fullAbs, pitchFilter) : null;
+    const filt = pitchActive ? filteredPitchStats(recentAbs, pitchFilter) : null;
     const pitchDetailForMatchup = pitchFilter.size > 0
       ? Object.fromEntries(Object.entries(row.p.pitch_detail || {}).filter(([pt]) => pitchFilter.has(pt)))
       : (row.p.pitch_detail || {});

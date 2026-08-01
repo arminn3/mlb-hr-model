@@ -68,8 +68,9 @@ class Report:
 
 def _recompute(abs_list: list[dict]) -> dict | None:
     """Recompute the displayed batter stats from the exact at-bats shown, using
-    the SAME definitions as the app (barrel = lsa 6, HH = EV>=95, FB = fly LA
-    25-50 hit >=90 EV, EV = mean)."""
+    the SAME definitions as the app (barrel = lsa 6, HH = EV>=95, FB = standard
+    fly LA 25-50 any EV, EV = mean). FB% and HH% are separate stats — FB is
+    never EV-gated."""
     n = len(abs_list)
     if n == 0:
         return None
@@ -82,7 +83,7 @@ def _recompute(abs_list: list[dict]) -> dict | None:
             brl += 1
         if ev >= 95:
             hh += 1
-        if 25 <= la <= 50 and ev >= 90:
+        if 25 <= la <= 50:   # standard FB% — all flies, any EV (never EV-gated)
             fb += 1
     return {
         "exit_velo": round(ev_sum / n, 1),

@@ -5,9 +5,12 @@ import { fetchLiveLineups, loadOverride, saveOverride, clearOverride, type Lineu
 
 type State = "idle" | "loading" | "done" | "error";
 
-// Auto-refresh cadence. Posted lineups trickle in over the afternoon, so polling
-// the MLB API every few minutes keeps the override fresh without a slate regen.
-const REFRESH_MS = 180_000;
+// Auto-refresh cadence. Posted lineups trickle in over the afternoon, so we poll
+// the MLB API frequently to keep the override fresh without a slate regen. 60s
+// (was 180s) so a scratched/benched player drops off within ~1 min of his team
+// posting — as close to instant as the MLB API's own lag allows. Public,
+// no-auth API, so 1 request/min per viewer is negligible.
+const REFRESH_MS = 60_000;
 const REFRESH_SECONDS = REFRESH_MS / 1000;
 
 const fmt = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
@@ -73,6 +76,13 @@ export function RefreshLineupsButton({
   // Latest refresh() for the ticker to call without re-arming the interval.
   const refreshRef = useRef(refresh);
   refreshRef.current = refresh;
+
+  // Pull live lineups immediately on load (and when the date changes) — a silent
+  // fetch so the page reflects current posted lineups right away instead of the
+  // last-saved override sitting in localStorage until the first poll tick.
+  useEffect(() => {
+    refreshRef.current(true);
+  }, [date]);
 
   // 1-second ticker: updates the visible countdown and fires a silent auto-fetch
   // when it reaches zero.
