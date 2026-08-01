@@ -1,9 +1,40 @@
 "use client";
 
 import { useState } from "react";
-import type { PlayerData, PitchDetailEntry } from "./types";
+import type { PlayerData, PitchDetailEntry, RecentAB } from "./types";
 import { scoreFor, type UILookback } from "./score-utils";
 import { teamLogoUrl, teamName } from "./game-header";
+
+// Pitch code -> Statcast pitch-type name(s). AB logs store the friendly name
+// ("4-Seam Fastball"); the filter chips use the code ("FF"). Accept both. Kept
+// in sync with the same map in batter-detail-page.tsx (SL must NOT alias to
+// Sweeper — Sweeper is its own chip, ST).
+const PITCH_NAMES: Record<string, string[]> = {
+  FF: ["4-Seam Fastball", "Four-Seam"],
+  SI: ["Sinker"],
+  FC: ["Cutter"],
+  SL: ["Slider"],
+  CU: ["Curveball", "Curve"],
+  CH: ["Changeup"],
+  FS: ["Split-Finger", "Splitter"],
+  FO: ["Forkball"],
+  KC: ["Knuckle Curve"],
+  KN: ["Knuckleball"],
+  ST: ["Sweeper"],
+  SV: ["Slurve"],
+  SC: ["Screwball"],
+  EP: ["Eephus"],
+};
+
+function abMatchesPitchFilter(ab: { pitch_type?: string | null }, filter: Set<string>): boolean {
+  const pt = String(ab.pitch_type ?? "");
+  if (filter.has(pt)) return true;
+  for (const code of filter) {
+    if (code === pt) return true;
+    if ((PITCH_NAMES[code] || []).includes(pt)) return true;
+  }
+  return false;
+}
 
 type SortCol = "score" | "pitch" | "ev" | "barrel" | "blast" | "hh" | "fb" | "hrfb" | "xwoba" | "sweet" | "la" | "swstr" | "pullbrl" | "bip" | "gb" | "ld" | "bzm" | "iso" | "air" | "hr" | null;
 
@@ -90,25 +121,36 @@ function matchupPill(score: number): { label: string; style: React.CSSProperties
   };
 }
 
-function filteredPitchStats(pitchDetail: Record<string, PitchDetailEntry>, filter: Set<string>) {
-  let totalCount = 0, wEv = 0, wBarrel = 0, wHH = 0, wFB = 0;
-  for (const pt of filter) {
-    const d = pitchDetail[pt];
-    if (!d) continue;
-    const c = d.count ?? 1;
-    totalCount += c;
-    wEv     += d.avg_exit_velo * c;
-    wBarrel += d.barrel_rate * c;
-    wHH     += d.hard_hit_rate * c;
-    wFB     += d.fb_rate * c;
+// Stats over the pitch-filtered slice of the ACTUAL BBE pool (recent_abs — the
+// same pool that feeds the score), using RAW integer counts. This is
+// display=score: no pitch-mix weighting, and no reconstructing a rate from
+// rounded per-pitch pitch_detail entries.
+//
+// The old version summed per-pitch `pitch_detail` pools (each is "last N BBE of
+// THAT pitch", up to 10 apiece), so selecting FF+ST double-counted to 20 BBE
+// and blended rounded rates — producing impossible values like 55% HH over a
+// "10 BIP" window. Filtering recent_abs guarantees the count matches the BIP
+// shown and equals the stored pool stat when the full arsenal is selected.
+function filteredPitchStats(recentAbs: RecentAB[], filter: Set<string>) {
+  const pool = recentAbs.filter((ab) => abMatchesPitchFilter(ab, filter));
+  const n = pool.length;
+  if (n === 0) return null;
+  let evSum = 0, hh = 0, brl = 0, fb = 0;
+  for (const ab of pool) {
+    const ev = Number(ab.ev || 0);
+    const la = Number(ab.angle || 0);
+    evSum += ev;
+    if (ev >= 95) hh += 1;
+    const isBarrel = ab.lsa != null ? ab.lsa === 6 : (ev >= 98 && la >= 26 && la <= 30);
+    if (isBarrel) brl += 1;
+    if (la >= 25 && la <= 50) fb += 1;   // standard FB% (all flies, any EV)
   }
-  if (totalCount === 0) return null;
   return {
-    exit_velo:    Math.round((wEv     / totalCount) * 10) / 10,
-    barrel_pct:   Math.round((wBarrel / totalCount) * 10) / 10,
-    hard_hit_pct: Math.round((wHH     / totalCount) * 10) / 10,
-    fb_pct:       Math.round((wFB     / totalCount) * 10) / 10,
-    bip: totalCount,
+    exit_velo:    Math.round((evSum / n) * 10) / 10,
+    barrel_pct:   Math.round((brl  / n) * 1000) / 10,
+    hard_hit_pct: Math.round((hh   / n) * 1000) / 10,
+    fb_pct:       Math.round((fb   / n) * 1000) / 10,
+    bip: n,
   };
 }
 
@@ -299,7 +341,15 @@ export function BatterRow({
     ? { ...rawScores, pitcher_score: overrideInfo.newPitcher, composite: overrideInfo.newComposite }
     : rawScores;
 
-  const recentAbs = scores.recent_abs ?? [];
+  const fullRecentAbs = scores.recent_abs ?? [];
+  // When a pitch filter is active, EVERY column reads from the same filtered
+  // slice of the BBE pool — EV/barrel/HH/FB, ISO, air%, HR, HR/FB — so they can
+  // never disagree with each other or with the BIP count shown. (Before, only
+  // EV/barrel/HH/FB were filtered while ISO/air/HR stayed on the full pool.)
+  const pitchActive = !!(pitchFilter && pitchFilter.size > 0);
+  const recentAbs = pitchActive
+    ? fullRecentAbs.filter((ab) => abMatchesPitchFilter(ab, pitchFilter))
+    : fullRecentAbs;
   // Every HR counts as a fly-ball event regardless of its launch angle —
   // a 20° line-drive HR is still a HR/FB hit. Without this, HR-heavy samples
   // could produce HR/FB > 100% (one HR at 22°, no FBs → 1/0).
@@ -311,8 +361,8 @@ export function BatterRow({
   const iso       = isoFromAbs(recentAbs);
   const airPct    = airPctFromAbs(recentAbs);
 
-  const filtered = pitchFilter && pitchFilter.size > 0
-    ? filteredPitchStats(p.pitch_detail || {}, pitchFilter)
+  const filtered = pitchActive
+    ? filteredPitchStats(fullRecentAbs, pitchFilter)
     : null;
 
   const pitchDetailForMatchup = (pitchFilter && pitchFilter.size > 0)
@@ -426,7 +476,9 @@ export function BatterRow({
       {/* BIP */}
       <td className="py-2 pr-2 w-14 text-center">
         {(() => {
-          const bip = scores.bip ?? p.season_profile?.bip_count ?? 0;
+          // When a pitch filter is active, show the count of matching BBE — so
+          // BIP always equals the pool the other stat columns are computed over.
+          const bip = filtered ? filtered.bip : (scores.bip ?? p.season_profile?.bip_count ?? 0);
           const style = bip >= 20 ? HEAT_NONE : HEAT_MUTED;
           const extra: React.CSSProperties = bip >= 20 && bip < 50 ? { color: "rgba(251,191,36,0.85)" } : {};
           return <span className={PILL_BASE} style={{ ...style, ...extra }}>{bip > 0 ? bip : "—"}</span>;
@@ -620,10 +672,14 @@ export function BatterTable({
         sc = { ...rawSc, pitcher_score: newP, composite: rawSc.composite + delta };
       }
     }
-    const recentAbs = sc.recent_abs ?? [];
+    const fullAbs = sc.recent_abs ?? [];
+    const pitchActive = pitchFilter.size > 0;
+    // Sort over the same filtered pool the row displays, so the ordering matches
+    // the visible numbers when a pitch filter is on.
+    const recentAbs = pitchActive ? fullAbs.filter((ab) => abMatchesPitchFilter(ab, pitchFilter)) : fullAbs;
     const fbs = recentAbs.filter((ab) => ab.angle >= 25 && ab.angle <= 50);
     const hrs = recentAbs.filter((ab) => ab.result === "home_run").length;
-    const filt = pitchFilter.size > 0 ? filteredPitchStats(row.p.pitch_detail || {}, pitchFilter) : null;
+    const filt = pitchActive ? filteredPitchStats(fullAbs, pitchFilter) : null;
     const pitchDetailForMatchup = pitchFilter.size > 0
       ? Object.fromEntries(Object.entries(row.p.pitch_detail || {}).filter(([pt]) => pitchFilter.has(pt)))
       : (row.p.pitch_detail || {});
