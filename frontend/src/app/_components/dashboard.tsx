@@ -571,7 +571,7 @@ export function Dashboard() {
   const tabConfig = TAB_CONFIG[activePage];
 
   return (
-    <div className="flex min-h-screen overflow-x-hidden">
+    <div className="flex min-h-screen">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -596,8 +596,10 @@ export function Dashboard() {
         />
       </div>
 
-      {/* Main content */}
-      <div className="flex-1 flex flex-col min-w-0">
+      {/* Main content — overflow-x-hidden lives HERE (not on the root flex row)
+          so the horizontal-overflow guard doesn't turn the sidebar's containing
+          block into a scroll container and break its sticky top-0. */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-x-hidden">
         {/* Top bar — 3 slots: left (title/meta), center (date), right (lookback)
             Mobile: stacks — title row above, controls row below. */}
         <header
