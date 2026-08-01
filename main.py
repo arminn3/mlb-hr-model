@@ -15,6 +15,7 @@ from __future__ import annotations  # PEP 563 — keeps `X | None` annotations l
 import argparse
 import json
 import math
+import re
 import shutil
 import socket
 import subprocess
@@ -1326,6 +1327,39 @@ def print_results(games_out: list, game_date: date, schedule: list = None) -> No
     ).returncode
     if rc != 0:
         print(f"  [three-yr injector] exited {rc} — Test tab will be empty until next regen")
+
+    # Keep the site lean: only the 4 newest slates stay on disk / in the deploy.
+    _prune_old_slates(data_dir, keep=4)
+
+
+def _prune_old_slates(data_dir: Path, keep: int = 4) -> None:
+    """Keep only the `keep` most-recent dated slate JSONs served by the site;
+    delete older ones and rebuild index.json to list only what remains.
+
+    Each full slate is ~25MB, so the whole `public/data` dir (and every Vercel
+    deploy) was ballooning ~25MB/day. Past slates are needed only transiently to
+    grade the next day's results — and that grading (`_refresh_results_and_ml`)
+    runs BEFORE this, on the same invocation, while yesterday's slate is still
+    present. The compact `results/` reports (the real season-long history the
+    Results tab + ML learn from) are a separate tree and are never touched here.
+
+    Retention decision: last 3 days + tomorrow = the 4 newest dated slates.
+    latest.json and all non-dated files are left alone."""
+    date_re = re.compile(r"^\d{4}-\d{2}-\d{2}\.json$")
+    dated = sorted(
+        (p for p in data_dir.glob("*.json") if date_re.match(p.name)),
+        key=lambda p: p.name, reverse=True,
+    )
+    for p in dated[keep:]:
+        try:
+            p.unlink()
+            print(f"[prune] removed old slate {p.name}")
+        except OSError as e:
+            print(f"[prune] could not remove {p.name}: {e}")
+    kept_dates = sorted((p.stem for p in dated[:keep]), reverse=True)
+    with open(data_dir / "index.json", "w") as f:
+        json.dump({"dates": kept_dates}, f, indent=2)
+    print(f"[prune] index.json now lists {len(kept_dates)} dates: {kept_dates}")
 
 
 def _refresh_results_and_ml(game_date: date) -> None:
