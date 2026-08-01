@@ -137289,7 +137289,7 @@
     ],
     "total_players_ranked": 304,
     "total_hrs_hit": 37,
-    "total_near_hrs": 0,
+    "total_near_hrs": 12,
     "model_hits": 37,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -137406,7 +137406,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 12,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -137432,28 +137432,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 5,
-        "rate": 25.0
+        "hits": 6,
+        "rate": 30.0
       },
       "top_30": {
         "total": 30,
-        "hits": 6,
-        "rate": 20.0
+        "hits": 7,
+        "rate": 23.3
       },
       "all": {
         "total": 304,
-        "hits": 37,
-        "rate": 12.2
+        "hits": 49,
+        "rate": 16.1
       }
     },
     "avg_composite_hr_hitters": 0.459,
-    "avg_composite_non_hitters": 0.439,
-    "composite_separation": 0.02,
+    "avg_composite_non_hitters": 0.438,
+    "composite_separation": 0.021,
     "hr_hitters": [
       {
         "name": "Spencer Jones",
@@ -137976,8 +137976,229 @@
         "matchup": "BOS@LAD"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Christian Yelich",
+        "rank": 6,
+        "composite": 0.785,
+        "opp_pitcher": "Ryan Johnson",
+        "matchup": "MIL@LAA"
+      },
+      {
+        "name": "Nick Gonzales",
+        "rank": 34,
+        "composite": 0.633,
+        "opp_pitcher": "Hunter Greene",
+        "matchup": "PIT@CIN"
+      },
+      {
+        "name": "Francisco Alvarez",
+        "rank": 70,
+        "composite": 0.544,
+        "opp_pitcher": "Janson Junk",
+        "matchup": "MIA@NYM"
+      },
+      {
+        "name": "Manny Machado",
+        "rank": 121,
+        "composite": 0.434,
+        "opp_pitcher": "Carson Whisenhunt",
+        "matchup": "SF@SD"
+      },
+      {
+        "name": "Brady House",
+        "rank": 125,
+        "composite": 0.431,
+        "opp_pitcher": "Bryce Elder",
+        "matchup": "WSH@ATL"
+      },
+      {
+        "name": "Garrett Mitchell",
+        "rank": 147,
+        "composite": 0.409,
+        "opp_pitcher": "Ryan Johnson",
+        "matchup": "MIL@LAA"
+      },
+      {
+        "name": "Coby Mayo",
+        "rank": 163,
+        "composite": 0.4,
+        "opp_pitcher": "Brian Keller",
+        "matchup": "PHI@BAL"
+      },
+      {
+        "name": "Otto Lopez",
+        "rank": 181,
+        "composite": 0.394,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "MIA@NYM"
+      },
+      {
+        "name": "Vladimir Guerrero Jr.",
+        "rank": 230,
+        "composite": 0.353,
+        "opp_pitcher": "Kyle Leahy",
+        "matchup": "STL@TOR"
+      },
+      {
+        "name": "Masataka Yoshida",
+        "rank": 237,
+        "composite": 0.345,
+        "opp_pitcher": "Edgardo Henriquez",
+        "matchup": "BOS@LAD"
+      },
+      {
+        "name": "Jonathan Aranda",
+        "rank": 257,
+        "composite": 0.32,
+        "opp_pitcher": "Erick Fedde",
+        "matchup": "CWS@TB"
+      },
+      {
+        "name": "Tyler Soderstrom",
+        "rank": 263,
+        "composite": 0.31,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "DET@ATH"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Tyler Soderstrom",
+        "ev": 99.3,
+        "angle": 28.0,
+        "distance": 390.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "De Jesus, Enmanuel"
+      },
+      {
+        "batter": "Brady House",
+        "ev": 104.9,
+        "angle": 23.0,
+        "distance": 383.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "Elder, Bryce"
+      },
+      {
+        "batter": "Coby Mayo",
+        "ev": 110.8,
+        "angle": 30.0,
+        "distance": 398.0,
+        "hr_in_parks": 4,
+        "result": "",
+        "pitcher": "Kerkering, Orion"
+      },
+      {
+        "batter": "J.T. Realmuto",
+        "ev": 102.3,
+        "angle": 26.0,
+        "distance": 395.0,
+        "hr_in_parks": 7,
+        "result": "field_out",
+        "pitcher": "Young, Brandon"
+      },
+      {
+        "batter": "Nick Gonzales",
+        "ev": 98.8,
+        "angle": 33.0,
+        "distance": 385.0,
+        "hr_in_parks": 12,
+        "result": "field_out",
+        "pitcher": "Greene, Hunter"
+      },
+      {
+        "batter": "Corey Seager",
+        "ev": 106.9,
+        "angle": 21.0,
+        "distance": 403.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Brown, Hunter"
+      },
+      {
+        "batter": "Christian Yelich",
+        "ev": 101.7,
+        "angle": 29.0,
+        "distance": 381.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Johnson, Ryan"
+      },
+      {
+        "batter": "Garrett Mitchell",
+        "ev": 109.9,
+        "angle": 21.0,
+        "distance": 395.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Johnson, Ryan"
+      },
+      {
+        "batter": "Christian Yelich",
+        "ev": 101.3,
+        "angle": 33.0,
+        "distance": 381.0,
+        "hr_in_parks": 14,
+        "result": "field_out",
+        "pitcher": "Johnson, Ryan"
+      },
+      {
+        "batter": "Masataka Yoshida",
+        "ev": 101.7,
+        "angle": 27.0,
+        "distance": 398.0,
+        "hr_in_parks": 8,
+        "result": "field_out",
+        "pitcher": "Irvin, Cole"
+      },
+      {
+        "batter": "Francisco Alvarez",
+        "ev": 105.4,
+        "angle": 31.0,
+        "distance": 408.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Fairbanks, Pete"
+      },
+      {
+        "batter": "Otto Lopez",
+        "ev": 103.9,
+        "angle": 23.0,
+        "distance": 393.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Senga, Kodai"
+      },
+      {
+        "batter": "Manny Machado",
+        "ev": 103.6,
+        "angle": 24.0,
+        "distance": 390.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "Houser, Adrian"
+      },
+      {
+        "batter": "Jonathan Aranda",
+        "ev": 100.6,
+        "angle": 32.0,
+        "distance": 387.0,
+        "hr_in_parks": 8,
+        "result": "field_out",
+        "pitcher": "Fedde, Erick"
+      },
+      {
+        "batter": "Vladimir Guerrero Jr.",
+        "ev": 112.4,
+        "angle": 19.0,
+        "distance": 394.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "Leahy, Kyle"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
