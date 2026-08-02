@@ -117,7 +117,9 @@ def refresh(game_date: date) -> None:
     slate["games"].sort(key=lambda g: g.get("game_time_sort", 9999))
     slate["refreshed_at"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
-    slate_path.write_text(json.dumps(slate, indent=2, default=str))
+    # Compact — matches main.py/patch_lineups/refresh_pitchers; keeps the deep
+    # season_abs slate under GitHub's 100MB push limit (indent=2 doubled it).
+    slate_path.write_text(json.dumps(slate, separators=(",", ":"), default=str))
     print(f"\nSaved {slate_path}")
     print(f"  {n_status_updated} status changes, {n_time_changed} time changes, "
           f"{n_weather_refreshed} weather refreshes")

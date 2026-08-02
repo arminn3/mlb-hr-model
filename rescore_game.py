@@ -121,7 +121,9 @@ def main() -> None:
     if root.exists():
         out_paths.append(root)
     for path in out_paths:
-        path.write_text(json.dumps(slate, indent=2, default=str))
+        # Compact — matches the other slate writers; keeps the deep season_abs
+        # slate under GitHub's 100MB push limit (indent=2 doubled it).
+        path.write_text(json.dumps(slate, separators=(",", ":"), default=str))
 
     print(f"Rescored + merged {replaced} game(s). Updated: "
           + ", ".join(p.name for p in out_paths))
