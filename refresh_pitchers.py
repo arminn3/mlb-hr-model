@@ -219,7 +219,11 @@ def apply_to_slate(slate_path: Path, probables: dict[int, dict], season_year: in
 
     if n_changes:
         with open(slate_path, "w") as f:
-            json.dump(slate, f, indent=2, default=str)
+            # Compact (no indent) — matches patch_lineups.py and keeps the slate
+            # well under GitHub's 100MB push limit. indent=2 whitespace more than
+            # doubled the deep-season_abs slate (55MB -> 124MB), which got the
+            # cron push rejected. The frontend parses compact JSON identically.
+            json.dump(slate, f, separators=(",", ":"), default=str)
 
     return n_changes, log
 

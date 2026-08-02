@@ -1272,13 +1272,17 @@ def print_results(games_out: list, game_date: date, schedule: list = None) -> No
         except Exception as e:
             print(f"  WARNING: slate lock failed ({e}) — writing fresh data.")
 
+    # Compact (no indent) — halves the on-disk/pushed size and keeps the deep
+    # season_abs slate well under GitHub's 100MB push limit. Must match
+    # patch_lineups.py + refresh_pitchers.py so every writer produces the same
+    # format. The frontend parses compact JSON identically.
     for path in [data_dir / "latest.json", dated_path]:
         with open(path, "w") as f:
-            json.dump(frontend_data, f, indent=2, default=str)
+            json.dump(frontend_data, f, separators=(",", ":"), default=str)
 
     # Also save a copy in the project root
     with open(f"hr_props_{game_date.isoformat()}.json", "w") as f:
-        json.dump(frontend_data, f, indent=2, default=str)
+        json.dump(frontend_data, f, separators=(",", ":"), default=str)
 
     # ── Automatic data-integrity check ────────────────────────────────────────
     # Runs the internal validator on the slate we just wrote (arsenal leaks,
