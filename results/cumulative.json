@@ -139250,7 +139250,7 @@
     ],
     "total_players_ranked": 293,
     "total_hrs_hit": 35,
-    "total_near_hrs": 0,
+    "total_near_hrs": 16,
     "model_hits": 33,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -139367,7 +139367,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 16,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -139393,28 +139393,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 4,
-        "rate": 40.0
+        "hits": 5,
+        "rate": 50.0
       },
       "top_20": {
         "total": 20,
-        "hits": 6,
-        "rate": 30.0
+        "hits": 7,
+        "rate": 35.0
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 10,
+        "rate": 33.3
       },
       "all": {
         "total": 293,
-        "hits": 33,
-        "rate": 11.3
+        "hits": 49,
+        "rate": 16.7
       }
     },
     "avg_composite_hr_hitters": 0.464,
-    "avg_composite_non_hitters": 0.426,
-    "composite_separation": 0.038,
+    "avg_composite_non_hitters": 0.424,
+    "composite_separation": 0.04,
     "hr_hitters": [
       {
         "name": "Salvador Perez",
@@ -139881,8 +139881,284 @@
         "matchup": "SF@SD"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Tyler Tolbert",
+        "rank": 5,
+        "composite": 0.765,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "KC@COL"
+      },
+      {
+        "name": "Taylor Trammell",
+        "rank": 21,
+        "composite": 0.668,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@HOU"
+      },
+      {
+        "name": "Bryan Reynolds",
+        "rank": 22,
+        "composite": 0.659,
+        "opp_pitcher": "Andrew Abbott",
+        "matchup": "PIT@CIN"
+      },
+      {
+        "name": "Kody Clemens",
+        "rank": 37,
+        "composite": 0.621,
+        "opp_pitcher": "Logan Gilbert",
+        "matchup": "MIN@SEA"
+      },
+      {
+        "name": "Ryan Kreidler",
+        "rank": 67,
+        "composite": 0.532,
+        "opp_pitcher": "Logan Gilbert",
+        "matchup": "MIN@SEA"
+      },
+      {
+        "name": "Austin Riley",
+        "rank": 85,
+        "composite": 0.479,
+        "opp_pitcher": "Miles Mikolas",
+        "matchup": "WSH@ATL"
+      },
+      {
+        "name": "Miguel Vargas",
+        "rank": 105,
+        "composite": 0.444,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CWS@TB"
+      },
+      {
+        "name": "Kyle Manzardo",
+        "rank": 147,
+        "composite": 0.4,
+        "opp_pitcher": "Kohl Drake",
+        "matchup": "AZ@CLE"
+      },
+      {
+        "name": "Yordan Alvarez",
+        "rank": 185,
+        "composite": 0.378,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@HOU"
+      },
+      {
+        "name": "Colt Keith",
+        "rank": 190,
+        "composite": 0.373,
+        "opp_pitcher": "Jack Perkins",
+        "matchup": "DET@ATH"
+      },
+      {
+        "name": "Jonah Heim",
+        "rank": 196,
+        "composite": 0.372,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "DET@ATH"
+      },
+      {
+        "name": "Miguel Rojas",
+        "rank": 199,
+        "composite": 0.366,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "BOS@LAD"
+      },
+      {
+        "name": "Tim Tawa",
+        "rank": 214,
+        "composite": 0.352,
+        "opp_pitcher": "Parker Messick",
+        "matchup": "AZ@CLE"
+      },
+      {
+        "name": "Angel Mart\u00ednez",
+        "rank": 235,
+        "composite": 0.327,
+        "opp_pitcher": "Kohl Drake",
+        "matchup": "AZ@CLE"
+      },
+      {
+        "name": "Tyler Soderstrom",
+        "rank": 249,
+        "composite": 0.301,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "DET@ATH"
+      },
+      {
+        "name": "Jackson Chourio",
+        "rank": 255,
+        "composite": 0.294,
+        "opp_pitcher": "Jos\u00e9 Soriano",
+        "matchup": "MIL@LAA"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Tyler Soderstrom",
+        "ev": 99.4,
+        "angle": 36.0,
+        "distance": 372.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Jansen, Kenley"
+      },
+      {
+        "batter": "Max Clark",
+        "ev": 89.3,
+        "angle": 19.0,
+        "distance": 414.0,
+        "hr_in_parks": 28,
+        "result": "",
+        "pitcher": "Blewett, Scott"
+      },
+      {
+        "batter": "Colt Keith",
+        "ev": 103.5,
+        "angle": 38.0,
+        "distance": 399.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Perkins, Jack"
+      },
+      {
+        "batter": "Jonah Heim",
+        "ev": 100.3,
+        "angle": 29.0,
+        "distance": 403.0,
+        "hr_in_parks": 16,
+        "result": "field_out",
+        "pitcher": "Valdez, Framber"
+      },
+      {
+        "batter": "Austin Riley",
+        "ev": 102.5,
+        "angle": 36.0,
+        "distance": 395.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Mikolas, Miles"
+      },
+      {
+        "batter": "Bryan Reynolds",
+        "ev": 102.1,
+        "angle": 24.0,
+        "distance": 391.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Abbott, Andrew"
+      },
+      {
+        "batter": "Kyle Manzardo",
+        "ev": 101.2,
+        "angle": 28.0,
+        "distance": 396.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Lo\u00e1isiga, Jonathan"
+      },
+      {
+        "batter": "Tim Tawa",
+        "ev": 100.6,
+        "angle": 24.0,
+        "distance": 403.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Gaddis, Hunter"
+      },
+      {
+        "batter": "Angel Mart\u00ednez",
+        "ev": 97.8,
+        "angle": 23.0,
+        "distance": 375.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Drake, Kohl"
+      },
+      {
+        "batter": "Salvador Perez",
+        "ev": 96.0,
+        "angle": 34.0,
+        "distance": 375.0,
+        "hr_in_parks": 16,
+        "result": "field_out",
+        "pitcher": "Feltner, Ryan"
+      },
+      {
+        "batter": "Tyler Tolbert",
+        "ev": 95.1,
+        "angle": 29.0,
+        "distance": 376.0,
+        "hr_in_parks": 22,
+        "result": "double",
+        "pitcher": "Feltner, Ryan"
+      },
+      {
+        "batter": "Yordan Alvarez",
+        "ev": 104.5,
+        "angle": 24.0,
+        "distance": 395.0,
+        "hr_in_parks": 22,
+        "result": "field_out",
+        "pitcher": "Alexander, Tyler"
+      },
+      {
+        "batter": "Taylor Trammell",
+        "ev": 111.5,
+        "angle": 26.0,
+        "distance": 409.0,
+        "hr_in_parks": 25,
+        "result": "",
+        "pitcher": "Alexander, Tyler"
+      },
+      {
+        "batter": "Jackson Chourio",
+        "ev": 107.8,
+        "angle": 21.0,
+        "distance": 376.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Natera Jr., Samy"
+      },
+      {
+        "batter": "Miguel Rojas",
+        "ev": 86.9,
+        "angle": 17.0,
+        "distance": 404.0,
+        "hr_in_parks": 19,
+        "result": "",
+        "pitcher": "Tolle, Payton"
+      },
+      {
+        "batter": "Kody Clemens",
+        "ev": 107.5,
+        "angle": 24.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Gilbert, Logan"
+      },
+      {
+        "batter": "Ryan Kreidler",
+        "ev": 102.3,
+        "angle": 27.0,
+        "distance": 385.0,
+        "hr_in_parks": 9,
+        "result": "field_out",
+        "pitcher": "Gilbert, Logan"
+      },
+      {
+        "batter": "Miguel Vargas",
+        "ev": 100.9,
+        "angle": 39.0,
+        "distance": 370.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Baker, Bryan"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
