@@ -300,7 +300,7 @@
   ],
   "total_players_ranked": 295,
   "total_hrs_hit": 30,
-  "total_near_hrs": 0,
+  "total_near_hrs": 10,
   "model_hits": 30,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -417,7 +417,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 10,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -443,28 +443,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 1,
-      "rate": 10.0
+      "hits": 2,
+      "rate": 20.0
     },
     "top_20": {
       "total": 20,
-      "hits": 2,
-      "rate": 10.0
+      "hits": 3,
+      "rate": 15.0
     },
     "top_30": {
       "total": 30,
-      "hits": 3,
-      "rate": 10.0
+      "hits": 4,
+      "rate": 13.3
     },
     "all": {
       "total": 295,
-      "hits": 30,
-      "rate": 10.2
+      "hits": 40,
+      "rate": 13.6
     }
   },
   "avg_composite_hr_hitters": 0.428,
-  "avg_composite_non_hitters": 0.43,
-  "composite_separation": -0.002,
+  "avg_composite_non_hitters": 0.429,
+  "composite_separation": -0.001,
   "hr_hitters": [
     {
       "name": "Wilyer Abreu",
@@ -889,8 +889,206 @@
       "matchup": "MIL@LAA"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Salvador Perez",
+      "rank": 1,
+      "composite": 0.814,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "KC@COL"
+    },
+    {
+      "name": "J.T. Realmuto",
+      "rank": 34,
+      "composite": 0.606,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "PHI@BAL"
+    },
+    {
+      "name": "Geraldo Perdomo",
+      "rank": 62,
+      "composite": 0.539,
+      "opp_pitcher": "Gavin Williams",
+      "matchup": "AZ@CLE"
+    },
+    {
+      "name": "Drake Baldwin",
+      "rank": 84,
+      "composite": 0.483,
+      "opp_pitcher": "Cade Cavalli",
+      "matchup": "WSH@ATL"
+    },
+    {
+      "name": "Ezequiel Tovar",
+      "rank": 95,
+      "composite": 0.457,
+      "opp_pitcher": "Seth Lugo",
+      "matchup": "KC@COL"
+    },
+    {
+      "name": "Ryan Kreidler",
+      "rank": 108,
+      "composite": 0.445,
+      "opp_pitcher": "George Kirby",
+      "matchup": "MIN@SEA"
+    },
+    {
+      "name": "Josh Bell",
+      "rank": 145,
+      "composite": 0.406,
+      "opp_pitcher": "George Kirby",
+      "matchup": "MIN@SEA"
+    },
+    {
+      "name": "Dylan Crews",
+      "rank": 214,
+      "composite": 0.356,
+      "opp_pitcher": "Jr Ritchie",
+      "matchup": "WSH@ATL"
+    },
+    {
+      "name": "Chase Meidroth",
+      "rank": 226,
+      "composite": 0.337,
+      "opp_pitcher": "Griffin Jax",
+      "matchup": "CWS@TB"
+    },
+    {
+      "name": "Evan Carter",
+      "rank": 276,
+      "composite": 0.257,
+      "opp_pitcher": "Peter Lambert",
+      "matchup": "TEX@HOU"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Drake Baldwin",
+      "ev": 101.3,
+      "angle": 31.0,
+      "distance": 391.0,
+      "hr_in_parks": 6,
+      "result": "field_out",
+      "pitcher": "Kranick, Max"
+    },
+    {
+      "batter": "Dylan Crews",
+      "ev": 102.4,
+      "angle": 33.0,
+      "distance": 402.0,
+      "hr_in_parks": 26,
+      "result": "field_out",
+      "pitcher": "Ritchie, JR"
+    },
+    {
+      "batter": "J.T. Realmuto",
+      "ev": 104.4,
+      "angle": 40.0,
+      "distance": 397.0,
+      "hr_in_parks": 12,
+      "result": "field_out",
+      "pitcher": "Bradish, Kyle"
+    },
+    {
+      "batter": "Geraldo Perdomo",
+      "ev": 99.2,
+      "angle": 31.0,
+      "distance": 388.0,
+      "hr_in_parks": 10,
+      "result": "field_out",
+      "pitcher": "Williams, Gavin"
+    },
+    {
+      "batter": "Salvador Perez",
+      "ev": 97.3,
+      "angle": 32.0,
+      "distance": 384.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Freeland, Kyle"
+    },
+    {
+      "batter": "Ezequiel Tovar",
+      "ev": 95.0,
+      "angle": 40.0,
+      "distance": 376.0,
+      "hr_in_parks": 11,
+      "result": "sac_fly",
+      "pitcher": "Lugo, Seth"
+    },
+    {
+      "batter": "Jake McCarthy",
+      "ev": 107.7,
+      "angle": 27.0,
+      "distance": 407.0,
+      "hr_in_parks": 22,
+      "result": "",
+      "pitcher": "Lugo, Seth"
+    },
+    {
+      "batter": "Evan Carter",
+      "ev": 102.9,
+      "angle": 28.0,
+      "distance": 403.0,
+      "hr_in_parks": 21,
+      "result": "field_out",
+      "pitcher": "Lambert, Peter"
+    },
+    {
+      "batter": "Josh Bell",
+      "ev": 97.4,
+      "angle": 26.0,
+      "distance": 383.0,
+      "hr_in_parks": 7,
+      "result": "double",
+      "pitcher": "Bazardo, Eduard"
+    },
+    {
+      "batter": "Ryan Kreidler",
+      "ev": 102.5,
+      "angle": 35.0,
+      "distance": 389.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Kirby, George"
+    },
+    {
+      "batter": "Cal Raleigh",
+      "ev": 104.6,
+      "angle": 34.0,
+      "distance": 398.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Bradley, Taj"
+    },
+    {
+      "batter": "Everson Pereira",
+      "ev": 107.1,
+      "angle": 22.0,
+      "distance": 391.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Kimbrel, Craig"
+    },
+    {
+      "batter": "Andrew Benintendi",
+      "ev": 100.4,
+      "angle": 28.0,
+      "distance": 401.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Kimbrel, Craig"
+    },
+    {
+      "batter": "Chase Meidroth",
+      "ev": 107.2,
+      "angle": 41.0,
+      "distance": 422.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Jax, Griffin"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
