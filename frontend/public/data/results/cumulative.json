@@ -142592,5 +142592,410 @@
         "matchup": "MIL@LAA"
       }
     ]
+  },
+  {
+    "date": "2026-08-03",
+    "players_who_batted": [],
+    "total_players_ranked": 182,
+    "total_hrs_hit": 0,
+    "total_near_hrs": 0,
+    "model_hits": 0,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 182,
+          "hits": 0,
+          "rate": 0.0
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 182,
+          "hits": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 182,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 182,
+          "hits": 0,
+          "rate": 0.0
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 182,
+          "hits": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 182,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 182,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "avg_composite_hr_hitters": 0,
+    "avg_composite_non_hitters": 0.416,
+    "composite_separation": -0.416,
+    "hr_hitters": [],
+    "hr_hitters_l10": [],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 48,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Bryson Stott",
+          "Garrett Stubbs",
+          "Jos\u00e9 Caballero",
+          "Nick Gonzales",
+          "Endy Rodr\u00edguez",
+          "Andrew Vaughn",
+          "Pedro Ram\u00edrez",
+          "Shohei Ohtani",
+          "Kyle Tucker",
+          "Enrique Hern\u00e1ndez",
+          "Michael Conforto",
+          "Mookie Betts",
+          "Dansby Swanson",
+          "Eliezer Alfonzo",
+          "Nico Hoerner",
+          "Teoscar Hern\u00e1ndez",
+          "Tommy Edman",
+          "Andy Pages",
+          "Alex Bregman",
+          "Freddie Freeman",
+          "James Triantos",
+          "Corey Seager",
+          "Evan Carter",
+          "Wyatt Langford",
+          "Bryce Eldridge",
+          "Drew Cavanaugh",
+          "Jung Hoo Lee",
+          "Brandon Nimmo",
+          "Joc Pederson",
+          "Lucas Spence",
+          "Alejandro Kirk",
+          "LaMonte Wade Jr.",
+          "Jes\u00fas S\u00e1nchez",
+          "Myles Straw",
+          "Nick Fortes",
+          "Tyler Freeman",
+          "Geraldo Perdomo",
+          "Sung-Mun Song",
+          "Ryan Waldschmidt",
+          "Corbin Carroll",
+          "Ildemaro Vargas",
+          "Jase Bowen",
+          "Gabriel Moreno",
+          "James McCann",
+          "Freddy Fermin",
+          "Nolan Arenado",
+          "Xander Bogaerts",
+          "Rodolfo Dur\u00e1n"
+        ],
+        "hr_names": []
+      },
+      "2_of_5": {
+        "players": 62,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Harry Ford",
+          "Bryce Harper",
+          "Jacob Young",
+          "CJ Abrams",
+          "Keibert Ruiz",
+          "Bryan De La Cruz",
+          "Derek Hill",
+          "Edmundo Sosa",
+          "Trea Turner",
+          "Jimmy Crooks",
+          "Jordan Walker",
+          "Iv\u00e1n Herrera",
+          "Masyn Winn",
+          "JJ Wetherholt",
+          "Brandon Lowe",
+          "Jhostynxon Garcia",
+          "Jacob Gonzalez",
+          "Bryan Reynolds",
+          "Esmerlyn Valdez",
+          "Rafael Flores Jr.",
+          "Jake Mangum",
+          "Spencer Horwitz",
+          "William Contreras",
+          "Jackson Chourio",
+          "Michael Busch",
+          "Miguel Amaya",
+          "Carson Kelly",
+          "Seiya Suzuki",
+          "Ian Happ",
+          "Grant McCray",
+          "Rafael Devers",
+          "Jake Burger",
+          "Daniel Susac",
+          "Heliot Ramos",
+          "Willy Adames",
+          "George Springer",
+          "Taylor Trammell",
+          "Nick Allen",
+          "Luis Ur\u00edas",
+          "Ernie Clement",
+          "Nathan Lukes",
+          "Junior Caminero",
+          "Jonny DeLuca",
+          "Willi Castro",
+          "Chandler Simpson",
+          "Hunter Goodman",
+          "Yandy D\u00edaz",
+          "Cole Carrigg",
+          "Ben Williamson",
+          "Kyle Karros",
+          "Ryan Vilade",
+          "Jackson Merrill",
+          "Tim Tawa",
+          "Gavin Sheets",
+          "Jake Cronenworth",
+          "Luis Rengifo",
+          "Manny Machado",
+          "Ketel Marte",
+          "Max Kepler",
+          "Ty France",
+          "Fernando Tatis Jr.",
+          "Luis Campusano"
+        ],
+        "hr_names": []
+      },
+      "3_of_5": {
+        "players": 46,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Brady House",
+          "Nasim Nu\u00f1ez",
+          "Dylan Crews",
+          "Abimelec Ortiz",
+          "Daylen Lile",
+          "Jorbit Vivas",
+          "Jos\u00e9 Tena",
+          "Alec Bohm",
+          "Luis Garc\u00eda Jr.",
+          "Austin Wells",
+          "Jasson Dom\u00ednguez",
+          "Alec Burleson",
+          "Trent Grisham",
+          "Spencer Jones",
+          "Jazz Chisholm Jr.",
+          "Lars Nootbaar",
+          "Nathan Church",
+          "Jake Bauers",
+          "Henry Davis",
+          "Jared Triolo",
+          "Marcell Ozuna",
+          "Brice Turang",
+          "Pete Crow-Armstrong",
+          "Drew Gilbert",
+          "Osleivis Basabe",
+          "Christian Koss",
+          "Jeremy Pe\u00f1a",
+          "Yainer Diaz",
+          "Vladimir Guerrero Jr.",
+          "Kazuma Okamoto",
+          "Brandon Valenzuela",
+          "Yordan Alvarez",
+          "Cam Smith",
+          "Christian V\u00e1zquez",
+          "Christian Walker",
+          "Jose Altuve",
+          "Daulton Varsho",
+          "Andr\u00e9s Gim\u00e9nez",
+          "Richie Palacios",
+          "Edouard Julien",
+          "Jake McCarthy",
+          "TJ Rumfield",
+          "Cedric Mullins",
+          "Taylor Walls",
+          "Hunter Feduccia",
+          "Ezequiel Tovar"
+        ],
+        "hr_names": []
+      },
+      "4_of_5": {
+        "players": 16,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Andr\u00e9s Chaparro",
+          "James Wood",
+          "Kyle Schwarber",
+          "Ryan McMahon",
+          "Ben Rice",
+          "David Hamilton",
+          "Christian Yelich",
+          "Garrett Mitchell",
+          "Davis Schneider",
+          "Isaac Paredes",
+          "Zach Dezenzo",
+          "Brett Sullivan",
+          "Mickey Moniak",
+          "Troy Johnston",
+          "Jonathan Aranda",
+          "Victor Mesa Jr."
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 182,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "combined_hr_hitters": []
   }
 ]
