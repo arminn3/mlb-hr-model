@@ -142757,7 +142757,7 @@
     ],
     "total_players_ranked": 148,
     "total_hrs_hit": 30,
-    "total_near_hrs": 0,
+    "total_near_hrs": 6,
     "model_hits": 25,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -142874,7 +142874,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 6,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -142900,28 +142900,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 5,
-        "rate": 25.0
+        "hits": 6,
+        "rate": 30.0
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 8,
+        "rate": 26.7
       },
       "all": {
         "total": 148,
-        "hits": 25,
-        "rate": 16.9
+        "hits": 31,
+        "rate": 20.9
       }
     },
     "avg_composite_hr_hitters": 0.436,
-    "avg_composite_non_hitters": 0.417,
-    "composite_separation": 0.019,
+    "avg_composite_non_hitters": 0.416,
+    "composite_separation": 0.02,
     "hr_hitters": [
       {
         "name": "Richie Palacios",
@@ -143276,8 +143276,151 @@
         "matchup": "SF@TEX"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Taylor Trammell",
+        "rank": 9,
+        "composite": 0.676,
+        "opp_pitcher": "Shane Bieber",
+        "matchup": "TOR@HOU"
+      },
+      {
+        "name": "Taylor Walls",
+        "rank": 44,
+        "composite": 0.46,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "TB@COL"
+      },
+      {
+        "name": "Victor Mesa Jr.",
+        "rank": 45,
+        "composite": 0.46,
+        "opp_pitcher": "Michael Lorenzen",
+        "matchup": "TB@COL"
+      },
+      {
+        "name": "Christian Walker",
+        "rank": 49,
+        "composite": 0.449,
+        "opp_pitcher": "Shane Bieber",
+        "matchup": "TOR@HOU"
+      },
+      {
+        "name": "Brandon Nimmo",
+        "rank": 103,
+        "composite": 0.346,
+        "opp_pitcher": "Logan Webb",
+        "matchup": "SF@TEX"
+      },
+      {
+        "name": "Tyler Freeman",
+        "rank": 136,
+        "composite": 0.27,
+        "opp_pitcher": "Ian Seymour",
+        "matchup": "TB@COL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Kevin Alc\u00e1ntara",
+        "ev": 107.9,
+        "angle": 27.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Wrobleski, Justin"
+      },
+      {
+        "batter": "Victor Mesa Jr.",
+        "ev": 100.7,
+        "angle": 29.0,
+        "distance": 412.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Gordon, Tanner"
+      },
+      {
+        "batter": "Junior Caminero",
+        "ev": 102.4,
+        "angle": 39.0,
+        "distance": 386.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Gordon, Tanner"
+      },
+      {
+        "batter": "Tyler Freeman",
+        "ev": 96.1,
+        "angle": 26.0,
+        "distance": 376.0,
+        "hr_in_parks": 9,
+        "result": "field_out",
+        "pitcher": "Seymour, Ian"
+      },
+      {
+        "batter": "Mickey Moniak",
+        "ev": 103.8,
+        "angle": 22.0,
+        "distance": 389.0,
+        "hr_in_parks": 26,
+        "result": "triple",
+        "pitcher": "Seymour, Ian"
+      },
+      {
+        "batter": "Victor Mesa Jr.",
+        "ev": 96.5,
+        "angle": 36.0,
+        "distance": 376.0,
+        "hr_in_parks": 17,
+        "result": "field_out",
+        "pitcher": "Gordon, Tanner"
+      },
+      {
+        "batter": "Taylor Walls",
+        "ev": 92.6,
+        "angle": 29.0,
+        "distance": 369.0,
+        "hr_in_parks": 11,
+        "result": "field_out",
+        "pitcher": "Lorenzen, Michael"
+      },
+      {
+        "batter": "Christian Walker",
+        "ev": 104.1,
+        "angle": 29.0,
+        "distance": 402.0,
+        "hr_in_parks": 26,
+        "result": "field_out",
+        "pitcher": "Bieber, Shane"
+      },
+      {
+        "batter": "Taylor Trammell",
+        "ev": 110.4,
+        "angle": 32.0,
+        "distance": 418.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Bieber, Shane"
+      },
+      {
+        "batter": "Blaze Jordan",
+        "ev": 103.6,
+        "angle": 24.0,
+        "distance": 414.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Yarbrough, Ryan"
+      },
+      {
+        "batter": "Brandon Nimmo",
+        "ev": 95.0,
+        "angle": 29.0,
+        "distance": 373.0,
+        "hr_in_parks": 23,
+        "result": "field_out",
+        "pitcher": "Webb, Logan"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Kevin Alc\u00e1ntara",
