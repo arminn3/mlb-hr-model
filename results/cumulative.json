@@ -144899,7 +144899,7 @@
       {
         "name": "Tyler O'Neill",
         "pitcher": "Mitch Farris",
-        "description": "${person|fullName|641933} homers ${total|homeRuns|641933} on a fly ball to left center field.  "
+        "description": "Tyler O'Neill homers (8) on a fly ball to left center field."
       },
       {
         "name": "Andrew Vaughn",
