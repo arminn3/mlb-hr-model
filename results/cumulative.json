@@ -144175,7 +144175,7 @@
     ],
     "total_players_ranked": 273,
     "total_hrs_hit": 30,
-    "total_near_hrs": 0,
+    "total_near_hrs": 10,
     "model_hits": 27,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -144292,7 +144292,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 10,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -144328,18 +144328,18 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 1,
-        "rate": 3.3
+        "hits": 2,
+        "rate": 6.7
       },
       "all": {
         "total": 273,
-        "hits": 27,
-        "rate": 9.9
+        "hits": 37,
+        "rate": 13.6
       }
     },
     "avg_composite_hr_hitters": 0.408,
-    "avg_composite_non_hitters": 0.424,
-    "composite_separation": -0.016,
+    "avg_composite_non_hitters": 0.425,
+    "composite_separation": -0.017,
     "hr_hitters": [
       {
         "name": "Mickey Moniak",
@@ -144722,18 +144722,189 @@
         "matchup": "STL@NYY"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Hunter Goodman",
+        "rank": 28,
+        "composite": 0.623,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "TB@COL"
+      },
+      {
+        "name": "Nelson Vel\u00e1zquez",
+        "rank": 66,
+        "composite": 0.531,
+        "opp_pitcher": "Ryan Weathers",
+        "matchup": "STL@NYY"
+      },
+      {
+        "name": "Jo Adell",
+        "rank": 101,
+        "composite": 0.445,
+        "opp_pitcher": "Sean Manaea",
+        "matchup": "NYM@CLE"
+      },
+      {
+        "name": "TJ Rumfield",
+        "rank": 113,
+        "composite": 0.43,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "TB@COL"
+      },
+      {
+        "name": "Kyle Stowers",
+        "rank": 144,
+        "composite": 0.404,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "MIA@ATL"
+      },
+      {
+        "name": "Jordan Beck",
+        "rank": 178,
+        "composite": 0.372,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "TB@COL"
+      },
+      {
+        "name": "Ryan Kreidler",
+        "rank": 209,
+        "composite": 0.332,
+        "opp_pitcher": "Randy Dobnak",
+        "matchup": "MIN@KC"
+      },
+      {
+        "name": "Zach Neto",
+        "rank": 225,
+        "composite": 0.303,
+        "opp_pitcher": "Cade Povich",
+        "matchup": "LAA@BAL"
+      },
+      {
+        "name": "Connor Wong",
+        "rank": 244,
+        "composite": 0.259,
+        "opp_pitcher": "Davis Martin",
+        "matchup": "CWS@BOS"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 248,
+        "composite": 0.243,
+        "opp_pitcher": "Gabriel Hughes",
+        "matchup": "TB@COL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Kyle Stowers",
+        "ev": 114.2,
+        "angle": 28.0,
+        "distance": 400.0,
+        "hr_in_parks": 13,
+        "result": "",
+        "pitcher": "Holmes, Grant"
+      },
+      {
+        "batter": "Zach Neto",
+        "ev": 98.1,
+        "angle": 36.0,
+        "distance": 369.0,
+        "hr_in_parks": 23,
+        "result": "field_out",
+        "pitcher": "Garcia, Rico"
+      },
+      {
+        "batter": "Connor Wong",
+        "ev": 105.7,
+        "angle": 35.0,
+        "distance": 395.0,
+        "hr_in_parks": 2,
+        "result": "",
+        "pitcher": "Fedde, Erick"
+      },
+      {
+        "batter": "Jo Adell",
+        "ev": 104.0,
+        "angle": 28.0,
+        "distance": 383.0,
+        "hr_in_parks": 14,
+        "result": "double",
+        "pitcher": "Manaea, Sean"
+      },
+      {
+        "batter": "Yandy D\u00edaz",
+        "ev": 104.0,
+        "angle": 27.0,
+        "distance": 396.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Frasso, Nick"
+      },
+      {
+        "batter": "Hunter Goodman",
+        "ev": 109.1,
+        "angle": 24.0,
+        "distance": 393.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Matz, Steven"
+      },
+      {
+        "batter": "TJ Rumfield",
+        "ev": 100.1,
+        "angle": 37.0,
+        "distance": 402.0,
+        "hr_in_parks": 17,
+        "result": "field_out",
+        "pitcher": "Booser, Cam"
+      },
+      {
+        "batter": "Jordan Beck",
+        "ev": 98.1,
+        "angle": 29.0,
+        "distance": 373.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Peralta, Freddy"
+      },
+      {
+        "batter": "Starling Marte",
+        "ev": 100.4,
+        "angle": 27.0,
+        "distance": 393.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Rogers, Taylor"
+      },
+      {
+        "batter": "Ryan Kreidler",
+        "ev": 99.6,
+        "angle": 37.0,
+        "distance": 371.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Schreiber, John"
+      },
+      {
+        "batter": "Nelson Vel\u00e1zquez",
+        "ev": 102.9,
+        "angle": 24.0,
+        "distance": 384.0,
+        "hr_in_parks": 13,
+        "result": "double",
+        "pitcher": "Cruz, Fernando"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Tyler O'Neill",
         "pitcher": "Mitch Farris",
-        "description": "Tyler O'Neill homers (8) on a fly ball to left center field."
+        "description": "${person|fullName|641933} homers ${total|homeRuns|641933} on a fly ball to left center field.  "
       },
       {
         "name": "Andrew Vaughn",
         "pitcher": "Jared Jones",
-        "description": "Andrew Vaughn homers (5) on a fly ball to center field."
+        "description": "${person|fullName|683734} homers ${total|homeRuns|683734} on a fly ball to center field.  "
       }
     ],
     "hr_signal_accuracy": {
