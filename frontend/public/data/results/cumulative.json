@@ -147556,7 +147556,7 @@
     ],
     "total_players_ranked": 229,
     "total_hrs_hit": 25,
-    "total_near_hrs": 0,
+    "total_near_hrs": 9,
     "model_hits": 23,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -147673,7 +147673,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 9,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -147699,28 +147699,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 3,
+        "rate": 30.0
       },
       "top_20": {
         "total": 20,
-        "hits": 1,
-        "rate": 5.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 6,
-        "rate": 20.0
+        "hits": 9,
+        "rate": 30.0
       },
       "all": {
         "total": 229,
-        "hits": 23,
-        "rate": 10.0
+        "hits": 32,
+        "rate": 14.0
       }
     },
     "avg_composite_hr_hitters": 0.458,
-    "avg_composite_non_hitters": 0.43,
-    "composite_separation": 0.028,
+    "avg_composite_non_hitters": 0.427,
+    "composite_separation": 0.031,
     "hr_hitters": [
       {
         "name": "Royce Lewis",
@@ -148047,8 +148047,172 @@
         "matchup": "WSH@PHI"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Eugenio Su\u00e1rez",
+        "rank": 3,
+        "composite": 0.747,
+        "opp_pitcher": "Mason Barnett",
+        "matchup": "ATH@CIN"
+      },
+      {
+        "name": "Spencer Torkelson",
+        "rank": 6,
+        "composite": 0.723,
+        "opp_pitcher": "Bryce Miller",
+        "matchup": "DET@SEA"
+      },
+      {
+        "name": "Carson Benge",
+        "rank": 19,
+        "composite": 0.637,
+        "opp_pitcher": "Foster Griffin",
+        "matchup": "NYM@CLE"
+      },
+      {
+        "name": "Bobby Witt Jr.",
+        "rank": 82,
+        "composite": 0.46,
+        "opp_pitcher": "Bailey Ober",
+        "matchup": "MIN@KC"
+      },
+      {
+        "name": "Colton Cowser",
+        "rank": 120,
+        "composite": 0.404,
+        "opp_pitcher": "Ryan Johnson",
+        "matchup": "LAA@BAL"
+      },
+      {
+        "name": "Gavin Sheets",
+        "rank": 124,
+        "composite": 0.4,
+        "opp_pitcher": "Kohl Drake",
+        "matchup": "SD@AZ"
+      },
+      {
+        "name": "Jackson Merrill",
+        "rank": 125,
+        "composite": 0.4,
+        "opp_pitcher": "Kohl Drake",
+        "matchup": "SD@AZ"
+      },
+      {
+        "name": "Mauricio Dub\u00f3n",
+        "rank": 150,
+        "composite": 0.37,
+        "opp_pitcher": "Janson Junk",
+        "matchup": "MIA@ATL"
+      },
+      {
+        "name": "Andruw Monasterio",
+        "rank": 209,
+        "composite": 0.254,
+        "opp_pitcher": "Luis Castillo",
+        "matchup": "CWS@BOS"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Jackson Merrill",
+        "ev": 100.6,
+        "angle": 27.0,
+        "distance": 401.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Drake, Kohl"
+      },
+      {
+        "batter": "Gavin Sheets",
+        "ev": 105.1,
+        "angle": 24.0,
+        "distance": 407.0,
+        "hr_in_parks": 29,
+        "result": "field_out",
+        "pitcher": "Drake, Kohl"
+      },
+      {
+        "batter": "Mauricio Dub\u00f3n",
+        "ev": 100.0,
+        "angle": 22.0,
+        "distance": 371.0,
+        "hr_in_parks": 2,
+        "result": "double",
+        "pitcher": "Sanoja, Javier"
+      },
+      {
+        "batter": "Matt Olson",
+        "ev": 106.2,
+        "angle": 21.0,
+        "distance": 382.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Junk, Janson"
+      },
+      {
+        "batter": "Colton Cowser",
+        "ev": 100.8,
+        "angle": 33.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Johnson, Ryan"
+      },
+      {
+        "batter": "Andruw Monasterio",
+        "ev": 103.6,
+        "angle": 21.0,
+        "distance": 370.0,
+        "hr_in_parks": 8,
+        "result": "double",
+        "pitcher": "Richards, Trevor"
+      },
+      {
+        "batter": "Eugenio Su\u00e1rez",
+        "ev": 98.8,
+        "angle": 28.0,
+        "distance": 376.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Johnson, Seth"
+      },
+      {
+        "batter": "Carson Benge",
+        "ev": 103.1,
+        "angle": 31.0,
+        "distance": 408.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Griffin, Foster"
+      },
+      {
+        "batter": "Bobby Witt Jr.",
+        "ev": 109.2,
+        "angle": 18.0,
+        "distance": 408.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Ober, Bailey"
+      },
+      {
+        "batter": "Jackson Chourio",
+        "ev": 103.3,
+        "angle": 26.0,
+        "distance": 393.0,
+        "hr_in_parks": 18,
+        "result": "field_out",
+        "pitcher": "Ashcraft, Braxton"
+      },
+      {
+        "batter": "Spencer Torkelson",
+        "ev": 104.5,
+        "angle": 36.0,
+        "distance": 382.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Miller, Bryce"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
