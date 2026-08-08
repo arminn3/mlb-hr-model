@@ -365,8 +365,8 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 3,
+      "rate": 15.0
     },
     "top_30": {
       "total": 30,
@@ -388,8 +388,8 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
         "total": 30,
