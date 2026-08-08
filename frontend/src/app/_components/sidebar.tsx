@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { PanelLeft } from "lucide-react";
 import { Icon, type IconName } from "./icon";
+import { SportSwitcher } from "./sport-switcher";
 
 export type Page =
   | "rankings"
@@ -196,6 +197,11 @@ export function Sidebar({
             <PanelLeft size={14} />
           </button>
         )}
+      </div>
+
+      {/* Sport switcher — one click to the NFL side */}
+      <div className={(collapsed ? "px-2 flex justify-center" : "px-3") + " pb-1"}>
+        <SportSwitcher active="mlb" collapsed={collapsed} />
       </div>
 
       {/* Nav groups */}

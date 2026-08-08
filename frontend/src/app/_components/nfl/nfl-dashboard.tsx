@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ListOrdered, Table2 } from "lucide-react";
 import { color } from "../../_design";
 import type { NflSlate } from "./types";
+import { SportSwitcher } from "../sport-switcher";
 import { Rankings } from "./rankings";
 import { ResearchTable } from "./research-table";
 
@@ -47,10 +48,13 @@ export function NflDashboard() {
     <div className="min-h-screen" style={{ background: color.background }}>
       <header className="border-b" style={{ borderColor: "#2c2c2e", background: color.card }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-[60px] flex items-center justify-between">
-          <div className="min-w-0">
-            <div className="text-[14px] font-semibold text-foreground leading-tight">Beeb Sheets — NFL</div>
-            <div className="text-[11px] font-medium truncate" style={{ color: color.muted }}>
-              Anytime TD{slate ? ` · ${slate.season} Week ${slate.week}` : ""}
+          <div className="flex items-center gap-3 min-w-0">
+            <SportSwitcher active="nfl" />
+            <div className="min-w-0">
+              <div className="text-[14px] font-semibold text-foreground leading-tight">Beeb Sheets — NFL</div>
+              <div className="text-[11px] font-medium truncate" style={{ color: color.muted }}>
+                Anytime TD{slate ? ` · ${slate.season} Week ${slate.week}` : ""}
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-1">
