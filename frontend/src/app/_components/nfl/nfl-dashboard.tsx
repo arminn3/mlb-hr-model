@@ -14,7 +14,7 @@ const FAV_KEY = "beeb:nfl-favorites";
 export function NflDashboard() {
   const [slate, setSlate] = useState<NflSlate | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [tab, setTab] = useState<Tab>("rankings");
+  const [tab, setTab] = useState<Tab>("research");
   const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<Set<string>>(() => {
     if (typeof window === "undefined") return new Set();
