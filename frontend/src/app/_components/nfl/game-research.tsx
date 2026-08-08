@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { LayoutGrid, ListOrdered, Zap, HeartPulse } from "lucide-react";
+import { LayoutGrid, ListOrdered, Zap, HeartPulse, ChevronDown } from "lucide-react";
 import { CARD, color } from "../../_design";
 import type { NflSlate, NflGame, NflPlayer } from "./types";
 import { PlayerBlock } from "./player-research";
@@ -170,34 +170,42 @@ export function GameResearch({
 
   return (
     <div className="flex flex-col lg:flex-row gap-4">
-      {/* left rail — pick a game */}
-      <aside className="lg:w-52 shrink-0">
-        <div className="text-[10px] uppercase tracking-wider mb-2 px-1" style={{ color: color.muted }}>Games</div>
-        <div className="flex lg:flex-col gap-1.5 overflow-x-auto lg:overflow-visible pb-1">
-          {games.map((g) => {
-            const on = g.game_id === game.game_id;
-            return (
-              <button
-                key={g.game_id}
-                onClick={() => onSelectGame(g.game_id)}
-                className="text-left px-3 py-2 rounded-lg cursor-pointer shrink-0 transition-colors w-[180px] lg:w-auto"
-                style={on
-                  ? { background: "rgba(96,165,250,0.14)", border: "1px solid rgba(96,165,250,0.45)" }
-                  : { background: "rgba(255,255,255,0.03)", border: "1px solid #2c2c2e" }}
-              >
-                <div className="flex items-center gap-1.5">
-                  <Logo team={g.away_team} size={18} />
-                  <span className="text-[12px] font-semibold text-foreground">{g.away_team}</span>
-                  <span className="text-[10px]" style={{ color: color.muted }}>@</span>
-                  <Logo team={g.home_team} size={18} />
-                  <span className="text-[12px] font-semibold text-foreground">{g.home_team}</span>
-                </div>
-                <div className="text-[10px] mt-0.5 flex items-center gap-2" style={{ color: color.muted }}>
-                  <span>O/U {g.total_line}</span><span>·</span><span>{spreadLabel(g)}</span>
-                </div>
-              </button>
-            );
-          })}
+      {/* left rail — game selection (copied from Figma node 3:65) */}
+      <aside className="shrink-0">
+        <div className="flex lg:flex-col gap-3 lg:gap-5 overflow-x-auto lg:overflow-visible pb-1">
+          {/* NFL league dropdown */}
+          <div className="flex items-center gap-2 rounded-lg p-3 w-[198px] shrink-0" style={{ background: "#1b1b1b", border: "1px solid #3a3a3a" }}>
+            <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png" alt="NFL" className="w-6 h-6 object-contain" />
+            <span className="flex-1 text-[16px] font-bold text-white">NFL</span>
+            <ChevronDown size={16} className="text-white/60" />
+          </div>
+          {/* game cards */}
+          <div className="flex lg:flex-col gap-3">
+            {games.map((g) => {
+              const on = g.game_id === game.game_id;
+              return (
+                <button
+                  key={g.game_id}
+                  onClick={() => onSelectGame(g.game_id)}
+                  className="w-[198px] shrink-0 rounded-lg p-3 text-left cursor-pointer flex flex-col gap-2 transition-colors"
+                  style={on
+                    ? { background: "rgba(58,84,213,0.25)", border: "1px solid #3a54d5" }
+                    : { background: "#1b1b1b", border: "1px solid #343434" }}
+                >
+                  <span className="text-[12px] font-semibold" style={{ color: "#ccc" }}>{g.kickoff}</span>
+                  <div className="flex items-center gap-[9px]">
+                    <span className="flex items-center gap-2"><Logo team={g.away_team} size={24} /><span className="text-[14px] font-bold text-white">{g.away_team}</span></span>
+                    <span className="text-[16px] font-semibold text-white">@</span>
+                    <span className="flex items-center gap-2"><Logo team={g.home_team} size={24} /><span className="text-[14px] font-bold text-white">{g.home_team}</span></span>
+                  </div>
+                  <div className="flex gap-1.5 text-[12px] font-semibold" style={{ color: "#7e7e7e" }}>
+                    <span>{spreadLabel(g)}</span>
+                    <span className="flex-1 text-right">OU {g.total_line}</span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </aside>
 

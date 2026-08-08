@@ -57,6 +57,7 @@ export interface NflGame {
   away_team: string;
   home_team: string;
   roof: string | null;
+  kickoff: string;        // e.g. "Sun 1:00 PM ET"
   total_line: number;
   spread_line: number;
   away_implied: number;

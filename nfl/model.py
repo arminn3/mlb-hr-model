@@ -52,6 +52,17 @@ def _snap_pct_by_gsis(season: int, week: int, pfr_to_gsis: dict) -> dict:
     return sn.groupby("gsis")["offense_pct"].mean().to_dict()
 
 
+def _kickoff(weekday, gametime) -> str:
+    """'Sunday' + '20:15' -> 'Sun 8:15 PM ET' (nflverse gametime is ET)."""
+    wd = str(weekday)[:3] if weekday and weekday == weekday else ""
+    try:
+        h, m = map(int, str(gametime).split(":"))
+        ampm = "AM" if h < 12 else "PM"
+        return f"{wd} {h % 12 or 12}:{m:02d} {ampm} ET".strip()
+    except Exception:
+        return wd
+
+
 def _game_logs(prior: pd.DataFrame, role_map: dict, name_map: dict):
     """Build per-game logs from PBP.
 
@@ -330,6 +341,7 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
             "roof": getattr(g, "roof", None),
             "total_line": total, "spread_line": spread,
             "away_implied": away_imp, "home_implied": home_imp,
+            "kickoff": _kickoff(getattr(g, "weekday", ""), getattr(g, "gametime", "")),
             "players": game_players,
         })
     meta = {"sport": "nfl", "market": "anytime_td", "season": season, "week": week}
