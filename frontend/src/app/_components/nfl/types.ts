@@ -5,10 +5,14 @@ export interface NflPlayer {
   gsis_id: string;
   team: string;
   pos: string;
+  role: string;           // usage-based depth role, e.g. "WR2", "RB1"
   opponent: string;
   is_home: boolean;
   score: number;          // anytime-TD probability (0-1)
   expected_tds: number;
+  opp_rank_vs_role: number;   // opponent's rank vs this role (highest = softest)
+  opp_rank_total: number;     // # of defenses ranked for this role (usually 32)
+  role_dvp_mult: number;      // matchup multiplier (>1 soft, <1 tough)
   hit_rate_season: number;
   hit_rate_l5: number;
   games: number;
@@ -20,8 +24,6 @@ export interface NflPlayer {
   carries_pg: number;
   air_yards: number;
   snap_pct: number;       // 0-1
-  dvp_rank: number;       // 1 = softest matchup vs this position
-  dvp_mult: number;
   implied_team_total: number;
 }
 

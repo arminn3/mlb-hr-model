@@ -22,10 +22,21 @@ export const POS_COLOR: Record<string, string> = {
 };
 export const posColor = (pos: string) => POS_COLOR[pos] ?? color.muted;
 
-/** DvP rank (1 = softest matchup) -> intent color. 32 teams. */
-export function dvpColor(rank: number): string {
-  if (!rank) return color.muted;
-  if (rank <= 8) return color.green; // soft matchup
-  if (rank <= 20) return color.yellow;
-  return color.muted; // tough
+/** Matchup color from defense-vs-role rank. HIGHER rank = softer (allows most),
+ *  so #32-of-32 vs a role is the best spot -> green. */
+export function matchupColor(rank: number, total: number): string {
+  if (!rank || !total) return color.muted;
+  const pct = rank / total;
+  if (pct >= 0.72) return color.green;   // soft — top of the barrel
+  if (pct >= 0.4) return color.yellow;   // middling
+  return color.red;                      // tough
+}
+
+/** Short matchup label from the defense-vs-role rank. */
+export function matchupLabel(rank: number, total: number): string {
+  if (!rank || !total) return "—";
+  const pct = rank / total;
+  if (pct >= 0.72) return "SOFT";
+  if (pct >= 0.4) return "AVG";
+  return "TOUGH";
 }

@@ -3,11 +3,17 @@
 For every skill player in a week's games, estimate P(scores a TD). The model
 is deliberately explainable — display == score, same discipline as the MLB side:
 
-  expected_team_TDs   = f(implied team total)          # game environment
-  player_TD_share     = 0.6*RZ-opportunity share + 0.4*actual team-TD share
-  dvp_mult            = opponent TDs-allowed-to-position vs league avg
-  expected_player_TDs = expected_team_TDs * player_TD_share * dvp_mult
-  anytime_TD_prob     = 1 - exp(-expected_player_TDs)  # Poisson P(>=1)
+  expected_team_TDs   = f(implied team total)              # game environment
+  player_TD_share     = 0.6*RZ-opportunity share + 0.4*team-TD share  # usage (gate)
+  role_dvp_mult       = opp vulnerability vs the player's DEPTH ROLE   # matchup (lead)
+  usage_gate          = clamp(RZ-share / floor, 0..1)      # kills low-volume flukes
+  expected_player_TDs = expected_team_TDs * player_TD_share * role_dvp_mult * usage_gate
+  anytime_TD_prob     = 1 - exp(-expected_player_TDs)      # Poisson P(>=1)
+
+Depth roles (WR1/WR2/WR3/…, RB1/RB2/…, TE1/…) are usage-based (ranked within
+team+position). Defense-vs-role vulnerability is a TD-weighted blend (TDs + yards
++ opportunities allowed to that role, per game), regressed toward the parent
+position for thin samples, then ranked 1-32 per role (#highest = softest).
 
 All inputs derived from nflverse PBP for the season up to (not including) the
 target week — i.e. only information available before kickoff. Empirical Anytime-
@@ -112,20 +118,75 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     team_rz = P.groupby("team")["rz_opps"].sum().rename("team_rz_opps")
     team_tds = P.groupby("team")["tds"].sum().rename("team_tds")
 
-    # ── defense-vs-position multiplier ───────────────────────────────────────
+    # ── usage-based depth roles (WR1/WR2/…, over ALL players with touches) ────
+    usage = pd.DataFrame({"targets": targets, "carries": carries}).fillna(0)
+    usage["touches"] = usage["targets"] + usage["carries"]
+    R = pd.DataFrame(index=usage.index)
+    R["team"] = R.index.map(team_of.to_dict())
+    R["position"] = R.index.map(pos_map)
+    R = R.dropna(subset=["team", "position"])
+    R = R[R["position"].isin(C.SCORING_POSITIONS)]
+    # ranking metric: WR/TE by targets, everyone else by touches
+    R["metric"] = [
+        usage.at[i, "targets"] if pos in ("WR", "TE") else usage.at[i, "touches"]
+        for i, pos in zip(R.index, R["position"])
+    ]
+    R["rank_in"] = R.groupby(["team", "position"])["metric"].rank(ascending=False, method="first")
+
+    def _role(pos: str, rk: float):
+        tiers = C.ROLE_TIERS.get(pos)
+        return tiers[min(int(rk) - 1, len(tiers) - 1)] if tiers else None
+
+    R["role"] = [_role(p, rk) for p, rk in zip(R["position"], R["rank_in"])]
+    role_map = R["role"].to_dict()
+    P["role"] = P.index.map(role_map)
+
+    # ── defense-vs-ROLE vulnerability (TD-weighted blend, regressed) ──────────
     tds_df["position"] = tds_df["pid"].map(pos_map)
-    tds_df = tds_df[tds_df["position"].isin(C.SCORING_POSITIONS)]
+    tds_df = tds_df[tds_df["position"].isin(C.SCORING_POSITIONS)].copy()
+    tds_df["role"] = tds_df["pid"].map(role_map)
     def_games = prior.groupby("defteam")["game_id"].nunique().rename("def_games")
-    dvp = tds_df.groupby(["defteam", "position"]).size().rename("td_allowed").reset_index()
-    dvp = dvp.merge(def_games, left_on="defteam", right_index=True)
-    dvp["rate"] = dvp["td_allowed"] / dvp["def_games"]
-    league_rate = dvp.groupby("position")["rate"].mean().rename("lg_rate")
-    dvp = dvp.merge(league_rate, left_on="position", right_index=True)
-    dvp["mult"] = (dvp["rate"] / dvp["lg_rate"]).clip(C.DVP_MULT_MIN, C.DVP_MULT_MAX)
-    # rank (1 = softest / most TDs allowed) per position
-    dvp["rank"] = dvp.groupby("position")["td_allowed"].rank(ascending=False, method="min").astype(int)
-    dvp_mult = {(r.defteam, r.position): r.mult for r in dvp.itertuples()}
-    dvp_rank = {(r.defteam, r.position): r.rank for r in dvp.itertuples()}
+
+    rec_o = rec[["defteam", "receiver_player_id", "yards_gained"]].rename(columns={"receiver_player_id": "pid"})
+    rush_o = rush[["defteam", "rusher_player_id", "yards_gained"]].rename(columns={"rusher_player_id": "pid"})
+    opp_df = pd.concat([rec_o, rush_o], ignore_index=True).dropna(subset=["defteam"])
+    opp_df["role"] = opp_df["pid"].map(role_map)
+    opp_df["position"] = opp_df["pid"].map(pos_map)
+
+    def _vuln(key: str) -> pd.DataFrame:
+        """Per (defteam, key): TD/yards/opp allowed per game, blended into a
+        vulnerability ratio vs the key's league average (>1 soft, <1 tough)."""
+        td = tds_df.dropna(subset=[key]).groupby(["defteam", key]).size().rename("td")
+        yd = opp_df.dropna(subset=[key]).groupby(["defteam", key])["yards_gained"].sum().rename("yd")
+        op = opp_df.dropna(subset=[key]).groupby(["defteam", key]).size().rename("op")
+        d = pd.concat([td, yd, op], axis=1).fillna(0).reset_index().rename(columns={key: "key"})
+        d = d.merge(def_games, left_on="defteam", right_index=True)
+        for c in ("td", "yd", "op"):
+            d[c + "_rate"] = d[c] / d["def_games"]
+        lg = d.groupby("key")[["td_rate", "yd_rate", "op_rate"]].mean().rename(columns=lambda c: "lg_" + c)
+        d = d.merge(lg, left_on="key", right_index=True)
+        ratio = lambda a, b: (d[a] / d[b].replace(0, np.nan)).fillna(1.0)
+        d["blend"] = (C.DVP_TD_WEIGHT * ratio("td_rate", "lg_td_rate")
+                      + C.DVP_YDS_WEIGHT * ratio("yd_rate", "lg_yd_rate")
+                      + C.DVP_OPP_WEIGHT * ratio("op_rate", "lg_op_rate"))
+        return d
+
+    role_v = _vuln("role")
+    pos_blend = {(r.defteam, r.key): r.blend for r in _vuln("position").itertuples()}
+    parent_of = {role: pos for pos, tiers in C.ROLE_TIERS.items() for role in tiers}
+
+    role_mult, rank_rows = {}, []
+    for r in role_v.itertuples():
+        pb = pos_blend.get((r.defteam, parent_of.get(r.key)), 1.0)
+        w = r.td / (r.td + C.DVP_REGRESSION_PRIOR)      # regress thin role samples to position
+        regressed = w * r.blend + (1 - w) * pb
+        role_mult[(r.defteam, r.key)] = float(np.clip(regressed, C.DVP_MULT_MIN, C.DVP_MULT_MAX))
+        rank_rows.append((r.key, r.defteam, regressed))
+    rr = pd.DataFrame(rank_rows, columns=["role", "defteam", "reg"])
+    # rank per role: #1 = toughest (lowest), highest = softest (matches "#32 vs WR2")
+    rr["rank"] = rr.groupby("role")["reg"].rank(ascending=True, method="min").astype(int)
+    role_rank = {(r.defteam, r.role): r.rank for r in rr.itertuples()}
+    role_rank_total = rr.groupby("role").size().to_dict()
 
     def exp_team_tds(implied_total: float) -> float:
         v = (implied_total - C.TD_POINT_BASELINE) * C.TD_PER_POINT
@@ -147,18 +208,25 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
             ttd = team_tds.get(team, 0.0) or 1.0
             eteam = exp_team_tds(imp)
             for pid, r in roster.iterrows():
+                role = r["role"]
                 rz_share = r["rz_opps"] / trz
                 td_share = r["tds"] / ttd
                 share = C.SHARE_RZ_WEIGHT * rz_share + C.SHARE_TD_WEIGHT * td_share
-                mult = dvp_mult.get((opp, r["position"]), 1.0)
-                exp_p = eteam * share * mult
+                # matchup LEAD: opponent's vulnerability to THIS depth role
+                rmult = role_mult.get((opp, role), 1.0)
+                # usage GATE: only bites below the RZ-share floor (kills low-vol flukes)
+                usage_gate = min(1.0, rz_share / C.USAGE_FLOOR) if C.USAGE_FLOOR > 0 else 1.0
+                exp_p = eteam * share * rmult * usage_gate
                 prob = 1 - math.exp(-exp_p)
                 gp = max(int(r["games"]), 1)
                 game_players.append({
                     "name": r["name"], "gsis_id": pid, "team": team, "pos": r["position"],
-                    "opponent": opp, "is_home": is_home,
+                    "role": role, "opponent": opp, "is_home": is_home,
                     "score": round(prob, 4),
                     "expected_tds": round(exp_p, 3),
+                    "opp_rank_vs_role": int(role_rank.get((opp, role), 0)),
+                    "opp_rank_total": int(role_rank_total.get(role, C.NUM_TEAMS)),
+                    "role_dvp_mult": round(float(rmult), 2),
                     "hit_rate_season": round(float(r["hit_rate_season"]), 3),
                     "hit_rate_l5": round(float(r["hit_rate_l5"]), 3),
                     "games": gp, "tds": int(r["tds"]),
@@ -169,8 +237,6 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
                     "carries_pg": round(r["carries"] / gp, 2),
                     "air_yards": int(r["air_yards"]),
                     "snap_pct": round(float(snap_map.get(pid, 0.0)), 3),
-                    "dvp_rank": int(dvp_rank.get((opp, r["position"]), 0)),
-                    "dvp_mult": round(float(mult), 2),
                     "implied_team_total": imp,
                 })
         game_players.sort(key=lambda p: p["score"], reverse=True)

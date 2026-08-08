@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Star } from "lucide-react";
 import { CARD, color } from "../../_design";
 import type { NflSlate, NflPlayer } from "./types";
-import { fmtPct, fmtPct1, scoreColor, posColor, dvpColor } from "./format";
+import { fmtPct, fmtPct1, scoreColor, posColor, matchupColor } from "./format";
 
 type Col = {
   key: string;
@@ -21,14 +21,14 @@ const ALIGN: Record<string, string> = { left: "text-left", right: "text-right", 
 
 const COLS: Col[] = [
   { key: "name", label: "Player", align: "left", get: (p) => p.name },
-  { key: "pos", label: "Pos", align: "center", get: (p) => p.pos },
+  { key: "role", label: "Role", align: "center", get: (p) => p.role },
   { key: "team", label: "Team", align: "center", get: (p) => p.team },
   { key: "opponent", label: "Opp", align: "center", get: (p) => p.opponent },
   { key: "score", label: "TD%", align: "right", numeric: true, get: (p) => p.score },
+  { key: "opp_rank_vs_role", label: "Opp Rk vs Role", align: "right", numeric: true, get: (p) => p.opp_rank_vs_role },
   { key: "hit_rate_season", label: "Hit% Szn", align: "right", numeric: true, get: (p) => p.hit_rate_season },
   { key: "hit_rate_l5", label: "Hit% L5", align: "right", numeric: true, get: (p) => p.hit_rate_l5 },
   { key: "rz_opp_share", label: "RZ Opp%", align: "right", numeric: true, get: (p) => p.rz_opp_share },
-  { key: "dvp_rank", label: "DvP#", align: "right", numeric: true, get: (p) => p.dvp_rank },
   { key: "snap_pct", label: "Snap%", align: "right", numeric: true, get: (p) => p.snap_pct },
   { key: "implied_team_total", label: "Imp Tot", align: "right", numeric: true, get: (p) => p.implied_team_total },
 ];
@@ -73,16 +73,20 @@ export function ResearchTable({
     switch (c.key) {
       case "score":
         return <span style={{ color: scoreColor(p.score), fontWeight: 700 }}>{fmtPct1(p.score)}</span>;
-      case "pos":
-        return <span style={{ color: posColor(p.pos), fontWeight: 600 }}>{p.pos}</span>;
+      case "role":
+        return <span style={{ color: posColor(p.pos), fontWeight: 600 }}>{p.role}</span>;
       case "hit_rate_season":
       case "hit_rate_l5":
         return fmtPct(c.get(p) as number);
       case "rz_opp_share":
       case "snap_pct":
         return fmtPct(c.get(p) as number);
-      case "dvp_rank":
-        return <span style={{ color: dvpColor(p.dvp_rank) }}>{p.dvp_rank || "—"}</span>;
+      case "opp_rank_vs_role":
+        return (
+          <span style={{ color: matchupColor(p.opp_rank_vs_role, p.opp_rank_total), fontWeight: 600 }}>
+            {p.opp_rank_vs_role ? `#${p.opp_rank_vs_role}/${p.opp_rank_total}` : "—"}
+          </span>
+        );
       default:
         return c.get(p);
     }
