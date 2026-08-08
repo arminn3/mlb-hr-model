@@ -52,6 +52,77 @@ def _snap_pct_by_gsis(season: int, week: int, pfr_to_gsis: dict) -> dict:
     return sn.groupby("gsis")["offense_pct"].mean().to_dict()
 
 
+def _game_logs(prior: pd.DataFrame, role_map: dict, name_map: dict):
+    """Build per-game logs from PBP.
+
+    Returns (player_logs, role_vs_def):
+      player_logs[pid]          -> chronological list of that player's game rows
+      role_vs_def[defteam][role]-> chronological list of the opposing role-holder's
+                                   game rows vs that defense ("QB1s vs PHI").
+    Each row carries passing/rushing/receiving lines + atd (any TD that game).
+    """
+    g = prior
+    meta = g.drop_duplicates("game_id").set_index("game_id")[["home_team"]]
+
+    def _agg(idcol, **cols):
+        d = g[g[idcol].notna()]
+        out = d.groupby([idcol, "game_id"]).agg(**cols).reset_index()
+        return out.rename(columns={idcol: "pid"})
+
+    pas = _agg("passer_player_id", pass_att=("pass_attempt", "sum"), cmp=("complete_pass", "sum"),
+               pass_yds=("passing_yards", "sum"), pass_td=("pass_touchdown", "sum"),
+               pass_int=("interception", "sum"))
+    rush = _agg("rusher_player_id", rush_att=("rush_attempt", "sum"),
+                rush_yds=("rushing_yards", "sum"), rush_td=("rush_touchdown", "sum"))
+    rec = _agg("receiver_player_id", targets=("pass_attempt", "size"), rec=("complete_pass", "sum"),
+               rec_yds=("receiving_yards", "sum"), rec_td=("pass_touchdown", "sum"))
+
+    def _side(idcol):
+        d = g[g[idcol].notna()][[idcol, "game_id", "posteam", "defteam", "game_date", "week"]]
+        return d.rename(columns={idcol: "pid"})
+    who = pd.concat([_side("passer_player_id"), _side("rusher_player_id"), _side("receiver_player_id")],
+                    ignore_index=True).drop_duplicates(["pid", "game_id"])
+
+    log = (who.merge(pas, on=["pid", "game_id"], how="left")
+              .merge(rush, on=["pid", "game_id"], how="left")
+              .merge(rec, on=["pid", "game_id"], how="left")
+              .merge(meta, left_on="game_id", right_index=True, how="left").fillna(0))
+    log["home"] = log["posteam"] == log["home_team"]
+    log["atd"] = ((log.get("rush_td", 0) + log.get("rec_td", 0)) > 0).astype(int)
+    log["role"] = log["pid"].map(role_map)
+    log["name"] = log["pid"].map(name_map)
+
+    STAT = ["pass_att", "cmp", "pass_yds", "pass_td", "pass_int",
+            "rush_att", "rush_yds", "rush_td", "targets", "rec", "rec_yds", "rec_td"]
+
+    def _row(r, with_name=False):
+        d = {"date": str(r["game_date"])[:10], "week": int(r["week"]),
+             "opp": r["defteam"], "home": bool(r["home"]), "atd": int(r["atd"])}
+        for s in STAT:
+            d[s] = int(round(float(r[s])))
+        if with_name:
+            d["name"] = r["name"]
+            d["team"] = r["posteam"]
+        return d
+
+    player_logs = {
+        pid: [_row(r) for _, r in grp.sort_values("week").iterrows()]
+        for pid, grp in log.groupby("pid")
+    }
+    # role-vs-defense: one row per (defense, role, game) — the opposing role-holder
+    # who actually had the volume that game (keeps QB backups / spot-fills out).
+    log["usage"] = log[["pass_att", "rush_att", "targets"]].sum(axis=1)
+    rvd_src = (log.dropna(subset=["role"])
+                  .sort_values("usage", ascending=False)
+                  .drop_duplicates(["defteam", "role", "game_id"]))
+    role_vs_def: dict = {}
+    for (dteam, role), grp in rvd_src.groupby(["defteam", "role"]):
+        role_vs_def.setdefault(dteam, {})[role] = [
+            _row(r, with_name=True) for _, r in grp.sort_values("week").iterrows()
+        ]
+    return player_logs, role_vs_def
+
+
 def score_week(season: int, week: int) -> tuple[dict, list]:
     """Return (meta, games) for the Anytime-TD slate of one week."""
     pbp = load_pbp(season)
@@ -140,6 +211,9 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     R["role"] = [_role(p, rk) for p, rk in zip(R["position"], R["rank_in"])]
     role_map = R["role"].to_dict()
     P["role"] = P.index.map(role_map)
+
+    # per-game logs (player log + role-vs-defense log)
+    player_logs, role_vs_def = _game_logs(prior, role_map, name_map)
 
     # ── defense-vs-ROLE vulnerability (TD-weighted blend, regressed) ──────────
     tds_df["position"] = tds_df["pid"].map(pos_map)
@@ -238,6 +312,8 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
                     "air_yards": int(r["air_yards"]),
                     "snap_pct": round(float(snap_map.get(pid, 0.0)), 3),
                     "implied_team_total": imp,
+                    "game_log": player_logs.get(pid, []),
+                    "role_vs_def_log": role_vs_def.get(opp, {}).get(role, []),
                 })
         game_players.sort(key=lambda p: p["score"], reverse=True)
         games.append({

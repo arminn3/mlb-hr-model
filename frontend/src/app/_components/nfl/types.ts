@@ -1,5 +1,27 @@
 // NFL slate types — mirror the JSON written by nfl/main.py (Anytime-TD market).
 
+export interface GameLogRow {
+  date: string;
+  week: number;
+  opp: string;
+  home: boolean;
+  atd: number;            // 1 = scored a TD that game
+  pass_att: number;
+  cmp: number;
+  pass_yds: number;
+  pass_td: number;
+  pass_int: number;
+  rush_att: number;
+  rush_yds: number;
+  rush_td: number;
+  targets: number;
+  rec: number;
+  rec_yds: number;
+  rec_td: number;
+  name?: string;          // present on role-vs-defense rows (the role-holder)
+  team?: string;
+}
+
 export interface NflPlayer {
   name: string;
   gsis_id: string;
@@ -25,6 +47,8 @@ export interface NflPlayer {
   air_yards: number;
   snap_pct: number;       // 0-1
   implied_team_total: number;
+  game_log: GameLogRow[];         // this player's games (chronological)
+  role_vs_def_log: GameLogRow[];  // opposing role-holders vs this player's opponent
 }
 
 export interface NflGame {

@@ -18,17 +18,21 @@ function Pill({ label, value, c }: { label: string; value: string; c?: string })
 }
 
 function Row({
-  p, rank, fav, onToggleFavorite,
+  p, rank, fav, onToggleFavorite, onSelect,
 }: {
-  p: NflPlayer; rank: number; fav: boolean; onToggleFavorite: (id: string) => void;
+  p: NflPlayer; rank: number; fav: boolean; onToggleFavorite: (id: string) => void; onSelect: (p: NflPlayer) => void;
 }) {
   const mColor = matchupColor(p.opp_rank_vs_role, p.opp_rank_total);
   const mLabel = matchupLabel(p.opp_rank_vs_role, p.opp_rank_total);
   const usage = p.pos === "RB" ? `${p.carries_pg} car/g` : `${p.targets_pg} tgt/g`;
   return (
-    <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl" style={CARD.simple}>
+    <div
+      className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer hover:brightness-125 transition-[filter]"
+      style={CARD.simple}
+      onClick={() => onSelect(p)}
+    >
       <span className="w-6 text-[13px] font-bold text-right shrink-0" style={{ color: "rgba(255,255,255,0.35)" }}>{rank}</span>
-      <button onClick={() => onToggleFavorite(p.gsis_id)} className="cursor-pointer shrink-0" aria-label="favorite">
+      <button onClick={(e) => { e.stopPropagation(); onToggleFavorite(p.gsis_id); }} className="cursor-pointer shrink-0" aria-label="favorite">
         <Star size={14} fill={fav ? color.yellow : "none"} stroke={fav ? color.yellow : "rgba(255,255,255,0.25)"} />
       </button>
 
@@ -68,9 +72,9 @@ function Row({
 }
 
 export function Rankings({
-  slate, favorites, onToggleFavorite,
+  slate, favorites, onToggleFavorite, onSelect,
 }: {
-  slate: NflSlate; favorites: Set<string>; onToggleFavorite: (id: string) => void;
+  slate: NflSlate; favorites: Set<string>; onToggleFavorite: (id: string) => void; onSelect: (p: NflPlayer) => void;
 }) {
   const top = useMemo(() => {
     const all = slate.games.flatMap((g) => g.players);
@@ -85,7 +89,7 @@ export function Rankings({
       </div>
       <div className="space-y-1.5">
         {top.map((p, i) => (
-          <Row key={p.gsis_id + p.team} p={p} rank={i + 1} fav={favorites.has(p.gsis_id)} onToggleFavorite={onToggleFavorite} />
+          <Row key={p.gsis_id + p.team} p={p} rank={i + 1} fav={favorites.has(p.gsis_id)} onToggleFavorite={onToggleFavorite} onSelect={onSelect} />
         ))}
       </div>
     </div>
