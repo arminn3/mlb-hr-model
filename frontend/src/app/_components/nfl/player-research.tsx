@@ -4,7 +4,7 @@
 import { useMemo } from "react";
 import { CARD, color } from "../../_design";
 import type { NflPlayer, GameLogRow } from "./types";
-import { fmtPct1, scoreColor, posColor, matchupColor, teamLogo, playerHeadshot, lineHeat } from "./format";
+import { matchupColor, teamLogo, playerHeadshot, lineHeat } from "./format";
 
 type ColDef = { key: keyof GameLogRow; label: string; invert?: boolean };
 
@@ -100,7 +100,7 @@ function LineTable({ header, rows, cols, showName }: {
                 ); })}
               </tr>
               <tr className="text-[10px]" style={{ background: "rgba(255,255,255,0.02)" }}>
-                <td className="py-2 pl-3 pr-2 uppercase tracking-wider" style={{ color: color.muted }} title="Placeholder line = season average. Live book lines wire in-season.">Line*</td>
+                <td className="py-2 pl-3 pr-2 uppercase tracking-wider" style={{ color: color.muted }} title="Placeholder line = season average. Live book lines wire in-season.">Best lines*</td>
                 {showName && <td />}<td />
                 {cols.map((c) => <td key={c.key} className="py-2 px-2 text-center font-mono" style={{ color: color.muted }}>{line[c.key as string]}</td>)}
               </tr>
@@ -128,30 +128,30 @@ export function PlayerBlock({ player }: { player: NflPlayer }) {
   const mColor = matchupColor(player.opp_rank_vs_role, player.opp_rank_total);
 
   const offHeader = (
-    <div className="p-3 border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-      <div className="flex items-center gap-3">
+    <div className="border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+      {/* player identity */}
+      <div className="flex items-center gap-3 p-3">
         {head
-          ? <img src={head} alt={player.name} className="w-12 h-12 rounded-full object-cover" style={{ background: "rgba(255,255,255,0.06)" }} />
-          : <div className="w-12 h-12 rounded-full" style={{ background: "rgba(255,255,255,0.06)" }} />}
+          ? <img src={head} alt={player.name} className="w-16 h-16 rounded-lg object-cover shrink-0" style={{ background: "rgba(255,255,255,0.06)" }} />
+          : <div className="w-16 h-16 rounded-lg shrink-0" style={{ background: "rgba(255,255,255,0.06)" }} />}
         <div className="min-w-0">
-          <div className="text-[16px] font-bold text-foreground truncate">{player.name}</div>
-          <div className="flex items-center gap-1.5 mt-0.5">
-            <span className="inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ background: "rgba(96,165,250,0.15)", color: color.accent }}>
-              <img src={teamLogo(player.team)} alt={player.team} className="w-3 h-3 object-contain" />{player.team}
+          <div className="text-[18px] font-bold text-foreground truncate">{player.name}</div>
+          <div className="flex items-center gap-1.5 mt-1">
+            <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2 py-0.5 rounded" style={{ background: "rgba(96,165,250,0.15)", color: color.accent }}>
+              <img src={teamLogo(player.team)} alt={player.team} className="w-3.5 h-3.5 object-contain" />{player.team}
             </span>
-            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded" style={{ background: "rgba(255,255,255,0.06)", color: posColor(player.pos) }}>{player.role}</span>
+            <span className="text-[11px] font-bold" style={{ color: color.muted }}>{player.role}</span>
           </div>
         </div>
-        <div className="ml-auto text-right shrink-0">
-          <div className="text-[18px] font-bold font-mono leading-none" style={{ color: scoreColor(player.score) }}>{fmtPct1(player.score)}</div>
-          <div className="text-[9px] uppercase tracking-wider mt-0.5" style={{ color: color.muted }}>TD prob</div>
+      </div>
+      {/* filter chips */}
+      <div className="px-3 pb-3 space-y-1.5">
+        <div className="flex flex-wrap gap-1.5">
+          <Chip dropdown>{"'25"}</Chip><Chip>vs {player.opponent}</Chip><Chip>{player.is_home ? "Home" : "Away"}</Chip><Chip>Primetime</Chip>
         </div>
-      </div>
-      <div className="flex flex-wrap gap-1.5 mt-3">
-        <Chip dropdown>{"'25"}</Chip><Chip>vs {player.opponent}</Chip><Chip>{player.is_home ? "Home" : "Away"}</Chip><Chip>Primetime</Chip>
-      </div>
-      <div className="flex flex-wrap gap-1.5 mt-1.5">
-        <Chip dropdown>Without Players</Chip><Chip dropdown>Filter Pass Attempts</Chip><Chip dropdown>Filter Rush Attempts</Chip>
+        <div className="flex flex-wrap gap-1.5">
+          <Chip dropdown>Without Players</Chip><Chip dropdown>Filter Pass Attempts</Chip><Chip dropdown>Filter Rush Attempts</Chip>
+        </div>
       </div>
     </div>
   );
@@ -167,7 +167,7 @@ export function PlayerBlock({ player }: { player: NflPlayer }) {
   );
 
   return (
-    <div className="grid grid-cols-1 2xl:grid-cols-2 gap-3">
+    <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
       <LineTable header={defHeader} rows={player.role_vs_def_log} cols={cols} showName />
       <LineTable header={offHeader} rows={player.game_log} cols={cols} />
     </div>
