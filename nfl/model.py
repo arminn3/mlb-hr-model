@@ -134,6 +134,8 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     players = load_players()
     pos_map = dict(zip(players["gsis_id"], players["position"]))
     name_map = dict(zip(players["gsis_id"], players["display_name"]))
+    espn_map = (dict(zip(players["gsis_id"], players["espn_id"]))
+                if "espn_id" in players.columns else {})
     pfr_to_gsis = dict(zip(players["pfr_id"].dropna(), players.loc[players["pfr_id"].notna(), "gsis_id"]))
     snap_map = _snap_pct_by_gsis(season, week, pfr_to_gsis)
 
@@ -298,8 +300,10 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
                 exp_p = eteam * share * rmult * usage_gate
                 prob = 1 - math.exp(-exp_p)
                 gp = max(int(r["games"]), 1)
+                _espn = espn_map.get(pid)
                 game_players.append({
                     "name": r["name"], "gsis_id": pid, "team": team, "pos": r["position"],
+                    "espn_id": str(int(_espn)) if _espn == _espn and _espn else None,  # NaN-safe
                     "role": role, "opponent": opp, "is_home": is_home,
                     "score": round(prob, 4),
                     "expected_tds": round(exp_p, 3),

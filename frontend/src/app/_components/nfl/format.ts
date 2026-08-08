@@ -8,6 +8,20 @@ const ESPN_ABBR: Record<string, string> = { LA: "lar", WAS: "wsh" };
 export const teamLogo = (abbr: string) =>
   `https://a.espncdn.com/i/teamlogos/nfl/500/${(ESPN_ABBR[abbr] ?? abbr).toLowerCase()}.png`;
 
+export const playerHeadshot = (espnId?: string | null) =>
+  espnId ? `https://a.espncdn.com/i/headshots/nfl/players/full/${espnId}.png` : null;
+
+/** Line-driven cell heat: over the line = green (good look), under = red.
+ *  `invert` flips it for lower-is-better stats (INT). Intensity by distance. */
+export function lineHeat(v: number, line: number | null | undefined, invert = false): string {
+  if (line == null) return "transparent";
+  const over = invert ? v < line : v > line;
+  const t = Math.min(1, Math.abs(v - line) / (Math.abs(line) || 1));
+  const a = (0.08 + 0.42 * t).toFixed(3);
+  if (Math.abs(v - line) < 1e-9) return "transparent";
+  return over ? `rgba(34,197,94,${a})` : `rgba(239,68,68,${a})`;
+}
+
 /** Continuous heat fill: t in [0,1] -> smooth red(low) → neutral → green(high).
  *  Fuller/saturated like the reference, not a faint tint. */
 export function heatFill(t: number): string {

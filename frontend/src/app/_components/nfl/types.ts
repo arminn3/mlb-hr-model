@@ -27,6 +27,7 @@ export interface NflPlayer {
   gsis_id: string;
   team: string;
   pos: string;
+  espn_id: string | null; // for the player headshot
   role: string;           // usage-based depth role, e.g. "WR2", "RB1"
   opponent: string;
   is_home: boolean;
