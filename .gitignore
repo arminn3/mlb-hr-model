@@ -5,6 +5,7 @@ __pycache__/
 odds_cache.json
 cron.log
 statcast_cache/
+nfl_cache/
 cache/
 .asos_cache/
 hr_props_*.json
