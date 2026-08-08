@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import { ArrowLeft } from "lucide-react";
 import { CARD, color } from "../../_design";
 import type { NflPlayer, GameLogRow } from "./types";
 import { fmtPct1, scoreColor, posColor, matchupColor } from "./format";
@@ -125,47 +124,20 @@ function LogTable({
   );
 }
 
-export function PlayerResearch({
-  player, players, onSelectPlayer, onBack,
-}: {
-  player: NflPlayer;
-  players: NflPlayer[];
-  onSelectPlayer: (gsisId: string) => void;
-  onBack: () => void;
-}) {
+// One role-holder's block: headline + [player game log | role-vs-defense].
+// Stacked by GameResearch for every role-holder on both teams of a game.
+export function PlayerBlock({ player }: { player: NflPlayer }) {
   const cols = colsFor(player.pos);
-  const options = useMemo(() => [...players].sort((a, b) => b.score - a.score), [players]);
   const mColor = matchupColor(player.opp_rank_vs_role, player.opp_rank_total);
-
   return (
-    <div className="space-y-4">
-      {/* controls */}
-      <div className="flex items-center gap-3 flex-wrap">
-        <button onClick={onBack} className="inline-flex items-center gap-1 text-[12px] cursor-pointer hover:text-foreground" style={{ color: color.muted }}>
-          <ArrowLeft size={14} /> Rankings
-        </button>
-        <select
-          value={player.gsis_id}
-          onChange={(e) => onSelectPlayer(e.target.value)}
-          className="text-[12px] rounded-lg px-2 py-1.5 cursor-pointer"
-          style={{ background: "rgba(255,255,255,0.05)", border: "1px solid #2c2c2e", color: color.foreground }}
-        >
-          {options.map((p) => (
-            <option key={p.gsis_id} value={p.gsis_id} style={{ background: "#1c1c1e" }}>
-              {p.name} — {p.role} {p.team} vs {p.opponent}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {/* player headline */}
-      <div className="flex items-center justify-between rounded-xl px-4 py-3" style={CARD.simple}>
+    <div className="space-y-2">
+      <div className="flex items-center justify-between rounded-xl px-4 py-2.5" style={CARD.simple}>
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <span className="text-[18px] font-bold text-foreground truncate">{player.name}</span>
+            <span className="text-[15px] font-bold text-foreground truncate">{player.name}</span>
             <span className="text-[11px] font-bold px-1.5 rounded" style={{ color: posColor(player.pos), background: "rgba(255,255,255,0.06)" }}>{player.role}</span>
           </div>
-          <div className="text-[12px] mt-0.5" style={{ color: color.muted }}>
+          <div className="text-[11px] mt-0.5" style={{ color: color.muted }}>
             {player.team} vs {player.opponent}
             <span className="mx-1.5">·</span>
             <span style={{ color: mColor, fontWeight: 600 }}>#{player.opp_rank_vs_role}/{player.opp_rank_total} vs {player.role}</span>
@@ -173,13 +145,11 @@ export function PlayerResearch({
           </div>
         </div>
         <div className="text-right shrink-0 pl-3">
-          <div className="text-[22px] font-bold font-mono leading-none" style={{ color: scoreColor(player.score) }}>{fmtPct1(player.score)}</div>
+          <div className="text-[18px] font-bold font-mono leading-none" style={{ color: scoreColor(player.score) }}>{fmtPct1(player.score)}</div>
           <div className="text-[9px] uppercase tracking-wider mt-0.5" style={{ color: color.muted }}>TD prob</div>
         </div>
       </div>
-
-      {/* the two panels */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         <LogTable
           title={`${player.name} — Game Log`}
           subtitle={`${player.game_log.length} games · ${Math.round(player.hit_rate_season * 100)}% ATD season`}
@@ -188,7 +158,7 @@ export function PlayerResearch({
         />
         <LogTable
           title={`${player.role}s vs ${player.opponent} Defense`}
-          subtitle={`how ${player.role}s have produced against ${player.opponent} · #${player.opp_rank_vs_role}/${player.opp_rank_total} vs ${player.role}`}
+          subtitle={`how ${player.role}s produce vs ${player.opponent} · #${player.opp_rank_vs_role}/${player.opp_rank_total} vs ${player.role}`}
           subColor={mColor}
           rows={player.role_vs_def_log}
           cols={cols}

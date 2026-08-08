@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { ListOrdered, LineChart } from "lucide-react";
 import { color } from "../../_design";
 import type { NflSlate, NflPlayer } from "./types";
 import { SportSwitcher } from "../sport-switcher";
 import { Rankings } from "./rankings";
-import { PlayerResearch } from "./player-research";
+import { GameResearch } from "./game-research";
 
 type Tab = "rankings" | "research";
 const FAV_KEY = "beeb:nfl-favorites";
@@ -15,7 +15,7 @@ export function NflDashboard() {
   const [slate, setSlate] = useState<NflSlate | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [tab, setTab] = useState<Tab>("rankings");
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
   const [favorites, setFavorites] = useState<Set<string>>(() => {
     if (typeof window === "undefined") return new Set();
     try {
@@ -45,14 +45,13 @@ export function NflDashboard() {
       return next;
     });
 
-  // Flat, score-sorted player list (for the Research picker + default selection).
-  const players = useMemo<NflPlayer[]>(
-    () => (slate ? [...slate.games.flatMap((g) => g.players)].sort((a, b) => b.score - a.score) : []),
-    [slate],
-  );
-  const selected = players.find((p) => p.gsis_id === selectedId) ?? players[0] ?? null;
-
-  const openResearch = (p: NflPlayer) => { setSelectedId(p.gsis_id); setTab("research"); };
+  // Clicking a ranking row jumps to that player's GAME in the game-driven
+  // Research view (then you scroll to the role-holder).
+  const openResearch = (p: NflPlayer) => {
+    const g = slate?.games.find((gm) => gm.players.some((pl) => pl.gsis_id === p.gsis_id && pl.team === p.team));
+    if (g) setSelectedGameId(g.game_id);
+    setTab("research");
+  };
 
   return (
     <div className="min-h-screen" style={{ background: color.background }}>
@@ -101,13 +100,8 @@ export function NflDashboard() {
         {slate && tab === "rankings" && (
           <Rankings slate={slate} favorites={favorites} onToggleFavorite={toggleFavorite} onSelect={openResearch} />
         )}
-        {slate && tab === "research" && selected && (
-          <PlayerResearch
-            player={selected}
-            players={players}
-            onSelectPlayer={setSelectedId}
-            onBack={() => setTab("rankings")}
-          />
+        {slate && tab === "research" && (
+          <GameResearch slate={slate} selectedGameId={selectedGameId} onSelectGame={setSelectedGameId} />
         )}
       </main>
     </div>
