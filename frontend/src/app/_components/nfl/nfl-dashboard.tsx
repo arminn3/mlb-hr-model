@@ -56,7 +56,7 @@ export function NflDashboard() {
   return (
     <div className="min-h-screen" style={{ background: color.background }}>
       <header className="border-b" style={{ borderColor: "#2c2c2e", background: color.card }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-[60px] flex items-center justify-between">
+        <div className="max-w-[1760px] mx-auto px-4 sm:px-6 h-[60px] flex items-center justify-between">
           <div className="flex items-center gap-3 min-w-0">
             <SportSwitcher active="nfl" />
             <div className="min-w-0">
@@ -87,7 +87,7 @@ export function NflDashboard() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
+      <main className="max-w-[1760px] mx-auto px-4 sm:px-6 py-6">
         {error && (
           <div className="rounded-xl p-8 text-center text-[13px]" style={{ color: color.muted, border: "1px solid #2c2c2e" }}>
             Couldn&apos;t load the NFL slate ({error}).<br />

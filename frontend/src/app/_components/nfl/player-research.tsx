@@ -151,7 +151,7 @@ export function PlayerBlock({ player }: { player: NflPlayer }) {
           <div className="text-[9px] uppercase tracking-wider mt-0.5" style={{ color: color.muted }}>TD prob</div>
         </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 2xl:grid-cols-2 gap-3">
         <LogTable
           title={`${player.name} — Game Log`}
           subtitle={`${player.game_log.length} games · ${Math.round(player.hit_rate_season * 100)}% ATD season`}
