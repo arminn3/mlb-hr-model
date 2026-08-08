@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { Star } from "lucide-react";
 import { CARD, color } from "../../_design";
 import type { NflSlate, NflPlayer } from "./types";
-import { fmtPct, fmtPct1, scoreColor, posColor, matchupColor, matchupLabel } from "./format";
+import { fmtPct, fmtPct1, scoreColor, posColor, matchupColor, matchupLabel, teamLogo } from "./format";
 
 const TOP_N = 30;
 
@@ -35,6 +35,8 @@ function Row({
       <button onClick={(e) => { e.stopPropagation(); onToggleFavorite(p.gsis_id); }} className="cursor-pointer shrink-0" aria-label="favorite">
         <Star size={14} fill={fav ? color.yellow : "none"} stroke={fav ? color.yellow : "rgba(255,255,255,0.25)"} />
       </button>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={teamLogo(p.team)} alt={p.team} className="w-6 h-6 object-contain shrink-0" style={{ width: 24, height: 24 }} />
 
       {/* name + role + the matchup headline */}
       <div className="min-w-0 flex-1">

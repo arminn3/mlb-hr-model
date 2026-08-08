@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { CARD, color } from "../../_design";
 import type { NflPlayer, GameLogRow } from "./types";
-import { fmtPct1, scoreColor, posColor, matchupColor } from "./format";
+import { fmtPct1, scoreColor, posColor, matchupColor, teamLogo, heatFill } from "./format";
 
 type ColDef = { key: keyof GameLogRow; label: string };
 
@@ -27,13 +27,8 @@ const colsFor = (pos: string): ColDef[] =>
   pos === "QB" ? QB_COLS : pos === "RB" || pos === "FB" ? RB_COLS : REC_COLS;
 
 // Relative heat: high = green, low = red, within the shown rows.
-function heatBg(v: number, lo: number, hi: number): string {
-  if (hi <= lo) return "transparent";
-  const t = (v - lo) / (hi - lo);
-  if (t >= 0.6) return `rgba(74,222,128,${(0.08 + 0.2 * t).toFixed(2)})`;
-  if (t <= 0.4) return `rgba(248,113,113,${(0.08 + 0.2 * (1 - t)).toFixed(2)})`;
-  return "transparent";
-}
+const heatBg = (v: number, lo: number, hi: number): string =>
+  hi <= lo ? "transparent" : heatFill((v - lo) / (hi - lo));
 
 function LogTable({
   title, subtitle, subColor, rows, cols, showName,
@@ -78,7 +73,14 @@ function LogTable({
               <tr key={i} className="border-t" style={{ borderColor: "rgba(255,255,255,0.05)" }}>
                 <td className="py-1.5 pl-3 pr-2 whitespace-nowrap font-mono text-[11px]" style={{ color: color.muted }}>{x.date.slice(5)}</td>
                 {showName && <td className="py-1.5 px-2 whitespace-nowrap text-foreground/85 text-[11px]">{x.name}</td>}
-                <td className="py-1.5 px-2 text-center whitespace-nowrap" style={{ color: color.muted }}>{x.home ? "" : "@"}{x.opp}</td>
+                <td className="py-1.5 px-2 whitespace-nowrap" style={{ color: color.muted }}>
+                  <span className="inline-flex items-center gap-1">
+                    <span className="text-[10px]">{x.home ? "" : "@"}</span>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={teamLogo(x.opp)} alt={x.opp} className="w-4 h-4 object-contain" />
+                    {x.opp}
+                  </span>
+                </td>
                 {cols.map((c) => {
                   const v = Number(x[c.key] ?? 0);
                   const [lo, hi] = ranges[c.key as string];
