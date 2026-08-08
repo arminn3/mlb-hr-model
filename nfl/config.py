@@ -30,12 +30,13 @@ EXP_TEAM_TDS_MAX = 4.5
 # last explicit tier is lumped into the "+" bucket. WR ranked by targets, RB by
 # touches (carries+targets), TE by targets, QB is a single role.
 ROLE_TIERS = {
-    "WR": ["WR1", "WR2", "WR3", "WR4+"],
-    "RB": ["RB1", "RB2", "RB3+"],
-    "TE": ["TE1", "TE2+"],
-    "FB": ["FB1+"],
+    "WR": ["WR1", "WR2", "WR3"],
+    "RB": ["RB1", "RB2"],
+    "TE": ["TE1", "TE2"],
     "QB": ["QB"],
 }
+# Players ranked deeper than the last tier (WR4+, RB3+, TE3+, backup QBs, FBs)
+# get NO role and are dropped from the slate — only the role-holders above show.
 
 # ── Defense-vs-ROLE vulnerability (TD-weighted blend) ─────────────────────────
 # Per (defense, role) we blend three per-game rates allowed — TDs, yards,

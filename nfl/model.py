@@ -206,7 +206,10 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
 
     def _role(pos: str, rk: float):
         tiers = C.ROLE_TIERS.get(pos)
-        return tiers[min(int(rk) - 1, len(tiers) - 1)] if tiers else None
+        if not tiers:
+            return None
+        i = int(rk) - 1
+        return tiers[i] if i < len(tiers) else None  # deeper than last tier -> no role (dropped)
 
     R["role"] = [_role(p, rk) for p, rk in zip(R["position"], R["rank_in"])]
     role_map = R["role"].to_dict()
@@ -283,6 +286,8 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
             eteam = exp_team_tds(imp)
             for pid, r in roster.iterrows():
                 role = r["role"]
+                if not isinstance(role, str):  # None/NaN — deeper than WR3/RB2/TE2, drop
+                    continue
                 rz_share = r["rz_opps"] / trz
                 td_share = r["tds"] / ttd
                 share = C.SHARE_RZ_WEIGHT * rz_share + C.SHARE_TD_WEIGHT * td_share

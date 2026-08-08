@@ -8,7 +8,7 @@ import { PlayerBlock } from "./player-research";
 import { teamLogo, fmtPct, fmtPct1, scoreColor, posColor, matchupColor, matchupLabel } from "./format";
 
 // Order role-holders within a team the way the reference stacks them.
-const ROLE_ORDER = ["QB", "RB1", "RB2", "RB3+", "WR1", "WR2", "WR3", "WR4+", "TE1", "TE2+", "FB1+"];
+const ROLE_ORDER = ["QB", "RB1", "RB2", "WR1", "WR2", "WR3", "TE1", "TE2"];
 const roleIdx = (r: string) => {
   const i = ROLE_ORDER.indexOf(r);
   return i < 0 ? 99 : i;
