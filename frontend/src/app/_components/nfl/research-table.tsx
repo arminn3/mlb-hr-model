@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Star } from "lucide-react";
 import { CARD, color } from "../../_design";
 import type { NflSlate, NflPlayer } from "./types";
-import { fmtPct, fmtPct1, fmtOdds, scoreColor, posColor, dvpColor } from "./format";
+import { fmtPct, fmtPct1, scoreColor, posColor, dvpColor } from "./format";
 
 type Col = {
   key: string;
@@ -25,7 +25,6 @@ const COLS: Col[] = [
   { key: "team", label: "Team", align: "center", get: (p) => p.team },
   { key: "opponent", label: "Opp", align: "center", get: (p) => p.opponent },
   { key: "score", label: "TD%", align: "right", numeric: true, get: (p) => p.score },
-  { key: "fair_odds", label: "Fair", align: "right", numeric: true, get: (p) => p.fair_odds },
   { key: "hit_rate_season", label: "Hit% Szn", align: "right", numeric: true, get: (p) => p.hit_rate_season },
   { key: "hit_rate_l5", label: "Hit% L5", align: "right", numeric: true, get: (p) => p.hit_rate_l5 },
   { key: "rz_opp_share", label: "RZ Opp%", align: "right", numeric: true, get: (p) => p.rz_opp_share },
@@ -74,8 +73,6 @@ export function ResearchTable({
     switch (c.key) {
       case "score":
         return <span style={{ color: scoreColor(p.score), fontWeight: 700 }}>{fmtPct1(p.score)}</span>;
-      case "fair_odds":
-        return <span className="font-mono">{fmtOdds(p.fair_odds)}</span>;
       case "pos":
         return <span style={{ color: posColor(p.pos), fontWeight: 600 }}>{p.pos}</span>;
       case "hit_rate_season":

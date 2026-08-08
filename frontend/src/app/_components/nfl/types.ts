@@ -8,7 +8,6 @@ export interface NflPlayer {
   opponent: string;
   is_home: boolean;
   score: number;          // anytime-TD probability (0-1)
-  fair_odds: number;      // fair no-vig American odds
   expected_tds: number;
   hit_rate_season: number;
   hit_rate_l5: number;

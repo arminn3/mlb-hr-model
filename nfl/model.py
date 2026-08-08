@@ -24,14 +24,6 @@ from . import config as C
 from .data_fetchers import load_pbp, load_schedules, load_snap_counts, load_players
 
 
-def _fair_american(p: float) -> int:
-    """Fair (no-vig) American odds implied by probability p."""
-    p = min(max(p, 1e-4), 0.9999)
-    if p >= 0.5:
-        return int(round(-100 * p / (1 - p)))
-    return int(round(100 * (1 - p) / p))
-
-
 def _offensive_tds(reg: pd.DataFrame) -> pd.DataFrame:
     """One row per offensive (pass/rush) TD: game_id, week, scorer, defteam."""
     ptd = reg[reg["pass_touchdown"] == 1][["game_id", "week", "posteam", "defteam", "receiver_player_id"]]
@@ -166,7 +158,6 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
                     "name": r["name"], "gsis_id": pid, "team": team, "pos": r["position"],
                     "opponent": opp, "is_home": is_home,
                     "score": round(prob, 4),
-                    "fair_odds": _fair_american(prob),
                     "expected_tds": round(exp_p, 3),
                     "hit_rate_season": round(float(r["hit_rate_season"]), 3),
                     "hit_rate_l5": round(float(r["hit_rate_l5"]), 3),

@@ -4,7 +4,6 @@ import { color } from "../../_design";
 
 export const fmtPct = (v: number) => `${Math.round(v * 100)}%`;
 export const fmtPct1 = (v: number) => `${(v * 100).toFixed(1)}%`;
-export const fmtOdds = (o: number) => (o > 0 ? `+${o}` : `${o}`);
 
 /** Anytime-TD probability -> intent color. */
 export function scoreColor(p: number): string {

@@ -1,19 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LayoutGrid, Table2 } from "lucide-react";
+import { ListOrdered, Table2 } from "lucide-react";
 import { color } from "../../_design";
 import type { NflSlate } from "./types";
-import { CheatSheet } from "./cheat-sheet";
+import { Rankings } from "./rankings";
 import { ResearchTable } from "./research-table";
 
-type Tab = "cheat" | "research";
+type Tab = "rankings" | "research";
 const FAV_KEY = "beeb:nfl-favorites";
 
 export function NflDashboard() {
   const [slate, setSlate] = useState<NflSlate | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [tab, setTab] = useState<Tab>("cheat");
+  const [tab, setTab] = useState<Tab>("rankings");
   const [favorites, setFavorites] = useState<Set<string>>(() => {
     if (typeof window === "undefined") return new Set();
     try {
@@ -54,7 +54,7 @@ export function NflDashboard() {
             </div>
           </div>
           <div className="flex items-center gap-1">
-            {([["cheat", "Cheat Sheet", LayoutGrid], ["research", "Research", Table2]] as const).map(
+            {([["rankings", "Rankings", ListOrdered], ["research", "Research", Table2]] as const).map(
               ([key, label, Ico]) => (
                 <button
                   key={key}
@@ -85,8 +85,8 @@ export function NflDashboard() {
           <div className="text-[13px]" style={{ color: color.muted }}>Loading slate…</div>
         )}
         {slate && (
-          tab === "cheat"
-            ? <CheatSheet slate={slate} favorites={favorites} onToggleFavorite={toggleFavorite} />
+          tab === "rankings"
+            ? <Rankings slate={slate} favorites={favorites} onToggleFavorite={toggleFavorite} />
             : <ResearchTable slate={slate} favorites={favorites} onToggleFavorite={toggleFavorite} />
         )}
       </main>
