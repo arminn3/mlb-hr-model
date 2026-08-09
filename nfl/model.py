@@ -57,8 +57,8 @@ def _kickoff(weekday, gametime) -> str:
     wd = str(weekday)[:3] if weekday and weekday == weekday else ""
     try:
         h, m = map(int, str(gametime).split(":"))
-        ampm = "AM" if h < 12 else "PM"
-        return f"{wd} {h % 12 or 12}:{m:02d} {ampm} ET".strip()
+        ampm = "am" if h < 12 else "pm"
+        return f"{wd} {h % 12 or 12}:{m:02d} {ampm} EST".strip()
     except Exception:
         return wd
 

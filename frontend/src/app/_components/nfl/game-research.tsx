@@ -250,22 +250,22 @@ export function GameResearch({
 
       {/* main — game header (node 6:1035), per-game tabs, then the tab content */}
       <div className="min-w-0 flex-1">
-        <div className="flex items-start justify-between flex-wrap gap-4 px-1">
-          <div>
-            <div className="text-[22px] font-bold text-foreground leading-tight">
-              {teamName(game.away_team)} <span style={{ color: color.muted }}>@</span> {teamName(game.home_team)}
-            </div>
-            <div className="mt-1.5 text-[12px] leading-[1.4]" style={{ color: color.muted }}>
-              <div>{game.kickoff.split(" ")[0]}</div>
-              <div>{game.kickoff.split(" ").slice(1).join(" ")}</div>
+        <div className="flex items-center gap-6 flex-wrap px-1 py-2">
+          <div className="flex flex-col gap-3 items-start">
+            <p className="text-[20px] font-medium text-white whitespace-nowrap">
+              {teamName(game.away_team)} @ {teamName(game.home_team)}
+            </p>
+            <div className="flex flex-col gap-2 text-[12px] font-semibold" style={{ color: "#7e7e7e" }}>
+              <span>{game.kickoff.split(" ")[0]}</span>
+              <span>{game.kickoff.split(" ").slice(1).join(" ")}</span>
             </div>
           </div>
-          <div className="space-y-1.5">
+          <div className="flex flex-col gap-[9px] items-start justify-center">
             {([[game.away_team, game.away_record], [game.home_team, game.home_record]] as const).map(([t, rec]) => (
               <div key={t} className="flex items-center gap-2">
                 <Logo team={t} size={24} />
-                <span className="text-[14px] font-bold text-foreground">{t}</span>
-                <span className="text-[14px]" style={{ color: color.muted }}>{rec}</span>
+                <span className="text-[14px] font-bold text-white">{t}</span>
+                <span className="text-[14px] font-bold" style={{ color: "#7e7e7e" }}>{rec}</span>
               </div>
             ))}
           </div>
