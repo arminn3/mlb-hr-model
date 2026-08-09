@@ -255,7 +255,7 @@ export function GameResearch({
             <p className="text-[20px] font-medium text-white whitespace-nowrap">
               {teamName(game.away_team)} @ {teamName(game.home_team)}
             </p>
-            <div className="flex flex-col gap-2 text-[12px] font-semibold" style={{ color: "#7e7e7e" }}>
+            <div className="flex flex-col gap-2 text-[14px] font-semibold" style={{ color: "#7e7e7e" }}>
               <span>{relativeDay(game.gameday)}</span>
               <span>{game.kickoff}</span>
             </div>
