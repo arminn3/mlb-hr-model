@@ -62,6 +62,8 @@ export interface NflGame {
   spread_line: number;
   away_implied: number;
   home_implied: number;
+  away_record: string;    // e.g. "8-2"
+  home_record: string;
   players: NflPlayer[];
 }
 

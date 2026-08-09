@@ -284,6 +284,18 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
 
     # ── build the week's games ───────────────────────────────────────────────
     sched = load_schedules(season)
+
+    # team W-L records coming into the week (result = home_score - away_score)
+    wins: dict = {}
+    losses: dict = {}
+    for r in sched[(sched["week"] < week) & sched["result"].notna()].itertuples():
+        if r.result == 0:
+            continue
+        home_won = r.result > 0
+        for t, won in ((r.home_team, home_won), (r.away_team, not home_won)):
+            (wins if won else losses)[t] = (wins if won else losses).get(t, 0) + 1
+    record = lambda t: f"{wins.get(t, 0)}-{losses.get(t, 0)}"
+
     wk = sched[sched["week"] == week]
     games = []
     for g in wk.itertuples():
@@ -342,6 +354,7 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
             "total_line": total, "spread_line": spread,
             "away_implied": away_imp, "home_implied": home_imp,
             "kickoff": _kickoff(getattr(g, "weekday", ""), getattr(g, "gametime", "")),
+            "away_record": record(away), "home_record": record(home),
             "players": game_players,
         })
     meta = {"sport": "nfl", "market": "anytime_td", "season": season, "week": week}

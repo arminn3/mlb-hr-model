@@ -5,7 +5,7 @@ import { LayoutGrid, ListOrdered, Zap, HeartPulse, ChevronDown } from "lucide-re
 import { CARD, color } from "../../_design";
 import type { NflSlate, NflGame, NflPlayer } from "./types";
 import { PlayerBlock } from "./player-research";
-import { teamLogo, fmtPct, fmtPct1, scoreColor, posColor, matchupColor, matchupLabel } from "./format";
+import { teamLogo, teamName, fmtPct, fmtPct1, scoreColor, posColor, matchupColor, matchupLabel } from "./format";
 
 // Order role-holders within a team the way the reference stacks them.
 const ROLE_ORDER = ["QB", "RB1", "RB2", "WR1", "WR2", "WR3", "TE1", "TE2"];
@@ -19,6 +19,49 @@ const Logo = ({ team, size = 20 }: { team: string; size?: number }) => (
   // eslint-disable-next-line @next/next/no-img-element
   <img src={teamLogo(team)} alt={team} width={size} height={size} className="object-contain shrink-0" style={{ width: size, height: size }} />
 );
+
+const LEAGUE_LOGO: Record<string, string> = {
+  NFL: "https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png",
+  MLB: "https://a.espncdn.com/i/teamlogos/leagues/500/mlb.png",
+};
+
+// The rail's league dropdown = the MLB <-> NFL model switcher.
+function LeagueSwitcher() {
+  const [open, setOpen] = useState(false);
+  const leagues = [
+    { key: "NFL", label: "NFL", href: "/nfl", current: true },
+    { key: "MLB", label: "MLB", href: "/dashboard", current: false },
+  ];
+  return (
+    <div className="relative w-[198px] shrink-0">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-2 rounded-lg p-3 w-full cursor-pointer"
+        style={{ background: "#1b1b1b", border: "1px solid #3a3a3a" }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={LEAGUE_LOGO.NFL} alt="NFL" className="w-6 h-6 object-contain" />
+        <span className="flex-1 text-left text-[16px] font-bold text-white">NFL</span>
+        <ChevronDown size={16} className="text-white/60 transition-transform" style={{ transform: open ? "rotate(180deg)" : "none" }} />
+      </button>
+      {open && (
+        <div className="absolute z-30 mt-1 w-full rounded-lg overflow-hidden" style={{ background: "#1b1b1b", border: "1px solid #3a3a3a" }}>
+          {leagues.map((l) => (
+            <a
+              key={l.key}
+              href={l.href}
+              className="flex items-center gap-2 px-3 py-2.5 text-[14px] font-bold text-white hover:bg-white/[0.06]"
+              style={l.current ? { background: "rgba(58,84,213,0.20)" } : undefined}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={LEAGUE_LOGO[l.key]} alt={l.label} className="w-5 h-5 object-contain" />{l.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 /** Favored team + line, e.g. "PHI -7.5". spread_line > 0 = home favored. */
 function spreadLabel(g: NflGame): string {
@@ -173,12 +216,8 @@ export function GameResearch({
       {/* left rail — game selection (copied from Figma node 3:65) */}
       <aside className="shrink-0">
         <div className="flex lg:flex-col gap-3 lg:gap-5 overflow-x-auto lg:overflow-visible pb-1">
-          {/* NFL league dropdown */}
-          <div className="flex items-center gap-2 rounded-lg p-3 w-[198px] shrink-0" style={{ background: "#1b1b1b", border: "1px solid #3a3a3a" }}>
-            <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png" alt="NFL" className="w-6 h-6 object-contain" />
-            <span className="flex-1 text-[16px] font-bold text-white">NFL</span>
-            <ChevronDown size={16} className="text-white/60" />
-          </div>
+          {/* league dropdown = MLB <-> NFL model switcher */}
+          <LeagueSwitcher />
           {/* game cards */}
           <div className="flex lg:flex-col gap-3">
             {games.map((g) => {
@@ -209,20 +248,26 @@ export function GameResearch({
         </div>
       </aside>
 
-      {/* main — matchup banner, per-game tabs, then the tab content */}
+      {/* main — game header (node 6:1035), per-game tabs, then the tab content */}
       <div className="min-w-0 flex-1">
-        <div className="rounded-xl px-4 py-3 flex items-center justify-between flex-wrap gap-3" style={CARD.elevated}>
-          <div className="flex items-center gap-2.5">
-            <Logo team={game.away_team} size={30} />
-            <span className="text-[18px] font-bold text-foreground">{game.away_team}</span>
-            <span className="text-[13px]" style={{ color: color.muted }}>@</span>
-            <span className="text-[18px] font-bold text-foreground">{game.home_team}</span>
-            <Logo team={game.home_team} size={30} />
+        <div className="flex items-start justify-between flex-wrap gap-4 px-1">
+          <div>
+            <div className="text-[22px] font-bold text-foreground leading-tight">
+              {teamName(game.away_team)} <span style={{ color: color.muted }}>@</span> {teamName(game.home_team)}
+            </div>
+            <div className="mt-1.5 text-[12px] leading-[1.4]" style={{ color: color.muted }}>
+              <div>{game.kickoff.split(" ")[0]}</div>
+              <div>{game.kickoff.split(" ").slice(1).join(" ")}</div>
+            </div>
           </div>
-          <div className="flex items-center gap-5 text-[12px]">
-            <div className="text-center"><div className="uppercase tracking-wider text-[9px]" style={{ color: color.muted }}>Spread</div><div className="font-mono font-semibold text-foreground">{spreadLabel(game)}</div></div>
-            <div className="text-center"><div className="uppercase tracking-wider text-[9px]" style={{ color: color.muted }}>O/U</div><div className="font-mono font-semibold text-foreground">{game.total_line}</div></div>
-            <div className="text-center"><div className="uppercase tracking-wider text-[9px]" style={{ color: color.muted }}>Implied</div><div className="font-mono font-semibold text-foreground">{game.away_implied} / {game.home_implied}</div></div>
+          <div className="space-y-1.5">
+            {([[game.away_team, game.away_record], [game.home_team, game.home_record]] as const).map(([t, rec]) => (
+              <div key={t} className="flex items-center gap-2">
+                <Logo team={t} size={24} />
+                <span className="text-[14px] font-bold text-foreground">{t}</span>
+                <span className="text-[14px]" style={{ color: color.muted }}>{rec}</span>
+              </div>
+            ))}
           </div>
         </div>
 
