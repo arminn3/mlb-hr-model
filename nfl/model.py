@@ -52,15 +52,15 @@ def _snap_pct_by_gsis(season: int, week: int, pfr_to_gsis: dict) -> dict:
     return sn.groupby("gsis")["offense_pct"].mean().to_dict()
 
 
-def _kickoff(weekday, gametime) -> str:
-    """'Sunday' + '20:15' -> 'Sun 8:15 PM ET' (nflverse gametime is ET)."""
-    wd = str(weekday)[:3] if weekday and weekday == weekday else ""
+def _kickoff(gametime) -> str:
+    """'20:15' -> '8:15 pm EST' (nflverse gametime is ET). Time only — the
+    frontend derives the day label (Today/Tomorrow/weekday) from `gameday`."""
     try:
         h, m = map(int, str(gametime).split(":"))
         ampm = "am" if h < 12 else "pm"
-        return f"{wd} {h % 12 or 12}:{m:02d} {ampm} EST".strip()
+        return f"{h % 12 or 12}:{m:02d} {ampm} EST"
     except Exception:
-        return wd
+        return ""
 
 
 def _game_logs(prior: pd.DataFrame, role_map: dict, name_map: dict):
@@ -353,7 +353,8 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
             "roof": getattr(g, "roof", None),
             "total_line": total, "spread_line": spread,
             "away_implied": away_imp, "home_implied": home_imp,
-            "kickoff": _kickoff(getattr(g, "weekday", ""), getattr(g, "gametime", "")),
+            "kickoff": _kickoff(getattr(g, "gametime", "")),
+            "gameday": str(getattr(g, "gameday", "")),
             "away_record": record(away), "home_record": record(home),
             "players": game_players,
         })

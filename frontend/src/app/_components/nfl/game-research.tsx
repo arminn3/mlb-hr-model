@@ -5,7 +5,7 @@ import { LayoutGrid, ListOrdered, Zap, HeartPulse, ChevronDown } from "lucide-re
 import { CARD, color } from "../../_design";
 import type { NflSlate, NflGame, NflPlayer } from "./types";
 import { PlayerBlock } from "./player-research";
-import { teamLogo, teamName, fmtPct, fmtPct1, scoreColor, posColor, matchupColor, matchupLabel } from "./format";
+import { teamLogo, teamName, relativeDay, fmtPct, fmtPct1, scoreColor, posColor, matchupColor, matchupLabel } from "./format";
 
 // Order role-holders within a team the way the reference stacks them.
 const ROLE_ORDER = ["QB", "RB1", "RB2", "WR1", "WR2", "WR3", "TE1", "TE2"];
@@ -231,7 +231,7 @@ export function GameResearch({
                     ? { background: "rgba(58,84,213,0.25)", border: "1px solid #3a54d5" }
                     : { background: "#1b1b1b", border: "1px solid #343434" }}
                 >
-                  <span className="text-[12px] font-semibold" style={{ color: "#ccc" }}>{g.kickoff}</span>
+                  <span className="text-[12px] font-semibold" style={{ color: "#ccc" }}>{relativeDay(g.gameday)} {g.kickoff}</span>
                   <div className="flex items-center gap-[9px]">
                     <span className="flex items-center gap-2"><Logo team={g.away_team} size={24} /><span className="text-[14px] font-bold text-white">{g.away_team}</span></span>
                     <span className="text-[16px] font-semibold text-white">@</span>
@@ -256,8 +256,8 @@ export function GameResearch({
               {teamName(game.away_team)} @ {teamName(game.home_team)}
             </p>
             <div className="flex flex-col gap-2 text-[12px] font-semibold" style={{ color: "#7e7e7e" }}>
-              <span>{game.kickoff.split(" ")[0]}</span>
-              <span>{game.kickoff.split(" ").slice(1).join(" ")}</span>
+              <span>{relativeDay(game.gameday)}</span>
+              <span>{game.kickoff}</span>
             </div>
           </div>
           <div className="flex flex-col gap-[9px] items-start justify-center">

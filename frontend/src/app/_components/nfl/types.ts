@@ -57,7 +57,8 @@ export interface NflGame {
   away_team: string;
   home_team: string;
   roof: string | null;
-  kickoff: string;        // e.g. "Sun 1:00 PM ET"
+  kickoff: string;        // time only, e.g. "1:00 pm EST"
+  gameday: string;        // ISO date, e.g. "2025-11-09" (for the Today/weekday label)
   total_line: number;
   spread_line: number;
   away_implied: number;

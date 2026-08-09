@@ -21,6 +21,20 @@ const TEAM_NAME: Record<string, string> = {
 };
 export const teamName = (abbr: string) => TEAM_NAME[abbr] ?? abbr;
 
+/** ISO date -> "Today" / "Tomorrow" / "Yesterday" / weekday ("Sun"). */
+export function relativeDay(iso: string): string {
+  if (!iso) return "";
+  const d = new Date(iso + "T00:00:00");
+  if (isNaN(d.getTime())) return "";
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const diff = Math.round((d.getTime() - today.getTime()) / 86400000);
+  if (diff === 0) return "Today";
+  if (diff === 1) return "Tomorrow";
+  if (diff === -1) return "Yesterday";
+  return d.toLocaleDateString("en-US", { weekday: "short" });
+}
+
 export const playerHeadshot = (espnId?: string | null) =>
   espnId ? `https://a.espncdn.com/i/headshots/nfl/players/full/${espnId}.png` : null;
 
