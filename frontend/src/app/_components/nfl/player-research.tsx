@@ -161,15 +161,16 @@ export function PlayerBlock({ player }: { player: NflPlayer }) {
       <img src={teamLogo(player.opponent)} alt={player.opponent} className="w-9 h-9 object-contain" />
       <div className="min-w-0">
         <div className="text-[15px] font-bold text-foreground">{player.opponent} vs {player.role}s</div>
-        <div className="text-[11px]" style={{ color: mColor, fontWeight: 600 }}>#{player.opp_rank_vs_role}/{player.opp_rank_total} vs {player.role} — TDs/production allowed</div>
+        <div className="text-[11px]" style={{ color: mColor, fontWeight: 600 }}>#{player.opp_rank_vs_role}/{player.opp_rank_total} vs {player.role} — allowed</div>
       </div>
     </div>
   );
 
+  // Two-panel: OFFENSE left (player game log), DEFENSE right ({opp} vs {role}s).
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-      <LineTable header={defHeader} rows={player.role_vs_def_log} cols={cols} showName />
       <LineTable header={offHeader} rows={player.game_log} cols={cols} />
+      <LineTable header={defHeader} rows={player.role_vs_def_log} cols={cols} showName />
     </div>
   );
 }
