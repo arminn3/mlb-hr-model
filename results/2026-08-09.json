@@ -309,7 +309,7 @@
   ],
   "total_players_ranked": 302,
   "total_hrs_hit": 33,
-  "total_near_hrs": 0,
+  "total_near_hrs": 15,
   "model_hits": 29,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -426,7 +426,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 15,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -467,13 +467,13 @@
     },
     "all": {
       "total": 302,
-      "hits": 29,
-      "rate": 9.6
+      "hits": 44,
+      "rate": 14.6
     }
   },
   "avg_composite_hr_hitters": 0.441,
-  "avg_composite_non_hitters": 0.423,
-  "composite_separation": 0.018,
+  "avg_composite_non_hitters": 0.422,
+  "composite_separation": 0.019,
   "hr_hitters": [
     {
       "name": "Matt Olson",
@@ -884,8 +884,259 @@
       "matchup": "HOU@SD"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Willi Castro",
+      "rank": 34,
+      "composite": 0.6,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "COL@STL"
+    },
+    {
+      "name": "Munetaka Murakami",
+      "rank": 42,
+      "composite": 0.587,
+      "opp_pitcher": "Joey Cantillo",
+      "matchup": "CLE@CWS"
+    },
+    {
+      "name": "Jake McCarthy",
+      "rank": 43,
+      "composite": 0.585,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "COL@STL"
+    },
+    {
+      "name": "Mike Yastrzemski",
+      "rank": 70,
+      "composite": 0.526,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "ATL@NYY"
+    },
+    {
+      "name": "Drake Baldwin",
+      "rank": 87,
+      "composite": 0.491,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "ATL@NYY"
+    },
+    {
+      "name": "JJ Wetherholt",
+      "rank": 117,
+      "composite": 0.459,
+      "opp_pitcher": "Michael Lorenzen",
+      "matchup": "COL@STL"
+    },
+    {
+      "name": "Taylor Ward",
+      "rank": 128,
+      "composite": 0.444,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "TB@SEA"
+    },
+    {
+      "name": "Jordan Walker",
+      "rank": 141,
+      "composite": 0.421,
+      "opp_pitcher": "Michael Lorenzen",
+      "matchup": "COL@STL"
+    },
+    {
+      "name": "Carlos Narv\u00e1ez",
+      "rank": 147,
+      "composite": 0.409,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "BAL@TEX"
+    },
+    {
+      "name": "Keibert Ruiz",
+      "rank": 154,
+      "composite": 0.404,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "CIN@WSH"
+    },
+    {
+      "name": "Tyler Stephenson",
+      "rank": 157,
+      "composite": 0.401,
+      "opp_pitcher": "Brad Lord",
+      "matchup": "CIN@WSH"
+    },
+    {
+      "name": "Rafael Flores Jr.",
+      "rank": 178,
+      "composite": 0.389,
+      "opp_pitcher": "Sean Manaea",
+      "matchup": "NYM@PIT"
+    },
+    {
+      "name": "Michael Conforto",
+      "rank": 183,
+      "composite": 0.387,
+      "opp_pitcher": "Randy Dobnak",
+      "matchup": "CHC@KC"
+    },
+    {
+      "name": "Andr\u00e9s Chaparro",
+      "rank": 215,
+      "composite": 0.351,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "CIN@WSH"
+    },
+    {
+      "name": "Masyn Winn",
+      "rank": 258,
+      "composite": 0.284,
+      "opp_pitcher": "Michael Lorenzen",
+      "matchup": "COL@STL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Munetaka Murakami",
+      "ev": 113.4,
+      "angle": 19.0,
+      "distance": 382.0,
+      "hr_in_parks": 11,
+      "result": "double",
+      "pitcher": "Cantillo, Joey"
+    },
+    {
+      "batter": "Michael Conforto",
+      "ev": 105.9,
+      "angle": 33.0,
+      "distance": 411.0,
+      "hr_in_parks": 28,
+      "result": "",
+      "pitcher": "McGee, Easton"
+    },
+    {
+      "batter": "Mike Yastrzemski",
+      "ev": 102.6,
+      "angle": 29.0,
+      "distance": 394.0,
+      "hr_in_parks": 26,
+      "result": "field_out",
+      "pitcher": "Schlittler, Cam"
+    },
+    {
+      "batter": "Drake Baldwin",
+      "ev": 100.9,
+      "angle": 37.0,
+      "distance": 380.0,
+      "hr_in_parks": 14,
+      "result": "field_out",
+      "pitcher": "Schlittler, Cam"
+    },
+    {
+      "batter": "Rafael Flores Jr.",
+      "ev": 99.3,
+      "angle": 40.0,
+      "distance": 374.0,
+      "hr_in_parks": 27,
+      "result": "field_out",
+      "pitcher": "Manaea, Sean"
+    },
+    {
+      "batter": "Fernando Tatis Jr.",
+      "ev": 108.2,
+      "angle": 19.0,
+      "distance": 384.0,
+      "hr_in_parks": 13,
+      "result": "double",
+      "pitcher": "Blubaugh, AJ"
+    },
+    {
+      "batter": "Taylor Ward",
+      "ev": 103.8,
+      "angle": 26.0,
+      "distance": 394.0,
+      "hr_in_parks": 19,
+      "result": "triple",
+      "pitcher": "Seymour, Ian"
+    },
+    {
+      "batter": "JJ Wetherholt",
+      "ev": 103.7,
+      "angle": 25.0,
+      "distance": 399.0,
+      "hr_in_parks": 19,
+      "result": "double",
+      "pitcher": "Mushinski, Parker"
+    },
+    {
+      "batter": "Willi Castro",
+      "ev": 105.2,
+      "angle": 25.0,
+      "distance": 386.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "McGreevy, Michael"
+    },
+    {
+      "batter": "Jake McCarthy",
+      "ev": 98.4,
+      "angle": 33.0,
+      "distance": 387.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "McGreevy, Michael"
+    },
+    {
+      "batter": "Masyn Winn",
+      "ev": 104.8,
+      "angle": 25.0,
+      "distance": 401.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Lorenzen, Michael"
+    },
+    {
+      "batter": "Jordan Walker",
+      "ev": 105.3,
+      "angle": 35.0,
+      "distance": 393.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Lorenzen, Michael"
+    },
+    {
+      "batter": "Carlos Narv\u00e1ez",
+      "ev": 102.2,
+      "angle": 27.0,
+      "distance": 405.0,
+      "hr_in_parks": 27,
+      "result": "field_out",
+      "pitcher": "Montgomery, Jordan"
+    },
+    {
+      "batter": "Andr\u00e9s Chaparro",
+      "ev": 112.1,
+      "angle": 37.0,
+      "distance": 418.0,
+      "hr_in_parks": 29,
+      "result": "",
+      "pitcher": "Antone, Tejay"
+    },
+    {
+      "batter": "Keibert Ruiz",
+      "ev": 103.4,
+      "angle": 31.0,
+      "distance": 395.0,
+      "hr_in_parks": 2,
+      "result": "",
+      "pitcher": "Singer, Brady"
+    },
+    {
+      "batter": "Tyler Stephenson",
+      "ev": 101.3,
+      "angle": 31.0,
+      "distance": 400.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Dion, Will"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Austin Hays",
