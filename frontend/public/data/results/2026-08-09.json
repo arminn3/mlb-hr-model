@@ -1141,7 +1141,7 @@
     {
       "name": "Austin Hays",
       "pitcher": "Bryan King",
-      "description": "Austin Hays homers (2) on a line drive to left field. Jase Bowen scores."
+      "description": "${person|fullName|669720} homers ${total|homeRuns|669720} on a line drive to left field.   ${person|fullName|687749} scores.  "
     }
   ],
   "hr_signal_accuracy": {
