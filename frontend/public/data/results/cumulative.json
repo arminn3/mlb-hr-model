@@ -163973,7 +163973,7 @@
     ],
     "total_players_ranked": 303,
     "total_hrs_hit": 42,
-    "total_near_hrs": 0,
+    "total_near_hrs": 17,
     "model_hits": 42,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -164090,7 +164090,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 17,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -164116,28 +164116,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 3,
-        "rate": 30.0
+        "hits": 4,
+        "rate": 40.0
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 6,
+        "rate": 30.0
       },
       "top_30": {
         "total": 30,
-        "hits": 6,
-        "rate": 20.0
+        "hits": 9,
+        "rate": 30.0
       },
       "all": {
         "total": 303,
-        "hits": 42,
-        "rate": 13.9
+        "hits": 59,
+        "rate": 19.5
       }
     },
     "avg_composite_hr_hitters": 0.474,
-    "avg_composite_non_hitters": 0.434,
-    "composite_separation": 0.04,
+    "avg_composite_non_hitters": 0.431,
+    "composite_separation": 0.043,
     "hr_hitters": [
       {
         "name": "Jake Burger",
@@ -164730,8 +164730,318 @@
         "matchup": "COL@SF"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Kyle Schwarber",
+        "rank": 1,
+        "composite": 0.849,
+        "opp_pitcher": "Dean Kremer",
+        "matchup": "PHI@MIN"
+      },
+      {
+        "name": "Elias D\u00edaz",
+        "rank": 16,
+        "composite": 0.722,
+        "opp_pitcher": "Jacob Lopez",
+        "matchup": "TEX@ATH"
+      },
+      {
+        "name": "Bo Bichette",
+        "rank": 26,
+        "composite": 0.678,
+        "opp_pitcher": "Jake Irvin",
+        "matchup": "WSH@NYM"
+      },
+      {
+        "name": "J.T. Realmuto",
+        "rank": 56,
+        "composite": 0.589,
+        "opp_pitcher": "Dean Kremer",
+        "matchup": "PHI@MIN"
+      },
+      {
+        "name": "Masyn Winn",
+        "rank": 58,
+        "composite": 0.588,
+        "opp_pitcher": "Edward Cabrera",
+        "matchup": "STL@CHC"
+      },
+      {
+        "name": "Fernando Tatis Jr.",
+        "rank": 62,
+        "composite": 0.576,
+        "opp_pitcher": "Tanner Bibee",
+        "matchup": "SD@CLE"
+      },
+      {
+        "name": "Jorge Mateo",
+        "rank": 87,
+        "composite": 0.509,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "BAL@TB"
+      },
+      {
+        "name": "Coby Mayo",
+        "rank": 117,
+        "composite": 0.449,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "BAL@TB"
+      },
+      {
+        "name": "Jackson Holliday",
+        "rank": 124,
+        "composite": 0.438,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "BAL@TB"
+      },
+      {
+        "name": "Jung Hoo Lee",
+        "rank": 135,
+        "composite": 0.431,
+        "opp_pitcher": "Gabriel Hughes",
+        "matchup": "COL@SF"
+      },
+      {
+        "name": "Kazuma Okamoto",
+        "rank": 196,
+        "composite": 0.383,
+        "opp_pitcher": "Ryan Weathers",
+        "matchup": "NYY@TOR"
+      },
+      {
+        "name": "Randal Grichuk",
+        "rank": 197,
+        "composite": 0.383,
+        "opp_pitcher": "Drew Anderson",
+        "matchup": "CWS@DET"
+      },
+      {
+        "name": "Bryan Reynolds",
+        "rank": 211,
+        "composite": 0.367,
+        "opp_pitcher": "Patrick Sandoval",
+        "matchup": "BOS@PIT"
+      },
+      {
+        "name": "Dylan Crews",
+        "rank": 219,
+        "composite": 0.358,
+        "opp_pitcher": "Christian Scott",
+        "matchup": "WSH@NYM"
+      },
+      {
+        "name": "Julio Rodr\u00edguez",
+        "rank": 244,
+        "composite": 0.327,
+        "opp_pitcher": "Hunter Brown",
+        "matchup": "SEA@HOU"
+      },
+      {
+        "name": "Esmerlyn Valdez",
+        "rank": 264,
+        "composite": 0.292,
+        "opp_pitcher": "Patrick Sandoval",
+        "matchup": "BOS@PIT"
+      },
+      {
+        "name": "Henry Davis",
+        "rank": 294,
+        "composite": 0.183,
+        "opp_pitcher": "Patrick Sandoval",
+        "matchup": "BOS@PIT"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Max Muncy",
+        "ev": 104.7,
+        "angle": 20.0,
+        "distance": 383.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Gray, Peyton"
+      },
+      {
+        "batter": "Elias D\u00edaz",
+        "ev": 103.9,
+        "angle": 25.0,
+        "distance": 388.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Lopez, Jacob"
+      },
+      {
+        "batter": "Masyn Winn",
+        "ev": 103.1,
+        "angle": 25.0,
+        "distance": 388.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Kelly, Carson"
+      },
+      {
+        "batter": "Jordan Walker",
+        "ev": 101.1,
+        "angle": 26.0,
+        "distance": 375.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Thornton, Trent"
+      },
+      {
+        "batter": "Pete Crow-Armstrong",
+        "ev": 86.2,
+        "angle": 18.0,
+        "distance": 439.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "Dobbins, Hunter"
+      },
+      {
+        "batter": "Fernando Tatis Jr.",
+        "ev": 101.9,
+        "angle": 40.0,
+        "distance": 375.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Bibee, Tanner"
+      },
+      {
+        "batter": "Randal Grichuk",
+        "ev": 109.2,
+        "angle": 18.0,
+        "distance": 413.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Holton, Tyler"
+      },
+      {
+        "batter": "Julio Rodr\u00edguez",
+        "ev": 107.3,
+        "angle": 26.0,
+        "distance": 411.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Hader, Josh"
+      },
+      {
+        "batter": "J.T. Realmuto",
+        "ev": 113.0,
+        "angle": 28.0,
+        "distance": 412.0,
+        "hr_in_parks": 28,
+        "result": "",
+        "pitcher": "Morris, Andrew"
+      },
+      {
+        "batter": "Kyle Schwarber",
+        "ev": 97.9,
+        "angle": 32.0,
+        "distance": 378.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Kremer, Dean"
+      },
+      {
+        "batter": "Bo Bichette",
+        "ev": 100.5,
+        "angle": 29.0,
+        "distance": 406.0,
+        "hr_in_parks": 28,
+        "result": "triple",
+        "pitcher": "Kranick, Max"
+      },
+      {
+        "batter": "Dylan Crews",
+        "ev": 101.5,
+        "angle": 25.0,
+        "distance": 369.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Scott, Christian"
+      },
+      {
+        "batter": "Henry Davis",
+        "ev": 100.3,
+        "angle": 39.0,
+        "distance": 375.0,
+        "hr_in_parks": 10,
+        "result": "field_out",
+        "pitcher": "Burgos, Raymond"
+      },
+      {
+        "batter": "Esmerlyn Valdez",
+        "ev": 100.5,
+        "angle": 38.0,
+        "distance": 381.0,
+        "hr_in_parks": 15,
+        "result": "double",
+        "pitcher": "Sandoval, Patrick"
+      },
+      {
+        "batter": "Bryan Reynolds",
+        "ev": 102.9,
+        "angle": 24.0,
+        "distance": 382.0,
+        "hr_in_parks": 5,
+        "result": "double",
+        "pitcher": "Sandoval, Patrick"
+      },
+      {
+        "batter": "Esmerlyn Valdez",
+        "ev": 102.0,
+        "angle": 25.0,
+        "distance": 372.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "Sandoval, Patrick"
+      },
+      {
+        "batter": "Jung Hoo Lee",
+        "ev": 98.4,
+        "angle": 33.0,
+        "distance": 372.0,
+        "hr_in_parks": 24,
+        "result": "field_out",
+        "pitcher": "Hughes, Gabriel"
+      },
+      {
+        "batter": "Jackson Holliday",
+        "ev": 101.0,
+        "angle": 23.0,
+        "distance": 391.0,
+        "hr_in_parks": 21,
+        "result": "double",
+        "pitcher": "Matz, Steven"
+      },
+      {
+        "batter": "Jorge Mateo",
+        "ev": 106.2,
+        "angle": 27.0,
+        "distance": 414.0,
+        "hr_in_parks": 28,
+        "result": "",
+        "pitcher": "Rogers, Trevor"
+      },
+      {
+        "batter": "Coby Mayo",
+        "ev": 104.0,
+        "angle": 32.0,
+        "distance": 401.0,
+        "hr_in_parks": 26,
+        "result": "field_out",
+        "pitcher": "Peralta, Freddy"
+      },
+      {
+        "batter": "Kazuma Okamoto",
+        "ev": 107.5,
+        "angle": 23.0,
+        "distance": 386.0,
+        "hr_in_parks": 8,
+        "result": "double",
+        "pitcher": "Weathers, Ryan"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
