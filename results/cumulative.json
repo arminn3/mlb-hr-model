@@ -169090,6 +169090,7 @@
     "players_who_batted": [
       "A.J. Ewing",
       "Abimelec Ortiz",
+      "Adael Amador",
       "Adley Rutschman",
       "Alec Bohm",
       "Alec Burleson",
@@ -169100,6 +169101,7 @@
       "Andruw Monasterio",
       "Andr\u00e9s Chaparro",
       "Andr\u00e9s Gim\u00e9nez",
+      "Andy Pages",
       "Angel Genao",
       "Angel Mart\u00ednez",
       "Austin Hays",
@@ -169108,6 +169110,7 @@
       "Austin Wells",
       "Ben Malgeri",
       "Ben Rice",
+      "Ben Rortvedt",
       "Blaze Jordan",
       "Bo Bichette",
       "Bobby Witt Jr.",
@@ -169122,6 +169125,7 @@
       "Brett Bateman",
       "Brett Baty",
       "Brett Callahan",
+      "Brett Sullivan",
       "Brice Turang",
       "Brock Rodden",
       "Brooks Lee",
@@ -169152,10 +169156,12 @@
       "Christian Yelich",
       "Coby Mayo",
       "Cody Freeman",
+      "Cole Carrigg",
       "Cole Young",
       "Colson Montgomery",
       "Colt Keith",
       "Colton Cowser",
+      "Connor Norby",
       "Connor Wong",
       "Cooper Pratt",
       "Corbin Carroll",
@@ -169176,14 +169182,17 @@
       "Eduardo Valencia",
       "Elias D\u00edaz",
       "Elly De La Cruz",
+      "Enrique Hern\u00e1ndez",
       "Esmerlyn Valdez",
       "Esteury Ruiz",
       "Eugenio Su\u00e1rez",
       "Evan Carter",
       "Ezequiel Duran",
+      "Ezequiel Tovar",
       "Fernando Tatis Jr.",
       "Francisco Alvarez",
       "Francisco Lindor",
+      "Freddie Freeman",
       "Gabriel Moreno",
       "Garrett Stubbs",
       "Gavin Sheets",
@@ -169215,6 +169224,7 @@
       "Jake Bauers",
       "Jake Cronenworth",
       "Jake Mangum",
+      "Jake McCarthy",
       "Jake Rogers",
       "Jakob Marsee",
       "James McCann",
@@ -169238,6 +169248,7 @@
       "Jonathan Aranda",
       "Jonny DeLuca",
       "Jorbit Vivas",
+      "Jordan Beck",
       "Jordan Lawlar",
       "Jordan Walker",
       "Jose Altuve",
@@ -169264,6 +169275,7 @@
       "Kody Clemens",
       "Kyle Isbel",
       "Kyle Schwarber",
+      "Kyle Tucker",
       "LaMonte Wade Jr.",
       "Lane Thomas",
       "Lars Nootbaar",
@@ -169292,10 +169304,13 @@
       "Michael Harris II",
       "Michael Toglia",
       "Mickey Gasper",
+      "Mickey Moniak",
+      "Miguel Rojas",
       "Miguel Vargas",
       "Mike Trout",
       "Mike Yastrzemski",
       "Mois\u00e9s Ballesteros",
+      "Mookie Betts",
       "Munetaka Murakami",
       "Myles Straw",
       "Nasim Nu\u00f1ez",
@@ -169338,15 +169353,18 @@
       "Sam Antonacci",
       "Samuel Basallo",
       "Seiya Suzuki",
+      "Shohei Ohtani",
       "Spencer Horwitz",
       "Spencer Jones",
       "Spencer Torkelson",
       "Steven Kwan",
       "Sung-Mun Song",
       "TJ Friedl",
+      "TJ Rumfield",
       "Taylor Trammell",
       "Taylor Walls",
       "Taylor Ward",
+      "Teoscar Hern\u00e1ndez",
       "Tim Tawa",
       "Tommy White",
       "Travis Bazzana",
@@ -169365,6 +169383,7 @@
       "Victor Caratini",
       "Vinnie Pasquantino",
       "Wade Meckler",
+      "Willi Castro",
       "William Contreras",
       "Willson Contreras",
       "Willy Adames",
@@ -169374,26 +169393,27 @@
       "Xavier Edwards",
       "Yandy D\u00edaz",
       "Yordan Alvarez",
+      "Zac Veen",
       "Zach McKinstry",
       "Zach Neto",
       "Zack Gelof"
     ],
-    "total_players_ranked": 287,
-    "total_hrs_hit": 23,
-    "total_near_hrs": 0,
-    "model_hits": 22,
+    "total_players_ranked": 307,
+    "total_hrs_hit": 26,
+    "total_near_hrs": 11,
+    "model_hits": 25,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.0
         },
         "top_30": {
           "total": 30,
@@ -169401,9 +169421,9 @@
           "rate": 6.7
         },
         "all": {
-          "total": 287,
-          "hits": 22,
-          "rate": 7.7
+          "total": 307,
+          "hits": 25,
+          "rate": 8.1
         }
       },
       "L10": {
@@ -169414,8 +169434,54 @@
         },
         "top_20": {
           "total": 20,
-          "hits": 3,
-          "rate": 15.0
+          "hits": 2,
+          "rate": 10.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 4,
+          "rate": 13.3
+        },
+        "all": {
+          "total": 307,
+          "hits": 25,
+          "rate": 8.1
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 307,
+        "hits": 25,
+        "rate": 8.1
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
         },
         "top_30": {
           "total": 30,
@@ -169423,17 +169489,40 @@
           "rate": 10.0
         },
         "all": {
-          "total": 287,
-          "hits": 22,
-          "rate": 7.7
+          "total": 307,
+          "hits": 25,
+          "rate": 8.1
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 2,
+          "rate": 6.7
+        },
+        "all": {
+          "total": 307,
+          "hits": 25,
+          "rate": 8.1
         }
       }
     },
-    "tier_accuracy_ml2026": {
+    "model_near_hits": 11,
+    "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
@@ -169446,256 +169535,208 @@
         "rate": 6.7
       },
       "all": {
-        "total": 287,
-        "hits": 22,
-        "rate": 7.7
-      }
-    },
-    "tier_accuracy_ml2026_by_lookback": {
-      "L5": {
-        "top_10": {
-          "total": 10,
-          "hits": 0,
-          "rate": 0.0
-        },
-        "top_20": {
-          "total": 20,
-          "hits": 1,
-          "rate": 5.0
-        },
-        "top_30": {
-          "total": 30,
-          "hits": 2,
-          "rate": 6.7
-        },
-        "all": {
-          "total": 287,
-          "hits": 22,
-          "rate": 7.7
-        }
-      },
-      "L10": {
-        "top_10": {
-          "total": 10,
-          "hits": 1,
-          "rate": 10.0
-        },
-        "top_20": {
-          "total": 20,
-          "hits": 1,
-          "rate": 5.0
-        },
-        "top_30": {
-          "total": 30,
-          "hits": 3,
-          "rate": 10.0
-        },
-        "all": {
-          "total": 287,
-          "hits": 22,
-          "rate": 7.7
-        }
-      }
-    },
-    "model_near_hits": 0,
-    "tier_accuracy": {
-      "top_10": {
-        "total": 10,
-        "hits": 0,
-        "rate": 0.0
-      },
-      "top_20": {
-        "total": 20,
-        "hits": 0,
-        "rate": 0.0
-      },
-      "top_30": {
-        "total": 30,
-        "hits": 2,
-        "rate": 6.7
-      },
-      "all": {
-        "total": 287,
-        "hits": 22,
-        "rate": 7.7
+        "total": 307,
+        "hits": 25,
+        "rate": 8.1
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
-        "total": 287,
-        "hits": 22,
-        "rate": 7.7
+        "total": 307,
+        "hits": 36,
+        "rate": 11.7
       }
     },
-    "avg_composite_hr_hitters": 0.449,
+    "avg_composite_hr_hitters": 0.468,
     "avg_composite_non_hitters": 0.427,
-    "composite_separation": 0.022,
+    "composite_separation": 0.041,
     "hr_hitters": [
       {
+        "name": "Mookie Betts",
+        "rank": 5,
+        "composite": 0.786,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "LAD@COL"
+      },
+      {
         "name": "Pete Alonso",
-        "rank": 24,
+        "rank": 28,
         "composite": 0.631,
         "opp_pitcher": "Will Warren",
         "matchup": "NYY@BAL"
       },
       {
         "name": "Jos\u00e9 Tena",
-        "rank": 30,
+        "rank": 34,
         "composite": 0.612,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "WSH@TEX"
       },
       {
         "name": "Max Muncy",
-        "rank": 32,
+        "rank": 36,
         "composite": 0.611,
         "opp_pitcher": "Seth Lugo",
         "matchup": "ATH@KC"
       },
       {
         "name": "Carson Benge",
-        "rank": 36,
+        "rank": 40,
         "composite": 0.601,
         "opp_pitcher": "Michael King",
         "matchup": "SD@NYM"
       },
       {
+        "name": "Mickey Moniak",
+        "rank": 50,
+        "composite": 0.583,
+        "opp_pitcher": "Roki Sasaki",
+        "matchup": "LAD@COL"
+      },
+      {
         "name": "Yandy D\u00edaz",
-        "rank": 53,
+        "rank": 58,
         "composite": 0.571,
         "opp_pitcher": "Max Scherzer",
         "matchup": "TOR@TB"
       },
       {
         "name": "Dylan Beavers",
-        "rank": 60,
+        "rank": 65,
         "composite": 0.554,
         "opp_pitcher": "Will Warren",
         "matchup": "NYY@BAL"
       },
       {
         "name": "Vinnie Pasquantino",
-        "rank": 62,
+        "rank": 67,
         "composite": 0.548,
         "opp_pitcher": "Jeffrey Springs",
         "matchup": "ATH@KC"
       },
       {
         "name": "Lars Nootbaar",
-        "rank": 70,
+        "rank": 75,
         "composite": 0.529,
         "opp_pitcher": "Payton Tolle",
         "matchup": "AZ@BOS"
       },
       {
         "name": "Javier Sanoja",
-        "rank": 90,
+        "rank": 97,
         "composite": 0.483,
         "opp_pitcher": "Aaron Nola",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Mickey Gasper",
-        "rank": 103,
+        "rank": 112,
         "composite": 0.459,
         "opp_pitcher": "Brandon Pfaadt",
         "matchup": "AZ@BOS"
       },
       {
         "name": "Ben Rice",
-        "rank": 105,
+        "rank": 114,
         "composite": 0.458,
         "opp_pitcher": "Chris Bassitt",
         "matchup": "NYY@BAL"
       },
       {
+        "name": "Enrique Hern\u00e1ndez",
+        "rank": 117,
+        "composite": 0.454,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "LAD@COL"
+      },
+      {
         "name": "Sal Stewart",
-        "rank": 138,
+        "rank": 150,
         "composite": 0.414,
         "opp_pitcher": "Matthew Liberatore",
         "matchup": "STL@CIN"
       },
       {
         "name": "Brandon Lowe",
-        "rank": 146,
+        "rank": 161,
         "composite": 0.4,
         "opp_pitcher": "Jackson Jobe",
         "matchup": "DET@PIT"
       },
       {
         "name": "Rafael Flores Jr.",
-        "rank": 149,
+        "rank": 164,
         "composite": 0.4,
         "opp_pitcher": "Jackson Jobe",
         "matchup": "DET@PIT"
       },
       {
         "name": "Joey Ortiz",
-        "rank": 175,
+        "rank": 191,
         "composite": 0.378,
         "opp_pitcher": "Logan Gilbert",
         "matchup": "SEA@MIL"
       },
       {
         "name": "Christian V\u00e1zquez",
-        "rank": 177,
+        "rank": 194,
         "composite": 0.377,
         "opp_pitcher": "Walbert Ure\u00f1a",
         "matchup": "LAA@HOU"
       },
       {
         "name": "Alejandro Kirk",
-        "rank": 202,
+        "rank": 220,
         "composite": 0.355,
         "opp_pitcher": "Drew Rasmussen",
         "matchup": "TOR@TB"
       },
       {
         "name": "Luis Arraez",
-        "rank": 209,
+        "rank": 227,
         "composite": 0.34,
         "opp_pitcher": "Sandy Alcantara",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Nick Sogard",
-        "rank": 234,
+        "rank": 252,
         "composite": 0.306,
         "opp_pitcher": "Brandon Pfaadt",
         "matchup": "AZ@BOS"
       },
       {
         "name": "Andr\u00e9s Chaparro",
-        "rank": 239,
+        "rank": 258,
         "composite": 0.298,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "WSH@TEX"
       },
       {
         "name": "Jarren Duran",
-        "rank": 242,
+        "rank": 261,
         "composite": 0.293,
         "opp_pitcher": "Brandon Pfaadt",
         "matchup": "AZ@BOS"
       },
       {
         "name": "Jordan Walker",
-        "rank": 256,
+        "rank": 275,
         "composite": 0.262,
         "opp_pitcher": "Chase Burns",
         "matchup": "STL@CIN"
@@ -169711,154 +169752,380 @@
       },
       {
         "name": "Pete Alonso",
-        "rank": 16,
+        "rank": 20,
         "composite": 0.657,
         "opp_pitcher": "Will Warren",
         "matchup": "NYY@BAL"
       },
       {
         "name": "Brandon Lowe",
-        "rank": 20,
+        "rank": 24,
         "composite": 0.646,
         "opp_pitcher": "Jackson Jobe",
         "matchup": "DET@PIT"
       },
       {
+        "name": "Mookie Betts",
+        "rank": 27,
+        "composite": 0.634,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "LAD@COL"
+      },
+      {
         "name": "Dylan Beavers",
-        "rank": 32,
+        "rank": 38,
         "composite": 0.612,
         "opp_pitcher": "Will Warren",
         "matchup": "NYY@BAL"
       },
       {
         "name": "Vinnie Pasquantino",
-        "rank": 34,
+        "rank": 41,
         "composite": 0.609,
         "opp_pitcher": "Jeffrey Springs",
         "matchup": "ATH@KC"
       },
       {
+        "name": "Mickey Moniak",
+        "rank": 52,
+        "composite": 0.588,
+        "opp_pitcher": "Roki Sasaki",
+        "matchup": "LAD@COL"
+      },
+      {
         "name": "Yandy D\u00edaz",
-        "rank": 54,
+        "rank": 64,
         "composite": 0.56,
         "opp_pitcher": "Max Scherzer",
         "matchup": "TOR@TB"
       },
       {
         "name": "Carson Benge",
-        "rank": 63,
+        "rank": 74,
         "composite": 0.52,
         "opp_pitcher": "Michael King",
         "matchup": "SD@NYM"
       },
       {
         "name": "Max Muncy",
-        "rank": 70,
+        "rank": 81,
         "composite": 0.508,
         "opp_pitcher": "Kyle Freeland",
         "matchup": "LAD@COL"
       },
       {
         "name": "Javier Sanoja",
-        "rank": 86,
+        "rank": 97,
         "composite": 0.483,
         "opp_pitcher": "Aaron Nola",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Joey Ortiz",
-        "rank": 92,
+        "rank": 103,
         "composite": 0.472,
         "opp_pitcher": "Logan Gilbert",
         "matchup": "SEA@MIL"
       },
       {
         "name": "Jos\u00e9 Tena",
-        "rank": 94,
+        "rank": 105,
         "composite": 0.47,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "WSH@TEX"
       },
       {
+        "name": "Enrique Hern\u00e1ndez",
+        "rank": 115,
+        "composite": 0.454,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "LAD@COL"
+      },
+      {
         "name": "Lars Nootbaar",
-        "rank": 106,
+        "rank": 119,
         "composite": 0.448,
         "opp_pitcher": "Payton Tolle",
         "matchup": "AZ@BOS"
       },
       {
         "name": "Mickey Gasper",
-        "rank": 128,
+        "rank": 141,
         "composite": 0.417,
         "opp_pitcher": "Brandon Pfaadt",
         "matchup": "AZ@BOS"
       },
       {
         "name": "Sal Stewart",
-        "rank": 135,
+        "rank": 148,
         "composite": 0.414,
         "opp_pitcher": "Matthew Liberatore",
         "matchup": "STL@CIN"
       },
       {
         "name": "Alejandro Kirk",
-        "rank": 172,
+        "rank": 188,
         "composite": 0.384,
         "opp_pitcher": "Drew Rasmussen",
         "matchup": "TOR@TB"
       },
       {
         "name": "Rafael Flores Jr.",
-        "rank": 188,
+        "rank": 204,
         "composite": 0.364,
         "opp_pitcher": "Jackson Jobe",
         "matchup": "DET@PIT"
       },
       {
         "name": "Luis Arraez",
-        "rank": 228,
+        "rank": 246,
         "composite": 0.314,
         "opp_pitcher": "Sandy Alcantara",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Andr\u00e9s Chaparro",
-        "rank": 242,
+        "rank": 260,
         "composite": 0.298,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "WSH@TEX"
       },
       {
         "name": "Nick Sogard",
-        "rank": 244,
+        "rank": 262,
         "composite": 0.296,
         "opp_pitcher": "Brandon Pfaadt",
         "matchup": "AZ@BOS"
       },
       {
         "name": "Jarren Duran",
-        "rank": 246,
+        "rank": 264,
         "composite": 0.293,
         "opp_pitcher": "Brandon Pfaadt",
         "matchup": "AZ@BOS"
       },
       {
         "name": "Christian V\u00e1zquez",
-        "rank": 252,
+        "rank": 270,
         "composite": 0.283,
         "opp_pitcher": "Walbert Ure\u00f1a",
         "matchup": "LAA@HOU"
       },
       {
         "name": "Jordan Walker",
-        "rank": 281,
+        "rank": 301,
         "composite": 0.196,
         "opp_pitcher": "Chase Burns",
         "matchup": "STL@CIN"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Kody Clemens",
+        "rank": 24,
+        "composite": 0.645,
+        "opp_pitcher": "AJ Smith-Shawver",
+        "matchup": "ATL@MIN"
+      },
+      {
+        "name": "Daylen Lile",
+        "rank": 44,
+        "composite": 0.594,
+        "opp_pitcher": "Kumar Rocker",
+        "matchup": "WSH@TEX"
+      },
+      {
+        "name": "Jose Siri",
+        "rank": 53,
+        "composite": 0.575,
+        "opp_pitcher": "Ethan Pecko",
+        "matchup": "LAA@HOU"
+      },
+      {
+        "name": "Jimmy Crooks",
+        "rank": 71,
+        "composite": 0.538,
+        "opp_pitcher": "Chase Burns",
+        "matchup": "STL@CIN"
+      },
+      {
+        "name": "Brett Baty",
+        "rank": 72,
+        "composite": 0.537,
+        "opp_pitcher": "Michael King",
+        "matchup": "SD@NYM"
+      },
+      {
+        "name": "Fernando Tatis Jr.",
+        "rank": 84,
+        "composite": 0.511,
+        "opp_pitcher": "Robert Stock",
+        "matchup": "SD@NYM"
+      },
+      {
+        "name": "Isaac Collins",
+        "rank": 138,
+        "composite": 0.427,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "ATH@KC"
+      },
+      {
+        "name": "Charles McAdoo",
+        "rank": 176,
+        "composite": 0.394,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "TOR@TB"
+      },
+      {
+        "name": "Tim Tawa",
+        "rank": 185,
+        "composite": 0.387,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "AZ@BOS"
+      },
+      {
+        "name": "Max Clark",
+        "rank": 247,
+        "composite": 0.312,
+        "opp_pitcher": "Paul Skenes",
+        "matchup": "DET@PIT"
+      },
+      {
+        "name": "Freddie Freeman",
+        "rank": 255,
+        "composite": 0.303,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "LAD@COL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Pete Alonso",
+        "ev": 107.1,
+        "angle": 34.0,
+        "distance": 408.0,
+        "hr_in_parks": 24,
+        "result": "",
+        "pitcher": "Headrick, Brent"
+      },
+      {
+        "batter": "Tim Tawa",
+        "ev": 101.7,
+        "angle": 28.0,
+        "distance": 397.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Weissert, Greg"
+      },
+      {
+        "batter": "Jimmy Crooks",
+        "ev": 109.4,
+        "angle": 32.0,
+        "distance": 399.0,
+        "hr_in_parks": 6,
+        "result": "",
+        "pitcher": "Burns, Chase"
+      },
+      {
+        "batter": "Freddie Freeman",
+        "ev": 103.3,
+        "angle": 25.0,
+        "distance": 373.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Frasso, Nick"
+      },
+      {
+        "batter": "Jose Siri",
+        "ev": 105.3,
+        "angle": 34.0,
+        "distance": 394.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Hader, Josh"
+      },
+      {
+        "batter": "Isaac Collins",
+        "ev": 102.0,
+        "angle": 23.0,
+        "distance": 397.0,
+        "hr_in_parks": 7,
+        "result": "sac_fly",
+        "pitcher": "Rom, Drew"
+      },
+      {
+        "batter": "Vinnie Pasquantino",
+        "ev": 108.9,
+        "angle": 19.0,
+        "distance": 368.0,
+        "hr_in_parks": 30,
+        "result": "single",
+        "pitcher": "Juenger, Hayden"
+      },
+      {
+        "batter": "Kody Clemens",
+        "ev": 104.5,
+        "angle": 25.0,
+        "distance": 381.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Dodd, Dylan"
+      },
+      {
+        "batter": "Brett Baty",
+        "ev": 106.7,
+        "angle": 35.0,
+        "distance": 407.0,
+        "hr_in_parks": 25,
+        "result": "field_out",
+        "pitcher": "King, Michael"
+      },
+      {
+        "batter": "Fernando Tatis Jr.",
+        "ev": 110.3,
+        "angle": 18.0,
+        "distance": 389.0,
+        "hr_in_parks": 2,
+        "result": "double",
+        "pitcher": "Stock, Robert"
+      },
+      {
+        "batter": "Max Clark",
+        "ev": 105.0,
+        "angle": 32.0,
+        "distance": 420.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "Doval, Camilo"
+      },
+      {
+        "batter": "Alejandro Kirk",
+        "ev": 100.0,
+        "angle": 25.0,
+        "distance": 381.0,
+        "hr_in_parks": 18,
+        "result": "field_out",
+        "pitcher": "Baker, Bryan"
+      },
+      {
+        "batter": "Charles McAdoo",
+        "ev": 107.7,
+        "angle": 33.0,
+        "distance": 397.0,
+        "hr_in_parks": 4,
+        "result": "",
+        "pitcher": "Baker, Bryan"
+      },
+      {
+        "batter": "Daylen Lile",
+        "ev": 105.5,
+        "angle": 26.0,
+        "distance": 411.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Rocker, Kumar"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
@@ -170152,8 +170419,8 @@
       },
       "3_of_5": {
         "players": 85,
-        "hr_count": 7,
-        "hr_rate": 8.2,
+        "hr_count": 9,
+        "hr_rate": 10.6,
         "names": [
           "Spencer Torkelson",
           "Bryan Reynolds",
@@ -170248,13 +170515,15 @@
           "Ben Rice",
           "Sal Stewart",
           "Max Muncy",
+          "Mookie Betts",
+          "Mickey Moniak",
           "Max Muncy"
         ]
       },
       "4_of_5": {
         "players": 19,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 1,
+        "hr_rate": 5.3,
         "names": [
           "Kyle Schwarber",
           "Graham Pauley",
@@ -170276,7 +170545,9 @@
           "Enrique Hern\u00e1ndez",
           "Teoscar Hern\u00e1ndez"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Enrique Hern\u00e1ndez"
+        ]
       }
     },
     "combined_tier_accuracy": {
@@ -170292,166 +170563,187 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 3.3
       },
       "all": {
-        "total": 287,
-        "hits": 22,
-        "rate": 7.7
+        "total": 307,
+        "hits": 25,
+        "rate": 8.1
       }
     },
     "combined_hr_hitters": [
       {
+        "name": "Mookie Betts",
+        "rank": 24,
+        "composite": 0.6,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "LAD@COL"
+      },
+      {
         "name": "Pete Alonso",
-        "rank": 31,
+        "rank": 35,
         "composite": 0.563,
         "opp_pitcher": "Will Warren",
         "matchup": "NYY@BAL"
       },
       {
         "name": "Dylan Beavers",
-        "rank": 38,
+        "rank": 42,
         "composite": 0.556,
         "opp_pitcher": "Will Warren",
         "matchup": "NYY@BAL"
       },
       {
         "name": "Carson Benge",
-        "rank": 46,
+        "rank": 50,
         "composite": 0.529,
         "opp_pitcher": "Michael King",
         "matchup": "SD@NYM"
       },
       {
         "name": "Jos\u00e9 Tena",
-        "rank": 48,
+        "rank": 52,
         "composite": 0.517,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "WSH@TEX"
       },
       {
         "name": "Max Muncy",
-        "rank": 52,
+        "rank": 56,
         "composite": 0.509,
         "opp_pitcher": "Kyle Freeland",
         "matchup": "LAD@COL"
       },
       {
+        "name": "Mickey Moniak",
+        "rank": 62,
+        "composite": 0.49,
+        "opp_pitcher": "Roki Sasaki",
+        "matchup": "LAD@COL"
+      },
+      {
         "name": "Ben Rice",
-        "rank": 58,
+        "rank": 63,
         "composite": 0.488,
         "opp_pitcher": "Chris Bassitt",
         "matchup": "NYY@BAL"
       },
       {
         "name": "Yandy D\u00edaz",
-        "rank": 69,
+        "rank": 75,
         "composite": 0.452,
         "opp_pitcher": "Max Scherzer",
         "matchup": "TOR@TB"
       },
       {
         "name": "Brandon Lowe",
-        "rank": 92,
+        "rank": 99,
         "composite": 0.366,
         "opp_pitcher": "Jackson Jobe",
         "matchup": "DET@PIT"
       },
       {
         "name": "Mickey Gasper",
-        "rank": 101,
+        "rank": 109,
         "composite": 0.348,
         "opp_pitcher": "Brandon Pfaadt",
         "matchup": "AZ@BOS"
       },
       {
         "name": "Lars Nootbaar",
-        "rank": 119,
+        "rank": 130,
         "composite": 0.296,
         "opp_pitcher": "Payton Tolle",
         "matchup": "AZ@BOS"
       },
       {
         "name": "Vinnie Pasquantino",
-        "rank": 122,
+        "rank": 134,
         "composite": 0.283,
         "opp_pitcher": "Jeffrey Springs",
         "matchup": "ATH@KC"
       },
       {
         "name": "Joey Ortiz",
-        "rank": 123,
+        "rank": 136,
         "composite": 0.28,
         "opp_pitcher": "Logan Gilbert",
         "matchup": "SEA@MIL"
       },
       {
+        "name": "Enrique Hern\u00e1ndez",
+        "rank": 146,
+        "composite": 0.258,
+        "opp_pitcher": "Kyle Freeland",
+        "matchup": "LAD@COL"
+      },
+      {
         "name": "Alejandro Kirk",
-        "rank": 138,
+        "rank": 153,
         "composite": 0.236,
         "opp_pitcher": "Drew Rasmussen",
         "matchup": "TOR@TB"
       },
       {
         "name": "Javier Sanoja",
-        "rank": 148,
+        "rank": 163,
         "composite": 0.221,
         "opp_pitcher": "Aaron Nola",
         "matchup": "MIA@PHI"
       },
       {
         "name": "Sal Stewart",
-        "rank": 156,
+        "rank": 171,
         "composite": 0.207,
         "opp_pitcher": "Matthew Liberatore",
         "matchup": "STL@CIN"
       },
       {
         "name": "Andr\u00e9s Chaparro",
-        "rank": 161,
+        "rank": 176,
         "composite": 0.204,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "WSH@TEX"
       },
       {
         "name": "Rafael Flores Jr.",
-        "rank": 180,
+        "rank": 196,
         "composite": 0.184,
         "opp_pitcher": "Jackson Jobe",
         "matchup": "DET@PIT"
       },
       {
         "name": "Christian V\u00e1zquez",
-        "rank": 192,
+        "rank": 208,
         "composite": 0.173,
         "opp_pitcher": "Walbert Ure\u00f1a",
         "matchup": "LAA@HOU"
       },
       {
         "name": "Jarren Duran",
-        "rank": 208,
+        "rank": 227,
         "composite": 0.152,
         "opp_pitcher": "Brandon Pfaadt",
         "matchup": "AZ@BOS"
       },
       {
         "name": "Nick Sogard",
-        "rank": 217,
+        "rank": 236,
         "composite": 0.146,
         "opp_pitcher": "Brandon Pfaadt",
         "matchup": "AZ@BOS"
       },
       {
         "name": "Jordan Walker",
-        "rank": 218,
+        "rank": 237,
         "composite": 0.145,
         "opp_pitcher": "Chase Burns",
         "matchup": "STL@CIN"
       },
       {
         "name": "Luis Arraez",
-        "rank": 240,
+        "rank": 259,
         "composite": 0.134,
         "opp_pitcher": "Sandy Alcantara",
         "matchup": "MIA@PHI"
