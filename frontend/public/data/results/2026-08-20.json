@@ -1,0 +1,952 @@
+{
+  "date": "2026-08-20",
+  "players_who_batted": [
+    "Abimelec Ortiz",
+    "Adam Frazier",
+    "Alec Burleson",
+    "Alejandro Kirk",
+    "Andrew Benintendi",
+    "Andrew Knizner",
+    "Andrew Pinckney",
+    "Andr\u00e9s Chaparro",
+    "Andr\u00e9s Gim\u00e9nez",
+    "Angel Genao",
+    "Angel Mart\u00ednez",
+    "Austin Riley",
+    "Austin Wells",
+    "Ben Rice",
+    "Blaze Jordan",
+    "Bobby Witt Jr.",
+    "Braden Montgomery",
+    "Brady House",
+    "Brandon Nimmo",
+    "Brandon Valenzuela",
+    "Brayan Rocchio",
+    "Brendan Donovan",
+    "Brenton Doyle",
+    "Brian Serven",
+    "Brice Turang",
+    "Brock Rodden",
+    "Bryan Torres",
+    "Bryce Eldridge",
+    "Cal Raleigh",
+    "Cam Smith",
+    "Carlos Cortes",
+    "Carlos Narv\u00e1ez",
+    "Cedric Mullins",
+    "Chandler Simpson",
+    "Charles McAdoo",
+    "Chase Meidroth",
+    "Christian Encarnacion-Strand",
+    "Christian Koss",
+    "Christian V\u00e1zquez",
+    "Christian Yelich",
+    "Cody Freeman",
+    "Cole Young",
+    "Colson Montgomery",
+    "Colton Cowser",
+    "Corey Seager",
+    "Dane Myers",
+    "Danny Jansen",
+    "Darell Hernaiz",
+    "Daulton Varsho",
+    "David Hamilton",
+    "Daylen Lile",
+    "Daz Cameron",
+    "Denzer Guzman",
+    "Dominic Canzone",
+    "Donovan Walton",
+    "Drake Baldwin",
+    "Drew Cavanaugh",
+    "Drew Gilbert",
+    "Drew Romo",
+    "Dylan Beavers",
+    "Dylan Crews",
+    "Elly De La Cruz",
+    "Ernie Clement",
+    "Eugenio Su\u00e1rez",
+    "Evan Carter",
+    "Everson Pereira",
+    "Ezequiel Duran",
+    "Garrett Mitchell",
+    "Gary S\u00e1nchez",
+    "George Lombard Jr.",
+    "George Springer",
+    "Gunnar Henderson",
+    "Harry Ford",
+    "Heliot Ramos",
+    "Henry Bolte",
+    "H\u00e9ctor Rodr\u00edguez",
+    "Isaac Collins",
+    "Isaac Paredes",
+    "Iv\u00e1n Herrera",
+    "JJ Bleday",
+    "JJ Wetherholt",
+    "Jackson Chourio",
+    "Jackson Holliday",
+    "Jake Bauers",
+    "Jake Burger",
+    "Jarred Kelenic",
+    "Jazz Chisholm Jr.",
+    "Jeff McNeil",
+    "Jhonny Pereda",
+    "Jimmy Crooks",
+    "Jo Adell",
+    "Joc Pederson",
+    "Joey Ortiz",
+    "John Rave",
+    "Jonah Cox",
+    "Jonathan Aranda",
+    "Jonny DeLuca",
+    "Jorbit Vivas",
+    "Jordan Walker",
+    "Jorge Mateo",
+    "Jose Altuve",
+    "Jose Siri",
+    "Josh Lowe",
+    "Josh Naylor",
+    "Joshua B\u00e1ez",
+    "Jos\u00e9 Caballero",
+    "Jos\u00e9 Ferm\u00edn",
+    "Jos\u00e9 Ram\u00edrez",
+    "Jos\u00e9 Tena",
+    "Julio Rodr\u00edguez",
+    "Jung Hoo Lee",
+    "Junior Caminero",
+    "Justin Foscue",
+    "Kazuma Okamoto",
+    "Ke'Bryan Hayes",
+    "Keibert Ruiz",
+    "LaMonte Wade Jr.",
+    "Lane Thomas",
+    "Lawrence Butler",
+    "Leody Taveras",
+    "Luis Garc\u00eda Jr.",
+    "Luis Lara",
+    "Luke Maile",
+    "Maikel Garcia",
+    "Masyn Winn",
+    "Matt McLain",
+    "Matt Olson",
+    "Mauricio Dub\u00f3n",
+    "Max Muncy",
+    "Michael Harris II",
+    "Michael Massey",
+    "Michael Toglia",
+    "Miguel Vargas",
+    "Mike Trout",
+    "Mois\u00e9s Ballesteros",
+    "Munetaka Murakami",
+    "Myles Straw",
+    "Nasim Nu\u00f1ez",
+    "Nathan Church",
+    "Nathan Lukes",
+    "Nathaniel Lowe",
+    "Nick Allen",
+    "Nick Fortes",
+    "Nick Loftin",
+    "Nicky Lopez",
+    "Nolan Schanuel",
+    "Osleivis Basabe",
+    "Oswald Peraza",
+    "Ozzie Albies",
+    "Patrick Bailey",
+    "Pete Alonso",
+    "Petey Halpin",
+    "Rafael Devers",
+    "Randal Grichuk",
+    "Randy Arozarena",
+    "Raynel Delgado",
+    "Richie Palacios",
+    "Ronald Acu\u00f1a Jr.",
+    "Sal Stewart",
+    "Salvador Perez",
+    "Sam Antonacci",
+    "Samuel Basallo",
+    "Sean Murphy",
+    "Spencer Jones",
+    "Steven Kwan",
+    "TJ Friedl",
+    "Taylor Trammell",
+    "Taylor Ward",
+    "Travis Bazzana",
+    "Trent Grisham",
+    "Tristan Peters",
+    "Turner Hill",
+    "Tyler Heineman",
+    "Tyler Stephenson",
+    "Tyler Tolbert",
+    "Vaughn Grissom",
+    "Victor Bericoto",
+    "Vinnie Pasquantino",
+    "Wade Meckler",
+    "Weston Wilson",
+    "Willy Adames",
+    "Wyatt Langford",
+    "Yainer Diaz",
+    "Yandy D\u00edaz",
+    "Yordan Alvarez",
+    "Zach Neto",
+    "Zack Gelof"
+  ],
+  "total_players_ranked": 186,
+  "total_hrs_hit": 14,
+  "total_near_hrs": 0,
+  "model_hits": 14,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 186,
+        "hits": 14,
+        "rate": 7.5
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 186,
+        "hits": 14,
+        "rate": 7.5
+      }
+    }
+  },
+  "tier_accuracy_ml2026": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 1,
+      "rate": 3.3
+    },
+    "all": {
+      "total": 186,
+      "hits": 14,
+      "rate": 7.5
+    }
+  },
+  "tier_accuracy_ml2026_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
+      },
+      "all": {
+        "total": 186,
+        "hits": 14,
+        "rate": 7.5
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 186,
+        "hits": 14,
+        "rate": 7.5
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 186,
+      "hits": 14,
+      "rate": 7.5
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 186,
+      "hits": 14,
+      "rate": 7.5
+    }
+  },
+  "avg_composite_hr_hitters": 0.458,
+  "avg_composite_non_hitters": 0.433,
+  "composite_separation": 0.025,
+  "hr_hitters": [
+    {
+      "name": "Kazuma Okamoto",
+      "rank": 38,
+      "composite": 0.556,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "TOR@TB"
+    },
+    {
+      "name": "Denzer Guzman",
+      "rank": 39,
+      "composite": 0.556,
+      "opp_pitcher": "Peter Lambert",
+      "matchup": "LAA@HOU"
+    },
+    {
+      "name": "Matt McLain",
+      "rank": 40,
+      "composite": 0.544,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "STL@CIN"
+    },
+    {
+      "name": "Corey Seager",
+      "rank": 48,
+      "composite": 0.523,
+      "opp_pitcher": "Andrew Alvarez",
+      "matchup": "WSH@TEX"
+    },
+    {
+      "name": "Dylan Beavers",
+      "rank": 50,
+      "composite": 0.52,
+      "opp_pitcher": "Gerrit Cole",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Nathan Lukes",
+      "rank": 57,
+      "composite": 0.494,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "TOR@TB"
+    },
+    {
+      "name": "Willy Adames",
+      "rank": 69,
+      "composite": 0.465,
+      "opp_pitcher": "Gavin Williams",
+      "matchup": "SF@CLE"
+    },
+    {
+      "name": "Daz Cameron",
+      "rank": 84,
+      "composite": 0.432,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "TOR@TB"
+    },
+    {
+      "name": "Garrett Mitchell",
+      "rank": 99,
+      "composite": 0.42,
+      "opp_pitcher": "George Kirby",
+      "matchup": "SEA@MIL"
+    },
+    {
+      "name": "Zach Neto",
+      "rank": 104,
+      "composite": 0.409,
+      "opp_pitcher": "Peter Lambert",
+      "matchup": "LAA@HOU"
+    },
+    {
+      "name": "Luis Garc\u00eda Jr.",
+      "rank": 114,
+      "composite": 0.396,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Jordan Walker",
+      "rank": 127,
+      "composite": 0.371,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "STL@CIN"
+    },
+    {
+      "name": "Spencer Jones",
+      "rank": 128,
+      "composite": 0.37,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 138,
+      "composite": 0.349,
+      "opp_pitcher": "Gage Jump",
+      "matchup": "ATH@KC"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Dylan Beavers",
+      "rank": 33,
+      "composite": 0.583,
+      "opp_pitcher": "Gerrit Cole",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Spencer Jones",
+      "rank": 42,
+      "composite": 0.56,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Matt McLain",
+      "rank": 43,
+      "composite": 0.552,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "STL@CIN"
+    },
+    {
+      "name": "Luis Garc\u00eda Jr.",
+      "rank": 44,
+      "composite": 0.55,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Kazuma Okamoto",
+      "rank": 45,
+      "composite": 0.548,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "TOR@TB"
+    },
+    {
+      "name": "Nathan Lukes",
+      "rank": 61,
+      "composite": 0.494,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "TOR@TB"
+    },
+    {
+      "name": "Corey Seager",
+      "rank": 64,
+      "composite": 0.481,
+      "opp_pitcher": "Andrew Alvarez",
+      "matchup": "WSH@TEX"
+    },
+    {
+      "name": "Willy Adames",
+      "rank": 67,
+      "composite": 0.465,
+      "opp_pitcher": "Gavin Williams",
+      "matchup": "SF@CLE"
+    },
+    {
+      "name": "Garrett Mitchell",
+      "rank": 81,
+      "composite": 0.429,
+      "opp_pitcher": "George Kirby",
+      "matchup": "SEA@MIL"
+    },
+    {
+      "name": "Denzer Guzman",
+      "rank": 93,
+      "composite": 0.409,
+      "opp_pitcher": "Peter Lambert",
+      "matchup": "LAA@HOU"
+    },
+    {
+      "name": "Zach Neto",
+      "rank": 96,
+      "composite": 0.409,
+      "opp_pitcher": "Peter Lambert",
+      "matchup": "LAA@HOU"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 114,
+      "composite": 0.392,
+      "opp_pitcher": "Gage Jump",
+      "matchup": "ATH@KC"
+    },
+    {
+      "name": "Jordan Walker",
+      "rank": 117,
+      "composite": 0.387,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "STL@CIN"
+    },
+    {
+      "name": "Daz Cameron",
+      "rank": 146,
+      "composite": 0.329,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "TOR@TB"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 70,
+      "hr_count": 4,
+      "hr_rate": 5.7,
+      "names": [
+        "Jose Trevino",
+        "Jos\u00e9 Ferm\u00edn",
+        "Will Banfield",
+        "Jo Adell",
+        "Bryce Eldridge",
+        "Rafael Devers",
+        "Nathaniel Lowe",
+        "Drew Gilbert",
+        "Petey Halpin",
+        "Austin Hedges",
+        "Turner Hill",
+        "Angel Genao",
+        "Andrew Knizner",
+        "Jonny DeLuca",
+        "Kazuma Okamoto",
+        "Brett Bateman",
+        "Andr\u00e9s Gim\u00e9nez",
+        "Jes\u00fas S\u00e1nchez",
+        "Chandler Simpson",
+        "Taylor Walls",
+        "Charles McAdoo",
+        "Daz Cameron",
+        "George Springer",
+        "Nick Fortes",
+        "Alejandro Kirk",
+        "Ernie Clement",
+        "Myles Straw",
+        "Vinnie Pasquantino",
+        "Maikel Garcia",
+        "Zack Gelof",
+        "Nick Loftin",
+        "Tommy White",
+        "Bobby Witt Jr.",
+        "Henry Bolte",
+        "Alika Williams",
+        "Kyle Isbel",
+        "Max Muncy",
+        "Darell Hernaiz",
+        "Jeff McNeil",
+        "Carlos Cortes",
+        "Lawrence Butler",
+        "Matt Olson",
+        "Ozzie Albies",
+        "Brenton Doyle",
+        "Chase Meidroth",
+        "Luisangel Acu\u00f1a",
+        "Braden Montgomery",
+        "Drake Baldwin",
+        "Randy Arozarena",
+        "Gary S\u00e1nchez",
+        "Joey Ortiz",
+        "Jhonny Pereda",
+        "Leo Rivas",
+        "Victor Robles",
+        "Cole Young",
+        "Cooper Pratt",
+        "William Contreras",
+        "Amed Rosario",
+        "Ali S\u00e1nchez",
+        "Brady House",
+        "Corey Seager",
+        "Jake Burger",
+        "Dylan Crews",
+        "Wyatt Langford",
+        "Harry Ford",
+        "Andrew Pinckney",
+        "Ezequiel Duran",
+        "Cody Freeman",
+        "Nolan Schanuel",
+        "Wade Meckler"
+      ],
+      "hr_names": [
+        "Kazuma Okamoto",
+        "Daz Cameron",
+        "Bobby Witt Jr.",
+        "Corey Seager"
+      ]
+    },
+    "2_of_5": {
+      "players": 77,
+      "hr_count": 3,
+      "hr_rate": 3.9,
+      "names": [
+        "Iv\u00e1n Herrera",
+        "Matt McLain",
+        "Ke'Bryan Hayes",
+        "Tyler Stephenson",
+        "Everson Pereira",
+        "Masyn Winn",
+        "Sal Stewart",
+        "Jordan Walker",
+        "Blaze Jordan",
+        "Dane Myers",
+        "Pedro Pag\u00e9s",
+        "Jonah Cox",
+        "David Fry",
+        "Travis Bazzana",
+        "Jorge Mateo",
+        "Yandy D\u00edaz",
+        "Josh Smith",
+        "Ryan Vilade",
+        "Richie Palacios",
+        "Liam Hicks",
+        "Nathan Lukes",
+        "Brandon Valenzuela",
+        "Kenny Piper",
+        "Salvador Perez",
+        "Carter Jensen",
+        "Isaac Collins",
+        "Jac Caglianone",
+        "Jacob Wilson",
+        "John Rave",
+        "Michael Massey",
+        "Jonah Heim",
+        "Donovan Walton",
+        "Miguel Vargas",
+        "Austin Riley",
+        "Munetaka Murakami",
+        "Lane Thomas",
+        "Ha-Seong Kim",
+        "Jake Rogers",
+        "Andrew Benintendi",
+        "Ronald Acu\u00f1a Jr.",
+        "Drew Romo",
+        "Randal Grichuk",
+        "Mauricio Dub\u00f3n",
+        "Sam Antonacci",
+        "Tristan Peters",
+        "Sean Murphy",
+        "Michael Harris II",
+        "Weston Wilson",
+        "Brock Rodden",
+        "Cal Raleigh",
+        "Andrew Vaughn",
+        "Jackson Chourio",
+        "Pete Alonso",
+        "Ben Rice",
+        "Carlos Narv\u00e1ez",
+        "Austin Wells",
+        "Christian Franklin",
+        "Leody Taveras",
+        "Trent Grisham",
+        "Ryan McMahon",
+        "Jos\u00e9 Caballero",
+        "Christian Encarnacion-Strand",
+        "Yohel Pozo",
+        "Andr\u00e9s Chaparro",
+        "Jos\u00e9 Tena",
+        "Nasim Nu\u00f1ez",
+        "Jorbit Vivas",
+        "Elias D\u00edaz",
+        "Brandon Nimmo",
+        "Justin Foscue",
+        "Evan Carter",
+        "LaMonte Wade Jr.",
+        "Travis d'Arnaud",
+        "Josh Lowe",
+        "Mois\u00e9s Ballesteros",
+        "Adam Frazier",
+        "Tyler Heineman"
+      ],
+      "hr_names": [
+        "Matt McLain",
+        "Jordan Walker",
+        "Nathan Lukes"
+      ]
+    },
+    "3_of_5": {
+      "players": 55,
+      "hr_count": 5,
+      "hr_rate": 9.1,
+      "names": [
+        "Alec Burleson",
+        "H\u00e9ctor Rodr\u00edguez",
+        "Joshua B\u00e1ez",
+        "Michael Toglia",
+        "Eugenio Su\u00e1rez",
+        "Bryan Torres",
+        "Jimmy Crooks",
+        "Nathan Church",
+        "TJ Friedl",
+        "Buddy Kennedy",
+        "Christian Koss",
+        "Osleivis Basabe",
+        "Victor Bericoto",
+        "Willy Adames",
+        "Jos\u00e9 Ram\u00edrez",
+        "Jonathan Aranda",
+        "Junior Caminero",
+        "Christian Yelich",
+        "Julio Rodr\u00edguez",
+        "Taylor Ward",
+        "Josh Naylor",
+        "David Hamilton",
+        "Jake Bauers",
+        "Luis Lara",
+        "Garrett Mitchell",
+        "Dominic Canzone",
+        "Brendan Donovan",
+        "Jazz Chisholm Jr.",
+        "Colton Cowser",
+        "Samuel Basallo",
+        "Paul Goldschmidt",
+        "Tyler O'Neill",
+        "George Lombard Jr.",
+        "Coby Mayo",
+        "Dylan Beavers",
+        "Gunnar Henderson",
+        "Luis Garc\u00eda Jr.",
+        "Spencer Jones",
+        "Heliot Ramos",
+        "Daylen Lile",
+        "Keibert Ruiz",
+        "CJ Abrams",
+        "Danny Jansen",
+        "Cam Smith",
+        "Christian Walker",
+        "Taylor Trammell",
+        "Christian V\u00e1zquez",
+        "Jose Siri",
+        "Jeremy Pe\u00f1a",
+        "Nick Allen",
+        "Yainer Diaz",
+        "Yordan Alvarez",
+        "Mike Trout",
+        "Oswald Peraza",
+        "Vaughn Grissom"
+      ],
+      "hr_names": [
+        "Willy Adames",
+        "Garrett Mitchell",
+        "Dylan Beavers",
+        "Luis Garc\u00eda Jr.",
+        "Spencer Jones"
+      ]
+    },
+    "4_of_5": {
+      "players": 14,
+      "hr_count": 2,
+      "hr_rate": 14.3,
+      "names": [
+        "Elly De La Cruz",
+        "JJ Bleday",
+        "JJ Wetherholt",
+        "Cedric Mullins",
+        "Colson Montgomery",
+        "Brice Turang",
+        "Jackson Holliday",
+        "Abimelec Ortiz",
+        "Nelson Vel\u00e1zquez",
+        "Denzer Guzman",
+        "Isaac Paredes",
+        "Jose Altuve",
+        "Daulton Varsho",
+        "Zach Neto"
+      ],
+      "hr_names": [
+        "Denzer Guzman",
+        "Zach Neto"
+      ]
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 186,
+      "hits": 14,
+      "rate": 7.5
+    }
+  },
+  "combined_hr_hitters": [
+    {
+      "name": "Kazuma Okamoto",
+      "rank": 18,
+      "composite": 0.627,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "TOR@TB"
+    },
+    {
+      "name": "Daz Cameron",
+      "rank": 30,
+      "composite": 0.553,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "TOR@TB"
+    },
+    {
+      "name": "Matt McLain",
+      "rank": 33,
+      "composite": 0.539,
+      "opp_pitcher": "Michael McGreevy",
+      "matchup": "STL@CIN"
+    },
+    {
+      "name": "Dylan Beavers",
+      "rank": 36,
+      "composite": 0.496,
+      "opp_pitcher": "Gerrit Cole",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Corey Seager",
+      "rank": 41,
+      "composite": 0.457,
+      "opp_pitcher": "Andrew Alvarez",
+      "matchup": "WSH@TEX"
+    },
+    {
+      "name": "Spencer Jones",
+      "rank": 55,
+      "composite": 0.378,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Denzer Guzman",
+      "rank": 60,
+      "composite": 0.368,
+      "opp_pitcher": "Peter Lambert",
+      "matchup": "LAA@HOU"
+    },
+    {
+      "name": "Luis Garc\u00eda Jr.",
+      "rank": 61,
+      "composite": 0.366,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "NYY@BAL"
+    },
+    {
+      "name": "Garrett Mitchell",
+      "rank": 89,
+      "composite": 0.277,
+      "opp_pitcher": "George Kirby",
+      "matchup": "SEA@MIL"
+    },
+    {
+      "name": "Jordan Walker",
+      "rank": 111,
+      "composite": 0.199,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "STL@CIN"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 113,
+      "composite": 0.198,
+      "opp_pitcher": "Gage Jump",
+      "matchup": "ATH@KC"
+    },
+    {
+      "name": "Zach Neto",
+      "rank": 120,
+      "composite": 0.187,
+      "opp_pitcher": "Peter Lambert",
+      "matchup": "LAA@HOU"
+    },
+    {
+      "name": "Willy Adames",
+      "rank": 152,
+      "composite": 0.141,
+      "opp_pitcher": "Gavin Williams",
+      "matchup": "SF@CLE"
+    },
+    {
+      "name": "Nathan Lukes",
+      "rank": 156,
+      "composite": 0.139,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "TOR@TB"
+    }
+  ]
+}
