@@ -170943,7 +170943,7 @@
     ],
     "total_players_ranked": 186,
     "total_hrs_hit": 14,
-    "total_near_hrs": 0,
+    "total_near_hrs": 5,
     "model_hits": 14,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -171060,7 +171060,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 5,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -171091,18 +171091,18 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
         "total": 30,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 3.3
       },
       "all": {
         "total": 186,
-        "hits": 14,
-        "rate": 7.5
+        "hits": 19,
+        "rate": 10.2
       }
     },
     "avg_composite_hr_hitters": 0.458,
@@ -171308,8 +171308,90 @@
         "matchup": "TOR@TB"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Austin Riley",
+        "rank": 12,
+        "composite": 0.671,
+        "opp_pitcher": "Anthony Kay",
+        "matchup": "ATL@CWS"
+      },
+      {
+        "name": "Victor Bericoto",
+        "rank": 68,
+        "composite": 0.465,
+        "opp_pitcher": "Gavin Williams",
+        "matchup": "SF@CLE"
+      },
+      {
+        "name": "Nick Loftin",
+        "rank": 106,
+        "composite": 0.403,
+        "opp_pitcher": "Gage Jump",
+        "matchup": "ATH@KC"
+      },
+      {
+        "name": "Mois\u00e9s Ballesteros",
+        "rank": 161,
+        "composite": 0.272,
+        "opp_pitcher": "Peter Lambert",
+        "matchup": "LAA@HOU"
+      },
+      {
+        "name": "Adam Frazier",
+        "rank": 168,
+        "composite": 0.242,
+        "opp_pitcher": "Peter Lambert",
+        "matchup": "LAA@HOU"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Austin Riley",
+        "ev": 107.7,
+        "angle": 42.0,
+        "distance": 402.0,
+        "hr_in_parks": 16,
+        "result": "",
+        "pitcher": "Kay, Anthony"
+      },
+      {
+        "batter": "Victor Bericoto",
+        "ev": 100.6,
+        "angle": 32.0,
+        "distance": 387.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Herrin, Tim"
+      },
+      {
+        "batter": "Adam Frazier",
+        "ev": 98.6,
+        "angle": 28.0,
+        "distance": 388.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "Lambert, Peter"
+      },
+      {
+        "batter": "Mois\u00e9s Ballesteros",
+        "ev": 107.4,
+        "angle": 20.0,
+        "distance": 382.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Lambert, Peter"
+      },
+      {
+        "batter": "Nick Loftin",
+        "ev": 100.2,
+        "angle": 24.0,
+        "distance": 387.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Jump, Gage"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
