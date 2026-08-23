@@ -301,7 +301,7 @@
   ],
   "total_players_ranked": 293,
   "total_hrs_hit": 41,
-  "total_near_hrs": 0,
+  "total_near_hrs": 11,
   "model_hits": 39,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -418,7 +418,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 11,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -459,8 +459,8 @@
     },
     "all": {
       "total": 293,
-      "hits": 39,
-      "rate": 13.3
+      "hits": 50,
+      "rate": 17.1
     }
   },
   "avg_composite_hr_hitters": 0.429,
@@ -1016,8 +1016,213 @@
       "matchup": "SF@BOS"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Pete Crow-Armstrong",
+      "rank": 55,
+      "composite": 0.567,
+      "opp_pitcher": "Kade Anderson",
+      "matchup": "CHC@SEA"
+    },
+    {
+      "name": "Christian Franklin",
+      "rank": 71,
+      "composite": 0.518,
+      "opp_pitcher": "Shane McClanahan",
+      "matchup": "TB@BAL"
+    },
+    {
+      "name": "Cedric Mullins",
+      "rank": 95,
+      "composite": 0.477,
+      "opp_pitcher": "Brandon Young",
+      "matchup": "TB@BAL"
+    },
+    {
+      "name": "Gabriel Moreno",
+      "rank": 118,
+      "composite": 0.452,
+      "opp_pitcher": "Rhett Lowder",
+      "matchup": "CIN@AZ"
+    },
+    {
+      "name": "Brandon Marsh",
+      "rank": 119,
+      "composite": 0.451,
+      "opp_pitcher": "Hunter Dobbins",
+      "matchup": "STL@PHI"
+    },
+    {
+      "name": "Yainer Diaz",
+      "rank": 133,
+      "composite": 0.43,
+      "opp_pitcher": "Jacob Lopez",
+      "matchup": "ATH@HOU"
+    },
+    {
+      "name": "Nathan Church",
+      "rank": 145,
+      "composite": 0.419,
+      "opp_pitcher": "Andrew Painter",
+      "matchup": "STL@PHI"
+    },
+    {
+      "name": "Cole Carrigg",
+      "rank": 157,
+      "composite": 0.404,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "CLE@COL"
+    },
+    {
+      "name": "Mois\u00e9s Ballesteros",
+      "rank": 162,
+      "composite": 0.403,
+      "opp_pitcher": "Cody Bradford",
+      "matchup": "LAA@TEX"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 171,
+      "composite": 0.397,
+      "opp_pitcher": "Christian Scott",
+      "matchup": "NYM@CWS"
+    },
+    {
+      "name": "Dylan Beavers",
+      "rank": 255,
+      "composite": 0.311,
+      "opp_pitcher": "Shane McClanahan",
+      "matchup": "TB@BAL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Tim Tawa",
+      "ev": 100.0,
+      "angle": 38.0,
+      "distance": 376.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Santillan, Tony"
+    },
+    {
+      "batter": "JJ Bleday",
+      "ev": 99.0,
+      "angle": 31.0,
+      "distance": 380.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Littell, Zack"
+    },
+    {
+      "batter": "Gabriel Moreno",
+      "ev": 99.3,
+      "angle": 29.0,
+      "distance": 380.0,
+      "hr_in_parks": 7,
+      "result": "field_out",
+      "pitcher": "Lowder, Rhett"
+    },
+    {
+      "batter": "Dylan Beavers",
+      "ev": 100.2,
+      "angle": 25.0,
+      "distance": 384.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Baker, Bryan"
+    },
+    {
+      "batter": "Cedric Mullins",
+      "ev": 101.9,
+      "angle": 25.0,
+      "distance": 374.0,
+      "hr_in_parks": 1,
+      "result": "double",
+      "pitcher": "Walker, Josh"
+    },
+    {
+      "batter": "Christian Franklin",
+      "ev": 108.1,
+      "angle": 22.0,
+      "distance": 395.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "McClanahan, Shane"
+    },
+    {
+      "batter": "Colson Montgomery",
+      "ev": 106.9,
+      "angle": 28.0,
+      "distance": 392.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Pintaro, Jonathan"
+    },
+    {
+      "batter": "Cole Carrigg",
+      "ev": 107.0,
+      "angle": 35.0,
+      "distance": 422.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Gaddis, Hunter"
+    },
+    {
+      "batter": "Yainer Diaz",
+      "ev": 100.2,
+      "angle": 24.0,
+      "distance": 387.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Lopez, Jacob"
+    },
+    {
+      "batter": "Nathan Church",
+      "ev": 97.1,
+      "angle": 32.0,
+      "distance": 385.0,
+      "hr_in_parks": 17,
+      "result": "triple",
+      "pitcher": "Shugart, Chase"
+    },
+    {
+      "batter": "Brandon Marsh",
+      "ev": 99.6,
+      "angle": 26.0,
+      "distance": 379.0,
+      "hr_in_parks": 6,
+      "result": "field_out",
+      "pitcher": "Pag\u00e9s, Pedro"
+    },
+    {
+      "batter": "Luke Keaschall",
+      "ev": 100.1,
+      "angle": 25.0,
+      "distance": 369.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Morejon, Adrian"
+    },
+    {
+      "batter": "Pete Crow-Armstrong",
+      "ev": 97.1,
+      "angle": 30.0,
+      "distance": 377.0,
+      "hr_in_parks": 23,
+      "result": "double",
+      "pitcher": "Anderson, Kade"
+    },
+    {
+      "batter": "Mois\u00e9s Ballesteros",
+      "ev": 99.8,
+      "angle": 26.0,
+      "distance": 389.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Bradford, Cody"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
