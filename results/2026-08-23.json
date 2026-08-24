@@ -307,7 +307,7 @@
   ],
   "total_players_ranked": 289,
   "total_hrs_hit": 28,
-  "total_near_hrs": 0,
+  "total_near_hrs": 16,
   "model_hits": 25,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -424,7 +424,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 16,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -450,28 +450,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 2,
-      "rate": 20.0
+      "hits": 4,
+      "rate": 40.0
     },
     "top_20": {
       "total": 20,
-      "hits": 2,
-      "rate": 10.0
+      "hits": 5,
+      "rate": 25.0
     },
     "top_30": {
       "total": 30,
-      "hits": 5,
-      "rate": 16.7
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 289,
-      "hits": 25,
-      "rate": 8.7
+      "hits": 41,
+      "rate": 14.2
     }
   },
   "avg_composite_hr_hitters": 0.462,
-  "avg_composite_non_hitters": 0.408,
-  "composite_separation": 0.054,
+  "avg_composite_non_hitters": 0.406,
+  "composite_separation": 0.056,
   "hr_hitters": [
     {
       "name": "Jackson Merrill",
@@ -826,18 +826,294 @@
       "matchup": "ATL@MIL"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Zack Gelof",
+      "rank": 3,
+      "composite": 0.766,
+      "opp_pitcher": "Cristian Javier",
+      "matchup": "ATH@HOU"
+    },
+    {
+      "name": "Kaelen Culpepper",
+      "rank": 8,
+      "composite": 0.693,
+      "opp_pitcher": "Walker Buehler",
+      "matchup": "MIN@SD"
+    },
+    {
+      "name": "Tommy White",
+      "rank": 15,
+      "composite": 0.647,
+      "opp_pitcher": "Cristian Javier",
+      "matchup": "ATH@HOU"
+    },
+    {
+      "name": "Corey Seager",
+      "rank": 59,
+      "composite": 0.524,
+      "opp_pitcher": "Yusei Kikuchi",
+      "matchup": "LAA@TEX"
+    },
+    {
+      "name": "Jeremy Pe\u00f1a",
+      "rank": 89,
+      "composite": 0.448,
+      "opp_pitcher": "Brady Basso",
+      "matchup": "ATH@HOU"
+    },
+    {
+      "name": "Corbin Carroll",
+      "rank": 105,
+      "composite": 0.429,
+      "opp_pitcher": "Andrew Abbott",
+      "matchup": "CIN@AZ"
+    },
+    {
+      "name": "Hao-Yu Lee",
+      "rank": 111,
+      "composite": 0.421,
+      "opp_pitcher": "Daniel Lynch IV",
+      "matchup": "DET@KC"
+    },
+    {
+      "name": "Christian Moore",
+      "rank": 115,
+      "composite": 0.42,
+      "opp_pitcher": "Cal Quantrill",
+      "matchup": "LAA@TEX"
+    },
+    {
+      "name": "Heriberto Hern\u00e1ndez",
+      "rank": 151,
+      "composite": 0.397,
+      "opp_pitcher": "Jackson Kent",
+      "matchup": "WSH@MIA"
+    },
+    {
+      "name": "Jackson Holliday",
+      "rank": 164,
+      "composite": 0.391,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "TB@BAL"
+    },
+    {
+      "name": "Jahmai Jones",
+      "rank": 174,
+      "composite": 0.378,
+      "opp_pitcher": "Matt Wilkinson",
+      "matchup": "SF@BOS"
+    },
+    {
+      "name": "Bo Bichette",
+      "rank": 195,
+      "composite": 0.355,
+      "opp_pitcher": "Sean Newcomb",
+      "matchup": "NYM@CWS"
+    },
+    {
+      "name": "Jorbit Vivas",
+      "rank": 211,
+      "composite": 0.34,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "WSH@MIA"
+    },
+    {
+      "name": "Jose Siri",
+      "rank": 216,
+      "composite": 0.337,
+      "opp_pitcher": "Cal Quantrill",
+      "matchup": "LAA@TEX"
+    },
+    {
+      "name": "William Contreras",
+      "rank": 244,
+      "composite": 0.294,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "ATL@MIL"
+    },
+    {
+      "name": "Brandon Nimmo",
+      "rank": 259,
+      "composite": 0.256,
+      "opp_pitcher": "Yusei Kikuchi",
+      "matchup": "LAA@TEX"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Corbin Carroll",
+      "ev": 105.3,
+      "angle": 31.0,
+      "distance": 416.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Abbott, Andrew"
+    },
+    {
+      "batter": "Corbin Carroll",
+      "ev": 107.1,
+      "angle": 19.0,
+      "distance": 382.0,
+      "hr_in_parks": 24,
+      "result": "double",
+      "pitcher": "Abbott, Andrew"
+    },
+    {
+      "batter": "Jackson Holliday",
+      "ev": 98.0,
+      "angle": 23.0,
+      "distance": 375.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Martinez, Nick"
+    },
+    {
+      "batter": "Jahmai Jones",
+      "ev": 103.7,
+      "angle": 29.0,
+      "distance": 410.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Wilkinson, Matt"
+    },
+    {
+      "batter": "Bo Bichette",
+      "ev": 100.9,
+      "angle": 29.0,
+      "distance": 378.0,
+      "hr_in_parks": 8,
+      "result": "field_out",
+      "pitcher": "Fedde, Erick"
+    },
+    {
+      "batter": "Jeremy Pe\u00f1a",
+      "ev": 103.9,
+      "angle": 23.0,
+      "distance": 390.0,
+      "hr_in_parks": 12,
+      "result": "double",
+      "pitcher": "Perkins, Jack"
+    },
+    {
+      "batter": "Zack Gelof",
+      "ev": 105.0,
+      "angle": 35.0,
+      "distance": 400.0,
+      "hr_in_parks": 13,
+      "result": "field_out",
+      "pitcher": "Teng, Kai-Wei"
+    },
+    {
+      "batter": "Tommy White",
+      "ev": 106.0,
+      "angle": 24.0,
+      "distance": 407.0,
+      "hr_in_parks": 29,
+      "result": "field_out",
+      "pitcher": "Javier, Cristian"
+    },
+    {
+      "batter": "Vinnie Pasquantino",
+      "ev": 107.5,
+      "angle": 21.0,
+      "distance": 408.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Sears, Andrew"
+    },
+    {
+      "batter": "Hao-Yu Lee",
+      "ev": 102.3,
+      "angle": 29.0,
+      "distance": 405.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Lynch IV, Daniel"
+    },
+    {
+      "batter": "Jorbit Vivas",
+      "ev": 98.2,
+      "angle": 28.0,
+      "distance": 386.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Faucher, Calvin"
+    },
+    {
+      "batter": "Heriberto Hern\u00e1ndez",
+      "ev": 105.7,
+      "angle": 34.0,
+      "distance": 399.0,
+      "hr_in_parks": 27,
+      "result": "double_play",
+      "pitcher": "Kent, Jackson"
+    },
+    {
+      "batter": "William Contreras",
+      "ev": 98.8,
+      "angle": 30.0,
+      "distance": 379.0,
+      "hr_in_parks": 21,
+      "result": "field_out",
+      "pitcher": "Iglesias, Raisel"
+    },
+    {
+      "batter": "Kaelen Culpepper",
+      "ev": 107.7,
+      "angle": 40.0,
+      "distance": 414.0,
+      "hr_in_parks": 28,
+      "result": "",
+      "pitcher": "Matsui, Yuki"
+    },
+    {
+      "batter": "Christian Moore",
+      "ev": 104.8,
+      "angle": 20.0,
+      "distance": 371.0,
+      "hr_in_parks": 3,
+      "result": "double",
+      "pitcher": "Latz, Jacob"
+    },
+    {
+      "batter": "Jose Siri",
+      "ev": 102.3,
+      "angle": 32.0,
+      "distance": 374.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Silseth, Chase"
+    },
+    {
+      "batter": "Brandon Nimmo",
+      "ev": 103.6,
+      "angle": 21.0,
+      "distance": 394.0,
+      "hr_in_parks": 26,
+      "result": "sac_fly",
+      "pitcher": "Kikuchi, Yusei"
+    },
+    {
+      "batter": "Corey Seager",
+      "ev": 95.6,
+      "angle": 31.0,
+      "distance": 372.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Kikuchi, Yusei"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Nick Loftin",
       "pitcher": "Ty Madden",
-      "description": "Nick Loftin homers (6) on a fly ball to left center field. Tyler Tolbert scores. Kyle Isbel scores."
+      "description": "${person|fullName|679845} homers ${total|homeRuns|679845} on a fly ball to left center field.   ${person|fullName|686475} scores.    ${person|fullName|664728} scores.  "
     },
     {
       "name": "John Rave",
       "pitcher": "Andrew Sears",
-      "description": "John Rave homers (3) on a fly ball to right field. Salvador Perez scores."
+      "description": "${person|fullName|670231} homers ${total|homeRuns|670231} on a fly ball to right field.    ${person|fullName|521692} scores.  "
     }
   ],
   "hr_signal_accuracy": {
