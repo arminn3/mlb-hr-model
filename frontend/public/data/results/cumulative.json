@@ -177287,122 +177287,218 @@
     "date": "2026-08-24",
     "players_who_batted": [
       "Abimelec Ortiz",
+      "Adam Frazier",
       "Adley Rutschman",
       "Agust\u00edn Ram\u00edrez",
+      "Alec Bohm",
+      "Alex Bregman",
       "Andrew Benintendi",
+      "Angel Genao",
+      "Angel Mart\u00ednez",
       "Anthony Seigler",
+      "Austin Hays",
+      "Austin Hedges",
       "Ben Malgeri",
       "Braden Montgomery",
       "Brady House",
+      "Brandon Lowe",
+      "Brandon Marsh",
       "Brandon Nimmo",
       "Braxton Fulford",
+      "Brayan Rocchio",
       "Brenton Doyle",
       "Brett Callahan",
       "Brett Sullivan",
+      "Brock Rodden",
+      "Brooks Lee",
+      "Bryan Reynolds",
+      "Bryce Harper",
+      "Bryson Stott",
+      "Byron Buxton",
       "CJ Abrams",
+      "Cal Raleigh",
       "Caleb Durbin",
+      "Carlos Cortes",
+      "Carson Kelly",
       "Ceddanne Rafaela",
       "Cedric Mullins",
       "Chandler Simpson",
       "Chase Meidroth",
+      "Christian Koss",
+      "Christian Moore",
       "Cody Freeman",
+      "Cole Young",
       "Colson Montgomery",
       "Colt Keith",
       "Connor Norby",
+      "Corbin Carroll",
       "Corey Seager",
+      "Dane Myers",
       "Daylen Lile",
+      "Denzer Guzman",
       "Dillon Dingler",
+      "Dominic Canzone",
+      "Donovan Walton",
+      "Drew Cavanaugh",
+      "Drew Gilbert",
       "Drew Romo",
+      "Dustin Harris",
       "Dylan Crews",
       "Elias D\u00edaz",
+      "Elly De La Cruz",
+      "Esmerlyn Valdez",
       "Esteury Ruiz",
+      "Eugenio Su\u00e1rez",
       "Evan Carter",
       "Ezequiel Duran",
       "Ezequiel Tovar",
+      "Fernando Tatis Jr.",
+      "Freddy Fermin",
+      "Gabriel Moreno",
+      "Gavin Sheets",
+      "Geraldo Perdomo",
+      "Grant McCray",
       "Griffin Conine",
+      "Gustavo Campero",
       "Hao-Yu Lee",
+      "Henry Bolte",
       "Heriberto Hern\u00e1ndez",
+      "Ian Happ",
+      "Ildemaro Vargas",
+      "Ivan Johnson",
+      "J.T. Realmuto",
+      "JJ Bleday",
+      "Jackson Merrill",
+      "Jacob Gonzalez",
       "Jacob Young",
       "Jake Burger",
+      "Jake Cronenworth",
+      "Jake Mangum",
       "Jake McCarthy",
       "Jakob Marsee",
+      "Jared Triolo",
       "Jarren Duran",
       "Javier B\u00e1ez",
       "Javier Sanoja",
+      "Jeff McNeil",
+      "Jo Adell",
       "Joc Pederson",
       "Joe Mack",
+      "Jonah Heim",
       "Jonathan Aranda",
       "Jonny DeLuca",
       "Jorbit Vivas",
       "Jordan Beck",
+      "Jordan Lawlar",
       "Jorge Mateo",
+      "Jose Fernandez",
+      "Jose Siri",
+      "Jose Trevino",
+      "Josh Bell",
+      "Josh Lowe",
+      "Josh Naylor",
+      "Jos\u00e9 Ram\u00edrez",
+      "Julio Rodr\u00edguez",
+      "Jung Hoo Lee",
       "Junior Caminero",
+      "Justin Crawford",
       "Justin Foscue",
+      "Kaelen Culpepper",
       "Keibert Ruiz",
       "Kevin McGonigle",
+      "Kody Clemens",
+      "Kyle Schwarber",
       "Kyle Stowers",
+      "Lars Nootbaar",
+      "Lawrence Butler",
       "Leo Jim\u00e9nez",
+      "Luis Arraez",
+      "Luis Campusano",
+      "Luis Rengifo",
+      "Luke Keaschall",
+      "Manny Machado",
+      "Matt McLain",
       "Max Clark",
+      "Max Kepler",
+      "Max Muncy",
+      "Michael Busch",
+      "Michael Conforto",
       "Mickey Gasper",
       "Mickey Moniak",
       "Miguel Vargas",
+      "Mike Trout",
+      "Mois\u00e9s Ballesteros",
       "Munetaka Murakami",
       "Nasim Nu\u00f1ez",
+      "Nate Furman",
+      "Nathaniel Lowe",
       "Nick Fortes",
+      "Nick Gonzales",
       "Nick Sogard",
+      "Nick Yorke",
       "Nicky Lopez",
+      "Nico Hoerner",
+      "Nolan Arenado",
+      "Oneil Cruz",
+      "Osleivis Basabe",
       "Otto Lopez",
       "Owen Caissie",
+      "Pedro Ram\u00edrez",
+      "Pete Crow-Armstrong",
+      "Petey Halpin",
+      "Rafael Devers",
+      "Rafael Flores Jr.",
+      "Randy Arozarena",
+      "Royce Lewis",
+      "Ryan Jeffers",
+      "Ryan Kreidler",
       "Ryan Ritter",
       "Ryan Vilade",
+      "Ryan Waldschmidt",
+      "Sal Stewart",
       "Sam Antonacci",
+      "Seiya Suzuki",
+      "Shay Whitcomb",
+      "Spencer Horwitz",
       "Spencer Torkelson",
+      "Steven Kwan",
       "TJ Rumfield",
       "Taylor Walls",
+      "Taylor Ward",
+      "Tim Tawa",
+      "Tommy White",
+      "Travis d'Arnaud",
+      "Trea Turner",
       "Tristan Peters",
       "Troy Johnston",
+      "Turner Hill",
+      "Ty France",
+      "Tyler Stephenson",
+      "Vaughn Grissom",
+      "Weston Wilson",
       "Willi Castro",
       "Willson Contreras",
       "Wilyer Abreu",
       "Wyatt Langford",
+      "Xander Bogaerts",
       "Xavier Edwards",
       "Yandy D\u00edaz",
       "Zac Veen",
-      "Zach McKinstry"
+      "Zach McKinstry",
+      "Zach Neto",
+      "Zack Gelof"
     ],
-    "total_players_ranked": 72,
-    "total_hrs_hit": 7,
-    "total_near_hrs": 0,
-    "model_hits": 7,
+    "total_players_ranked": 186,
+    "total_hrs_hit": 19,
+    "total_near_hrs": 10,
+    "model_hits": 17,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 3,
-          "rate": 30.0
-        },
-        "top_20": {
-          "total": 20,
-          "hits": 4,
-          "rate": 20.0
-        },
-        "top_30": {
-          "total": 30,
-          "hits": 4,
-          "rate": 13.3
-        },
-        "all": {
-          "total": 72,
-          "hits": 7,
-          "rate": 9.7
-        }
-      },
-      "L10": {
-        "top_10": {
-          "total": 10,
-          "hits": 3,
-          "rate": 30.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
@@ -177415,17 +177511,130 @@
           "rate": 16.7
         },
         "all": {
-          "total": 72,
-          "hits": 7,
-          "rate": 9.7
+          "total": 186,
+          "hits": 17,
+          "rate": 9.1
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 3,
+          "rate": 30.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 3,
+          "rate": 15.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 5,
+          "rate": 16.7
+        },
+        "all": {
+          "total": 186,
+          "hits": 17,
+          "rate": 9.1
         }
       }
     },
     "tier_accuracy_ml2026": {
       "top_10": {
         "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
         "hits": 3,
-        "rate": 30.0
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 186,
+        "hits": 17,
+        "rate": 9.1
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 3,
+          "rate": 15.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 4,
+          "rate": 13.3
+        },
+        "all": {
+          "total": 186,
+          "hits": 17,
+          "rate": 9.1
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 4,
+          "rate": 20.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 5,
+          "rate": 16.7
+        },
+        "all": {
+          "total": 186,
+          "hits": 17,
+          "rate": 9.1
+        }
+      }
+    },
+    "model_near_hits": 10,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 186,
+        "hits": 17,
+        "rate": 9.1
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
@@ -177434,219 +177643,430 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 5,
-        "rate": 16.7
-      },
-      "all": {
-        "total": 72,
-        "hits": 7,
-        "rate": 9.7
-      }
-    },
-    "tier_accuracy_ml2026_by_lookback": {
-      "L5": {
-        "top_10": {
-          "total": 10,
-          "hits": 3,
-          "rate": 30.0
-        },
-        "top_20": {
-          "total": 20,
-          "hits": 5,
-          "rate": 25.0
-        },
-        "top_30": {
-          "total": 30,
-          "hits": 5,
-          "rate": 16.7
-        },
-        "all": {
-          "total": 72,
-          "hits": 7,
-          "rate": 9.7
-        }
-      },
-      "L10": {
-        "top_10": {
-          "total": 10,
-          "hits": 3,
-          "rate": 30.0
-        },
-        "top_20": {
-          "total": 20,
-          "hits": 5,
-          "rate": 25.0
-        },
-        "top_30": {
-          "total": 30,
-          "hits": 5,
-          "rate": 16.7
-        },
-        "all": {
-          "total": 72,
-          "hits": 7,
-          "rate": 9.7
-        }
-      }
-    },
-    "model_near_hits": 0,
-    "tier_accuracy": {
-      "top_10": {
-        "total": 10,
-        "hits": 3,
-        "rate": 30.0
-      },
-      "top_20": {
-        "total": 20,
-        "hits": 4,
+        "hits": 6,
         "rate": 20.0
       },
-      "top_30": {
-        "total": 30,
-        "hits": 4,
-        "rate": 13.3
-      },
       "all": {
-        "total": 72,
-        "hits": 7,
-        "rate": 9.7
+        "total": 186,
+        "hits": 27,
+        "rate": 14.5
       }
     },
-    "tier_accuracy_with_near": {
-      "top_10": {
-        "total": 10,
-        "hits": 3,
-        "rate": 30.0
-      },
-      "top_20": {
-        "total": 20,
-        "hits": 4,
-        "rate": 20.0
-      },
-      "top_30": {
-        "total": 30,
-        "hits": 4,
-        "rate": 13.3
-      },
-      "all": {
-        "total": 72,
-        "hits": 7,
-        "rate": 9.7
-      }
-    },
-    "avg_composite_hr_hitters": 0.497,
-    "avg_composite_non_hitters": 0.408,
-    "composite_separation": 0.089,
+    "avg_composite_hr_hitters": 0.474,
+    "avg_composite_non_hitters": 0.426,
+    "composite_separation": 0.048,
     "hr_hitters": [
       {
+        "name": "Rafael Devers",
+        "rank": 8,
+        "composite": 0.681,
+        "opp_pitcher": "Chase Burns",
+        "matchup": "CIN@SF"
+      },
+      {
         "name": "Willi Castro",
-        "rank": 2,
+        "rank": 11,
         "composite": 0.673,
         "opp_pitcher": "Cade Cavalli",
         "matchup": "COL@WSH"
       },
       {
         "name": "Tristan Peters",
-        "rank": 4,
+        "rank": 13,
         "composite": 0.67,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "TEX@CWS"
       },
       {
+        "name": "Julio Rodr\u00edguez",
+        "rank": 20,
+        "composite": 0.607,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "PHI@SEA"
+      },
+      {
         "name": "Wyatt Langford",
-        "rank": 8,
+        "rank": 26,
         "composite": 0.58,
         "opp_pitcher": "Jos\u00e9 Urquidy",
         "matchup": "TEX@CWS"
       },
       {
+        "name": "Esmerlyn Valdez",
+        "rank": 36,
+        "composite": 0.536,
+        "opp_pitcher": "Robbie Ray",
+        "matchup": "PIT@SD"
+      },
+      {
         "name": "Jake Burger",
-        "rank": 14,
+        "rank": 40,
         "composite": 0.529,
         "opp_pitcher": "Jos\u00e9 Urquidy",
         "matchup": "TEX@CWS"
       },
       {
+        "name": "J.T. Realmuto",
+        "rank": 41,
+        "composite": 0.521,
+        "opp_pitcher": "Logan Gilbert",
+        "matchup": "PHI@SEA"
+      },
+      {
+        "name": "Michael Conforto",
+        "rank": 63,
+        "composite": 0.442,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "CHC@AZ"
+      },
+      {
+        "name": "Ryan Kreidler",
+        "rank": 72,
+        "composite": 0.431,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIN@ATH"
+      },
+      {
         "name": "Daylen Lile",
-        "rank": 31,
+        "rank": 79,
         "composite": 0.429,
         "opp_pitcher": "Ryan Feltner",
         "matchup": "COL@WSH"
       },
       {
+        "name": "Carson Kelly",
+        "rank": 101,
+        "composite": 0.407,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "CHC@AZ"
+      },
+      {
+        "name": "Cal Raleigh",
+        "rank": 112,
+        "composite": 0.394,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "PHI@SEA"
+      },
+      {
+        "name": "Cole Young",
+        "rank": 113,
+        "composite": 0.394,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "PHI@SEA"
+      },
+      {
         "name": "Ezequiel Tovar",
-        "rank": 54,
+        "rank": 151,
         "composite": 0.34,
         "opp_pitcher": "Cade Cavalli",
         "matchup": "COL@WSH"
       },
       {
         "name": "Jonathan Aranda",
-        "rank": 65,
+        "rank": 171,
         "composite": 0.261,
         "opp_pitcher": "Framber Valdez",
         "matchup": "TB@DET"
+      },
+      {
+        "name": "Austin Hedges",
+        "rank": 185,
+        "composite": 0.159,
+        "opp_pitcher": "George Klassen",
+        "matchup": "CLE@LAA"
       }
     ],
     "hr_hitters_l10": [
       {
+        "name": "Michael Conforto",
+        "rank": 7,
+        "composite": 0.69,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "CHC@AZ"
+      },
+      {
         "name": "Willi Castro",
-        "rank": 1,
+        "rank": 8,
         "composite": 0.687,
         "opp_pitcher": "Cade Cavalli",
         "matchup": "COL@WSH"
       },
       {
         "name": "Jake Burger",
-        "rank": 2,
+        "rank": 10,
         "composite": 0.673,
         "opp_pitcher": "Jos\u00e9 Urquidy",
         "matchup": "TEX@CWS"
       },
       {
+        "name": "Rafael Devers",
+        "rank": 24,
+        "composite": 0.6,
+        "opp_pitcher": "Chase Burns",
+        "matchup": "CIN@SF"
+      },
+      {
         "name": "Tristan Peters",
-        "rank": 7,
+        "rank": 26,
         "composite": 0.588,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "TEX@CWS"
       },
       {
         "name": "Wyatt Langford",
-        "rank": 13,
+        "rank": 37,
         "composite": 0.535,
         "opp_pitcher": "Jos\u00e9 Urquidy",
         "matchup": "TEX@CWS"
       },
       {
+        "name": "Julio Rodr\u00edguez",
+        "rank": 38,
+        "composite": 0.53,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "PHI@SEA"
+      },
+      {
+        "name": "J.T. Realmuto",
+        "rank": 44,
+        "composite": 0.5,
+        "opp_pitcher": "Logan Gilbert",
+        "matchup": "PHI@SEA"
+      },
+      {
+        "name": "Ryan Kreidler",
+        "rank": 71,
+        "composite": 0.431,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIN@ATH"
+      },
+      {
         "name": "Daylen Lile",
-        "rank": 27,
+        "rank": 78,
         "composite": 0.429,
         "opp_pitcher": "Ryan Feltner",
         "matchup": "COL@WSH"
       },
       {
+        "name": "Esmerlyn Valdez",
+        "rank": 100,
+        "composite": 0.406,
+        "opp_pitcher": "Robbie Ray",
+        "matchup": "PIT@SD"
+      },
+      {
+        "name": "Carson Kelly",
+        "rank": 104,
+        "composite": 0.403,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "CHC@AZ"
+      },
+      {
+        "name": "Cal Raleigh",
+        "rank": 111,
+        "composite": 0.394,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "PHI@SEA"
+      },
+      {
+        "name": "Cole Young",
+        "rank": 112,
+        "composite": 0.394,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "PHI@SEA"
+      },
+      {
         "name": "Ezequiel Tovar",
-        "rank": 52,
+        "rank": 148,
         "composite": 0.349,
         "opp_pitcher": "Cade Cavalli",
         "matchup": "COL@WSH"
       },
       {
         "name": "Jonathan Aranda",
-        "rank": 61,
+        "rank": 166,
         "composite": 0.29,
         "opp_pitcher": "Framber Valdez",
         "matchup": "TB@DET"
+      },
+      {
+        "name": "Austin Hedges",
+        "rank": 186,
+        "composite": 0.153,
+        "opp_pitcher": "George Klassen",
+        "matchup": "CLE@LAA"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Josh Bell",
+        "rank": 19,
+        "composite": 0.611,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIN@ATH"
+      },
+      {
+        "name": "Drew Gilbert",
+        "rank": 31,
+        "composite": 0.56,
+        "opp_pitcher": "Chase Burns",
+        "matchup": "CIN@SF"
+      },
+      {
+        "name": "Brady House",
+        "rank": 32,
+        "composite": 0.559,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "COL@WSH"
+      },
+      {
+        "name": "Jacob Young",
+        "rank": 55,
+        "composite": 0.46,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "COL@WSH"
+      },
+      {
+        "name": "Luke Keaschall",
+        "rank": 70,
+        "composite": 0.431,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIN@ATH"
+      },
+      {
+        "name": "Wilyer Abreu",
+        "rank": 105,
+        "composite": 0.402,
+        "opp_pitcher": "Sandy Alcantara",
+        "matchup": "BOS@MIA"
+      },
+      {
+        "name": "Mickey Gasper",
+        "rank": 124,
+        "composite": 0.383,
+        "opp_pitcher": "Sandy Alcantara",
+        "matchup": "BOS@MIA"
+      },
+      {
+        "name": "Kevin McGonigle",
+        "rank": 142,
+        "composite": 0.352,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "TB@DET"
+      },
+      {
+        "name": "Turner Hill",
+        "rank": 143,
+        "composite": 0.352,
+        "opp_pitcher": "Chase Burns",
+        "matchup": "CIN@SF"
+      },
+      {
+        "name": "Otto Lopez",
+        "rank": 160,
+        "composite": 0.312,
+        "opp_pitcher": "Ranger Suarez",
+        "matchup": "BOS@MIA"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Luke Keaschall",
+        "ev": 105.8,
+        "angle": 21.0,
+        "distance": 372.0,
+        "hr_in_parks": 4,
+        "result": "double",
+        "pitcher": "Rom, Drew"
+      },
+      {
+        "batter": "Josh Bell",
+        "ev": 98.2,
+        "angle": 36.0,
+        "distance": 396.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Springs, Jeffrey"
+      },
+      {
+        "batter": "Kevin McGonigle",
+        "ev": 101.2,
+        "angle": 24.0,
+        "distance": 378.0,
+        "hr_in_parks": 8,
+        "result": "double",
+        "pitcher": "Rasmussen, Drew"
+      },
+      {
+        "batter": "Otto Lopez",
+        "ev": 104.3,
+        "angle": 22.0,
+        "distance": 381.0,
+        "hr_in_parks": 19,
+        "result": "double",
+        "pitcher": "Bello, Brayan"
+      },
+      {
+        "batter": "Wilyer Abreu",
+        "ev": 107.8,
+        "angle": 35.0,
+        "distance": 414.0,
+        "hr_in_parks": 28,
+        "result": "",
+        "pitcher": "Alcantara, Sandy"
+      },
+      {
+        "batter": "Mickey Gasper",
+        "ev": 104.8,
+        "angle": 24.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Alcantara, Sandy"
+      },
+      {
+        "batter": "Turner Hill",
+        "ev": 104.2,
+        "angle": 22.0,
+        "distance": 373.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Burns, Chase"
+      },
+      {
+        "batter": "Drew Gilbert",
+        "ev": 103.5,
+        "angle": 30.0,
+        "distance": 392.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Burns, Chase"
+      },
+      {
+        "batter": "Jacob Young",
+        "ev": 104.0,
+        "angle": 22.0,
+        "distance": 385.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Adams, Blake"
+      },
+      {
+        "batter": "Brady House",
+        "ev": 102.2,
+        "angle": 22.0,
+        "distance": 389.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Feltner, Ryan"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
         "players": 83,
-        "hr_count": 2,
-        "hr_rate": 2.4,
+        "hr_count": 5,
+        "hr_rate": 6.0,
         "names": [
           "Ryan Vilade",
           "Hao-Yu Lee",
@@ -177734,13 +178154,16 @@
         ],
         "hr_names": [
           "Jonathan Aranda",
-          "Jake Burger"
+          "Jake Burger",
+          "Michael Conforto",
+          "Cole Young",
+          "Rafael Devers"
         ]
       },
       "2_of_5": {
         "players": 70,
-        "hr_count": 2,
-        "hr_rate": 2.9,
+        "hr_count": 4,
+        "hr_rate": 5.7,
         "names": [
           "Junior Caminero",
           "Spencer Torkelson",
@@ -177815,13 +178238,15 @@
         ],
         "hr_names": [
           "Willi Castro",
-          "Ezequiel Tovar"
+          "Ezequiel Tovar",
+          "Carson Kelly",
+          "Julio Rodr\u00edguez"
         ]
       },
       "3_of_5": {
         "players": 48,
-        "hr_count": 3,
-        "hr_rate": 6.2,
+        "hr_count": 8,
+        "hr_rate": 16.7,
         "names": [
           "Esteury Ruiz",
           "Dylan Crews",
@@ -177875,7 +178300,12 @@
         "hr_names": [
           "Daylen Lile",
           "Tristan Peters",
-          "Wyatt Langford"
+          "Wyatt Langford",
+          "Austin Hedges",
+          "Esmerlyn Valdez",
+          "Ryan Kreidler",
+          "J.T. Realmuto",
+          "Cal Raleigh"
         ]
       },
       "4_of_5": {
@@ -177908,74 +178338,144 @@
     "combined_tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 3,
-        "rate": 30.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
-        "hits": 4,
-        "rate": 13.3
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
-        "total": 72,
-        "hits": 7,
-        "rate": 9.7
+        "total": 186,
+        "hits": 17,
+        "rate": 9.1
       }
     },
     "combined_hr_hitters": [
       {
         "name": "Willi Castro",
-        "rank": 1,
+        "rank": 3,
         "composite": 0.753,
         "opp_pitcher": "Cade Cavalli",
         "matchup": "COL@WSH"
       },
       {
+        "name": "Rafael Devers",
+        "rank": 5,
+        "composite": 0.649,
+        "opp_pitcher": "Chase Burns",
+        "matchup": "CIN@SF"
+      },
+      {
         "name": "Jake Burger",
-        "rank": 4,
+        "rank": 14,
         "composite": 0.604,
         "opp_pitcher": "Jos\u00e9 Urquidy",
         "matchup": "TEX@CWS"
       },
       {
         "name": "Tristan Peters",
-        "rank": 5,
+        "rank": 16,
         "composite": 0.594,
         "opp_pitcher": "Kumar Rocker",
         "matchup": "TEX@CWS"
       },
       {
+        "name": "Julio Rodr\u00edguez",
+        "rank": 18,
+        "composite": 0.564,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "PHI@SEA"
+      },
+      {
+        "name": "Esmerlyn Valdez",
+        "rank": 33,
+        "composite": 0.448,
+        "opp_pitcher": "Robbie Ray",
+        "matchup": "PIT@SD"
+      },
+      {
+        "name": "J.T. Realmuto",
+        "rank": 43,
+        "composite": 0.403,
+        "opp_pitcher": "Logan Gilbert",
+        "matchup": "PHI@SEA"
+      },
+      {
         "name": "Wyatt Langford",
-        "rank": 15,
+        "rank": 47,
         "composite": 0.389,
         "opp_pitcher": "Jos\u00e9 Urquidy",
         "matchup": "TEX@CWS"
       },
       {
+        "name": "Michael Conforto",
+        "rank": 51,
+        "composite": 0.38,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "CHC@AZ"
+      },
+      {
+        "name": "Cal Raleigh",
+        "rank": 86,
+        "composite": 0.247,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "PHI@SEA"
+      },
+      {
         "name": "Daylen Lile",
-        "rank": 33,
+        "rank": 87,
         "composite": 0.244,
         "opp_pitcher": "Ryan Feltner",
         "matchup": "COL@WSH"
       },
       {
+        "name": "Ryan Kreidler",
+        "rank": 88,
+        "composite": 0.243,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "MIN@ATH"
+      },
+      {
+        "name": "Carson Kelly",
+        "rank": 114,
+        "composite": 0.198,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "CHC@AZ"
+      },
+      {
         "name": "Ezequiel Tovar",
-        "rank": 46,
+        "rank": 124,
         "composite": 0.178,
         "opp_pitcher": "Cade Cavalli",
         "matchup": "COL@WSH"
       },
       {
+        "name": "Cole Young",
+        "rank": 133,
+        "composite": 0.164,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "PHI@SEA"
+      },
+      {
         "name": "Jonathan Aranda",
-        "rank": 52,
+        "rank": 141,
         "composite": 0.159,
         "opp_pitcher": "Framber Valdez",
         "matchup": "TB@DET"
+      },
+      {
+        "name": "Austin Hedges",
+        "rank": 185,
+        "composite": 0.089,
+        "opp_pitcher": "George Klassen",
+        "matchup": "CLE@LAA"
       }
     ]
   }
