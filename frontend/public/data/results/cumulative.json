@@ -177282,5 +177282,701 @@
         "matchup": "ATL@MIL"
       }
     ]
+  },
+  {
+    "date": "2026-08-24",
+    "players_who_batted": [
+      "Abimelec Ortiz",
+      "Adley Rutschman",
+      "Agust\u00edn Ram\u00edrez",
+      "Andrew Benintendi",
+      "Anthony Seigler",
+      "Ben Malgeri",
+      "Braden Montgomery",
+      "Brady House",
+      "Brandon Nimmo",
+      "Braxton Fulford",
+      "Brenton Doyle",
+      "Brett Callahan",
+      "Brett Sullivan",
+      "CJ Abrams",
+      "Caleb Durbin",
+      "Ceddanne Rafaela",
+      "Cedric Mullins",
+      "Chandler Simpson",
+      "Chase Meidroth",
+      "Cody Freeman",
+      "Colson Montgomery",
+      "Colt Keith",
+      "Connor Norby",
+      "Corey Seager",
+      "Daylen Lile",
+      "Dillon Dingler",
+      "Drew Romo",
+      "Dylan Crews",
+      "Elias D\u00edaz",
+      "Esteury Ruiz",
+      "Evan Carter",
+      "Ezequiel Duran",
+      "Ezequiel Tovar",
+      "Griffin Conine",
+      "Hao-Yu Lee",
+      "Heriberto Hern\u00e1ndez",
+      "Jacob Young",
+      "Jake Burger",
+      "Jake McCarthy",
+      "Jakob Marsee",
+      "Jarren Duran",
+      "Javier B\u00e1ez",
+      "Javier Sanoja",
+      "Joc Pederson",
+      "Joe Mack",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Jorbit Vivas",
+      "Jordan Beck",
+      "Jorge Mateo",
+      "Junior Caminero",
+      "Justin Foscue",
+      "Keibert Ruiz",
+      "Kevin McGonigle",
+      "Kyle Stowers",
+      "Leo Jim\u00e9nez",
+      "Max Clark",
+      "Mickey Gasper",
+      "Mickey Moniak",
+      "Miguel Vargas",
+      "Munetaka Murakami",
+      "Nasim Nu\u00f1ez",
+      "Nick Fortes",
+      "Nick Sogard",
+      "Nicky Lopez",
+      "Otto Lopez",
+      "Owen Caissie",
+      "Ryan Ritter",
+      "Ryan Vilade",
+      "Sam Antonacci",
+      "Spencer Torkelson",
+      "TJ Rumfield",
+      "Taylor Walls",
+      "Tristan Peters",
+      "Troy Johnston",
+      "Willi Castro",
+      "Willson Contreras",
+      "Wilyer Abreu",
+      "Wyatt Langford",
+      "Xavier Edwards",
+      "Yandy D\u00edaz",
+      "Zac Veen",
+      "Zach McKinstry"
+    ],
+    "total_players_ranked": 72,
+    "total_hrs_hit": 7,
+    "total_near_hrs": 0,
+    "model_hits": 7,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 3,
+          "rate": 30.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 4,
+          "rate": 20.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 4,
+          "rate": 13.3
+        },
+        "all": {
+          "total": 72,
+          "hits": 7,
+          "rate": 9.7
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 3,
+          "rate": 30.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 4,
+          "rate": 20.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 5,
+          "rate": 16.7
+        },
+        "all": {
+          "total": 72,
+          "hits": 7,
+          "rate": 9.7
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 3,
+        "rate": 30.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 5,
+        "rate": 25.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 72,
+        "hits": 7,
+        "rate": 9.7
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 3,
+          "rate": 30.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 5,
+          "rate": 25.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 5,
+          "rate": 16.7
+        },
+        "all": {
+          "total": 72,
+          "hits": 7,
+          "rate": 9.7
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 3,
+          "rate": 30.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 5,
+          "rate": 25.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 5,
+          "rate": 16.7
+        },
+        "all": {
+          "total": 72,
+          "hits": 7,
+          "rate": 9.7
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 3,
+        "rate": 30.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 72,
+        "hits": 7,
+        "rate": 9.7
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 3,
+        "rate": 30.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 72,
+        "hits": 7,
+        "rate": 9.7
+      }
+    },
+    "avg_composite_hr_hitters": 0.497,
+    "avg_composite_non_hitters": 0.408,
+    "composite_separation": 0.089,
+    "hr_hitters": [
+      {
+        "name": "Willi Castro",
+        "rank": 2,
+        "composite": 0.673,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "COL@WSH"
+      },
+      {
+        "name": "Tristan Peters",
+        "rank": 4,
+        "composite": 0.67,
+        "opp_pitcher": "Kumar Rocker",
+        "matchup": "TEX@CWS"
+      },
+      {
+        "name": "Wyatt Langford",
+        "rank": 8,
+        "composite": 0.58,
+        "opp_pitcher": "Jos\u00e9 Urquidy",
+        "matchup": "TEX@CWS"
+      },
+      {
+        "name": "Jake Burger",
+        "rank": 14,
+        "composite": 0.529,
+        "opp_pitcher": "Jos\u00e9 Urquidy",
+        "matchup": "TEX@CWS"
+      },
+      {
+        "name": "Daylen Lile",
+        "rank": 31,
+        "composite": 0.429,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "COL@WSH"
+      },
+      {
+        "name": "Ezequiel Tovar",
+        "rank": 54,
+        "composite": 0.34,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "COL@WSH"
+      },
+      {
+        "name": "Jonathan Aranda",
+        "rank": 65,
+        "composite": 0.261,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "TB@DET"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Willi Castro",
+        "rank": 1,
+        "composite": 0.687,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "COL@WSH"
+      },
+      {
+        "name": "Jake Burger",
+        "rank": 2,
+        "composite": 0.673,
+        "opp_pitcher": "Jos\u00e9 Urquidy",
+        "matchup": "TEX@CWS"
+      },
+      {
+        "name": "Tristan Peters",
+        "rank": 7,
+        "composite": 0.588,
+        "opp_pitcher": "Kumar Rocker",
+        "matchup": "TEX@CWS"
+      },
+      {
+        "name": "Wyatt Langford",
+        "rank": 13,
+        "composite": 0.535,
+        "opp_pitcher": "Jos\u00e9 Urquidy",
+        "matchup": "TEX@CWS"
+      },
+      {
+        "name": "Daylen Lile",
+        "rank": 27,
+        "composite": 0.429,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "COL@WSH"
+      },
+      {
+        "name": "Ezequiel Tovar",
+        "rank": 52,
+        "composite": 0.349,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "COL@WSH"
+      },
+      {
+        "name": "Jonathan Aranda",
+        "rank": 61,
+        "composite": 0.29,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "TB@DET"
+      }
+    ],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 83,
+        "hr_count": 2,
+        "hr_rate": 2.4,
+        "names": [
+          "Ryan Vilade",
+          "Hao-Yu Lee",
+          "Colt Keith",
+          "Yandy D\u00edaz",
+          "Kevin McGonigle",
+          "Dillon Dingler",
+          "Jorge Mateo",
+          "Brett Callahan",
+          "Jonathan Aranda",
+          "Max Clark",
+          "Zach McKinstry",
+          "Jarren Duran",
+          "Adley Rutschman",
+          "Willson Contreras",
+          "Kyle Stowers",
+          "Anthony Seigler",
+          "Wilyer Abreu",
+          "Mickey Gasper",
+          "Heriberto Hern\u00e1ndez",
+          "Joe Mack",
+          "Nick Sogard",
+          "Ceddanne Rafaela",
+          "Agust\u00edn Ram\u00edrez",
+          "Javier Sanoja",
+          "Xavier Edwards",
+          "Brady House",
+          "Connor Norby",
+          "Jake Burger",
+          "Miguel Vargas",
+          "Corey Seager",
+          "Chase Meidroth",
+          "Joc Pederson",
+          "Travis d'Arnaud",
+          "Angel Genao",
+          "Petey Halpin",
+          "Chase DeLauter",
+          "Steven Kwan",
+          "Angel Mart\u00ednez",
+          "Alex Bregman",
+          "Lars Nootbaar",
+          "Ildemaro Vargas",
+          "Geraldo Perdomo",
+          "Michael Conforto",
+          "Tyrone Taylor",
+          "Ryan Waldschmidt",
+          "Fernando Tatis Jr.",
+          "Xander Bogaerts",
+          "Oneil Cruz",
+          "Gavin Sheets",
+          "Jake Cronenworth",
+          "Luis Rengifo",
+          "Sung-Mun Song",
+          "Manny Machado",
+          "Billy Cook",
+          "Ty France",
+          "Jared Triolo",
+          "Austin Hays",
+          "Luis Campusano",
+          "Jacob Gonzalez",
+          "Brandon Lowe",
+          "Bryce Harper",
+          "Patrick Wisdom",
+          "Luis Arraez",
+          "Brandon Marsh",
+          "Derek Hill",
+          "Cole Young",
+          "Leo Rivas",
+          "Randy Arozarena",
+          "Taylor Ward",
+          "Weston Wilson",
+          "Rafael Devers",
+          "Drew Gilbert",
+          "Jose Trevino",
+          "Ke'Bryan Hayes",
+          "Turner Hill",
+          "Willy Adames",
+          "Will Banfield",
+          "Ivan Johnson",
+          "Christian Koss",
+          "TJ Friedl",
+          "Jonah Cox",
+          "Andrew Knizner",
+          "H\u00e9ctor Rodr\u00edguez"
+        ],
+        "hr_names": [
+          "Jonathan Aranda",
+          "Jake Burger"
+        ]
+      },
+      "2_of_5": {
+        "players": 70,
+        "hr_count": 2,
+        "hr_rate": 2.9,
+        "names": [
+          "Junior Caminero",
+          "Spencer Torkelson",
+          "Javier B\u00e1ez",
+          "Otto Lopez",
+          "Willi Castro",
+          "Mickey Moniak",
+          "Jacob Young",
+          "Keibert Ruiz",
+          "Nasim Nu\u00f1ez",
+          "Zac Veen",
+          "Ezequiel Tovar",
+          "Braden Montgomery",
+          "Drew Romo",
+          "Brandon Nimmo",
+          "Evan Carter",
+          "Sam Antonacci",
+          "Andrew Benintendi",
+          "Munetaka Murakami",
+          "Ezequiel Duran",
+          "Elias D\u00edaz",
+          "Zach Neto",
+          "Denzer Guzman",
+          "Josh Lowe",
+          "Tyler Heineman",
+          "Gustavo Campero",
+          "Brayan Rocchio",
+          "Patrick Bailey",
+          "Oswald Peraza",
+          "Jo Adell",
+          "David Fry",
+          "Gabriel Moreno",
+          "Nolan Arenado",
+          "Seiya Suzuki",
+          "Ian Happ",
+          "Michael Busch",
+          "Pedro Ram\u00edrez",
+          "James McCann",
+          "Carson Kelly",
+          "Corbin Carroll",
+          "Max Kepler",
+          "Jordan Lawlar",
+          "Jose Fernandez",
+          "Miguel Amaya",
+          "Tim Tawa",
+          "Gabriel Arias",
+          "Kevin Alc\u00e1ntara",
+          "Jackson Merrill",
+          "Jake Mangum",
+          "Nick Gonzales",
+          "Nick Yorke",
+          "Rafael Flores Jr.",
+          "Spencer Horwitz",
+          "Alex Jackson",
+          "Michael Stefanic",
+          "Julio Rodr\u00edguez",
+          "Kyle Schwarber",
+          "Brock Rodden",
+          "Josh Naylor",
+          "Justin Crawford",
+          "Alec Bohm",
+          "Bryan De La Cruz",
+          "Dane Myers",
+          "Tyler Stephenson",
+          "Eugenio Su\u00e1rez",
+          "Buddy Kennedy",
+          "Matt McLain",
+          "Elly De La Cruz",
+          "Osleivis Basabe",
+          "Victor Bericoto",
+          "JJ Bleday"
+        ],
+        "hr_names": [
+          "Willi Castro",
+          "Ezequiel Tovar"
+        ]
+      },
+      "3_of_5": {
+        "players": 48,
+        "hr_count": 3,
+        "hr_rate": 6.2,
+        "names": [
+          "Esteury Ruiz",
+          "Dylan Crews",
+          "Brett Sullivan",
+          "CJ Abrams",
+          "Daylen Lile",
+          "Jorbit Vivas",
+          "Troy Johnston",
+          "TJ Rumfield",
+          "Jake McCarthy",
+          "Tristan Peters",
+          "Wyatt Langford",
+          "Colson Montgomery",
+          "Cody Freeman",
+          "Christian Moore",
+          "Mike Trout",
+          "Vaughn Grissom",
+          "Mois\u00e9s Ballesteros",
+          "Jos\u00e9 Ram\u00edrez",
+          "Nathaniel Lowe",
+          "Travis Bazzana",
+          "Jose Siri",
+          "Adam Frazier",
+          "Austin Hedges",
+          "Pete Crow-Armstrong",
+          "Esmerlyn Valdez",
+          "Bryan Reynolds",
+          "Kaelen Culpepper",
+          "Brooks Lee",
+          "Alan Roden",
+          "Max Muncy",
+          "Tommy White",
+          "Brian Serven",
+          "Josh Bell",
+          "Kody Clemens",
+          "Alika Williams",
+          "Darell Hernaiz",
+          "Henry Bolte",
+          "Luke Keaschall",
+          "Ryan Kreidler",
+          "Donovan Walton",
+          "Jeff McNeil",
+          "Lawrence Butler",
+          "J.T. Realmuto",
+          "Edmundo Sosa",
+          "Trea Turner",
+          "Cal Raleigh",
+          "Dominic Canzone",
+          "Sal Stewart"
+        ],
+        "hr_names": [
+          "Daylen Lile",
+          "Tristan Peters",
+          "Wyatt Langford"
+        ]
+      },
+      "4_of_5": {
+        "players": 9,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Abimelec Ortiz",
+          "Henry Davis",
+          "Royce Lewis",
+          "Trevor Larnach",
+          "Zack Gelof",
+          "Ryan Jeffers",
+          "Victor Caratini",
+          "Carlos Cortes",
+          "Jonah Heim"
+        ],
+        "hr_names": []
+      },
+      "5_of_5": {
+        "players": 1,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Byron Buxton"
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 3,
+        "rate": 30.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 72,
+        "hits": 7,
+        "rate": 9.7
+      }
+    },
+    "combined_hr_hitters": [
+      {
+        "name": "Willi Castro",
+        "rank": 1,
+        "composite": 0.753,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "COL@WSH"
+      },
+      {
+        "name": "Jake Burger",
+        "rank": 4,
+        "composite": 0.604,
+        "opp_pitcher": "Jos\u00e9 Urquidy",
+        "matchup": "TEX@CWS"
+      },
+      {
+        "name": "Tristan Peters",
+        "rank": 5,
+        "composite": 0.594,
+        "opp_pitcher": "Kumar Rocker",
+        "matchup": "TEX@CWS"
+      },
+      {
+        "name": "Wyatt Langford",
+        "rank": 15,
+        "composite": 0.389,
+        "opp_pitcher": "Jos\u00e9 Urquidy",
+        "matchup": "TEX@CWS"
+      },
+      {
+        "name": "Daylen Lile",
+        "rank": 33,
+        "composite": 0.244,
+        "opp_pitcher": "Ryan Feltner",
+        "matchup": "COL@WSH"
+      },
+      {
+        "name": "Ezequiel Tovar",
+        "rank": 46,
+        "composite": 0.178,
+        "opp_pitcher": "Cade Cavalli",
+        "matchup": "COL@WSH"
+      },
+      {
+        "name": "Jonathan Aranda",
+        "rank": 52,
+        "composite": 0.159,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "TB@DET"
+      }
+    ]
   }
 ]
