@@ -267,8 +267,8 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 4,
-      "rate": 13.3
+      "hits": 5,
+      "rate": 16.7
     },
     "all": {
       "total": 186,
@@ -290,8 +290,8 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 4,
-        "rate": 13.3
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
         "total": 186,
