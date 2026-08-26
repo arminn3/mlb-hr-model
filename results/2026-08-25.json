@@ -362,13 +362,13 @@
   "tier_accuracy_ml2026": {
     "top_10": {
       "total": 10,
-      "hits": 2,
-      "rate": 20.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
       "total": 20,
-      "hits": 6,
-      "rate": 30.0
+      "hits": 5,
+      "rate": 25.0
     },
     "top_30": {
       "total": 30,
@@ -385,13 +385,13 @@
     "L5": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 6,
-        "rate": 30.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
@@ -412,8 +412,8 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 6,
-        "rate": 30.0
+        "hits": 5,
+        "rate": 25.0
       },
       "top_30": {
         "total": 30,
