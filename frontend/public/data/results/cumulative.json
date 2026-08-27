@@ -180535,7 +180535,7 @@
     ],
     "total_players_ranked": 302,
     "total_hrs_hit": 32,
-    "total_near_hrs": 0,
+    "total_near_hrs": 15,
     "model_hits": 31,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -180592,8 +180592,8 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 2,
+        "rate": 10.0
       },
       "top_30": {
         "total": 30,
@@ -180615,8 +180615,8 @@
         },
         "top_20": {
           "total": 20,
-          "hits": 3,
-          "rate": 15.0
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
           "total": 30,
@@ -180637,8 +180637,8 @@
         },
         "top_20": {
           "total": 20,
-          "hits": 2,
-          "rate": 10.0
+          "hits": 3,
+          "rate": 15.0
         },
         "top_30": {
           "total": 30,
@@ -180652,7 +180652,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 15,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -180678,23 +180678,23 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 3,
+        "rate": 30.0
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 5,
-        "rate": 16.7
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
         "total": 302,
-        "hits": 31,
-        "rate": 10.3
+        "hits": 46,
+        "rate": 15.2
       }
     },
     "avg_composite_hr_hitters": 0.458,
@@ -181138,8 +181138,277 @@
         "matchup": "HOU@NYY"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Michael Harris II",
+        "rank": 7,
+        "composite": 0.673,
+        "opp_pitcher": "Roki Sasaki",
+        "matchup": "LAD@ATL"
+      },
+      {
+        "name": "Dylan Beavers",
+        "rank": 32,
+        "composite": 0.59,
+        "opp_pitcher": "Michael McGreevy",
+        "matchup": "BAL@STL"
+      },
+      {
+        "name": "Cody Bellinger",
+        "rank": 72,
+        "composite": 0.494,
+        "opp_pitcher": "Peter Lambert",
+        "matchup": "HOU@NYY"
+      },
+      {
+        "name": "Alan Roden",
+        "rank": 96,
+        "composite": 0.457,
+        "opp_pitcher": "J.T. Ginn",
+        "matchup": "MIN@ATH"
+      },
+      {
+        "name": "Max Clark",
+        "rank": 120,
+        "composite": 0.432,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "TB@DET"
+      },
+      {
+        "name": "James McCann",
+        "rank": 129,
+        "composite": 0.428,
+        "opp_pitcher": "Matthew Boyd",
+        "matchup": "CHC@AZ"
+      },
+      {
+        "name": "Jake Burger",
+        "rank": 137,
+        "composite": 0.428,
+        "opp_pitcher": "Sean Burke",
+        "matchup": "TEX@CWS"
+      },
+      {
+        "name": "Cedric Mullins",
+        "rank": 143,
+        "composite": 0.424,
+        "opp_pitcher": "Troy Melton",
+        "matchup": "TB@DET"
+      },
+      {
+        "name": "TJ Rumfield",
+        "rank": 151,
+        "composite": 0.422,
+        "opp_pitcher": "Matt Waldron",
+        "matchup": "COL@WSH"
+      },
+      {
+        "name": "Alika Williams",
+        "rank": 166,
+        "composite": 0.407,
+        "opp_pitcher": "Connor Prielipp",
+        "matchup": "MIN@ATH"
+      },
+      {
+        "name": "Evan Carter",
+        "rank": 179,
+        "composite": 0.402,
+        "opp_pitcher": "Sean Burke",
+        "matchup": "TEX@CWS"
+      },
+      {
+        "name": "Luis Lara",
+        "rank": 198,
+        "composite": 0.373,
+        "opp_pitcher": "Robert Stock",
+        "matchup": "MIL@NYM"
+      },
+      {
+        "name": "Trea Turner",
+        "rank": 219,
+        "composite": 0.355,
+        "opp_pitcher": "Bryan Woo",
+        "matchup": "PHI@SEA"
+      },
+      {
+        "name": "Jazz Chisholm Jr.",
+        "rank": 256,
+        "composite": 0.299,
+        "opp_pitcher": "Peter Lambert",
+        "matchup": "HOU@NYY"
+      },
+      {
+        "name": "Drew Gilbert",
+        "rank": 288,
+        "composite": 0.222,
+        "opp_pitcher": "Nick Lodolo",
+        "matchup": "CIN@SF"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "James McCann",
+        "ev": 104.1,
+        "angle": 36.0,
+        "distance": 404.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Boyd, Matthew"
+      },
+      {
+        "batter": "Alan Roden",
+        "ev": 100.1,
+        "angle": 35.0,
+        "distance": 389.0,
+        "hr_in_parks": 11,
+        "result": "field_out",
+        "pitcher": "Alvarado, Elvis"
+      },
+      {
+        "batter": "Alika Williams",
+        "ev": 97.5,
+        "angle": 32.0,
+        "distance": 392.0,
+        "hr_in_parks": 20,
+        "result": "triple",
+        "pitcher": "Morris, Andrew"
+      },
+      {
+        "batter": "Michael Harris II",
+        "ev": 102.1,
+        "angle": 29.0,
+        "distance": 379.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Phillips, Evan"
+      },
+      {
+        "batter": "Matt Olson",
+        "ev": 102.2,
+        "angle": 25.0,
+        "distance": 391.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Sasaki, Roki"
+      },
+      {
+        "batter": "Jake Burger",
+        "ev": 109.5,
+        "angle": 21.0,
+        "distance": 399.0,
+        "hr_in_parks": 19,
+        "result": "double",
+        "pitcher": "Cannon, Jonathan"
+      },
+      {
+        "batter": "Jake Burger",
+        "ev": 106.6,
+        "angle": 35.0,
+        "distance": 394.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Newcomb, Sean"
+      },
+      {
+        "batter": "Evan Carter",
+        "ev": 105.9,
+        "angle": 32.0,
+        "distance": 416.0,
+        "hr_in_parks": 29,
+        "result": "",
+        "pitcher": "Burke, Sean"
+      },
+      {
+        "batter": "Cedric Mullins",
+        "ev": 102.0,
+        "angle": 27.0,
+        "distance": 389.0,
+        "hr_in_parks": 24,
+        "result": "field_out",
+        "pitcher": "Melton, Troy"
+      },
+      {
+        "batter": "Max Clark",
+        "ev": 97.7,
+        "angle": 34.0,
+        "distance": 369.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Peralta, Freddy"
+      },
+      {
+        "batter": "Luis Lara",
+        "ev": 100.0,
+        "angle": 32.0,
+        "distance": 385.0,
+        "hr_in_parks": 7,
+        "result": "field_out",
+        "pitcher": "N\u00fa\u00f1ez, Dedniel"
+      },
+      {
+        "batter": "Jazz Chisholm Jr.",
+        "ev": 103.2,
+        "angle": 24.0,
+        "distance": 391.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Sousa, Bennett"
+      },
+      {
+        "batter": "Cody Bellinger",
+        "ev": 103.7,
+        "angle": 23.0,
+        "distance": 403.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Sousa, Bennett"
+      },
+      {
+        "batter": "Drew Gilbert",
+        "ev": 105.4,
+        "angle": 29.0,
+        "distance": 404.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Santillan, Tony"
+      },
+      {
+        "batter": "Trea Turner",
+        "ev": 100.2,
+        "angle": 26.0,
+        "distance": 390.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Vargas, Carlos"
+      },
+      {
+        "batter": "Dylan Beavers",
+        "ev": 100.5,
+        "angle": 26.0,
+        "distance": 389.0,
+        "hr_in_parks": 18,
+        "result": "double",
+        "pitcher": "McGreevy, Michael"
+      },
+      {
+        "batter": "Troy Johnston",
+        "ev": 97.9,
+        "angle": 34.0,
+        "distance": 374.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Perales, Luis"
+      },
+      {
+        "batter": "TJ Rumfield",
+        "ev": 95.9,
+        "angle": 26.0,
+        "distance": 375.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Dion, Will"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
