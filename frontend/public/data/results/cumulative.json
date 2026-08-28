@@ -182099,12 +182099,14 @@
       "Brady House",
       "Brett Baty",
       "Brett Sullivan",
+      "Bryce Eldridge",
       "CJ Abrams",
       "Cam Smith",
       "Carson Benge",
       "Carter Jensen",
       "Charles McAdoo",
       "Christian Encarnacion-Strand",
+      "Christian Koss",
       "Christian Walker",
       "Christopher Morel",
       "Coby Mayo",
@@ -182113,11 +182115,14 @@
       "Colton Cowser",
       "Connor Norby",
       "Cooper Pratt",
+      "Corbin Carroll",
       "Daulton Varsho",
       "David Hamilton",
       "Daylen Lile",
       "Daz Cameron",
       "Drake Baldwin",
+      "Drew Cavanaugh",
+      "Drew Gilbert",
       "Dylan Beavers",
       "Dylan Crews",
       "Enrique Hern\u00e1ndez",
@@ -182126,13 +182131,16 @@
       "Francisco Alvarez",
       "Francisco Lindor",
       "Freddie Freeman",
+      "Gabriel Moreno",
       "Gary S\u00e1nchez",
       "George Lombard Jr.",
       "George Springer",
+      "Geraldo Perdomo",
       "Gunnar Henderson",
       "Ha-Seong Kim",
       "Heliot Ramos",
       "Hunter Goodman",
+      "Ildemaro Vargas",
       "Isaac Collins",
       "Isaac Paredes",
       "Iv\u00e1n Herrera",
@@ -182146,18 +182154,22 @@
       "Jeremy Pe\u00f1a",
       "Joey Ortiz",
       "John Rave",
+      "Jonah Cox",
       "Jorbit Vivas",
       "Jordan Beck",
       "Jordan Walker",
       "Jose Altuve",
+      "Jose Fernandez",
       "Josh Rojas",
       "Joshua B\u00e1ez",
       "Jos\u00e9 Caballero",
       "Jos\u00e9 Ferm\u00edn",
+      "Jung Hoo Lee",
       "Kazuma Okamoto",
       "Keibert Ruiz",
       "Kyle Isbel",
       "Lane Thomas",
+      "Lars Nootbaar",
       "Leody Taveras",
       "Luis Garc\u00eda Jr.",
       "Luis Lara",
@@ -182167,12 +182179,14 @@
       "Matt Olson",
       "Matthew Lugo",
       "Mauricio Dub\u00f3n",
+      "Max Kepler",
       "Michael Harris II",
       "Miguel Rojas",
       "Mike Yastrzemski",
       "Mookie Betts",
       "Myles Straw",
       "Nasim Nu\u00f1ez",
+      "Nate Furman",
       "Nathan Church",
       "Nathan Lukes",
       "Nick Allen",
@@ -182180,18 +182194,23 @@
       "Ozzie Albies",
       "Pedro Pag\u00e9s",
       "Pete Alonso",
+      "Rafael Devers",
       "Ram\u00f3n Ur\u00edas",
+      "Ryan Waldschmidt",
       "Sal Frelick",
       "Salvador Perez",
       "Samuel Basallo",
+      "Shay Whitcomb",
       "Shohei Ohtani",
       "Spencer Jones",
       "TJ Rumfield",
       "Taylor Trammell",
       "Teoscar Hern\u00e1ndez",
+      "Tim Tawa",
       "Tommy Edman",
       "Trent Grisham",
       "Troy Johnston",
+      "Turner Hill",
       "Tyler Tolbert",
       "Vinnie Pasquantino",
       "Vladimir Guerrero Jr.",
@@ -182201,17 +182220,17 @@
       "Yordan Alvarez",
       "Zac Veen"
     ],
-    "total_players_ranked": 116,
-    "total_hrs_hit": 14,
+    "total_players_ranked": 134,
+    "total_hrs_hit": 16,
     "total_near_hrs": 0,
-    "model_hits": 13,
+    "model_hits": 15,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 1,
-          "rate": 10.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 20,
@@ -182224,8 +182243,8 @@
           "rate": 16.7
         },
         "all": {
-          "total": 116,
-          "hits": 13,
+          "total": 134,
+          "hits": 15,
           "rate": 11.2
         }
       },
@@ -182234,74 +182253,6 @@
           "total": 10,
           "hits": 3,
           "rate": 30.0
-        },
-        "top_20": {
-          "total": 20,
-          "hits": 4,
-          "rate": 20.0
-        },
-        "top_30": {
-          "total": 30,
-          "hits": 5,
-          "rate": 16.7
-        },
-        "all": {
-          "total": 116,
-          "hits": 13,
-          "rate": 11.2
-        }
-      }
-    },
-    "tier_accuracy_ml2026": {
-      "top_10": {
-        "total": 10,
-        "hits": 1,
-        "rate": 10.0
-      },
-      "top_20": {
-        "total": 20,
-        "hits": 2,
-        "rate": 10.0
-      },
-      "top_30": {
-        "total": 30,
-        "hits": 6,
-        "rate": 20.0
-      },
-      "all": {
-        "total": 116,
-        "hits": 13,
-        "rate": 11.2
-      }
-    },
-    "tier_accuracy_ml2026_by_lookback": {
-      "L5": {
-        "top_10": {
-          "total": 10,
-          "hits": 1,
-          "rate": 10.0
-        },
-        "top_20": {
-          "total": 20,
-          "hits": 2,
-          "rate": 10.0
-        },
-        "top_30": {
-          "total": 30,
-          "hits": 6,
-          "rate": 20.0
-        },
-        "all": {
-          "total": 116,
-          "hits": 13,
-          "rate": 11.2
-        }
-      },
-      "L10": {
-        "top_10": {
-          "total": 10,
-          "hits": 2,
-          "rate": 20.0
         },
         "top_20": {
           "total": 20,
@@ -182314,8 +182265,76 @@
           "rate": 20.0
         },
         "all": {
-          "total": 116,
-          "hits": 13,
+          "total": 134,
+          "hits": 15,
+          "rate": 11.2
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 6,
+        "rate": 20.0
+      },
+      "all": {
+        "total": 134,
+        "hits": 15,
+        "rate": 11.2
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 3,
+          "rate": 15.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 6,
+          "rate": 20.0
+        },
+        "all": {
+          "total": 134,
+          "hits": 15,
+          "rate": 11.2
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 3,
+          "rate": 30.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 6,
+          "rate": 30.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 6,
+          "rate": 20.0
+        },
+        "all": {
+          "total": 134,
+          "hits": 15,
           "rate": 11.2
         }
       }
@@ -182324,8 +182343,8 @@
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
@@ -182338,16 +182357,16 @@
         "rate": 16.7
       },
       "all": {
-        "total": 116,
-        "hits": 13,
+        "total": 134,
+        "hits": 15,
         "rate": 11.2
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
@@ -182360,102 +182379,116 @@
         "rate": 16.7
       },
       "all": {
-        "total": 116,
-        "hits": 13,
+        "total": 134,
+        "hits": 15,
         "rate": 11.2
       }
     },
-    "avg_composite_hr_hitters": 0.465,
+    "avg_composite_hr_hitters": 0.48,
     "avg_composite_non_hitters": 0.411,
-    "composite_separation": 0.054,
+    "composite_separation": 0.069,
     "hr_hitters": [
       {
         "name": "Jac Caglianone",
-        "rank": 3,
+        "rank": 4,
         "composite": 0.744,
         "opp_pitcher": "Spencer Arrighetti",
         "matchup": "KC@TOR"
       },
       {
+        "name": "Drew Gilbert",
+        "rank": 5,
+        "composite": 0.728,
+        "opp_pitcher": "Jose Cabrera",
+        "matchup": "AZ@SF"
+      },
+      {
         "name": "Coby Mayo",
-        "rank": 20,
+        "rank": 24,
         "composite": 0.573,
         "opp_pitcher": "Cooper Hjerpe",
         "matchup": "BAL@STL"
       },
       {
         "name": "Jeremy Pe\u00f1a",
-        "rank": 22,
+        "rank": 26,
         "composite": 0.559,
         "opp_pitcher": "Gerrit Cole",
         "matchup": "HOU@NYY"
       },
       {
         "name": "Blaze Jordan",
-        "rank": 24,
+        "rank": 28,
         "composite": 0.553,
         "opp_pitcher": "Trevor Rogers",
         "matchup": "BAL@STL"
       },
       {
         "name": "Daylen Lile",
-        "rank": 28,
+        "rank": 33,
         "composite": 0.53,
         "opp_pitcher": "Gabriel Hughes",
         "matchup": "COL@WSH"
       },
       {
         "name": "Jackson Chourio",
-        "rank": 40,
+        "rank": 46,
         "composite": 0.465,
         "opp_pitcher": "Sean Manaea",
         "matchup": "MIL@NYM"
       },
       {
         "name": "Ram\u00f3n Ur\u00edas",
-        "rank": 46,
+        "rank": 52,
         "composite": 0.435,
         "opp_pitcher": "Trevor Rogers",
         "matchup": "BAL@STL"
       },
       {
         "name": "Drake Baldwin",
-        "rank": 47,
+        "rank": 53,
         "composite": 0.433,
         "opp_pitcher": "Yoshinobu Yamamoto",
         "matchup": "LAD@ATL"
       },
       {
+        "name": "Gabriel Moreno",
+        "rank": 54,
+        "composite": 0.433,
+        "opp_pitcher": "Landen Roupp",
+        "matchup": "AZ@SF"
+      },
+      {
         "name": "Carter Jensen",
-        "rank": 48,
+        "rank": 55,
         "composite": 0.419,
         "opp_pitcher": "Spencer Arrighetti",
         "matchup": "KC@TOR"
       },
       {
         "name": "Vinnie Pasquantino",
-        "rank": 50,
+        "rank": 57,
         "composite": 0.419,
         "opp_pitcher": "Spencer Arrighetti",
         "matchup": "KC@TOR"
       },
       {
         "name": "George Springer",
-        "rank": 62,
+        "rank": 73,
         "composite": 0.37,
         "opp_pitcher": "Noah Cameron",
         "matchup": "KC@TOR"
       },
       {
         "name": "Keibert Ruiz",
-        "rank": 98,
+        "rank": 111,
         "composite": 0.272,
         "opp_pitcher": "Gabriel Hughes",
         "matchup": "COL@WSH"
       },
       {
         "name": "Christian Walker",
-        "rank": 101,
+        "rank": 114,
         "composite": 0.269,
         "opp_pitcher": "Gerrit Cole",
         "matchup": "HOU@NYY"
@@ -182470,85 +182503,99 @@
         "matchup": "MIL@NYM"
       },
       {
+        "name": "Drew Gilbert",
+        "rank": 4,
+        "composite": 0.717,
+        "opp_pitcher": "Jose Cabrera",
+        "matchup": "AZ@SF"
+      },
+      {
         "name": "Jac Caglianone",
-        "rank": 5,
+        "rank": 8,
         "composite": 0.668,
         "opp_pitcher": "Spencer Arrighetti",
         "matchup": "KC@TOR"
       },
       {
         "name": "Coby Mayo",
-        "rank": 10,
+        "rank": 13,
         "composite": 0.631,
         "opp_pitcher": "Cooper Hjerpe",
         "matchup": "BAL@STL"
       },
       {
         "name": "Blaze Jordan",
-        "rank": 15,
+        "rank": 19,
         "composite": 0.601,
         "opp_pitcher": "Trevor Rogers",
         "matchup": "BAL@STL"
       },
       {
         "name": "Jeremy Pe\u00f1a",
-        "rank": 22,
+        "rank": 26,
         "composite": 0.564,
         "opp_pitcher": "Gerrit Cole",
         "matchup": "HOU@NYY"
       },
       {
         "name": "Drake Baldwin",
-        "rank": 33,
+        "rank": 37,
         "composite": 0.505,
         "opp_pitcher": "Yoshinobu Yamamoto",
         "matchup": "LAD@ATL"
       },
       {
+        "name": "Gabriel Moreno",
+        "rank": 40,
+        "composite": 0.485,
+        "opp_pitcher": "Landen Roupp",
+        "matchup": "AZ@SF"
+      },
+      {
         "name": "Daylen Lile",
-        "rank": 38,
+        "rank": 44,
         "composite": 0.468,
         "opp_pitcher": "Gabriel Hughes",
         "matchup": "COL@WSH"
       },
       {
         "name": "Ram\u00f3n Ur\u00edas",
-        "rank": 46,
+        "rank": 52,
         "composite": 0.452,
         "opp_pitcher": "Trevor Rogers",
         "matchup": "BAL@STL"
       },
       {
         "name": "Carter Jensen",
-        "rank": 50,
+        "rank": 56,
         "composite": 0.419,
         "opp_pitcher": "Spencer Arrighetti",
         "matchup": "KC@TOR"
       },
       {
         "name": "Vinnie Pasquantino",
-        "rank": 52,
+        "rank": 58,
         "composite": 0.419,
         "opp_pitcher": "Spencer Arrighetti",
         "matchup": "KC@TOR"
       },
       {
         "name": "Christian Walker",
-        "rank": 76,
+        "rank": 89,
         "composite": 0.34,
         "opp_pitcher": "Gerrit Cole",
         "matchup": "HOU@NYY"
       },
       {
         "name": "George Springer",
-        "rank": 77,
+        "rank": 90,
         "composite": 0.337,
         "opp_pitcher": "Noah Cameron",
         "matchup": "KC@TOR"
       },
       {
         "name": "Keibert Ruiz",
-        "rank": 88,
+        "rank": 102,
         "composite": 0.308,
         "opp_pitcher": "Gabriel Hughes",
         "matchup": "COL@WSH"
@@ -182560,8 +182607,8 @@
     "hr_signal_accuracy": {
       "1_of_5": {
         "players": 76,
-        "hr_count": 5,
-        "hr_rate": 6.6,
+        "hr_count": 6,
+        "hr_rate": 7.9,
         "names": [
           "Brady House",
           "Andrew Pinckney",
@@ -182645,13 +182692,14 @@
           "Keibert Ruiz",
           "Blaze Jordan",
           "Ram\u00f3n Ur\u00edas",
-          "Jeremy Pe\u00f1a"
+          "Jeremy Pe\u00f1a",
+          "Gabriel Moreno"
         ]
       },
       "2_of_5": {
         "players": 63,
-        "hr_count": 4,
-        "hr_rate": 6.3,
+        "hr_count": 5,
+        "hr_rate": 7.9,
         "names": [
           "Hunter Goodman",
           "Andr\u00e9s Chaparro",
@@ -182721,7 +182769,8 @@
           "Coby Mayo",
           "Christian Walker",
           "George Springer",
-          "Drake Baldwin"
+          "Drake Baldwin",
+          "Drew Gilbert"
         ]
       },
       "3_of_5": {
@@ -182781,8 +182830,8 @@
     "combined_tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
@@ -182791,12 +182840,12 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 6,
-        "rate": 20.0
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
-        "total": 116,
-        "hits": 13,
+        "total": 134,
+        "hits": 15,
         "rate": 11.2
       }
     },
@@ -182809,85 +182858,99 @@
         "matchup": "KC@TOR"
       },
       {
+        "name": "Drew Gilbert",
+        "rank": 5,
+        "composite": 0.768,
+        "opp_pitcher": "Jose Cabrera",
+        "matchup": "AZ@SF"
+      },
+      {
         "name": "Jeremy Pe\u00f1a",
-        "rank": 14,
+        "rank": 18,
         "composite": 0.573,
         "opp_pitcher": "Gerrit Cole",
         "matchup": "HOU@NYY"
       },
       {
         "name": "Blaze Jordan",
-        "rank": 17,
+        "rank": 21,
         "composite": 0.555,
         "opp_pitcher": "Trevor Rogers",
         "matchup": "BAL@STL"
       },
       {
         "name": "Ram\u00f3n Ur\u00edas",
-        "rank": 25,
+        "rank": 30,
         "composite": 0.502,
         "opp_pitcher": "Trevor Rogers",
         "matchup": "BAL@STL"
       },
       {
         "name": "Daylen Lile",
-        "rank": 26,
+        "rank": 31,
         "composite": 0.497,
         "opp_pitcher": "Gabriel Hughes",
         "matchup": "COL@WSH"
       },
       {
         "name": "Drake Baldwin",
-        "rank": 28,
+        "rank": 33,
         "composite": 0.457,
         "opp_pitcher": "Yoshinobu Yamamoto",
         "matchup": "LAD@ATL"
       },
       {
         "name": "Jackson Chourio",
-        "rank": 32,
+        "rank": 37,
         "composite": 0.408,
         "opp_pitcher": "Sean Manaea",
         "matchup": "MIL@NYM"
       },
       {
         "name": "Coby Mayo",
-        "rank": 34,
+        "rank": 39,
         "composite": 0.384,
         "opp_pitcher": "Cooper Hjerpe",
         "matchup": "BAL@STL"
       },
       {
         "name": "Carter Jensen",
-        "rank": 45,
+        "rank": 51,
         "composite": 0.28,
         "opp_pitcher": "Spencer Arrighetti",
         "matchup": "KC@TOR"
       },
       {
+        "name": "Gabriel Moreno",
+        "rank": 53,
+        "composite": 0.278,
+        "opp_pitcher": "Landen Roupp",
+        "matchup": "AZ@SF"
+      },
+      {
         "name": "Vinnie Pasquantino",
-        "rank": 54,
+        "rank": 62,
         "composite": 0.24,
         "opp_pitcher": "Spencer Arrighetti",
         "matchup": "KC@TOR"
       },
       {
         "name": "George Springer",
-        "rank": 78,
+        "rank": 88,
         "composite": 0.162,
         "opp_pitcher": "Noah Cameron",
         "matchup": "KC@TOR"
       },
       {
         "name": "Christian Walker",
-        "rank": 81,
+        "rank": 91,
         "composite": 0.155,
         "opp_pitcher": "Gerrit Cole",
         "matchup": "HOU@NYY"
       },
       {
         "name": "Keibert Ruiz",
-        "rank": 83,
+        "rank": 94,
         "composite": 0.153,
         "opp_pitcher": "Gabriel Hughes",
         "matchup": "COL@WSH"
