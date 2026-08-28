@@ -140,7 +140,7 @@
   ],
   "total_players_ranked": 134,
   "total_hrs_hit": 16,
-  "total_near_hrs": 0,
+  "total_near_hrs": 12,
   "model_hits": 15,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -257,7 +257,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 12,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -283,28 +283,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 2,
-      "rate": 20.0
+      "hits": 4,
+      "rate": 40.0
     },
     "top_20": {
       "total": 20,
-      "hits": 2,
-      "rate": 10.0
+      "hits": 5,
+      "rate": 25.0
     },
     "top_30": {
       "total": 30,
-      "hits": 5,
-      "rate": 16.7
+      "hits": 9,
+      "rate": 30.0
     },
     "all": {
       "total": 134,
-      "hits": 15,
-      "rate": 11.2
+      "hits": 27,
+      "rate": 20.1
     }
   },
   "avg_composite_hr_hitters": 0.48,
-  "avg_composite_non_hitters": 0.411,
-  "composite_separation": 0.069,
+  "avg_composite_non_hitters": 0.41,
+  "composite_separation": 0.07,
   "hr_hitters": [
     {
       "name": "Jac Caglianone",
@@ -519,8 +519,202 @@
       "matchup": "COL@WSH"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Daulton Varsho",
+      "rank": 8,
+      "composite": 0.69,
+      "opp_pitcher": "Gerrit Cole",
+      "matchup": "HOU@NYY"
+    },
+    {
+      "name": "Andr\u00e9s Chaparro",
+      "rank": 9,
+      "composite": 0.679,
+      "opp_pitcher": "Gabriel Hughes",
+      "matchup": "COL@WSH"
+    },
+    {
+      "name": "Willi Castro",
+      "rank": 20,
+      "composite": 0.616,
+      "opp_pitcher": "Jake Irvin",
+      "matchup": "COL@WSH"
+    },
+    {
+      "name": "Kazuma Okamoto",
+      "rank": 25,
+      "composite": 0.568,
+      "opp_pitcher": "Noah Cameron",
+      "matchup": "KC@TOR"
+    },
+    {
+      "name": "Joey Ortiz",
+      "rank": 47,
+      "composite": 0.465,
+      "opp_pitcher": "Sean Manaea",
+      "matchup": "MIL@NYM"
+    },
+    {
+      "name": "Christian Encarnacion-Strand",
+      "rank": 50,
+      "composite": 0.452,
+      "opp_pitcher": "Cooper Hjerpe",
+      "matchup": "BAL@STL"
+    },
+    {
+      "name": "Drew Cavanaugh",
+      "rank": 58,
+      "composite": 0.404,
+      "opp_pitcher": "Jose Cabrera",
+      "matchup": "AZ@SF"
+    },
+    {
+      "name": "Luis Garc\u00eda Jr.",
+      "rank": 79,
+      "composite": 0.358,
+      "opp_pitcher": "Hayden Wesneski",
+      "matchup": "HOU@NYY"
+    },
+    {
+      "name": "Myles Straw",
+      "rank": 106,
+      "composite": 0.284,
+      "opp_pitcher": "Noah Cameron",
+      "matchup": "KC@TOR"
+    },
+    {
+      "name": "George Lombard Jr.",
+      "rank": 118,
+      "composite": 0.263,
+      "opp_pitcher": "Hayden Wesneski",
+      "matchup": "HOU@NYY"
+    },
+    {
+      "name": "Amed Rosario",
+      "rank": 128,
+      "composite": 0.214,
+      "opp_pitcher": "Hayden Wesneski",
+      "matchup": "HOU@NYY"
+    },
+    {
+      "name": "Enrique Hern\u00e1ndez",
+      "rank": 133,
+      "composite": 0.153,
+      "opp_pitcher": "Chris Sale",
+      "matchup": "LAD@ATL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Enrique Hern\u00e1ndez",
+      "ev": 101.5,
+      "angle": 27.0,
+      "distance": 384.0,
+      "hr_in_parks": 5,
+      "result": "field_out",
+      "pitcher": "Sale, Chris"
+    },
+    {
+      "batter": "Joey Ortiz",
+      "ev": 105.4,
+      "angle": 25.0,
+      "distance": 411.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Manaea, Sean"
+    },
+    {
+      "batter": "Amed Rosario",
+      "ev": 102.3,
+      "angle": 27.0,
+      "distance": 400.0,
+      "hr_in_parks": 15,
+      "result": "field_out",
+      "pitcher": "Hader, Josh"
+    },
+    {
+      "batter": "George Lombard Jr.",
+      "ev": 102.5,
+      "angle": 28.0,
+      "distance": 413.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Okert, Steven"
+    },
+    {
+      "batter": "Luis Garc\u00eda Jr.",
+      "ev": 105.5,
+      "angle": 32.0,
+      "distance": 409.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Okert, Steven"
+    },
+    {
+      "batter": "Daulton Varsho",
+      "ev": 102.6,
+      "angle": 22.0,
+      "distance": 392.0,
+      "hr_in_parks": 17,
+      "result": "field_out",
+      "pitcher": "Cole, Gerrit"
+    },
+    {
+      "batter": "Drew Cavanaugh",
+      "ev": 101.9,
+      "angle": 28.0,
+      "distance": 371.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Burgos, Juan"
+    },
+    {
+      "batter": "Christian Encarnacion-Strand",
+      "ev": 104.8,
+      "angle": 23.0,
+      "distance": 397.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Bruihl, Justin"
+    },
+    {
+      "batter": "Kazuma Okamoto",
+      "ev": 100.2,
+      "angle": 27.0,
+      "distance": 383.0,
+      "hr_in_parks": 23,
+      "result": "double",
+      "pitcher": "Cameron, Noah"
+    },
+    {
+      "batter": "Myles Straw",
+      "ev": 96.0,
+      "angle": 30.0,
+      "distance": 393.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Cameron, Noah"
+    },
+    {
+      "batter": "Willi Castro",
+      "ev": 107.5,
+      "angle": 29.0,
+      "distance": 416.0,
+      "hr_in_parks": 29,
+      "result": "",
+      "pitcher": "Irvin, Jake"
+    },
+    {
+      "batter": "Andr\u00e9s Chaparro",
+      "ev": 96.5,
+      "angle": 25.0,
+      "distance": 374.0,
+      "hr_in_parks": 11,
+      "result": "field_out",
+      "pitcher": "Hughes, Gabriel"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
