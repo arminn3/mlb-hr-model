@@ -54,6 +54,15 @@ from environment import calc_environment_score
 import config
 
 
+def _safe_num(v, default=0.0):
+    """`v or default` blows up with `TypeError: boolean value of NA is ambiguous`
+    when v is pandas' nullable `pd.NA` (distinct from float NaN/None, which are
+    fine in a boolean context) — this is what crashed the 2026-08-30 run on a
+    batted-ball row with an NA launch_angle. Use this instead of `x or default`
+    anywhere `x` could come from a pandas row/Series."""
+    return default if pd.isna(v) else v
+
+
 def _clean_for_json(obj):
     """Recursively replace NaN/Infinity with None so json.dump doesn't emit invalid tokens."""
     if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
@@ -126,11 +135,11 @@ def _pitcher_score_from_profile_row(row: dict) -> float:
         if v is None: return 0.5
         return max(0.0, min(1.0, (v - lo) / (hi - lo)))
 
-    iso        = float(row.get("iso")       or 0.0)
-    hr_per_9   = float(row.get("hr_per_9")  or 0.0)
-    hr_fb_pct  = float(row.get("hr_fb_pct") or 0.0) / 100.0
-    fb_pct     = float(row.get("fb_pct")    or 0.0) / 100.0
-    hr_count   = float(row.get("hr")        or 0.0)
+    iso        = float(_safe_num(row.get("iso")))
+    hr_per_9   = float(_safe_num(row.get("hr_per_9")))
+    hr_fb_pct  = float(_safe_num(row.get("hr_fb_pct"))) / 100.0
+    fb_pct     = float(_safe_num(row.get("fb_pct"))) / 100.0
+    hr_count   = float(_safe_num(row.get("hr")))
 
     # ISO range: league avg ~.150, elite power suppressor ~.080, vulnerable .200+
     f_iso    = n(iso,       0.08, 0.24)
@@ -165,7 +174,7 @@ def _apply_pitcher_split_override(players_by_game: dict, schedule: list, pitcher
             batter_hand = player.get("batter_hand", "R")
             row_key = "vs_L" if batter_hand == "L" else "vs_R"
             row = profile.get("rows", {}).get(row_key, {})
-            bf = int(row.get("bf") or 0)
+            bf = int(_safe_num(row.get("bf")))
             if bf < MIN_BF:
                 continue
 
@@ -177,10 +186,10 @@ def _apply_pitcher_split_override(players_by_game: dict, schedule: list, pitcher
             for lb in ("L5", "L10"):
                 s = player.get("scores", {}).get(lb)
                 if not s: continue
-                old_pitcher = float(s.get("pitcher_score") or 0.0)
+                old_pitcher = float(_safe_num(s.get("pitcher_score")))
                 delta = (new_pitcher_score - old_pitcher) * w_p
                 s["pitcher_score"] = new_pitcher_score
-                s["composite"]     = round(float(s.get("composite") or 0.0) + delta, 3)
+                s["composite"]     = round(float(_safe_num(s.get("composite"))) + delta, 3)
             fixed += 1
     return fixed
 
@@ -377,8 +386,8 @@ def _compute_hr_signals(
         )
 
     # ── Signal 2: Pull-power tendency (66.5% HR rate on pulled barrels) ──
-    pull_air = season_profile.get("pull_air", 0) or 0
-    pull_barrel = season_profile.get("pull_barrel", 0) or 0
+    pull_air = _safe_num(season_profile.get("pull_air", 0))
+    pull_barrel = _safe_num(season_profile.get("pull_barrel", 0))
     pull_power = pull_air >= 28 or pull_barrel >= 12
 
     # ── Signal 3: HR drought (bips since last HR vs personal expected gap) ──
@@ -761,8 +770,8 @@ def run_model(game_date: date = None, fast: bool = False, only_game_pks=None):
                         "pitcher_name": str(_r.get("player_name", "")),
                         "pitch_arm": str(_r.get("p_throws", pitcher_hand)),
                         "pitch_type": str(_r.get("pitch_name", _r.get("pitch_type", ""))),
-                        "ev": round(float(_r.get("launch_speed", 0) or 0), 1),
-                        "angle": round(float(_r.get("launch_angle", 0) or 0), 1),
+                        "ev": round(float(_r.get("launch_speed", 0)), 1) if pd.notna(_r.get("launch_speed")) else 0.0,
+                        "angle": round(float(_r.get("launch_angle", 0)), 1) if pd.notna(_r.get("launch_angle")) else 0.0,
                         "distance": round(float(_r.get("hit_distance_sc", 0) or 0), 0)
                             if pd.notna(_r.get("hit_distance_sc")) else None,
                         "result": str(_r.get("events", "")),
