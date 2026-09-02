@@ -324,7 +324,7 @@
   ],
   "total_players_ranked": 305,
   "total_hrs_hit": 38,
-  "total_near_hrs": 0,
+  "total_near_hrs": 14,
   "model_hits": 32,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -441,7 +441,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 14,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -472,18 +472,18 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 3,
-      "rate": 15.0
+      "hits": 4,
+      "rate": 20.0
     },
     "top_30": {
       "total": 30,
-      "hits": 3,
-      "rate": 10.0
+      "hits": 4,
+      "rate": 13.3
     },
     "all": {
       "total": 305,
-      "hits": 32,
-      "rate": 10.5
+      "hits": 46,
+      "rate": 15.1
     }
   },
   "avg_composite_hr_hitters": 0.461,
@@ -941,8 +941,297 @@
       "matchup": "DET@MIN"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Juan Soto",
+      "rank": 20,
+      "composite": 0.661,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "NYM@TB"
+    },
+    {
+      "name": "Samad Taylor",
+      "rank": 47,
+      "composite": 0.593,
+      "opp_pitcher": "Nick Lodolo",
+      "matchup": "SD@CIN"
+    },
+    {
+      "name": "Freddy Fermin",
+      "rank": 59,
+      "composite": 0.573,
+      "opp_pitcher": "Nick Lodolo",
+      "matchup": "SD@CIN"
+    },
+    {
+      "name": "Leody Taveras",
+      "rank": 63,
+      "composite": 0.567,
+      "opp_pitcher": "Gabriel Hughes",
+      "matchup": "BAL@COL"
+    },
+    {
+      "name": "Victor Scott II",
+      "rank": 124,
+      "composite": 0.434,
+      "opp_pitcher": "Eric Lauer",
+      "matchup": "STL@LAD"
+    },
+    {
+      "name": "Zac Veen",
+      "rank": 150,
+      "composite": 0.42,
+      "opp_pitcher": "Kyle Bradish",
+      "matchup": "BAL@COL"
+    },
+    {
+      "name": "William Contreras",
+      "rank": 158,
+      "composite": 0.418,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "MIL@CHC"
+    },
+    {
+      "name": "Taylor Trammell",
+      "rank": 174,
+      "composite": 0.399,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Ben Malgeri",
+      "rank": 214,
+      "composite": 0.354,
+      "opp_pitcher": "Andrew Morris",
+      "matchup": "DET@MIN"
+    },
+    {
+      "name": "Josh Naylor",
+      "rank": 243,
+      "composite": 0.312,
+      "opp_pitcher": "Jedixson Paez",
+      "matchup": "SEA@BOS"
+    },
+    {
+      "name": "Cole Young",
+      "rank": 245,
+      "composite": 0.31,
+      "opp_pitcher": "Jedixson Paez",
+      "matchup": "SEA@BOS"
+    },
+    {
+      "name": "Logan O'Hoppe",
+      "rank": 250,
+      "composite": 0.304,
+      "opp_pitcher": "Brady Basso",
+      "matchup": "ATH@TEX"
+    },
+    {
+      "name": "Alec Bohm",
+      "rank": 254,
+      "composite": 0.302,
+      "opp_pitcher": "Eduardo Rodriguez",
+      "matchup": "PHI@AZ"
+    },
+    {
+      "name": "Trea Turner",
+      "rank": 258,
+      "composite": 0.294,
+      "opp_pitcher": "Eduardo Rodriguez",
+      "matchup": "PHI@AZ"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Alec Bohm",
+      "ev": 107.7,
+      "angle": 22.0,
+      "distance": 416.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Walston, Blake"
+    },
+    {
+      "batter": "Trea Turner",
+      "ev": 103.1,
+      "angle": 27.0,
+      "distance": 413.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Rodriguez, Eduardo"
+    },
+    {
+      "batter": "Cole Young",
+      "ev": 100.5,
+      "angle": 28.0,
+      "distance": 382.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Olds, Wyatt"
+    },
+    {
+      "batter": "Josh Naylor",
+      "ev": 102.2,
+      "angle": 24.0,
+      "distance": 378.0,
+      "hr_in_parks": 13,
+      "result": "double",
+      "pitcher": "Paez, Jedixson"
+    },
+    {
+      "batter": "William Contreras",
+      "ev": 100.3,
+      "angle": 26.0,
+      "distance": 390.0,
+      "hr_in_parks": 19,
+      "result": "double",
+      "pitcher": "Zeferjahn, Ryan"
+    },
+    {
+      "batter": "William Contreras",
+      "ev": 100.3,
+      "angle": 35.0,
+      "distance": 391.0,
+      "hr_in_parks": 7,
+      "result": "field_out",
+      "pitcher": "Boyd, Matthew"
+    },
+    {
+      "batter": "Freddy Fermin",
+      "ev": 98.5,
+      "angle": 29.0,
+      "distance": 372.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Lodolo, Nick"
+    },
+    {
+      "batter": "Samad Taylor",
+      "ev": 96.2,
+      "angle": 29.0,
+      "distance": 384.0,
+      "hr_in_parks": 2,
+      "result": "triple",
+      "pitcher": "Lodolo, Nick"
+    },
+    {
+      "batter": "TJ Rumfield",
+      "ev": 101.8,
+      "angle": 26.0,
+      "distance": 395.0,
+      "hr_in_parks": 10,
+      "result": "field_out",
+      "pitcher": "Bradish, Kyle"
+    },
+    {
+      "batter": "Zac Veen",
+      "ev": 102.9,
+      "angle": 23.0,
+      "distance": 382.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Bradish, Kyle"
+    },
+    {
+      "batter": "Leody Taveras",
+      "ev": 93.2,
+      "angle": 32.0,
+      "distance": 388.0,
+      "hr_in_parks": 21,
+      "result": "field_out",
+      "pitcher": "Hughes, Gabriel"
+    },
+    {
+      "batter": "Taylor Trammell",
+      "ev": 107.2,
+      "angle": 18.0,
+      "distance": 398.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Burke, Sean"
+    },
+    {
+      "batter": "Kyle Stowers",
+      "ev": 105.1,
+      "angle": 34.0,
+      "distance": 415.0,
+      "hr_in_parks": 29,
+      "result": "",
+      "pitcher": "Dobnak, Randy"
+    },
+    {
+      "batter": "Victor Scott II",
+      "ev": 106.3,
+      "angle": 20.0,
+      "distance": 371.0,
+      "hr_in_parks": 25,
+      "result": "single",
+      "pitcher": "Hern\u00e1ndez, Enrique"
+    },
+    {
+      "batter": "Alex Freeland",
+      "ev": 102.6,
+      "angle": 26.0,
+      "distance": 394.0,
+      "hr_in_parks": 17,
+      "result": "field_out",
+      "pitcher": "Gastelum, Luis"
+    },
+    {
+      "batter": "Ben Malgeri",
+      "ev": 97.2,
+      "angle": 26.0,
+      "distance": 386.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Acton, Garrett"
+    },
+    {
+      "batter": "Yandy D\u00edaz",
+      "ev": 103.4,
+      "angle": 36.0,
+      "distance": 376.0,
+      "hr_in_parks": 10,
+      "result": "field_out",
+      "pitcher": "Manaea, Sean"
+    },
+    {
+      "batter": "Juan Soto",
+      "ev": 99.2,
+      "angle": 25.0,
+      "distance": 398.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Peralta, Freddy"
+    },
+    {
+      "batter": "Yandy D\u00edaz",
+      "ev": 104.5,
+      "angle": 18.0,
+      "distance": 370.0,
+      "hr_in_parks": 16,
+      "result": "double",
+      "pitcher": "Manaea, Sean"
+    },
+    {
+      "batter": "Logan O'Hoppe",
+      "ev": 101.6,
+      "angle": 37.0,
+      "distance": 373.0,
+      "hr_in_parks": 14,
+      "result": "sac_fly",
+      "pitcher": "Suarez, Jos\u00e9"
+    },
+    {
+      "batter": "Yohandy Morales",
+      "ev": 104.9,
+      "angle": 23.0,
+      "distance": 392.0,
+      "hr_in_parks": 17,
+      "result": "double",
+      "pitcher": "Suter, Brent"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Lazaro Montes",
