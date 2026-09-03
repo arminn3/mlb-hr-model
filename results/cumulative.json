@@ -192389,7 +192389,7 @@
     ],
     "total_players_ranked": 316,
     "total_hrs_hit": 35,
-    "total_near_hrs": 0,
+    "total_near_hrs": 30,
     "model_hits": 33,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -192506,7 +192506,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 30,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -192532,23 +192532,23 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 1,
-        "rate": 5.0
+        "hits": 2,
+        "rate": 10.0
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 4,
+        "rate": 13.3
       },
       "all": {
         "total": 316,
-        "hits": 33,
-        "rate": 10.4
+        "hits": 63,
+        "rate": 19.9
       }
     },
     "avg_composite_hr_hitters": 0.371,
@@ -193020,8 +193020,535 @@
         "matchup": "STL@LAD"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Will Smith",
+        "rank": 3,
+        "composite": 0.764,
+        "opp_pitcher": "Brycen Mautz",
+        "matchup": "STL@LAD"
+      },
+      {
+        "name": "Cole Carrigg",
+        "rank": 29,
+        "composite": 0.618,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "BAL@COL"
+      },
+      {
+        "name": "George Springer",
+        "rank": 33,
+        "composite": 0.61,
+        "opp_pitcher": "Joey Cantillo",
+        "matchup": "TOR@CLE"
+      },
+      {
+        "name": "Wyatt Langford",
+        "rank": 45,
+        "composite": 0.579,
+        "opp_pitcher": "Jacob Lopez",
+        "matchup": "ATH@TEX"
+      },
+      {
+        "name": "Heriberto Hern\u00e1ndez",
+        "rank": 84,
+        "composite": 0.507,
+        "opp_pitcher": "Noah Cameron",
+        "matchup": "MIA@KC"
+      },
+      {
+        "name": "Bryan Reynolds",
+        "rank": 89,
+        "composite": 0.492,
+        "opp_pitcher": "Landen Roupp",
+        "matchup": "SF@PIT"
+      },
+      {
+        "name": "Matt Shaw",
+        "rank": 95,
+        "composite": 0.482,
+        "opp_pitcher": "Jacob Misiorowski",
+        "matchup": "MIL@CHC"
+      },
+      {
+        "name": "Eduardo Valencia",
+        "rank": 106,
+        "composite": 0.457,
+        "opp_pitcher": "Dean Kremer",
+        "matchup": "DET@MIN"
+      },
+      {
+        "name": "Luis Robert Jr.",
+        "rank": 109,
+        "composite": 0.452,
+        "opp_pitcher": "Tomoyuki Sugano",
+        "matchup": "BAL@COL"
+      },
+      {
+        "name": "Hunter Goodman",
+        "rank": 114,
+        "composite": 0.433,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "BAL@COL"
+      },
+      {
+        "name": "Mike Yastrzemski",
+        "rank": 117,
+        "composite": 0.431,
+        "opp_pitcher": "Brad Lord",
+        "matchup": "ATL@WSH"
+      },
+      {
+        "name": "Cedric Mullins",
+        "rank": 120,
+        "composite": 0.43,
+        "opp_pitcher": "Justin Hagenman",
+        "matchup": "NYM@TB"
+      },
+      {
+        "name": "Jeremy Pe\u00f1a",
+        "rank": 126,
+        "composite": 0.43,
+        "opp_pitcher": "Davis Martin",
+        "matchup": "CWS@HOU"
+      },
+      {
+        "name": "John Peck",
+        "rank": 128,
+        "composite": 0.429,
+        "opp_pitcher": "Dean Kremer",
+        "matchup": "DET@MIN"
+      },
+      {
+        "name": "Eli White",
+        "rank": 136,
+        "composite": 0.414,
+        "opp_pitcher": "Bryce Miller",
+        "matchup": "SEA@BOS"
+      },
+      {
+        "name": "Bobby Witt Jr.",
+        "rank": 139,
+        "composite": 0.41,
+        "opp_pitcher": "Eury P\u00e9rez",
+        "matchup": "MIA@KC"
+      },
+      {
+        "name": "Bo Bichette",
+        "rank": 162,
+        "composite": 0.389,
+        "opp_pitcher": "Griffin Jax",
+        "matchup": "NYM@TB"
+      },
+      {
+        "name": "Ian Happ",
+        "rank": 163,
+        "composite": 0.389,
+        "opp_pitcher": "Jacob Misiorowski",
+        "matchup": "MIL@CHC"
+      },
+      {
+        "name": "Dominic Canzone",
+        "rank": 174,
+        "composite": 0.379,
+        "opp_pitcher": "Patrick Sandoval",
+        "matchup": "SEA@BOS"
+      },
+      {
+        "name": "Jordan Lawlar",
+        "rank": 187,
+        "composite": 0.373,
+        "opp_pitcher": "Andrew Painter",
+        "matchup": "PHI@AZ"
+      },
+      {
+        "name": "Brett Baty",
+        "rank": 191,
+        "composite": 0.371,
+        "opp_pitcher": "Griffin Jax",
+        "matchup": "NYM@TB"
+      },
+      {
+        "name": "Trevor Larnach",
+        "rank": 200,
+        "composite": 0.367,
+        "opp_pitcher": "Drew Anderson",
+        "matchup": "DET@MIN"
+      },
+      {
+        "name": "Abimelec Ortiz",
+        "rank": 201,
+        "composite": 0.366,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "ATL@WSH"
+      },
+      {
+        "name": "Seiya Suzuki",
+        "rank": 210,
+        "composite": 0.355,
+        "opp_pitcher": "Jacob Misiorowski",
+        "matchup": "MIL@CHC"
+      },
+      {
+        "name": "Adael Amador",
+        "rank": 212,
+        "composite": 0.353,
+        "opp_pitcher": "Trevor Rogers",
+        "matchup": "BAL@COL"
+      },
+      {
+        "name": "Chase DeLauter",
+        "rank": 243,
+        "composite": 0.324,
+        "opp_pitcher": "Dylan Cease",
+        "matchup": "TOR@CLE"
+      },
+      {
+        "name": "Tristan Peters",
+        "rank": 246,
+        "composite": 0.323,
+        "opp_pitcher": "Hayden Wesneski",
+        "matchup": "CWS@HOU"
+      },
+      {
+        "name": "J.T. Realmuto",
+        "rank": 269,
+        "composite": 0.289,
+        "opp_pitcher": "Taylor Clarke",
+        "matchup": "PHI@AZ"
+      },
+      {
+        "name": "Jacob Gonzalez",
+        "rank": 272,
+        "composite": 0.283,
+        "opp_pitcher": "Landen Roupp",
+        "matchup": "SF@PIT"
+      },
+      {
+        "name": "Ethan Salas",
+        "rank": 312,
+        "composite": 0.109,
+        "opp_pitcher": "Brandon Williamson",
+        "matchup": "SD@CIN"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Jordan Lawlar",
+        "ev": 93.9,
+        "angle": 34.0,
+        "distance": 376.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Painter, Andrew"
+      },
+      {
+        "batter": "J.T. Realmuto",
+        "ev": 102.2,
+        "angle": 26.0,
+        "distance": 401.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "Law, Derek"
+      },
+      {
+        "batter": "Eli White",
+        "ev": 107.8,
+        "angle": 20.0,
+        "distance": 400.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Rucker, Michael"
+      },
+      {
+        "batter": "Dominic Canzone",
+        "ev": 104.5,
+        "angle": 25.0,
+        "distance": 385.0,
+        "hr_in_parks": 2,
+        "result": "double",
+        "pitcher": "Bello, Brayan"
+      },
+      {
+        "batter": "Ian Happ",
+        "ev": 97.8,
+        "angle": 26.0,
+        "distance": 394.0,
+        "hr_in_parks": 18,
+        "result": "field_out",
+        "pitcher": "Ashby, Aaron"
+      },
+      {
+        "batter": "Seiya Suzuki",
+        "ev": 100.6,
+        "angle": 37.0,
+        "distance": 395.0,
+        "hr_in_parks": 18,
+        "result": "field_out",
+        "pitcher": "Uribe, Abner"
+      },
+      {
+        "batter": "Matt Shaw",
+        "ev": 99.6,
+        "angle": 36.0,
+        "distance": 371.0,
+        "hr_in_parks": 12,
+        "result": "triple",
+        "pitcher": "Misiorowski, Jacob"
+      },
+      {
+        "batter": "Ethan Salas",
+        "ev": 99.4,
+        "angle": 32.0,
+        "distance": 388.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Williamson, Brandon"
+      },
+      {
+        "batter": "George Springer",
+        "ev": 106.0,
+        "angle": 22.0,
+        "distance": 396.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "Hern\u00e1ndez, Carlos"
+      },
+      {
+        "batter": "Chase DeLauter",
+        "ev": 98.6,
+        "angle": 27.0,
+        "distance": 369.0,
+        "hr_in_parks": 3,
+        "result": "double",
+        "pitcher": "Cease, Dylan"
+      },
+      {
+        "batter": "Vladimir Guerrero Jr.",
+        "ev": 105.9,
+        "angle": 18.0,
+        "distance": 405.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Cantillo, Joey"
+      },
+      {
+        "batter": "Adael Amador",
+        "ev": 98.9,
+        "angle": 28.0,
+        "distance": 395.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "Wolfram, Grant"
+      },
+      {
+        "batter": "Cole Carrigg",
+        "ev": 99.9,
+        "angle": 29.0,
+        "distance": 379.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Kittredge, Andrew"
+      },
+      {
+        "batter": "Hunter Goodman",
+        "ev": 105.6,
+        "angle": 35.0,
+        "distance": 426.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "Kittredge, Andrew"
+      },
+      {
+        "batter": "Luis Robert Jr.",
+        "ev": 102.9,
+        "angle": 22.0,
+        "distance": 378.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Sugano, Tomoyuki"
+      },
+      {
+        "batter": "Jeremy Pe\u00f1a",
+        "ev": 105.3,
+        "angle": 24.0,
+        "distance": 401.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Newcomb, Sean"
+      },
+      {
+        "batter": "Tristan Peters",
+        "ev": 103.5,
+        "angle": 28.0,
+        "distance": 396.0,
+        "hr_in_parks": 29,
+        "result": "triple",
+        "pitcher": "Blubaugh, AJ"
+      },
+      {
+        "batter": "Michael Massey",
+        "ev": 95.2,
+        "angle": 33.0,
+        "distance": 381.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Ralston, Jack"
+      },
+      {
+        "batter": "Bobby Witt Jr.",
+        "ev": 96.4,
+        "angle": 29.0,
+        "distance": 380.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Ekness, Josh"
+      },
+      {
+        "batter": "Heriberto Hern\u00e1ndez",
+        "ev": 105.2,
+        "angle": 22.0,
+        "distance": 419.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Thomas, Connor"
+      },
+      {
+        "batter": "Carter Jensen",
+        "ev": 104.9,
+        "angle": 23.0,
+        "distance": 406.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "P\u00e9rez, Eury"
+      },
+      {
+        "batter": "Michael Massey",
+        "ev": 105.6,
+        "angle": 22.0,
+        "distance": 387.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "P\u00e9rez, Eury"
+      },
+      {
+        "batter": "Will Smith",
+        "ev": 99.0,
+        "angle": 34.0,
+        "distance": 371.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Bruihl, Justin"
+      },
+      {
+        "batter": "Trevor Larnach",
+        "ev": 107.9,
+        "angle": 17.0,
+        "distance": 378.0,
+        "hr_in_parks": 21,
+        "result": "double",
+        "pitcher": "Anderson, Drew"
+      },
+      {
+        "batter": "Eduardo Valencia",
+        "ev": 103.8,
+        "angle": 27.0,
+        "distance": 405.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Kremer, Dean"
+      },
+      {
+        "batter": "John Peck",
+        "ev": 109.9,
+        "angle": 18.0,
+        "distance": 398.0,
+        "hr_in_parks": 29,
+        "result": "double",
+        "pitcher": "Kremer, Dean"
+      },
+      {
+        "batter": "Jacob Gonzalez",
+        "ev": 99.5,
+        "angle": 30.0,
+        "distance": 391.0,
+        "hr_in_parks": 19,
+        "result": "double",
+        "pitcher": "Foley, Jason"
+      },
+      {
+        "batter": "Bryan Reynolds",
+        "ev": 109.1,
+        "angle": 22.0,
+        "distance": 388.0,
+        "hr_in_parks": 26,
+        "result": "double",
+        "pitcher": "Seymour, Carson"
+      },
+      {
+        "batter": "Bo Bichette",
+        "ev": 102.6,
+        "angle": 24.0,
+        "distance": 383.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Booser, Cam"
+      },
+      {
+        "batter": "Cedric Mullins",
+        "ev": 103.8,
+        "angle": 39.0,
+        "distance": 374.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Hagenman, Justin"
+      },
+      {
+        "batter": "Brett Baty",
+        "ev": 106.1,
+        "angle": 21.0,
+        "distance": 388.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Jax, Griffin"
+      },
+      {
+        "batter": "Zack Gelof",
+        "ev": 100.1,
+        "angle": 28.0,
+        "distance": 376.0,
+        "hr_in_parks": 8,
+        "result": "double",
+        "pitcher": "Montgomery, Jordan"
+      },
+      {
+        "batter": "Wyatt Langford",
+        "ev": 95.8,
+        "angle": 32.0,
+        "distance": 371.0,
+        "hr_in_parks": 25,
+        "result": "field_out",
+        "pitcher": "Lopez, Jacob"
+      },
+      {
+        "batter": "Abimelec Ortiz",
+        "ev": 108.8,
+        "angle": 36.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Hern\u00e1ndez, Elieser"
+      },
+      {
+        "batter": "Mike Yastrzemski",
+        "ev": 96.8,
+        "angle": 31.0,
+        "distance": 372.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Cornelio, Riley"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
