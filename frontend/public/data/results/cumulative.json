@@ -194437,7 +194437,7 @@
     ],
     "total_players_ranked": 177,
     "total_hrs_hit": 16,
-    "total_near_hrs": 0,
+    "total_near_hrs": 4,
     "model_hits": 15,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -194554,7 +194554,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 4,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -194580,28 +194580,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 4,
+        "rate": 40.0
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 6,
+        "rate": 30.0
       },
       "top_30": {
         "total": 30,
-        "hits": 4,
-        "rate": 13.3
+        "hits": 7,
+        "rate": 23.3
       },
       "all": {
         "total": 177,
-        "hits": 15,
-        "rate": 8.5
+        "hits": 19,
+        "rate": 10.7
       }
     },
     "avg_composite_hr_hitters": 0.51,
-    "avg_composite_non_hitters": 0.429,
-    "composite_separation": 0.081,
+    "avg_composite_non_hitters": 0.423,
+    "composite_separation": 0.087,
     "hr_hitters": [
       {
         "name": "Heriberto Hern\u00e1ndez",
@@ -194816,8 +194816,92 @@
         "matchup": "BOS@BAL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Daulton Varsho",
+        "rank": 2,
+        "composite": 0.807,
+        "opp_pitcher": "Luis Castillo",
+        "matchup": "CWS@HOU"
+      },
+      {
+        "name": "Bryan Reynolds",
+        "rank": 6,
+        "composite": 0.771,
+        "opp_pitcher": "Blade Tidwell",
+        "matchup": "SF@PIT"
+      },
+      {
+        "name": "Kyle Stowers",
+        "rank": 25,
+        "composite": 0.606,
+        "opp_pitcher": "Michael Wacha",
+        "matchup": "MIA@KC"
+      },
+      {
+        "name": "Junior Caminero",
+        "rank": 37,
+        "composite": 0.55,
+        "opp_pitcher": "Cal Quantrill",
+        "matchup": "TB@TEX"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Pete Alonso",
+        "ev": 103.0,
+        "angle": 33.0,
+        "distance": 396.0,
+        "hr_in_parks": 6,
+        "result": "field_out",
+        "pitcher": "Bennett, Jake"
+      },
+      {
+        "batter": "Pete Alonso",
+        "ev": 102.7,
+        "angle": 25.0,
+        "distance": 394.0,
+        "hr_in_parks": 3,
+        "result": "sac_fly",
+        "pitcher": "Bennett, Jake"
+      },
+      {
+        "batter": "Daulton Varsho",
+        "ev": 101.0,
+        "angle": 23.0,
+        "distance": 391.0,
+        "hr_in_parks": 27,
+        "result": "triple",
+        "pitcher": "Castillo, Luis"
+      },
+      {
+        "batter": "Kyle Stowers",
+        "ev": 107.1,
+        "angle": 43.0,
+        "distance": 398.0,
+        "hr_in_parks": 4,
+        "result": "",
+        "pitcher": "Wacha, Michael"
+      },
+      {
+        "batter": "Bryan Reynolds",
+        "ev": 103.0,
+        "angle": 31.0,
+        "distance": 383.0,
+        "hr_in_parks": 13,
+        "result": "field_out",
+        "pitcher": "Tidwell, Blade"
+      },
+      {
+        "batter": "Junior Caminero",
+        "ev": 104.6,
+        "angle": 20.0,
+        "distance": 384.0,
+        "hr_in_parks": 7,
+        "result": "field_out",
+        "pitcher": "Quantrill, Cal"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
