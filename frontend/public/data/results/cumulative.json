@@ -197588,7 +197588,7 @@
     ],
     "total_players_ranked": 305,
     "total_hrs_hit": 37,
-    "total_near_hrs": 0,
+    "total_near_hrs": 17,
     "model_hits": 34,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -197705,7 +197705,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 17,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -197731,28 +197731,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 5,
+        "rate": 50.0
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 8,
+        "rate": 40.0
       },
       "top_30": {
         "total": 30,
-        "hits": 5,
-        "rate": 16.7
+        "hits": 9,
+        "rate": 30.0
       },
       "all": {
         "total": 305,
-        "hits": 34,
-        "rate": 11.1
+        "hits": 51,
+        "rate": 16.7
       }
     },
     "avg_composite_hr_hitters": 0.432,
-    "avg_composite_non_hitters": 0.421,
-    "composite_separation": 0.011,
+    "avg_composite_non_hitters": 0.418,
+    "composite_separation": 0.014,
     "hr_hitters": [
       {
         "name": "Kyle Stowers",
@@ -198233,8 +198233,300 @@
         "matchup": "SF@NYM"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Esmerlyn Valdez",
+        "rank": 5,
+        "composite": 0.74,
+        "opp_pitcher": "Yusei Kikuchi",
+        "matchup": "LAA@PIT"
+      },
+      {
+        "name": "Salvador Perez",
+        "rank": 6,
+        "composite": 0.734,
+        "opp_pitcher": "Max Scherzer",
+        "matchup": "TOR@KC"
+      },
+      {
+        "name": "Roman Anthony",
+        "rank": 7,
+        "composite": 0.733,
+        "opp_pitcher": "Chris Bassitt",
+        "matchup": "BOS@BAL"
+      },
+      {
+        "name": "Daylen Lile",
+        "rank": 12,
+        "composite": 0.691,
+        "opp_pitcher": "Tyler Glasnow",
+        "matchup": "WSH@LAD"
+      },
+      {
+        "name": "Alec Burleson",
+        "rank": 37,
+        "composite": 0.629,
+        "opp_pitcher": "Mason Adams",
+        "matchup": "STL@COL"
+      },
+      {
+        "name": "Eugenio Su\u00e1rez",
+        "rank": 76,
+        "composite": 0.516,
+        "opp_pitcher": "Dustin May",
+        "matchup": "MIL@CIN"
+      },
+      {
+        "name": "Zack Gelof",
+        "rank": 99,
+        "composite": 0.472,
+        "opp_pitcher": "George Kirby",
+        "matchup": "ATH@SEA"
+      },
+      {
+        "name": "Jordan Beck",
+        "rank": 134,
+        "composite": 0.423,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "STL@COL"
+      },
+      {
+        "name": "Bryson Stott",
+        "rank": 138,
+        "composite": 0.418,
+        "opp_pitcher": "Mart\u00edn P\u00e9rez",
+        "matchup": "ATL@PHI"
+      },
+      {
+        "name": "Wade Meckler",
+        "rank": 150,
+        "composite": 0.406,
+        "opp_pitcher": "Braxton Ashcraft",
+        "matchup": "LAA@PIT"
+      },
+      {
+        "name": "Nolan Gorman",
+        "rank": 165,
+        "composite": 0.4,
+        "opp_pitcher": "Mason Adams",
+        "matchup": "STL@COL"
+      },
+      {
+        "name": "Daulton Varsho",
+        "rank": 168,
+        "composite": 0.398,
+        "opp_pitcher": "Brandon Pfaadt",
+        "matchup": "AZ@HOU"
+      },
+      {
+        "name": "Corbin Carroll",
+        "rank": 173,
+        "composite": 0.392,
+        "opp_pitcher": "Ethan Pecko",
+        "matchup": "AZ@HOU"
+      },
+      {
+        "name": "Samuel Basallo",
+        "rank": 179,
+        "composite": 0.389,
+        "opp_pitcher": "Sonny Gray",
+        "matchup": "BOS@BAL"
+      },
+      {
+        "name": "Kyle Isbel",
+        "rank": 270,
+        "composite": 0.256,
+        "opp_pitcher": "Max Scherzer",
+        "matchup": "TOR@KC"
+      },
+      {
+        "name": "Esteury Ruiz",
+        "rank": 280,
+        "composite": 0.24,
+        "opp_pitcher": "Javier Assad",
+        "matchup": "CHC@MIA"
+      },
+      {
+        "name": "Cam Smith",
+        "rank": 293,
+        "composite": 0.203,
+        "opp_pitcher": "Brandon Pfaadt",
+        "matchup": "AZ@HOU"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Samuel Basallo",
+        "ev": 107.0,
+        "angle": 38.0,
+        "distance": 381.0,
+        "hr_in_parks": 23,
+        "result": "field_out",
+        "pitcher": "Gray, Sonny"
+      },
+      {
+        "batter": "Roman Anthony",
+        "ev": 110.8,
+        "angle": 28.0,
+        "distance": 402.0,
+        "hr_in_parks": 16,
+        "result": "",
+        "pitcher": "Bassitt, Chris"
+      },
+      {
+        "batter": "Eugenio Su\u00e1rez",
+        "ev": 106.4,
+        "angle": 25.0,
+        "distance": 392.0,
+        "hr_in_parks": 19,
+        "result": "double",
+        "pitcher": "Anderson, Grant"
+      },
+      {
+        "batter": "Riley Greene",
+        "ev": 105.7,
+        "angle": 25.0,
+        "distance": 378.0,
+        "hr_in_parks": 11,
+        "result": "double",
+        "pitcher": "Festa, Matt"
+      },
+      {
+        "batter": "Alec Burleson",
+        "ev": 106.5,
+        "angle": 30.0,
+        "distance": 408.0,
+        "hr_in_parks": 24,
+        "result": "",
+        "pitcher": "Hill, Jaden"
+      },
+      {
+        "batter": "Nolan Gorman",
+        "ev": 105.2,
+        "angle": 40.0,
+        "distance": 410.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Agnos, Zach"
+      },
+      {
+        "batter": "Jordan Beck",
+        "ev": 107.1,
+        "angle": 38.0,
+        "distance": 422.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "Liberatore, Matthew"
+      },
+      {
+        "batter": "Daulton Varsho",
+        "ev": 104.5,
+        "angle": 29.0,
+        "distance": 388.0,
+        "hr_in_parks": 25,
+        "result": "field_out",
+        "pitcher": "Morillo, Juan"
+      },
+      {
+        "batter": "Cam Smith",
+        "ev": 106.6,
+        "angle": 20.0,
+        "distance": 402.0,
+        "hr_in_parks": 29,
+        "result": "triple",
+        "pitcher": "Pfaadt, Brandon"
+      },
+      {
+        "batter": "Corbin Carroll",
+        "ev": 104.8,
+        "angle": 31.0,
+        "distance": 414.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Pecko, Ethan"
+      },
+      {
+        "batter": "Kyle Isbel",
+        "ev": 77.6,
+        "angle": 25.0,
+        "distance": 391.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Varland, Louis"
+      },
+      {
+        "batter": "Salvador Perez",
+        "ev": 102.3,
+        "angle": 30.0,
+        "distance": 402.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "Scherzer, Max"
+      },
+      {
+        "batter": "Daylen Lile",
+        "ev": 101.0,
+        "angle": 33.0,
+        "distance": 378.0,
+        "hr_in_parks": 7,
+        "result": "field_out",
+        "pitcher": "Glasnow, Tyler"
+      },
+      {
+        "batter": "Esteury Ruiz",
+        "ev": 100.7,
+        "angle": 33.0,
+        "distance": 390.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Rolison, Ryan"
+      },
+      {
+        "batter": "Bryson Stott",
+        "ev": 105.8,
+        "angle": 18.0,
+        "distance": 372.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "P\u00e9rez, Mart\u00edn"
+      },
+      {
+        "batter": "Wade Meckler",
+        "ev": 98.5,
+        "angle": 29.0,
+        "distance": 384.0,
+        "hr_in_parks": 5,
+        "result": "double",
+        "pitcher": "Mattson, Isaac"
+      },
+      {
+        "batter": "Esmerlyn Valdez",
+        "ev": 105.8,
+        "angle": 37.0,
+        "distance": 397.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Kikuchi, Yusei"
+      },
+      {
+        "batter": "Jasson Dom\u00ednguez",
+        "ev": 102.9,
+        "angle": 22.0,
+        "distance": 389.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Brito, Jhony"
+      },
+      {
+        "batter": "Zack Gelof",
+        "ev": 102.2,
+        "angle": 27.0,
+        "distance": 392.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Kirby, George"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
