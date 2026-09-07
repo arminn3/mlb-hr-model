@@ -323,7 +323,7 @@
   ],
   "total_players_ranked": 306,
   "total_hrs_hit": 33,
-  "total_near_hrs": 0,
+  "total_near_hrs": 15,
   "model_hits": 31,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -440,7 +440,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 15,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -466,28 +466,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 2,
-      "rate": 20.0
+      "hits": 3,
+      "rate": 30.0
     },
     "top_20": {
       "total": 20,
-      "hits": 3,
-      "rate": 15.0
+      "hits": 4,
+      "rate": 20.0
     },
     "top_30": {
       "total": 30,
-      "hits": 3,
-      "rate": 10.0
+      "hits": 5,
+      "rate": 16.7
     },
     "all": {
       "total": 306,
-      "hits": 31,
-      "rate": 10.1
+      "hits": 46,
+      "rate": 15.0
     }
   },
   "avg_composite_hr_hitters": 0.438,
-  "avg_composite_non_hitters": 0.417,
-  "composite_separation": 0.021,
+  "avg_composite_non_hitters": 0.413,
+  "composite_separation": 0.025,
   "hr_hitters": [
     {
       "name": "Corey Seager",
@@ -926,8 +926,277 @@
       "matchup": "CHC@MIA"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Sal Frelick",
+      "rank": 8,
+      "composite": 0.766,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "MIL@CIN"
+    },
+    {
+      "name": "Austin Riley",
+      "rank": 24,
+      "composite": 0.674,
+      "opp_pitcher": "Aaron Nola",
+      "matchup": "ATL@PHI"
+    },
+    {
+      "name": "Garrett Mitchell",
+      "rank": 52,
+      "composite": 0.577,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "MIL@CIN"
+    },
+    {
+      "name": "Ty France",
+      "rank": 61,
+      "composite": 0.549,
+      "opp_pitcher": "Gerrit Cole",
+      "matchup": "NYY@SD"
+    },
+    {
+      "name": "Justin Foscue",
+      "rank": 66,
+      "composite": 0.535,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "TB@TEX"
+    },
+    {
+      "name": "Daylen Lile",
+      "rank": 74,
+      "composite": 0.513,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "WSH@LAD"
+    },
+    {
+      "name": "Luis Garc\u00eda Jr.",
+      "rank": 87,
+      "composite": 0.474,
+      "opp_pitcher": "Michael King",
+      "matchup": "NYY@SD"
+    },
+    {
+      "name": "TJ Rumfield",
+      "rank": 90,
+      "composite": 0.472,
+      "opp_pitcher": "Kyle Leahy",
+      "matchup": "STL@COL"
+    },
+    {
+      "name": "Thomas Saggese",
+      "rank": 103,
+      "composite": 0.437,
+      "opp_pitcher": "Tanner Gordon",
+      "matchup": "STL@COL"
+    },
+    {
+      "name": "Cal Raleigh",
+      "rank": 113,
+      "composite": 0.425,
+      "opp_pitcher": "Gage Jump",
+      "matchup": "ATH@SEA"
+    },
+    {
+      "name": "Harry Ford",
+      "rank": 118,
+      "composite": 0.425,
+      "opp_pitcher": "Justin Wrobleski",
+      "matchup": "WSH@LAD"
+    },
+    {
+      "name": "Alec Burleson",
+      "rank": 126,
+      "composite": 0.421,
+      "opp_pitcher": "Tanner Gordon",
+      "matchup": "STL@COL"
+    },
+    {
+      "name": "Jacob Gonzalez",
+      "rank": 147,
+      "composite": 0.404,
+      "opp_pitcher": "Walbert Ure\u00f1a",
+      "matchup": "LAA@PIT"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 168,
+      "composite": 0.396,
+      "opp_pitcher": "Spencer Arrighetti",
+      "matchup": "TOR@KC"
+    },
+    {
+      "name": "Otto Lopez",
+      "rank": 277,
+      "composite": 0.231,
+      "opp_pitcher": "Clay Holmes",
+      "matchup": "CHC@MIA"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Sal Frelick",
+      "ev": 106.9,
+      "angle": 29.0,
+      "distance": 397.0,
+      "hr_in_parks": 4,
+      "result": "",
+      "pitcher": "Mey, Luis"
+    },
+    {
+      "batter": "Garrett Mitchell",
+      "ev": 109.2,
+      "angle": 21.0,
+      "distance": 410.0,
+      "hr_in_parks": 28,
+      "result": "triple",
+      "pitcher": "Singer, Brady"
+    },
+    {
+      "batter": "TJ Rumfield",
+      "ev": 104.1,
+      "angle": 29.0,
+      "distance": 416.0,
+      "hr_in_parks": 29,
+      "result": "",
+      "pitcher": "Hjerpe, Cooper"
+    },
+    {
+      "batter": "Jake McCarthy",
+      "ev": 99.3,
+      "angle": 36.0,
+      "distance": 393.0,
+      "hr_in_parks": 5,
+      "result": "field_out",
+      "pitcher": "Leahy, Kyle"
+    },
+    {
+      "batter": "Alec Burleson",
+      "ev": 101.8,
+      "angle": 31.0,
+      "distance": 397.0,
+      "hr_in_parks": 29,
+      "result": "field_out",
+      "pitcher": "Gordon, Tanner"
+    },
+    {
+      "batter": "Thomas Saggese",
+      "ev": 102.3,
+      "angle": 20.0,
+      "distance": 373.0,
+      "hr_in_parks": 16,
+      "result": "double",
+      "pitcher": "Gordon, Tanner"
+    },
+    {
+      "batter": "Bobby Witt Jr.",
+      "ev": 112.5,
+      "angle": 17.0,
+      "distance": 375.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Arrighetti, Spencer"
+    },
+    {
+      "batter": "Harry Ford",
+      "ev": 100.2,
+      "angle": 35.0,
+      "distance": 371.0,
+      "hr_in_parks": 14,
+      "result": "field_out",
+      "pitcher": "Miller, Bobby"
+    },
+    {
+      "batter": "Mookie Betts",
+      "ev": 100.6,
+      "angle": 23.0,
+      "distance": 369.0,
+      "hr_in_parks": 16,
+      "result": "field_out",
+      "pitcher": "Lord, Brad"
+    },
+    {
+      "batter": "Daylen Lile",
+      "ev": 103.7,
+      "angle": 28.0,
+      "distance": 395.0,
+      "hr_in_parks": 3,
+      "result": "triple",
+      "pitcher": "Miller, Bobby"
+    },
+    {
+      "batter": "Otto Lopez",
+      "ev": 98.4,
+      "angle": 25.0,
+      "distance": 381.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Holmes, Clay"
+    },
+    {
+      "batter": "Austin Riley",
+      "ev": 109.0,
+      "angle": 21.0,
+      "distance": 393.0,
+      "hr_in_parks": 23,
+      "result": "triple",
+      "pitcher": "Duran, Jhoan"
+    },
+    {
+      "batter": "Jacob Gonzalez",
+      "ev": 102.9,
+      "angle": 28.0,
+      "distance": 394.0,
+      "hr_in_parks": 25,
+      "result": "field_out",
+      "pitcher": "Ure\u00f1a, Walbert"
+    },
+    {
+      "batter": "Luis Garc\u00eda Jr.",
+      "ev": 101.2,
+      "angle": 30.0,
+      "distance": 392.0,
+      "hr_in_parks": 9,
+      "result": "field_out",
+      "pitcher": "King, Michael"
+    },
+    {
+      "batter": "Manny Machado",
+      "ev": 102.1,
+      "angle": 31.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Cole, Gerrit"
+    },
+    {
+      "batter": "Ty France",
+      "ev": 102.5,
+      "angle": 28.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Cole, Gerrit"
+    },
+    {
+      "batter": "Cal Raleigh",
+      "ev": 109.0,
+      "angle": 29.0,
+      "distance": 392.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Jump, Gage"
+    },
+    {
+      "batter": "Justin Foscue",
+      "ev": 99.0,
+      "angle": 26.0,
+      "distance": 392.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Seymour, Ian"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Derek Hill",
