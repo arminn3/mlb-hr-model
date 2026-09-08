@@ -201360,7 +201360,7 @@
     ],
     "total_players_ranked": 222,
     "total_hrs_hit": 22,
-    "total_near_hrs": 0,
+    "total_near_hrs": 8,
     "model_hits": 21,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -201477,7 +201477,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 8,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -201503,28 +201503,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 3,
+        "rate": 30.0
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 4,
-        "rate": 13.3
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
         "total": 222,
-        "hits": 21,
-        "rate": 9.5
+        "hits": 29,
+        "rate": 13.1
       }
     },
     "avg_composite_hr_hitters": 0.444,
-    "avg_composite_non_hitters": 0.41,
-    "composite_separation": 0.034,
+    "avg_composite_non_hitters": 0.408,
+    "composite_separation": 0.036,
     "hr_hitters": [
       {
         "name": "Eugenio Su\u00e1rez",
@@ -201823,8 +201823,165 @@
         "matchup": "TOR@ATH"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Rafael Devers",
+        "rank": 7,
+        "composite": 0.735,
+        "opp_pitcher": "Michael McGreevy",
+        "matchup": "STL@SF"
+      },
+      {
+        "name": "Bryson Stott",
+        "rank": 32,
+        "composite": 0.59,
+        "opp_pitcher": "Grant Holmes",
+        "matchup": "ATL@PHI"
+      },
+      {
+        "name": "Bobby Witt Jr.",
+        "rank": 49,
+        "composite": 0.514,
+        "opp_pitcher": "Jose Cabrera",
+        "matchup": "AZ@KC"
+      },
+      {
+        "name": "Nolan Gorman",
+        "rank": 73,
+        "composite": 0.448,
+        "opp_pitcher": "Logan Webb",
+        "matchup": "STL@SF"
+      },
+      {
+        "name": "Josh Bell",
+        "rank": 85,
+        "composite": 0.421,
+        "opp_pitcher": "Troy Melton",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Ryan Jeffers",
+        "rank": 111,
+        "composite": 0.397,
+        "opp_pitcher": "Troy Melton",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Corbin Carroll",
+        "rank": 168,
+        "composite": 0.316,
+        "opp_pitcher": "Noah Cameron",
+        "matchup": "AZ@KC"
+      },
+      {
+        "name": "Abimelec Ortiz",
+        "rank": 197,
+        "composite": 0.252,
+        "opp_pitcher": "Nick Pivetta",
+        "matchup": "WSH@SD"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Kazuma Okamoto",
+        "ev": 99.5,
+        "angle": 28.0,
+        "distance": 376.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Lopez, Jacob"
+      },
+      {
+        "batter": "Ryan Jeffers",
+        "ev": 104.6,
+        "angle": 28.0,
+        "distance": 410.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Jansen, Kenley"
+      },
+      {
+        "batter": "Josh Bell",
+        "ev": 98.5,
+        "angle": 28.0,
+        "distance": 388.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Melton, Troy"
+      },
+      {
+        "batter": "Corbin Carroll",
+        "ev": 112.4,
+        "angle": 29.0,
+        "distance": 431.0,
+        "hr_in_parks": 30,
+        "result": "",
+        "pitcher": "Kimbrel, Craig"
+      },
+      {
+        "batter": "Bobby Witt Jr.",
+        "ev": 101.4,
+        "angle": 27.0,
+        "distance": 374.0,
+        "hr_in_parks": 11,
+        "result": "field_out",
+        "pitcher": "Cabrera, Jose"
+      },
+      {
+        "batter": "Pedro Ram\u00edrez",
+        "ev": 99.6,
+        "angle": 28.0,
+        "distance": 381.0,
+        "hr_in_parks": 24,
+        "result": "field_out",
+        "pitcher": "Megill, Trevor"
+      },
+      {
+        "batter": "Bryson Stott",
+        "ev": 104.2,
+        "angle": 31.0,
+        "distance": 399.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Holmes, Grant"
+      },
+      {
+        "batter": "Abimelec Ortiz",
+        "ev": 105.6,
+        "angle": 19.0,
+        "distance": 398.0,
+        "hr_in_parks": 20,
+        "result": "field_out",
+        "pitcher": "Pivetta, Nick"
+      },
+      {
+        "batter": "Nolan Gorman",
+        "ev": 100.7,
+        "angle": 26.0,
+        "distance": 379.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Smith, Dylan"
+      },
+      {
+        "batter": "Alec Burleson",
+        "ev": 102.5,
+        "angle": 42.0,
+        "distance": 373.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Smith, Dylan"
+      },
+      {
+        "batter": "Rafael Devers",
+        "ev": 106.7,
+        "angle": 24.0,
+        "distance": 400.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "McGreevy, Michael"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
