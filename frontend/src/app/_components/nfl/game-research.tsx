@@ -5,6 +5,9 @@ import { LayoutGrid, ListOrdered, Zap, HeartPulse, ChevronDown } from "lucide-re
 import { CARD, color } from "../../_design";
 import type { NflSlate, NflGame, NflPlayer } from "./types";
 import { PlayerBlock } from "./player-research";
+import { Lineups } from "./lineups";
+import { MatchupFactors } from "./matchup-factors";
+import { Touchdowns } from "./touchdowns";
 import { teamLogo, teamName, relativeDay, fmtPct, fmtPct1, scoreColor, posColor, matchupColor, matchupLabel } from "./format";
 
 // Order role-holders within a team the way the reference stacks them.
@@ -33,7 +36,7 @@ function LeagueSwitcher() {
     { key: "MLB", label: "MLB", href: "/dashboard", current: false },
   ];
   return (
-    <div className="relative w-[198px] shrink-0">
+    <div className="relative w-[180px] shrink-0">
       <button
         onClick={() => setOpen((o) => !o)}
         className="flex items-center gap-2 rounded-lg p-3 w-full cursor-pointer"
@@ -71,72 +74,31 @@ function spreadLabel(g: NflGame): string {
 }
 
 // ── Player Props tab (default) — stacked role-holder blocks, both teams ───────
-function TeamSection({ game, team }: { game: NflGame; team: string }) {
+function TeamSection({ game, team, currentSeason }: { game: NflGame; team: string; currentSeason: number }) {
   const players = useMemo(() => game.players.filter((p) => p.team === team).sort(byRole), [game, team]);
   const opp = team === game.home_team ? game.away_team : game.home_team;
   const imp = team === game.home_team ? game.home_implied : game.away_implied;
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-2 sticky top-0 z-10 py-2 -mx-1 px-1" style={{ background: color.background }}>
+      <div className="flex items-center gap-2 py-2 px-1">
         <Logo team={team} size={22} />
         <span className="text-[16px] font-bold text-foreground">{team}</span>
         <span className="text-[11px]" style={{ color: color.muted }}>offense vs {opp} · implied {imp}</span>
       </div>
-      {players.map((p) => <PlayerBlock key={p.gsis_id} player={p} />)}
+      {players.map((p) => <PlayerBlock key={p.gsis_id} player={p} currentSeason={currentSeason} />)}
     </div>
   );
 }
 
-function PlayerProps({ game }: { game: NflGame }) {
+function PlayerProps({ game, currentSeason }: { game: NflGame; currentSeason: number }) {
   return (
     <div className="space-y-8">
-      <TeamSection game={game} team={game.away_team} />
-      <TeamSection game={game} team={game.home_team} />
+      <TeamSection game={game} team={game.away_team} currentSeason={currentSeason} />
+      <TeamSection game={game} team={game.home_team} currentSeason={currentSeason} />
     </div>
   );
 }
 
-// ── Touchdowns tab — every role-holder ranked by anytime-TD probability ───────
-function Touchdowns({ game }: { game: NflGame }) {
-  const rows = useMemo(() => [...game.players].sort((a, b) => b.score - a.score), [game]);
-  return (
-    <div className="rounded-xl overflow-hidden" style={CARD.elevated}>
-      <div className="overflow-x-auto">
-        <table className="w-full text-[13px]" style={{ minWidth: 560 }}>
-          <thead>
-            <tr className="text-[9px] uppercase tracking-wider" style={{ color: color.muted }}>
-              <th className="text-right py-2 pl-3 pr-2">#</th>
-              <th className="text-left py-2 px-2">Player</th>
-              <th className="text-left py-2 px-2">Team</th>
-              <th className="text-right py-2 px-2">vs Role</th>
-              <th className="text-right py-2 px-2">Hit% Szn</th>
-              <th className="text-right py-2 px-3">TD%</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((p, i) => (
-              <tr key={p.gsis_id} className="border-t" style={{ borderColor: "rgba(255,255,255,0.05)" }}>
-                <td className="py-2 pl-3 pr-2 text-right font-mono" style={{ color: "rgba(255,255,255,0.35)" }}>{i + 1}</td>
-                <td className="py-2 px-2">
-                  <span className="font-semibold text-foreground">{p.name}</span>
-                  <span className="ml-1.5 text-[10px] font-bold" style={{ color: posColor(p.pos) }}>{p.role}</span>
-                </td>
-                <td className="py-2 px-2">
-                  <span className="inline-flex items-center gap-1.5"><Logo team={p.team} size={16} /><span style={{ color: color.muted }}>{p.team}</span></span>
-                </td>
-                <td className="py-2 px-2 text-right font-mono" style={{ color: matchupColor(p.opp_rank_vs_role, p.opp_rank_total) }}>
-                  #{p.opp_rank_vs_role}/{p.opp_rank_total}
-                </td>
-                <td className="py-2 px-2 text-right font-mono text-foreground/85">{fmtPct(p.hit_rate_season)}</td>
-                <td className="py-2 px-3 text-right font-mono font-bold" style={{ color: scoreColor(p.score) }}>{fmtPct1(p.score)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
 
 // ── Game Overview tab — matchup summary + each team's top plays ───────────────
 function TeamTop({ game, team }: { game: NflGame; team: string }) {
@@ -172,9 +134,13 @@ function TeamTop({ game, team }: { game: NflGame; team: string }) {
 
 function GameOverview({ game }: { game: NflGame }) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      <TeamTop game={game} team={game.away_team} />
-      <TeamTop game={game} team={game.home_team} />
+    <div className="flex flex-col gap-6">
+      <MatchupFactors game={game} />
+      <Lineups game={game} />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <TeamTop game={game} team={game.away_team} />
+        <TeamTop game={game} team={game.home_team} />
+      </div>
     </div>
   );
 }
@@ -204,17 +170,24 @@ export function GameResearch({
   onSelectGame: (id: string) => void;
 }) {
   const [gameTab, setGameTab] = useState<GameTab>("props");
+  // soonest kickoff first (by date, then time)
+  const kickoffMin = (k: string) => {
+    const m = k.match(/(\d+):(\d+)\s*(am|pm)/i);
+    if (!m) return 0;
+    return ((+m[1] % 12) + (/pm/i.test(m[3]) ? 12 : 0)) * 60 + +m[2];
+  };
   const games = useMemo(
-    () => [...slate.games].sort((a, b) => (b.away_implied + b.home_implied) - (a.away_implied + a.home_implied)),
+    () => [...slate.games].sort((a, b) => (a.gameday || "").localeCompare(b.gameday || "") || kickoffMin(a.kickoff) - kickoffMin(b.kickoff)),
     [slate],
   );
   const game = games.find((g) => g.game_id === selectedGameId) ?? games[0];
   if (!game) return null;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-4">
+    // rail and stats scroll independently: cap the row to the viewport and let each column scroll on its own.
+    <div className="flex flex-col lg:flex-row gap-4 lg:h-[calc(100vh-124px)] lg:overflow-hidden">
       {/* left rail — game selection (copied from Figma node 3:65) */}
-      <aside className="shrink-0">
+      <aside className="shrink-0 lg:h-full lg:overflow-y-auto lg:pr-1 scroll-subtle">
         <div className="flex lg:flex-col gap-3 lg:gap-5 overflow-x-auto lg:overflow-visible pb-1">
           {/* league dropdown = MLB <-> NFL model switcher */}
           <LeagueSwitcher />
@@ -226,13 +199,13 @@ export function GameResearch({
                 <button
                   key={g.game_id}
                   onClick={() => onSelectGame(g.game_id)}
-                  className="w-[198px] shrink-0 rounded-lg p-3 text-left cursor-pointer flex flex-col gap-2 transition-colors"
+                  className="w-[180px] shrink-0 rounded-lg p-3 text-left cursor-pointer flex flex-col gap-2 transition-colors"
                   style={on
                     ? { background: "rgba(58,84,213,0.25)", border: "1px solid #3a54d5" }
                     : { background: "#1b1b1b", border: "1px solid #343434" }}
                 >
                   <span className="text-[12px] font-semibold" style={{ color: "#ccc" }}>{relativeDay(g.gameday)} {g.kickoff}</span>
-                  <div className="flex items-center gap-[9px]">
+                  <div className="flex items-center justify-between w-full">
                     <span className="flex items-center gap-2"><Logo team={g.away_team} size={24} /><span className="text-[14px] font-bold text-white">{g.away_team}</span></span>
                     <span className="text-[16px] font-semibold text-white">@</span>
                     <span className="flex items-center gap-2"><Logo team={g.home_team} size={24} /><span className="text-[14px] font-bold text-white">{g.home_team}</span></span>
@@ -249,7 +222,7 @@ export function GameResearch({
       </aside>
 
       {/* main — game header (node 6:1035), per-game tabs, then the tab content */}
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1 lg:h-full lg:overflow-y-auto lg:pr-1 scroll-subtle">
         <div className="flex items-center gap-6 flex-wrap px-1 py-2">
           <div className="flex flex-col gap-3 items-start">
             <p className="text-[20px] font-medium text-white whitespace-nowrap">
@@ -291,7 +264,7 @@ export function GameResearch({
         </div>
 
         {gameTab === "overview" && <GameOverview game={game} />}
-        {gameTab === "props" && <PlayerProps game={game} />}
+        {gameTab === "props" && <PlayerProps game={game} currentSeason={slate.season} />}
         {gameTab === "tds" && <Touchdowns game={game} />}
         {gameTab === "injuries" && <Injuries />}
       </div>

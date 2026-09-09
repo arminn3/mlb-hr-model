@@ -1,12 +1,18 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Star } from "lucide-react";
 import { CARD, color } from "../../_design";
 import type { NflSlate, NflPlayer } from "./types";
 import { fmtPct, fmtPct1, scoreColor, posColor, matchupColor, matchupLabel, teamLogo } from "./format";
 
 const TOP_N = 30;
+
+// RBs structurally score higher than every other position (goal-line carries
+// concentrate red-zone volume in a way WR/TE/QB usage never does), so a single
+// pooled Top-N buries everyone else. Rank each position on its own board.
+const POSITIONS = ["ALL", "QB", "RB", "WR", "TE"] as const;
+type PosFilter = (typeof POSITIONS)[number];
 
 function Pill({ label, value, c }: { label: string; value: string; c?: string }) {
   return (
@@ -78,16 +84,39 @@ export function Rankings({
 }: {
   slate: NflSlate; favorites: Set<string>; onToggleFavorite: (id: string) => void; onSelect: (p: NflPlayer) => void;
 }) {
+  const [pos, setPos] = useState<PosFilter>("ALL");
+
   const top = useMemo(() => {
     const all = slate.games.flatMap((g) => g.players);
-    return [...all].sort((a, b) => b.score - a.score).slice(0, TOP_N);
-  }, [slate]);
+    const filtered = pos === "ALL" ? all : all.filter((p) => p.pos === pos);
+    return [...filtered].sort((a, b) => b.score - a.score).slice(0, TOP_N);
+  }, [slate, pos]);
 
   return (
     <div>
-      <div className="flex items-baseline justify-between mb-3">
-        <h2 className="text-[18px] font-semibold text-foreground tracking-[-0.005em]">Top {TOP_N} Anytime-TD Plays</h2>
-        <span className="text-[11px]" style={{ color: color.muted }}>ranked by model TD probability</span>
+      <div className="flex items-center justify-between mb-3 flex-wrap gap-3">
+        <div className="flex items-baseline gap-3">
+          <h2 className="text-[18px] font-semibold text-foreground tracking-[-0.005em]">
+            Top {TOP_N} {pos === "ALL" ? "" : pos + " "}Anytime-TD Plays
+          </h2>
+          <span className="text-[11px] hidden sm:inline" style={{ color: color.muted }}>ranked by model TD probability</span>
+        </div>
+        <div className="flex items-center gap-1">
+          {POSITIONS.map((key) => (
+            <button
+              key={key}
+              onClick={() => setPos(key)}
+              className="px-3 py-1.5 rounded-lg text-[12px] font-semibold cursor-pointer transition-colors"
+              style={
+                pos === key
+                  ? { background: "rgba(96,165,250,0.15)", border: "1px solid rgba(96,165,250,0.4)", color: color.accent }
+                  : { background: "transparent", border: "1px solid #2c2c2e", color: color.muted }
+              }
+            >
+              {key}
+            </button>
+          ))}
+        </div>
       </div>
       <div className="space-y-1.5">
         {top.map((p, i) => (

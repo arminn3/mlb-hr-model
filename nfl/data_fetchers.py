@@ -58,3 +58,21 @@ def load_schedules(year: int) -> pd.DataFrame:
 def load_players() -> pd.DataFrame:
     """All-time player table — used to map gsis_id -> position for DvP."""
     return _cached("players", lambda: nfl.import_players())
+
+
+def load_rosters(year: int) -> pd.DataFrame:
+    """Season rosters (gsis_id -> current team) — used to remap players to their
+    team for a season we don't have play-by-play for yet (e.g. Week 1 fallback)."""
+    return _cached(f"rosters_{year}", lambda: nfl.import_seasonal_rosters([year]))
+
+
+def load_depth_charts(year: int) -> pd.DataFrame:
+    """Official team depth charts (numbered via pos_rank — WR1/WR2/…), scraped
+    ~daily. Used as the role source during the prior-season-fallback period
+    (preseason/Week 1, before real current-season usage exists) since it
+    reflects the team's CURRENT plan — unlike reverse-engineering roles from a
+    prior season's box score, which misranks anyone who missed time to injury.
+    Cache key includes today's date so it refreshes daily instead of going stale."""
+    import datetime
+    today = datetime.date.today().isoformat()
+    return _cached(f"depth_{year}_{today}", lambda: nfl.import_depth_charts([year]))

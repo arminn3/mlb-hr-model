@@ -11,11 +11,13 @@ SCORING_POSITIONS = ("WR", "RB", "TE", "FB", "QB")
 RZ_YARDLINE = 20
 INSIDE_10 = 10
 
-# Player's slice of team TDs = blend of red-zone-opportunity share and their
-# actual share of team TDs so far. RZ-opportunity share is more predictive, so
-# it's weighted higher.
-SHARE_RZ_WEIGHT = 0.60
-SHARE_TD_WEIGHT = 0.40
+# Player's slice of team TDs = blend of red-zone-opportunity share, overall
+# usage share (touches / team touches — general offensive trust, not just
+# scoring outcomes), and their actual share of team TDs so far. RZ-opportunity
+# share is the single most predictive signal, so it stays weighted highest.
+SHARE_RZ_WEIGHT = 0.50
+SHARE_USAGE_WEIGHT = 0.25
+SHARE_TD_WEIGHT = 0.25
 
 # Implied team total (points) -> expected offensive TDs for the game.
 # ~24 implied points => ~3.1 expected TDs (rest is FGs/ST). Linear, clamped.
@@ -39,12 +41,20 @@ ROLE_TIERS = {
 # get NO role and are dropped from the slate — only the role-holders above show.
 
 # ── Defense-vs-ROLE vulnerability (TD-weighted blend) ─────────────────────────
-# Per (defense, role) we blend three per-game rates allowed — TDs, yards,
-# opportunities (targets+carries) — each normalized within the role across the 32
-# defenses, weighted toward TDs (this is an Anytime-TD board).
-DVP_TD_WEIGHT = 0.60
-DVP_YDS_WEIGHT = 0.25
-DVP_OPP_WEIGHT = 0.15
+# Per (defense, role) we blend four signals allowed to that role, each
+# normalized within the role across the 32 defenses, weighted toward TDs (this
+# is an Anytime-TD board):
+#   TD-weighted   — TDs allowed per game (the outcome we're predicting)
+#   yards-allowed — yards allowed per game
+#   usage-allowed — SHARE of the defense's total touches allowed to this role
+#                   (not a raw count, so pace doesn't skew it)
+#   RZ-usage-allowed — same share idea, restricted to red-zone touches; weighted
+#                   above general usage since RZ usage is the stronger signal
+#                   for a defense's true vulnerability to a role.
+DVP_TD_WEIGHT = 0.50
+DVP_YDS_WEIGHT = 0.15
+DVP_USAGE_WEIGHT = 0.15
+DVP_RZ_USAGE_WEIGHT = 0.20
 
 # Small-sample stabilizer: a role's vulnerability is regressed toward its parent
 # position's vulnerability. Weight on the role signal = n / (n + PRIOR), where n

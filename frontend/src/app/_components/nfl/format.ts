@@ -21,6 +21,12 @@ const TEAM_NAME: Record<string, string> = {
 };
 export const teamName = (abbr: string) => TEAM_NAME[abbr] ?? abbr;
 
+/** City/location only, e.g. "MIA" -> "Miami", "NE" -> "New England". */
+export const teamCity = (abbr: string) => {
+  const n = TEAM_NAME[abbr];
+  return n ? n.split(" ").slice(0, -1).join(" ") : abbr;
+};
+
 /** ISO date -> "Today" / "Tomorrow" / "Yesterday" / weekday ("Sun"). */
 export function relativeDay(iso: string): string {
   if (!iso) return "";
@@ -37,6 +43,23 @@ export function relativeDay(iso: string): string {
 
 export const playerHeadshot = (espnId?: string | null) =>
   espnId ? `https://a.espncdn.com/i/headshots/nfl/players/full/${espnId}.png` : null;
+
+// Tiled-heat shades: closer to the line = muted, further past it = vivid —
+// shared by the Research game-log cells and the Game-Overview split table so
+// both read the same "how far over/under" signal identically.
+const G_NEAR = [28, 66, 45], G_FAR = [22, 165, 74];
+const R_NEAR = [72, 41, 41], R_FAR = [198, 66, 66];
+const lerp = (a: number, b: number, t: number) => Math.round(a + (b - a) * t);
+const shadeRgb = (near: number[], far: number[], t: number) =>
+  `rgb(${lerp(near[0], far[0], t)},${lerp(near[1], far[1], t)},${lerp(near[2], far[2], t)})`;
+
+/** Tiled cell heat: over the line = shaded green, under = shaded red, shade
+ *  intensity scales with margin vs the line (muted near it, vivid far past). */
+export function tileHeat(v: number, line: number, invert = false): string {
+  const over = invert ? v <= line : v >= line;
+  const t = Math.min(1, Math.abs(v - line) / Math.max(0.5 * Math.abs(line), 1));
+  return over ? shadeRgb(G_NEAR, G_FAR, t) : shadeRgb(R_NEAR, R_FAR, t);
+}
 
 /** Line-driven cell heat: over the line = green (good look), under = red.
  *  `invert` flips it for lower-is-better stats (INT). Intensity by distance. */

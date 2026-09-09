@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ListOrdered, LineChart } from "lucide-react";
 import { color } from "../../_design";
+import { UserMenu } from "../user-menu";
 import type { NflSlate, NflPlayer } from "./types";
-import { SportSwitcher } from "../sport-switcher";
 import { Rankings } from "./rankings";
 import { GameResearch } from "./game-research";
 
@@ -55,34 +54,30 @@ export function NflDashboard() {
 
   return (
     <div className="min-h-screen" style={{ background: color.background }}>
-      <header className="border-b" style={{ borderColor: "#2c2c2e", background: color.card }}>
-        <div className="max-w-[1760px] mx-auto px-4 sm:px-6 h-[60px] flex items-center justify-between">
-          <div className="flex items-center gap-3 min-w-0">
-            <SportSwitcher active="nfl" />
-            <div className="min-w-0">
-              <div className="text-[14px] font-semibold text-foreground leading-tight">Beeb Sheets — NFL</div>
-              <div className="text-[11px] font-medium truncate" style={{ color: color.muted }}>
-                Anytime TD{slate ? ` · ${slate.season} Week ${slate.week}` : ""}
-              </div>
-            </div>
+      <header className="border-b" style={{ borderColor: "#3a3a3a", background: color.background }}>
+        <div className="max-w-[1760px] mx-auto px-6 flex items-center justify-between">
+          {/* title — sits above the game rail */}
+          <div className="flex items-center py-6 w-[186px] shrink-0">
+            <span className="text-[20px] font-bold text-white whitespace-nowrap">Beeb Sheets</span>
           </div>
-          <div className="flex items-center gap-1">
-            {([["rankings", "Rankings", ListOrdered], ["research", "Research", LineChart]] as const).map(
-              ([key, label, Ico]) => (
-                <button
-                  key={key}
-                  onClick={() => setTab(key)}
-                  className="px-3 py-1.5 rounded-lg text-[12px] font-semibold cursor-pointer transition-colors inline-flex items-center gap-1.5"
-                  style={
-                    tab === key
-                      ? { background: "rgba(96,165,250,0.15)", border: "1px solid rgba(96,165,250,0.4)", color: color.accent }
-                      : { background: "transparent", border: "1px solid #2c2c2e", color: color.muted }
-                  }
-                >
-                  <Ico size={14} /> {label}
-                </button>
-              ),
-            )}
+          {/* main nav tabs */}
+          <nav className="flex-1 min-w-0 flex items-center gap-6 px-[18px]">
+            {([["rankings", "Rankings"], ["research", "Research"]] as const).map(([key, label]) => (
+              <button
+                key={key}
+                onClick={() => setTab(key)}
+                className="px-2 py-1 rounded-lg text-[16px] font-medium cursor-pointer whitespace-nowrap transition-colors"
+                style={tab === key
+                  ? { background: "#1e2444", border: "1px solid #3a54d5", color: "#fff" }
+                  : { background: "transparent", border: "1px solid transparent", color: "#909090" }}
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
+          {/* account — Clerk avatar (signed-in) / Sign in link (signed-out) */}
+          <div className="shrink-0 flex items-center justify-end min-w-[44px]">
+            <UserMenu />
           </div>
         </div>
       </header>
