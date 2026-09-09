@@ -309,7 +309,7 @@
   ],
   "total_players_ranked": 304,
   "total_hrs_hit": 38,
-  "total_near_hrs": 0,
+  "total_near_hrs": 18,
   "model_hits": 38,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -426,7 +426,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 18,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -457,18 +457,18 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 3,
-      "rate": 15.0
+      "hits": 4,
+      "rate": 20.0
     },
     "top_30": {
       "total": 30,
-      "hits": 4,
-      "rate": 13.3
+      "hits": 5,
+      "rate": 16.7
     },
     "all": {
       "total": 304,
-      "hits": 38,
-      "rate": 12.5
+      "hits": 56,
+      "rate": 18.4
     }
   },
   "avg_composite_hr_hitters": 0.452,
@@ -1010,8 +1010,316 @@
       "matchup": "TEX@SEA"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Heriberto Hern\u00e1ndez",
+      "rank": 16,
+      "composite": 0.693,
+      "opp_pitcher": "Sean Manaea",
+      "matchup": "NYM@MIA"
+    },
+    {
+      "name": "Vladimir Guerrero Jr.",
+      "rank": 37,
+      "composite": 0.638,
+      "opp_pitcher": "Jack Perkins",
+      "matchup": "TOR@ATH"
+    },
+    {
+      "name": "Matt Olson",
+      "rank": 50,
+      "composite": 0.6,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "TB@ATL"
+    },
+    {
+      "name": "Griffin Conine",
+      "rank": 71,
+      "composite": 0.546,
+      "opp_pitcher": "Sean Manaea",
+      "matchup": "NYM@MIA"
+    },
+    {
+      "name": "Bryan Reynolds",
+      "rank": 87,
+      "composite": 0.521,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "PIT@CWS"
+    },
+    {
+      "name": "Carson Kelly",
+      "rank": 99,
+      "composite": 0.48,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "CHC@MIL"
+    },
+    {
+      "name": "Harry Ford",
+      "rank": 120,
+      "composite": 0.452,
+      "opp_pitcher": "Casey Mize",
+      "matchup": "WSH@SD"
+    },
+    {
+      "name": "Drake Baldwin",
+      "rank": 127,
+      "composite": 0.433,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "TB@ATL"
+    },
+    {
+      "name": "Yordan Alvarez",
+      "rank": 153,
+      "composite": 0.412,
+      "opp_pitcher": "Andrew Painter",
+      "matchup": "HOU@PHI"
+    },
+    {
+      "name": "Oneil Cruz",
+      "rank": 162,
+      "composite": 0.406,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "PIT@CWS"
+    },
+    {
+      "name": "J.T. Realmuto",
+      "rank": 192,
+      "composite": 0.374,
+      "opp_pitcher": "Hayden Wesneski",
+      "matchup": "HOU@PHI"
+    },
+    {
+      "name": "Jake Burger",
+      "rank": 193,
+      "composite": 0.374,
+      "opp_pitcher": "Bryce Miller",
+      "matchup": "TEX@SEA"
+    },
+    {
+      "name": "Seiya Suzuki",
+      "rank": 196,
+      "composite": 0.371,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "CHC@MIL"
+    },
+    {
+      "name": "Steven Kwan",
+      "rank": 200,
+      "composite": 0.367,
+      "opp_pitcher": "Brandon Young",
+      "matchup": "CLE@BAL"
+    },
+    {
+      "name": "Brandon Marsh",
+      "rank": 222,
+      "composite": 0.35,
+      "opp_pitcher": "Hayden Wesneski",
+      "matchup": "HOU@PHI"
+    },
+    {
+      "name": "Mike Trout",
+      "rank": 254,
+      "composite": 0.315,
+      "opp_pitcher": "Patrick Sandoval",
+      "matchup": "LAA@BOS"
+    },
+    {
+      "name": "Vinnie Pasquantino",
+      "rank": 276,
+      "composite": 0.262,
+      "opp_pitcher": "Corbin Burnes",
+      "matchup": "AZ@KC"
+    },
+    {
+      "name": "Edmundo Sosa",
+      "rank": 287,
+      "composite": 0.246,
+      "opp_pitcher": "Hayden Wesneski",
+      "matchup": "HOU@PHI"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Vladimir Guerrero Jr.",
+      "ev": 105.0,
+      "angle": 20.0,
+      "distance": 393.0,
+      "hr_in_parks": 6,
+      "result": "field_out",
+      "pitcher": "Perkins, Jack"
+    },
+    {
+      "batter": "Drake Baldwin",
+      "ev": 99.8,
+      "angle": 33.0,
+      "distance": 385.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Peralta, Freddy"
+    },
+    {
+      "batter": "Matt Olson",
+      "ev": 100.5,
+      "angle": 25.0,
+      "distance": 394.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Peralta, Freddy"
+    },
+    {
+      "batter": "Steven Kwan",
+      "ev": 97.7,
+      "angle": 25.0,
+      "distance": 375.0,
+      "hr_in_parks": 5,
+      "result": "double",
+      "pitcher": "Young, Brandon"
+    },
+    {
+      "batter": "Mike Trout",
+      "ev": 106.3,
+      "angle": 22.0,
+      "distance": 403.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Burgos, Raymond"
+    },
+    {
+      "batter": "Bryan Reynolds",
+      "ev": 100.4,
+      "angle": 32.0,
+      "distance": 393.0,
+      "hr_in_parks": 13,
+      "result": "sac_fly",
+      "pitcher": "Urquidy, Jos\u00e9"
+    },
+    {
+      "batter": "Oneil Cruz",
+      "ev": 111.2,
+      "angle": 18.0,
+      "distance": 406.0,
+      "hr_in_parks": 21,
+      "result": "double",
+      "pitcher": "Burke, Sean"
+    },
+    {
+      "batter": "Bryan Reynolds",
+      "ev": 99.5,
+      "angle": 25.0,
+      "distance": 370.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Burke, Sean"
+    },
+    {
+      "batter": "Vinnie Pasquantino",
+      "ev": 102.0,
+      "angle": 22.0,
+      "distance": 397.0,
+      "hr_in_parks": 27,
+      "result": "double",
+      "pitcher": "Burnes, Corbin"
+    },
+    {
+      "batter": "Griffin Conine",
+      "ev": 101.4,
+      "angle": 27.0,
+      "distance": 368.0,
+      "hr_in_parks": 22,
+      "result": "field_out",
+      "pitcher": "Senga, Kodai"
+    },
+    {
+      "batter": "Heriberto Hern\u00e1ndez",
+      "ev": 107.0,
+      "angle": 35.0,
+      "distance": 395.0,
+      "hr_in_parks": 22,
+      "result": "field_out",
+      "pitcher": "Manaea, Sean"
+    },
+    {
+      "batter": "Carson Kelly",
+      "ev": 98.5,
+      "angle": 26.0,
+      "distance": 385.0,
+      "hr_in_parks": 13,
+      "result": "double",
+      "pitcher": "Megill, Trevor"
+    },
+    {
+      "batter": "Seiya Suzuki",
+      "ev": 104.1,
+      "angle": 21.0,
+      "distance": 378.0,
+      "hr_in_parks": 2,
+      "result": "double",
+      "pitcher": "Misiorowski, Jacob"
+    },
+    {
+      "batter": "Edmundo Sosa",
+      "ev": 100.0,
+      "angle": 35.0,
+      "distance": 371.0,
+      "hr_in_parks": 2,
+      "result": "double",
+      "pitcher": "Hader, Josh"
+    },
+    {
+      "batter": "Trea Turner",
+      "ev": 102.6,
+      "angle": 20.0,
+      "distance": 384.0,
+      "hr_in_parks": 3,
+      "result": "double",
+      "pitcher": "Abreu, Bryan"
+    },
+    {
+      "batter": "Brandon Marsh",
+      "ev": 103.8,
+      "angle": 21.0,
+      "distance": 402.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Blubaugh, AJ"
+    },
+    {
+      "batter": "J.T. Realmuto",
+      "ev": 99.4,
+      "angle": 30.0,
+      "distance": 399.0,
+      "hr_in_parks": 24,
+      "result": "field_out",
+      "pitcher": "Wesneski, Hayden"
+    },
+    {
+      "batter": "Yordan Alvarez",
+      "ev": 105.2,
+      "angle": 33.0,
+      "distance": 384.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Painter, Andrew"
+    },
+    {
+      "batter": "Harry Ford",
+      "ev": 101.2,
+      "angle": 31.0,
+      "distance": 383.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Mize, Casey"
+    },
+    {
+      "batter": "Jake Burger",
+      "ev": 103.2,
+      "angle": 29.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Bazardo, Eduard"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
