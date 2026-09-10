@@ -204903,7 +204903,7 @@
     ],
     "total_players_ranked": 299,
     "total_hrs_hit": 45,
-    "total_near_hrs": 0,
+    "total_near_hrs": 12,
     "model_hits": 44,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -205020,7 +205020,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 12,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -205056,18 +205056,18 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 9,
-        "rate": 30.0
+        "hits": 10,
+        "rate": 33.3
       },
       "all": {
         "total": 299,
-        "hits": 44,
-        "rate": 14.7
+        "hits": 56,
+        "rate": 18.7
       }
     },
     "avg_composite_hr_hitters": 0.518,
-    "avg_composite_non_hitters": 0.44,
-    "composite_separation": 0.078,
+    "avg_composite_non_hitters": 0.435,
+    "composite_separation": 0.083,
     "hr_hitters": [
       {
         "name": "Luis Garc\u00eda Jr.",
@@ -205688,8 +205688,247 @@
         "matchup": "LAA@BOS"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Daylen Lile",
+        "rank": 22,
+        "composite": 0.692,
+        "opp_pitcher": "Walker Buehler",
+        "matchup": "WSH@SD"
+      },
+      {
+        "name": "Marcus Semien",
+        "rank": 37,
+        "composite": 0.65,
+        "opp_pitcher": "Janson Junk",
+        "matchup": "NYM@MIA"
+      },
+      {
+        "name": "Bryan Reynolds",
+        "rank": 40,
+        "composite": 0.647,
+        "opp_pitcher": "Davis Martin",
+        "matchup": "PIT@CWS"
+      },
+      {
+        "name": "Ronald Acu\u00f1a Jr.",
+        "rank": 50,
+        "composite": 0.618,
+        "opp_pitcher": "Griffin Jax",
+        "matchup": "TB@ATL"
+      },
+      {
+        "name": "Brooks Lee",
+        "rank": 51,
+        "composite": 0.615,
+        "opp_pitcher": "Keider Montero",
+        "matchup": "MIN@DET"
+      },
+      {
+        "name": "Hunter Feduccia",
+        "rank": 63,
+        "composite": 0.596,
+        "opp_pitcher": "Rhett Lowder",
+        "matchup": "CIN@LAD"
+      },
+      {
+        "name": "Vladimir Guerrero Jr.",
+        "rank": 71,
+        "composite": 0.579,
+        "opp_pitcher": "Brady Basso",
+        "matchup": "TOR@ATH"
+      },
+      {
+        "name": "Will Smith",
+        "rank": 94,
+        "composite": 0.516,
+        "opp_pitcher": "Rhett Lowder",
+        "matchup": "CIN@LAD"
+      },
+      {
+        "name": "George Springer",
+        "rank": 96,
+        "composite": 0.514,
+        "opp_pitcher": "Brady Basso",
+        "matchup": "TOR@ATH"
+      },
+      {
+        "name": "Lars Nootbaar",
+        "rank": 154,
+        "composite": 0.409,
+        "opp_pitcher": "Daniel Lynch IV",
+        "matchup": "AZ@KC"
+      },
+      {
+        "name": "Heriberto Hern\u00e1ndez",
+        "rank": 252,
+        "composite": 0.315,
+        "opp_pitcher": "Robert Stock",
+        "matchup": "NYM@MIA"
+      },
+      {
+        "name": "Shay Whitcomb",
+        "rank": 298,
+        "composite": 0.136,
+        "opp_pitcher": "Andre Pallante",
+        "matchup": "STL@SF"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Vladimir Guerrero Jr.",
+        "ev": 95.7,
+        "angle": 27.0,
+        "distance": 368.0,
+        "hr_in_parks": 15,
+        "result": "field_out",
+        "pitcher": "Harris, Hogan"
+      },
+      {
+        "batter": "George Springer",
+        "ev": 104.1,
+        "angle": 32.0,
+        "distance": 395.0,
+        "hr_in_parks": 16,
+        "result": "field_out",
+        "pitcher": "Harris, Hogan"
+      },
+      {
+        "batter": "Ronald Acu\u00f1a Jr.",
+        "ev": 104.3,
+        "angle": 19.0,
+        "distance": 376.0,
+        "hr_in_parks": 9,
+        "result": "double",
+        "pitcher": "Johnson, Ty"
+      },
+      {
+        "batter": "Bryan Reynolds",
+        "ev": 100.3,
+        "angle": 31.0,
+        "distance": 384.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Martin, Davis"
+      },
+      {
+        "batter": "Kody Clemens",
+        "ev": 108.5,
+        "angle": 30.0,
+        "distance": 414.0,
+        "hr_in_parks": 28,
+        "result": "",
+        "pitcher": "Montero, Keider"
+      },
+      {
+        "batter": "Brooks Lee",
+        "ev": 100.8,
+        "angle": 28.0,
+        "distance": 394.0,
+        "hr_in_parks": 11,
+        "result": "field_out",
+        "pitcher": "Montero, Keider"
+      },
+      {
+        "batter": "Lars Nootbaar",
+        "ev": 101.8,
+        "angle": 33.0,
+        "distance": 395.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "Gose, Anthony"
+      },
+      {
+        "batter": "Kyle Tucker",
+        "ev": 106.2,
+        "angle": 21.0,
+        "distance": 393.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Lowder, Rhett"
+      },
+      {
+        "batter": "Hunter Feduccia",
+        "ev": 106.5,
+        "angle": 32.0,
+        "distance": 403.0,
+        "hr_in_parks": 16,
+        "result": "",
+        "pitcher": "Lowder, Rhett"
+      },
+      {
+        "batter": "Will Smith",
+        "ev": 98.7,
+        "angle": 31.0,
+        "distance": 386.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Lowder, Rhett"
+      },
+      {
+        "batter": "Marcus Semien",
+        "ev": 98.3,
+        "angle": 29.0,
+        "distance": 387.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "Petersen, Michael"
+      },
+      {
+        "batter": "Owen Caissie",
+        "ev": 102.7,
+        "angle": 33.0,
+        "distance": 380.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Stock, Robert"
+      },
+      {
+        "batter": "Heriberto Hern\u00e1ndez",
+        "ev": 100.0,
+        "angle": 28.0,
+        "distance": 388.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Stock, Robert"
+      },
+      {
+        "batter": "Connor Norby",
+        "ev": 98.0,
+        "angle": 29.0,
+        "distance": 386.0,
+        "hr_in_parks": 24,
+        "result": "double",
+        "pitcher": "Warren, Will"
+      },
+      {
+        "batter": "Daylen Lile",
+        "ev": 102.5,
+        "angle": 31.0,
+        "distance": 391.0,
+        "hr_in_parks": 10,
+        "result": "field_out",
+        "pitcher": "Hart, Kyle"
+      },
+      {
+        "batter": "Jackson Merrill",
+        "ev": 101.9,
+        "angle": 33.0,
+        "distance": 402.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Kent, Jackson"
+      },
+      {
+        "batter": "Shay Whitcomb",
+        "ev": 102.6,
+        "angle": 25.0,
+        "distance": 402.0,
+        "hr_in_parks": 20,
+        "result": "double",
+        "pitcher": "Soriano, George"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
