@@ -207197,7 +207197,7 @@
       {
         "name": "Victor Mesa Jr.",
         "pitcher": "Raisel Iglesias",
-        "description": "${person|fullName|683748} homers ${total|homeRuns|683748} on a line drive to right center field.  "
+        "description": "Victor Mesa Jr. homers (12) on a line drive to right center field."
       },
       {
         "name": "Anthony Volpe",
