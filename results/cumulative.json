@@ -206727,5 +206727,497 @@
         "matchup": "LAA@BOS"
       }
     ]
+  },
+  {
+    "date": "2026-09-10",
+    "players_who_batted": [
+      "Alec Bohm",
+      "Austin Riley",
+      "Brandon Marsh",
+      "Brandon Nimmo",
+      "Brewer Hicklen",
+      "Brock Rodden",
+      "Bryce Harper",
+      "Bryson Stott",
+      "Cal Raleigh",
+      "Cam Smith",
+      "Cedric Mullins",
+      "Chandler Simpson",
+      "Christian V\u00e1zquez",
+      "Christian Walker",
+      "Cody Freeman",
+      "Cole Young",
+      "Corey Seager",
+      "Danny Jansen",
+      "Daulton Varsho",
+      "Dominic Canzone",
+      "Dominic Smith",
+      "Drake Baldwin",
+      "Edmundo Sosa",
+      "Evan Carter",
+      "Ezequiel Duran",
+      "Ha-Seong Kim",
+      "Isaac Paredes",
+      "J.P. Crawford",
+      "Jake Burger",
+      "Jeremy Pe\u00f1a",
+      "Joc Pederson",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Jorge Mateo",
+      "Jose Altuve",
+      "Josh Naylor",
+      "Julio Rodr\u00edguez",
+      "Junior Caminero",
+      "Justin Crawford",
+      "Justin Foscue",
+      "Kyle Schwarber",
+      "Lazaro Montes",
+      "Liam Hicks",
+      "Luis Arraez",
+      "Matt Olson",
+      "Mauricio Dub\u00f3n",
+      "Michael Harris II",
+      "Mike Yastrzemski",
+      "Nick Fortes",
+      "Nick Madrigal",
+      "Nicky Lopez",
+      "Ozzie Albies",
+      "Rafael March\u00e1n",
+      "Randy Arozarena",
+      "Ronald Acu\u00f1a Jr.",
+      "Ryan Vilade",
+      "Taylor Trammell",
+      "Taylor Ward",
+      "Trea Turner",
+      "Victor Mesa Jr.",
+      "Wyatt Langford",
+      "Yainer Diaz",
+      "Yandy D\u00edaz",
+      "Yordan Alvarez"
+    ],
+    "total_players_ranked": 56,
+    "total_hrs_hit": 4,
+    "total_near_hrs": 0,
+    "model_hits": 3,
+    "best_lookback": "L10",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
+        },
+        "all": {
+          "total": 56,
+          "hits": 3,
+          "rate": 5.4
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 2,
+          "rate": 6.7
+        },
+        "all": {
+          "total": 56,
+          "hits": 3,
+          "rate": 5.4
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 56,
+        "hits": 3,
+        "rate": 5.4
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
+        },
+        "all": {
+          "total": 56,
+          "hits": 3,
+          "rate": 5.4
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 2,
+          "rate": 6.7
+        },
+        "all": {
+          "total": 56,
+          "hits": 3,
+          "rate": 5.4
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 56,
+        "hits": 3,
+        "rate": 5.4
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 56,
+        "hits": 3,
+        "rate": 5.4
+      }
+    },
+    "avg_composite_hr_hitters": 0.529,
+    "avg_composite_non_hitters": 0.479,
+    "composite_separation": 0.05,
+    "hr_hitters": [
+      {
+        "name": "Cam Smith",
+        "rank": 14,
+        "composite": 0.645,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "HOU@PHI"
+      },
+      {
+        "name": "Julio Rodr\u00edguez",
+        "rank": 23,
+        "composite": 0.498,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@SEA"
+      },
+      {
+        "name": "Joc Pederson",
+        "rank": 27,
+        "composite": 0.444,
+        "opp_pitcher": "Logan Gilbert",
+        "matchup": "TEX@SEA"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Julio Rodr\u00edguez",
+        "rank": 2,
+        "composite": 0.686,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@SEA"
+      },
+      {
+        "name": "Cam Smith",
+        "rank": 15,
+        "composite": 0.566,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "HOU@PHI"
+      },
+      {
+        "name": "Joc Pederson",
+        "rank": 36,
+        "composite": 0.396,
+        "opp_pitcher": "Logan Gilbert",
+        "matchup": "TEX@SEA"
+      }
+    ],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [
+      {
+        "name": "Victor Mesa Jr.",
+        "pitcher": "Raisel Iglesias",
+        "description": "${person|fullName|683748} homers ${total|homeRuns|683748} on a line drive to right center field.  "
+      }
+    ],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 38,
+        "hr_count": 2,
+        "hr_rate": 5.3,
+        "names": [
+          "Austin Riley",
+          "Chandler Simpson",
+          "Ronald Acu\u00f1a Jr.",
+          "Ha-Seong Kim",
+          "Mauricio Dub\u00f3n",
+          "Yandy D\u00edaz",
+          "Brewer Hicklen",
+          "Nick Fortes",
+          "Junior Caminero",
+          "Luis Arraez",
+          "Rafael March\u00e1n",
+          "Lazaro Montes",
+          "Corey Seager",
+          "Taylor Ward",
+          "Julio Rodr\u00edguez",
+          "Cody Freeman",
+          "Joc Pederson",
+          "Brock Rodden",
+          "Josh Naylor",
+          "Weston Wilson",
+          "J.P. Crawford",
+          "Evan Carter",
+          "Adael Amador",
+          "George Lombard Jr.",
+          "Kyle Karros",
+          "Jos\u00e9 Caballero",
+          "Jordan Beck",
+          "Connor Norby",
+          "Cole Carrigg",
+          "Esmerlyn Valdez",
+          "Jake Rogers",
+          "Spencer Horwitz",
+          "Luisangel Acu\u00f1a",
+          "Rafael Flores Jr.",
+          "Ronny Simon",
+          "Bryan Reynolds",
+          "Konnor Griffin",
+          "Jake Mangum"
+        ],
+        "hr_names": [
+          "Julio Rodr\u00edguez",
+          "Joc Pederson"
+        ]
+      },
+      "2_of_5": {
+        "players": 35,
+        "hr_count": 1,
+        "hr_rate": 2.9,
+        "names": [
+          "Drake Baldwin",
+          "Ryan Vilade",
+          "Michael Harris II",
+          "Cam Smith",
+          "Christian Walker",
+          "Bryson Stott",
+          "Bryce Harper",
+          "Justin Crawford",
+          "Christian V\u00e1zquez",
+          "Jake Burger",
+          "Ezequiel Duran",
+          "Cole Young",
+          "Cam Cauley",
+          "Elias D\u00edaz",
+          "Wyatt Langford",
+          "Brandon Nimmo",
+          "Dominic Canzone",
+          "Randy Arozarena",
+          "Heliot Ramos",
+          "Paul Goldschmidt",
+          "Ali S\u00e1nchez",
+          "Munetaka Murakami",
+          "Jacob Gonzalez",
+          "Brandon Lowe",
+          "Randal Grichuk",
+          "Braden Montgomery",
+          "Edgar Quero",
+          "Kyle Teel",
+          "Sam Antonacci",
+          "Brenton Doyle",
+          "Chase Meidroth",
+          "Miguel Vargas",
+          "Oneil Cruz",
+          "Henry Davis",
+          "Nick Gonzales"
+        ],
+        "hr_names": [
+          "Cam Smith"
+        ]
+      },
+      "3_of_5": {
+        "players": 30,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Cedric Mullins",
+          "Matt Olson",
+          "Daulton Varsho",
+          "Yordan Alvarez",
+          "Alec Bohm",
+          "Brandon Marsh",
+          "Trea Turner",
+          "Kyle Schwarber",
+          "Taylor Trammell",
+          "Jeremy Pe\u00f1a",
+          "Isaac Paredes",
+          "Jose Altuve",
+          "Justin Foscue",
+          "Cal Raleigh",
+          "Danny Jansen",
+          "Logan O'Hoppe",
+          "Aaron Judge",
+          "Luis Garc\u00eda Jr.",
+          "Ben Rice",
+          "Austin Wells",
+          "Amed Rosario",
+          "Cody Bellinger",
+          "Ryan McMahon",
+          "TJ Rumfield",
+          "Troy Johnston",
+          "Jake McCarthy",
+          "Mickey Moniak",
+          "Zac Veen",
+          "Vimael Mach\u00edn",
+          "Andrew Benintendi"
+        ],
+        "hr_names": []
+      },
+      "4_of_5": {
+        "players": 5,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Jasson Dom\u00ednguez",
+          "Spencer Jones",
+          "Jazz Chisholm Jr.",
+          "Tristan Peters",
+          "Colson Montgomery"
+        ],
+        "hr_names": []
+      },
+      "5_of_5": {
+        "players": 1,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Brett Sullivan"
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 56,
+        "hits": 3,
+        "rate": 5.4
+      }
+    },
+    "combined_hr_hitters": [
+      {
+        "name": "Cam Smith",
+        "rank": 7,
+        "composite": 0.644,
+        "opp_pitcher": "Zack Wheeler",
+        "matchup": "HOU@PHI"
+      },
+      {
+        "name": "Julio Rodr\u00edguez",
+        "rank": 12,
+        "composite": 0.566,
+        "opp_pitcher": "Jacob deGrom",
+        "matchup": "TEX@SEA"
+      },
+      {
+        "name": "Joc Pederson",
+        "rank": 24,
+        "composite": 0.356,
+        "opp_pitcher": "Logan Gilbert",
+        "matchup": "TEX@SEA"
+      }
+    ]
   }
 ]
