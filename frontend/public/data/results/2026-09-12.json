@@ -327,7 +327,7 @@
   ],
   "total_players_ranked": 318,
   "total_hrs_hit": 46,
-  "total_near_hrs": 0,
+  "total_near_hrs": 12,
   "model_hits": 45,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -444,7 +444,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 12,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -485,13 +485,13 @@
     },
     "all": {
       "total": 318,
-      "hits": 45,
-      "rate": 14.2
+      "hits": 57,
+      "rate": 17.9
     }
   },
   "avg_composite_hr_hitters": 0.422,
-  "avg_composite_non_hitters": 0.39,
-  "composite_separation": 0.032,
+  "avg_composite_non_hitters": 0.391,
+  "composite_separation": 0.031,
   "hr_hitters": [
     {
       "name": "Eugenio Su\u00e1rez",
@@ -1126,8 +1126,229 @@
       "matchup": "CLE@MIN"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Junior Caminero",
+      "rank": 47,
+      "composite": 0.567,
+      "opp_pitcher": "Peter Lambert",
+      "matchup": "HOU@TB"
+    },
+    {
+      "name": "Tim Tawa",
+      "rank": 61,
+      "composite": 0.534,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "TEX@AZ"
+    },
+    {
+      "name": "Wilyer Abreu",
+      "rank": 73,
+      "composite": 0.51,
+      "opp_pitcher": "Randy Dobnak",
+      "matchup": "KC@BOS"
+    },
+    {
+      "name": "Taylor Trammell",
+      "rank": 79,
+      "composite": 0.486,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "HOU@TB"
+    },
+    {
+      "name": "Jose Altuve",
+      "rank": 121,
+      "composite": 0.41,
+      "opp_pitcher": "Ian Seymour",
+      "matchup": "HOU@TB"
+    },
+    {
+      "name": "Drake Baldwin",
+      "rank": 170,
+      "composite": 0.375,
+      "opp_pitcher": "Tim Mayza",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "H\u00e9ctor Rodr\u00edguez",
+      "rank": 193,
+      "composite": 0.348,
+      "opp_pitcher": "Kyle Harrison",
+      "matchup": "CIN@MIL"
+    },
+    {
+      "name": "Matt Olson",
+      "rank": 205,
+      "composite": 0.335,
+      "opp_pitcher": "Tim Mayza",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Griffin Conine",
+      "rank": 226,
+      "composite": 0.309,
+      "opp_pitcher": "Tyler Glasnow",
+      "matchup": "LAD@MIA"
+    },
+    {
+      "name": "Dylan Crews",
+      "rank": 245,
+      "composite": 0.286,
+      "opp_pitcher": "Walbert Ure\u00f1a",
+      "matchup": "LAA@WSH"
+    },
+    {
+      "name": "Keibert Ruiz",
+      "rank": 281,
+      "composite": 0.237,
+      "opp_pitcher": "Walbert Ure\u00f1a",
+      "matchup": "LAA@WSH"
+    },
+    {
+      "name": "Connor Norby",
+      "rank": 315,
+      "composite": 0.134,
+      "opp_pitcher": "Andrew Sears",
+      "matchup": "COL@DET"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Tim Tawa",
+      "ev": 103.8,
+      "angle": 30.0,
+      "distance": 410.0,
+      "hr_in_parks": 29,
+      "result": "triple",
+      "pitcher": "Rocker, Kumar"
+    },
+    {
+      "batter": "Wyatt Langford",
+      "ev": 102.7,
+      "angle": 22.0,
+      "distance": 371.0,
+      "hr_in_parks": 5,
+      "result": "double",
+      "pitcher": "Pfaadt, Brandon"
+    },
+    {
+      "batter": "Michael Arroyo",
+      "ev": 104.0,
+      "angle": 19.0,
+      "distance": 376.0,
+      "hr_in_parks": 14,
+      "result": "double",
+      "pitcher": "Johnson, Seth"
+    },
+    {
+      "batter": "Matt Olson",
+      "ev": 101.1,
+      "angle": 40.0,
+      "distance": 386.0,
+      "hr_in_parks": 5,
+      "result": "field_out",
+      "pitcher": "Stubbs, Garrett"
+    },
+    {
+      "batter": "Drake Baldwin",
+      "ev": 100.3,
+      "angle": 30.0,
+      "distance": 378.0,
+      "hr_in_parks": 11,
+      "result": "double",
+      "pitcher": "Holman, Grant"
+    },
+    {
+      "batter": "Wilyer Abreu",
+      "ev": 104.9,
+      "angle": 25.0,
+      "distance": 408.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Gose, Anthony"
+    },
+    {
+      "batter": "Connor Norby",
+      "ev": 100.1,
+      "angle": 28.0,
+      "distance": 393.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Sears, Andrew"
+    },
+    {
+      "batter": "Griffin Conine",
+      "ev": 102.4,
+      "angle": 29.0,
+      "distance": 398.0,
+      "hr_in_parks": 18,
+      "result": "double",
+      "pitcher": "Glasnow, Tyler"
+    },
+    {
+      "batter": "Juan Brito",
+      "ev": 102.7,
+      "angle": 27.0,
+      "distance": 402.0,
+      "hr_in_parks": 26,
+      "result": "single",
+      "pitcher": "Ashby, Aaron"
+    },
+    {
+      "batter": "H\u00e9ctor Rodr\u00edguez",
+      "ev": 97.1,
+      "angle": 34.0,
+      "distance": 375.0,
+      "hr_in_parks": 16,
+      "result": "field_out",
+      "pitcher": "Drohan, Shane"
+    },
+    {
+      "batter": "Taylor Trammell",
+      "ev": 107.2,
+      "angle": 39.0,
+      "distance": 386.0,
+      "hr_in_parks": 26,
+      "result": "field_out",
+      "pitcher": "Baker, Bryan"
+    },
+    {
+      "batter": "Jose Altuve",
+      "ev": 99.9,
+      "angle": 28.0,
+      "distance": 392.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Seymour, Ian"
+    },
+    {
+      "batter": "Junior Caminero",
+      "ev": 103.8,
+      "angle": 30.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Lambert, Peter"
+    },
+    {
+      "batter": "Dylan Crews",
+      "ev": 100.9,
+      "angle": 30.0,
+      "distance": 406.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Joyce, Ben"
+    },
+    {
+      "batter": "Keibert Ruiz",
+      "ev": 98.4,
+      "angle": 26.0,
+      "distance": 386.0,
+      "hr_in_parks": 19,
+      "result": "double",
+      "pitcher": "Ure\u00f1a, Walbert"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
