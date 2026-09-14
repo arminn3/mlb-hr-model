@@ -33,6 +33,9 @@ export interface NflPlayer {
   espn_id: string | null; // for the player headshot
   headshot?: string | null; // nflverse headshot URL (preferred over espn_id)
   role: string;           // usage-based depth role, e.g. "WR2", "RB1"
+  injury_status: string | null;    // official report_status: "Out" / "Doubtful" / "Questionable" / null (healthy)
+  injury_detail: string | null;    // e.g. "Ankle"
+  practice_status: string | null;  // e.g. "Did Not Participate In Practice"
   opponent: string;
   is_home: boolean;
   score: number;          // anytime-TD probability (0-1)
@@ -118,7 +121,21 @@ export interface NflGame {
   away_receivers: ReceiverRow[];
   home_receivers: ReceiverRow[];
 
+  // Injuries tab — the FULL official weekly injury report per team (every
+  // listed player, not just the model's role-holders), sorted Out -> Doubtful
+  // -> Questionable -> other.
+  away_injuries: InjuryRow[];
+  home_injuries: InjuryRow[];
+
   players: NflPlayer[];
+}
+
+export interface InjuryRow {
+  name: string;
+  position: string | null;
+  status: string | null;   // "Out" / "Doubtful" / "Questionable" / null
+  injury: string | null;   // e.g. "Ankle"
+  practice_status: string | null;
 }
 
 export interface OffenseSplitYear {

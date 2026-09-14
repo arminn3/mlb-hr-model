@@ -30,7 +30,7 @@ import numpy as np
 import pandas as pd
 
 from . import config as C
-from .data_fetchers import load_pbp, load_schedules, load_snap_counts, load_players, load_rosters, load_depth_charts
+from .data_fetchers import load_pbp, load_schedules, load_snap_counts, load_players, load_rosters, load_depth_charts, load_injuries
 
 
 def _offensive_tds(reg: pd.DataFrame) -> pd.DataFrame:
@@ -53,6 +53,57 @@ def _snap_pct_by_gsis(season: int, week: int, pfr_to_gsis: dict) -> dict:
     sn = sn[sn["week"] < week]
     sn = sn.assign(gsis=sn["pfr_player_id"].map(pfr_to_gsis)).dropna(subset=["gsis"])
     return sn.groupby("gsis")["offense_pct"].mean().to_dict()
+
+
+_INJURY_SEVERITY = {"Out": 0, "Doubtful": 1, "Questionable": 2}
+
+
+def _sorted_injuries(rows: list) -> list:
+    """Most-likely-to-not-play first (Out, then Doubtful, then Questionable,
+    then anything else e.g. 'Injured Reserve' notes)."""
+    return sorted(rows, key=lambda r: _INJURY_SEVERITY.get(r["status"], 3))
+
+
+def _injury_report(season: int, week: int) -> tuple[dict, dict]:
+    """THIS week's real official injury report (Out/Doubtful/Questionable +
+    practice participation) for the target season/week being scored — separate
+    from `hist`/`hist_week`, which is about which season's PBP backs the
+    model, not who's actually playing this week. Refetch (via `load_injuries`'s
+    daily cache key) to pick up new designations as the week progresses toward
+    kickoff.
+
+    Returns:
+      status_map: gsis_id -> {status, injury, practice_status} — for tagging
+        the role-holder players already in the model's Top-30 output.
+      by_team: team -> [{name, position, status, injury, practice_status}] —
+        the FULL team injury report (every listed player, not just role-
+        holders) for the dedicated Injuries tab.
+    """
+    try:
+        inj = load_injuries(season)
+    except Exception:
+        return {}, {}
+    if inj.empty or "week" not in inj.columns:
+        return {}, {}
+    wk = inj[inj["week"] == week]
+    _s = lambda v: v if isinstance(v, str) and v else None
+    status_map: dict = {}
+    by_team: dict = {}
+    for r in wk.itertuples():
+        pid = getattr(r, "gsis_id", None)
+        row = {
+            "name": _s(getattr(r, "full_name", None)),
+            "position": _s(getattr(r, "position", None)),
+            "status": _s(getattr(r, "report_status", None)),
+            "injury": _s(getattr(r, "report_primary_injury", None)),
+            "practice_status": _s(getattr(r, "practice_status", None)),
+        }
+        team = _s(getattr(r, "team", None))
+        if team:
+            by_team.setdefault(team, []).append(row)
+        if isinstance(pid, str):
+            status_map[pid] = {"status": row["status"], "injury": row["injury"], "practice_status": row["practice_status"]}
+    return status_map, by_team
 
 
 def _availability(season: int, week: int):
@@ -254,8 +305,15 @@ def _against_stats(pbp_reg: pd.DataFrame, role_map: dict) -> dict:
         base["rec_yds_pg"] = base["rec_yds"] / gp
         base["td_pg"] = base["rush_td_pg"].fillna(0) + base["rec_td_pg"].fillna(0)
         rec_applicable = role != "QB"
-        for metric in ("rush_td_pg", "rush_yds_pg"):
-            base[metric + "_rank"] = base[metric].rank(ascending=True, method="min")
+        # WR/TE rushing the ball at all is a trick-play rarity — nearly every
+        # defense allows exactly 0, so ranking it just stamps "1st" on ~90% of
+        # the league and reads as broken. Rushing is only a real, differentiated
+        # part of the job for QB/RB1/RB2; keep the true (often 0) rate for every
+        # role, but only rank it where the rank means something.
+        rush_rankable = role in ("QB", "RB1", "RB2")
+        if rush_rankable:
+            for metric in ("rush_td_pg", "rush_yds_pg"):
+                base[metric + "_rank"] = base[metric].rank(ascending=True, method="min")
         if rec_applicable:
             for metric in ("rec_td_pg", "rec_yds_pg"):
                 base[metric + "_rank"] = base[metric].rank(ascending=True, method="min")
@@ -551,7 +609,10 @@ def _game_logs(raw_log: pd.DataFrame, role_map: dict, name_map: dict, avail: tup
 def score_week(season: int, week: int) -> tuple[dict, list]:
     """Return (meta, games) for the Anytime-TD slate of one week."""
     pbp = load_pbp(season)
-    reg = pbp[pbp["season_type"] == "REG"].copy() if len(pbp) else pbp
+    # REG + POST: a player's postseason games (e.g. a Super Bowl run) are real
+    # games and belong in their season stats/game log — excluding them made a
+    # team look like it never played an opponent it actually beat in the playoffs.
+    reg = pbp[pbp["season_type"].isin(["REG", "POST"])].copy() if len(pbp) else pbp
     prior = reg[reg["week"] < week].copy() if len(reg) else reg
 
     # Prior-season fallback: preseason / Week 1 with no current-season PBP yet.
@@ -561,7 +622,7 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     if prior is None or prior.empty:
         hist = season - 1
         hp = load_pbp(hist)
-        prior = hp[hp["season_type"] == "REG"].copy()
+        prior = hp[hp["season_type"].isin(["REG", "POST"])].copy()
         if prior.empty:
             raise ValueError(f"No PBP for {season} wk{week} or prior-season {hist} fallback.")
         hist_week = int(prior["week"].max()) + 1  # use the full prior season
@@ -720,6 +781,53 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
         except Exception:
             pass  # keep the usage-based role_map if depth-chart data is unavailable
 
+    # Injury-day override: a role-holder ruled OUT for THIS week can't be this
+    # week's play no matter how the season-long usage (or even the depth-chart
+    # snapshot, which can lag same-day injury news) ranks him. The official
+    # injury report is the freshest, most specific signal for exactly this —
+    # demote him and promote the next healthy name off the CURRENT depth
+    # chart, skipping anyone else also listed Out (e.g. the primary AND
+    # backup both out, third-stringer gets the start).
+    injury_map, injuries_by_team = _injury_report(season, week)
+    out_pids = {pid for pid, v in injury_map.items() if v.get("status") == "Out"}
+    if out_pids:
+        try:
+            dc_all = load_depth_charts(season)
+            dc_all = dc_all[dc_all["dt"] == dc_all["dt"].max()]
+        except Exception:
+            dc_all = None
+        affected = {(R.at[pid, "team"], R.at[pid, "position"])
+                    for pid in out_pids if pid in R.index and role_map.get(pid)}
+        for team, pos in affected:
+            grp = R[(R["team"] == team) & (R["position"] == pos)].sort_values("rank_in")
+            filled = 0
+            for pid in grp.index:
+                if pid in out_pids:
+                    role_map[pid] = None
+                    continue
+                filled += 1
+                role_map[pid] = _role(pos, filled)
+            # A tier is still vacant (nobody healthy had usage this fallback
+            # season, e.g. a never-played 3rd-stringer) — pull the next name
+            # straight off the depth chart, even with zero usage on record.
+            if dc_all is not None and _role(pos, filled + 1) is not None:
+                dcg = dc_all[(dc_all["team"] == team) & (dc_all["pos_abb"] == pos)].sort_values("pos_rank")
+                for pid in dcg["gsis_id"].dropna():
+                    if pid in out_pids or role_map.get(pid):
+                        continue
+                    filled += 1
+                    role_map[pid] = _role(pos, filled)
+                    if pid not in P.index:
+                        # No usage on record at all — an honest zero floor
+                        # (he'll surface with a near-0 score until he actually
+                        # plays) beats leaving a real starter off the board.
+                        P.loc[pid] = {col: 0 for col in P.columns}
+                        P.at[pid, "team"] = team
+                        P.at[pid, "position"] = pos
+                        P.at[pid, "name"] = name_map.get(pid, pid)
+                    if _role(pos, filled + 1) is None:
+                        break
+
     P["role"] = P.index.map(role_map)
 
     # per-game logs (player log + role-vs-defense log)
@@ -734,7 +842,7 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     lp = None
     try:
         lp = load_pbp(hist - 1)
-        lp = lp[lp["season_type"] == "REG"]
+        lp = lp[lp["season_type"].isin(["REG", "POST"])]
         if not lp.empty:
             last_season_raw_log = _raw_game_log(lp)
         else:
@@ -851,6 +959,7 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
 
     # ── build the week's games ───────────────────────────────────────────────
     sched = load_schedules(season)
+    # injury_map/injuries_by_team already computed above (role-swap step)
 
     # team W-L records coming into the week (result = home_score - away_score)
     wins: dict = {}
@@ -916,8 +1025,12 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
                 prob = 1 - math.exp(-exp_p)
                 gp = max(int(r["games"]), 1)
                 _espn = espn_map.get(pid)
+                inj = injury_map.get(pid)
                 game_players.append({
                     "name": r["name"], "gsis_id": pid, "team": team, "pos": r["position"],
+                    "injury_status": inj["status"] if inj else None,
+                    "injury_detail": inj["injury"] if inj else None,
+                    "practice_status": inj["practice_status"] if inj else None,
                     "espn_id": str(int(_espn)) if _espn == _espn and _espn else None,  # NaN-safe
                     "headshot": (lambda h: h if isinstance(h, str) and h else None)(headshot_map.get(pid)),
                     "role": role, "opponent": opp, "is_home": is_home,
@@ -975,6 +1088,8 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
             "home_against": {y: d.get(away, {}) for y, d in against_by_year.items()},
             "away_rushers": rusher_by_team.get(away, []), "home_rushers": rusher_by_team.get(home, []),
             "away_receivers": receiver_by_team.get(away, []), "home_receivers": receiver_by_team.get(home, []),
+            "away_injuries": _sorted_injuries(injuries_by_team.get(away, [])),
+            "home_injuries": _sorted_injuries(injuries_by_team.get(home, [])),
             "players": game_players,
         })
     meta = {"sport": "nfl", "market": "anytime_td", "season": season, "week": week}

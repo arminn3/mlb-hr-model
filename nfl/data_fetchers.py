@@ -76,3 +76,15 @@ def load_depth_charts(year: int) -> pd.DataFrame:
     import datetime
     today = datetime.date.today().isoformat()
     return _cached(f"depth_{year}_{today}", lambda: nfl.import_depth_charts([year]))
+
+
+def load_injuries(year: int) -> pd.DataFrame:
+    """Official weekly injury report (report_status: Out/Doubtful/Questionable,
+    plus practice participation) — one row per player per week, updated
+    through the week as new reports come in (Wed practice -> Thu -> Fri ->
+    final). Cache key includes today's date so a re-run mid-week (or on
+    gameday) picks up the latest designation instead of the first snapshot
+    seen that week."""
+    import datetime
+    today = datetime.date.today().isoformat()
+    return _cached(f"injuries_{year}_{today}", lambda: nfl.import_injuries([year]))

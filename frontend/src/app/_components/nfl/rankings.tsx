@@ -23,6 +23,15 @@ function Pill({ label, value, c }: { label: string; value: string; c?: string })
   );
 }
 
+// Official injury report_status -> badge color. "Out"/"Doubtful" are effectively
+// won't-play; "Questionable" is a real coin flip, still worth flagging.
+function injuryColor(status: string | null): string | null {
+  if (!status) return null;
+  if (status === "Out" || status === "Doubtful") return color.red;
+  if (status === "Questionable") return color.yellow;
+  return null;
+}
+
 function Row({
   p, rank, fav, onToggleFavorite, onSelect,
 }: {
@@ -31,6 +40,7 @@ function Row({
   const mColor = matchupColor(p.opp_rank_vs_role, p.opp_rank_total);
   const mLabel = matchupLabel(p.opp_rank_vs_role, p.opp_rank_total);
   const usage = p.pos === "RB" ? `${p.carries_pg} car/g` : `${p.targets_pg} tgt/g`;
+  const iColor = injuryColor(p.injury_status);
   return (
     <div
       className="flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer hover:brightness-125 transition-[filter]"
@@ -49,6 +59,15 @@ function Row({
         <div className="flex items-center gap-1.5">
           <span className="text-[14px] font-semibold text-foreground truncate">{p.name}</span>
           <span className="text-[10px] font-bold shrink-0 px-1 rounded" style={{ color: posColor(p.pos), background: "rgba(255,255,255,0.06)" }}>{p.role}</span>
+          {iColor && (
+            <span
+              className="text-[9px] font-bold shrink-0 px-1 rounded uppercase tracking-wide"
+              style={{ color: iColor, background: `${iColor}1a`, border: `1px solid ${iColor}55` }}
+              title={[p.injury_status, p.injury_detail].filter(Boolean).join(" — ") || undefined}
+            >
+              {p.injury_status}
+            </span>
+          )}
         </div>
         <div className="text-[11px] mt-0.5" style={{ color: color.muted }}>
           {p.team} <span style={{ color: "rgba(255,255,255,0.3)" }}>vs</span> {p.opponent}
@@ -92,6 +111,176 @@ export function Rankings({
     return [...filtered].sort((a, b) => b.score - a.score).slice(0, TOP_N);
   }, [slate, pos]);
 
+  const [downloadState, setDownloadState] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [downloadError, setDownloadError] = useState<string>("");
+  const [copyState, setCopyState] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const [copyError, setCopyError] = useState<string>("");
+
+  // Pure canvas builder — one source of truth so download and copy-to-clipboard
+  // produce byte-identical PNGs. Same layout convention as the MLB rankings
+  // export (900w canvas, text-only rows, "Beeb Sheets" watermark).
+  const buildRankingsCanvas = (): HTMLCanvasElement => {
+    const DPR = 2;
+    const W = 900;
+    const PAD = 28;
+    const ROW_H = 64;
+    const HEADER_H = 72;
+    const FOOTER_H = 44;
+    const rows = top;
+    const H = HEADER_H + rows.length * (ROW_H + 8) + FOOTER_H + PAD;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = W * DPR;
+    canvas.height = H * DPR;
+    const ctx = canvas.getContext("2d")!;
+    ctx.scale(DPR, DPR);
+
+    ctx.fillStyle = "#111113";
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.fillStyle = "#e4e4e7";
+    ctx.font = "bold 22px Inter, system-ui, sans-serif";
+    ctx.fillText(`Top ${TOP_N} ${pos === "ALL" ? "" : pos + " "}Anytime-TD Plays`, PAD, 34);
+    ctx.fillStyle = "#71717a";
+    ctx.font = "13px Inter, system-ui, sans-serif";
+    ctx.fillText(`${rows.length} players · ranked by model TD probability · Beeb Sheets`, PAD, 56);
+
+    const COL = { rank: PAD, name: PAD + 36, hitSzn: 480, hitL5: 550, rz: 620, snap: 690, matchup: 760, score: W - PAD };
+    ctx.fillStyle = "#52525b";
+    ctx.font = "bold 9px Inter, system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ["HIT% SZN", "HIT% L5", "RZ OPP%", "SNAP%"].forEach((lbl, i) => {
+      ctx.fillText(lbl, [COL.hitSzn, COL.hitL5, COL.rz, COL.snap][i], HEADER_H - 10);
+    });
+    ctx.fillText("MATCHUP", COL.matchup, HEADER_H - 10);
+    ctx.textAlign = "right";
+    ctx.fillText("SCORE", COL.score, HEADER_H - 10);
+    ctx.textAlign = "left";
+
+    rows.forEach((p, i) => {
+      const y = HEADER_H + i * (ROW_H + 8);
+      ctx.beginPath();
+      ctx.roundRect(PAD - 8, y, W - (PAD - 8) * 2, ROW_H, 10);
+      ctx.fillStyle = "#1c1c1e";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,0.07)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      const cy = y + ROW_H / 2;
+
+      // Rank
+      ctx.fillStyle = "rgba(255,255,255,0.35)";
+      ctx.font = "bold 13px Inter, system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(String(i + 1), COL.rank + 6, cy + 5);
+      ctx.textAlign = "left";
+
+      // Name + role badge (+ injury tag if flagged)
+      ctx.fillStyle = "#e4e4e7";
+      ctx.font = "bold 15px Inter, system-ui, sans-serif";
+      ctx.fillText(p.name, COL.name, cy - 6);
+      const nameW = ctx.measureText(p.name).width;
+      ctx.font = "bold 10px Inter, system-ui, sans-serif";
+      ctx.fillStyle = posColor(p.pos);
+      ctx.fillText(p.role, COL.name + nameW + 8, cy - 6);
+      let tagX = COL.name + nameW + 8 + ctx.measureText(p.role).width + 8;
+      const iColor = injuryColor(p.injury_status);
+      if (iColor && p.injury_status) {
+        ctx.fillStyle = iColor;
+        ctx.fillText(p.injury_status.toUpperCase(), tagX, cy - 6);
+        tagX += ctx.measureText(p.injury_status.toUpperCase()).width;
+      }
+
+      // Matchup line
+      const mLabel = matchupLabel(p.opp_rank_vs_role, p.opp_rank_total);
+      const mColor = matchupColor(p.opp_rank_vs_role, p.opp_rank_total);
+      ctx.fillStyle = "#71717a";
+      ctx.font = "11px Inter, system-ui, sans-serif";
+      ctx.fillText(`${p.team} vs ${p.opponent} · #${p.opp_rank_vs_role}/${p.opp_rank_total} vs ${p.role} · imp ${p.implied_team_total}`, COL.name, cy + 10);
+
+      // Stats
+      const drawStat = (val: string, x: number) => {
+        ctx.fillStyle = "#e4e4e7";
+        ctx.font = "bold 13px Inter, system-ui, sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(val, x, cy + 5);
+        ctx.textAlign = "left";
+      };
+      drawStat(fmtPct(p.hit_rate_season), COL.hitSzn);
+      drawStat(fmtPct(p.hit_rate_l5), COL.hitL5);
+      drawStat(fmtPct(p.rz_opp_share), COL.rz);
+      drawStat(fmtPct(p.snap_pct), COL.snap);
+
+      // Matchup label
+      ctx.fillStyle = mColor;
+      ctx.font = "bold 11px Inter, system-ui, sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(mLabel, COL.matchup, cy + 5);
+      ctx.textAlign = "left";
+
+      // Score
+      ctx.fillStyle = scoreColor(p.score);
+      ctx.font = "bold 22px Inter, system-ui, sans-serif";
+      const scoreTxt = fmtPct1(p.score);
+      const scoreW = ctx.measureText(scoreTxt).width;
+      ctx.fillText(scoreTxt, COL.score - scoreW, cy + 8);
+    });
+
+    const fy = H - 14;
+    ctx.fillStyle = "#3f3f46";
+    ctx.font = "bold 11px Inter, system-ui, sans-serif";
+    const wm = "Beeb Sheets";
+    const wmW = ctx.measureText(wm).width;
+    ctx.fillText(wm, W / 2 - wmW / 2, fy);
+
+    return canvas;
+  };
+
+  const downloadPng = () => {
+    if (downloadState === "loading") return;
+    setDownloadState("loading");
+    try {
+      const canvas = buildRankingsCanvas();
+      const link = document.createElement("a");
+      link.download = `beeb-nfl-rankings-${pos === "ALL" ? "all" : pos.toLowerCase()}.png`;
+      link.href = canvas.toDataURL("image/png");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setDownloadState("done");
+      setTimeout(() => setDownloadState("idle"), 2500);
+    } catch (err) {
+      setDownloadError(err instanceof Error ? err.message : String(err));
+      setDownloadState("error");
+      setTimeout(() => setDownloadState("idle"), 4000);
+    }
+  };
+
+  const copyPng = () => {
+    if (copyState === "loading") return;
+    setCopyState("loading");
+    try {
+      const canvas = buildRankingsCanvas();
+      const item = new ClipboardItem({
+        "image/png": new Promise<Blob>((res, rej) =>
+          canvas.toBlob((b) => (b ? res(b) : rej(new Error("toBlob failed"))), "image/png"),
+        ),
+      });
+      navigator.clipboard.write([item]).then(
+        () => { setCopyState("done"); setTimeout(() => setCopyState("idle"), 2500); },
+        (err) => {
+          setCopyError(err instanceof Error ? err.message : String(err));
+          setCopyState("error");
+          setTimeout(() => setCopyState("idle"), 4000);
+        },
+      );
+    } catch (err) {
+      setCopyError(err instanceof Error ? err.message : String(err));
+      setCopyState("error");
+      setTimeout(() => setCopyState("idle"), 4000);
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-3 flex-wrap gap-3">
@@ -116,6 +305,97 @@ export function Rankings({
               {key}
             </button>
           ))}
+          <button
+            onClick={downloadPng}
+            disabled={downloadState === "loading"}
+            title="Download as PNG"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg cursor-pointer transition-all text-[11px] font-semibold border ${
+              downloadState === "done"
+                ? "bg-accent-green/15 border-accent-green/40 text-accent-green"
+                : downloadState === "error"
+                ? "bg-red-500/15 border-red-500/40 text-red-400"
+                : downloadState === "loading"
+                ? "bg-card/50 border-card-border text-muted opacity-60"
+                : "bg-card/50 border-card-border text-muted hover:border-accent/40 hover:text-accent"
+            }`}
+          >
+            {downloadState === "loading" ? (
+              <>
+                <svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                </svg>
+                Generating…
+              </>
+            ) : downloadState === "done" ? (
+              <>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                Downloaded!
+              </>
+            ) : downloadState === "error" ? (
+              <>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                {downloadError ? downloadError.slice(0, 40) : "Failed"}
+              </>
+            ) : (
+              <>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+                </svg>
+                PNG
+              </>
+            )}
+          </button>
+          <button
+            onClick={copyPng}
+            disabled={copyState === "loading"}
+            title="Copy image to clipboard (same as PNG)"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg cursor-pointer transition-all text-[11px] font-semibold border ${
+              copyState === "done"
+                ? "bg-accent-green/15 border-accent-green/40 text-accent-green"
+                : copyState === "error"
+                ? "bg-red-500/15 border-red-500/40 text-red-400"
+                : copyState === "loading"
+                ? "bg-card/50 border-card-border text-muted opacity-60"
+                : "bg-card/50 border-card-border text-muted hover:border-accent/40 hover:text-accent"
+            }`}
+          >
+            {copyState === "loading" ? (
+              <>
+                <svg className="w-3.5 h-3.5 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                </svg>
+                Copying…
+              </>
+            ) : copyState === "done" ? (
+              <>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                Copied!
+              </>
+            ) : copyState === "error" ? (
+              <>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                {copyError ? copyError.slice(0, 40) : "Failed"}
+              </>
+            ) : (
+              <>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <rect x="9" y="9" width="11" height="11" rx="2" ry="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                </svg>
+                Copy
+              </>
+            )}
+          </button>
         </div>
       </div>
       <div className="space-y-1.5">

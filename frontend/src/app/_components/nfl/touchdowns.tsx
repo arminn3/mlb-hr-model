@@ -333,13 +333,13 @@ export function Touchdowns({ game }: { game: NflGame }) {
     <div className="flex flex-col gap-8">
       <TeamTdSection
         team={game.away_team} opp={game.home_team}
-        offenseSplit={game.away_offense_split} against={game.home_against}
+        offenseSplit={game.away_offense_split} against={game.away_against}
         rushers={game.away_rushers} receivers={game.away_receivers}
         mode={mode} onModeChange={setMode}
       />
       <TeamTdSection
         team={game.home_team} opp={game.away_team}
-        offenseSplit={game.home_offense_split} against={game.away_against}
+        offenseSplit={game.home_offense_split} against={game.home_against}
         rushers={game.home_rushers} receivers={game.home_receivers}
         mode={mode} onModeChange={setMode}
       />
