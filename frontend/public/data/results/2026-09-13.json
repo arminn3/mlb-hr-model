@@ -319,7 +319,7 @@
   ],
   "total_players_ranked": 292,
   "total_hrs_hit": 40,
-  "total_near_hrs": 0,
+  "total_near_hrs": 12,
   "model_hits": 37,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -436,7 +436,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 12,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -462,28 +462,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 2,
-      "rate": 20.0
+      "hits": 3,
+      "rate": 30.0
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 6,
+      "rate": 30.0
     },
     "top_30": {
       "total": 30,
-      "hits": 5,
-      "rate": 16.7
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 292,
-      "hits": 37,
-      "rate": 12.7
+      "hits": 49,
+      "rate": 16.8
     }
   },
   "avg_composite_hr_hitters": 0.474,
-  "avg_composite_non_hitters": 0.443,
-  "composite_separation": 0.031,
+  "avg_composite_non_hitters": 0.439,
+  "composite_separation": 0.035,
   "hr_hitters": [
     {
       "name": "Lawrence Butler",
@@ -1006,8 +1006,238 @@
       "matchup": "PIT@CHC"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Daylen Lile",
+      "rank": 6,
+      "composite": 0.756,
+      "opp_pitcher": "Grayson Rodriguez",
+      "matchup": "LAA@WSH"
+    },
+    {
+      "name": "Leo Bernal",
+      "rank": 14,
+      "composite": 0.714,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@STL"
+    },
+    {
+      "name": "Max Muncy",
+      "rank": 29,
+      "composite": 0.67,
+      "opp_pitcher": "Bryce Miller",
+      "matchup": "SEA@ATH"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 43,
+      "composite": 0.618,
+      "opp_pitcher": "Grant Holmes",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Kevin McGonigle",
+      "rank": 89,
+      "composite": 0.522,
+      "opp_pitcher": "Gabriel Hughes",
+      "matchup": "COL@DET"
+    },
+    {
+      "name": "Tim Tawa",
+      "rank": 95,
+      "composite": 0.511,
+      "opp_pitcher": "Cal Quantrill",
+      "matchup": "TEX@AZ"
+    },
+    {
+      "name": "Seiya Suzuki",
+      "rank": 105,
+      "composite": 0.481,
+      "opp_pitcher": "Bubba Chandler",
+      "matchup": "PIT@CHC"
+    },
+    {
+      "name": "Pete Crow-Armstrong",
+      "rank": 109,
+      "composite": 0.473,
+      "opp_pitcher": "Bubba Chandler",
+      "matchup": "PIT@CHC"
+    },
+    {
+      "name": "Alec Bohm",
+      "rank": 122,
+      "composite": 0.448,
+      "opp_pitcher": "Grant Holmes",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Angel Mart\u00ednez",
+      "rank": 147,
+      "composite": 0.421,
+      "opp_pitcher": "Joe Ryan",
+      "matchup": "CLE@MIN"
+    },
+    {
+      "name": "Alika Williams",
+      "rank": 166,
+      "composite": 0.401,
+      "opp_pitcher": "Bryce Miller",
+      "matchup": "SEA@ATH"
+    },
+    {
+      "name": "Jordan Lawlar",
+      "rank": 229,
+      "composite": 0.333,
+      "opp_pitcher": "Cal Quantrill",
+      "matchup": "TEX@AZ"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Jordan Lawlar",
+      "ev": 103.5,
+      "angle": 24.0,
+      "distance": 388.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Latz, Jacob"
+    },
+    {
+      "batter": "Tim Tawa",
+      "ev": 94.8,
+      "angle": 26.0,
+      "distance": 378.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Alexander, Tyler"
+    },
+    {
+      "batter": "Alika Williams",
+      "ev": 101.9,
+      "angle": 25.0,
+      "distance": 369.0,
+      "hr_in_parks": 2,
+      "result": "double",
+      "pitcher": "Vargas, Carlos"
+    },
+    {
+      "batter": "Alec Bohm",
+      "ev": 103.0,
+      "angle": 22.0,
+      "distance": 387.0,
+      "hr_in_parks": 12,
+      "result": "double",
+      "pitcher": "Lee, Dylan"
+    },
+    {
+      "batter": "J.T. Realmuto",
+      "ev": 98.8,
+      "angle": 29.0,
+      "distance": 377.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Holmes, Grant"
+    },
+    {
+      "batter": "Kyle Schwarber",
+      "ev": 100.8,
+      "angle": 35.0,
+      "distance": 382.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Holmes, Grant"
+    },
+    {
+      "batter": "Seiya Suzuki",
+      "ev": 101.8,
+      "angle": 35.0,
+      "distance": 372.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Chandler, Bubba"
+    },
+    {
+      "batter": "Pete Crow-Armstrong",
+      "ev": 106.4,
+      "angle": 34.0,
+      "distance": 369.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Chandler, Bubba"
+    },
+    {
+      "batter": "Kevin McGonigle",
+      "ev": 99.9,
+      "angle": 29.0,
+      "distance": 395.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Hughes, Gabriel"
+    },
+    {
+      "batter": "Max Muncy",
+      "ev": 99.6,
+      "angle": 34.0,
+      "distance": 387.0,
+      "hr_in_parks": 5,
+      "result": "field_out",
+      "pitcher": "Vodnik, Victor"
+    },
+    {
+      "batter": "Josue De Paula",
+      "ev": 101.9,
+      "angle": 24.0,
+      "distance": 384.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Ralston, Jack"
+    },
+    {
+      "batter": "Angel Mart\u00ednez",
+      "ev": 106.0,
+      "angle": 23.0,
+      "distance": 406.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Nance, Tommy"
+    },
+    {
+      "batter": "Leo Bernal",
+      "ev": 98.5,
+      "angle": 34.0,
+      "distance": 376.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Sandlin, David"
+    },
+    {
+      "batter": "Nick Fortes",
+      "ev": 110.6,
+      "angle": 26.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Blanco, Ronel"
+    },
+    {
+      "batter": "Vladimir Guerrero Jr.",
+      "ev": 105.3,
+      "angle": 24.0,
+      "distance": 396.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Rogers, Trevor"
+    },
+    {
+      "batter": "Daylen Lile",
+      "ev": 105.0,
+      "angle": 23.0,
+      "distance": 382.0,
+      "hr_in_parks": 21,
+      "result": "triple",
+      "pitcher": "Murphy, Luke"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
