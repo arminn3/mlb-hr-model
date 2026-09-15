@@ -213634,7 +213634,7 @@
     ],
     "total_players_ranked": 199,
     "total_hrs_hit": 24,
-    "total_near_hrs": 0,
+    "total_near_hrs": 7,
     "model_hits": 24,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -213751,7 +213751,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 7,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -213787,18 +213787,18 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 8,
+        "rate": 26.7
       },
       "all": {
         "total": 199,
-        "hits": 24,
-        "rate": 12.1
+        "hits": 31,
+        "rate": 15.6
       }
     },
     "avg_composite_hr_hitters": 0.503,
-    "avg_composite_non_hitters": 0.424,
-    "composite_separation": 0.079,
+    "avg_composite_non_hitters": 0.423,
+    "composite_separation": 0.08,
     "hr_hitters": [
       {
         "name": "Teoscar Hern\u00e1ndez",
@@ -214139,8 +214139,140 @@
         "matchup": "MIA@AZ"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Otto Lopez",
+        "rank": 25,
+        "composite": 0.638,
+        "opp_pitcher": "Corbin Burnes",
+        "matchup": "MIA@AZ"
+      },
+      {
+        "name": "Connor Norby",
+        "rank": 33,
+        "composite": 0.612,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "SD@COL"
+      },
+      {
+        "name": "George Lombard Jr.",
+        "rank": 73,
+        "composite": 0.468,
+        "opp_pitcher": "Dean Kremer",
+        "matchup": "NYY@MIN"
+      },
+      {
+        "name": "Hunter Goodman",
+        "rank": 83,
+        "composite": 0.432,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "SD@COL"
+      },
+      {
+        "name": "Kyle Karros",
+        "rank": 93,
+        "composite": 0.412,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "SD@COL"
+      },
+      {
+        "name": "Jake McCarthy",
+        "rank": 114,
+        "composite": 0.389,
+        "opp_pitcher": "Casey Mize",
+        "matchup": "SD@COL"
+      },
+      {
+        "name": "Ernie Clement",
+        "rank": 182,
+        "composite": 0.242,
+        "opp_pitcher": "Troy Melton",
+        "matchup": "DET@TOR"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Otto Lopez",
+        "ev": 99.0,
+        "angle": 32.0,
+        "distance": 370.0,
+        "hr_in_parks": 23,
+        "result": "field_out",
+        "pitcher": "Burnes, Corbin"
+      },
+      {
+        "batter": "Hunter Goodman",
+        "ev": 108.1,
+        "angle": 23.0,
+        "distance": 428.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Rodriguez, Bradgley"
+      },
+      {
+        "batter": "Jake McCarthy",
+        "ev": 102.7,
+        "angle": 27.0,
+        "distance": 419.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Hart, Kyle"
+      },
+      {
+        "batter": "Connor Norby",
+        "ev": 106.8,
+        "angle": 22.0,
+        "distance": 395.0,
+        "hr_in_parks": 23,
+        "result": "double",
+        "pitcher": "Mize, Casey"
+      },
+      {
+        "batter": "Ty France",
+        "ev": 99.5,
+        "angle": 30.0,
+        "distance": 409.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Sugano, Tomoyuki"
+      },
+      {
+        "batter": "Kyle Karros",
+        "ev": 102.0,
+        "angle": 25.0,
+        "distance": 379.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Mize, Casey"
+      },
+      {
+        "batter": "George Lombard Jr.",
+        "ev": 111.1,
+        "angle": 19.0,
+        "distance": 388.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "Morris, Andrew"
+      },
+      {
+        "batter": "Gunnar Henderson",
+        "ev": 98.5,
+        "angle": 26.0,
+        "distance": 390.0,
+        "hr_in_parks": 3,
+        "result": "field_out",
+        "pitcher": "Tong, Jonah"
+      },
+      {
+        "batter": "Ernie Clement",
+        "ev": 97.8,
+        "angle": 36.0,
+        "distance": 368.0,
+        "hr_in_parks": 8,
+        "result": "field_out",
+        "pitcher": "Kinley, Tyler"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
