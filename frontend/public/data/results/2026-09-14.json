@@ -1,0 +1,581 @@
+{
+  "date": "2026-09-14",
+  "players_who_batted": [
+    "Alex Freeland",
+    "Carlos Jorge",
+    "Dane Myers",
+    "Elly De La Cruz",
+    "Enrique Hern\u00e1ndez",
+    "Eugenio Su\u00e1rez",
+    "H\u00e9ctor Rodr\u00edguez",
+    "JJ Bleday",
+    "Josue De Paula",
+    "Juan Brito",
+    "Ke'Bryan Hayes",
+    "Kyle Tucker",
+    "Max Muncy",
+    "Miguel Rojas",
+    "Mookie Betts",
+    "Sal Stewart",
+    "Teoscar Hern\u00e1ndez",
+    "Tommy Edman",
+    "Tyler Stephenson",
+    "Will Smith"
+  ],
+  "total_players_ranked": 20,
+  "total_hrs_hit": 3,
+  "total_near_hrs": 0,
+  "model_hits": 3,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "all": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "all": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      }
+    }
+  },
+  "tier_accuracy_ml2026": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "all": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    }
+  },
+  "tier_accuracy_ml2026_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "all": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "all": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "all": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "all": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    }
+  },
+  "avg_composite_hr_hitters": 0.576,
+  "avg_composite_non_hitters": 0.464,
+  "composite_separation": 0.112,
+  "hr_hitters": [
+    {
+      "name": "Teoscar Hern\u00e1ndez",
+      "rank": 1,
+      "composite": 0.773,
+      "opp_pitcher": "Nick Lodolo",
+      "matchup": "LAD@CIN"
+    },
+    {
+      "name": "Elly De La Cruz",
+      "rank": 8,
+      "composite": 0.532,
+      "opp_pitcher": "Tarik Skubal",
+      "matchup": "LAD@CIN"
+    },
+    {
+      "name": "Kyle Tucker",
+      "rank": 14,
+      "composite": 0.422,
+      "opp_pitcher": "Nick Lodolo",
+      "matchup": "LAD@CIN"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Teoscar Hern\u00e1ndez",
+      "rank": 1,
+      "composite": 0.755,
+      "opp_pitcher": "Nick Lodolo",
+      "matchup": "LAD@CIN"
+    },
+    {
+      "name": "Elly De La Cruz",
+      "rank": 5,
+      "composite": 0.579,
+      "opp_pitcher": "Tarik Skubal",
+      "matchup": "LAD@CIN"
+    },
+    {
+      "name": "Kyle Tucker",
+      "rank": 17,
+      "composite": 0.301,
+      "opp_pitcher": "Nick Lodolo",
+      "matchup": "LAD@CIN"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 78,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Matt McLain",
+        "Ke'Bryan Hayes",
+        "Jose Trevino",
+        "Freddie Freeman",
+        "Will Banfield",
+        "Randal Grichuk",
+        "Andrew Benintendi",
+        "Munetaka Murakami",
+        "Jake Rogers",
+        "Luisangel Acu\u00f1a",
+        "Braden Montgomery",
+        "Angel Mart\u00ednez",
+        "Edgar Quero",
+        "Brayan Rocchio",
+        "Sam Antonacci",
+        "Daniel Schneemann",
+        "Jo Adell",
+        "Angel Genao",
+        "Travis Bazzana",
+        "Nathaniel Lowe",
+        "Chase DeLauter",
+        "Jared Young",
+        "Brett Baty",
+        "A.J. Ewing",
+        "Samuel Basallo",
+        "Francisco Lindor",
+        "Juan Soto",
+        "Colton Cowser",
+        "Heston Kjerstad",
+        "Jackson Holliday",
+        "Matt Olson",
+        "Austin Riley",
+        "Ronald Acu\u00f1a Jr.",
+        "Pedro Ram\u00edrez",
+        "Drake Baldwin",
+        "Michael Conforto",
+        "Michael Harris II",
+        "Mauricio Dub\u00f3n",
+        "Ha-Seong Kim",
+        "Alex Bregman",
+        "Nico Hoerner",
+        "Tyrone Taylor",
+        "DaShawn Keirsey Jr.",
+        "Kody Clemens",
+        "Josh Bell",
+        "Ryan Kreidler",
+        "Trevor Larnach",
+        "George Lombard Jr.",
+        "Jos\u00e9 Caballero",
+        "Alex Jackson",
+        "Paul Goldschmidt",
+        "Emmanuel Rodriguez",
+        "Walker Jenkins",
+        "Bryce Eldridge",
+        "Nolan Gorman",
+        "Iv\u00e1n Herrera",
+        "Pedro Pag\u00e9s",
+        "Jos\u00e9 Ferm\u00edn",
+        "Turner Hill",
+        "Jordan Walker",
+        "Christian Koss",
+        "Andrew Knizner",
+        "Grant McCray",
+        "Drew Gilbert",
+        "Bryan Torres",
+        "Jonah Cox",
+        "TJ Rumfield",
+        "Vimael Mach\u00edn",
+        "Brock Rodden",
+        "Victor Robles",
+        "Jhonny Pereda",
+        "Tim Tawa",
+        "Joe Mack",
+        "Brian Navarreto",
+        "James McCann",
+        "Jordan Lawlar",
+        "Nolan Arenado",
+        "Graham Pauley"
+      ],
+      "hr_names": []
+    },
+    "2_of_5": {
+      "players": 94,
+      "hr_count": 2,
+      "hr_rate": 2.1,
+      "names": [
+        "Elly De La Cruz",
+        "Eugenio Su\u00e1rez",
+        "Tommy Edman",
+        "Kyle Tucker",
+        "H\u00e9ctor Rodr\u00edguez",
+        "TJ Friedl",
+        "Dane Myers",
+        "Hunter Feduccia",
+        "Josue De Paula",
+        "Brenton Doyle",
+        "Chase Meidroth",
+        "David Fry",
+        "Jos\u00e9 Ram\u00edrez",
+        "Josh Smith",
+        "John Peck",
+        "Spencer Torkelson",
+        "Andr\u00e9s Gim\u00e9nez",
+        "Ben Malgeri",
+        "Kazuma Okamoto",
+        "Dillon Dingler",
+        "Alejandro Kirk",
+        "George Springer",
+        "Hao-Yu Lee",
+        "Javier B\u00e1ez",
+        "Myles Straw",
+        "Charles McAdoo",
+        "Vladimir Guerrero Jr.",
+        "Ernie Clement",
+        "Rudy Martin Jr.",
+        "Gunnar Henderson",
+        "Dylan Beavers",
+        "Nick Morabito",
+        "Yohel Pozo",
+        "Michael Busch",
+        "Sean Murphy",
+        "Ian Happ",
+        "Seiya Suzuki",
+        "BJ Murray Jr.",
+        "Ozzie Albies",
+        "Mike Yastrzemski",
+        "Brewer Hicklen",
+        "Miguel Amaya",
+        "Carson Kelly",
+        "Gabriel Arias",
+        "Austin Wells",
+        "Ryan Jeffers",
+        "Anthony Volpe",
+        "Luis Garc\u00eda Jr.",
+        "Heliot Ramos",
+        "Cody Bellinger",
+        "Victor Caratini",
+        "Kaelen Culpepper",
+        "Luke Keaschall",
+        "Austin Martin",
+        "Aaron Judge",
+        "Ben Rice",
+        "Ali S\u00e1nchez",
+        "Brooks Lee",
+        "Joshua B\u00e1ez",
+        "Leo Bernal",
+        "Shay Whitcomb",
+        "Nathan Church",
+        "Jung Hoo Lee",
+        "Victor Scott II",
+        "Adael Amador",
+        "Cole Carrigg",
+        "Zac Veen",
+        "Jase Bowen",
+        "Ethan Salas",
+        "Jake Cronenworth",
+        "Sung-Mun Song",
+        "Jake McCarthy",
+        "Mickey Moniak",
+        "Troy Johnston",
+        "Luis Campusano",
+        "Randy Arozarena",
+        "Cole Young",
+        "Dominic Canzone",
+        "Julio Rodr\u00edguez",
+        "Vaughn Grissom",
+        "Taylor Ward",
+        "Michael Arroyo",
+        "J.P. Crawford",
+        "Lazaro Montes",
+        "Corbin Carroll",
+        "Agust\u00edn Ram\u00edrez",
+        "Javier Sanoja",
+        "Geraldo Perdomo",
+        "Lars Nootbaar",
+        "Kyle Stowers",
+        "Jared Serna",
+        "Griffin Conine",
+        "Xavier Edwards",
+        "Deyvison De Los Santos"
+      ],
+      "hr_names": [
+        "Elly De La Cruz",
+        "Kyle Tucker"
+      ]
+    },
+    "3_of_5": {
+      "players": 68,
+      "hr_count": 1,
+      "hr_rate": 1.5,
+      "names": [
+        "Teoscar Hern\u00e1ndez",
+        "Enrique Hern\u00e1ndez",
+        "Juan Brito",
+        "Will Smith",
+        "Sal Stewart",
+        "Mookie Betts",
+        "Eliezer Alfonzo",
+        "Alex Call",
+        "Max Muncy",
+        "Carlos Jorge",
+        "Miguel Vargas",
+        "Colson Montgomery",
+        "Tristan Peters",
+        "Brett Bateman",
+        "Max Clark",
+        "Riley Greene",
+        "Kevin McGonigle",
+        "Brandon Valenzuela",
+        "Sean Keys",
+        "Eduardo Valencia",
+        "Colt Keith",
+        "Gleyber Torres",
+        "Zach McKinstry",
+        "Coby Mayo",
+        "Luis Torrens",
+        "Pete Alonso",
+        "Bo Bichette",
+        "Mark Vientos",
+        "Jeremiah Jackson",
+        "Francisco Alvarez",
+        "Carlos Narv\u00e1ez",
+        "Cristian Pache",
+        "Rece Hinds",
+        "Spencer Jones",
+        "Ryan McMahon",
+        "Royce Lewis",
+        "Amed Rosario",
+        "Jackson Merrill",
+        "Fernando Tatis Jr.",
+        "Manny Machado",
+        "Connor Norby",
+        "Ezequiel Tovar",
+        "Hunter Goodman",
+        "Jordan Beck",
+        "Austin Hays",
+        "Dustin Harris",
+        "Freddy Fermin",
+        "Kyle Karros",
+        "Samad Taylor",
+        "Zach Neto",
+        "Josh Lowe",
+        "Wade Meckler",
+        "Denzer Guzman",
+        "Jose Siri",
+        "Mike Trout",
+        "Travis d'Arnaud",
+        "Tyler Heineman",
+        "Mois\u00e9s Ballesteros",
+        "Weston Wilson",
+        "Oswald Peraza",
+        "Josh Naylor",
+        "Adam Frazier",
+        "Otto Lopez",
+        "Heriberto Hern\u00e1ndez",
+        "Ketel Marte",
+        "Pavin Smith",
+        "Esteury Ruiz",
+        "Ildemaro Vargas"
+      ],
+      "hr_names": [
+        "Teoscar Hern\u00e1ndez"
+      ]
+    },
+    "4_of_5": {
+      "players": 16,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Tyler Stephenson",
+        "Alex Freeland",
+        "Miguel Rojas",
+        "JJ Bleday",
+        "Brett Callahan",
+        "Nathan Lukes",
+        "Marcus Semien",
+        "Christopher Morel",
+        "Christian Encarnacion-Strand",
+        "Pete Crow-Armstrong",
+        "Xander Bogaerts",
+        "Brett Sullivan",
+        "Mason McCoy",
+        "Christian Moore",
+        "Kyren Paris",
+        "Cal Raleigh"
+      ],
+      "hr_names": []
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "all": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    }
+  },
+  "combined_hr_hitters": [
+    {
+      "name": "Teoscar Hern\u00e1ndez",
+      "rank": 1,
+      "composite": 0.863,
+      "opp_pitcher": "Nick Lodolo",
+      "matchup": "LAD@CIN"
+    },
+    {
+      "name": "Elly De La Cruz",
+      "rank": 4,
+      "composite": 0.676,
+      "opp_pitcher": "Tarik Skubal",
+      "matchup": "LAD@CIN"
+    },
+    {
+      "name": "Kyle Tucker",
+      "rank": 12,
+      "composite": 0.219,
+      "opp_pitcher": "Nick Lodolo",
+      "matchup": "LAD@CIN"
+    }
+  ]
+}
