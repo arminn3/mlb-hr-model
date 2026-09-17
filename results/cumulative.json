@@ -217987,7 +217987,7 @@
       {
         "name": "Drew Gilbert",
         "pitcher": "Riley O'Brien",
-        "description": "Drew Gilbert homers (10) on a fly ball to center field. Grant McCray scores."
+        "description": "${person|fullName|687551} homers ${total|homeRuns|687551} on a fly ball to center field.   ${person|fullName|687529} scores.  "
       }
     ],
     "hr_signal_accuracy": {
