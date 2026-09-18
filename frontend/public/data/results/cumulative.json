@@ -218621,5 +218621,696 @@
         "matchup": "CWS@CLE"
       }
     ]
+  },
+  {
+    "date": "2026-09-17",
+    "players_who_batted": [
+      "Adael Amador",
+      "Alex Freeland",
+      "Alika Williams",
+      "Andrew Vaughn",
+      "Austin Hays",
+      "Bo Naylor",
+      "Brandon Lowe",
+      "Brett Sullivan",
+      "Brice Turang",
+      "Bryan Reynolds",
+      "Carlos Jorge",
+      "Cedric Mullins",
+      "Chandler Simpson",
+      "Cole Carrigg",
+      "Connor Norby",
+      "Cooper Pratt",
+      "Dane Myers",
+      "David Hamilton",
+      "Denzel Clarke",
+      "Donovan Walton",
+      "Dustin Harris",
+      "Elly De La Cruz",
+      "Fernando Tatis Jr.",
+      "Freddie Freeman",
+      "Freddy Fermin",
+      "Garrett Mitchell",
+      "Gary S\u00e1nchez",
+      "Henry Bolte",
+      "Henry Davis",
+      "Hunter Feduccia",
+      "H\u00e9ctor Rodr\u00edguez",
+      "Jackson Chourio",
+      "Jackson Merrill",
+      "Jake Cronenworth",
+      "Jake Fraley",
+      "Jake McCarthy",
+      "Jared Triolo",
+      "Jase Bowen",
+      "Jeff McNeil",
+      "Joey Ortiz",
+      "Jonah Heim",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Jordan Beck",
+      "Josue De Paula",
+      "Juan Brito",
+      "Junior Caminero",
+      "Ke'Bryan Hayes",
+      "Konnor Griffin",
+      "Kyle Karros",
+      "Kyle Tucker",
+      "Lawrence Butler",
+      "Liam Hicks",
+      "Luis Campusano",
+      "Luis Lara",
+      "Manny Machado",
+      "Matt McLain",
+      "Max Muncy",
+      "Michael Stefanic",
+      "Mickey Moniak",
+      "Miguel Rojas",
+      "Nick Gonzales",
+      "Oneil Cruz",
+      "Rafael Flores Jr.",
+      "Richie Palacios",
+      "Ronny Simon",
+      "Ryan Vilade",
+      "Sal Frelick",
+      "Sal Stewart",
+      "Samad Taylor",
+      "TJ Friedl",
+      "TJ Rumfield",
+      "Taylor Walls",
+      "Teoscar Hern\u00e1ndez",
+      "Tommy Edman",
+      "Tommy White",
+      "Troy Johnston",
+      "Ty France",
+      "Tyler Stephenson",
+      "Will Banfield",
+      "Xander Bogaerts",
+      "Yandy D\u00edaz",
+      "Zac Veen",
+      "Zack Gelof"
+    ],
+    "total_players_ranked": 77,
+    "total_hrs_hit": 7,
+    "total_near_hrs": 0,
+    "model_hits": 7,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 4,
+          "rate": 20.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 4,
+          "rate": 13.3
+        },
+        "all": {
+          "total": 77,
+          "hits": 7,
+          "rate": 9.1
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
+        },
+        "all": {
+          "total": 77,
+          "hits": 7,
+          "rate": 9.1
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 77,
+        "hits": 7,
+        "rate": 9.1
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 3,
+          "rate": 15.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 5,
+          "rate": 16.7
+        },
+        "all": {
+          "total": 77,
+          "hits": 7,
+          "rate": 9.1
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
+        },
+        "all": {
+          "total": 77,
+          "hits": 7,
+          "rate": 9.1
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 77,
+        "hits": 7,
+        "rate": 9.1
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 77,
+        "hits": 7,
+        "rate": 9.1
+      }
+    },
+    "avg_composite_hr_hitters": 0.493,
+    "avg_composite_non_hitters": 0.458,
+    "composite_separation": 0.035,
+    "hr_hitters": [
+      {
+        "name": "Sal Stewart",
+        "rank": 7,
+        "composite": 0.683,
+        "opp_pitcher": "Justin Wrobleski",
+        "matchup": "LAD@CIN"
+      },
+      {
+        "name": "Lawrence Butler",
+        "rank": 16,
+        "composite": 0.58,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "ATH@TB"
+      },
+      {
+        "name": "Xander Bogaerts",
+        "rank": 18,
+        "composite": 0.573,
+        "opp_pitcher": "Tanner Gordon",
+        "matchup": "SD@COL"
+      },
+      {
+        "name": "Kyle Tucker",
+        "rank": 19,
+        "composite": 0.567,
+        "opp_pitcher": "Brady Singer",
+        "matchup": "LAD@CIN"
+      },
+      {
+        "name": "Henry Davis",
+        "rank": 39,
+        "composite": 0.455,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@PIT"
+      },
+      {
+        "name": "Miguel Rojas",
+        "rank": 63,
+        "composite": 0.346,
+        "opp_pitcher": "Brady Singer",
+        "matchup": "LAD@CIN"
+      },
+      {
+        "name": "Bo Naylor",
+        "rank": 70,
+        "composite": 0.25,
+        "opp_pitcher": "Wilber Dotel",
+        "matchup": "MIL@PIT"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Sal Stewart",
+        "rank": 2,
+        "composite": 0.819,
+        "opp_pitcher": "Justin Wrobleski",
+        "matchup": "LAD@CIN"
+      },
+      {
+        "name": "Kyle Tucker",
+        "rank": 21,
+        "composite": 0.561,
+        "opp_pitcher": "Brady Singer",
+        "matchup": "LAD@CIN"
+      },
+      {
+        "name": "Xander Bogaerts",
+        "rank": 26,
+        "composite": 0.471,
+        "opp_pitcher": "Tanner Gordon",
+        "matchup": "SD@COL"
+      },
+      {
+        "name": "Henry Davis",
+        "rank": 35,
+        "composite": 0.455,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@PIT"
+      },
+      {
+        "name": "Lawrence Butler",
+        "rank": 41,
+        "composite": 0.42,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "ATH@TB"
+      },
+      {
+        "name": "Miguel Rojas",
+        "rank": 46,
+        "composite": 0.409,
+        "opp_pitcher": "Brady Singer",
+        "matchup": "LAD@CIN"
+      },
+      {
+        "name": "Bo Naylor",
+        "rank": 70,
+        "composite": 0.287,
+        "opp_pitcher": "Wilber Dotel",
+        "matchup": "MIL@PIT"
+      }
+    ],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 52,
+        "hr_count": 1,
+        "hr_rate": 1.9,
+        "names": [
+          "Brandon Lowe",
+          "Brice Turang",
+          "Jackson Chourio",
+          "Jared Triolo",
+          "Joey Ortiz",
+          "Gary S\u00e1nchez",
+          "Oneil Cruz",
+          "Lawrence Butler",
+          "Liam Hicks",
+          "Zack Gelof",
+          "Jonny DeLuca",
+          "Alika Williams",
+          "Henry Bolte",
+          "Denzel Clarke",
+          "Braxton Fulford",
+          "Nick Allen",
+          "Tyler Tolbert",
+          "Nick Loftin",
+          "Luke Maile",
+          "Brett Baty",
+          "Garrett Stubbs",
+          "Luis Arraez",
+          "Edmundo Sosa",
+          "Bryan De La Cruz",
+          "Rafael March\u00e1n",
+          "Colt Keith",
+          "Colson Montgomery",
+          "Chase Meidroth",
+          "Randal Grichuk",
+          "Riley Greene",
+          "Kevin McGonigle",
+          "Zach McKinstry",
+          "Braden Montgomery",
+          "Tommy Pham",
+          "Sam Antonacci",
+          "Miguel Vargas",
+          "Kyle Teel",
+          "Wyatt Langford",
+          "Danny Jansen",
+          "Elias D\u00edaz",
+          "Brandon Nimmo",
+          "Joc Pederson",
+          "Corey Seager",
+          "Caleb Durbin",
+          "Ezequiel Duran",
+          "Willson Contreras",
+          "Mickey Gasper",
+          "Roman Anthony",
+          "Nate Eaton",
+          "Jose Siri",
+          "Denzer Guzman",
+          "Ryan Jeffers"
+        ],
+        "hr_names": [
+          "Lawrence Butler"
+        ]
+      },
+      "2_of_5": {
+        "players": 80,
+        "hr_count": 2,
+        "hr_rate": 2.5,
+        "names": [
+          "Bryan Reynolds",
+          "Ronny Simon",
+          "Konnor Griffin",
+          "Rafael Flores Jr.",
+          "Bo Naylor",
+          "David Hamilton",
+          "Sal Frelick",
+          "Teoscar Hern\u00e1ndez",
+          "Ke'Bryan Hayes",
+          "Miguel Rojas",
+          "Junior Caminero",
+          "Jonathan Aranda",
+          "Ryan Vilade",
+          "Richie Palacios",
+          "Chandler Simpson",
+          "Taylor Walls",
+          "Connor Norby",
+          "Hunter Goodman",
+          "Jase Bowen",
+          "Kyle Karros",
+          "TJ Rumfield",
+          "Ezequiel Tovar",
+          "Michael Massey",
+          "Yainer Diaz",
+          "Jeremy Pe\u00f1a",
+          "Isaac Paredes",
+          "Jorge Barrosa",
+          "LaMonte Wade Jr.",
+          "Josh Rojas",
+          "Kyle Isbel",
+          "Cam Smith",
+          "Christian V\u00e1zquez",
+          "Salvador Perez",
+          "Bobby Witt Jr.",
+          "Maikel Garcia",
+          "Carson Benge",
+          "Kyle Schwarber",
+          "Jared Young",
+          "Bryce Harper",
+          "Bryson Stott",
+          "Nick Morabito",
+          "A.J. Ewing",
+          "Francisco Lindor",
+          "Derek Hill",
+          "Justin Crawford",
+          "J.T. Realmuto",
+          "Alec Bohm",
+          "Trea Turner",
+          "John Peck",
+          "Ben Malgeri",
+          "Andrew Benintendi",
+          "Javier B\u00e1ez",
+          "Hao-Yu Lee",
+          "Brett Callahan",
+          "Dillon Dingler",
+          "Wilyer Abreu",
+          "Andruw Monasterio",
+          "Nick Sogard",
+          "Jahmai Jones",
+          "Josh Jung",
+          "Justin Foscue",
+          "Jake Burger",
+          "Trevor Story",
+          "Vaughn Grissom",
+          "Mike Trout",
+          "Kody Clemens",
+          "Emmanuel Rodriguez",
+          "Josh Bell",
+          "Wade Meckler",
+          "Trevor Larnach",
+          "Travis d'Arnaud",
+          "Christian Moore",
+          "Zach Neto",
+          "Luke Keaschall",
+          "Alex Jackson",
+          "Oswald Peraza",
+          "Walker Jenkins",
+          "Ryan Kreidler",
+          "Austin Martin",
+          "Kyren Paris"
+        ],
+        "hr_names": [
+          "Bo Naylor",
+          "Miguel Rojas"
+        ]
+      },
+      "3_of_5": {
+        "players": 60,
+        "hr_count": 4,
+        "hr_rate": 6.7,
+        "names": [
+          "Nick Gonzales",
+          "Henry Davis",
+          "Matt McLain",
+          "Sal Stewart",
+          "Kyle Tucker",
+          "Max Muncy",
+          "Alex Freeland",
+          "TJ Friedl",
+          "Dane Myers",
+          "Elly De La Cruz",
+          "Tommy Edman",
+          "Freddie Freeman",
+          "Hunter Feduccia",
+          "Yandy D\u00edaz",
+          "Jeff McNeil",
+          "Ethan Salas",
+          "Jake Cronenworth",
+          "Jackson Merrill",
+          "Xander Bogaerts",
+          "Sung-Mun Song",
+          "Austin Hays",
+          "Fernando Tatis Jr.",
+          "Freddy Fermin",
+          "Manny Machado",
+          "Samad Taylor",
+          "Ty France",
+          "Luis Campusano",
+          "Dustin Harris",
+          "Jake McCarthy",
+          "Zac Veen",
+          "Jordan Beck",
+          "Adael Amador",
+          "Yordan Alvarez",
+          "Vinnie Pasquantino",
+          "John Rave",
+          "Nelson Vel\u00e1zquez",
+          "Jac Caglianone",
+          "Christian Walker",
+          "Jose Altuve",
+          "Isaac Collins",
+          "Joey Loperfido",
+          "Luis Torrens",
+          "Juan Soto",
+          "Brandon Marsh",
+          "Marcus Semien",
+          "Cristian Pache",
+          "Mark Vientos",
+          "Spencer Torkelson",
+          "Eduardo Valencia",
+          "Gleyber Torres",
+          "Munetaka Murakami",
+          "Tristan Peters",
+          "Mois\u00e9s Ballesteros",
+          "Josh Lowe",
+          "Royce Lewis",
+          "Adam Frazier",
+          "Tyler Heineman",
+          "Brooks Lee",
+          "Victor Caratini",
+          "Ben Ross"
+        ],
+        "hr_names": [
+          "Henry Davis",
+          "Sal Stewart",
+          "Kyle Tucker",
+          "Xander Bogaerts"
+        ]
+      },
+      "4_of_5": {
+        "players": 12,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Tyler Stephenson",
+          "Juan Brito",
+          "H\u00e9ctor Rodr\u00edguez",
+          "Josue De Paula",
+          "Cole Carrigg",
+          "Mickey Moniak",
+          "Troy Johnston",
+          "Carter Jensen",
+          "Daulton Varsho",
+          "Bo Bichette",
+          "Francisco Alvarez",
+          "Christopher Morel"
+        ],
+        "hr_names": []
+      },
+      "5_of_5": {
+        "players": 1,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Brett Sullivan"
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 77,
+        "hits": 7,
+        "rate": 9.1
+      }
+    },
+    "combined_hr_hitters": [
+      {
+        "name": "Sal Stewart",
+        "rank": 6,
+        "composite": 0.65,
+        "opp_pitcher": "Justin Wrobleski",
+        "matchup": "LAD@CIN"
+      },
+      {
+        "name": "Lawrence Butler",
+        "rank": 15,
+        "composite": 0.478,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "ATH@TB"
+      },
+      {
+        "name": "Kyle Tucker",
+        "rank": 24,
+        "composite": 0.389,
+        "opp_pitcher": "Brady Singer",
+        "matchup": "LAD@CIN"
+      },
+      {
+        "name": "Bo Naylor",
+        "rank": 25,
+        "composite": 0.363,
+        "opp_pitcher": "Wilber Dotel",
+        "matchup": "MIL@PIT"
+      },
+      {
+        "name": "Xander Bogaerts",
+        "rank": 30,
+        "composite": 0.33,
+        "opp_pitcher": "Tanner Gordon",
+        "matchup": "SD@COL"
+      },
+      {
+        "name": "Henry Davis",
+        "rank": 60,
+        "composite": 0.162,
+        "opp_pitcher": "Kyle Harrison",
+        "matchup": "MIL@PIT"
+      },
+      {
+        "name": "Miguel Rojas",
+        "rank": 63,
+        "composite": 0.151,
+        "opp_pitcher": "Brady Singer",
+        "matchup": "LAD@CIN"
+      }
+    ]
   }
 ]
