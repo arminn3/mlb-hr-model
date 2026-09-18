@@ -305,13 +305,14 @@ def _against_stats(pbp_reg: pd.DataFrame, role_map: dict) -> dict:
         base["rec_yds_pg"] = base["rec_yds"] / gp
         base["td_pg"] = base["rush_td_pg"].fillna(0) + base["rec_td_pg"].fillna(0)
         rec_applicable = role != "QB"
-        # WR/TE rushing the ball at all is a trick-play rarity — nearly every
-        # defense allows exactly 0, so ranking it just stamps "1st" on ~90% of
-        # the league and reads as broken. Rushing is only a real, differentiated
-        # part of the job for QB/RB1/RB2; keep the true (often 0) rate for every
-        # role, but only rank it where the rank means something.
-        rush_rankable = role in ("QB", "RB1", "RB2")
-        if rush_rankable:
+        # WR/TE rushing the ball isn't a real part of the role — same taxonomy
+        # call as QBs not catching passes. It happens on the rare trick play,
+        # but treating it as a trackable stat/rank for that role is misleading
+        # (nearly every defense allows exactly 0, so it doesn't discriminate,
+        # and displaying it invites reading noise as signal). Only rank/show
+        # rushing where it's a real, differentiated part of the job.
+        rush_applicable = role in ("QB", "RB1", "RB2")
+        if rush_applicable:
             for metric in ("rush_td_pg", "rush_yds_pg"):
                 base[metric + "_rank"] = base[metric].rank(ascending=True, method="min")
         if rec_applicable:
@@ -322,10 +323,10 @@ def _against_stats(pbp_reg: pd.DataFrame, role_map: dict) -> dict:
         for team, r in base.iterrows():
             row = {
                 "td": round(float(r["td_pg"]), 2),
-                "rush_td": round(float(r["rush_td_pg"]), 2) if pd.notna(r["rush_td_pg"]) else None,
-                "rush_td_rank": int(r["rush_td_pg_rank"]) if pd.notna(r.get("rush_td_pg_rank")) else None,
-                "rush_yds": round(float(r["rush_yds_pg"]), 1) if pd.notna(r["rush_yds_pg"]) else None,
-                "rush_yds_rank": int(r["rush_yds_pg_rank"]) if pd.notna(r.get("rush_yds_pg_rank")) else None,
+                "rush_td": round(float(r["rush_td_pg"]), 2) if (rush_applicable and pd.notna(r["rush_td_pg"])) else None,
+                "rush_td_rank": int(r["rush_td_pg_rank"]) if (rush_applicable and pd.notna(r.get("rush_td_pg_rank"))) else None,
+                "rush_yds": round(float(r["rush_yds_pg"]), 1) if (rush_applicable and pd.notna(r["rush_yds_pg"])) else None,
+                "rush_yds_rank": int(r["rush_yds_pg_rank"]) if (rush_applicable and pd.notna(r.get("rush_yds_pg_rank"))) else None,
                 "rec_td": round(float(r["rec_td_pg"]), 2) if (rec_applicable and pd.notna(r["rec_td_pg"])) else None,
                 "rec_td_rank": int(r["rec_td_pg_rank"]) if (rec_applicable and pd.notna(r.get("rec_td_pg_rank"))) else None,
                 "rec_yds": round(float(r["rec_yds_pg"]), 1) if (rec_applicable and pd.notna(r["rec_yds_pg"])) else None,
