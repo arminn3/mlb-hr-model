@@ -218813,7 +218813,7 @@
     ],
     "total_players_ranked": 177,
     "total_hrs_hit": 16,
-    "total_near_hrs": 0,
+    "total_near_hrs": 7,
     "model_hits": 15,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -218930,7 +218930,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 7,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -218961,23 +218961,23 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
         "total": 30,
-        "hits": 3,
-        "rate": 10.0
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
         "total": 177,
-        "hits": 15,
-        "rate": 8.5
+        "hits": 22,
+        "rate": 12.4
       }
     },
     "avg_composite_hr_hitters": 0.46,
-    "avg_composite_non_hitters": 0.435,
-    "composite_separation": 0.025,
+    "avg_composite_non_hitters": 0.434,
+    "composite_separation": 0.026,
     "hr_hitters": [
       {
         "name": "Yordan Alvarez",
@@ -219192,8 +219192,140 @@
         "matchup": "MIL@PIT"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Josh Lowe",
+        "rank": 14,
+        "composite": 0.667,
+        "opp_pitcher": "Taj Bradley",
+        "matchup": "MIN@LAA"
+      },
+      {
+        "name": "Jake Cronenworth",
+        "rank": 30,
+        "composite": 0.589,
+        "opp_pitcher": "Tanner Gordon",
+        "matchup": "SD@COL"
+      },
+      {
+        "name": "Fernando Tatis Jr.",
+        "rank": 61,
+        "composite": 0.471,
+        "opp_pitcher": "Tanner Gordon",
+        "matchup": "SD@COL"
+      },
+      {
+        "name": "Samad Taylor",
+        "rank": 65,
+        "composite": 0.471,
+        "opp_pitcher": "Tanner Gordon",
+        "matchup": "SD@COL"
+      },
+      {
+        "name": "Jake McCarthy",
+        "rank": 120,
+        "composite": 0.364,
+        "opp_pitcher": "Michael King",
+        "matchup": "SD@COL"
+      },
+      {
+        "name": "Nick Sogard",
+        "rank": 129,
+        "composite": 0.347,
+        "opp_pitcher": "Tyler Alexander",
+        "matchup": "BOS@TEX"
+      },
+      {
+        "name": "Adley Rutschman",
+        "rank": 154,
+        "composite": 0.265,
+        "opp_pitcher": "Tyler Alexander",
+        "matchup": "BOS@TEX"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Samad Taylor",
+        "ev": 91.6,
+        "angle": 29.0,
+        "distance": 372.0,
+        "hr_in_parks": 11,
+        "result": "field_out",
+        "pitcher": "Hill, Jaden"
+      },
+      {
+        "batter": "Jake Cronenworth",
+        "ev": 102.2,
+        "angle": 25.0,
+        "distance": 369.0,
+        "hr_in_parks": 30,
+        "result": "triple",
+        "pitcher": "Agnos, Zach"
+      },
+      {
+        "batter": "Fernando Tatis Jr.",
+        "ev": 107.9,
+        "angle": 21.0,
+        "distance": 419.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Gordon, Tanner"
+      },
+      {
+        "batter": "Jake McCarthy",
+        "ev": 99.4,
+        "angle": 27.0,
+        "distance": 386.0,
+        "hr_in_parks": 25,
+        "result": "triple",
+        "pitcher": "King, Michael"
+      },
+      {
+        "batter": "Josh Lowe",
+        "ev": 99.2,
+        "angle": 26.0,
+        "distance": 368.0,
+        "hr_in_parks": 22,
+        "result": "double",
+        "pitcher": "Minter, A.J."
+      },
+      {
+        "batter": "Garrett Mitchell",
+        "ev": 109.6,
+        "angle": 17.0,
+        "distance": 381.0,
+        "hr_in_parks": 1,
+        "result": "double",
+        "pitcher": "Weaver, Luke"
+      },
+      {
+        "batter": "Nick Sogard",
+        "ev": 100.2,
+        "angle": 26.0,
+        "distance": 405.0,
+        "hr_in_parks": 21,
+        "result": "field_out",
+        "pitcher": "Ahlstrom, Robby"
+      },
+      {
+        "batter": "Josh Jung",
+        "ev": 104.8,
+        "angle": 22.0,
+        "distance": 395.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Gray, Sonny"
+      },
+      {
+        "batter": "Adley Rutschman",
+        "ev": 101.4,
+        "angle": 25.0,
+        "distance": 376.0,
+        "hr_in_parks": 4,
+        "result": "double",
+        "pitcher": "Silseth, Chase"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Taylor Trammell",
