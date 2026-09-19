@@ -315,7 +315,7 @@
   ],
   "total_players_ranked": 308,
   "total_hrs_hit": 36,
-  "total_near_hrs": 0,
+  "total_near_hrs": 15,
   "model_hits": 35,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -432,7 +432,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 15,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -463,23 +463,23 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 7,
-      "rate": 35.0
+      "hits": 8,
+      "rate": 40.0
     },
     "top_30": {
       "total": 30,
-      "hits": 10,
-      "rate": 33.3
+      "hits": 12,
+      "rate": 40.0
     },
     "all": {
       "total": 308,
-      "hits": 35,
-      "rate": 11.4
+      "hits": 50,
+      "rate": 16.2
     }
   },
   "avg_composite_hr_hitters": 0.498,
-  "avg_composite_non_hitters": 0.405,
-  "composite_separation": 0.093,
+  "avg_composite_non_hitters": 0.401,
+  "composite_separation": 0.097,
   "hr_hitters": [
     {
       "name": "Walker Jenkins",
@@ -974,8 +974,259 @@
       "matchup": "MIL@BAL"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Josh Bell",
+      "rank": 11,
+      "composite": 0.723,
+      "opp_pitcher": "Grayson Rodriguez",
+      "matchup": "MIN@LAA"
+    },
+    {
+      "name": "Alec Bohm",
+      "rank": 24,
+      "composite": 0.648,
+      "opp_pitcher": "Zac Thornton",
+      "matchup": "PHI@NYM"
+    },
+    {
+      "name": "Drake Baldwin",
+      "rank": 46,
+      "composite": 0.579,
+      "opp_pitcher": "Peter Lambert",
+      "matchup": "ATL@HOU"
+    },
+    {
+      "name": "Dominic Canzone",
+      "rank": 47,
+      "composite": 0.578,
+      "opp_pitcher": "Ryan Feltner",
+      "matchup": "SEA@COL"
+    },
+    {
+      "name": "Mickey Moniak",
+      "rank": 65,
+      "composite": 0.552,
+      "opp_pitcher": "Bryan Woo",
+      "matchup": "SEA@COL"
+    },
+    {
+      "name": "Coby Mayo",
+      "rank": 75,
+      "composite": 0.529,
+      "opp_pitcher": "Dustin May",
+      "matchup": "MIL@BAL"
+    },
+    {
+      "name": "Kevin McGonigle",
+      "rank": 101,
+      "composite": 0.445,
+      "opp_pitcher": "David Sandlin",
+      "matchup": "DET@CWS"
+    },
+    {
+      "name": "Nathan Lukes",
+      "rank": 107,
+      "composite": 0.433,
+      "opp_pitcher": "Kumar Rocker",
+      "matchup": "TOR@TEX"
+    },
+    {
+      "name": "Josh Naylor",
+      "rank": 123,
+      "composite": 0.421,
+      "opp_pitcher": "Ryan Feltner",
+      "matchup": "SEA@COL"
+    },
+    {
+      "name": "Henry Davis",
+      "rank": 134,
+      "composite": 0.407,
+      "opp_pitcher": "Randy Dobnak",
+      "matchup": "KC@PIT"
+    },
+    {
+      "name": "Jake McCarthy",
+      "rank": 135,
+      "composite": 0.407,
+      "opp_pitcher": "Bryan Woo",
+      "matchup": "SEA@COL"
+    },
+    {
+      "name": "Otto Lopez",
+      "rank": 150,
+      "composite": 0.4,
+      "opp_pitcher": "Nick Pivetta",
+      "matchup": "MIA@SD"
+    },
+    {
+      "name": "Mauricio Dub\u00f3n",
+      "rank": 171,
+      "composite": 0.375,
+      "opp_pitcher": "Peter Lambert",
+      "matchup": "ATL@HOU"
+    },
+    {
+      "name": "Corey Seager",
+      "rank": 191,
+      "composite": 0.358,
+      "opp_pitcher": "Dylan Cease",
+      "matchup": "TOR@TEX"
+    },
+    {
+      "name": "Jake Burger",
+      "rank": 210,
+      "composite": 0.334,
+      "opp_pitcher": "Dylan Cease",
+      "matchup": "TOR@TEX"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Coby Mayo",
+      "ev": 107.3,
+      "angle": 23.0,
+      "distance": 370.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "May, Dustin"
+    },
+    {
+      "batter": "Coby Mayo",
+      "ev": 112.3,
+      "angle": 46.0,
+      "distance": 396.0,
+      "hr_in_parks": 4,
+      "result": "",
+      "pitcher": "May, Dustin"
+    },
+    {
+      "batter": "Kevin McGonigle",
+      "ev": 103.8,
+      "angle": 28.0,
+      "distance": 381.0,
+      "hr_in_parks": 12,
+      "result": "triple",
+      "pitcher": "Sandlin, David"
+    },
+    {
+      "batter": "Josh Naylor",
+      "ev": 105.0,
+      "angle": 19.0,
+      "distance": 395.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Hill, Jaden"
+    },
+    {
+      "batter": "Mickey Moniak",
+      "ev": 99.2,
+      "angle": 38.0,
+      "distance": 407.0,
+      "hr_in_parks": 22,
+      "result": "",
+      "pitcher": "Dom\u00ednguez, Seranthony"
+    },
+    {
+      "batter": "Jake McCarthy",
+      "ev": 104.8,
+      "angle": 24.0,
+      "distance": 391.0,
+      "hr_in_parks": 21,
+      "result": "triple",
+      "pitcher": "Speier, Gabe"
+    },
+    {
+      "batter": "Dominic Canzone",
+      "ev": 102.7,
+      "angle": 27.0,
+      "distance": 405.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Hughes, Gabriel"
+    },
+    {
+      "batter": "Drake Baldwin",
+      "ev": 105.8,
+      "angle": 26.0,
+      "distance": 407.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "De Los Santos, Enyel"
+    },
+    {
+      "batter": "Mauricio Dub\u00f3n",
+      "ev": 100.6,
+      "angle": 25.0,
+      "distance": 395.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Lambert, Peter"
+    },
+    {
+      "batter": "Josh Bell",
+      "ev": 103.8,
+      "angle": 23.0,
+      "distance": 400.0,
+      "hr_in_parks": 14,
+      "result": "field_out",
+      "pitcher": "Rodriguez, Grayson"
+    },
+    {
+      "batter": "Alec Bohm",
+      "ev": 102.4,
+      "angle": 25.0,
+      "distance": 385.0,
+      "hr_in_parks": 6,
+      "result": "field_out",
+      "pitcher": "Thornton, Zac"
+    },
+    {
+      "batter": "Henry Davis",
+      "ev": 107.2,
+      "angle": 31.0,
+      "distance": 395.0,
+      "hr_in_parks": 2,
+      "result": "",
+      "pitcher": "Dobnak, Randy"
+    },
+    {
+      "batter": "Otto Lopez",
+      "ev": 100.0,
+      "angle": 24.0,
+      "distance": 383.0,
+      "hr_in_parks": 19,
+      "result": "double",
+      "pitcher": "Morgan, David"
+    },
+    {
+      "batter": "Jake Burger",
+      "ev": 107.1,
+      "angle": 25.0,
+      "distance": 413.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Mantiply, Joe"
+    },
+    {
+      "batter": "Nathan Lukes",
+      "ev": 99.2,
+      "angle": 26.0,
+      "distance": 391.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Rocker, Kumar"
+    },
+    {
+      "batter": "Corey Seager",
+      "ev": 107.2,
+      "angle": 22.0,
+      "distance": 391.0,
+      "hr_in_parks": 24,
+      "result": "double",
+      "pitcher": "Cease, Dylan"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
