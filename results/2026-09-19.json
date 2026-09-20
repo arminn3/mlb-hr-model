@@ -316,7 +316,7 @@
   ],
   "total_players_ranked": 311,
   "total_hrs_hit": 34,
-  "total_near_hrs": 0,
+  "total_near_hrs": 11,
   "model_hits": 33,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -433,7 +433,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 11,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -474,13 +474,13 @@
     },
     "all": {
       "total": 311,
-      "hits": 33,
-      "rate": 10.6
+      "hits": 44,
+      "rate": 14.1
     }
   },
   "avg_composite_hr_hitters": 0.487,
-  "avg_composite_non_hitters": 0.419,
-  "composite_separation": 0.068,
+  "avg_composite_non_hitters": 0.418,
+  "composite_separation": 0.069,
   "hr_hitters": [
     {
       "name": "Dansby Swanson",
@@ -947,8 +947,195 @@
       "matchup": "MIA@SD"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Drake Baldwin",
+      "rank": 32,
+      "composite": 0.644,
+      "opp_pitcher": "Hayden Wesneski",
+      "matchup": "ATL@HOU"
+    },
+    {
+      "name": "Francisco Lindor",
+      "rank": 36,
+      "composite": 0.627,
+      "opp_pitcher": "Andrew Painter",
+      "matchup": "PHI@NYM"
+    },
+    {
+      "name": "Julio Rodr\u00edguez",
+      "rank": 52,
+      "composite": 0.59,
+      "opp_pitcher": "Jose Quintana",
+      "matchup": "SEA@COL"
+    },
+    {
+      "name": "Jeremy Pe\u00f1a",
+      "rank": 67,
+      "composite": 0.555,
+      "opp_pitcher": "Grant Holmes",
+      "matchup": "ATL@HOU"
+    },
+    {
+      "name": "Rece Hinds",
+      "rank": 78,
+      "composite": 0.525,
+      "opp_pitcher": "Robert Gasser",
+      "matchup": "MIL@BAL"
+    },
+    {
+      "name": "Matt Shaw",
+      "rank": 125,
+      "composite": 0.43,
+      "opp_pitcher": "Nick Lodolo",
+      "matchup": "CHC@CIN"
+    },
+    {
+      "name": "Nico Hoerner",
+      "rank": 126,
+      "composite": 0.43,
+      "opp_pitcher": "Nick Lodolo",
+      "matchup": "CHC@CIN"
+    },
+    {
+      "name": "Josh Naylor",
+      "rank": 201,
+      "composite": 0.369,
+      "opp_pitcher": "Jose Quintana",
+      "matchup": "SEA@COL"
+    },
+    {
+      "name": "Jordan Walker",
+      "rank": 205,
+      "composite": 0.362,
+      "opp_pitcher": "Andrew Alvarez",
+      "matchup": "WSH@STL"
+    },
+    {
+      "name": "Konnor Griffin",
+      "rank": 257,
+      "composite": 0.296,
+      "opp_pitcher": "Noah Cameron",
+      "matchup": "KC@PIT"
+    },
+    {
+      "name": "Liam Hicks",
+      "rank": 307,
+      "composite": 0.158,
+      "opp_pitcher": "Brayan Bello",
+      "matchup": "BOS@TB"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Rece Hinds",
+      "ev": 110.8,
+      "angle": 36.0,
+      "distance": 404.0,
+      "hr_in_parks": 19,
+      "result": "",
+      "pitcher": "Gasser, Robert"
+    },
+    {
+      "batter": "Nico Hoerner",
+      "ev": 96.8,
+      "angle": 36.0,
+      "distance": 369.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Lodolo, Nick"
+    },
+    {
+      "batter": "Matt Shaw",
+      "ev": 94.5,
+      "angle": 30.0,
+      "distance": 381.0,
+      "hr_in_parks": 2,
+      "result": "sac_fly",
+      "pitcher": "Lodolo, Nick"
+    },
+    {
+      "batter": "Josh Naylor",
+      "ev": 101.3,
+      "angle": 23.0,
+      "distance": 389.0,
+      "hr_in_parks": 11,
+      "result": "field_out",
+      "pitcher": "Quintana, Jose"
+    },
+    {
+      "batter": "Julio Rodr\u00edguez",
+      "ev": 103.4,
+      "angle": 40.0,
+      "distance": 395.0,
+      "hr_in_parks": 29,
+      "result": "field_out",
+      "pitcher": "Quintana, Jose"
+    },
+    {
+      "batter": "Jeremy Pe\u00f1a",
+      "ev": 105.7,
+      "angle": 24.0,
+      "distance": 410.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Holmes, Grant"
+    },
+    {
+      "batter": "Drake Baldwin",
+      "ev": 107.3,
+      "angle": 22.0,
+      "distance": 399.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Wesneski, Hayden"
+    },
+    {
+      "batter": "Victor Bericoto",
+      "ev": 104.9,
+      "angle": 19.0,
+      "distance": 369.0,
+      "hr_in_parks": 12,
+      "result": "double",
+      "pitcher": "Skubal, Tarik"
+    },
+    {
+      "batter": "Francisco Lindor",
+      "ev": 103.2,
+      "angle": 29.0,
+      "distance": 396.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Shugart, Chase"
+    },
+    {
+      "batter": "Konnor Griffin",
+      "ev": 106.1,
+      "angle": 35.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Cameron, Noah"
+    },
+    {
+      "batter": "Jordan Walker",
+      "ev": 112.1,
+      "angle": 17.0,
+      "distance": 406.0,
+      "hr_in_parks": 25,
+      "result": "field_out",
+      "pitcher": "Alvarez, Andrew"
+    },
+    {
+      "batter": "Liam Hicks",
+      "ev": 107.4,
+      "angle": 30.0,
+      "distance": 417.0,
+      "hr_in_parks": 29,
+      "result": "",
+      "pitcher": "Bello, Brayan"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
