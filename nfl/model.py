@@ -616,11 +616,16 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     reg = pbp[pbp["season_type"].isin(["REG", "POST"])].copy() if len(pbp) else pbp
     prior = reg[reg["week"] < week].copy() if len(reg) else reg
 
-    # Prior-season fallback: preseason / Week 1 with no current-season PBP yet.
+    # Prior-season fallback: preseason / early season, before the current
+    # season has enough real weeks on record. Checking `prior.empty` alone
+    # isn't enough — MIN_GAMES=2 means a single real week (e.g. Week 2, right
+    # after Week 1's games are in) still filters every player out of `P`
+    # entirely (0 players on the whole slate), since nobody can have 2 games
+    # yet. Fall back until there are at least MIN_GAMES real weeks banked.
     # Player form, roles, game logs and DvP come from last season's full slate;
     # the schedule + rosters still come from the requested season.
     hist, hist_week, fallback = season, week, False
-    if prior is None or prior.empty:
+    if prior is None or prior.empty or prior["week"].nunique() < C.MIN_GAMES:
         hist = season - 1
         hp = load_pbp(hist)
         prior = hp[hp["season_type"].isin(["REG", "POST"])].copy()

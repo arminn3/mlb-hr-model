@@ -39,20 +39,33 @@ def _cached(key: str, loader) -> pd.DataFrame:
     return df
 
 
+def _daily_key(prefix: str, year: int) -> str:
+    """A cache key that changes once a day. A season IN PROGRESS grows new
+    games every week — caching it under a bare per-year key (no date) meant
+    the very first pull (e.g. taken during preseason, truly empty) would
+    silently serve forever, never picking up real games once the season
+    started. Completed/historical seasons don't need this (they never
+    change), but re-fetching them once a day too is a small, safe cost next
+    to that failure mode — a fast nflverse pull beats a permanently-stale
+    "no data yet" snapshot driving the live model all season."""
+    import datetime
+    return f"{prefix}_{year}_{datetime.date.today().isoformat()}"
+
+
 def load_pbp(year: int) -> pd.DataFrame:
     """Play-by-play for one season (the primary source: RZ tendencies, TDs,
     per-player targets/carries/air-yards, defense-vs-position)."""
-    return _cached(f"pbp_{year}", lambda: nfl.import_pbp_data([year], downcast=True, cache=False))
+    return _cached(_daily_key("pbp", year), lambda: nfl.import_pbp_data([year], downcast=True, cache=False))
 
 
 def load_snap_counts(year: int) -> pd.DataFrame:
     """Weekly snap counts (offense_snaps / offense_pct) — for snap share."""
-    return _cached(f"snaps_{year}", lambda: nfl.import_snap_counts([year]))
+    return _cached(_daily_key("snaps", year), lambda: nfl.import_snap_counts([year]))
 
 
 def load_schedules(year: int) -> pd.DataFrame:
     """Game schedule: kickoff, roof/surface, spread/total (game environment)."""
-    return _cached(f"sched_{year}", lambda: nfl.import_schedules([year]))
+    return _cached(_daily_key("sched", year), lambda: nfl.import_schedules([year]))
 
 
 def load_players() -> pd.DataFrame:
@@ -63,7 +76,7 @@ def load_players() -> pd.DataFrame:
 def load_rosters(year: int) -> pd.DataFrame:
     """Season rosters (gsis_id -> current team) — used to remap players to their
     team for a season we don't have play-by-play for yet (e.g. Week 1 fallback)."""
-    return _cached(f"rosters_{year}", lambda: nfl.import_seasonal_rosters([year]))
+    return _cached(_daily_key("rosters", year), lambda: nfl.import_seasonal_rosters([year]))
 
 
 def load_depth_charts(year: int) -> pd.DataFrame:
@@ -73,9 +86,7 @@ def load_depth_charts(year: int) -> pd.DataFrame:
     reflects the team's CURRENT plan — unlike reverse-engineering roles from a
     prior season's box score, which misranks anyone who missed time to injury.
     Cache key includes today's date so it refreshes daily instead of going stale."""
-    import datetime
-    today = datetime.date.today().isoformat()
-    return _cached(f"depth_{year}_{today}", lambda: nfl.import_depth_charts([year]))
+    return _cached(_daily_key("depth", year), lambda: nfl.import_depth_charts([year]))
 
 
 def load_injuries(year: int) -> pd.DataFrame:
@@ -85,6 +96,4 @@ def load_injuries(year: int) -> pd.DataFrame:
     final). Cache key includes today's date so a re-run mid-week (or on
     gameday) picks up the latest designation instead of the first snapshot
     seen that week."""
-    import datetime
-    today = datetime.date.today().isoformat()
-    return _cached(f"injuries_{year}_{today}", lambda: nfl.import_injuries([year]))
+    return _cached(_daily_key("injuries", year), lambda: nfl.import_injuries([year]))
