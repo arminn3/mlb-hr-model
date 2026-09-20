@@ -805,32 +805,46 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
         affected = {(R.at[pid, "team"], R.at[pid, "position"])
                     for pid in out_pids if pid in R.index and role_map.get(pid)}
         for team, pos in affected:
+            # The CURRENT depth chart's own order is who the team actually
+            # has next in line right now — last-season usage can rank a
+            # QB3 who started elsewhere last year (more attempts on a since-
+            # departed team) above the real QB2, which is exactly backwards
+            # for "who plays if the starter is out." Prefer depth-chart order
+            # wherever it covers this (team, position); usage rank is only
+            # the fallback for a slot the depth chart has zero listing for.
+            dcg = (dc_all[(dc_all["team"] == team) & (dc_all["pos_abb"] == pos)].sort_values("pos_rank")
+                   if dc_all is not None else None)
+            dc_pids = [pid for pid in dcg["gsis_id"].dropna()] if dcg is not None else []
             grp = R[(R["team"] == team) & (R["position"] == pos)].sort_values("rank_in")
+            def _promote(pid):
+                # No usage on record at all — an honest zero floor (he'll
+                # surface with a near-0 score until he actually plays) beats
+                # leaving a real starter off the board.
+                if pid not in P.index:
+                    P.loc[pid] = {col: 0 for col in P.columns}
+                    P.at[pid, "team"] = team
+                    P.at[pid, "position"] = pos
+                    P.at[pid, "name"] = name_map.get(pid, pid)
+
+            ordered = dc_pids if dc_pids else list(grp.index)
             filled = 0
-            for pid in grp.index:
+            for pid in ordered:
                 if pid in out_pids:
                     role_map[pid] = None
                     continue
                 filled += 1
                 role_map[pid] = _role(pos, filled)
+                _promote(pid)
             # A tier is still vacant (nobody healthy had usage this fallback
             # season, e.g. a never-played 3rd-stringer) — pull the next name
             # straight off the depth chart, even with zero usage on record.
             if dc_all is not None and _role(pos, filled + 1) is not None:
-                dcg = dc_all[(dc_all["team"] == team) & (dc_all["pos_abb"] == pos)].sort_values("pos_rank")
                 for pid in dcg["gsis_id"].dropna():
                     if pid in out_pids or role_map.get(pid):
                         continue
                     filled += 1
                     role_map[pid] = _role(pos, filled)
-                    if pid not in P.index:
-                        # No usage on record at all — an honest zero floor
-                        # (he'll surface with a near-0 score until he actually
-                        # plays) beats leaving a real starter off the board.
-                        P.loc[pid] = {col: 0 for col in P.columns}
-                        P.at[pid, "team"] = team
-                        P.at[pid, "position"] = pos
-                        P.at[pid, "name"] = name_map.get(pid, pid)
+                    _promote(pid)
                     if _role(pos, filled + 1) is None:
                         break
 
