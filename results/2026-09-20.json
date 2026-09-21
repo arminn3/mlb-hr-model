@@ -311,7 +311,7 @@
   ],
   "total_players_ranked": 297,
   "total_hrs_hit": 31,
-  "total_near_hrs": 0,
+  "total_near_hrs": 8,
   "model_hits": 28,
   "best_lookback": "L10",
   "tier_accuracy_by_lookback": {
@@ -428,7 +428,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 8,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -469,13 +469,13 @@
     },
     "all": {
       "total": 297,
-      "hits": 28,
-      "rate": 9.4
+      "hits": 36,
+      "rate": 12.1
     }
   },
   "avg_composite_hr_hitters": 0.425,
-  "avg_composite_non_hitters": 0.438,
-  "composite_separation": -0.013,
+  "avg_composite_non_hitters": 0.439,
+  "composite_separation": -0.014,
   "hr_hitters": [
     {
       "name": "Pete Crow-Armstrong",
@@ -872,8 +872,138 @@
       "matchup": "DET@CWS"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "TJ Rumfield",
+      "rank": 56,
+      "composite": 0.567,
+      "opp_pitcher": "Kade Anderson",
+      "matchup": "SEA@COL"
+    },
+    {
+      "name": "Jake McCarthy",
+      "rank": 61,
+      "composite": 0.556,
+      "opp_pitcher": "Kade Anderson",
+      "matchup": "SEA@COL"
+    },
+    {
+      "name": "Connor Norby",
+      "rank": 64,
+      "composite": 0.551,
+      "opp_pitcher": "Kade Anderson",
+      "matchup": "SEA@COL"
+    },
+    {
+      "name": "Cole Carrigg",
+      "rank": 151,
+      "composite": 0.408,
+      "opp_pitcher": "Kade Anderson",
+      "matchup": "SEA@COL"
+    },
+    {
+      "name": "Yandy D\u00edaz",
+      "rank": 205,
+      "composite": 0.379,
+      "opp_pitcher": "Patrick Sandoval",
+      "matchup": "BOS@TB"
+    },
+    {
+      "name": "Coby Mayo",
+      "rank": 217,
+      "composite": 0.367,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "MIL@BAL"
+    },
+    {
+      "name": "Dylan Beavers",
+      "rank": 244,
+      "composite": 0.315,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "MIL@BAL"
+    },
+    {
+      "name": "Bryan Reynolds",
+      "rank": 281,
+      "composite": 0.241,
+      "opp_pitcher": "Michael Wacha",
+      "matchup": "KC@PIT"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Coby Mayo",
+      "ev": 105.0,
+      "angle": 25.0,
+      "distance": 373.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Hall, DL"
+    },
+    {
+      "batter": "Dylan Beavers",
+      "ev": 99.2,
+      "angle": 38.0,
+      "distance": 374.0,
+      "hr_in_parks": 15,
+      "result": "field_out",
+      "pitcher": "Misiorowski, Jacob"
+    },
+    {
+      "batter": "Cole Carrigg",
+      "ev": 102.9,
+      "angle": 27.0,
+      "distance": 406.0,
+      "hr_in_parks": 29,
+      "result": "field_out",
+      "pitcher": "Anderson, Kade"
+    },
+    {
+      "batter": "TJ Rumfield",
+      "ev": 101.4,
+      "angle": 23.0,
+      "distance": 401.0,
+      "hr_in_parks": 19,
+      "result": "field_out",
+      "pitcher": "Anderson, Kade"
+    },
+    {
+      "batter": "Connor Norby",
+      "ev": 99.6,
+      "angle": 35.0,
+      "distance": 402.0,
+      "hr_in_parks": 29,
+      "result": "field_out",
+      "pitcher": "Anderson, Kade"
+    },
+    {
+      "batter": "Jake McCarthy",
+      "ev": 105.9,
+      "angle": 44.0,
+      "distance": 410.0,
+      "hr_in_parks": 28,
+      "result": "",
+      "pitcher": "Anderson, Kade"
+    },
+    {
+      "batter": "Bryan Reynolds",
+      "ev": 111.1,
+      "angle": 26.0,
+      "distance": 404.0,
+      "hr_in_parks": 19,
+      "result": "",
+      "pitcher": "Wacha, Michael"
+    },
+    {
+      "batter": "Yandy D\u00edaz",
+      "ev": 96.4,
+      "angle": 23.0,
+      "distance": 379.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Sandoval, Patrick"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Vinnie Pasquantino",
