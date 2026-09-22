@@ -225272,7 +225272,7 @@
     ],
     "total_players_ranked": 60,
     "total_hrs_hit": 10,
-    "total_near_hrs": 0,
+    "total_near_hrs": 4,
     "model_hits": 9,
     "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
@@ -225389,7 +225389,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 4,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -225415,28 +225415,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 3,
-        "rate": 30.0
+        "hits": 6,
+        "rate": 60.0
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 7,
+        "rate": 35.0
       },
       "top_30": {
         "total": 30,
-        "hits": 7,
-        "rate": 23.3
+        "hits": 10,
+        "rate": 33.3
       },
       "all": {
         "total": 60,
-        "hits": 9,
-        "rate": 15.0
+        "hits": 13,
+        "rate": 21.7
       }
     },
     "avg_composite_hr_hitters": 0.507,
-    "avg_composite_non_hitters": 0.404,
-    "composite_separation": 0.103,
+    "avg_composite_non_hitters": 0.391,
+    "composite_separation": 0.116,
     "hr_hitters": [
       {
         "name": "Emmanuel Rodriguez",
@@ -225567,8 +225567,83 @@
         "matchup": "WSH@DET"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Hao-Yu Lee",
+        "rank": 3,
+        "composite": 0.661,
+        "opp_pitcher": "DJ Herz",
+        "matchup": "WSH@DET"
+      },
+      {
+        "name": "Alan Roden",
+        "rank": 6,
+        "composite": 0.629,
+        "opp_pitcher": "Blade Tidwell",
+        "matchup": "MIN@SF"
+      },
+      {
+        "name": "Walker Jenkins",
+        "rank": 10,
+        "composite": 0.603,
+        "opp_pitcher": "Blade Tidwell",
+        "matchup": "MIN@SF"
+      },
+      {
+        "name": "Dillon Dingler",
+        "rank": 46,
+        "composite": 0.342,
+        "opp_pitcher": "DJ Herz",
+        "matchup": "WSH@DET"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Gunnar Henderson",
+        "ev": 104.9,
+        "angle": 23.0,
+        "distance": 398.0,
+        "hr_in_parks": 5,
+        "result": "triple",
+        "pitcher": "Cellucci, Brendan"
+      },
+      {
+        "batter": "Dillon Dingler",
+        "ev": 100.8,
+        "angle": 23.0,
+        "distance": 394.0,
+        "hr_in_parks": 27,
+        "result": "double",
+        "pitcher": "Perales, Luis"
+      },
+      {
+        "batter": "Hao-Yu Lee",
+        "ev": 101.9,
+        "angle": 24.0,
+        "distance": 377.0,
+        "hr_in_parks": 17,
+        "result": "double",
+        "pitcher": "Herz, DJ"
+      },
+      {
+        "batter": "Walker Jenkins",
+        "ev": 97.1,
+        "angle": 37.0,
+        "distance": 368.0,
+        "hr_in_parks": 17,
+        "result": "field_out",
+        "pitcher": "Foley, Jason"
+      },
+      {
+        "batter": "Alan Roden",
+        "ev": 105.9,
+        "angle": 34.0,
+        "distance": 397.0,
+        "hr_in_parks": 4,
+        "result": "",
+        "pitcher": "Tidwell, Blade"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
