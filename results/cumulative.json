@@ -225205,35 +225205,76 @@
   {
     "date": "2026-09-21",
     "players_who_batted": [
+      "Aaron Sabato",
       "Abimelec Ortiz",
+      "Alan Roden",
+      "Alejandro Kirk",
+      "Andrew Knizner",
+      "Andr\u00e9s Gim\u00e9nez",
       "Ben Malgeri",
+      "Bo Davidson",
       "Brady House",
+      "Brett Bateman",
       "Brett Callahan",
+      "Brett Harris",
+      "Brooks Lee",
       "CJ Abrams",
+      "Carlos Narv\u00e1ez",
+      "Christian Encarnacion-Strand",
+      "Christian Franklin",
+      "Christian Koss",
+      "Coby Mayo",
+      "Colton Cowser",
       "Daylen Lile",
       "Dillon Dingler",
+      "Drew Cavanaugh",
+      "Drew Gilbert",
+      "Dylan Beavers",
       "Dylan Crews",
       "Eduardo Valencia",
+      "Emmanuel Rodriguez",
+      "Ernie Clement",
+      "George Springer",
       "Gleyber Torres",
+      "Gunnar Henderson",
       "Hao-Yu Lee",
       "Jace Jung",
       "Jacob Young",
       "James Wood",
       "Javier B\u00e1ez",
+      "Jeremiah Jackson",
       "John Peck",
+      "Jonah Cox",
       "Jorbit Vivas",
+      "Josh Smith",
+      "Jos\u00e9 Barrero",
+      "Kazuma Okamoto",
       "Keibert Ruiz",
+      "Kody Clemens",
+      "Luke Keaschall",
+      "Marcelo Mayer",
+      "Myles Straw",
       "Nasim Nu\u00f1ez",
+      "Nathan Lukes",
+      "Osleivis Basabe",
+      "Pete Alonso",
+      "Rece Hinds",
       "Riley Greene",
+      "Ryan Jeffers",
+      "Ryan Kreidler",
+      "Samuel Basallo",
+      "Scott Bandura",
+      "Sean Keys",
       "Spencer Torkelson",
+      "Walker Jenkins",
       "Yohandy Morales",
       "Zach McKinstry"
     ],
-    "total_players_ranked": 22,
-    "total_hrs_hit": 4,
+    "total_players_ranked": 60,
+    "total_hrs_hit": 10,
     "total_near_hrs": 0,
-    "model_hits": 4,
-    "best_lookback": "L5",
+    "model_hits": 9,
+    "best_lookback": "L10",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
@@ -225247,36 +225288,36 @@
           "rate": 20.0
         },
         "top_30": {
-          "total": 22,
-          "hits": 4,
-          "rate": 18.2
+          "total": 30,
+          "hits": 7,
+          "rate": 23.3
         },
         "all": {
-          "total": 22,
-          "hits": 4,
-          "rate": 18.2
+          "total": 60,
+          "hits": 9,
+          "rate": 15.0
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 3,
-          "rate": 30.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 20,
-          "hits": 4,
-          "rate": 20.0
+          "hits": 5,
+          "rate": 25.0
         },
         "top_30": {
-          "total": 22,
-          "hits": 4,
-          "rate": 18.2
+          "total": 30,
+          "hits": 7,
+          "rate": 23.3
         },
         "all": {
-          "total": 22,
-          "hits": 4,
-          "rate": 18.2
+          "total": 60,
+          "hits": 9,
+          "rate": 15.0
         }
       }
     },
@@ -225288,18 +225329,18 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
-        "total": 22,
-        "hits": 4,
-        "rate": 18.2
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
-        "total": 22,
-        "hits": 4,
-        "rate": 18.2
+        "total": 60,
+        "hits": 9,
+        "rate": 15.0
       }
     },
     "tier_accuracy_ml2026_by_lookback": {
@@ -225311,40 +225352,40 @@
         },
         "top_20": {
           "total": 20,
-          "hits": 4,
-          "rate": 20.0
+          "hits": 3,
+          "rate": 15.0
         },
         "top_30": {
-          "total": 22,
-          "hits": 4,
-          "rate": 18.2
+          "total": 30,
+          "hits": 5,
+          "rate": 16.7
         },
         "all": {
-          "total": 22,
-          "hits": 4,
-          "rate": 18.2
+          "total": 60,
+          "hits": 9,
+          "rate": 15.0
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 3,
-          "rate": 30.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
-          "hits": 4,
-          "rate": 20.0
+          "hits": 3,
+          "rate": 15.0
         },
         "top_30": {
-          "total": 22,
-          "hits": 4,
-          "rate": 18.2
+          "total": 30,
+          "hits": 6,
+          "rate": 20.0
         },
         "all": {
-          "total": 22,
-          "hits": 4,
-          "rate": 18.2
+          "total": 60,
+          "hits": 9,
+          "rate": 15.0
         }
       }
     },
@@ -225361,14 +225402,14 @@
         "rate": 20.0
       },
       "top_30": {
-        "total": 22,
-        "hits": 4,
-        "rate": 18.2
+        "total": 30,
+        "hits": 7,
+        "rate": 23.3
       },
       "all": {
-        "total": 22,
-        "hits": 4,
-        "rate": 18.2
+        "total": 60,
+        "hits": 9,
+        "rate": 15.0
       }
     },
     "tier_accuracy_with_near": {
@@ -225383,44 +225424,79 @@
         "rate": 20.0
       },
       "top_30": {
-        "total": 22,
-        "hits": 4,
-        "rate": 18.2
+        "total": 30,
+        "hits": 7,
+        "rate": 23.3
       },
       "all": {
-        "total": 22,
-        "hits": 4,
-        "rate": 18.2
+        "total": 60,
+        "hits": 9,
+        "rate": 15.0
       }
     },
-    "avg_composite_hr_hitters": 0.457,
-    "avg_composite_non_hitters": 0.418,
-    "composite_separation": 0.039,
+    "avg_composite_hr_hitters": 0.507,
+    "avg_composite_non_hitters": 0.404,
+    "composite_separation": 0.103,
     "hr_hitters": [
       {
-        "name": "Spencer Torkelson",
+        "name": "Emmanuel Rodriguez",
+        "rank": 1,
+        "composite": 0.783,
+        "opp_pitcher": "Blade Tidwell",
+        "matchup": "MIN@SF"
+      },
+      {
+        "name": "Gunnar Henderson",
         "rank": 2,
+        "composite": 0.686,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@BAL"
+      },
+      {
+        "name": "Spencer Torkelson",
+        "rank": 9,
         "composite": 0.609,
         "opp_pitcher": "DJ Herz",
         "matchup": "WSH@DET"
       },
       {
         "name": "Javier B\u00e1ez",
-        "rank": 7,
+        "rank": 16,
         "composite": 0.479,
         "opp_pitcher": "DJ Herz",
         "matchup": "WSH@DET"
       },
       {
+        "name": "Drew Gilbert",
+        "rank": 23,
+        "composite": 0.426,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@SF"
+      },
+      {
+        "name": "Brooks Lee",
+        "rank": 24,
+        "composite": 0.423,
+        "opp_pitcher": "Blade Tidwell",
+        "matchup": "MIN@SF"
+      },
+      {
+        "name": "Pete Alonso",
+        "rank": 28,
+        "composite": 0.421,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@BAL"
+      },
+      {
         "name": "Yohandy Morales",
-        "rank": 10,
+        "rank": 33,
         "composite": 0.4,
         "opp_pitcher": "River Ryan",
         "matchup": "WSH@DET"
       },
       {
         "name": "Ben Malgeri",
-        "rank": 20,
+        "rank": 50,
         "composite": 0.339,
         "opp_pitcher": "DJ Herz",
         "matchup": "WSH@DET"
@@ -225428,29 +225504,64 @@
     ],
     "hr_hitters_l10": [
       {
+        "name": "Emmanuel Rodriguez",
+        "rank": 2,
+        "composite": 0.783,
+        "opp_pitcher": "Blade Tidwell",
+        "matchup": "MIN@SF"
+      },
+      {
+        "name": "Drew Gilbert",
+        "rank": 7,
+        "composite": 0.574,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@SF"
+      },
+      {
+        "name": "Gunnar Henderson",
+        "rank": 11,
+        "composite": 0.556,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@BAL"
+      },
+      {
         "name": "Javier B\u00e1ez",
-        "rank": 5,
+        "rank": 15,
         "composite": 0.509,
         "opp_pitcher": "DJ Herz",
         "matchup": "WSH@DET"
       },
       {
         "name": "Yohandy Morales",
-        "rank": 7,
+        "rank": 18,
         "composite": 0.495,
         "opp_pitcher": "River Ryan",
         "matchup": "WSH@DET"
       },
       {
         "name": "Spencer Torkelson",
-        "rank": 9,
+        "rank": 21,
         "composite": 0.456,
         "opp_pitcher": "DJ Herz",
         "matchup": "WSH@DET"
       },
       {
+        "name": "Brooks Lee",
+        "rank": 29,
+        "composite": 0.423,
+        "opp_pitcher": "Blade Tidwell",
+        "matchup": "MIN@SF"
+      },
+      {
+        "name": "Pete Alonso",
+        "rank": 32,
+        "composite": 0.421,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@BAL"
+      },
+      {
         "name": "Ben Malgeri",
-        "rank": 15,
+        "rank": 40,
         "composite": 0.4,
         "opp_pitcher": "DJ Herz",
         "matchup": "WSH@DET"
@@ -225503,8 +225614,8 @@
       },
       "2_of_5": {
         "players": 37,
-        "hr_count": 2,
-        "hr_rate": 5.4,
+        "hr_count": 6,
+        "hr_rate": 16.2,
         "names": [
           "Gunnar Henderson",
           "Samuel Basallo",
@@ -225545,14 +225656,18 @@
           "Royce Lewis"
         ],
         "hr_names": [
+          "Gunnar Henderson",
           "Spencer Torkelson",
-          "Yohandy Morales"
+          "Yohandy Morales",
+          "Emmanuel Rodriguez",
+          "Drew Gilbert",
+          "Brooks Lee"
         ]
       },
       "3_of_5": {
         "players": 14,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 1,
+        "hr_rate": 7.1,
         "names": [
           "Christian Franklin",
           "Christian Encarnacion-Strand",
@@ -225569,56 +225684,93 @@
           "Josh Bell",
           "Victor Caratini"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Pete Alonso"
+        ]
       }
     },
     "combined_tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 3,
-        "rate": 30.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 4,
-        "rate": 20.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
-        "total": 22,
-        "hits": 4,
-        "rate": 18.2
+        "total": 30,
+        "hits": 6,
+        "rate": 20.0
       },
       "all": {
-        "total": 22,
-        "hits": 4,
-        "rate": 18.2
+        "total": 60,
+        "hits": 9,
+        "rate": 15.0
       }
     },
     "combined_hr_hitters": [
       {
+        "name": "Emmanuel Rodriguez",
+        "rank": 1,
+        "composite": 0.837,
+        "opp_pitcher": "Blade Tidwell",
+        "matchup": "MIN@SF"
+      },
+      {
+        "name": "Gunnar Henderson",
+        "rank": 5,
+        "composite": 0.564,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@BAL"
+      },
+      {
         "name": "Spencer Torkelson",
-        "rank": 6,
+        "rank": 18,
         "composite": 0.317,
         "opp_pitcher": "DJ Herz",
         "matchup": "WSH@DET"
       },
       {
         "name": "Javier B\u00e1ez",
-        "rank": 7,
+        "rank": 21,
         "composite": 0.299,
         "opp_pitcher": "DJ Herz",
         "matchup": "WSH@DET"
       },
       {
+        "name": "Drew Gilbert",
+        "rank": 23,
+        "composite": 0.271,
+        "opp_pitcher": "Zebby Matthews",
+        "matchup": "MIN@SF"
+      },
+      {
         "name": "Yohandy Morales",
-        "rank": 9,
+        "rank": 28,
         "composite": 0.235,
         "opp_pitcher": "River Ryan",
         "matchup": "WSH@DET"
       },
       {
+        "name": "Pete Alonso",
+        "rank": 31,
+        "composite": 0.205,
+        "opp_pitcher": "Trey Yesavage",
+        "matchup": "TOR@BAL"
+      },
+      {
+        "name": "Brooks Lee",
+        "rank": 33,
+        "composite": 0.201,
+        "opp_pitcher": "Blade Tidwell",
+        "matchup": "MIN@SF"
+      },
+      {
         "name": "Ben Malgeri",
-        "rank": 15,
+        "rank": 45,
         "composite": 0.129,
         "opp_pitcher": "DJ Herz",
         "matchup": "WSH@DET"
