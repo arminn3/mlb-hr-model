@@ -141,6 +141,84 @@ function WithoutChip({ value, options, onChange }: { value: string; options: str
   );
 }
 
+// Doink-style range filter: rolling game counts, calendar seasons, or a
+// custom start date — replaces the old plain year-only <select>.
+type RangeFilter =
+  | { kind: "last"; n: 5 | 10 | 15 | 30 }
+  | { kind: "season"; year: number }
+  | { kind: "since"; date: string };
+
+const LAST_N_OPTIONS = [5, 10, 15, 30] as const;
+
+function rangeLabel(r: RangeFilter): string {
+  if (r.kind === "last") return `L${r.n}`;
+  if (r.kind === "season") return "'" + String(r.year).slice(2);
+  return fmtDate(r.date);
+}
+
+function RangeDropdown({ value, onChange, seasons, currentSeason }: {
+  value: RangeFilter; onChange: (r: RangeFilter) => void; seasons: number[]; currentSeason: number;
+}) {
+  const [open, setOpen] = useState(false);
+  const rowStyle = (active: boolean) => (active ? { background: "rgba(58,84,213,0.20)" } : undefined);
+  const rowClass = "w-full flex items-center justify-between gap-3 px-3 py-2 text-left text-[14px] text-white hover:bg-white/[0.06] cursor-pointer";
+  return (
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="inline-flex items-center gap-2 font-semibold text-white px-2 py-2 rounded-lg text-[14px] cursor-pointer"
+        style={{ background: "#1e2444", border: "1px solid #3a54d5" }}
+      >
+        {rangeLabel(value)}
+        <ChevronDown size={14} className="text-white/80" />
+      </button>
+      {open && (
+        <>
+          <div className="fixed inset-0 z-20" onClick={() => setOpen(false)} />
+          <div className="absolute z-30 mt-1 w-52 rounded-xl overflow-hidden py-1" style={{ background: "#1b1b1b", border: "1px solid #3a3a3a" }}>
+            {LAST_N_OPTIONS.map((n) => (
+              <button
+                key={n}
+                type="button"
+                onClick={() => { onChange({ kind: "last", n }); setOpen(false); }}
+                className={rowClass}
+                style={rowStyle(value.kind === "last" && value.n === n)}
+              >
+                Last {n} games
+              </button>
+            ))}
+            <div style={{ borderTop: "1px solid #343434", margin: "4px 0" }} />
+            {seasons.slice(0, 2).map((y) => (
+              <button
+                key={y}
+                type="button"
+                onClick={() => { onChange({ kind: "season", year: y }); setOpen(false); }}
+                className={rowClass}
+                style={rowStyle(value.kind === "season" && value.year === y)}
+              >
+                <span>{y === currentSeason ? "This season" : "Last season"}</span>
+                <span className="text-[11px] px-1.5 py-0.5 rounded" style={{ background: "rgba(255,255,255,0.08)", color: "#ccc" }}>
+                  {"'" + String(y).slice(2)}
+                </span>
+              </button>
+            ))}
+            <div style={{ borderTop: "1px solid #343434", margin: "4px 0" }} />
+            <label className={`${rowClass} relative`} style={rowStyle(value.kind === "since")}>
+              Since Date
+              <input
+                type="date"
+                onChange={(e) => { if (e.target.value) { onChange({ kind: "since", date: e.target.value }); setOpen(false); } }}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+            </label>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 function LineTable({ header, rows, cols, pos, opponent, offense, without = [], showName, showOpp = true, currentSeason }: {
   header: React.ReactNode; rows: GameLogRow[]; cols: ColDef[];
   pos: string; opponent: string; offense: boolean; without?: string[]; showName?: boolean; showOpp?: boolean; currentSeason: number;
@@ -157,17 +235,25 @@ function LineTable({ header, rows, cols, pos, opponent, offense, without = [], s
   // it just shows "No games match these filters" until real games are played.
   const dataSeasons = useMemo(() => [...new Set(rows.map((r) => seasonOf(r.date)))].sort((a, b) => b - a), [rows]);
   const seasons = useMemo(() => [...new Set([currentSeason, ...dataSeasons])].sort((a, b) => b - a), [dataSeasons, currentSeason]);
-  const [season, setSeason] = useState<number | null>(null);
-  const activeSeason = season ?? dataSeasons[0] ?? currentSeason;
+  const [range, setRange] = useState<RangeFilter>({ kind: "last", n: 10 });
 
-  const frows = useMemo(() => rows.filter((r) =>
-    (activeSeason == null || seasonOf(r.date) === activeSeason) &&
+  // "Last N" is a rolling window over ALL games regardless of calendar year
+  // (chronological, most recent N) — Home/Away/vs-opponent/etc. below then
+  // narrow WITHIN that window, same as the reference tool.
+  const rangedRows = useMemo(() => {
+    const sorted = [...rows].sort((a, b) => a.date.localeCompare(b.date));
+    if (range.kind === "last") return sorted.slice(-range.n);
+    if (range.kind === "season") return sorted.filter((r) => seasonOf(r.date) === range.year);
+    return sorted.filter((r) => r.date >= range.date);
+  }, [rows, range]);
+
+  const frows = useMemo(() => rangedRows.filter((r) =>
     (loc === "all" || (loc === "home" ? r.home : !r.home)) &&
     (!h2h || r.opp === opponent) &&
     (!woPlayer || (r.out ?? []).includes(woPlayer)) &&
     Number(r[vol[0].key] ?? 0) >= minA &&
     Number(r[vol[1].key] ?? 0) >= minB
-  ), [rows, activeSeason, loc, h2h, woPlayer, minA, minB, opponent, vol]);
+  ), [rangedRows, loc, h2h, woPlayer, minA, minB, opponent, vol]);
 
   const { avg, line } = useMemo(() => {
     const avg: Record<string, number> = {}, line: Record<string, number> = {};
@@ -200,13 +286,7 @@ function LineTable({ header, rows, cols, pos, opponent, offense, without = [], s
       {/* filters — functional, sit on the page background */}
       <div className="flex flex-col gap-3 p-2">
         <div className="flex flex-wrap gap-2.5 items-center">
-          <label className="relative inline-flex items-center gap-2 font-semibold text-white px-2 py-2 rounded-lg text-[14px] cursor-pointer" style={{ background: "#1e2444", border: "1px solid #3a54d5" }}>
-            {"'" + String(activeSeason ?? "").slice(2)}
-            <ChevronDown size={14} className="text-white/80" />
-            <select value={activeSeason ?? ""} onChange={(e) => setSeason(Number(e.target.value))} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-              {seasons.map((y) => <option key={y} value={y}>{"'" + String(y).slice(2)}</option>)}
-            </select>
-          </label>
+          <RangeDropdown value={range} onChange={setRange} seasons={seasons} currentSeason={currentSeason} />
           {offense && <ToggleChip active={h2h} onClick={() => setH2h((v) => !v)}>vs {teamCity(opponent)}</ToggleChip>}
           <ToggleChip active={loc === "home"} onClick={() => setLoc((v) => (v === "home" ? "all" : "home"))}>Home</ToggleChip>
           <ToggleChip active={loc === "away"} onClick={() => setLoc((v) => (v === "away" ? "all" : "away"))}>Away</ToggleChip>

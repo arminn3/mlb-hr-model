@@ -2,6 +2,11 @@
   "slates": [
     {
       "season": 2026,
+      "week": 3,
+      "file": "2026-w03.json"
+    },
+    {
+      "season": 2026,
       "week": 2,
       "file": "2026-w02.json"
     },
