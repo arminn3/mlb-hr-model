@@ -302,7 +302,7 @@
   ],
   "total_players_ranked": 296,
   "total_hrs_hit": 26,
-  "total_near_hrs": 0,
+  "total_near_hrs": 14,
   "model_hits": 25,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -419,7 +419,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 14,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -450,23 +450,23 @@
     },
     "top_20": {
       "total": 20,
-      "hits": 3,
-      "rate": 15.0
+      "hits": 5,
+      "rate": 25.0
     },
     "top_30": {
       "total": 30,
-      "hits": 5,
-      "rate": 16.7
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 296,
-      "hits": 25,
-      "rate": 8.4
+      "hits": 39,
+      "rate": 13.2
     }
   },
   "avg_composite_hr_hitters": 0.466,
-  "avg_composite_non_hitters": 0.434,
-  "composite_separation": 0.032,
+  "avg_composite_non_hitters": 0.433,
+  "composite_separation": 0.033,
   "hr_hitters": [
     {
       "name": "Kyle Stowers",
@@ -821,8 +821,252 @@
       "matchup": "LAA@ATH"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Jordan Lawlar",
+      "rank": 15,
+      "composite": 0.722,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "AZ@COL"
+    },
+    {
+      "name": "Yainer Diaz",
+      "rank": 18,
+      "composite": 0.706,
+      "opp_pitcher": "Logan Gilbert",
+      "matchup": "HOU@SEA"
+    },
+    {
+      "name": "Francisco Alvarez",
+      "rank": 30,
+      "composite": 0.676,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "NYM@TEX"
+    },
+    {
+      "name": "Corbin Carroll",
+      "rank": 56,
+      "composite": 0.555,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "AZ@COL"
+    },
+    {
+      "name": "Eduardo Valencia",
+      "rank": 92,
+      "composite": 0.489,
+      "opp_pitcher": "Riley Cornelio",
+      "matchup": "WSH@DET"
+    },
+    {
+      "name": "Mike Trout",
+      "rank": 93,
+      "composite": 0.487,
+      "opp_pitcher": "Brady Basso",
+      "matchup": "LAA@ATH"
+    },
+    {
+      "name": "Ezequiel Duran",
+      "rank": 112,
+      "composite": 0.462,
+      "opp_pitcher": "Sean Manaea",
+      "matchup": "NYM@TEX"
+    },
+    {
+      "name": "Tim Tawa",
+      "rank": 123,
+      "composite": 0.44,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "AZ@COL"
+    },
+    {
+      "name": "Turner Hill",
+      "rank": 177,
+      "composite": 0.387,
+      "opp_pitcher": "Taj Bradley",
+      "matchup": "MIN@SF"
+    },
+    {
+      "name": "TJ Rumfield",
+      "rank": 206,
+      "composite": 0.362,
+      "opp_pitcher": "Michael Soroka",
+      "matchup": "AZ@COL"
+    },
+    {
+      "name": "Juan Soto",
+      "rank": 213,
+      "composite": 0.357,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "NYM@TEX"
+    },
+    {
+      "name": "Jac Caglianone",
+      "rank": 241,
+      "composite": 0.314,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "CWS@KC"
+    },
+    {
+      "name": "Luke Keaschall",
+      "rank": 247,
+      "composite": 0.296,
+      "opp_pitcher": "Anthony Molina",
+      "matchup": "MIN@SF"
+    },
+    {
+      "name": "Lawrence Butler",
+      "rank": 257,
+      "composite": 0.276,
+      "opp_pitcher": "Yusei Kikuchi",
+      "matchup": "LAA@ATH"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Lawrence Butler",
+      "ev": 102.6,
+      "angle": 36.0,
+      "distance": 390.0,
+      "hr_in_parks": 19,
+      "result": "triple",
+      "pitcher": "Kikuchi, Yusei"
+    },
+    {
+      "batter": "Mike Trout",
+      "ev": 103.9,
+      "angle": 21.0,
+      "distance": 380.0,
+      "hr_in_parks": 14,
+      "result": "double",
+      "pitcher": "Johnson, Seth"
+    },
+    {
+      "batter": "TJ Rumfield",
+      "ev": 99.5,
+      "angle": 40.0,
+      "distance": 391.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Ginkel, Kevin"
+    },
+    {
+      "batter": "Jordan Lawlar",
+      "ev": 97.8,
+      "angle": 32.0,
+      "distance": 393.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Agnos, Zach"
+    },
+    {
+      "batter": "Tim Tawa",
+      "ev": 110.9,
+      "angle": 20.0,
+      "distance": 382.0,
+      "hr_in_parks": 21,
+      "result": "double",
+      "pitcher": "Freeland, Kyle"
+    },
+    {
+      "batter": "Corbin Carroll",
+      "ev": 105.7,
+      "angle": 21.0,
+      "distance": 392.0,
+      "hr_in_parks": 13,
+      "result": "field_out",
+      "pitcher": "Freeland, Kyle"
+    },
+    {
+      "batter": "Eduardo Valencia",
+      "ev": 104.8,
+      "angle": 30.0,
+      "distance": 410.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Cornelio, Riley"
+    },
+    {
+      "batter": "Jac Caglianone",
+      "ev": 107.2,
+      "angle": 22.0,
+      "distance": 397.0,
+      "hr_in_parks": 29,
+      "result": "double",
+      "pitcher": "Richards, Trevor"
+    },
+    {
+      "batter": "Brandon Marsh",
+      "ev": 100.1,
+      "angle": 22.0,
+      "distance": 373.0,
+      "hr_in_parks": 15,
+      "result": "double",
+      "pitcher": "Gordon, Colton"
+    },
+    {
+      "batter": "Luke Keaschall",
+      "ev": 101.8,
+      "angle": 26.0,
+      "distance": 402.0,
+      "hr_in_parks": 28,
+      "result": "triple",
+      "pitcher": "Molina, Anthony"
+    },
+    {
+      "batter": "Turner Hill",
+      "ev": 98.1,
+      "angle": 31.0,
+      "distance": 374.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Bradley, Taj"
+    },
+    {
+      "batter": "Yainer Diaz",
+      "ev": 103.8,
+      "angle": 26.0,
+      "distance": 400.0,
+      "hr_in_parks": 25,
+      "result": "field_out",
+      "pitcher": "Bazardo, Eduard"
+    },
+    {
+      "batter": "Francisco Alvarez",
+      "ev": 104.6,
+      "angle": 24.0,
+      "distance": 391.0,
+      "hr_in_parks": 24,
+      "result": "double",
+      "pitcher": "Eovaldi, Nathan"
+    },
+    {
+      "batter": "Francisco Alvarez",
+      "ev": 112.3,
+      "angle": 20.0,
+      "distance": 394.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Gore, MacKenzie"
+    },
+    {
+      "batter": "Ezequiel Duran",
+      "ev": 97.2,
+      "angle": 36.0,
+      "distance": 371.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Manaea, Sean"
+    },
+    {
+      "batter": "Juan Soto",
+      "ev": 100.5,
+      "angle": 24.0,
+      "distance": 372.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Gore, MacKenzie"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
