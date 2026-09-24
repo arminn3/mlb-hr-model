@@ -227882,7 +227882,7 @@
     ],
     "total_players_ranked": 313,
     "total_hrs_hit": 28,
-    "total_near_hrs": 0,
+    "total_near_hrs": 9,
     "model_hits": 27,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -227999,7 +227999,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 9,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -228025,23 +228025,23 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 6,
-        "rate": 20.0
+        "hits": 7,
+        "rate": 23.3
       },
       "all": {
         "total": 313,
-        "hits": 27,
-        "rate": 8.6
+        "hits": 36,
+        "rate": 11.5
       }
     },
     "avg_composite_hr_hitters": 0.499,
@@ -228429,8 +228429,163 @@
         "matchup": "MIN@SF"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Christian Moore",
+        "rank": 1,
+        "composite": 0.842,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "LAA@ATH"
+      },
+      {
+        "name": "Iv\u00e1n Herrera",
+        "rank": 70,
+        "composite": 0.547,
+        "opp_pitcher": "Lake Bachar",
+        "matchup": "STL@PIT"
+      },
+      {
+        "name": "Wade Meckler",
+        "rank": 75,
+        "composite": 0.532,
+        "opp_pitcher": "Jeffrey Springs",
+        "matchup": "LAA@ATH"
+      },
+      {
+        "name": "Nick Gonzales",
+        "rank": 134,
+        "composite": 0.446,
+        "opp_pitcher": "Matthew Liberatore",
+        "matchup": "STL@PIT"
+      },
+      {
+        "name": "Sam Antonacci",
+        "rank": 140,
+        "composite": 0.443,
+        "opp_pitcher": "Seth Lugo",
+        "matchup": "CWS@KC"
+      },
+      {
+        "name": "Adael Amador",
+        "rank": 161,
+        "composite": 0.423,
+        "opp_pitcher": "Merrill Kelly",
+        "matchup": "AZ@COL"
+      },
+      {
+        "name": "Jacob Young",
+        "rank": 257,
+        "composite": 0.319,
+        "opp_pitcher": "Framber Valdez",
+        "matchup": "WSH@DET"
+      },
+      {
+        "name": "Ben Ross",
+        "rank": 271,
+        "composite": 0.296,
+        "opp_pitcher": "Cesar Perdomo",
+        "matchup": "MIN@SF"
+      },
+      {
+        "name": "Salvador Perez",
+        "rank": 295,
+        "composite": 0.25,
+        "opp_pitcher": "Bryan Hudson",
+        "matchup": "CWS@KC"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Wade Meckler",
+        "ev": 100.1,
+        "angle": 30.0,
+        "distance": 376.0,
+        "hr_in_parks": 2,
+        "result": "field_out",
+        "pitcher": "Hartlieb, Geoff"
+      },
+      {
+        "batter": "Christian Moore",
+        "ev": 103.9,
+        "angle": 33.0,
+        "distance": 388.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Springs, Jeffrey"
+      },
+      {
+        "batter": "Pete Alonso",
+        "ev": 110.1,
+        "angle": 32.0,
+        "distance": 419.0,
+        "hr_in_parks": 29,
+        "result": "",
+        "pitcher": "Van Eyk, CJ"
+      },
+      {
+        "batter": "Adael Amador",
+        "ev": 93.6,
+        "angle": 28.0,
+        "distance": 369.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Kelly, Merrill"
+      },
+      {
+        "batter": "Jacob Young",
+        "ev": 100.6,
+        "angle": 27.0,
+        "distance": 394.0,
+        "hr_in_parks": 24,
+        "result": "field_out",
+        "pitcher": "Jansen, Kenley"
+      },
+      {
+        "batter": "Sam Antonacci",
+        "ev": 99.2,
+        "angle": 28.0,
+        "distance": 379.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Cruz, Steven"
+      },
+      {
+        "batter": "Salvador Perez",
+        "ev": 106.5,
+        "angle": 23.0,
+        "distance": 401.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Newcomb, Sean"
+      },
+      {
+        "batter": "Iv\u00e1n Herrera",
+        "ev": 104.8,
+        "angle": 34.0,
+        "distance": 372.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Curtis, Khristian"
+      },
+      {
+        "batter": "Nick Gonzales",
+        "ev": 103.4,
+        "angle": 33.0,
+        "distance": 381.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Liberatore, Matthew"
+      },
+      {
+        "batter": "Ben Ross",
+        "ev": 98.5,
+        "angle": 31.0,
+        "distance": 388.0,
+        "hr_in_parks": 24,
+        "result": "triple",
+        "pitcher": "Perdomo, Cesar"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
