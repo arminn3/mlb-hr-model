@@ -245,7 +245,7 @@
   ],
   "total_players_ranked": 230,
   "total_hrs_hit": 29,
-  "total_near_hrs": 0,
+  "total_near_hrs": 13,
   "model_hits": 25,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -362,7 +362,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 13,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -388,28 +388,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 2,
-      "rate": 20.0
+      "hits": 3,
+      "rate": 30.0
     },
     "top_20": {
       "total": 20,
-      "hits": 3,
-      "rate": 15.0
+      "hits": 4,
+      "rate": 20.0
     },
     "top_30": {
       "total": 30,
-      "hits": 6,
-      "rate": 20.0
+      "hits": 7,
+      "rate": 23.3
     },
     "all": {
       "total": 230,
-      "hits": 25,
-      "rate": 10.9
+      "hits": 38,
+      "rate": 16.5
     }
   },
   "avg_composite_hr_hitters": 0.487,
-  "avg_composite_non_hitters": 0.422,
-  "composite_separation": 0.065,
+  "avg_composite_non_hitters": 0.421,
+  "composite_separation": 0.066,
   "hr_hitters": [
     {
       "name": "Isaac Paredes",
@@ -764,8 +764,263 @@
       "matchup": "HOU@ATH"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Michael Massey",
+      "rank": 3,
+      "composite": 0.76,
+      "opp_pitcher": "David Sandlin",
+      "matchup": "CWS@KC"
+    },
+    {
+      "name": "Ketel Marte",
+      "rank": 38,
+      "composite": 0.569,
+      "opp_pitcher": "Tanner Gordon",
+      "matchup": "AZ@COL"
+    },
+    {
+      "name": "Pavin Smith",
+      "rank": 42,
+      "composite": 0.562,
+      "opp_pitcher": "Tanner Gordon",
+      "matchup": "AZ@COL"
+    },
+    {
+      "name": "Tim Tawa",
+      "rank": 65,
+      "composite": 0.491,
+      "opp_pitcher": "Tanner Gordon",
+      "matchup": "AZ@COL"
+    },
+    {
+      "name": "Lawrence Butler",
+      "rank": 76,
+      "composite": 0.451,
+      "opp_pitcher": "Peter Lambert",
+      "matchup": "HOU@ATH"
+    },
+    {
+      "name": "Shohei Ohtani",
+      "rank": 93,
+      "composite": 0.43,
+      "opp_pitcher": "Nick Pivetta",
+      "matchup": "SD@LAD"
+    },
+    {
+      "name": "Geraldo Perdomo",
+      "rank": 95,
+      "composite": 0.426,
+      "opp_pitcher": "Tanner Gordon",
+      "matchup": "AZ@COL"
+    },
+    {
+      "name": "Drake Baldwin",
+      "rank": 126,
+      "composite": 0.395,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "CIN@ATL"
+    },
+    {
+      "name": "Michael Harris II",
+      "rank": 139,
+      "composite": 0.384,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "CIN@ATL"
+    },
+    {
+      "name": "Taylor Walls",
+      "rank": 170,
+      "composite": 0.34,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "TB@NYY"
+    },
+    {
+      "name": "Ronald Acu\u00f1a Jr.",
+      "rank": 172,
+      "composite": 0.337,
+      "opp_pitcher": "Brady Singer",
+      "matchup": "CIN@ATL"
+    },
+    {
+      "name": "Christian Moore",
+      "rank": 206,
+      "composite": 0.273,
+      "opp_pitcher": "Bryan Woo",
+      "matchup": "LAA@SEA"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 217,
+      "composite": 0.241,
+      "opp_pitcher": "David Sandlin",
+      "matchup": "CWS@KC"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Lawrence Butler",
+      "ev": 109.0,
+      "angle": 19.0,
+      "distance": 371.0,
+      "hr_in_parks": 12,
+      "result": "double",
+      "pitcher": "Ullola, Miguel"
+    },
+    {
+      "batter": "Michael Harris II",
+      "ev": 101.9,
+      "angle": 24.0,
+      "distance": 393.0,
+      "hr_in_parks": 24,
+      "result": "field_out",
+      "pitcher": "McCambley, Zach"
+    },
+    {
+      "batter": "Drake Baldwin",
+      "ev": 104.6,
+      "angle": 26.0,
+      "distance": 406.0,
+      "hr_in_parks": 26,
+      "result": "field_out",
+      "pitcher": "McCambley, Zach"
+    },
+    {
+      "batter": "Ronald Acu\u00f1a Jr.",
+      "ev": 104.1,
+      "angle": 24.0,
+      "distance": 372.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Singer, Brady"
+    },
+    {
+      "batter": "H\u00e9ctor Rodr\u00edguez",
+      "ev": 107.8,
+      "angle": 18.0,
+      "distance": 398.0,
+      "hr_in_parks": 4,
+      "result": "double",
+      "pitcher": "Mahle, Tyler"
+    },
+    {
+      "batter": "Drake Baldwin",
+      "ev": 104.4,
+      "angle": 30.0,
+      "distance": 393.0,
+      "hr_in_parks": 20,
+      "result": "field_out",
+      "pitcher": "Singer, Brady"
+    },
+    {
+      "batter": "Kyle Karros",
+      "ev": 94.2,
+      "angle": 29.0,
+      "distance": 380.0,
+      "hr_in_parks": 21,
+      "result": "field_out",
+      "pitcher": "Clarke, Taylor"
+    },
+    {
+      "batter": "Adael Amador",
+      "ev": 104.1,
+      "angle": 20.0,
+      "distance": 368.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Clarke, Taylor"
+    },
+    {
+      "batter": "Adael Amador",
+      "ev": 97.7,
+      "angle": 33.0,
+      "distance": 397.0,
+      "hr_in_parks": 29,
+      "result": "field_out",
+      "pitcher": "Santana, Dennis"
+    },
+    {
+      "batter": "Pavin Smith",
+      "ev": 101.1,
+      "angle": 22.0,
+      "distance": 368.0,
+      "hr_in_parks": 7,
+      "result": "double",
+      "pitcher": "Gordon, Tanner"
+    },
+    {
+      "batter": "Ketel Marte",
+      "ev": 105.2,
+      "angle": 23.0,
+      "distance": 417.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Gordon, Tanner"
+    },
+    {
+      "batter": "Tim Tawa",
+      "ev": 102.3,
+      "angle": 42.0,
+      "distance": 372.0,
+      "hr_in_parks": 10,
+      "result": "field_out",
+      "pitcher": "Gordon, Tanner"
+    },
+    {
+      "batter": "Geraldo Perdomo",
+      "ev": 101.4,
+      "angle": 26.0,
+      "distance": 419.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Gordon, Tanner"
+    },
+    {
+      "batter": "Bobby Witt Jr.",
+      "ev": 102.9,
+      "angle": 22.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Davis, Tyler"
+    },
+    {
+      "batter": "Michael Massey",
+      "ev": 101.7,
+      "angle": 31.0,
+      "distance": 402.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Sandlin, David"
+    },
+    {
+      "batter": "Shohei Ohtani",
+      "ev": 106.8,
+      "angle": 18.0,
+      "distance": 372.0,
+      "hr_in_parks": 1,
+      "result": "double",
+      "pitcher": "Miller, Mason"
+    },
+    {
+      "batter": "Taylor Walls",
+      "ev": 102.9,
+      "angle": 24.0,
+      "distance": 379.0,
+      "hr_in_parks": 2,
+      "result": "double",
+      "pitcher": "Hanner, Bradley"
+    },
+    {
+      "batter": "Christian Moore",
+      "ev": 102.7,
+      "angle": 23.0,
+      "distance": 401.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Woo, Bryan"
+    }
+  ],
   "surprise_hrs": [
     {
       "name": "Zac Veen",
