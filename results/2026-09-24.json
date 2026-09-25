@@ -1025,7 +1025,7 @@
     {
       "name": "Zac Veen",
       "pitcher": "Taylor Clarke",
-      "description": "${person|fullName|691728} homers ${total|homeRuns|691728} on a fly ball to right center field.  "
+      "description": "Zac Veen homers (3) on a fly ball to right center field."
     }
   ],
   "hr_signal_accuracy": {
