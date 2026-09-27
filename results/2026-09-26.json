@@ -275,7 +275,7 @@
   ],
   "total_players_ranked": 264,
   "total_hrs_hit": 37,
-  "total_near_hrs": 0,
+  "total_near_hrs": 11,
   "model_hits": 32,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -392,7 +392,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 11,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -418,28 +418,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 3,
-      "rate": 30.0
+      "hits": 4,
+      "rate": 40.0
     },
     "top_20": {
       "total": 20,
-      "hits": 4,
-      "rate": 20.0
+      "hits": 6,
+      "rate": 30.0
     },
     "top_30": {
       "total": 30,
-      "hits": 4,
-      "rate": 13.3
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 264,
-      "hits": 32,
-      "rate": 12.1
+      "hits": 43,
+      "rate": 16.3
     }
   },
   "avg_composite_hr_hitters": 0.45,
-  "avg_composite_non_hitters": 0.429,
-  "composite_separation": 0.021,
+  "avg_composite_non_hitters": 0.425,
+  "composite_separation": 0.025,
   "hr_hitters": [
     {
       "name": "Lucas Spence",
@@ -892,8 +892,213 @@
       "matchup": "ATL@MIA"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Carter Jensen",
+      "rank": 1,
+      "composite": 0.824,
+      "opp_pitcher": "Tanner Bibee",
+      "matchup": "CLE@KC"
+    },
+    {
+      "name": "Michael Harris II",
+      "rank": 14,
+      "composite": 0.702,
+      "opp_pitcher": "Jack Ralston",
+      "matchup": "ATL@MIA"
+    },
+    {
+      "name": "Jake Cronenworth",
+      "rank": 23,
+      "composite": 0.645,
+      "opp_pitcher": "Ryne Nelson",
+      "matchup": "AZ@SD"
+    },
+    {
+      "name": "Munetaka Murakami",
+      "rank": 24,
+      "composite": 0.644,
+      "opp_pitcher": "Jose Quintana",
+      "matchup": "COL@CWS"
+    },
+    {
+      "name": "Tyler Stephenson",
+      "rank": 44,
+      "composite": 0.6,
+      "opp_pitcher": "Trey Yesavage",
+      "matchup": "CIN@TOR"
+    },
+    {
+      "name": "Sean Keys",
+      "rank": 46,
+      "composite": 0.597,
+      "opp_pitcher": "Rhett Lowder",
+      "matchup": "CIN@TOR"
+    },
+    {
+      "name": "Travis Bazzana",
+      "rank": 101,
+      "composite": 0.456,
+      "opp_pitcher": "Michael Wacha",
+      "matchup": "CLE@KC"
+    },
+    {
+      "name": "Jake Bauers",
+      "rank": 117,
+      "composite": 0.426,
+      "opp_pitcher": "Quinn Mathews",
+      "matchup": "STL@MIL"
+    },
+    {
+      "name": "Heriberto Hern\u00e1ndez",
+      "rank": 146,
+      "composite": 0.397,
+      "opp_pitcher": "Brent Suter",
+      "matchup": "ATL@MIA"
+    },
+    {
+      "name": "Turner Hill",
+      "rank": 259,
+      "composite": 0.147,
+      "opp_pitcher": "Blake Snell",
+      "matchup": "LAD@SF"
+    },
+    {
+      "name": "Drew Cavanaugh",
+      "rank": 261,
+      "composite": 0.101,
+      "opp_pitcher": "Blake Snell",
+      "matchup": "LAD@SF"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Munetaka Murakami",
+      "ev": 101.9,
+      "angle": 35.0,
+      "distance": 382.0,
+      "hr_in_parks": 11,
+      "result": "field_out",
+      "pitcher": "Bernardino, Brennan"
+    },
+    {
+      "batter": "Billy Cook",
+      "ev": 111.7,
+      "angle": 35.0,
+      "distance": 403.0,
+      "hr_in_parks": 16,
+      "result": "",
+      "pitcher": "Waguespack, Jacob"
+    },
+    {
+      "batter": "Patrick Bailey",
+      "ev": 101.1,
+      "angle": 29.0,
+      "distance": 394.0,
+      "hr_in_parks": 26,
+      "result": "field_out",
+      "pitcher": "Bivens, Spencer"
+    },
+    {
+      "batter": "Carter Jensen",
+      "ev": 107.9,
+      "angle": 37.0,
+      "distance": 372.0,
+      "hr_in_parks": 15,
+      "result": "field_out",
+      "pitcher": "Armstrong, Shawn"
+    },
+    {
+      "batter": "Travis Bazzana",
+      "ev": 102.2,
+      "angle": 27.0,
+      "distance": 386.0,
+      "hr_in_parks": 24,
+      "result": "triple",
+      "pitcher": "Wacha, Michael"
+    },
+    {
+      "batter": "Carter Jensen",
+      "ev": 108.0,
+      "angle": 22.0,
+      "distance": 409.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Bibee, Tanner"
+    },
+    {
+      "batter": "Heriberto Hern\u00e1ndez",
+      "ev": 101.2,
+      "angle": 29.0,
+      "distance": 383.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Suter, Brent"
+    },
+    {
+      "batter": "Michael Harris II",
+      "ev": 103.5,
+      "angle": 21.0,
+      "distance": 384.0,
+      "hr_in_parks": 27,
+      "result": "double",
+      "pitcher": "Ralston, Jack"
+    },
+    {
+      "batter": "Jake Bauers",
+      "ev": 106.8,
+      "angle": 33.0,
+      "distance": 390.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Mathews, Quinn"
+    },
+    {
+      "batter": "Jake Cronenworth",
+      "ev": 103.4,
+      "angle": 23.0,
+      "distance": 392.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Cabrera, Jose"
+    },
+    {
+      "batter": "Turner Hill",
+      "ev": 103.1,
+      "angle": 25.0,
+      "distance": 412.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Phillips, Evan"
+    },
+    {
+      "batter": "Drew Cavanaugh",
+      "ev": 98.4,
+      "angle": 36.0,
+      "distance": 377.0,
+      "hr_in_parks": 29,
+      "result": "triple",
+      "pitcher": "Stewart, Brock"
+    },
+    {
+      "batter": "Tyler Stephenson",
+      "ev": 103.4,
+      "angle": 25.0,
+      "distance": 389.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "Klein, John"
+    },
+    {
+      "batter": "Sean Keys",
+      "ev": 100.1,
+      "angle": 32.0,
+      "distance": 376.0,
+      "hr_in_parks": 8,
+      "result": "field_out",
+      "pitcher": "Lowder, Rhett"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
