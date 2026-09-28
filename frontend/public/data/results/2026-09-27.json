@@ -299,7 +299,7 @@
   ],
   "total_players_ranked": 285,
   "total_hrs_hit": 37,
-  "total_near_hrs": 0,
+  "total_near_hrs": 14,
   "model_hits": 33,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -416,7 +416,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 14,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -442,28 +442,28 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 5,
-      "rate": 50.0
+      "hits": 6,
+      "rate": 60.0
     },
     "top_20": {
       "total": 20,
-      "hits": 6,
-      "rate": 30.0
+      "hits": 7,
+      "rate": 35.0
     },
     "top_30": {
       "total": 30,
-      "hits": 7,
-      "rate": 23.3
+      "hits": 8,
+      "rate": 26.7
     },
     "all": {
       "total": 285,
-      "hits": 33,
-      "rate": 11.6
+      "hits": 47,
+      "rate": 16.5
     }
   },
   "avg_composite_hr_hitters": 0.498,
-  "avg_composite_non_hitters": 0.434,
-  "composite_separation": 0.064,
+  "avg_composite_non_hitters": 0.432,
+  "composite_separation": 0.066,
   "hr_hitters": [
     {
       "name": "Christian Walker",
@@ -930,8 +930,252 @@
       "matchup": "CLE@KC"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Michael Conforto",
+      "rank": 3,
+      "composite": 0.761,
+      "opp_pitcher": "Tanner Houck",
+      "matchup": "CHC@BOS"
+    },
+    {
+      "name": "Iv\u00e1n Herrera",
+      "rank": 34,
+      "composite": 0.633,
+      "opp_pitcher": "Jacob Misiorowski",
+      "matchup": "STL@MIL"
+    },
+    {
+      "name": "Brooks Lee",
+      "rank": 35,
+      "composite": 0.63,
+      "opp_pitcher": "MacKenzie Gore",
+      "matchup": "TEX@MIN"
+    },
+    {
+      "name": "Miguel Amaya",
+      "rank": 58,
+      "composite": 0.553,
+      "opp_pitcher": "Tanner Houck",
+      "matchup": "CHC@BOS"
+    },
+    {
+      "name": "Bobby Witt Jr.",
+      "rank": 72,
+      "composite": 0.52,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CLE@KC"
+    },
+    {
+      "name": "Munetaka Murakami",
+      "rank": 91,
+      "composite": 0.469,
+      "opp_pitcher": "Kyle Freeland",
+      "matchup": "COL@CWS"
+    },
+    {
+      "name": "Nasim Nu\u00f1ez",
+      "rank": 98,
+      "composite": 0.462,
+      "opp_pitcher": "Sean Manaea",
+      "matchup": "NYM@WSH"
+    },
+    {
+      "name": "Ketel Marte",
+      "rank": 122,
+      "composite": 0.442,
+      "opp_pitcher": "Randy V\u00e1squez",
+      "matchup": "AZ@SD"
+    },
+    {
+      "name": "Alex Call",
+      "rank": 138,
+      "composite": 0.423,
+      "opp_pitcher": "Carson Seymour",
+      "matchup": "LAD@SF"
+    },
+    {
+      "name": "Max Muncy",
+      "rank": 153,
+      "composite": 0.408,
+      "opp_pitcher": "Carson Seymour",
+      "matchup": "LAD@SF"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 182,
+      "composite": 0.389,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "TB@PHI"
+    },
+    {
+      "name": "Matt Olson",
+      "rank": 246,
+      "composite": 0.312,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "ATL@MIA"
+    },
+    {
+      "name": "Jorge Mateo",
+      "rank": 253,
+      "composite": 0.288,
+      "opp_pitcher": "Zack Wheeler",
+      "matchup": "TB@PHI"
+    },
+    {
+      "name": "Mike Yastrzemski",
+      "rank": 266,
+      "composite": 0.238,
+      "opp_pitcher": "Janson Junk",
+      "matchup": "ATL@MIA"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Michael Conforto",
+      "ev": 101.0,
+      "angle": 26.0,
+      "distance": 390.0,
+      "hr_in_parks": 28,
+      "result": "double",
+      "pitcher": "Mor\u00e1n, Jovani"
+    },
+    {
+      "batter": "Miguel Amaya",
+      "ev": 101.6,
+      "angle": 26.0,
+      "distance": 399.0,
+      "hr_in_parks": 26,
+      "result": "double",
+      "pitcher": "Sandoval, Patrick"
+    },
+    {
+      "batter": "Alex Bregman",
+      "ev": 99.7,
+      "angle": 34.0,
+      "distance": 394.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Sandoval, Patrick"
+    },
+    {
+      "batter": "Munetaka Murakami",
+      "ev": 104.6,
+      "angle": 36.0,
+      "distance": 384.0,
+      "hr_in_parks": 16,
+      "result": "double",
+      "pitcher": "Freeland, Kyle"
+    },
+    {
+      "batter": "Bobby Witt Jr.",
+      "ev": 109.0,
+      "angle": 32.0,
+      "distance": 422.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Peterson, Austin"
+    },
+    {
+      "batter": "Mike Yastrzemski",
+      "ev": 99.9,
+      "angle": 33.0,
+      "distance": 382.0,
+      "hr_in_parks": 5,
+      "result": "field_out",
+      "pitcher": "Junk, Janson"
+    },
+    {
+      "batter": "Matt Olson",
+      "ev": 98.0,
+      "angle": 33.0,
+      "distance": 381.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Junk, Janson"
+    },
+    {
+      "batter": "Iv\u00e1n Herrera",
+      "ev": 102.5,
+      "angle": 24.0,
+      "distance": 396.0,
+      "hr_in_parks": 4,
+      "result": "field_out",
+      "pitcher": "Hall, DL"
+    },
+    {
+      "batter": "Iv\u00e1n Herrera",
+      "ev": 103.1,
+      "angle": 40.0,
+      "distance": 398.0,
+      "hr_in_parks": 4,
+      "result": "",
+      "pitcher": "Misiorowski, Jacob"
+    },
+    {
+      "batter": "Brooks Lee",
+      "ev": 104.5,
+      "angle": 28.0,
+      "distance": 403.0,
+      "hr_in_parks": 26,
+      "result": "field_out",
+      "pitcher": "Gore, MacKenzie"
+    },
+    {
+      "batter": "Jorge Mateo",
+      "ev": 105.1,
+      "angle": 20.0,
+      "distance": 399.0,
+      "hr_in_parks": 21,
+      "result": "double",
+      "pitcher": "McFarlane, Alex"
+    },
+    {
+      "batter": "Kyle Schwarber",
+      "ev": 117.1,
+      "angle": 45.0,
+      "distance": 420.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Scholtens, Jesse"
+    },
+    {
+      "batter": "Ketel Marte",
+      "ev": 102.9,
+      "angle": 33.0,
+      "distance": 395.0,
+      "hr_in_parks": 2,
+      "result": "field_out",
+      "pitcher": "V\u00e1squez, Randy"
+    },
+    {
+      "batter": "Alex Call",
+      "ev": 104.2,
+      "angle": 21.0,
+      "distance": 388.0,
+      "hr_in_parks": 25,
+      "result": "double",
+      "pitcher": "Davitt, Duncan"
+    },
+    {
+      "batter": "Max Muncy",
+      "ev": 105.4,
+      "angle": 35.0,
+      "distance": 390.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Smith, Dylan"
+    },
+    {
+      "batter": "Nasim Nu\u00f1ez",
+      "ev": 97.5,
+      "angle": 24.0,
+      "distance": 370.0,
+      "hr_in_parks": 6,
+      "result": "double",
+      "pitcher": "Manaea, Sean"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
