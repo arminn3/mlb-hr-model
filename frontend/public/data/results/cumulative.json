@@ -236607,7 +236607,7 @@
     ],
     "total_players_ranked": 78,
     "total_hrs_hit": 8,
-    "total_near_hrs": 0,
+    "total_near_hrs": 3,
     "model_hits": 6,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -236724,7 +236724,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 3,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -236750,28 +236750,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 3,
-        "rate": 10.0
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
         "total": 78,
-        "hits": 6,
-        "rate": 7.7
+        "hits": 9,
+        "rate": 11.5
       }
     },
     "avg_composite_hr_hitters": 0.443,
-    "avg_composite_non_hitters": 0.389,
-    "composite_separation": 0.054,
+    "avg_composite_non_hitters": 0.384,
+    "composite_separation": 0.059,
     "hr_hitters": [
       {
         "name": "Austin Riley",
@@ -236860,8 +236860,67 @@
         "matchup": "CHC@SD"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "George Lombard Jr.",
+        "rank": 6,
+        "composite": 0.62,
+        "opp_pitcher": "Payton Tolle",
+        "matchup": "BOS@NYY"
+      },
+      {
+        "name": "Alec Bohm",
+        "rank": 11,
+        "composite": 0.54,
+        "opp_pitcher": "Chris Sale",
+        "matchup": "PHI@ATL"
+      },
+      {
+        "name": "Ozzie Albies",
+        "rank": 51,
+        "composite": 0.355,
+        "opp_pitcher": "Jes\u00fas Luzardo",
+        "matchup": "PHI@ATL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "George Lombard Jr.",
+        "ev": 108.6,
+        "angle": 18.0,
+        "distance": 372.0,
+        "hr_in_parks": 1,
+        "result": "single",
+        "pitcher": "Olds, Wyatt"
+      },
+      {
+        "batter": "Ozzie Albies",
+        "ev": 102.1,
+        "angle": 30.0,
+        "distance": 397.0,
+        "hr_in_parks": 25,
+        "result": "triple",
+        "pitcher": "McFarlane, Alex"
+      },
+      {
+        "batter": "Alec Bohm",
+        "ev": 102.9,
+        "angle": 22.0,
+        "distance": 399.0,
+        "hr_in_parks": 6,
+        "result": "double",
+        "pitcher": "Sale, Chris"
+      },
+      {
+        "batter": "Manny Machado",
+        "ev": 108.0,
+        "angle": 19.0,
+        "distance": 398.0,
+        "hr_in_parks": 28,
+        "result": "double",
+        "pitcher": "Boyd, Matthew"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Nelson Vel\u00e1zquez",
