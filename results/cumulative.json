@@ -236925,7 +236925,7 @@
       {
         "name": "Nelson Vel\u00e1zquez",
         "pitcher": "Sean Newcomb",
-        "description": "Nelson Vel\u00e1zquez homers (1) on a fly ball to left field. Lucas Spence scores."
+        "description": "${person|fullName|676369} homers ${total|homeRuns|676369} on a fly ball to left field.   ${person|fullName|828599} scores.  "
       }
     ],
     "hr_signal_accuracy": {
