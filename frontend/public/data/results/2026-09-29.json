@@ -1,0 +1,421 @@
+{
+  "date": "2026-09-29",
+  "players_who_batted": [
+    "Alec Bohm",
+    "Andrew Benintendi",
+    "Austin Riley",
+    "Braden Montgomery",
+    "Brandon Marsh",
+    "Bryan De La Cruz",
+    "Bryce Harper",
+    "Bryson Stott",
+    "Cam Smith",
+    "Chase Meidroth",
+    "Christian Walker",
+    "Colson Montgomery",
+    "Derek Hill",
+    "Dominic Smith",
+    "Drake Baldwin",
+    "Edmundo Sosa",
+    "Ha-Seong Kim",
+    "Isaac Paredes",
+    "J.T. Realmuto",
+    "Jeremy Pe\u00f1a",
+    "Jose Altuve",
+    "Justin Crawford",
+    "Kyle Schwarber",
+    "Kyle Teel",
+    "Lucas Spence",
+    "Matt Olson",
+    "Mauricio Dub\u00f3n",
+    "Michael Harris II",
+    "Miguel Vargas",
+    "Mike Yastrzemski",
+    "Munetaka Murakami",
+    "Nelson Vel\u00e1zquez",
+    "Ozzie Albies",
+    "Randal Grichuk",
+    "Ronald Acu\u00f1a Jr.",
+    "Sam Antonacci",
+    "Taylor Trammell",
+    "Trea Turner",
+    "Tristan Peters",
+    "Yainer Diaz",
+    "Yordan Alvarez"
+  ],
+  "total_players_ranked": 36,
+  "total_hrs_hit": 3,
+  "total_near_hrs": 0,
+  "model_hits": 2,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 2,
+        "rate": 6.7
+      },
+      "all": {
+        "total": 36,
+        "hits": 2,
+        "rate": 5.6
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 2,
+        "rate": 6.7
+      },
+      "all": {
+        "total": 36,
+        "hits": 2,
+        "rate": 5.6
+      }
+    }
+  },
+  "tier_accuracy_ml2026": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 36,
+      "hits": 2,
+      "rate": 5.6
+    }
+  },
+  "tier_accuracy_ml2026_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 2,
+        "rate": 6.7
+      },
+      "all": {
+        "total": 36,
+        "hits": 2,
+        "rate": 5.6
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 2,
+        "rate": 6.7
+      },
+      "all": {
+        "total": 36,
+        "hits": 2,
+        "rate": 5.6
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 36,
+      "hits": 2,
+      "rate": 5.6
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 36,
+      "hits": 2,
+      "rate": 5.6
+    }
+  },
+  "avg_composite_hr_hitters": 0.486,
+  "avg_composite_non_hitters": 0.348,
+  "composite_separation": 0.138,
+  "hr_hitters": [
+    {
+      "name": "Austin Riley",
+      "rank": 3,
+      "composite": 0.573,
+      "opp_pitcher": "Jes\u00fas Luzardo",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 14,
+      "composite": 0.399,
+      "opp_pitcher": "AJ Blubaugh",
+      "matchup": "CWS@HOU"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Austin Riley",
+      "rank": 11,
+      "composite": 0.427,
+      "opp_pitcher": "Jes\u00fas Luzardo",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 15,
+      "composite": 0.399,
+      "opp_pitcher": "AJ Blubaugh",
+      "matchup": "CWS@HOU"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [
+    {
+      "name": "Nelson Vel\u00e1zquez",
+      "pitcher": "Sean Newcomb",
+      "description": "Nelson Vel\u00e1zquez homers (1) on a fly ball to left field. Lucas Spence scores."
+    }
+  ],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 39,
+      "hr_count": 1,
+      "hr_rate": 2.6,
+      "names": [
+        "Austin Riley",
+        "Derek Hill",
+        "Matt Olson",
+        "Ha-Seong Kim",
+        "Mauricio Dub\u00f3n",
+        "Edmundo Sosa",
+        "Michael Harris II",
+        "Drake Baldwin",
+        "Mike Yastrzemski",
+        "J.T. Realmuto",
+        "Bryce Harper",
+        "Miguel Vargas",
+        "Cam Smith",
+        "Heliot Ramos",
+        "George Lombard Jr.",
+        "Trevor Story",
+        "Jarren Duran",
+        "Ali S\u00e1nchez",
+        "Jahmai Jones",
+        "Nick Sogard",
+        "Willson Contreras",
+        "Alex Bregman",
+        "Jase Bowen",
+        "Austin Hays",
+        "Miguel Amaya",
+        "Ty France",
+        "Xander Bogaerts",
+        "Gavin Sheets",
+        "BJ Murray Jr.",
+        "Carson Kelly",
+        "Seiya Suzuki",
+        "Dansby Swanson",
+        "Tyrone Taylor",
+        "Michael Conforto",
+        "Nico Hoerner",
+        "Gabriel Arias",
+        "Jake Cronenworth",
+        "Dustin Harris",
+        "Ethan Salas"
+      ],
+      "hr_names": [
+        "Austin Riley"
+      ]
+    },
+    "2_of_5": {
+      "players": 36,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Alec Bohm",
+        "Ronald Acu\u00f1a Jr.",
+        "Ozzie Albies",
+        "Trea Turner",
+        "Bryan De La Cruz",
+        "Bryson Stott",
+        "Chase Meidroth",
+        "Lucas Spence",
+        "Yainer Diaz",
+        "Yordan Alvarez",
+        "Christian Walker",
+        "Taylor Trammell",
+        "Jeremy Pe\u00f1a",
+        "Roman Anthony",
+        "Spencer Jones",
+        "Cody Bellinger",
+        "Amed Rosario",
+        "Anthony Volpe",
+        "Paul Goldschmidt",
+        "Ceddanne Rafaela",
+        "Austin Wells",
+        "Ben Rice",
+        "Adley Rutschman",
+        "Luis Garc\u00eda Jr.",
+        "Ryan McMahon",
+        "Caleb Durbin",
+        "Andruw Monasterio",
+        "Giancarlo Stanton",
+        "Michael Busch",
+        "Manny Machado",
+        "Jackson Merrill",
+        "Samad Taylor",
+        "Luis Campusano",
+        "Ian Happ",
+        "Fernando Tatis Jr.",
+        "Kevin Alc\u00e1ntara"
+      ],
+      "hr_names": []
+    },
+    "3_of_5": {
+      "players": 12,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Kyle Schwarber",
+        "Munetaka Murakami",
+        "Kyle Teel",
+        "Andrew Benintendi",
+        "Isaac Paredes",
+        "Jose Altuve",
+        "Trent Grisham",
+        "Jazz Chisholm Jr.",
+        "Wilyer Abreu",
+        "Freddy Fermin",
+        "Miguel Andujar",
+        "Pete Crow-Armstrong"
+      ],
+      "hr_names": []
+    },
+    "4_of_5": {
+      "players": 4,
+      "hr_count": 1,
+      "hr_rate": 25.0,
+      "names": [
+        "Sam Antonacci",
+        "Tristan Peters",
+        "Braden Montgomery",
+        "Colson Montgomery"
+      ],
+      "hr_names": [
+        "Colson Montgomery"
+      ]
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 2,
+      "rate": 6.7
+    },
+    "all": {
+      "total": 36,
+      "hits": 2,
+      "rate": 5.6
+    }
+  },
+  "combined_hr_hitters": [
+    {
+      "name": "Austin Riley",
+      "rank": 5,
+      "composite": 0.466,
+      "opp_pitcher": "Jes\u00fas Luzardo",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Colson Montgomery",
+      "rank": 13,
+      "composite": 0.246,
+      "opp_pitcher": "AJ Blubaugh",
+      "matchup": "CWS@HOU"
+    }
+  ]
+}
