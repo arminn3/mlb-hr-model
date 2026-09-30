@@ -1,52 +1,94 @@
 {
   "date": "2026-09-29",
   "players_who_batted": [
+    "Adley Rutschman",
     "Alec Bohm",
+    "Alex Bregman",
+    "Amed Rosario",
     "Andrew Benintendi",
+    "Andruw Monasterio",
+    "Anthony Volpe",
+    "Austin Hays",
     "Austin Riley",
+    "Austin Wells",
+    "Ben Rice",
     "Braden Montgomery",
     "Brandon Marsh",
     "Bryan De La Cruz",
     "Bryce Harper",
     "Bryson Stott",
+    "Caleb Durbin",
     "Cam Smith",
+    "Carson Kelly",
+    "Ceddanne Rafaela",
     "Chase Meidroth",
     "Christian Walker",
+    "Cody Bellinger",
     "Colson Montgomery",
+    "Dansby Swanson",
     "Derek Hill",
     "Dominic Smith",
     "Drake Baldwin",
+    "Dustin Harris",
     "Edmundo Sosa",
+    "Fernando Tatis Jr.",
+    "George Lombard Jr.",
     "Ha-Seong Kim",
+    "Heliot Ramos",
+    "Ian Happ",
     "Isaac Paredes",
     "J.T. Realmuto",
+    "Jackson Merrill",
+    "Jake Cronenworth",
+    "Jarren Duran",
     "Jeremy Pe\u00f1a",
     "Jose Altuve",
     "Justin Crawford",
     "Kyle Schwarber",
     "Kyle Teel",
     "Lucas Spence",
+    "Luis Campusano",
+    "Luis Garc\u00eda Jr.",
+    "Manny Machado",
     "Matt Olson",
     "Mauricio Dub\u00f3n",
+    "Michael Busch",
+    "Michael Conforto",
     "Michael Harris II",
     "Miguel Vargas",
     "Mike Yastrzemski",
     "Munetaka Murakami",
     "Nelson Vel\u00e1zquez",
+    "Nick Sogard",
+    "Nico Hoerner",
     "Ozzie Albies",
+    "Paul Goldschmidt",
+    "Pedro Ram\u00edrez",
+    "Pete Crow-Armstrong",
     "Randal Grichuk",
+    "Roman Anthony",
     "Ronald Acu\u00f1a Jr.",
+    "Ryan McMahon",
     "Sam Antonacci",
+    "Samad Taylor",
+    "Seiya Suzuki",
+    "Spencer Jones",
     "Taylor Trammell",
     "Trea Turner",
+    "Trent Grisham",
+    "Trevor Story",
     "Tristan Peters",
+    "Ty France",
+    "Willson Contreras",
+    "Wilyer Abreu",
+    "Xander Bogaerts",
     "Yainer Diaz",
     "Yordan Alvarez"
   ],
-  "total_players_ranked": 36,
-  "total_hrs_hit": 3,
+  "total_players_ranked": 78,
+  "total_hrs_hit": 8,
   "total_near_hrs": 0,
-  "model_hits": 2,
+  "model_hits": 6,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
@@ -62,20 +104,20 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
-        "total": 36,
-        "hits": 2,
-        "rate": 5.6
+        "total": 78,
+        "hits": 6,
+        "rate": 7.7
       }
     },
     "L10": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
@@ -84,13 +126,13 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
-        "total": 36,
-        "hits": 2,
-        "rate": 5.6
+        "total": 78,
+        "hits": 6,
+        "rate": 7.7
       }
     }
   },
@@ -107,13 +149,13 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 2,
-      "rate": 6.7
+      "hits": 4,
+      "rate": 13.3
     },
     "all": {
-      "total": 36,
-      "hits": 2,
-      "rate": 5.6
+      "total": 78,
+      "hits": 6,
+      "rate": 7.7
     }
   },
   "tier_accuracy_ml2026_by_lookback": {
@@ -130,35 +172,35 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 4,
+        "rate": 13.3
       },
       "all": {
-        "total": 36,
-        "hits": 2,
-        "rate": 5.6
+        "total": 78,
+        "hits": 6,
+        "rate": 7.7
       }
     },
     "L10": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
         "total": 30,
-        "hits": 2,
-        "rate": 6.7
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
-        "total": 36,
-        "hits": 2,
-        "rate": 5.6
+        "total": 78,
+        "hits": 6,
+        "rate": 7.7
       }
     }
   },
@@ -176,13 +218,13 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 2,
-      "rate": 6.7
+      "hits": 3,
+      "rate": 10.0
     },
     "all": {
-      "total": 36,
-      "hits": 2,
-      "rate": 5.6
+      "total": 78,
+      "hits": 6,
+      "rate": 7.7
     }
   },
   "tier_accuracy_with_near": {
@@ -198,48 +240,104 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 2,
-      "rate": 6.7
+      "hits": 3,
+      "rate": 10.0
     },
     "all": {
-      "total": 36,
-      "hits": 2,
-      "rate": 5.6
+      "total": 78,
+      "hits": 6,
+      "rate": 7.7
     }
   },
-  "avg_composite_hr_hitters": 0.486,
-  "avg_composite_non_hitters": 0.348,
-  "composite_separation": 0.138,
+  "avg_composite_hr_hitters": 0.443,
+  "avg_composite_non_hitters": 0.389,
+  "composite_separation": 0.054,
   "hr_hitters": [
     {
       "name": "Austin Riley",
-      "rank": 3,
+      "rank": 9,
       "composite": 0.573,
       "opp_pitcher": "Jes\u00fas Luzardo",
       "matchup": "PHI@ATL"
     },
     {
+      "name": "Manny Machado",
+      "rank": 13,
+      "composite": 0.526,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 28,
+      "composite": 0.419,
+      "opp_pitcher": "Payton Tolle",
+      "matchup": "BOS@NYY"
+    },
+    {
       "name": "Colson Montgomery",
-      "rank": 14,
+      "rank": 33,
       "composite": 0.399,
       "opp_pitcher": "AJ Blubaugh",
       "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Xander Bogaerts",
+      "rank": 34,
+      "composite": 0.392,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Fernando Tatis Jr.",
+      "rank": 55,
+      "composite": 0.351,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "CHC@SD"
     }
   ],
   "hr_hitters_l10": [
     {
+      "name": "Manny Machado",
+      "rank": 2,
+      "composite": 0.659,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Ben Rice",
+      "rank": 8,
+      "composite": 0.553,
+      "opp_pitcher": "Payton Tolle",
+      "matchup": "BOS@NYY"
+    },
+    {
       "name": "Austin Riley",
-      "rank": 11,
+      "rank": 27,
       "composite": 0.427,
       "opp_pitcher": "Jes\u00fas Luzardo",
       "matchup": "PHI@ATL"
     },
     {
       "name": "Colson Montgomery",
-      "rank": 15,
+      "rank": 36,
       "composite": 0.399,
       "opp_pitcher": "AJ Blubaugh",
       "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Xander Bogaerts",
+      "rank": 39,
+      "composite": 0.392,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Fernando Tatis Jr.",
+      "rank": 40,
+      "composite": 0.392,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "CHC@SD"
     }
   ],
   "near_hr_hitters": [],
@@ -254,8 +352,8 @@
   "hr_signal_accuracy": {
     "1_of_5": {
       "players": 39,
-      "hr_count": 1,
-      "hr_rate": 2.6,
+      "hr_count": 2,
+      "hr_rate": 5.1,
       "names": [
         "Austin Riley",
         "Derek Hill",
@@ -298,13 +396,14 @@
         "Ethan Salas"
       ],
       "hr_names": [
-        "Austin Riley"
+        "Austin Riley",
+        "Xander Bogaerts"
       ]
     },
     "2_of_5": {
       "players": 36,
-      "hr_count": 0,
-      "hr_rate": 0.0,
+      "hr_count": 3,
+      "hr_rate": 8.3,
       "names": [
         "Alec Bohm",
         "Ronald Acu\u00f1a Jr.",
@@ -343,7 +442,11 @@
         "Fernando Tatis Jr.",
         "Kevin Alc\u00e1ntara"
       ],
-      "hr_names": []
+      "hr_names": [
+        "Ben Rice",
+        "Manny Machado",
+        "Fernando Tatis Jr."
+      ]
     },
     "3_of_5": {
       "players": 12,
@@ -383,39 +486,67 @@
   "combined_tier_accuracy": {
     "top_10": {
       "total": 10,
-      "hits": 1,
-      "rate": 10.0
+      "hits": 2,
+      "rate": 20.0
     },
     "top_20": {
       "total": 20,
-      "hits": 2,
-      "rate": 10.0
+      "hits": 3,
+      "rate": 15.0
     },
     "top_30": {
       "total": 30,
-      "hits": 2,
-      "rate": 6.7
+      "hits": 3,
+      "rate": 10.0
     },
     "all": {
-      "total": 36,
-      "hits": 2,
-      "rate": 5.6
+      "total": 78,
+      "hits": 6,
+      "rate": 7.7
     }
   },
   "combined_hr_hitters": [
     {
+      "name": "Manny Machado",
+      "rank": 7,
+      "composite": 0.551,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "CHC@SD"
+    },
+    {
       "name": "Austin Riley",
-      "rank": 5,
+      "rank": 10,
       "composite": 0.466,
       "opp_pitcher": "Jes\u00fas Luzardo",
       "matchup": "PHI@ATL"
     },
     {
+      "name": "Ben Rice",
+      "rank": 20,
+      "composite": 0.36,
+      "opp_pitcher": "Payton Tolle",
+      "matchup": "BOS@NYY"
+    },
+    {
       "name": "Colson Montgomery",
-      "rank": 13,
+      "rank": 32,
       "composite": 0.246,
       "opp_pitcher": "AJ Blubaugh",
       "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Xander Bogaerts",
+      "rank": 39,
+      "composite": 0.227,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "CHC@SD"
+    },
+    {
+      "name": "Fernando Tatis Jr.",
+      "rank": 45,
+      "composite": 0.203,
+      "opp_pitcher": "Matthew Boyd",
+      "matchup": "CHC@SD"
     }
   ]
 }
