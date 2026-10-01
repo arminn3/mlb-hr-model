@@ -1,0 +1,527 @@
+{
+  "date": "2026-09-30",
+  "players_who_batted": [
+    "Alec Bohm",
+    "Andrew Benintendi",
+    "Austin Riley",
+    "Braden Montgomery",
+    "Brandon Marsh",
+    "Brenton Doyle",
+    "Bryan De La Cruz",
+    "Bryce Harper",
+    "Bryson Stott",
+    "Cam Smith",
+    "Chase Meidroth",
+    "Christian Walker",
+    "Colson Montgomery",
+    "Derek Hill",
+    "Dominic Smith",
+    "Drake Baldwin",
+    "Edmundo Sosa",
+    "Ha-Seong Kim",
+    "Isaac Paredes",
+    "J.T. Realmuto",
+    "Jeremy Pe\u00f1a",
+    "Jose Altuve",
+    "Justin Crawford",
+    "Kyle Schwarber",
+    "Kyle Teel",
+    "Lucas Spence",
+    "Luisangel Acu\u00f1a",
+    "Matt Olson",
+    "Mauricio Dub\u00f3n",
+    "Michael Harris II",
+    "Miguel Vargas",
+    "Mike Yastrzemski",
+    "Munetaka Murakami",
+    "Nick Allen",
+    "Ozzie Albies",
+    "Ronald Acu\u00f1a Jr.",
+    "Sam Antonacci",
+    "Sean Murphy",
+    "Trea Turner",
+    "Tristan Peters",
+    "Yainer Diaz",
+    "Yordan Alvarez"
+  ],
+  "total_players_ranked": 38,
+  "total_hrs_hit": 7,
+  "total_near_hrs": 0,
+  "model_hits": 7,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 38,
+        "hits": 7,
+        "rate": 18.4
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 6,
+        "rate": 20.0
+      },
+      "all": {
+        "total": 38,
+        "hits": 7,
+        "rate": 18.4
+      }
+    }
+  },
+  "tier_accuracy_ml2026": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 5,
+      "rate": 16.7
+    },
+    "all": {
+      "total": 38,
+      "hits": 7,
+      "rate": 18.4
+    }
+  },
+  "tier_accuracy_ml2026_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 38,
+        "hits": 7,
+        "rate": 18.4
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 6,
+        "rate": 20.0
+      },
+      "all": {
+        "total": 38,
+        "hits": 7,
+        "rate": 18.4
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 4,
+      "rate": 20.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 5,
+      "rate": 16.7
+    },
+    "all": {
+      "total": 38,
+      "hits": 7,
+      "rate": 18.4
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 4,
+      "rate": 20.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 5,
+      "rate": 16.7
+    },
+    "all": {
+      "total": 38,
+      "hits": 7,
+      "rate": 18.4
+    }
+  },
+  "avg_composite_hr_hitters": 0.394,
+  "avg_composite_non_hitters": 0.394,
+  "composite_separation": 0.0,
+  "hr_hitters": [
+    {
+      "name": "Jeremy Pe\u00f1a",
+      "rank": 6,
+      "composite": 0.533,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Bryce Harper",
+      "rank": 8,
+      "composite": 0.495,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Chase Meidroth",
+      "rank": 15,
+      "composite": 0.411,
+      "opp_pitcher": "Hunter Brown",
+      "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 19,
+      "composite": 0.377,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Cam Smith",
+      "rank": 29,
+      "composite": 0.354,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Jose Altuve",
+      "rank": 31,
+      "composite": 0.303,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Alec Bohm",
+      "rank": 32,
+      "composite": 0.282,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "PHI@ATL"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Jeremy Pe\u00f1a",
+      "rank": 7,
+      "composite": 0.513,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Bryce Harper",
+      "rank": 9,
+      "composite": 0.474,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Chase Meidroth",
+      "rank": 17,
+      "composite": 0.39,
+      "opp_pitcher": "Hunter Brown",
+      "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 19,
+      "composite": 0.377,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Cam Smith",
+      "rank": 25,
+      "composite": 0.355,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Jose Altuve",
+      "rank": 28,
+      "composite": 0.333,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Alec Bohm",
+      "rank": 35,
+      "composite": 0.25,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "PHI@ATL"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 29,
+      "hr_count": 2,
+      "hr_rate": 6.9,
+      "names": [
+        "Bryce Harper",
+        "Justin Crawford",
+        "J.T. Realmuto",
+        "Matt Olson",
+        "Edmundo Sosa",
+        "Michael Harris II",
+        "Drake Baldwin",
+        "Nelson Vel\u00e1zquez",
+        "Miguel Vargas",
+        "Cam Smith",
+        "Jake Rogers",
+        "Nick Allen",
+        "Christian V\u00e1zquez",
+        "Tommy Pham",
+        "George Lombard Jr.",
+        "Heliot Ramos",
+        "Adley Rutschman",
+        "Ali S\u00e1nchez",
+        "Nick Sogard",
+        "Willson Contreras",
+        "Trevor Story",
+        "Jarren Duran",
+        "Austin Hays",
+        "Xander Bogaerts",
+        "Matt Shaw",
+        "Jase Bowen",
+        "Ty France",
+        "Dustin Harris",
+        "Michael Conforto"
+      ],
+      "hr_names": [
+        "Bryce Harper",
+        "Cam Smith"
+      ]
+    },
+    "2_of_5": {
+      "players": 49,
+      "hr_count": 4,
+      "hr_rate": 8.2,
+      "names": [
+        "Bryson Stott",
+        "Ha-Seong Kim",
+        "Austin Riley",
+        "Mauricio Dub\u00f3n",
+        "Trea Turner",
+        "Alec Bohm",
+        "Munetaka Murakami",
+        "Christian Walker",
+        "Kyle Teel",
+        "Jeremy Pe\u00f1a",
+        "Brenton Doyle",
+        "Yainer Diaz",
+        "Chase Meidroth",
+        "Andrew Benintendi",
+        "Randal Grichuk",
+        "Jose Altuve",
+        "Luisangel Acu\u00f1a",
+        "Austin Wells",
+        "Ben Rice",
+        "Spencer Jones",
+        "Ryan McMahon",
+        "Cody Bellinger",
+        "Jahmai Jones",
+        "Ceddanne Rafaela",
+        "Luis Garc\u00eda Jr.",
+        "Anthony Volpe",
+        "Amed Rosario",
+        "Paul Goldschmidt",
+        "Caleb Durbin",
+        "Andruw Monasterio",
+        "Roman Anthony",
+        "Giancarlo Stanton",
+        "Alex Bregman",
+        "Fernando Tatis Jr.",
+        "Seiya Suzuki",
+        "Samad Taylor",
+        "Gavin Sheets",
+        "Jake Cronenworth",
+        "Carson Kelly",
+        "Dansby Swanson",
+        "Gabriel Arias",
+        "Miguel Amaya",
+        "Nico Hoerner",
+        "Tyrone Taylor",
+        "Luis Campusano",
+        "Manny Machado",
+        "Ian Happ",
+        "Michael Busch",
+        "Ethan Salas"
+      ],
+      "hr_names": [
+        "Alec Bohm",
+        "Jeremy Pe\u00f1a",
+        "Chase Meidroth",
+        "Jose Altuve"
+      ]
+    },
+    "3_of_5": {
+      "players": 21,
+      "hr_count": 1,
+      "hr_rate": 4.8,
+      "names": [
+        "Ronald Acu\u00f1a Jr.",
+        "Sean Murphy",
+        "Ozzie Albies",
+        "Kyle Schwarber",
+        "Lucas Spence",
+        "Taylor Trammell",
+        "Yordan Alvarez",
+        "Joey Loperfido",
+        "Raynel Delgado",
+        "Isaac Paredes",
+        "Braden Montgomery",
+        "Colson Montgomery",
+        "Sam Antonacci",
+        "Tristan Peters",
+        "Jazz Chisholm Jr.",
+        "Trent Grisham",
+        "Wilyer Abreu",
+        "Miguel Andujar",
+        "Freddy Fermin",
+        "Jackson Merrill",
+        "Pete Crow-Armstrong"
+      ],
+      "hr_names": [
+        "Kyle Schwarber"
+      ]
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 3,
+      "rate": 15.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 6,
+      "rate": 20.0
+    },
+    "all": {
+      "total": 38,
+      "hits": 7,
+      "rate": 18.4
+    }
+  },
+  "combined_hr_hitters": [
+    {
+      "name": "Jeremy Pe\u00f1a",
+      "rank": 5,
+      "composite": 0.505,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Bryce Harper",
+      "rank": 11,
+      "composite": 0.323,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Chase Meidroth",
+      "rank": 14,
+      "composite": 0.266,
+      "opp_pitcher": "Hunter Brown",
+      "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Cam Smith",
+      "rank": 24,
+      "composite": 0.185,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@HOU"
+    },
+    {
+      "name": "Kyle Schwarber",
+      "rank": 25,
+      "composite": 0.185,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Alec Bohm",
+      "rank": 29,
+      "composite": 0.161,
+      "opp_pitcher": "Tyler Mahle",
+      "matchup": "PHI@ATL"
+    },
+    {
+      "name": "Jose Altuve",
+      "rank": 31,
+      "composite": 0.151,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@HOU"
+    }
+  ]
+}
