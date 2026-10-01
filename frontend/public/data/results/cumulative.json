@@ -237132,101 +237132,235 @@
   {
     "date": "2026-09-30",
     "players_who_batted": [
+      "Adley Rutschman",
       "Alec Bohm",
+      "Alex Bregman",
       "Andrew Benintendi",
+      "Austin Hays",
       "Austin Riley",
+      "Austin Wells",
+      "Ben Rice",
       "Braden Montgomery",
       "Brandon Marsh",
       "Brenton Doyle",
       "Bryan De La Cruz",
       "Bryce Harper",
       "Bryson Stott",
+      "Caleb Durbin",
       "Cam Smith",
+      "Carson Kelly",
+      "Ceddanne Rafaela",
       "Chase Meidroth",
       "Christian Walker",
+      "Cody Bellinger",
       "Colson Montgomery",
+      "Dansby Swanson",
       "Derek Hill",
       "Dominic Smith",
       "Drake Baldwin",
+      "Dustin Harris",
       "Edmundo Sosa",
+      "Ethan Salas",
+      "Fernando Tatis Jr.",
+      "Gavin Sheets",
+      "George Lombard Jr.",
       "Ha-Seong Kim",
+      "Ian Happ",
       "Isaac Paredes",
       "J.T. Realmuto",
+      "Jackson Merrill",
+      "Jahmai Jones",
+      "Jake Cronenworth",
+      "Jarren Duran",
+      "Jazz Chisholm Jr.",
       "Jeremy Pe\u00f1a",
       "Jose Altuve",
       "Justin Crawford",
       "Kyle Schwarber",
       "Kyle Teel",
       "Lucas Spence",
+      "Luis Garc\u00eda Jr.",
       "Luisangel Acu\u00f1a",
+      "Manny Machado",
       "Matt Olson",
+      "Matt Shaw",
       "Mauricio Dub\u00f3n",
+      "Michael Busch",
+      "Michael Conforto",
       "Michael Harris II",
+      "Miguel Andujar",
       "Miguel Vargas",
       "Mike Yastrzemski",
       "Munetaka Murakami",
+      "Nate Eaton",
       "Nick Allen",
+      "Nick Sogard",
+      "Nico Hoerner",
       "Ozzie Albies",
+      "Paul Goldschmidt",
+      "Pete Crow-Armstrong",
       "Ronald Acu\u00f1a Jr.",
+      "Ryan McMahon",
       "Sam Antonacci",
+      "Samad Taylor",
       "Sean Murphy",
+      "Seiya Suzuki",
+      "Spencer Jones",
       "Trea Turner",
+      "Trent Grisham",
+      "Trevor Story",
       "Tristan Peters",
+      "Ty France",
+      "Tyrone Taylor",
+      "Willson Contreras",
+      "Wilyer Abreu",
+      "Xander Bogaerts",
       "Yainer Diaz",
       "Yordan Alvarez"
     ],
-    "total_players_ranked": 38,
-    "total_hrs_hit": 7,
-    "total_near_hrs": 0,
-    "model_hits": 7,
+    "total_players_ranked": 81,
+    "total_hrs_hit": 12,
+    "total_near_hrs": 2,
+    "model_hits": 12,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 2,
-          "rate": 20.0
+          "hits": 0,
+          "rate": 0.0
         },
         "top_20": {
           "total": 20,
-          "hits": 4,
-          "rate": 20.0
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
           "total": 30,
-          "hits": 5,
-          "rate": 16.7
+          "hits": 4,
+          "rate": 13.3
         },
         "all": {
-          "total": 38,
-          "hits": 7,
-          "rate": 18.4
+          "total": 81,
+          "hits": 12,
+          "rate": 14.8
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 2,
-          "rate": 20.0
+          "hits": 0,
+          "rate": 0.0
         },
         "top_20": {
           "total": 20,
-          "hits": 4,
-          "rate": 20.0
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
           "total": 30,
-          "hits": 6,
-          "rate": 20.0
+          "hits": 3,
+          "rate": 10.0
         },
         "all": {
-          "total": 38,
-          "hits": 7,
-          "rate": 18.4
+          "total": 81,
+          "hits": 12,
+          "rate": 14.8
         }
       }
     },
     "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 81,
+        "hits": 12,
+        "rate": 14.8
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
+        },
+        "all": {
+          "total": 81,
+          "hits": 12,
+          "rate": 14.8
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 2,
+          "rate": 6.7
+        },
+        "all": {
+          "total": 81,
+          "hits": 12,
+          "rate": 14.8
+        }
+      }
+    },
+    "model_near_hits": 2,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 81,
+        "hits": 12,
+        "rate": 14.8
+      }
+    },
+    "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
         "hits": 1,
@@ -237243,151 +237377,95 @@
         "rate": 16.7
       },
       "all": {
-        "total": 38,
-        "hits": 7,
-        "rate": 18.4
+        "total": 81,
+        "hits": 14,
+        "rate": 17.3
       }
     },
-    "tier_accuracy_ml2026_by_lookback": {
-      "L5": {
-        "top_10": {
-          "total": 10,
-          "hits": 1,
-          "rate": 10.0
-        },
-        "top_20": {
-          "total": 20,
-          "hits": 3,
-          "rate": 15.0
-        },
-        "top_30": {
-          "total": 30,
-          "hits": 5,
-          "rate": 16.7
-        },
-        "all": {
-          "total": 38,
-          "hits": 7,
-          "rate": 18.4
-        }
-      },
-      "L10": {
-        "top_10": {
-          "total": 10,
-          "hits": 1,
-          "rate": 10.0
-        },
-        "top_20": {
-          "total": 20,
-          "hits": 4,
-          "rate": 20.0
-        },
-        "top_30": {
-          "total": 30,
-          "hits": 6,
-          "rate": 20.0
-        },
-        "all": {
-          "total": 38,
-          "hits": 7,
-          "rate": 18.4
-        }
-      }
-    },
-    "model_near_hits": 0,
-    "tier_accuracy": {
-      "top_10": {
-        "total": 10,
-        "hits": 2,
-        "rate": 20.0
-      },
-      "top_20": {
-        "total": 20,
-        "hits": 4,
-        "rate": 20.0
-      },
-      "top_30": {
-        "total": 30,
-        "hits": 5,
-        "rate": 16.7
-      },
-      "all": {
-        "total": 38,
-        "hits": 7,
-        "rate": 18.4
-      }
-    },
-    "tier_accuracy_with_near": {
-      "top_10": {
-        "total": 10,
-        "hits": 2,
-        "rate": 20.0
-      },
-      "top_20": {
-        "total": 20,
-        "hits": 4,
-        "rate": 20.0
-      },
-      "top_30": {
-        "total": 30,
-        "hits": 5,
-        "rate": 16.7
-      },
-      "all": {
-        "total": 38,
-        "hits": 7,
-        "rate": 18.4
-      }
-    },
-    "avg_composite_hr_hitters": 0.394,
-    "avg_composite_non_hitters": 0.394,
-    "composite_separation": 0.0,
+    "avg_composite_hr_hitters": 0.396,
+    "avg_composite_non_hitters": 0.428,
+    "composite_separation": -0.032,
     "hr_hitters": [
       {
         "name": "Jeremy Pe\u00f1a",
-        "rank": 6,
+        "rank": 16,
         "composite": 0.533,
         "opp_pitcher": "Sean Burke",
         "matchup": "CWS@HOU"
       },
       {
+        "name": "Gavin Sheets",
+        "rank": 19,
+        "composite": 0.525,
+        "opp_pitcher": "Kevin Gausman",
+        "matchup": "CHC@SD"
+      },
+      {
+        "name": "Cody Bellinger",
+        "rank": 21,
+        "composite": 0.502,
+        "opp_pitcher": "Sonny Gray",
+        "matchup": "BOS@NYY"
+      },
+      {
         "name": "Bryce Harper",
-        "rank": 8,
+        "rank": 28,
         "composite": 0.495,
         "opp_pitcher": "Tyler Mahle",
         "matchup": "PHI@ATL"
       },
       {
         "name": "Chase Meidroth",
-        "rank": 15,
+        "rank": 39,
         "composite": 0.411,
         "opp_pitcher": "Hunter Brown",
         "matchup": "CWS@HOU"
       },
       {
         "name": "Kyle Schwarber",
-        "rank": 19,
+        "rank": 48,
         "composite": 0.377,
         "opp_pitcher": "Tyler Mahle",
         "matchup": "PHI@ATL"
       },
       {
+        "name": "Luis Garc\u00eda Jr.",
+        "rank": 50,
+        "composite": 0.376,
+        "opp_pitcher": "Sonny Gray",
+        "matchup": "BOS@NYY"
+      },
+      {
         "name": "Cam Smith",
-        "rank": 29,
+        "rank": 62,
         "composite": 0.354,
         "opp_pitcher": "Sean Burke",
         "matchup": "CWS@HOU"
       },
       {
+        "name": "Nick Sogard",
+        "rank": 65,
+        "composite": 0.304,
+        "opp_pitcher": "Max Fried",
+        "matchup": "BOS@NYY"
+      },
+      {
         "name": "Jose Altuve",
-        "rank": 31,
+        "rank": 66,
         "composite": 0.303,
         "opp_pitcher": "Sean Burke",
         "matchup": "CWS@HOU"
       },
       {
+        "name": "Willson Contreras",
+        "rank": 68,
+        "composite": 0.288,
+        "opp_pitcher": "Max Fried",
+        "matchup": "BOS@NYY"
+      },
+      {
         "name": "Alec Bohm",
-        "rank": 32,
+        "rank": 69,
         "composite": 0.282,
         "opp_pitcher": "Tyler Mahle",
         "matchup": "PHI@ATL"
@@ -237395,63 +237473,132 @@
     ],
     "hr_hitters_l10": [
       {
+        "name": "Gavin Sheets",
+        "rank": 11,
+        "composite": 0.561,
+        "opp_pitcher": "Kevin Gausman",
+        "matchup": "CHC@SD"
+      },
+      {
         "name": "Jeremy Pe\u00f1a",
-        "rank": 7,
+        "rank": 17,
         "composite": 0.513,
         "opp_pitcher": "Sean Burke",
         "matchup": "CWS@HOU"
       },
       {
         "name": "Bryce Harper",
-        "rank": 9,
+        "rank": 25,
         "composite": 0.474,
         "opp_pitcher": "Tyler Mahle",
         "matchup": "PHI@ATL"
       },
       {
+        "name": "Cody Bellinger",
+        "rank": 32,
+        "composite": 0.451,
+        "opp_pitcher": "Sonny Gray",
+        "matchup": "BOS@NYY"
+      },
+      {
         "name": "Chase Meidroth",
-        "rank": 17,
+        "rank": 40,
         "composite": 0.39,
         "opp_pitcher": "Hunter Brown",
         "matchup": "CWS@HOU"
       },
       {
         "name": "Kyle Schwarber",
-        "rank": 19,
+        "rank": 45,
         "composite": 0.377,
         "opp_pitcher": "Tyler Mahle",
         "matchup": "PHI@ATL"
       },
       {
+        "name": "Luis Garc\u00eda Jr.",
+        "rank": 49,
+        "composite": 0.376,
+        "opp_pitcher": "Sonny Gray",
+        "matchup": "BOS@NYY"
+      },
+      {
         "name": "Cam Smith",
-        "rank": 25,
+        "rank": 56,
         "composite": 0.355,
         "opp_pitcher": "Sean Burke",
         "matchup": "CWS@HOU"
       },
       {
         "name": "Jose Altuve",
-        "rank": 28,
+        "rank": 60,
         "composite": 0.333,
         "opp_pitcher": "Sean Burke",
         "matchup": "CWS@HOU"
       },
       {
+        "name": "Willson Contreras",
+        "rank": 71,
+        "composite": 0.288,
+        "opp_pitcher": "Max Fried",
+        "matchup": "BOS@NYY"
+      },
+      {
+        "name": "Nick Sogard",
+        "rank": 73,
+        "composite": 0.277,
+        "opp_pitcher": "Max Fried",
+        "matchup": "BOS@NYY"
+      },
+      {
         "name": "Alec Bohm",
-        "rank": 35,
+        "rank": 77,
         "composite": 0.25,
         "opp_pitcher": "Tyler Mahle",
         "matchup": "PHI@ATL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Fernando Tatis Jr.",
+        "rank": 2,
+        "composite": 0.715,
+        "opp_pitcher": "Kevin Gausman",
+        "matchup": "CHC@SD"
+      },
+      {
+        "name": "Jahmai Jones",
+        "rank": 33,
+        "composite": 0.454,
+        "opp_pitcher": "Max Fried",
+        "matchup": "BOS@NYY"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Jahmai Jones",
+        "ev": 112.5,
+        "angle": 32.0,
+        "distance": 397.0,
+        "hr_in_parks": 4,
+        "result": "",
+        "pitcher": "Fried, Max"
+      },
+      {
+        "batter": "Fernando Tatis Jr.",
+        "ev": 101.0,
+        "angle": 24.0,
+        "distance": 388.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Palencia, Daniel"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
         "players": 29,
-        "hr_count": 2,
-        "hr_rate": 6.9,
+        "hr_count": 4,
+        "hr_rate": 13.8,
         "names": [
           "Bryce Harper",
           "Justin Crawford",
@@ -237485,13 +237632,15 @@
         ],
         "hr_names": [
           "Bryce Harper",
-          "Cam Smith"
+          "Cam Smith",
+          "Nick Sogard",
+          "Willson Contreras"
         ]
       },
       "2_of_5": {
         "players": 49,
-        "hr_count": 4,
-        "hr_rate": 8.2,
+        "hr_count": 7,
+        "hr_rate": 14.3,
         "names": [
           "Bryson Stott",
           "Ha-Seong Kim",
@@ -237547,7 +237696,10 @@
           "Alec Bohm",
           "Jeremy Pe\u00f1a",
           "Chase Meidroth",
-          "Jose Altuve"
+          "Jose Altuve",
+          "Cody Bellinger",
+          "Luis Garc\u00eda Jr.",
+          "Gavin Sheets"
         ]
       },
       "3_of_5": {
@@ -237585,8 +237737,8 @@
     "combined_tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 0,
+        "rate": 0.0
       },
       "top_20": {
         "total": 20,
@@ -237595,64 +237747,99 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 6,
-        "rate": 20.0
+        "hits": 4,
+        "rate": 13.3
       },
       "all": {
-        "total": 38,
-        "hits": 7,
-        "rate": 18.4
+        "total": 81,
+        "hits": 12,
+        "rate": 14.8
       }
     },
     "combined_hr_hitters": [
       {
         "name": "Jeremy Pe\u00f1a",
-        "rank": 5,
+        "rank": 12,
         "composite": 0.505,
         "opp_pitcher": "Sean Burke",
         "matchup": "CWS@HOU"
       },
       {
+        "name": "Gavin Sheets",
+        "rank": 17,
+        "composite": 0.427,
+        "opp_pitcher": "Kevin Gausman",
+        "matchup": "CHC@SD"
+      },
+      {
+        "name": "Cody Bellinger",
+        "rank": 19,
+        "composite": 0.412,
+        "opp_pitcher": "Sonny Gray",
+        "matchup": "BOS@NYY"
+      },
+      {
         "name": "Bryce Harper",
-        "rank": 11,
+        "rank": 27,
         "composite": 0.323,
         "opp_pitcher": "Tyler Mahle",
         "matchup": "PHI@ATL"
       },
       {
         "name": "Chase Meidroth",
-        "rank": 14,
+        "rank": 34,
         "composite": 0.266,
         "opp_pitcher": "Hunter Brown",
         "matchup": "CWS@HOU"
       },
       {
+        "name": "Luis Garc\u00eda Jr.",
+        "rank": 45,
+        "composite": 0.214,
+        "opp_pitcher": "Sonny Gray",
+        "matchup": "BOS@NYY"
+      },
+      {
         "name": "Cam Smith",
-        "rank": 24,
+        "rank": 56,
         "composite": 0.185,
         "opp_pitcher": "Sean Burke",
         "matchup": "CWS@HOU"
       },
       {
         "name": "Kyle Schwarber",
-        "rank": 25,
+        "rank": 57,
         "composite": 0.185,
         "opp_pitcher": "Tyler Mahle",
         "matchup": "PHI@ATL"
       },
       {
         "name": "Alec Bohm",
-        "rank": 29,
+        "rank": 65,
         "composite": 0.161,
         "opp_pitcher": "Tyler Mahle",
         "matchup": "PHI@ATL"
       },
       {
+        "name": "Willson Contreras",
+        "rank": 66,
+        "composite": 0.159,
+        "opp_pitcher": "Max Fried",
+        "matchup": "BOS@NYY"
+      },
+      {
         "name": "Jose Altuve",
-        "rank": 31,
+        "rank": 68,
         "composite": 0.151,
         "opp_pitcher": "Sean Burke",
         "matchup": "CWS@HOU"
+      },
+      {
+        "name": "Nick Sogard",
+        "rank": 77,
+        "composite": 0.13,
+        "opp_pitcher": "Max Fried",
+        "matchup": "BOS@NYY"
       }
     ]
   }
