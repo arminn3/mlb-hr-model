@@ -1,0 +1,557 @@
+{
+  "date": "2026-10-03",
+  "players_who_batted": [
+    "Andy Pages",
+    "Angel Mart\u00ednez",
+    "Austin Hedges",
+    "Austin Riley",
+    "Austin Wells",
+    "Ben Rice",
+    "Braden Montgomery",
+    "Brayan Rocchio",
+    "Brenton Doyle",
+    "Chandler Simpson",
+    "Chase DeLauter",
+    "Chase Meidroth",
+    "Cody Bellinger",
+    "Colson Montgomery",
+    "David Fry",
+    "Drake Baldwin",
+    "Freddie Freeman",
+    "George Lombard Jr.",
+    "Giancarlo Stanton",
+    "Ha-Seong Kim",
+    "Jazz Chisholm Jr.",
+    "Jo Adell",
+    "Jonathan Aranda",
+    "Jonny DeLuca",
+    "Jos\u00e9 Ram\u00edrez",
+    "Junior Caminero",
+    "Kyle Teel",
+    "Kyle Tucker",
+    "Lane Thomas",
+    "Liam Hicks",
+    "Luis Garc\u00eda Jr.",
+    "Matt Olson",
+    "Mauricio Dub\u00f3n",
+    "Max Muncy",
+    "Michael Harris II",
+    "Miguel Vargas",
+    "Mookie Betts",
+    "Munetaka Murakami",
+    "Nathaniel Lowe",
+    "Ozzie Albies",
+    "Patrick Bailey",
+    "Randal Grichuk",
+    "Richie Palacios",
+    "Ronald Acu\u00f1a Jr.",
+    "Ryan McMahon",
+    "Sam Antonacci",
+    "Sean Murphy",
+    "Shohei Ohtani",
+    "Spencer Jones",
+    "Steven Kwan",
+    "Taylor Walls",
+    "Teoscar Hern\u00e1ndez",
+    "Tommy Edman",
+    "Tommy Pham",
+    "Travis Bazzana",
+    "Trent Grisham",
+    "Tristan Peters",
+    "Victor Mesa Jr.",
+    "Will Smith",
+    "Yandy D\u00edaz"
+  ],
+  "total_players_ranked": 55,
+  "total_hrs_hit": 7,
+  "total_near_hrs": 0,
+  "model_hits": 7,
+  "best_lookback": "L10",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 4,
+        "rate": 40.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 6,
+        "rate": 20.0
+      },
+      "all": {
+        "total": 55,
+        "hits": 7,
+        "rate": 12.7
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 4,
+        "rate": 40.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 5,
+        "rate": 25.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 6,
+        "rate": 20.0
+      },
+      "all": {
+        "total": 55,
+        "hits": 7,
+        "rate": 12.7
+      }
+    }
+  },
+  "tier_accuracy_ml2026": {
+    "top_10": {
+      "total": 10,
+      "hits": 3,
+      "rate": 30.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 5,
+      "rate": 25.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 6,
+      "rate": 20.0
+    },
+    "all": {
+      "total": 55,
+      "hits": 7,
+      "rate": 12.7
+    }
+  },
+  "tier_accuracy_ml2026_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 3,
+        "rate": 30.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 5,
+        "rate": 25.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 6,
+        "rate": 20.0
+      },
+      "all": {
+        "total": 55,
+        "hits": 7,
+        "rate": 12.7
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 4,
+        "rate": 40.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 6,
+        "rate": 20.0
+      },
+      "all": {
+        "total": 55,
+        "hits": 7,
+        "rate": 12.7
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 4,
+      "rate": 40.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 4,
+      "rate": 20.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 6,
+      "rate": 20.0
+    },
+    "all": {
+      "total": 55,
+      "hits": 7,
+      "rate": 12.7
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 4,
+      "rate": 40.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 4,
+      "rate": 20.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 6,
+      "rate": 20.0
+    },
+    "all": {
+      "total": 55,
+      "hits": 7,
+      "rate": 12.7
+    }
+  },
+  "avg_composite_hr_hitters": 0.544,
+  "avg_composite_non_hitters": 0.396,
+  "composite_separation": 0.148,
+  "hr_hitters": [
+    {
+      "name": "Jonathan Aranda",
+      "rank": 2,
+      "composite": 0.708,
+      "opp_pitcher": "Gerrit Cole",
+      "matchup": "NYY@TB"
+    },
+    {
+      "name": "Teoscar Hern\u00e1ndez",
+      "rank": 3,
+      "composite": 0.687,
+      "opp_pitcher": "Jr Ritchie",
+      "matchup": "ATL@LAD"
+    },
+    {
+      "name": "Munetaka Murakami",
+      "rank": 5,
+      "composite": 0.653,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CWS@CLE"
+    },
+    {
+      "name": "Sean Murphy",
+      "rank": 7,
+      "composite": 0.569,
+      "opp_pitcher": "Tarik Skubal",
+      "matchup": "ATL@LAD"
+    },
+    {
+      "name": "Kyle Tucker",
+      "rank": 29,
+      "composite": 0.409,
+      "opp_pitcher": "Jr Ritchie",
+      "matchup": "ATL@LAD"
+    },
+    {
+      "name": "Max Muncy",
+      "rank": 30,
+      "composite": 0.409,
+      "opp_pitcher": "Jr Ritchie",
+      "matchup": "ATL@LAD"
+    },
+    {
+      "name": "Ozzie Albies",
+      "rank": 36,
+      "composite": 0.374,
+      "opp_pitcher": "Tarik Skubal",
+      "matchup": "ATL@LAD"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Teoscar Hern\u00e1ndez",
+      "rank": 2,
+      "composite": 0.763,
+      "opp_pitcher": "Jr Ritchie",
+      "matchup": "ATL@LAD"
+    },
+    {
+      "name": "Jonathan Aranda",
+      "rank": 3,
+      "composite": 0.715,
+      "opp_pitcher": "Gerrit Cole",
+      "matchup": "NYY@TB"
+    },
+    {
+      "name": "Max Muncy",
+      "rank": 5,
+      "composite": 0.609,
+      "opp_pitcher": "Jr Ritchie",
+      "matchup": "ATL@LAD"
+    },
+    {
+      "name": "Munetaka Murakami",
+      "rank": 10,
+      "composite": 0.544,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CWS@CLE"
+    },
+    {
+      "name": "Sean Murphy",
+      "rank": 13,
+      "composite": 0.492,
+      "opp_pitcher": "Tarik Skubal",
+      "matchup": "ATL@LAD"
+    },
+    {
+      "name": "Kyle Tucker",
+      "rank": 29,
+      "composite": 0.409,
+      "opp_pitcher": "Jr Ritchie",
+      "matchup": "ATL@LAD"
+    },
+    {
+      "name": "Ozzie Albies",
+      "rank": 36,
+      "composite": 0.364,
+      "opp_pitcher": "Tarik Skubal",
+      "matchup": "ATL@LAD"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 37,
+      "hr_count": 1,
+      "hr_rate": 2.7,
+      "names": [
+        "Munetaka Murakami",
+        "Kyle Teel",
+        "Randal Grichuk",
+        "Brenton Doyle",
+        "Chase Meidroth",
+        "Colson Montgomery",
+        "Chase DeLauter",
+        "Jo Adell",
+        "Austin Hedges",
+        "Jos\u00e9 Ram\u00edrez",
+        "Brayan Rocchio",
+        "DaShawn Keirsey Jr.",
+        "Junior Caminero",
+        "Ben Rice",
+        "Spencer Jones",
+        "Ryan McMahon",
+        "Austin Wells",
+        "Chandler Simpson",
+        "Jonny DeLuca",
+        "Liam Hicks",
+        "Cody Bellinger",
+        "George Lombard Jr.",
+        "Nick Fortes",
+        "Jorge Mateo",
+        "Ben Williamson",
+        "Heliot Ramos",
+        "Luis Garc\u00eda Jr.",
+        "Ali S\u00e1nchez",
+        "Fernando Tatis Jr.",
+        "Jackson Chourio",
+        "Manny Machado",
+        "Samad Taylor",
+        "Andrew Vaughn",
+        "Luis Campusano",
+        "Gary S\u00e1nchez",
+        "William Contreras",
+        "Dustin Harris"
+      ],
+      "hr_names": [
+        "Munetaka Murakami"
+      ]
+    },
+    "2_of_5": {
+      "players": 32,
+      "hr_count": 1,
+      "hr_rate": 3.1,
+      "names": [
+        "David Fry",
+        "Travis Bazzana",
+        "Braden Montgomery",
+        "Austin Riley",
+        "Matt Olson",
+        "Mike Yastrzemski",
+        "Dalton Rushing",
+        "Hunter Feduccia",
+        "Drake Baldwin",
+        "Ha-Seong Kim",
+        "Dominic Smith",
+        "Rowdy Tellez",
+        "Mauricio Dub\u00f3n",
+        "Luke Williams",
+        "Jonathan Aranda",
+        "Taylor Walls",
+        "Yandy D\u00edaz",
+        "Ryan Vilade",
+        "Trent Grisham",
+        "Jazz Chisholm Jr.",
+        "Anthony Volpe",
+        "Paul Goldschmidt",
+        "Giancarlo Stanton",
+        "Miguel Andujar",
+        "Gavin Sheets",
+        "Jake Cronenworth",
+        "Brice Turang",
+        "Freddy Fermin",
+        "Ethan Salas",
+        "Christian Yelich",
+        "Garrett Mitchell",
+        "Sal Frelick"
+      ],
+      "hr_names": [
+        "Jonathan Aranda"
+      ]
+    },
+    "3_of_5": {
+      "players": 21,
+      "hr_count": 4,
+      "hr_rate": 19.0,
+      "names": [
+        "Teoscar Hern\u00e1ndez",
+        "Miguel Rojas",
+        "Enrique Hern\u00e1ndez",
+        "Sean Murphy",
+        "Andy Pages",
+        "Mookie Betts",
+        "Will Smith",
+        "Eliezer Alfonzo",
+        "Kyle Tucker",
+        "Tommy Edman",
+        "Ozzie Albies",
+        "Ronald Acu\u00f1a Jr.",
+        "Brewer Hicklen",
+        "Michael Harris II",
+        "Hyeseong Kim",
+        "Cedric Mullins",
+        "Richie Palacios",
+        "Victor Mesa Jr.",
+        "Jackson Merrill",
+        "Jake Bauers",
+        "David Hamilton"
+      ],
+      "hr_names": [
+        "Teoscar Hern\u00e1ndez",
+        "Sean Murphy",
+        "Kyle Tucker",
+        "Ozzie Albies"
+      ]
+    },
+    "4_of_5": {
+      "players": 3,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Shohei Ohtani",
+        "Freddie Freeman",
+        "Alex Call"
+      ],
+      "hr_names": []
+    },
+    "5_of_5": {
+      "players": 1,
+      "hr_count": 1,
+      "hr_rate": 100.0,
+      "names": [
+        "Max Muncy"
+      ],
+      "hr_names": [
+        "Max Muncy"
+      ]
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 4,
+      "rate": 40.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 5,
+      "rate": 25.0
+    },
+    "top_30": {
+      "total": 30,
+      "hits": 5,
+      "rate": 16.7
+    },
+    "all": {
+      "total": 55,
+      "hits": 7,
+      "rate": 12.7
+    }
+  },
+  "combined_hr_hitters": [
+    {
+      "name": "Jonathan Aranda",
+      "rank": 2,
+      "composite": 0.734,
+      "opp_pitcher": "Gerrit Cole",
+      "matchup": "NYY@TB"
+    },
+    {
+      "name": "Munetaka Murakami",
+      "rank": 4,
+      "composite": 0.675,
+      "opp_pitcher": "Parker Messick",
+      "matchup": "CWS@CLE"
+    },
+    {
+      "name": "Teoscar Hern\u00e1ndez",
+      "rank": 6,
+      "composite": 0.667,
+      "opp_pitcher": "Jr Ritchie",
+      "matchup": "ATL@LAD"
+    },
+    {
+      "name": "Sean Murphy",
+      "rank": 8,
+      "composite": 0.47,
+      "opp_pitcher": "Tarik Skubal",
+      "matchup": "ATL@LAD"
+    },
+    {
+      "name": "Max Muncy",
+      "rank": 12,
+      "composite": 0.377,
+      "opp_pitcher": "Jr Ritchie",
+      "matchup": "ATL@LAD"
+    },
+    {
+      "name": "Kyle Tucker",
+      "rank": 42,
+      "composite": 0.161,
+      "opp_pitcher": "Jr Ritchie",
+      "matchup": "ATL@LAD"
+    },
+    {
+      "name": "Ozzie Albies",
+      "rank": 46,
+      "composite": 0.137,
+      "opp_pitcher": "Tarik Skubal",
+      "matchup": "ATL@LAD"
+    }
+  ]
+}
