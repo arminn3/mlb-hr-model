@@ -1,0 +1,306 @@
+{
+  "date": "2026-10-04",
+  "players_who_batted": [
+    "Andrew Vaughn",
+    "Austin Hays",
+    "Brice Turang",
+    "Christian Yelich",
+    "Cooper Pratt",
+    "David Hamilton",
+    "Dustin Harris",
+    "Fernando Tatis Jr.",
+    "Freddy Fermin",
+    "Garrett Mitchell",
+    "Gary S\u00e1nchez",
+    "Gavin Sheets",
+    "Jackson Chourio",
+    "Jackson Merrill",
+    "Jake Bauers",
+    "Jake Cronenworth",
+    "Luis Campusano",
+    "Manny Machado",
+    "Sal Frelick",
+    "Samad Taylor",
+    "Ty France",
+    "William Contreras",
+    "Xander Bogaerts"
+  ],
+  "total_players_ranked": 23,
+  "total_hrs_hit": 0,
+  "total_near_hrs": 0,
+  "model_hits": 0,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 23,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 23,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 23,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 23,
+        "hits": 0,
+        "rate": 0.0
+      }
+    }
+  },
+  "tier_accuracy_ml2026": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 23,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 23,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "tier_accuracy_ml2026_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 23,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 23,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 23,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 23,
+        "hits": 0,
+        "rate": 0.0
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 23,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 23,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 23,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 23,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "avg_composite_hr_hitters": 0,
+  "avg_composite_non_hitters": 0.423,
+  "composite_separation": -0.423,
+  "hr_hitters": [],
+  "hr_hitters_l10": [],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 10,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Fernando Tatis Jr.",
+        "Manny Machado",
+        "Samad Taylor",
+        "William Contreras",
+        "Luis Lara",
+        "Andrew Vaughn",
+        "Jackson Chourio",
+        "Gary S\u00e1nchez",
+        "Luis Campusano",
+        "Hunter Feduccia"
+      ],
+      "hr_names": []
+    },
+    "2_of_5": {
+      "players": 24,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Miguel Andujar",
+        "Dustin Harris",
+        "Freddy Fermin",
+        "Garrett Mitchell",
+        "Brice Turang",
+        "Christian Yelich",
+        "Sal Frelick",
+        "Will Smith",
+        "Mookie Betts",
+        "Andy Pages",
+        "Austin Riley",
+        "Teoscar Hern\u00e1ndez",
+        "Miguel Rojas",
+        "Enrique Hern\u00e1ndez",
+        "Matt Olson",
+        "Lane Thomas",
+        "Tommy Edman",
+        "Ha-Seong Kim",
+        "Mike Yastrzemski",
+        "Mauricio Dub\u00f3n",
+        "Drake Baldwin",
+        "Kyle Tucker",
+        "Rowdy Tellez",
+        "Hyeseong Kim"
+      ],
+      "hr_names": []
+    },
+    "3_of_5": {
+      "players": 13,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Jake Cronenworth",
+        "Gavin Sheets",
+        "Jake Bauers",
+        "Ethan Salas",
+        "David Hamilton",
+        "Sean Murphy",
+        "Freddie Freeman",
+        "Ronald Acu\u00f1a Jr.",
+        "Ozzie Albies",
+        "Shohei Ohtani",
+        "Brewer Hicklen",
+        "Michael Harris II",
+        "Josue De Paula"
+      ],
+      "hr_names": []
+    },
+    "4_of_5": {
+      "players": 2,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Jackson Merrill",
+        "Max Muncy"
+      ],
+      "hr_names": []
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 23,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 23,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "combined_hr_hitters": []
+}
