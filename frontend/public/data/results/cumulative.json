@@ -239303,5 +239303,290 @@
         "matchup": "ATL@LAD"
       }
     ]
+  },
+  {
+    "date": "2026-10-05",
+    "players_who_batted": [
+      "Andrew Benintendi",
+      "Angel Mart\u00ednez",
+      "Braden Montgomery",
+      "Brayan Rocchio",
+      "Brenton Doyle",
+      "Chase DeLauter",
+      "Chase Meidroth",
+      "Colson Montgomery",
+      "Jo Adell",
+      "Jos\u00e9 Ram\u00edrez",
+      "Kyle Teel",
+      "Miguel Vargas",
+      "Munetaka Murakami",
+      "Nathaniel Lowe",
+      "Patrick Bailey",
+      "Randal Grichuk",
+      "Sam Antonacci",
+      "Steven Kwan",
+      "Tommy Pham",
+      "Travis Bazzana",
+      "Tristan Peters"
+    ],
+    "total_players_ranked": 18,
+    "total_hrs_hit": 0,
+    "total_near_hrs": 0,
+    "model_hits": 0,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "avg_composite_hr_hitters": 0,
+    "avg_composite_non_hitters": 0.385,
+    "composite_separation": -0.385,
+    "hr_hitters": [],
+    "hr_hitters_l10": [],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 14,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Munetaka Murakami",
+          "Miguel Vargas",
+          "Angel Mart\u00ednez",
+          "Andrew Benintendi",
+          "Kyle Teel",
+          "Chase DeLauter",
+          "Nathaniel Lowe",
+          "Junior Caminero",
+          "Jonathan Aranda",
+          "Jonny DeLuca",
+          "Ali S\u00e1nchez",
+          "Taylor Walls",
+          "George Lombard Jr.",
+          "Heliot Ramos"
+        ],
+        "hr_names": []
+      },
+      "2_of_5": {
+        "players": 22,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Jo Adell",
+          "Chase Meidroth",
+          "Patrick Bailey",
+          "Jos\u00e9 Ram\u00edrez",
+          "Brayan Rocchio",
+          "Braden Montgomery",
+          "Sam Antonacci",
+          "Colson Montgomery",
+          "Tristan Peters",
+          "Travis Bazzana",
+          "Ben Rice",
+          "Spencer Jones",
+          "Ryan McMahon",
+          "Anthony Volpe",
+          "Austin Wells",
+          "Victor Mesa Jr.",
+          "Cody Bellinger",
+          "Yandy D\u00edaz",
+          "Paul Goldschmidt",
+          "Luis Garc\u00eda Jr.",
+          "Richie Palacios",
+          "Giancarlo Stanton"
+        ],
+        "hr_names": []
+      },
+      "3_of_5": {
+        "players": 2,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Jazz Chisholm Jr.",
+          "Trent Grisham"
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "combined_hr_hitters": []
   }
 ]
