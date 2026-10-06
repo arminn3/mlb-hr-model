@@ -3,197 +3,314 @@
   "players_who_batted": [
     "Andrew Benintendi",
     "Angel Mart\u00ednez",
+    "Austin Wells",
+    "Ben Rice",
     "Braden Montgomery",
     "Brayan Rocchio",
     "Brenton Doyle",
+    "Chandler Simpson",
     "Chase DeLauter",
     "Chase Meidroth",
+    "Cody Bellinger",
     "Colson Montgomery",
+    "George Lombard Jr.",
+    "Jazz Chisholm Jr.",
     "Jo Adell",
+    "Jonathan Aranda",
+    "Jonny DeLuca",
     "Jos\u00e9 Ram\u00edrez",
+    "Junior Caminero",
     "Kyle Teel",
+    "Liam Hicks",
+    "Luis Garc\u00eda Jr.",
     "Miguel Vargas",
     "Munetaka Murakami",
     "Nathaniel Lowe",
     "Patrick Bailey",
+    "Paul Goldschmidt",
     "Randal Grichuk",
+    "Richie Palacios",
+    "Ryan McMahon",
     "Sam Antonacci",
+    "Spencer Jones",
     "Steven Kwan",
+    "Taylor Walls",
     "Tommy Pham",
     "Travis Bazzana",
-    "Tristan Peters"
+    "Trent Grisham",
+    "Tristan Peters",
+    "Victor Mesa Jr.",
+    "Yandy D\u00edaz"
   ],
-  "total_players_ranked": 18,
-  "total_hrs_hit": 0,
-  "total_near_hrs": 0,
-  "model_hits": 0,
+  "total_players_ranked": 37,
+  "total_hrs_hit": 2,
+  "total_near_hrs": 5,
+  "model_hits": 1,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
       },
       "all": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 37,
+        "hits": 1,
+        "rate": 2.7
       }
     },
     "L10": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
       },
       "all": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 37,
+        "hits": 1,
+        "rate": 2.7
       }
     }
   },
   "tier_accuracy_ml2026": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
-      "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
     },
     "top_30": {
-      "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "total": 30,
+      "hits": 1,
+      "rate": 3.3
     },
     "all": {
-      "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "total": 37,
+      "hits": 1,
+      "rate": 2.7
     }
   },
   "tier_accuracy_ml2026_by_lookback": {
     "L5": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
       },
       "all": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 37,
+        "hits": 1,
+        "rate": 2.7
       }
     },
     "L10": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
       },
       "all": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 37,
+        "hits": 1,
+        "rate": 2.7
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 5,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
-      "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
     },
     "top_30": {
-      "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "total": 30,
+      "hits": 1,
+      "rate": 3.3
     },
     "all": {
-      "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "total": 37,
+      "hits": 1,
+      "rate": 2.7
     }
   },
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 3,
+      "rate": 30.0
     },
     "top_20": {
-      "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "total": 20,
+      "hits": 5,
+      "rate": 25.0
     },
     "top_30": {
-      "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "total": 30,
+      "hits": 6,
+      "rate": 20.0
     },
     "all": {
-      "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "total": 37,
+      "hits": 6,
+      "rate": 16.2
     }
   },
-  "avg_composite_hr_hitters": 0,
-  "avg_composite_non_hitters": 0.385,
-  "composite_separation": -0.385,
-  "hr_hitters": [],
-  "hr_hitters_l10": [],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "avg_composite_hr_hitters": 0.639,
+  "avg_composite_non_hitters": 0.402,
+  "composite_separation": 0.237,
+  "hr_hitters": [
+    {
+      "name": "Ben Rice",
+      "rank": 2,
+      "composite": 0.639,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "NYY@TB"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Ben Rice",
+      "rank": 7,
+      "composite": 0.568,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "NYY@TB"
+    }
+  ],
+  "near_hr_hitters": [
+    {
+      "name": "Jo Adell",
+      "rank": 1,
+      "composite": 0.719,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "CWS@CLE"
+    },
+    {
+      "name": "Junior Caminero",
+      "rank": 5,
+      "composite": 0.626,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "NYY@TB"
+    },
+    {
+      "name": "Patrick Bailey",
+      "rank": 13,
+      "composite": 0.462,
+      "opp_pitcher": "Anthony Kay",
+      "matchup": "CWS@CLE"
+    },
+    {
+      "name": "Cody Bellinger",
+      "rank": 17,
+      "composite": 0.397,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "NYY@TB"
+    },
+    {
+      "name": "Yandy D\u00edaz",
+      "rank": 22,
+      "composite": 0.375,
+      "opp_pitcher": "Cam Schlittler",
+      "matchup": "NYY@TB"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Cody Bellinger",
+      "ev": 102.9,
+      "angle": 27.0,
+      "distance": 403.0,
+      "hr_in_parks": 27,
+      "result": "field_out",
+      "pitcher": "Booser, Cam"
+    },
+    {
+      "batter": "Yandy D\u00edaz",
+      "ev": 103.0,
+      "angle": 20.0,
+      "distance": 369.0,
+      "hr_in_parks": 1,
+      "result": "field_out",
+      "pitcher": "Schlittler, Cam"
+    },
+    {
+      "batter": "Junior Caminero",
+      "ev": 112.1,
+      "angle": 42.0,
+      "distance": 433.0,
+      "hr_in_parks": 30,
+      "result": "",
+      "pitcher": "Schlittler, Cam"
+    },
+    {
+      "batter": "Patrick Bailey",
+      "ev": 103.5,
+      "angle": 26.0,
+      "distance": 385.0,
+      "hr_in_parks": 3,
+      "result": "field_out",
+      "pitcher": "Taylor, Grant"
+    },
+    {
+      "batter": "Jo Adell",
+      "ev": 108.2,
+      "angle": 32.0,
+      "distance": 411.0,
+      "hr_in_parks": 30,
+      "result": "triple",
+      "pitcher": "Taylor, Grant"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
@@ -220,8 +337,8 @@
     },
     "2_of_5": {
       "players": 22,
-      "hr_count": 0,
-      "hr_rate": 0.0,
+      "hr_count": 1,
+      "hr_rate": 4.5,
       "names": [
         "Jo Adell",
         "Chase Meidroth",
@@ -246,7 +363,9 @@
         "Richie Palacios",
         "Giancarlo Stanton"
       ],
-      "hr_names": []
+      "hr_names": [
+        "Ben Rice"
+      ]
     },
     "3_of_5": {
       "players": 2,
@@ -262,24 +381,32 @@
   "combined_tier_accuracy": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
-      "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "total": 20,
+      "hits": 1,
+      "rate": 5.0
     },
     "top_30": {
-      "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "total": 30,
+      "hits": 1,
+      "rate": 3.3
     },
     "all": {
-      "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "total": 37,
+      "hits": 1,
+      "rate": 2.7
     }
   },
-  "combined_hr_hitters": []
+  "combined_hr_hitters": [
+    {
+      "name": "Ben Rice",
+      "rank": 5,
+      "composite": 0.605,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "NYY@TB"
+    }
+  ]
 }
