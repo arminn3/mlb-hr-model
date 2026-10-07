@@ -1,0 +1,346 @@
+{
+  "date": "2026-10-06",
+  "players_who_batted": [
+    "Andy Pages",
+    "Austin Riley",
+    "Brewer Hicklen",
+    "Drake Baldwin",
+    "Enrique Hern\u00e1ndez",
+    "Freddie Freeman",
+    "Ha-Seong Kim",
+    "Kyle Tucker",
+    "Lane Thomas",
+    "Matt Olson",
+    "Mauricio Dub\u00f3n",
+    "Max Muncy",
+    "Michael Harris II",
+    "Miguel Rojas",
+    "Mike Yastrzemski",
+    "Mookie Betts",
+    "Ozzie Albies",
+    "Ronald Acu\u00f1a Jr.",
+    "Rowdy Tellez",
+    "Shohei Ohtani",
+    "Teoscar Hern\u00e1ndez",
+    "Tommy Edman",
+    "Will Smith"
+  ],
+  "total_players_ranked": 23,
+  "total_hrs_hit": 2,
+  "total_near_hrs": 0,
+  "model_hits": 2,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 23,
+        "hits": 2,
+        "rate": 8.7
+      },
+      "all": {
+        "total": 23,
+        "hits": 2,
+        "rate": 8.7
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
+      },
+      "top_30": {
+        "total": 23,
+        "hits": 2,
+        "rate": 8.7
+      },
+      "all": {
+        "total": 23,
+        "hits": 2,
+        "rate": 8.7
+      }
+    }
+  },
+  "tier_accuracy_ml2026": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 23,
+      "hits": 2,
+      "rate": 8.7
+    },
+    "all": {
+      "total": 23,
+      "hits": 2,
+      "rate": 8.7
+    }
+  },
+  "tier_accuracy_ml2026_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 23,
+        "hits": 2,
+        "rate": 8.7
+      },
+      "all": {
+        "total": 23,
+        "hits": 2,
+        "rate": 8.7
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 23,
+        "hits": 2,
+        "rate": 8.7
+      },
+      "all": {
+        "total": 23,
+        "hits": 2,
+        "rate": 8.7
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 23,
+      "hits": 2,
+      "rate": 8.7
+    },
+    "all": {
+      "total": 23,
+      "hits": 2,
+      "rate": 8.7
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 23,
+      "hits": 2,
+      "rate": 8.7
+    },
+    "all": {
+      "total": 23,
+      "hits": 2,
+      "rate": 8.7
+    }
+  },
+  "avg_composite_hr_hitters": 0.267,
+  "avg_composite_non_hitters": 0.368,
+  "composite_separation": -0.101,
+  "hr_hitters": [
+    {
+      "name": "Enrique Hern\u00e1ndez",
+      "rank": 17,
+      "composite": 0.281,
+      "opp_pitcher": "Chris Sale",
+      "matchup": "LAD@ATL"
+    },
+    {
+      "name": "Freddie Freeman",
+      "rank": 20,
+      "composite": 0.253,
+      "opp_pitcher": "Chris Sale",
+      "matchup": "LAD@ATL"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Enrique Hern\u00e1ndez",
+      "rank": 16,
+      "composite": 0.286,
+      "opp_pitcher": "Chris Sale",
+      "matchup": "LAD@ATL"
+    },
+    {
+      "name": "Freddie Freeman",
+      "rank": 21,
+      "composite": 0.225,
+      "opp_pitcher": "Chris Sale",
+      "matchup": "LAD@ATL"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 32,
+      "hr_count": 1,
+      "hr_rate": 3.1,
+      "names": [
+        "Rowdy Tellez",
+        "Drake Baldwin",
+        "Mike Yastrzemski",
+        "Will Smith",
+        "Mookie Betts",
+        "Austin Riley",
+        "Matt Olson",
+        "Andy Pages",
+        "Teoscar Hern\u00e1ndez",
+        "Mauricio Dub\u00f3n",
+        "Brewer Hicklen",
+        "Miguel Rojas",
+        "Ha-Seong Kim",
+        "Enrique Hern\u00e1ndez",
+        "Lane Thomas",
+        "Tommy Edman",
+        "Kyle Tucker",
+        "Hyeseong Kim",
+        "Manny Machado",
+        "Jake Cronenworth",
+        "Cooper Pratt",
+        "Joey Ortiz",
+        "Fernando Tatis Jr.",
+        "Gavin Sheets",
+        "Samad Taylor",
+        "Ethan Salas",
+        "Freddy Fermin",
+        "Luis Campusano",
+        "Garrett Mitchell",
+        "Brice Turang",
+        "Christian Yelich",
+        "Sal Frelick"
+      ],
+      "hr_names": [
+        "Enrique Hern\u00e1ndez"
+      ]
+    },
+    "2_of_5": {
+      "players": 14,
+      "hr_count": 1,
+      "hr_rate": 7.1,
+      "names": [
+        "Michael Harris II",
+        "Sean Murphy",
+        "Ronald Acu\u00f1a Jr.",
+        "Freddie Freeman",
+        "Shohei Ohtani",
+        "Josue De Paula",
+        "Jackson Chourio",
+        "Miguel Andujar",
+        "Andrew Vaughn",
+        "Gary S\u00e1nchez",
+        "William Contreras",
+        "Jackson Merrill",
+        "Jake Bauers",
+        "David Hamilton"
+      ],
+      "hr_names": [
+        "Freddie Freeman"
+      ]
+    },
+    "3_of_5": {
+      "players": 2,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Ozzie Albies",
+        "Max Muncy"
+      ],
+      "hr_names": []
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 20,
+      "hits": 2,
+      "rate": 10.0
+    },
+    "top_30": {
+      "total": 23,
+      "hits": 2,
+      "rate": 8.7
+    },
+    "all": {
+      "total": 23,
+      "hits": 2,
+      "rate": 8.7
+    }
+  },
+  "combined_hr_hitters": [
+    {
+      "name": "Enrique Hern\u00e1ndez",
+      "rank": 12,
+      "composite": 0.209,
+      "opp_pitcher": "Chris Sale",
+      "matchup": "LAD@ATL"
+    },
+    {
+      "name": "Freddie Freeman",
+      "rank": 18,
+      "composite": 0.142,
+      "opp_pitcher": "Chris Sale",
+      "matchup": "LAD@ATL"
+    }
+  ]
+}
