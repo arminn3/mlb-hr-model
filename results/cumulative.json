@@ -239722,38 +239722,58 @@
       "Andy Pages",
       "Austin Riley",
       "Brewer Hicklen",
+      "Brice Turang",
+      "Christian Yelich",
+      "Cooper Pratt",
+      "David Hamilton",
       "Drake Baldwin",
+      "Dustin Harris",
       "Enrique Hern\u00e1ndez",
+      "Ethan Salas",
+      "Fernando Tatis Jr.",
       "Freddie Freeman",
+      "Garrett Mitchell",
       "Ha-Seong Kim",
+      "Jackson Chourio",
+      "Jackson Merrill",
+      "Jake Bauers",
+      "Jake Cronenworth",
+      "Joey Ortiz",
       "Kyle Tucker",
       "Lane Thomas",
+      "Manny Machado",
       "Matt Olson",
       "Mauricio Dub\u00f3n",
       "Max Muncy",
       "Michael Harris II",
+      "Miguel Andujar",
       "Miguel Rojas",
       "Mike Yastrzemski",
       "Mookie Betts",
       "Ozzie Albies",
       "Ronald Acu\u00f1a Jr.",
       "Rowdy Tellez",
+      "Sal Frelick",
+      "Samad Taylor",
       "Shohei Ohtani",
       "Teoscar Hern\u00e1ndez",
       "Tommy Edman",
-      "Will Smith"
+      "Ty France",
+      "Will Smith",
+      "William Contreras",
+      "Xander Bogaerts"
     ],
-    "total_players_ranked": 23,
-    "total_hrs_hit": 2,
-    "total_near_hrs": 0,
-    "model_hits": 2,
+    "total_players_ranked": 43,
+    "total_hrs_hit": 4,
+    "total_near_hrs": 4,
+    "model_hits": 4,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
@@ -239761,44 +239781,44 @@
           "rate": 10.0
         },
         "top_30": {
-          "total": 23,
+          "total": 30,
           "hits": 2,
-          "rate": 8.7
+          "rate": 6.7
         },
         "all": {
-          "total": 23,
-          "hits": 2,
-          "rate": 8.7
+          "total": 43,
+          "hits": 4,
+          "rate": 9.3
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
-          "hits": 1,
-          "rate": 5.0
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
-          "total": 23,
-          "hits": 2,
-          "rate": 8.7
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
         },
         "all": {
-          "total": 23,
-          "hits": 2,
-          "rate": 8.7
+          "total": 43,
+          "hits": 4,
+          "rate": 9.3
         }
       }
     },
     "tier_accuracy_ml2026": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
@@ -239806,22 +239826,22 @@
         "rate": 10.0
       },
       "top_30": {
-        "total": 23,
-        "hits": 2,
-        "rate": 8.7
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
-        "total": 23,
-        "hits": 2,
-        "rate": 8.7
+        "total": 43,
+        "hits": 4,
+        "rate": 9.3
       }
     },
     "tier_accuracy_ml2026_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
@@ -239829,21 +239849,21 @@
           "rate": 10.0
         },
         "top_30": {
-          "total": 23,
-          "hits": 2,
-          "rate": 8.7
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
         },
         "all": {
-          "total": 23,
-          "hits": 2,
-          "rate": 8.7
+          "total": 43,
+          "hits": 4,
+          "rate": 9.3
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 20,
@@ -239851,23 +239871,23 @@
           "rate": 10.0
         },
         "top_30": {
-          "total": 23,
-          "hits": 2,
-          "rate": 8.7
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
         },
         "all": {
-          "total": 23,
-          "hits": 2,
-          "rate": 8.7
+          "total": 43,
+          "hits": 4,
+          "rate": 9.3
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 4,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
@@ -239875,52 +239895,66 @@
         "rate": 10.0
       },
       "top_30": {
-        "total": 23,
+        "total": 30,
         "hits": 2,
-        "rate": 8.7
+        "rate": 6.7
       },
       "all": {
-        "total": 23,
-        "hits": 2,
-        "rate": 8.7
+        "total": 43,
+        "hits": 4,
+        "rate": 9.3
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
-        "total": 23,
-        "hits": 2,
-        "rate": 8.7
+        "total": 30,
+        "hits": 5,
+        "rate": 16.7
       },
       "all": {
-        "total": 23,
-        "hits": 2,
-        "rate": 8.7
+        "total": 43,
+        "hits": 8,
+        "rate": 18.6
       }
     },
-    "avg_composite_hr_hitters": 0.267,
+    "avg_composite_hr_hitters": 0.385,
     "avg_composite_non_hitters": 0.368,
-    "composite_separation": -0.101,
+    "composite_separation": 0.017,
     "hr_hitters": [
       {
+        "name": "Jake Cronenworth",
+        "rank": 8,
+        "composite": 0.505,
+        "opp_pitcher": "Dustin May",
+        "matchup": "MIL@SD"
+      },
+      {
+        "name": "William Contreras",
+        "rank": 12,
+        "composite": 0.5,
+        "opp_pitcher": "Nick Pivetta",
+        "matchup": "MIL@SD"
+      },
+      {
         "name": "Enrique Hern\u00e1ndez",
-        "rank": 17,
+        "rank": 32,
         "composite": 0.281,
         "opp_pitcher": "Chris Sale",
         "matchup": "LAD@ATL"
       },
       {
         "name": "Freddie Freeman",
-        "rank": 20,
+        "rank": 35,
         "composite": 0.253,
         "opp_pitcher": "Chris Sale",
         "matchup": "LAD@ATL"
@@ -239928,28 +239962,117 @@
     ],
     "hr_hitters_l10": [
       {
+        "name": "William Contreras",
+        "rank": 10,
+        "composite": 0.5,
+        "opp_pitcher": "Nick Pivetta",
+        "matchup": "MIL@SD"
+      },
+      {
+        "name": "Jake Cronenworth",
+        "rank": 11,
+        "composite": 0.498,
+        "opp_pitcher": "Dustin May",
+        "matchup": "MIL@SD"
+      },
+      {
         "name": "Enrique Hern\u00e1ndez",
-        "rank": 16,
+        "rank": 30,
         "composite": 0.286,
         "opp_pitcher": "Chris Sale",
         "matchup": "LAD@ATL"
       },
       {
         "name": "Freddie Freeman",
-        "rank": 21,
+        "rank": 37,
         "composite": 0.225,
         "opp_pitcher": "Chris Sale",
         "matchup": "LAD@ATL"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Teoscar Hern\u00e1ndez",
+        "rank": 19,
+        "composite": 0.376,
+        "opp_pitcher": "Chris Sale",
+        "matchup": "LAD@ATL"
+      },
+      {
+        "name": "Ozzie Albies",
+        "rank": 27,
+        "composite": 0.31,
+        "opp_pitcher": "Yoshinobu Yamamoto",
+        "matchup": "LAD@ATL"
+      },
+      {
+        "name": "Ty France",
+        "rank": 29,
+        "composite": 0.302,
+        "opp_pitcher": "Dustin May",
+        "matchup": "MIL@SD"
+      },
+      {
+        "name": "Jake Bauers",
+        "rank": 31,
+        "composite": 0.301,
+        "opp_pitcher": "Nick Pivetta",
+        "matchup": "MIL@SD"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Ty France",
+        "ev": 103.1,
+        "angle": 28.0,
+        "distance": 368.0,
+        "hr_in_parks": 4,
+        "result": "field_out",
+        "pitcher": "May, Dustin"
+      },
+      {
+        "batter": "Jake Bauers",
+        "ev": 115.0,
+        "angle": 45.0,
+        "distance": 397.0,
+        "hr_in_parks": 4,
+        "result": "",
+        "pitcher": "Pivetta, Nick"
+      },
+      {
+        "batter": "Ozzie Albies",
+        "ev": 104.4,
+        "angle": 22.0,
+        "distance": 387.0,
+        "hr_in_parks": 25,
+        "result": "double",
+        "pitcher": "D\u00edaz, Edwin"
+      },
+      {
+        "batter": "Freddie Freeman",
+        "ev": 101.6,
+        "angle": 29.0,
+        "distance": 395.0,
+        "hr_in_parks": 12,
+        "result": "field_out",
+        "pitcher": "Lee, Dylan"
+      },
+      {
+        "batter": "Teoscar Hern\u00e1ndez",
+        "ev": 108.4,
+        "angle": 21.0,
+        "distance": 378.0,
+        "hr_in_parks": 29,
+        "result": "field_out",
+        "pitcher": "Sale, Chris"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
         "players": 32,
-        "hr_count": 1,
-        "hr_rate": 3.1,
+        "hr_count": 2,
+        "hr_rate": 6.2,
         "names": [
           "Rowdy Tellez",
           "Drake Baldwin",
@@ -239985,13 +240108,14 @@
           "Sal Frelick"
         ],
         "hr_names": [
-          "Enrique Hern\u00e1ndez"
+          "Enrique Hern\u00e1ndez",
+          "Jake Cronenworth"
         ]
       },
       "2_of_5": {
         "players": 14,
-        "hr_count": 1,
-        "hr_rate": 7.1,
+        "hr_count": 2,
+        "hr_rate": 14.3,
         "names": [
           "Michael Harris II",
           "Sean Murphy",
@@ -240009,7 +240133,8 @@
           "David Hamilton"
         ],
         "hr_names": [
-          "Freddie Freeman"
+          "Freddie Freeman",
+          "William Contreras"
         ]
       },
       "3_of_5": {
@@ -240026,36 +240151,50 @@
     "combined_tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 20,
-        "hits": 2,
-        "rate": 10.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
-        "total": 23,
-        "hits": 2,
-        "rate": 8.7
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
-        "total": 23,
-        "hits": 2,
-        "rate": 8.7
+        "total": 43,
+        "hits": 4,
+        "rate": 9.3
       }
     },
     "combined_hr_hitters": [
       {
+        "name": "Jake Cronenworth",
+        "rank": 9,
+        "composite": 0.404,
+        "opp_pitcher": "Dustin May",
+        "matchup": "MIL@SD"
+      },
+      {
+        "name": "William Contreras",
+        "rank": 19,
+        "composite": 0.211,
+        "opp_pitcher": "Nick Pivetta",
+        "matchup": "MIL@SD"
+      },
+      {
         "name": "Enrique Hern\u00e1ndez",
-        "rank": 12,
+        "rank": 20,
         "composite": 0.209,
         "opp_pitcher": "Chris Sale",
         "matchup": "LAD@ATL"
       },
       {
         "name": "Freddie Freeman",
-        "rank": 18,
+        "rank": 33,
         "composite": 0.142,
         "opp_pitcher": "Chris Sale",
         "matchup": "LAD@ATL"
