@@ -4,25 +4,55 @@
     "Andy Pages",
     "Angel Genao",
     "Angel Mart\u00ednez",
+    "Anthony Volpe",
+    "Austin Hays",
     "Austin Riley",
+    "Austin Wells",
+    "Ben Rice",
     "Braden Montgomery",
     "Brayan Rocchio",
+    "Brice Turang",
+    "Cedric Mullins",
     "Chase DeLauter",
     "Chase Meidroth",
+    "Christian Yelich",
+    "Cody Bellinger",
     "Colson Montgomery",
+    "Cooper Pratt",
     "Drake Baldwin",
     "Enrique Hern\u00e1ndez",
+    "Ethan Salas",
+    "Fernando Tatis Jr.",
     "Freddie Freeman",
+    "Garrett Mitchell",
+    "Gavin Sheets",
+    "George Lombard Jr.",
+    "Giancarlo Stanton",
+    "Jackson Chourio",
+    "Jackson Merrill",
+    "Jake Bauers",
+    "Jake Cronenworth",
+    "Jazz Chisholm Jr.",
     "Jo Adell",
+    "Joey Ortiz",
+    "Jonathan Aranda",
+    "Jonny DeLuca",
     "Josue De Paula",
+    "Jos\u00e9 Caballero",
     "Jos\u00e9 Ram\u00edrez",
+    "Junior Caminero",
     "Kyle Teel",
     "Kyle Tucker",
     "Lane Thomas",
+    "Liam Hicks",
+    "Luis Campusano",
+    "Luis Garc\u00eda Jr.",
+    "Manny Machado",
     "Matt Olson",
     "Mauricio Dub\u00f3n",
     "Max Muncy",
     "Michael Harris II",
+    "Miguel Andujar",
     "Miguel Vargas",
     "Mike Yastrzemski",
     "Mookie Betts",
@@ -30,24 +60,37 @@
     "Nathaniel Lowe",
     "Ozzie Albies",
     "Patrick Bailey",
+    "Paul Goldschmidt",
     "Petey Halpin",
     "Randal Grichuk",
+    "Richie Palacios",
     "Ronald Acu\u00f1a Jr.",
     "Rowdy Tellez",
+    "Ryan Vilade",
+    "Sal Frelick",
     "Sam Antonacci",
+    "Samad Taylor",
     "Sean Murphy",
     "Shohei Ohtani",
+    "Spencer Jones",
     "Steven Kwan",
+    "Taylor Walls",
     "Teoscar Hern\u00e1ndez",
     "Tommy Edman",
     "Travis Bazzana",
+    "Trent Grisham",
     "Tristan Peters",
-    "Will Smith"
+    "Ty France",
+    "Victor Mesa Jr.",
+    "Will Smith",
+    "William Contreras",
+    "Xander Bogaerts",
+    "Yandy D\u00edaz"
   ],
-  "total_players_ranked": 40,
-  "total_hrs_hit": 1,
-  "total_near_hrs": 0,
-  "model_hits": 1,
+  "total_players_ranked": 83,
+  "total_hrs_hit": 4,
+  "total_near_hrs": 3,
+  "model_hits": 4,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
@@ -63,13 +106,13 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 1,
-        "rate": 3.3
+        "hits": 2,
+        "rate": 6.7
       },
       "all": {
-        "total": 40,
-        "hits": 1,
-        "rate": 2.5
+        "total": 83,
+        "hits": 4,
+        "rate": 4.8
       }
     },
     "L10": {
@@ -89,62 +132,62 @@
         "rate": 3.3
       },
       "all": {
-        "total": 40,
-        "hits": 1,
-        "rate": 2.5
+        "total": 83,
+        "hits": 4,
+        "rate": 4.8
       }
     }
   },
   "tier_accuracy_ml2026": {
     "top_10": {
       "total": 10,
-      "hits": 1,
-      "rate": 10.0
+      "hits": 0,
+      "rate": 0.0
     },
     "top_20": {
       "total": 20,
-      "hits": 1,
-      "rate": 5.0
+      "hits": 2,
+      "rate": 10.0
     },
     "top_30": {
       "total": 30,
-      "hits": 1,
-      "rate": 3.3
+      "hits": 2,
+      "rate": 6.7
     },
     "all": {
-      "total": 40,
-      "hits": 1,
-      "rate": 2.5
+      "total": 83,
+      "hits": 4,
+      "rate": 4.8
     }
   },
   "tier_accuracy_ml2026_by_lookback": {
     "L5": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 0,
+        "rate": 0.0
       },
       "top_20": {
         "total": 20,
-        "hits": 1,
-        "rate": 5.0
+        "hits": 2,
+        "rate": 10.0
       },
       "top_30": {
         "total": 30,
-        "hits": 1,
-        "rate": 3.3
+        "hits": 2,
+        "rate": 6.7
       },
       "all": {
-        "total": 40,
-        "hits": 1,
-        "rate": 2.5
+        "total": 83,
+        "hits": 4,
+        "rate": 4.8
       }
     },
     "L10": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 0,
+        "rate": 0.0
       },
       "top_20": {
         "total": 20,
@@ -153,17 +196,17 @@
       },
       "top_30": {
         "total": 30,
-        "hits": 1,
-        "rate": 3.3
+        "hits": 2,
+        "rate": 6.7
       },
       "all": {
-        "total": 40,
-        "hits": 1,
-        "rate": 2.5
+        "total": 83,
+        "hits": 4,
+        "rate": 4.8
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 3,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -177,13 +220,13 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 1,
-      "rate": 3.3
+      "hits": 2,
+      "rate": 6.7
     },
     "all": {
-      "total": 40,
-      "hits": 1,
-      "rate": 2.5
+      "total": 83,
+      "hits": 4,
+      "rate": 4.8
     }
   },
   "tier_accuracy_with_near": {
@@ -199,38 +242,139 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 1,
-      "rate": 3.3
+      "hits": 4,
+      "rate": 13.3
     },
     "all": {
-      "total": 40,
-      "hits": 1,
-      "rate": 2.5
+      "total": 83,
+      "hits": 7,
+      "rate": 8.4
     }
   },
-  "avg_composite_hr_hitters": 0.649,
-  "avg_composite_non_hitters": 0.37,
-  "composite_separation": 0.279,
+  "avg_composite_hr_hitters": 0.42,
+  "avg_composite_non_hitters": 0.403,
+  "composite_separation": 0.017,
   "hr_hitters": [
     {
       "name": "Max Muncy",
-      "rank": 4,
+      "rank": 7,
       "composite": 0.649,
       "opp_pitcher": "Tyler Mahle",
       "matchup": "LAD@ATL"
+    },
+    {
+      "name": "Fernando Tatis Jr.",
+      "rank": 23,
+      "composite": 0.551,
+      "opp_pitcher": "Robert Gasser",
+      "matchup": "MIL@SD"
+    },
+    {
+      "name": "Ryan Vilade",
+      "rank": 64,
+      "composite": 0.243,
+      "opp_pitcher": "Max Fried",
+      "matchup": "TB@NYY"
+    },
+    {
+      "name": "Victor Mesa Jr.",
+      "rank": 65,
+      "composite": 0.237,
+      "opp_pitcher": "Max Fried",
+      "matchup": "TB@NYY"
     }
   ],
   "hr_hitters_l10": [
     {
       "name": "Max Muncy",
-      "rank": 3,
+      "rank": 7,
       "composite": 0.612,
       "opp_pitcher": "Tyler Mahle",
       "matchup": "LAD@ATL"
+    },
+    {
+      "name": "Fernando Tatis Jr.",
+      "rank": 31,
+      "composite": 0.418,
+      "opp_pitcher": "Robert Gasser",
+      "matchup": "MIL@SD"
+    },
+    {
+      "name": "Victor Mesa Jr.",
+      "rank": 60,
+      "composite": 0.281,
+      "opp_pitcher": "Max Fried",
+      "matchup": "TB@NYY"
+    },
+    {
+      "name": "Ryan Vilade",
+      "rank": 61,
+      "composite": 0.273,
+      "opp_pitcher": "Max Fried",
+      "matchup": "TB@NYY"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Manny Machado",
+      "rank": 24,
+      "composite": 0.549,
+      "opp_pitcher": "Robert Gasser",
+      "matchup": "MIL@SD"
+    },
+    {
+      "name": "Matt Olson",
+      "rank": 29,
+      "composite": 0.485,
+      "opp_pitcher": "Tyler Glasnow",
+      "matchup": "LAD@ATL"
+    },
+    {
+      "name": "Ozzie Albies",
+      "rank": 59,
+      "composite": 0.269,
+      "opp_pitcher": "Tyler Glasnow",
+      "matchup": "LAD@ATL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Manny Machado",
+      "ev": 106.7,
+      "angle": 26.0,
+      "distance": 404.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Uribe, Abner"
+    },
+    {
+      "batter": "Ozzie Albies",
+      "ev": 98.6,
+      "angle": 28.0,
+      "distance": 382.0,
+      "hr_in_parks": 30,
+      "result": "double",
+      "pitcher": "Vesia, Alex"
+    },
+    {
+      "batter": "Max Muncy",
+      "ev": 100.5,
+      "angle": 29.0,
+      "distance": 391.0,
+      "hr_in_parks": 14,
+      "result": "field_out",
+      "pitcher": "Mahle, Tyler"
+    },
+    {
+      "batter": "Matt Olson",
+      "ev": 101.7,
+      "angle": 40.0,
+      "distance": 377.0,
+      "hr_in_parks": 14,
+      "result": "field_out",
+      "pitcher": "Glasnow, Tyler"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
@@ -291,8 +435,8 @@
     },
     "2_of_5": {
       "players": 34,
-      "hr_count": 0,
-      "hr_rate": 0.0,
+      "hr_count": 2,
+      "hr_rate": 5.9,
       "names": [
         "Chase Meidroth",
         "Jos\u00e9 Ram\u00edrez",
@@ -329,12 +473,15 @@
         "Samad Taylor",
         "Sal Frelick"
       ],
-      "hr_names": []
+      "hr_names": [
+        "Ryan Vilade",
+        "Fernando Tatis Jr."
+      ]
     },
     "3_of_5": {
       "players": 13,
-      "hr_count": 1,
-      "hr_rate": 7.7,
+      "hr_count": 2,
+      "hr_rate": 15.4,
       "names": [
         "Max Muncy",
         "Ozzie Albies",
@@ -351,7 +498,8 @@
         "David Hamilton"
       ],
       "hr_names": [
-        "Max Muncy"
+        "Max Muncy",
+        "Victor Mesa Jr."
       ]
     },
     "4_of_5": {
@@ -378,13 +526,13 @@
     },
     "top_30": {
       "total": 30,
-      "hits": 1,
-      "rate": 3.3
+      "hits": 2,
+      "rate": 6.7
     },
     "all": {
-      "total": 40,
-      "hits": 1,
-      "rate": 2.5
+      "total": 83,
+      "hits": 4,
+      "rate": 4.8
     }
   },
   "combined_hr_hitters": [
@@ -394,6 +542,27 @@
       "composite": 0.664,
       "opp_pitcher": "Tyler Mahle",
       "matchup": "LAD@ATL"
+    },
+    {
+      "name": "Fernando Tatis Jr.",
+      "rank": 21,
+      "composite": 0.439,
+      "opp_pitcher": "Robert Gasser",
+      "matchup": "MIL@SD"
+    },
+    {
+      "name": "Victor Mesa Jr.",
+      "rank": 41,
+      "composite": 0.256,
+      "opp_pitcher": "Max Fried",
+      "matchup": "TB@NYY"
+    },
+    {
+      "name": "Ryan Vilade",
+      "rank": 56,
+      "composite": 0.172,
+      "opp_pitcher": "Max Fried",
+      "matchup": "TB@NYY"
     }
   ]
 }
