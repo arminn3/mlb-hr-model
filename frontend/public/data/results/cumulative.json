@@ -240204,143 +240204,165 @@
   {
     "date": "2026-10-07",
     "players_who_batted": [
+      "Andy Pages",
       "Angel Genao",
       "Angel Mart\u00ednez",
+      "Austin Riley",
       "Braden Montgomery",
       "Brayan Rocchio",
       "Chase DeLauter",
       "Chase Meidroth",
       "Colson Montgomery",
+      "Drake Baldwin",
+      "Enrique Hern\u00e1ndez",
+      "Freddie Freeman",
       "Jo Adell",
+      "Josue De Paula",
       "Jos\u00e9 Ram\u00edrez",
       "Kyle Teel",
+      "Kyle Tucker",
+      "Lane Thomas",
+      "Matt Olson",
+      "Mauricio Dub\u00f3n",
+      "Max Muncy",
+      "Michael Harris II",
       "Miguel Vargas",
+      "Mike Yastrzemski",
+      "Mookie Betts",
       "Munetaka Murakami",
       "Nathaniel Lowe",
+      "Ozzie Albies",
       "Patrick Bailey",
       "Petey Halpin",
       "Randal Grichuk",
+      "Ronald Acu\u00f1a Jr.",
+      "Rowdy Tellez",
       "Sam Antonacci",
+      "Sean Murphy",
+      "Shohei Ohtani",
       "Steven Kwan",
+      "Teoscar Hern\u00e1ndez",
+      "Tommy Edman",
       "Travis Bazzana",
-      "Tristan Peters"
+      "Tristan Peters",
+      "Will Smith"
     ],
-    "total_players_ranked": 18,
-    "total_hrs_hit": 0,
+    "total_players_ranked": 40,
+    "total_hrs_hit": 1,
     "total_near_hrs": 0,
-    "model_hits": 0,
+    "model_hits": 1,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
         },
         "top_30": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 30,
+          "hits": 1,
+          "rate": 3.3
         },
         "all": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 40,
+          "hits": 1,
+          "rate": 2.5
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
         },
         "top_30": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 30,
+          "hits": 1,
+          "rate": 3.3
         },
         "all": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 40,
+          "hits": 1,
+          "rate": 2.5
         }
       }
     },
     "tier_accuracy_ml2026": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
       },
       "all": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 40,
+        "hits": 1,
+        "rate": 2.5
       }
     },
     "tier_accuracy_ml2026_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
         },
         "top_30": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 30,
+          "hits": 1,
+          "rate": 3.3
         },
         "all": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 40,
+          "hits": 1,
+          "rate": 2.5
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
         },
         "top_30": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 30,
+          "hits": 1,
+          "rate": 3.3
         },
         "all": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 40,
+          "hits": 1,
+          "rate": 2.5
         }
       }
     },
@@ -240348,52 +240370,68 @@
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
       },
       "all": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 40,
+        "hits": 1,
+        "rate": 2.5
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
       },
       "all": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 40,
+        "hits": 1,
+        "rate": 2.5
       }
     },
-    "avg_composite_hr_hitters": 0,
-    "avg_composite_non_hitters": 0.339,
-    "composite_separation": -0.339,
-    "hr_hitters": [],
-    "hr_hitters_l10": [],
+    "avg_composite_hr_hitters": 0.649,
+    "avg_composite_non_hitters": 0.37,
+    "composite_separation": 0.279,
+    "hr_hitters": [
+      {
+        "name": "Max Muncy",
+        "rank": 4,
+        "composite": 0.649,
+        "opp_pitcher": "Tyler Mahle",
+        "matchup": "LAD@ATL"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Max Muncy",
+        "rank": 3,
+        "composite": 0.612,
+        "opp_pitcher": "Tyler Mahle",
+        "matchup": "LAD@ATL"
+      }
+    ],
     "near_hr_hitters": [],
     "near_hr_events": [],
     "surprise_hrs": [],
@@ -240498,8 +240536,8 @@
       },
       "3_of_5": {
         "players": 13,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 1,
+        "hr_rate": 7.7,
         "names": [
           "Max Muncy",
           "Ozzie Albies",
@@ -240515,7 +240553,9 @@
           "Miguel Andujar",
           "David Hamilton"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Max Muncy"
+        ]
       },
       "4_of_5": {
         "players": 2,
@@ -240531,25 +240571,33 @@
     "combined_tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 20,
+        "hits": 1,
+        "rate": 5.0
       },
       "top_30": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 30,
+        "hits": 1,
+        "rate": 3.3
       },
       "all": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 40,
+        "hits": 1,
+        "rate": 2.5
       }
     },
-    "combined_hr_hitters": []
+    "combined_hr_hitters": [
+      {
+        "name": "Max Muncy",
+        "rank": 4,
+        "composite": 0.664,
+        "opp_pitcher": "Tyler Mahle",
+        "matchup": "LAD@ATL"
+      }
+    ]
   }
 ]
