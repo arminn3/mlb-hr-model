@@ -240771,11 +240771,36 @@
   },
   {
     "date": "2026-10-08",
-    "players_who_batted": [],
-    "total_players_ranked": 28,
-    "total_hrs_hit": 0,
-    "total_near_hrs": 0,
-    "model_hits": 0,
+    "players_who_batted": [
+      "Andrew Benintendi",
+      "Angel Genao",
+      "Angel Mart\u00ednez",
+      "Austin Hedges",
+      "Braden Montgomery",
+      "Brayan Rocchio",
+      "Brenton Doyle",
+      "Chase DeLauter",
+      "Chase Meidroth",
+      "Colson Montgomery",
+      "Jo Adell",
+      "Jos\u00e9 Ram\u00edrez",
+      "Kyle Teel",
+      "Miguel Vargas",
+      "Munetaka Murakami",
+      "Nathaniel Lowe",
+      "Patrick Bailey",
+      "Petey Halpin",
+      "Randal Grichuk",
+      "Sam Antonacci",
+      "Steven Kwan",
+      "Tommy Pham",
+      "Travis Bazzana",
+      "Tristan Peters"
+    ],
+    "total_players_ranked": 24,
+    "total_hrs_hit": 3,
+    "total_near_hrs": 1,
+    "model_hits": 3,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
@@ -240786,18 +240811,18 @@
         },
         "top_20": {
           "total": 20,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
-          "total": 28,
-          "hits": 0,
-          "rate": 0.0
+          "total": 24,
+          "hits": 3,
+          "rate": 12.5
         },
         "all": {
-          "total": 28,
-          "hits": 0,
-          "rate": 0.0
+          "total": 24,
+          "hits": 3,
+          "rate": 12.5
         }
       },
       "L10": {
@@ -240808,18 +240833,18 @@
         },
         "top_20": {
           "total": 20,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
-          "total": 28,
-          "hits": 0,
-          "rate": 0.0
+          "total": 24,
+          "hits": 3,
+          "rate": 12.5
         },
         "all": {
-          "total": 28,
-          "hits": 0,
-          "rate": 0.0
+          "total": 24,
+          "hits": 3,
+          "rate": 12.5
         }
       }
     },
@@ -240831,18 +240856,18 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 10.0
       },
       "top_30": {
-        "total": 28,
-        "hits": 0,
-        "rate": 0.0
+        "total": 24,
+        "hits": 3,
+        "rate": 12.5
       },
       "all": {
-        "total": 28,
-        "hits": 0,
-        "rate": 0.0
+        "total": 24,
+        "hits": 3,
+        "rate": 12.5
       }
     },
     "tier_accuracy_ml2026_by_lookback": {
@@ -240854,18 +240879,18 @@
         },
         "top_20": {
           "total": 20,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
-          "total": 28,
-          "hits": 0,
-          "rate": 0.0
+          "total": 24,
+          "hits": 3,
+          "rate": 12.5
         },
         "all": {
-          "total": 28,
-          "hits": 0,
-          "rate": 0.0
+          "total": 24,
+          "hits": 3,
+          "rate": 12.5
         }
       },
       "L10": {
@@ -240876,22 +240901,22 @@
         },
         "top_20": {
           "total": 20,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
-          "total": 28,
-          "hits": 0,
-          "rate": 0.0
+          "total": 24,
+          "hits": 3,
+          "rate": 12.5
         },
         "all": {
-          "total": 28,
-          "hits": 0,
-          "rate": 0.0
+          "total": 24,
+          "hits": 3,
+          "rate": 12.5
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 1,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -240900,18 +240925,18 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 10.0
       },
       "top_30": {
-        "total": 28,
-        "hits": 0,
-        "rate": 0.0
+        "total": 24,
+        "hits": 3,
+        "rate": 12.5
       },
       "all": {
-        "total": 28,
-        "hits": 0,
-        "rate": 0.0
+        "total": 24,
+        "hits": 3,
+        "rate": 12.5
       }
     },
     "tier_accuracy_with_near": {
@@ -240922,33 +240947,95 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
-        "total": 28,
-        "hits": 0,
-        "rate": 0.0
+        "total": 24,
+        "hits": 4,
+        "rate": 16.7
       },
       "all": {
-        "total": 28,
-        "hits": 0,
-        "rate": 0.0
+        "total": 24,
+        "hits": 4,
+        "rate": 16.7
       }
     },
-    "avg_composite_hr_hitters": 0,
-    "avg_composite_non_hitters": 0.343,
-    "composite_separation": -0.343,
-    "hr_hitters": [],
-    "hr_hitters_l10": [],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "avg_composite_hr_hitters": 0.228,
+    "avg_composite_non_hitters": 0.351,
+    "composite_separation": -0.123,
+    "hr_hitters": [
+      {
+        "name": "Patrick Bailey",
+        "rank": 15,
+        "composite": 0.269,
+        "opp_pitcher": "Hagen Smith",
+        "matchup": "CLE@CWS"
+      },
+      {
+        "name": "Miguel Vargas",
+        "rank": 19,
+        "composite": 0.245,
+        "opp_pitcher": "Parker Messick",
+        "matchup": "CLE@CWS"
+      },
+      {
+        "name": "Jos\u00e9 Ram\u00edrez",
+        "rank": 24,
+        "composite": 0.171,
+        "opp_pitcher": "Hagen Smith",
+        "matchup": "CLE@CWS"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Jos\u00e9 Ram\u00edrez",
+        "rank": 17,
+        "composite": 0.271,
+        "opp_pitcher": "Hagen Smith",
+        "matchup": "CLE@CWS"
+      },
+      {
+        "name": "Miguel Vargas",
+        "rank": 20,
+        "composite": 0.245,
+        "opp_pitcher": "Parker Messick",
+        "matchup": "CLE@CWS"
+      },
+      {
+        "name": "Patrick Bailey",
+        "rank": 24,
+        "composite": 0.16,
+        "opp_pitcher": "Hagen Smith",
+        "matchup": "CLE@CWS"
+      }
+    ],
+    "near_hr_hitters": [
+      {
+        "name": "Jo Adell",
+        "rank": 18,
+        "composite": 0.253,
+        "opp_pitcher": "Hagen Smith",
+        "matchup": "CLE@CWS"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Jo Adell",
+        "ev": 108.3,
+        "angle": 19.0,
+        "distance": 382.0,
+        "hr_in_parks": 5,
+        "result": "field_out",
+        "pitcher": "Fedde, Erick"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
         "players": 16,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 1,
+        "hr_rate": 6.2,
         "names": [
           "Munetaka Murakami",
           "Randal Grichuk",
@@ -240967,12 +241054,14 @@
           "Austin Hedges",
           "Brayan Rocchio"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Patrick Bailey"
+        ]
       },
       "2_of_5": {
         "players": 6,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 1,
+        "hr_rate": 16.7,
         "names": [
           "Sam Antonacci",
           "David Fry",
@@ -240981,7 +241070,9 @@
           "Braden Montgomery",
           "Jos\u00e9 Ram\u00edrez"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Jos\u00e9 Ram\u00edrez"
+        ]
       }
     },
     "combined_tier_accuracy": {
@@ -240992,20 +241083,42 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
-        "total": 28,
-        "hits": 0,
-        "rate": 0.0
+        "total": 24,
+        "hits": 3,
+        "rate": 12.5
       },
       "all": {
-        "total": 28,
-        "hits": 0,
-        "rate": 0.0
+        "total": 24,
+        "hits": 3,
+        "rate": 12.5
       }
     },
-    "combined_hr_hitters": []
+    "combined_hr_hitters": [
+      {
+        "name": "Patrick Bailey",
+        "rank": 12,
+        "composite": 0.189,
+        "opp_pitcher": "Hagen Smith",
+        "matchup": "CLE@CWS"
+      },
+      {
+        "name": "Miguel Vargas",
+        "rank": 15,
+        "composite": 0.175,
+        "opp_pitcher": "Parker Messick",
+        "matchup": "CLE@CWS"
+      },
+      {
+        "name": "Jos\u00e9 Ram\u00edrez",
+        "rank": 16,
+        "composite": 0.142,
+        "opp_pitcher": "Hagen Smith",
+        "matchup": "CLE@CWS"
+      }
+    ]
   }
 ]
