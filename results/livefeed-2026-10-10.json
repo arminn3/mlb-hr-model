@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-10",
+  "games": [
+    {
+      "gamePk": 849831,
+      "away": "CWS",
+      "home": "CLE",
+      "status": "Final",
+      "awayScore": 0,
+      "homeScore": 2
+    }
+  ],
+  "plays": [
+    {
+      "batter": "Petey Halpin",
+      "pitcher": "Sean Newcomb",
+      "game": "CWS@CLE",
+      "ev": 97.3,
+      "angle": 26.0,
+      "distance": 383.0,
+      "result": "Double",
+      "inning": 8,
+      "timestamp": "2026-10-11T02:26:38.921Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Miguel Vargas",
+      "pitcher": "Cade Smith",
+      "game": "CWS@CLE",
+      "ev": 91.1,
+      "angle": 82.0,
+      "distance": 32.0,
+      "result": "Pop Out",
+      "inning": 8,
+      "timestamp": "2026-10-11T02:21:36.413Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jos\u00e9 Ram\u00edrez",
+      "pitcher": "Sean Burke",
+      "game": "CWS@CLE",
+      "ev": 97.2,
+      "angle": 23.0,
+      "distance": 348.0,
+      "result": "Home Run",
+      "inning": 4,
+      "timestamp": "2026-10-11T01:02:32.793Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Steven Kwan",
+      "pitcher": "Sean Burke",
+      "game": "CWS@CLE",
+      "ev": 95.8,
+      "angle": 32.0,
+      "distance": 353.0,
+      "result": "Flyout",
+      "inning": 1,
+      "timestamp": "2026-10-11T00:14:07.239Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Sam Antonacci",
+      "pitcher": "Gavin Williams",
+      "game": "CWS@CLE",
+      "ev": 101.3,
+      "angle": 22.0,
+      "distance": 347.0,
+      "result": "Lineout",
+      "inning": 1,
+      "timestamp": "2026-10-11T00:08:57.132Z",
+      "isHR": false,
+      "isNearHR": false
+    }
+  ],
+  "totalHRs": 1,
+  "nearHRs": 2,
+  "hardHitAir": 2,
+  "totalAirBalls": 5
+}

@@ -1,32 +1,52 @@
 {
   "date": "2026-10-10",
-  "players_who_batted": [],
+  "players_who_batted": [
+    "Andrew Benintendi",
+    "Brayan Rocchio",
+    "Brenton Doyle",
+    "Chase DeLauter",
+    "Chase Meidroth",
+    "Colson Montgomery",
+    "Jo Adell",
+    "Jos\u00e9 Ram\u00edrez",
+    "Kyle Teel",
+    "Miguel Vargas",
+    "Munetaka Murakami",
+    "Nathaniel Lowe",
+    "Patrick Bailey",
+    "Petey Halpin",
+    "Randal Grichuk",
+    "Sam Antonacci",
+    "Steven Kwan",
+    "Travis Bazzana",
+    "Tristan Peters"
+  ],
   "total_players_ranked": 18,
-  "total_hrs_hit": 0,
-  "total_near_hrs": 0,
-  "model_hits": 0,
+  "total_hrs_hit": 1,
+  "total_near_hrs": 1,
+  "model_hits": 1,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       }
     },
     "L10": {
@@ -37,64 +57,64 @@
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       }
     }
   },
   "tier_accuracy_ml2026": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 5.6
     },
     "top_30": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 5.6
     },
     "all": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 5.6
     }
   },
   "tier_accuracy_ml2026_by_lookback": {
     "L5": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       }
     },
     "L10": {
@@ -105,73 +125,107 @@
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 1,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 5.6
     },
     "top_30": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 5.6
     },
     "all": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 5.6
     }
   },
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 11.1
     },
     "top_30": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 11.1
     },
     "all": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 11.1
     }
   },
-  "avg_composite_hr_hitters": 0,
-  "avg_composite_non_hitters": 0.465,
-  "composite_separation": -0.465,
-  "hr_hitters": [],
-  "hr_hitters_l10": [],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "avg_composite_hr_hitters": 0.514,
+  "avg_composite_non_hitters": 0.466,
+  "composite_separation": 0.048,
+  "hr_hitters": [
+    {
+      "name": "Jos\u00e9 Ram\u00edrez",
+      "rank": 7,
+      "composite": 0.514,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@CLE"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Jos\u00e9 Ram\u00edrez",
+      "rank": 12,
+      "composite": 0.411,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@CLE"
+    }
+  ],
+  "near_hr_hitters": [
+    {
+      "name": "Petey Halpin",
+      "rank": 14,
+      "composite": 0.393,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@CLE"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Petey Halpin",
+      "ev": 97.3,
+      "angle": 26.0,
+      "distance": 381.0,
+      "hr_in_parks": 21,
+      "result": "double",
+      "pitcher": "Newcomb, Sean"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
@@ -208,13 +262,15 @@
     },
     "3_of_5": {
       "players": 2,
-      "hr_count": 0,
-      "hr_rate": 0.0,
+      "hr_count": 1,
+      "hr_rate": 50.0,
       "names": [
         "Travis Bazzana",
         "Jos\u00e9 Ram\u00edrez"
       ],
-      "hr_names": []
+      "hr_names": [
+        "Jos\u00e9 Ram\u00edrez"
+      ]
     }
   },
   "combined_tier_accuracy": {
@@ -225,19 +281,27 @@
     },
     "top_20": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 5.6
     },
     "top_30": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 5.6
     },
     "all": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 5.6
     }
   },
-  "combined_hr_hitters": []
+  "combined_hr_hitters": [
+    {
+      "name": "Jos\u00e9 Ram\u00edrez",
+      "rank": 15,
+      "composite": 0.182,
+      "opp_pitcher": "Sean Burke",
+      "matchup": "CWS@CLE"
+    }
+  ]
 }
