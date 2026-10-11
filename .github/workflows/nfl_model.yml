@@ -1,0 +1,73 @@
+name: NFL Anytime-TD Model
+
+on:
+  schedule:
+    - cron: '0 11 * * *'   #  7:00 AM ET — daily refresh (new week rollover, depth chart/injury updates)
+    - cron: '30 15 * * *'  # 11:30 AM ET — pre-early-slate refresh (Sunday inactives etc.)
+  workflow_dispatch:
+    inputs:
+      season:
+        description: 'Season (e.g. 2026). Leave blank to auto-detect.'
+        required: false
+        default: ''
+      week:
+        description: 'Week (e.g. 3). Leave blank to auto-detect.'
+        required: false
+        default: ''
+
+concurrency:
+  group: nfl-model-run
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  run-model:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run NFL model
+        run: |
+          ARGS=""
+          if [ -n "${{ github.event.inputs.season }}" ]; then ARGS="$ARGS --season ${{ github.event.inputs.season }}"; fi
+          if [ -n "${{ github.event.inputs.week }}" ]; then ARGS="$ARGS --week ${{ github.event.inputs.week }}"; fi
+          python3 -m nfl.main $ARGS
+
+      - name: Commit and push
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          mkdir -p /tmp/nfl-stash
+          cp -r frontend/public/data/nfl/. /tmp/nfl-stash/
+
+          git fetch --unshallow 2>/dev/null || git fetch origin main
+          for i in 1 2 3 4 5; do
+            git reset --hard origin/main
+            cp -r /tmp/nfl-stash/. frontend/public/data/nfl/
+            git add frontend/public/data/nfl/
+            git diff --cached --quiet && echo "No changes after reset" && exit 0
+            git commit -m "auto: NFL slate $(date -u +%Y-%m-%d)"
+            if git push origin main; then
+              echo "Pushed successfully on attempt $i"
+              exit 0
+            fi
+            echo "Push attempt $i failed, retrying in $((i * 15))s..."
+            sleep $((i * 15))
+            git fetch origin main
+          done
+          echo "WARNING: push failed after 5 attempts — data generated but not committed"
+          exit 0
