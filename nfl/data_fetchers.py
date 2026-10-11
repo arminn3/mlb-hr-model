@@ -21,9 +21,13 @@ from pathlib import Path
 
 import pandas as pd
 import nfl_data_py as nfl
+import requests
 
 CACHE_DIR = Path(__file__).resolve().parent.parent / "nfl_cache"
 CACHE_DIR.mkdir(exist_ok=True)
+
+# ESPN's team abbreviations differ from nflverse's for two franchises.
+ESPN_TEAM_FIX = {"LAR": "LA", "WSH": "WAS"}
 
 
 def _cached(key: str, loader) -> pd.DataFrame:
@@ -97,3 +101,60 @@ def load_injuries(year: int) -> pd.DataFrame:
     gameday) picks up the latest designation instead of the first snapshot
     seen that week."""
     return _cached(_daily_key("injuries", year), lambda: nfl.import_injuries([year]))
+
+
+def load_live_scoreboard() -> list[dict]:
+    """Real-time ESPN scoreboard for the CURRENT NFL week (one call covers
+    every game in the week, whatever day it's checked). Used to catch the
+    actual GAMEDAY-inactives list — released ~90 min before each kickoff —
+    which the Wed-Fri practice-week injury report (`load_injuries`) can't
+    see at all: a player can be "Questionable" all week and still be a
+    healthy-scratch/inactive on gameday itself. Team abbreviations are
+    normalized to nflverse convention (ESPN's "LAR"/"WSH" -> "LA"/"WAS").
+    Best-effort: returns [] on any failure so a flaky/rate-limited live call
+    never breaks the model run."""
+    try:
+        r = requests.get("https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard", timeout=10)
+        r.raise_for_status()
+        data = r.json()
+    except Exception:
+        return []
+    out = []
+    for ev in data.get("events", []):
+        try:
+            comp = ev["competitions"][0]
+            state = comp["status"]["type"]["state"]  # "pre" / "in" / "post"
+            teams = {c["homeAway"]: ESPN_TEAM_FIX.get(c["team"]["abbreviation"], c["team"]["abbreviation"])
+                     for c in comp["competitors"]}
+            out.append({"event_id": ev["id"], "home": teams.get("home"), "away": teams.get("away"), "state": state})
+        except Exception:
+            continue
+    return out
+
+
+def load_live_active_espn_ids(event_id: str) -> dict[str, set[str]]:
+    """For one in-progress/final game: {team_abbr: {espn_athlete_id, ...}} of
+    every player who recorded ANY offensive stat (passing/rushing/receiving)
+    — the real, ground-truth evidence of who actually played, as opposed to
+    who was merely active/dressed. Best-effort: {} on any failure."""
+    out: dict[str, set[str]] = {}
+    try:
+        r = requests.get(
+            f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event={event_id}", timeout=10)
+        r.raise_for_status()
+        data = r.json()
+        for team in data.get("boxscore", {}).get("players", []):
+            abbr = ESPN_TEAM_FIX.get(team.get("team", {}).get("abbreviation"), team.get("team", {}).get("abbreviation"))
+            ids: set[str] = set()
+            for cat in team.get("statistics", []):
+                if cat.get("name") not in ("passing", "rushing", "receiving"):
+                    continue
+                for ath in cat.get("athletes", []):
+                    aid = ath.get("athlete", {}).get("id")
+                    if aid:
+                        ids.add(str(aid))
+            if abbr:
+                out[abbr] = ids
+    except Exception:
+        return {}
+    return out

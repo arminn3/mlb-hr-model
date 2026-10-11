@@ -30,7 +30,10 @@ import numpy as np
 import pandas as pd
 
 from . import config as C
-from .data_fetchers import load_pbp, load_schedules, load_snap_counts, load_players, load_rosters, load_depth_charts, load_injuries
+from .data_fetchers import (
+    load_pbp, load_schedules, load_snap_counts, load_players, load_rosters, load_depth_charts, load_injuries,
+    load_live_scoreboard, load_live_active_espn_ids,
+)
 
 
 def _offensive_tds(reg: pd.DataFrame) -> pd.DataFrame:
@@ -847,6 +850,55 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
                     _promote(pid)
                     if _role(pos, filled + 1) is None:
                         break
+
+    # Live-gameday override: the Wed-Fri injury report only carries
+    # Out/Doubtful/Questionable — it can't see the actual INACTIVES LIST,
+    # which the NFL releases separately ~90 min before each kickoff and is
+    # the real source of truth (e.g. a "Questionable" starter scratched on
+    # gameday with no prior "Out" designation at all). Cross-check against
+    # the live ESPN box score for any game that has actually kicked off
+    # (state "in"/"post") this week: if the model's assigned role-holder
+    # recorded ZERO offensive stats while a teammate at the same (team,
+    # position) who currently holds no/a lower role DID, he's a healthy
+    # scratch — demote/promote the same way the injury override does.
+    # Best-effort and silent on any failure (flaky/rate-limited live call,
+    # unmapped espn_id, etc.) — never blocks the rest of the model.
+    try:
+        espn_to_gsis = {v: k for k, v in espn_map.items() if v == v and v}
+        live_games = [g for g in load_live_scoreboard() if g["state"] != "pre"]
+        for g in live_games:
+            active_by_team = load_live_active_espn_ids(g["event_id"])
+            for team in (g["home"], g["away"]):
+                active_espn = active_by_team.get(team)
+                if not active_espn:
+                    continue
+                active_gsis = {espn_to_gsis[e] for e in active_espn if e in espn_to_gsis}
+                team_roster = R[(R["team"] == team) & R.index.map(lambda pid: bool(role_map.get(pid)))]
+                for pid, pos in zip(team_roster.index, team_roster["position"]):
+                    pos_group = R[(R["team"] == team) & (R["position"] == pos)]
+                    if pid in active_gsis or active_gsis.isdisjoint(set(pos_group.index)):
+                        continue  # he played, or NOBODY at this position has live stats yet (too early to call)
+                    # This role-holder has 0 live stats, but a teammate at the
+                    # same (team, position) does — healthy scratch confirmed.
+                    # Swap his EXACT role onto the best-evidenced active
+                    # teammate specifically — not a full depth-chart reshuffle,
+                    # which would promote unconfirmed names ahead of him too.
+                    active_candidates = [c for c in pos_group.sort_values("rank_in").index
+                                         if c != pid and c not in out_pids and c in active_gsis and not role_map.get(c)]
+                    if not active_candidates:
+                        continue
+                    best = active_candidates[0]
+                    role_map[best] = role_map[pid]
+                    role_map[pid] = None
+                    if best not in P.index:
+                        # No usage on record at all — an honest zero floor
+                        # beats leaving a real live starter off the board.
+                        P.loc[best] = {col: 0 for col in P.columns}
+                        P.at[best, "team"] = team
+                        P.at[best, "position"] = pos
+                        P.at[best, "name"] = name_map.get(best, best)
+    except Exception:
+        pass
 
     P["role"] = P.index.map(role_map)
 
