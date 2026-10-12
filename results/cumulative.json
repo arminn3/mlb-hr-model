@@ -241430,11 +241430,31 @@
   },
   {
     "date": "2026-10-11",
-    "players_who_batted": [],
+    "players_who_batted": [
+      "Andrew Vaughn",
+      "Andy Pages",
+      "Brice Turang",
+      "Cooper Pratt",
+      "Enrique Hern\u00e1ndez",
+      "Freddie Freeman",
+      "Garrett Mitchell",
+      "Jackson Chourio",
+      "Jake Bauers",
+      "Joey Ortiz",
+      "Josue De Paula",
+      "Kyle Tucker",
+      "Luis Lara",
+      "Max Muncy",
+      "Mookie Betts",
+      "Shohei Ohtani",
+      "Teoscar Hern\u00e1ndez",
+      "Will Smith",
+      "William Contreras"
+    ],
     "total_players_ranked": 18,
-    "total_hrs_hit": 0,
-    "total_near_hrs": 0,
-    "model_hits": 0,
+    "total_hrs_hit": 1,
+    "total_near_hrs": 2,
+    "model_hits": 1,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
@@ -241445,40 +241465,40 @@
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.6
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.6
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.6
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.6
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.6
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.6
         }
       }
     },
@@ -241490,18 +241510,18 @@
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       }
     },
     "tier_accuracy_ml2026_by_lookback": {
@@ -241513,44 +241533,44 @@
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.6
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.6
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.6
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.6
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.6
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 5.6
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 2,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -241559,49 +241579,99 @@
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       }
     },
-    "avg_composite_hr_hitters": 0,
-    "avg_composite_non_hitters": 0.47,
-    "composite_separation": -0.47,
-    "hr_hitters": [],
-    "hr_hitters_l10": [],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "avg_composite_hr_hitters": 0.37,
+    "avg_composite_non_hitters": 0.478,
+    "composite_separation": -0.108,
+    "hr_hitters": [
+      {
+        "name": "Brice Turang",
+        "rank": 13,
+        "composite": 0.37,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "LAD@MIL"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Brice Turang",
+        "rank": 9,
+        "composite": 0.473,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "LAD@MIL"
+      }
+    ],
+    "near_hr_hitters": [
+      {
+        "name": "Enrique Hern\u00e1ndez",
+        "rank": 5,
+        "composite": 0.584,
+        "opp_pitcher": "Jacob Misiorowski",
+        "matchup": "LAD@MIL"
+      },
+      {
+        "name": "William Contreras",
+        "rank": 16,
+        "composite": 0.331,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "LAD@MIL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Enrique Hern\u00e1ndez",
+        "ev": 97.7,
+        "angle": 28.0,
+        "distance": 383.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Ashby, Aaron"
+      },
+      {
+        "batter": "William Contreras",
+        "ev": 109.0,
+        "angle": 32.0,
+        "distance": 402.0,
+        "hr_in_parks": 16,
+        "result": "",
+        "pitcher": "Skubal, Tarik"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
@@ -241617,8 +241687,8 @@
       },
       "2_of_5": {
         "players": 8,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 1,
+        "hr_rate": 12.5,
         "names": [
           "Will Smith",
           "Andy Pages",
@@ -241629,7 +241699,9 @@
           "Brice Turang",
           "Kyle Tucker"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Brice Turang"
+        ]
       },
       "3_of_5": {
         "players": 3,
@@ -241660,20 +241732,28 @@
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 5.6
       }
     },
-    "combined_hr_hitters": []
+    "combined_hr_hitters": [
+      {
+        "name": "Brice Turang",
+        "rank": 12,
+        "composite": 0.287,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "LAD@MIL"
+      }
+    ]
   }
 ]

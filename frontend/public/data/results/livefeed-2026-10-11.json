@@ -1,0 +1,149 @@
+{
+  "date": "2026-10-11",
+  "games": [
+    {
+      "gamePk": 849809,
+      "away": "LAD",
+      "home": "MIL",
+      "status": "Final",
+      "awayScore": 1,
+      "homeScore": 2
+    }
+  ],
+  "plays": [
+    {
+      "batter": "Mookie Betts",
+      "pitcher": "Trevor Megill",
+      "game": "LAD@MIL",
+      "ev": 97.5,
+      "angle": 27.0,
+      "distance": 375.0,
+      "result": "Flyout",
+      "inning": 9,
+      "timestamp": "2026-10-12T03:11:22.447Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Andy Pages",
+      "pitcher": "Trevor Megill",
+      "game": "LAD@MIL",
+      "ev": 98.8,
+      "angle": 22.0,
+      "distance": 347.0,
+      "result": "Lineout",
+      "inning": 9,
+      "timestamp": "2026-10-12T03:04:39.992Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Enrique Hern\u00e1ndez",
+      "pitcher": "Aaron Ashby",
+      "game": "LAD@MIL",
+      "ev": 97.7,
+      "angle": 28.0,
+      "distance": 385.0,
+      "result": "Flyout",
+      "inning": 7,
+      "timestamp": "2026-10-12T02:27:41.551Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Will Smith",
+      "pitcher": "Abner Uribe",
+      "game": "LAD@MIL",
+      "ev": 95.6,
+      "angle": 42.0,
+      "distance": 308.0,
+      "result": "Flyout",
+      "inning": 6,
+      "timestamp": "2026-10-12T02:05:45.302Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "William Contreras",
+      "pitcher": "Tarik Skubal",
+      "game": "LAD@MIL",
+      "ev": 94.7,
+      "angle": 45.0,
+      "distance": 300.0,
+      "result": "Flyout",
+      "inning": 5,
+      "timestamp": "2026-10-12T01:59:50.640Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Enrique Hern\u00e1ndez",
+      "pitcher": "Jacob Misiorowski",
+      "game": "LAD@MIL",
+      "ev": 99.9,
+      "angle": 35.0,
+      "distance": 350.0,
+      "result": "Flyout",
+      "inning": 5,
+      "timestamp": "2026-10-12T01:39:35.517Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Brice Turang",
+      "pitcher": "Tarik Skubal",
+      "game": "LAD@MIL",
+      "ev": 102.5,
+      "angle": 30.0,
+      "distance": 384.0,
+      "result": "Home Run",
+      "inning": 4,
+      "timestamp": "2026-10-12T01:30:00.319Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Andy Pages",
+      "pitcher": "Jacob Misiorowski",
+      "game": "LAD@MIL",
+      "ev": 90.4,
+      "angle": 39.0,
+      "distance": 298.0,
+      "result": "Flyout",
+      "inning": 4,
+      "timestamp": "2026-10-12T01:20:29.915Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jackson Chourio",
+      "pitcher": "Tarik Skubal",
+      "game": "LAD@MIL",
+      "ev": 99.8,
+      "angle": 35.0,
+      "distance": 369.0,
+      "result": "Flyout",
+      "inning": 3,
+      "timestamp": "2026-10-12T01:13:32.537Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Will Smith",
+      "pitcher": "Jacob Misiorowski",
+      "game": "LAD@MIL",
+      "ev": 97.7,
+      "angle": 37.0,
+      "distance": 340.0,
+      "result": "Flyout",
+      "inning": 3,
+      "timestamp": "2026-10-12T01:03:56.352Z",
+      "isHR": false,
+      "isNearHR": false
+    }
+  ],
+  "totalHRs": 1,
+  "nearHRs": 4,
+  "hardHitAir": 7,
+  "totalAirBalls": 10
+}
