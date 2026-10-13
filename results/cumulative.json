@@ -241760,7 +241760,13 @@
     "date": "2026-10-12",
     "players_who_batted": [
       "Andy Pages",
+      "Angel Mart\u00ednez",
+      "Ben Williamson",
+      "Brayan Rocchio",
       "Brice Turang",
+      "Cedric Mullins",
+      "Chandler Simpson",
+      "Chase DeLauter",
       "Christian Yelich",
       "Cooper Pratt",
       "David Hamilton",
@@ -241768,43 +241774,59 @@
       "Garrett Mitchell",
       "Jackson Chourio",
       "Jake Bauers",
+      "Jo Adell",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Jos\u00e9 Ram\u00edrez",
+      "Junior Caminero",
       "Kyle Tucker",
+      "Liam Hicks",
       "Max Muncy",
       "Miguel Rojas",
       "Mookie Betts",
+      "Nathaniel Lowe",
+      "Nick Fortes",
+      "Patrick Bailey",
+      "Petey Halpin",
+      "Ryan Vilade",
       "Sal Frelick",
       "Shohei Ohtani",
+      "Steven Kwan",
+      "Taylor Walls",
       "Teoscar Hern\u00e1ndez",
       "Tommy Edman",
+      "Travis Bazzana",
+      "Victor Mesa Jr.",
       "Will Smith",
-      "William Contreras"
+      "William Contreras",
+      "Yandy D\u00edaz"
     ],
-    "total_players_ranked": 18,
-    "total_hrs_hit": 1,
+    "total_players_ranked": 36,
+    "total_hrs_hit": 4,
     "total_near_hrs": 0,
-    "model_hits": 1,
+    "model_hits": 3,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 1,
-          "rate": 10.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
-          "total": 18,
-          "hits": 1,
-          "rate": 5.6
+          "total": 20,
+          "hits": 3,
+          "rate": 15.0
         },
         "top_30": {
-          "total": 18,
-          "hits": 1,
-          "rate": 5.6
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
         },
         "all": {
-          "total": 18,
-          "hits": 1,
-          "rate": 5.6
+          "total": 36,
+          "hits": 3,
+          "rate": 8.3
         }
       },
       "L10": {
@@ -241814,65 +241836,65 @@
           "rate": 10.0
         },
         "top_20": {
-          "total": 18,
-          "hits": 1,
-          "rate": 5.6
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
-          "total": 18,
-          "hits": 1,
-          "rate": 5.6
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
         },
         "all": {
-          "total": 18,
-          "hits": 1,
-          "rate": 5.6
+          "total": 36,
+          "hits": 3,
+          "rate": 8.3
         }
       }
     },
     "tier_accuracy_ml2026": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 1,
-        "rate": 5.6
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
-        "total": 18,
-        "hits": 1,
-        "rate": 5.6
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
-        "total": 18,
-        "hits": 1,
-        "rate": 5.6
+        "total": 36,
+        "hits": 3,
+        "rate": 8.3
       }
     },
     "tier_accuracy_ml2026_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 1,
-          "rate": 10.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
-          "total": 18,
-          "hits": 1,
-          "rate": 5.6
+          "total": 20,
+          "hits": 3,
+          "rate": 15.0
         },
         "top_30": {
-          "total": 18,
-          "hits": 1,
-          "rate": 5.6
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
         },
         "all": {
-          "total": 18,
-          "hits": 1,
-          "rate": 5.6
+          "total": 36,
+          "hits": 3,
+          "rate": 8.3
         }
       },
       "L10": {
@@ -241882,19 +241904,19 @@
           "rate": 10.0
         },
         "top_20": {
-          "total": 18,
-          "hits": 1,
-          "rate": 5.6
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
         },
         "top_30": {
-          "total": 18,
-          "hits": 1,
-          "rate": 5.6
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
         },
         "all": {
-          "total": 18,
-          "hits": 1,
-          "rate": 5.6
+          "total": 36,
+          "hits": 3,
+          "rate": 8.3
         }
       }
     },
@@ -241902,50 +241924,50 @@
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 1,
-        "rate": 5.6
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
-        "total": 18,
-        "hits": 1,
-        "rate": 5.6
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
-        "total": 18,
-        "hits": 1,
-        "rate": 5.6
+        "total": 36,
+        "hits": 3,
+        "rate": 8.3
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 1,
-        "rate": 5.6
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
-        "total": 18,
-        "hits": 1,
-        "rate": 5.6
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
-        "total": 18,
-        "hits": 1,
-        "rate": 5.6
+        "total": 36,
+        "hits": 3,
+        "rate": 8.3
       }
     },
-    "avg_composite_hr_hitters": 0.578,
-    "avg_composite_non_hitters": 0.452,
-    "composite_separation": 0.126,
+    "avg_composite_hr_hitters": 0.48,
+    "avg_composite_non_hitters": 0.391,
+    "composite_separation": 0.089,
     "hr_hitters": [
       {
         "name": "William Contreras",
@@ -241953,25 +241975,59 @@
         "composite": 0.578,
         "opp_pitcher": "Yoshinobu Yamamoto",
         "matchup": "LAD@MIL"
+      },
+      {
+        "name": "Patrick Bailey",
+        "rank": 6,
+        "composite": 0.512,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Chase DeLauter",
+        "rank": 20,
+        "composite": 0.35,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CLE@TB"
       }
     ],
     "hr_hitters_l10": [
       {
         "name": "William Contreras",
-        "rank": 6,
+        "rank": 8,
         "composite": 0.488,
         "opp_pitcher": "Yoshinobu Yamamoto",
         "matchup": "LAD@MIL"
+      },
+      {
+        "name": "Patrick Bailey",
+        "rank": 15,
+        "composite": 0.414,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Chase DeLauter",
+        "rank": 27,
+        "composite": 0.286,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CLE@TB"
       }
     ],
     "near_hr_hitters": [],
     "near_hr_events": [],
-    "surprise_hrs": [],
+    "surprise_hrs": [
+      {
+        "name": "Cedric Mullins",
+        "pitcher": "Erik Sabrowski",
+        "description": "Cedric Mullins homers (1) on a fly ball to right field."
+      }
+    ],
     "hr_signal_accuracy": {
       "1_of_5": {
         "players": 16,
-        "hr_count": 1,
-        "hr_rate": 6.2,
+        "hr_count": 3,
+        "hr_rate": 18.8,
         "names": [
           "William Contreras",
           "Teoscar Hern\u00e1ndez",
@@ -241991,7 +242047,9 @@
           "Taylor Walls"
         ],
         "hr_names": [
-          "William Contreras"
+          "William Contreras",
+          "Patrick Bailey",
+          "Chase DeLauter"
         ]
       },
       "2_of_5": {
@@ -242047,23 +242105,23 @@
     "combined_tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 1,
-        "rate": 10.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 1,
-        "rate": 5.6
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
       },
       "top_30": {
-        "total": 18,
-        "hits": 1,
-        "rate": 5.6
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
       },
       "all": {
-        "total": 18,
-        "hits": 1,
-        "rate": 5.6
+        "total": 36,
+        "hits": 3,
+        "rate": 8.3
       }
     },
     "combined_hr_hitters": [
@@ -242073,6 +242131,20 @@
         "composite": 0.567,
         "opp_pitcher": "Yoshinobu Yamamoto",
         "matchup": "LAD@MIL"
+      },
+      {
+        "name": "Patrick Bailey",
+        "rank": 6,
+        "composite": 0.41,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Chase DeLauter",
+        "rank": 16,
+        "composite": 0.281,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CLE@TB"
       }
     ]
   }
