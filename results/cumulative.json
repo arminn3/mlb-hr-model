@@ -241803,7 +241803,7 @@
     ],
     "total_players_ranked": 36,
     "total_hrs_hit": 4,
-    "total_near_hrs": 0,
+    "total_near_hrs": 1,
     "model_hits": 3,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -241920,7 +241920,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 1,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -241951,18 +241951,18 @@
       },
       "top_20": {
         "total": 20,
-        "hits": 3,
-        "rate": 15.0
+        "hits": 4,
+        "rate": 20.0
       },
       "top_30": {
         "total": 30,
-        "hits": 3,
-        "rate": 10.0
+        "hits": 4,
+        "rate": 13.3
       },
       "all": {
         "total": 36,
-        "hits": 3,
-        "rate": 8.3
+        "hits": 4,
+        "rate": 11.1
       }
     },
     "avg_composite_hr_hitters": 0.48,
@@ -242014,8 +242014,26 @@
         "matchup": "CLE@TB"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Jonathan Aranda",
+        "rank": 17,
+        "composite": 0.397,
+        "opp_pitcher": "Foster Griffin",
+        "matchup": "CLE@TB"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Jonathan Aranda",
+        "ev": 106.7,
+        "angle": 37.0,
+        "distance": 402.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Griffin, Foster"
+      }
+    ],
     "surprise_hrs": [
       {
         "name": "Cedric Mullins",
