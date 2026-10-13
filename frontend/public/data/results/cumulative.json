@@ -242038,7 +242038,7 @@
       {
         "name": "Cedric Mullins",
         "pitcher": "Erik Sabrowski",
-        "description": "Cedric Mullins homers (1) on a fly ball to right field."
+        "description": "${person|fullName|656775} homers ${total|homeRuns|656775} on a fly ball to right field.  "
       }
     ],
     "hr_signal_accuracy": {
