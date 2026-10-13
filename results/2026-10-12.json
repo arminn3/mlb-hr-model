@@ -1,0 +1,320 @@
+{
+  "date": "2026-10-12",
+  "players_who_batted": [
+    "Andy Pages",
+    "Brice Turang",
+    "Christian Yelich",
+    "Cooper Pratt",
+    "David Hamilton",
+    "Freddie Freeman",
+    "Garrett Mitchell",
+    "Jackson Chourio",
+    "Jake Bauers",
+    "Kyle Tucker",
+    "Max Muncy",
+    "Miguel Rojas",
+    "Mookie Betts",
+    "Sal Frelick",
+    "Shohei Ohtani",
+    "Teoscar Hern\u00e1ndez",
+    "Tommy Edman",
+    "Will Smith",
+    "William Contreras"
+  ],
+  "total_players_ranked": 18,
+  "total_hrs_hit": 1,
+  "total_near_hrs": 0,
+  "model_hits": 1,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "all": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "all": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      }
+    }
+  },
+  "tier_accuracy_ml2026": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    },
+    "all": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    }
+  },
+  "tier_accuracy_ml2026_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "all": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "all": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    },
+    "all": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    },
+    "all": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    }
+  },
+  "avg_composite_hr_hitters": 0.578,
+  "avg_composite_non_hitters": 0.452,
+  "composite_separation": 0.126,
+  "hr_hitters": [
+    {
+      "name": "William Contreras",
+      "rank": 4,
+      "composite": 0.578,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "LAD@MIL"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "William Contreras",
+      "rank": 6,
+      "composite": 0.488,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "LAD@MIL"
+    }
+  ],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 16,
+      "hr_count": 1,
+      "hr_rate": 6.2,
+      "names": [
+        "William Contreras",
+        "Teoscar Hern\u00e1ndez",
+        "Jackson Chourio",
+        "Will Smith",
+        "Mookie Betts",
+        "Andy Pages",
+        "Patrick Bailey",
+        "Junior Caminero",
+        "Ben Williamson",
+        "Nick Fortes",
+        "Chase DeLauter",
+        "Jo Adell",
+        "Jonny DeLuca",
+        "Petey Halpin",
+        "Brayan Rocchio",
+        "Taylor Walls"
+      ],
+      "hr_names": [
+        "William Contreras"
+      ]
+    },
+    "2_of_5": {
+      "players": 9,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Christian Yelich",
+        "Garrett Mitchell",
+        "Brice Turang",
+        "Sal Frelick",
+        "Jonathan Aranda",
+        "Travis Bazzana",
+        "Jos\u00e9 Ram\u00edrez",
+        "Yandy D\u00edaz",
+        "Ryan Vilade"
+      ],
+      "hr_names": []
+    },
+    "3_of_5": {
+      "players": 5,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Jake Bauers",
+        "Kyle Tucker",
+        "Tommy Edman",
+        "David Hamilton",
+        "Victor Mesa Jr."
+      ],
+      "hr_names": []
+    },
+    "4_of_5": {
+      "players": 2,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Shohei Ohtani",
+        "Freddie Freeman"
+      ],
+      "hr_names": []
+    },
+    "5_of_5": {
+      "players": 1,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Max Muncy"
+      ],
+      "hr_names": []
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 1,
+      "rate": 10.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    },
+    "all": {
+      "total": 18,
+      "hits": 1,
+      "rate": 5.6
+    }
+  },
+  "combined_hr_hitters": [
+    {
+      "name": "William Contreras",
+      "rank": 4,
+      "composite": 0.567,
+      "opp_pitcher": "Yoshinobu Yamamoto",
+      "matchup": "LAD@MIL"
+    }
+  ]
+}
