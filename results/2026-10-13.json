@@ -1,9 +1,31 @@
 {
   "date": "2026-10-13",
-  "players_who_batted": [],
+  "players_who_batted": [
+    "Angel Mart\u00ednez",
+    "Austin Hedges",
+    "Ben Williamson",
+    "Brayan Rocchio",
+    "Chandler Simpson",
+    "Chase DeLauter",
+    "Jo Adell",
+    "Jonathan Aranda",
+    "Jonny DeLuca",
+    "Jos\u00e9 Ram\u00edrez",
+    "Junior Caminero",
+    "Liam Hicks",
+    "Nathaniel Lowe",
+    "Patrick Bailey",
+    "Petey Halpin",
+    "Richie Palacios",
+    "Steven Kwan",
+    "Taylor Walls",
+    "Travis Bazzana",
+    "Victor Mesa Jr.",
+    "Yandy D\u00edaz"
+  ],
   "total_players_ranked": 18,
   "total_hrs_hit": 0,
-  "total_near_hrs": 0,
+  "total_near_hrs": 1,
   "model_hits": 0,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -120,7 +142,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 1,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -146,32 +168,50 @@
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 5.6
     },
     "top_30": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 5.6
     },
     "all": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 5.6
     }
   },
   "avg_composite_hr_hitters": 0,
-  "avg_composite_non_hitters": 0.395,
-  "composite_separation": -0.395,
+  "avg_composite_non_hitters": 0.387,
+  "composite_separation": -0.387,
   "hr_hitters": [],
   "hr_hitters_l10": [],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Travis Bazzana",
+      "rank": 3,
+      "composite": 0.537,
+      "opp_pitcher": "Freddy Peralta",
+      "matchup": "CLE@TB"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Travis Bazzana",
+      "ev": 102.4,
+      "angle": 33.0,
+      "distance": 399.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Peralta, Freddy"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
