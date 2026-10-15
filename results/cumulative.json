@@ -242449,178 +242449,262 @@
   },
   {
     "date": "2026-10-14",
-    "players_who_batted": [],
+    "players_who_batted": [
+      "Andrew Vaughn",
+      "Andy Pages",
+      "Brice Turang",
+      "Christian Yelich",
+      "Cooper Pratt",
+      "Enrique Hern\u00e1ndez",
+      "Freddie Freeman",
+      "Garrett Mitchell",
+      "Jackson Chourio",
+      "Jake Bauers",
+      "Joey Ortiz",
+      "Kyle Tucker",
+      "Luis Lara",
+      "Max Muncy",
+      "Miguel Rojas",
+      "Mookie Betts",
+      "Shohei Ohtani",
+      "Teoscar Hern\u00e1ndez",
+      "Tommy Edman",
+      "Will Smith",
+      "William Contreras"
+    ],
     "total_players_ranked": 18,
-    "total_hrs_hit": 0,
-    "total_near_hrs": 0,
-    "model_hits": 0,
+    "total_hrs_hit": 3,
+    "total_near_hrs": 1,
+    "model_hits": 3,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         }
       }
     },
     "tier_accuracy_ml2026": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       }
     },
     "tier_accuracy_ml2026_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 3,
+          "rate": 16.7
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 1,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 30.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 4,
+        "rate": 22.2
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 4,
+        "rate": 22.2
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 4,
+        "rate": 22.2
       }
     },
-    "avg_composite_hr_hitters": 0,
-    "avg_composite_non_hitters": 0.379,
-    "composite_separation": -0.379,
-    "hr_hitters": [],
-    "hr_hitters_l10": [],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "avg_composite_hr_hitters": 0.386,
+    "avg_composite_non_hitters": 0.362,
+    "composite_separation": 0.024,
+    "hr_hitters": [
+      {
+        "name": "Jackson Chourio",
+        "rank": 5,
+        "composite": 0.484,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Jake Bauers",
+        "rank": 6,
+        "composite": 0.444,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Garrett Mitchell",
+        "rank": 16,
+        "composite": 0.229,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Jackson Chourio",
+        "rank": 5,
+        "composite": 0.507,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Jake Bauers",
+        "rank": 6,
+        "composite": 0.437,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Garrett Mitchell",
+        "rank": 14,
+        "composite": 0.251,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      }
+    ],
+    "near_hr_hitters": [
+      {
+        "name": "Will Smith",
+        "rank": 2,
+        "composite": 0.598,
+        "opp_pitcher": "Robert Gasser",
+        "matchup": "MIL@LAD"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Will Smith",
+        "ev": 101.9,
+        "angle": 26.0,
+        "distance": 383.0,
+        "hr_in_parks": 5,
+        "result": "double",
+        "pitcher": "Uribe, Abner"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
@@ -242636,8 +242720,8 @@
       },
       "2_of_5": {
         "players": 6,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 2,
+        "hr_rate": 33.3,
         "names": [
           "Jackson Chourio",
           "William Contreras",
@@ -242646,12 +242730,15 @@
           "Garrett Mitchell",
           "Kyle Tucker"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Jackson Chourio",
+          "Garrett Mitchell"
+        ]
       },
       "3_of_5": {
         "players": 9,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 1,
+        "hr_rate": 11.1,
         "names": [
           "Mookie Betts",
           "Will Smith",
@@ -242663,31 +242750,55 @@
           "Shohei Ohtani",
           "Freddie Freeman"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Jake Bauers"
+        ]
       }
     },
     "combined_tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       }
     },
-    "combined_hr_hitters": []
+    "combined_hr_hitters": [
+      {
+        "name": "Jake Bauers",
+        "rank": 2,
+        "composite": 0.534,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Jackson Chourio",
+        "rank": 4,
+        "composite": 0.477,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Garrett Mitchell",
+        "rank": 12,
+        "composite": 0.22,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      }
+    ]
   }
 ]
