@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-16",
+  "games": [
+    {
+      "gamePk": 849817,
+      "away": "TB",
+      "home": "CLE",
+      "status": "Postponed",
+      "awayScore": 0,
+      "homeScore": 0
+    }
+  ],
+  "plays": [],
+  "totalHRs": 0,
+  "nearHRs": 0,
+  "hardHitAir": 0,
+  "totalAirBalls": 0
+}

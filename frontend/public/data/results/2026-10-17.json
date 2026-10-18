@@ -1,0 +1,357 @@
+{
+  "date": "2026-10-17",
+  "players_who_batted": [
+    "Angel Mart\u00ednez",
+    "Ben Williamson",
+    "Brayan Rocchio",
+    "Cedric Mullins",
+    "Chandler Simpson",
+    "Chase DeLauter",
+    "David Fry",
+    "Jo Adell",
+    "Jonathan Aranda",
+    "Jonny DeLuca",
+    "Jos\u00e9 Ram\u00edrez",
+    "Junior Caminero",
+    "Liam Hicks",
+    "Nathaniel Lowe",
+    "Nick Fortes",
+    "Patrick Bailey",
+    "Petey Halpin",
+    "Richie Palacios",
+    "Steven Kwan",
+    "Taylor Walls",
+    "Travis Bazzana",
+    "Victor Mesa Jr.",
+    "Yandy D\u00edaz"
+  ],
+  "total_players_ranked": 18,
+  "total_hrs_hit": 2,
+  "total_near_hrs": 2,
+  "model_hits": 2,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "all": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "all": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      }
+    }
+  },
+  "tier_accuracy_ml2026": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 2,
+      "rate": 11.1
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 2,
+      "rate": 11.1
+    },
+    "all": {
+      "total": 18,
+      "hits": 2,
+      "rate": 11.1
+    }
+  },
+  "tier_accuracy_ml2026_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "all": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "all": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      }
+    }
+  },
+  "model_near_hits": 2,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 2,
+      "rate": 11.1
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 2,
+      "rate": 11.1
+    },
+    "all": {
+      "total": 18,
+      "hits": 2,
+      "rate": 11.1
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 4,
+      "rate": 40.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 4,
+      "rate": 22.2
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 4,
+      "rate": 22.2
+    },
+    "all": {
+      "total": 18,
+      "hits": 4,
+      "rate": 22.2
+    }
+  },
+  "avg_composite_hr_hitters": 0.567,
+  "avg_composite_non_hitters": 0.37,
+  "composite_separation": 0.197,
+  "hr_hitters": [
+    {
+      "name": "Yandy D\u00edaz",
+      "rank": 4,
+      "composite": 0.585,
+      "opp_pitcher": "Shawn Armstrong",
+      "matchup": "TB@CLE"
+    },
+    {
+      "name": "Travis Bazzana",
+      "rank": 5,
+      "composite": 0.549,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "TB@CLE"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "Travis Bazzana",
+      "rank": 3,
+      "composite": 0.588,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "TB@CLE"
+    },
+    {
+      "name": "Yandy D\u00edaz",
+      "rank": 5,
+      "composite": 0.552,
+      "opp_pitcher": "Shawn Armstrong",
+      "matchup": "TB@CLE"
+    }
+  ],
+  "near_hr_hitters": [
+    {
+      "name": "Junior Caminero",
+      "rank": 1,
+      "composite": 0.68,
+      "opp_pitcher": "Shawn Armstrong",
+      "matchup": "TB@CLE"
+    },
+    {
+      "name": "Patrick Bailey",
+      "rank": 3,
+      "composite": 0.664,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "TB@CLE"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "David Fry",
+      "ev": 108.3,
+      "angle": 37.0,
+      "distance": 392.0,
+      "hr_in_parks": 1,
+      "result": "",
+      "pitcher": "Booser, Cam"
+    },
+    {
+      "batter": "Patrick Bailey",
+      "ev": 107.9,
+      "angle": 20.0,
+      "distance": 374.0,
+      "hr_in_parks": 20,
+      "result": "single",
+      "pitcher": "Seymour, Ian"
+    },
+    {
+      "batter": "Junior Caminero",
+      "ev": 110.7,
+      "angle": 29.0,
+      "distance": 408.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Griffin, Foster"
+    }
+  ],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 6,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Junior Caminero",
+        "Jonny DeLuca",
+        "Jonathan Aranda",
+        "Nathaniel Lowe",
+        "Steven Kwan",
+        "Taylor Walls"
+      ],
+      "hr_names": []
+    },
+    "2_of_5": {
+      "players": 8,
+      "hr_count": 1,
+      "hr_rate": 12.5,
+      "names": [
+        "Patrick Bailey",
+        "Yandy D\u00edaz",
+        "Chase DeLauter",
+        "Jo Adell",
+        "Victor Mesa Jr.",
+        "Petey Halpin",
+        "Brayan Rocchio",
+        "Richie Palacios"
+      ],
+      "hr_names": [
+        "Yandy D\u00edaz"
+      ]
+    },
+    "3_of_5": {
+      "players": 2,
+      "hr_count": 1,
+      "hr_rate": 50.0,
+      "names": [
+        "Travis Bazzana",
+        "Jos\u00e9 Ram\u00edrez"
+      ],
+      "hr_names": [
+        "Travis Bazzana"
+      ]
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 2,
+      "rate": 20.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 2,
+      "rate": 11.1
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 2,
+      "rate": 11.1
+    },
+    "all": {
+      "total": 18,
+      "hits": 2,
+      "rate": 11.1
+    }
+  },
+  "combined_hr_hitters": [
+    {
+      "name": "Travis Bazzana",
+      "rank": 3,
+      "composite": 0.474,
+      "opp_pitcher": "Nick Martinez",
+      "matchup": "TB@CLE"
+    },
+    {
+      "name": "Yandy D\u00edaz",
+      "rank": 9,
+      "composite": 0.255,
+      "opp_pitcher": "Shawn Armstrong",
+      "matchup": "TB@CLE"
+    }
+  ]
+}

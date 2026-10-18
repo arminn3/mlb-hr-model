@@ -1,0 +1,149 @@
+{
+  "date": "2026-10-13",
+  "games": [
+    {
+      "gamePk": 849813,
+      "away": "CLE",
+      "home": "TB",
+      "status": "Final",
+      "awayScore": 1,
+      "homeScore": 3
+    }
+  ],
+  "plays": [
+    {
+      "batter": "Brayan Rocchio",
+      "pitcher": "Bryan Baker",
+      "game": "CLE@TB",
+      "ev": 95.2,
+      "angle": 39.0,
+      "distance": 342.0,
+      "result": "Flyout",
+      "inning": 9,
+      "timestamp": "2026-10-14T02:49:36.532Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jos\u00e9 Ram\u00edrez",
+      "pitcher": "Kevin Kelly",
+      "game": "CLE@TB",
+      "ev": 91.6,
+      "angle": 46.0,
+      "distance": 290.0,
+      "result": "Flyout",
+      "inning": 7,
+      "timestamp": "2026-10-14T02:11:15.763Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Liam Hicks",
+      "pitcher": "Shawn Armstrong",
+      "game": "CLE@TB",
+      "ev": 93.4,
+      "angle": 22.0,
+      "distance": 344.0,
+      "result": "Lineout",
+      "inning": 6,
+      "timestamp": "2026-10-14T02:02:04.322Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Chandler Simpson",
+      "pitcher": "Shawn Armstrong",
+      "game": "CLE@TB",
+      "ev": 94.0,
+      "angle": 21.0,
+      "distance": 335.0,
+      "result": "Lineout",
+      "inning": 6,
+      "timestamp": "2026-10-14T01:57:24.726Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Travis Bazzana",
+      "pitcher": "Freddy Peralta",
+      "game": "CLE@TB",
+      "ev": 102.4,
+      "angle": 33.0,
+      "distance": 401.0,
+      "result": "Flyout",
+      "inning": 6,
+      "timestamp": "2026-10-14T01:48:49.113Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Junior Caminero",
+      "pitcher": "Parker Messick",
+      "game": "CLE@TB",
+      "ev": 99.8,
+      "angle": 55.0,
+      "distance": 263.0,
+      "result": "Flyout",
+      "inning": 5,
+      "timestamp": "2026-10-14T01:41:50.284Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Yandy D\u00edaz",
+      "pitcher": "Parker Messick",
+      "game": "CLE@TB",
+      "ev": 96.1,
+      "angle": 31.0,
+      "distance": 363.0,
+      "result": "Flyout",
+      "inning": 5,
+      "timestamp": "2026-10-14T01:39:55.785Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Jo Adell",
+      "pitcher": "Freddy Peralta",
+      "game": "CLE@TB",
+      "ev": 90.4,
+      "angle": 21.0,
+      "distance": 322.0,
+      "result": "Lineout",
+      "inning": 5,
+      "timestamp": "2026-10-14T01:36:49.075Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jo Adell",
+      "pitcher": "Freddy Peralta",
+      "game": "CLE@TB",
+      "ev": 98.0,
+      "angle": 62.0,
+      "distance": 184.0,
+      "result": "Flyout",
+      "inning": 3,
+      "timestamp": "2026-10-14T00:50:09.524Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jo Adell",
+      "pitcher": "Freddy Peralta",
+      "game": "CLE@TB",
+      "ev": 95.1,
+      "angle": 57.0,
+      "distance": 219.0,
+      "result": "Flyout",
+      "inning": 1,
+      "timestamp": "2026-10-14T00:10:56.169Z",
+      "isHR": false,
+      "isNearHR": false
+    }
+  ],
+  "totalHRs": 0,
+  "nearHRs": 2,
+  "hardHitAir": 6,
+  "totalAirBalls": 10
+}

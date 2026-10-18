@@ -241427,5 +241427,2349 @@
         "matchup": "CWS@CLE"
       }
     ]
+  },
+  {
+    "date": "2026-10-11",
+    "players_who_batted": [
+      "Andrew Vaughn",
+      "Andy Pages",
+      "Brice Turang",
+      "Cooper Pratt",
+      "Enrique Hern\u00e1ndez",
+      "Freddie Freeman",
+      "Garrett Mitchell",
+      "Jackson Chourio",
+      "Jake Bauers",
+      "Joey Ortiz",
+      "Josue De Paula",
+      "Kyle Tucker",
+      "Luis Lara",
+      "Max Muncy",
+      "Mookie Betts",
+      "Shohei Ohtani",
+      "Teoscar Hern\u00e1ndez",
+      "Will Smith",
+      "William Contreras"
+    ],
+    "total_players_ranked": 18,
+    "total_hrs_hit": 1,
+    "total_near_hrs": 2,
+    "model_hits": 1,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 1,
+          "rate": 5.6
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 1,
+          "rate": 5.6
+        },
+        "all": {
+          "total": 18,
+          "hits": 1,
+          "rate": 5.6
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 1,
+          "rate": 5.6
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 1,
+          "rate": 5.6
+        },
+        "all": {
+          "total": 18,
+          "hits": 1,
+          "rate": 5.6
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "all": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 1,
+          "rate": 5.6
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 1,
+          "rate": 5.6
+        },
+        "all": {
+          "total": 18,
+          "hits": 1,
+          "rate": 5.6
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 1,
+          "rate": 5.6
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 1,
+          "rate": 5.6
+        },
+        "all": {
+          "total": 18,
+          "hits": 1,
+          "rate": 5.6
+        }
+      }
+    },
+    "model_near_hits": 2,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "all": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 3,
+        "rate": 16.7
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 3,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 18,
+        "hits": 3,
+        "rate": 16.7
+      }
+    },
+    "avg_composite_hr_hitters": 0.37,
+    "avg_composite_non_hitters": 0.478,
+    "composite_separation": -0.108,
+    "hr_hitters": [
+      {
+        "name": "Brice Turang",
+        "rank": 13,
+        "composite": 0.37,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "LAD@MIL"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Brice Turang",
+        "rank": 9,
+        "composite": 0.473,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "LAD@MIL"
+      }
+    ],
+    "near_hr_hitters": [
+      {
+        "name": "Enrique Hern\u00e1ndez",
+        "rank": 5,
+        "composite": 0.584,
+        "opp_pitcher": "Jacob Misiorowski",
+        "matchup": "LAD@MIL"
+      },
+      {
+        "name": "William Contreras",
+        "rank": 16,
+        "composite": 0.331,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "LAD@MIL"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Enrique Hern\u00e1ndez",
+        "ev": 97.7,
+        "angle": 28.0,
+        "distance": 383.0,
+        "hr_in_parks": 1,
+        "result": "field_out",
+        "pitcher": "Ashby, Aaron"
+      },
+      {
+        "batter": "William Contreras",
+        "ev": 109.0,
+        "angle": 32.0,
+        "distance": 402.0,
+        "hr_in_parks": 16,
+        "result": "",
+        "pitcher": "Skubal, Tarik"
+      }
+    ],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 3,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Jackson Chourio",
+          "Andrew Vaughn",
+          "William Contreras"
+        ],
+        "hr_names": []
+      },
+      "2_of_5": {
+        "players": 8,
+        "hr_count": 1,
+        "hr_rate": 12.5,
+        "names": [
+          "Will Smith",
+          "Andy Pages",
+          "Teoscar Hern\u00e1ndez",
+          "Enrique Hern\u00e1ndez",
+          "Mookie Betts",
+          "Garrett Mitchell",
+          "Brice Turang",
+          "Kyle Tucker"
+        ],
+        "hr_names": [
+          "Brice Turang"
+        ]
+      },
+      "3_of_5": {
+        "players": 3,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Shohei Ohtani",
+          "Freddie Freeman",
+          "Jake Bauers"
+        ],
+        "hr_names": []
+      },
+      "4_of_5": {
+        "players": 1,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Max Muncy"
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "all": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      }
+    },
+    "combined_hr_hitters": [
+      {
+        "name": "Brice Turang",
+        "rank": 12,
+        "composite": 0.287,
+        "opp_pitcher": "Tarik Skubal",
+        "matchup": "LAD@MIL"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-12",
+    "players_who_batted": [
+      "Andy Pages",
+      "Angel Mart\u00ednez",
+      "Ben Williamson",
+      "Brayan Rocchio",
+      "Brice Turang",
+      "Cedric Mullins",
+      "Chandler Simpson",
+      "Chase DeLauter",
+      "Christian Yelich",
+      "Cooper Pratt",
+      "David Hamilton",
+      "Freddie Freeman",
+      "Garrett Mitchell",
+      "Jackson Chourio",
+      "Jake Bauers",
+      "Jo Adell",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Jos\u00e9 Ram\u00edrez",
+      "Junior Caminero",
+      "Kyle Tucker",
+      "Liam Hicks",
+      "Max Muncy",
+      "Miguel Rojas",
+      "Mookie Betts",
+      "Nathaniel Lowe",
+      "Nick Fortes",
+      "Patrick Bailey",
+      "Petey Halpin",
+      "Ryan Vilade",
+      "Sal Frelick",
+      "Shohei Ohtani",
+      "Steven Kwan",
+      "Taylor Walls",
+      "Teoscar Hern\u00e1ndez",
+      "Tommy Edman",
+      "Travis Bazzana",
+      "Victor Mesa Jr.",
+      "Will Smith",
+      "William Contreras",
+      "Yandy D\u00edaz"
+    ],
+    "total_players_ranked": 36,
+    "total_hrs_hit": 4,
+    "total_near_hrs": 1,
+    "model_hits": 3,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 3,
+          "rate": 15.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
+        },
+        "all": {
+          "total": 36,
+          "hits": 3,
+          "rate": 8.3
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
+        },
+        "all": {
+          "total": 36,
+          "hits": 3,
+          "rate": 8.3
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 36,
+        "hits": 3,
+        "rate": 8.3
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 3,
+          "rate": 15.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
+        },
+        "all": {
+          "total": 36,
+          "hits": 3,
+          "rate": 8.3
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 3,
+          "rate": 10.0
+        },
+        "all": {
+          "total": 36,
+          "hits": 3,
+          "rate": 8.3
+        }
+      }
+    },
+    "model_near_hits": 1,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 36,
+        "hits": 3,
+        "rate": 8.3
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 4,
+        "rate": 20.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 36,
+        "hits": 4,
+        "rate": 11.1
+      }
+    },
+    "avg_composite_hr_hitters": 0.48,
+    "avg_composite_non_hitters": 0.391,
+    "composite_separation": 0.089,
+    "hr_hitters": [
+      {
+        "name": "William Contreras",
+        "rank": 4,
+        "composite": 0.578,
+        "opp_pitcher": "Yoshinobu Yamamoto",
+        "matchup": "LAD@MIL"
+      },
+      {
+        "name": "Patrick Bailey",
+        "rank": 6,
+        "composite": 0.512,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Chase DeLauter",
+        "rank": 20,
+        "composite": 0.35,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CLE@TB"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "William Contreras",
+        "rank": 8,
+        "composite": 0.488,
+        "opp_pitcher": "Yoshinobu Yamamoto",
+        "matchup": "LAD@MIL"
+      },
+      {
+        "name": "Patrick Bailey",
+        "rank": 15,
+        "composite": 0.414,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Chase DeLauter",
+        "rank": 27,
+        "composite": 0.286,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CLE@TB"
+      }
+    ],
+    "near_hr_hitters": [
+      {
+        "name": "Jonathan Aranda",
+        "rank": 17,
+        "composite": 0.397,
+        "opp_pitcher": "Foster Griffin",
+        "matchup": "CLE@TB"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Jonathan Aranda",
+        "ev": 106.7,
+        "angle": 37.0,
+        "distance": 402.0,
+        "hr_in_parks": 19,
+        "result": "field_out",
+        "pitcher": "Griffin, Foster"
+      }
+    ],
+    "surprise_hrs": [
+      {
+        "name": "Cedric Mullins",
+        "pitcher": "Erik Sabrowski",
+        "description": "${person|fullName|656775} homers ${total|homeRuns|656775} on a fly ball to right field.  "
+      }
+    ],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 16,
+        "hr_count": 3,
+        "hr_rate": 18.8,
+        "names": [
+          "William Contreras",
+          "Teoscar Hern\u00e1ndez",
+          "Jackson Chourio",
+          "Will Smith",
+          "Mookie Betts",
+          "Andy Pages",
+          "Patrick Bailey",
+          "Junior Caminero",
+          "Ben Williamson",
+          "Nick Fortes",
+          "Chase DeLauter",
+          "Jo Adell",
+          "Jonny DeLuca",
+          "Petey Halpin",
+          "Brayan Rocchio",
+          "Taylor Walls"
+        ],
+        "hr_names": [
+          "William Contreras",
+          "Patrick Bailey",
+          "Chase DeLauter"
+        ]
+      },
+      "2_of_5": {
+        "players": 9,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Christian Yelich",
+          "Garrett Mitchell",
+          "Brice Turang",
+          "Sal Frelick",
+          "Jonathan Aranda",
+          "Travis Bazzana",
+          "Jos\u00e9 Ram\u00edrez",
+          "Yandy D\u00edaz",
+          "Ryan Vilade"
+        ],
+        "hr_names": []
+      },
+      "3_of_5": {
+        "players": 5,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Jake Bauers",
+          "Kyle Tucker",
+          "Tommy Edman",
+          "David Hamilton",
+          "Victor Mesa Jr."
+        ],
+        "hr_names": []
+      },
+      "4_of_5": {
+        "players": 2,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Shohei Ohtani",
+          "Freddie Freeman"
+        ],
+        "hr_names": []
+      },
+      "5_of_5": {
+        "players": 1,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Max Muncy"
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 36,
+        "hits": 3,
+        "rate": 8.3
+      }
+    },
+    "combined_hr_hitters": [
+      {
+        "name": "William Contreras",
+        "rank": 4,
+        "composite": 0.567,
+        "opp_pitcher": "Yoshinobu Yamamoto",
+        "matchup": "LAD@MIL"
+      },
+      {
+        "name": "Patrick Bailey",
+        "rank": 6,
+        "composite": 0.41,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Chase DeLauter",
+        "rank": 16,
+        "composite": 0.281,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "CLE@TB"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-13",
+    "players_who_batted": [
+      "Angel Mart\u00ednez",
+      "Austin Hedges",
+      "Ben Williamson",
+      "Brayan Rocchio",
+      "Chandler Simpson",
+      "Chase DeLauter",
+      "Jo Adell",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Jos\u00e9 Ram\u00edrez",
+      "Junior Caminero",
+      "Liam Hicks",
+      "Nathaniel Lowe",
+      "Patrick Bailey",
+      "Petey Halpin",
+      "Richie Palacios",
+      "Steven Kwan",
+      "Taylor Walls",
+      "Travis Bazzana",
+      "Victor Mesa Jr.",
+      "Yandy D\u00edaz"
+    ],
+    "total_players_ranked": 18,
+    "total_hrs_hit": 0,
+    "total_near_hrs": 1,
+    "model_hits": 0,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 18,
+          "hits": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "model_near_hits": 1,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      },
+      "all": {
+        "total": 18,
+        "hits": 1,
+        "rate": 5.6
+      }
+    },
+    "avg_composite_hr_hitters": 0,
+    "avg_composite_non_hitters": 0.387,
+    "composite_separation": -0.387,
+    "hr_hitters": [],
+    "hr_hitters_l10": [],
+    "near_hr_hitters": [
+      {
+        "name": "Travis Bazzana",
+        "rank": 3,
+        "composite": 0.537,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "CLE@TB"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Travis Bazzana",
+        "ev": 102.4,
+        "angle": 33.0,
+        "distance": 399.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Peralta, Freddy"
+      }
+    ],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 6,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Junior Caminero",
+          "Ben Williamson",
+          "Steven Kwan",
+          "Jonny DeLuca",
+          "Jonathan Aranda",
+          "Taylor Walls"
+        ],
+        "hr_names": []
+      },
+      "2_of_5": {
+        "players": 7,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Chase DeLauter",
+          "Jo Adell",
+          "Nathaniel Lowe",
+          "Victor Mesa Jr.",
+          "Yandy D\u00edaz",
+          "Petey Halpin",
+          "Brayan Rocchio"
+        ],
+        "hr_names": []
+      },
+      "3_of_5": {
+        "players": 3,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Travis Bazzana",
+          "Jos\u00e9 Ram\u00edrez",
+          "Austin Hedges"
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "combined_hr_hitters": []
+  },
+  {
+    "date": "2026-10-14",
+    "players_who_batted": [
+      "Andrew Vaughn",
+      "Andy Pages",
+      "Brice Turang",
+      "Christian Yelich",
+      "Cooper Pratt",
+      "Enrique Hern\u00e1ndez",
+      "Freddie Freeman",
+      "Garrett Mitchell",
+      "Jackson Chourio",
+      "Jake Bauers",
+      "Joey Ortiz",
+      "Kyle Tucker",
+      "Luis Lara",
+      "Max Muncy",
+      "Miguel Rojas",
+      "Mookie Betts",
+      "Shohei Ohtani",
+      "Teoscar Hern\u00e1ndez",
+      "Tommy Edman",
+      "Will Smith",
+      "William Contreras"
+    ],
+    "total_players_ranked": 18,
+    "total_hrs_hit": 3,
+    "total_near_hrs": 1,
+    "model_hits": 3,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 3,
+          "rate": 16.7
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 3,
+          "rate": 16.7
+        },
+        "all": {
+          "total": 18,
+          "hits": 3,
+          "rate": 16.7
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 3,
+          "rate": 16.7
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 3,
+          "rate": 16.7
+        },
+        "all": {
+          "total": 18,
+          "hits": 3,
+          "rate": 16.7
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 3,
+        "rate": 16.7
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 3,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 18,
+        "hits": 3,
+        "rate": 16.7
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 3,
+          "rate": 16.7
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 3,
+          "rate": 16.7
+        },
+        "all": {
+          "total": 18,
+          "hits": 3,
+          "rate": 16.7
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 3,
+          "rate": 16.7
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 3,
+          "rate": 16.7
+        },
+        "all": {
+          "total": 18,
+          "hits": 3,
+          "rate": 16.7
+        }
+      }
+    },
+    "model_near_hits": 1,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 3,
+        "rate": 16.7
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 3,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 18,
+        "hits": 3,
+        "rate": 16.7
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 3,
+        "rate": 30.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 4,
+        "rate": 22.2
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 4,
+        "rate": 22.2
+      },
+      "all": {
+        "total": 18,
+        "hits": 4,
+        "rate": 22.2
+      }
+    },
+    "avg_composite_hr_hitters": 0.386,
+    "avg_composite_non_hitters": 0.362,
+    "composite_separation": 0.024,
+    "hr_hitters": [
+      {
+        "name": "Jackson Chourio",
+        "rank": 5,
+        "composite": 0.484,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Jake Bauers",
+        "rank": 6,
+        "composite": 0.444,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Garrett Mitchell",
+        "rank": 16,
+        "composite": 0.229,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Jackson Chourio",
+        "rank": 5,
+        "composite": 0.507,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Jake Bauers",
+        "rank": 6,
+        "composite": 0.437,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Garrett Mitchell",
+        "rank": 14,
+        "composite": 0.251,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      }
+    ],
+    "near_hr_hitters": [
+      {
+        "name": "Will Smith",
+        "rank": 2,
+        "composite": 0.598,
+        "opp_pitcher": "Robert Gasser",
+        "matchup": "MIL@LAD"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Will Smith",
+        "ev": 101.9,
+        "angle": 26.0,
+        "distance": 383.0,
+        "hr_in_parks": 5,
+        "result": "double",
+        "pitcher": "Uribe, Abner"
+      }
+    ],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 3,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Cooper Pratt",
+          "Joey Ortiz",
+          "Luis Lara"
+        ],
+        "hr_names": []
+      },
+      "2_of_5": {
+        "players": 6,
+        "hr_count": 2,
+        "hr_rate": 33.3,
+        "names": [
+          "Jackson Chourio",
+          "William Contreras",
+          "Brice Turang",
+          "Andrew Vaughn",
+          "Garrett Mitchell",
+          "Kyle Tucker"
+        ],
+        "hr_names": [
+          "Jackson Chourio",
+          "Garrett Mitchell"
+        ]
+      },
+      "3_of_5": {
+        "players": 9,
+        "hr_count": 1,
+        "hr_rate": 11.1,
+        "names": [
+          "Mookie Betts",
+          "Will Smith",
+          "Tommy Edman",
+          "Miguel Rojas",
+          "Jake Bauers",
+          "Teoscar Hern\u00e1ndez",
+          "Andy Pages",
+          "Shohei Ohtani",
+          "Freddie Freeman"
+        ],
+        "hr_names": [
+          "Jake Bauers"
+        ]
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 3,
+        "rate": 16.7
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 3,
+        "rate": 16.7
+      },
+      "all": {
+        "total": 18,
+        "hits": 3,
+        "rate": 16.7
+      }
+    },
+    "combined_hr_hitters": [
+      {
+        "name": "Jake Bauers",
+        "rank": 2,
+        "composite": 0.534,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Jackson Chourio",
+        "rank": 4,
+        "composite": 0.477,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Garrett Mitchell",
+        "rank": 12,
+        "composite": 0.22,
+        "opp_pitcher": "Blake Snell",
+        "matchup": "MIL@LAD"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-15",
+    "players_who_batted": [
+      "Andy Pages",
+      "Brayan Rocchio",
+      "Brice Turang",
+      "Chandler Simpson",
+      "Chase DeLauter",
+      "Christian Yelich",
+      "Cooper Pratt",
+      "David Hamilton",
+      "Enrique Hern\u00e1ndez",
+      "Freddie Freeman",
+      "Garrett Mitchell",
+      "Jackson Chourio",
+      "Jake Bauers",
+      "Jo Adell",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Jos\u00e9 Ram\u00edrez",
+      "Junior Caminero",
+      "Kyle Tucker",
+      "Liam Hicks",
+      "Max Muncy",
+      "Mookie Betts",
+      "Nathaniel Lowe",
+      "Patrick Bailey",
+      "Petey Halpin",
+      "Richie Palacios",
+      "Sal Frelick",
+      "Shohei Ohtani",
+      "Steven Kwan",
+      "Taylor Walls",
+      "Teoscar Hern\u00e1ndez",
+      "Tommy Edman",
+      "Travis Bazzana",
+      "Victor Mesa Jr.",
+      "Will Smith",
+      "William Contreras",
+      "Yandy D\u00edaz"
+    ],
+    "total_players_ranked": 37,
+    "total_hrs_hit": 4,
+    "total_near_hrs": 0,
+    "model_hits": 4,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 4,
+          "rate": 13.3
+        },
+        "all": {
+          "total": 37,
+          "hits": 4,
+          "rate": 10.8
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 1,
+          "rate": 5.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 4,
+          "rate": 13.3
+        },
+        "all": {
+          "total": 37,
+          "hits": 4,
+          "rate": 10.8
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 37,
+        "hits": 4,
+        "rate": 10.8
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 4,
+          "rate": 13.3
+        },
+        "all": {
+          "total": 37,
+          "hits": 4,
+          "rate": 10.8
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 1,
+          "rate": 10.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 2,
+          "rate": 10.0
+        },
+        "top_30": {
+          "total": 30,
+          "hits": 4,
+          "rate": 13.3
+        },
+        "all": {
+          "total": 37,
+          "hits": 4,
+          "rate": 10.8
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 37,
+        "hits": 4,
+        "rate": 10.8
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 2,
+        "rate": 10.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 4,
+        "rate": 13.3
+      },
+      "all": {
+        "total": 37,
+        "hits": 4,
+        "rate": 10.8
+      }
+    },
+    "avg_composite_hr_hitters": 0.493,
+    "avg_composite_non_hitters": 0.458,
+    "composite_separation": 0.035,
+    "hr_hitters": [
+      {
+        "name": "Shohei Ohtani",
+        "rank": 3,
+        "composite": 0.669,
+        "opp_pitcher": "Dustin May",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "David Hamilton",
+        "rank": 11,
+        "composite": 0.544,
+        "opp_pitcher": "Tyler Glasnow",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Garrett Mitchell",
+        "rank": 22,
+        "composite": 0.411,
+        "opp_pitcher": "Tyler Glasnow",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Petey Halpin",
+        "rank": 29,
+        "composite": 0.348,
+        "opp_pitcher": "Griffin Jax",
+        "matchup": "TB@CLE"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Shohei Ohtani",
+        "rank": 1,
+        "composite": 0.682,
+        "opp_pitcher": "Dustin May",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Petey Halpin",
+        "rank": 24,
+        "composite": 0.348,
+        "opp_pitcher": "Griffin Jax",
+        "matchup": "TB@CLE"
+      },
+      {
+        "name": "David Hamilton",
+        "rank": 25,
+        "composite": 0.34,
+        "opp_pitcher": "Tyler Glasnow",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Garrett Mitchell",
+        "rank": 27,
+        "composite": 0.34,
+        "opp_pitcher": "Tyler Glasnow",
+        "matchup": "MIL@LAD"
+      }
+    ],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 10,
+        "hr_count": 1,
+        "hr_rate": 10.0,
+        "names": [
+          "Patrick Bailey",
+          "Jonathan Aranda",
+          "Chase DeLauter",
+          "Jo Adell",
+          "Taylor Walls",
+          "Brayan Rocchio",
+          "Petey Halpin",
+          "Luis Lara",
+          "Joey Ortiz",
+          "Cooper Pratt"
+        ],
+        "hr_names": [
+          "Petey Halpin"
+        ]
+      },
+      "2_of_5": {
+        "players": 21,
+        "hr_count": 1,
+        "hr_rate": 4.8,
+        "names": [
+          "Jonny DeLuca",
+          "Junior Caminero",
+          "Travis Bazzana",
+          "Victor Mesa Jr.",
+          "Jos\u00e9 Ram\u00edrez",
+          "Richie Palacios",
+          "Enrique Hern\u00e1ndez",
+          "Andy Pages",
+          "Teoscar Hern\u00e1ndez",
+          "Will Smith",
+          "William Contreras",
+          "Christian Yelich",
+          "Miguel Rojas",
+          "Mookie Betts",
+          "Gary S\u00e1nchez",
+          "Garrett Mitchell",
+          "Brice Turang",
+          "Hunter Feduccia",
+          "Sal Frelick",
+          "Jackson Chourio",
+          "Andrew Vaughn"
+        ],
+        "hr_names": [
+          "Garrett Mitchell"
+        ]
+      },
+      "3_of_5": {
+        "players": 5,
+        "hr_count": 1,
+        "hr_rate": 20.0,
+        "names": [
+          "Yandy D\u00edaz",
+          "David Hamilton",
+          "Jake Bauers",
+          "Kyle Tucker",
+          "Tommy Edman"
+        ],
+        "hr_names": [
+          "David Hamilton"
+        ]
+      },
+      "4_of_5": {
+        "players": 3,
+        "hr_count": 1,
+        "hr_rate": 33.3,
+        "names": [
+          "Shohei Ohtani",
+          "Freddie Freeman",
+          "Josue De Paula"
+        ],
+        "hr_names": [
+          "Shohei Ohtani"
+        ]
+      },
+      "5_of_5": {
+        "players": 1,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Max Muncy"
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 1,
+        "rate": 10.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 3,
+        "rate": 15.0
+      },
+      "top_30": {
+        "total": 30,
+        "hits": 3,
+        "rate": 10.0
+      },
+      "all": {
+        "total": 37,
+        "hits": 4,
+        "rate": 10.8
+      }
+    },
+    "combined_hr_hitters": [
+      {
+        "name": "Shohei Ohtani",
+        "rank": 2,
+        "composite": 0.795,
+        "opp_pitcher": "Dustin May",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "David Hamilton",
+        "rank": 17,
+        "composite": 0.365,
+        "opp_pitcher": "Tyler Glasnow",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Garrett Mitchell",
+        "rank": 18,
+        "composite": 0.364,
+        "opp_pitcher": "Tyler Glasnow",
+        "matchup": "MIL@LAD"
+      },
+      {
+        "name": "Petey Halpin",
+        "rank": 31,
+        "composite": 0.155,
+        "opp_pitcher": "Griffin Jax",
+        "matchup": "TB@CLE"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-16",
+    "players_who_batted": [],
+    "total_players_ranked": 0,
+    "total_hrs_hit": 0,
+    "total_near_hrs": 0,
+    "model_hits": 0,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        },
+        "top_20": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        },
+        "top_30": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        },
+        "all": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        },
+        "top_20": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        },
+        "top_30": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        },
+        "all": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      },
+      "top_20": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      },
+      "top_30": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      },
+      "all": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        },
+        "top_20": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        },
+        "top_30": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        },
+        "all": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        },
+        "top_20": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        },
+        "top_30": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        },
+        "all": {
+          "total": 0,
+          "hits": 0,
+          "rate": 0
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      },
+      "top_20": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      },
+      "top_30": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      },
+      "all": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      },
+      "top_20": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      },
+      "top_30": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      },
+      "all": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      }
+    },
+    "avg_composite_hr_hitters": 0,
+    "avg_composite_non_hitters": 0,
+    "composite_separation": 0,
+    "hr_hitters": [],
+    "hr_hitters_l10": [],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {},
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      },
+      "top_20": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      },
+      "top_30": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      },
+      "all": {
+        "total": 0,
+        "hits": 0,
+        "rate": 0
+      }
+    },
+    "combined_hr_hitters": []
+  },
+  {
+    "date": "2026-10-17",
+    "players_who_batted": [
+      "Angel Mart\u00ednez",
+      "Ben Williamson",
+      "Brayan Rocchio",
+      "Cedric Mullins",
+      "Chandler Simpson",
+      "Chase DeLauter",
+      "David Fry",
+      "Jo Adell",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Jos\u00e9 Ram\u00edrez",
+      "Junior Caminero",
+      "Liam Hicks",
+      "Nathaniel Lowe",
+      "Nick Fortes",
+      "Patrick Bailey",
+      "Petey Halpin",
+      "Richie Palacios",
+      "Steven Kwan",
+      "Taylor Walls",
+      "Travis Bazzana",
+      "Victor Mesa Jr.",
+      "Yandy D\u00edaz"
+    ],
+    "total_players_ranked": 18,
+    "total_hrs_hit": 2,
+    "total_near_hrs": 2,
+    "model_hits": 2,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 2,
+          "rate": 11.1
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 2,
+          "rate": 11.1
+        },
+        "all": {
+          "total": 18,
+          "hits": 2,
+          "rate": 11.1
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 2,
+          "rate": 11.1
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 2,
+          "rate": 11.1
+        },
+        "all": {
+          "total": 18,
+          "hits": 2,
+          "rate": 11.1
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "all": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 2,
+          "rate": 11.1
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 2,
+          "rate": 11.1
+        },
+        "all": {
+          "total": 18,
+          "hits": 2,
+          "rate": 11.1
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 2,
+          "rate": 20.0
+        },
+        "top_20": {
+          "total": 18,
+          "hits": 2,
+          "rate": 11.1
+        },
+        "top_30": {
+          "total": 18,
+          "hits": 2,
+          "rate": 11.1
+        },
+        "all": {
+          "total": 18,
+          "hits": 2,
+          "rate": 11.1
+        }
+      }
+    },
+    "model_near_hits": 2,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "all": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 4,
+        "rate": 40.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 4,
+        "rate": 22.2
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 4,
+        "rate": 22.2
+      },
+      "all": {
+        "total": 18,
+        "hits": 4,
+        "rate": 22.2
+      }
+    },
+    "avg_composite_hr_hitters": 0.567,
+    "avg_composite_non_hitters": 0.37,
+    "composite_separation": 0.197,
+    "hr_hitters": [
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 4,
+        "composite": 0.585,
+        "opp_pitcher": "Shawn Armstrong",
+        "matchup": "TB@CLE"
+      },
+      {
+        "name": "Travis Bazzana",
+        "rank": 5,
+        "composite": 0.549,
+        "opp_pitcher": "Nick Martinez",
+        "matchup": "TB@CLE"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Travis Bazzana",
+        "rank": 3,
+        "composite": 0.588,
+        "opp_pitcher": "Nick Martinez",
+        "matchup": "TB@CLE"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 5,
+        "composite": 0.552,
+        "opp_pitcher": "Shawn Armstrong",
+        "matchup": "TB@CLE"
+      }
+    ],
+    "near_hr_hitters": [
+      {
+        "name": "Junior Caminero",
+        "rank": 1,
+        "composite": 0.68,
+        "opp_pitcher": "Shawn Armstrong",
+        "matchup": "TB@CLE"
+      },
+      {
+        "name": "Patrick Bailey",
+        "rank": 3,
+        "composite": 0.664,
+        "opp_pitcher": "Nick Martinez",
+        "matchup": "TB@CLE"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "David Fry",
+        "ev": 108.3,
+        "angle": 37.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Booser, Cam"
+      },
+      {
+        "batter": "Patrick Bailey",
+        "ev": 107.9,
+        "angle": 20.0,
+        "distance": 374.0,
+        "hr_in_parks": 20,
+        "result": "single",
+        "pitcher": "Seymour, Ian"
+      },
+      {
+        "batter": "Junior Caminero",
+        "ev": 110.7,
+        "angle": 29.0,
+        "distance": 408.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Griffin, Foster"
+      }
+    ],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 6,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Junior Caminero",
+          "Jonny DeLuca",
+          "Jonathan Aranda",
+          "Nathaniel Lowe",
+          "Steven Kwan",
+          "Taylor Walls"
+        ],
+        "hr_names": []
+      },
+      "2_of_5": {
+        "players": 8,
+        "hr_count": 1,
+        "hr_rate": 12.5,
+        "names": [
+          "Patrick Bailey",
+          "Yandy D\u00edaz",
+          "Chase DeLauter",
+          "Jo Adell",
+          "Victor Mesa Jr.",
+          "Petey Halpin",
+          "Brayan Rocchio",
+          "Richie Palacios"
+        ],
+        "hr_names": [
+          "Yandy D\u00edaz"
+        ]
+      },
+      "3_of_5": {
+        "players": 2,
+        "hr_count": 1,
+        "hr_rate": 50.0,
+        "names": [
+          "Travis Bazzana",
+          "Jos\u00e9 Ram\u00edrez"
+        ],
+        "hr_names": [
+          "Travis Bazzana"
+        ]
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 2,
+        "rate": 20.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      },
+      "all": {
+        "total": 18,
+        "hits": 2,
+        "rate": 11.1
+      }
+    },
+    "combined_hr_hitters": [
+      {
+        "name": "Travis Bazzana",
+        "rank": 3,
+        "composite": 0.474,
+        "opp_pitcher": "Nick Martinez",
+        "matchup": "TB@CLE"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 9,
+        "composite": 0.255,
+        "opp_pitcher": "Shawn Armstrong",
+        "matchup": "TB@CLE"
+      }
+    ]
   }
 ]

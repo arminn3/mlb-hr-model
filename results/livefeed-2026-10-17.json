@@ -1,0 +1,162 @@
+{
+  "date": "2026-10-17",
+  "games": [
+    {
+      "gamePk": 849816,
+      "away": "TB",
+      "home": "CLE",
+      "status": "Final",
+      "awayScore": 7,
+      "homeScore": 3
+    }
+  ],
+  "plays": [
+    {
+      "batter": "Yandy D\u00edaz",
+      "pitcher": "Matt Festa",
+      "game": "TB@CLE",
+      "ev": 101.0,
+      "angle": 36.0,
+      "distance": 349.0,
+      "result": "Home Run",
+      "inning": 9,
+      "timestamp": "2026-10-18T03:00:42.139Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jos\u00e9 Ram\u00edrez",
+      "pitcher": "Kevin Kelly",
+      "game": "TB@CLE",
+      "ev": 94.6,
+      "angle": 35.0,
+      "distance": 324.0,
+      "result": "Flyout",
+      "inning": 8,
+      "timestamp": "2026-10-18T02:44:53.542Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Victor Mesa Jr.",
+      "pitcher": "Matt Festa",
+      "game": "TB@CLE",
+      "ev": 92.6,
+      "angle": 60.0,
+      "distance": 197.0,
+      "result": "Pop Out",
+      "inning": 8,
+      "timestamp": "2026-10-18T02:37:40.043Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Patrick Bailey",
+      "pitcher": "Ian Seymour",
+      "game": "TB@CLE",
+      "ev": 107.9,
+      "angle": 20.0,
+      "distance": 375.0,
+      "result": "Single",
+      "inning": 7,
+      "timestamp": "2026-10-18T02:24:36.310Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Travis Bazzana",
+      "pitcher": "Ian Seymour",
+      "game": "TB@CLE",
+      "ev": 107.8,
+      "angle": 21.0,
+      "distance": 374.0,
+      "result": "Home Run",
+      "inning": 7,
+      "timestamp": "2026-10-18T02:23:43.773Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Chase DeLauter",
+      "pitcher": "Freddy Peralta",
+      "game": "TB@CLE",
+      "ev": 102.8,
+      "angle": 23.0,
+      "distance": 375.0,
+      "result": "Flyout",
+      "inning": 6,
+      "timestamp": "2026-10-18T02:00:56.273Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Steven Kwan",
+      "pitcher": "Freddy Peralta",
+      "game": "TB@CLE",
+      "ev": 90.4,
+      "angle": 23.0,
+      "distance": 304.0,
+      "result": "Lineout",
+      "inning": 6,
+      "timestamp": "2026-10-18T01:58:37.524Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Nathaniel Lowe",
+      "pitcher": "Nick Martinez",
+      "game": "TB@CLE",
+      "ev": 93.5,
+      "angle": 36.0,
+      "distance": 326.0,
+      "result": "Flyout",
+      "inning": 5,
+      "timestamp": "2026-10-18T01:23:28.461Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Junior Caminero",
+      "pitcher": "Foster Griffin",
+      "game": "TB@CLE",
+      "ev": 110.7,
+      "angle": 29.0,
+      "distance": 410.0,
+      "result": "Flyout",
+      "inning": 4,
+      "timestamp": "2026-10-18T01:00:02.448Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Steven Kwan",
+      "pitcher": "Nick Martinez",
+      "game": "TB@CLE",
+      "ev": 91.6,
+      "angle": 32.0,
+      "distance": 349.0,
+      "result": "Flyout",
+      "inning": 3,
+      "timestamp": "2026-10-18T00:55:40.928Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jo Adell",
+      "pitcher": "Nick Martinez",
+      "game": "TB@CLE",
+      "ev": 106.8,
+      "angle": 43.0,
+      "distance": 358.0,
+      "result": "Flyout",
+      "inning": 1,
+      "timestamp": "2026-10-18T00:24:25.463Z",
+      "isHR": false,
+      "isNearHR": false
+    }
+  ],
+  "totalHRs": 2,
+  "nearHRs": 1,
+  "hardHitAir": 3,
+  "totalAirBalls": 11
+}
