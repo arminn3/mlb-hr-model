@@ -243444,7 +243444,7 @@
     ],
     "total_players_ranked": 18,
     "total_hrs_hit": 2,
-    "total_near_hrs": 0,
+    "total_near_hrs": 2,
     "model_hits": 2,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -243561,7 +243561,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 2,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -243587,28 +243587,28 @@
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 2,
-        "rate": 20.0
+        "hits": 4,
+        "rate": 40.0
       },
       "top_20": {
         "total": 18,
-        "hits": 2,
-        "rate": 11.1
+        "hits": 4,
+        "rate": 22.2
       },
       "top_30": {
         "total": 18,
-        "hits": 2,
-        "rate": 11.1
+        "hits": 4,
+        "rate": 22.2
       },
       "all": {
         "total": 18,
-        "hits": 2,
-        "rate": 11.1
+        "hits": 4,
+        "rate": 22.2
       }
     },
     "avg_composite_hr_hitters": 0.567,
-    "avg_composite_non_hitters": 0.408,
-    "composite_separation": 0.159,
+    "avg_composite_non_hitters": 0.37,
+    "composite_separation": 0.197,
     "hr_hitters": [
       {
         "name": "Yandy D\u00edaz",
@@ -243641,8 +243641,51 @@
         "matchup": "TB@CLE"
       }
     ],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Junior Caminero",
+        "rank": 1,
+        "composite": 0.68,
+        "opp_pitcher": "Shawn Armstrong",
+        "matchup": "TB@CLE"
+      },
+      {
+        "name": "Patrick Bailey",
+        "rank": 3,
+        "composite": 0.664,
+        "opp_pitcher": "Nick Martinez",
+        "matchup": "TB@CLE"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "David Fry",
+        "ev": 108.3,
+        "angle": 37.0,
+        "distance": 392.0,
+        "hr_in_parks": 1,
+        "result": "",
+        "pitcher": "Booser, Cam"
+      },
+      {
+        "batter": "Patrick Bailey",
+        "ev": 107.9,
+        "angle": 20.0,
+        "distance": 374.0,
+        "hr_in_parks": 20,
+        "result": "single",
+        "pitcher": "Seymour, Ian"
+      },
+      {
+        "batter": "Junior Caminero",
+        "ev": 110.7,
+        "angle": 29.0,
+        "distance": 408.0,
+        "hr_in_parks": 28,
+        "result": "field_out",
+        "pitcher": "Griffin, Foster"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
