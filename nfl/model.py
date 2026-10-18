@@ -267,6 +267,41 @@ def _season_role_map(pbp_reg: pd.DataFrame, pos_map: dict) -> dict:
     return R["role"].to_dict()
 
 
+def _per_game_role_map(raw_log: pd.DataFrame, pos_map: dict) -> dict:
+    """Role tag keyed by (pid, game_id) — whoever ACTUALLY carried that depth
+    role in THAT SPECIFIC game, not whoever holds it today. The live slate's
+    `role_map` is a single present-day snapshot — correctly reactive to this
+    week's injuries for CURRENT scoring purposes — but applying that same
+    snapshot retroactively across a whole season's history erases every past
+    week the role changed hands. A mid-season emergency promotion (e.g. the
+    starter AND primary backup both ruled Out one week, so a 3rd-stringer
+    with zero season usage becomes today's "RB1") would otherwise wipe out
+    EVERY earlier week from the opposing-role-holder log, since the newly-
+    tagged name has no history of his own and the real earlier starter no
+    longer holds the role at all. Used for the role-vs-defense history log,
+    where correctness means tagging each week with what actually happened
+    that week, not what's true today."""
+    df = raw_log.copy()
+    df["position"] = df["pid"].map(pos_map)
+    df = df[df["position"].isin(C.SCORING_POSITIONS)]
+    df["metric"] = [
+        r.targets if r.position in ("WR", "TE") else (r.rush_att + r.targets) if r.position in ("RB", "FB") else r.pass_att
+        for r in df.itertuples()
+    ]
+    df = df[df["metric"] > 0]  # a 0-usage row (e.g. a healthy scratch) can't outrank anyone for that game
+    df["rank_in_game"] = df.groupby(["posteam", "game_id", "position"])["metric"].rank(ascending=False, method="first")
+
+    def _role(pos: str, rk: float):
+        tiers = C.ROLE_TIERS.get(pos)
+        if not tiers:
+            return None
+        i = int(rk) - 1
+        return tiers[i] if i < len(tiers) else None
+
+    return {(pid, gid): _role(pos, rk) for pid, gid, rk, pos in
+            zip(df["pid"], df["game_id"], df["rank_in_game"], df["position"])}
+
+
 def _against_stats(pbp_reg: pd.DataFrame, role_map: dict) -> dict:
     """Per (defteam, role) — plus an 'All' combined row per defense — the real
     per-game rate allowed for TD / rush-TD / rec-TD / rush-yds / rec-yds, each
@@ -550,7 +585,7 @@ def _lineup_splits(season_log: pd.DataFrame, last_season_log: pd.DataFrame | Non
     }
 
 
-def _game_logs(raw_log: pd.DataFrame, role_map: dict, name_map: dict, avail: tuple = ({}, {}, {}, {}), espn_map: dict | None = None, headshot_map: dict | None = None):
+def _game_logs(raw_log: pd.DataFrame, pos_map: dict, name_map: dict, avail: tuple = ({}, {}, {}, {}), espn_map: dict | None = None, headshot_map: dict | None = None):
     """Build per-game display logs from a raw game log (see `_raw_game_log`).
 
     Returns (player_logs, role_vs_def):
@@ -558,9 +593,15 @@ def _game_logs(raw_log: pd.DataFrame, role_map: dict, name_map: dict, avail: tup
       role_vs_def[defteam][role]-> chronological list of the opposing role-holder's
                                    game rows vs that defense ("QB1s vs PHI").
     Each row carries passing/rushing/receiving lines + atd (any TD that game).
+
+    role_vs_def is bucketed by a PER-GAME role (see `_per_game_role_map`), not
+    the live slate's current role_map — the live map is correctly reactive to
+    THIS week's injuries for scoring, but tagging every past week with today's
+    snapshot erases history the moment a role changes hands mid-season.
     """
     log = raw_log.copy()
-    log["role"] = log["pid"].map(role_map)
+    per_game_role = _per_game_role_map(raw_log, pos_map)
+    log["role"] = [per_game_role.get((pid, gid)) for pid, gid in zip(log["pid"], log["game_id"])]
     log["name"] = log["pid"].map(name_map)
 
     STAT = GAME_STAT
@@ -906,7 +947,7 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     avail = _availability(hist, hist_week)
     key_off_map, key_def_map = avail[0], avail[1]
     season_raw_log = _raw_game_log(prior)
-    player_logs, role_vs_def = _game_logs(season_raw_log, role_map, name_map, avail, espn_map, headshot_map)
+    player_logs, role_vs_def = _game_logs(season_raw_log, pos_map, name_map, avail, espn_map, headshot_map)
 
     # One season further back — powers the Game-Overview "Lineups" splits
     # ('last season' row, and part of the 'vs this opponent' search window).
