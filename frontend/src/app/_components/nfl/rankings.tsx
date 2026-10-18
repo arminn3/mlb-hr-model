@@ -288,6 +288,12 @@ export function Rankings({
           <h2 className="text-[18px] font-semibold text-foreground tracking-[-0.005em]">
             Top {TOP_N} {pos === "ALL" ? "" : pos + " "}Anytime-TD Plays
           </h2>
+          <span
+            className="text-[11px] font-semibold px-1.5 py-0.5 rounded"
+            style={{ color: color.accent, background: "rgba(96,165,250,0.12)" }}
+          >
+            Week {slate.week}
+          </span>
           <span className="text-[11px] hidden sm:inline" style={{ color: color.muted }}>ranked by model TD probability</span>
         </div>
         <div className="flex items-center gap-1">
