@@ -244035,184 +244035,253 @@
   },
   {
     "date": "2026-10-19",
-    "players_who_batted": [],
+    "players_who_batted": [
+      "Angel Mart\u00ednez",
+      "Brayan Rocchio",
+      "Chandler Simpson",
+      "Chase DeLauter",
+      "David Fry",
+      "Jo Adell",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Jos\u00e9 Ram\u00edrez",
+      "Junior Caminero",
+      "Liam Hicks",
+      "Nathaniel Lowe",
+      "Patrick Bailey",
+      "Petey Halpin",
+      "Richie Palacios",
+      "Steven Kwan",
+      "Taylor Walls",
+      "Travis Bazzana",
+      "Victor Mesa Jr.",
+      "Yandy D\u00edaz"
+    ],
     "total_players_ranked": 18,
-    "total_hrs_hit": 0,
-    "total_near_hrs": 0,
-    "model_hits": 0,
+    "total_hrs_hit": 2,
+    "total_near_hrs": 1,
+    "model_hits": 2,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 11.1
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 11.1
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 11.1
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 11.1
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 11.1
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 11.1
         }
       }
     },
     "tier_accuracy_ml2026": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       }
     },
     "tier_accuracy_ml2026_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 20.0
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 11.1
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 11.1
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 11.1
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 11.1
         },
         "top_30": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 11.1
         },
         "all": {
           "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 2,
+          "rate": 11.1
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 1,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 3,
+        "rate": 16.7
       }
     },
-    "avg_composite_hr_hitters": 0,
-    "avg_composite_non_hitters": 0.361,
-    "composite_separation": -0.361,
-    "hr_hitters": [],
-    "hr_hitters_l10": [],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "avg_composite_hr_hitters": 0.391,
+    "avg_composite_non_hitters": 0.349,
+    "composite_separation": 0.042,
+    "hr_hitters": [
+      {
+        "name": "Junior Caminero",
+        "rank": 6,
+        "composite": 0.438,
+        "opp_pitcher": "Shawn Armstrong",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 11,
+        "composite": 0.343,
+        "opp_pitcher": "Shawn Armstrong",
+        "matchup": "CLE@TB"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Junior Caminero",
+        "rank": 7,
+        "composite": 0.409,
+        "opp_pitcher": "Shawn Armstrong",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 12,
+        "composite": 0.31,
+        "opp_pitcher": "Shawn Armstrong",
+        "matchup": "CLE@TB"
+      }
+    ],
+    "near_hr_hitters": [
+      {
+        "name": "Chase DeLauter",
+        "rank": 3,
+        "composite": 0.491,
+        "opp_pitcher": "Freddy Peralta",
+        "matchup": "CLE@TB"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Chase DeLauter",
+        "ev": 105.9,
+        "angle": 21.0,
+        "distance": 408.0,
+        "hr_in_parks": 30,
+        "result": "double",
+        "pitcher": "Peralta, Freddy"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
         "players": 9,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 1,
+        "hr_rate": 11.1,
         "names": [
           "Patrick Bailey",
           "Chase DeLauter",
@@ -244224,12 +244293,14 @@
           "Petey Halpin",
           "Brayan Rocchio"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Junior Caminero"
+        ]
       },
       "2_of_5": {
         "players": 6,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 1,
+        "hr_rate": 16.7,
         "names": [
           "Jo Adell",
           "Travis Bazzana",
@@ -244238,31 +244309,48 @@
           "Yandy D\u00edaz",
           "Richie Palacios"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Yandy D\u00edaz"
+        ]
       }
     },
     "combined_tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 20.0
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       }
     },
-    "combined_hr_hitters": []
+    "combined_hr_hitters": [
+      {
+        "name": "Junior Caminero",
+        "rank": 8,
+        "composite": 0.361,
+        "opp_pitcher": "Shawn Armstrong",
+        "matchup": "CLE@TB"
+      },
+      {
+        "name": "Yandy D\u00edaz",
+        "rank": 10,
+        "composite": 0.197,
+        "opp_pitcher": "Shawn Armstrong",
+        "matchup": "CLE@TB"
+      }
+    ]
   }
 ]
