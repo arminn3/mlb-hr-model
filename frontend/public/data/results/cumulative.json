@@ -244352,5 +244352,255 @@
         "matchup": "CLE@TB"
       }
     ]
+  },
+  {
+    "date": "2026-10-20",
+    "players_who_batted": [],
+    "total_players_ranked": 27,
+    "total_hrs_hit": 0,
+    "total_near_hrs": 0,
+    "model_hits": 0,
+    "best_lookback": "L5",
+    "tier_accuracy_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 27,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 27,
+          "hits": 0,
+          "rate": 0.0
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 27,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 27,
+          "hits": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "tier_accuracy_ml2026": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 27,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 27,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "tier_accuracy_ml2026_by_lookback": {
+      "L5": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 27,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 27,
+          "hits": 0,
+          "rate": 0.0
+        }
+      },
+      "L10": {
+        "top_10": {
+          "total": 10,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_20": {
+          "total": 20,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "top_30": {
+          "total": 27,
+          "hits": 0,
+          "rate": 0.0
+        },
+        "all": {
+          "total": 27,
+          "hits": 0,
+          "rate": 0.0
+        }
+      }
+    },
+    "model_near_hits": 0,
+    "tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 27,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 27,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "tier_accuracy_with_near": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 27,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 27,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "avg_composite_hr_hitters": 0,
+    "avg_composite_non_hitters": 0.4,
+    "composite_separation": -0.4,
+    "hr_hitters": [],
+    "hr_hitters_l10": [],
+    "near_hr_hitters": [],
+    "near_hr_events": [],
+    "surprise_hrs": [],
+    "hr_signal_accuracy": {
+      "1_of_5": {
+        "players": 13,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Patrick Bailey",
+          "Junior Caminero",
+          "Chase DeLauter",
+          "Chandler Simpson",
+          "Liam Hicks",
+          "Jonny DeLuca",
+          "Nathaniel Lowe",
+          "Angel Genao",
+          "Jorge Mateo",
+          "Petey Halpin",
+          "Brayan Rocchio",
+          "Nick Fortes",
+          "Ben Williamson"
+        ],
+        "hr_names": []
+      },
+      "2_of_5": {
+        "players": 8,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Jonathan Aranda",
+          "David Fry",
+          "Taylor Walls",
+          "Jo Adell",
+          "Travis Bazzana",
+          "Jos\u00e9 Ram\u00edrez",
+          "Yandy D\u00edaz",
+          "Ryan Vilade"
+        ],
+        "hr_names": []
+      },
+      "3_of_5": {
+        "players": 4,
+        "hr_count": 0,
+        "hr_rate": 0.0,
+        "names": [
+          "Victor Mesa Jr.",
+          "Cedric Mullins",
+          "Richie Palacios",
+          "Austin Hedges"
+        ],
+        "hr_names": []
+      }
+    },
+    "combined_tier_accuracy": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 20,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 27,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 27,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "combined_hr_hitters": []
   }
 ]
