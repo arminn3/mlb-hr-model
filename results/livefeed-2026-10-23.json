@@ -1,0 +1,110 @@
+{
+  "date": "2026-10-23",
+  "games": [
+    {
+      "gamePk": 849805,
+      "away": "TB",
+      "home": "MIL",
+      "status": "Final",
+      "awayScore": 2,
+      "homeScore": 3
+    }
+  ],
+  "plays": [
+    {
+      "batter": "Sal Frelick",
+      "pitcher": "Steven Matz",
+      "game": "TB@MIL",
+      "ev": 98.7,
+      "angle": 21.0,
+      "distance": 334.0,
+      "result": "Lineout",
+      "inning": 7,
+      "timestamp": "2026-10-24T02:28:59.679Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Brice Turang",
+      "pitcher": "Nick Martinez",
+      "game": "TB@MIL",
+      "ev": 101.6,
+      "angle": 30.0,
+      "distance": 367.0,
+      "result": "Flyout",
+      "inning": 4,
+      "timestamp": "2026-10-24T01:23:28.882Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Jonny DeLuca",
+      "pitcher": "Jacob Misiorowski",
+      "game": "TB@MIL",
+      "ev": 100.3,
+      "angle": 42.0,
+      "distance": 332.0,
+      "result": "Flyout",
+      "inning": 4,
+      "timestamp": "2026-10-24T01:20:27.320Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jonny DeLuca",
+      "pitcher": "Jacob Misiorowski",
+      "game": "TB@MIL",
+      "ev": 94.3,
+      "angle": 44.0,
+      "distance": 289.0,
+      "result": "Flyout",
+      "inning": 2,
+      "timestamp": "2026-10-24T00:40:41.912Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Christian Yelich",
+      "pitcher": "Nick Martinez",
+      "game": "TB@MIL",
+      "ev": 103.1,
+      "angle": 22.0,
+      "distance": 358.0,
+      "result": "Triple",
+      "inning": 1,
+      "timestamp": "2026-10-24T00:28:17.372Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jake Bauers",
+      "pitcher": "Nick Martinez",
+      "game": "TB@MIL",
+      "ev": 94.8,
+      "angle": 58.0,
+      "distance": 220.0,
+      "result": "Flyout",
+      "inning": 1,
+      "timestamp": "2026-10-24T00:25:51.122Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Yandy D\u00edaz",
+      "pitcher": "Jacob Misiorowski",
+      "game": "TB@MIL",
+      "ev": 99.9,
+      "angle": 28.0,
+      "distance": 347.0,
+      "result": "Flyout",
+      "inning": 1,
+      "timestamp": "2026-10-24T00:16:34.973Z",
+      "isHR": false,
+      "isNearHR": true
+    }
+  ],
+  "totalHRs": 0,
+  "nearHRs": 2,
+  "hardHitAir": 3,
+  "totalAirBalls": 7
+}
