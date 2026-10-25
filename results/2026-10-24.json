@@ -24,7 +24,7 @@
   ],
   "total_players_ranked": 17,
   "total_hrs_hit": 2,
-  "total_near_hrs": 0,
+  "total_near_hrs": 1,
   "model_hits": 2,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
@@ -141,7 +141,7 @@
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 1,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -172,23 +172,23 @@
     },
     "top_20": {
       "total": 17,
-      "hits": 2,
-      "rate": 11.8
+      "hits": 3,
+      "rate": 17.6
     },
     "top_30": {
       "total": 17,
-      "hits": 2,
-      "rate": 11.8
+      "hits": 3,
+      "rate": 17.6
     },
     "all": {
       "total": 17,
-      "hits": 2,
-      "rate": 11.8
+      "hits": 3,
+      "rate": 17.6
     }
   },
   "avg_composite_hr_hitters": 0.325,
-  "avg_composite_non_hitters": 0.412,
-  "composite_separation": -0.087,
+  "avg_composite_non_hitters": 0.419,
+  "composite_separation": -0.094,
   "hr_hitters": [
     {
       "name": "Liam Hicks",
@@ -221,8 +221,35 @@
       "matchup": "TB@MIL"
     }
   ],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "near_hr_hitters": [
+    {
+      "name": "Garrett Mitchell",
+      "rank": 14,
+      "composite": 0.313,
+      "opp_pitcher": "Drew Rasmussen",
+      "matchup": "TB@MIL"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Sal Frelick",
+      "ev": 98.5,
+      "angle": 29.0,
+      "distance": 378.0,
+      "hr_in_parks": 30,
+      "result": "field_out",
+      "pitcher": "Kelly, Kevin"
+    },
+    {
+      "batter": "Garrett Mitchell",
+      "ev": 97.4,
+      "angle": 27.0,
+      "distance": 382.0,
+      "hr_in_parks": 11,
+      "result": "field_out",
+      "pitcher": "Wells, Tyler"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
