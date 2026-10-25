@@ -244877,123 +244877,144 @@
   },
   {
     "date": "2026-10-24",
-    "players_who_batted": [],
-    "total_players_ranked": 18,
-    "total_hrs_hit": 0,
+    "players_who_batted": [
+      "Ben Williamson",
+      "Brice Turang",
+      "Chandler Simpson",
+      "Christian Yelich",
+      "Cooper Pratt",
+      "David Hamilton",
+      "Garrett Mitchell",
+      "Jackson Chourio",
+      "Jake Bauers",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Junior Caminero",
+      "Liam Hicks",
+      "Richie Palacios",
+      "Ryan Vilade",
+      "Sal Frelick",
+      "Taylor Walls",
+      "Victor Mesa Jr.",
+      "William Contreras",
+      "Yandy D\u00edaz"
+    ],
+    "total_players_ranked": 17,
+    "total_hrs_hit": 2,
     "total_near_hrs": 0,
-    "model_hits": 0,
+    "model_hits": 2,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 17,
+          "hits": 2,
+          "rate": 11.8
         },
         "top_30": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 17,
+          "hits": 2,
+          "rate": 11.8
         },
         "all": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 17,
+          "hits": 2,
+          "rate": 11.8
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 17,
+          "hits": 2,
+          "rate": 11.8
         },
         "top_30": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 17,
+          "hits": 2,
+          "rate": 11.8
         },
         "all": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 17,
+          "hits": 2,
+          "rate": 11.8
         }
       }
     },
     "tier_accuracy_ml2026": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 17,
+        "hits": 2,
+        "rate": 11.8
       },
       "top_30": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 17,
+        "hits": 2,
+        "rate": 11.8
       },
       "all": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 17,
+        "hits": 2,
+        "rate": 11.8
       }
     },
     "tier_accuracy_ml2026_by_lookback": {
       "L5": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 17,
+          "hits": 2,
+          "rate": 11.8
         },
         "top_30": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 17,
+          "hits": 2,
+          "rate": 11.8
         },
         "all": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 17,
+          "hits": 2,
+          "rate": 11.8
         }
       },
       "L10": {
         "top_10": {
           "total": 10,
-          "hits": 0,
-          "rate": 0.0
+          "hits": 1,
+          "rate": 10.0
         },
         "top_20": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 17,
+          "hits": 2,
+          "rate": 11.8
         },
         "top_30": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 17,
+          "hits": 2,
+          "rate": 11.8
         },
         "all": {
-          "total": 18,
-          "hits": 0,
-          "rate": 0.0
+          "total": 17,
+          "hits": 2,
+          "rate": 11.8
         }
       }
     },
@@ -245001,52 +245022,82 @@
     "tier_accuracy": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 17,
+        "hits": 2,
+        "rate": 11.8
       },
       "top_30": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 17,
+        "hits": 2,
+        "rate": 11.8
       },
       "all": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 17,
+        "hits": 2,
+        "rate": 11.8
       }
     },
     "tier_accuracy_with_near": {
       "top_10": {
         "total": 10,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 1,
+        "rate": 10.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 17,
+        "hits": 2,
+        "rate": 11.8
       },
       "top_30": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 17,
+        "hits": 2,
+        "rate": 11.8
       },
       "all": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 17,
+        "hits": 2,
+        "rate": 11.8
       }
     },
-    "avg_composite_hr_hitters": 0,
-    "avg_composite_non_hitters": 0.403,
-    "composite_separation": -0.403,
-    "hr_hitters": [],
-    "hr_hitters_l10": [],
+    "avg_composite_hr_hitters": 0.325,
+    "avg_composite_non_hitters": 0.412,
+    "composite_separation": -0.087,
+    "hr_hitters": [
+      {
+        "name": "Liam Hicks",
+        "rank": 5,
+        "composite": 0.422,
+        "opp_pitcher": "Logan Henderson",
+        "matchup": "TB@MIL"
+      },
+      {
+        "name": "Sal Frelick",
+        "rank": 16,
+        "composite": 0.227,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "TB@MIL"
+      }
+    ],
+    "hr_hitters_l10": [
+      {
+        "name": "Liam Hicks",
+        "rank": 6,
+        "composite": 0.422,
+        "opp_pitcher": "Logan Henderson",
+        "matchup": "TB@MIL"
+      },
+      {
+        "name": "Sal Frelick",
+        "rank": 16,
+        "composite": 0.234,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "TB@MIL"
+      }
+    ],
     "near_hr_hitters": [],
     "near_hr_events": [],
     "surprise_hrs": [],
@@ -245066,8 +245117,8 @@
       },
       "2_of_5": {
         "players": 7,
-        "hr_count": 0,
-        "hr_rate": 0.0,
+        "hr_count": 2,
+        "hr_rate": 28.6,
         "names": [
           "Chandler Simpson",
           "Liam Hicks",
@@ -245077,7 +245128,10 @@
           "Brice Turang",
           "Sal Frelick"
         ],
-        "hr_names": []
+        "hr_names": [
+          "Liam Hicks",
+          "Sal Frelick"
+        ]
       },
       "3_of_5": {
         "players": 3,
@@ -245109,21 +245163,36 @@
         "rate": 0.0
       },
       "top_20": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 17,
+        "hits": 2,
+        "rate": 11.8
       },
       "top_30": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 17,
+        "hits": 2,
+        "rate": 11.8
       },
       "all": {
-        "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "total": 17,
+        "hits": 2,
+        "rate": 11.8
       }
     },
-    "combined_hr_hitters": []
+    "combined_hr_hitters": [
+      {
+        "name": "Liam Hicks",
+        "rank": 12,
+        "composite": 0.15,
+        "opp_pitcher": "Logan Henderson",
+        "matchup": "TB@MIL"
+      },
+      {
+        "name": "Sal Frelick",
+        "rank": 16,
+        "composite": 0.103,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "TB@MIL"
+      }
+    ]
   }
 ]

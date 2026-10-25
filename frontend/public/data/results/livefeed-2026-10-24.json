@@ -1,0 +1,149 @@
+{
+  "date": "2026-10-24",
+  "games": [
+    {
+      "gamePk": 849802,
+      "away": "TB",
+      "home": "MIL",
+      "status": "Final",
+      "awayScore": 4,
+      "homeScore": 5
+    }
+  ],
+  "plays": [
+    {
+      "batter": "Brice Turang",
+      "pitcher": "Steven Matz",
+      "game": "TB@MIL",
+      "ev": 90.1,
+      "angle": 23.0,
+      "distance": 292.0,
+      "result": "Lineout",
+      "inning": 8,
+      "timestamp": "2026-10-25T03:32:21.960Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jake Bauers",
+      "pitcher": "Kevin Kelly",
+      "game": "TB@MIL",
+      "ev": 97.4,
+      "angle": 38.0,
+      "distance": 337.0,
+      "result": "Flyout",
+      "inning": 8,
+      "timestamp": "2026-10-25T03:19:19.097Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Sal Frelick",
+      "pitcher": "Kevin Kelly",
+      "game": "TB@MIL",
+      "ev": 98.5,
+      "angle": 29.0,
+      "distance": 379.0,
+      "result": "Flyout",
+      "inning": 7,
+      "timestamp": "2026-10-25T03:00:22.964Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Garrett Mitchell",
+      "pitcher": "Tyler Wells",
+      "game": "TB@MIL",
+      "ev": 97.4,
+      "angle": 27.0,
+      "distance": 384.0,
+      "result": "Flyout",
+      "inning": 7,
+      "timestamp": "2026-10-25T02:52:55.621Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Brice Turang",
+      "pitcher": "Tyler Wells",
+      "game": "TB@MIL",
+      "ev": 104.5,
+      "angle": 21.0,
+      "distance": 363.0,
+      "result": "Double",
+      "inning": 7,
+      "timestamp": "2026-10-25T02:51:59.850Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Sal Frelick",
+      "pitcher": "Ian Seymour",
+      "game": "TB@MIL",
+      "ev": 104.4,
+      "angle": 23.0,
+      "distance": 408.0,
+      "result": "Home Run",
+      "inning": 6,
+      "timestamp": "2026-10-25T02:17:39.620Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Cooper Pratt",
+      "pitcher": "Cam Booser",
+      "game": "TB@MIL",
+      "ev": 95.3,
+      "angle": 37.0,
+      "distance": 337.0,
+      "result": "Flyout",
+      "inning": 5,
+      "timestamp": "2026-10-25T02:02:44.992Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Junior Caminero",
+      "pitcher": "Logan Henderson",
+      "game": "TB@MIL",
+      "ev": 90.3,
+      "angle": 83.0,
+      "distance": 41.0,
+      "result": "Pop Out",
+      "inning": 3,
+      "timestamp": "2026-10-25T01:07:19.773Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "David Hamilton",
+      "pitcher": "Drew Rasmussen",
+      "game": "TB@MIL",
+      "ev": 91.1,
+      "angle": 40.0,
+      "distance": 310.0,
+      "result": "Flyout",
+      "inning": 2,
+      "timestamp": "2026-10-25T00:57:24.305Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Liam Hicks",
+      "pitcher": "Logan Henderson",
+      "game": "TB@MIL",
+      "ev": 102.4,
+      "angle": 24.0,
+      "distance": 411.0,
+      "result": "Home Run",
+      "inning": 1,
+      "timestamp": "2026-10-25T00:21:29.299Z",
+      "isHR": true,
+      "isNearHR": false
+    }
+  ],
+  "totalHRs": 2,
+  "nearHRs": 2,
+  "hardHitAir": 4,
+  "totalAirBalls": 10
+}
