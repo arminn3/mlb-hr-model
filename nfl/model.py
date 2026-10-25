@@ -245,15 +245,21 @@ def _season_role_map(pbp_reg: pd.DataFrame, pos_map: dict) -> dict:
     if touches_df.empty:
         return {}
     team_of = touches_df.groupby("pid")["posteam"].agg(lambda s: s.value_counts().index[0])
+    games_played = touches_df.groupby("pid")["game_id"].nunique()
     usage = pd.DataFrame({"targets": targets, "carries": carries}).fillna(0)
     usage["touches"] = usage["targets"] + usage["carries"]
     R = pd.DataFrame(index=usage.index)
     R["team"] = R.index.map(team_of.to_dict())
     R["position"] = R.index.map(pos_map)
+    R["games"] = R.index.map(games_played.to_dict()).fillna(0)
     R = R.dropna(subset=["team", "position"])
     R = R[R["position"].isin(C.SCORING_POSITIONS)]
-    R["metric"] = [usage.at[i, "targets"] if p in ("WR", "TE") else usage.at[i, "touches"]
-                   for i, p in zip(R.index, R["position"])]
+    # Per-game rate, not season total — a real starter who missed games to
+    # injury shouldn't rank below a healthy compiler with a lower rate just
+    # because he played more games (same fix as the main score_week ranker).
+    R = R[R["games"] >= C.MIN_GAMES]
+    R["metric"] = [(usage.at[i, "targets"] if p in ("WR", "TE") else usage.at[i, "touches"]) / g
+                   for i, p, g in zip(R.index, R["position"], R["games"])]
     R["rank_in"] = R.groupby(["team", "position"])["metric"].rank(ascending=False, method="first")
 
     def _role(pos: str, rk: float):
@@ -781,12 +787,23 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     R = pd.DataFrame(index=usage.index)
     R["team"] = R.index.map(team_of.to_dict())
     R["position"] = R.index.map(pos_map)
+    R["games"] = R.index.map(games_played.to_dict()).fillna(0)
     R = R.dropna(subset=["team", "position"])
     R = R[R["position"].isin(C.SCORING_POSITIONS)]
-    # ranking metric: WR/TE by targets, everyone else by touches
+    # A real starter who missed games to injury still ranks on PER-GAME rate,
+    # not total volume — raw-total ranking let a healthy compiler who merely
+    # played more games (e.g. 6 games at a thin rate) outrank an obvious WR1
+    # who missed time (e.g. 4 games at a far higher rate), simply because his
+    # season total came in lower (Nico Collins, missed 2 games, still out-
+    # targeted-per-game Xavier Hutchinson by 32%, yet ranked BELOW him on
+    # cumulative volume alone). Require the same MIN_GAMES floor used
+    # everywhere else in this model before a rate counts for ranking at all
+    # — guards against a single huge garbage-time game looking like a role.
+    R = R[R["games"] >= C.MIN_GAMES]
+    # ranking metric: WR/TE by targets/game, everyone else by touches/game
     R["metric"] = [
-        usage.at[i, "targets"] if pos in ("WR", "TE") else usage.at[i, "touches"]
-        for i, pos in zip(R.index, R["position"])
+        (usage.at[i, "targets"] if pos in ("WR", "TE") else usage.at[i, "touches"]) / g
+        for i, pos, g in zip(R.index, R["position"], R["games"])
     ]
     R["rank_in"] = R.groupby(["team", "position"])["metric"].rank(ascending=False, method="first")
 
@@ -915,29 +932,42 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
                     continue
                 active_gsis = {espn_to_gsis[e] for e in active_espn if e in espn_to_gsis}
                 team_roster = R[(R["team"] == team) & R.index.map(lambda pid: bool(role_map.get(pid)))]
+                checked_groups = set()
                 for pid, pos in zip(team_roster.index, team_roster["position"]):
-                    pos_group = R[(R["team"] == team) & (R["position"] == pos)]
-                    if pid in active_gsis or active_gsis.isdisjoint(set(pos_group.index)):
-                        continue  # he played, or NOBODY at this position has live stats yet (too early to call)
-                    # This role-holder has 0 live stats, but a teammate at the
-                    # same (team, position) does — healthy scratch confirmed.
-                    # Swap his EXACT role onto the best-evidenced active
-                    # teammate specifically — not a full depth-chart reshuffle,
-                    # which would promote unconfirmed names ahead of him too.
-                    active_candidates = [c for c in pos_group.sort_values("rank_in").index
-                                         if c != pid and c not in out_pids and c in active_gsis and not role_map.get(c)]
-                    if not active_candidates:
+                    if (team, pos) in checked_groups:
                         continue
-                    best = active_candidates[0]
-                    role_map[best] = role_map[pid]
-                    role_map[pid] = None
-                    if best not in P.index:
-                        # No usage on record at all — an honest zero floor
-                        # beats leaving a real live starter off the board.
-                        P.loc[best] = {col: 0 for col in P.columns}
-                        P.at[best, "team"] = team
-                        P.at[best, "position"] = pos
-                        P.at[best, "name"] = name_map.get(best, best)
+                    pos_group = R[(R["team"] == team) & (R["position"] == pos)]
+                    if active_gsis.isdisjoint(set(pos_group.index)):
+                        continue  # nobody at this position has live stats yet — too early to call
+                    checked_groups.add((team, pos))
+                    # Any CURRENT role-holder at this position with 0 live
+                    # stats, while a teammate here does, is a confirmed
+                    # healthy scratch. Recompute the WHOLE tier stack for
+                    # this (team, position) excluding him — a single swap to
+                    # the best totally-unranked name would skip right past
+                    # whoever's legitimately next in line (e.g. the natural
+                    # WR3) just because he already holds a lower role, and
+                    # jump to someone far less qualified instead.
+                    holders = [c for c in pos_group.index if role_map.get(c)]
+                    scratched = {c for c in holders if c not in active_gsis}
+                    if not scratched:
+                        continue
+                    ordered = [c for c in pos_group.sort_values("rank_in").index
+                               if c not in scratched and c not in out_pids]
+                    for c in scratched:
+                        role_map[c] = None
+                    filled = 0
+                    for cand in ordered:
+                        filled += 1
+                        role_map[cand] = _role(pos, filled)
+                        if cand not in P.index:
+                            # No usage on record at all — an honest zero
+                            # floor beats leaving a real live starter off
+                            # the board.
+                            P.loc[cand] = {col: 0 for col in P.columns}
+                            P.at[cand, "team"] = team
+                            P.at[cand, "position"] = pos
+                            P.at[cand, "name"] = name_map.get(cand, cand)
     except Exception:
         pass
 
