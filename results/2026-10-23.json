@@ -1,0 +1,272 @@
+{
+  "date": "2026-10-23",
+  "players_who_batted": [
+    "Ben Williamson",
+    "Brice Turang",
+    "Chandler Simpson",
+    "Christian Yelich",
+    "Cooper Pratt",
+    "David Hamilton",
+    "Garrett Mitchell",
+    "Gary S\u00e1nchez",
+    "Jackson Chourio",
+    "Jake Bauers",
+    "Jonathan Aranda",
+    "Jonny DeLuca",
+    "Junior Caminero",
+    "Liam Hicks",
+    "Ryan Vilade",
+    "Sal Frelick",
+    "Taylor Walls",
+    "Victor Mesa Jr.",
+    "William Contreras",
+    "Yandy D\u00edaz"
+  ],
+  "total_players_ranked": 18,
+  "total_hrs_hit": 0,
+  "total_near_hrs": 0,
+  "model_hits": 0,
+  "best_lookback": "L5",
+  "tier_accuracy_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    }
+  },
+  "tier_accuracy_ml2026": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "tier_accuracy_ml2026_by_lookback": {
+    "L5": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    },
+    "L10": {
+      "top_10": {
+        "total": 10,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_20": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "top_30": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      },
+      "all": {
+        "total": 18,
+        "hits": 0,
+        "rate": 0.0
+      }
+    }
+  },
+  "model_near_hits": 0,
+  "tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "tier_accuracy_with_near": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "avg_composite_hr_hitters": 0,
+  "avg_composite_non_hitters": 0.451,
+  "composite_separation": -0.451,
+  "hr_hitters": [],
+  "hr_hitters_l10": [],
+  "near_hr_hitters": [],
+  "near_hr_events": [],
+  "surprise_hrs": [],
+  "hr_signal_accuracy": {
+    "1_of_5": {
+      "players": 2,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Chandler Simpson",
+        "Liam Hicks"
+      ],
+      "hr_names": []
+    },
+    "2_of_5": {
+      "players": 8,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Junior Caminero",
+        "William Contreras",
+        "Jonathan Aranda",
+        "Jonny DeLuca",
+        "Jackson Chourio",
+        "Taylor Walls",
+        "Ben Williamson",
+        "Cooper Pratt"
+      ],
+      "hr_names": []
+    },
+    "3_of_5": {
+      "players": 6,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Christian Yelich",
+        "Victor Mesa Jr.",
+        "Garrett Mitchell",
+        "Yandy D\u00edaz",
+        "Brice Turang",
+        "Sal Frelick"
+      ],
+      "hr_names": []
+    },
+    "4_of_5": {
+      "players": 2,
+      "hr_count": 0,
+      "hr_rate": 0.0,
+      "names": [
+        "Jake Bauers",
+        "David Hamilton"
+      ],
+      "hr_names": []
+    }
+  },
+  "combined_tier_accuracy": {
+    "top_10": {
+      "total": 10,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_20": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "top_30": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    },
+    "all": {
+      "total": 18,
+      "hits": 0,
+      "rate": 0.0
+    }
+  },
+  "combined_hr_hitters": []
+}

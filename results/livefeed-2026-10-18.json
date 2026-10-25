@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-18",
+  "games": [
+    {
+      "gamePk": 849817,
+      "away": "TB",
+      "home": "CLE",
+      "status": "Final",
+      "awayScore": 3,
+      "homeScore": 1
+    }
+  ],
+  "plays": [
+    {
+      "batter": "Victor Mesa Jr.",
+      "pitcher": "Cade Smith",
+      "game": "TB@CLE",
+      "ev": 101.3,
+      "angle": 36.0,
+      "distance": 384.0,
+      "result": "Flyout",
+      "inning": 9,
+      "timestamp": "2026-10-18T23:48:22.937Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Ben Williamson",
+      "pitcher": "Cade Smith",
+      "game": "TB@CLE",
+      "ev": 90.9,
+      "angle": 45.0,
+      "distance": 289.0,
+      "result": "Flyout",
+      "inning": 8,
+      "timestamp": "2026-10-18T23:25:21.213Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jonny DeLuca",
+      "pitcher": "Hunter Gaddis",
+      "game": "TB@CLE",
+      "ev": 94.4,
+      "angle": 26.0,
+      "distance": 325.0,
+      "result": "Flyout",
+      "inning": 8,
+      "timestamp": "2026-10-18T23:19:08.416Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Victor Mesa Jr.",
+      "pitcher": "Shawn Armstrong",
+      "game": "TB@CLE",
+      "ev": 95.8,
+      "angle": 39.0,
+      "distance": 339.0,
+      "result": "Flyout",
+      "inning": 4,
+      "timestamp": "2026-10-18T22:15:52.869Z",
+      "isHR": false,
+      "isNearHR": false
+    }
+  ],
+  "totalHRs": 0,
+  "nearHRs": 0,
+  "hardHitAir": 2,
+  "totalAirBalls": 4
+}

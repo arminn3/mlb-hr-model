@@ -1,0 +1,149 @@
+{
+  "date": "2026-10-19",
+  "games": [
+    {
+      "gamePk": 849815,
+      "away": "CLE",
+      "home": "TB",
+      "status": "Final",
+      "awayScore": 3,
+      "homeScore": 7
+    }
+  ],
+  "plays": [
+    {
+      "batter": "Yandy D\u00edaz",
+      "pitcher": "Hunter Gaddis",
+      "game": "CLE@TB",
+      "ev": 111.9,
+      "angle": 22.0,
+      "distance": 416.0,
+      "result": "Home Run",
+      "inning": 8,
+      "timestamp": "2026-10-20T02:53:50.047Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Victor Mesa Jr.",
+      "pitcher": "Cade Smith",
+      "game": "CLE@TB",
+      "ev": 95.8,
+      "angle": 56.0,
+      "distance": 253.0,
+      "result": "Flyout",
+      "inning": 7,
+      "timestamp": "2026-10-20T02:23:59.353Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Junior Caminero",
+      "pitcher": "Cade Smith",
+      "game": "CLE@TB",
+      "ev": 92.3,
+      "angle": 26.0,
+      "distance": 346.0,
+      "result": "Home Run",
+      "inning": 7,
+      "timestamp": "2026-10-20T02:21:50.301Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Travis Bazzana",
+      "pitcher": "Cam Booser",
+      "game": "CLE@TB",
+      "ev": 92.0,
+      "angle": 49.0,
+      "distance": 280.0,
+      "result": "Flyout",
+      "inning": 6,
+      "timestamp": "2026-10-20T01:59:32.093Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Chase DeLauter",
+      "pitcher": "Freddy Peralta",
+      "game": "CLE@TB",
+      "ev": 105.9,
+      "angle": 21.0,
+      "distance": 409.0,
+      "result": "Double",
+      "inning": 6,
+      "timestamp": "2026-10-20T01:50:47.007Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Brayan Rocchio",
+      "pitcher": "Freddy Peralta",
+      "game": "CLE@TB",
+      "ev": 97.0,
+      "angle": 36.0,
+      "distance": 358.0,
+      "result": "Flyout",
+      "inning": 5,
+      "timestamp": "2026-10-20T01:38:57.124Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Junior Caminero",
+      "pitcher": "Daniel Espino",
+      "game": "CLE@TB",
+      "ev": 106.7,
+      "angle": 40.0,
+      "distance": 380.0,
+      "result": "Flyout",
+      "inning": 4,
+      "timestamp": "2026-10-20T01:34:48.289Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Patrick Bailey",
+      "pitcher": "Freddy Peralta",
+      "game": "CLE@TB",
+      "ev": 98.5,
+      "angle": 33.0,
+      "distance": 376.0,
+      "result": "Flyout",
+      "inning": 2,
+      "timestamp": "2026-10-20T00:27:03.140Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Travis Bazzana",
+      "pitcher": "Freddy Peralta",
+      "game": "CLE@TB",
+      "ev": 102.0,
+      "angle": 50.0,
+      "distance": 290.0,
+      "result": "Flyout",
+      "inning": 2,
+      "timestamp": "2026-10-20T00:24:44.934Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Chase DeLauter",
+      "pitcher": "Freddy Peralta",
+      "game": "CLE@TB",
+      "ev": 92.4,
+      "angle": 28.0,
+      "distance": 346.0,
+      "result": "Flyout",
+      "inning": 1,
+      "timestamp": "2026-10-20T00:11:13.934Z",
+      "isHR": false,
+      "isNearHR": false
+    }
+  ],
+  "totalHRs": 2,
+  "nearHRs": 1,
+  "hardHitAir": 5,
+  "totalAirBalls": 10
+}
