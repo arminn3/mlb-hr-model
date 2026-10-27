@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-26",
+  "games": [
+    {
+      "gamePk": 849804,
+      "away": "MIL",
+      "home": "TB",
+      "status": "Final",
+      "awayScore": 10,
+      "homeScore": 1
+    }
+  ],
+  "plays": [
+    {
+      "batter": "Andrew Vaughn",
+      "pitcher": "Tyler Wells",
+      "game": "MIL@TB",
+      "ev": 94.0,
+      "angle": 55.0,
+      "distance": 254.0,
+      "result": "Flyout",
+      "inning": 8,
+      "timestamp": "2026-10-27T02:35:45.112Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Christian Yelich",
+      "pitcher": "Cole Sulser",
+      "game": "MIL@TB",
+      "ev": 104.7,
+      "angle": 29.0,
+      "distance": 385.0,
+      "result": "Flyout",
+      "inning": 6,
+      "timestamp": "2026-10-27T01:58:47.419Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Jake Bauers",
+      "pitcher": "Cole Sulser",
+      "game": "MIL@TB",
+      "ev": 98.7,
+      "angle": 47.0,
+      "distance": 304.0,
+      "result": "Flyout",
+      "inning": 5,
+      "timestamp": "2026-10-27T01:44:41.916Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jackson Chourio",
+      "pitcher": "Cole Sulser",
+      "game": "MIL@TB",
+      "ev": 99.0,
+      "angle": 24.0,
+      "distance": 353.0,
+      "result": "Double",
+      "inning": 5,
+      "timestamp": "2026-10-27T01:42:45.199Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jake Bauers",
+      "pitcher": "Freddy Peralta",
+      "game": "MIL@TB",
+      "ev": 94.3,
+      "angle": 25.0,
+      "distance": 334.0,
+      "result": "Flyout",
+      "inning": 5,
+      "timestamp": "2026-10-27T01:22:32.728Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Sal Frelick",
+      "pitcher": "Freddy Peralta",
+      "game": "MIL@TB",
+      "ev": 90.7,
+      "angle": 31.0,
+      "distance": 324.0,
+      "result": "Lineout",
+      "inning": 2,
+      "timestamp": "2026-10-27T00:36:41.808Z",
+      "isHR": false,
+      "isNearHR": false
+    }
+  ],
+  "totalHRs": 0,
+  "nearHRs": 1,
+  "hardHitAir": 2,
+  "totalAirBalls": 6
+}
