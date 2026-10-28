@@ -1,10 +1,32 @@
 {
   "date": "2026-10-27",
-  "players_who_batted": [],
+  "players_who_batted": [
+    "Ben Williamson",
+    "Brice Turang",
+    "Chandler Simpson",
+    "Christian Yelich",
+    "Cooper Pratt",
+    "David Hamilton",
+    "Garrett Mitchell",
+    "Jackson Chourio",
+    "Jake Bauers",
+    "Joey Ortiz",
+    "Jonathan Aranda",
+    "Jonny DeLuca",
+    "Junior Caminero",
+    "Liam Hicks",
+    "Richie Palacios",
+    "Ryan Vilade",
+    "Sal Frelick",
+    "Taylor Walls",
+    "Victor Mesa Jr.",
+    "William Contreras",
+    "Yandy D\u00edaz"
+  ],
   "total_players_ranked": 18,
-  "total_hrs_hit": 0,
-  "total_near_hrs": 0,
-  "model_hits": 0,
+  "total_hrs_hit": 2,
+  "total_near_hrs": 1,
+  "model_hits": 2,
   "best_lookback": "L5",
   "tier_accuracy_by_lookback": {
     "L5": {
@@ -15,18 +37,18 @@
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       }
     },
     "L10": {
@@ -37,18 +59,18 @@
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       }
     }
   },
@@ -60,18 +82,18 @@
     },
     "top_20": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 11.1
     },
     "top_30": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 11.1
     },
     "all": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 11.1
     }
   },
   "tier_accuracy_ml2026_by_lookback": {
@@ -83,18 +105,18 @@
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       }
     },
     "L10": {
@@ -105,22 +127,22 @@
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       }
     }
   },
-  "model_near_hits": 0,
+  "model_near_hits": 1,
   "tier_accuracy": {
     "top_10": {
       "total": 10,
@@ -129,55 +151,103 @@
     },
     "top_20": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 11.1
     },
     "top_30": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 11.1
     },
     "all": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 11.1
     }
   },
   "tier_accuracy_with_near": {
     "top_10": {
       "total": 10,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 1,
+      "rate": 10.0
     },
     "top_20": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 3,
+      "rate": 16.7
     },
     "top_30": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 3,
+      "rate": 16.7
     },
     "all": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 3,
+      "rate": 16.7
     }
   },
-  "avg_composite_hr_hitters": 0,
-  "avg_composite_non_hitters": 0.386,
-  "composite_separation": -0.386,
-  "hr_hitters": [],
-  "hr_hitters_l10": [],
-  "near_hr_hitters": [],
-  "near_hr_events": [],
+  "avg_composite_hr_hitters": 0.311,
+  "avg_composite_non_hitters": 0.392,
+  "composite_separation": -0.081,
+  "hr_hitters": [
+    {
+      "name": "David Hamilton",
+      "rank": 11,
+      "composite": 0.339,
+      "opp_pitcher": "Griffin Jax",
+      "matchup": "MIL@TB"
+    },
+    {
+      "name": "Cooper Pratt",
+      "rank": 16,
+      "composite": 0.284,
+      "opp_pitcher": "Griffin Jax",
+      "matchup": "MIL@TB"
+    }
+  ],
+  "hr_hitters_l10": [
+    {
+      "name": "David Hamilton",
+      "rank": 12,
+      "composite": 0.326,
+      "opp_pitcher": "Griffin Jax",
+      "matchup": "MIL@TB"
+    },
+    {
+      "name": "Cooper Pratt",
+      "rank": 16,
+      "composite": 0.284,
+      "opp_pitcher": "Griffin Jax",
+      "matchup": "MIL@TB"
+    }
+  ],
+  "near_hr_hitters": [
+    {
+      "name": "Jake Bauers",
+      "rank": 5,
+      "composite": 0.443,
+      "opp_pitcher": "Griffin Jax",
+      "matchup": "MIL@TB"
+    }
+  ],
+  "near_hr_events": [
+    {
+      "batter": "Jake Bauers",
+      "ev": 104.3,
+      "angle": 23.0,
+      "distance": 402.0,
+      "hr_in_parks": 28,
+      "result": "field_out",
+      "pitcher": "Jax, Griffin"
+    }
+  ],
   "surprise_hrs": [],
   "hr_signal_accuracy": {
     "1_of_5": {
       "players": 10,
-      "hr_count": 0,
-      "hr_rate": 0.0,
+      "hr_count": 1,
+      "hr_rate": 10.0,
       "names": [
         "Jonathan Aranda",
         "William Contreras",
@@ -190,12 +260,14 @@
         "Jackson Chourio",
         "Cooper Pratt"
       ],
-      "hr_names": []
+      "hr_names": [
+        "Cooper Pratt"
+      ]
     },
     "2_of_5": {
       "players": 6,
-      "hr_count": 0,
-      "hr_rate": 0.0,
+      "hr_count": 1,
+      "hr_rate": 16.7,
       "names": [
         "Jake Bauers",
         "Yandy D\u00edaz",
@@ -204,7 +276,9 @@
         "Richie Palacios",
         "Ryan Vilade"
       ],
-      "hr_names": []
+      "hr_names": [
+        "David Hamilton"
+      ]
     }
   },
   "combined_tier_accuracy": {
@@ -215,19 +289,34 @@
     },
     "top_20": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 11.1
     },
     "top_30": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 11.1
     },
     "all": {
       "total": 18,
-      "hits": 0,
-      "rate": 0.0
+      "hits": 2,
+      "rate": 11.1
     }
   },
-  "combined_hr_hitters": []
+  "combined_hr_hitters": [
+    {
+      "name": "David Hamilton",
+      "rank": 13,
+      "composite": 0.153,
+      "opp_pitcher": "Griffin Jax",
+      "matchup": "MIL@TB"
+    },
+    {
+      "name": "Cooper Pratt",
+      "rank": 16,
+      "composite": 0.115,
+      "opp_pitcher": "Griffin Jax",
+      "matchup": "MIL@TB"
+    }
+  ]
 }

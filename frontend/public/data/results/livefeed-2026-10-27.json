@@ -1,0 +1,123 @@
+{
+  "date": "2026-10-27",
+  "games": [
+    {
+      "gamePk": 849803,
+      "away": "MIL",
+      "home": "TB",
+      "status": "Final",
+      "awayScore": 3,
+      "homeScore": 4
+    }
+  ],
+  "plays": [
+    {
+      "batter": "Cooper Pratt",
+      "pitcher": "Ian Seymour",
+      "game": "MIL@TB",
+      "ev": 99.1,
+      "angle": 31.0,
+      "distance": 396.0,
+      "result": "Home Run",
+      "inning": 12,
+      "timestamp": "2026-10-28T03:59:51.682Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Joey Ortiz",
+      "pitcher": "Tyler Wells",
+      "game": "MIL@TB",
+      "ev": 90.5,
+      "angle": 49.0,
+      "distance": 262.0,
+      "result": "Flyout",
+      "inning": 10,
+      "timestamp": "2026-10-28T03:10:07.950Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Garrett Mitchell",
+      "pitcher": "Bryan Baker",
+      "game": "MIL@TB",
+      "ev": 98.9,
+      "angle": 33.0,
+      "distance": 348.0,
+      "result": "Flyout",
+      "inning": 9,
+      "timestamp": "2026-10-28T02:51:43.949Z",
+      "isHR": false,
+      "isNearHR": true
+    },
+    {
+      "batter": "Jake Bauers",
+      "pitcher": "Nick Martinez",
+      "game": "MIL@TB",
+      "ev": 105.1,
+      "angle": 38.0,
+      "distance": 388.0,
+      "result": "Flyout",
+      "inning": 7,
+      "timestamp": "2026-10-28T02:17:29.908Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Brice Turang",
+      "pitcher": "Nick Martinez",
+      "game": "MIL@TB",
+      "ev": 96.6,
+      "angle": 62.0,
+      "distance": 195.0,
+      "result": "Pop Out",
+      "inning": 6,
+      "timestamp": "2026-10-28T01:55:28.581Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "David Hamilton",
+      "pitcher": "Griffin Jax",
+      "game": "MIL@TB",
+      "ev": 102.0,
+      "angle": 31.0,
+      "distance": 391.0,
+      "result": "Home Run",
+      "inning": 5,
+      "timestamp": "2026-10-28T01:32:14.374Z",
+      "isHR": true,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jake Bauers",
+      "pitcher": "Griffin Jax",
+      "game": "MIL@TB",
+      "ev": 104.3,
+      "angle": 23.0,
+      "distance": 403.0,
+      "result": "Flyout",
+      "inning": 3,
+      "timestamp": "2026-10-28T00:51:33.183Z",
+      "isHR": false,
+      "isNearHR": false
+    },
+    {
+      "batter": "Jake Bauers",
+      "pitcher": "Griffin Jax",
+      "game": "MIL@TB",
+      "ev": 99.8,
+      "angle": 52.0,
+      "distance": 275.0,
+      "result": "Flyout",
+      "inning": 1,
+      "timestamp": "2026-10-28T00:10:11.687Z",
+      "isHR": false,
+      "isNearHR": false
+    }
+  ],
+  "totalHRs": 2,
+  "nearHRs": 1,
+  "hardHitAir": 6,
+  "totalAirBalls": 8
+}
