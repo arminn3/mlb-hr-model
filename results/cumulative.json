@@ -245831,10 +245831,31 @@
   },
   {
     "date": "2026-10-28",
-    "players_who_batted": [],
+    "players_who_batted": [
+      "Ben Williamson",
+      "Brice Turang",
+      "Chandler Simpson",
+      "Christian Yelich",
+      "Cooper Pratt",
+      "David Hamilton",
+      "Garrett Mitchell",
+      "Jackson Chourio",
+      "Jake Bauers",
+      "Jonathan Aranda",
+      "Jonny DeLuca",
+      "Junior Caminero",
+      "Liam Hicks",
+      "Richie Palacios",
+      "Ryan Vilade",
+      "Sal Frelick",
+      "Taylor Walls",
+      "Victor Mesa Jr.",
+      "William Contreras",
+      "Yandy D\u00edaz"
+    ],
     "total_players_ranked": 18,
     "total_hrs_hit": 0,
-    "total_near_hrs": 0,
+    "total_near_hrs": 2,
     "model_hits": 0,
     "best_lookback": "L5",
     "tier_accuracy_by_lookback": {
@@ -245951,7 +245972,7 @@
         }
       }
     },
-    "model_near_hits": 0,
+    "model_near_hits": 2,
     "tier_accuracy": {
       "top_10": {
         "total": 10,
@@ -245982,27 +246003,61 @@
       },
       "top_20": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "top_30": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       },
       "all": {
         "total": 18,
-        "hits": 0,
-        "rate": 0.0
+        "hits": 2,
+        "rate": 11.1
       }
     },
     "avg_composite_hr_hitters": 0,
-    "avg_composite_non_hitters": 0.383,
-    "composite_separation": -0.383,
+    "avg_composite_non_hitters": 0.398,
+    "composite_separation": -0.398,
     "hr_hitters": [],
     "hr_hitters_l10": [],
-    "near_hr_hitters": [],
-    "near_hr_events": [],
+    "near_hr_hitters": [
+      {
+        "name": "Brice Turang",
+        "rank": 14,
+        "composite": 0.301,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "MIL@TB"
+      },
+      {
+        "name": "Sal Frelick",
+        "rank": 18,
+        "composite": 0.22,
+        "opp_pitcher": "Drew Rasmussen",
+        "matchup": "MIL@TB"
+      }
+    ],
+    "near_hr_events": [
+      {
+        "batter": "Sal Frelick",
+        "ev": 105.6,
+        "angle": 36.0,
+        "distance": 408.0,
+        "hr_in_parks": 24,
+        "result": "",
+        "pitcher": "Baker, Bryan"
+      },
+      {
+        "batter": "Brice Turang",
+        "ev": 104.5,
+        "angle": 25.0,
+        "distance": 410.0,
+        "hr_in_parks": 30,
+        "result": "field_out",
+        "pitcher": "Rasmussen, Drew"
+      }
+    ],
     "surprise_hrs": [],
     "hr_signal_accuracy": {
       "1_of_5": {
