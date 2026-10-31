@@ -58,8 +58,18 @@ def _daily_key(prefix: str, year: int) -> str:
 
 def load_pbp(year: int) -> pd.DataFrame:
     """Play-by-play for one season (the primary source: RZ tendencies, TDs,
-    per-player targets/carries/air-yards, defense-vs-position)."""
-    return _cached(_daily_key("pbp", year), lambda: nfl.import_pbp_data([year], downcast=True, cache=False))
+    per-player targets/carries/air-yards, defense-vs-position).
+
+    include_participation=False: nfl_data_py's own participation-merge step
+    tries to fetch nflverse's pbp_participation_{year}.parquet, which 404s
+    for any week that hasn't finished post-game processing yet (i.e. the
+    CURRENT in-progress season, every single run) — and some installs of
+    nfl_data_py mishandle that 404 internally (a NameError instead of a
+    clean skip), crashing the whole pull. We never use participation-only
+    columns (offense/defense personnel, # pass rushers, etc.), so there's no
+    reason to depend on this merge — or its failure mode — at all."""
+    return _cached(_daily_key("pbp", year),
+                   lambda: nfl.import_pbp_data([year], downcast=True, cache=False, include_participation=False))
 
 
 def load_snap_counts(year: int) -> pd.DataFrame:

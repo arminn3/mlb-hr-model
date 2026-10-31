@@ -719,10 +719,23 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     # a player's team = the team they took the most touches for
     team_of = touches.groupby("pid")["posteam"].agg(lambda s: s.value_counts().index[0]).rename("team")
 
+    # Current depth-chart snapshot — loaded every week (not just preseason
+    # fallback), reused below for role assignment generally. It's the
+    # freshest, most authoritative "who's really playing this role right
+    # now" signal available: catches benchings/trades/QB changes that raw
+    # season usage can't see until enough new games accumulate (e.g. a QB
+    # change mid-season — the bench-ee's cumulative volume from his earlier
+    # starts still outranks the new starter's 1-2 games on raw usage alone).
+    dc_current = None
+    try:
+        dc_current = load_depth_charts(season)
+        dc_current = dc_current[dc_current["dt"] == dc_current["dt"].max()]
+    except Exception:
+        dc_current = None
+
     # fallback: remap to the requested season's rosters so free-agency / trades show
     # a player on his new team (roles then re-rank within the new team).
-    dc_current = None  # current depth-chart snapshot, reused below for role assignment
-    if fallback:
+    if fallback and dc_current is not None:
         try:
             ros = load_rosters(season)
             gid = "gsis_id" if "gsis_id" in ros.columns else "player_id"
@@ -740,8 +753,6 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
             # at all, so he kept his stale 2025 "NE" tag and his old NE role).
             # The depth chart is scraped ~daily and stays current, so it wins
             # wherever it disagrees with the roster table.
-            dc_current = load_depth_charts(season)
-            dc_current = dc_current[dc_current["dt"] == dc_current["dt"].max()]
             team_dc = dict(zip(dc_current["gsis_id"].dropna(),
                                dc_current.loc[dc_current["gsis_id"].notna(), "team"]))
             team26 = {**team26, **team_dc}
@@ -765,13 +776,17 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
         return s.sort_values("week").tail(C.FORM_GAMES)["scored"].mean()
     hit_l5 = pg.groupby("pid").apply(_last5).rename("hit_rate_l5")
 
-    P = pd.concat([targets, rz_targets, air, carries, rz_carries, in10,
+    P_all = pd.concat([targets, rz_targets, air, carries, rz_carries, in10,
                    games_played, team_of, player_tds, hit_season, hit_l5], axis=1).fillna(0)
-    P.index.name = "pid"
-    P = P[P["games"] >= C.MIN_GAMES]
-    P["position"] = P.index.map(pos_map)
-    P["name"] = P.index.map(lambda i: name_map.get(i, i))
-    P = P[P["position"].isin(C.SCORING_POSITIONS)]
+    P_all.index.name = "pid"
+    P_all["position"] = P_all.index.map(pos_map)
+    P_all["name"] = P_all.index.map(lambda i: name_map.get(i, i))
+    P_all = P_all[P_all["position"].isin(C.SCORING_POSITIONS)]
+    # Kept around (unfiltered by MIN_GAMES) so a depth-chart-promoted player
+    # with real-but-thin usage (e.g. a new starter 1 game into the job) can
+    # be recovered with his ACTUAL stats below, instead of a fabricated zero
+    # floor overwriting a real (if small) sample.
+    P = P_all[P_all["games"] >= C.MIN_GAMES].copy()
 
     # RZ-opportunity units (goal-line carries weighted up)
     P["rz_opps"] = P["rz_targets"] + P["rz_carries"] + (C.INSIDE_10_WEIGHT - 1) * P["inside10_carries"]
@@ -828,16 +843,31 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     # 2025 stats surviving alongside the real depth chart's TE2). Usage-based
     # role_map only stays as the fallback for (team, position) pairs the
     # depth-chart scrape has zero rows for at all.
+    #
+    # NOTE: extending this to run ALL season (not just fallback), so non-
+    # injury role changes like benchings/QB competitions get caught
+    # automatically, was tried and reverted — the underlying nflverse
+    # depth-chart scrape has real, demonstrated data-quality problems for
+    # SOME teams (e.g. a healthy, clearly-starting Jalen Hurts scraped at
+    # pos_rank 4 for PHI QB behind third-stringers; Davante Adams at rank 7
+    # for LA WR behind backups — both with zero injury-report entries, so
+    # not real demotions). Trusting the depth chart as sole authority
+    # in-season would have silently broken those (and presumably other)
+    # teams' correct, usage-proven roles to fix the Giants QB case. Needs a
+    # more targeted design (e.g. only promote on a large rate gap + some
+    # cross-check) before it's safe to apply beyond preseason.
     if fallback and dc_current is not None:
         try:
             dc = dc_current[dc_current["pos_abb"].isin(C.ROLE_TIERS.keys()) & dc_current["gsis_id"].notna()]
             dc = dc.sort_values(["team", "pos_abb", "pos_rank"])
             dc_role_map = {}
             covered_groups = set()
+            dc_team_pos: dict = {}
             for (team, pos), grp in dc.groupby(["team", "pos_abb"]):
                 covered_groups.add((team, pos))
                 for i, pid in enumerate(grp["gsis_id"]):
                     dc_role_map[pid] = _role(pos, i + 1)
+                    dc_team_pos[pid] = (team, pos)
             if dc_role_map:
                 # Drop anyone the usage-based ranker placed in a (team, position)
                 # the depth chart covers but didn't list them for.
@@ -845,6 +875,29 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
                     if (team, pos) in covered_groups and pid not in dc_role_map:
                         role_map[pid] = None
                 role_map = {**role_map, **dc_role_map}
+                # A depth-chart promotion can name someone whose real usage
+                # this season is too thin to clear MIN_GAMES (a brand-new
+                # starter a game or two into the job) — recover his ACTUAL
+                # stats from the unfiltered P_all rather than leaving him
+                # off the slate entirely or fabricating a zero floor over a
+                # real (if small) sample. True zero-usage names (just
+                # elevated, never played a snap yet) still get an honest
+                # zero floor so they're visible rather than silently absent.
+                for pid, role in dc_role_map.items():
+                    if role and pid not in P.index:
+                        team, pos = dc_team_pos[pid]
+                        if pid in P_all.index:
+                            row = P_all.loc[pid].copy()
+                            row["team"], row["position"] = team, pos
+                            P.loc[pid] = row
+                        else:
+                            P.loc[pid] = {col: 0 for col in P.columns}
+                            P.at[pid, "team"] = team
+                            P.at[pid, "position"] = pos
+                            P.at[pid, "name"] = name_map.get(pid, pid)
+                        P.at[pid, "rz_opps"] = (P.at[pid, "rz_targets"] + P.at[pid, "rz_carries"]
+                                                 + (C.INSIDE_10_WEIGHT - 1) * P.at[pid, "inside10_carries"])
+                        P.at[pid, "touches"] = P.at[pid, "targets"] + P.at[pid, "carries"]
         except Exception:
             pass  # keep the usage-based role_map if depth-chart data is unavailable
 

@@ -7,5 +7,9 @@ python-dotenv>=1.0.0
 tabulate>=0.9.0
 
 # NFL side (Phase 1+) — nflverse data. Local dev is py3.9 so nfl_data_py
-# (pandas) rather than nflreadpy (needs py3.10+/polars).
-nfl_data_py
+# (pandas) rather than nflreadpy (needs py3.10+/polars). Pinned (not just
+# floating "latest") so a CI pip cache can't silently serve a stale/broken
+# build under the same version string — this exact bug broke the daily cron
+# for several days (nfl_data_py's own 404-handling for the pbp_participation
+# merge hit a NameError instead of a clean skip).
+nfl_data_py==0.3.3
