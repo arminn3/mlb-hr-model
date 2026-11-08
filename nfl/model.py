@@ -814,6 +814,18 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     # cumulative volume alone). Require the same MIN_GAMES floor used
     # everywhere else in this model before a rate counts for ranking at all
     # — guards against a single huge garbage-time game looking like a role.
+    #
+    # NOTE: switching this to a strict recent-games (last FORM_GAMES) window
+    # instead of full-season rate was tried and reverted — it fixed one
+    # near-tie (Bengals WR1/WR2) but immediately broke another just as badly
+    # in the other direction (Vikings: Jefferson, an obvious WR1 who still
+    # scored far higher than the alternative, got outranked by Addison on a
+    # razor-thin 6.2 vs 6.4 targets/game L5 split — pure noise, same failure
+    # mode as the bug being fixed, just relocated). A short window is JUST as
+    # noise-sensitive as a raw season total, maybe more so on a smaller
+    # sample — needs a sturdier design (e.g. blending full-season and recent
+    # rate, or only flipping roles past some real gap threshold) before it's
+    # safe to ship.
     R = R[R["games"] >= C.MIN_GAMES]
     # ranking metric: WR/TE by targets/game, everyone else by touches/game
     R["metric"] = [
