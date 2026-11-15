@@ -844,6 +844,89 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     R["role"] = [_role(p, rk) for p, rk in zip(R["position"], R["rank_in"])]
     role_map = R["role"].to_dict()
 
+    # Depth-chart "debut" promotion — a narrow, safe middle ground after a
+    # full depth-chart-authority override was tried and reverted for
+    # corrupting established, actively-playing players' roles (the nflverse
+    # scrape had Jalen Hurts ranked 4th at PHI QB and Davante Adams 7th at
+    # LA WR, both healthy/clearly-starting). This version ONLY acts when the
+    # depth chart's listed player for a role slot has fewer than MIN_GAMES
+    # of usage this season — i.e. he isn't even in the usage-ranked pool (R)
+    # at all, so there's no real signal being overridden, only a genuine gap
+    # usage ranking structurally can't see yet: a brand-new starter with (as
+    # of this week) no snaps on record — a trade, a rookie promotion, a QB
+    # change the new guy hasn't played a down of (Dolphins week 10: Kyle
+    # McCord named the starter with zero pass attempts this season). Once a
+    # debut player clears MIN_GAMES of real usage, this stops touching him
+    # and ordinary usage-rate ranking takes over on its own — this only
+    # bridges the gap until then. Never reorders among players who BOTH
+    # already have real, rankable usage (that's a recency/tiebreaker
+    # question — see the Chase/Higgins note below — not a "debut" gap), so
+    # it can't reproduce the Hurts/Adams failure (McKee and Whittington, the
+    # players wrongly promoted ahead of them, both had real multi-game usage
+    # of their own — this rule would correctly leave them alone).
+    if dc_current is not None:
+        try:
+            dc_elig = dc_current[dc_current["pos_abb"].isin(C.ROLE_TIERS.keys()) & dc_current["gsis_id"].notna()]
+            games_map = games_played.to_dict()
+
+            def _ensure_in_P(pid, team, pos):
+                if pid in P.index:
+                    return
+                if pid in P_all.index:
+                    row = P_all.loc[pid].copy()
+                    row["team"], row["position"] = team, pos
+                    P.loc[pid] = row
+                else:
+                    P.loc[pid] = {col: 0 for col in P.columns}
+                    P.at[pid, "team"] = team
+                    P.at[pid, "position"] = pos
+                    P.at[pid, "name"] = name_map.get(pid, pid)
+                P.at[pid, "rz_opps"] = (P.at[pid, "rz_targets"] + P.at[pid, "rz_carries"]
+                                         + (C.INSIDE_10_WEIGHT - 1) * P.at[pid, "inside10_carries"])
+                P.at[pid, "touches"] = P.at[pid, "targets"] + P.at[pid, "carries"]
+
+            for (team, pos), grp in dc_elig.groupby(["team", "pos_abb"]):
+                tiers = C.ROLE_TIERS.get(pos, [])
+                # QB has exactly ONE tier (ROLE_TIERS["QB"] == ["QB"]) — a
+                # false-positive debut promotion here doesn't just demote the
+                # incumbent a tier, it erases him from the slate entirely,
+                # with zero room for the real starter to land anywhere. And
+                # a real QB change is INDISTINGUISHABLE in this data from a
+                # stale/broken scrape: PHI's depth chart buried an active,
+                # 5-game Jalen Hurts dead last behind a 0-usage name (a data
+                # bug, confirmed no corresponding injury) in EXACTLY the
+                # same shape as MIA's real Malik Willis -> Kyle McCord change
+                # (also an 8-game incumbent buried dead last, also no injury
+                # flag) — no feature here tells them apart. Multi-tier
+                # positions (WR1-3/RB1-2/TE1-2) are safe because a wrong call
+                # only swaps a tier label, never drops someone from the
+                # board. QB changes still need a human-confirmed report.
+                if not tiers or pos == "QB":
+                    continue
+                grp = grp.sort_values("pos_rank")
+                debut_by_tier = {i: pid for i, pid in enumerate(grp["gsis_id"])
+                                  if i < len(tiers) and games_map.get(pid, 0) < C.MIN_GAMES}
+                if not debut_by_tier:
+                    continue  # no-op: nobody here is a genuine debut case
+                usage_order = [p for p in R[(R["team"] == team) & (R["position"] == pos)].sort_values("rank_in").index
+                               if p not in debut_by_tier.values()]
+                final: dict = {}
+                ui = 0
+                for i in range(len(tiers)):
+                    if i in debut_by_tier:
+                        final[debut_by_tier[i]] = tiers[i]
+                    elif ui < len(usage_order):
+                        final[usage_order[ui]] = tiers[i]
+                        ui += 1
+                for pid in R[(R["team"] == team) & (R["position"] == pos)].index:
+                    if pid not in final:
+                        role_map[pid] = None
+                for pid, role in final.items():
+                    role_map[pid] = role
+                    _ensure_in_P(pid, team, pos)
+        except Exception:
+            pass  # keep the usage-based role_map if depth-chart data is unavailable
+
     # Fallback role override: preseason has no real current-season usage, and
     # reverse-engineering roles from an injury-affected prior season misranks
     # anyone who missed time (a healthy-again WR1 buried behind a compiler who
