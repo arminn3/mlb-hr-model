@@ -733,9 +733,19 @@ def score_week(season: int, week: int) -> tuple[dict, list]:
     except Exception:
         dc_current = None
 
-    # fallback: remap to the requested season's rosters so free-agency / trades show
-    # a player on his new team (roles then re-rank within the new team).
-    if fallback and dc_current is not None:
+    # Remap to each player's CURRENT team (depth chart / roster), not just
+    # during preseason fallback. Unlike role-ranking (which a stale/broken
+    # depth-chart SCRAPE can misorder — see the QB-exclusion note below),
+    # "which team is this guy on" is a simple, low-risk factual field, not a
+    # subjective ranking — there's no equivalent failure mode to guard
+    # against. And snap-count-based team_of (whoever he's taken the MOST
+    # accumulated reps for) is structurally wrong for an in-season trade
+    # until he's played MORE games for his new team than his old one, which
+    # can take half a season (Jacoby Brissett: traded to BAL, but still
+    # showed as ARI — 324 career-to-date ARI attempts vs. 51 for BAL — since
+    # snap-count alone just picks whichever total is bigger regardless of
+    # which one is current).
+    if dc_current is not None:
         try:
             ros = load_rosters(season)
             gid = "gsis_id" if "gsis_id" in ros.columns else "player_id"
