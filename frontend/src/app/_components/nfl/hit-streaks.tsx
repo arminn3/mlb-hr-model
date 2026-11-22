@@ -4,22 +4,38 @@ import { useMemo, useState } from "react";
 import { CARD, color } from "../../_design";
 import type { NflSlate, NflPlayer } from "./types";
 import { teamLogo, matchupColor, matchupLabel, posColor } from "./format";
-import { colsFor, roundLine, roleLabel, type ColDef } from "./player-research";
+import { colsFor, roleLabel, type ColDef } from "./player-research";
 
-// A "100%" streak means every game in the window cleared the player's OWN
-// rolling average (same line convention as the Research game-log) — not a
-// fixed floor. A true alpha WR1 clearing 20 receiving yards every game is
-// meaningless (he'd clear that in his sleep); clearing HIS OWN ~95-yard
-// average every single game, with zero off weeks, is a genuinely rare,
-// noteworthy consistency streak regardless of who the player is. This also
-// means a merely-good player with one so-so game drops off the list
-// entirely — the bar scales with how good he already is.
+// A "100%" streak means every game in the recent window cleared a FLOOR —
+// not a fixed, universal number (a true alpha WR1 clearing 20 yards every
+// game is meaningless noise), but not his own average either. Yards is a
+// high-variance stat even for elite players (Justin Jefferson's own game
+// log this season: 92, 55, 32, 79, 44, 33, 58 — a ~60-yard spread), so
+// requiring every recent game to clear his OWN mean is nearly impossible by
+// construction (roughly half of any sample sits below its own average) —
+// that produced an empty tab most weeks, not a useful one.
+//
+// Instead, the floor is each player's own 20th-percentile game from his
+// PRIOR history — i.e. a personalized "he rarely has it worse than this"
+// level — computed ONLY from games BEFORE the recent window being tested
+// (never the same games), so there's no tautology (the floor can't simply
+// be drawn from inside the window it's grading). A "100%" streak then
+// means: he hasn't had a game below his own rough floor in his last
+// L5/L10 games. Still fully personalized (CeeDee Lamb's floor is CeeDee
+// Lamb's floor, not 20 universal yards) and genuinely achievable/rare.
 const WINDOWS = [5, 10] as const;
-// A "100%" streak over 1-2 games is just small-sample noise, not a real
-// signal — require this many real games in the window before it counts.
-const MIN_SAMPLE = 3;
+// Need real prior history (games BEFORE the tested window) to set a
+// trustworthy floor — too few and the "floor" is just one random game.
+const MIN_PRIOR = 3;
+const FLOOR_PCT = 0.2;
 
-type Streak = { player: NflPlayer; col: ColDef; games: number; avg: number; line: number };
+type Streak = { player: NflPlayer; col: ColDef; games: number; floor: number; priorAvg: number };
+
+function floorFrom(vals: number[], pct: number): number {
+  const sorted = [...vals].sort((a, b) => a - b);
+  const idx = Math.max(0, Math.ceil(sorted.length * pct) - 1);
+  return sorted[idx];
+}
 
 function computeStreaks(slate: NflSlate, windowN: number): Streak[] {
   const out: Streak[] = [];
@@ -27,14 +43,26 @@ function computeStreaks(slate: NflSlate, windowN: number): Streak[] {
     for (const p of g.players) {
       if (!p.role || !p.game_log?.length) continue;
       const sorted = [...p.game_log].sort((a, b) => a.date.localeCompare(b.date));
+      if (sorted.length <= windowN) continue; // no prior history left to set a floor from
       const recent = sorted.slice(-windowN);
-      if (recent.length < MIN_SAMPLE) continue;
+      const prior = sorted.slice(0, -windowN);
+      if (prior.length < MIN_PRIOR) continue;
       for (const col of colsFor(p.pos)) {
-        const vals = recent.map((r) => Number(r[col.key] ?? 0));
-        const avg = vals.reduce((s, x) => s + x, 0) / vals.length;
-        const line = roundLine(avg, col.key as string);
-        const hits = vals.filter((v) => (col.invert ? v < line : v > line)).length;
-        if (hits === recent.length) out.push({ player: p, col, games: recent.length, avg, line });
+        if (col.key === "atd") {
+          // Binary stat — "100%" just means scored in every recent game,
+          // no floor/average ambiguity to resolve.
+          const vals = recent.map((r) => Number(r.atd ?? 0));
+          if (vals.every((v) => v > 0)) out.push({ player: p, col, games: recent.length, floor: 1, priorAvg: 1 });
+          continue;
+        }
+        const priorVals = prior.map((r) => Number(r[col.key] ?? 0));
+        const floor = floorFrom(priorVals, FLOOR_PCT);
+        if (col.invert || floor <= 0) continue; // INT-style stats don't have a meaningful "floor to clear"
+        const recentVals = recent.map((r) => Number(r[col.key] ?? 0));
+        if (recentVals.every((v) => v >= floor)) {
+          const priorAvg = priorVals.reduce((s, x) => s + x, 0) / priorVals.length;
+          out.push({ player: p, col, games: recent.length, floor, priorAvg });
+        }
       }
     }
   }
@@ -48,7 +76,7 @@ function StreakRow({ s }: { s: Streak }) {
   const mColor = matchupColor(p.opp_rank_vs_role, p.opp_rank_total);
   const mLabel = matchupLabel(p.opp_rank_vs_role, p.opp_rank_total);
   const iColor = p.injury_status ? INJURY_COLOR[p.injury_status] : null;
-  const lineTxt = s.col.key === "atd" ? "scored" : `${s.col.invert ? "under" : "over"} ${s.line}`;
+  const lineTxt = s.col.key === "atd" ? "scored" : `≥ ${s.floor} (his own floor)`;
   return (
     <div className="flex items-center gap-3 px-3 py-2.5 rounded-xl" style={CARD.simple}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -68,7 +96,7 @@ function StreakRow({ s }: { s: Streak }) {
         <div className="text-[11px] mt-0.5" style={{ color: color.muted }}>
           {p.team} <span style={{ color: "rgba(255,255,255,0.3)" }}>vs</span> {p.opponent}
           <span className="mx-1.5">·</span>{s.col.label} {lineTxt}
-          {s.col.key !== "atd" && <span className="mx-1 text-[10px]" style={{ color: "rgba(255,255,255,0.35)" }}>(avg {s.avg.toFixed(1)})</span>}
+          {s.col.key !== "atd" && <span className="mx-1 text-[10px]" style={{ color: "rgba(255,255,255,0.35)" }}>(typically {s.priorAvg.toFixed(1)})</span>}
         </div>
       </div>
       <div className="flex items-center gap-3 shrink-0">
@@ -82,16 +110,22 @@ function StreakRow({ s }: { s: Streak }) {
   );
 }
 
+const YARD_KEYS = new Set(["rec_yds", "rush_yds", "pass_yds"]);
+
 export function HitStreaks({ slate }: { slate: NflSlate }) {
   const [windowN, setWindowN] = useState<(typeof WINDOWS)[number]>(5);
   const streaks = useMemo(() => computeStreaks(slate, windowN), [slate, windowN]);
 
+  const yards = useMemo(
+    () => streaks.filter((s) => YARD_KEYS.has(s.col.key as string)).sort((a, b) => b.games - a.games || b.priorAvg - a.priorAvg),
+    [streaks],
+  );
   const atd = useMemo(
     () => streaks.filter((s) => s.col.key === "atd").sort((a, b) => b.games - a.games || b.player.score - a.player.score),
     [streaks],
   );
   const other = useMemo(
-    () => streaks.filter((s) => s.col.key !== "atd").sort((a, b) => b.games - a.games),
+    () => streaks.filter((s) => !YARD_KEYS.has(s.col.key as string) && s.col.key !== "atd").sort((a, b) => b.games - a.games),
     [streaks],
   );
 
@@ -101,7 +135,7 @@ export function HitStreaks({ slate }: { slate: NflSlate }) {
         <div>
           <h2 className="text-[18px] font-semibold text-foreground tracking-[-0.005em]">100% Hit-Rate Streaks</h2>
           <p className="text-[11px] mt-0.5" style={{ color: color.muted }}>
-            Every game in the window cleared the player&apos;s own rolling average — not a fixed, trivial floor. Min {MIN_SAMPLE} games.
+            Every game in the window cleared the player&apos;s own floor (ATD: scored every game) — not a fixed, trivial number.
           </p>
         </div>
         <div className="flex items-center gap-1">
@@ -118,6 +152,15 @@ export function HitStreaks({ slate }: { slate: NflSlate }) {
             </button>
           ))}
         </div>
+      </div>
+
+      <div>
+        <h3 className="text-[14px] font-semibold text-foreground mb-2">Yardage Streaks</h3>
+        {yards.length === 0 ? (
+          <p className="text-[12px] px-1" style={{ color: color.muted }}>No one has cleared their own yardage floor every game this window.</p>
+        ) : (
+          <div className="space-y-1.5">{yards.map((s) => <StreakRow key={s.player.gsis_id + s.player.team + s.col.key} s={s} />)}</div>
+        )}
       </div>
 
       <div>
