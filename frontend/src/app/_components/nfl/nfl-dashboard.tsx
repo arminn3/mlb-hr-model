@@ -6,8 +6,9 @@ import { UserMenu } from "../user-menu";
 import type { NflSlate, NflPlayer } from "./types";
 import { Rankings } from "./rankings";
 import { GameResearch } from "./game-research";
+import { HitStreaks } from "./hit-streaks";
 
-type Tab = "rankings" | "research";
+type Tab = "rankings" | "research" | "streaks";
 const FAV_KEY = "beeb:nfl-favorites";
 
 export function NflDashboard() {
@@ -62,7 +63,7 @@ export function NflDashboard() {
           </div>
           {/* main nav tabs */}
           <nav className="flex-1 min-w-0 flex items-center gap-6 px-[18px]">
-            {([["rankings", "Rankings"], ["research", "Research"]] as const).map(([key, label]) => (
+            {([["rankings", "Rankings"], ["research", "Research"], ["streaks", "Hit Streaks"]] as const).map(([key, label]) => (
               <button
                 key={key}
                 onClick={() => setTab(key)}
@@ -98,6 +99,7 @@ export function NflDashboard() {
         {slate && tab === "research" && (
           <GameResearch slate={slate} selectedGameId={selectedGameId} onSelectGame={setSelectedGameId} />
         )}
+        {slate && tab === "streaks" && <HitStreaks slate={slate} />}
       </main>
     </div>
   );

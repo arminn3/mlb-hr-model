@@ -6,7 +6,7 @@ import { ChevronDown, User } from "lucide-react";
 import type { NflPlayer, GameLogRow } from "./types";
 import { teamLogo, playerHeadshot, teamCity, tileHeat } from "./format";
 
-type ColDef = { key: keyof GameLogRow; label: string; invert?: boolean };
+export type ColDef = { key: keyof GameLogRow; label: string; invert?: boolean };
 
 // Position-adaptive columns (full labels exactly per Figma; 12px text). INT is lower-is-better.
 const QB_COLS: ColDef[] = [
@@ -22,7 +22,7 @@ const REC_COLS: ColDef[] = [
   { key: "atd", label: "ATD" }, { key: "targets", label: "Tgt" }, { key: "rec", label: "Rec" }, { key: "rec_yds", label: "Rec Yards" }, { key: "rec_td", label: "Rec TD" },
   { key: "rush_att", label: "Rush Att" }, { key: "rush_yds", label: "Rush Yards" },
 ];
-const colsFor = (pos: string): ColDef[] => (pos === "QB" ? QB_COLS : pos === "RB" || pos === "FB" ? RB_COLS : REC_COLS);
+export const colsFor = (pos: string): ColDef[] => (pos === "QB" ? QB_COLS : pos === "RB" || pos === "FB" ? RB_COLS : REC_COLS);
 
 // The two volume stats each position gets a threshold filter for.
 const VOL_FILTERS: Record<string, { key: keyof GameLogRow; label: string }[]> = {
@@ -56,10 +56,10 @@ const COL_W: Record<string, number> = {
   rush_att: 71, rush_yds: 85, rush_td: 69, targets: 54, rec: 54, rec_yds: 85, rec_td: 69,
 };
 
-const roundLine = (v: number, key: string) => (key === "atd" ? 0.5 : Math.round(v * 2) / 2);
+export const roundLine = (v: number, key: string) => (key === "atd" ? 0.5 : Math.round(v * 2) / 2);
 
 // Depth role incl. position + slot. Model uses a single "QB" tier -> show "QB1".
-const roleLabel = (role: string) => (role === "QB" ? "QB1" : role);
+export const roleLabel = (role: string) => (role === "QB" ? "QB1" : role);
 
 const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const fmtDate = (iso: string) => { const p = iso.split("-"); return p.length === 3 ? `${MON[+p[1] - 1]} ${+p[2]}` : iso; };
